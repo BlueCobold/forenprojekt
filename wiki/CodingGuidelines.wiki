@@ -1,0 +1,64 @@
+#summary Dient der Absprache und Festhaltung der Coding Guidelines
+
+== Einrückung ==
+
+Tabs oder Leerzeichen? Anzahl Leerzeichen?
+
+=== Switch ===
+
+Case eingerückt?
+Code unter Case eingerückt?
+Break eingerückt?
+
+== Zeilenlänge ==
+
+80? 100? 120?
+
+== Namen ==
+
+=== Variablennamen ===
+
+mit "_" vor Präfixen? CamelCase? mit Unterstrichen?
+Typ im Namen?
+
+==== Member ====
+
+"m" oder nichts
+
+==== Parameter ====
+
+"p" oder nichts
+
+==== Lokal ====
+
+"v" anderes Zeichen oder nichts
+
+=== Methodennamen ===
+
+Verb am Anfang?
+
+=== Define Namen ===
+
+Großbuchstaben mit Unterstrichen?
+
+=== Konstanten ===
+
+Großbuchstaben mit Unterstrichen?
+
+=== Klassen ===
+
+Substantiv? großer Anfangsbuchstaben?
+
+== Codeblöcke ==
+
+geschweifte Klammern auf gleicher Zeile? mit Leerzeichen am Ende? nächste Zeile?
+
+== Auflistungen ==
+
+(bspw. Parameterlisten, Variablendeklarationen, ...)
+Leerzeichen davor?
+Leerzeichen dahinter?
+
+== Operatoren ==
+
+Leerzeichen davor und dahinter? keine Leerzeichen?
