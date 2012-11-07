@@ -54,6 +54,10 @@ Verwendetes Zeichen<br>
 3) Zwischen Methoden-Definitionen (J/N)<br>
 4) Zwischen Methoden-Deklarationen (J/N)<br>
 
+=== Klammerung ===
+1) Jede logische Operation wird umklammert (J/N)
+2) Jede mathematische Operation wird umklammert, sofern nicht "Punkt vor Strich" (+-*/) gilt. (J/N)
+
 == Namen ==
 
 === Variablennamen ===
