@@ -1,4 +1,4 @@
-#summary Dient der Absprache und Festhaltung der Coding Guidelines
+#summary Dient der Absprache und Festhaltung der syntaktischen Coding Guidelines
 
 == Einrückung ==
 Verwendetes Zeichen<br>
