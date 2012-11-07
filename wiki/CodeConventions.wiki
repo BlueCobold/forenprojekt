@@ -16,3 +16,4 @@
  * Boolsche Ausdrücke enthalten niemals mehr als 4 Operatoren
  * Verwendung von Referenzen in Parametern, sofern Pointer nicht absolut notwendig für die Operation ist
  * Kommentare nur für ein "was", niemals für "wie". Ist ein "wie" notwendig, dann Code so umschreiben, dass er selbsterklärend ist.
+ * Es gelten alle Regeln bezüglich [http://en.wikipedia.org/wiki/Code_smell/ Code Smell]
