@@ -2,90 +2,77 @@
 
 == Einrückung ==
 Verwendetes Zeichen<br>
-1) Tabs (J/N)<br>
+1) Leerzeichen<br>
+2) 4 Zeichen<br>
 
-2.1) 3 Zeichen<br>
-2.2) 4 Zeichen<br>
-2.3) 5 Zeichen<br>
-
-3) Alles innerhalb eines Blocks (J/N)<br>
-4) Alles innerhalb einer Class (J/N)<br>
-5) Alles innerhalb eines Structs (J/N)<br>
-6) Alles innheralb eines Enums (J/N)<br>
-7) Case-Statements in Switches (J/N)<br>
-8) Code nach Case (J/N)<br>
-9) Break in Case-Block (J/N)<br>
+3) Alles innerhalb eines Blocks<br>
+4) Alles innerhalb einer Class<br>
+5) Alles innerhalb eines Structs<br>
+6) Alles innheralb eines Enums<br>
+7) Case-Statements in Switches<br>
+8) Code nach Case<br>
+9) Break in Case-Block<br>
 
 === Blöcke mit { } ===
-1) Immer auf neuer Zeile (J/N)<br>
-2) Generell immer, auch bei einzeiligen IF/FOR/DO/WHILE (J/N)<br>
-3) Für Konstanten immer auf neuer Zeile (J/N)<br>
-4) Für Konstanten immer auf selber Zeile (J/N)<br>
+1) Immer auf neuer Zeile<br>
+2) Einzeiligen IF/FOR/DO/WHILE immer ohne { }<br>
+3) Für Konstanten auf selber Zeile, sofern nicht zu lang<br/>
 
 === Umbrüche ===
-1) Immer vor und nach "{" und "}" (J/N)<br>
-2) Immer vor und nach "else" (J/N)<br>
-3) Immer vor und nach "return", "break", "continue" (J/N)<br>
-4) Nach jedem ": type" bei Vererbung (J/N)<br>
+1) Immer vor und nach "{" und "}"<br>
+2) Immer vor und nach "else"<br>
+3) Immer vor und nach "return", "break", "continue"<br>
+4) Nach jedem ": type" bei Vererbung hintereinander<br>
 
 === Maximale Zeilenlänge ===
-1.1) 80 Zeichen<br>
-1.2) 100<br>
-1.3) 120<br>
+1) 120<br>
 
 === Leerzeichen ===
-1) Vor und nach Operatoren => (x && y - a / b) || (x == 14) (J/N)<br>
-1.a) Nicht für "++", "--", Vorzeichen (J/N)<br>
-2) Nach öffnenden Klammern und vor schließenden Klammern (J/N)<br>
-3) Nach Methoden-Namen (J/N)<br>
-4) Nach Anweisungen (if, for, do, etc) außer "case:" (J/N)<br>
-5) Vor und nach einer Zuweisung =>  x=4, x = 4) (J/N) <br>
-6) Nach einem Komma (foo(int x, int y) - int x, y, z;) (J/N)<br>
-6.1) Gilt auch für Template-Parameter (J/N)<br>
-7) Nach einem Semikolon (for(int x=0; x<...) (J/N)<br>
-8) In "leeren" Arrays (int x[ ]) (J/N)<br>
-9) Bei Index-Zugriff (int x[ i ]) (J/N)<br>
-10) Vor eckiger Klammer (int x []) (J/N)<br>
-11) Nach "public:", "private:" (J/N)<br>
+1) Vor und nach Operatoren => (x && y - a / b) || (x == 14)<br>
+1.a) Nicht für "++", "--", Vorzeichen<br>
+2) Nach öffnenden Klammern und vor schließenden Klammern keine Leerzeichen<br>
+3) Keine nach Methoden-Namen<br>
+4) Keine nach Anweisungen (if, for, do, etc) außer "case:"<br>
+5) Vor und nach einer Zuweisung => x = 4<br>
+6) Nach einem Komma (foo(int x, int y) - int x, y, z;)<br>
+6.1) Gilt auch für Template-Parameter<br>
+7) Nach einem Semikolon (for(int x=0; x<...)<br>
+8) Nicht in "leeren" Arrays (int x[])<br>
+9) Nicht bei Index-Zugriff (int x[i])<br>
+10) Nicht in eckiger Klammer (int x[])<br>
 
 === Leerzeilen ===
-1) Vor "using" (J/N)<br>
-2) Zwischen "class", "struct", "enum", etc. (J/N)<br>
-3) Zwischen Methoden-Definitionen (J/N)<br>
-4) Zwischen Methoden-Deklarationen (J/N)<br>
+1) Vor "using"<br>
+2) Zwischen "class", "struct", "enum", etc.<br>
+3) Zwischen Methoden-Definitionen<br>
+4) Nicht zwischen Methoden-Deklarationen<br>
 
 === Klammerung ===
-1) Jede logische Operation wird umklammert (J/N)
-2) Jede mathematische Operation wird umklammert, sofern nicht "Punkt vor Strich" (+-*/) gilt. (J/N)
+1) Jede logische Operation wird umklammert
+2) Jede mathematische Operation wird umklammert, sofern nicht "Punkt vor Strich" (+-*/) gilt.
 
 == Namen ==
 
 === Variablennamen ===
 
-1.1) camelCase<br>
-1.2) PascalCase<br>
-1.3) under_score<br>
-
-3) Voll ausgeschrieben, keine Abkürzung (J/N)<br>
-3.1) Ausnahme gilt für Variablen deklariert in "for" (J/N)<br>
+1) camelCase<br>
+2) Voll ausgeschrieben, keine kryptischen Abkürzung<br>
+3) Ein-Buchstaben für Schleifen-Variablen sind erlaubt<br>
+4) Echte Akronyme nur den Anfangsbuchstaben groß, bzw. klein, wenn erster Buchstabe<br>
 
 ==== Member ====
 
-1) mit Präfix "m_" (J/N)
+1) mit Präfix "m_"
 
 ==== Parameter ====
 
-1) mir Präfix "p" (J/N)
+1) kein Präfix
 
 === Methodennamen ===
 
-1) Verb am Anfang (J/N)
-
-2.1) cascalCase<br>
-2.2) PascalCase<br>
-2.3) under_score<br>
-
-3) Voll ausgeschrieben, keine Abkürzung (J/N)
+1) Verb am Anfang<br>
+2) camelCase<br>
+3) Voll ausgeschrieben, keine Abkürzung
 
 === Define Namen ===
 
