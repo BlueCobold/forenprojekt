@@ -8,7 +8,7 @@
 
  * Bei mehr als einem Feature pro SVN-Commit, sind mehrere Kommentare zu schreiben, zu jeder fachlichen Änderung je einer.
 
- * Alle Änderungen an Code werden entsprechend der CodeGuidelines und CodeConventions durchgeführt.
+ * Alle Änderungen an Code werden entsprechend der CodingGuidelines und CodeConventions durchgeführt.
 
  * User-Stories werden in Privotal Tracker verwaltet. Jeder User startet eine Story nur dann, wenn er sie auch tatsächlich bearbeitet.
 
