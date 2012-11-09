@@ -1,6 +1,7 @@
 #summary Diese Regeln beziehen sich auf die Art, wie Code geschrieben wird.
 
  * Das Projekt ist C++ und nicht C. Daher gilt die Verwendung der stdlib für std::string, io-streams und Container.
+ * Der C++ Teil des Projekts ist mit VC2010 kompatibel.
  * Konstanten werden als Konstanten definiert, nicht über #DEFINE
  * Es werden keine globalen Variablen verwendet. Falls sie notwendig sind, ist dies mit der Team-Leitung und den Verantwortlichen der Architektur abzuklären.
  * Es werden keine statischen Variablen verwendet. Falls sie notwendig sind, ist dies mit der Team-Leitung und den Verantwortlichen der Architektur abzuklären.
