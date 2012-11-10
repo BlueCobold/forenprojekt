@@ -15,6 +15,13 @@ App::App(std::string& windowTitle, const unsigned int screenWidth, const unsigne
         m_window.create(sf::VideoMode(screenWidth, screenHeight, bitsPerPixel), windowTitle, sf::Style::Fullscreen);
     else
         m_window.create(sf::VideoMode(screenWidth, screenHeight, bitsPerPixel), windowTitle);
+
+    m_font.loadFromFile("visitor.ttf");
+
+    m_fpsText.setFont(m_font);
+    m_fpsText.setColor(sf::Color::Yellow);
+    m_fpsText.setCharacterSize(30);
+    m_fpsText.setPosition(10, 10);
 }
 
 
@@ -33,6 +40,9 @@ void App::run()
 
 void App::update()
 {
+    calculateFps();
+    m_fpsText.setString(floatToString(m_fps));
+   
     handleEvents();
     handleKeyboard();	
 }
@@ -40,7 +50,9 @@ void App::update()
 void App::draw()
 {
     m_window.clear();
-    	 
+    
+    m_window.draw(m_fpsText);
+
     m_window.display();
 }
 
@@ -87,7 +99,16 @@ void App::switchDisplayMode()
 
 void App::calculateFps()
 {
-    m_currentTime = clock.restart().asSeconds();
+    m_currentTime = clock.getElapsedTime().asSeconds();
     m_fps = 1.f / (m_currentTime - m_lastTime);
     m_lastTime = m_currentTime;
+}
+
+std::string App::floatToString(float value)
+{
+    std::ostringstream out;
+
+    out << value;
+
+    return out.str();
 }

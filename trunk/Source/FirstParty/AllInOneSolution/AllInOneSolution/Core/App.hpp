@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include <sstream>
 #include <string>
 
 /// This class will be used to handle the window or fullscreen
@@ -26,6 +28,8 @@ class App
     void switchDisplayMode();
    
     void calculateFps();
+
+    std::string floatToString(float value);
     
     private:
   
@@ -37,6 +41,9 @@ class App
     bool m_fullscreen;
    
     float m_fps, m_lastTime, m_currentTime;
+
+    sf::Font m_font;
+    sf::Text m_fpsText;
 
 };
 
