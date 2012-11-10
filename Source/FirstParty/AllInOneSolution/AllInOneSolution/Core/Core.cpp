@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "App.h"
+#include "App.hpp"
 
 /// This Function should be a part of Windowclass
 bool LoadConfigFile(std::string FileName);

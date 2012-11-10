@@ -1,4 +1,4 @@
-#include "App.h"
+#include "App.hpp"
 
 App::App(std::string& windowTitle, const unsigned int screenWidth, const unsigned int screenHeight,
     const unsigned int bitsPerPixel, const bool fullscreen)
