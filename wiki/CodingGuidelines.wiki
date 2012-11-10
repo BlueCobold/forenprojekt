@@ -87,3 +87,13 @@ Verwendetes Zeichen<br>
 1) Substantiv<br>
 2) großer Anfangsbuchstabe<br>
 3) Kein Präfix (kein CClass!)<br>
+
+=== Pfadnamen ===
+
+1) Bei includes: / (foward slash)<br>
+2) Bei Dateinamen: / (foward slash)<br>
+
+=== Code Dateien ===
+
+1) Source: `*`.cpp<br>
+2) Header: `*`.hpp<br>
