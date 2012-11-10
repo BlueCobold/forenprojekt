@@ -49,11 +49,7 @@ void App::handleKeyboard()
 	{
 		m_fullscreen = !m_fullscreen;
 
-		if(m_fullscreen)
-			m_window.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel),
-			m_windowTitle, sf::Style::Fullscreen);
-		else
-			m_window.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle);
+		switchDisplayMode();
 	}
 }
 void App::handleEvents()
@@ -65,5 +61,23 @@ void App::handleEvents()
 		// Close the window
 		if(event.type == sf::Event::Closed)
 			m_window.close();
+	}
+}
+
+void App::switchDisplayMode()
+{
+	if(m_fullscreen)
+	{	// Switch to fullscreen
+		m_window.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel),
+		m_windowTitle, sf::Style::Fullscreen);
+		// Disable the cursor
+		m_window.setMouseCursorVisible(false);
+	}
+	else
+	{
+		// Switch to window mode
+		m_window.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle);
+		// Enable the cursor
+		m_window.setMouseCursorVisible(true);
 	}
 }

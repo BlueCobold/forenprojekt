@@ -23,6 +23,8 @@ class App
 	void handleKeyboard(); /// Will be used to handle the keyboard input
 	void handleEvents(); /// Will be used to handle events from the window
 
+	void switchDisplayMode();
+
 	private:
 
 	sf::RenderWindow m_window;
