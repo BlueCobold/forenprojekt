@@ -12,7 +12,11 @@ App::App(std::string& windowTitle, const unsigned int screenWidth, const unsigne
 
 {
     if(fullscreen)
+    {
         m_window.create(sf::VideoMode(screenWidth, screenHeight, bitsPerPixel), windowTitle, sf::Style::Fullscreen);
+        // Disable the cursor
+        m_window.setMouseCursorVisible(false);
+    }
     else
         m_window.create(sf::VideoMode(screenWidth, screenHeight, bitsPerPixel), windowTitle);
 
