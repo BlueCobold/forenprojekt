@@ -1,38 +1,38 @@
-#include "ConfigFileLoader.h"
+#include "ConfigFileLoader.hpp"
 
 ConfigFileLoader::ConfigFileLoader(void)
 {
-    m_ResolutionX = 0;
-    m_ResolutionY = 0;
-    m_BitsPerPixel = 0;
-    m_IsFullScreen = false;
+    m_resolutionX = 0;
+    m_resolutionY = 0;
+    m_bitsPerPixel = 0;
+    m_isFullScreen = false;
 }
 
 ConfigFileLoader::~ConfigFileLoader(void)
 {
 }
 
-int ConfigFileLoader::GetResolutionX()
+int ConfigFileLoader::getResolutionX()
 {
-    return m_ResolutionX;
+    return m_resolutionX;
 }
 
-int ConfigFileLoader::GetResolutionY()
+int ConfigFileLoader::getResolutionY()
 {
-    return m_ResolutionY;
+    return m_resolutionY;
 }
 
-int ConfigFileLoader::GetBitsPerPixel()
+int ConfigFileLoader::getBitsPerPixel()
 {
-    return m_BitsPerPixel;
+    return m_bitsPerPixel;
 }
 
-int ConfigFileLoader::GetFullScreen()
+int ConfigFileLoader::getFullScreen()
 {
-    return m_IsFullScreen;
+    return m_isFullScreen;
 }
 
-bool ConfigFileLoader::LoadConfigFile(std::string FileName)
+bool ConfigFileLoader::loadConfigFile(std::string FileName)
 { 
     std::ifstream ConfigFile;
     std::string Input;
@@ -45,7 +45,7 @@ bool ConfigFileLoader::LoadConfigFile(std::string FileName)
             std::getline(ConfigFile, Input);
             if(Input == "[Window]")
             {
-                LoadWindowSettings(ConfigFile);
+                loadWindowSettings(ConfigFile);
                 GroupCounter--;
             }
             Input.clear();
@@ -57,7 +57,7 @@ bool ConfigFileLoader::LoadConfigFile(std::string FileName)
     return false;
 }
 
-bool ConfigFileLoader::LoadWindowSettings(std::ifstream &File)
+bool ConfigFileLoader::loadWindowSettings(std::ifstream &File)
 {
     std::string Input;
     int ParameterCounter = 4; /// at the moment 4 Parameter for Window Settings
@@ -66,22 +66,22 @@ bool ConfigFileLoader::LoadWindowSettings(std::ifstream &File)
         std::getline(File, Input);
         if(Input.find("ResolutionX = ") != -1)
         {
-            if(SetResolutionX(Input))
+            if(setResolutionX(Input))
                 ParameterCounter--;
         }
         else if(Input.find("ResolutionY = ") != -1)
         {
-            if(SetResolutionY(Input))
+            if(setResolutionY(Input))
                 ParameterCounter--;
         }
         else if(Input.find("BitsPerPixel = ") != -1)
         {
-            if(SetBitsPerPixel(Input))
+            if(setBitsPerPixel(Input))
                 ParameterCounter--;
         }
         else if(Input.find("IsFullScreen = ") != -1)
         {
-            if(SetFullScreen(Input))
+            if(setFullScreen(Input))
                 ParameterCounter--;
         }
         Input.clear();
@@ -92,46 +92,46 @@ bool ConfigFileLoader::LoadWindowSettings(std::ifstream &File)
     return false;
 }
 
-bool ConfigFileLoader::SetResolutionX(std::string &Input)
+bool ConfigFileLoader::setResolutionX(std::string &Input)
 {
     Input.erase(0, 14 + Input.find("ResolutionX = ")); /// Erase overhead in the string
     std::stringstream toNumber(Input);
-    toNumber >> m_ResolutionX; /// Convert string to an integer
-    if(m_ResolutionX > 0)
+    toNumber >> m_resolutionX; /// Convert string to an integer
+    if(m_resolutionX > 0)
         return true;
     return false;
 }
 
-bool ConfigFileLoader::SetResolutionY(std::string &Input)
+bool ConfigFileLoader::setResolutionY(std::string &Input)
 {
     Input.erase(0, 14 + Input.find("ResolutionY = ")); /// Erase overhead in the string
     std::stringstream toNumber(Input);
-    toNumber >> m_ResolutionY; /// Convert string to an integer
-    if(m_ResolutionY > 0)
+    toNumber >> m_resolutionY; /// Convert string to an integer
+    if(m_resolutionY > 0)
         return true;
     return false;
 }
 
-bool ConfigFileLoader::SetBitsPerPixel(std::string &Input)
+bool ConfigFileLoader::setBitsPerPixel(std::string &Input)
 {
     Input.erase(0, 15 + Input.find("BitsPerPixel = ")); /// Erase overhead in the string
     std::stringstream toNumber(Input);
-    toNumber >> m_BitsPerPixel; /// Convert string to an integer
-    if(m_BitsPerPixel > 0)
+    toNumber >> m_bitsPerPixel; /// Convert string to an integer
+    if(m_bitsPerPixel > 0)
         return true;
     return false;
 }
 
-bool ConfigFileLoader::SetFullScreen(std::string &Input)
+bool ConfigFileLoader::setFullScreen(std::string &Input)
 {
     if(Input.find("false") != -1)
     {
-        m_IsFullScreen = false;
+        m_isFullScreen = false;
         return true;
     }
     if(Input.find("true") != -1)
     {
-        m_IsFullScreen = true;
+        m_isFullScreen = true;
         return true;
     }
     return false;
