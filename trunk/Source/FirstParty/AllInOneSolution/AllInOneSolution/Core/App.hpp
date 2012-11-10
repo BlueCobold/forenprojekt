@@ -36,7 +36,7 @@ class App
     unsigned int m_screenWidth, m_screenHeight, m_bitsPerPixel;
     bool m_fullscreen;
    
-    unsigned int m_fps, m_lastTime, m_currentTime;
+    float m_fps, m_lastTime, m_currentTime;
 
 };
 
