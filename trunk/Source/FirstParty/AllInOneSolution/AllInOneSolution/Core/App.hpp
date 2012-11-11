@@ -7,6 +7,7 @@
 
 #include "StateManager.hpp"
 #include "TestState.hpp"
+#include "TestState2.hpp"
 
 /// This class will be used to handle the window or fullscreen
 /// and to handle the rendering
