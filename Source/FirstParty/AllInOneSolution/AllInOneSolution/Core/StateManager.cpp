@@ -16,7 +16,6 @@ void StateManager::push(std::unique_ptr<State> state)
     {
         m_states.push_back(std::move(state));
         m_states.back()->initialize();
-        m_states.back()->pause();
     }
     else
     {
