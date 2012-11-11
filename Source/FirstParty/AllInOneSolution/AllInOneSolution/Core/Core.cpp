@@ -1,23 +1,18 @@
-#include <iostream>
 #include <string>
-#include <fstream>
 #include "App.hpp"
 #include "ConfigFileLoader.hpp"
 
 int main(int argc, char* argv[])
 {
+    ConfigFileLoader ConfigFile("Config.ini");
+	/// Create the Application
+    App app(ConfigFile.getString("WindowName"),
+            ConfigFile.getInt("ResolutionX"), 
+            ConfigFile.getInt("ResolutionY"), 
+            ConfigFile.getInt("BitsPerPixel"),
+            ConfigFile.getBool("IsFullScreen"));
 
-    ConfigFileLoader configFileLoader;
+	app.run();
 
-    configFileLoader.loadConfigFile("Config.ini");
-
-    std::string windowTitle = "Test";
-    // Create the Application
-    App app(windowTitle, configFileLoader.getResolutionX(), configFileLoader.getResolutionY(), 
-        configFileLoader.getBitsPerPixel(), configFileLoader.getFullScreen());
-
-    app.run();
-    
-    return 0;
+	return 0;
 }
-
