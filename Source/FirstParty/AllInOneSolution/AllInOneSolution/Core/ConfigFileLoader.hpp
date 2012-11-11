@@ -12,24 +12,16 @@
 class ConfigFileLoader
 {
 private:
-    int m_resolutionX;
-    int m_resolutionY;
-    int m_bitsPerPixel;
-    bool m_isFullScreen;
+    std::string m_FileName;
 
-    bool loadWindowSettings(std::ifstream &File);
-    bool setResolutionX(std::string &Input);
-    bool setResolutionY(std::string &Input);
-    bool setBitsPerPixel(std::string &Input);
-    bool setFullScreen(std::string &Input);
-
+    int StringToInt(std::string Data);
+    bool StringToBool(std::string Data);
+    std::string eraseOverhang(std::string Data);
 public:
-    bool loadConfigFile(std::string FileName);
-    int getResolutionX() const;
-    int getResolutionY() const;
-    int getBitsPerPixel() const;
-    int getFullScreen() const;
-    ConfigFileLoader(void);
+    int getInt(std::string Data);
+    bool getBool(std::string Data);
+    std::string getString(std::string Data);
+    ConfigFileLoader(std::string File);
     ~ConfigFileLoader(void);
 };
 
