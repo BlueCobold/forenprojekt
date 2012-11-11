@@ -28,9 +28,6 @@ App::App(std::string& windowTitle, const unsigned int screenWidth, const unsigne
     m_fpsText.setColor(sf::Color::Yellow);
     m_fpsText.setCharacterSize(30);
     m_fpsText.setPosition(10, 10);
-
-    m_stateManager.push(std::move(std::unique_ptr<TestState>( new TestState(m_screen) )));
-    m_stateManager.push(std::move(std::unique_ptr<TestState2>( new TestState2(m_screen) )));
 }
 
 App::~App()
@@ -76,16 +73,7 @@ void App::handleKeyboard()
         m_fullscreen = !m_fullscreen;
         
         switchDisplayMode();
-    }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-    {
-        m_stateManager.prev();
-    }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-    {
-        m_stateManager.next();
-    }
-    
+    }    
 }
 void App::handleEvents()
 {

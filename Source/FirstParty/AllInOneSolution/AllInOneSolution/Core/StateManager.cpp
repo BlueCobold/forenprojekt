@@ -26,7 +26,7 @@ void StateManager::push(std::unique_ptr<State> state)
 
 void StateManager::next()
 {
-    if(m_states[m_index] != m_states.back())
+    if((m_states[m_index] != m_states.back() && !m_states.empty()))
     {
         m_index++;
     }
@@ -34,7 +34,7 @@ void StateManager::next()
 
 void StateManager::prev()
 {
-    if(m_states[m_index] != m_states.front())
+    if(( m_states[m_index] != m_states.front() && !m_states.empty()))
     {
         m_index--;
     }
