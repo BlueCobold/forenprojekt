@@ -43,7 +43,7 @@ class App
     unsigned int m_screenWidth, m_screenHeight, m_bitsPerPixel;
     bool m_fullscreen;
    
-    float m_fps, m_lastTime, m_currentTime;
+    float m_fps, m_lastTime, m_currentTime  ;
 
     sf::Font m_font;
     sf::Text m_fpsText;
