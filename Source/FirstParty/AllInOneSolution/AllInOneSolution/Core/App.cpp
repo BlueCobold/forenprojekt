@@ -13,12 +13,12 @@ App::App(std::string& windowTitle, const unsigned int screenWidth, const unsigne
 {
     if(fullscreen)
     {
-        m_window.create(sf::VideoMode(screenWidth, screenHeight, bitsPerPixel), windowTitle, sf::Style::Fullscreen);
+        m_screen.create(sf::VideoMode(screenWidth, screenHeight, bitsPerPixel), windowTitle, sf::Style::Fullscreen);
         // Disable the cursor
-        m_window.setMouseCursorVisible(false);
+        m_screen.setMouseCursorVisible(false);
     }
     else
-        m_window.create(sf::VideoMode(screenWidth, screenHeight, bitsPerPixel), windowTitle);
+        m_screen.create(sf::VideoMode(screenWidth, screenHeight, bitsPerPixel), windowTitle);
 
     m_font.loadFromFile("visitor.ttf");
 
@@ -35,7 +35,7 @@ App::~App()
 
 void App::run()
 {
-    while(m_window.isOpen())
+    while(m_screen.isOpen())
     {
         update();
         draw();
@@ -53,11 +53,11 @@ void App::update()
 
 void App::draw()
 {
-    m_window.clear();
+    m_screen.clear();
     
-    m_window.draw(m_fpsText);
+    m_screen.draw(m_fpsText);
 
-    m_window.display();
+    m_screen.display();
 }
 
 void App::handleKeyboard()
@@ -74,11 +74,11 @@ void App::handleEvents()
 {
     sf::Event event;
     
-    while(m_window.pollEvent(event))
+    while(m_screen.pollEvent(event))
     {
         // Close the window
         if(event.type == sf::Event::Closed)
-            m_window.close();
+            m_screen.close();
     }
 }
 
@@ -87,17 +87,17 @@ void App::switchDisplayMode()
     if(m_fullscreen)
     {	
         // Switch to fullscreen
-        m_window.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel),
+        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel),
         m_windowTitle, sf::Style::Fullscreen);
         // Disable the cursor
-        m_window.setMouseCursorVisible(false);
+        m_screen.setMouseCursorVisible(false);
     }
     else
     {
         // Switch to window mode
-        m_window.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle);
+        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_screenTitle);
         // Enable the cursor
-        m_window.setMouseCursorVisible(true);
+        m_screen.setMouseCursorVisible(true);
     }
 }
 

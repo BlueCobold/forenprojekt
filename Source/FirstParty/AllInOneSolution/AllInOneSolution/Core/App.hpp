@@ -33,7 +33,7 @@ class App
     
     private:
   
-    sf::RenderWindow m_window;
+    sf::RenderWindow m_screen;
     sf::Clock clock;
     
     std::string m_windowTitle;
