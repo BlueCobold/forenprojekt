@@ -5,6 +5,9 @@
 #include <sstream>
 #include <string>
 
+#include "StateManager.hpp"
+#include "TestState.hpp"
+
 /// This class will be used to handle the window or fullscreen
 /// and to handle the rendering
 class App
@@ -44,6 +47,8 @@ class App
 
     sf::Font m_font;
     sf::Text m_fpsText;
+
+    StateManager m_stateManager;
 
 };
 

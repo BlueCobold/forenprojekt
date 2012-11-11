@@ -85,12 +85,14 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="TestState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="ConfigFileLoader.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />
+    <ClInclude Include="TestState.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config.ini" />

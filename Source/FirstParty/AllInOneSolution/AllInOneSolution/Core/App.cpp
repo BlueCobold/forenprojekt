@@ -26,6 +26,9 @@ App::App(std::string& windowTitle, const unsigned int screenWidth, const unsigne
     m_fpsText.setColor(sf::Color::Yellow);
     m_fpsText.setCharacterSize(30);
     m_fpsText.setPosition(10, 10);
+
+    m_stateManager.push(std::move(std::unique_ptr<TestState>( new TestState(m_screen) )));
+
 }
 
 
@@ -49,11 +52,15 @@ void App::update()
    
     handleEvents();
     handleKeyboard();	
+
+    m_stateManager.update();
 }
 
 void App::draw()
 {
     m_screen.clear();
+
+    m_stateManager.draw();
     
     m_screen.draw(m_fpsText);
 
@@ -95,7 +102,7 @@ void App::switchDisplayMode()
     else
     {
         // Switch to window mode
-        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle);
+        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle );
         // Enable the cursor
         m_screen.setMouseCursorVisible(true);
     }

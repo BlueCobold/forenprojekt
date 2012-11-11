@@ -44,11 +44,13 @@ void StateManager::prev()
 void StateManager::update()
 {
     if(!m_states.empty())
-        m_states[m_index]->update();
+        if(!m_states[m_index]->isPaused())
+            m_states[m_index]->update();
 }
 
 void StateManager::draw()
 {
     if(!m_states.empty())
-        m_states[m_index]->draw();
+        if(!m_states[m_index]->isPaused())
+            m_states[m_index]->draw();
 }
