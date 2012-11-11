@@ -12,22 +12,22 @@ ConfigFileLoader::~ConfigFileLoader(void)
 {
 }
 
-int ConfigFileLoader::getResolutionX()
+int ConfigFileLoader::getResolutionX() const
 {
     return m_resolutionX;
 }
 
-int ConfigFileLoader::getResolutionY()
+int ConfigFileLoader::getResolutionY() const
 {
     return m_resolutionY;
 }
 
-int ConfigFileLoader::getBitsPerPixel()
+int ConfigFileLoader::getBitsPerPixel() const
 {
     return m_bitsPerPixel;
 }
 
-int ConfigFileLoader::getFullScreen()
+int ConfigFileLoader::getFullScreen() const
 {
     return m_isFullScreen;
 }
@@ -94,7 +94,7 @@ bool ConfigFileLoader::loadWindowSettings(std::ifstream &File)
 
 bool ConfigFileLoader::setResolutionX(std::string &Input)
 {
-    Input.erase(0, 14 + Input.find("ResolutionX = ")); /// Erase overhead in the string
+    Input.erase(0, 13 + Input.find("ResolutionX = ")); /// Erase overhead in the string
     std::stringstream toNumber(Input);
     toNumber >> m_resolutionX; /// Convert string to an integer
     if(m_resolutionX > 0)
@@ -104,7 +104,7 @@ bool ConfigFileLoader::setResolutionX(std::string &Input)
 
 bool ConfigFileLoader::setResolutionY(std::string &Input)
 {
-    Input.erase(0, 14 + Input.find("ResolutionY = ")); /// Erase overhead in the string
+    Input.erase(0, 13 + Input.find("ResolutionY = ")); /// Erase overhead in the string
     std::stringstream toNumber(Input);
     toNumber >> m_resolutionY; /// Convert string to an integer
     if(m_resolutionY > 0)
@@ -114,7 +114,7 @@ bool ConfigFileLoader::setResolutionY(std::string &Input)
 
 bool ConfigFileLoader::setBitsPerPixel(std::string &Input)
 {
-    Input.erase(0, 15 + Input.find("BitsPerPixel = ")); /// Erase overhead in the string
+    Input.erase(0, 14 + Input.find("BitsPerPixel = ")); /// Erase overhead in the string
     std::stringstream toNumber(Input);
     toNumber >> m_bitsPerPixel; /// Convert string to an integer
     if(m_bitsPerPixel > 0)

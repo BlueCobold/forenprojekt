@@ -25,10 +25,10 @@ private:
 
 public:
     bool loadConfigFile(std::string FileName);
-    int getResolutionX();
-    int getResolutionY();
-    int getBitsPerPixel();
-    int getFullScreen();
+    int getResolutionX() const;
+    int getResolutionY() const;
+    int getBitsPerPixel() const;
+    int getFullScreen() const;
     ConfigFileLoader(void);
     ~ConfigFileLoader(void);
 };
