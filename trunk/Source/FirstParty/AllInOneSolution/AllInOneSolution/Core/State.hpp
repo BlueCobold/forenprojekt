@@ -16,11 +16,26 @@ class State
     virtual void draw() = 0;
     virtual void shutdown() = 0;
 
-    virtual void pause() = 0;
-    virtual void resume() = 0;
+    void pause()
+    {
+        m_pause = true;
+    }
+    void resume()
+    {
+        m_pause = false;
+    }
+
+    bool isPaused()
+    {
+        return m_pause;
+    }
 
     private:
 
+    bool m_pause;
+
+    protected:
+    
     sf::RenderWindow& m_screen;
 
 };
