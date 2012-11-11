@@ -1,9 +1,8 @@
 #include "State.hpp"
 
 
-State::State(sf::RenderWindow& screen)
+State::State(sf::RenderWindow& screen) : m_screen(screen)
 {
-    m_screen = screen;
 }
 
 

@@ -95,7 +95,7 @@ void App::switchDisplayMode()
     else
     {
         // Switch to window mode
-        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_screenTitle);
+        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle);
         // Enable the cursor
         m_screen.setMouseCursorVisible(true);
     }
