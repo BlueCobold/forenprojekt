@@ -1,138 +1,100 @@
 #include "ConfigFileLoader.hpp"
 
-ConfigFileLoader::ConfigFileLoader(void)
+ConfigFileLoader::ConfigFileLoader(std::string File)
+    : m_FileName(File)
 {
-    m_resolutionX = 0;
-    m_resolutionY = 0;
-    m_bitsPerPixel = 0;
-    m_isFullScreen = false;
 }
 
 ConfigFileLoader::~ConfigFileLoader(void)
 {
 }
 
-int ConfigFileLoader::getResolutionX() const
-{
-    return m_resolutionX;
-}
-
-int ConfigFileLoader::getResolutionY() const
-{
-    return m_resolutionY;
-}
-
-int ConfigFileLoader::getBitsPerPixel() const
-{
-    return m_bitsPerPixel;
-}
-
-int ConfigFileLoader::getFullScreen() const
-{
-    return m_isFullScreen;
-}
-
-bool ConfigFileLoader::loadConfigFile(std::string FileName)
+std::string ConfigFileLoader:: getString(std::string Data)
 { 
     std::ifstream ConfigFile;
     std::string Input;
-    int GroupCounter = 1; /// at the moment 1 group of parameter in the ConfigFile
-    ConfigFile.open(FileName, std::ios_base::in);
+    ConfigFile.open(m_FileName, std::ios_base::in);
     if(ConfigFile)
     {
         do
         {
             std::getline(ConfigFile, Input);
-            if(Input == "[Window]")
+            if(Input.find(Data) != -1)
             {
-                loadWindowSettings(ConfigFile);
-                GroupCounter--;
+                Input = eraseOverhang(Input);
+                return Input;
             }
             Input.clear();
         }
-        while(!ConfigFile.eof() && GroupCounter);
+        while(!ConfigFile.eof());
     }
-    if(GroupCounter == 0)
-        return true;
-    return false;
+    return "Fehler";
 }
 
-bool ConfigFileLoader::loadWindowSettings(std::ifstream &File)
-{
+int ConfigFileLoader::getInt(std::string Data)
+{ 
+    std::ifstream ConfigFile;
     std::string Input;
-    int ParameterCounter = 4; /// at the moment 4 Parameter for Window Settings
+    ConfigFile.open(m_FileName, std::ios_base::in);
+    if(ConfigFile)
+    {
+        do
+        {
+            std::getline(ConfigFile, Input);
+            if(Input.find(Data) != -1)
+            {
+                Input = eraseOverhang(Input);
+                return StringToInt(Input);
+            }
+            Input.clear();
+        }
+        while(!ConfigFile.eof());
+    }
+    return -1;
+}
+bool ConfigFileLoader::getBool(std::string Data)
+{ 
+    std::ifstream ConfigFile;
+    std::string Input;
+    ConfigFile.open(m_FileName, std::ios_base::in);
+    if(ConfigFile)
+    {
+        do
+        {
+            std::getline(ConfigFile, Input);
+            if(Input.find(Data) != -1)
+            {
+                return StringToBool(Input);
+            }
+            Input.clear();
+        }
+        while(!ConfigFile.eof());
+    }
+    return false;
+}
+int ConfigFileLoader::StringToInt(std::string Data)
+{
+    int Number;
+    std::stringstream toNumber(Data);
+    toNumber >> Number; /// Convert string to an integer
+    return Number;
+}
+
+std::string ConfigFileLoader::eraseOverhang(std::string Data)
+{
+    Data.erase(0, Data.find("=") + 1); /// Erase overhang in the string
     do
     {
-        std::getline(File, Input);
-        if(Input.find("ResolutionX = ") != -1)
-        {
-            if(setResolutionX(Input))
-                ParameterCounter--;
-        }
-        else if(Input.find("ResolutionY = ") != -1)
-        {
-            if(setResolutionY(Input))
-                ParameterCounter--;
-        }
-        else if(Input.find("BitsPerPixel = ") != -1)
-        {
-            if(setBitsPerPixel(Input))
-                ParameterCounter--;
-        }
-        else if(Input.find("IsFullScreen = ") != -1)
-        {
-            if(setFullScreen(Input))
-                ParameterCounter--;
-        }
-        Input.clear();
+        Data.replace(Data.find(" "), Data.find(" ") + 1, ""); /// Erase Spaces
     }
-    while(!File.eof() &&  ParameterCounter);            
-    if(ParameterCounter == 0)
-        return true;
-    return false;
+    while(Data.find(" ") != -1);
+    return Data;
 }
 
-bool ConfigFileLoader::setResolutionX(std::string &Input)
+bool ConfigFileLoader::StringToBool(std::string Data)
 {
-    Input.erase(0, 13 + Input.find("ResolutionX = ")); /// Erase overhead in the string
-    std::stringstream toNumber(Input);
-    toNumber >> m_resolutionX; /// Convert string to an integer
-    if(m_resolutionX > 0)
+    if(Data.find("true") != -1)
         return true;
-    return false;
-}
-
-bool ConfigFileLoader::setResolutionY(std::string &Input)
-{
-    Input.erase(0, 13 + Input.find("ResolutionY = ")); /// Erase overhead in the string
-    std::stringstream toNumber(Input);
-    toNumber >> m_resolutionY; /// Convert string to an integer
-    if(m_resolutionY > 0)
-        return true;
-    return false;
-}
-
-bool ConfigFileLoader::setBitsPerPixel(std::string &Input)
-{
-    Input.erase(0, 14 + Input.find("BitsPerPixel = ")); /// Erase overhead in the string
-    std::stringstream toNumber(Input);
-    toNumber >> m_bitsPerPixel; /// Convert string to an integer
-    if(m_bitsPerPixel > 0)
-        return true;
-    return false;
-}
-
-bool ConfigFileLoader::setFullScreen(std::string &Input)
-{
-    if(Input.find("false") != -1)
-    {
-        m_isFullScreen = false;
-        return true;
-    }
-    if(Input.find("true") != -1)
-    {
-        m_isFullScreen = true;
-        return true;
-    }
-    return false;
+    else
+        return false;
 }
