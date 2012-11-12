@@ -8,7 +8,13 @@
 
 #include <sstream>
 
-App::App(ConfigFileLoader& configLoader)
+App::App(ConfigFileLoader& configLoader) :
+    m_screenWidth(0),
+    m_screenHeight(0),
+    m_bitsPerPixel(0),
+    m_fullscreen(false),
+    m_fps(0.f),
+    m_frameCounter(0.f)
 {
     m_windowTitle = configLoader.getString("WindowName");
     m_screenWidth = configLoader.getInt("ResolutionX"); 
