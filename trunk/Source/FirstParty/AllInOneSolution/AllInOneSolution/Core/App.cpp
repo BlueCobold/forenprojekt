@@ -9,9 +9,6 @@
 #include <sstream>
 
 App::App(ConfigFileLoader& configLoader)
-    : m_lastTime(0),
-    m_currentTime(0)
-
 {
     m_windowTitle = configLoader.getString("WindowName");
     m_screenWidth = configLoader.getInt("ResolutionX"); 
@@ -112,7 +109,11 @@ void App::switchDisplayMode()
 
 void App::calculateFps()
 {
-    m_currentTime = m_clock.getElapsedTime().asSeconds();
-    m_fps = 1.f / (m_currentTime - m_lastTime);
-    m_lastTime = m_currentTime;
+    m_frameCounter++;
+    if(m_clock.getElapsedTime().asSeconds() >= 1.0f)
+    {
+        m_fps = (m_frameCounter / m_clock.getElapsedTime().asSeconds());
+        m_clock.restart();
+        m_frameCounter = 0;
+    }
 }

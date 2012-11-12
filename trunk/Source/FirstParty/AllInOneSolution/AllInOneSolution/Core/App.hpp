@@ -43,7 +43,7 @@ private:
     unsigned int m_screenWidth, m_screenHeight, m_bitsPerPixel;
     bool m_fullscreen;
    
-    float m_fps, m_lastTime, m_currentTime;
+    float m_fps, m_frameCounter;
 
     sf::Font m_font;
     sf::Text m_fpsText;
