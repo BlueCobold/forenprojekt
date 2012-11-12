@@ -1,0 +1,6 @@
+
+[{---Game/Ressources---}]
+
+.ZIPped File, renamed file ending to .fprsrc, pw:fp(just for dev)
+Folders are just there to see the layout without unZIPping the files
+

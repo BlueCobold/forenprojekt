@@ -1,0 +1,24 @@
+<level>
+	<needed_ressources>
+		<template name = "ballOne">GameObject-Template.fpgt</template>
+	</needed_ressources>
+	<configuration>
+		
+	</cofiguration>
+	<scene>
+		<gameObjects>
+			<gameObject>
+				<template>ballOne</template>
+				<changes>
+					<transform>
+						<position>
+							<x>32.65</x>
+							<y>189.2</y>
+							<z>1</z> <!--->Layer<!--->
+						</position>
+					</transform>
+				</changes>
+			</gameObject>
+		</gameObjects>
+	</scene>
+</level>
