@@ -5,3 +5,5 @@ C:\Users\Yannic\LightClaw@SVN\Source\Developer Tools\ProjectManager\Libraries\Pi
 C:\Users\Yannic\LightClaw@SVN\Source\Developer Tools\ProjectManager\Libraries\PivotalTracker.NET\PivotalTrackerTest\obj\Debug\PivotalTrackerTest.csprojResolveAssemblyReference.cache
 C:\Users\Yannic\LightClaw@SVN\Source\Developer Tools\ProjectManager\Libraries\PivotalTracker.NET\PivotalTrackerTest\obj\Debug\PivotalTrackerTest.exe
 C:\Users\Yannic\LightClaw@SVN\Source\Developer Tools\ProjectManager\Libraries\PivotalTracker.NET\PivotalTrackerTest\obj\Debug\PivotalTrackerTest.pdb
+C:\Users\Yannic\Sppro-Projekt\Source\FirstParty\Tools\Libraries\PivotalTracker.NET\PivotalTrackerTest\obj\Debug\PivotalTrackerTest.exe
+C:\Users\Yannic\Sppro-Projekt\Source\FirstParty\Tools\Libraries\PivotalTracker.NET\PivotalTrackerTest\obj\Debug\PivotalTrackerTest.pdb

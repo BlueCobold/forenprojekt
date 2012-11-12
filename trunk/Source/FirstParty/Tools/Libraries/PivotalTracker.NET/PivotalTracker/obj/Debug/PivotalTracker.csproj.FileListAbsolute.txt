@@ -1,0 +1,5 @@
+C:\Users\Yannic\Sppro-Projekt\Source\FirstParty\Tools\Libraries\PivotalTracker.NET\PivotalTracker\bin\Debug\PivotalTracker.NET.dll
+C:\Users\Yannic\Sppro-Projekt\Source\FirstParty\Tools\Libraries\PivotalTracker.NET\PivotalTracker\bin\Debug\PivotalTracker.NET.pdb
+C:\Users\Yannic\Sppro-Projekt\Source\FirstParty\Tools\Libraries\PivotalTracker.NET\PivotalTracker\obj\Debug\PivotalTracker.csprojResolveAssemblyReference.cache
+C:\Users\Yannic\Sppro-Projekt\Source\FirstParty\Tools\Libraries\PivotalTracker.NET\PivotalTracker\obj\Debug\PivotalTracker.NET.dll
+C:\Users\Yannic\Sppro-Projekt\Source\FirstParty\Tools\Libraries\PivotalTracker.NET\PivotalTracker\obj\Debug\PivotalTracker.NET.pdb

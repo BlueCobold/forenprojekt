@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="PivotalTracker">
+</Property><Property Name="Projektmappendatei" Value="C:\Users\Yannic\Sppro-Projekt\Source\FirstParty\Tools\Libraries\PivotalTracker.NET\PivotalTracker.sln">
+</Property><Property Name="Date" Value="10 November 2012">
+</Property><Property Name="Time" Value="20:53">
+</Property></Properties><Event ErrorLevel="0" Project="PivotalTracker" Source="PivotalTracker\PivotalTracker.csproj" Description="Die Projektdatei erfordert keine Konvertierung.">
+</Event><Event ErrorLevel="3" Project="PivotalTracker" Source="PivotalTracker\PivotalTracker.csproj" Description="Keine Konvertierung erforderlich">
+</Event><Event ErrorLevel="0" Project="PivotalTrackerTest" Source="PivotalTrackerTest\PivotalTrackerTest.csproj" Description="Die Projektdatei erfordert keine Konvertierung.">
+</Event><Event ErrorLevel="3" Project="PivotalTrackerTest" Source="PivotalTrackerTest\PivotalTrackerTest.csproj" Description="Keine Konvertierung erforderlich">
+</Event><Event ErrorLevel="0" Project="" Source="PivotalTracker.sln" Description="Die Projektmappe wurde erfolgreich konvertiert.">
+</Event><Event ErrorLevel="3" Project="" Source="PivotalTracker.sln" Description="Converted">
+</Event></UpgradeLog>
