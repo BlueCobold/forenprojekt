@@ -1,24 +1,32 @@
 #include "App.hpp"
+#include "Util.hpp"
+#include "ConfigFileLoader.hpp"
 
-App::App(std::string& windowTitle, const unsigned int screenWidth, const unsigned int screenHeight,
-    const unsigned int bitsPerPixel, const bool fullscreen)
-: m_windowTitle(windowTitle),
-  m_screenWidth(screenWidth),
-  m_screenHeight(screenHeight),
-  m_bitsPerPixel(bitsPerPixel),
-  m_fullscreen(fullscreen),
-  m_lastTime(0),
-  m_currentTime(0)
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Event.hpp>
+
+#include <sstream>
+
+App::App(ConfigFileLoader& configLoader)
+    : m_lastTime(0),
+    m_currentTime(0)
 
 {
-    if(fullscreen)
+    m_windowTitle = configLoader.getString("WindowName");
+    m_screenWidth = configLoader.getInt("ResolutionX"); 
+    m_screenHeight = configLoader.getInt("ResolutionY"); 
+    m_bitsPerPixel = configLoader.getInt("BitsPerPixel");
+    m_fullscreen = configLoader.getBool("IsFullScreen");
+
+    if(m_fullscreen)
     {
-        m_screen.create(sf::VideoMode(screenWidth, screenHeight, bitsPerPixel), windowTitle, sf::Style::Fullscreen);
+        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle, sf::Style::Fullscreen);
         // Disable the cursor
         m_screen.setMouseCursorVisible(false);
     }
     else
-        m_screen.create(sf::VideoMode(screenWidth, screenHeight, bitsPerPixel), windowTitle);
+        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle);
 
     m_screen.setFramerateLimit(60);
 
@@ -28,10 +36,6 @@ App::App(std::string& windowTitle, const unsigned int screenWidth, const unsigne
     m_fpsText.setColor(sf::Color::Yellow);
     m_fpsText.setCharacterSize(30);
     m_fpsText.setPosition(10, 10);
-}
-
-App::~App()
-{
 }
 
 void App::run()
@@ -46,7 +50,7 @@ void App::run()
 void App::update()
 {
     calculateFps();
-    m_fpsText.setString(floatToString(m_fps));
+    m_fpsText.setString(Util::toString<float>(m_fps));
    
     handleEvents();
     handleKeyboard();	
@@ -108,16 +112,7 @@ void App::switchDisplayMode()
 
 void App::calculateFps()
 {
-    m_currentTime = clock.getElapsedTime().asSeconds();
+    m_currentTime = m_clock.getElapsedTime().asSeconds();
     m_fps = 1.f / (m_currentTime - m_lastTime);
     m_lastTime = m_currentTime;
-}
-
-std::string App::floatToString(float value)
-{
-    std::ostringstream out;
-
-    out << value;
-
-    return out.str();
 }

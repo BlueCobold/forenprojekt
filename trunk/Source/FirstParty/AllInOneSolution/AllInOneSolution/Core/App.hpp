@@ -1,48 +1,49 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <sstream>
+#include "StateManager.hpp"
+
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Text.hpp>
+
 #include <string>
 
-#include "StateManager.hpp"
+class ConfigFileLoader;
 
 /// This class will be used to handle the window or fullscreen
 /// and to handle the rendering
 class App
 {
-    public:
+public:
     
-    App(std::string& windowTitle, const unsigned int screenWidth, 
-    	const unsigned int screenHeight, const unsigned int bitsPerPixel, const bool fullscreen);
-    ~App();
+    App(ConfigFileLoader& configLoader);
     
     void run();
     
-    private:
+private:
     
     void update();
+
     void draw();
     
-    void handleKeyboard(); /// Will be used to handle the keyboard input
-    void handleEvents(); /// Will be used to handle events from the window
+    void handleKeyboard();
+
+    void handleEvents();
   
     void switchDisplayMode();
    
     void calculateFps();
-
-    std::string floatToString(float value);
     
-    private:
+private:
   
     sf::RenderWindow m_screen;
-    sf::Clock clock;
+    sf::Clock m_clock;
     
     std::string m_windowTitle;
     unsigned int m_screenWidth, m_screenHeight, m_bitsPerPixel;
     bool m_fullscreen;
    
-    float m_fps, m_lastTime, m_currentTime  ;
+    float m_fps, m_lastTime, m_currentTime;
 
     sf::Font m_font;
     sf::Text m_fpsText;
