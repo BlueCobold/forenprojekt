@@ -1,26 +1,22 @@
 #pragma once
 
+#include "PhysicalObject.hpp"
+#include "GraphicalObject.hpp"
+
 #include <SFML/Graphics/Drawable.hpp>
-#include <SFML/Graphics/Transform.hpp>
-#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 
-class Entity : public sf::Drawable
+
+class Entity : public sf::Drawable , public PhysicalObject, public GraphicalObject
 {
 public:
 
-    Entity();
-    virtual ~Entity();
+    void update();
 
 private:
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
-
-protected:
-
-    sf::Texture m_texture;
-    sf::Transform m_transform;
+    void draw(sf::RenderTarget& target, sf::RenderStates states)const;
 
 };
 
