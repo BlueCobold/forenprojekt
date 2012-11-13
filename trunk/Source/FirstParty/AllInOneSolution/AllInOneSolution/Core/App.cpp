@@ -17,11 +17,11 @@ App::App(ConfigFileLoader& configLoader) :
     m_frameCounter(0.f)
 {
     m_windowTitle = configLoader.getString("WindowName");
-    m_screenWidth = configLoader.getInt("ResolutionX"); 
-    m_screenHeight = configLoader.getInt("ResolutionY"); 
+    m_screenWidth = configLoader.getInt("ResolutionX");
+    m_screenHeight = configLoader.getInt("ResolutionY");
     m_bitsPerPixel = configLoader.getInt("BitsPerPixel");
     m_fullscreen = configLoader.getBool("IsFullScreen");
-
+    
     if(m_fullscreen)
     {
         m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle, sf::Style::Fullscreen);
@@ -30,8 +30,6 @@ App::App(ConfigFileLoader& configLoader) :
     }
     else
         m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle);
-
-    m_screen.setFramerateLimit(60);
 
     m_font.loadFromFile("visitor.ttf");
 

@@ -83,12 +83,14 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="ConfigFileLoader.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="ConfigFileLoader.hpp" />
+    <ClInclude Include="Entity.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />
     <ClInclude Include="Util.hpp" />
