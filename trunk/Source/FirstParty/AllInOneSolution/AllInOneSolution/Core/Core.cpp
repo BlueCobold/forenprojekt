@@ -1,9 +1,9 @@
 #include "App.hpp"
-#include "ConfigFileLoader.hpp"
+#include "Config.hpp"
 
 int main(int argc, char* argv[])
 {
-    ConfigFileLoader ConfigFile("Config.ini");
+    Config ConfigFile("Config.ini");
 	
     App app(ConfigFile);
 

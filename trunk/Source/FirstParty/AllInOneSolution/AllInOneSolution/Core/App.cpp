@@ -1,6 +1,6 @@
 #include "App.hpp"
 #include "Util.hpp"
-#include "ConfigFileLoader.hpp"
+#include "Config.hpp"
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -8,7 +8,7 @@
 
 #include <sstream>
 
-App::App(ConfigFileLoader& configLoader) :
+App::App(Config& configLoader) :
     m_screenWidth(0),
     m_screenHeight(0),
     m_bitsPerPixel(0),
@@ -16,11 +16,11 @@ App::App(ConfigFileLoader& configLoader) :
     m_fps(0.f),
     m_frameCounter(0.f)
 {
-    m_windowTitle = configLoader.getString("WindowName");
-    m_screenWidth = configLoader.getInt("ResolutionX");
-    m_screenHeight = configLoader.getInt("ResolutionY");
-    m_bitsPerPixel = configLoader.getInt("BitsPerPixel");
-    m_fullscreen = configLoader.getBool("IsFullScreen");
+    m_windowTitle = configLoader.get<std::string>("WindowName");
+    m_screenWidth = configLoader.get<unsigned int>("ResolutionX");
+    m_screenHeight = configLoader.get<unsigned int>("ResolutionY");
+    m_bitsPerPixel = configLoader.get<unsigned int>("BitsPerPixel");
+    m_fullscreen = configLoader.get<bool>("IsFullScreen");
     
     if(m_fullscreen)
     {
