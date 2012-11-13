@@ -31,24 +31,23 @@ template<typename T>
 T Config::get(const std::string& data)
 { 
     std::string input;
-    T output = 0;
+    T output = Util::stringTo<T>("0");
     if(m_configFile)
     {
-        m_configFile.seekg(std::ios_base::beg);
-        while(!m_configFile.eof())
-        {
-            std::getline(m_configFile, input);
-            if(input.find(data) != std::string::npos)
-            {
-                input = eraseOverhang(input);
-                output = Util::stringTo<T>(input);
-                return output;
-            }
-            input.clear();
+       m_configFile.seekg(std::ios_base::beg);
+       while(!m_configFile.eof())
+       {
+           std::getline(m_configFile, input);
+           if(input.find(data) != std::string::npos)
+           {
+               input = eraseOverhang(input);
+               output = Util::stringTo<T>(input);
+               return output;
+           }
+           input.clear();
         }
     }
     /// avoid errors if data not found
-    output = Util::stringTo<T>("0");
     return output;
 }
 
