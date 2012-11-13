@@ -8,7 +8,7 @@
 
 #include <string>
 
-class ConfigFileLoader;
+class Config;
 
 /// This class will be used to handle the window or fullscreen
 /// and to handle the rendering
@@ -16,7 +16,7 @@ class App
 {
 public:
     
-    App(ConfigFileLoader& configLoader);
+    App(Config& configLoader);
     
     void run();
     
