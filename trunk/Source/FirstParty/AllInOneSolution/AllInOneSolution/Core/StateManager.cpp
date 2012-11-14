@@ -1,13 +1,15 @@
 #include "StateManager.hpp"
 
+#include <utility>
 
 StateManager::StateManager() : m_index(0)
 {
-}
 
+}
 
 StateManager::~StateManager()
 {
+
 }
 
 void StateManager::push(std::unique_ptr<State> state)

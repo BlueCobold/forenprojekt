@@ -1,6 +1,12 @@
 #pragma once
 
-#include <SFML/Graphics/RenderWindow.hpp>
+#ifndef STATE_HPP
+#define STATE_HPP
+
+namespace sf
+{
+    class RenderWindow;
+}
 
 /// This class will be used to discribe a State
 /// and to be managed by the StateManager
@@ -45,3 +51,4 @@ protected:
 
 };
 
+#endif // STATE_HPP

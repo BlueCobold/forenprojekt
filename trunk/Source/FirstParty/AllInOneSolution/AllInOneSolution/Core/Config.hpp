@@ -1,30 +1,36 @@
 #pragma once
 
-#ifndef Config_HPP
-#define Config_HPP
+#ifndef CONFIG_HPP
+#define CONFIG_HPP
+
+#include "Util.hpp"
 
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <sstream>
-#include "Util.hpp"
 
 /// This class will load configdata from a file
 class Config
 {
-private:
-    std::string m_fileName;
-    std::ifstream m_configFile;
-
-private:
-    std::string eraseOverhang(std::string& data);
-
 public:
+
+    Config(const std::string& fileName);
+    ~Config(void);
+
     template<typename T>
     T get(const std::string& data);
     bool load(std::string& fileName);
-    Config(const std::string& fileName);
-    ~Config(void);
+
+private:
+
+    std::string eraseOverhang(std::string& data);
+
+private:
+
+    std::string m_fileName;
+    std::ifstream m_configFile;
+
 };
 
 template<typename T>
@@ -32,6 +38,7 @@ T Config::get(const std::string& data)
 { 
     std::string input;
     T output = Util::stringTo<T>("0");
+
     if(m_configFile)
     {
        m_configFile.seekg(std::ios_base::beg);
@@ -51,4 +58,4 @@ T Config::get(const std::string& data)
     return output;
 }
 
-#endif /// Config_HPP
+#endif // CONFIG_HPP

@@ -80,6 +80,7 @@ void App::handleKeyboard()
         switchDisplayMode();
     }    
 }
+
 void App::handleEvents()
 {
     sf::Event event;
