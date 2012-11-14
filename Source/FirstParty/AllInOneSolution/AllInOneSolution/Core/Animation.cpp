@@ -24,6 +24,9 @@ void Animation::update(const float value)
 {
     if(!m_sleep)
     {
+
+        Entity::update();
+
         if(m_infinite)
             calculateFrameInfinte(value);
         else
