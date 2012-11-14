@@ -20,7 +20,7 @@ public:
 
     template<typename T>
     T get(const std::string& data);
-    bool load(std::string& fileName);
+    bool load(const std::string& fileName);
 
 private:
 

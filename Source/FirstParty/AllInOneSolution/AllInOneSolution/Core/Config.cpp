@@ -21,7 +21,7 @@ std::string Config::eraseOverhang(std::string& data)
    return data;
 }
 
-bool Config::load(std::string& fileName)
+bool Config::load(const std::string& fileName)
 {
    m_fileName = fileName;
    if(m_configFile)
