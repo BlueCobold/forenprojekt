@@ -1,8 +1,12 @@
 #pragma once
 
+#ifndef STATE_MANAGER_HPP
+#define STATE_MANAGER_HPP
+
 #include "State.hpp"
 
 #include <vector>
+#include <memory>
 
 /// This class is used to manage the diffrent states
 class StateManager
@@ -27,3 +31,4 @@ private:
 
 };
 
+#endif // STATE_MANAGER_HPP

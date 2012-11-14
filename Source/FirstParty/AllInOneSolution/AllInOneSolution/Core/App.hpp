@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef APP_HPP
+#define APP_HPP
+
 #include "StateManager.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -52,3 +55,4 @@ private:
 
 };
 
+#endif // APP_HPP

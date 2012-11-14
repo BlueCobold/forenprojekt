@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef ENTITY_HPP
+#define ENTITY_HPP
+
 #include "PhysicalObject.hpp"
 #include "GraphicalObject.hpp"
 
@@ -17,7 +20,8 @@ public:
 
 private:
 
-    void draw(sf::RenderTarget& target, sf::RenderStates states)const;
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 };
 
+#endif // ENTITY_HPP

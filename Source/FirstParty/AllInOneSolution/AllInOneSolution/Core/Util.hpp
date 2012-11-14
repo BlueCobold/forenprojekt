@@ -1,6 +1,10 @@
 #pragma once
 
+#ifndef UTIL_HPP
+#define UTIL_HPP
+
 #include <string>
+#include <sstream>
 
 namespace Util
 {
@@ -39,6 +43,6 @@ namespace Util
         value *= 0.0174532925199432957f;
         return (Z)value;
     }
+} // namespace Util
 
-
-};
+#endif // UTIL_HPP
