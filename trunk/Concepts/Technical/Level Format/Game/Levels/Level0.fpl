@@ -19,6 +19,48 @@
 					</transform>
 				</changes>
 			</gameObject>
+			<gameObject>
+				<name>Wall</name>
+				<transform>
+					<position>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+					</position>
+					<rotation>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+					</rotation>
+					<scale>
+						<x>1</x>
+						<y>1</y>
+						<z>1</z>
+					</scale>
+				</transform>
+				<shape>
+					<vertexNumber>4</vertexNumber>
+					<vertices>
+						<1>
+							<x>0</x>
+							<y>0</y>
+						</1>
+						<2>
+							<x>1</x>
+							<y>0</y>
+						</2>
+						<3>
+							<x>1</x>
+							<y>1</y>
+						</3>
+						<4>
+							<x>0</x>
+							<y>1</y>
+						</4>
+					</vertices>
+				</shape>
+			</gameObject>
+
 		</gameObjects>
 	</scene>
 </level>
