@@ -93,6 +93,7 @@
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="GraphicalObject.hpp" />
     <ClInclude Include="PhysicalObject.hpp" />
+    <ClInclude Include="ResourcenManager.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />
     <ClInclude Include="Util.hpp" />
