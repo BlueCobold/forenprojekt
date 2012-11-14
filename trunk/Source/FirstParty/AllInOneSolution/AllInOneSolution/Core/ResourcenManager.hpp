@@ -22,7 +22,7 @@ private:
 public:
 
 	
-	bool LoadResource (const Key& key, const Functor& func)
+	bool loadResource (const Key& key, const Functor& func)
 	{
 		auto it = m_ResourceMap.find (key);
 
@@ -34,7 +34,7 @@ public:
 	}
 
 	// Überladung geht hier leider nicht.. sinnvoller Name!?
-	bool LoadResourceFromKey (const Key& key, const Functor2& func)
+	bool loadResourceFromKey (const Key& key, const Functor2& func)
 	{
 		auto it = m_ResourceMap.find (key);
 
@@ -46,9 +46,9 @@ public:
 	}
 
 	// return the resource
-	T* GetResource (const Key& key)
+	T* getResource (const Key& key)
 	{
-		std::map<Key, Value>::iterator it = m_ResourceMap.find (key);
+		auto it = m_ResourceMap.find (key);
 
 		if (it != m_ResourceMap.end())
 		{
