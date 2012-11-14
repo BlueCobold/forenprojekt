@@ -4,6 +4,7 @@
 #define APP_HPP
 
 #include "StateManager.hpp"
+#include "Animation.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
@@ -41,6 +42,11 @@ private:
   
     sf::RenderWindow m_screen;
     sf::Clock m_clock;
+
+    // TEST
+    Animation m_test_animation;
+    sf::Texture m_test_texture;
+    sf::Clock m_test_clock;
     
     std::string m_windowTitle;
     unsigned int m_screenWidth, m_screenHeight, m_bitsPerPixel;

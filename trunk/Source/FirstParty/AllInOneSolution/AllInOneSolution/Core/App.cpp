@@ -14,13 +14,20 @@ App::App(Config& configLoader) :
     m_bitsPerPixel(0),
     m_fullscreen(false),
     m_fps(0.f),
-    m_frameCounter(0.f)
+    m_frameCounter(0.f),
+    m_test_animation(true, 0,10000, 0.15, 4, 64, 76)
 {
     m_windowTitle = configLoader.get<std::string>("WindowName");
     m_screenWidth = configLoader.get<unsigned int>("ResolutionX");
     m_screenHeight = configLoader.get<unsigned int>("ResolutionY");
     m_bitsPerPixel = configLoader.get<unsigned int>("BitsPerPixel");
     m_fullscreen = configLoader.get<bool>("IsFullScreen");
+    
+    m_test_texture.loadFromFile("crono.jpg");
+    m_test_animation.bindTexture(m_test_texture);
+    m_test_animation.start();
+
+    m_test_clock.restart();
     
     if(m_fullscreen)
     {
@@ -52,6 +59,8 @@ void App::update()
 {
     calculateFps();
     m_fpsText.setString(Util::toString<float>(m_fps));
+
+    m_test_animation.update( m_test_clock.getElapsedTime().asSeconds() );
    
     handleEvents();
     handleKeyboard();	
@@ -66,6 +75,8 @@ void App::draw()
     m_stateManager.draw();
     
     m_screen.draw(m_fpsText);
+
+    m_screen.draw(m_test_animation);
         
     m_screen.display();
 }

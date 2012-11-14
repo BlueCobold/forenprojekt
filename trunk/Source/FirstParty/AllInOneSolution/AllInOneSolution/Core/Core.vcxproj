@@ -80,6 +80,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -88,6 +89,7 @@
     <ClCompile Include="StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="Entity.hpp" />
@@ -100,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Config.ini" />
+    <None Include="crono.jpg" />
     <None Include="visitor.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
