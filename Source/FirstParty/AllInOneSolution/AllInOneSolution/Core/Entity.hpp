@@ -16,6 +16,9 @@ class Entity : public sf::Drawable , public PhysicalObject, public GraphicalObje
 {
 public:
 
+    Entity();
+    ~Entity();
+
     void update();
 
 private:
