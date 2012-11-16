@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef ANIMATION_HPP
+#define ANIMATION_HPP
+
 #include "Entity.hpp"
 
 class Animation : public Entity
@@ -38,3 +41,4 @@ private:
 
 };
 
+#endif // ANIMATION_HPP

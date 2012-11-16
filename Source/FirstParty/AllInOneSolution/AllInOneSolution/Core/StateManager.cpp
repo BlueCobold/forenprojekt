@@ -1,8 +1,9 @@
 #include "StateManager.hpp"
 
-#include <utility>
+#include <utility> // move
 
-StateManager::StateManager() : m_index(0)
+StateManager::StateManager() :
+    m_index(0)
 {
 
 }

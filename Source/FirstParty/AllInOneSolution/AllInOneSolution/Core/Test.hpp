@@ -6,8 +6,13 @@
 #include "State.hpp"
 #include "Animation.hpp"
 
-#include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/System/Clock.hpp>
+
+namespace sf
+{
+    class RenderWindow;
+}
 
 class Test : public State
 {
@@ -29,7 +34,6 @@ private:
     sf::Clock m_clock;
     sf::Texture m_texture;
     Animation m_animation;
-    
 };
 
 #endif // TEST_HPP

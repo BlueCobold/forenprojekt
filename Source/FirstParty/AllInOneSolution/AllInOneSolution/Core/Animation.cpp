@@ -1,5 +1,6 @@
 #include "Animation.hpp"
 
+#include <SFML/Graphics/Rect.hpp>
 
 Animation::Animation(const bool infinite, const float min, const float max, const float step, const unsigned int numFrames
     , const unsigned int frameWidth, const unsigned int frameHeight) :
@@ -15,7 +16,6 @@ Animation::Animation(const bool infinite, const float min, const float max, cons
 {
 }
 
-
 Animation::~Animation()
 {
 }
@@ -24,7 +24,6 @@ void Animation::update(const float value)
 {
     if(!m_sleep)
     {
-
         Entity::update();
 
         if(m_infinite)
@@ -33,7 +32,6 @@ void Animation::update(const float value)
             calculateFrame(value);
 
         m_sprite.setTextureRect(sf::IntRect((m_frame * m_frameWidth), 0, m_frameWidth, m_frameHeight));
-
     }
 }
 
@@ -45,7 +43,6 @@ void Animation::calculateFrame(const float value)
         m_sleep = true;
     else
         m_frame = (value / m_step);
-
 }
 
 void Animation::calculateFrameInfinte(float value)

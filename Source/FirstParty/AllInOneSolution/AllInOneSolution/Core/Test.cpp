@@ -1,12 +1,12 @@
 #include "Test.hpp"
 
+#include <SFML/Graphics/RenderWindow.hpp>
 
 Test::Test(sf::RenderWindow& screen) :
     State(screen),
     m_animation(true, 0, 1, 0.1, 8, 64, 64)
 {
 }
-
 
 Test::~Test()
 {
@@ -34,4 +34,4 @@ void Test::draw()
     
 void Test::shutdown()
 {
-}   
+}
