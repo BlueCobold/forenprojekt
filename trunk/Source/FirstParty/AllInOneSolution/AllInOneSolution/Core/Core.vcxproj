@@ -96,11 +96,11 @@
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="GraphicalObject.hpp" />
     <ClInclude Include="PhysicalObject.hpp" />
-    <ClInclude Include="ResourcenManager.hpp" />
+    <ClInclude Include="ResourceManager.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />
     <ClInclude Include="Test.hpp" />
-    <ClInclude Include="Util.hpp" />
+    <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config.ini" />

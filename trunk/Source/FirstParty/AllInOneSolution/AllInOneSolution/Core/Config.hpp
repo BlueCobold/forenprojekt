@@ -3,7 +3,7 @@
 #ifndef CONFIG_HPP
 #define CONFIG_HPP
 
-#include "Util.hpp"
+#include "Utility.hpp" // stringTo
 
 #include <string>
 #include <fstream>
@@ -36,7 +36,7 @@ template<typename T>
 T Config::get(const std::string& data)
 { 
     std::string input;
-    T output = Util::stringTo<T>("0");
+    T output = utility::stringTo<T>("0");
 
     if(m_configFile)
     {
@@ -47,7 +47,7 @@ T Config::get(const std::string& data)
             if(input.find(data) != std::string::npos)
             {
                 input = eraseOverhang(input);
-                output = Util::stringTo<T>(input);
+                output = utility::stringTo<T>(input);
                 return output;
             }
             input.clear();
