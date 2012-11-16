@@ -12,7 +12,7 @@
 /// Author & Maintainer: ftb
 template <typename T>
 class ResourceManager
-{	
+{
 public:
 	typedef std::string Key;
 	typedef std::unique_ptr<T> Value;
@@ -21,13 +21,12 @@ public:
 private:
 	typedef std::map<Key, Value> Map;
 public:
-
 	
-	bool loadResource (const Key& key, const Functor& func)
+	bool loadResource(const Key& key, const Functor& func)
 	{
-		auto it = m_ResourceMap.find (key);
+		auto it = m_ResourceMap.find(key);
 
-		if (it == m_ResourceMap.end())
+		if(it == m_ResourceMap.end())
 		{
 			m_ResourceMap.insert(std::make_pair(key, std::unique_ptr<T>(func())));
 		}
@@ -35,7 +34,7 @@ public:
 	}
 
 	// Überladung geht hier leider nicht.. sinnvoller Name!?
-	bool loadResourceFromKey (const Key& key, const Functor2& func)
+	bool loadResourceFromKey(const Key& key, const Functor2& func)
 	{
 		auto it = m_ResourceMap.find (key);
 
@@ -47,11 +46,11 @@ public:
 	}
 
 	// return the resource
-	T* getResource (const Key& key)
+	T* getResource(const Key& key)
 	{
-		auto it = m_ResourceMap.find (key);
+		auto it = m_ResourceMap.find(key);
 
-		if (it != m_ResourceMap.end())
+		if(it != m_ResourceMap.end())
 		{
 			return (it->second).get();
 		}
@@ -60,5 +59,4 @@ public:
 
 private:
 	std::map<Key, Value> m_ResourceMap;
-
 };
