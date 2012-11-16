@@ -1,5 +1,5 @@
 #include "App.hpp"
-#include "Util.hpp"
+#include "utility.hpp" // toString
 #include "Config.hpp"
 
 #include <SFML/Graphics/Color.hpp>
@@ -56,7 +56,7 @@ void App::run()
 void App::update()
 {
     calculateFps();
-    m_fpsText.setString(Util::toString<float>(m_fps));
+    m_fpsText.setString(utility::toString<float>(m_fps));
    
     handleEvents();
     handleKeyboard();	

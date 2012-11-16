@@ -1,12 +1,12 @@
 #pragma once
 
-#ifndef UTIL_HPP
-#define UTIL_HPP
+#ifndef UTILITY_HPP
+#define UTILITY_HPP
 
 #include <string>
 #include <sstream>
 
-namespace Util
+namespace utility
 {
     template<typename T>
     std::string toString(const T& value)
@@ -43,6 +43,6 @@ namespace Util
         value *= 0.0174532925199432957f;
         return (Z)value;
     }
-} // namespace Util
+} // namespace utility
 
-#endif // UTIL_HPP
+#endif // UTILITY_HPP

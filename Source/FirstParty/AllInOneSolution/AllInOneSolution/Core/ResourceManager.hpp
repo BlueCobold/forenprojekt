@@ -1,14 +1,15 @@
 #pragma once
 
-#include <memory>
-#include <functional>
+#include <functional> // function
 #include <map>
+#include <memory> // unique_ptr
 #include <string>
+#include <utility> // make_pair
 
-#include <iostream>
-
-// ftb war hier :D
-
+/// This class is a light header-only ResourceManager
+/// and is capabale of handling all sorts of resources,
+/// including the ones from SFML.
+/// Author & Maintainer: ftb
 template <typename T>
 class ResourceManager
 {	
