@@ -38,27 +38,33 @@
 						<z>1</z>
 					</scale>
 				</transform>
-				<shape>
-					<vertexNumber>4</vertexNumber>
-					<vertices>
-						<1>
-							<x>0</x>
-							<y>0</y>
-						</1>
-						<2>
-							<x>1</x>
-							<y>0</y>
-						</2>
-						<3>
-							<x>1</x>
-							<y>1</y>
-						</3>
-						<4>
-							<x>0</x>
-							<y>1</y>
-						</4>
-					</vertices>
-				</shape>
+				<physics>
+					<bodyType>static</bodyType>	
+					<shape>
+						<vertexNumber>4</vertexNumber>
+						<vertices>
+							<vertex index="1">
+								<x>0</x>
+								<y>0</y>
+							</vertex>
+							<vertex index="2">
+								<x>1</x>
+								<y>0</y>
+							</vertex>
+							<vertex index="3">
+								<x>1</x>
+								<y>1</y>
+							</vertex>
+							<vertex index="4">
+								<x>0</x>
+								<y>1</y>
+							</vertex>
+						</vertices>
+					</shape>
+					<density>0</density>
+					<friction>0</friction>
+					<restitution>0</restitution>
+				</physics>
 			</gameObject>
 
 		</gameObjects>
