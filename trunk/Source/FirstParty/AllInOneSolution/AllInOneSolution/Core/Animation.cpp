@@ -42,7 +42,7 @@ void Animation::calculateFrame(const float value)
     else if(value < m_min)
         m_sleep = true;
     else
-        m_frame = (value / m_step);
+        m_frame = static_cast<unsigned int>(value / m_step);
 }
 
 void Animation::calculateFrameInfinte(float value)
@@ -53,5 +53,5 @@ void Animation::calculateFrameInfinte(float value)
     while(value < m_min)
         value += max;
 
-    m_frame = (value / m_step);
+    m_frame = static_cast<unsigned int>(value / m_step);
 }
