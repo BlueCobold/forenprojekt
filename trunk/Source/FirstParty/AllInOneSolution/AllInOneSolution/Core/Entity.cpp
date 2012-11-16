@@ -1,6 +1,8 @@
 #include "Entity.hpp"
 #include "Util.hpp"
 
+#include <SFML/Graphics/RenderTarget.hpp>
+
 Entity::Entity()
 {
 }

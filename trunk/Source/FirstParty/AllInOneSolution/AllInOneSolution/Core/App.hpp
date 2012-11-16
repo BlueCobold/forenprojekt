@@ -9,6 +9,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/System/Clock.hpp>
 
 #include <string>
 
@@ -53,7 +54,6 @@ private:
     sf::Text m_fpsText;
 
     StateManager m_stateManager;
-
 };
 
 #endif // APP_HPP

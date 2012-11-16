@@ -5,8 +5,11 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Window/VideoMode.hpp>
+#include <SFML/Window/WindowStyle.hpp>
 
 #include <sstream>
+#include <utility> // move
 
 App::App(Config& configLoader) :
     m_screenWidth(0),
@@ -39,7 +42,6 @@ App::App(Config& configLoader) :
     m_fpsText.setPosition(10, 10);
 
     m_stateManager.push(std::move(std::unique_ptr<Test>(new Test(m_screen))));
-
 }
 
 void App::run()
@@ -109,7 +111,7 @@ void App::switchDisplayMode()
     else
     {
         // Switch to window mode
-        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle );
+        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle);
         // Enable the cursor
         m_screen.setMouseCursorVisible(true);
     }

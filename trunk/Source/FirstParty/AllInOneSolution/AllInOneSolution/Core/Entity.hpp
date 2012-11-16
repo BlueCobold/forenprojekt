@@ -7,7 +7,6 @@
 #include "GraphicalObject.hpp"
 
 #include <SFML/Graphics/Drawable.hpp>
-#include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 
 /// This class will be used to draw objects that have a binding
