@@ -3,8 +3,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 TestState::TestState(sf::RenderWindow& screen) :
-    State(screen),
-    m_animation(true, 0, 1, 0.1f, 8, 64, 64)
+    State(screen)
 {
 }
 
@@ -16,8 +15,9 @@ bool TestState::initialize()
 {
     m_texture.loadFromFile("sprite.png");
     m_clock.restart();
+    m_animation.bindAnimation(true, 0, 1, 0.1f, 8, 64, 64);
     m_animation.bindTexture(m_texture);
-    m_animation.start();
+    m_animation.getAnimation().start();
 
     return true;
 }

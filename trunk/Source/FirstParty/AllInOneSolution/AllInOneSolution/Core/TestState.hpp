@@ -4,7 +4,7 @@
 #define TESTSTATE_HPP
 
 #include "State.hpp"
-#include "Animation.hpp"
+#include "AnimatedEntity.hpp"
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Clock.hpp>
@@ -33,7 +33,7 @@ private:
 
     sf::Clock m_clock;
     sf::Texture m_texture;
-    Animation m_animation;
+    AnimatedEntity m_animation;
 };
 
 #endif // TESTSTATE_HPP

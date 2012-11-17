@@ -2,6 +2,10 @@
 
 #include <SFML/Graphics/Rect.hpp>
 
+Animation::Animation()
+{
+}
+
 Animation::Animation(const bool infinite, const float min, const float max, const float step, const unsigned int numFrames
     , const unsigned int frameWidth, const unsigned int frameHeight) :
     m_infinite(infinite),
@@ -24,14 +28,12 @@ void Animation::update(const float value)
 {
     if(!m_sleep)
     {
-        Entity::update();
-
         if(m_infinite)
             calculateFrameInfinte(value);
         else
             calculateFrame(value);
 
-        m_sprite.setTextureRect(sf::IntRect((m_frame * m_frameWidth), 0, m_frameWidth, m_frameHeight));
+        m_textureRect = sf::IntRect(sf::IntRect((m_frame * m_frameWidth), 0, m_frameWidth, m_frameHeight));
     }
 }
 

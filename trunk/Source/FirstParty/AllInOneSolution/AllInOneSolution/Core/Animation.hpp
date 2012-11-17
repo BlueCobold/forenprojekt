@@ -3,12 +3,13 @@
 #ifndef ANIMATION_HPP
 #define ANIMATION_HPP
 
-#include "Entity.hpp"
+#include <SFML/Graphics/Rect.hpp>
 
-class Animation : public Entity
+class Animation
 {
 public:
 
+    Animation();
     Animation(const bool infinite, const float min, const float max, const float step, const unsigned int numFrames
         , const unsigned int frameWidth, const unsigned int frameHeight);
 
@@ -26,6 +27,11 @@ public:
 
     void update(const float value);
 
+    sf::IntRect getTextureRect()
+    {
+        return m_textureRect;
+    }
+
 private:
 
     void calculateFrameInfinte(float value);
@@ -33,6 +39,7 @@ private:
 
 private:
 
+    sf::IntRect m_textureRect;
     float m_min, m_max, m_step;
     unsigned int m_frame, m_numFrames;
     unsigned int m_frameWidth, m_frameHeight;

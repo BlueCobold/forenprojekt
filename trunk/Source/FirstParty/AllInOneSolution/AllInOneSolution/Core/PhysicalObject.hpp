@@ -11,18 +11,18 @@ class PhysicalObject
 {
 public:
 
-    PhysicalObject()
-    {}
-    ~PhysicalObject(){}
+    PhysicalObject(){}
+
+    virtual ~PhysicalObject(){}
 
     void bindBody(b2Body& body)
     {
-//        m_body = body;
+  //       m_body = body;
     }
 
 protected:
 
-    //b2Body m_body;
+   // b2Body m_body;
 };
 
 #endif // PHYSICAL_OBJECT_HPP
