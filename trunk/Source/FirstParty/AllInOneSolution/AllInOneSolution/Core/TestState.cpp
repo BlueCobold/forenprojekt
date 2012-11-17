@@ -1,18 +1,18 @@
-#include "Test.hpp"
+#include "TestState.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-Test::Test(sf::RenderWindow& screen) :
+TestState::TestState(sf::RenderWindow& screen) :
     State(screen),
     m_animation(true, 0, 1, 0.1f, 8, 64, 64)
 {
 }
 
-Test::~Test()
+TestState::~TestState()
 {
 }
 
-bool Test::initialize()
+bool TestState::initialize()
 {
     m_texture.loadFromFile("sprite.png");
     m_clock.restart();
@@ -22,16 +22,16 @@ bool Test::initialize()
     return true;
 }
 
-void Test::update()
+void TestState::update()
 {
     m_animation.update( m_clock.getElapsedTime().asSeconds());
 }
 
-void Test::draw()
+void TestState::draw()
 {
     m_screen.draw(m_animation);
 }
     
-void Test::shutdown()
+void TestState::shutdown()
 {
 }

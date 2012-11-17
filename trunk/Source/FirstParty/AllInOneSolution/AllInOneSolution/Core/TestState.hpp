@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef TEST_HPP
-#define TEST_HPP
+#ifndef TESTSTATE_HPP
+#define TESTSTATE_HPP
 
 #include "State.hpp"
 #include "Animation.hpp"
@@ -14,12 +14,12 @@ namespace sf
     class RenderWindow;
 }
 
-class Test : public State
+class TestState : public State
 {
 public:
 
-    Test(sf::RenderWindow& screen);
-    ~Test();
+    TestState(sf::RenderWindow& screen);
+    ~TestState();
 
     bool initialize();
 
@@ -36,4 +36,4 @@ private:
     Animation m_animation;
 };
 
-#endif // TEST_HPP
+#endif // TESTSTATE_HPP

@@ -4,7 +4,7 @@
 #define APP_HPP
 
 #include "StateManager.hpp"
-#include "Test.hpp"
+#include "TestState.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
