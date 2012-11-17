@@ -6,18 +6,28 @@
 
 
 ///
-class Ball : public Entity
+class Ball
 {
 public:
 
-    Ball(b2World& world);
+    Ball(b2World& world, const sf::Texture& texture, float radius, float density, float friction);
+    
     ~Ball(void);
+
+    void update();
+
+    void draw(sf::RenderTarget& target, sf::RenderStates states);
+    /// If Ball killed, you can give him a new position
+    void setNewPosition(float x, float y);
+    void setNewPosition(b2Vec2 position);
 
 private:
     
-    b2Body* ballBody;
-    //b2PolygonShape ballBox;
-    b2BodyDef ballDef;
+    b2Body* m_ballBody;
+    b2CircleShape m_ballShape;
+    b2BodyDef m_ballDef;
+    b2FixtureDef m_ballFixtureDef;
+    sf::Sprite m_sprite;
 };
 
 #endif /// BALL_HPP
