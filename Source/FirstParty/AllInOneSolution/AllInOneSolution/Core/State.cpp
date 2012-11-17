@@ -11,3 +11,18 @@ State::~State()
 {
 
 }
+
+void State::pause()
+{
+    m_pause = true;
+}
+
+void State::resume()
+{
+    m_pause = false;
+}
+
+const bool State::isPaused()
+{
+    return  m_pause;
+}
