@@ -13,7 +13,7 @@ class Entity : public PhysicalObject, public GraphicalObject
 public:
 
     Entity();
-    ~Entity();
+    virtual ~Entity();
 
     void update();
 

@@ -86,6 +86,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedEntity.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Ball.cpp" />
@@ -97,6 +98,7 @@
     <ClCompile Include="TestState.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedEntity.hpp" />
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Ball.hpp" />
@@ -112,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Config.ini" />
+    <None Include="sprite.png" />
     <None Include="visitor.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
