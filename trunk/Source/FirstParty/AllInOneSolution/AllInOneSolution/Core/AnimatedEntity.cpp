@@ -24,3 +24,8 @@ void AnimatedEntity::bindAnimation(const bool infinite, const float min, const f
 {
     m_animation = Animation(infinite, min, max, step, numFrames, frameWidth, frameHeight);
 }
+
+Animation& AnimatedEntity::getAnimation()
+{
+    return m_animation;
+}

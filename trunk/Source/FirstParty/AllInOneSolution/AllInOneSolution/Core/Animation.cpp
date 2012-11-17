@@ -57,3 +57,18 @@ void Animation::calculateFrameInfinte(float value)
 
     m_frame = static_cast<unsigned int>(value / m_step);
 }
+
+void Animation::start()
+{
+    m_sleep = false;
+}
+
+void Animation::pause()
+{
+    m_sleep = true;
+}
+
+const sf::IntRect Animation::getTextureRect()
+{
+    return sf::IntRect(sf::IntRect((m_frame * m_frameWidth), 0, m_frameWidth, m_frameHeight));
+}

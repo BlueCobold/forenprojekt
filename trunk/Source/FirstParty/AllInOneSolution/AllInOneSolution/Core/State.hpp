@@ -26,20 +26,11 @@ public:
 
     virtual void shutdown() = 0;
 
-    void pause()
-    {
-        m_pause = true;
-    }
+    void pause();
 
-    void resume()
-    {
-        m_pause = false;
-    }
+    void resume();
 
-    bool isPaused()
-    {
-        return m_pause;
-    }
+    const bool isPaused();
 
 private:
 

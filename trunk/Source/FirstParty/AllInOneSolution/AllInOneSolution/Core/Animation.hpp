@@ -15,22 +15,13 @@ public:
 
     ~Animation();
 
-    void start()
-    {
-        m_sleep = false;
-    }
+    void start();
 
-    void pause()
-    {
-        m_sleep = true;
-    }
+    void pause();
 
     void update(const float value);
 
-    sf::IntRect getTextureRect()
-    {
-        return m_textureRect;
-    }
+    const sf::IntRect getTextureRect();
 
 private:
 
