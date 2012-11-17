@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -92,6 +93,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="Ball.hpp" />
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="GraphicalObject.hpp" />
