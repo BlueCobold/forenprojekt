@@ -6,17 +6,17 @@
 
 
 ///
-class Ball
+class Ball : public GraphicalObject
 {
 public:
 
-    Ball(b2World& world, const sf::Texture& texture, float radius, float density, float friction);
+    Ball(b2World& world, float radius, float density, float friction);
     
     ~Ball(void);
 
     void update();
 
-    void draw(sf::RenderTarget& target, sf::RenderStates states);
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     /// If Ball killed, you can give him a new position
     void setNewPosition(float x, float y);
     void setNewPosition(b2Vec2 position);
@@ -27,7 +27,6 @@ private:
     b2CircleShape m_ballShape;
     b2BodyDef m_ballDef;
     b2FixtureDef m_ballFixtureDef;
-    sf::Sprite m_sprite;
 };
 
 #endif /// BALL_HPP
