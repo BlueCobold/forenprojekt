@@ -1,7 +1,7 @@
 #include "Ball.hpp"
 
 
-Ball::Ball(b2World& world, const sf::Texture& texture, float radius, float density, float friction)
+Ball::Ball(b2World& world, float radius, float density, float friction)
 {
     m_ballDef.type = b2_dynamicBody;
     m_ballDef.position.Set(0.0f, 4.0f);
@@ -15,9 +15,6 @@ Ball::Ball(b2World& world, const sf::Texture& texture, float radius, float densi
     m_ballFixtureDef.friction = friction;
 
     m_ballBody->CreateFixture(&m_ballFixtureDef);
-
-    m_sprite.setTexture(texture);
-    m_sprite.setPosition(m_ballDef.position.x,m_ballDef.position.y);
 }
 
 
@@ -30,7 +27,7 @@ void Ball::update()
     m_sprite.setPosition(m_ballDef.position.x,m_ballDef.position.y);
 }
 
-void Ball::draw(sf::RenderTarget& target, sf::RenderStates states)
+void Ball::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(m_sprite,states);
 }
