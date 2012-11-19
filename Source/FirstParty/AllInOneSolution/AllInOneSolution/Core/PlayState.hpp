@@ -5,6 +5,7 @@
 
 #include "State.hpp"
 
+/// The PlayState is where the actual gameplay happens.
 class PlayState : public State
 {
 public:
