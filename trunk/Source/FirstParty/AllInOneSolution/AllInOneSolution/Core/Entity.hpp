@@ -22,6 +22,10 @@ public:
     void setPosition(float x, float y);
     
     void setRotation(float angle);
+
+    sf::Vector2<float> getPosition();
+    float getRotation();
+
     // -------------------------------------
 
 private:
