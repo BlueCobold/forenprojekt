@@ -30,3 +30,13 @@ void Entity::setRotation(float angle)
 {
     m_sprite.setRotation(angle);
 }
+
+sf::Vector2<float> Entity::getPosition()
+{
+    return m_sprite.getPosition();
+}
+
+float Entity::getRotation()
+{
+    return m_sprite.getRotation();
+}
