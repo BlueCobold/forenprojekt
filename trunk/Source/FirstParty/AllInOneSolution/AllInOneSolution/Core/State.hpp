@@ -14,31 +14,39 @@ class State
 {
 public:
     
-    State(sf::RenderWindow& screen);
+    State(sf::RenderWindow& screen) :
+        m_screen(screen),
+        m_pause(false)
+    { }
 
-    virtual ~State();
-
-    virtual bool initialize() = 0;
+    virtual ~State()
+    { }
 
     virtual void update() = 0;
-
     virtual void draw() = 0;
 
-    virtual void shutdown() = 0;
+    void pause()
+    {
+         m_pause = true;
+    }
 
-    void pause();
+    void resume()
+    {
+         m_pause = false;
+    }
 
-    void resume();
-
-    const bool isPaused();
-
-private:
-
-    bool m_pause;
+    const bool isPaused()
+    {
+        return m_pause;
+    }
 
 protected:
     
     sf::RenderWindow& m_screen;
+
+private:
+
+    bool m_pause;
 
 };
 
