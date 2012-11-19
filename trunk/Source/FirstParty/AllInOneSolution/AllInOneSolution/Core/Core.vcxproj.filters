@@ -31,6 +31,12 @@
     <ClCompile Include="PlayState.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedEntity.hpp">
@@ -73,6 +79,12 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="PlayState.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
