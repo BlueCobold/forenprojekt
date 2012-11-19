@@ -10,7 +10,7 @@ class Animation
 public:
 
     Animation();
-    Animation(const bool infinite, const float min, const float max, const float step, const unsigned int numFrames
+    Animation(const bool infinite, const float min, const float step, const unsigned int numFrames
         , const unsigned int frameWidth, const unsigned int frameHeight);
 
     ~Animation();

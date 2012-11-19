@@ -21,3 +21,12 @@ void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     target.draw(m_sprite);
 }
+
+void Entity::setPosition(float x, float y)
+{
+    m_sprite.setPosition(x, y);
+}
+void Entity::setRotation(float angle)
+{
+    m_sprite.setRotation(angle);
+}
