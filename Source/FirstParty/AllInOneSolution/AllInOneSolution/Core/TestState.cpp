@@ -6,14 +6,6 @@
 TestState::TestState(sf::RenderWindow& screen) :
     State(screen)
 {
-}
-
-TestState::~TestState()
-{
-}
-
-bool TestState::initialize()
-{
     m_texture.loadFromFile("res/img/sprite.png");
     m_clock.restart();
     
@@ -23,8 +15,11 @@ bool TestState::initialize()
     m_animation.setPosition(0, 64);
 
     m_animation.getAnimation().start();
+}
 
-    return true;
+TestState::~TestState()
+{
+
 }
 
 void TestState::update()
@@ -41,14 +36,9 @@ void TestState::update()
     {
         m_animation.setPosition(x + 0.1, y);
     }
-
 }
 
 void TestState::draw()
 {
     m_screen.draw(m_animation);
-}
-    
-void TestState::shutdown()
-{
 }

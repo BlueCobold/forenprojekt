@@ -22,13 +22,13 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="StateManager.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="TestState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayState.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -70,6 +70,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Utility.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayState.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

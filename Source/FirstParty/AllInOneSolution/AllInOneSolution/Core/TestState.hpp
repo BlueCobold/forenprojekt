@@ -21,13 +21,8 @@ public:
     TestState(sf::RenderWindow& screen);
     ~TestState();
 
-    bool initialize();
-
     void update();
-
     void draw();
-    
-    void shutdown();
 
 private:
 

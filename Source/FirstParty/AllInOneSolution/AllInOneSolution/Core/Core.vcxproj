@@ -93,7 +93,7 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="State.cpp" />
+    <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="TestState.cpp" />
   </ItemGroup>
@@ -106,6 +106,7 @@
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="GraphicalObject.hpp" />
     <ClInclude Include="PhysicalObject.hpp" />
+    <ClInclude Include="PlayState.hpp" />
     <ClInclude Include="ResourceManager.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />

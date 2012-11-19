@@ -18,12 +18,10 @@ void StateManager::push(std::unique_ptr<State> state)
     if(!m_states.empty())
     {
         m_states.push_back(std::move(state));
-        m_states.back()->initialize();
     }
     else
     {
         m_states.push_back(std::move(state));
-        m_states.back()->initialize();
     }
 }
 
