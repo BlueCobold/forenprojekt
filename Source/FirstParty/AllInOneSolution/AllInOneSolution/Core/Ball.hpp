@@ -6,11 +6,11 @@
 
 
 ///
-class Ball : public GraphicalObject
+class Ball : public Entity
 {
 public:
 
-    Ball(b2World& world, float radius, float density, float friction);
+    Ball(b2CircleShape ballShape);
     
     ~Ball(void);
 
@@ -23,10 +23,7 @@ public:
 
 private:
     
-    b2Body* m_ballBody;
     b2CircleShape m_ballShape;
-    b2BodyDef m_ballDef;
-    b2FixtureDef m_ballFixtureDef;
 };
 
 #endif /// BALL_HPP
