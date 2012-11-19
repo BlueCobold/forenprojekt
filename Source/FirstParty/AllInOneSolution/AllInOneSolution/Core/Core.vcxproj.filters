@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="AnimatedEntity.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TestState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AnimatedEntity.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="App.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalObject.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicalObject.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="State.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TestState.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\font\visitor.ttf">
+      <Filter>Resouces</Filter>
+    </None>
+    <None Include="Config.ini">
+      <Filter>Resouces</Filter>
+    </None>
+    <None Include="res\img\sprite.png">
+      <Filter>Resouces</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resouces">
+      <UniqueIdentifier>{7273a69a-eff2-4e02-adaf-342e2be673e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{7bf9fef6-15c1-4b0c-896f-d0d2c24b5a74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{fd86505c-1ee9-4960-b8e0-4540743f0492}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -34,7 +34,7 @@ App::App(Config& configLoader) :
     else
         m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle);
 
-    m_font.loadFromFile("visitor.ttf");
+    m_font.loadFromFile("res/font/visitor.ttf");
 
     m_fpsText.setFont(m_font);
     m_fpsText.setColor(sf::Color::Yellow);

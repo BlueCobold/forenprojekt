@@ -114,8 +114,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Config.ini" />
-    <None Include="sprite.png" />
-    <None Include="visitor.ttf" />
+    <None Include="res\font\visitor.ttf" />
+    <None Include="res\img\sprite.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
