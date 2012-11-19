@@ -45,7 +45,7 @@ public:
         m_fixtureDef.shape = &shape;
     }
 
-    void bindToWorld(b2World world)
+    void bindWorld(b2World world)
     {
         m_body = world.CreateBody(&m_bodyDef); 
         m_body->CreateFixture(&m_fixtureDef);
