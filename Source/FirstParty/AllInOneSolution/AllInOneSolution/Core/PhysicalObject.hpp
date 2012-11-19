@@ -14,11 +14,11 @@ public:
     /// Default Constructor extra for Entity class
     PhysicalObject()
     {
-        m_body = NULL;
+        m_body = 0;
     }
     PhysicalObject(enum b2BodyType bodyType, float xPos, float yPos, float density, float friction)
     {
-        m_body = NULL;
+        m_body = 0;
 
         m_bodyDef.type = bodyType;
         m_bodyDef.position.Set(xPos, yPos);
