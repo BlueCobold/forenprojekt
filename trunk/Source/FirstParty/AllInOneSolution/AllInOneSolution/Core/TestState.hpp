@@ -9,6 +9,8 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Clock.hpp>
 
+class StateManager;
+
 namespace sf
 {
     class RenderWindow;
@@ -18,7 +20,7 @@ class TestState : public State
 {
 public:
 
-    TestState(sf::RenderWindow& screen);
+    TestState(StateManager& stateManager, sf::RenderWindow& screen);
     ~TestState();
 
     void update();
@@ -29,6 +31,8 @@ private:
     sf::Clock m_clock;
     sf::Texture m_texture;
     AnimatedEntity m_animation;
+
+    StateManager& m_stateManager;
 };
 
 #endif // TESTSTATE_HPP

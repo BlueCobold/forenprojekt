@@ -1,10 +1,14 @@
 #include "TestState.hpp"
 
+#include "StateManager.hpp"
+#include "PlayState.hpp"
+
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
-TestState::TestState(sf::RenderWindow& screen) :
-    State(screen)
+TestState::TestState(StateManager& stateManager, sf::RenderWindow& screen) :
+    State(screen),
+    m_stateManager(stateManager)
 {
     m_texture.loadFromFile("res/img/sprite.png");
     m_clock.restart();
@@ -35,6 +39,13 @@ void TestState::update()
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
         m_animation.setPosition(x + 0.1, y);
+    }
+
+    // Switch state
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) || sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+    {
+        m_stateManager.push(std::unique_ptr<PlayState>(new PlayState(m_screen)));
+        m_stateManager.next();
     }
 }
 
