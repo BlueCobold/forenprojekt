@@ -14,7 +14,7 @@ class StateManager
 public:
 
     StateManager();
-    virtual ~StateManager();
+    ~StateManager();
 
     void push(std::unique_ptr<State> state);
 

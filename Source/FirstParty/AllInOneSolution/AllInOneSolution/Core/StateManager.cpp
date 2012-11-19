@@ -15,14 +15,7 @@ StateManager::~StateManager()
 
 void StateManager::push(std::unique_ptr<State> state)
 {
-    if(!m_states.empty())
-    {
-        m_states.push_back(std::move(state));
-    }
-    else
-    {
-        m_states.push_back(std::move(state));
-    }
+    m_states.push_back(std::move(state));
 }
 
 void StateManager::next()
