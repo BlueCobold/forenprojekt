@@ -34,11 +34,11 @@ void TestState::update()
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {
-        m_animation.setPosition(x - 0.1, y);
+        m_animation.setPosition(x - 0.1f, y);
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
     {
-        m_animation.setPosition(x + 0.1, y);
+        m_animation.setPosition(x + 0.1f, y);
     }
 
     // Switch state
