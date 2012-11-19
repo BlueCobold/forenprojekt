@@ -6,11 +6,11 @@ Animation::Animation()
 {
 }
 
-Animation::Animation(const bool infinite, const float min, const float max, const float step, const unsigned int numFrames
+Animation::Animation(const bool infinite, const float min, const float step, const unsigned int numFrames
     , const unsigned int frameWidth, const unsigned int frameHeight) :
     m_infinite(infinite),
     m_min(min),
-    m_max(max),
+    m_max(step*numFrames),
     m_step(step),
     m_numFrames(numFrames),
     m_sleep(true),
@@ -49,11 +49,10 @@ void Animation::calculateFrame(const float value)
 
 void Animation::calculateFrameInfinte(float value)
 {
-    float max = m_step * m_numFrames;
-    while(value > max)
-        value -= max;
+    while(value > m_max)
+        value -= m_max;
     while(value < m_min)
-        value += max;
+        value += m_max;
 
     m_frame = static_cast<unsigned int>(value / m_step);
 }

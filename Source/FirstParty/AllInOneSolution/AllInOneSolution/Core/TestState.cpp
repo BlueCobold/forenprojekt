@@ -15,7 +15,7 @@ bool TestState::initialize()
 {
     m_texture.loadFromFile("res/img/sprite.png");
     m_clock.restart();
-    m_animation.bindAnimation(true, 0, 1, 0.1f, 8, 64, 64);
+    m_animation.bindAnimation(true, 0, 0.1f, 8, 64, 64);
     m_animation.bindTexture(m_texture);
     m_animation.getAnimation().start();
 

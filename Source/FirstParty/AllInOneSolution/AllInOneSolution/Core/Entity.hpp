@@ -17,6 +17,13 @@ public:
 
     void update();
 
+    // This functions only exist because the physic system is not yet implemented
+    // -------------------------------------
+    void setPosition(float x, float y);
+    
+    void setRotation(float angle);
+    // -------------------------------------
+
 private:
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
