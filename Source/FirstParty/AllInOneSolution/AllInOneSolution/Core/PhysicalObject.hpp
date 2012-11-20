@@ -10,13 +10,10 @@
 class PhysicalObject
 {
 public:
-
-    /// Default Constructor extra for Entity class
-    PhysicalObject()
-    {
-        m_body = 0;
-    }
-    PhysicalObject(enum b2BodyType bodyType, float xPos, float yPos, float density, float friction)
+    /// Same as a default Constructor
+    PhysicalObject(float xPos = 0.0f, float yPos = 0.0f, 
+                   float density = 0.0f, float friction = 0.0f, 
+                   enum b2BodyType bodyType = b2_staticBody)
     {
         m_body = 0;
 
