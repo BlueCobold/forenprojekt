@@ -5,12 +5,13 @@
 #include "Entity.hpp"
 
 
-///
+/// a elementar game object
 class Ball : public Entity
 {
 public:
 
-    Ball(b2CircleShape ballShape);
+    Ball(b2CircleShape ballShape, float xPos, float yPos, float radius, 
+         float density, float friction, sf::Texture texture);
     
     ~Ball(void);
 
