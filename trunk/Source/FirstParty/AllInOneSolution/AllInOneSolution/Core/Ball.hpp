@@ -15,9 +15,6 @@ public:
     
     ~Ball(void);
 
-    void update();
-
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     /// If Ball killed, you can give him a new position
     void setNewPosition(float x, float y);
     void setNewPosition(b2Vec2 position);
