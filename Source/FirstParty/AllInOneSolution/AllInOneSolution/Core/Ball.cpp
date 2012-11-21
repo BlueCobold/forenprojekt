@@ -21,16 +21,6 @@ Ball::~Ball(void)
 {
 }
 
-void Ball::update()
-{
-    m_sprite.setPosition(m_bodyDef.position.x,m_bodyDef.position.y);
-}
-
-void Ball::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-    target.draw(m_sprite,states);
-}
-
 void Ball::setNewPosition(float x, float y)
 {
     m_bodyDef.position.Set(x, y);

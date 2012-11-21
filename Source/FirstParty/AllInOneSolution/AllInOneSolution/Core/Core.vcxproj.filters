@@ -37,6 +37,9 @@
     <ClCompile Include="LevelManager.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicalObject.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedEntity.hpp">
