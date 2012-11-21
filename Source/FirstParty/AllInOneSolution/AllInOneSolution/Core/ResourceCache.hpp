@@ -11,7 +11,7 @@
 /// including the ones from SFML.
 /// Author & Maintainer: ftb
 template <typename T>
-class ResourceManager
+class ResourceCache
 {
 public:
 	typedef std::string Key;
@@ -24,11 +24,11 @@ public:
 	
 	bool loadResource(const Key& key, const Functor& func)
 	{
-		auto it = m_ResourceMap.find(key);
+		auto it = m_resources.find(key);
 
-		if(it == m_ResourceMap.end())
+		if(it == m_resources.end())
 		{
-			m_ResourceMap.insert(std::make_pair(key, std::unique_ptr<T>(func())));
+			m_resources.insert(std::make_pair(key, std::unique_ptr<T>(func())));
 		}
 		return true;
 	}
@@ -36,11 +36,11 @@ public:
 	// Überladung geht hier leider nicht.. sinnvoller Name!?
 	bool loadResourceFromKey(const Key& key, const Functor2& func)
 	{
-		auto it = m_ResourceMap.find (key);
+		auto it = m_resources.find (key);
 
-		if (it == m_ResourceMap.end())
+		if (it == m_resources.end())
 		{
-			m_ResourceMap.insert(std::make_pair(key, std::unique_ptr<T>(func(key))));
+			m_resources.insert(std::make_pair(key, std::unique_ptr<T>(func(key))));
 		}
 		return true;
 	}
@@ -48,9 +48,9 @@ public:
 	// return the resource
 	T* getResource(const Key& key)
 	{
-		auto it = m_ResourceMap.find(key);
+		auto it = m_resources.find(key);
 
-		if(it != m_ResourceMap.end())
+		if(it != m_resources.end())
 		{
 			return (it->second).get();
 		}
@@ -58,5 +58,5 @@ public:
 	}
 
 private:
-	std::map<Key, Value> m_ResourceMap;
+	std::map<Key, Value> m_resources;
 };
