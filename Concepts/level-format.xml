@@ -1,0 +1,61 @@
+<!-- Definition -->
+<level>
+ <objects>
+  <entity name="string" rep="char" size="unsigned int" orientation="square OR vertical OR horizontal">
+   <physics type="static OR kinematic OR dynamic" angle="float" fixedRotation="true OR false" linearVelocityX="float" linearVelocityY="float" linearDamping="float" angularVelocity="float" angularDamping="float">
+    <shape type="circle OR polygon" num="unsigned int">
+	 <vertex x="float" y="float" />
+	 <vertex x="float" y="float" />
+	 <vertex x="float" y="float" />
+	 <vertex x="float" y="float" />
+	</shape>
+   </physics>
+   <texture file="string" width="unsigned int" height="unsigned int" />
+   <animation infinite="true OR false" min="float" step="float" num="unsigned int" width="unsigned int" height="unsigned int" />
+  </entity>
+ </objects>
+ <grid width="unsigned int" height="unsigned int" size="unsigned int">
+  char[][]
+ </grid>
+</level>
+
+<!-- Example -->
+<level>
+ <objects>
+  <entity name="WallV" rep="W" size="2" orientation="vertical">
+   <physics type="static" angle="0" fixedRotation="true" linearVelocityX="0" linearVelocityY="0" linearDamping="0" angularVelocity="0" angularDamping="0">
+    <shape type="polygon" num="4">
+	 <vertex x="0" y="0" />
+	 <vertex x="1" y="0" />
+	 <vertex x="1" y="1" />
+	 <vertex x="0" y="1" />
+	</shape>
+   </physics>
+   <texture file="wall-vertical.png" width="60" height="120" />
+  </entity>
+  <entity name="WallH" rep="w" size="2" orientation="horizontal">
+   <texture file="wall-horizontal.png" widht="120" height="60" />
+  </entity>
+  <entity name="Ball" rep="B" size="1" orientation="square">
+   <texture file="ball.png" width="480" height="60" />
+   <animation infinite="true" min="0.12" num="8" step="3" width="60" height="60" />
+  </entity>
+ </objects>
+ <grid>
+  <width>10</width>
+  <height>10</height>
+  <size>60</size>
+  <data>
+wwwwwwwwww
+W        W
+W        W
+W        W
+W    B   W
+W        W
+W        W
+W        W
+W        W
+wwwwwwwwww
+  </data>
+ </grid>
+</level>

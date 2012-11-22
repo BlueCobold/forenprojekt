@@ -89,14 +89,12 @@
     <ClCompile Include="AnimatedEntity.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Level.cpp" />
-    <ClCompile Include="LevelManager.cpp" />
-    <ClCompile Include="PhysicalObject.cpp" />
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="TestState.cpp" />
   </ItemGroup>
@@ -104,14 +102,13 @@
     <ClInclude Include="AnimatedEntity.hpp" />
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="App.hpp" />
-    <ClInclude Include="Ball.hpp" />
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="GraphicalObject.hpp" />
     <ClInclude Include="Level.hpp" />
-    <ClInclude Include="LevelManager.hpp" />
     <ClInclude Include="PhysicalObject.hpp" />
     <ClInclude Include="PlayState.hpp" />
+    <ClInclude Include="ResourceCache.hpp" />
     <ClInclude Include="ResourceManager.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />
@@ -122,6 +119,7 @@
     <None Include="Config.ini" />
     <None Include="res\font\visitor.ttf" />
     <None Include="res\img\sprite.png" />
+    <None Include="res\level\001.lvl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

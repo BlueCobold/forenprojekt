@@ -3,6 +3,8 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
+class ResourceManager;
+
 namespace sf
 {
     class RenderWindow;
@@ -14,8 +16,9 @@ class State
 {
 public:
     
-    State(sf::RenderWindow& screen) :
+    State(sf::RenderWindow& screen, ResourceManager& resourceManager) :
         m_screen(screen),
+        m_resourceManager(resourceManager),
         m_pause(false)
     { }
 
@@ -43,6 +46,7 @@ public:
 protected:
     
     sf::RenderWindow& m_screen;
+    ResourceManager& m_resourceManager;
 
 private:
 

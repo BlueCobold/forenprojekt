@@ -3,7 +3,11 @@
 #ifndef PHYSICAL_OBJECT_HPP
 #define PHYSICAL_OBJECT_HPP
 
-#include <Box2D/Box2D.h>
+#include <Box2D/Dynamics/b2Body.h>
+#include <Box2D/Collision/Shapes/b2Shape.h>
+
+#include <vector>
+#include <memory> // unique_ptr
 
 /// This class will be used to give a object a binding to
 /// a physical body
@@ -11,26 +15,27 @@ class PhysicalObject
 {
 public:
     /// Same as a default Constructor
-    PhysicalObject(float xPos = 0.0f, float yPos = 0.0f, float density = 0.0f, float friction = 0.0f, 
-                   enum b2BodyType bodyType = b2_staticBody);
-
-    virtual ~PhysicalObject();
+    PhysicalObject() :
+      m_shapes()
+    { }
+    virtual ~PhysicalObject()
+    {
+        // HACK: since VS10 can't handle unique_ptrs correctly
+        // LEAK!!!!!!11!111
+    }
 
     /// Overloaded Function this is for a b2CircleShape
-    void bindShape(b2CircleShape& shape);
-    /// Overloaded Function this is for a b2PolygonShape
-    void bindShape(b2PolygonShape& shape);
-    /// Overloaded Function this is for a b2EdgeShape
-    void bindShape(b2EdgeShape&  shape);
-
-    void bindWorld(b2World& world);
+    void bindBody(b2Body* body, std::vector<b2Shape*> shapes)
+    {
+        m_body = body;
+        m_shapes.swap(shapes);
+    }
+    
 protected:
 
     b2Body* m_body;
 
-    b2BodyDef m_bodyDef;
-
-    b2FixtureDef m_fixtureDef;
+    std::vector<b2Shape*> m_shapes; // HACK: since VS10 can't handle unique_ptrs correctly
 };
 
 #endif // PHYSICAL_OBJECT_HPP

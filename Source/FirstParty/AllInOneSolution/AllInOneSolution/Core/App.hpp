@@ -3,6 +3,7 @@
 #ifndef APP_HPP
 #define APP_HPP
 
+#include "ResourceManager.hpp"
 #include "StateManager.hpp"
 #include "TestState.hpp"
 
@@ -49,6 +50,8 @@ private:
     bool m_fullscreen;
    
     float m_fps, m_frameCounter;
+
+    ResourceManager m_resourceManager;
 
     sf::Font m_font;
     sf::Text m_fpsText;

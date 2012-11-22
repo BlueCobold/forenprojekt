@@ -15,7 +15,7 @@ public:
     Entity();
     virtual ~Entity();
 
-    void update();
+    virtual void update();
 
     // This functions only exist because the physic system is not yet implemented
     // -------------------------------------
