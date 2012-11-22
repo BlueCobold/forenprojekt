@@ -6,6 +6,7 @@
 #include "Entity.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
+#include <Box2D/Collision/Shapes/b2Shape.h>
 
 #include <vector>
 
@@ -35,6 +36,9 @@ private:
     unsigned int m_number;
 
     std::vector<Entity> m_entities;
+
+    // HACK: This should be in the Entity class, but since unique_ptr sucks with VS10...
+    std::vector<std::unique_ptr<b2Shape>> m_shapes;
 
     b2World m_world;
 };

@@ -15,27 +15,20 @@ class PhysicalObject
 {
 public:
     /// Same as a default Constructor
-    PhysicalObject() :
-      m_shapes()
+    PhysicalObject()
     { }
     virtual ~PhysicalObject()
-    {
-        // HACK: since VS10 can't handle unique_ptrs correctly
-        // LEAK!!!!!!11!111
-    }
+    { }
 
     /// Overloaded Function this is for a b2CircleShape
-    void bindBody(b2Body* body, std::vector<b2Shape*> shapes)
+    void bindBody(b2Body* body)
     {
         m_body = body;
-        m_shapes.swap(shapes);
     }
     
 protected:
 
     b2Body* m_body;
-
-    std::vector<b2Shape*> m_shapes; // HACK: since VS10 can't handle unique_ptrs correctly
 };
 
 #endif // PHYSICAL_OBJECT_HPP
