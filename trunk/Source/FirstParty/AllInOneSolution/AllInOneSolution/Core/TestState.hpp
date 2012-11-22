@@ -10,6 +10,7 @@
 #include <SFML/System/Clock.hpp>
 
 class StateManager;
+class ResourceManager;
 
 namespace sf
 {
@@ -20,7 +21,7 @@ class TestState : public State
 {
 public:
 
-    TestState(StateManager& stateManager, sf::RenderWindow& screen);
+    TestState(StateManager& stateManager, sf::RenderWindow& screen, ResourceManager& resourceManager);
     ~TestState();
 
     void update();

@@ -1,0 +1,64 @@
+<level>
+ <objects>
+  <entity name="WallV" rep="W" size="2" orientation="vertical">
+   <physics>
+    <body type="static" x="0" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="0" y="0" />
+	  <vertex x="1" y="0" />
+	  <vertex x="1" y="2" />
+	  <vertex x="0" y="2" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="wall-vertical.png" width="60" height="120" />
+  </entity>
+  <entity name="WallH" rep="w" size="2" orientation="horizontal">
+   <physics>
+    <body type="static" x="10" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="0" y="0" />
+	  <vertex x="2" y="0" />
+	  <vertex x="2" y="1" />
+	  <vertex x="0" y="1" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="wall-horizontal.png" widht="120" height="60" />
+  </entity>
+  <entity name="Ball" rep="B" size="1" orientation="square">
+   <physics>
+    <body type="kinematic" x="20" y="20" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="0" y="0" />
+	  <vertex x="1" y="0" />
+	  <vertex x="1" y="1" />
+	  <vertex x="0" y="1" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="ball.png" width="480" height="60" />
+   <animation infinite="true" min="0.12" num="8" step="3" width="60" height="60" />
+  </entity>
+ </objects>
+ <grid>
+  <width>10</width>
+  <height>10</height>
+  <size>60</size>
+  <data>
+wwwwwwwwww
+W        W
+W        W
+W        W
+W    B   W
+W        W
+W        W
+W        W
+W        W
+wwwwwwwwww
+  </data>
+ </grid>
+</level>

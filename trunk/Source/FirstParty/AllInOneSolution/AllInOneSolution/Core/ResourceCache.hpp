@@ -22,7 +22,7 @@ private:
 	typedef std::map<Key, Value> Map;
 public:
 	
-	bool loadResource(const Key& key, const Functor& func)
+	bool load(const Key& key, const Functor& func)
 	{
 		auto it = m_resources.find(key);
 
@@ -34,7 +34,7 @@ public:
 	}
 
 	// Überladung geht hier leider nicht.. sinnvoller Name!?
-	bool loadResourceFromKey(const Key& key, const Functor2& func)
+	bool loadFromKey(const Key& key, const Functor2& func)
 	{
 		auto it = m_resources.find (key);
 
@@ -45,8 +45,13 @@ public:
 		return true;
 	}
 
+    bool exists(const Key& key)
+    {
+        return (m_resources.find(key) != m_resources.end());
+    }
+
 	// return the resource
-	T* getResource(const Key& key)
+	T* get(const Key& key)
 	{
 		auto it = m_resources.find(key);
 
