@@ -17,6 +17,7 @@ App::App(Config& configLoader) :
     m_screenHeight(0),
     m_bitsPerPixel(0),
     m_fullscreen(false),
+    m_focus(true),
     m_fps(0.f),
     m_frameCounter(0.f)
 {
@@ -79,7 +80,7 @@ void App::draw()
 void App::handleKeyboard()
 {
     // Enter to window or fullscreen mode when Press Return+LAlt
-    if((sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt)))
+    if(m_focus && (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt)))
     {
         m_fullscreen = !m_fullscreen;
         
@@ -96,6 +97,10 @@ void App::handleEvents()
         // Close the window
         if(event.type == sf::Event::Closed)
             m_screen.close();
+        else if(event.type == sf::Event::LostFocus)
+            m_focus = false;
+        else if(event.type == sf::Event::GainedFocus)
+            m_focus = true;
     }
 }
 

@@ -47,6 +47,7 @@ private:
     std::string m_windowTitle;
     unsigned int m_screenWidth, m_screenHeight, m_bitsPerPixel;
     bool m_fullscreen;
+    bool m_focus;
    
     float m_fps, m_frameCounter;
 
