@@ -40,15 +40,11 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="sprite.png" width="480" height="60" />
-   <animation infinite="true" min="0.12" num="8" step="3" width="60" height="60" />
+   <texture file="assets/ball/ball.png" width="240" height="30" />
+   <animation infinite="true" min="0" step="0.1" num="8" width="30" height="30" />
   </entity>
  </objects>
- <grid>
-  <width>10</width>
-  <height>10</height>
-  <size>60</size>
-  <data>
+ <grid width="unsigned int" height="unsigned int" size="unsigned int">
 wwwwwwwwww
 W        W
 W        W
@@ -59,6 +55,5 @@ W        W
 W        W
 W        W
 wwwwwwwwww
-  </data>
  </grid>
 </level>
