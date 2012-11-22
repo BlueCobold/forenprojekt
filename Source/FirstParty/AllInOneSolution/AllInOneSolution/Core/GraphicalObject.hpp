@@ -3,7 +3,16 @@
 #ifndef GRAPHICAL_OBJECT_HPP
 #define GRAPHICAL_OBJECT_HPP
 
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/Rect.hpp>
+#include <SFML/Graphics/RenderStates.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+
+namespace sf
+{
+    class RenderTarget;
+    class Texture;
+}
 
 /// This class will be used to give a Object a
 /// binding to a Graphic
