@@ -40,7 +40,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="ball.png" width="480" height="60" />
+   <texture file="sprite.png" width="480" height="60" />
    <animation infinite="true" min="0.12" num="8" step="3" width="60" height="60" />
   </entity>
  </objects>

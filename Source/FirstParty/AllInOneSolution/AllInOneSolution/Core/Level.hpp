@@ -12,6 +12,11 @@
 
 class ResourceManager;
 
+namespace sf
+{
+    class RenderWindow;
+}
+
 /// Manages the different levels and is
 /// also resposible for loading them.
 class Level
@@ -19,6 +24,9 @@ class Level
 public:
     Level(const unsigned int level, ResourceManager& resourceManager);
     ~Level();
+
+    void update();
+    void draw(sf::RenderWindow& screen);
 
     /// Return the level number
     const unsigned int number();
