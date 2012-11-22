@@ -9,8 +9,8 @@ sf::Texture* ResourceManager::getTexture(const std::string& key)
     else
     {
         if(m_textures.loadFromKey(key, &ResourceManager::loadTexture))
-            return nullptr;
-        else
             return m_textures.get(key);
+        else
+            return nullptr;
     }
 }

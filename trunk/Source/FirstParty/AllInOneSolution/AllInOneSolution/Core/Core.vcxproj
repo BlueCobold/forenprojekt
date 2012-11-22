@@ -114,10 +114,10 @@
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Config.ini" />
-    <None Include="res\font\visitor.ttf" />
-    <None Include="res\img\sprite.png" />
-    <None Include="res\level\001.lvl" />
+    <None Include="..\..\..\Game\Config.ini" />
+    <None Include="..\..\..\Game\res\font\visitor.ttf" />
+    <None Include="..\..\..\Game\res\img\sprite.png" />
+    <None Include="..\..\..\Game\res\level\001.lvl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

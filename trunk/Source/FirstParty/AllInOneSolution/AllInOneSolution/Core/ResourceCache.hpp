@@ -36,9 +36,9 @@ public:
 	// Überladung geht hier leider nicht.. sinnvoller Name!?
 	bool loadFromKey(const Key& key, const Functor2& func)
 	{
-		auto it = m_resources.find (key);
+		auto it = m_resources.find(key);
 
-		if (it == m_resources.end())
+		if(it == m_resources.end())
 		{
 			m_resources.insert(std::make_pair(key, std::unique_ptr<T>(func(key))));
 		}

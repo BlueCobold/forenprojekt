@@ -6,6 +6,8 @@
 #include "State.hpp"
 #include "Level.hpp"
 
+#include <SFML/System/Clock.hpp>
+
 #include <memory> // unique_ptr
 
 class ResourceManager;
@@ -22,6 +24,7 @@ public:
 
 private:
     std::unique_ptr<Level> m_level;
+    sf::Clock m_frametime;
 };
 
 #endif // PLAYSTATE_HPP

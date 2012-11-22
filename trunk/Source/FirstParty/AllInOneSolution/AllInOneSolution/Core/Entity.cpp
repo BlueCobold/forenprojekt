@@ -1,7 +1,9 @@
 #include "Entity.hpp"
-//#include "Utility.hpp" // toDegree
+#include "Utility.hpp" // toDegree
 
 #include <SFML/Graphics/RenderTarget.hpp>
+
+#include <iostream>
 
 Entity::Entity() :
     m_animated(false)
@@ -10,12 +12,6 @@ Entity::Entity() :
 
 Entity::~Entity()
 {
-}
-
-void Entity::update()
-{
-    //m_sprite.setPosition((m_body.GetPosition().x), (m_body.GetPosition().y));
-    //m_sprite.setRotation(utility::toDegree<float32, float>(m_body.GetAngle()));
 }
 
 void Entity::update(const float value)
@@ -27,7 +23,8 @@ void Entity::update(const float value)
         m_sprite.setTextureRect(m_animation.getTextureRect());
     }
 
-    update();
+    m_sprite.setPosition(utility::toPixel(m_body->GetPosition().x), utility::toPixel(m_body->GetPosition().y));
+    m_sprite.setRotation(utility::toDegree<float32, float>(m_body->GetAngle()));
 }
 
 void Entity::bindAnimation(const bool infinite, const float min, const float step,

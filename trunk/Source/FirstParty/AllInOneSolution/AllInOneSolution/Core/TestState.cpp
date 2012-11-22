@@ -11,10 +11,10 @@ TestState::TestState(StateManager& stateManager, sf::RenderWindow& screen, Resou
     State(screen, resourceManager),
     m_stateManager(stateManager)
 {
-    m_texture.loadFromFile("res/img/sprite.png");
+    m_texture.loadFromFile("res/img/assets/ball/ball.png");
     m_clock.restart();
     
-    m_animation.bindAnimation(true, 0, 0.1f, 8, 64, 64);
+    m_animation.bindAnimation(true, 0, 0.1f, 8, 30, 30);
     m_animation.bindTexture(m_texture);
     
     m_animation.setPosition(0, 64);
@@ -31,7 +31,7 @@ void TestState::update()
 {
     float x = m_animation.getPosition().x, y = m_animation.getPosition().y;
 
-    m_animation.update( m_clock.getElapsedTime().asSeconds());
+    m_animation.update(m_clock.getElapsedTime().asSeconds());
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
     {

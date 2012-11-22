@@ -25,7 +25,7 @@ public:
     Level(const unsigned int level, ResourceManager& resourceManager);
     ~Level();
 
-    void update();
+    void update(const float dt);
     void draw(sf::RenderWindow& screen);
 
     /// Return the level number
@@ -49,6 +49,9 @@ private:
     std::vector<std::unique_ptr<b2Shape>> m_shapes;
 
     b2World m_world;
+    float m_timeStep;
+    int m_velocityIterations;
+    int m_positionIterations;
 };
 
 #endif // LEVEL_HPP

@@ -1,6 +1,7 @@
 #include "App.hpp"
 #include "utility.hpp" // toString
 #include "Config.hpp"
+#include "PlayState.hpp"
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -41,7 +42,7 @@ App::App(Config& configLoader) :
     m_fpsText.setCharacterSize(30);
     m_fpsText.setPosition(10, 10);
 
-    m_stateManager.push(std::unique_ptr<TestState>(new TestState(m_stateManager, m_screen, m_resourceManager)));
+    m_stateManager.push(std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager)));
 }
 
 void App::run()

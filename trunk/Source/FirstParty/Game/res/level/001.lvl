@@ -1,42 +1,602 @@
 <level>
  <objects>
-  <entity name="WallV" rep="W" size="2" orientation="vertical">
+  <entity name="Wall1" rep="W" size="1" orientation="vertical">
    <physics>
     <body type="static" x="0" y="0" angle="0" fixedRotation="true" />
 	<fixture density="0" friction="0" restitution="0">
 	 <shape type="polygon" num="4">
-	  <vertex x="0" y="0" />
-	  <vertex x="1" y="0" />
-	  <vertex x="1" y="2" />
-	  <vertex x="0" y="2" />
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="wall-vertical.png" width="60" height="120" />
+   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" />
   </entity>
-  <entity name="WallH" rep="w" size="2" orientation="horizontal">
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
-    <body type="static" x="10" y="0" angle="0" fixedRotation="true" />
+    <body type="static" x="60" y="0" angle="0" fixedRotation="true" />
 	<fixture density="0" friction="0" restitution="0">
 	 <shape type="polygon" num="4">
-	  <vertex x="0" y="0" />
-	  <vertex x="2" y="0" />
-	  <vertex x="2" y="1" />
-	  <vertex x="0" y="1" />
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="wall-horizontal.png" widht="120" height="60" />
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="120" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="180" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="240" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="300" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="360" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="420" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="480" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="540" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="600" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="660" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="720" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall1" rep="W" size="1" orientation="vertical">
+   <physics>
+    <body type="static" x="0" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="60" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="120" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="180" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="240" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="300" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="360" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="420" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="480" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="540" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="600" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="660" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="720" y="540" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="0" y="60" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="0" y="120" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="0" y="180" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="0" y="240" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="0" y="300" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="0" y="360" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="0" y="420" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="0" y="480" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="720" y="60" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="720" y="120" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="720" y="180" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="720" y="240" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="720" y="300" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="720" y="360" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="720" y="420" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+  </entity>
+  <entity name="Wall2" rep="w" size="1" orientation="horizontal">
+   <physics>
+    <body type="static" x="720" y="480" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="1" y="1" />
+	  <vertex x="59" y="1" />
+	  <vertex x="59" y="59" />
+	  <vertex x="1" y="59" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" />
   </entity>
   <entity name="Ball" rep="B" size="1" orientation="square">
    <physics>
-    <body type="kinematic" x="20" y="20" angle="0" fixedRotation="true" />
-	<fixture density="0" friction="0" restitution="0">
+    <body type="dynamic" x="375" y="65" angle="0" fixedRotation="true" />
+	<fixture density="0.5" friction="0.5" restitution="0.5">
 	 <shape type="polygon" num="4">
-	  <vertex x="0" y="0" />
-	  <vertex x="1" y="0" />
 	  <vertex x="1" y="1" />
-	  <vertex x="0" y="1" />
+	  <vertex x="29" y="1" />
+	  <vertex x="30" y="29" />
+	  <vertex x="1" y="29" />
 	 </shape>
 	</fixture>
    </physics>
