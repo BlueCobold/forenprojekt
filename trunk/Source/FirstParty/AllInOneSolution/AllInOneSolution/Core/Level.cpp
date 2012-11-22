@@ -5,6 +5,7 @@
 #include "Entity.hpp"
 
 #include <SFML/System/Err.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 #include <Box2D/Dynamics/b2Body.h>
 #include <Box2D/Dynamics/b2Fixture.h>
@@ -29,6 +30,18 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager) :
 Level::~Level()
 {
 
+}
+
+void Level::update()
+{
+    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+        it->update();
+}
+
+void Level::draw(sf::RenderWindow& screen)
+{
+    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+        screen.draw(*it);
 }
 
 bool Level::load()
@@ -73,7 +86,7 @@ bool Level::load()
             m_entities.back().bindTexture(*m_resourceManager.getTexture(element->Attribute("file")),
                 sf::IntRect(0, 0, element->IntAttribute("width"), element->IntAttribute("height")));
         else
-            sf::err() << "Bad texture key for entity: " << entityIterator->Attribute("name") << std::endl;
+            sf::err() << "Bad texture key ('" << element->Attribute("file") <<  "') for entity: " << entityIterator->Attribute("name") << std::endl;
 
         // Load physics
         std::vector<b2FixtureDef> fixtures;

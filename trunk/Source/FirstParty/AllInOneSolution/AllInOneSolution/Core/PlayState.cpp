@@ -19,10 +19,10 @@ PlayState::~PlayState()
 
 void PlayState::update()
 {
-
+    m_level->update();
 }
 
 void PlayState::draw()
 {
-
+    m_level->draw(m_screen);
 }
