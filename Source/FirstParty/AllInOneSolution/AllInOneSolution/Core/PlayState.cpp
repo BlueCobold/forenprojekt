@@ -1,5 +1,4 @@
 #include "PlayState.hpp"
-
 #include "ResourceManager.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>

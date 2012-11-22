@@ -19,9 +19,6 @@
     <ClCompile Include="StateManager.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="TestState.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="PlayState.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -55,9 +52,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="StateManager.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TestState.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Utility.hpp">

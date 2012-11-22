@@ -16,6 +16,7 @@ class ResourceManager;
 class PlayState : public State
 {
 public:
+
     PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager);
     ~PlayState();
 
@@ -23,6 +24,7 @@ public:
     void draw();
 
 private:
+
     std::unique_ptr<Level> m_level;
     sf::Clock m_frametime;
 };

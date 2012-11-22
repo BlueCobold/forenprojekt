@@ -28,11 +28,9 @@ public:
 private:
     
     void update();
-
     void draw();
     
     void handleKeyboard();
-
     void handleEvents();
   
     void switchDisplayMode();
@@ -40,23 +38,26 @@ private:
     void calculateFps();
     
 private:
-  
+
     sf::RenderWindow m_screen;
     sf::Clock m_clock;
 
     std::string m_windowTitle;
-    unsigned int m_screenWidth, m_screenHeight, m_bitsPerPixel;
+    unsigned int m_screenWidth;
+    unsigned int m_screenHeight;
+    unsigned int m_bitsPerPixel;
     bool m_fullscreen;
     bool m_focus;
    
-    float m_fps, m_frameCounter;
+    float m_fps;
+    float m_frameCounter;
 
     ResourceManager m_resourceManager;
 
-    sf::Font m_font;
     sf::Text m_fpsText;
 
     StateManager m_stateManager;
+
 };
 
 #endif // APP_HPP

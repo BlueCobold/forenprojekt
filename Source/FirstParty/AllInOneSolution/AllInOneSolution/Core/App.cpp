@@ -1,11 +1,11 @@
 #include "App.hpp"
-#include "utility.hpp" // toString
 #include "Config.hpp"
+#include "utility.hpp" // toString
 #include "PlayState.hpp"
 
 #include <SFML/Graphics/Color.hpp>
-#include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 
@@ -36,9 +36,7 @@ App::App(Config& configLoader) :
     else
         m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle);
 
-    m_font.loadFromFile("res/font/visitor.ttf");
-
-    m_fpsText.setFont(m_font);
+    m_fpsText.setFont(*m_resourceManager.getFont("visitor.ttf"));
     m_fpsText.setColor(sf::Color::Yellow);
     m_fpsText.setCharacterSize(30);
     m_fpsText.setPosition(10, 10);
@@ -71,7 +69,6 @@ void App::draw()
     m_screen.clear();
 
     m_stateManager.draw();
-    
     m_screen.draw(m_fpsText);
         
     m_screen.display();
