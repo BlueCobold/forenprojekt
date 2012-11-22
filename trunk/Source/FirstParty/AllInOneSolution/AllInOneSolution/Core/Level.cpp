@@ -9,7 +9,6 @@
 
 #include <Box2D/Dynamics/b2Body.h>
 #include <Box2D/Dynamics/b2Fixture.h>
-#include <Box2D/Collision/Shapes/b2Shape.h>
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
 #include <Box2D/Common/b2Math.h>
 
@@ -83,7 +82,6 @@ bool Level::load()
             sf::err() << "Bad texture key for entity: " << entityIterator->Attribute("name") << std::endl;
 
         // Load physics
-        std::vector<b2Shape*> shapes;  // HACK: since VS10 can't handle unique_ptrs correctly
         std::vector<b2FixtureDef> fixtures;
 
         tinyxml2::XMLElement* physics = entityIterator->FirstChildElement("physics");
@@ -117,13 +115,13 @@ bool Level::load()
                     vertices.push_back(b2Vec2(vertexIterator->FloatAttribute("x"), vertexIterator->FloatAttribute("y")));
                 }
 
-                b2PolygonShape* ps = new b2PolygonShape;  // HACK: since VS10 can't handle unique_ptrs correctly
+                std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
                 ps->Set(vertices.data(), vertices.size());
-                shapes.push_back(ps);
+                m_shapes.push_back(std::move(ps));
             }
 
             b2FixtureDef fixtureDef;
-            fixtureDef.shape = shapes.back();
+            fixtureDef.shape = m_shapes.back().get();
             fixtureDef.density = fixtureIterator->FloatAttribute("density");
             fixtureDef.friction = fixtureIterator->FloatAttribute("friction");
             fixtureDef.restitution = fixtureIterator->FloatAttribute("restitution");
@@ -136,7 +134,7 @@ bool Level::load()
         for(auto it = fixtures.begin(); it != fixtures.end(); it++)
             body->CreateFixture(&(*it));
 
-        m_entities.back().bindBody(body, shapes);
+        m_entities.back().bindBody(body);
     }
 
     return true;
