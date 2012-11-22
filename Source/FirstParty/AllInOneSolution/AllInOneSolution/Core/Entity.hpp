@@ -5,6 +5,7 @@
 
 #include "PhysicalObject.hpp"
 #include "GraphicalObject.hpp"
+#include "Animation.hpp"
 
 /// This class will be used to draw objects that have a binding
 /// to Box2D 
@@ -16,6 +17,7 @@ public:
     virtual ~Entity();
 
     virtual void update();
+    virtual void update( const float value );
 
     // This functions only exist because the physic system is not yet implemented
     // -------------------------------------
@@ -28,9 +30,19 @@ public:
 
     // -------------------------------------
 
-private:
+    void bindAnimation(const bool infinite, const float min, const float step,
+        const unsigned int numFrames, const unsigned int frameWidth, const unsigned int frameHeight);
+
+    Animation& getAnimation();
+
+protected:
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
+protected:
+
+    Animation m_animation;
+    bool m_animated;
 
 };
 
