@@ -14,3 +14,18 @@ sf::Texture* ResourceManager::getTexture(const std::string& key)
             return nullptr;
     }
 }
+
+sf::Font* ResourceManager::getFont(const std::string& key)
+{
+    if(m_fonts.exists(key))
+    {
+        return m_fonts.get(key);
+    }
+    else
+    {
+        if(m_fonts.loadFromKey(key, &ResourceManager::loadFont))
+            return m_fonts.get(key);
+        else
+            return nullptr;
+    }
+}

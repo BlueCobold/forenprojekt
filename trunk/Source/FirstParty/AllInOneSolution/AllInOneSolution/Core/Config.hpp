@@ -53,7 +53,7 @@ T Config::get(const std::string& data)
             input.clear();
         }
     }
-    /// avoid errors if data not found
+    // avoid errors if data not found
     return output;
 }
 

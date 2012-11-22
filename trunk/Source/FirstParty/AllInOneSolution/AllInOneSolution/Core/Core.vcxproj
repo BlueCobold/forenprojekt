@@ -95,7 +95,6 @@
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="StateManager.cpp" />
-    <ClCompile Include="TestState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.hpp" />
@@ -110,7 +109,6 @@
     <ClInclude Include="ResourceManager.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />
-    <ClInclude Include="TestState.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <ItemGroup>

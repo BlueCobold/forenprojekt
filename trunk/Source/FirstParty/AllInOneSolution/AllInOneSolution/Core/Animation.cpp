@@ -12,8 +12,7 @@ Animation::Animation() :
     m_frame(0),
     m_frameWidth(0),
     m_frameHeight(0)
-{
-}
+{ }
 
 Animation::Animation(const bool infinite, const float min, const float step,
     const unsigned int numFrames, const unsigned int frameWidth, const unsigned int frameHeight) :
@@ -26,12 +25,10 @@ Animation::Animation(const bool infinite, const float min, const float step,
     m_frame(0),
     m_frameWidth(frameWidth),
     m_frameHeight(frameHeight)
-{
-}
+{ }
 
 Animation::~Animation()
-{
-}
+{ }
 
 void Animation::update(const float value)
 {
@@ -42,7 +39,7 @@ void Animation::update(const float value)
         else
             calculateFrame(value);
 
-        m_textureRect = sf::IntRect((m_frame * m_frameWidth), 0, m_frameWidth, m_frameHeight);
+        m_textureRect = sf::IntRect(m_frame * m_frameWidth, 0, m_frameWidth, m_frameHeight);
     }
 }
 
@@ -76,7 +73,7 @@ void Animation::pause()
     m_sleep = true;
 }
 
-const sf::IntRect Animation::getTextureRect()
+const sf::IntRect& Animation::getTextureRect()
 {
     return m_textureRect;
 }

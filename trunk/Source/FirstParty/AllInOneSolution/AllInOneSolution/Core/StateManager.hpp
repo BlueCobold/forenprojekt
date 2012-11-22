@@ -5,8 +5,8 @@
 
 #include "State.hpp"
 
-#include <vector>
 #include <memory> // unique_ptr
+#include <vector>
 
 /// This class is used to manage the diffrent states
 class StateManager
@@ -28,6 +28,7 @@ private:
 
     std::vector<std::unique_ptr<State>> m_states;
     unsigned int m_index;
+
 };
 
 #endif // STATE_MANAGER_HPP

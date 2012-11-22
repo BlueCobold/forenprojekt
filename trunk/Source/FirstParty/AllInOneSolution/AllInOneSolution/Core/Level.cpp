@@ -1,23 +1,22 @@
 #include "Level.hpp"
-
-#include "ResourceManager.hpp"
-#include "Utility.hpp" // toString
 #include "Entity.hpp"
+#include "ResourceManager.hpp"
+#include "Utility.hpp" // toString, toMeter
 
-#include <SFML/System/Err.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Err.hpp>
 
-#include <Box2D/Dynamics/b2Body.h>
-#include <Box2D/Dynamics/b2Fixture.h>
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
 #include <Box2D/Common/b2Math.h>
+#include <Box2D/Dynamics/b2Body.h>
+#include <Box2D/Dynamics/b2Fixture.h>
 
 #include <tinyxml2.h>
 
-#include <utility> // pair, make_pair, move
 #include <memory> // unique_ptr
+#include <ostream> // endl
 #include <string>
-#include <iostream> // endl
+#include <utility> // pair, make_pair, move
 
 Level::Level(const unsigned int level, ResourceManager& resourceManager) :
     m_number(level),
@@ -126,7 +125,8 @@ bool Level::load()
                 for(tinyxml2::XMLElement* vertexIterator = element->FirstChildElement("vertex");
                     vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
                 {
-                    vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")), utility::toMeter(vertexIterator->FloatAttribute("y"))));
+                    vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
+                        utility::toMeter(vertexIterator->FloatAttribute("y"))));
                 }
 
                 std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);

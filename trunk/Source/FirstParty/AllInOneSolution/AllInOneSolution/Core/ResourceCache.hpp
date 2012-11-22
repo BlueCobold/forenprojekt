@@ -14,12 +14,16 @@ template <typename T>
 class ResourceCache
 {
 public:
+
 	typedef std::string Key;
 	typedef std::unique_ptr<T> Value;
 	typedef std::function<T*()> Functor;
 	typedef std::function<T*(const Key&)> Functor2;
+
 private:
+
 	typedef std::map<Key, Value> Map;
+
 public:
 	
 	bool load(const Key& key, const Functor& func)
@@ -33,7 +37,7 @@ public:
 		return true;
 	}
 
-	// Überladung geht hier leider nicht.. sinnvoller Name!?
+	// Overloding doesn't work... reasonable name?
 	bool loadFromKey(const Key& key, const Functor2& func)
 	{
 		auto it = m_resources.find(key);
@@ -63,5 +67,7 @@ public:
 	}
 
 private:
+
 	std::map<Key, Value> m_resources;
+
 };
