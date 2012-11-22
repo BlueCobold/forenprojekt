@@ -3,7 +3,6 @@
 #include "ResourceManager.hpp"
 #include "Utility.hpp" // toString
 #include "Entity.hpp"
-#include "AnimatedEntity.hpp"
 
 #include <SFML/System/Err.hpp>
 
@@ -53,25 +52,20 @@ bool Level::load()
     for(tinyxml2::XMLElement* entityIterator = objects->FirstChildElement("entity");
         entityIterator != nullptr; entityIterator = entityIterator->NextSiblingElement("entity"))
     {
+        Entity entity;
+
         // Entity is animated
         if(entityIterator->FirstChildElement("animation") != nullptr)
         {
-            AnimatedEntity animatedEntity;
-
             // Load animation
             element = entityIterator->FirstChildElement("animation");
             if(element != nullptr)
-                animatedEntity.bindAnimation(element->BoolAttribute("infinite"), element->FloatAttribute("min"),
+                entity.bindAnimation(element->BoolAttribute("infinite"), element->FloatAttribute("min"),
                     element->FloatAttribute("step"), element->IntAttribute("num"), element->IntAttribute("width"),
                     element->IntAttribute("height"));
+        }
 
-            m_entities.push_back(std::move(animatedEntity));
-        }
-        // Entity is NOT animated
-        else
-        {
-            m_entities.push_back(std::move(Entity()));
-        }
+        m_entities.push_back(std::move(entity));
 
         // Load texture
         element = entityIterator->FirstChildElement("texture");

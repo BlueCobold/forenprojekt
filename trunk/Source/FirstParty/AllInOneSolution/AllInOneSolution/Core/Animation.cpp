@@ -2,12 +2,21 @@
 
 #include <SFML/Graphics/Rect.hpp>
 
-Animation::Animation()
+Animation::Animation() :
+    m_infinite(false),
+    m_min(0.f),
+    m_max(0.f),
+    m_step(0.f),
+    m_numFrames(0),
+    m_sleep(true),
+    m_frame(0),
+    m_frameWidth(0),
+    m_frameHeight(0)
 {
 }
 
-Animation::Animation(const bool infinite, const float min, const float step, const unsigned int numFrames
-    , const unsigned int frameWidth, const unsigned int frameHeight) :
+Animation::Animation(const bool infinite, const float min, const float step,
+    const unsigned int numFrames, const unsigned int frameWidth, const unsigned int frameHeight) :
     m_infinite(infinite),
     m_min(min),
     m_max(step*numFrames),

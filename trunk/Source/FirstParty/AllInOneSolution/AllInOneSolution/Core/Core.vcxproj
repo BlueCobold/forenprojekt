@@ -86,7 +86,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AnimatedEntity.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Config.cpp" />
@@ -99,7 +98,6 @@
     <ClCompile Include="TestState.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimatedEntity.hpp" />
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Config.hpp" />
