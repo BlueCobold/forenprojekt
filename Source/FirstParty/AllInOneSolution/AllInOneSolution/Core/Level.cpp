@@ -22,7 +22,10 @@
 Level::Level(const unsigned int level, ResourceManager& resourceManager) :
     m_number(level),
     m_resourceManager(resourceManager),
-    m_world(b2Vec2(0.f, 9.81f))
+    m_world(b2Vec2(0.f, 9.81f)),
+    m_timeStep(1.f/60.f),
+    m_velocityIterations(6),
+    m_positionIterations(2)
 {
     load();
 }
@@ -32,10 +35,12 @@ Level::~Level()
 
 }
 
-void Level::update()
+void Level::update(const float dt)
 {
+    m_world.Step(m_timeStep, m_velocityIterations, m_positionIterations);
+
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
-        it->update();
+        it->update(dt);
 }
 
 void Level::draw(sf::RenderWindow& screen)
@@ -76,6 +81,8 @@ bool Level::load()
                 entity.bindAnimation(element->BoolAttribute("infinite"), element->FloatAttribute("min"),
                     element->FloatAttribute("step"), element->IntAttribute("num"), element->IntAttribute("width"),
                     element->IntAttribute("height"));
+
+            entity.getAnimation().start();
         }
 
         m_entities.push_back(std::move(entity));
@@ -102,7 +109,7 @@ bool Level::load()
             bodyDef.type = b2_kinematicBody;
         else if(std::string(element->Attribute("type")) == "dynamic")
             bodyDef.type = b2_dynamicBody;
-        bodyDef.position = b2Vec2(element->FloatAttribute("x"), element->FloatAttribute("y"));
+        bodyDef.position = b2Vec2(utility::toMeter(element->FloatAttribute("x")), utility::toMeter(element->FloatAttribute("y")));
         bodyDef.angle = element->FloatAttribute("angle");
         bodyDef.fixedRotation = element->BoolAttribute("fixedRotation");
 
@@ -119,7 +126,7 @@ bool Level::load()
                 for(tinyxml2::XMLElement* vertexIterator = element->FirstChildElement("vertex");
                     vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
                 {
-                    vertices.push_back(b2Vec2(vertexIterator->FloatAttribute("x"), vertexIterator->FloatAttribute("y")));
+                    vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")), utility::toMeter(vertexIterator->FloatAttribute("y"))));
                 }
 
                 std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);

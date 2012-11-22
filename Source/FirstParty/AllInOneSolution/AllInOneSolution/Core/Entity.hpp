@@ -16,8 +16,7 @@ public:
     Entity();
     virtual ~Entity();
 
-    virtual void update();
-    virtual void update( const float value );
+    virtual void update(const float value);
 
     // This functions only exist because the physic system is not yet implemented
     // -------------------------------------

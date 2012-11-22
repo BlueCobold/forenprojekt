@@ -5,7 +5,6 @@
 
 #include "ResourceManager.hpp"
 #include "StateManager.hpp"
-#include "TestState.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>

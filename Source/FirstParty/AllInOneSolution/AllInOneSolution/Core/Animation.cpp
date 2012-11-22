@@ -42,7 +42,7 @@ void Animation::update(const float value)
         else
             calculateFrame(value);
 
-        m_textureRect = sf::IntRect(sf::IntRect((m_frame * m_frameWidth), 0, m_frameWidth, m_frameHeight));
+        m_textureRect = sf::IntRect((m_frame * m_frameWidth), 0, m_frameWidth, m_frameHeight);
     }
 }
 
@@ -78,5 +78,5 @@ void Animation::pause()
 
 const sf::IntRect Animation::getTextureRect()
 {
-    return sf::IntRect(sf::IntRect((m_frame * m_frameWidth), 0, m_frameWidth, m_frameHeight));
+    return m_textureRect;
 }

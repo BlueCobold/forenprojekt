@@ -8,6 +8,8 @@
 
 namespace utility
 {
+    static const float PIXEL_PER_METER = 10.f;
+
     template<typename T>
     std::string toString(const T& value)
     {
@@ -42,6 +44,18 @@ namespace utility
     {
         value *= 0.0174532925199432957f;
         return (Z)value;
+    }
+
+    template<typename T>
+    T toMeter(T value)
+    {
+        return static_cast<T>(value/PIXEL_PER_METER);
+    }
+
+    template<typename T>
+    T toPixel(T value)
+    {
+        return static_cast<T>(value*PIXEL_PER_METER);
     }
 } // namespace utility
 

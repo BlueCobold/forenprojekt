@@ -77,20 +77,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\font\visitor.ttf">
-      <Filter>Resouces</Filter>
-    </None>
-    <None Include="Config.ini">
-      <Filter>Resouces</Filter>
-    </None>
-    <None Include="res\img\sprite.png">
-      <Filter>Resouces</Filter>
-    </None>
-    <None Include="res\level\001.lvl">
-      <Filter>Resouces</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Resouces">
       <UniqueIdentifier>{7273a69a-eff2-4e02-adaf-342e2be673e6}</UniqueIdentifier>
     </Filter>
@@ -100,5 +86,19 @@
     <Filter Include="Headers">
       <UniqueIdentifier>{fd86505c-1ee9-4960-b8e0-4540743f0492}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Game\Config.ini">
+      <Filter>Resouces</Filter>
+    </None>
+    <None Include="..\..\..\Game\res\font\visitor.ttf">
+      <Filter>Resouces</Filter>
+    </None>
+    <None Include="..\..\..\Game\res\img\sprite.png">
+      <Filter>Resouces</Filter>
+    </None>
+    <None Include="..\..\..\Game\res\level\001.lvl">
+      <Filter>Resouces</Filter>
+    </None>
   </ItemGroup>
 </Project>
