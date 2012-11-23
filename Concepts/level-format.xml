@@ -5,18 +5,21 @@
    <physics>
     <body type="static OR kinematic OR dynamic" x="float" y="float" angle="float" fixedRotation="true" />
 	<fixture density="float" friction="float" restitution="float">
-     <shape type="circle OR polygon" num="unsigned int">
+     <shape type="polygon" num="unsigned int">
 	  <vertex x="float" y="float" />
-	  <vertex x="float" y="float" />
-	  <vertex x="float" y="float" />
-	  <vertex x="float" y="float" />
+	  <!-- as many more vertices are wanted/needed -->
 	 </shape>
+	 <shape type="circle" radius="float" />
 	</fixture>
    </physics>
-   <texture file="string" width="unsigned int" height="unsigned int" />
-   <animation infinite="true OR false" min="float" step="float" num="unsigned int" width="unsigned int" height="unsigned int" />
+   <texture file="string" width="unsigned int" height="unsigned int" x="float" y="float" />
+   </texture>
+   <!-- optional --><animation infinite="true OR false" min="float" step="float" num="unsigned int" width="unsigned int" height="unsigned int" />
   </entity>
  </objects>
+ <world>
+  <gravity x="float" y="float" />
+ </world>
  <grid width="unsigned int" height="unsigned int" size="unsigned int">
   char[][]
  </grid>

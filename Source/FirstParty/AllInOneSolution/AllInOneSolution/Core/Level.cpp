@@ -7,6 +7,7 @@
 #include <SFML/System/Err.hpp>
 
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
+#include <Box2D/Collision/Shapes/b2CircleShape.h>
 #include <Box2D/Common/b2Math.h>
 #include <Box2D/Dynamics/b2Body.h>
 #include <Box2D/Dynamics/b2Fixture.h>
@@ -60,6 +61,7 @@ bool Level::load()
         return false;
 
     tinyxml2::XMLElement* objects = doc.FirstChildElement("level")->FirstChildElement("objects");
+    tinyxml2::XMLElement* world = doc.FirstChildElement("level")->FirstChildElement("world");
     tinyxml2::XMLElement* grid = doc.FirstChildElement("level")->FirstChildElement("grid");
     
     std::vector<b2BodyDef> bodies;
@@ -90,13 +92,12 @@ bool Level::load()
         element = entityIterator->FirstChildElement("texture");
         if(m_resourceManager.getTexture(element->Attribute("file")) != nullptr)
             m_entities.back().bindTexture(*m_resourceManager.getTexture(element->Attribute("file")),
-                sf::IntRect(0, 0, element->IntAttribute("width"), element->IntAttribute("height")));
+                sf::IntRect(0, 0, element->IntAttribute("width"), element->IntAttribute("height")),
+                sf::Vector2f(element->IntAttribute("x"), element->IntAttribute("y")));
         else
             sf::err() << "Bad texture key ('" << element->Attribute("file") <<  "') for entity: " << entityIterator->Attribute("name") << std::endl;
 
         // Load physics
-        std::vector<b2FixtureDef> fixtures;
-
         tinyxml2::XMLElement* physics = entityIterator->FirstChildElement("physics");
 
         // Load body
@@ -113,6 +114,8 @@ bool Level::load()
         bodyDef.fixedRotation = element->BoolAttribute("fixedRotation");
 
         // Load fixtures
+        std::vector<b2FixtureDef> fixtures;
+
         for(tinyxml2::XMLElement* fixtureIterator = physics->FirstChildElement("fixture");
             fixtureIterator != nullptr; fixtureIterator = fixtureIterator->NextSiblingElement("fixture"))
         {
@@ -122,6 +125,7 @@ bool Level::load()
             {
                 std::vector<b2Vec2> vertices;
 
+                // Ierator over the vertices
                 for(tinyxml2::XMLElement* vertexIterator = element->FirstChildElement("vertex");
                     vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
                 {
@@ -129,9 +133,16 @@ bool Level::load()
                         utility::toMeter(vertexIterator->FloatAttribute("y"))));
                 }
 
+                // Construct the b2Shape
                 std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
                 ps->Set(vertices.data(), vertices.size());
                 m_shapes.push_back(std::move(ps));
+            }
+            else if(std::string(element->Attribute("type")) == "circle") // Load circle
+            {
+                std::unique_ptr<b2CircleShape> cs(new b2CircleShape);
+                cs->m_radius = utility::toMeter(element->FloatAttribute("radius"));
+                m_shapes.push_back(std::move(cs));
             }
 
             b2FixtureDef fixtureDef;
@@ -150,6 +161,10 @@ bool Level::load()
 
         m_entities.back().bindBody(body);
     }
+
+    // Load world properties
+    tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
+    m_world.SetGravity(b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y")));
 
     return true;
 }

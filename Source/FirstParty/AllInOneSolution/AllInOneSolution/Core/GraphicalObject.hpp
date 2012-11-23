@@ -20,15 +20,17 @@ class GraphicalObject : public sf::Drawable
 {
 public:
 
-    void bindTexture(const sf::Texture& texture, const sf::IntRect& textureRect)
+    void bindTexture(const sf::Texture& texture, const sf::IntRect& textureRect, const sf::Vector2f& offSet)
     {
         m_sprite.setTexture(texture);
         m_sprite.setTextureRect(textureRect);
+        m_sprite.setOrigin(offSet);
     }
 
-    void bindTexture(const sf::Texture& texture)
+    void bindTexture(const sf::Texture& texture, const sf::Vector2f& offSet)
     {
         m_sprite.setTexture(texture);
+        m_sprite.setOrigin(offSet);
     }
 
 protected:
