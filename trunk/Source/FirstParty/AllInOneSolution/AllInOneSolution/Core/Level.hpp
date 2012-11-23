@@ -22,6 +22,7 @@ namespace sf
 class Level
 {
 public:
+    /// Construct a level from the given level number
     Level(const unsigned int level, ResourceManager& resourceManager);
     ~Level();
 

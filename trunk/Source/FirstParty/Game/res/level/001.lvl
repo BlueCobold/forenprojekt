@@ -12,7 +12,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -26,7 +26,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -40,7 +40,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -54,7 +54,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -68,7 +68,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -82,7 +82,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -96,7 +96,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -110,7 +110,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -124,7 +124,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -138,7 +138,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -152,7 +152,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -166,7 +166,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -180,7 +180,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall1" rep="W" size="1" orientation="vertical">
    <physics>
@@ -194,7 +194,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -208,7 +208,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -222,7 +222,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -236,7 +236,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -250,7 +250,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -264,7 +264,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -278,7 +278,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -292,7 +292,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -306,7 +306,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -320,7 +320,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -334,7 +334,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -348,7 +348,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -362,7 +362,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -376,7 +376,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -390,7 +390,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -404,7 +404,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -418,7 +418,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -432,7 +432,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -446,7 +446,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -460,7 +460,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -474,7 +474,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -488,7 +488,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -502,7 +502,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v3.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -516,7 +516,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -530,7 +530,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v1.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -544,7 +544,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v6.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -558,7 +558,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v2.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -572,7 +572,7 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v4.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
@@ -586,24 +586,22 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" />
+   <texture file="walls/sand/small_quad/main/v5.png" width="60" height="60" x="0" y="0" />
   </entity>
   <entity name="Ball" rep="B" size="1" orientation="square">
    <physics>
     <body type="dynamic" x="375" y="65" angle="0" fixedRotation="true" />
 	<fixture density="0.5" friction="0.5" restitution="0.5">
-	 <shape type="polygon" num="4">
-	  <vertex x="1" y="1" />
-	  <vertex x="29" y="1" />
-	  <vertex x="30" y="29" />
-	  <vertex x="1" y="29" />
-	 </shape>
+	 <shape type="circle" radius="15" />
 	</fixture>
    </physics>
-   <texture file="assets/ball/ball.png" width="240" height="30" />
+   <texture file="assets/ball/ball.png" width="240" height="30" x="15" y="15" />
    <animation infinite="true" min="0" step="0.1" num="8" width="30" height="30" />
   </entity>
  </objects>
+ <world>
+  <gravity x="1" y="9.81" />
+ </world>
  <grid width="unsigned int" height="unsigned int" size="unsigned int">
 wwwwwwwwww
 W        W
