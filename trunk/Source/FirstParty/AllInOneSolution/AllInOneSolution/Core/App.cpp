@@ -12,29 +12,26 @@
 #include <sstream>
 #include <utility> // move
 
-App::App(Config& configLoader) :
-    m_screenWidth(0),
-    m_screenHeight(0),
-    m_bitsPerPixel(0),
+App::App(Config& config) :
+    m_config(config),
     m_fullscreen(false),
     m_focus(true),
     m_fps(0.f),
     m_frameCounter(0.f)
 {
-    m_windowTitle = configLoader.get<std::string>("WindowName");
-    m_screenWidth = configLoader.get<unsigned int>("ResolutionX");
-    m_screenHeight = configLoader.get<unsigned int>("ResolutionY");
-    m_bitsPerPixel = configLoader.get<unsigned int>("BitsPerPixel");
-    m_fullscreen = configLoader.get<bool>("IsFullScreen");
+    m_windowTitle = config.get<std::string>("WindowName");
+    m_fullscreen = config.get<bool>("IsFullScreen");
     
     if(m_fullscreen)
     {
-        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle, sf::Style::Fullscreen);
+        m_screen.create(sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"))
+            , m_windowTitle, sf::Style::Fullscreen);
         // Disable the cursor
         m_screen.setMouseCursorVisible(false);
     }
     else
-        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle);
+        m_screen.create(sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"))
+            , m_windowTitle);
 
     m_fpsText.setFont(*m_resourceManager.getFont("visitor.ttf"));
     m_fpsText.setColor(sf::Color::Yellow);
@@ -98,6 +95,8 @@ void App::handleEvents()
             m_focus = false;
         else if(event.type == sf::Event::GainedFocus)
             m_focus = true;
+        else if(event.type == sf::Event::Resized)
+            onResize();
     }
 }
 
@@ -106,15 +105,15 @@ void App::switchDisplayMode()
     if(m_fullscreen)
     {	
         // Switch to fullscreen
-        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel),
-        m_windowTitle, sf::Style::Fullscreen);
+        m_screen.create(sf::VideoMode::getDesktopMode(), m_windowTitle, sf::Style::Fullscreen);
         // Disable the cursor
         m_screen.setMouseCursorVisible(false);
     }
     else
     {
         // Switch to window mode
-        m_screen.create(sf::VideoMode(m_screenWidth, m_screenHeight, m_bitsPerPixel), m_windowTitle);
+        m_screen.create(sf::VideoMode(m_config.get<unsigned int>("ResolutionX"),
+            m_config.get<unsigned int>("ResolutionY")), m_windowTitle);
         // Enable the cursor
         m_screen.setMouseCursorVisible(true);
     }
@@ -129,4 +128,21 @@ void App::calculateFps()
         m_clock.restart();
         m_frameCounter = 0;
     }
+}
+
+void App::onResize()
+{
+    sf::Vector2f size = static_cast<sf::Vector2f>(m_screen.getSize());
+
+	// Minimum size
+	if(size.x < 800)
+		size.x = 800;
+	if(size.y < 600)
+		size.y = 600;
+
+	// Apply possible size changes
+	m_screen.setSize(static_cast<sf::Vector2u>(size));
+
+	// Reset view
+	m_screen.setView(sf::View(sf::FloatRect(0.f, 0.f, size.x, size.y)));
 }

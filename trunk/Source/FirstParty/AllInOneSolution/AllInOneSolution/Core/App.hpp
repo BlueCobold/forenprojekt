@@ -21,7 +21,7 @@ class App
 {
 public:
     
-    App(Config& configLoader);
+    App(Config& config);
     
     void run();
     
@@ -36,16 +36,15 @@ private:
     void switchDisplayMode();
    
     void calculateFps();
+    void onResize();
     
 private:
 
     sf::RenderWindow m_screen;
     sf::Clock m_clock;
 
+    Config& m_config;
     std::string m_windowTitle;
-    unsigned int m_screenWidth;
-    unsigned int m_screenHeight;
-    unsigned int m_bitsPerPixel;
     bool m_fullscreen;
     bool m_focus;
    
