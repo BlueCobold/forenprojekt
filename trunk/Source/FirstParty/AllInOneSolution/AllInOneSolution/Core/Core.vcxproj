@@ -39,9 +39,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <ExecutablePath>$(ExecutablePath);..\..\..\Game</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <ExecutablePath>$(ExecutablePath);..\..\..\Game</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -95,6 +97,7 @@
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="Teeter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.hpp" />
@@ -109,6 +112,7 @@
     <ClInclude Include="ResourceManager.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />
+    <ClInclude Include="Teeter.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <ItemGroup>

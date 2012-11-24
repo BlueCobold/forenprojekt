@@ -28,6 +28,9 @@
     <ClCompile Include="Level.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Teeter.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.hpp">
@@ -67,6 +70,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Level.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Teeter.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
