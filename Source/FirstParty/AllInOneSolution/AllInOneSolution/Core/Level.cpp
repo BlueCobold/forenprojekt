@@ -177,7 +177,7 @@ bool Level::load()
 
         b2Vec2 position = b2Vec2(utility::toMeter(element->FloatAttribute("x")), utility::toMeter(element->FloatAttribute("y")));
         float angle = element->FloatAttribute("angle");
-
+        b2Vec2 center = b2Vec2(utility::toMeter(element->FloatAttribute("centerX")), utility::toMeter(element->FloatAttribute("centerY")));
 
         // Load fixture
         b2FixtureDef fixtureDef;
@@ -211,7 +211,7 @@ bool Level::load()
             }
         }
 
-        Teeter teeter(position.x, position.y, 0.f, 0.f, fixtureDef, m_world);
+        Teeter teeter(position.x, position.y, center.x, center.y, fixtureDef, m_world);
 
         // Teeter is animated
         if(teeterIterator->FirstChildElement("animation") != nullptr)

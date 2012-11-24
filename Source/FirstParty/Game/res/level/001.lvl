@@ -630,7 +630,7 @@
   </entity>
      <teeter name="Teeter1" rep="T" size="1" orientation="horizontal">
          <physics>
-             <body x="200" y="180" angle="0" />
+             <body x="200" y="180" centerX="106" centerY="15" angle="0" />
              <fixture density="0.1" friction="0.1" restitution="0">
                  <shape type="polygon" num="4">
                      <vertex x="1" y="1" />
