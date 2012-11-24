@@ -2,6 +2,7 @@
 #include "Entity.hpp"
 #include "ResourceManager.hpp"
 #include "Utility.hpp" // toString, toMeter
+#include "Teeter.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Err.hpp>
@@ -160,6 +161,81 @@ bool Level::load()
             body->CreateFixture(&(*it));
 
         m_entities.back().bindBody(body);
+    }
+
+    // Iterate over all defined teeter
+    for(tinyxml2::XMLElement* teeterIterator = objects->FirstChildElement("teeter");
+        teeterIterator != nullptr; teeterIterator = teeterIterator->NextSiblingElement("teeter"))
+    {
+        b2PolygonShape ps;
+
+        // Load physics
+        tinyxml2::XMLElement* physics = teeterIterator->FirstChildElement("physics");
+
+        // Load body
+        element = physics->FirstChildElement("body");
+
+        b2Vec2 position = b2Vec2(utility::toMeter(element->FloatAttribute("x")), utility::toMeter(element->FloatAttribute("y")));
+        float angle = element->FloatAttribute("angle");
+
+
+        // Load fixture
+        b2FixtureDef fixtureDef;
+
+        for(tinyxml2::XMLElement* fixtureIterator = physics->FirstChildElement("fixture");
+            fixtureIterator != nullptr; fixtureIterator = fixtureIterator->NextSiblingElement("fixture"))
+        {
+            // Load shape
+            element = fixtureIterator->FirstChildElement("shape");
+            if(std::string(element->Attribute("type")) == "polygon") // Load polygon
+            {
+                std::vector<b2Vec2> vertices;
+
+                // Ierator over the vertices
+                for(tinyxml2::XMLElement* vertexIterator = element->FirstChildElement("vertex");
+                    vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
+                {
+                    vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
+                        utility::toMeter(vertexIterator->FloatAttribute("y"))));
+                }
+
+                // Construct the b2Shape
+                ps.Set(vertices.data(), vertices.size());
+
+                fixtureDef.shape = &ps;
+                fixtureDef.density = fixtureIterator->FloatAttribute("density");
+                fixtureDef.friction = fixtureIterator->FloatAttribute("friction");
+                fixtureDef.restitution = fixtureIterator->FloatAttribute("restitution");
+
+
+            }
+        }
+
+        Teeter teeter(position.x, position.y, 0.f, 0.f, fixtureDef, m_world);
+
+        // Teeter is animated
+        if(teeterIterator->FirstChildElement("animation") != nullptr)
+        {
+            // Load animation
+            element = teeterIterator->FirstChildElement("animation");
+            if(element != nullptr)
+                teeter.bindAnimation(element->BoolAttribute("infinite"), element->FloatAttribute("min"),
+                    element->FloatAttribute("step"), element->IntAttribute("num"), element->IntAttribute("width"),
+                    element->IntAttribute("height"));
+
+            teeter.getAnimation().start();
+        }
+
+        m_entities.push_back(std::move(teeter));
+
+        // Load texture
+        element = teeterIterator->FirstChildElement("texture");
+        if(m_resourceManager.getTexture(element->Attribute("file")) != nullptr)
+            m_entities.back().bindTexture(*m_resourceManager.getTexture(element->Attribute("file")),
+                sf::IntRect(0, 0, element->IntAttribute("width"), element->IntAttribute("height")),
+                sf::Vector2f(element->IntAttribute("x"), element->IntAttribute("y")));
+        else
+            sf::err() << "Bad texture key ('" << element->Attribute("file") <<  "') for teeter: " << teeterIterator->Attribute("name") << std::endl;
     }
 
     // Load world properties
