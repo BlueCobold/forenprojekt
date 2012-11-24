@@ -41,13 +41,13 @@ void Level::update(const float dt)
     m_world.Step(m_timeStep, m_velocityIterations, m_positionIterations);
 
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
-        it->update(dt);
+        (*it)->update(dt);
 }
 
 void Level::draw(sf::RenderWindow& screen)
 {
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
-        screen.draw(*it);
+        screen.draw(**it);
 }
 
 bool Level::load()
@@ -72,7 +72,7 @@ bool Level::load()
     for(tinyxml2::XMLElement* entityIterator = objects->FirstChildElement("entity");
         entityIterator != nullptr; entityIterator = entityIterator->NextSiblingElement("entity"))
     {
-        Entity entity;
+        std::unique_ptr<Entity> entity(new Entity);
 
         // Entity is animated
         if(entityIterator->FirstChildElement("animation") != nullptr)
@@ -80,11 +80,11 @@ bool Level::load()
             // Load animation
             element = entityIterator->FirstChildElement("animation");
             if(element != nullptr)
-                entity.bindAnimation(element->BoolAttribute("infinite"), element->FloatAttribute("min"),
+                entity->bindAnimation(element->BoolAttribute("infinite"), element->FloatAttribute("min"),
                     element->FloatAttribute("step"), element->IntAttribute("num"), element->IntAttribute("width"),
                     element->IntAttribute("height"));
 
-            entity.getAnimation().start();
+            entity->getAnimation().start();
         }
 
         m_entities.push_back(std::move(entity));
@@ -92,7 +92,7 @@ bool Level::load()
         // Load texture
         element = entityIterator->FirstChildElement("texture");
         if(m_resourceManager.getTexture(element->Attribute("file")) != nullptr)
-            m_entities.back().bindTexture(*m_resourceManager.getTexture(element->Attribute("file")),
+            m_entities.back()->bindTexture(*m_resourceManager.getTexture(element->Attribute("file")),
                 sf::IntRect(0, 0, element->IntAttribute("width"), element->IntAttribute("height")),
                 sf::Vector2f(element->IntAttribute("x"), element->IntAttribute("y")));
         else
@@ -160,7 +160,7 @@ bool Level::load()
         for(auto it = fixtures.begin(); it != fixtures.end(); it++)
             body->CreateFixture(&(*it));
 
-        m_entities.back().bindBody(body);
+        m_entities.back()->bindBody(body);
     }
 
     // Iterate over all defined teeter
@@ -211,7 +211,7 @@ bool Level::load()
             }
         }
 
-        Teeter teeter(position.x, position.y, center.x, center.y, fixtureDef, m_world);
+        std::unique_ptr<Teeter> teeter(new Teeter(position.x, position.y, center.x, center.y, fixtureDef, m_world));
 
         // Teeter is animated
         if(teeterIterator->FirstChildElement("animation") != nullptr)
@@ -219,11 +219,11 @@ bool Level::load()
             // Load animation
             element = teeterIterator->FirstChildElement("animation");
             if(element != nullptr)
-                teeter.bindAnimation(element->BoolAttribute("infinite"), element->FloatAttribute("min"),
+                teeter->bindAnimation(element->BoolAttribute("infinite"), element->FloatAttribute("min"),
                     element->FloatAttribute("step"), element->IntAttribute("num"), element->IntAttribute("width"),
                     element->IntAttribute("height"));
 
-            teeter.getAnimation().start();
+            teeter->getAnimation().start();
         }
 
         m_entities.push_back(std::move(teeter));
@@ -231,7 +231,7 @@ bool Level::load()
         // Load texture
         element = teeterIterator->FirstChildElement("texture");
         if(m_resourceManager.getTexture(element->Attribute("file")) != nullptr)
-            m_entities.back().bindTexture(*m_resourceManager.getTexture(element->Attribute("file")),
+            m_entities.back()->bindTexture(*m_resourceManager.getTexture(element->Attribute("file")),
                 sf::IntRect(0, 0, element->IntAttribute("width"), element->IntAttribute("height")),
                 sf::Vector2f(element->IntAttribute("x"), element->IntAttribute("y")));
         else

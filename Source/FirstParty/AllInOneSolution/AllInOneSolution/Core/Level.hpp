@@ -44,7 +44,7 @@ private:
 
     unsigned int m_number;
 
-    std::vector<Entity> m_entities;
+    std::vector<std::unique_ptr<Entity>> m_entities;
 
     // HACK: This should be in the Entity class, but since unique_ptr sucks with VS10...
     std::vector<std::unique_ptr<b2Shape>> m_shapes;
