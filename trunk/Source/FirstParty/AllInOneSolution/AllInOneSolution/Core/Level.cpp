@@ -46,51 +46,11 @@ void Level::update(const float dt)
         (*it)->update(dt);
 }
 
-class DebugDrawer:public b2Draw
-{
-    sf::RenderWindow* m_screen;
-public:
-    DebugDrawer(sf::RenderWindow& screen) : m_screen(&screen)
-    {
-    }
-    virtual void DrawPolygon (const b2Vec2 *vertices, int32 vertexCount, const b2Color &color)
-    {
-        sf::ConvexShape polygon(vertexCount);
-        for (int32 i=0; i<vertexCount; i++)
-        {
-            b2Vec2 vertex = vertices[i];
-            polygon.setPoint(i, sf::Vector2f(vertex.x*10, vertex.y*10));
-        }
-        sf::Color result(255,255,255,200);
-        sf::Color result2(255,255,255,50);
-        polygon.setFillColor(result2);
-        polygon.setOutlineColor(result);
-        polygon.setOutlineThickness(1.0f);
-        m_screen->draw(polygon);
-    }
-    virtual void DrawSolidPolygon (const b2Vec2 *vertices, int32 vertexCount, const b2Color &color)
-    {
-        DrawPolygon(vertices, vertexCount, color);
-    }
-    virtual void DrawCircle (const b2Vec2 &center, float32 radius, const b2Color &color)
-    {
-    }
-    virtual void DrawSolidCircle (const b2Vec2 &center, float32 radius, const b2Vec2 &axis, const b2Color &color)
-    {
-    }
-    virtual void DrawSegment (const b2Vec2 &p1, const b2Vec2 &p2, const b2Color &color)
-    {
-    }
-    virtual void 	DrawTransform (const b2Transform &xf)
-    {
-    }
-};
-
 void Level::draw(sf::RenderWindow& screen)
 {
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         screen.draw(**it);
-    DebugDrawer d(screen);
+    DebugDraw d(screen);
     d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
     m_world.SetDebugDraw(&d);
     m_world.DrawDebugData();

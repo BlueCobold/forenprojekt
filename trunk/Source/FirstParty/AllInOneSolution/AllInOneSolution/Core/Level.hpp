@@ -4,6 +4,7 @@
 #define LEVEL_HPP
 
 #include "Entity.hpp"
+#include "DebugDraw.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>

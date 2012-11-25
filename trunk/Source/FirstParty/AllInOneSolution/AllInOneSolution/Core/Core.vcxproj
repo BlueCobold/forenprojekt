@@ -92,6 +92,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="PlayState.cpp" />
@@ -103,6 +104,7 @@
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Config.hpp" />
+    <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="GraphicalObject.hpp" />
     <ClInclude Include="Level.hpp" />
@@ -119,7 +121,9 @@
     <None Include="..\..\..\Game\Config.ini" />
     <None Include="..\..\..\Game\res\font\visitor.ttf" />
     <None Include="..\..\..\Game\res\img\sprite.png" />
-    <None Include="..\..\..\Game\res\level\001.lvl" />
+    <None Include="..\..\..\Game\res\level\001.lvl">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
