@@ -32,8 +32,6 @@ void Teeter::update(const float value)
 {
     float angle = utility::toDegree<float32,float>(m_body->GetAngle());
 
-    printf("%f\n",angle);
-
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
         if(angle < -45.f)
             m_body->SetAngularVelocity(0.f);
