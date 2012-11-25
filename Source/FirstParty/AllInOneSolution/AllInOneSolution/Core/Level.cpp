@@ -46,17 +46,11 @@ void Level::update(const float dt)
         (*it)->update(dt);
 }
 
-class drawer:public b2Draw
+class DebugDrawer:public b2Draw
 {
     sf::RenderWindow* m_screen;
 public:
-    sf::Color B2SFColor(const b2Color &color, int alpha = 255)
-       {
-           sf::Color result((sf::Uint8)(color.r*255), (sf::Uint8)(color.g*255), (sf::Uint8)(color.b*255), (sf::Uint8) alpha);
-           return result;
-       }
-
-    drawer(sf::RenderWindow& screen) : m_screen(&screen)
+    DebugDrawer(sf::RenderWindow& screen) : m_screen(&screen)
     {
     }
     virtual void DrawPolygon (const b2Vec2 *vertices, int32 vertexCount, const b2Color &color)
@@ -74,26 +68,21 @@ public:
         polygon.setOutlineThickness(1.0f);
         m_screen->draw(polygon);
     }
-    virtual void 	DrawSolidPolygon (const b2Vec2 *vertices, int32 vertexCount, const b2Color &color)
+    virtual void DrawSolidPolygon (const b2Vec2 *vertices, int32 vertexCount, const b2Color &color)
     {
         DrawPolygon(vertices, vertexCount, color);
     }
-    
-    virtual void 	DrawCircle (const b2Vec2 &center, float32 radius, const b2Color &color)
+    virtual void DrawCircle (const b2Vec2 &center, float32 radius, const b2Color &color)
     {
-        int b=4;
     }
-    virtual void 	DrawSolidCircle (const b2Vec2 &center, float32 radius, const b2Vec2 &axis, const b2Color &color)
+    virtual void DrawSolidCircle (const b2Vec2 &center, float32 radius, const b2Vec2 &axis, const b2Color &color)
     {
-        int b=4;
     }
-    virtual void 	DrawSegment (const b2Vec2 &p1, const b2Vec2 &p2, const b2Color &color)
+    virtual void DrawSegment (const b2Vec2 &p1, const b2Vec2 &p2, const b2Color &color)
     {
-        int b=4;
     }
     virtual void 	DrawTransform (const b2Transform &xf)
     {
-        int b=4;
     }
 };
 
@@ -101,7 +90,7 @@ void Level::draw(sf::RenderWindow& screen)
 {
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         screen.draw(**it);
-    drawer d(screen);
+    DebugDrawer d(screen);
     d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
     m_world.SetDebugDraw(&d);
     m_world.DrawDebugData();
