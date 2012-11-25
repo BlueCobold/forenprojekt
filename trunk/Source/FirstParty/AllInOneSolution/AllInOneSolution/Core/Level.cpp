@@ -119,6 +119,7 @@ bool Level::load()
         bodyDef.position = b2Vec2(utility::toMeter(element->FloatAttribute("x")), utility::toMeter(element->FloatAttribute("y")));
         bodyDef.angle = element->FloatAttribute("angle");
         bodyDef.fixedRotation = element->BoolAttribute("fixedRotation");
+        bodyDef.angularDamping = element->BoolAttribute("angularDamping");
 
         // Load fixtures
         std::vector<b2FixtureDef> fixtures;
