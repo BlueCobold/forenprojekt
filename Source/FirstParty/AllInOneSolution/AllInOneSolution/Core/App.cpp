@@ -16,7 +16,7 @@ App::App(Config& config) :
     m_config(config),
     m_fullscreen(false),
     m_focus(true),
-    m_fps(0.f),
+    m_fps(0),
     m_frameCounter(0.f)
 {
     m_windowTitle = config.get<std::string>("WindowName");
@@ -53,7 +53,7 @@ void App::run()
 void App::update()
 {
     calculateFps();
-    m_fpsText.setString(utility::toString<float>(m_fps));
+    m_fpsText.setString(utility::toString<int>(m_fps));
    
     handleEvents();
     handleKeyboard();	
@@ -124,7 +124,7 @@ void App::calculateFps()
     m_frameCounter++;
     if(m_clock.getElapsedTime().asSeconds() >= 1.0f)
     {
-        m_fps = (m_frameCounter / m_clock.getElapsedTime().asSeconds());
+        m_fps = static_cast<int>((m_frameCounter / m_clock.getElapsedTime().asSeconds()));
         m_clock.restart();
         m_frameCounter = 0;
     }
