@@ -22,10 +22,10 @@ Teeter::Teeter(const float32 x, const float32 y, const float centerX, const floa
 
         // Create binder
 
-        polyShape.SetAsBox(1,1);
+        polyShape.SetAsBox(0.1f,0.1f);
 
         bodyDef.type = b2_staticBody;
-        bodyDef.position.Set(x, y);
+        bodyDef.position.Set(x+centerX, y+centerY);
 
         fixDef.density = 0.1f;
         fixDef.friction = 0.1f;
@@ -48,7 +48,7 @@ Teeter::Teeter(const float32 x, const float32 y, const float centerX, const floa
 
         revDef.bodyA = binder;
         revDef.bodyB = m_body;
-        revDef.localAnchorA.Set( centerX, centerY);
+        revDef.localAnchorA.Set( 0, 0);
         revDef.localAnchorB.Set( centerX, centerY);
 
         revDef.enableLimit = true;
