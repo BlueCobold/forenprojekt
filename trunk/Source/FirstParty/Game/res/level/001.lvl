@@ -633,10 +633,10 @@
              <body x="200" y="180" centerX="106" centerY="15" angle="0" />
              <fixture density="0.5" friction="0.7" restitution="0">
                  <shape type="polygon" num="4">
-                     <vertex x="1" y="1" />
-                     <vertex x="212" y="1" />
-                     <vertex x="212" y="30" />
-                     <vertex x="1" y="30" />
+                     <vertex x="-106" y="-15" />
+                     <vertex x="106" y="-15" />
+                     <vertex x="106" y="15" />
+                     <vertex x="-106" y="15" />
                  </shape>
              </fixture>
          </physics>

@@ -13,52 +13,15 @@ Teeter::Teeter(const float32 x, const float32 y, const float centerX, const floa
     const b2FixtureDef& fixtureDef, b2World& world)
 {
     	b2BodyDef bodyDef;
-        b2FixtureDef fixDef;
-        b2PolygonShape polyShape;
-
-        b2Body* binder;
-
-        b2RevoluteJointDef revDef;
-
-        // Create binder
-
-        polyShape.SetAsBox(0.1f,0.1f);
-
-        bodyDef.type = b2_staticBody;
-        bodyDef.position.Set(x+centerX, y+centerY);
-
-        fixDef.density = 0.1f;
-        fixDef.friction = 0.1f;
-        fixDef.shape = &polyShape;
-
-        binder = world.CreateBody(&bodyDef);
-
-        binder->CreateFixture(&fixDef);
 
         // Create teeter
 
         bodyDef.position.Set(x, y);
-        bodyDef.type = b2_dynamicBody;
+        bodyDef.type = b2_kinematicBody;
 
         m_body = world.CreateBody( &bodyDef );
 
         m_body->CreateFixture( &fixtureDef );
-
-        // joints
-
-        revDef.bodyA = binder;
-        revDef.bodyB = m_body;
-        revDef.localAnchorA.Set( 0, 0);
-        revDef.localAnchorB.Set( centerX, centerY);
-
-        revDef.enableLimit = true;
-        revDef.lowerAngle = utility::toRadian<double,float32>(-45.0);
-        revDef.upperAngle = utility::toRadian<double,float32>(45.0);
-
-        revDef.collideConnected = false;
-
-        world.CreateJoint( &revDef );
-
 }
 
 Teeter::~Teeter()
@@ -67,12 +30,22 @@ Teeter::~Teeter()
 
 void Teeter::update(const float value)
 {
-    Entity::update(value);
+    float angle = utility::toDegree<float32,float>(m_body->GetAngle());
+
+    printf("%f\n",angle);
 
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        m_body->SetAngularVelocity(0.5f);
+        if(angle < -45.f)
+            m_body->SetAngularVelocity(0.f);
+        else
+            m_body->SetAngularVelocity(-0.5f);
     else if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
-        m_body->SetAngularVelocity(-0.5f);
+        if(angle > 45.f)
+            m_body->SetAngularVelocity(0.f);
+        else
+            m_body->SetAngularVelocity(0.5f);
     else
         m_body->SetAngularVelocity(0.0f);
+
+    Entity::update(value);
 }
