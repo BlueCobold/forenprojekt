@@ -48,7 +48,7 @@ private:
     bool m_fullscreen;
     bool m_focus;
    
-    float m_fps;
+    int m_fps;
     float m_frameCounter;
 
     ResourceManager m_resourceManager;
