@@ -34,7 +34,7 @@ App::App(Config& config) :
             , m_windowTitle);
 
     m_fpsText.setFont(*m_resourceManager.getFont("visitor.ttf"));
-    m_fpsText.setColor(sf::Color::Yellow);
+    m_fpsText.setColor(sf::Color::Blue);
     m_fpsText.setCharacterSize(30);
     m_fpsText.setPosition(10, 10);
 
