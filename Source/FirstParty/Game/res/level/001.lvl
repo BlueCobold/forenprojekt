@@ -3,7 +3,7 @@
    <entity name="Wall1" rep="X" size="1" orientation="vertical">
    <physics>
     <body type="static" x="360" y="720" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="3">
 	  <vertex x="1" y="6" />
 	  <vertex x="6" y="6" />
@@ -18,7 +18,7 @@
    <entity name="Wall1" rep="X" size="1" orientation="vertical">
    <physics>
     <body type="static" x="480" y="720" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="3">
 	  <vertex x="54" y="6" />
 	  <vertex x="59" y="6" />
@@ -33,7 +33,7 @@
   <entity name="Wall1" rep="W" size="1" orientation="vertical">
    <physics>
     <body type="static" x="0" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -47,7 +47,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="60" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -61,7 +61,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="120" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -75,7 +75,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="180" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -89,7 +89,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="240" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -103,7 +103,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="300" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -117,7 +117,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="360" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -131,7 +131,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="420" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -145,7 +145,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="480" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -159,7 +159,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="540" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -173,7 +173,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="600" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -187,7 +187,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="660" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -201,7 +201,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="720" y="0" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -215,7 +215,7 @@
   <entity name="Wall1" rep="W" size="1" orientation="vertical">
    <physics>
     <body type="static" x="0" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -229,7 +229,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="60" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -243,7 +243,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="120" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -257,7 +257,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="180" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -271,7 +271,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="240" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -285,7 +285,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="300" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -299,7 +299,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="360" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -313,7 +313,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="420" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -327,7 +327,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="480" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -341,7 +341,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="540" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -355,7 +355,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="600" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -369,7 +369,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="660" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -383,7 +383,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="720" y="780" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -397,7 +397,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="0" y="60" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -411,7 +411,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="0" y="120" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -425,7 +425,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="0" y="180" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -439,7 +439,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="0" y="240" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -453,7 +453,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="0" y="300" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -467,7 +467,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="0" y="360" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -481,7 +481,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="0" y="420" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -495,7 +495,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="0" y="480" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -509,7 +509,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="0" y="540" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -523,7 +523,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="0" y="600" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -537,7 +537,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="0" y="660" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -551,7 +551,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="0" y="720" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -565,7 +565,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="720" y="60" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -579,7 +579,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="720" y="120" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -593,7 +593,7 @@
   <entity name="static" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="dynamic" x="720" y="180" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -607,7 +607,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="720" y="240" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -621,7 +621,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="720" y="300" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -635,7 +635,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="720" y="360" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -649,7 +649,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="720" y="420" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -663,7 +663,7 @@
   <entity name="Wall2" rep="w" size="1" orientation="horizontal">
    <physics>
     <body type="static" x="720" y="720" angle="0" fixedRotation="true" />
-	<fixture density="0.1" friction="0.1" restitution="0">
+	<fixture density="0.1" friction="0.8" restitution="0">
 	 <shape type="polygon" num="4">
 	  <vertex x="1" y="1" />
 	  <vertex x="59" y="1" />
@@ -676,8 +676,8 @@
   </entity>
   <entity name="Ball" rep="B" size="1" orientation="square">
    <physics>
-    <body type="dynamic" x="375" y="65" angle="0" fixedRotation="false" />
-	<fixture density="10.01" friction="0.7" restitution="0.4">
+    <body type="dynamic" x="375" y="65" angle="0" fixedRotation="false" angularDamping="4.0"/>
+	<fixture density="0.5" friction="0.7" restitution="0.4">
 	 <shape type="circle" radius="15" />
 	</fixture>
    </physics>
@@ -687,7 +687,7 @@
      <teeter name="Teeter1" rep="T" size="1" orientation="horizontal">
          <physics>
              <body x="280" y="280" centerX="106" centerY="15" angle="0" />
-             <fixture density="0.5" friction="0.6" restitution="0.1">
+             <fixture density="0.5" friction="0.8" restitution="0.1">
                  <shape type="polygon" num="4">
                      <vertex x="-106" y="-15" />
                      <vertex x="106" y="-15" />
@@ -701,7 +701,7 @@
      <teeter name="Teeter1" rep="T" size="1" orientation="horizontal">
          <physics>
              <body x="580" y="580" centerX="106" centerY="15" angle="0" />
-             <fixture density="0.5" friction="0.6" restitution="0.1">
+             <fixture density="0.5" friction="0.8" restitution="0.1">
                  <shape type="polygon" num="4">
                      <vertex x="-106" y="-15" />
                      <vertex x="106" y="-15" />
