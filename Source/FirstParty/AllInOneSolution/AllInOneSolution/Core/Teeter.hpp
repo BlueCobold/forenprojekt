@@ -14,7 +14,7 @@ public:
         const b2FixtureDef& fixtureDef, b2World& world);
     ~Teeter();
 
-    void update(const float value);
+    virtual void update(const float value);
 
 };
 

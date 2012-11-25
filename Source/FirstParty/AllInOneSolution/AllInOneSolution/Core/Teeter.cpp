@@ -70,8 +70,8 @@ void Teeter::update(const float value)
     Entity::update(value);
 
     if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        m_body->ApplyAngularImpulse(5, false);
+        m_body->ApplyAngularImpulse(-25, true);
     if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
-        m_body->ApplyAngularImpulse(-5, false);
+        m_body->ApplyAngularImpulse(25, true);
 
 }
