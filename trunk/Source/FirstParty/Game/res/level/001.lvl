@@ -677,7 +677,7 @@
   <entity name="Ball" rep="B" size="1" orientation="square">
    <physics>
     <body type="dynamic" x="375" y="65" angle="0" fixedRotation="false" />
-	<fixture density="0.01" friction="0.7" restitution="0.61">
+	<fixture density="10.01" friction="0.7" restitution="0.4">
 	 <shape type="circle" radius="15" />
 	</fixture>
    </physics>
@@ -687,7 +687,7 @@
      <teeter name="Teeter1" rep="T" size="1" orientation="horizontal">
          <physics>
              <body x="280" y="280" centerX="106" centerY="15" angle="0" />
-             <fixture density="0.5" friction="0.001" restitution="0">
+             <fixture density="0.5" friction="0.6" restitution="0.1">
                  <shape type="polygon" num="4">
                      <vertex x="-106" y="-15" />
                      <vertex x="106" y="-15" />
@@ -701,7 +701,7 @@
      <teeter name="Teeter1" rep="T" size="1" orientation="horizontal">
          <physics>
              <body x="580" y="580" centerX="106" centerY="15" angle="0" />
-             <fixture density="0.5" friction="0.001" restitution="0">
+             <fixture density="0.5" friction="0.6" restitution="0.1">
                  <shape type="polygon" num="4">
                      <vertex x="-106" y="-15" />
                      <vertex x="106" y="-15" />
