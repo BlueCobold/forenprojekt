@@ -12,6 +12,8 @@
 Teeter::Teeter(const float32 x, const float32 y, const float centerX, const float centerY,
     const b2FixtureDef& fixtureDef, b2World& world)
 {
+    m_lastMouseX = sf::Mouse::getPosition().x;
+
     	b2BodyDef bodyDef;
 
         // Create teeter
@@ -32,18 +34,23 @@ void Teeter::update(const float value)
 {
     float angle = utility::toDegree<float32,float>(m_body->GetAngle());
 
-    if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        if(angle < -45.f)
-            m_body->SetAngularVelocity(0.f);
-        else
-            m_body->SetAngularVelocity(-0.5f);
-    else if(sf::Mouse::isButtonPressed(sf::Mouse::Right))
-        if(angle > 45.f)
-            m_body->SetAngularVelocity(0.f);
-        else
-            m_body->SetAngularVelocity(0.5f);
-    else
-        m_body->SetAngularVelocity(0.0f);
+    int mouseX = sf::Mouse::getPosition().x;
+    float mouseDiff = (m_lastMouseX-mouseX)/(-5.0);
 
+    if(angle < -45.f)
+    {
+        if (mouseDiff<0)
+            m_body->SetAngularVelocity(0.f);
+        else
+            m_body->SetAngularVelocity(mouseDiff);
+    }
+    else
+    {
+        if(angle > 45.f && mouseDiff>0)
+            m_body->SetAngularVelocity(0.f);
+        else
+            m_body->SetAngularVelocity(mouseDiff);
+    }
+    m_lastMouseX = mouseX;
     Entity::update(value);
 }

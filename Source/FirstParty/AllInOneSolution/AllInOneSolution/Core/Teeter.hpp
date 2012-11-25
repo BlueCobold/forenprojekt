@@ -8,6 +8,9 @@
 /// This class will be used to bind the physical setting and the control to a entity of a teeter
 class Teeter : public Entity
 {
+private:
+    int m_lastMouseX;
+
 public:
 
     Teeter(const float32 x, const float32 y, const float centerX, const float centerY, 
