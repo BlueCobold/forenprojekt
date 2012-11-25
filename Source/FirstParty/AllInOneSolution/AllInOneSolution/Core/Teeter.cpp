@@ -35,7 +35,7 @@ void Teeter::update(const float value)
     float angle = utility::toDegree<float32,float>(m_body->GetAngle());
 
     int mouseX = sf::Mouse::getPosition().x;
-    float mouseDiff = (m_lastMouseX-mouseX)/(value);
+    float mouseDiff = (m_lastMouseX-mouseX)/(-10.0f);
 
     if(angle < -45.f)
     {
