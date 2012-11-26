@@ -10,6 +10,7 @@ class Teeter : public Entity
 {
 private:
     int m_lastMouseX;
+    float m_lastTime;
 
 public:
 

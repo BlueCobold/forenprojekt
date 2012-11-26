@@ -13,17 +13,17 @@ Teeter::Teeter(const float32 x, const float32 y, const float centerX, const floa
     const b2FixtureDef& fixtureDef, b2World& world)
 {
     m_lastMouseX = sf::Mouse::getPosition().x;
+    m_lastTime = -1;
+    b2BodyDef bodyDef;
 
-    	b2BodyDef bodyDef;
+    // Create teeter
 
-        // Create teeter
+    bodyDef.position.Set(x, y);
+    bodyDef.type = b2_kinematicBody;
 
-        bodyDef.position.Set(x, y);
-        bodyDef.type = b2_kinematicBody;
+    m_body = world.CreateBody( &bodyDef );
 
-        m_body = world.CreateBody( &bodyDef );
-
-        m_body->CreateFixture( &fixtureDef );
+    m_body->CreateFixture( &fixtureDef );
 }
 
 Teeter::~Teeter()
@@ -32,25 +32,28 @@ Teeter::~Teeter()
 
 void Teeter::update(const float value)
 {
-    float angle = utility::toDegree<float32,float>(m_body->GetAngle());
+
+    float velocity  = 0 ,maxVelocity = 0;
+    float angle = utility::toDegree<float,float>(m_body->GetAngle());
+    float timeDiff = value - m_lastTime;
 
     int mouseX = sf::Mouse::getPosition().x;
-    float mouseDiff = (m_lastMouseX-mouseX)/(-10.0f);
+    float mouseDiff = (m_lastMouseX - mouseX) * 2.5f;
 
-    if(angle < -45.f)
-    {
-        if (mouseDiff<0)
-            m_body->SetAngularVelocity(0.f);
-        else
-            m_body->SetAngularVelocity(mouseDiff);
-    }
+    if(mouseDiff < 0)
+        maxVelocity = ((-45.f) - angle) / timeDiff;   
     else
-    {
-        if(angle > 45.f && mouseDiff>0)
-            m_body->SetAngularVelocity(0.f);
-        else
-            m_body->SetAngularVelocity(mouseDiff);
-    }
+        maxVelocity = ((45.f) - angle) / timeDiff;
+    
+
+    if(mouseDiff >= maxVelocity)
+        velocity = utility::toRadian<float,float>(maxVelocity);
+    else
+        velocity = utility::toRadian<float,float>(mouseDiff);
+   
+    m_body->SetAngularVelocity(velocity);
+    
+    m_lastTime = value;
     m_lastMouseX = mouseX;
     Entity::update(value);
 }
