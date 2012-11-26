@@ -1,6 +1,7 @@
 <!-- Definition -->
 <level>
- <objects>
+  <background file="string" width="unsigned int" height="unsigned int" x="float" y="float" />
+  <objects>
   <entity name="string" rep="char" size="unsigned int" orientation="square OR vertical OR horizontal">
    <physics>
     <body type="static OR kinematic OR dynamic" x="float" y="float" angle="float" fixedRotation="true" />
@@ -16,7 +17,7 @@
    </texture>
    <!-- optional --><animation infinite="true OR false" min="float" step="float" num="unsigned int" width="unsigned int" height="unsigned int" />
   </entity>
- </objects>
+ </objects>  
  <world>
   <gravity x="float" y="float" />
  </world>
@@ -27,6 +28,7 @@
 
 <!-- Example -->
 <level>
+ <background file="background01.jpeg" width="1600" height="900" x="0" y="0" />
  <objects>
   <entity name="WallV" rep="W" size="2" orientation="vertical">
    <physics>
