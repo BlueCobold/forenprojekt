@@ -1,4 +1,5 @@
 <level>
+ <background file="backgrounds/pastureland/full_scene.jpg" width="1600" height="900" x="0" y="0" /> 
  <objects>
    <entity name="Wall1" rep="X" size="1" orientation="vertical">
    <physics>
