@@ -48,7 +48,8 @@ void Level::update(const float dt)
 
 void Level::draw(sf::RenderWindow& screen)
 {
-    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+	screen.draw(*m_background);	
+	for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         screen.draw(**it);
     DebugDraw d(screen);
     d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
@@ -67,12 +68,25 @@ bool Level::load()
     if(doc.ErrorID() != 0) // Error while loading file
         return false;
 
+	tinyxml2::XMLElement* background = doc.FirstChildElement("level")->FirstChildElement("background");
     tinyxml2::XMLElement* objects = doc.FirstChildElement("level")->FirstChildElement("objects");
     tinyxml2::XMLElement* world = doc.FirstChildElement("level")->FirstChildElement("world");
     tinyxml2::XMLElement* grid = doc.FirstChildElement("level")->FirstChildElement("grid");
     
     std::vector<b2BodyDef> bodies;
     tinyxml2::XMLElement* element = nullptr; // Temp object
+
+	//Load background-image
+	std::unique_ptr<Background> Background(new Background());
+	
+	if(m_resourceManager.getTexture(background->Attribute("file")) != nullptr)
+		Background->bindTexture(*m_resourceManager.getTexture(background->Attribute("file")),
+								sf::IntRect(0, 0, background->IntAttribute("width"), background->IntAttribute("height")),
+								sf::Vector2f(background->IntAttribute("x"), background->IntAttribute("y")));
+	else
+		sf::err() << "Bad background key ('" << background->Attribute("file") << ")" << std::endl;
+
+	m_background = std::move(Background);
 
     // Iterate over all defined entities
     for(tinyxml2::XMLElement* entityIterator = objects->FirstChildElement("entity");

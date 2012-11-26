@@ -5,6 +5,7 @@
 
 #include "Entity.hpp"
 #include "DebugDraw.hpp"
+#include "Background.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -49,6 +50,8 @@ private:
 
     // HACK: This should be in the Entity class, but since unique_ptr sucks with VS10...
     std::vector<std::unique_ptr<b2Shape>> m_shapes;
+
+	std::unique_ptr<Background> m_background;
 
     b2World m_world;
     float m_timeStep;
