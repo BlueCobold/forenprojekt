@@ -34,6 +34,9 @@
     <ClCompile Include="DebugDraw.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.hpp">
@@ -79,6 +82,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="DebugDraw.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
