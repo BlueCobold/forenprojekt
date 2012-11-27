@@ -9,6 +9,9 @@
 
 #include <SFML/Window/Mouse.hpp>
 
+#include <algorithm>
+#include <cmath>
+
 Teeter::Teeter(const float32 x, const float32 y, const float centerX, const float centerY,
     const b2FixtureDef& fixtureDef, b2World& world)
 {
@@ -33,23 +36,18 @@ Teeter::~Teeter()
 void Teeter::update(const float value)
 {
 
-    float velocity  = 0 ,maxVelocity = 0;
+    float velocity  = 0;
     float angle = utility::toDegree<float,float>(m_body->GetAngle());
     float timeDiff = value - m_lastTime;
 
     int mouseX = sf::Mouse::getPosition().x;
-    float mouseDiff = (m_lastMouseX - mouseX) * 2.5f;
+    float mouseDiff = (m_lastMouseX - mouseX) * -12.5f;
 
-    if(mouseDiff < 0)
-        maxVelocity = ((-45.f) - angle) / timeDiff;   
-    else
-        maxVelocity = ((45.f) - angle) / timeDiff;
+    float minVelocity = ((-45.f) - angle) / timeDiff;   
+    float maxVelocity = ((45.f) - angle) / timeDiff;
     
-
-    if(mouseDiff >= maxVelocity)
-        velocity = utility::toRadian<float,float>(maxVelocity);
-    else
-        velocity = utility::toRadian<float,float>(mouseDiff);
+    maxVelocity = std::min(maxVelocity, std::max(minVelocity, mouseDiff));
+    velocity = utility::toRadian<float,float>(maxVelocity);
    
     m_body->SetAngularVelocity(velocity);
     
