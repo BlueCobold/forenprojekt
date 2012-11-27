@@ -1,5 +1,5 @@
 #include "PlayState.hpp"
-#include "ResourceManager.hpp"
+#include "resources/ResourceManager.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
@@ -9,6 +9,8 @@ PlayState::PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager)
 {
     screen.setFramerateLimit(60);
     m_level = std::unique_ptr<Level>(new Level(1, m_resourceManager));
+    float time = m_frametime.getElapsedTime().asSeconds();
+    m_level->restartAt(time);
 }
 
 PlayState::~PlayState()

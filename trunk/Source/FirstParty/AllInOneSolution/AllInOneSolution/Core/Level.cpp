@@ -1,6 +1,7 @@
 #include "Level.hpp"
 #include "Entity.hpp"
-#include "ResourceManager.hpp"
+#include "resources/ResourceManager.hpp"
+#include "resources/LevelFileLoader.hpp"
 #include "Utility.hpp" // toString, toMeter
 #include "Teeter.hpp"
 
@@ -36,6 +37,13 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager) :
 Level::~Level()
 {
 
+}
+
+void Level::restartAt(const float time)
+{
+    TimedObject::restartAt(time);
+    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+        (*it)->restartAt(time);
 }
 
 void Level::update(const float dt)
@@ -94,18 +102,13 @@ bool Level::load()
     {
         std::unique_ptr<Entity> entity(new Entity);
 
-        // Entity is animated
-        if(entityIterator->FirstChildElement("animation") != nullptr)
-        {
-            // Load animation
-            element = entityIterator->FirstChildElement("animation");
-            if(element != nullptr)
-                entity->bindAnimation(element->BoolAttribute("infinite"), element->FloatAttribute("min"),
-                    element->FloatAttribute("step"), element->IntAttribute("num"), element->IntAttribute("width"),
-                    element->IntAttribute("height"));
+        entity->setName(std::string(entityIterator->Attribute("name")));
 
-            entity->getAnimation().start();
-        }
+        // Load animation
+        element = entityIterator->FirstChildElement("animation");
+        if(element != nullptr)
+            entity->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, entity.get())),
+            element->FirstChildElement("timed") != nullptr);
 
         m_entities.push_back(std::move(entity));
 
@@ -235,17 +238,10 @@ bool Level::load()
         std::unique_ptr<Teeter> teeter(new Teeter(position.x, position.y, center.x, center.y, fixtureDef, m_world));
 
         // Teeter is animated
-        if(teeterIterator->FirstChildElement("animation") != nullptr)
-        {
-            // Load animation
-            element = teeterIterator->FirstChildElement("animation");
-            if(element != nullptr)
-                teeter->bindAnimation(element->BoolAttribute("infinite"), element->FloatAttribute("min"),
-                    element->FloatAttribute("step"), element->IntAttribute("num"), element->IntAttribute("width"),
-                    element->IntAttribute("height"));
-
-            teeter->getAnimation().start();
-        }
+        element = teeterIterator->FirstChildElement("animation");
+        if(element != nullptr)
+            teeter->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, teeter.get())),
+            element->FirstChildElement("timed") != nullptr);
 
         m_entities.push_back(std::move(teeter));
 
