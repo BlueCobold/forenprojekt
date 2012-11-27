@@ -1,5 +1,4 @@
 #include "Entity.hpp"
-#include "Utility.hpp" // toDegree, toPixel
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
@@ -17,7 +16,7 @@ void Entity::update(const float value)
     if(getAnimation() != nullptr)
     {
         getAnimation()->update();
-        getAnimation()->setPosition(utility::toPixel(m_body->GetPosition().x), utility::toPixel(m_body->GetPosition().y));
-        getAnimation()->setRotation(static_cast<float32>(m_body->GetAngle()));
+        getAnimation()->setPosition(m_body->GetPosition().x, m_body->GetPosition().y);
+        getAnimation()->setRotation(m_body->GetAngle());
     }
 }

@@ -43,6 +43,10 @@ public:
 
 private:
 
+    static std::unique_ptr<ValueCalculator> parseCalculator(
+        tinyxml2::XMLElement* xml, 
+        const AnimatedGraphics* animated);
+
     static std::unique_ptr<Animation> parseAnimation(tinyxml2::XMLElement* xml,
         const AnimatedGraphics* animated,
         std::unique_ptr<ValueCalculator> calculator,

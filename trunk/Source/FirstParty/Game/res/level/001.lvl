@@ -782,9 +782,12 @@
                     <shape type="circle" radius="15" />
                 </fixture>
             </physics>
-            <animation texture="assets/ball/ball.png" frames="8" width="30" height="30" x="15" y="15" rotate="false">
-                <!-- timed delay="0.1"/ -->
-                <angled min="0" step="45"/>
+            <animation texture="assets/ball/ballback.png" frames="1" width="30" height="30" x="15" y="15" rotate="true">
+                <static value="0"/>
+				<animation texture="assets/ball/ballshade.png" frames="1" width="30" height="30" x="15" y="15" rotate="false">
+					<static value="0"/>
+				</animation>
+                <!-- angled min="0" step="45"/-->
             </animation>
         </entity>
         <teeter name="Teeter1" rep="T" size="1" orientation="horizontal">

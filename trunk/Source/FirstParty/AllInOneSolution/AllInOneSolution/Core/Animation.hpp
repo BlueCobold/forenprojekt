@@ -6,6 +6,7 @@
 #include "animation/ValueCalculator.hpp"
 
 #include <memory> // unique_ptr
+#include <vector>
 
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Rect.hpp>
@@ -25,6 +26,7 @@ public:
 
     void update();
 
+    void bindSubAnimations(std::vector<std::unique_ptr<Animation>>& animations);
     void setPosition(const float x, const float y);
     void setRotation(const float radians);
     void bindTexture(const sf::Texture& texture, const sf::Vector2f& offset);
@@ -33,9 +35,10 @@ public:
 
 private:
 
-    const sf::IntRect& Animation::getTextureRect() const;
+    const sf::IntRect Animation::getTextureRect() const;
 
     std::unique_ptr<ValueCalculator> m_calculator;
+    std::vector<std::unique_ptr<Animation>> m_subAnimations;
     bool m_applyRotation;
     unsigned int m_frame;
     unsigned int m_frameWidth;
