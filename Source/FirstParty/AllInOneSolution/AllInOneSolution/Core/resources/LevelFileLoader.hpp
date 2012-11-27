@@ -5,8 +5,10 @@
 
 #include "../Animation.hpp"
 #include "../Entity.hpp"
-#include "../animation/AngleCalculator.hpp"
-#include "../animation/TimeCalculator.hpp"
+#include "../AnimatedGraphics.hpp"
+#include "../animation/ValueProvider.hpp"
+
+#include "ResourceManager.hpp"
 
 #include <memory>
 
@@ -16,9 +18,12 @@ class LevelFileLoader
 {
 public:
 
+    static std::unique_ptr<ValueCalculator> parseStaticCalculator(
+        tinyxml2::XMLElement* xml);
+
     static std::unique_ptr<ValueCalculator> parseTimedCalculator(
         tinyxml2::XMLElement* xml,
-        const Entity* entity,
+        const AnimatedGraphics* entity,
         const int frames);
         
     static std::unique_ptr<ValueCalculator> parseAngleCalculator(
@@ -26,9 +31,22 @@ public:
         const Entity* entity,
         const int frames);
 
+     static std::unique_ptr<Animation> parseAnimation(
+         tinyxml2::XMLElement* xml,
+         const AnimatedGraphics* animated,
+         ResourceManager& resourceManager);
+
     static std::unique_ptr<Animation> parseAnimation(
         tinyxml2::XMLElement* xml,
-        const Entity* entity);
+        const Entity* entity,
+        ResourceManager& resourceManager);
+
+private:
+
+    static std::unique_ptr<Animation> parseAnimation(tinyxml2::XMLElement* xml,
+        const AnimatedGraphics* animated,
+        std::unique_ptr<ValueCalculator> calculator,
+        ResourceManager& resourceManager);
 };
 
 #endif // LEVEL_FILE_LOADER_HPP

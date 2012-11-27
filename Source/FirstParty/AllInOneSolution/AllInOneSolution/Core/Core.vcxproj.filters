@@ -57,9 +57,6 @@
     <ClInclude Include="PhysicalObject.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicalObject.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="State.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -116,6 +113,15 @@
     </ClInclude>
     <ClInclude Include="resources\LevelFileLoader.hpp">
       <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicalObject.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedGraphics.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\StaticProvider.hpp">
+      <Filter>Headers\animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

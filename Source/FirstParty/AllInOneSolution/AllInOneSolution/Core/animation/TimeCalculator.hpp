@@ -27,7 +27,7 @@ public:
     virtual float calculateValue() const
     {
         float steps = getProvider()->getValue() / m_step;
-        steps = fmod(steps, m_numFrames);
+        steps = fmod(steps, static_cast<float>(m_numFrames));
         return steps;
     }
 };

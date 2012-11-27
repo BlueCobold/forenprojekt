@@ -102,10 +102,12 @@
     <ClCompile Include="Teeter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimatedGraphics.hpp" />
     <ClInclude Include="Animation.hpp" />
     <ClInclude Include="animation\AngleCalculator.hpp" />
     <ClInclude Include="animation\AngleProvider.hpp" />
     <ClInclude Include="animation\OrientedObject.hpp" />
+    <ClInclude Include="animation\StaticProvider.hpp" />
     <ClInclude Include="animation\TimeCalculator.hpp" />
     <ClInclude Include="animation\TimedObject.hpp" />
     <ClInclude Include="animation\TimeProvider.hpp" />

@@ -76,7 +76,7 @@ bool Level::load()
     if(doc.ErrorID() != 0) // Error while loading file
         return false;
 
-	tinyxml2::XMLElement* background = doc.FirstChildElement("level")->FirstChildElement("background");
+	tinyxml2::XMLElement* backgroundXml = doc.FirstChildElement("level")->FirstChildElement("background");
     tinyxml2::XMLElement* objects = doc.FirstChildElement("level")->FirstChildElement("objects");
     tinyxml2::XMLElement* world = doc.FirstChildElement("level")->FirstChildElement("world");
     tinyxml2::XMLElement* grid = doc.FirstChildElement("level")->FirstChildElement("grid");
@@ -85,41 +85,30 @@ bool Level::load()
     tinyxml2::XMLElement* element = nullptr; // Temp object
 
 	//Load background-image
-	std::unique_ptr<Background> Background(new Background());
-	
-	if(m_resourceManager.getTexture(background->Attribute("file")) != nullptr)
-		Background->bindTexture(*m_resourceManager.getTexture(background->Attribute("file")),
-								sf::IntRect(0, 0, background->IntAttribute("width"), background->IntAttribute("height")),
-								sf::Vector2f(background->IntAttribute("x"), background->IntAttribute("y")));
+	std::unique_ptr<Background> background(new Background());
+	if(backgroundXml != nullptr)
+    {
+        element = backgroundXml->FirstChildElement("animation");
+        if(element != nullptr)
+            background->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, background.get(), m_resourceManager)));
+    }
 	else
-		sf::err() << "Bad background key ('" << background->Attribute("file") << ")" << std::endl;
-
-	m_background = std::move(Background);
+		sf::err() << "Bad background key ('" << backgroundXml->Attribute("file") << ")" << std::endl;
+	m_background = std::move(background);
 
     // Iterate over all defined entities
     for(tinyxml2::XMLElement* entityIterator = objects->FirstChildElement("entity");
         entityIterator != nullptr; entityIterator = entityIterator->NextSiblingElement("entity"))
     {
         std::unique_ptr<Entity> entity(new Entity);
-
         entity->setName(std::string(entityIterator->Attribute("name")));
 
         // Load animation
         element = entityIterator->FirstChildElement("animation");
         if(element != nullptr)
-            entity->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, entity.get())),
-            element->FirstChildElement("timed") != nullptr);
+            entity->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, entity.get(), m_resourceManager)));
 
         m_entities.push_back(std::move(entity));
-
-        // Load texture
-        element = entityIterator->FirstChildElement("texture");
-        if(m_resourceManager.getTexture(element->Attribute("file")) != nullptr)
-            m_entities.back()->bindTexture(*m_resourceManager.getTexture(element->Attribute("file")),
-                sf::IntRect(0, 0, element->IntAttribute("width"), element->IntAttribute("height")),
-                sf::Vector2f(element->IntAttribute("x"), element->IntAttribute("y")));
-        else
-            sf::err() << "Bad texture key ('" << element->Attribute("file") <<  "') for entity: " << entityIterator->Attribute("name") << std::endl;
 
         // Load physics
         tinyxml2::XMLElement* physics = entityIterator->FirstChildElement("physics");
@@ -240,19 +229,9 @@ bool Level::load()
         // Teeter is animated
         element = teeterIterator->FirstChildElement("animation");
         if(element != nullptr)
-            teeter->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, teeter.get())),
-            element->FirstChildElement("timed") != nullptr);
+            teeter->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, teeter.get(), m_resourceManager)));
 
         m_entities.push_back(std::move(teeter));
-
-        // Load texture
-        element = teeterIterator->FirstChildElement("texture");
-        if(m_resourceManager.getTexture(element->Attribute("file")) != nullptr)
-            m_entities.back()->bindTexture(*m_resourceManager.getTexture(element->Attribute("file")),
-                sf::IntRect(0, 0, element->IntAttribute("width"), element->IntAttribute("height")),
-                sf::Vector2f(element->IntAttribute("x"), element->IntAttribute("y")));
-        else
-            sf::err() << "Bad texture key ('" << element->Attribute("file") <<  "') for teeter: " << teeterIterator->Attribute("name") << std::endl;
     }
 
     // Load world properties
