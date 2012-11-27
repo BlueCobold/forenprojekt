@@ -13,6 +13,8 @@
 
 #include <vector>
 
+class Config;
+
 class ResourceManager;
 
 namespace sf
@@ -26,7 +28,7 @@ class Level : public TimedObject
 {
 public:
     /// Construct a level from the given level number
-    Level(const unsigned int level, ResourceManager& resourceManager);
+    Level(const unsigned int level, ResourceManager& resourceManager, Config& config);
     ~Level();
 
     virtual void restartAt(const float time);
@@ -59,6 +61,8 @@ private:
     float m_timeStep;
     int m_velocityIterations;
     int m_positionIterations;
+
+    Config& m_config;
 };
 
 #endif // LEVEL_HPP

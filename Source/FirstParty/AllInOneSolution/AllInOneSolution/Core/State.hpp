@@ -3,6 +3,8 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
+class Config;
+
 class ResourceManager;
 
 namespace sf
@@ -16,10 +18,11 @@ class State
 {
 public:
     
-    State(sf::RenderWindow& screen, ResourceManager& resourceManager) :
+    State(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
         m_screen(screen),
         m_resourceManager(resourceManager),
-        m_pause(false)
+        m_pause(false),
+        m_config(config)
     { }
 
     virtual ~State()
@@ -47,6 +50,7 @@ protected:
     
     sf::RenderWindow& m_screen;
     ResourceManager& m_resourceManager;
+    Config& m_config;
 
 private:
 
