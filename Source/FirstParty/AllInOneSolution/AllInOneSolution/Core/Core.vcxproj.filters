@@ -25,10 +25,10 @@
     <ClCompile Include="Level.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="DebugDraw.cpp">
+    <ClCompile Include="Teeter.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Teeter.cpp">
+    <ClCompile Include="DebugDraw.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Background.cpp">
@@ -94,9 +94,6 @@
       <Filter>Headers\animation</Filter>
     </ClInclude>
     <ClInclude Include="animation\ValueCalculator.hpp">
-      <Filter>Headers\animation</Filter>
-    </ClInclude>
-    <ClInclude Include="TimedObject.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
     <ClInclude Include="animation\OrientedObject.hpp">

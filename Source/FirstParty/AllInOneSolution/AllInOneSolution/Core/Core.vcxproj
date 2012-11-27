@@ -126,7 +126,6 @@
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />
     <ClInclude Include="Teeter.hpp" />
-    <ClInclude Include="TimedObject.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <ItemGroup>
