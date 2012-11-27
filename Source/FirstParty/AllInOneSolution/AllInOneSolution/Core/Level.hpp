@@ -6,6 +6,7 @@
 #include "Entity.hpp"
 #include "DebugDraw.hpp"
 #include "Background.hpp"
+#include "animation/TimedObject.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -21,13 +22,14 @@ namespace sf
 
 /// Manages the different levels and is
 /// also resposible for loading them.
-class Level
+class Level : public TimedObject
 {
 public:
     /// Construct a level from the given level number
     Level(const unsigned int level, ResourceManager& resourceManager);
     ~Level();
 
+    virtual void restartAt(const float time);
     void update(const float dt);
     void draw(sf::RenderWindow& screen);
 

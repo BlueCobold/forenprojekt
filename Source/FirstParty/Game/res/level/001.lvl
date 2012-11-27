@@ -1,5 +1,5 @@
 <level>
- <background file="backgrounds/pastureland/full_scene.jpg" width="1600" height="900" x="0" y="0" /> 
+ <background file="backgrounds/pastureland/full_scene.jpg" width="1600" height="900" x="0" y="0" />
  <objects>
    <entity name="Wall1" rep="X" size="1" orientation="vertical">
    <physics>
@@ -683,7 +683,10 @@
 	</fixture>
    </physics>
    <texture file="assets/ball/ball.png" width="240" height="30" x="15" y="15" />
-   <animation infinite="true" min="0" step="0.05" num="1" width="30" height="30" />
+   <animation frames="8" width="30" height="30">
+    <!-- timed delay="0.1"/ -->
+    <angled min="0" step="45"/>
+   </animation>
   </entity>
      <teeter name="Teeter1" rep="T" size="1" orientation="horizontal">
          <physics>
@@ -699,7 +702,7 @@
          </physics>
          <texture file="assets/teeter/wood/small.png" width="212" height="30" x="106" y="15" />
      </teeter>
-     <teeter name="Teeter1" rep="T" size="1" orientation="horizontal">
+     <teeter name="Teeter2" rep="T" size="1" orientation="horizontal">
          <physics>
              <body x="580" y="580" centerX="106" centerY="15" angle="0" />
              <fixture density="0.5" friction="0.8" restitution="0.1">

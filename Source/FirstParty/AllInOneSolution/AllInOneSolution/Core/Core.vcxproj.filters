@@ -22,9 +22,6 @@
     <ClCompile Include="PlayState.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -36,6 +33,12 @@
     </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="resources\ResourceManager.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="resources\LevelFileLoader.cpp">
+      <Filter>Sources\resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,12 +72,6 @@
     <ClInclude Include="PlayState.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceCache.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Level.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -87,6 +84,42 @@
     <ClInclude Include="Background.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="animation\TimeCalculator.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\ValueProvider.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\TimeProvider.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\ValueCalculator.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="TimedObject.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\OrientedObject.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\TimedObject.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\AngleCalculator.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\AngleProvider.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\ResourceCache.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\ResourceManager.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\LevelFileLoader.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -97,6 +130,15 @@
     </Filter>
     <Filter Include="Headers">
       <UniqueIdentifier>{fd86505c-1ee9-4960-b8e0-4540743f0492}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\animation">
+      <UniqueIdentifier>{36dc91bb-1a73-4581-857a-931ee2adcad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\resources">
+      <UniqueIdentifier>{e9828d56-ec52-467b-87cf-e7accb312ec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\resources">
+      <UniqueIdentifier>{e2e0953d-9905-43eb-a6c1-1bd23951d8a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

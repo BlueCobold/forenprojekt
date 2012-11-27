@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef RESOURCE_CACHE_HPP
+#define RESOURCE_CACHE_HPP
+
 #include <functional> // function
 #include <map>
 #include <memory> // unique_ptr
@@ -71,3 +74,5 @@ private:
 	std::map<Key, Value> m_resources;
 
 };
+
+#endif // RESOURCE_CACHE_HPP

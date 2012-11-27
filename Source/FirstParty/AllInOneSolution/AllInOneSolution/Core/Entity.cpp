@@ -3,8 +3,7 @@
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
-Entity::Entity() :
-    m_animated(false)
+Entity::Entity()
 {
 }
 
@@ -14,27 +13,22 @@ Entity::~Entity()
 
 void Entity::update(const float value)
 {
-    if(m_animated)
+    updateCurrentTime(value);
+    if(m_animation!=nullptr)
     {
-        m_animation.update(value);
-
-        m_sprite.setTextureRect(m_animation.getTextureRect());
+        m_animation->update();
+        m_sprite.setTextureRect(m_animation->getTextureRect());
     }
 
     m_sprite.setPosition(utility::toPixel(m_body->GetPosition().x), utility::toPixel(m_body->GetPosition().y));
-    m_sprite.setRotation(utility::toDegree<float32, float>(m_body->GetAngle()));
+    if(m_autoRotate)
+        m_sprite.setRotation(utility::toDegree<float32, float>(m_body->GetAngle()));
 }
 
-void Entity::bindAnimation(const bool infinite, const float min, const float step,
-    const unsigned int numFrames, const unsigned int frameWidth, const unsigned int frameHeight)
+void Entity::bindAnimation(std::unique_ptr<Animation> animation, bool autoRotate)
 {
-    m_animation = Animation(infinite, min, step, numFrames, frameWidth, frameHeight);
-    m_animated = true;
-}
-
-Animation& Entity::getAnimation()
-{
-    return m_animation;
+    m_autoRotate = autoRotate;
+    m_animation = std::move(animation);
 }
 
 void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const

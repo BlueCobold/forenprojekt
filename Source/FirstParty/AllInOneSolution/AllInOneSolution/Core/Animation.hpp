@@ -3,41 +3,31 @@
 #ifndef ANIMATION_HPP
 #define ANIMATION_HPP
 
+#include "animation/ValueCalculator.hpp"
+
+#include <memory> // unique_ptr
 #include <SFML/Graphics/Rect.hpp>
 
 class Animation
 {
 public:
 
-    Animation();
-    Animation(const bool infinite, const float min, const float step,
-        const unsigned int numFrames, const unsigned int frameWidth, const unsigned int frameHeight);
+    Animation(std::unique_ptr<ValueCalculator> calculator,
+        const unsigned int frameWidth,
+        const unsigned int frameHeight);
     ~Animation();
 
-    void start();
-    void pause();
-
-    void update(const float value);
+    void update();
 
     const sf::IntRect& getTextureRect();
 
 private:
 
-    void calculateFrameInfinte(float value);
-    void calculateFrame(const float value);
-
-private:
-
+    std::unique_ptr<ValueCalculator> m_calculator;
     sf::IntRect m_textureRect;
-    float m_min;
-    float m_max;
-    float m_step;
     unsigned int m_frame;
-    unsigned int m_numFrames;
     unsigned int m_frameWidth;
     unsigned int m_frameHeight;
-    bool m_infinite;
-    bool m_sleep;
 
 };
 

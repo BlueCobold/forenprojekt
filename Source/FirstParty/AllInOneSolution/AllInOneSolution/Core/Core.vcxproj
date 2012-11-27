@@ -96,12 +96,21 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="PlayState.cpp" />
-    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="resources\LevelFileLoader.cpp" />
+    <ClCompile Include="resources\ResourceManager.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Teeter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="animation\AngleCalculator.hpp" />
+    <ClInclude Include="animation\AngleProvider.hpp" />
+    <ClInclude Include="animation\OrientedObject.hpp" />
+    <ClInclude Include="animation\TimeCalculator.hpp" />
+    <ClInclude Include="animation\TimedObject.hpp" />
+    <ClInclude Include="animation\TimeProvider.hpp" />
+    <ClInclude Include="animation\ValueCalculator.hpp" />
+    <ClInclude Include="animation\ValueProvider.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Background.hpp" />
     <ClInclude Include="Config.hpp" />
@@ -111,11 +120,13 @@
     <ClInclude Include="Level.hpp" />
     <ClInclude Include="PhysicalObject.hpp" />
     <ClInclude Include="PlayState.hpp" />
-    <ClInclude Include="ResourceCache.hpp" />
-    <ClInclude Include="ResourceManager.hpp" />
+    <ClInclude Include="resources\LevelFileLoader.hpp" />
+    <ClInclude Include="resources\ResourceCache.hpp" />
+    <ClInclude Include="resources\ResourceManager.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />
     <ClInclude Include="Teeter.hpp" />
+    <ClInclude Include="TimedObject.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <ItemGroup>

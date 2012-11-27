@@ -3,7 +3,7 @@
 #ifndef APP_HPP
 #define APP_HPP
 
-#include "ResourceManager.hpp"
+#include "resources/ResourceManager.hpp"
 #include "StateManager.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
