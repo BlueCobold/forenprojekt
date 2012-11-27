@@ -38,7 +38,8 @@ App::App(Config& config) :
     m_fpsText.setCharacterSize(30);
     m_fpsText.setPosition(10, 10);
 
-    m_stateManager.push(std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager)));
+    m_stateManager.push(std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config)));
+
 }
 
 void App::run()

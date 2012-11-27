@@ -23,7 +23,8 @@ void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2C
     for(int i = 0 ; i < vertexCount; i++)
     {
         polygon.setPoint(i,
-            sf::Vector2f(utility::toPixel(vertices[i].x), 
+            sf::Vector2f(
+            utility::toPixel(vertices[i].x), 
             utility::toPixel(vertices[i].y))
             );
     }
@@ -52,7 +53,7 @@ void DebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& 
         utility::toPixel(center.y - radius)
         );
 
-    circle.setOutlineThickness(1.f);
+   circle.setOutlineThickness(1.f);
 
     m_target.draw(circle);
 }

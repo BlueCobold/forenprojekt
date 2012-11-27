@@ -17,7 +17,7 @@ class PlayState : public State
 {
 public:
 
-    PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager);
+    PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
     ~PlayState();
 
     void update();

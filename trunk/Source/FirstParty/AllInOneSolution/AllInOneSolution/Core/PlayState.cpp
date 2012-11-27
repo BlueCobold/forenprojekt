@@ -3,12 +3,12 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-PlayState::PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager) :
-    State(screen, resourceManager),
+PlayState::PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
+    State(screen, resourceManager, config),
     m_level(nullptr) // Make sure
 {
     screen.setFramerateLimit(60);
-    m_level = std::unique_ptr<Level>(new Level(1, m_resourceManager));
+    m_level = std::unique_ptr<Level>(new Level(1, m_resourceManager, m_config));
     float time = m_frametime.getElapsedTime().asSeconds();
     m_level->restartAt(time);
 }

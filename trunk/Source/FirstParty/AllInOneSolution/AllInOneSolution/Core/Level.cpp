@@ -1,4 +1,5 @@
 #include "Level.hpp"
+#include "Config.hpp"
 #include "Entity.hpp"
 #include "resources/ResourceManager.hpp"
 #include "resources/LevelFileLoader.hpp"
@@ -23,13 +24,14 @@
 #include <string>
 #include <utility> // pair, make_pair, move
 
-Level::Level(const unsigned int level, ResourceManager& resourceManager) :
+Level::Level(const unsigned int level, ResourceManager& resourceManager, Config& config) :
     m_number(level),
     m_resourceManager(resourceManager),
     m_world(b2Vec2(0.f, 9.81f)),
     m_timeStep(1.f/60.f),
     m_velocityIterations(6),
-    m_positionIterations(2)
+    m_positionIterations(2),
+    m_config(config)
 {
     load();
 }
@@ -59,10 +61,10 @@ void Level::draw(sf::RenderWindow& screen)
 	screen.draw(*m_background);	
 	for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         screen.draw(**it);
-    DebugDraw d(screen);
-    d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
-    m_world.SetDebugDraw(&d);
-    m_world.DrawDebugData();
+    //DebugDraw d(screen);
+    //d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
+    //m_world.SetDebugDraw(&d);
+    //m_world.DrawDebugData();
 }
 
 bool Level::load()
@@ -224,7 +226,7 @@ bool Level::load()
             }
         }
 
-        std::unique_ptr<Teeter> teeter(new Teeter(position.x, position.y, center.x, center.y, fixtureDef, m_world));
+        std::unique_ptr<Teeter> teeter(new Teeter(position.x, position.y, center.x, center.y, fixtureDef, m_world, m_config.get<float>("MouseScale")));
 
         // Teeter is animated
         element = teeterIterator->FirstChildElement("animation");

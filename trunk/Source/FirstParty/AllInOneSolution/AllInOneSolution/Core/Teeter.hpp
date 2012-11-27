@@ -11,11 +11,12 @@ class Teeter : public Entity
 private:
     int m_lastMouseX;
     float m_lastTime;
+    float m_mouseScale;
 
 public:
 
     Teeter(const float32 x, const float32 y, const float centerX, const float centerY, 
-        const b2FixtureDef& fixtureDef, b2World& world);
+        const b2FixtureDef& fixtureDef, b2World& world, const float mouseScale);
     ~Teeter();
 
     virtual void update(const float value);
