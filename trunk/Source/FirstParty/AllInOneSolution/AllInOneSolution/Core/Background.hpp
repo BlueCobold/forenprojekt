@@ -3,18 +3,16 @@
 #ifndef BACKGROUND_HPP
 #define BACKGROUND_HPP
 
-#include "GraphicalObject.hpp"
+#include "AnimatedGraphics.hpp"
 
 /// This class will be used to bind an image which will be rendered as background
-class Background : public GraphicalObject
+class Background : public AnimatedGraphics
 {
 public:
 	Background();
 	~Background();
 
-protected:
-
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const; 
+    void update(const float time);
 };
 
 #endif	//BACKGROUND_HPP

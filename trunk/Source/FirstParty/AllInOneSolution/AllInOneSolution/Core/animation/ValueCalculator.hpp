@@ -21,7 +21,10 @@ public:
     {
     }
 
-    virtual float calculateValue() const = 0;
+    virtual float calculateValue() const
+    {
+        return m_provider->getValue();
+    }
 
 protected:
 

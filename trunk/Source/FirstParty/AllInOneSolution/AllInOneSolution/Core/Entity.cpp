@@ -14,24 +14,10 @@ Entity::~Entity()
 void Entity::update(const float value)
 {
     updateCurrentTime(value);
-    if(m_animation!=nullptr)
+    if(getAnimation() != nullptr)
     {
-        m_animation->update();
-        m_sprite.setTextureRect(m_animation->getTextureRect());
+        getAnimation()->update();
+        getAnimation()->setPosition(utility::toPixel(m_body->GetPosition().x), utility::toPixel(m_body->GetPosition().y));
+        getAnimation()->setRotation(static_cast<float32>(m_body->GetAngle()));
     }
-
-    m_sprite.setPosition(utility::toPixel(m_body->GetPosition().x), utility::toPixel(m_body->GetPosition().y));
-    if(m_autoRotate)
-        m_sprite.setRotation(utility::toDegree<float32, float>(m_body->GetAngle()));
-}
-
-void Entity::bindAnimation(std::unique_ptr<Animation> animation, bool autoRotate)
-{
-    m_autoRotate = autoRotate;
-    m_animation = std::move(animation);
-}
-
-void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-    target.draw(m_sprite);
 }

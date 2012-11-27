@@ -11,7 +11,8 @@ Background::~Background()
 {
 }
 
-void Background::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Background::update(const float time)
 {
-	target.draw(m_sprite);
+    updateCurrentTime(time);
+    getAnimation()->update();
 }
