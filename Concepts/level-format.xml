@@ -1,23 +1,36 @@
 <!-- Definition -->
 <level>
-  <background file="string" width="unsigned int" height="unsigned int" x="float" y="float" />
-  <objects>
+ <background>
+  <animation texture="string" frames="float" width="float" height="float" x="float" y="float" rotate="bool" scrx="float" scry="float">
+   <!-- optional, but one of the two --><timed delay="float"/>
+   <!-- optional, but one of the two --><static value="float"/>
+  </animation>
+ </background>
+ <objects>
   <entity name="string" rep="char" size="unsigned int" orientation="square OR vertical OR horizontal">
    <physics>
     <body type="static OR kinematic OR dynamic" x="float" y="float" angle="float" fixedRotation="true" />
 	<fixture density="float" friction="float" restitution="float">
-     <shape type="polygon" num="unsigned int">
+     <shape type="polygon">
 	  <vertex x="float" y="float" />
 	  <!-- as many more vertices are wanted/needed -->
 	 </shape>
 	 <shape type="circle" radius="float" />
 	</fixture>
    </physics>
-   <texture file="string" width="unsigned int" height="unsigned int" x="float" y="float" />
-   </texture>
-   <!-- optional --><animation infinite="true OR false" min="float" step="float" num="unsigned int" width="unsigned int" height="unsigned int" />
+   <!-- optional --><animation texture="string" frames="float" width="float" height="float" x="float" y="float" rotate="bool" scrx="float" scry="float">
+    <!-- optional, but one of the three --><static value="float"/>
+    <!-- optional, but one of the three --><timed delay="float"/>
+    <!-- optional, but one of the three --><angled min="float" step="float"/>
+    <!-- optional, multiple allowed --><animation texture="string" frames="float" width="float" height="float" x="float" y="float" rotate="bool" scrx="float" scry="float">
+     <!-- optional, but one of the two --><static value="float"/>
+     <!-- optional, but one of the two --><timed delay="float"/>
+	<!-- optional --></animation>
+   </animation>
   </entity>
- </objects>  
+  <teeter <!-- identical to entity --> >
+  </teeter>
+ </objects>
  <world>
   <gravity x="float" y="float" />
  </world>
@@ -34,7 +47,7 @@
    <physics>
     <body type="static" x="0" y="0" angle="0" fixedRotation="true" />
 	<fixture density="0" friction="0" restitution="0">
-	 <shape type="polygon" num="4">
+	 <shape type="polygon">
 	  <vertex x="0" y="0" />
 	  <vertex x="1" y="0" />
 	  <vertex x="1" y="2" />
@@ -42,13 +55,15 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="wall-vertical.png" width="60" height="120" />
+   <animation texture="walls/sand/small_quad/left_lower/v1.png" width="60" height="60" rotate="false">
+    <static value="0"/>
+   </animation>
   </entity>
   <entity name="WallH" rep="w" size="2" orientation="horizontal">
    <physics>
     <body type="static" x="10" y="0" angle="0" fixedRotation="true" />
 	<fixture density="0" friction="0" restitution="0">
-	 <shape type="polygon" num="4">
+	 <shape type="polygon">
 	  <vertex x="0" y="0" />
 	  <vertex x="2" y="0" />
 	  <vertex x="2" y="1" />
@@ -56,7 +71,9 @@
 	 </shape>
 	</fixture>
    </physics>
-   <texture file="wall-horizontal.png" widht="120" height="60" />
+   <animation texture="walls/sand/small_quad/left_lower/v1.png" width="60" height="60" rotate="false">
+    <static value="0"/>
+   </animation>
   </entity>
   <entity name="Ball" rep="B" size="1" orientation="square">
    <physics>
@@ -71,7 +88,9 @@
 	</fixture>
    </physics>
    <texture file="assets/ball/ball.png" width="480" height="60" />
-   <animation infinite="true" min="0.12" num="8" step="3" width="60" height="60" />
+   <animation texture="walls/sand/small_quad/left_lower/v1.png" width="60" height="60" rotate="true">
+    <static value="0"/>
+   </animation>
   </entity>
  </objects>
  <grid width="unsigned int" height="unsigned int" size="unsigned int">
