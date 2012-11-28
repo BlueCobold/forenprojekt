@@ -1,6 +1,6 @@
 <level>
     <background>
-        <animation texture="backgrounds/pastureland/full_scene.jpg" frames="1" width="1600" height="900" x="0" y="0" rotate="false">
+        <animation texture="backgrounds/pastureland/full_scene.jpg" smooth="false" frames="1" width="1600" height="900" x="0" y="0" rotate="false">
             <timed delay="1.0"/>
         </animation>
     </background>
@@ -18,7 +18,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/left_lower/v1.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/left_lower/v1.png" smooth="true" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -35,7 +35,7 @@
                     </shape>
                 </fixture>
             </physics>
-			<animation texture="walls/sand/small_quad/right_lower/v1.png" width="60" height="60" rotate="false">
+			<animation texture="walls/sand/small_quad/right_lower/v1.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -51,7 +51,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v5.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -67,7 +67,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v3.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -83,7 +83,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v2.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v2.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -99,7 +99,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v1.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -115,7 +115,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v1.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -131,7 +131,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v6.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v6.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -147,7 +147,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v3.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -163,7 +163,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -179,7 +179,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v5.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -195,7 +195,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -211,7 +211,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v2.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v2.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -227,7 +227,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v3.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -243,7 +243,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v1.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -259,7 +259,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v1.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -275,7 +275,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v6.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v6.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -291,7 +291,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -307,7 +307,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v5.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -323,7 +323,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -339,7 +339,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v2.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v2.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -355,7 +355,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -371,7 +371,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v3.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -387,7 +387,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v1.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -403,7 +403,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v6.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v6.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -419,7 +419,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v5.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -435,7 +435,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v6.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v6.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -451,7 +451,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v3.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -467,7 +467,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -483,7 +483,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -499,7 +499,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v1.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -515,7 +515,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v2.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v2.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -531,7 +531,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v5.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -547,7 +547,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v5.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -563,7 +563,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -579,7 +579,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -595,7 +595,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -611,7 +611,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -627,7 +627,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -643,7 +643,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v3.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -659,7 +659,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -675,7 +675,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v3.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -691,7 +691,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v1.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -707,7 +707,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v1.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -723,7 +723,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v6.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v6.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -739,7 +739,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v2.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v2.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -755,7 +755,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v4.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -771,7 +771,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="walls/sand/small_quad/main/v5.png" width="60" height="60" rotate="false">
+            <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
                 <static value="0"/>
             </animation>
         </entity>
@@ -782,9 +782,9 @@
                     <shape type="circle" radius="14" />
                 </fixture>
             </physics>
-            <animation texture="assets/ball/ballback.png" frames="1" width="30" height="30" x="15" y="15" rotate="true">
+            <animation texture="assets/ball/ballback.png" smooth="false" frames="1" width="30" height="30" x="15" y="15" rotate="true">
                 <static value="0"/>
-				<animation texture="assets/ball/ballshade.png" frames="1" width="30" height="30" x="15" y="15" rotate="false">
+				<animation texture="assets/ball/ballshade.png" smooth="false" frames="1" width="30" height="30" x="15" y="15" rotate="false">
 					<static value="0"/>
 				</animation>
                 <!-- angled min="0" step="45"/-->
@@ -802,7 +802,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="assets/teeter/wood/small.png" frames="1" width="214" height="32" x="107" y="16" rotate="true">
+            <animation texture="assets/teeter/wood/small.png" smooth="true" frames="1" width="214" height="32" x="107" y="16" rotate="true">
                 <timed delay="1.0"/>
             </animation>
         </teeter>
@@ -818,7 +818,7 @@
                     </shape>
                 </fixture>
             </physics>
-            <animation texture="assets/teeter/wood/small.png" frames="1" width="214" height="32" x="107" y="16" rotate="true">
+            <animation texture="assets/teeter/wood/small.png" smooth="true" frames="1" width="214" height="32" x="107" y="16" rotate="true">
                 <timed delay="1.0"/>
             </animation>
         </teeter>
