@@ -41,10 +41,13 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     bool rotate = xml->BoolAttribute("rotate");
     std::unique_ptr<Animation> anim(new Animation(std::move(calculator), width, height, rotate));
     sf::Vector2f offset;
+    sf::Vector2f sourceOffset;
     sf::Texture* texture = resourceManager.getTexture(xml->Attribute("texture"));
     offset.x = xml->FloatAttribute("x");
     offset.y = xml->FloatAttribute("y");
-    anim->bindTexture(*texture, offset);
+    sourceOffset.x = xml->FloatAttribute("srcx");
+    sourceOffset.y = xml->FloatAttribute("srcy");
+    anim->bindTexture(*texture, offset, sourceOffset);
 
     std::vector<std::unique_ptr<Animation>> subAnimations;
 

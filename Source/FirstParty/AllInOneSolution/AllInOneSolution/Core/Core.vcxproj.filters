@@ -151,9 +151,6 @@
     <None Include="..\..\..\Game\res\font\visitor.ttf">
       <Filter>Resouces</Filter>
     </None>
-    <None Include="..\..\..\Game\res\img\sprite.png">
-      <Filter>Resouces</Filter>
-    </None>
     <None Include="..\..\..\Game\res\level\001.lvl">
       <Filter>Resouces</Filter>
     </None>

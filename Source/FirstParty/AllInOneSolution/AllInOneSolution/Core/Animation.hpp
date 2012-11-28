@@ -29,7 +29,7 @@ public:
     void bindSubAnimations(std::vector<std::unique_ptr<Animation>>& animations);
     void setPosition(const float x, const float y);
     void setRotation(const float radians);
-    void bindTexture(const sf::Texture& texture, const sf::Vector2f& offset);
+    void bindTexture(const sf::Texture& texture, const sf::Vector2f& drawOffset, const sf::Vector2f& sourceOffset);
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
@@ -44,6 +44,7 @@ private:
     unsigned int m_frameWidth;
     unsigned int m_frameHeight;
     sf::Sprite m_sprite;
+    sf::Vector2f m_sourceOffset;
 };
 
 #endif // ANIMATION_HPP

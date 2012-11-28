@@ -26,9 +26,7 @@ void Animation::update()
 
 void Animation::bindSubAnimations(std::vector<std::unique_ptr<Animation>>& animations)
 {
-    for(auto sub = animations.begin(); sub != animations.end(); ++sub)
-        m_subAnimations.push_back(std::move(*sub));
-    animations.clear();
+    m_subAnimations = std::move(animations);
 }
 
 void Animation::setPosition(const float x, const float y)
@@ -46,15 +44,16 @@ void Animation::setRotation(const float radians)
         m_sprite.setRotation(utility::toDegree<float, float>(radians));
 }
 
-void Animation::bindTexture(const sf::Texture& texture, const sf::Vector2f& offset)
+void Animation::bindTexture(const sf::Texture& texture, const sf::Vector2f& offset, const sf::Vector2f& sourceOffset)
 {
+    m_sourceOffset = sourceOffset;
     m_sprite.setTexture(texture);
     m_sprite.setOrigin(offset);
 }
 
 const sf::IntRect Animation::getTextureRect() const
 {
-    return sf::IntRect(m_frame * m_frameWidth, 0, m_frameWidth, m_frameHeight);
+    return sf::IntRect(m_frame * m_frameWidth + m_sourceOffset.x, m_sourceOffset.y, m_frameWidth, m_frameHeight);
 }
 
 void Animation::draw(sf::RenderTarget& target, sf::RenderStates states) const
