@@ -61,10 +61,12 @@ void Level::draw(sf::RenderWindow& screen)
 	screen.draw(*m_background);	
 	for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         screen.draw(**it);
+    
     //DebugDraw d(screen);
     //d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
     //m_world.SetDebugDraw(&d);
     //m_world.DrawDebugData();
+
 }
 
 bool Level::load()
@@ -104,7 +106,7 @@ bool Level::load()
     {
         std::unique_ptr<Entity> entity(new Entity);
         entity->setName(std::string(entityIterator->Attribute("name")));
-
+        
         // Load animation
         element = entityIterator->FirstChildElement("animation");
         if(element != nullptr)
