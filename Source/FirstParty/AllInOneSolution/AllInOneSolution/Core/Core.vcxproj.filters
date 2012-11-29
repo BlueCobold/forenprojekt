@@ -40,6 +40,9 @@
     <ClCompile Include="resources\LevelFileLoader.cpp">
       <Filter>Sources\resources</Filter>
     </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.hpp">
