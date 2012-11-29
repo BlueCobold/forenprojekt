@@ -13,11 +13,7 @@ Config::~Config(void)
 
 std::string Config::eraseOverhang(std::string& data)
 {
-    data.erase(0, data.find("=") + 1); /// Erase overhang in the string
-    while(data.find(" ") != std::string::npos)
-    {
-        data.replace(data.find(" "), data.find(" ") + 1, ""); /// Erase Spaces
-    }
+    data.erase(0, data.find("=") + 2); /// Erase key in the string
     return data;
 }
 

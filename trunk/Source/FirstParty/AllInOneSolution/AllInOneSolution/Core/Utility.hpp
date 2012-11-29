@@ -21,16 +21,22 @@ namespace utility
     }
 
     template<typename T>
-    T stringTo(const std::string& string)
+    T stringTo(const std::string& str)
     {
         T value;
 
-        std::stringstream stringstream(string);
+        std::stringstream stringstream(str);
 
         stringstream >> value;
 
         return value;
     }
+
+	template<>
+    std::string stringTo(const std::string& str);
+    //{
+    //    return str;
+    //}
 
     template<typename T, typename Z>
     Z toDegree(T value)

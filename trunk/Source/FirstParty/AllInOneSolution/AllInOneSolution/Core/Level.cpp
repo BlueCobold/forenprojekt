@@ -9,6 +9,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <SFML/System/Err.hpp>
+#include <SFML/Window/Keyboard.hpp>
 
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
 #include <Box2D/Collision/Shapes/b2CircleShape.h>
@@ -33,6 +34,7 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_positionIterations(2),
     m_config(config)
 {
+	m_debugDraw = false;
     load();
 }
 
@@ -54,6 +56,9 @@ void Level::update(const float dt)
 
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         (*it)->update(dt);
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		m_debugDraw = !m_debugDraw;
 }
 
 void Level::draw(sf::RenderWindow& screen)
@@ -62,11 +67,13 @@ void Level::draw(sf::RenderWindow& screen)
 	for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         screen.draw(**it);
     
-    //DebugDraw d(screen);
-    //d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
-    //m_world.SetDebugDraw(&d);
-    //m_world.DrawDebugData();
-
+    if(m_debugDraw)
+	{
+		DebugDraw d(screen);
+		d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
+		m_world.SetDebugDraw(&d);
+		m_world.DrawDebugData();
+	}
 }
 
 bool Level::load()

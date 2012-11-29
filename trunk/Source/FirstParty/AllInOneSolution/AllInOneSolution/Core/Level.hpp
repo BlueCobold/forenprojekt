@@ -63,6 +63,8 @@ private:
     int m_positionIterations;
 
     Config& m_config;
+
+	bool m_debugDraw;
 };
 
 #endif // LEVEL_HPP
