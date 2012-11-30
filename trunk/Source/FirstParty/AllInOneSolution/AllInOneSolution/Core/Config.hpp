@@ -9,6 +9,7 @@
 #include <fstream>
 #include <sstream>
 
+
 /// This class will load configdata from a file
 class Config
 {

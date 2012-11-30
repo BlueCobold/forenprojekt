@@ -13,7 +13,9 @@ Config::~Config(void)
 
 std::string Config::eraseOverhang(std::string& data)
 {
-    data.erase(0, data.find("=") + 2); /// Erase key in the string
+    data.erase(0, data.find("=") + 1); /// Erase key and = in the string
+    while(!data.find(" "))             /// Find and erase leading spaces
+            data.erase(0, 1);
     return data;
 }
 
