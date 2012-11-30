@@ -42,6 +42,9 @@ private:
     /// Load the level after m_number
     bool load();
 
+    /// Validate the XML file
+    bool validate();
+
     /// Construct the full level filename from the level number
     const std::string filename();
 
