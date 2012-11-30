@@ -782,9 +782,9 @@
                     <shape type="circle" radius="14" />
                 </fixture>
             </physics>
-            <animation texture="assets/ball/ballback.png" smooth="false" frames="1" width="30" height="30" x="15" y="15" rotate="true">
+            <animation texture="assets/ball/ballback.png" smooth="true" frames="1" width="30" height="30" x="15" y="15" rotate="true">
                 <static value="0"/>
-				<animation texture="assets/ball/ballshade.png" smooth="false" frames="1" width="30" height="30" x="15" y="15" rotate="false">
+				<animation texture="assets/ball/ballshade.png" smooth="true" frames="1" width="30" height="30" x="15" y="15" rotate="false">
 					<static value="0"/>
 				</animation>
                 <!-- angled min="0" step="45"/-->
