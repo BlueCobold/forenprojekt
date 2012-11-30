@@ -1,7 +1,9 @@
 <level>
     <background>
         <animation texture="backgrounds/pastureland/full_scene.jpg" smooth="false" frames="1" width="1600" height="900" x="0" y="0" rotate="false">
-            <timed delay="1.0"/>
+          <frameindex frames="1">
+            <static value="0"/>
+          </frameindex>
         </animation>
     </background>
     <objects>
@@ -19,7 +21,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/left_lower/v1.png" smooth="true" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall1" rep="X" size="1" orientation="vertical">
@@ -35,8 +39,10 @@
                     </shape>
                 </fixture>
             </physics>
-			<animation texture="walls/sand/small_quad/right_lower/v1.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+            <animation texture="walls/sand/small_quad/right_lower/v1.png" smooth="false" width="60" height="60" rotate="false">
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall1" rep="W" size="1" orientation="vertical">
@@ -52,7 +58,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -68,7 +76,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -84,7 +94,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v2.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -100,7 +112,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -116,7 +130,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -132,7 +148,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v6.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -148,7 +166,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -164,7 +184,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -180,7 +202,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -196,7 +220,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -212,7 +238,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v2.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -228,7 +256,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -244,7 +274,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall1" rep="W" size="1" orientation="vertical">
@@ -260,7 +292,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -276,7 +310,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v6.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -292,7 +328,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -308,7 +346,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -324,7 +364,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -340,7 +382,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v2.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -356,7 +400,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -372,7 +418,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -388,7 +436,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -404,7 +454,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v6.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -420,7 +472,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -436,7 +490,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v6.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -452,7 +508,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -468,7 +526,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -484,7 +544,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -500,7 +562,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -516,7 +580,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v2.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -532,7 +598,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -548,7 +616,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -564,7 +634,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -580,7 +652,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -596,7 +670,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -612,7 +688,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -628,7 +706,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -644,7 +724,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -660,7 +742,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -676,7 +760,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v3.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="static" rep="w" size="1" orientation="horizontal">
@@ -692,7 +778,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -708,7 +796,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v1.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -724,7 +814,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v6.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -740,7 +832,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v2.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -756,7 +850,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v4.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Wall2" rep="w" size="1" orientation="horizontal">
@@ -772,7 +868,9 @@
                 </fixture>
             </physics>
             <animation texture="walls/sand/small_quad/main/v5.png" smooth="false" width="60" height="60" rotate="false">
-                <static value="0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </entity>
         <entity name="Ball" rep="B" size="1" orientation="square">
@@ -783,10 +881,14 @@
                 </fixture>
             </physics>
             <animation texture="assets/ball/ballback.png" smooth="true" frames="1" width="30" height="30" x="15" y="15" rotate="true">
-                <static value="0"/>
-				<animation texture="assets/ball/ballshade.png" smooth="true" frames="1" width="30" height="30" x="15" y="15" rotate="false">
-					<static value="0"/>
-				</animation>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
+                <animation texture="assets/ball/ballshade.png" smooth="true" frames="1" width="30" height="30" x="15" y="15" rotate="false">
+                    <frameindex frames="1">
+                        <static value="0"/>
+                    </frameindex>
+                </animation>
                 <!-- angled min="0" step="45"/-->
             </animation>
         </entity>
@@ -803,7 +905,9 @@
                 </fixture>
             </physics>
             <animation texture="assets/teeter/wood/small.png" smooth="true" frames="1" width="214" height="32" x="107" y="16" rotate="true">
-                <timed delay="1.0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </teeter>
         <teeter name="Teeter2" rep="T" size="1" orientation="horizontal">
@@ -819,7 +923,9 @@
                 </fixture>
             </physics>
             <animation texture="assets/teeter/wood/small.png" smooth="true" frames="1" width="214" height="32" x="107" y="16" rotate="true">
-                <timed delay="1.0"/>
+                <frameindex frames="1">
+                    <static value="0"/>
+                </frameindex>
             </animation>
         </teeter>
     </objects>

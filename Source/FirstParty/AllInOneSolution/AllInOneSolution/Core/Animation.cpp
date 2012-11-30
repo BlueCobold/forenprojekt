@@ -3,10 +3,14 @@
 
 #include <SFML/Graphics/Rect.hpp>
 
-Animation::Animation(std::unique_ptr<ValueCalculator> calculator,
+#include <cmath>
+
+Animation::Animation(std::unique_ptr<ValueProvider> provider,
+    const unsigned int frames,
     const unsigned int frameWidth, const unsigned int frameHeight,
     const bool applyRotation) :
-    m_calculator(std::move(calculator)),
+    m_provider(std::move(provider)),
+    m_frames(frames),
     m_frame(0),
     m_frameWidth(frameWidth),
     m_frameHeight(frameHeight),
@@ -20,7 +24,10 @@ void Animation::update()
 {
     for(auto sub = m_subAnimations.begin(); sub != m_subAnimations.end(); ++sub)
         (*sub)->update();
-    m_frame = static_cast<int>(m_calculator->calculateValue());
+    if(m_provider == nullptr)
+        m_frame = 0;
+    else
+        m_frame = static_cast<int>(m_provider->getValue()) % m_frames;
     m_sprite.setTextureRect(getTextureRect());
 }
 

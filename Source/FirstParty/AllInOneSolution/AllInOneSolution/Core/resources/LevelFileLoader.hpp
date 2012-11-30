@@ -17,39 +17,20 @@
 class LevelFileLoader
 {
 public:
-
-    static std::unique_ptr<ValueCalculator> parseStaticCalculator(
-        tinyxml2::XMLElement* xml);
-
-    static std::unique_ptr<ValueCalculator> parseTimedCalculator(
-        tinyxml2::XMLElement* xml,
-        const AnimatedGraphics* entity,
-        const int frames);
-        
-    static std::unique_ptr<ValueCalculator> parseAngleCalculator(
-        tinyxml2::XMLElement* xml,
-        const Entity* entity,
-        const int frames);
-
      static std::unique_ptr<Animation> parseAnimation(
          tinyxml2::XMLElement* xml,
          const AnimatedGraphics* animated,
          ResourceManager& resourceManager);
 
-    static std::unique_ptr<Animation> parseAnimation(
-        tinyxml2::XMLElement* xml,
-        const Entity* entity,
-        ResourceManager& resourceManager);
-
 private:
 
-    static std::unique_ptr<ValueCalculator> parseCalculator(
+    static std::unique_ptr<ValueProvider> parseProvider(
         tinyxml2::XMLElement* xml, 
         const AnimatedGraphics* animated);
 
     static std::unique_ptr<Animation> parseAnimation(tinyxml2::XMLElement* xml,
         const AnimatedGraphics* animated,
-        std::unique_ptr<ValueCalculator> calculator,
+        std::unique_ptr<ValueProvider> provider,
         ResourceManager& resourceManager);
 };
 

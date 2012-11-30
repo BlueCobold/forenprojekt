@@ -8,7 +8,10 @@ class OrientedObject
 {
 public:
 
-    virtual float getAngle() const = 0;
+    virtual float getAngle() const
+    {
+        return 0;
+    }
 };
 
 #endif //ORIENTED_OBJECT_HPP
