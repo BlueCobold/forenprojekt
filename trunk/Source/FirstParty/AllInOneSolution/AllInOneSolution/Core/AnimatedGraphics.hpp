@@ -4,10 +4,11 @@
 #define ANIMATED_GRAPHICS_HPP
 
 #include "GraphicalObject.hpp"
+#include "animation/OrientedObject.hpp"
 #include "animation/TimedObject.hpp"
 
 /// This class defines typical behavior of graphical objects
-class AnimatedGraphics : public GraphicalObject, public TimedObject
+class AnimatedGraphics : public GraphicalObject, public TimedObject, public OrientedObject
 {
 };
 

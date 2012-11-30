@@ -1,45 +1,24 @@
 #include "LevelFileLoader.hpp"
 
-#include "../animation/AngleCalculator.hpp"
 #include "../animation/AngleProvider.hpp"
-#include "../animation/TimeCalculator.hpp"
 #include "../animation/TimeProvider.hpp"
 #include "../animation/StaticProvider.hpp"
 
 #include <vector>
 
-std::unique_ptr<ValueCalculator> LevelFileLoader::parseStaticCalculator(tinyxml2::XMLElement* xml)
-{
-    std::unique_ptr<StaticProvider> provider(new StaticProvider(xml->FloatAttribute("value")));
-    std::unique_ptr<ValueCalculator> calc(new ValueCalculator(std::move(provider)));
-    return calc;
-}
-
-std::unique_ptr<ValueCalculator> LevelFileLoader::parseTimedCalculator(tinyxml2::XMLElement* xml, const AnimatedGraphics* entity, const int frames)
-{
-    std::unique_ptr<TimeProvider> provider(new TimeProvider(entity));
-    std::unique_ptr<ValueCalculator> calc(new TimeCalculator(std::move(provider),
-        xml->FloatAttribute("delay"), frames));
-    return calc;
-}
-
-std::unique_ptr<ValueCalculator> LevelFileLoader::parseAngleCalculator(tinyxml2::XMLElement* xml, const Entity* entity, const int frames)
-{
-    std::unique_ptr<AngleProvider> provider(new AngleProvider(entity));
-    std::unique_ptr<ValueCalculator> calc(new AngleCalculator(std::move(provider),
-        xml->FloatAttribute("min"), xml->FloatAttribute("step"), frames));
-    return calc;
-}
-
 std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml,
     const AnimatedGraphics* animated,
-    std::unique_ptr<ValueCalculator> calculator,
+    std::unique_ptr<ValueProvider> provider,
     ResourceManager& resourceManager)
 {
+    tinyxml2::XMLElement* frameIndex = xml->FirstChildElement("frameindex");
+    if(frameIndex == nullptr)
+        return nullptr;
+    int frames = frameIndex->IntAttribute("frames");
     int width = xml->IntAttribute("width");
     int height = xml->IntAttribute("height");
     bool rotate = xml->BoolAttribute("rotate");
-    std::unique_ptr<Animation> anim(new Animation(std::move(calculator), width, height, rotate));
+    std::unique_ptr<Animation> anim(new Animation(std::move(provider), frames, width, height, rotate));
     sf::Vector2f offset;
     sf::Vector2f sourceOffset;
     sf::Texture* texture = resourceManager.getTexture(xml->Attribute("texture"));
@@ -57,8 +36,8 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 
     for(auto subs = xml->FirstChildElement("animation"); subs != nullptr; subs = subs->NextSiblingElement("animation"))
     {
-        std::unique_ptr<ValueCalculator> calculator = parseCalculator(subs, animated);
-        subAnimations.push_back(std::move(parseAnimation(subs, animated, std::move(calculator), resourceManager)));
+        std::unique_ptr<ValueProvider> subProvider = parseProvider(subs, animated);
+        subAnimations.push_back(std::move(parseAnimation(subs, animated, std::move(subProvider), resourceManager)));
     }
     if(subAnimations.size() > 0)
         anim->bindSubAnimations(subAnimations);
@@ -66,17 +45,18 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     return anim;
 }
 
-std::unique_ptr<ValueCalculator> LevelFileLoader::parseCalculator(tinyxml2::XMLElement* xml, 
+std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLElement* xml, 
     const AnimatedGraphics* animated)
 {
-    int frames = xml->IntAttribute("frames");
-    tinyxml2::XMLElement* timed = xml->FirstChildElement("timed");
+    tinyxml2::XMLElement* timed = xml->FirstChildElement("time");
     tinyxml2::XMLElement* stat = xml->FirstChildElement("static");
-    std::unique_ptr<ValueCalculator> calculator;
+    tinyxml2::XMLElement* angled = xml->FirstChildElement("angle");
     if(timed != nullptr)
-        return parseTimedCalculator(timed, animated, frames);
+        return std::unique_ptr<TimeProvider>(new TimeProvider(animated));
+    else if(angled != nullptr)
+        return std::unique_ptr<AngleProvider>(new AngleProvider(animated));
     else if(stat != nullptr)
-        return parseStaticCalculator(stat);
+        return std::unique_ptr<StaticProvider>(new StaticProvider(stat->FloatAttribute("value")));
     return nullptr;
 }
 
@@ -84,28 +64,12 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     const AnimatedGraphics* animated,
     ResourceManager& resourceManager)
 {
-    std::unique_ptr<ValueCalculator> calculator = std::move(parseCalculator(xml, animated));
-    if(calculator == nullptr)
+    tinyxml2::XMLElement* frameIndex = xml->FirstChildElement("frameindex");
+    if(frameIndex == nullptr)
+        return nullptr;
+    std::unique_ptr<ValueProvider> provider = std::move(parseProvider(frameIndex, animated));
+    if(provider == nullptr)
         return nullptr;
 
-    return parseAnimation(xml, animated, std::move(calculator), resourceManager);
-}
-
-std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml,
-    const Entity* entity,
-    ResourceManager& resourceManager)
-{
-    int frames = xml->IntAttribute("frames");
-
-    std::unique_ptr<ValueCalculator> calculator = parseCalculator(xml, entity);
-    if(calculator == nullptr)
-    {
-        tinyxml2::XMLElement* angled = xml->FirstChildElement("angled");
-        if(angled != nullptr)
-            calculator = parseAngleCalculator(angled, entity, frames);
-        else
-            return nullptr;
-    }
-    
-    return parseAnimation(xml, entity, std::move(calculator), resourceManager);
+    return parseAnimation(xml, animated, std::move(provider), resourceManager);
 }

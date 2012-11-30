@@ -84,25 +84,16 @@
     <ClInclude Include="Background.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="animation\TimeCalculator.hpp">
-      <Filter>Headers\animation</Filter>
-    </ClInclude>
     <ClInclude Include="animation\ValueProvider.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
     <ClInclude Include="animation\TimeProvider.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
-    <ClInclude Include="animation\ValueCalculator.hpp">
-      <Filter>Headers\animation</Filter>
-    </ClInclude>
     <ClInclude Include="animation\OrientedObject.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
     <ClInclude Include="animation\TimedObject.hpp">
-      <Filter>Headers\animation</Filter>
-    </ClInclude>
-    <ClInclude Include="animation\AngleCalculator.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
     <ClInclude Include="animation\AngleProvider.hpp">

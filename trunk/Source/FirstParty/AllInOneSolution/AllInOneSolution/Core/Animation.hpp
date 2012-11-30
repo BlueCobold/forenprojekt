@@ -3,7 +3,7 @@
 #ifndef ANIMATION_HPP
 #define ANIMATION_HPP
 
-#include "animation/ValueCalculator.hpp"
+#include "animation/ValueProvider.hpp"
 
 #include <memory> // unique_ptr
 #include <vector>
@@ -18,7 +18,8 @@ class Animation : sf::Drawable
 {
 public:
 
-    Animation(std::unique_ptr<ValueCalculator> calculator,
+    Animation(std::unique_ptr<ValueProvider> provider,
+        const unsigned int frames,
         const unsigned int frameWidth,
         const unsigned int frameHeight,
         const bool applyRotation);
@@ -37,9 +38,10 @@ private:
 
     const sf::IntRect Animation::getTextureRect() const;
 
-    std::unique_ptr<ValueCalculator> m_calculator;
+    std::unique_ptr<ValueProvider> m_provider;
     std::vector<std::unique_ptr<Animation>> m_subAnimations;
     bool m_applyRotation;
+    unsigned int m_frames;
     unsigned int m_frame;
     unsigned int m_frameWidth;
     unsigned int m_frameHeight;
