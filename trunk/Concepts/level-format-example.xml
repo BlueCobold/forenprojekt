@@ -130,7 +130,7 @@
 			</entity>
 			
 			<!-- Ball -->
-			<entity name="Ball" rep="BB">
+			<entity name="Ball" rep="BB" type="ball">
 				<physics name="ball">
 					<shape type="circle" radius="14" />
 				</physics>
@@ -146,7 +146,7 @@
 			</entity>
 			
 			<!-- Teeters -->
-			<entity type="teeter" name="Teeter1" rep="TT">
+			<entity name="Teeter" rep="TT" type="teeter">
 				<physics name="teeter" shape="teeter" />
 				<animations>
 					<animation texture="teeter_wooden" frames="1" width="214" height="32" x="107" y="16" rotate="true">
@@ -164,7 +164,7 @@
 				<static value="0" />
 			</animation>
 		</background>
-		
+		<entity template="Teeter" x="448" y="448" />
 		<grid size="64">
 w1w4w4w2w3w5w1w1w3w3w2w6w5
 w4                      w3

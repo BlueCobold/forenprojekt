@@ -78,14 +78,11 @@ void Level::draw(sf::RenderWindow& screen)
 
 bool Level::load()
 {
-    if(m_number == 0) // Level start from 1
+    if(!validate()) // Validate the XML file
         return false;
 
     tinyxml2::XMLDocument doc;
     doc.LoadFile(filename().c_str());
-    
-    if(doc.ErrorID() != 0) // Error while loading file
-        return false;
 
 	tinyxml2::XMLElement* backgroundXml = doc.FirstChildElement("level")->FirstChildElement("background");
     tinyxml2::XMLElement* objects = doc.FirstChildElement("level")->FirstChildElement("objects");
@@ -250,6 +247,26 @@ bool Level::load()
     m_world.SetGravity(b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y")));
 
     return true;
+}
+
+bool Level::validate()
+{
+    if(m_number == 0) // Level start from 1
+        return false;
+
+    tinyxml2::XMLDocument doc;
+    doc.LoadFile(filename().c_str());
+    
+    if(doc.ErrorID() != 0) // Error while loading file
+        return false;
+
+    // Check for tags
+    bool tagCheck = true;
+    tagCheck &= (doc.FirstChildElement("level") != nullptr);
+    tagCheck &= (doc.FirstChildElement("level")->FirstChildElement("objects") != nullptr);
+    tagCheck &= (doc.FirstChildElement("level")->FirstChildElement("world") != nullptr);
+
+    return tagCheck;
 }
 
 const unsigned int Level::number()
