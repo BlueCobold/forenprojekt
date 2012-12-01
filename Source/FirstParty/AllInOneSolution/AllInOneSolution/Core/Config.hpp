@@ -8,9 +8,10 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <unordered_map>
 
 
-/// This class will load configdata from a file
+/// This class will load configdata from a ini file
 class Config
 {
 public:
@@ -20,41 +21,31 @@ public:
 
     template<typename T>
     T get(const std::string& data);
-    bool load(const std::string& fileName);
+    bool reload(const std::string& fileName);
 
 private:
 
     std::string eraseOverhang(std::string& data);
 
+    bool readFile();
+
 private:
 
     std::string m_fileName;
     std::ifstream m_configFile;
-
+    std::unordered_map<std::string, std::string> m_content;
 };
 
 template<typename T>
-T Config::get(const std::string& data)
-{ 
-    std::string input;
+T Config::get(const std::string& key)
+{
     T output = utility::stringTo<T>("0");
 
-    if(m_configFile)
-    {
-        m_configFile.seekg(std::ios_base::beg);
-        while(!m_configFile.eof())
-        {
-            std::getline(m_configFile, input);
-            if(input.find(data) != std::string::npos)
-            {
-                input = eraseOverhang(input);
-                output = utility::stringTo<T>(input);
-                return output;
-            }
-            input.clear();
-        }
-    }
-    // avoid errors if data not found
+    auto it = m_content.find(key);
+
+    if(it != m_content.end())
+        output = utility::stringTo<T>(it->second);
+
     return output;
 }
 
