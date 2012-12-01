@@ -6,6 +6,7 @@
 #include "Utility.hpp" // stringTo
 
 #include <string>
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <unordered_map>
@@ -17,17 +18,16 @@ class Config
 public:
 
     Config(const std::string& fileName);
-    ~Config(void);
 
     template<typename T>
     T get(const std::string& data);
-    bool reload(const std::string& fileName);
+    void reload(const std::string& fileName);
 
 private:
 
     std::string eraseOverhang(std::string& data);
 
-    bool readFile();
+    void readFile();
 
 private:
 
