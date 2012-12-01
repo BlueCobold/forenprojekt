@@ -6,11 +6,6 @@ Config::Config(const std::string& fileName) :
     readFile();
 }
 
-Config::~Config(void)
-{
-    
-}
-
 std::string Config::eraseOverhang(std::string& data)
 {
     while(!data.find(" "))             /// Find and erase leading spaces
@@ -27,46 +22,52 @@ std::string Config::eraseOverhang(std::string& data)
     return data;
 }
 
-bool Config::reload(const std::string& fileName)
+void Config::reload(const std::string& fileName)
 {
     m_fileName = fileName;
 
     if(m_configFile)
         m_configFile.close();
     
-    return readFile();
+    readFile();
 }
 
-bool Config::readFile()
+void Config::readFile()
 {
     m_configFile.open(m_fileName, std::ios_base::in);
-    if(m_configFile.is_open())
+    try
     {
-        std::string line = "";
-        std::string key = "";
-        std::string value = "";
-        unsigned int pos;
-
-        while(!m_configFile.eof())
+        if(m_configFile.is_open())
         {
-            std::getline(m_configFile, line);
+            std::string line = "";
+            std::string key = "";
+            std::string value = "";
+            unsigned int pos;
 
-            pos = line.find('=');
+            while(!m_configFile.eof())
+            {
+                std::getline(m_configFile, line);
 
-            if(pos == std::string::npos)
-                continue;
+                pos = line.find('=');
 
-            key = line.substr(0, pos-1);
-            eraseOverhang(key);
-            value = line.substr(pos+1);
-            eraseOverhang(value);
+                if(pos == std::string::npos)
+                    continue;
 
-            if(!key.empty() && !value.empty())
-                m_content.insert(std::make_pair<std::string&, std::string&>(key, value));
-        }
-        m_configFile.close();
-        return true;
+                key = line.substr(0, pos-1);
+                eraseOverhang(key);
+                value = line.substr(pos+1);
+                eraseOverhang(value);
+
+                if(!key.empty() && !value.empty())
+                    m_content.insert(std::make_pair<std::string&, std::string&>(key, value));
+            } 
+        } 
+        else
+            throw "File '" + m_fileName + "' not found";
+
+    } 
+    catch(std::string str)
+    {
+        std::cout << "Exception raised: " << str << std::endl;
     }
-    m_configFile.close();
-    return false;
 }
