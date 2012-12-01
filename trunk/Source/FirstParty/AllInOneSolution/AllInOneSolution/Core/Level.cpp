@@ -50,15 +50,19 @@ void Level::restartAt(const float time)
         (*it)->restartAt(time);
 }
 
-void Level::update(const float dt)
+void Level::update(const float elapsedTime)
 {
+    m_timeStep =  elapsedTime - m_lastTime;
+
     m_world.Step(m_timeStep, m_velocityIterations, m_positionIterations);
 
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
-        (*it)->update(dt);
+        (*it)->update(elapsedTime);
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		m_debugDraw = !m_debugDraw;
+
+    m_lastTime = elapsedTime;
 }
 
 void Level::draw(sf::RenderWindow& screen)

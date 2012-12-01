@@ -65,6 +65,8 @@ private:
     int m_velocityIterations;
     int m_positionIterations;
 
+    float m_lastTime;
+
     Config& m_config;
 
 	bool m_debugDraw;
