@@ -53,7 +53,7 @@ void Config::readFile()
                 if(pos == std::string::npos)
                     continue;
 
-                key = line.substr(0, pos-1);
+                key = line.substr(0, pos);
                 eraseOverhang(key);
                 value = line.substr(pos+1);
                 eraseOverhang(value);
