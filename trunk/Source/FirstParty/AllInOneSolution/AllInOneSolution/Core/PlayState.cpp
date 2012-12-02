@@ -26,7 +26,9 @@ void PlayState::update()
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
 		m_level.reset();
-		m_level = std::unique_ptr<Level>(new Level(1, m_resourceManager, m_config));
+        m_level = std::unique_ptr<Level>(new Level(1, m_resourceManager, m_config));
+        float time = m_frametime.getElapsedTime().asSeconds();
+        m_level->restartAt(time);
 	}
 }
 
