@@ -20,6 +20,7 @@
 
 #include <tinyxml2.h>
 
+#include <algorithm>
 #include <memory> // unique_ptr
 #include <ostream> // endl
 #include <string>
@@ -29,11 +30,12 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_number(level),
     m_resourceManager(resourceManager),
     m_world(b2Vec2(0.f, 9.81f)),
-    m_timeStep(1.f/60.f),
-    m_velocityIterations(6),
-    m_positionIterations(2),
+    m_timeStep(1.f / 60.f),
+    m_velocityIterations(4),
+    m_positionIterations(4),
     m_config(config)
 {
+    m_world.SetAllowSleeping(false);
 	m_debugDraw = false;
     load();
 }
@@ -53,7 +55,8 @@ void Level::restartAt(const float time)
 void Level::update(const float elapsedTime)
 {
     m_timeStep =  elapsedTime - m_lastTime;
-
+    m_velocityIterations = std::max(1, static_cast<int>(4 * m_timeStep * 60.0f));
+    m_positionIterations = m_velocityIterations;
     m_world.Step(m_timeStep, m_velocityIterations, m_positionIterations);
 
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)

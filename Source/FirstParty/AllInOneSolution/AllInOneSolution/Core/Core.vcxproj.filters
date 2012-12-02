@@ -137,16 +137,25 @@
     <Filter Include="Sources\resources">
       <UniqueIdentifier>{e2e0953d-9905-43eb-a6c1-1bd23951d8a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resouces\res">
+      <UniqueIdentifier>{4cc06c48-eec2-4ce2-b023-886f24d5c03e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resouces\res\font">
+      <UniqueIdentifier>{f5161282-8cec-4255-917a-bbaa4303df93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resouces\res\level">
+      <UniqueIdentifier>{90c0ba6a-3cd0-4d24-b07f-c3f329daa084}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Game\Config.ini">
       <Filter>Resouces</Filter>
     </None>
     <None Include="..\..\..\Game\res\font\visitor.ttf">
-      <Filter>Resouces</Filter>
+      <Filter>Resouces\res\font</Filter>
     </None>
     <None Include="..\..\..\Game\res\level\001.lvl">
-      <Filter>Resouces</Filter>
+      <Filter>Resouces\res\level</Filter>
     </None>
   </ItemGroup>
 </Project>

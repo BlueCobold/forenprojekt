@@ -11,6 +11,7 @@ public:
     virtual void restartAt(const float time)
     {
         m_startTime = time;
+        m_currentTime = time;
     }
 
     float getPassedTime() const
