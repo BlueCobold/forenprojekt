@@ -4,6 +4,9 @@
 #define ANGLE_PROVIDER_HPP
 
 #include "OrientedObject.hpp"
+#include "../Utility.hpp"
+
+#include <cmath>
 
 /// Returns the angle of the owner
 class AngleProvider : public ValueProvider
@@ -19,7 +22,10 @@ public:
 
     virtual float getValue() const
     {
-        return m_owner->getAngle();
+        float angle = fmod(utility::toDegree<float, float>(m_owner->getAngle()), 360.f);
+        if(angle < 0)
+            return angle + 360;
+        return angle;
     }
 };
 
