@@ -21,6 +21,7 @@ App::App(Config& config) :
 {
     m_windowTitle = config.get<std::string>("WindowName");
     m_fullscreen = config.get<bool>("IsFullScreen");
+	m_showFps = config.get<bool>("ShowFps");
     
     if(m_fullscreen)
     {
@@ -53,6 +54,7 @@ void App::run()
 
 void App::update()
 {
+
     calculateFps();
     m_fpsText.setString(utility::toString<int>(m_fps));
    
@@ -67,7 +69,9 @@ void App::draw()
     m_screen.clear();
 
     m_stateManager.draw();
-    m_screen.draw(m_fpsText);
+	
+	if(m_showFps)
+		m_screen.draw(m_fpsText);
         
     m_screen.display();
 }
@@ -92,6 +96,8 @@ void App::handleEvents()
         // Close the window
         if(event.type == sf::Event::Closed)
             m_screen.close();
+		else if((event.type == sf::Event::KeyReleased) && (event.key.code == sf::Keyboard::F))
+			m_showFps = !m_showFps;
         else if(event.type == sf::Event::LostFocus)
             m_focus = false;
         else if(event.type == sf::Event::GainedFocus)

@@ -47,7 +47,8 @@ private:
     std::string m_windowTitle;
     bool m_fullscreen;
     bool m_focus;
-   
+
+	bool m_showFps;
     int m_fps;
     float m_frameCounter;
 
