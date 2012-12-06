@@ -20,24 +20,24 @@ class Config;
 class App
 {
 public:
-    
+
     App(Config& config);
-    
+
     void run();
-    
+
 private:
-    
+
     void update();
     void draw();
-    
+
     void handleKeyboard();
     void handleEvents();
-  
+
     void switchDisplayMode();
-   
+
     void calculateFps();
     void onResize();
-    
+
 private:
 
     sf::RenderWindow m_screen;
@@ -48,7 +48,7 @@ private:
     bool m_fullscreen;
     bool m_focus;
 
-	bool m_showFps;
+    bool m_showFps;
     int m_fps;
     float m_frameCounter;
 
