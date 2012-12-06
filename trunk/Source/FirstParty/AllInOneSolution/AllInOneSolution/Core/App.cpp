@@ -21,8 +21,8 @@ App::App(Config& config) :
 {
     m_windowTitle = config.get<std::string>("WindowName");
     m_fullscreen = config.get<bool>("IsFullScreen");
-	m_showFps = config.get<bool>("ShowFps");
-    
+    m_showFps = config.get<bool>("ShowFps");
+
     if(m_fullscreen)
     {
         m_screen.create(sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"))
@@ -57,9 +57,9 @@ void App::update()
 
     calculateFps();
     m_fpsText.setString(utility::toString<int>(m_fps));
-   
+
     handleEvents();
-    handleKeyboard();	
+    handleKeyboard();
 
     m_stateManager.update();
 }
@@ -69,9 +69,9 @@ void App::draw()
     m_screen.clear();
 
     m_stateManager.draw();
-	
-	if(m_showFps)
-		m_screen.draw(m_fpsText);
+
+    if(m_showFps)
+        m_screen.draw(m_fpsText);
         
     m_screen.display();
 }
@@ -84,20 +84,20 @@ void App::handleKeyboard()
         m_fullscreen = !m_fullscreen;
         
         switchDisplayMode();
-    }    
+    }
 }
 
 void App::handleEvents()
 {
     sf::Event event;
-    
+
     while(m_screen.pollEvent(event))
     {
         // Close the window
         if(event.type == sf::Event::Closed)
             m_screen.close();
-		else if((event.type == sf::Event::KeyReleased) && (event.key.code == sf::Keyboard::F))
-			m_showFps = !m_showFps;
+        else if((event.type == sf::Event::KeyReleased) && (event.key.code == sf::Keyboard::F))
+            m_showFps = !m_showFps;
         else if(event.type == sf::Event::LostFocus)
             m_focus = false;
         else if(event.type == sf::Event::GainedFocus)
@@ -110,7 +110,7 @@ void App::handleEvents()
 void App::switchDisplayMode()
 {
     if(m_fullscreen)
-    {	
+    {
         // Switch to fullscreen
         m_screen.create(sf::VideoMode::getDesktopMode(), m_windowTitle, sf::Style::Fullscreen);
         // Disable the cursor
@@ -141,15 +141,15 @@ void App::onResize()
 {
     sf::Vector2f size = static_cast<sf::Vector2f>(m_screen.getSize());
 
-	// Minimum size
-	if(size.x < 800)
-		size.x = 800;
-	if(size.y < 600)
-		size.y = 600;
+    // Minimum size
+    if(size.x < 800)
+        size.x = 800;
+    if(size.y < 600)
+        size.y = 600;
 
-	// Apply possible size changes
-	m_screen.setSize(static_cast<sf::Vector2u>(size));
+    // Apply possible size changes
+    m_screen.setSize(static_cast<sf::Vector2u>(size));
 
-	// Reset view
-	m_screen.setView(sf::View(sf::FloatRect(0.f, 0.f, size.x, size.y)));
+    // Reset view
+    m_screen.setView(sf::View(sf::FloatRect(0.f, 0.f, size.x, size.y)));
 }
