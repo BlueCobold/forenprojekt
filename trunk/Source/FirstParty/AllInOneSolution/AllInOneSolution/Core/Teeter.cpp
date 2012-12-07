@@ -12,14 +12,14 @@
 #include <algorithm>
 #include <cmath>
 
-Teeter::Teeter(const float32 x, const float32 y, const float centerX, const float centerY,
-    const b2FixtureDef& fixtureDef, b2World& world, const float mouseScale)
+Teeter::Teeter(const float mouseScale)
 {
     m_lastMouseX = sf::Mouse::getPosition().x;
     m_lastTime = -1;
-    b2BodyDef bodyDef;
 
     m_mouseScale = mouseScale;
+
+    /*b2BodyDef bodyDef;
 
     // Create teeter
 
@@ -28,7 +28,7 @@ Teeter::Teeter(const float32 x, const float32 y, const float centerX, const floa
 
     m_body = world.CreateBody( &bodyDef );
 
-    m_body->CreateFixture( &fixtureDef );
+    m_body->CreateFixture( &fixtureDef );*/
 }
 
 Teeter::~Teeter()

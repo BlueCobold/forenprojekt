@@ -34,7 +34,7 @@ App::App(Config& config) :
         m_screen.create(sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"))
             , m_windowTitle);
 
-    m_fpsText.setFont(*m_resourceManager.getFont("visitor.ttf"));
+    m_fpsText.setFont(*m_resourceManager.getFont("visitor"));
     m_fpsText.setColor(sf::Color::Blue);
     m_fpsText.setCharacterSize(30);
     m_fpsText.setPosition(10, 10);
@@ -54,7 +54,6 @@ void App::run()
 
 void App::update()
 {
-
     calculateFps();
     m_fpsText.setString(utility::toString<int>(m_fps));
 

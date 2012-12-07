@@ -1,0 +1,17 @@
+<textures>
+	<texture name="bg_pastureland" path="backgrounds/pastureland/full_scene.jpg" smooth="false" />
+	<texture name="small_quad_1" path="walls/sand/small_quad/main/v1.png" smooth="false" />
+	<texture name="small_quad_2" path="walls/sand/small_quad/main/v2.png" smooth="false" />
+	<texture name="small_quad_3" path="walls/sand/small_quad/main/v3.png" smooth="false" />
+	<texture name="small_quad_4" path="walls/sand/small_quad/main/v4.png" smooth="false" />
+	<texture name="small_quad_5" path="walls/sand/small_quad/main/v5.png" smooth="false" />
+	<texture name="small_quad_6" path="walls/sand/small_quad/main/v6.png" smooth="false" />
+	<texture name="small_left" path="walls/sand/small_quad/left_lower/v1.png" smooth="false" />
+	<texture name="small_right" path="walls/sand/small_quad/right_lower/v1.png" smooth="false" />
+	<texture name="ballback" path="assets/ball/ballback.png" smooth="false" />
+	<texture name="ballshade" path="assets/ball/ballshade.png" smooth="false" />
+	<texture name="teeter_wooden" path="assets/teeter/wood/small.png" smooth="true" />
+</textures>
+<fonts>
+	<font name="visitor" path="visitor.ttf" />
+</fonts>

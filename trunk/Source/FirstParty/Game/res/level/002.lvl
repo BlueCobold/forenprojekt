@@ -1,0 +1,198 @@
+<level>
+	<templates>
+		<shapes>
+			<shape name="wall" type="polygon">
+				<vertex x="1" y="1" />
+				<vertex x="59" y="1" />
+				<vertex x="59" y="59" />
+				<vertex x="1" y="59" />
+			</shape>
+			<shape name="left_lower" type="polygon">
+				<vertex x="1" y="6" />
+				<vertex x="6" y="6" />
+				<vertex x="54" y="54" />
+				<vertex x="54" y="59" />
+				<vertex x="1" y="59" />
+			</shape>
+			<shape name="right_lower" type="polygon">
+				<vertex x="54" y="6" />
+				<vertex x="59" y="6" />
+				<vertex x="59" y="59" />
+				<vertex x="6" y="54" />
+				<vertex x="6" y="59" />
+			</shape>
+			<shape name="teeter" type="polygon">
+				<vertex x="-106" y="-15" />
+				<vertex x="106" y="-15" />
+				<vertex x="106" y="15" />
+				<vertex x="-106" y="15" />
+			</shape>
+		</shapes>		
+		<physics>
+			<physic name="wall">
+				<body type="static" angle="0" />
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="lower">
+				<body type="static" angle="0" />
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="ball">
+				<body type="dynamic" angle="0" angularDamping="4.0" />
+				<fixture density="0.5" friction="0.7" restitution="0.4" />
+			</physic>			
+			<physic name="teeter">
+				<body type="kinematic" angle="0" />
+				<fixture density="0.5" friction="0.8" restitution="0.1" />
+			</physic>
+		</physics>
+		
+		<entities>
+			<!-- Walls -->
+			<entity name="wall_1" rep="w1">
+				<physics name="wall" shape="wall" />
+				<animations>
+					<animation texture="small_quad_1" width="60" height="60" rotate="false">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wall_2" rep="w2">
+				<physics name="wall" shape="wall" />
+				<animations>
+					<animation texture="small_quad_2" width="60" height="60" rotate="false">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
+
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wall_3" rep="w3">
+				<physics name="wall" shape="wall" />
+				<animations>
+					<animation texture="small_quad_3" width="60" height="60" rotate="false">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wall_4" rep="w4">
+				<physics name="wall" shape="wall" />
+				<animations>
+					<animation texture="small_quad_4" width="60" height="60" rotate="false">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wall_5" rep="w5">
+				<physics name="wall" shape="wall" />
+				<animations>
+					<animation texture="small_quad_5" width="60" height="60" rotate="false">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wall_6" rep="w6">
+				<physics name="wall" shape="wall" />
+				<animations>
+					<animation texture="small_quad_6" width="60" height="60" rotate="false">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			
+			<!-- lower/upper left/right -->
+			<entity name="left_lower" rep="ll">
+				<physics name="lower" shape="left_lower" />
+				<animations>
+					<animation texture="small_left" width="60" height="60" rotate="false">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="right_lower" rep="lr">
+				<physics name="lower" shape="right_lower" />
+				<animations>
+					<animation texture="small_right" width="60" height="60" rotate="false">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			
+			<!-- Ball -->
+			<entity name="Ball" rep="BB" type="ball">
+				<physics name="ball">
+					<shape type="circle" radius="14" />
+				</physics>
+				<animations>
+					<animation texture="ballback" frames="1" width="30" height="30" x="15" y="15" rotate="true">
+						<static value="0" />
+						<!-- angled min="0" step="45"/-->
+					</animation>
+					<animation texture="ballshade" frames="1" width="30" height="30" x="15" y="15" rotate="false">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			
+			<!-- Teeters -->
+			<entity name="Teeter" rep="TT" type="teeter">
+				<physics name="teeter" shape="teeter" />
+				<animations>
+					<animation texture="teeter_wooden" frames="1" width="214" height="32" x="107" y="16" rotate="true">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+		</entities>
+	</templates>
+	
+	<grid size="60" width="900" height="900">
+w1w4w4w2w3w5w1w1w3w3w2w6w5
+w4                      w3
+w6                      w2
+w6          BB          w5
+w5      TT              w6
+w1                      w2
+w3                      w4
+w3                      w1
+w2                        
+w6                TT      
+w5                        
+w4                        
+w3          ll  lr      w4
+w1w2w3w3w4w1w1w6w5w4w5w5w2
+	</grid>
+    <objects>
+		<!-- Background -->
+		<background>
+			<animation texture="bg_pastureland" smooth="false" frames="1" width="1600" height="900" x="0" y="0" rotate="false">
+				<frameindex frames="1">
+					<static value="0"/>
+				</frameindex>
+			</animation>
+		</background>
+		<entity template="Teeter" x="448" y="448" />
+    </objects>
+    <world>
+        <gravity x="0" y="40" />
+    </world>
+</level>
