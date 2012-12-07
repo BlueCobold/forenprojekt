@@ -134,6 +134,7 @@
     <None Include="..\..\..\Game\res\level\001.lvl">
       <SubType>Designer</SubType>
     </None>
+    <None Include="..\..\..\Game\res\level\002.lvl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

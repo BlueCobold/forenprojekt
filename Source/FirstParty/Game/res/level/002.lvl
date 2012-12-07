@@ -170,8 +170,8 @@
 	<grid size="60" width="900" height="900">
 w1w4w4w2w3w5w1w1w3w3w2w6w5
 w4                      w3
-w6                      w2
-w6          BB          w5
+w6        BB            w2
+w6                      w5
 w5      TT              w6
 w1                      w2
 w3                      w4
@@ -192,7 +192,7 @@ w1w2w3w3w4w1w1w6w5w4w5w5w2
 				</frameindex>
 			</animation>
 		</background>
-		<entity template="Teeter" x="448" y="448" />
+		<entity template="Teeter" x="200" y="600" />
     </objects>
     <world>
         <gravity x="0" y="40" />
