@@ -26,9 +26,6 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     offset.y = xml->FloatAttribute("y");
     sourceOffset.x = xml->FloatAttribute("srcx");
     sourceOffset.y = xml->FloatAttribute("srcy");
-    bool smooth = xml->BoolAttribute("smooth");
-
-    texture->setSmooth(smooth);
 
     anim->bindTexture(*texture, offset, sourceOffset);
 

@@ -168,7 +168,7 @@ bool Level::load()
                 
                 // Entity is well defined
                 if(entity != nullptr && shape != nullptr && physic != nullptr)
-                    m_entities.push_back(std::move(createEntity(entities.find(name)->second, sf::Vector2u((column/2)*size, row*size), shape, physic)));
+                    m_entities.push_back(std::move(createEntity(entity, sf::Vector2u((column/2)*size, row*size), shape, physic)));
             }
         }
 
@@ -176,7 +176,6 @@ bool Level::load()
     tinyxml2::XMLElement* backgroundXml = objects->FirstChildElement("background");
     tinyxml2::XMLElement* world = doc.FirstChildElement("level")->FirstChildElement("world");
     
-    std::vector<b2BodyDef> bodies;
     tinyxml2::XMLElement* element = nullptr; // Temp object
 
 	// Load background-image
@@ -188,6 +187,50 @@ bool Level::load()
             background->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, background.get(), m_resourceManager)));
     }
 	m_background = std::move(background);
+
+    for(tinyxml2::XMLElement* entitiesIterator = objects->FirstChildElement("entity");
+        entitiesIterator != nullptr; entitiesIterator = entitiesIterator->NextSiblingElement("entity"))
+    {
+        // Identify the needed parts of an entity
+        tinyxml2::XMLElement* entity = nullptr;
+        tinyxml2::XMLElement* physic = nullptr;
+        tinyxml2::XMLElement* shape = nullptr;
+
+        sf::Vector2u position(entitiesIterator->IntAttribute("x"), entitiesIterator->IntAttribute("y"));
+
+        if(entitiesIterator->Attribute("template") != nullptr)
+        {
+            std::string name;
+            name = std::string(entitiesIterator->Attribute("template"));
+
+            // Entity template exists
+            if(entities.find(name) != entities.end())
+            {
+                entity = entities.find(name)->second;
+
+                // Physics tag exists
+                physic = entity->FirstChildElement("physics");
+                if(physic != nullptr)
+                {
+                    // Shape template exists
+                    if(physic->Attribute("shape") != nullptr &&
+                        shapes.find(std::string(physic->Attribute("shape"))) != shapes.end())
+                        shape = shapes.find(std::string(physic->Attribute("shape")))->second;
+                    // Physics doesn't use a template
+                    else
+                        shape = physic->FirstChildElement("shape");
+
+                    // Physics template exists other wise no template is used
+                    if(physics.find(std::string(physic->Attribute("name"))) != physics.end())
+                        physic = physics.find(std::string(physic->Attribute("name")))->second;
+                }
+            }
+        }
+            
+        // Entity is well defined
+        if(entity != nullptr && shape != nullptr && physic != nullptr)
+            m_entities.push_back(std::move(createEntity(entity, position, shape, physic)));
+    }
 
     // Load world properties
     tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
