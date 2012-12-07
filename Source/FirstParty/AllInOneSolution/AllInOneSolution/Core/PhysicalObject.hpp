@@ -4,6 +4,7 @@
 #define PHYSICAL_OBJECT_HPP
 
 #include "animation/OrientedObject.hpp"
+#include "animation/provider/ValueProvider.hpp"
 
 #include <Box2D/Collision/Shapes/b2Shape.h>
 #include <Box2D/Dynamics/b2Body.h>
@@ -15,6 +16,10 @@
 /// a physical body
 class PhysicalObject : public OrientedObject
 {
+private:
+
+    std::unique_ptr<ValueProvider> m_rotation;
+
 public:
 
     PhysicalObject()
@@ -27,16 +32,22 @@ public:
     {
         m_body = body;
     }
-    
+
+    void bindBodyRotation(std::unique_ptr<ValueProvider> provider)
+    {
+        m_rotation = std::move(provider);
+    }
+
     virtual float getAngle() const
     {
         return m_body->GetAngle();
     }
 
+    void updateKinematics(const float value, const float delta);
+
 protected:
 
     b2Body* m_body;
-
 };
 
 #endif // PHYSICAL_OBJECT_HPP

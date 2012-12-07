@@ -27,7 +27,7 @@
 				<vertex x="106" y="15" />
 				<vertex x="-106" y="15" />
 			</shape>
-		</shapes>		
+		</shapes>
 		<physics>
 			<physic name="wall">
 				<body type="static" angle="0" />
@@ -40,14 +40,39 @@
 			<physic name="ball">
 				<body type="dynamic" angle="0" angularDamping="4.0" />
 				<fixture density="0.5" friction="0.7" restitution="0.4" />
-			</physic>			
+			</physic>
 			<physic name="teeter">
 				<body type="kinematic" angle="0" />
 				<fixture density="0.5" friction="0.8" restitution="0.1" />
 			</physic>
+			<physic name="slapper">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<rotation>
+							<mul>
+								<static value="150" />
+								<time />
+							</mul>
+						</rotation>
+					</kinematics>
+				</body>
+				<fixture density="0.5" friction="0.8" restitution="0.1" />
+			</physic>
 		</physics>
-		
+
 		<entities>
+
+			<entity name="Slapper" rep="RR">
+				<physics name="slapper" shape="teeter" />
+				<animations>
+					<animation texture="teeter_wooden" frames="1" width="214" height="32" x="107" y="16" rotate="true">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+
 			<!-- Walls -->
 			<entity name="wall_1" rep="w1">
 				<physics name="wall" shape="wall" />
@@ -110,7 +135,7 @@
 					</animation>
 				</animations>
 			</entity>
-			
+
 			<!-- lower/upper left/right -->
 			<entity name="left_lower" rep="ll">
 				<physics name="lower" shape="left_lower" />
@@ -132,7 +157,7 @@
 					</animation>
 				</animations>
 			</entity>
-			
+
 			<!-- Ball -->
 			<entity name="Ball" rep="BB" type="ball">
 				<physics name="ball">
@@ -152,7 +177,7 @@
 					</animation>
 				</animations>
 			</entity>
-			
+
 			<!-- Teeters -->
 			<entity name="Teeter" rep="TT" type="teeter">
 				<physics name="teeter" shape="teeter" />
@@ -166,13 +191,13 @@
 			</entity>
 		</entities>
 	</templates>
-	
+
 	<grid size="60" width="900" height="900">
 w1w4w4w2w3w5w1w1w3w3w2w6w5
 w4                      w3
-w6        BB            w2
-w6                      w5
-w5      TT              w6
+w6                      w2
+w4        BB            w5
+w5      TT        RR    w6
 w1                      w2
 w3                      w4
 w3                      w1
@@ -192,7 +217,6 @@ w1w2w3w3w4w1w1w6w5w4w5w5w2
 				</frameindex>
 			</animation>
 		</background>
-		<entity template="Teeter" x="200" y="600" />
     </objects>
     <world>
         <gravity x="0" y="40" />

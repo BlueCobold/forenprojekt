@@ -297,6 +297,7 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     bodyDef.angle = element->FloatAttribute("angle");
     bodyDef.fixedRotation = element->BoolAttribute("fixedRotation");
     bodyDef.angularDamping = element->BoolAttribute("angularDamping");
+    LevelFileLoader::parseKinematics(element, entity.get());
 
     // Load shape
     if(std::string(shape->Attribute("type")) == "polygon") // Load polygon

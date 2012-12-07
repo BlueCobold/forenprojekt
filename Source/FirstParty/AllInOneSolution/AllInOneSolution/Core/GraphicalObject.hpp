@@ -17,7 +17,7 @@ private:
     std::unique_ptr<Animation> m_animation;
 
 public:
-    
+
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
         if(m_animation != nullptr)
