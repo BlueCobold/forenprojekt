@@ -11,6 +11,9 @@
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
 
+#include <memory> // unique_ptr
+#include <string>
+#include <unordered_map>
 #include <vector>
 
 class Config;
@@ -20,6 +23,12 @@ class ResourceManager;
 namespace sf
 {
     class RenderWindow;
+}
+
+namespace tinyxml2
+{
+    class XMLDocument;
+    class XMLElement;
 }
 
 /// Manages the different levels and is
@@ -43,7 +52,11 @@ private:
     bool load();
 
     /// Validate the XML file
-    bool validate();
+    bool validate(const tinyxml2::XMLDocument& document);
+
+    /// Create an Entity
+    std::unique_ptr<Entity> createEntity(tinyxml2::XMLElement* xml, const sf::Vector2u& position,
+        tinyxml2::XMLElement* shape, tinyxml2::XMLElement* physic);
 
     /// Construct the full level filename from the level number
     const std::string filename();

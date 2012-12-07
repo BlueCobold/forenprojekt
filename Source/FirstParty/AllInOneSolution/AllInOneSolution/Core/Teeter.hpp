@@ -15,8 +15,7 @@ private:
 
 public:
 
-    Teeter(const float32 x, const float32 y, const float centerX, const float centerY, 
-        const b2FixtureDef& fixtureDef, b2World& world, const float mouseScale);
+    Teeter(const float mouseScale);
     ~Teeter();
 
     virtual void update(const float value);
