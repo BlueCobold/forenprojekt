@@ -8,8 +8,8 @@
 	<texture name="small_quad_6" path="walls/sand/small_quad/main/v6.png" smooth="false" />
 	<texture name="small_left" path="walls/sand/small_quad/left_lower/v1.png" smooth="false" />
 	<texture name="small_right" path="walls/sand/small_quad/right_lower/v1.png" smooth="false" />
-	<texture name="ballback" path="assets/ball/ballback.png" smooth="false" />
-	<texture name="ballshade" path="assets/ball/ballshade.png" smooth="false" />
+	<texture name="ballback" path="assets/ball/ballback.png" smooth="true" />
+	<texture name="ballshade" path="assets/ball/ballshade.png" smooth="true" />
 	<texture name="teeter_wooden" path="assets/teeter/wood/small.png" smooth="true" />
 </textures>
 <fonts>
