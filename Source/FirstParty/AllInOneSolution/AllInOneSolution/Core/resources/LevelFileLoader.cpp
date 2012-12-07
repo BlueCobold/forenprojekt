@@ -1,6 +1,13 @@
 #include "LevelFileLoader.hpp"
 
+#include "../animation/Adder.hpp"
 #include "../animation/AngleProvider.hpp"
+#include "../animation/FloatToInt.hpp"
+#include "../animation/Maximum.hpp"
+#include "../animation/Minimum.hpp"
+#include "../animation/Modulo.hpp"
+#include "../animation/Multiplier.hpp"
+#include "../animation/Sine.hpp"
 #include "../animation/TimeProvider.hpp"
 #include "../animation/StaticProvider.hpp"
 
@@ -42,18 +49,42 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     return anim;
 }
 
+std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(tinyxml2::XMLElement* xml, 
+    const AnimatedGraphics* animated)
+{
+    std::vector<std::unique_ptr<ValueProvider>> providers;
+    for(auto child = xml->FirstChildElement(); child != nullptr; child = child->NextSiblingElement())
+    {
+        std::unique_ptr<ValueProvider> provider = parseProvider(child, animated);
+        if(provider != nullptr)
+            providers.push_back(std::move(provider));
+    }
+    return providers;
+}
+
 std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLElement* xml, 
     const AnimatedGraphics* animated)
 {
-    tinyxml2::XMLElement* timed = xml->FirstChildElement("time");
-    tinyxml2::XMLElement* stat = xml->FirstChildElement("static");
-    tinyxml2::XMLElement* angled = xml->FirstChildElement("angle");
-    if(timed != nullptr)
+    if(std::string(xml->Name())=="time")
         return std::unique_ptr<TimeProvider>(new TimeProvider(animated));
-    else if(angled != nullptr)
+    else if(std::string(xml->Name())=="angle")
         return std::unique_ptr<AngleProvider>(new AngleProvider(animated));
-    else if(stat != nullptr)
-        return std::unique_ptr<StaticProvider>(new StaticProvider(stat->FloatAttribute("value")));
+    else if(std::string(xml->Name())=="static")
+        return std::unique_ptr<StaticProvider>(new StaticProvider(xml->FloatAttribute("value")));
+    else if(std::string(xml->Name())=="sine")
+        return std::unique_ptr<Sine>(new Sine(std::move(parseProviders(xml, animated)[0])));
+    else if(std::string(xml->Name())=="int")
+        return std::unique_ptr<FloatToInt>(new FloatToInt(std::move(parseProviders(xml, animated)[0])));
+    else if(std::string(xml->Name())=="add")
+        return std::unique_ptr<Adder>(new Adder(std::move(parseProviders(xml, animated))));
+    else if(std::string(xml->Name())=="mul")
+        return std::unique_ptr<Multiplier>(new Multiplier(std::move(parseProviders(xml, animated))));
+    else if(std::string(xml->Name())=="min")
+        return std::unique_ptr<Minimum>(new Minimum(std::move(parseProviders(xml, animated))));
+    else if(std::string(xml->Name())=="max")
+        return std::unique_ptr<Maximum>(new Maximum(std::move(parseProviders(xml, animated))));
+    else if(std::string(xml->Name())=="mod")
+        return std::unique_ptr<Modulo>(new Modulo(std::move(parseProviders(xml, animated))));
     return nullptr;
 }
 
@@ -64,7 +95,10 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     tinyxml2::XMLElement* frameIndex = xml->FirstChildElement("frameindex");
     if(frameIndex == nullptr)
         return nullptr;
-    std::unique_ptr<ValueProvider> provider = std::move(parseProvider(frameIndex, animated));
+    tinyxml2::XMLElement* child = frameIndex->FirstChildElement();
+    if(child == nullptr)
+        return nullptr;
+    std::unique_ptr<ValueProvider> provider = std::move(parseProvider(child, animated));
     if(provider == nullptr)
         return nullptr;
 

@@ -3,6 +3,7 @@
 #ifndef TIME_PROVIDER_HPP
 #define TIME_PROVIDER_HPP
 
+#include "ValueProvider.hpp"
 #include "TimedObject.hpp"
 
 /// Returns the time of the owner.
