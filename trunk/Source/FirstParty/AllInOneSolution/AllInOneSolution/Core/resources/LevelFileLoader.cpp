@@ -1,15 +1,15 @@
 #include "LevelFileLoader.hpp"
 
-#include "../animation/Adder.hpp"
-#include "../animation/AngleProvider.hpp"
-#include "../animation/FloatToInt.hpp"
-#include "../animation/Maximum.hpp"
-#include "../animation/Minimum.hpp"
-#include "../animation/Modulo.hpp"
-#include "../animation/Multiplier.hpp"
-#include "../animation/Sine.hpp"
-#include "../animation/TimeProvider.hpp"
-#include "../animation/StaticProvider.hpp"
+#include "../animation/provider/Adder.hpp"
+#include "../animation/provider/AngleProvider.hpp"
+#include "../animation/provider/FloatToInt.hpp"
+#include "../animation/provider/Maximum.hpp"
+#include "../animation/provider/Minimum.hpp"
+#include "../animation/provider/Modulo.hpp"
+#include "../animation/provider/Multiplier.hpp"
+#include "../animation/provider/Sine.hpp"
+#include "../animation/provider/TimeProvider.hpp"
+#include "../animation/provider/StaticProvider.hpp"
 
 #include <vector>
 
@@ -134,4 +134,17 @@ std::vector<std::string> LevelFileLoader::parseGrid(tinyxml2::XMLElement* xml)
         lines.push_back(data.substr(i, data.find('\n', i)-i));
 
     return std::move(lines);
+}
+
+void LevelFileLoader::parseKinematics(tinyxml2::XMLElement* element, Entity* entity)
+{
+    tinyxml2::XMLElement* kinematics = element->FirstChildElement("kinematics");
+    if(kinematics == nullptr)
+        return;
+    tinyxml2::XMLElement* rotation = kinematics->FirstChildElement("rotation");
+    if(rotation == nullptr || rotation->FirstChildElement() == nullptr)
+        return;
+    std::unique_ptr<ValueProvider> provider = parseProvider(rotation->FirstChildElement(), entity);
+    if(provider != nullptr)
+        entity->bindBodyRotation(std::move(provider));
 }

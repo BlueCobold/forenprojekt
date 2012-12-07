@@ -43,6 +43,9 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicalObject.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.hpp">
@@ -84,19 +87,10 @@
     <ClInclude Include="Background.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="animation\ValueProvider.hpp">
-      <Filter>Headers\animation</Filter>
-    </ClInclude>
-    <ClInclude Include="animation\TimeProvider.hpp">
-      <Filter>Headers\animation</Filter>
-    </ClInclude>
     <ClInclude Include="animation\OrientedObject.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
     <ClInclude Include="animation\TimedObject.hpp">
-      <Filter>Headers\animation</Filter>
-    </ClInclude>
-    <ClInclude Include="animation\AngleProvider.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
     <ClInclude Include="resources\ResourceCache.hpp">
@@ -114,35 +108,44 @@
     <ClInclude Include="AnimatedGraphics.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="animation\StaticProvider.hpp">
-      <Filter>Headers\animation</Filter>
+    <ClInclude Include="animation\provider\Adder.hpp">
+      <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="animation\Adder.hpp">
-      <Filter>Headers\animation</Filter>
+    <ClInclude Include="animation\provider\AngleProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="animation\Maximum.hpp">
-      <Filter>Headers\animation</Filter>
+    <ClInclude Include="animation\provider\FloatToInt.hpp">
+      <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="animation\Minimum.hpp">
-      <Filter>Headers\animation</Filter>
+    <ClInclude Include="animation\provider\Maximum.hpp">
+      <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="animation\Multiplier.hpp">
-      <Filter>Headers\animation</Filter>
+    <ClInclude Include="animation\provider\Minimum.hpp">
+      <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="animation\MultiProvider.hpp">
-      <Filter>Headers\animation</Filter>
+    <ClInclude Include="animation\provider\Modulo.hpp">
+      <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="animation\SingleProvider.hpp">
-      <Filter>Headers\animation</Filter>
+    <ClInclude Include="animation\provider\Multiplier.hpp">
+      <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="animation\Sine.hpp">
-      <Filter>Headers\animation</Filter>
+    <ClInclude Include="animation\provider\MultiProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="animation\Modulo.hpp">
-      <Filter>Headers\animation</Filter>
+    <ClInclude Include="animation\provider\Sine.hpp">
+      <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="animation\FloatToInt.hpp">
-      <Filter>Headers\animation</Filter>
+    <ClInclude Include="animation\provider\SingleProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\provider\StaticProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\provider\TimeProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\provider\ValueProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +175,9 @@
     </Filter>
     <Filter Include="Resouces\res\level">
       <UniqueIdentifier>{90c0ba6a-3cd0-4d24-b07f-c3f329daa084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\animation\provider">
+      <UniqueIdentifier>{8f3ce49a-75ba-4d2d-b341-e8b0c76204bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,6 @@
 #include "App.hpp"
 #include "Config.hpp"
 
-#include "animation/Modulo.hpp"
-
 #include <iostream>
 
 int main(int argc, char* argv[])

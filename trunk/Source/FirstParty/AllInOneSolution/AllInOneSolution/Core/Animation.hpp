@@ -3,7 +3,7 @@
 #ifndef ANIMATION_HPP
 #define ANIMATION_HPP
 
-#include "animation/ValueProvider.hpp"
+#include "animation/provider/ValueProvider.hpp"
 
 #include <memory> // unique_ptr
 #include <vector>

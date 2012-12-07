@@ -16,6 +16,7 @@ class Entity : public PhysicalObject, public AnimatedGraphics
 private:
 
     std::string m_name;
+    float m_lastTime;
 
 public:
 
@@ -23,6 +24,12 @@ public:
     virtual ~Entity();
 
     virtual void update(const float value);
+
+    virtual void Entity::restartAt(const float value)
+    {
+        TimedObject::restartAt(value);
+        m_lastTime = value;
+    }
 
     void setName(std::string name)
     {

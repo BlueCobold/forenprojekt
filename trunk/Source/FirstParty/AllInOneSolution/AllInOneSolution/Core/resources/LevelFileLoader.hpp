@@ -6,7 +6,7 @@
 #include "../Animation.hpp"
 #include "../Entity.hpp"
 #include "../AnimatedGraphics.hpp"
-#include "../animation/ValueProvider.hpp"
+#include "../animation/provider/ValueProvider.hpp"
 
 #include "ResourceManager.hpp"
 
@@ -29,6 +29,9 @@ public:
          tinyxml2::XMLElement* xml, const std::string& name, const std::string& key);
 
      static std::vector<std::string> parseGrid(tinyxml2::XMLElement* xml);
+
+     static void parseKinematics(tinyxml2::XMLElement* element,
+         Entity* entity);
 
 private:
 
