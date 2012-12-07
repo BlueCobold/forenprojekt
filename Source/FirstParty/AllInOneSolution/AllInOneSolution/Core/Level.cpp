@@ -246,7 +246,7 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     b2BodyDef bodyDef;
     if(std::string(element->Attribute("type")) == "static")
         bodyDef.type = b2_staticBody;
-    else if(std::string(element->Attribute("type")) == "kinematics")
+    else if(std::string(element->Attribute("type")) == "kinematic")
         bodyDef.type = b2_kinematicBody;
     else if(std::string(element->Attribute("type")) == "dynamic")
         bodyDef.type = b2_dynamicBody;
