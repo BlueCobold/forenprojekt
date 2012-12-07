@@ -60,7 +60,7 @@ void Animation::bindTexture(const sf::Texture& texture, const sf::Vector2f& offs
 
 const sf::IntRect Animation::getTextureRect() const
 {
-    return sf::IntRect(m_frame * m_frameWidth + m_sourceOffset.x, m_sourceOffset.y, m_frameWidth, m_frameHeight);
+    return sf::IntRect(static_cast<int>(m_frame * m_frameWidth + m_sourceOffset.x), static_cast<int>(m_sourceOffset.y), m_frameWidth, m_frameHeight);
 }
 
 void Animation::draw(sf::RenderTarget& target, sf::RenderStates states) const

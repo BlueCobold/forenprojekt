@@ -1,13 +1,24 @@
 #include "App.hpp"
 #include "Config.hpp"
 
+#include "animation/Modulo.hpp"
+
+#include <iostream>
+
 int main(int argc, char* argv[])
 {
-    Config ConfigFile("Config.ini");
-
-    App app(ConfigFile);
-
-    app.run();
+    try
+    {
+        Config configFile("Config.ini");
+        App app(configFile);
+        app.run();
+    }
+    catch (std::runtime_error& error)
+    {
+        std::cout << "An error occurred: " << error.what();
+        getchar();
+        return 1;
+    }
 
     return 0;
 }

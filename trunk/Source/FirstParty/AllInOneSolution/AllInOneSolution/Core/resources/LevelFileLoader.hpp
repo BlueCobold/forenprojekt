@@ -35,6 +35,10 @@ private:
     static std::unique_ptr<ValueProvider> parseProvider(
         tinyxml2::XMLElement* xml, 
         const AnimatedGraphics* animated);
+    
+    static std::vector<std::unique_ptr<ValueProvider>> parseProviders(
+        tinyxml2::XMLElement* xml, 
+        const AnimatedGraphics* animated);
 
     static std::unique_ptr<Animation> parseAnimation(tinyxml2::XMLElement* xml,
         const AnimatedGraphics* animated,

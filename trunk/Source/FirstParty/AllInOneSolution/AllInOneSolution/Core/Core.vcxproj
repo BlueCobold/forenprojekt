@@ -105,8 +105,17 @@
   <ItemGroup>
     <ClInclude Include="AnimatedGraphics.hpp" />
     <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="animation\Adder.hpp" />
     <ClInclude Include="animation\AngleProvider.hpp" />
+    <ClInclude Include="animation\FloatToInt.hpp" />
+    <ClInclude Include="animation\Maximum.hpp" />
+    <ClInclude Include="animation\Minimum.hpp" />
+    <ClInclude Include="animation\Modulo.hpp" />
+    <ClInclude Include="animation\Multiplier.hpp" />
+    <ClInclude Include="animation\MultiProvider.hpp" />
     <ClInclude Include="animation\OrientedObject.hpp" />
+    <ClInclude Include="animation\Sine.hpp" />
+    <ClInclude Include="animation\SingleProvider.hpp" />
     <ClInclude Include="animation\StaticProvider.hpp" />
     <ClInclude Include="animation\TimedObject.hpp" />
     <ClInclude Include="animation\TimeProvider.hpp" />
