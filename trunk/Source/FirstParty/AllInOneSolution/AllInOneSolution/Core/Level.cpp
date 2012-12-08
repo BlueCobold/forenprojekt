@@ -54,14 +54,20 @@ void Level::restartAt(const float time)
 
 void Level::update(const float elapsedTime)
 {
+    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+        if((*it)->killed())
+            m_entities.erase(it);
+
     m_timeStep =  elapsedTime - m_lastTime;
     m_velocityIterations = std::max(1, static_cast<int>(4 * m_timeStep * 60.0f));
     m_positionIterations = m_velocityIterations;
+    printf("%.4f\n",m_timeStep);
+
     m_world.Step(m_timeStep, m_velocityIterations, m_positionIterations);
 
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         (*it)->update(elapsedTime);
-
+    
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		m_debugDraw = !m_debugDraw;
 
@@ -235,6 +241,7 @@ bool Level::load()
     // Load world properties
     tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
     m_world.SetGravity(b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y")));
+    m_world.SetContactListener(&m_contactListener);
 
     return true;
 }
@@ -270,9 +277,15 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     if(xml->Attribute("type") != nullptr)
     {
         if(std::string(xml->Attribute("type")) == "teeter")
+        {
             entity = std::unique_ptr<Entity>(new Teeter(m_config.get<float>("MouseScale")));
+            entity->bindType(ET_Teeter);
+        }
         else if(std::string(xml->Attribute("type")) == "ball") // Normal Entity atm
+        {
             entity = std::unique_ptr<Entity>(new Entity);
+            entity->bindType(ET_Ball);
+        }
     }
     else // No type specified == normal Entity
         entity = std::unique_ptr<Entity>(new Entity);
@@ -335,6 +348,8 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     // Create & bind body
     b2Body* body = m_world.CreateBody(&bodyDef);
     body->CreateFixture(&fixtureDef);
+    // Save the entity in the body for the contact listener
+    body->SetUserData(entity.get());
 
     entity->bindBody(body);
 

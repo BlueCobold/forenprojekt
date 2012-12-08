@@ -22,5 +22,40 @@ void Entity::update(const float value)
         getAnimation()->setRotation(m_body->GetAngle());
         getAnimation()->update();
     }
+    
+    m_type = *(static_cast<EntityType*>(m_body->GetUserData()));
+
     m_lastTime = value;
+
+}
+
+void Entity::bindType(EntityType type)
+{
+    m_type = type;
+}
+
+void Entity::setName(std::string name)
+{
+    m_name = name;
+}
+
+EntityType& Entity::getType()
+{
+    return m_type;
+}
+
+void Entity::restartAt(const float value)
+{
+    TimedObject::restartAt(value);
+    m_lastTime = value;
+}
+
+void Entity::kill()
+{
+    m_killed = true;
+}
+
+bool Entity::killed()
+{
+    return m_killed;
 }
