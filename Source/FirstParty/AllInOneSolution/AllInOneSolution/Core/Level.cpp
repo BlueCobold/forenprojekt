@@ -58,7 +58,10 @@ void Level::update(const float elapsedTime)
     while(it != m_entities.end())
     {
         if((*it)->killed())
+        {
+            (*it)->unbindBody();
             it = m_entities.erase(it);
+        }
         else
             ++it;
     }

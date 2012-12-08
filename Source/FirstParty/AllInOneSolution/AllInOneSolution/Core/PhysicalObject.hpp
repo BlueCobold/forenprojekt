@@ -26,14 +26,17 @@ public:
     PhysicalObject()
     { }
     virtual ~PhysicalObject()
-    {
-        m_body->GetWorld()->DestroyBody(m_body);
-    }
+    { }
 
     /// Bind the body
     void bindBody(b2Body* body)
     {
         m_body = body;
+    }
+
+    void unbindBody()
+    {
+        m_body->GetWorld()->DestroyBody(m_body);
     }
 
     void bindRotationController(std::unique_ptr<ValueProvider> provider)
