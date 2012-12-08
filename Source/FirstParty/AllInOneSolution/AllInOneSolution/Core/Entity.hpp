@@ -9,6 +9,8 @@
 #include <memory> // std::unique_ptr
 #include <string>
 
+enum EntityType {ET_Teeter, ET_Ball, ET_Target, ET_None};
+
 /// This class will be used to draw objects that have a binding
 /// to Box2D 
 class Entity : public PhysicalObject, public AnimatedGraphics
@@ -16,7 +18,9 @@ class Entity : public PhysicalObject, public AnimatedGraphics
 private:
 
     std::string m_name;
+    EntityType m_type;
     float m_lastTime;
+    bool m_killed;
 
 public:
 
@@ -25,16 +29,18 @@ public:
 
     virtual void update(const float value);
 
-    virtual void Entity::restartAt(const float value)
-    {
-        TimedObject::restartAt(value);
-        m_lastTime = value;
-    }
+    void bindType(EntityType type);
 
-    void setName(std::string name)
-    {
-        m_name = name;
-    }
+    void setName(std::string name);
+
+    EntityType& getType();
+
+    virtual void Entity::restartAt(const float value);
+
+    void kill();
+
+    bool killed();
+
 };
 
 #endif // ENTITY_HPP
