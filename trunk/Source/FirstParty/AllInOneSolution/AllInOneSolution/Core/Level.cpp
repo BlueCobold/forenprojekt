@@ -54,22 +54,26 @@ void Level::restartAt(const float time)
 
 void Level::update(const float elapsedTime)
 {
-    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+    auto it=m_entities.begin();
+    while(it != m_entities.end())
+    {
         if((*it)->killed())
-            m_entities.erase(it);
+            it = m_entities.erase(it);
+        else
+            ++it;
+    }
 
     m_timeStep =  elapsedTime - m_lastTime;
     m_velocityIterations = std::max(1, static_cast<int>(4 * m_timeStep * 60.0f));
     m_positionIterations = m_velocityIterations;
-    printf("%.4f\n",m_timeStep);
 
     m_world.Step(m_timeStep, m_velocityIterations, m_positionIterations);
 
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         (*it)->update(elapsedTime);
-    
-	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		m_debugDraw = !m_debugDraw;
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        m_debugDraw = !m_debugDraw;
 
     m_lastTime = elapsedTime;
 }

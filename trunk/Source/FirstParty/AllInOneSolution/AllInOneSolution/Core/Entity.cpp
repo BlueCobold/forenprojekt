@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
-Entity::Entity()
+Entity::Entity() : m_killed(false)
 {
 }
 
@@ -22,8 +22,6 @@ void Entity::update(const float value)
         getAnimation()->setRotation(m_body->GetAngle());
         getAnimation()->update();
     }
-    
-    m_type = *(static_cast<EntityType*>(m_body->GetUserData()));
 
     m_lastTime = value;
 
