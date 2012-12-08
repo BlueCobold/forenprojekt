@@ -146,5 +146,5 @@ void LevelFileLoader::parseKinematics(tinyxml2::XMLElement* element, Entity* ent
         return;
     std::unique_ptr<ValueProvider> provider = parseProvider(rotation->FirstChildElement(), entity);
     if(provider != nullptr)
-        entity->bindBodyRotation(std::move(provider));
+        entity->bindRotationController(std::move(provider));
 }
