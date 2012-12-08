@@ -9,7 +9,7 @@ Animation::Animation(std::unique_ptr<ValueProvider> provider,
     const unsigned int frames,
     const unsigned int frameWidth, const unsigned int frameHeight,
     const bool applyRotation) :
-    m_provider(std::move(provider)),
+    m_frameProvider(std::move(provider)),
     m_frames(frames),
     m_frame(0),
     m_frameWidth(frameWidth),
@@ -24,11 +24,17 @@ void Animation::update()
 {
     for(auto sub = m_subAnimations.begin(); sub != m_subAnimations.end(); ++sub)
         (*sub)->update();
-    if(m_provider == nullptr)
+    if(m_frameProvider == nullptr)
         m_frame = 0;
     else
-        m_frame = static_cast<int>(m_provider->getValue()) % m_frames;
+        m_frame = static_cast<int>(m_frameProvider->getValue()) % m_frames;
     m_sprite.setTextureRect(getTextureRect());
+    sf::Vector2f pos = sf::Vector2f(utility::toPixel(m_externalPos.x), utility::toPixel(m_externalPos.y));
+    if(m_xPositionProvider != nullptr)
+        pos.x += m_xPositionProvider->getValue();
+    if(m_yPositionProvider != nullptr)
+        pos.y += m_yPositionProvider->getValue();
+    m_sprite.setPosition(pos.x, pos.y);
 }
 
 void Animation::bindSubAnimations(std::vector<std::unique_ptr<Animation>>& animations)
@@ -40,7 +46,7 @@ void Animation::setPosition(const float x, const float y)
 {
     for(auto sub = m_subAnimations.begin(); sub != m_subAnimations.end(); ++sub)
         (*sub)->setPosition(x, y);
-    m_sprite.setPosition(utility::toPixel<float>(x), utility::toPixel<float>(y));
+    m_externalPos = sf::Vector2f(x, y);
 }
 
 void Animation::setRotation(const float radians)
@@ -68,4 +74,10 @@ void Animation::draw(sf::RenderTarget& target, sf::RenderStates states) const
     target.draw(m_sprite, states);
     for(auto sub = m_subAnimations.begin(); sub != m_subAnimations.end(); ++sub)
         (*sub)->draw(target, states);
+}
+
+void Animation::bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y)
+{
+    m_xPositionProvider = std::move(x);
+    m_yPositionProvider = std::move(y);
 }

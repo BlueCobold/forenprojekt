@@ -9,6 +9,7 @@
 class Background : public AnimatedGraphics
 {
 public:
+
 	Background();
 	~Background();
 

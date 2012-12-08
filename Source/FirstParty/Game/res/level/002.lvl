@@ -81,6 +81,28 @@
 						<frameindex frames="1">
 							<static value="0"/>
 						</frameindex>
+						<!-- position axis="x">
+							<mul>
+								<sine>
+									<mul>
+										<time />
+										<static value="85" />
+									</mul>
+								</sine>
+								<static value="10" />
+							</mul>
+						</position>
+						<position axis="y">
+							<mul>
+								<sine>
+									<mul>
+										<time />
+										<static value="115" />
+									</mul>
+								</sine>
+								<static value="10" />
+							</mul>
+						</position -->
 					</animation>
 				</animations>
 			</entity>
@@ -201,10 +223,10 @@ w5      TT        RR    w6
 w1                      w2
 w3                      w4
 w3                      w1
-w2                        
-w6                TT      
-w5                        
-w4                        
+w2
+w6                TT
+w5
+w4
 w3          ll  lr      w4
 w1w2w3w3w4w1w1w6w5w4w5w5w2
 	</grid>
