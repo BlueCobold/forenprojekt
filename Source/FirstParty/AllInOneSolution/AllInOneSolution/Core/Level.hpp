@@ -7,7 +7,7 @@
 #include "DebugDraw.hpp"
 #include "Background.hpp"
 #include "animation/TimedObject.hpp"
-#include "ContactListener.hpp"
+#include "ContactFilter.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -77,7 +77,7 @@ private:
 
     std::unique_ptr<Background> m_background;
 
-    ContactListener m_contactListener;
+    ContactFilter m_contactFilter;
 
     float m_timeStep;
     int m_velocityIterations;

@@ -91,7 +91,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Config.cpp" />
-    <ClCompile Include="ContactListener.cpp" />
+    <ClCompile Include="ContactFilter.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -125,7 +125,7 @@
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Background.hpp" />
     <ClInclude Include="Config.hpp" />
-    <ClInclude Include="ContactListener.hpp" />
+    <ClInclude Include="ContactFilter.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="GraphicalObject.hpp" />
