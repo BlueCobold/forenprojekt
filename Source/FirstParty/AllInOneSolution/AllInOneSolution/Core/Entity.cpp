@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
-Entity::Entity() : m_killed(false)
+Entity::Entity(Type type) : m_killed(false), m_type(type)
 {
 }
 
@@ -27,17 +27,12 @@ void Entity::update(const float value)
 
 }
 
-void Entity::bindType(EntityType type)
-{
-    m_type = type;
-}
-
 void Entity::setName(std::string name)
 {
     m_name = name;
 }
 
-EntityType& Entity::getType()
+const Entity::Type& Entity::getType() const
 {
     return m_type;
 }
@@ -53,7 +48,7 @@ void Entity::kill()
     m_killed = true;
 }
 
-bool Entity::killed()
+bool Entity::killed() const
 {
     return m_killed;
 }
