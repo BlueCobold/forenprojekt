@@ -191,11 +191,11 @@
 							<static value="0"/>
 						</frameindex>
 						<!-- angled min="0" step="45"/-->
-					</animation>
-					<animation texture="ballshade" frames="1" width="30" height="30" x="15" y="15" rotate="false">
-						<frameindex frames="1">
-							<static value="0"/>
-						</frameindex>
+					    <animation texture="ballshade" frames="1" width="30" height="30" x="15" y="15" rotate="false">
+                            <frameindex frames="1">
+                                <static value="0"/>
+                            </frameindex>
+                        </animation>
 					</animation>
 				</animations>
 			</entity>
