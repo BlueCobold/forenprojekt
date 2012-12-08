@@ -33,7 +33,7 @@ public:
         m_body = body;
     }
 
-    void bindBodyRotation(std::unique_ptr<ValueProvider> provider)
+    void bindRotationController(std::unique_ptr<ValueProvider> provider)
     {
         m_rotation = std::move(provider);
     }
