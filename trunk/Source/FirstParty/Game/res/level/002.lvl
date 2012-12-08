@@ -45,6 +45,10 @@
 				<body type="kinematic" angle="0" />
 				<fixture density="0.5" friction="0.8" restitution="0.1" />
 			</physic>
+			<physic name="target">
+				<body type="kinematic" angle="0" />
+				<fixture density="0.5" friction="0.8" restitution="0.1" />
+			</physic>
 			<physic name="slapper">
 				<body type="kinematic" angle="0">
 					<kinematics>
@@ -73,15 +77,16 @@
 				</animations>
 			</entity>
 
-			<!-- Walls -->
-			<entity name="wall_1" rep="w1">
-				<physics name="wall" shape="wall" />
+			<entity name="target_1" rep="t1" type="target">
+				<physics name="target">
+					<shape type="circle" radius="33" />
+				</physics>
 				<animations>
-					<animation texture="small_quad_1" width="60" height="60" rotate="false">
+					<animation texture="target" frames="1" width="67" height="67" x="33" y="33" rotate="true">
 						<frameindex frames="1">
 							<static value="0"/>
 						</frameindex>
-						<!-- position axis="x">
+						<!--position axis="x">
 							<mul>
 								<sine>
 									<mul>
@@ -89,7 +94,7 @@
 										<static value="85" />
 									</mul>
 								</sine>
-								<static value="10" />
+								<static value="20" />
 							</mul>
 						</position>
 						<position axis="y">
@@ -100,9 +105,20 @@
 										<static value="115" />
 									</mul>
 								</sine>
-								<static value="10" />
+								<static value="20" />
 							</mul>
 						</position -->
+					</animation>
+				</animations>
+			</entity>
+			<!-- Walls -->
+			<entity name="wall_1" rep="w1">
+				<physics name="wall" shape="wall" />
+				<animations>
+					<animation texture="small_quad_1" width="60" height="60" rotate="false">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
 					</animation>
 				</animations>
 			</entity>
@@ -223,10 +239,10 @@ w5      TT        RR    w6
 w1                      w2
 w3                      w4
 w3                      w1
-w2
-w6                TT
-w5
-w4
+w2                        w2
+w6                TT      w6
+w5  t1                    w1
+w4                        w3
 w3          ll  lr      w4
 w1w2w3w3w4w1w1w6w5w4w5w5w2
 	</grid>
