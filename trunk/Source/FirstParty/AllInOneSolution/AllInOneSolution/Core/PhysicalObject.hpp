@@ -6,6 +6,7 @@
 #include "animation/OrientedObject.hpp"
 #include "animation/provider/ValueProvider.hpp"
 
+#include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
 #include <Box2D/Dynamics/b2Body.h>
 
@@ -25,7 +26,9 @@ public:
     PhysicalObject()
     { }
     virtual ~PhysicalObject()
-    { }
+    {
+        m_body->GetWorld()->DestroyBody(m_body);
+    }
 
     /// Bind the body
     void bindBody(b2Body* body)
