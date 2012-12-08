@@ -9,38 +9,37 @@
 #include <memory> // std::unique_ptr
 #include <string>
 
-enum EntityType {ET_Teeter, ET_Ball, ET_Target, ET_None};
-
 /// This class will be used to draw objects that have a binding
 /// to Box2D 
 class Entity : public PhysicalObject, public AnimatedGraphics
 {
+public:
+
+    enum Type {Teeter, Ball, Target, None};
+
 private:
 
     std::string m_name;
-    EntityType m_type;
+    Type m_type;
     float m_lastTime;
     bool m_killed;
 
 public:
 
-    Entity();
+    Entity(Type type);
     virtual ~Entity();
 
     virtual void update(const float value);
 
-    void bindType(EntityType type);
-
     void setName(std::string name);
 
-    EntityType& getType();
+    const Type& getType() const;
 
     virtual void Entity::restartAt(const float value);
 
     void kill();
 
-    bool killed();
-
+    bool killed() const;
 };
 
 #endif // ENTITY_HPP

@@ -282,17 +282,15 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     {
         if(std::string(xml->Attribute("type")) == "teeter")
         {
-            entity = std::unique_ptr<Entity>(new Teeter(m_config.get<float>("MouseScale")));
-            entity->bindType(ET_Teeter);
+            entity = std::unique_ptr<Teeter>(new Teeter(m_config.get<float>("MouseScale")));
         }
         else if(std::string(xml->Attribute("type")) == "ball") // Normal Entity atm
         {
-            entity = std::unique_ptr<Entity>(new Entity);
-            entity->bindType(ET_Ball);
+            entity = std::unique_ptr<Entity>(new Entity(Entity::Ball));
         }
     }
     else // No type specified == normal Entity
-        entity = std::unique_ptr<Entity>(new Entity);
+        entity = std::unique_ptr<Entity>(new Entity(Entity::None));
 
     entity->setName(std::string(xml->Attribute("name")));
         

@@ -8,9 +8,9 @@ void ContactListener::BeginContact(b2Contact* contact)
     Entity* entityA = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
     Entity* entityB = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
-    if(entityA->getType() == ET_Target && entityB->getType() == ET_Ball)
+    if(entityA->getType() == Entity::Target && entityB->getType() == Entity::Ball)
         entityA->kill();
-    else if(entityA->getType() == ET_Ball && entityB->getType() == ET_Target)
+    else if(entityA->getType() == Entity::Ball && entityB->getType() == Entity::Target)
         entityB->kill();
 }
  
