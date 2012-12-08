@@ -248,7 +248,7 @@ bool Level::load()
     // Load world properties
     tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
     m_world.SetGravity(b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y")));
-    m_world.SetContactListener(&m_contactListener);
+    m_world.SetContactFilter(&m_contactFilter);
 
     return true;
 }
@@ -294,6 +294,13 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     }
     else // No type specified == normal Entity
         entity = std::unique_ptr<Entity>(new Entity(Entity::None));
+
+    if(xml->Attribute("collideWithBall") != nullptr)
+    {
+        entity->setCollideWithBall(xml->BoolAttribute("collideWithBall"));
+    }
+    else
+        entity->setCollideWithBall(true);
 
     entity->setName(std::string(xml->Attribute("name")));
         

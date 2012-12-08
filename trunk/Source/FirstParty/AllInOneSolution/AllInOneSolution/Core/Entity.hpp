@@ -23,6 +23,7 @@ private:
     Type m_type;
     float m_lastTime;
     bool m_killed;
+    bool m_collideWithBall;
 
 public:
 
@@ -40,6 +41,11 @@ public:
     void kill();
 
     bool killed() const;
+
+    void setCollideWithBall(bool value);
+
+    bool isCollideWithBall();
+
 };
 
 #endif // ENTITY_HPP

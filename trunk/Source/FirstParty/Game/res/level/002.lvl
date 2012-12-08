@@ -77,7 +77,7 @@
 				</animations>
 			</entity>
 
-			<entity name="target_1" rep="t1" type="target">
+			<entity name="target_1" rep="t1" type="target" collideWithBall="false">
 				<physics name="target">
 					<shape type="circle" radius="33" />
 				</physics>

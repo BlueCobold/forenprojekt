@@ -43,12 +43,10 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="ContactListener.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicalObject.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="ContactFilter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.hpp">
@@ -141,9 +139,6 @@
     <ClInclude Include="animation\provider\SingleProvider.hpp">
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="ContactListener.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="animation\provider\StaticProvider.hpp">
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
@@ -153,6 +148,7 @@
     <ClInclude Include="animation\provider\ValueProvider.hpp">
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
+    <ClInclude Include="ContactFilter.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

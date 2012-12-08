@@ -56,3 +56,13 @@ bool Entity::killed() const
 {
     return m_killed;
 }
+
+void Entity::setCollideWithBall(bool value)
+{
+    m_collideWithBall = value;
+}
+
+bool Entity::isCollideWithBall()
+{
+    return m_collideWithBall;
+}
