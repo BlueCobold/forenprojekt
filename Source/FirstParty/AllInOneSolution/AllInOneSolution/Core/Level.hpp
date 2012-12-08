@@ -72,7 +72,7 @@ private:
     // HACK: This should be in the Entity class, but since unique_ptr sucks with VS10...
     std::vector<std::unique_ptr<b2Shape>> m_shapes;
 
-	std::unique_ptr<Background> m_background;
+    std::unique_ptr<Background> m_background;
 
     b2World m_world;
 
