@@ -12,6 +12,8 @@ void ContactListener::BeginContact(b2Contact* contact)
         entityA->kill();
     else if(entityA->getType() == Entity::Ball && entityB->getType() == Entity::Target)
         entityB->kill();
+
+    
 }
  
 void ContactListener::EndContact(b2Contact* contact)

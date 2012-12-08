@@ -63,6 +63,9 @@ private:
     const std::string filename();
 
 private:
+
+    b2World m_world;
+
     ResourceManager& m_resourceManager;
 
     unsigned int m_number;
@@ -73,8 +76,6 @@ private:
     std::vector<std::unique_ptr<b2Shape>> m_shapes;
 
     std::unique_ptr<Background> m_background;
-
-    b2World m_world;
 
     ContactListener m_contactListener;
 
