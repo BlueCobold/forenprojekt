@@ -38,6 +38,11 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 
     std::vector<std::unique_ptr<Animation>> subAnimations;
 
+    std::unique_ptr<ValueProvider> xProvider = findPositionController(xml, animated, std::string("x"));
+    std::unique_ptr<ValueProvider> yProvider = findPositionController(xml, animated, std::string("y"));
+    if((xProvider != nullptr) || (yProvider != nullptr))
+        anim->bindPositionController(std::move(xProvider), std::move(yProvider));
+
     for(auto subs = xml->FirstChildElement("animation"); subs != nullptr; subs = subs->NextSiblingElement("animation"))
     {
         std::unique_ptr<ValueProvider> subProvider = parseProvider(subs, animated);
@@ -147,4 +152,21 @@ void LevelFileLoader::parseKinematics(tinyxml2::XMLElement* element, Entity* ent
     std::unique_ptr<ValueProvider> provider = parseProvider(rotation->FirstChildElement(), entity);
     if(provider != nullptr)
         entity->bindRotationController(std::move(provider));
+}
+
+std::unique_ptr<ValueProvider> LevelFileLoader::findPositionController(
+    tinyxml2::XMLElement* xml,
+    const AnimatedGraphics* animated,
+    const std::string& axis)
+{
+    for(auto iterator = xml->FirstChildElement("position");
+        iterator != nullptr; iterator = iterator->NextSiblingElement("position"))
+    {
+        if(std::string(iterator->Attribute("axis")) != axis)
+            continue;
+        if(iterator->FirstChildElement() == nullptr)
+            throw std::runtime_error("The position element needs a mathematical sub-tag.");
+        return parseProvider(iterator->FirstChildElement(), animated);
+    }
+    return nullptr;
 }

@@ -47,6 +47,10 @@ private:
         const AnimatedGraphics* animated,
         std::unique_ptr<ValueProvider> provider,
         ResourceManager& resourceManager);
+
+    static std::unique_ptr<ValueProvider> findPositionController(tinyxml2::XMLElement* xml,
+        const AnimatedGraphics* animated,
+        const std::string& axis);
 };
 
 #endif // LEVEL_FILE_LOADER_HPP

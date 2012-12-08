@@ -18,9 +18,9 @@ void Entity::update(const float value)
     updateKinematics(getPassedTime(), value - m_lastTime);
     if(getAnimation() != nullptr)
     {
-        getAnimation()->update();
         getAnimation()->setPosition(m_body->GetPosition().x, m_body->GetPosition().y);
         getAnimation()->setRotation(m_body->GetAngle());
+        getAnimation()->update();
     }
     m_lastTime = value;
 }
