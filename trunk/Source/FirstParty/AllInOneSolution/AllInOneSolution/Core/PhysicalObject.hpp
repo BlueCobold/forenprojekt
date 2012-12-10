@@ -20,6 +20,9 @@ class PhysicalObject : public OrientedObject
 private:
 
     std::unique_ptr<ValueProvider> m_rotation;
+    std::unique_ptr<ValueProvider> m_xPositionProvider;
+    std::unique_ptr<ValueProvider> m_yPositionProvider;
+    b2Vec2 m_basePosition;
 
 public:
 
@@ -32,6 +35,7 @@ public:
     void bindBody(b2Body* body)
     {
         m_body = body;
+        m_basePosition = m_body->GetPosition();
     }
 
     void unbindBody()
@@ -42,6 +46,12 @@ public:
     void bindRotationController(std::unique_ptr<ValueProvider> provider)
     {
         m_rotation = std::move(provider);
+    }
+
+    void bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y)
+    {
+        m_xPositionProvider = std::move(x);
+        m_yPositionProvider = std::move(y);
     }
 
     virtual float getAngle() const

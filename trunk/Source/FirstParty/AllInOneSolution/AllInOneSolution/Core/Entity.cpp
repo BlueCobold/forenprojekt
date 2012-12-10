@@ -1,12 +1,13 @@
 #include "Entity.hpp"
-
 #include "Utility.hpp"
+
+#include <exception>
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
 #include <Box2D/Dynamics/b2World.h>
 
-Entity::Entity(Type type) : m_killed(false), m_type(type)
+Entity::Entity(Type type) : m_killed(false), m_type(type), m_updatingAni(nullptr)
 {
 }
 
@@ -20,15 +21,24 @@ void Entity::update(const float value)
     {
         updateCurrentTime(value);
         updateKinematics(getPassedTime(), value - m_lastTime);
-        if(getAnimation() != nullptr)
+        for(auto animation = getAnimations().begin(); animation != getAnimations().end(); animation++)
         {
-            getAnimation()->setPosition(m_body->GetPosition().x, m_body->GetPosition().y);
-            getAnimation()->setRotation(m_body->GetAngle());
-            getAnimation()->update();
+            m_updatingAni = (*animation).get();
+            (*animation)->setPosition(m_body->GetPosition().x, m_body->GetPosition().y);
+            (*animation)->setRotation(m_body->GetAngle());
+            (*animation)->update();
         }
+        m_updatingAni = nullptr;
 
         m_lastTime = value;
     }
+}
+
+float Entity::getValueOf(const std::string& name) const
+{
+    if(m_updatingAni == nullptr)
+        throw std::runtime_error("Can't evaluate a variable at this time.");
+    return m_updatingAni->getValueOf(name);
 }
 
 void Entity::setName(std::string name)

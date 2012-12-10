@@ -46,7 +46,32 @@
 				<fixture density="0.5" friction="0.8" restitution="0.1" />
 			</physic>
 			<physic name="target">
-				<body type="kinematic" angle="0" />
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<!-- position axis="x">
+							<mul>
+								<sine>
+									<mul>
+										<time />
+										<static value="120" />
+									</mul>
+								</sine>
+								<static value="30" />
+							</mul>
+						</position>
+						<position axis="y">
+							<mul>
+								<sine>
+									<mul>
+										<time />
+										<static value="100" />
+									</mul>
+								</sine>
+								<static value="30" />
+							</mul>
+						</position -->
+					</kinematics>
+				</body>
 				<fixture density="0.5" friction="0.8" restitution="0.1" />
 			</physic>
 			<physic name="slapper">
@@ -69,7 +94,7 @@
 			<entity name="Slapper" rep="RR">
 				<physics name="slapper" shape="teeter" />
 				<animations>
-					<animation texture="teeter_wooden" frames="1" width="214" height="32" x="107" y="16" rotate="true">
+					<animation texture="teeter_wooden" frames="1" width="214" height="32" midx="107" midy="16" rotate="true">
 						<frameindex frames="1">
 							<static value="0"/>
 						</frameindex>
@@ -82,32 +107,10 @@
 					<shape type="circle" radius="33" />
 				</physics>
 				<animations>
-					<animation texture="target" frames="1" width="67" height="67" x="33" y="33" rotate="true">
+					<animation texture="target" frames="1" width="67" height="67" midx="33" midy="33" rotate="true">
 						<frameindex frames="1">
 							<static value="0"/>
 						</frameindex>
-						<!--position axis="x">
-							<mul>
-								<sine>
-									<mul>
-										<time />
-										<static value="85" />
-									</mul>
-								</sine>
-								<static value="20" />
-							</mul>
-						</position>
-						<position axis="y">
-							<mul>
-								<sine>
-									<mul>
-										<time />
-										<static value="115" />
-									</mul>
-								</sine>
-								<static value="20" />
-							</mul>
-						</position -->
 					</animation>
 				</animations>
 			</entity>
@@ -202,16 +205,16 @@
 					<shape type="circle" radius="14" />
 				</physics>
 				<animations>
-					<animation texture="ballback" frames="1" width="30" height="30" x="15" y="15" rotate="true">
+					<animation texture="ballback" frames="1" width="30" height="30" midx="15" midy="15" rotate="true">
 						<frameindex frames="1">
 							<static value="0"/>
 						</frameindex>
 						<!-- angled min="0" step="45"/-->
-					    <animation texture="ballshade" frames="1" width="30" height="30" x="15" y="15" rotate="false">
-                            <frameindex frames="1">
-                                <static value="0"/>
-                            </frameindex>
-                        </animation>
+					</animation>
+					<animation texture="ballshade" frames="1" width="30" height="30" midx="15" midy="15" rotate="false">
+						<frameindex frames="1">
+							<static value="0"/>
+						</frameindex>
 					</animation>
 				</animations>
 			</entity>
@@ -220,7 +223,7 @@
 			<entity name="Teeter" rep="TT" type="teeter">
 				<physics name="teeter" shape="teeter" />
 				<animations>
-					<animation texture="teeter_wooden" frames="1" width="214" height="32" x="107" y="16" rotate="true">
+					<animation texture="teeter_wooden" frames="1" width="214" height="32" midx="107" midy="16" rotate="true">
 						<frameindex frames="1">
 							<static value="0"/>
 						</frameindex>
@@ -246,17 +249,139 @@ w4                        w3
 w3          ll  lr      w4
 w1w2w3w3w4w1w1w6w5w4w5w5w2
 	</grid>
-    <objects>
+	<objects>
 		<!-- Background -->
 		<background>
-			<animation texture="bg_pastureland" smooth="false" frames="1" width="1600" height="900" x="0" y="0" rotate="false">
+			<animation texture="pastureland_bg" width="1600" height="900" rotate="false">
 				<frameindex frames="1">
 					<static value="0"/>
 				</frameindex>
 			</animation>
+			<animation texture="pastureland_clouds" width="200" height="98"><!-- small cloud -->
+				<frameindex frames="1">
+					<static value="0"/>
+				</frameindex>
+				<constants speed="15" offset="65" />
+				<position axis="x">
+					<add>
+						<static value="1650" />
+						<mul>
+							<mul>
+								<var name="speed" />
+								<static value="-1" />
+							</mul>
+							<mod>
+								<add>
+									<time />
+									<var name="offset" />
+								</add>
+								<mul>
+									<inv>
+										<var name="speed" />
+									</inv>
+									<static value="1900" />
+								</mul>
+							</mod>
+						</mul>
+					</add>
+				</position>
+				<position axis="y">
+					<static value="260" />
+				</position>
+			</animation>
+			<animation texture="pastureland_clouds" width="240" height="126" srcy="98"><!-- large cloud -->
+				<frameindex frames="1">
+					<static value="0"/>
+				</frameindex>
+				<constants speed="30" offset="35" />
+				<position axis="x">
+					<add>
+						<static value="1650" />
+						<mul>
+							<mul>
+								<var name="speed" />
+								<static value="-1" />
+							</mul>
+							<mod>
+								<add>
+									<time />
+									<var name="offset" />
+								</add>
+								<mul>
+									<inv>
+										<var name="speed" />
+									</inv>
+									<static value="1900" />
+								</mul>
+							</mod>
+						</mul>
+					</add>
+				</position>
+				<position axis="y">
+					<static value="60" />
+				</position>
+			</animation>
+			<animation texture="pastureland_flowers_front2" width="149" height="187" x="268" y="605" midx="68" midy="180"><!-- 02 mid flower -->
+				<frameindex frames="1">
+					<static value="0"/>
+				</frameindex>
+				<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.6" perSmall="100" />
+				<rotation>
+					<add>
+						<var name="minAngle" />
+						<mul>
+							<sine>
+								<mul>
+									<time />
+									<var name="perBig" />
+								</mul>
+							</sine>
+							<var name="ampBig" />
+						</mul>
+						<mul>
+							<sine>
+								<mul>
+									<time />
+									<var name="perSmall" />
+								</mul>
+							</sine>
+							<var name="ampSmall" />
+						</mul>
+					</add>
+				</rotation>
+			</animation>
+			<animation texture="pastureland_flowers_front" width="96" height="129" x="230" y="610" midx="48" midy="125"><!-- 01 front flower -->
+				<frameindex frames="1">
+					<static value="0"/>
+				</frameindex>
+				<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.2" perSmall="120" />
+				<rotation>
+					<add>
+						<var name="minAngle" />
+						<mul>
+							<sine>
+								<mul>
+									<time />
+									<var name="perBig" />
+								</mul>
+							</sine>
+							<var name="ampBig" />
+						</mul>
+						<mul>
+							<sine>
+								<mul>
+									<time />
+									<var name="perSmall" />
+								</mul>
+							</sine>
+							<var name="ampSmall" />
+						</mul>
+					</add>
+				</rotation>
+			</animation>
 		</background>
-    </objects>
-    <world>
-        <gravity x="0" y="40" />
-    </world>
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
 </level>

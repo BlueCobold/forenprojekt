@@ -23,7 +23,9 @@ public:
 
     virtual float getValue() const
     {
-        return fmodf(getProvider()[0]->getValue(), getProvider()[1]->getValue());
+        float dividend = getProvider()[0]->getValue();
+        float divisor = getProvider()[1]->getValue();
+        return fmodf(dividend, divisor);
     }
 };
 
