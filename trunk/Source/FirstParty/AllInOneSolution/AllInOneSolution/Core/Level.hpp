@@ -8,6 +8,7 @@
 #include "Background.hpp"
 #include "animation/TimedObject.hpp"
 #include "ContactFilter.hpp"
+#include "ScrollView.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -94,6 +95,9 @@ private:
     Config& m_config;
 
 	bool m_debugDraw;
+
+	ScrollView m_scrollView;
+	Entity* m_ball;
 };
 
 #endif // LEVEL_HPP
