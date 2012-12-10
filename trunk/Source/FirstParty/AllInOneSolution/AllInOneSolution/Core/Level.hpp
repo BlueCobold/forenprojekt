@@ -48,6 +48,9 @@ public:
     /// Return the level number
     const unsigned int number();
 
+    const float getWidth() const;
+    const float getHeight() const;
+
 private:
     /// Load the level after m_number
     bool load();
@@ -82,6 +85,9 @@ private:
     float m_timeStep;
     int m_velocityIterations;
     int m_positionIterations;
+
+    float m_width;
+    float m_height;
 
     float m_lastTime;
 

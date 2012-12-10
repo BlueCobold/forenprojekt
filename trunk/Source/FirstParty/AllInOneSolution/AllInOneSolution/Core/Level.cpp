@@ -144,6 +144,8 @@ bool Level::load()
     
     // Get tile size
     unsigned int size = static_cast<unsigned int>(grid->IntAttribute("size"));
+    m_height = grid->FloatAttribute("height");
+    m_width = grid->FloatAttribute("width");
 
     // Separate the lines for easier processing
     std::vector<std::string> lines = LevelFileLoader::parseGrid(grid);
@@ -390,4 +392,14 @@ const std::string Level::filename()
         filename.append(utility::toString(m_number) + ".lvl");
 
     return filename;
+}
+
+const float Level::getWidth() const
+{
+    return m_width;
+}
+
+const float Level::getHeight() const
+{
+    return m_height;
 }
