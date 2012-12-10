@@ -11,6 +11,7 @@
 class ScrollView
 {
 public:
+	ScrollView();
 	ScrollView(const sf::Vector2u& levelsize, const sf::Vector2u& viewsize);
 
 	/*
@@ -19,9 +20,12 @@ public:
 	*/
 	void adjustView(const sf::Vector2f& scrollvec, sf::RenderWindow& window);
 
+	void setViewSize(const sf::Vector2u& v);
+	void setLevelSize(const sf::Vector2u& v);
+
 private:
-	const sf::Vector2u m_viewSize;  // view dimension
-	sf::Vector2f m_levelSize; // level dimension
+	sf::Vector2u m_viewSize;  // view dimension
+	sf::Vector2u m_levelSize; // level dimension
 };
 
 #endif

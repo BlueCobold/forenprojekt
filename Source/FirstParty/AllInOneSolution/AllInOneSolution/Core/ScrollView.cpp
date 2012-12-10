@@ -1,5 +1,9 @@
 #include "ScrollView.hpp"
 
+ScrollView::ScrollView()
+{
+}
+
 ScrollView::ScrollView(const sf::Vector2u& levelsize, const sf::Vector2u& viewsize)
 	: m_viewSize(viewsize), m_levelSize(levelsize)
 {
@@ -44,4 +48,14 @@ void ScrollView::adjustView(const sf::Vector2f& scrollvec, sf::RenderWindow& win
 
 	view.setCenter(center);
 	window.setView(view);
+}
+
+void ScrollView::setViewSize(const sf::Vector2u& v)
+{
+	m_viewSize = v;
+}
+
+void ScrollView::setLevelSize(const sf::Vector2u& v)
+{
+	m_levelSize = v;
 }

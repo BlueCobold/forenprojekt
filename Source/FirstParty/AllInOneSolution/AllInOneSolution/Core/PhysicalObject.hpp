@@ -61,6 +61,11 @@ public:
 
     void updateKinematics(const float value, const float delta);
 
+	const b2Vec2& getPosition() const
+	{
+		return m_body->GetPosition();
+	}
+
 protected:
 
     b2Body* m_body;

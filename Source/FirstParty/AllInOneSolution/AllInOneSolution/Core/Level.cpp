@@ -88,6 +88,10 @@ void Level::update(const float elapsedTime)
 
 void Level::draw(sf::RenderWindow& screen)
 {
+	m_scrollView.setViewSize(screen.getSize());
+	sf::Vector2f ballpos = sf::Vector2f(utility::toPixel(m_ball->getPosition().x), utility::toPixel(m_ball->getPosition().y));
+	m_scrollView.adjustView(ballpos, screen);
+
     if(m_background != nullptr)
 	    screen.draw(*m_background);
 
@@ -256,6 +260,14 @@ bool Level::load()
     tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
     m_world.SetGravity(b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y")));
     m_world.SetContactFilter(&m_contactFilter);
+
+	// setup scrollview
+	m_scrollView.setLevelSize(sf::Vector2u(getWidth(), getHeight()));
+
+	// get the fucking ball
+	for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+		if((*it)->getType() == Entity::Type::Ball)
+			m_ball = (*it).get();
 
     return true;
 }
