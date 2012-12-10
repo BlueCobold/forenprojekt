@@ -100,6 +100,7 @@
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="resources\LevelFileLoader.cpp" />
     <ClCompile Include="resources\ResourceManager.cpp" />
+    <ClCompile Include="ScrollView.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Teeter.cpp" />
     <ClCompile Include="Utility.cpp" />
@@ -135,6 +136,7 @@
     <ClInclude Include="resources\LevelFileLoader.hpp" />
     <ClInclude Include="resources\ResourceCache.hpp" />
     <ClInclude Include="resources\ResourceManager.hpp" />
+    <ClInclude Include="ScrollView.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />
     <ClInclude Include="Teeter.hpp" />

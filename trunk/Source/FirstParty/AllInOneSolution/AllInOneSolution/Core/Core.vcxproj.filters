@@ -47,6 +47,9 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="ContactFilter.cpp" />
+    <ClCompile Include="ScrollView.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.hpp">
@@ -149,6 +152,9 @@
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
     <ClInclude Include="ContactFilter.hpp" />
+    <ClInclude Include="ScrollView.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
