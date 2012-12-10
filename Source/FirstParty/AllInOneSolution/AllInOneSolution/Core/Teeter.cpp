@@ -12,7 +12,7 @@
 #include <algorithm>
 #include <cmath>
 
-Teeter::Teeter(const float mouseScale) : Entity(Type::Teeter)
+Teeter::Teeter(const float mouseScale) : Entity(Entity::Teeter)
 {
     m_lastMouseX = sf::Mouse::getPosition().x;
     m_lastTime = -1;

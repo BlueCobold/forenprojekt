@@ -24,6 +24,7 @@ private:
     float m_lastTime;
     bool m_killed;
     bool m_collideWithBall;
+    Animation* m_updatingAni;
 
 public:
 
@@ -31,21 +32,18 @@ public:
     virtual ~Entity();
 
     virtual void update(const float value);
+    virtual void restartAt(const float value);
 
     void setName(std::string name);
-
     const Type& getType() const;
 
-    virtual void Entity::restartAt(const float value);
-
     void kill();
-
     bool killed() const;
 
     void setCollideWithBall(bool value);
-
     bool isCollideWithBall();
 
+    virtual float getValueOf(const std::string& name) const;
 };
 
 #endif // ENTITY_HPP

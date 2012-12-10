@@ -8,32 +8,34 @@
 #include <SFML/Graphics/Drawable.hpp>
 
 #include <memory>
+#include <vector>
 
 /// This class defines typical behavior of graphical objects
 class GraphicalObject : public sf::Drawable
 {
 private:
 
-    std::unique_ptr<Animation> m_animation;
+    std::vector<std::unique_ptr<Animation>> m_animations;
 
 public:
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
-        if(m_animation != nullptr)
-            m_animation->draw(target, states);
+        for(auto animation = m_animations.begin(); animation != m_animations.end(); ++animation)
+            if((*animation) != nullptr)
+                (*animation)->draw(target, states);
     }
 
     void bindAnimation(std::unique_ptr<Animation> animation)
     {
-        m_animation = std::move(animation);
+        m_animations.push_back(std::move(animation));
     }
 
 protected:
 
-    Animation* getAnimation() const
+    const std::vector<std::unique_ptr<Animation>>& getAnimations() const
     {
-        return m_animation.get();
+        return m_animations;
     }
 };
 

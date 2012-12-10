@@ -112,6 +112,7 @@
     <ClInclude Include="animation\provider\Adder.hpp" />
     <ClInclude Include="animation\provider\AngleProvider.hpp" />
     <ClInclude Include="animation\provider\FloatToInt.hpp" />
+    <ClInclude Include="animation\provider\Inverse.hpp" />
     <ClInclude Include="animation\provider\Maximum.hpp" />
     <ClInclude Include="animation\provider\Minimum.hpp" />
     <ClInclude Include="animation\provider\Modulo.hpp" />
@@ -122,7 +123,10 @@
     <ClInclude Include="animation\provider\StaticProvider.hpp" />
     <ClInclude Include="animation\provider\TimeProvider.hpp" />
     <ClInclude Include="animation\provider\ValueProvider.hpp" />
+    <ClInclude Include="animation\provider\VariableProvider.hpp" />
     <ClInclude Include="animation\TimedObject.hpp" />
+    <ClInclude Include="animation\VariableHandler.hpp" />
+    <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Background.hpp" />
     <ClInclude Include="Config.hpp" />

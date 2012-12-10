@@ -47,6 +47,8 @@ Level::~Level()
 
 void Level::restartAt(const float time)
 {
+    if(m_background != nullptr)
+        m_background->restartAt(time);
     TimedObject::restartAt(time);
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         (*it)->restartAt(time);
@@ -54,6 +56,9 @@ void Level::restartAt(const float time)
 
 void Level::update(const float elapsedTime)
 {
+    if(m_background != nullptr)
+        m_background->update(elapsedTime);
+
     auto it=m_entities.begin();
     while(it != m_entities.end())
     {
@@ -195,8 +200,8 @@ bool Level::load()
 	std::unique_ptr<Background> background(new Background());
 	if(backgroundXml != nullptr)
     {
-        element = backgroundXml->FirstChildElement("animation");
-        if(element != nullptr)
+        for(auto element = backgroundXml->FirstChildElement("animation"); element != nullptr;
+            element = element->NextSiblingElement("animation"))
             background->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, background.get(), m_resourceManager)));
     }
 	m_background = std::move(background);
@@ -303,10 +308,11 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
         entity->setCollideWithBall(true);
 
     entity->setName(std::string(xml->Attribute("name")));
-        
+    
+    auto animations = xml->FirstChildElement("animations");
     // Load animation
-    element = xml->FirstChildElement("animations")->FirstChildElement("animation");
-    if(element != nullptr)
+    for(auto element = animations->FirstChildElement("animation"); element != nullptr;
+        element = element->NextSiblingElement("animation"))
         entity->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, entity.get(), m_resourceManager)));
 
     // Load body

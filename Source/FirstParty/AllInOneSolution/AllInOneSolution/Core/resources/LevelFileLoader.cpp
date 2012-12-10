@@ -3,15 +3,31 @@
 #include "../animation/provider/Adder.hpp"
 #include "../animation/provider/AngleProvider.hpp"
 #include "../animation/provider/FloatToInt.hpp"
+#include "../animation/provider/Inverse.hpp"
 #include "../animation/provider/Maximum.hpp"
 #include "../animation/provider/Minimum.hpp"
 #include "../animation/provider/Modulo.hpp"
 #include "../animation/provider/Multiplier.hpp"
 #include "../animation/provider/Sine.hpp"
-#include "../animation/provider/TimeProvider.hpp"
 #include "../animation/provider/StaticProvider.hpp"
+#include "../animation/provider/TimeProvider.hpp"
+#include "../animation/provider/VariableProvider.hpp"
 
+#include <map>
 #include <vector>
+
+void LevelFileLoader::parseConstants(tinyxml2::XMLElement* xml,
+    const AnimatedGraphics* animated,
+    Animation* holder)
+{
+    std::map<std::string, std::unique_ptr<ValueProvider>> map;
+    for(auto var = xml->FirstAttribute(); var != nullptr; var = var->Next())
+    {
+        std::unique_ptr<ValueProvider> provider(new StaticProvider(var->FloatValue()));
+        map.insert(std::pair<std::string, std::unique_ptr<ValueProvider>>(var->Name(), std::move(provider)));
+    }
+    holder->bindVariables(map);
+}
 
 std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml,
     const AnimatedGraphics* animated,
@@ -25,16 +41,19 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     int width = xml->IntAttribute("width");
     int height = xml->IntAttribute("height");
     bool rotate = xml->BoolAttribute("rotate");
-    std::unique_ptr<Animation> anim(new Animation(std::move(provider), frames, width, height, rotate));
     sf::Vector2f offset;
-    sf::Vector2f sourceOffset;
-    sf::Texture* texture = resourceManager.getTexture(xml->Attribute("texture"));
     offset.x = xml->FloatAttribute("x");
     offset.y = xml->FloatAttribute("y");
+    sf::Vector2f origin;
+    origin.x = xml->FloatAttribute("midx");
+    origin.y = xml->FloatAttribute("midy");
+    std::unique_ptr<Animation> anim(new Animation(std::move(provider), frames, width, height, rotate, origin, offset));
+    sf::Vector2f sourceOffset;
+    sf::Texture* texture = resourceManager.getTexture(xml->Attribute("texture"));
     sourceOffset.x = xml->FloatAttribute("srcx");
     sourceOffset.y = xml->FloatAttribute("srcy");
 
-    anim->bindTexture(*texture, offset, sourceOffset);
+    anim->bindTexture(*texture, sourceOffset);
 
     std::vector<std::unique_ptr<Animation>> subAnimations;
 
@@ -43,13 +62,17 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     if((xProvider != nullptr) || (yProvider != nullptr))
         anim->bindPositionController(std::move(xProvider), std::move(yProvider));
 
-    for(auto subs = xml->FirstChildElement("animation"); subs != nullptr; subs = subs->NextSiblingElement("animation"))
+    tinyxml2::XMLElement* rotation = xml->FirstChildElement("rotation");
+    if(rotation != nullptr && rotation->FirstChildElement() != nullptr)
     {
-        std::unique_ptr<ValueProvider> subProvider = parseProvider(subs, animated);
-        subAnimations.push_back(std::move(parseAnimation(subs, animated, std::move(subProvider), resourceManager)));
+        std::unique_ptr<ValueProvider> rotProvider = parseProvider(rotation->FirstChildElement(), animated);
+        if(rotProvider != nullptr)
+            anim->bindRotationController(std::move(rotProvider));
     }
-    if(subAnimations.size() > 0)
-        anim->bindSubAnimations(subAnimations);
+
+    tinyxml2::XMLElement* constants = xml->FirstChildElement("constants");
+    if(constants != nullptr)
+        parseConstants(constants, animated, anim.get());
 
     return anim;
 }
@@ -76,6 +99,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
         return std::unique_ptr<AngleProvider>(new AngleProvider(animated));
     else if(std::string(xml->Name())=="static")
         return std::unique_ptr<StaticProvider>(new StaticProvider(xml->FloatAttribute("value")));
+    else if(std::string(xml->Name())=="var")
+        return std::unique_ptr<VariableProvider>(new VariableProvider(animated, xml->Attribute("name")));
     else if(std::string(xml->Name())=="sine")
         return std::unique_ptr<Sine>(new Sine(std::move(parseProviders(xml, animated)[0])));
     else if(std::string(xml->Name())=="int")
@@ -90,6 +115,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
         return std::unique_ptr<Maximum>(new Maximum(std::move(parseProviders(xml, animated))));
     else if(std::string(xml->Name())=="mod")
         return std::unique_ptr<Modulo>(new Modulo(std::move(parseProviders(xml, animated))));
+    else if(std::string(xml->Name())=="inv")
+        return std::unique_ptr<Inverse>(new Inverse(std::move(parseProviders(xml, animated)[0])));
     return nullptr;
 }
 
@@ -147,11 +174,16 @@ void LevelFileLoader::parseKinematics(tinyxml2::XMLElement* element, Entity* ent
     if(kinematics == nullptr)
         return;
     tinyxml2::XMLElement* rotation = kinematics->FirstChildElement("rotation");
-    if(rotation == nullptr || rotation->FirstChildElement() == nullptr)
-        return;
-    std::unique_ptr<ValueProvider> provider = parseProvider(rotation->FirstChildElement(), entity);
-    if(provider != nullptr)
-        entity->bindRotationController(std::move(provider));
+    if(rotation != nullptr && rotation->FirstChildElement() != nullptr)
+    {
+        std::unique_ptr<ValueProvider> provider = parseProvider(rotation->FirstChildElement(), entity);
+        if(provider != nullptr)
+            entity->bindRotationController(std::move(provider));
+    }
+    std::unique_ptr<ValueProvider> posX = findPositionController(kinematics, entity, "x");
+    std::unique_ptr<ValueProvider> posY = findPositionController(kinematics, entity, "y");
+    if(posX != nullptr || posY != nullptr)
+        entity->bindPositionController(std::move(posX), std::move(posY));
 }
 
 std::unique_ptr<ValueProvider> LevelFileLoader::findPositionController(

@@ -15,4 +15,3 @@ public:
 };
 
 #endif //ORIENTED_OBJECT_HPP
-

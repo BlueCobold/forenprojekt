@@ -1,5 +1,8 @@
 <textures>
-	<texture name="bg_pastureland" path="backgrounds/pastureland/full_scene.jpg" smooth="false" />
+	<texture name="pastureland_bg" path="backgrounds/pastureland/full_scene.jpg" smooth="false" />
+	<texture name="pastureland_clouds" path="backgrounds/pastureland/clouds.png" smooth="true" />
+	<texture name="pastureland_flowers_front" path="backgrounds/pastureland/flowery/front/01_tiny.png" smooth="true" />
+	<texture name="pastureland_flowers_front2" path="backgrounds/pastureland/flowery/front/02_mid.png" smooth="true" />
 	<texture name="small_quad_1" path="walls/sand/small_quad/main/v1.png" smooth="false" />
 	<texture name="small_quad_2" path="walls/sand/small_quad/main/v2.png" smooth="false" />
 	<texture name="small_quad_3" path="walls/sand/small_quad/main/v3.png" smooth="false" />
