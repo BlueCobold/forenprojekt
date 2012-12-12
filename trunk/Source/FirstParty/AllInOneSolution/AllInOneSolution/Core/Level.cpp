@@ -167,7 +167,7 @@ bool Level::load()
             tinyxml2::XMLElement* entity = nullptr;
             tinyxml2::XMLElement* physic = nullptr;
             tinyxml2::XMLElement* shape = nullptr;
-
+            
             // Entity template exists
             if(entities.find(name) != entities.end())
             {
@@ -266,7 +266,7 @@ bool Level::load()
 
 	// get the fucking ball
 	for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
-		if((*it)->getType() == Entity::Type::Ball)
+		if((*it)->getType() == Entity::Ball)
 			m_ball = (*it).get();
 
     return true;

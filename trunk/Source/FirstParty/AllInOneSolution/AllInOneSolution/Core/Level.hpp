@@ -3,7 +3,7 @@
 #ifndef LEVEL_HPP
 #define LEVEL_HPP
 
-#include "Entity.hpp"
+#include "Ball.hpp"
 #include "DebugDraw.hpp"
 #include "Background.hpp"
 #include "animation/TimedObject.hpp"
