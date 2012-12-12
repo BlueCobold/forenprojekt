@@ -50,6 +50,9 @@
     <ClCompile Include="ScrollView.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.hpp">
@@ -166,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="animation\VariableHandler.hpp">
       <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

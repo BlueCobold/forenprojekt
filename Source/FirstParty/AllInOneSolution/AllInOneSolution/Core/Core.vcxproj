@@ -90,6 +90,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="ContactFilter.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Background.hpp" />
+    <ClInclude Include="Ball.hpp" />
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="ContactFilter.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
