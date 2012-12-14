@@ -283,7 +283,11 @@ bool Level::load()
     // get the fucking ball
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         if((*it)->getType() == Entity::Ball)
-            m_ball = (*it).get();
+        {
+            m_ball = dynamic_cast<Ball*>((*it).get());
+            m_ball->setStartPosition(m_ball->getPosition());
+            m_ball->setFieldDimension(b2Vec2(m_width,m_height));
+        }
 
     return true;
 }
@@ -321,7 +325,7 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
         if(std::string(xml->Attribute("type")) == "teeter")
             entity = std::unique_ptr<Teeter>(new Teeter(m_config.get<float>("MouseScale")));
         else if(std::string(xml->Attribute("type")) == "ball")
-            entity = std::unique_ptr<Entity>(new Entity(Entity::Ball));
+            entity = std::unique_ptr<Ball>(new Ball);
         else if(std::string(xml->Attribute("type")) == "target")
             entity = std::unique_ptr<Entity>(new Entity(Entity::Target));
         else
