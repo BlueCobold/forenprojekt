@@ -97,7 +97,7 @@ private:
 	bool m_debugDraw;
 
 	ScrollView m_scrollView;
-	Entity* m_ball;
+	Ball* m_ball;
 };
 
 #endif // LEVEL_HPP

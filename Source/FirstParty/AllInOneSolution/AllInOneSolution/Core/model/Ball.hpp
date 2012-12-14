@@ -5,21 +5,29 @@
 
 #include "Entity.hpp"
 
-/// Only for Ball
+/// This class will be used to bind the physical setting and the control to a entity of a ball
 class Ball : public Entity
 {
+public:
+
+    Ball();
+
+    virtual void update(const float value);
+
+    void setStartPosition(b2Vec2 startPosition);
+
+    void setFieldDimension(b2Vec2 fieldDimension);
+
 private:
 
     float m_ballResetTime;
+
     b2Vec2 m_startPosition;
+    b2Vec2 m_fieldDimension;
 
-public:
+private:
 
-    Ball(b2Vec2 startPosition);
-
-    void update(const float elapsedTime);
-
-    void autoResetBall(const float elapsedTime, float width, float height);
+    void autoResetBall(const float elapsedTime);
 };
 
 #endif
