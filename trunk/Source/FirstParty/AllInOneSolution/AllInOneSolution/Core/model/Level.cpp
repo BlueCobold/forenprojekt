@@ -1,9 +1,9 @@
 #include "Level.hpp"
-#include "Config.hpp"
+#include "../Config.hpp"
 #include "Entity.hpp"
-#include "resources/ResourceManager.hpp"
-#include "resources/LevelFileLoader.hpp"
-#include "Utility.hpp" // toString, toMeter
+#include "../resources/ResourceManager.hpp"
+#include "../resources/LevelFileLoader.hpp"
+#include "../Utility.hpp" // toString, toMeter
 #include "Teeter.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -36,7 +36,7 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_config(config)
 {
     m_world.SetAllowSleeping(false);
-	m_debugDraw = false;
+    m_debugDraw = false;
     load();
 }
 
@@ -88,23 +88,23 @@ void Level::update(const float elapsedTime)
 
 void Level::draw(sf::RenderWindow& screen)
 {
-	m_scrollView.setViewSize(screen.getSize());
-	sf::Vector2f ballpos = sf::Vector2f(utility::toPixel(m_ball->getPosition().x), utility::toPixel(m_ball->getPosition().y));
-	m_scrollView.adjustView(ballpos, screen);
+    m_scrollView.setViewSize(screen.getSize());
+    sf::Vector2f ballpos = sf::Vector2f(utility::toPixel(m_ball->getPosition().x), utility::toPixel(m_ball->getPosition().y));
+    m_scrollView.adjustView(ballpos, screen);
 
     if(m_background != nullptr)
-	    screen.draw(*m_background);
+        screen.draw(*m_background);
 
-	for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         screen.draw(**it);
-    
+
     if(m_debugDraw)
-	{
-		DebugDraw d(screen);
-		d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
-		m_world.SetDebugDraw(&d);
-		m_world.DrawDebugData();
-	}
+    {
+        DebugDraw d(screen);
+        d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
+        m_world.SetDebugDraw(&d);
+        m_world.DrawDebugData();
+    }
 }
 
 bool Level::load()
@@ -145,7 +145,7 @@ bool Level::load()
 
     // ==Parse grid==
     tinyxml2::XMLElement* grid = doc.FirstChildElement("level")->FirstChildElement("grid");
-    
+
     // Get tile size
     unsigned int size = static_cast<unsigned int>(grid->IntAttribute("size"));
     m_height = grid->FloatAttribute("height");
@@ -196,21 +196,21 @@ bool Level::load()
             }
         }
 
-	tinyxml2::XMLElement* objects = doc.FirstChildElement("level")->FirstChildElement("objects");
+    tinyxml2::XMLElement* objects = doc.FirstChildElement("level")->FirstChildElement("objects");
     tinyxml2::XMLElement* backgroundXml = objects->FirstChildElement("background");
     tinyxml2::XMLElement* world = doc.FirstChildElement("level")->FirstChildElement("world");
     
     tinyxml2::XMLElement* element = nullptr; // Temp object
 
-	// Load background-image
-	std::unique_ptr<Background> background(new Background());
-	if(backgroundXml != nullptr)
+    // Load background-image
+    std::unique_ptr<Background> background(new Background());
+    if(backgroundXml != nullptr)
     {
         for(auto element = backgroundXml->FirstChildElement("animation"); element != nullptr;
             element = element->NextSiblingElement("animation"))
             background->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, background.get(), m_resourceManager)));
     }
-	m_background = std::move(background);
+    m_background = std::move(background);
 
     for(tinyxml2::XMLElement* entitiesIterator = objects->FirstChildElement("entity");
         entitiesIterator != nullptr; entitiesIterator = entitiesIterator->NextSiblingElement("entity"))
@@ -250,7 +250,7 @@ bool Level::load()
                 }
             }
         }
-            
+
         // Entity is well defined
         if(entity != nullptr && shape != nullptr && physic != nullptr)
             m_entities.push_back(std::move(createEntity(entity, position, shape, physic)));
@@ -261,13 +261,15 @@ bool Level::load()
     m_world.SetGravity(b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y")));
     m_world.SetContactFilter(&m_contactFilter);
 
-	// setup scrollview
-	m_scrollView.setLevelSize(sf::Vector2u(getWidth(), getHeight()));
+    // setup scrollview
+    m_scrollView.setLevelSize(sf::Vector2u(
+        static_cast<unsigned int>(getWidth()),
+        static_cast<unsigned int>(getHeight())));
 
-	// get the fucking ball
-	for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
-		if((*it)->getType() == Entity::Ball)
-			m_ball = (*it).get();
+    // get the fucking ball
+    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+        if((*it)->getType() == Entity::Ball)
+            m_ball = (*it).get();
 
     return true;
 }

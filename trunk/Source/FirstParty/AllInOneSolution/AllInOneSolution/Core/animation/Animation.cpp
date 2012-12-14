@@ -1,5 +1,5 @@
 #include "Animation.hpp"
-#include "Utility.hpp" // toDegree, toPixel
+#include "../Utility.hpp" // toDegree, toPixel
 
 #include <SFML/Graphics/Rect.hpp>
 

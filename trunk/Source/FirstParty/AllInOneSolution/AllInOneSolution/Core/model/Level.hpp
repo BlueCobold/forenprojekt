@@ -4,11 +4,11 @@
 #define LEVEL_HPP
 
 #include "Ball.hpp"
-#include "DebugDraw.hpp"
+#include "../DebugDraw.hpp"
 #include "Background.hpp"
-#include "animation/TimedObject.hpp"
-#include "ContactFilter.hpp"
-#include "ScrollView.hpp"
+#include "../animation/TimedObject.hpp"
+#include "../ContactFilter.hpp"
+#include "../ScrollView.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>

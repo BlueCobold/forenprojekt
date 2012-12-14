@@ -3,8 +3,8 @@
 #ifndef PHYSICAL_OBJECT_HPP
 #define PHYSICAL_OBJECT_HPP
 
-#include "animation/OrientedObject.hpp"
-#include "animation/provider/ValueProvider.hpp"
+#include "../animation/OrientedObject.hpp"
+#include "../animation/provider/ValueProvider.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>

@@ -1,5 +1,5 @@
 #include "Entity.hpp"
-#include "Utility.hpp"
+#include "../Utility.hpp"
 
 #include <exception>
 

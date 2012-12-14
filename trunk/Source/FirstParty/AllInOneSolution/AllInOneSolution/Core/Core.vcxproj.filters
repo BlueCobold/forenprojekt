@@ -4,16 +4,10 @@
     <ClCompile Include="Config.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="App.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Core.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="StateManager.cpp">
@@ -22,16 +16,7 @@
     <ClCompile Include="PlayState.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Teeter.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="DebugDraw.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Background.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="resources\ResourceManager.cpp">
@@ -43,31 +28,39 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicalObject.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="ContactFilter.cpp" />
     <ClCompile Include="ScrollView.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="Ball.cpp">
+    <ClCompile Include="ContactFilter.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="model\Teeter.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="model\Background.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="model\Ball.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="model\Entity.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="model\Level.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="model\PhysicalObject.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="animation\Animation.cpp">
+      <Filter>Sources\animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="App.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Config.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicalObject.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="State.hpp">
@@ -82,16 +75,7 @@
     <ClInclude Include="PlayState.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Level.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Teeter.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="DebugDraw.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Background.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="animation\OrientedObject.hpp">
@@ -108,12 +92,6 @@
     </ClInclude>
     <ClInclude Include="resources\LevelFileLoader.hpp">
       <Filter>Headers\resources</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicalObject.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimatedGraphics.hpp">
-      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="animation\provider\Adder.hpp">
       <Filter>Headers\animation\provider</Filter>
@@ -154,7 +132,6 @@
     <ClInclude Include="animation\provider\ValueProvider.hpp">
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="ContactFilter.hpp" />
     <ClInclude Include="ScrollView.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -170,8 +147,35 @@
     <ClInclude Include="animation\VariableHandler.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
-    <ClInclude Include="Ball.hpp">
+    <ClInclude Include="ContactFilter.hpp">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="model\Background.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\Ball.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\Entity.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\GraphicalObject.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\Level.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\PhysicalObject.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\Teeter.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\AnimatedGraphics.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\Animation.hpp">
+      <Filter>Headers\animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +208,15 @@
     </Filter>
     <Filter Include="Headers\animation\provider">
       <UniqueIdentifier>{8f3ce49a-75ba-4d2d-b341-e8b0c76204bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\model">
+      <UniqueIdentifier>{06c2f113-30ff-46b3-b58a-f22046b60a6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\model">
+      <UniqueIdentifier>{82c559a9-cddc-4c24-b5c5-e0031f2b65a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\animation">
+      <UniqueIdentifier>{78c81f4f-30be-49c1-8df7-ec1ba111d3a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
