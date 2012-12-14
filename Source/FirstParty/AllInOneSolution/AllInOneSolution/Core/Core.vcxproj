@@ -87,28 +87,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="animation\Animation.cpp" />
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="Background.cpp" />
-    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="ContactFilter.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Level.cpp" />
-    <ClCompile Include="PhysicalObject.cpp" />
+    <ClCompile Include="model\Background.cpp" />
+    <ClCompile Include="model\Ball.cpp" />
+    <ClCompile Include="model\Entity.cpp" />
+    <ClCompile Include="model\Level.cpp" />
+    <ClCompile Include="model\PhysicalObject.cpp" />
+    <ClCompile Include="model\Teeter.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="resources\LevelFileLoader.cpp" />
     <ClCompile Include="resources\ResourceManager.cpp" />
     <ClCompile Include="ScrollView.cpp" />
     <ClCompile Include="StateManager.cpp" />
-    <ClCompile Include="Teeter.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimatedGraphics.hpp" />
-    <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="animation\Animation.hpp" />
     <ClInclude Include="animation\OrientedObject.hpp" />
     <ClInclude Include="animation\provider\Adder.hpp" />
     <ClInclude Include="animation\provider\AngleProvider.hpp" />
@@ -129,15 +128,17 @@
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
-    <ClInclude Include="Background.hpp" />
-    <ClInclude Include="Ball.hpp" />
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="ContactFilter.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
-    <ClInclude Include="Entity.hpp" />
-    <ClInclude Include="GraphicalObject.hpp" />
-    <ClInclude Include="Level.hpp" />
-    <ClInclude Include="PhysicalObject.hpp" />
+    <ClInclude Include="model\AnimatedGraphics.hpp" />
+    <ClInclude Include="model\Background.hpp" />
+    <ClInclude Include="model\Ball.hpp" />
+    <ClInclude Include="model\Entity.hpp" />
+    <ClInclude Include="model\GraphicalObject.hpp" />
+    <ClInclude Include="model\Level.hpp" />
+    <ClInclude Include="model\PhysicalObject.hpp" />
+    <ClInclude Include="model\Teeter.hpp" />
     <ClInclude Include="PlayState.hpp" />
     <ClInclude Include="resources\LevelFileLoader.hpp" />
     <ClInclude Include="resources\ResourceCache.hpp" />
@@ -145,7 +146,6 @@
     <ClInclude Include="ScrollView.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateManager.hpp" />
-    <ClInclude Include="Teeter.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <ItemGroup>

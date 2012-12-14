@@ -1,6 +1,6 @@
 
 #include "PhysicalObject.hpp"
-#include "Utility.hpp"
+#include "../Utility.hpp"
 
 #include <cfloat>
 #include <cmath>

@@ -3,11 +3,11 @@
 #ifndef ANIMATION_HPP
 #define ANIMATION_HPP
 
-#include "animation/provider/ValueProvider.hpp"
+#include "provider/ValueProvider.hpp"
 
 #include <memory> // unique_ptr
 
-#include "animation/VariableHolder.hpp"
+#include "VariableHolder.hpp"
 
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Rect.hpp>

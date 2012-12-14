@@ -1,5 +1,5 @@
 #include "ContactFilter.hpp"
-#include "Entity.hpp"
+#include "model/Entity.hpp"
 
 #include <Box2D/Dynamics/b2Fixture.h>
 

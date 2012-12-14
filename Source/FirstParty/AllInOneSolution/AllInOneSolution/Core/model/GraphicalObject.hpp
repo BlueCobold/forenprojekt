@@ -3,7 +3,8 @@
 #ifndef GRAPHICAL_OBJECT_HPP
 #define GRAPHICAL_OBJECT_HPP
 
-#include "Animation.hpp"
+#include "../animation/Animation.hpp"
+#include "AnimatedGraphics.hpp"
 
 #include <SFML/Graphics/Drawable.hpp>
 

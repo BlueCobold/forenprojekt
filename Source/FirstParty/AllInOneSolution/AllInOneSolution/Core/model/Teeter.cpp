@@ -1,6 +1,6 @@
 #include "Entity.hpp"
 #include "Teeter.hpp"
-#include "Utility.hpp"
+#include "../Utility.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>

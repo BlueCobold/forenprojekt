@@ -3,10 +3,10 @@
 #ifndef LEVEL_FILE_LOADER_HPP
 #define LEVEL_FILE_LOADER_HPP
 
-#include "../Animation.hpp"
-#include "../Entity.hpp"
-#include "../AnimatedGraphics.hpp"
+#include "../animation/Animation.hpp"
 #include "../animation/provider/ValueProvider.hpp"
+#include "../model/AnimatedGraphics.hpp"
+#include "../model/Entity.hpp"
 
 #include "ResourceManager.hpp"
 

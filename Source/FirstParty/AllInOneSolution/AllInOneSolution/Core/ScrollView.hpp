@@ -6,7 +6,7 @@
 #include <SFML\System\Vector2.hpp>
 #include <SFML\Graphics\Rect.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "Entity.hpp"
+#include "model/Entity.hpp"
 
 class ScrollView
 {

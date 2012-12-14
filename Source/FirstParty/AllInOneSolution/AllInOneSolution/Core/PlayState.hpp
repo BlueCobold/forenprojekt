@@ -4,7 +4,7 @@
 #define PLAYSTATE_HPP
 
 #include "State.hpp"
-#include "Level.hpp"
+#include "model/Level.hpp"
 
 #include <SFML/System/Clock.hpp>
 
