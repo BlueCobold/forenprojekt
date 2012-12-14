@@ -23,7 +23,7 @@ public:
 
     virtual float getValue() const
     {
-        float v = 1.0f;
+        float v = 0.0f;
         for(auto it = getProvider().begin(); it != getProvider().end(); ++it)
             v += (*it)->getValue();
         return v;

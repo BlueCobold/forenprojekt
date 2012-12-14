@@ -28,6 +28,9 @@ Animation::~Animation()
 
 void Animation::update()
 {
+    sf::Sprite s(m_sprite);
+    m_sprite = s;
+
     if(m_frameProvider == nullptr)
         m_frame = 0;
     else
@@ -39,7 +42,7 @@ void Animation::update()
         rotation += m_rotationProvider->getValue();
     m_sprite.setRotation(rotation);
 
-    sf::Vector2f pos = sf::Vector2f(utility::toPixel(m_externalPosition.x), utility::toPixel(m_externalPosition.y)) + m_drawOffset;
+    sf::Vector2f pos = sf::Vector2f(m_externalPosition.x, m_externalPosition.y) + m_drawOffset;
     if(m_xPositionProvider != nullptr)
         pos.x += m_xPositionProvider->getValue();
     if(m_yPositionProvider != nullptr)

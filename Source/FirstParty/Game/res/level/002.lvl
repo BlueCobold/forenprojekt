@@ -321,64 +321,66 @@ w1w2w3w3w4w1w1w6w5w4w5w5w2
 					<static value="60" />
 				</position>
 			</animation>
-			<animation texture="pastureland_flowers_front2" width="149" height="187" x="268" y="605" midx="68" midy="180"><!-- 02 mid flower -->
-				<frameindex frames="1">
-					<static value="0"/>
-				</frameindex>
-				<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.6" perSmall="100" />
-				<rotation>
-					<add>
-						<var name="minAngle" />
-						<mul>
-							<sine>
-								<mul>
-									<time />
-									<var name="perBig" />
-								</mul>
-							</sine>
-							<var name="ampBig" />
-						</mul>
-						<mul>
-							<sine>
-								<mul>
-									<time />
-									<var name="perSmall" />
-								</mul>
-							</sine>
-							<var name="ampSmall" />
-						</mul>
-					</add>
-				</rotation>
-			</animation>
-			<animation texture="pastureland_flowers_front" width="96" height="129" x="230" y="610" midx="48" midy="125"><!-- 01 front flower -->
-				<frameindex frames="1">
-					<static value="0"/>
-				</frameindex>
-				<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.2" perSmall="120" />
-				<rotation>
-					<add>
-						<var name="minAngle" />
-						<mul>
-							<sine>
-								<mul>
-									<time />
-									<var name="perBig" />
-								</mul>
-							</sine>
-							<var name="ampBig" />
-						</mul>
-						<mul>
-							<sine>
-								<mul>
-									<time />
-									<var name="perSmall" />
-								</mul>
-							</sine>
-							<var name="ampSmall" />
-						</mul>
-					</add>
-				</rotation>
-			</animation>
+			<parallax x="10" y="10">
+				<animation texture="pastureland_flowers_front2" width="149" height="187" x="268" y="605" midx="68" midy="180"><!-- 02 mid flower -->
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.6" perSmall="100" />
+					<rotation>
+						<add>
+							<var name="minAngle" />
+							<mul>
+								<sine>
+									<mul>
+										<time />
+										<var name="perBig" />
+									</mul>
+								</sine>
+								<var name="ampBig" />
+							</mul>
+							<mul>
+								<sine>
+									<mul>
+										<time />
+										<var name="perSmall" />
+									</mul>
+								</sine>
+								<var name="ampSmall" />
+							</mul>
+						</add>
+					</rotation>
+				</animation>
+				<animation texture="pastureland_flowers_front" width="96" height="129" x="230" y="610" midx="48" midy="125"><!-- 01 front flower -->
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.2" perSmall="120" />
+					<rotation>
+						<add>
+							<var name="minAngle" />
+							<mul>
+								<sine>
+									<mul>
+										<time />
+										<var name="perBig" />
+									</mul>
+								</sine>
+								<var name="ampBig" />
+							</mul>
+							<mul>
+								<sine>
+									<mul>
+										<time />
+										<var name="perSmall" />
+									</mul>
+								</sine>
+								<var name="ampSmall" />
+							</mul>
+						</add>
+					</rotation>
+				</animation>
+			</parallax>
 		</background>
 	</objects>
 	<world>
