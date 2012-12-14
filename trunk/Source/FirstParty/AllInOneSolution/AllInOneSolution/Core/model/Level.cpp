@@ -203,12 +203,26 @@ bool Level::load()
     tinyxml2::XMLElement* element = nullptr; // Temp object
 
     // Load background-image
-    std::unique_ptr<Background> background(new Background());
+    std::unique_ptr<Background> background(new Background(sf::Vector2u(
+        static_cast<unsigned int>(m_width),
+        static_cast<unsigned int>(m_height))));
     if(backgroundXml != nullptr)
     {
         for(auto element = backgroundXml->FirstChildElement("animation"); element != nullptr;
             element = element->NextSiblingElement("animation"))
             background->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, background.get(), m_resourceManager)));
+
+        for(auto parallax = backgroundXml->FirstChildElement("parallax"); parallax != nullptr;
+            parallax = parallax->NextSiblingElement("parallax"))
+        {
+            std::unique_ptr<ParallaxLayer> layer(new ParallaxLayer(sf::Vector2f(
+                parallax->FloatAttribute("x"),
+                parallax->FloatAttribute("y"))));
+            for(auto anim = parallax->FirstChildElement("animation"); anim != nullptr;
+                anim = anim->NextSiblingElement("animation"))
+                layer->bindAnimation(std::move(LevelFileLoader::parseAnimation(anim, layer.get(), m_resourceManager)));
+            background->bindLayer(std::move(layer));
+        }
     }
     m_background = std::move(background);
 

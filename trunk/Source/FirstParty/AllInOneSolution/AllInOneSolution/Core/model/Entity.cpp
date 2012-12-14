@@ -21,10 +21,10 @@ void Entity::update(const float value)
     {
         updateCurrentTime(value);
         updateKinematics(getPassedTime(), value - m_lastTime);
-        for(auto animation = getAnimations().begin(); animation != getAnimations().end(); animation++)
+        for(auto animation = getAnimations().begin(); animation != getAnimations().end(); ++animation)
         {
             m_updatingAni = (*animation).get();
-            (*animation)->setPosition(m_body->GetPosition().x, m_body->GetPosition().y);
+            (*animation)->setPosition(utility::toPixel(m_body->GetPosition().x), utility::toPixel(m_body->GetPosition().y));
             (*animation)->setRotation(m_body->GetAngle());
             (*animation)->update();
         }

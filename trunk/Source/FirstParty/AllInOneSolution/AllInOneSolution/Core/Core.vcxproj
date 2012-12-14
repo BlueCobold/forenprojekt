@@ -97,6 +97,7 @@
     <ClCompile Include="model\Ball.cpp" />
     <ClCompile Include="model\Entity.cpp" />
     <ClCompile Include="model\Level.cpp" />
+    <ClCompile Include="model\ParallaxLayer.cpp" />
     <ClCompile Include="model\PhysicalObject.cpp" />
     <ClCompile Include="model\Teeter.cpp" />
     <ClCompile Include="PlayState.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="model\Entity.hpp" />
     <ClInclude Include="model\GraphicalObject.hpp" />
     <ClInclude Include="model\Level.hpp" />
+    <ClInclude Include="model\ParallaxLayer.hpp" />
     <ClInclude Include="model\PhysicalObject.hpp" />
     <ClInclude Include="model\Teeter.hpp" />
     <ClInclude Include="PlayState.hpp" />
