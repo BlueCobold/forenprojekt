@@ -325,7 +325,7 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
         if(std::string(xml->Attribute("type")) == "teeter")
             entity = std::unique_ptr<Teeter>(new Teeter(m_config.get<float>("MouseScale")));
         else if(std::string(xml->Attribute("type")) == "ball")
-            entity = std::unique_ptr<Ball>(new Ball);
+            entity = std::unique_ptr<Ball>(new Ball(m_config.get<float>("BallResetTime")));
         else if(std::string(xml->Attribute("type")) == "target")
             entity = std::unique_ptr<Entity>(new Entity(Entity::Target));
         else
