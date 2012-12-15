@@ -21,6 +21,8 @@ void Ball::autoResetBall(const float elapsedTime)
         if(elapsedTime > m_ballResetTime)
         {
             m_body->SetTransform(m_startPosition,0.0f);
+            m_body->SetLinearVelocity(b2Vec2(0,0));
+            m_body->SetAngularVelocity(0.0f);
             m_ballResetTime = 0.0f;
         }
 }
