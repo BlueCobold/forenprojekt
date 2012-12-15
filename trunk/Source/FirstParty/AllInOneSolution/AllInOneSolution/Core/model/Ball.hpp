@@ -10,17 +10,18 @@ class Ball : public Entity
 {
 public:
 
-    Ball();
+    Ball(float resetTime);
 
     virtual void update(const float value);
 
-    void setStartPosition(b2Vec2 startPosition);
+    void setStartPosition(const b2Vec2 startPosition);
 
-    void setFieldDimension(b2Vec2 fieldDimension);
+    void setFieldDimension(const b2Vec2 fieldDimension);
 
 private:
 
     float m_ballResetTime;
+    float m_resetTime;
 
     b2Vec2 m_startPosition;
     b2Vec2 m_fieldDimension;
@@ -28,6 +29,9 @@ private:
 private:
 
     void autoResetBall(const float elapsedTime);
+
+    bool isOutside();
+
 };
 
 #endif

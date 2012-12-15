@@ -2,7 +2,7 @@
 #include "../Utility.hpp"
 #include <iostream>
 
-Ball::Ball() :  Entity(Entity::Ball)
+Ball::Ball(float resetTime) :  m_resetTime(resetTime), Entity(Entity::Ball)
 {
     m_ballResetTime = 0.0f;
     m_startPosition.x = 0.0f;
@@ -11,16 +11,10 @@ Ball::Ball() :  Entity(Entity::Ball)
 void Ball::autoResetBall(const float elapsedTime)
 {
     // If Ball outside of field
-    if(((utility::toPixel(m_body->GetPosition().x) < - 100.f) ||
-        (utility::toPixel(m_body->GetPosition().x) > (m_fieldDimension.x + 100.f)) ||
-        (utility::toPixel(m_body->GetPosition().y) > (m_fieldDimension.y + 100.f))) &&
-       (m_ballResetTime == 0.0f))
-        m_ballResetTime = elapsedTime + 1.0f;
+    if(isOutside() && (m_ballResetTime == 0.0f))
+        m_ballResetTime = elapsedTime + m_resetTime;
     // if ball back in field
-    else if((utility::toPixel(m_body->GetPosition().x) > - 100.f) &&
-            (utility::toPixel(m_body->GetPosition().x) < (m_fieldDimension.x + 100.f)) &&
-            (utility::toPixel(m_body->GetPosition().y) < (m_fieldDimension.y + 100.f)) &&
-            (m_ballResetTime > 0.0f))
+    else if(!isOutside() && (m_ballResetTime > 0.0f))
         m_ballResetTime = 0.0f;
     // if timer up, reset the ball
     else if(m_ballResetTime > 0.0f)
@@ -46,4 +40,14 @@ void Ball::setStartPosition(b2Vec2 startPosition)
 void Ball::setFieldDimension(b2Vec2 fieldDimension)
 {
     m_fieldDimension = fieldDimension;
+}
+
+bool Ball::isOutside()
+{
+    if((utility::toPixel(m_body->GetPosition().x) < - 100.f) ||
+    (utility::toPixel(m_body->GetPosition().x) > (m_fieldDimension.x + 100.f)) ||
+    (utility::toPixel(m_body->GetPosition().y) > (m_fieldDimension.y + 100.f)))
+        return true;
+    else
+        return false;
 }
