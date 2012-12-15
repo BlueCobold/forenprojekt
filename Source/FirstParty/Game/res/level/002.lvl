@@ -233,30 +233,38 @@
 		</entities>
 	</templates>
 
-	<grid size="60" width="900" height="900">
-w1w4w4w2w3w5w1w1w3w3w2w6w5
-w4                      w3
-w6                      w2
-w4        BB            w5
-w5      TT        RR    w6
-w1                      w2
-w3                      w4
-w3                      w1
-w2                        w2
-w6                TT      w6
-w5  t1                    w1
-w4                        w3
-w3          ll  lr      w4
-w1w2w3w3w4w1w1w6w5w4w5w5w2
+	<grid size="60" width="960" height="1200">
+w1w4w4w2w3w2w5w1w1w3w3w2w6w1w5w1
+w4        w4        w2        w3
+w4    t1  w3    t1  w5  t1    w3
+w4        w1        w6        w3
+w4                            w3
+w4              RR            w3
+w4                            w3
+w6        BB                  w2
+w4                            w5
+w5                            w6
+w1                            w2
+w3  ll        lrll        lr  w4
+w3        TT          TT      w1
+w2                            w2
+w6                            w6
+w5                            w1
+w4                            w3
+w3                            w4
+w1                            w2
+w1                            w2
 	</grid>
 	<objects>
 		<!-- Background -->
 		<background>
-			<animation texture="pastureland_bg" width="1600" height="900" rotate="false">
-				<frameindex frames="1">
-					<static value="0"/>
-				</frameindex>
-			</animation>
+			<parallax x="0" y="-150">
+                <animation texture="pastureland_bg" width="1600" height="900" rotate="false">
+                    <frameindex frames="1">
+                        <static value="0"/>
+                    </frameindex>
+                </animation>
+            </parallax>
 			<animation texture="pastureland_clouds" width="200" height="98"><!-- small cloud -->
 				<frameindex frames="1">
 					<static value="0"/>
@@ -321,7 +329,7 @@ w1w2w3w3w4w1w1w6w5w4w5w5w2
 					<static value="60" />
 				</position>
 			</animation>
-			<parallax x="10" y="10">
+			<parallax x="0" y="-150">
 				<animation texture="pastureland_flowers_front2" width="149" height="187" x="268" y="605" midx="68" midy="180"><!-- 02 mid flower -->
 					<frameindex frames="1">
 						<static value="0"/>
