@@ -23,16 +23,19 @@ App::App(Config& config) :
     m_fullscreen = config.get<bool>("IsFullScreen");
     m_showFps = config.get<bool>("ShowFps");
 
+    sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+    
+    if(!checkVideoMode(videoMode))
+        adjustVideoMode(videoMode);
+
     if(m_fullscreen)
     {
-        m_screen.create(sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"))
-            , m_windowTitle, sf::Style::Fullscreen);
+        m_screen.create(videoMode, m_windowTitle, sf::Style::Fullscreen);
         // Disable the cursor
         m_screen.setMouseCursorVisible(false);
     }
     else
-        m_screen.create(sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"))
-            , m_windowTitle);
+        m_screen.create(videoMode, m_windowTitle);
 
     m_fpsText.setFont(*m_resourceManager.getFont("visitor"));
     m_fpsText.setColor(sf::Color::Blue);
@@ -117,9 +120,13 @@ void App::switchDisplayMode()
     }
     else
     {
+        sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+    
+        if(!checkVideoMode(videoMode))
+            adjustVideoMode(videoMode);
+
         // Switch to window mode
-        m_screen.create(sf::VideoMode(m_config.get<unsigned int>("ResolutionX"),
-            m_config.get<unsigned int>("ResolutionY")), m_windowTitle);
+        m_screen.create(sf::VideoMode(videoMode), m_windowTitle);
         // Enable the cursor
         m_screen.setMouseCursorVisible(true);
     }
@@ -151,4 +158,35 @@ void App::onResize()
 
     // Reset view
     m_screen.setView(sf::View(sf::FloatRect(0.f, 0.f, size.x, size.y)));
+}
+// Ensure that the Resolution is between a boarder and valid
+bool App::checkVideoMode(const sf::VideoMode mode)
+{
+    if((mode.width <= 1920) && (mode.width >= 800) && (mode.height <= 1080) && (mode.height >= 600))
+    {
+        return mode.isValid();
+    }
+    return false;
+}
+
+void App::adjustVideoMode(sf::VideoMode& mode)
+{
+    try
+    {
+        mode = sf::VideoMode::getDesktopMode();
+        if(!mode.isValid())
+        {
+            mode.width = 800;
+            mode.height = 600;
+            if(!mode.isValid())
+            {
+                 throw "Found no valid videomode.";
+            }
+        }
+    }
+    catch(std::string str)
+    {
+        std::cout << "Exception raised: " << str << std::endl;
+    }
+
 }
