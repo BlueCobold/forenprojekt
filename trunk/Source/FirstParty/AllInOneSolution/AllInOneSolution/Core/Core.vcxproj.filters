@@ -58,6 +58,9 @@
     <ClCompile Include="model\ParallaxLayer.cpp">
       <Filter>Sources\model</Filter>
     </ClCompile>
+    <ClCompile Include="model\SoundObject.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -181,6 +184,9 @@
       <Filter>Headers\animation</Filter>
     </ClInclude>
     <ClInclude Include="model\ParallaxLayer.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\SoundObject.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
   </ItemGroup>

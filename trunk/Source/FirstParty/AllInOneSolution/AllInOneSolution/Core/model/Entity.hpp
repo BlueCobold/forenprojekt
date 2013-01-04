@@ -5,13 +5,14 @@
 
 #include "AnimatedGraphics.hpp"
 #include "PhysicalObject.hpp"
+#include "SoundObject.hpp"
 
 #include <memory> // std::unique_ptr
 #include <string>
 
 /// This class will be used to draw objects that have a binding
 /// to Box2D 
-class Entity : public PhysicalObject, public AnimatedGraphics
+class Entity : public PhysicalObject, public AnimatedGraphics, public SoundObject
 {
 public:
 

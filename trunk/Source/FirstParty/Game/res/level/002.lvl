@@ -222,6 +222,7 @@
 			<!-- Teeters -->
 			<entity name="Teeter" rep="TT" type="teeter">
 				<physics name="teeter" shape="teeter" />
+                <sound name="test" />
 				<animations>
 					<animation texture="teeter_wooden" frames="1" width="214" height="32" midx="107" midy="16" rotate="true">
 						<frameindex frames="1">

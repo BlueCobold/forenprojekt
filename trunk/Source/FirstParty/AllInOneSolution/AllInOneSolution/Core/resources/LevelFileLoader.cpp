@@ -16,17 +16,12 @@
 #include <map>
 #include <vector>
 
-void LevelFileLoader::parseConstants(tinyxml2::XMLElement* xml,
-    const AnimatedGraphics* animated,
-    Animation* holder)
+sf::Sound* LevelFileLoader::parseSound(tinyxml2::XMLElement* xml,
+    ResourceManager& resourceManager)
 {
-    std::map<std::string, std::unique_ptr<ValueProvider>> map;
-    for(auto var = xml->FirstAttribute(); var != nullptr; var = var->Next())
-    {
-        std::unique_ptr<ValueProvider> provider(new StaticProvider(var->FloatValue()));
-        map.insert(std::pair<std::string, std::unique_ptr<ValueProvider>>(var->Name(), std::move(provider)));
-    }
-    holder->bindVariables(map);
+     sf::Sound* sound = resourceManager.getSound(xml->Attribute("name"));
+
+     return sound;
 }
 
 std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml,

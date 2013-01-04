@@ -57,10 +57,10 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../../../ThirdParty/SFML/lib/;../../../../ThirdParty/Box2D/lib/Debug/;../../../../ThirdParty/tinyxml2/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;Box2D.lib;tinyxml2-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>libcmt.lib; msvcrt.lib; msvcrtd.lib; msvcmrt.lib; msvcurt.lib</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;sfml-audio-s-d.lib;sfml-network-s-d.lib;Box2D.lib;tinyxml2-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -80,10 +80,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>../../../../ThirdParty/SFML/lib/;../../../../ThirdParty/Box2D/lib/Release/;../../../../ThirdParty/tinyxml2/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;Box2D.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>msvcrt.lib; libcmtd.lib; msvcrtd.lib; msvcmrt.lib; msvcurt.lib</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;sfml-audio-s.lib;sfml-network-s.lib;Box2D.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -99,6 +99,7 @@
     <ClCompile Include="model\Level.cpp" />
     <ClCompile Include="model\ParallaxLayer.cpp" />
     <ClCompile Include="model\PhysicalObject.cpp" />
+    <ClCompile Include="model\SoundObject.cpp" />
     <ClCompile Include="model\Teeter.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="resources\LevelFileLoader.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="model\Level.hpp" />
     <ClInclude Include="model\ParallaxLayer.hpp" />
     <ClInclude Include="model\PhysicalObject.hpp" />
+    <ClInclude Include="model\SoundObject.hpp" />
     <ClInclude Include="model\Teeter.hpp" />
     <ClInclude Include="PlayState.hpp" />
     <ClInclude Include="resources\LevelFileLoader.hpp" />
