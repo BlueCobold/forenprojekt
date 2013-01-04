@@ -10,6 +10,7 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/System/Clock.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
 
 #include <string>
 
@@ -57,6 +58,7 @@ private:
     float m_frameCounter;
 
     ResourceManager m_resourceManager;
+    sf::SoundBuffer* m_soundBuffer;
 
     sf::Text m_fpsText;
 

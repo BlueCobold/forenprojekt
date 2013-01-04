@@ -13,6 +13,11 @@ bool ContactFilter::ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB)
     else if(entityA->getType() == Entity::Ball && entityB->getType() == Entity::Target)
         entityB->kill();
 
+    if(entityA->getType() == Entity::Teeter && entityB->getType() == Entity::Ball)
+        entityA->play();
+    else if(entityA->getType() == Entity::Ball && entityB->getType() == Entity::Teeter)
+        entityB->play();
+
     if(!entityA->isCollideWithBall() && entityB->getType() == Entity::Ball)
         return false;
     else if(entityA->getType() == Entity::Ball && !entityB->isCollideWithBall() )

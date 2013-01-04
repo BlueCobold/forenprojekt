@@ -349,6 +349,10 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
         element = element->NextSiblingElement("animation"))
         entity->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, entity.get(), m_resourceManager)));
 
+    // Load sound
+    if(xml->FirstChildElement("sound") != nullptr)
+        entity->bindSound(LevelFileLoader::parseSound(xml->FirstChildElement("sound"), m_resourceManager));
+
     // Load body
     element = physic->FirstChildElement("body");
     b2BodyDef bodyDef;

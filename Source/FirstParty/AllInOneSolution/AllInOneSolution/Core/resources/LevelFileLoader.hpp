@@ -5,8 +5,7 @@
 
 #include "../animation/Animation.hpp"
 #include "../animation/provider/ValueProvider.hpp"
-#include "../model/AnimatedGraphics.hpp"
-#include "../model/Entity.hpp"
+#include "../SoundObject.hpp"
 
 #include "ResourceManager.hpp"
 
@@ -32,6 +31,9 @@ public:
 
      static void parseKinematics(tinyxml2::XMLElement* element,
          Entity* entity);
+
+      static sf::Sound* parseSound(tinyxml2::XMLElement* xml,
+        ResourceManager& resourceManager);
 
 private:
 

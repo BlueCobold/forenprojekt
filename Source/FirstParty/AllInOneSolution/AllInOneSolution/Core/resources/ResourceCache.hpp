@@ -9,6 +9,8 @@
 #include <string>
 #include <utility> // make_pair
 
+#include <SFML/Audio/SoundBuffer.hpp>
+
 /// This class is a light header-only ResourceManager
 /// and is capabale of handling all sorts of resources,
 /// including the ones from SFML.
