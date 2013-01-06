@@ -11,9 +11,11 @@ class SoundObject
 {
 public:
 
-    ~SoundObject(){};
+    SoundObject();
 
-    void bindSound(sf::Music* sound);
+    virtual ~SoundObject();
+
+    void bindSound(sf::Music& sound);
 
     void play();
 
@@ -23,7 +25,7 @@ public:
 
 
 private:
-    std::unique_ptr<sf::Music> m_sound;
+    sf::Music m_sound;
 };
 
 #endif // SOUND_OBJECT
