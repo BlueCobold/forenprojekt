@@ -1,22 +1,32 @@
 #include "SoundObject.hpp"
 
-void SoundObject::bindSound(sf::Music* sound)
+SoundObject::SoundObject()
 {
-    m_sound = std::unique_ptr<sf::Music>(sound);
+}
+
+SoundObject::~SoundObject()
+{
+
+} 
+
+
+void SoundObject::bindSound(sf::Music& sound)
+{
+    m_sound = sound;
 }
 
 
 void SoundObject::play()
 {
-    m_sound->play();
+    m_sound.play();
 }
 
 void SoundObject::pause()
 {
-    m_sound->pause();
+    m_sound.pause();
 }
 
 void SoundObject::stop()
 {
-    m_sound->stop();
+    m_sound.stop();
 }
