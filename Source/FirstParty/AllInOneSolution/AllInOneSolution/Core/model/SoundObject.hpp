@@ -25,7 +25,7 @@ public:
 
 
 private:
-    sf::Music m_sound;
+    sf::Music* m_sound;
 };
 
 #endif // SOUND_OBJECT
