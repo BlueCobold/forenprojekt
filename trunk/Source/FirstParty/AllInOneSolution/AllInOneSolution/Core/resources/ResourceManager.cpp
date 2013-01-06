@@ -26,7 +26,6 @@ sf::Music* ResourceManager::getSound(const std::string& key)
     // Does the key even exist?
     auto sound = m_soundKeys.find(key);
 
-
     if(sound != m_soundKeys.end() && sound->first == key)
     {
         // Sound already loaded

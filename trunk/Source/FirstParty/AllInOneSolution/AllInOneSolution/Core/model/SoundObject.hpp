@@ -13,7 +13,7 @@ public:
 
     ~SoundObject(){};
 
-    void bindSound(std::unique_ptr<sf::Music> sound);
+    void bindSound(sf::Music* sound);
 
     void play();
 
