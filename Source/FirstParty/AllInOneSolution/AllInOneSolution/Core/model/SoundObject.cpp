@@ -1,8 +1,8 @@
 #include "SoundObject.hpp"
 
-void SoundObject::bindSound(std::unique_ptr<sf::Music> sound)
+void SoundObject::bindSound(sf::Music* sound)
 {
-    *m_sound = *std::move(sound);
+    m_sound = std::unique_ptr<sf::Music>(sound);
 }
 
 
