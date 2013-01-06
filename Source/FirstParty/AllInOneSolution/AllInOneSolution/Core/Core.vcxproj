@@ -93,6 +93,8 @@
     <ClCompile Include="ContactFilter.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
+    <ClCompile Include="LoadLevelState.cpp" />
+    <ClCompile Include="model\AlphaFadedGraphics.cpp" />
     <ClCompile Include="model\Background.cpp" />
     <ClCompile Include="model\Ball.cpp" />
     <ClCompile Include="model\Entity.cpp" />
@@ -133,6 +135,8 @@
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="ContactFilter.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
+    <ClInclude Include="LoadLevelState.hpp" />
+    <ClInclude Include="model\AlphaFadedGraphics.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />
     <ClInclude Include="model\Ball.hpp" />
@@ -149,6 +153,7 @@
     <ClInclude Include="resources\ResourceManager.hpp" />
     <ClInclude Include="ScrollView.hpp" />
     <ClInclude Include="State.hpp" />
+    <ClInclude Include="StateChangeInformation.h" />
     <ClInclude Include="StateManager.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>

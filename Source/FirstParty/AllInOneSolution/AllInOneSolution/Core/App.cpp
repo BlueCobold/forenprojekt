@@ -2,6 +2,7 @@
 #include "Config.hpp"
 #include "utility.hpp" // toString
 #include "PlayState.hpp"
+#include "LoadLevelState.hpp"
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Event.hpp>
@@ -42,8 +43,9 @@ App::App(Config& config) :
     m_fpsText.setCharacterSize(30);
     m_fpsText.setPosition(10, 10);
 
-    m_stateManager.push(std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config)));
-
+	m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config))); 
+	m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
+	m_stateManager.setState(LoadLevelStateId);
 }
 
 void App::run()

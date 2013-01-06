@@ -61,6 +61,12 @@
     <ClCompile Include="model\SoundObject.cpp">
       <Filter>Sources\model</Filter>
     </ClCompile>
+    <ClCompile Include="model\AlphaFadedGraphics.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadLevelState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -188,6 +194,15 @@
     </ClInclude>
     <ClInclude Include="model\SoundObject.hpp">
       <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\AlphaFadedGraphics.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadLevelState.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="StateChangeInformation.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
