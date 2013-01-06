@@ -1,9 +1,10 @@
 #include "StateManager.hpp"
 
 #include <utility> // move
+#include <exception>
 
 StateManager::StateManager() :
-    m_index(0)
+	m_currentState(nullptr)
 {
 
 }
@@ -13,37 +14,36 @@ StateManager::~StateManager()
 
 }
 
-void StateManager::push(std::unique_ptr<State> state)
+void StateManager::registerState(StateId id, std::shared_ptr<State> state)
 {
-    m_states.push_back(std::move(state));
+	auto existingState = m_statesById.find(id);
+	if (existingState != m_statesById.end()) return;
+
+	m_statesById[id] = state;		
 }
 
-void StateManager::next()
+void StateManager::setState(StateId id, void* enterInformation)
 {
-    if((m_states[m_index] != m_states.back() && !m_states.empty()))
-    {
-        m_index++;
-    }
-}
-
-void StateManager::prev()
-{
-    if(( m_states[m_index] != m_states.front() && !m_states.empty()))
-    {
-        m_index--;
-    }
+	auto state = m_statesById.find(id);
+	if (state == m_statesById.end()) return;
+	m_currentState = state->second;
+	m_currentState->onEnter(enterInformation);
 }
 
 void StateManager::update()
 {
-    if(!m_states.empty())
-        if(!m_states[m_index]->isPaused())
-            m_states[m_index]->update();
+	if (m_currentState.get() && !m_currentState->isPaused())
+	{
+		StateChangeInformation changeInformation = m_currentState->update();
+		if (changeInformation != StateChangeInformation::Empty())
+			setState(changeInformation.getStateId(), changeInformation.getUserData());
+	}
 }
 
 void StateManager::draw()
 {
-    if(!m_states.empty())
-        if(!m_states[m_index]->isPaused())
-            m_states[m_index]->draw();
+    if (m_currentState.get() && !m_currentState->isPaused())
+	{
+		m_currentState->draw();
+	}
 }

@@ -20,8 +20,9 @@ public:
     PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
     ~PlayState();
 
-    void update();
+    StateChangeInformation update();
     void draw();
+	void onEnter(void *enterInformation);
 
 private:
 
