@@ -2,6 +2,7 @@
 
 #include <utility> // move
 #include <exception>
+#include <sstream>
 
 StateManager::StateManager() :
 	m_currentState(nullptr)
@@ -17,7 +18,12 @@ StateManager::~StateManager()
 void StateManager::registerState(StateId id, std::shared_ptr<State> state)
 {
 	auto existingState = m_statesById.find(id);
-	if (existingState != m_statesById.end()) return;
+	if (existingState != m_statesById.end())
+	{
+		std::stringstream ss;
+		ss << "The state with id " << id << " already exists.";
+		throw std::exception(ss.str().c_str());
+	}
 
 	m_statesById[id] = state;		
 }
@@ -25,7 +31,12 @@ void StateManager::registerState(StateId id, std::shared_ptr<State> state)
 void StateManager::setState(StateId id, void* enterInformation)
 {
 	auto state = m_statesById.find(id);
-	if (state == m_statesById.end()) return;
+	if (state == m_statesById.end())
+	{
+		std::stringstream ss;
+		ss << "The state with id " << id << " does not exist.";
+		throw std::exception(ss.str().c_str());
+	}
 	m_currentState = state->second;
 	m_currentState->onEnter(enterInformation);
 }
