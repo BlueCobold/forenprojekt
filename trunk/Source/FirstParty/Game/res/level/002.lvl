@@ -222,7 +222,7 @@
 			<!-- Teeters -->
 			<entity name="Teeter" rep="TT" type="teeter">
 				<physics name="teeter" shape="teeter" />
-                <sound name="test" />
+				<sound name="test" />
 				<animations>
 					<animation texture="teeter_wooden" frames="1" width="214" height="32" midx="107" midy="16" rotate="true">
 						<frameindex frames="1">
@@ -260,7 +260,7 @@ w1                            w2
 		<!-- Background -->
 		<background>
 			<parallax x="0" y="-150">
-                <animation texture="pastureland_bg" width="1600" height="900" rotate="false">
+                <animation texture="pastureland_bg" width="1600" height="900" rotate="false" y="150">
                     <frameindex frames="1">
                         <static value="0"/>
                     </frameindex>
@@ -331,7 +331,7 @@ w1                            w2
 				</position>
 			</animation>
 			<parallax x="0" y="-150">
-				<animation texture="pastureland_flowers_front2" width="149" height="187" x="268" y="605" midx="68" midy="180"><!-- 02 mid flower -->
+				<animation texture="pastureland_flowers_front2" width="149" height="187" x="268" y="755" midx="68" midy="180"><!-- 02 mid flower -->
 					<frameindex frames="1">
 						<static value="0"/>
 					</frameindex>
@@ -360,7 +360,7 @@ w1                            w2
 						</add>
 					</rotation>
 				</animation>
-				<animation texture="pastureland_flowers_front" width="96" height="129" x="230" y="610" midx="48" midy="125"><!-- 01 front flower -->
+				<animation texture="pastureland_flowers_front" width="96" height="129" x="230" y="760" midx="48" midy="125"><!-- 01 front flower -->
 					<frameindex frames="1">
 						<static value="0"/>
 					</frameindex>
