@@ -21,9 +21,10 @@ public:
     virtual float getValue() const
     {
         float value = getProvider()->getValue();
-        if(value < FLT_EPSILON)
+        if((value >= FLT_EPSILON) || (value <= -FLT_EPSILON))
+            return 1/value;
+        else
             return 0;
-        return 1/value;
     }
 };
 
