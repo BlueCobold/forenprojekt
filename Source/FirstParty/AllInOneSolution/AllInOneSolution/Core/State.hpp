@@ -13,12 +13,12 @@ namespace sf
 
 enum StateId
 {
-	None,
-	PlayStateId,
-	LoadLevelStateId,
+    None,
+    PlayStateId,
+    LoadLevelStateId,
 };
 
-#include "StateChangeInformation.h"
+#include "StateChangeInformation.hpp"
 
 /// This class will be used to discribe a State
 /// and to be managed by the StateManager
