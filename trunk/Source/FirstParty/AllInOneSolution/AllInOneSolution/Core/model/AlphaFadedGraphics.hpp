@@ -15,24 +15,24 @@ class AlphaFadedGraphics : public GraphicalObject, public TimedObject
 {
 public:
 
-	AlphaFadedGraphics(const sf::Texture& texture, const float startAlpha, const float targetAlpha, const float duration);
-	~AlphaFadedGraphics();
+    AlphaFadedGraphics(const sf::Texture& texture, const float startAlpha, const float targetAlpha, const float duration);
+    ~AlphaFadedGraphics();
 
-	void update();
+    void update();
 
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	bool isFinished() const { return _isFinished; }
+    bool isFinished() const { return m_isFinished; }
 
 private:
-	sf::Texture m_texture;
-	sf::Sprite m_sprite;
-	float m_startAlpha;
-	float m_alphaDelta;
-	float m_duration;
-	float m_currentAlpha;
-	sf::Clock m_frameTime;
-	bool _isFinished;
+    sf::Texture m_texture;
+    sf::Sprite m_sprite;
+    float m_startAlpha;
+    float m_alphaDelta;
+    float m_duration;
+    float m_currentAlpha;
+    sf::Clock m_frameTime;
+    bool m_isFinished;
 };
 
 #endif // ANIMATED_GRAPHICS_HPP
