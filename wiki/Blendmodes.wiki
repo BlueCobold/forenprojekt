@@ -1,0 +1,11 @@
+#summary Lists the different modes from blending from one game-stage to another
+#labels blending
+
+= Overview =
+
+This page lists the number of mockups for blending over from one game-stage to another.
+
+
+== Vertical Stripes ==
+
+https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/vertical_stripes.jpg
