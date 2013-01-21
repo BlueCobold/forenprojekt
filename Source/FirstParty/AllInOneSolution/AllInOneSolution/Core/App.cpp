@@ -113,20 +113,20 @@ void App::handleEvents()
 
 void App::switchDisplayMode()
 {
+    sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+    
+        if(!checkVideoMode(videoMode))
+            adjustVideoMode(videoMode);
+
     if(m_fullscreen)
     {
         // Switch to fullscreen
-        m_screen.create(sf::VideoMode::getDesktopMode(), m_windowTitle, sf::Style::Fullscreen);
+        m_screen.create(sf::VideoMode(videoMode), m_windowTitle, sf::Style::Fullscreen);
         // Disable the cursor
         m_screen.setMouseCursorVisible(false);
     }
     else
     {
-        sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
-    
-        if(!checkVideoMode(videoMode))
-            adjustVideoMode(videoMode);
-
         // Switch to window mode
         m_screen.create(sf::VideoMode(videoMode), m_windowTitle);
         // Enable the cursor
