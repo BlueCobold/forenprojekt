@@ -54,11 +54,8 @@ void Level::restartAt(const float time)
         (*it)->restartAt(time);
 }
 
-void Level::update(const float elapsedTime)
+void Level::update(const float elapsedTime, sf::RenderWindow& screen)
 {
-    if(m_background != nullptr)
-        m_background->update(elapsedTime);
-
     auto it=m_entities.begin();
     while(it != m_entities.end())
     {
@@ -84,19 +81,13 @@ void Level::update(const float elapsedTime)
         m_debugDraw = !m_debugDraw;
 
     m_lastTime = elapsedTime;
-}
 
-void Level::draw(sf::RenderWindow& screen)
-{
     m_scrollView.setViewSize(screen.getSize());
     sf::Vector2f ballpos = sf::Vector2f(utility::toPixel(m_ball->getPosition().x), utility::toPixel(m_ball->getPosition().y));
     m_scrollView.adjustView(ballpos, screen);
 
     if(m_background != nullptr)
-        screen.draw(*m_background);
-
-    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
-        screen.draw(**it);
+        m_background->update(elapsedTime, screen.getView());
 
     if(m_debugDraw)
     {
@@ -105,6 +96,15 @@ void Level::draw(sf::RenderWindow& screen)
         m_world.SetDebugDraw(&d);
         m_world.DrawDebugData();
     }
+}
+
+void Level::draw(sf::RenderWindow& screen) const
+{
+    if(m_background != nullptr)
+        screen.draw(*m_background);
+
+    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+        screen.draw(**it);
 }
 
 bool Level::load()

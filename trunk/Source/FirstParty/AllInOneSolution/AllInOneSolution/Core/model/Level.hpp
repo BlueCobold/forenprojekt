@@ -43,8 +43,8 @@ public:
     ~Level();
 
     virtual void restartAt(const float time);
-    void update(const float dt);
-    void draw(sf::RenderWindow& screen);
+    void update(const float dt, sf::RenderWindow& screen);
+    void draw(sf::RenderWindow& screen) const;
 
     /// Return the level number
     const unsigned int number();

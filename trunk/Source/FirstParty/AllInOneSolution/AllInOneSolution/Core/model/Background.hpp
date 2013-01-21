@@ -24,7 +24,7 @@ public:
 	~Background();
 
     virtual void restartAt(const float time);
-    void update(const float time);
+    void update(const float time, const sf::View& view);
 
     void bindLayer(std::unique_ptr<ParallaxLayer>& layer);
 

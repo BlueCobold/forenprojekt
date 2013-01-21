@@ -13,7 +13,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     screen.setFramerateLimit(60);
 	m_level = new Level(2, m_resourceManager, m_config);
     m_level->restartAt(m_frametime.getElapsedTime().asSeconds());
-	m_level->update(m_frametime.getElapsedTime().asSeconds());
+    m_level->update(m_frametime.getElapsedTime().asSeconds(), screen);
 	m_level->draw(screen);
 
 	sf::Image img = screen.capture();

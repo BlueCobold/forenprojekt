@@ -18,9 +18,7 @@ public:
 	ParallaxLayer(const sf::Vector2f& parallaxDistance);
 	~ParallaxLayer();
 
-    void update(const float time);
-
-    void drawParallax(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& scrollPercent);
+    void update(const float time, const sf::Vector2f& scrollPercent);
 
     virtual float getValueOf(const std::string& name) const;
 };

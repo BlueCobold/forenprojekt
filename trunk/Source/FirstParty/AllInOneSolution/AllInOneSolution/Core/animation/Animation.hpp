@@ -40,6 +40,7 @@ public:
 
 private:
 
+    void updatePosition();
     const sf::IntRect Animation::getTextureRect() const;
 
     std::unique_ptr<ValueProvider> m_xPositionProvider;
