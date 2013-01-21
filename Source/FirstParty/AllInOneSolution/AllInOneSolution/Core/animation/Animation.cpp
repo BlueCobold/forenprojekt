@@ -42,17 +42,22 @@ void Animation::update()
         rotation += m_rotationProvider->getValue();
     m_sprite.setRotation(rotation);
 
+    updatePosition();
+}
+
+void Animation::setPosition(const float x, const float y)
+{
+    m_externalPosition = sf::Vector2f(x, y);
+}
+
+void Animation::updatePosition()
+{
     sf::Vector2f pos = sf::Vector2f(m_externalPosition.x, m_externalPosition.y) + m_drawOffset;
     if(m_xPositionProvider != nullptr)
         pos.x += m_xPositionProvider->getValue();
     if(m_yPositionProvider != nullptr)
         pos.y += m_yPositionProvider->getValue();
     m_sprite.setPosition(pos.x, pos.y);
-}
-
-void Animation::setPosition(const float x, const float y)
-{
-    m_externalPosition = sf::Vector2f(x, y);
 }
 
 void Animation::setRotation(const float radians)

@@ -35,39 +35,31 @@ void Config::reload(const std::string& fileName)
 void Config::readFile()
 {
     m_configFile.open(m_fileName, std::ios_base::in);
-    try
+    if(m_configFile.is_open())
     {
-        if(m_configFile.is_open())
+        std::string line = "";
+        std::string key = "";
+        std::string value = "";
+        unsigned int pos;
+
+        while(!m_configFile.eof())
         {
-            std::string line = "";
-            std::string key = "";
-            std::string value = "";
-            unsigned int pos;
+            std::getline(m_configFile, line);
 
-            while(!m_configFile.eof())
-            {
-                std::getline(m_configFile, line);
+            pos = line.find('=');
 
-                pos = line.find('=');
+            if(pos == std::string::npos)
+                continue;
 
-                if(pos == std::string::npos)
-                    continue;
+            key = line.substr(0, pos);
+            eraseOverhang(key);
+            value = line.substr(pos+1);
+            eraseOverhang(value);
 
-                key = line.substr(0, pos);
-                eraseOverhang(key);
-                value = line.substr(pos+1);
-                eraseOverhang(value);
-
-                if(!key.empty() && !value.empty())
-                    m_content.insert(std::make_pair<std::string&, std::string&>(key, value));
-            } 
+            if(!key.empty() && !value.empty())
+                m_content.insert(std::make_pair<std::string&, std::string&>(key, value));
         } 
-        else
-            throw "File '" + m_fileName + "' not found";
-
     } 
-    catch(std::string str)
-    {
-        std::cout << "Exception raised: " << str << std::endl;
-    }
+    else
+        throw std::runtime_error("File '" + m_fileName + "' not found");
 }

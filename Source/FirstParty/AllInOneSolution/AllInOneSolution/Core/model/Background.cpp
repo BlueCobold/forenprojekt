@@ -23,7 +23,7 @@ void Background::restartAt(const float time)
         (*layer)->restartAt(time);
 }
 
-void Background::update(const float time)
+void Background::update(const float time, const sf::View& view)
 {
     updateCurrentTime(time);
     for(auto animation = getAnimations().begin(); animation != getAnimations().end(); ++animation)
@@ -31,9 +31,18 @@ void Background::update(const float time)
         m_updatingAni = (*animation).get();
         (*animation)->update();
     }
+    
+    sf::Vector2f scroll = sf::Vector2f(0.5f, 0.5f);
+    float xper = (m_size.x-view.getSize().x);
+    if (fabs(xper) > FLT_EPSILON)
+        scroll.x = (view.getCenter().x - 0.5f*view.getSize().x) / xper;
+    float yper = (m_size.y-view.getSize().y);
+    if (fabs(yper)>FLT_EPSILON)
+        scroll.y = (view.getCenter().y - 0.5f*view.getSize().y) / yper;
+
     m_updatingAni = nullptr;
     for(auto layer = m_layers.begin(); layer != m_layers.end(); ++layer)
-        (*layer)->update(time);
+        (*layer)->update(time, scroll);
 }
 
 float Background::getValueOf(const std::string& name) const
@@ -47,13 +56,6 @@ void Background::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     GraphicalObject::draw(target, states);
 
-    sf::Vector2f scroll = sf::Vector2f(0.5f, 0.5f);
-    float xper = (m_size.x-target.getView().getSize().x);
-    if (fabs(xper) > FLT_EPSILON)
-        scroll.x = (target.getView().getCenter().x - 0.5f*target.getView().getSize().x) / xper;
-    float yper = (m_size.y-target.getView().getSize().y);
-    if (fabs(yper)>FLT_EPSILON)
-        scroll.y = (target.getView().getCenter().y - 0.5f*target.getView().getSize().y) / yper;
     for(auto layer = m_layers.begin(); layer != m_layers.end(); ++layer)
-        (*layer)->drawParallax(target, states, scroll);
+        (*layer)->draw(target, states);
 }
