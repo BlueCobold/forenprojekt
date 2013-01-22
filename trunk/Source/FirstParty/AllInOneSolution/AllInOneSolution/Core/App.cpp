@@ -181,7 +181,7 @@ void App::adjustVideoMode(sf::VideoMode& mode)
             return;
 
         mode = sf::VideoMode::getDesktopMode();
-        if(mode.isValid())
+        if(checkVideoMode(mode))
             return;
 
         mode.width = 800;
