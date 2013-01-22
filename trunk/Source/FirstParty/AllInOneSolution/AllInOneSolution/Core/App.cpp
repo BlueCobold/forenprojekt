@@ -175,20 +175,24 @@ void App::adjustVideoMode(sf::VideoMode& mode)
 {
     try
     {
+        mode.width = 1920;
+        mode.height = 1080;
+        if(mode.isValid())
+            return;
+
         mode = sf::VideoMode::getDesktopMode();
-        if(!mode.isValid())
-        {
-            mode.width = 800;
-            mode.height = 600;
-            if(!mode.isValid())
-            {
-                 throw "Found no valid videomode.";
-            }
-        }
+        if(mode.isValid())
+            return;
+
+        mode.width = 800;
+        mode.height = 600;
+        if(mode.isValid())
+            return;
+        else
+            throw "Found no valid videomode.";
     }
     catch(std::string str)
     {
         std::cout << "Exception raised: " << str << std::endl;
     }
-
 }
