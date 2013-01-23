@@ -16,7 +16,6 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     m_level->update(m_frametime.getElapsedTime().asSeconds(), screen);
 	m_level->draw(screen);
 
-	sf::Image img = screen.capture();
 	sf::Texture texture;
 	bool fromImage = texture.loadFromImage(screen.capture());
 
