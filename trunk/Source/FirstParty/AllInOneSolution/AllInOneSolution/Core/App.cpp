@@ -9,6 +9,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
+#include <SFML/Audio/Listener.hpp>
 
 #include <sstream>
 #include <utility> // move
@@ -23,6 +24,9 @@ App::App(Config& config) :
     m_windowTitle = config.get<std::string>("WindowName");
     m_fullscreen = config.get<bool>("IsFullScreen");
     m_showFps = config.get<bool>("ShowFps");
+
+    // Set the Volume for sf::Sound and sf::Music
+    sf::Listener::setGlobalVolume(config.get<float>("MasterVolume"));
 
     sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
     
