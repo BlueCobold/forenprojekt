@@ -28,7 +28,7 @@ public:
 
     sf::Texture* getTexture(const std::string& key);
     sf::Font* getFont(const std::string& key);
-    sf::Sound* getSound(const std::string& key);
+    sf::SoundBuffer* getSoundBuffer(const std::string& key);
 
 private:
 
@@ -61,27 +61,24 @@ private:
             return font;
     }
 
-    static sf::Sound* loadSound(const std::string& path, sf::SoundBuffer* soundBuffer)
+    static sf::SoundBuffer* loadSoundBuffer(const std::string& path)
     {
-        sf::Sound* sound = new sf::Sound;
-        sound->setVolume(100.f);
-        sound->setBuffer(*soundBuffer);
+        sf::SoundBuffer* soundBuffer = new sf::SoundBuffer;
         if(!soundBuffer->loadFromFile("res/audio/" + path))
             return nullptr;
         else
-            return sound;
+            return soundBuffer;
     }
 
 private:
-    sf::SoundBuffer m_soundBuffer;
 
     std::unordered_map<std::string, std::pair<std::string, bool>> m_textureKeys;
     std::unordered_map<std::string, std::string> m_fontKeys;
-    std::unordered_map<std::string, std::string> m_soundKeys;
+    std::unordered_map<std::string, std::string> m_soundBufferKeys;
 
     ResourceCache<sf::Texture> m_textures;
     ResourceCache<sf::Font> m_fonts;
-    ResourceCache<sf::Sound> m_sounds;
+    ResourceCache<sf::SoundBuffer> m_soundBuffers;
 
 };
 

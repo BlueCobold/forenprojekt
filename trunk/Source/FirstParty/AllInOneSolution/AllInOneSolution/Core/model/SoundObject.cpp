@@ -1,38 +1,22 @@
 #include "SoundObject.hpp"
 
-#include <stdio.h>
-
-SoundObject::SoundObject()
-    : m_sound(nullptr)
+void SoundObject::bindSoundBuffer(sf::SoundBuffer* soundBuffer)
 {
-}
-
-SoundObject::~SoundObject()
-{
-    if(m_sound != nullptr)
-    {
-        m_sound = nullptr;
-    }
-} 
-
-
-void SoundObject::bindSound(sf::Sound* sound)
-{
-    m_sound = sound;
+    m_sound.setBuffer(*soundBuffer);
 }
 
 
 void SoundObject::play()
 {
-    m_sound->play();
+    m_sound.play();
 }
 
 void SoundObject::pause()
 {
-    m_sound->pause();
+    m_sound.pause();
 }
 
 void SoundObject::stop()
 {
-    m_sound->stop();
+    m_sound.stop();
 }

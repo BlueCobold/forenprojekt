@@ -21,21 +21,21 @@ ResourceManager::ResourceManager()
     parseFonts(doc);
 }
 
-sf::Sound* ResourceManager::getSound(const std::string& key)
+sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
 {
     // Does the key even exist?
-    auto sound = m_soundKeys.find(key);
+    auto sound = m_soundBufferKeys.find(key);
 
-    if(sound != m_soundKeys.end() && sound->first == key)
+    if(sound != m_soundBufferKeys.end() && sound->first == key)
     {
         // Sound already loaded
-        if(m_sounds.exists(sound->first))
-            return m_sounds.get(sound->first);
+        if(m_soundBuffers.exists(sound->first))
+            return m_soundBuffers.get(sound->first);
         else
         {
-            if(m_sounds.load(sound->first,
-                std::bind(&ResourceManager::loadSound, sound->second, &m_soundBuffer)))
-                return m_sounds.get(sound->first);    
+            if(m_soundBuffers.load(sound->first,
+                std::bind(&ResourceManager::loadSoundBuffer, sound->second)))
+                return m_soundBuffers.get(sound->first);    
         }
     }
     
@@ -122,7 +122,7 @@ void ResourceManager::parseSounds(tinyxml2::XMLDocument& doc)
     for(auto soundIterator = sounds->FirstChildElement("sound");
         soundIterator != nullptr; soundIterator = soundIterator->NextSiblingElement("sound"))
     {
-        m_soundKeys.insert(std::make_pair<std::string, std::string>(
+        m_soundBufferKeys.insert(std::make_pair<std::string, std::string>(
             std::string(soundIterator->Attribute("name")), std::string(soundIterator->Attribute("path"))));
     }
 }
