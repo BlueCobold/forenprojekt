@@ -1,5 +1,7 @@
 #include "SoundObject.hpp"
 
+#include <stdio.h>
+
 SoundObject::SoundObject()
     : m_sound(nullptr)
 {
@@ -14,9 +16,9 @@ SoundObject::~SoundObject()
 } 
 
 
-void SoundObject::bindSound(sf::Music& sound)
+void SoundObject::bindSound(sf::Sound* sound)
 {
-    m_sound = &sound;
+    m_sound = sound;
 }
 
 
