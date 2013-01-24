@@ -7,7 +7,8 @@
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
-#include <SFML/Audio/Music.hpp>
+#include <SFML/Audio/Sound.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
 
 //#include <memory>
 #include <string>
@@ -27,7 +28,7 @@ public:
 
     sf::Texture* getTexture(const std::string& key);
     sf::Font* getFont(const std::string& key);
-    sf::Music* getSound(const std::string& key);
+    sf::Sound* getSound(const std::string& key);
 
 private:
 
@@ -60,23 +61,27 @@ private:
             return font;
     }
 
-    static sf::Music* loadSound(const std::string& path)
+    static sf::Sound* loadSound(const std::string& path, sf::SoundBuffer* soundBuffer)
     {
-        sf::Music* sound = new sf::Music;
-        if(!sound->openFromFile("res/audio/" + path))
+        sf::Sound* sound = new sf::Sound;
+        sound->setVolume(100.f);
+        sound->setBuffer(*soundBuffer);
+        if(!soundBuffer->loadFromFile("res/audio/" + path))
             return nullptr;
         else
             return sound;
     }
 
 private:
+    sf::SoundBuffer m_soundBuffer;
+
     std::unordered_map<std::string, std::pair<std::string, bool>> m_textureKeys;
     std::unordered_map<std::string, std::string> m_fontKeys;
     std::unordered_map<std::string, std::string> m_soundKeys;
 
     ResourceCache<sf::Texture> m_textures;
     ResourceCache<sf::Font> m_fonts;
-    ResourceCache<sf::Music> m_sounds;
+    ResourceCache<sf::Sound> m_sounds;
 
 };
 

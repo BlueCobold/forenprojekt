@@ -16,10 +16,10 @@
 #include <map>
 #include <vector>
 
-sf::Music* LevelFileLoader::parseSound(tinyxml2::XMLElement* xml,
+sf::Sound* LevelFileLoader::parseSound(tinyxml2::XMLElement* xml,
     ResourceManager& resourceManager)
 {
-     sf::Music* sound = resourceManager.getSound(xml->Attribute("name"));
+     sf::Sound* sound = resourceManager.getSound(xml->Attribute("name"));
 
      return sound;
 }

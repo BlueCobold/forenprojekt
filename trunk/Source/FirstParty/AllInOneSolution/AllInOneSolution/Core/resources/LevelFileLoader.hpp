@@ -34,7 +34,7 @@ public:
      static void parseKinematics(tinyxml2::XMLElement* element,
          Entity* entity);
 
-      static sf::Music* parseSound(tinyxml2::XMLElement* xml,
+      static sf::Sound* parseSound(tinyxml2::XMLElement* xml,
         ResourceManager& resourceManager);
 
 private:

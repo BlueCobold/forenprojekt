@@ -21,7 +21,7 @@ ResourceManager::ResourceManager()
     parseFonts(doc);
 }
 
-sf::Music* ResourceManager::getSound(const std::string& key)
+sf::Sound* ResourceManager::getSound(const std::string& key)
 {
     // Does the key even exist?
     auto sound = m_soundKeys.find(key);
@@ -34,7 +34,7 @@ sf::Music* ResourceManager::getSound(const std::string& key)
         else
         {
             if(m_sounds.load(sound->first,
-                std::bind(&ResourceManager::loadSound, sound->second)))
+                std::bind(&ResourceManager::loadSound, sound->second, &m_soundBuffer)))
                 return m_sounds.get(sound->first);    
         }
     }
