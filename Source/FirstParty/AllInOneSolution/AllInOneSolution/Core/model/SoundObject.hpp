@@ -4,6 +4,7 @@
 #define SOUND_OBJECT
 
 #include <SFML/Audio/Sound.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
 
 /// This class is used to be a container and a manager for a sound for a single entity
 
@@ -11,11 +12,7 @@ class SoundObject
 {
 public:
 
-    SoundObject();
-
-    virtual ~SoundObject();
-
-    void bindSound(sf::Sound* sound);
+    void bindSoundBuffer(sf::SoundBuffer* sound);
 
     void play();
 
@@ -25,7 +22,7 @@ public:
 
 
 private:
-    sf::Sound* m_sound;
+    sf::Sound m_sound;
 };
 
 #endif // SOUND_OBJECT
