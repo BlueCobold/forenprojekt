@@ -17,8 +17,6 @@ PlayState::~PlayState()
 
 void PlayState::onEnter(void *enterInformation)
 {
-    m_screen.setFramerateLimit(0);
-    m_screen.setVerticalSyncEnabled(true);
     m_level = std::unique_ptr<Level>((Level*)enterInformation);
     float time = m_frametime.getElapsedTime().asSeconds();
     m_level->restartAt(time);
