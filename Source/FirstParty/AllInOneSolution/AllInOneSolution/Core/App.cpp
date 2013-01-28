@@ -28,6 +28,8 @@ App::App(Config& config) :
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
     m_showFps = m_config.get<bool>("ShowFps");
+    m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
+    m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
 
     // Set the Volume for sf::Sound and sf::Music
     sf::Listener::setGlobalVolume(m_config.get<float>("MasterVolume"));
@@ -180,7 +182,7 @@ void App::adjustVideoMode(sf::VideoMode& mode)
         mode.height = 600;
 
     // Validity of resolution is only important in fullscreen mode
-    if(m_fullscreen && !mode.isValid())
+    if(!mode.isValid())
     {
         // Get sorted fullscreen modes - best before worse
         const std::vector<sf::VideoMode>& modes = sf::VideoMode::getFullscreenModes();
