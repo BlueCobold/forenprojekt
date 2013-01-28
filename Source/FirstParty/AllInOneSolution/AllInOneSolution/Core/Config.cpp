@@ -25,29 +25,30 @@ std::string Config::eraseOverhang(std::string& data)
 void Config::reload(const std::string& fileName)
 {
     m_fileName = fileName;
-
-    if(m_configFile)
-        m_configFile.close();
     
     readFile();
 }
 
 void Config::readFile()
 {
-    m_configFile.open(m_fileName, std::ios_base::in);
-    if(m_configFile.is_open())
+    // Open file
+    std::ifstream configFile(m_fileName, std::ios_base::in);
+
+    if(configFile.is_open())
     {
+        // Reset variables
         std::string line = "";
         std::string key = "";
         std::string value = "";
-        unsigned int pos;
+        unsigned int pos = 0;
 
-        while(!m_configFile.eof())
+        while(!configFile.eof())
         {
-            std::getline(m_configFile, line);
+            std::getline(configFile, line);
 
             pos = line.find('=');
 
+            // Does not contain a =
             if(pos == std::string::npos)
                 continue;
 
