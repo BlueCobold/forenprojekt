@@ -32,13 +32,13 @@ private:
 private:
 
     std::string m_fileName;
-    std::ifstream m_configFile;
     std::unordered_map<std::string, std::string> m_content;
 };
 
 template<typename T>
 T Config::get(const std::string& key)
 {
+    // Default return value
     T output = utility::stringTo<T>("0");
 
     auto it = m_content.find(key);

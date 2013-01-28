@@ -16,22 +16,25 @@
 
 App::App(Config& config) :
     m_config(config),
+    m_windowTitle("Rickety Racket"),
     m_fullscreen(false),
     m_focus(true),
+    m_showFps(true),
     m_fps(0),
-    m_frameCounter(0.f)
+    m_frameCounter(0.f),
+    m_soundBuffer(nullptr)
 {
-    m_windowTitle = config.get<std::string>("WindowName");
-    m_fullscreen = config.get<bool>("IsFullScreen");
-    m_showFps = config.get<bool>("ShowFps");
+    // Cache often used settings
+    m_windowTitle = m_config.get<std::string>("WindowName");
+    m_fullscreen = m_config.get<bool>("IsFullScreen");
+    m_showFps = m_config.get<bool>("ShowFps");
 
     // Set the Volume for sf::Sound and sf::Music
-    sf::Listener::setGlobalVolume(config.get<float>("MasterVolume"));
+    sf::Listener::setGlobalVolume(m_config.get<float>("MasterVolume"));
 
     sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
-    
-    if(!checkVideoMode(videoMode))
-        adjustVideoMode(videoMode);
+
+    adjustVideoMode(videoMode);
 
     if(m_fullscreen)
     {
@@ -118,9 +121,8 @@ void App::handleEvents()
 void App::switchDisplayMode()
 {
     sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
-    
-        if(!checkVideoMode(videoMode))
-            adjustVideoMode(videoMode);
+
+    adjustVideoMode(videoMode);
 
     if(m_fullscreen)
     {
@@ -151,52 +153,46 @@ void App::calculateFps()
 
 void App::onResize()
 {
-    sf::Vector2f size = static_cast<sf::Vector2f>(m_screen.getSize());
+    sf::VideoMode mode(m_screen.getSize().x, m_screen.getSize().y);
 
-    // Minimum size
-    if(size.x < 800)
-        size.x = 800;
-    if(size.y < 600)
-        size.y = 600;
-
+    adjustVideoMode(mode);
+    
     // Apply possible size changes
-    m_screen.setSize(static_cast<sf::Vector2u>(size));
+    m_screen.setSize(sf::Vector2u(mode.width, mode.height));
 
     // Reset view
-    m_screen.setView(sf::View(sf::FloatRect(0.f, 0.f, size.x, size.y)));
-}
-// Ensure that the Resolution is between a boarder and valid
-bool App::checkVideoMode(const sf::VideoMode mode)
-{
-    if((mode.width <= 1920) && (mode.width >= 800) && (mode.height <= 1080) && (mode.height >= 600))
-    {
-        return mode.isValid();
-    }
-    return false;
+    m_screen.setView(
+        sf::View(sf::FloatRect(0.f, 0.f, static_cast<float>(mode.width), static_cast<float>(mode.height)))
+        );
 }
 
 void App::adjustVideoMode(sf::VideoMode& mode)
 {
-    try
-    {
+    // Ensure minimas and maximas
+    if(mode.width > 1920)
         mode.width = 1920;
-        mode.height = 1080;
-        if(mode.isValid())
-            return;
-
-        mode = sf::VideoMode::getDesktopMode();
-        if(checkVideoMode(mode))
-            return;
-
+    else if(mode.width < 800)
         mode.width = 800;
+
+    if(mode.height > 1080)
+        mode.height = 1080;
+    else if(mode.height < 600)
         mode.height = 600;
-        if(mode.isValid())
-            return;
-        else
-            throw "Found no valid videomode.";
-    }
-    catch(std::string str)
+
+    // Validity of resolution is only important in fullscreen mode
+    if(m_fullscreen && !mode.isValid())
     {
-        std::cout << "Exception raised: " << str << std::endl;
+        // Get sorted fullscreen modes - best before worse
+        const std::vector<sf::VideoMode>& modes = sf::VideoMode::getFullscreenModes();
+
+        for(std::size_t i = 1; i < modes.size(); ++i)
+        {
+            if(modes[i].width < mode.width && modes[i].height < mode.height &&
+                modes[i-1].width <= 1920 && modes[i-1].height <= 1080)
+            {
+                mode = modes[i-1];
+                break;
+            }
+        }
     }
 }

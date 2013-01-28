@@ -39,8 +39,6 @@ private:
     void calculateFps();
     void onResize();
 
-    bool checkVideoMode(const sf::VideoMode mode);
-
     void adjustVideoMode(sf::VideoMode& mode);
 
 private:
