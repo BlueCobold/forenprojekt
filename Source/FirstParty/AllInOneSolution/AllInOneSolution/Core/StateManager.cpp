@@ -10,15 +10,10 @@ StateManager::StateManager() :
 
 }
 
-StateManager::~StateManager()
-{
-
-}
-
 void StateManager::registerState(StateId id, std::shared_ptr<State> state)
 {
 	auto existingState = m_statesById.find(id);
-	if (existingState != m_statesById.end())
+	if(existingState != m_statesById.end())
 	{
 		std::stringstream ss;
 		ss << "The state with id " << id << " already exists.";
@@ -31,7 +26,7 @@ void StateManager::registerState(StateId id, std::shared_ptr<State> state)
 void StateManager::setState(StateId id, void* enterInformation)
 {
 	auto state = m_statesById.find(id);
-	if (state == m_statesById.end())
+	if(state == m_statesById.end())
 	{
 		std::stringstream ss;
 		ss << "The state with id " << id << " does not exist.";
@@ -43,17 +38,17 @@ void StateManager::setState(StateId id, void* enterInformation)
 
 void StateManager::update()
 {
-	if (m_currentState.get() && !m_currentState->isPaused())
+	if(m_currentState.get() && !m_currentState->isPaused())
 	{
 		StateChangeInformation changeInformation = m_currentState->update();
-		if (changeInformation != StateChangeInformation::Empty())
+		if(changeInformation != StateChangeInformation::Empty())
 			setState(changeInformation.getStateId(), changeInformation.getUserData());
 	}
 }
 
 void StateManager::draw()
 {
-    if (m_currentState.get() && !m_currentState->isPaused())
+    if(m_currentState.get() && !m_currentState->isPaused())
 	{
 		m_currentState->draw();
 	}

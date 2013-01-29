@@ -182,7 +182,7 @@ void App::adjustVideoMode(sf::VideoMode& mode)
         mode.height = 600;
 
     // Validity of resolution is only important in fullscreen mode
-    if(!mode.isValid())
+    if(m_fullscreen && !mode.isValid())
     {
         // Get sorted fullscreen modes - best before worse
         const std::vector<sf::VideoMode>& modes = sf::VideoMode::getFullscreenModes();
@@ -197,4 +197,13 @@ void App::adjustVideoMode(sf::VideoMode& mode)
             }
         }
     }
+    else if(!m_fullscreen)
+    {
+        if(mode.width > sf::VideoMode::getDesktopMode().width)
+            mode.width = sf::VideoMode::getDesktopMode().width;
+        if(mode.height > sf::VideoMode::getDesktopMode().height)
+            mode.height = sf::VideoMode::getDesktopMode().height;
+    }
+
+    std::cout << mode.width << "," << mode.height << std::endl;
 }

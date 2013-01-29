@@ -36,7 +36,8 @@ void LoadLevelState::onEnter(void* enterInformation)
 StateChangeInformation LoadLevelState::update()
 {
 	m_alphaFadedScreen->update();
-	if (m_alphaFadedScreen->isFinished()) return StateChangeInformation(PlayStateId, m_level);
+	if(m_alphaFadedScreen->isFinished())
+        return StateChangeInformation(PlayStateId, m_level);
 
 	return StateChangeInformation::Empty();
 }
