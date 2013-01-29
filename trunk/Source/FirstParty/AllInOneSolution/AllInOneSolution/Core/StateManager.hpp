@@ -16,7 +16,6 @@ class StateManager
 public:
 
     StateManager();
-    ~StateManager();
 
 	void registerState(StateId id, std::shared_ptr<State> state);
     void setState(StateId id, void* enterInformation= nullptr);
