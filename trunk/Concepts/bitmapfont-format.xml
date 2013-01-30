@@ -1,0 +1,15 @@
+<!-- Definition -->
+<bitmapfont>
+    <image = "String"> </image>
+    <height = int> </height>
+    <glyphe = char>
+         <x = int> </x>
+         <y = int> </y>
+         <width = int> </width>
+    </glyphe>
+	.
+	.
+	.
+	.
+	.
+</bitmapfont>
