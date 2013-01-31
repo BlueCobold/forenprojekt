@@ -3,7 +3,7 @@
 #ifndef ANIMATED_GRAPHICS_HPP
 #define ANIMATED_GRAPHICS_HPP
 
-#include "GraphicalObject.hpp"
+#include "../rendering/GraphicalObject.hpp"
 #include "../animation/OrientedObject.hpp"
 #include "../animation/TimedObject.hpp"
 #include "../animation/VariableHolder.hpp"

@@ -9,7 +9,7 @@ ScrollView::ScrollView(const sf::Vector2u& levelsize, const sf::Vector2u& viewsi
 {
 }
 
-void ScrollView::adjustView(const sf::Vector2f& scrollvec, sf::RenderWindow& window)
+void ScrollView::adjustView(const sf::Vector2f& scrollvec, sf::RenderTarget& window)
 {
 	sf::View view = window.getView();
 	sf::Vector2f center = scrollvec;

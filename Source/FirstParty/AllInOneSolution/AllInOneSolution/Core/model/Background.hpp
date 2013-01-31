@@ -30,7 +30,7 @@ public:
 
     virtual float getValueOf(const std::string& name) const;
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    void draw(const DrawParameter& param);
 };
 
 #endif	//BACKGROUND_HPP

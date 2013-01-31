@@ -1,6 +1,7 @@
 #include "Level.hpp"
 #include "../Config.hpp"
 #include "Entity.hpp"
+#include "../rendering/DrawParameter.hpp"
 #include "../resources/ResourceManager.hpp"
 #include "../resources/LevelFileLoader.hpp"
 #include "../Utility.hpp" // toString, toMeter
@@ -52,9 +53,10 @@ void Level::restartAt(const float time)
     TimedObject::restartAt(time);
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         (*it)->restartAt(time);
+    m_lastTime = time;
 }
 
-void Level::update(const float elapsedTime, sf::RenderWindow& screen)
+void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 {
     auto it=m_entities.begin();
     while(it != m_entities.end())
@@ -98,13 +100,13 @@ void Level::update(const float elapsedTime, sf::RenderWindow& screen)
     }
 }
 
-void Level::draw(sf::RenderWindow& screen) const
+void Level::draw(const DrawParameter& param)
 {
     if(m_background != nullptr)
-        screen.draw(*m_background);
+        m_background->draw(param);
 
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
-        screen.draw(**it);
+        it->get()->draw(param);
 }
 
 bool Level::load()
@@ -363,7 +365,7 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     else if(std::string(element->Attribute("type")) == "dynamic")
         bodyDef.type = b2_dynamicBody;
     bodyDef.position = b2Vec2(static_cast<float>(utility::toMeter(position.x)), static_cast<float>(utility::toMeter(position.y)));
-    bodyDef.angle = element->FloatAttribute("angle");
+    bodyDef.angle = utility::toRadian<float, float>(element->FloatAttribute("angle"));
     bodyDef.fixedRotation = element->BoolAttribute("fixedRotation");
     bodyDef.angularDamping = element->BoolAttribute("angularDamping");
     LevelFileLoader::parseKinematics(element, entity.get());

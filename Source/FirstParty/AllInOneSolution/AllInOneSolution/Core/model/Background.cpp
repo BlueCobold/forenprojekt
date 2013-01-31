@@ -52,10 +52,10 @@ float Background::getValueOf(const std::string& name) const
     return m_updatingAni->getValueOf(name);
 }
 
-void Background::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Background::draw(const DrawParameter& param)
 {
-    GraphicalObject::draw(target, states);
+    GraphicalObject::draw(param);
 
     for(auto layer = m_layers.begin(); layer != m_layers.end(); ++layer)
-        (*layer)->draw(target, states);
+        (*layer)->draw(param);
 }

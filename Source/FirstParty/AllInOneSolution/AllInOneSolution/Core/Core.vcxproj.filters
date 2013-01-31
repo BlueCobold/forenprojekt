@@ -61,11 +61,11 @@
     <ClCompile Include="model\SoundObject.cpp">
       <Filter>Sources\model</Filter>
     </ClCompile>
-    <ClCompile Include="model\AlphaFadedGraphics.cpp">
-      <Filter>Sources\model</Filter>
-    </ClCompile>
     <ClCompile Include="LoadLevelState.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering\transitions\AlphaTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -171,9 +171,6 @@
     <ClInclude Include="model\Entity.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
-    <ClInclude Include="model\GraphicalObject.hpp">
-      <Filter>Headers\model</Filter>
-    </ClInclude>
     <ClInclude Include="model\Level.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
@@ -195,14 +192,26 @@
     <ClInclude Include="model\SoundObject.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
-    <ClInclude Include="model\AlphaFadedGraphics.hpp">
-      <Filter>Headers\model</Filter>
-    </ClInclude>
     <ClInclude Include="LoadLevelState.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="StateChangeInformation.hpp">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\Drawable.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\DrawParameter.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\GraphicalObject.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\Transition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\AlphaTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +253,18 @@
     </Filter>
     <Filter Include="Sources\animation">
       <UniqueIdentifier>{78c81f4f-30be-49c1-8df7-ec1ba111d3a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\rendering">
+      <UniqueIdentifier>{8f910ab8-7b56-458a-85ab-f377ac98f07c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\rendering\transitions">
+      <UniqueIdentifier>{acb536c9-9eb9-4df7-afb3-a6e40e801964}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\rendering">
+      <UniqueIdentifier>{e0f806b4-001a-4391-af88-bc2fc06dd47b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\rendering\transitions">
+      <UniqueIdentifier>{dafee3bd-2f74-4c28-84de-e0c4d161420c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

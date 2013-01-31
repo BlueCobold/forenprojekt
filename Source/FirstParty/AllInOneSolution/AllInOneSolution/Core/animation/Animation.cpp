@@ -77,9 +77,9 @@ const sf::IntRect Animation::getTextureRect() const
     return sf::IntRect(static_cast<int>(m_frame * m_frameWidth + m_sourceOffset.x), static_cast<int>(m_sourceOffset.y), m_frameWidth, m_frameHeight);
 }
 
-void Animation::draw(sf::RenderTarget& target, sf::RenderStates states) const
+void Animation::draw(const DrawParameter& param)
 {
-    target.draw(m_sprite, states);
+    param.getTarget().draw(m_sprite);
 }
 
 void Animation::bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y)
