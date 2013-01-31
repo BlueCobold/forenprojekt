@@ -5,14 +5,13 @@
 
 #include "../animation/Animation.hpp"
 #include "AnimatedGraphics.hpp"
-
-#include <SFML/Graphics/Drawable.hpp>
+#include "Drawable.hpp"
 
 #include <memory>
 #include <vector>
 
 /// This class defines typical behavior of graphical objects
-class GraphicalObject : public sf::Drawable
+class GraphicalObject : public Drawable
 {
 private:
 
@@ -20,11 +19,11 @@ private:
 
 public:
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
+    virtual void draw(const DrawParameter& param)
     {
         for(auto animation = m_animations.begin(); animation != m_animations.end(); ++animation)
             if((*animation) != nullptr)
-                (*animation)->draw(target, states);
+                (*animation)->draw(param);
     }
 
     void bindAnimation(std::unique_ptr<Animation> animation)

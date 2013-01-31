@@ -52,9 +52,9 @@ App::App(Config& config) :
     m_fpsText.setCharacterSize(30);
     m_fpsText.setPosition(10, 10);
 
-	m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config))); 
-	m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
-	m_stateManager.setState(LoadLevelStateId);
+    m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config))); 
+    m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
+    m_stateManager.setState(LoadLevelStateId);
 }
 
 void App::run()
@@ -204,6 +204,4 @@ void App::adjustVideoMode(sf::VideoMode& mode)
         if(mode.height > sf::VideoMode::getDesktopMode().height)
             mode.height = sf::VideoMode::getDesktopMode().height;
     }
-
-    std::cout << mode.width << "," << mode.height << std::endl;
 }

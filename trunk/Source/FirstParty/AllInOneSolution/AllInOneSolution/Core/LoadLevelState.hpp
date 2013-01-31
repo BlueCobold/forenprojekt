@@ -5,10 +5,10 @@
 
 #include "State.hpp"
 #include "model/Level.hpp"
-#include "model\AlphaFadedGraphics.hpp"
+#include "rendering/transitions/Transition.hpp"
 
 #include <SFML/System/Clock.hpp>
-#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
 
 #include <memory> // unique_ptr
 
@@ -24,13 +24,14 @@ public:
 
     StateChangeInformation update();
     void draw();
-	void onEnter(void *enterInformation);
+    void onEnter(void *enterInformation);
 
 private:
 
     Level *m_level;
-	std::unique_ptr<AlphaFadedGraphics> m_alphaFadedScreen;
-	sf::Clock m_frametime;
+    std::unique_ptr<Transition> m_fadedScreen;
+    sf::Clock m_frametime;
+    sf::RenderTexture m_texture;
 };
 
 #endif // LOADLEVELSTATE_HPP

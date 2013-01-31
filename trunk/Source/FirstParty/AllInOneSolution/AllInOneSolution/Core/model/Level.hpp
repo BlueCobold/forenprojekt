@@ -8,6 +8,7 @@
 #include "Background.hpp"
 #include "../animation/TimedObject.hpp"
 #include "../ContactFilter.hpp"
+#include "../rendering/Drawable.hpp"
 #include "../ScrollView.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
@@ -22,11 +23,6 @@ class Config;
 
 class ResourceManager;
 
-namespace sf
-{
-    class RenderWindow;
-}
-
 namespace tinyxml2
 {
     class XMLDocument;
@@ -35,7 +31,7 @@ namespace tinyxml2
 
 /// Manages the different levels and is
 /// also resposible for loading them.
-class Level : public TimedObject
+class Level : public TimedObject, public Drawable
 {
 public:
     /// Construct a level from the given level number
@@ -43,8 +39,8 @@ public:
     ~Level();
 
     virtual void restartAt(const float time);
-    void update(const float dt, sf::RenderWindow& screen);
-    void draw(sf::RenderWindow& screen) const;
+    void update(const float dt, sf::RenderTarget& screen);
+    void draw(const DrawParameter& param);
 
     /// Return the level number
     const unsigned int number();

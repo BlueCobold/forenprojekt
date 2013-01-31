@@ -18,7 +18,7 @@ public:
 		Adjust the view of the given render window. 
 		scrollvec is the ball's position.
 	*/
-	void adjustView(const sf::Vector2f& scrollvec, sf::RenderWindow& window);
+    void adjustView(const sf::Vector2f& scrollvec, sf::RenderTarget& window);
 
 	void setViewSize(const sf::Vector2u& v);
 	void setLevelSize(const sf::Vector2u& v);

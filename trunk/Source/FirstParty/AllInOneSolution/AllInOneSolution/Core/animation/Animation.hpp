@@ -4,18 +4,18 @@
 #define ANIMATION_HPP
 
 #include "provider/ValueProvider.hpp"
+#include "../rendering/Drawable.hpp"
 
 #include <memory> // unique_ptr
 
 #include "VariableHolder.hpp"
 
-#include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-class Animation : sf::Drawable, public VariableHolder
+class Animation : Drawable, public VariableHolder
 {
 public:
 
@@ -36,7 +36,7 @@ public:
     void bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y);
     void bindRotationController(std::unique_ptr<ValueProvider> provider);
 
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    void draw(const DrawParameter& param);
 
 private:
 
