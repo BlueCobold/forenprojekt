@@ -8,4 +8,4 @@ This page lists the number of mockups for blending over from one game-stage to a
 
 == Vertical Stripes ==
 
-https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/vertical_stripes.jpg
+https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/vertical_stripes.gif
