@@ -35,3 +35,8 @@ https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graph
 The new scene will be blended over the old by using a growing circle which limits the view:
 
 https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/growing_circle.gif
+
+== Rotating squares ==
+The new scene will be split in squares which rotate from -90° to 0° while changing transparency from fully transparent to fully opaque:
+
+https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/rotating_squares.gif
