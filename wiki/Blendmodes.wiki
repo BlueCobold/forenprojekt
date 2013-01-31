@@ -6,6 +6,32 @@
 This page lists the number of mockups for blending over from one game-stage to another.
 
 
+== Alpha Blend ==
+The next scene will just be alpha-blended over the current scene:
+
+https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/alpha_blend.gif
+
 == Vertical Stripes ==
+The new scene will expand as vertical stripes in vertical stripes:
 
 https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/vertical_stripes.gif
+
+== Vertical Sliding Stripes ==
+The old scene will be slided up and down in stripes and the new scene will be attached to these stripes and slide in:
+
+https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/vertical_stripes_up_down.gif
+
+== Horizontal Halves ==
+The old scene will be slided sidewards in two bars, beneath the new scene will become visible:
+
+https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/horizontal_halves.gif
+
+== Growing Rectangle ==
+The new scene will be blended over the old by using a growing rectangle which limits the view:
+
+https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/growing_rect.gif
+
+== Growing Circle ==
+The new scene will be blended over the old by using a growing circle which limits the view:
+
+https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/growing_circle.gif
