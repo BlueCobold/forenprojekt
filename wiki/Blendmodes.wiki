@@ -7,7 +7,7 @@ This page lists the number of mockups for blending over from one game-stage to a
 
 
 == Alpha Blend ==
-The next scene will just be alpha-blended over the current scene:
+[implemented] The next scene will just be alpha-blended over the current scene:
 
 https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/alpha_blend.gif
 
