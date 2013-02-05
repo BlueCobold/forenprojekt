@@ -8,8 +8,11 @@
 #include "Background.hpp"
 #include "../animation/TimedObject.hpp"
 #include "../ContactFilter.hpp"
+#include "../ContactListener.hpp"
 #include "../rendering/Drawable.hpp"
 #include "../ScrollView.hpp"
+#include "SoundManager.hpp"
+
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -68,6 +71,8 @@ private:
 
     ResourceManager& m_resourceManager;
 
+    SoundManager m_soundManager;
+
     unsigned int m_number;
 
     std::vector<std::unique_ptr<Entity>> m_entities;
@@ -78,6 +83,7 @@ private:
     std::unique_ptr<Background> m_background;
 
     ContactFilter m_contactFilter;
+    ContactListener m_contactListener;
 
     float m_timeStep;
     int m_velocityIterations;

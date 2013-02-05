@@ -34,7 +34,8 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_timeStep(1.f / 60.f),
     m_velocityIterations(4),
     m_positionIterations(4),
-    m_config(config)
+    m_config(config),
+    m_soundManager(resourceManager)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -69,6 +70,8 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         else
             ++it;
     }
+
+    m_soundManager.update();
 
     m_timeStep =  elapsedTime - m_lastTime;
     m_velocityIterations = std::max(1, static_cast<int>(4 * m_timeStep * 60.0f));
@@ -276,6 +279,7 @@ bool Level::load()
     tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
     m_world.SetGravity(b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y")));
     m_world.SetContactFilter(&m_contactFilter);
+    m_world.SetContactListener(&m_contactListener);
 
     // setup scrollview
     m_scrollView.setLevelSize(sf::Vector2u(
@@ -353,7 +357,7 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
 
     // Load sound
     if(xml->FirstChildElement("sound") != nullptr)
-        entity->bindSoundBuffer(LevelFileLoader::parseSound(xml->FirstChildElement("sound"), m_resourceManager));
+        entity->bindSound(std::string(xml->FirstChildElement("sound")->Attribute("name")), &m_soundManager);
 
     // Load body
     element = physic->FirstChildElement("body");

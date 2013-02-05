@@ -58,14 +58,20 @@
     <ClCompile Include="model\ParallaxLayer.cpp">
       <Filter>Sources\model</Filter>
     </ClCompile>
-    <ClCompile Include="model\SoundObject.cpp">
-      <Filter>Sources\model</Filter>
-    </ClCompile>
     <ClCompile Include="LoadLevelState.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\AlphaTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="model\SoundManager.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="model\SoundObject.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="ContactListener.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,9 +195,6 @@
     <ClInclude Include="model\ParallaxLayer.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
-    <ClInclude Include="model\SoundObject.hpp">
-      <Filter>Headers\model</Filter>
-    </ClInclude>
     <ClInclude Include="LoadLevelState.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -212,6 +215,15 @@
     </ClInclude>
     <ClInclude Include="rendering\transitions\AlphaTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="model\SoundManager.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\SoundObject.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="ContactListener.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

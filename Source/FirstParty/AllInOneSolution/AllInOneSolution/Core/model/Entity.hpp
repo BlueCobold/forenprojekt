@@ -27,6 +27,7 @@ private:
     bool m_collideWithBall;
     Animation* m_updatingAni;
 
+
 public:
 
     Entity(Type type);
