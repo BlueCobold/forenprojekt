@@ -3,26 +3,22 @@
 #ifndef SOUND_OBJECT
 #define SOUND_OBJECT
 
-#include <SFML/Audio/Sound.hpp>
-#include <SFML/Audio/SoundBuffer.hpp>
+#include "SoundManager.hpp"
 
-/// This class is used to be a container and a manager for a sound for a single entity
+/// This class is used to be link to the sound manager
 
 class SoundObject
 {
 public:
 
-    void bindSoundBuffer(sf::SoundBuffer* sound);
-
-    void play();
-
-    void pause();
-
-    void stop();
-
+    void bindSound(const std::string& key, SoundManager* soundManager);
+    SoundManager*  getSoundManager();
+    std::string getKey();
 
 private:
-    sf::Sound m_sound;
+    
+    std::string m_key;
+    SoundManager* m_soundManager;
 };
 
 #endif // SOUND_OBJECT

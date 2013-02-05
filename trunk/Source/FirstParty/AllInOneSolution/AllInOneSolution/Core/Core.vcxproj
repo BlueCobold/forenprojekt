@@ -91,6 +91,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="ContactFilter.cpp" />
+    <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="LoadLevelState.cpp" />
@@ -100,6 +101,7 @@
     <ClCompile Include="model\Level.cpp" />
     <ClCompile Include="model\ParallaxLayer.cpp" />
     <ClCompile Include="model\PhysicalObject.cpp" />
+    <ClCompile Include="model\SoundManager.cpp" />
     <ClCompile Include="model\SoundObject.cpp" />
     <ClCompile Include="model\Teeter.cpp" />
     <ClCompile Include="PlayState.cpp" />
@@ -134,17 +136,19 @@
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="ContactFilter.hpp" />
+    <ClInclude Include="ContactListener.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />
     <ClInclude Include="model\Ball.hpp" />
     <ClInclude Include="model\Entity.hpp" />
+    <ClInclude Include="model\SoundManager.hpp" />
+    <ClInclude Include="model\SoundObject.hpp" />
     <ClInclude Include="rendering\GraphicalObject.hpp" />
     <ClInclude Include="model\Level.hpp" />
     <ClInclude Include="model\ParallaxLayer.hpp" />
     <ClInclude Include="model\PhysicalObject.hpp" />
-    <ClInclude Include="model\SoundObject.hpp" />
     <ClInclude Include="model\Teeter.hpp" />
     <ClInclude Include="PlayState.hpp" />
     <ClInclude Include="rendering\Drawable.hpp" />

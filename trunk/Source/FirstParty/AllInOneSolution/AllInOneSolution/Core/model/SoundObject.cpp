@@ -1,22 +1,17 @@
 #include "SoundObject.hpp"
 
-void SoundObject::bindSoundBuffer(sf::SoundBuffer* soundBuffer)
+void SoundObject::bindSound(const std::string& key, SoundManager* soundManager)
 {
-    m_sound.setBuffer(*soundBuffer);
+    m_soundManager = soundManager;
+    m_key = key;
 }
 
-
-void SoundObject::play()
+std::string SoundObject::getKey()
 {
-    m_sound.play();
+    return m_key;
 }
 
-void SoundObject::pause()
+SoundManager* SoundObject::getSoundManager()
 {
-    m_sound.pause();
-}
-
-void SoundObject::stop()
-{
-    m_sound.stop();
+    return m_soundManager;
 }
