@@ -1,0 +1,160 @@
+<bitmapfont>
+    <image = "BitmapfontGold.png"> </image>
+    <height = 17> </height>
+    <glyphe = "A">
+         <x = 0> </x>
+         <y = 0> </y>
+         <width = 11> </width>
+    </glyphe>
+
+    <glyphe = "B">
+         <x = 13> </x>
+         <y = 0> </y>
+         <width = 9> </width>
+    </glyphe>
+
+    <glyphe = "C">
+         <x = 24> </x>
+         <y = 0> </y>
+         <width = 8> </width>
+    </glyphe>
+
+    <glyphe = "D">
+         <x = 34> </x>
+         <y = 0> </y>
+         <width = 10> </width>
+    </glyphe>
+
+    <glyphe = "E">
+         <x = 46> </x>
+         <y = 0> </y>
+         <width = 7> </width>
+    </glyphe>
+
+    <glyphe = "F">
+         <x = 55> </x>
+         <y = 0> </y>
+         <width = 6> </width>
+    </glyphe>
+
+    <glyphe = "G">
+         <x = 64> </x>
+         <y = 0> </y>
+         <width = 10> </width>
+    </glyphe>
+
+    <glyphe = "H">
+         <x = 76> </x>
+         <y = 0> </y>
+         <width = 9> </width>
+    </glyphe>
+
+    <glyphe = "I">
+         <x = 0> </x>
+         <y = 20> </y>
+         <width = 3> </width>
+    </glyphe>
+
+    <glyphe = "J">
+         <x = 5> </x>
+         <y = 20> </y>
+         <width = 5> </width>
+    </glyphe>
+
+    <glyphe = "K">
+         <x = 12> </x>
+         <y = 20> </y>
+         <width = 9> </width>
+    </glyphe>
+
+    <glyphe = "L">
+         <x = 23> </x>
+         <y = 20> </y>
+         <width = 7> </width>
+    </glyphe>
+
+    <glyphe = "M">
+         <x = 31> </x>
+         <y = 20> </y>
+         <width = 14> </width>
+    </glyphe>
+
+    <glyphe = "N">
+         <x = 48> </x>
+         <y = 20> </y>
+         <width = 10> </width>
+    </glyphe>
+
+    <glyphe = "O">
+         <x = 61> </x>
+         <y = 20> </y>
+         <width = 11> </width>
+    </glyphe>
+
+    <glyphe = "P">
+         <x = 74> </x>
+         <y = 20> </y>
+         <width = 8> </width>
+    </glyphe>
+
+    <glyphe = "Q">
+         <x = 0> </x>
+         <y = 36> </y>
+         <width = 12> </width>
+    </glyphe>
+
+    <glyphe = "R">
+         <x = 13> </x>
+         <y = 36> </y>
+         <width = 9> </width>
+    </glyphe>
+
+    <glyphe = "S">
+         <x = 24> </x>
+         <y = 36> </y>
+         <width = 7> </width>
+    </glyphe>
+
+    <glyphe = "T">
+         <x = 32> </x>
+         <y = 36> </y>
+         <width = 9> </width>
+    </glyphe>
+
+    <glyphe = "U">
+         <x = 42> </x>
+         <y = 36> </y>
+         <width = 10> </width>
+    </glyphe>
+
+    <glyphe = "V">
+         <x = 54> </x>
+         <y = 36> </y>
+         <width = 10> </width>
+    </glyphe>
+
+    <glyphe = "W">
+         <x = 64> </x>
+         <y = 36> </y>
+         <width = 16> </width>
+    </glyphe>
+
+    <glyphe = "X">
+         <x = 82> </x>
+         <y = 36> </y>
+         <width = 9> </width>
+    </glyphe>
+
+    <glyphe = "Y">
+         <x = 0> </x>
+         <y = 53> </y>
+         <width = 8> </width>
+    </glyphe>
+
+    <glyphe = "Z">
+         <x = 10> </x>
+         <y = 53> </y>
+         <width = 7> </width>
+    </glyphe>
+
+</bitmapfont>
