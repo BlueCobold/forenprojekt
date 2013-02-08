@@ -225,6 +225,9 @@
     <ClInclude Include="ContactListener.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Glyph.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

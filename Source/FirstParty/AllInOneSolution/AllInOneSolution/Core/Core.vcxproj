@@ -138,6 +138,7 @@
     <ClInclude Include="ContactFilter.hpp" />
     <ClInclude Include="ContactListener.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
+    <ClInclude Include="Glyph.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />
