@@ -1,9 +1,12 @@
 #ifndef GLYPH_HPP
 #define GLYPH_HPP
 
-#include "SFML\Graphics\Rect.hpp"
+#pragma once
+
+#include <SFML/Graphics/Rect.hpp>
 #include <iostream>
 
+/// This class discribes a single letter from a bitmap font
 class Glyph
 {
     
@@ -21,11 +24,11 @@ public:
     }
     Glyph(sf::IntRect textureRect) { m_textureRect = textureRect;}
 
-    sf::IntRect gettextureRect() {return m_textureRect;}
+    sf::IntRect getTextureRect() {return m_textureRect;}
 
-    void settextureRect(sf::IntRect textureRect) {m_textureRect = textureRect;}
+    void setTextureRect(sf::IntRect textureRect) {m_textureRect = textureRect;}
 
-    void settextureRect(int top, int left, int width, int height) 
+    void setTextureRect(int top, int left, int width, int height) 
     {
         m_textureRect.top = top;
         m_textureRect.left = left;

@@ -1,160 +1,63 @@
 <bitmapfont>
-    <image = "BitmapfontGold.png"> </image>
-    <height = 17> </height>
-    <glyphe = "A">
-         <x = 0> </x>
-         <y = 0> </y>
-         <width = 11> </width>
-    </glyphe>
+   
+    <image name = "BitmapfontGold" />
+   
+    <height value="17" />
+    
+    <glyphs>
 
-    <glyphe = "B">
-         <x = 13> </x>
-         <y = 0> </y>
-         <width = 9> </width>
-    </glyphe>
+        <glyph name = "A" x = "0" y = "0" width="11" />
 
-    <glyphe = "C">
-         <x = 24> </x>
-         <y = 0> </y>
-         <width = 8> </width>
-    </glyphe>
+        <glyph name = "B" x = "13" y = "0" width = "9" />
 
-    <glyphe = "D">
-         <x = 34> </x>
-         <y = 0> </y>
-         <width = 10> </width>
-    </glyphe>
+        <glyph name = "C" x = "24" y= "0" width ="8" />
 
-    <glyphe = "E">
-         <x = 46> </x>
-         <y = 0> </y>
-         <width = 7> </width>
-    </glyphe>
+        <glyph name = "D" x = "34" y= "0" width ="10" />
 
-    <glyphe = "F">
-         <x = 55> </x>
-         <y = 0> </y>
-         <width = 6> </width>
-    </glyphe>
+        <glyph name = "E" x = "46" y= "0" width ="7" />
 
-    <glyphe = "G">
-         <x = 64> </x>
-         <y = 0> </y>
-         <width = 10> </width>
-    </glyphe>
+        <glyph name = "F" x = "55" y= "0" width ="6" />
 
-    <glyphe = "H">
-         <x = 76> </x>
-         <y = 0> </y>
-         <width = 9> </width>
-    </glyphe>
+        <glyph name = "G" x = "64" y= "0" width ="10" />
 
-    <glyphe = "I">
-         <x = 0> </x>
-         <y = 20> </y>
-         <width = 3> </width>
-    </glyphe>
+        <glyph name = "H" x = "76" y= "0" width ="9" />
 
-    <glyphe = "J">
-         <x = 5> </x>
-         <y = 20> </y>
-         <width = 5> </width>
-    </glyphe>
+        <glyph name = "I" x = "0" y= "20" width ="3" />
 
-    <glyphe = "K">
-         <x = 12> </x>
-         <y = 20> </y>
-         <width = 9> </width>
-    </glyphe>
+        <glyph name = "J" x = "5" y= "20" width ="5" />
 
-    <glyphe = "L">
-         <x = 23> </x>
-         <y = 20> </y>
-         <width = 7> </width>
-    </glyphe>
+        <glyph name = "K" x = "12" y= "20" width ="9" />
 
-    <glyphe = "M">
-         <x = 31> </x>
-         <y = 20> </y>
-         <width = 14> </width>
-    </glyphe>
+        <glyph name = "L" x = "23" y= "20" width ="7" />
 
-    <glyphe = "N">
-         <x = 48> </x>
-         <y = 20> </y>
-         <width = 10> </width>
-    </glyphe>
+        <glyph name = "M" x = "31" y= "20" width ="14" />
 
-    <glyphe = "O">
-         <x = 61> </x>
-         <y = 20> </y>
-         <width = 11> </width>
-    </glyphe>
+        <glyph name = "N" x = "48" y= "20" width ="10" />
 
-    <glyphe = "P">
-         <x = 74> </x>
-         <y = 20> </y>
-         <width = 8> </width>
-    </glyphe>
+        <glyph name = "O" x = "61" y= "20" width ="11" />
 
-    <glyphe = "Q">
-         <x = 0> </x>
-         <y = 36> </y>
-         <width = 12> </width>
-    </glyphe>
+        <glyph name = "P" x = "74" y= "20" width ="8" />
 
-    <glyphe = "R">
-         <x = 13> </x>
-         <y = 36> </y>
-         <width = 9> </width>
-    </glyphe>
+        <glyph name = "Q" x = "0" y= "36" width ="12" />
 
-    <glyphe = "S">
-         <x = 24> </x>
-         <y = 36> </y>
-         <width = 7> </width>
-    </glyphe>
+        <glyph name = "R" x = "13" y= "36" width ="9" />
 
-    <glyphe = "T">
-         <x = 32> </x>
-         <y = 36> </y>
-         <width = 9> </width>
-    </glyphe>
+        <glyph name = "S" x = "24" y= "36" width ="7" />
 
-    <glyphe = "U">
-         <x = 42> </x>
-         <y = 36> </y>
-         <width = 10> </width>
-    </glyphe>
+        <glyph name = "T" x = "32" y= "36" width ="9" />
 
-    <glyphe = "V">
-         <x = 54> </x>
-         <y = 36> </y>
-         <width = 10> </width>
-    </glyphe>
+        <glyph name = "U" x = "42" y= "36" width ="10" />
 
-    <glyphe = "W">
-         <x = 64> </x>
-         <y = 36> </y>
-         <width = 16> </width>
-    </glyphe>
+        <glyph name = "V" x = "54" y= "36" width ="10" />
 
-    <glyphe = "X">
-         <x = 82> </x>
-         <y = 36> </y>
-         <width = 9> </width>
-    </glyphe>
+        <glyph name = "W" x = "64" y= "36" width ="16" />
 
-    <glyphe = "Y">
-         <x = 0> </x>
-         <y = 53> </y>
-         <width = 8> </width>
-    </glyphe>
+        <glyph name = "X" x = "82" y= "36" width ="9" />
 
-    <glyphe = "Z">
-         <x = 10> </x>
-         <y = 53> </y>
-         <width = 7> </width>
-    </glyphe>
+        <glyph name = "Y" x = "0" y= "53" width ="8" />
+
+        <glyph name = "Z" x = "10" y= "53" width ="7" />
+
+    </glyphs>
 
 </bitmapfont>

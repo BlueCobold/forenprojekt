@@ -73,6 +73,9 @@
     <ClCompile Include="ContactListener.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="BitmapFont.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -226,6 +229,9 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Glyph.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="BitmapFont.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
