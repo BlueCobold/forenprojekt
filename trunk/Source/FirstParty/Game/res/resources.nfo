@@ -15,6 +15,7 @@
 	<texture name="ballshade" path="assets/ball/ballshade.png" smooth="true" />
 	<texture name="teeter_wooden" path="assets/teeter/wood/small.png" smooth="true" />
 	<texture name="target" path="assets/target/target.png" smooth="true" />
+	<texture name="bitmapfontGold" path="../bitmapfont/BitmapfontGold.png" smooth="true" />
 </textures>
 <fonts>
 	<font name="visitor" path="visitor.ttf" />
@@ -22,3 +23,6 @@
 <sounds>
 	<sound name="test" path="test.wav" />
 </sounds>
+<bitmapfonts>
+<bitmapfont name="gold" path="bitmapfontGold.xml" />
+</bitmapfonts>

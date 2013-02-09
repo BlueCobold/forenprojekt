@@ -19,6 +19,26 @@ ResourceManager::ResourceManager()
     parseSounds(doc);
     parseTextures(doc);
     parseFonts(doc);
+    parseBitmapFonts(doc);
+}
+
+BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
+{
+    auto bitmapFont = m_bitmapFontKeys.find(key);
+    
+    if(bitmapFont != m_bitmapFontKeys.end() && bitmapFont->first == key)
+    {
+        if(m_bitmapFonts.exists(bitmapFont->first))
+            return m_bitmapFonts.get(bitmapFont->first);
+        else
+        {
+            if(m_bitmapFonts.load(bitmapFont->first,
+                std::bind(&ResourceManager::loadBitmapFont, bitmapFont->second, this)))
+                return m_bitmapFonts.get(bitmapFont->first);
+        }
+    }
+
+    return nullptr;
 }
 
 sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
@@ -124,5 +144,17 @@ void ResourceManager::parseSounds(tinyxml2::XMLDocument& doc)
     {
         m_soundBufferKeys.insert(std::make_pair<std::string, std::string>(
             std::string(soundIterator->Attribute("name")), std::string(soundIterator->Attribute("path"))));
+    }
+}
+
+void ResourceManager::parseBitmapFonts(tinyxml2::XMLDocument& doc)
+{
+    tinyxml2::XMLElement* bitmapFonts = doc.FirstChildElement("bitmapfonts");
+
+    for(auto it = bitmapFonts->FirstChildElement("bitmapfont");
+        it != nullptr; it = it->NextSiblingElement("bitmapfont"))
+    {
+        m_bitmapFontKeys.insert(std::make_pair<std::string, std::string>(
+            std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
     }
 }

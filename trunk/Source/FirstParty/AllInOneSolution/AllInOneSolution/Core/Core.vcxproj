@@ -89,6 +89,7 @@
   <ItemGroup>
     <ClCompile Include="animation\Animation.cpp" />
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="BitmapFont.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="ContactFilter.cpp" />
     <ClCompile Include="ContactListener.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="BitmapFont.hpp" />
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="ContactFilter.hpp" />
     <ClInclude Include="ContactListener.hpp" />
