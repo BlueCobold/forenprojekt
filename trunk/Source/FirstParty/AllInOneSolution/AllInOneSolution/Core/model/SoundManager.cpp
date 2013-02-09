@@ -1,5 +1,7 @@
 #include "SoundManager.hpp"
 
+#include <vector>
+
 #include <SFML/Audio/SoundBuffer.hpp>
 
 SoundManager::SoundManager(ResourceManager& resourceManager)
@@ -9,14 +11,27 @@ SoundManager::SoundManager(ResourceManager& resourceManager)
 
 void SoundManager::update()
 {
-    for(auto it = m_sounds.begin(); it != m_sounds.end(); it++)
+    if(!m_sounds.empty())
     {
-        it->play();
-    }
+        if(m_sounds.front().second.getStatus() == sf::Sound::Paused)
+            m_sounds.front().second.play();
+        if(m_sounds.front().second.getStatus() == sf::Sound::Stopped)
+        {
+            m_soundKeys.erase(m_sounds.front().first);
+            m_sounds.pop();
+        }
+    }         
 }
 
 void SoundManager::play(const std::string& key)
 {
-    m_sounds.push_front(sf::Sound(*m_resourceManager.getSoundBuffer(key)));
+    if(m_soundKeys.count(key) <= 0)
+    {
+        sf::Sound sound(*m_resourceManager.getSoundBuffer(key));
+        m_sounds.push(std::make_pair(key, sound));
+        m_soundKeys.insert(std::pair<std::string, std::string>(key,key));
+        m_sounds.front().second.play();
+        m_sounds.front().second.pause();
+    }
 }
 
