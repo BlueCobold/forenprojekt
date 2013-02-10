@@ -6,6 +6,7 @@
 #include "Glyph.hpp"
 
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 
 #include <map>
 
@@ -21,6 +22,8 @@ class BitmapFont
 public:
 
     bool loadFromFile(const std::string& path, ResourceManager& resourceManager);
+    sf::Sprite getGlyphBySprite(const char key);
+    Glyph getGlyph(const char key);
 
 private:
     bool validate(const tinyxml2::XMLDocument& document);
