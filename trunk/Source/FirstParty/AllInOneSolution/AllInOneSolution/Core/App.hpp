@@ -5,6 +5,7 @@
 
 #include "resources/ResourceManager.hpp"
 #include "StateManager.hpp"
+#include "LineLabel.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
@@ -45,6 +46,9 @@ private:
 
     sf::RenderWindow m_screen;
     sf::Clock m_clock;
+
+    BitmapFont m_bitmapfont;
+    LineLabel m_label;
 
     Config& m_config;
     std::string m_windowTitle;

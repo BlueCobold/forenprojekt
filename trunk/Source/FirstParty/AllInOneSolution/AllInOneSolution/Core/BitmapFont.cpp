@@ -19,19 +19,16 @@ bool BitmapFont::loadFromFile(const std::string& path, ResourceManager& resource
     }
 
     tinyxml2::XMLElement* bitmapfont = doc.FirstChildElement("bitmapfont");
-    height = bitmapfont->FirstChildElement("height")->IntAttribute("value");
-
-    for(auto it = bitmapfont->FirstChildElement("glyphs"); it != nullptr; it = it->NextSiblingElement("glyphs"))
-    {
-        if(m_glyphs.count((char)it->Attribute("name") <= 0))
-            m_glyphs.insert
-            ( 
-                std::make_pair<char, Glyph>((char)it->Attribute("name"), 
-                Glyph( it->IntAttribute("x"), it->IntAttribute("y"), it->IntAttribute("width"), height))
-            );
-    }
-
     m_texture = *resourceManager.getTexture(bitmapfont->FirstChildElement("image")->Attribute("name"));
+    height = bitmapfont->FirstChildElement("height")->IntAttribute("value"); 
+    for(auto it = bitmapfont->FirstChildElement("glyphs")->FirstChildElement("glyph"); it != nullptr; it = it->NextSiblingElement("glyph"))
+    {
+        m_glyphs.insert
+        ( 
+            std::make_pair<char, Glyph>(it->Attribute("name")[0], 
+            Glyph( it->IntAttribute("y"),it->IntAttribute("x"), it->IntAttribute("width"), height))
+        );
+    }
 
     return true;
 }
@@ -49,7 +46,7 @@ bool BitmapFont::validate(const tinyxml2::XMLDocument& document)
 
 sf::Sprite BitmapFont::getGlyphBySprite(const char key)
 {
-    if(m_glyphs.count(key) < 0)
+    if(m_glyphs.count(key))
         return sf::Sprite(m_texture, m_glyphs.at(key).getTextureRect());
 
     return sf::Sprite();
@@ -57,7 +54,7 @@ sf::Sprite BitmapFont::getGlyphBySprite(const char key)
 
 Glyph BitmapFont::getGlyph(const char key)
 {
-    if(m_glyphs.count(key) < 0)
+    if(m_glyphs.count(key))
         return m_glyphs.at(key);
     
     return Glyph(0, 0, 0, 0);
