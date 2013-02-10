@@ -55,6 +55,13 @@ App::App(Config& config) :
     m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config))); 
     m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
     m_stateManager.setState(LoadLevelStateId);
+
+    m_bitmapfont = *m_resourceManager.getBitmapFont("gold");
+    m_label.setBitmapFont(m_bitmapfont);
+    m_label.setPosition(300, 300);
+    m_label.setRotation(0);
+    m_label.setText("HELLO");
+
 }
 
 void App::run()
@@ -85,6 +92,8 @@ void App::draw()
 
     if(m_showFps)
         m_screen.draw(m_fpsText);
+
+    m_label.draw(DrawParameter(m_screen));
         
     m_screen.display();
 }
