@@ -95,6 +95,7 @@
     <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
+    <ClCompile Include="LineLabel.cpp" />
     <ClCompile Include="LoadLevelState.cpp" />
     <ClCompile Include="model\Background.cpp" />
     <ClCompile Include="model\Ball.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="ContactListener.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="Glyph.hpp" />
+    <ClInclude Include="LineLabel.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />

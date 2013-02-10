@@ -46,3 +46,19 @@ bool BitmapFont::validate(const tinyxml2::XMLDocument& document)
         
     return true;
 }
+
+sf::Sprite BitmapFont::getGlyphBySprite(const char key)
+{
+    if(m_glyphs.count(key) < 0)
+        return sf::Sprite(m_texture, m_glyphs.at(key).getTextureRect());
+
+    return sf::Sprite();
+}
+
+Glyph BitmapFont::getGlyph(const char key)
+{
+    if(m_glyphs.count(key) < 0)
+        return m_glyphs.at(key);
+    
+    return Glyph(0, 0, 0, 0);
+}

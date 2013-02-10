@@ -76,6 +76,7 @@
     <ClCompile Include="BitmapFont.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="LineLabel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -234,6 +235,7 @@
     <ClInclude Include="BitmapFont.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="LineLabel.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
