@@ -40,6 +40,14 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
     load();
+
+    m_fpsShow = config.get<bool>("ShowFps");
+
+    m_bitmapfont = *m_resourceManager.getBitmapFont("gold");
+    m_label.setBitmapFont(m_bitmapfont);
+    m_label.setPosition(10, 10);
+    m_label.setRotation(0);
+    m_label.setText(utility::toString<int>(0));
 }
 
 Level::~Level()
@@ -94,6 +102,10 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     if(m_background != nullptr)
         m_background->update(elapsedTime, screen.getView());
 
+    m_fpsCounter.update();
+    m_label.setPosition(m_scrollView.toGlobalCoords(sf::Vector2u(10,10)));
+    m_label.setText(utility::toString<int>(m_fpsCounter.getFPS()));
+
     if(m_debugDraw)
     {
         DebugDraw d(screen);
@@ -110,6 +122,9 @@ void Level::draw(const DrawParameter& param)
 
     for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
         it->get()->draw(param);
+
+    if(m_fpsShow)
+        m_label.draw(DrawParameter(param));
 }
 
 bool Level::load()

@@ -37,7 +37,6 @@ private:
 
     void switchDisplayMode();
 
-    void calculateFps();
     void onResize();
 
     void adjustVideoMode(sf::VideoMode& mode);
@@ -45,24 +44,14 @@ private:
 private:
 
     sf::RenderWindow m_screen;
-    sf::Clock m_clock;
-
-    BitmapFont m_bitmapfont;
-    LineLabel m_label;
 
     Config& m_config;
     std::string m_windowTitle;
     bool m_fullscreen;
     bool m_focus;
 
-    bool m_showFps;
-    int m_fps;
-    float m_frameCounter;
-
     ResourceManager m_resourceManager;
     sf::SoundBuffer* m_soundBuffer;
-
-    sf::Text m_fpsText;
 
     StateManager m_stateManager;
 

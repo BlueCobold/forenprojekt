@@ -19,15 +19,11 @@ App::App(Config& config) :
     m_windowTitle("Rickety Racket"),
     m_fullscreen(false),
     m_focus(true),
-    m_showFps(true),
-    m_fps(0),
-    m_frameCounter(0.f),
     m_soundBuffer(nullptr)
 {
     // Cache often used settings
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
-    m_showFps = m_config.get<bool>("ShowFps");
     m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
     m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
 
@@ -47,20 +43,9 @@ App::App(Config& config) :
     else
         m_screen.create(videoMode, m_windowTitle);
 
-    m_fpsText.setFont(*m_resourceManager.getFont("visitor"));
-    m_fpsText.setColor(sf::Color::Blue);
-    m_fpsText.setCharacterSize(30);
-    m_fpsText.setPosition(10, 10);
-
     m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config))); 
     m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
     m_stateManager.setState(LoadLevelStateId);
-
-    m_bitmapfont = *m_resourceManager.getBitmapFont("gold");
-    m_label.setBitmapFont(m_bitmapfont);
-    m_label.setPosition(300, 300);
-    m_label.setRotation(0);
-    m_label.setText("HELLO");
 
 }
 
@@ -75,9 +60,6 @@ void App::run()
 
 void App::update()
 {
-    calculateFps();
-    m_fpsText.setString(utility::toString<int>(m_fps));
-
     handleEvents();
     handleKeyboard();
 
@@ -89,11 +71,6 @@ void App::draw()
     m_screen.clear();
 
     m_stateManager.draw();
-
-    if(m_showFps)
-        m_screen.draw(m_fpsText);
-
-    m_label.draw(DrawParameter(m_screen));
         
     m_screen.display();
 }
@@ -118,8 +95,6 @@ void App::handleEvents()
         // Close the window
         if(event.type == sf::Event::Closed)
             m_screen.close();
-        else if((event.type == sf::Event::KeyReleased) && (event.key.code == sf::Keyboard::F))
-            m_showFps = !m_showFps;
         else if(event.type == sf::Event::LostFocus)
             m_focus = false;
         else if(event.type == sf::Event::GainedFocus)
@@ -148,17 +123,6 @@ void App::switchDisplayMode()
         m_screen.create(sf::VideoMode(videoMode), m_windowTitle);
         // Enable the cursor
         m_screen.setMouseCursorVisible(true);
-    }
-}
-
-void App::calculateFps()
-{
-    m_frameCounter++;
-    if(m_clock.getElapsedTime().asSeconds() >= 1.0f)
-    {
-        m_fps = static_cast<int>((m_frameCounter / m_clock.getElapsedTime().asSeconds()));
-        m_clock.restart();
-        m_frameCounter = 0;
     }
 }
 
