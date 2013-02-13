@@ -23,9 +23,13 @@ public:
 	void setViewSize(const sf::Vector2u& v);
 	void setLevelSize(const sf::Vector2u& v);
 
+    sf::Vector2f toGlobalCoords(const sf::Vector2u& v);
+
 private:
 	sf::Vector2u m_viewSize;  // view dimension
 	sf::Vector2u m_levelSize; // level dimension
+
+    sf::Vector2f m_viewCenter;
 };
 
 #endif

@@ -12,7 +12,8 @@
 #include "../rendering/Drawable.hpp"
 #include "../ScrollView.hpp"
 #include "SoundManager.hpp"
-
+#include "../FPSCounter.hpp"
+#include "../LineLabel.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -100,6 +101,11 @@ private:
 
 	ScrollView m_scrollView;
 	Ball* m_ball;
+
+    FPSCounter m_fpsCounter;
+    BitmapFont m_bitmapfont;
+    LineLabel m_label;
+    bool m_fpsShow;
 };
 
 #endif // LEVEL_HPP
