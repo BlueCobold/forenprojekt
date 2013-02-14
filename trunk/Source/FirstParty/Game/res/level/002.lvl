@@ -265,71 +265,71 @@ w1                            w2
                         <static value="0"/>
                     </frameindex>
                 </animation>
-            </parallax>
-			<animation texture="pastureland_clouds" width="200" height="98"><!-- small cloud -->
-				<frameindex frames="1">
-					<static value="0"/>
-				</frameindex>
-				<constants speed="15" offset="65" />
-				<position axis="x">
-					<add>
-						<static value="1650" />
-						<mul>
+				<animation texture="pastureland_clouds" width="200" height="98"><!-- small cloud -->
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+					<constants speed="15" offset="65" />
+					<position axis="x">
+						<add>
+							<static value="1650" />
 							<mul>
-								<var name="speed" />
-								<static value="-1" />
-							</mul>
-							<mod>
-								<add>
-									<time />
-									<var name="offset" />
-								</add>
 								<mul>
-									<inv>
-										<var name="speed" />
-									</inv>
-									<static value="1900" />
+									<var name="speed" />
+									<static value="-1" />
 								</mul>
-							</mod>
-						</mul>
-					</add>
-				</position>
-				<position axis="y">
-					<static value="260" />
-				</position>
-			</animation>
-			<animation texture="pastureland_clouds" width="240" height="126" srcy="98"><!-- large cloud -->
-				<frameindex frames="1">
-					<static value="0"/>
-				</frameindex>
-				<constants speed="30" offset="35" />
-				<position axis="x">
-					<add>
-						<static value="1650" />
-						<mul>
+								<mod>
+									<add>
+										<time />
+										<var name="offset" />
+									</add>
+									<mul>
+										<inv>
+											<var name="speed" />
+										</inv>
+										<static value="1900" />
+									</mul>
+								</mod>
+							</mul>
+						</add>
+					</position>
+					<position axis="y">
+						<static value="260" />
+					</position>
+				</animation>
+				<animation texture="pastureland_clouds" width="240" height="126" srcy="98"><!-- large cloud -->
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+					<constants speed="30" offset="35" />
+					<position axis="x">
+						<add>
+							<static value="1650" />
 							<mul>
-								<var name="speed" />
-								<static value="-1" />
-							</mul>
-							<mod>
-								<add>
-									<time />
-									<var name="offset" />
-								</add>
 								<mul>
-									<inv>
-										<var name="speed" />
-									</inv>
-									<static value="1900" />
+									<var name="speed" />
+									<static value="-1" />
 								</mul>
-							</mod>
-						</mul>
-					</add>
-				</position>
-				<position axis="y">
-					<static value="60" />
-				</position>
-			</animation>
+								<mod>
+									<add>
+										<time />
+										<var name="offset" />
+									</add>
+									<mul>
+										<inv>
+											<var name="speed" />
+										</inv>
+										<static value="1900" />
+									</mul>
+								</mod>
+							</mul>
+						</add>
+					</position>
+					<position axis="y">
+						<static value="60" />
+					</position>
+				</animation>
+			</parallax>
 			<parallax x="0" y="-150">
 				<animation texture="pastureland_flowers_front2" width="149" height="187" x="268" y="755" midx="68" midy="180"><!-- 02 mid flower -->
 					<frameindex frames="1">
