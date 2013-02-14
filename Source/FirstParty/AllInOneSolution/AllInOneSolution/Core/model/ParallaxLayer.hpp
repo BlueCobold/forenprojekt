@@ -11,14 +11,14 @@ class ParallaxLayer : public AnimatedGraphics
 private:
 
     Animation* m_updatingAni;
-    sf::Vector2f m_parallaxDistance;
+    sf::Vector2f m_layerSize;
 
 public:
 
-	ParallaxLayer(const sf::Vector2f& parallaxDistance);
+	ParallaxLayer(const sf::Vector2f& layerSize);
 	~ParallaxLayer();
 
-    void update(const float time, const sf::Vector2f& scrollPercent);
+    void update(const float time, const sf::View& view, const sf::Vector2u& worldSize);
 
     virtual float getValueOf(const std::string& name) const;
 };

@@ -27,17 +27,9 @@ void Background::update(const float time, const sf::View& view)
 {
     updateCurrentTime(time);
 
-    sf::Vector2f scroll = sf::Vector2f(0.5f, 0.5f);
-    float xper = (m_size.x-view.getSize().x);
-    if (fabs(xper) > FLT_EPSILON)
-        scroll.x = (view.getCenter().x - 0.5f*view.getSize().x) / xper;
-    float yper = (m_size.y-view.getSize().y);
-    if (fabs(yper)>FLT_EPSILON)
-        scroll.y = (view.getCenter().y - 0.5f*view.getSize().y) / yper;
-
     m_updatingAni = nullptr;
     for(auto layer = m_layers.begin(); layer != m_layers.end(); ++layer)
-        (*layer)->update(time, scroll);
+        (*layer)->update(time, view, m_size);
 }
 
 float Background::getValueOf(const std::string& name) const

@@ -76,8 +76,12 @@
     <ClCompile Include="BitmapFont.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="LineLabel.cpp" />
-    <ClCompile Include="FPSCounter.cpp" />
+    <ClCompile Include="FPSCounter.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="LineLabel.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -236,8 +240,12 @@
     <ClInclude Include="BitmapFont.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="LineLabel.hpp" />
-    <ClInclude Include="FPSCounter.hpp" />
+    <ClInclude Include="LineLabel.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSCounter.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
