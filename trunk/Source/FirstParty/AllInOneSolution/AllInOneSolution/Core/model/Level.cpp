@@ -232,8 +232,8 @@ bool Level::load()
             parallax = parallax->NextSiblingElement("parallax"))
         {
             std::unique_ptr<ParallaxLayer> layer(new ParallaxLayer(sf::Vector2f(
-                parallax->FloatAttribute("x"),
-                parallax->FloatAttribute("y"))));
+                parallax->FloatAttribute("width"),
+                parallax->FloatAttribute("height"))));
             for(auto anim = parallax->FirstChildElement("animation"); anim != nullptr;
                 anim = anim->NextSiblingElement("animation"))
                 layer->bindAnimation(std::move(LevelFileLoader::parseAnimation(anim, layer.get(), m_resourceManager)));

@@ -1,9 +1,8 @@
 #include "ParallaxLayer.hpp"
 #include <SFML/Graphics/RenderTarget.hpp>
 
-#include <iostream>
-ParallaxLayer::ParallaxLayer(const sf::Vector2f& parallaxDistance) :
-    m_parallaxDistance(parallaxDistance),
+ParallaxLayer::ParallaxLayer(const sf::Vector2f& layerSize) :
+    m_layerSize(layerSize),
     m_updatingAni(nullptr)
 {
 }
@@ -13,13 +12,18 @@ ParallaxLayer::~ParallaxLayer()
 {
 }
 
-void ParallaxLayer::update(const float time, const sf::Vector2f& scrollPercent)
+void ParallaxLayer::update(const float time, const sf::View& view, const sf::Vector2u& worldSize)
 {
     updateCurrentTime(time);
     
-    sf::Vector2f offset = sf::Vector2f(
-        m_parallaxDistance.x * (1 - scrollPercent.x * 2),
-        m_parallaxDistance.y * (1 - scrollPercent.y * 2));
+    sf::Vector2f diff = sf::Vector2f(worldSize.x - view.getSize().x, 
+                                     worldSize.y - view.getSize().y);
+    sf::Vector2f viewPos = view.getCenter() - 0.5f * view.getSize();
+    sf::Vector2f percent = sf::Vector2f(viewPos.x / diff.x, viewPos.y / diff.y);
+
+    sf::Vector2f offset = viewPos + sf::Vector2f(
+        -(m_layerSize.x - view.getSize().x) * percent.x,
+        -(m_layerSize.y - view.getSize().y) * percent.y);
 
     for(auto animation = getAnimations().begin(); animation != getAnimations().end(); ++animation)
     {
