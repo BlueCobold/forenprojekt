@@ -26,12 +26,7 @@ void Background::restartAt(const float time)
 void Background::update(const float time, const sf::View& view)
 {
     updateCurrentTime(time);
-    for(auto animation = getAnimations().begin(); animation != getAnimations().end(); ++animation)
-    {
-        m_updatingAni = (*animation).get();
-        (*animation)->update();
-    }
-    
+
     sf::Vector2f scroll = sf::Vector2f(0.5f, 0.5f);
     float xper = (m_size.x-view.getSize().x);
     if (fabs(xper) > FLT_EPSILON)
@@ -54,8 +49,6 @@ float Background::getValueOf(const std::string& name) const
 
 void Background::draw(const DrawParameter& param)
 {
-    GraphicalObject::draw(param);
-
     for(auto layer = m_layers.begin(); layer != m_layers.end(); ++layer)
         (*layer)->draw(param);
 }

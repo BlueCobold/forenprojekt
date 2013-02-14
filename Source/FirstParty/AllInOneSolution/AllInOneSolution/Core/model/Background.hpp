@@ -10,7 +10,7 @@
 #include <vector>
 
 /// This class will be used to bind an image which will be rendered as background
-class Background : public AnimatedGraphics
+class Background : public Drawable, public TimedObject, public VariableHandler
 {
 private:
 

@@ -228,10 +228,6 @@ bool Level::load()
         static_cast<unsigned int>(m_height))));
     if(backgroundXml != nullptr)
     {
-        for(auto element = backgroundXml->FirstChildElement("animation"); element != nullptr;
-            element = element->NextSiblingElement("animation"))
-            background->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, background.get(), m_resourceManager)));
-
         for(auto parallax = backgroundXml->FirstChildElement("parallax"); parallax != nullptr;
             parallax = parallax->NextSiblingElement("parallax"))
         {
