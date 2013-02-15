@@ -43,9 +43,10 @@ public:
     bool killed() const;
 
     void setCollideWithBall(bool value);
-    bool isCollideWithBall();
+    bool isCollideWithBall() const;
 
     virtual float getValueOf(const std::string& name) const;
+    virtual void setValueOf(const std::string& name, const float value);
 };
 
 #endif // ENTITY_HPP

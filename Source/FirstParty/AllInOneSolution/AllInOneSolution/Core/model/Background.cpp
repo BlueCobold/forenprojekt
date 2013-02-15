@@ -39,6 +39,13 @@ float Background::getValueOf(const std::string& name) const
     return m_updatingAni->getValueOf(name);
 }
 
+void Background::setValueOf(const std::string& name, const float value)
+{
+    if(m_updatingAni == nullptr)
+        throw std::runtime_error("Can't set a variable at this time.");
+    return m_updatingAni->setValueOf(name, value);
+}
+
 void Background::draw(const DrawParameter& param)
 {
     for(auto layer = m_layers.begin(); layer != m_layers.end(); ++layer)

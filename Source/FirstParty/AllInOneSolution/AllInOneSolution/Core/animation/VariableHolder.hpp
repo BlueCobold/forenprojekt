@@ -4,6 +4,7 @@
 #define VARIABLE_HOLDER_HPP
 
 #include "provider/ValueProvider.hpp"
+#include "provider/StaticProvider.hpp"
 #include "VariableHandler.hpp"
 
 #include <exception>
@@ -27,6 +28,12 @@ public:
         else
             throw std::runtime_error(std::string("The variable '") + name + std::string("' is not defined."));
         return 0;
+    }
+
+    virtual void setValueOf(const std::string& name, const float value)
+    {
+        std::unique_ptr<ValueProvider> var(new StaticProvider(value));
+        m_variables[name] = std::move(var);
     }
 
     void bindVariables(std::map<std::string, std::unique_ptr<ValueProvider>>& variables)
