@@ -25,8 +25,8 @@ bool BitmapFont::loadFromFile(const std::string& path, ResourceManager& resource
     {
         m_glyphs.insert
         ( 
-            std::make_pair<char, Glyph>(it->Attribute("name")[0], 
-            Glyph( it->IntAttribute("y"),it->IntAttribute("x"), it->IntAttribute("width"), height))
+            std::make_pair<char, sf::IntRect>(it->Attribute("name")[0], 
+            sf::IntRect(it->IntAttribute("x"), it->IntAttribute("y"), it->IntAttribute("width"), height))
         );
     }
 
@@ -44,18 +44,10 @@ bool BitmapFont::validate(const tinyxml2::XMLDocument& document)
     return true;
 }
 
-sf::Sprite BitmapFont::getGlyphBySprite(const char key)
+sf::Sprite BitmapFont::getSprite(const char key)
 {
     if(m_glyphs.count(key))
-        return sf::Sprite(m_texture, m_glyphs.at(key).getTextureRect());
+        return sf::Sprite(m_texture, m_glyphs.at(key));
 
     return sf::Sprite();
-}
-
-Glyph BitmapFont::getGlyph(const char key)
-{
-    if(m_glyphs.count(key))
-        return m_glyphs.at(key);
-    
-    return Glyph(0, 0, 0, 0);
 }

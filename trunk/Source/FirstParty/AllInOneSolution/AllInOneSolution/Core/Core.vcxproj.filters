@@ -71,8 +71,13 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="FPSCounter.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Sources\gui</Filter>
     </ClCompile>
+<<<<<<< .mine
+    <ClCompile Include="LineLabel.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+=======
     <ClCompile Include="LineLabel.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -82,6 +87,7 @@
     <ClCompile Include="model\collision\ContactListener.cpp">
       <Filter>Sources\model\collision</Filter>
     </ClCompile>
+>>>>>>> .r246
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -94,9 +100,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="StateManager.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="PlayState.hpp">
@@ -228,12 +231,17 @@
     <ClInclude Include="model\SoundObject.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
-    <ClInclude Include="Glyph.hpp">
+    <ClInclude Include="Utility.hpp">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LineLabel.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="BitmapFont.hpp">
-      <Filter>Headers</Filter>
+      <Filter>Headers\gui</Filter>
     </ClInclude>
+<<<<<<< .mine
+=======
     <ClInclude Include="LineLabel.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -257,6 +265,7 @@
     <ClInclude Include="animation\AnimatedObject.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
+>>>>>>> .r246
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -310,12 +319,21 @@
     <Filter Include="Sources\rendering\transitions">
       <UniqueIdentifier>{dafee3bd-2f74-4c28-84de-e0c4d161420c}</UniqueIdentifier>
     </Filter>
+<<<<<<< .mine
+    <Filter Include="Sources\gui">
+      <UniqueIdentifier>{fcd8490c-86da-411a-83a2-17292da26ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\gui">
+      <UniqueIdentifier>{bdfccfb4-a91a-4f04-b85f-93c3734b5063}</UniqueIdentifier>
+    </Filter>
+=======
     <Filter Include="Sources\model\collision">
       <UniqueIdentifier>{c05e86fd-1e76-45ef-be24-abf5d5f4f2cd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\model\collision">
       <UniqueIdentifier>{d910b3ee-6878-4717-af44-04072ee84fb5}</UniqueIdentifier>
     </Filter>
+>>>>>>> .r246
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Game\Config.ini">

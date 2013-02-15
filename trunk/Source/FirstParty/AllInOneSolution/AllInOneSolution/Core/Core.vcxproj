@@ -141,8 +141,11 @@
     <ClInclude Include="BitmapFont.hpp" />
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
+<<<<<<< .mine
+=======
     <ClInclude Include="FPSCounter.hpp" />
     <ClInclude Include="Glyph.hpp" />
+>>>>>>> .r246
     <ClInclude Include="LineLabel.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
