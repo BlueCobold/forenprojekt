@@ -31,9 +31,6 @@
     <ClCompile Include="ScrollView.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="ContactFilter.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="model\Teeter.cpp">
       <Filter>Sources\model</Filter>
     </ClCompile>
@@ -70,9 +67,6 @@
     <ClCompile Include="model\SoundObject.cpp">
       <Filter>Sources\model</Filter>
     </ClCompile>
-    <ClCompile Include="ContactListener.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="BitmapFont.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -81,6 +75,12 @@
     </ClCompile>
     <ClCompile Include="LineLabel.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="model\collision\ContactFilter.cpp">
+      <Filter>Sources\model\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="model\collision\ContactListener.cpp">
+      <Filter>Sources\model\collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -174,9 +174,6 @@
     <ClInclude Include="animation\VariableHandler.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
-    <ClInclude Include="ContactFilter.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="model\Background.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
@@ -231,9 +228,6 @@
     <ClInclude Include="model\SoundObject.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
-    <ClInclude Include="ContactListener.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Glyph.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -245,6 +239,12 @@
     </ClInclude>
     <ClInclude Include="FPSCounter.hpp">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="model\collision\ContactFilter.hpp">
+      <Filter>Headers\model\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="model\collision\ContactListener.hpp">
+      <Filter>Headers\model\collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +298,12 @@
     </Filter>
     <Filter Include="Sources\rendering\transitions">
       <UniqueIdentifier>{dafee3bd-2f74-4c28-84de-e0c4d161420c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\model\collision">
+      <UniqueIdentifier>{c05e86fd-1e76-45ef-be24-abf5d5f4f2cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\model\collision">
+      <UniqueIdentifier>{d910b3ee-6878-4717-af44-04072ee84fb5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

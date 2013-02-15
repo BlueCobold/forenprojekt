@@ -1,5 +1,5 @@
 #include "ContactListener.hpp"
-#include "model/Entity.hpp"
+#include "../Entity.hpp"
 
 #include <Box2D/Dynamics/Contacts/b2Contact.h>
 #include <Box2D/Dynamics/b2Fixture.h>
