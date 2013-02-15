@@ -91,8 +91,6 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="BitmapFont.cpp" />
     <ClCompile Include="Config.cpp" />
-    <ClCompile Include="ContactFilter.cpp" />
-    <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
@@ -100,6 +98,8 @@
     <ClCompile Include="LoadLevelState.cpp" />
     <ClCompile Include="model\Background.cpp" />
     <ClCompile Include="model\Ball.cpp" />
+    <ClCompile Include="model\collision\ContactFilter.cpp" />
+    <ClCompile Include="model\collision\ContactListener.cpp" />
     <ClCompile Include="model\Entity.cpp" />
     <ClCompile Include="model\Level.cpp" />
     <ClCompile Include="model\ParallaxLayer.cpp" />
@@ -139,8 +139,6 @@
     <ClInclude Include="App.hpp" />
     <ClInclude Include="BitmapFont.hpp" />
     <ClInclude Include="Config.hpp" />
-    <ClInclude Include="ContactFilter.hpp" />
-    <ClInclude Include="ContactListener.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="FPSCounter.hpp" />
     <ClInclude Include="Glyph.hpp" />
@@ -149,6 +147,8 @@
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />
     <ClInclude Include="model\Ball.hpp" />
+    <ClInclude Include="model\collision\ContactFilter.hpp" />
+    <ClInclude Include="model\collision\ContactListener.hpp" />
     <ClInclude Include="model\Entity.hpp" />
     <ClInclude Include="model\SoundManager.hpp" />
     <ClInclude Include="model\SoundObject.hpp" />
