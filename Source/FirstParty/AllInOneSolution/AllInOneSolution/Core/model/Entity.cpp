@@ -36,16 +36,22 @@ void Entity::update(const float value)
 
 float Entity::getValueOf(const std::string& name) const
 {
-    if(m_updatingAni == nullptr)
-        throw std::runtime_error("Can't evaluate a variable at this time.");
-    return m_updatingAni->getValueOf(name);
+    auto match = m_variables.find(name);
+    if(match == m_variables.end())
+    {
+        if(m_updatingAni == nullptr)
+            throw std::exception("Can't get a variable at this time.");
+        return m_updatingAni->getValueOf(name);
+    }
+    return match->second;
 }
 
 void Entity::setValueOf(const std::string& name, const float value)
 {
     if(m_updatingAni == nullptr)
-        throw std::runtime_error("Can't set a variable at this time.");
-    return m_updatingAni->setValueOf(name, value);
+        m_variables[name] = value;
+    else
+        m_updatingAni->setValueOf(name, value);
 }
 
 void Entity::setName(std::string name)
@@ -82,4 +88,15 @@ void Entity::setCollideWithBall(bool value)
 bool Entity::isCollideWithBall() const
 {
     return m_collideWithBall;
+}
+
+void Entity::bindCollisionHandler(std::unique_ptr<CollisionHandler> handler)
+{
+    m_collisionHandler = std::move(handler);
+}
+
+void Entity::onCollide(Entity* partner)
+{
+    if(m_collisionHandler != nullptr)
+        m_collisionHandler->OnCollision(this, partner);
 }

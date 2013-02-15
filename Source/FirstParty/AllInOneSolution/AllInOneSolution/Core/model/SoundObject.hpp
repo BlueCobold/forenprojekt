@@ -13,11 +13,11 @@ public:
 
     void bindSound(const std::string& key, SoundManager* soundManager);
     SoundManager*  getSoundManager();
-    std::string getKey();
+    std::string getSoundName();
 
 private:
     
-    std::string m_key;
+    std::string m_soundName;
     SoundManager* m_soundManager;
 };
 

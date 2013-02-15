@@ -1,14 +1,14 @@
 #include "SoundObject.hpp"
 
-void SoundObject::bindSound(const std::string& key, SoundManager* soundManager)
+void SoundObject::bindSound(const std::string& name, SoundManager* soundManager)
 {
     m_soundManager = soundManager;
-    m_key = key;
+    m_soundName = name;
 }
 
-std::string SoundObject::getKey()
+std::string SoundObject::getSoundName()
 {
-    return m_key;
+    return m_soundName;
 }
 
 SoundManager* SoundObject::getSoundManager()

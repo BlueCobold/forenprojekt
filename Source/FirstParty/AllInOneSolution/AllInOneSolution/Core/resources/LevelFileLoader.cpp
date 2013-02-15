@@ -25,16 +25,14 @@ sf::SoundBuffer* LevelFileLoader::parseSound(tinyxml2::XMLElement* xml,
 }
 
 void LevelFileLoader::parseConstants(tinyxml2::XMLElement* xml,
-    const AnimatedGraphics* animated,
-    Animation* holder)
+    const AnimatedObject* animated,
+    VariableHandler* holder)
 {
     std::map<std::string, std::unique_ptr<ValueProvider>> map;
     for(auto var = xml->FirstAttribute(); var != nullptr; var = var->Next())
     {
-        std::unique_ptr<ValueProvider> provider(new StaticProvider(var->FloatValue()));
-        map.insert(std::pair<std::string, std::unique_ptr<ValueProvider>>(var->Name(), std::move(provider)));
+        holder->setValueOf(var->Name(), var->FloatValue());
     }
-    holder->bindVariables(map);
 }
 
 std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml,
@@ -86,7 +84,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 }
 
 std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(tinyxml2::XMLElement* xml, 
-    const AnimatedGraphics* animated)
+    const AnimatedObject* animated)
 {
     std::vector<std::unique_ptr<ValueProvider>> providers;
     for(auto child = xml->FirstChildElement(); child != nullptr; child = child->NextSiblingElement())
@@ -99,7 +97,7 @@ std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(tiny
 }
 
 std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLElement* xml, 
-    const AnimatedGraphics* animated)
+    const AnimatedObject* animated)
 {
     if(std::string(xml->Name())=="time")
         return std::unique_ptr<TimeProvider>(new TimeProvider(animated));
@@ -205,7 +203,7 @@ std::unique_ptr<ValueProvider> LevelFileLoader::findPositionController(
         if(std::string(iterator->Attribute("axis")) != axis)
             continue;
         if(iterator->FirstChildElement() == nullptr)
-            throw std::runtime_error("The position element needs a mathematical sub-tag.");
+            throw std::exception("The position element needs a mathematical sub-tag.");
         return parseProvider(iterator->FirstChildElement(), animated);
     }
     return nullptr;

@@ -26,6 +26,7 @@
 #include <string>
 #include <unordered_map>
 #include <utility> // pair, make_pair, move
+#include "collision/ChangeBallPropertyCollisionHandler.hpp"
 
 Level::Level(const unsigned int level, ResourceManager& resourceManager, Config& config) :
     m_number(level),
@@ -357,6 +358,9 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     }
     else
         entity->setCollideWithBall(true);
+    auto collider = xml->FirstChildElement("onCollision");
+    if(collider != nullptr)
+        parseCollider(entity.get(), collider);
 
     entity->setName(std::string(xml->Attribute("name")));
     
@@ -365,6 +369,10 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     for(auto element = animations->FirstChildElement("animation"); element != nullptr;
         element = element->NextSiblingElement("animation"))
         entity->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, entity.get(), m_resourceManager)));
+
+    auto constants = xml->FirstChildElement("constants");
+    if(constants != nullptr)
+        LevelFileLoader::parseConstants(constants, entity.get(), entity.get());
 
     // Load sound
     if(xml->FirstChildElement("sound") != nullptr)
@@ -455,4 +463,19 @@ const float Level::getWidth() const
 const float Level::getHeight() const
 {
     return m_height;
+}
+
+void Level::parseCollider(Entity* entity, tinyxml2::XMLElement* xml)
+{
+    for(auto child = xml->FirstChildElement(); child != nullptr; child = child->NextSiblingElement())
+    {
+        if(std::string(child->Name()) == "changeBallProperty")
+        {
+            std::unique_ptr<ChangeBallPropertyCollisionHandler> collider(new ChangeBallPropertyCollisionHandler(child->Attribute("name")));
+            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), collider.get()));
+            collider->bindProvider(std::move(provider));
+            entity->bindCollisionHandler(std::move(collider));
+        }
+        break;
+    }
 }

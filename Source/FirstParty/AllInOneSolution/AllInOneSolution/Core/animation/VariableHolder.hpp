@@ -12,11 +12,11 @@
 #include <string>
 
 /// This interface specifies an object that can store and return variables.
-class VariableHolder : public VariableHandler
+class VariableHolder : public virtual VariableHandler
 {
 private:
 
-    std::map<std::string, std::unique_ptr<ValueProvider>> m_variables;
+    std::map<std::string, float> m_variables;
 
 public:
 
@@ -24,21 +24,15 @@ public:
     {
         auto found = m_variables.find(name);
         if(found != m_variables.end())
-            return found->second->getValue();
+            return found->second;
         else
-            throw std::runtime_error(std::string("The variable '") + name + std::string("' is not defined."));
+            throw std::exception((std::string("The variable '") + name + std::string("' is not defined.")).c_str());
         return 0;
     }
 
     virtual void setValueOf(const std::string& name, const float value)
     {
-        std::unique_ptr<ValueProvider> var(new StaticProvider(value));
-        m_variables[name] = std::move(var);
-    }
-
-    void bindVariables(std::map<std::string, std::unique_ptr<ValueProvider>>& variables)
-    {
-        m_variables = std::move(variables);
+        m_variables[name] = value;
     }
 };
 
