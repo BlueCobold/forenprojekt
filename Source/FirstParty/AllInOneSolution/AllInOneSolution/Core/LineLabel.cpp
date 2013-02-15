@@ -29,13 +29,13 @@ void LineLabel::draw(const DrawParameter& params)
     float xOffset = 0;
     for(auto it = m_text.begin(); it != m_text.end(); it++)
     {
-        sf::Sprite tmp = m_font.getGlyphBySprite(*it);
+        sf::Sprite tmp = m_font.getSprite(*it);
         tmp.setPosition(m_position.x + xOffset, m_position.y);
         tmp.setRotation(m_rotation);
 
         params.getTarget().draw(tmp);
 
-        xOffset += m_font.getGlyph(*it).getTextureRect().width;
+        xOffset += m_font.getSprite(*it).getTextureRect().width;
     }
 }
 
