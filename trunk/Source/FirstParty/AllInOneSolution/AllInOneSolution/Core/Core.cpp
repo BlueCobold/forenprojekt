@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
         App app(configFile);
         app.run();
     }
-    catch (std::runtime_error& error)
+    catch (std::exception& error)
     {
         std::cout << "An error occurred: " << error.what();
         getchar();

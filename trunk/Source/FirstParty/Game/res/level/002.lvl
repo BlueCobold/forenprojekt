@@ -100,6 +100,17 @@
 						</frameindex>
 					</animation>
 				</animations>
+				<onCollision>
+					<changeBallProperty name="color">
+						<mod>
+							<add>
+								<var name="ball:color" />
+								<static value="1" />
+							</add>
+							<static value="3" />
+						</mod>
+					</changeBallProperty>
+				</onCollision>
 			</entity>
 
 			<entity name="target_1" rep="t1" type="target" collideWithBall="false">
@@ -175,7 +186,7 @@
 					</animation>
 				</animations>
 			</entity>
-			
+
 			<entity name="darkwall_1" rep="d1">
 				<physics name="wall" shape="wall" />
 				<animations>
@@ -297,7 +308,7 @@
 					</animation>
 				</animations>
 			</entity>
-			
+
 			<!-- lower/upper left/right -->
 			<entity name="left_lower" rep="ll">
 				<physics name="lower" shape="left_lower" />
@@ -325,10 +336,11 @@
 				<physics name="ball">
 					<shape type="circle" radius="14" />
 				</physics>
+				<constants color="0" />
 				<animations>
 					<animation texture="ballback" frames="1" width="30" height="30" midx="15" midy="15" rotate="true">
-						<frameindex frames="1">
-							<static value="0"/>
+						<frameindex frames="3">
+							<var name="color"/>
 						</frameindex>
 						<!-- angled min="0" step="45"/-->
 					</animation>

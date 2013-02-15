@@ -34,18 +34,22 @@ public:
      static void parseKinematics(tinyxml2::XMLElement* element,
          Entity* entity);
 
-      static sf::SoundBuffer* parseSound(tinyxml2::XMLElement* xml,
-        ResourceManager& resourceManager);
+     static sf::SoundBuffer* parseSound(tinyxml2::XMLElement* xml,
+         ResourceManager& resourceManager);
+
+     static std::unique_ptr<ValueProvider> parseProvider(
+         tinyxml2::XMLElement* xml, 
+         const AnimatedObject* animated);
+
+     static void parseConstants(tinyxml2::XMLElement* xml,
+         const AnimatedObject* owner,
+         VariableHandler* holder);
 
 private:
 
-    static std::unique_ptr<ValueProvider> parseProvider(
-        tinyxml2::XMLElement* xml, 
-        const AnimatedGraphics* animated);
-    
     static std::vector<std::unique_ptr<ValueProvider>> parseProviders(
         tinyxml2::XMLElement* xml, 
-        const AnimatedGraphics* animated);
+        const AnimatedObject* animated);
 
     static std::unique_ptr<Animation> parseAnimation(tinyxml2::XMLElement* xml,
         const AnimatedGraphics* animated,
@@ -55,10 +59,6 @@ private:
     static std::unique_ptr<ValueProvider> findPositionController(tinyxml2::XMLElement* xml,
         const AnimatedGraphics* animated,
         const std::string& axis);
-
-    static void parseConstants(tinyxml2::XMLElement* xml,
-        const AnimatedGraphics* owner,
-        Animation* holder);
 };
 
 #endif // LEVEL_FILE_LOADER_HPP

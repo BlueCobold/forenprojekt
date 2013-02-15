@@ -116,6 +116,7 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="animation\AnimatedObject.hpp" />
     <ClInclude Include="animation\Animation.hpp" />
     <ClInclude Include="animation\OrientedObject.hpp" />
     <ClInclude Include="animation\provider\Adder.hpp" />
@@ -147,6 +148,10 @@
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />
     <ClInclude Include="model\Ball.hpp" />
+    <ClInclude Include="model\collision\ChangeBallPropertyCollisionHandler.hpp" />
+    <ClInclude Include="model\collision\CollisionHandler.hpp" />
+    <ClInclude Include="model\collision\ChangeBallPropertyCollisionHandler.hpp" />
+    <ClInclude Include="model\collision\CollisionHandler.hpp" />
     <ClInclude Include="model\collision\ContactFilter.hpp" />
     <ClInclude Include="model\collision\ContactListener.hpp" />
     <ClInclude Include="model\Entity.hpp" />

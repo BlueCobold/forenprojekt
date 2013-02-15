@@ -15,7 +15,7 @@
 
 /// This class will be used to give a object a binding to
 /// a physical body
-class PhysicalObject : public OrientedObject
+class PhysicalObject : public virtual OrientedObject
 {
 private:
 

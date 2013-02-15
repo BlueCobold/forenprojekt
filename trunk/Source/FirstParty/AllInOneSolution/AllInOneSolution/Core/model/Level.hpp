@@ -62,6 +62,7 @@ private:
     /// Create an Entity
     std::unique_ptr<Entity> createEntity(tinyxml2::XMLElement* xml, const sf::Vector2u& position,
         tinyxml2::XMLElement* shape, tinyxml2::XMLElement* physic);
+    void parseCollider(Entity* entity, tinyxml2::XMLElement* collider);
 
     /// Construct the full level filename from the level number
     const std::string filename();

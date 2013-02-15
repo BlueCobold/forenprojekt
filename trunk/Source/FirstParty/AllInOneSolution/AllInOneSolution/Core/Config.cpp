@@ -62,5 +62,5 @@ void Config::readFile()
         } 
     } 
     else
-        throw std::runtime_error("File '" + m_fileName + "' not found");
+        throw std::exception(("File '" + m_fileName + "' not found").c_str());
 }

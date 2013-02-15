@@ -6,6 +6,7 @@
 #include "AnimatedGraphics.hpp"
 #include "PhysicalObject.hpp"
 #include "SoundObject.hpp"
+#include "collision/CollisionHandler.hpp"
 
 #include <memory> // std::unique_ptr
 #include <string>
@@ -26,10 +27,10 @@ private:
     bool m_killed;
     bool m_collideWithBall;
     Animation* m_updatingAni;
-
+    std::unique_ptr<CollisionHandler> m_collisionHandler;
+    std::map<std::string, float> m_variables;
 
 public:
-
     Entity(Type type);
     virtual ~Entity();
 
@@ -47,6 +48,9 @@ public:
 
     virtual float getValueOf(const std::string& name) const;
     virtual void setValueOf(const std::string& name, const float value);
+
+    void bindCollisionHandler(std::unique_ptr<CollisionHandler> handler);
+    void onCollide(Entity* partner);
 };
 
 #endif // ENTITY_HPP

@@ -21,7 +21,7 @@ public:
     {
         for(auto it = m_provider.begin(); it != m_provider.end(); ++it)
             if((*it) == nullptr)
-                throw std::runtime_error("One of the providers has been passed incorrectly and is null.");
+                throw std::exception("One of the providers has been passed incorrectly and is null.");
     }
 
     virtual float getValue() const = 0;

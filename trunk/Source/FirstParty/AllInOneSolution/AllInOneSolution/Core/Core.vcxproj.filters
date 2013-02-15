@@ -246,6 +246,17 @@
     <ClInclude Include="model\collision\ContactListener.hpp">
       <Filter>Headers\model\collision</Filter>
     </ClInclude>
+    <ClInclude Include="model\collision\CollisionHandler.hpp">
+      <Filter>Headers\model\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="model\collision\ChangeBallPropertyCollisionHandler.hpp">
+      <Filter>Headers\model\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="model\collision\ChangeBallPropertyCollisionHandler.hpp" />
+    <ClInclude Include="model\collision\CollisionHandler.hpp" />
+    <ClInclude Include="animation\AnimatedObject.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
