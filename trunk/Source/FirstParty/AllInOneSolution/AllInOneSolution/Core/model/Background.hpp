@@ -29,6 +29,7 @@ public:
     void bindLayer(std::unique_ptr<ParallaxLayer>& layer);
 
     virtual float getValueOf(const std::string& name) const;
+    virtual void setValueOf(const std::string& name, const float value);
 
     void draw(const DrawParameter& param);
 };

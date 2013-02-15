@@ -41,6 +41,13 @@ float Entity::getValueOf(const std::string& name) const
     return m_updatingAni->getValueOf(name);
 }
 
+void Entity::setValueOf(const std::string& name, const float value)
+{
+    if(m_updatingAni == nullptr)
+        throw std::runtime_error("Can't set a variable at this time.");
+    return m_updatingAni->setValueOf(name, value);
+}
+
 void Entity::setName(std::string name)
 {
     m_name = name;
@@ -72,7 +79,7 @@ void Entity::setCollideWithBall(bool value)
     m_collideWithBall = value;
 }
 
-bool Entity::isCollideWithBall()
+bool Entity::isCollideWithBall() const
 {
     return m_collideWithBall;
 }
