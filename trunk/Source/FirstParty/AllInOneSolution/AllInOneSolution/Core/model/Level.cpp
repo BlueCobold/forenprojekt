@@ -61,15 +61,15 @@ void Level::restartAt(const float time)
     if(m_background != nullptr)
         m_background->restartAt(time);
     TimedObject::restartAt(time);
-    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+    for(auto it = begin(m_entities); it != end(m_entities); ++it)
         (*it)->restartAt(time);
     m_lastTime = time;
 }
 
 void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 {
-    auto it=m_entities.begin();
-    while(it != m_entities.end())
+    auto it = begin(m_entities);
+    while(it != end(m_entities))
     {
         if((*it)->killed())
         {
@@ -88,7 +88,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
     m_world.Step(m_timeStep, m_velocityIterations, m_positionIterations);
 
-    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+    for(auto it = begin(m_entities); it != end(m_entities); ++it)
         (*it)->update(elapsedTime);
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -121,7 +121,7 @@ void Level::draw(const DrawParameter& param)
     if(m_background != nullptr)
         m_background->draw(param);
 
-    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+    for(auto it = begin(m_entities); it != end(m_entities); ++it)
         it->get()->draw(param);
 
     if(m_fpsShow)
@@ -160,7 +160,7 @@ bool Level::load()
             // Add use keys 'name' (objects) and 'rep' (grid)
             entities = std::move(LevelFileLoader::parseList(templates->FirstChildElement("entities"), "entity", "rep"));
             auto temp = LevelFileLoader::parseList(templates->FirstChildElement("entities"), "entity", "name");
-            entities.insert(temp.begin(), temp.end());
+            entities.insert(begin(temp), end(temp));
         }
     }
 
@@ -190,7 +190,7 @@ bool Level::load()
             tinyxml2::XMLElement* shape = nullptr;
             
             // Entity template exists
-            if(entities.find(name) != entities.end())
+            if(entities.find(name) != end(entities))
             {
                 entity = entities.find(name)->second;
 
@@ -200,14 +200,14 @@ bool Level::load()
                 {
                     // Shape template exists
                     if(physic->Attribute("shape") != nullptr &&
-                        shapes.find(std::string(physic->Attribute("shape"))) != shapes.end())
+                        shapes.find(std::string(physic->Attribute("shape"))) != end(shapes))
                         shape = shapes.find(std::string(physic->Attribute("shape")))->second;
                     // Physics doesn't use a template
                     else
                         shape = physic->FirstChildElement("shape");
 
                     // Physics template exists other wise no template is used
-                    if(physics.find(std::string(physic->Attribute("name"))) != physics.end())
+                    if(physics.find(std::string(physic->Attribute("name"))) != end(physics))
                         physic = physics.find(std::string(physic->Attribute("name")))->second;
                 }
                 
@@ -259,7 +259,7 @@ bool Level::load()
             name = std::string(entitiesIterator->Attribute("template"));
 
             // Entity template exists
-            if(entities.find(name) != entities.end())
+            if(entities.find(name) != end(entities))
             {
                 entity = entities.find(name)->second;
 
@@ -269,14 +269,14 @@ bool Level::load()
                 {
                     // Shape template exists
                     if(physic->Attribute("shape") != nullptr &&
-                        shapes.find(std::string(physic->Attribute("shape"))) != shapes.end())
+                        shapes.find(std::string(physic->Attribute("shape"))) != end(shapes))
                         shape = shapes.find(std::string(physic->Attribute("shape")))->second;
                     // Physics doesn't use a template
                     else
                         shape = physic->FirstChildElement("shape");
 
                     // Physics template exists other wise no template is used
-                    if(physics.find(std::string(physic->Attribute("name"))) != physics.end())
+                    if(physics.find(std::string(physic->Attribute("name"))) != end(physics))
                         physic = physics.find(std::string(physic->Attribute("name")))->second;
                 }
             }
@@ -299,7 +299,7 @@ bool Level::load()
         static_cast<unsigned int>(getHeight())));
 
     // get the fucking ball
-    for(auto it = m_entities.begin(); it != m_entities.end(); ++it)
+    for(auto it = begin(m_entities); it != end(m_entities); ++it)
         if((*it)->getType() == Entity::Ball)
         {
             m_ball = dynamic_cast<Ball*>((*it).get());

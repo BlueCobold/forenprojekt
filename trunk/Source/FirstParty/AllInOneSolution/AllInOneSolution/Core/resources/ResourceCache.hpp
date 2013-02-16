@@ -35,7 +35,7 @@ public:
 	{
 		auto it = m_resources.find(key);
 
-		if(it == m_resources.end())
+		if(it == end(m_resources))
 		{
 			m_resources.insert(std::make_pair(key, std::unique_ptr<T>(func())));
 		}
@@ -47,7 +47,7 @@ public:
 	{
 		auto it = m_resources.find(key);
 
-		if(it == m_resources.end())
+		if(it == end(m_resources))
 		{
 			m_resources.insert(std::make_pair(key, std::unique_ptr<T>(func(key))));
 		}
@@ -56,7 +56,7 @@ public:
 
     bool exists(const Key& key)
     {
-        return (m_resources.find(key) != m_resources.end());
+        return (m_resources.find(key) != end(m_resources));
     }
 
 	// return the resource
@@ -64,7 +64,7 @@ public:
 	{
 		auto it = m_resources.find(key);
 
-		if(it != m_resources.end())
+		if(it != end(m_resources))
 		{
 			return (it->second).get();
 		}

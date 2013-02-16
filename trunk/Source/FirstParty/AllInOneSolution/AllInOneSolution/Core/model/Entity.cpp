@@ -21,7 +21,7 @@ void Entity::update(const float value)
     {
         updateCurrentTime(value);
         updateKinematics(getPassedTime(), value - m_lastTime);
-        for(auto animation = getAnimations().begin(); animation != getAnimations().end(); ++animation)
+        for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
         {
             m_updatingAni = (*animation).get();
             (*animation)->setPosition(utility::toPixel(m_body->GetPosition().x), utility::toPixel(m_body->GetPosition().y));
@@ -37,7 +37,7 @@ void Entity::update(const float value)
 float Entity::getValueOf(const std::string& name) const
 {
     auto match = m_variables.find(name);
-    if(match == m_variables.end())
+    if(match == end(m_variables))
     {
         if(m_updatingAni == nullptr)
             throw std::exception("Can't get a variable at this time.");

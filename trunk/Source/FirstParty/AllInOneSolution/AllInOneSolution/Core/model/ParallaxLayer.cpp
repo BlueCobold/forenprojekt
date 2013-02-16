@@ -25,7 +25,7 @@ void ParallaxLayer::update(const float time, const sf::View& view, const sf::Vec
         -(m_layerSize.x - view.getSize().x) * percent.x,
         -(m_layerSize.y - view.getSize().y) * percent.y);
 
-    for(auto animation = getAnimations().begin(); animation != getAnimations().end(); ++animation)
+    for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
     {
         m_updatingAni = (*animation).get();
         (*animation)->setPosition(offset.x, offset.y);
