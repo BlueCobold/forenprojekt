@@ -59,7 +59,10 @@ private:
     {
         sf::Font* font = new sf::Font;
         if(!font->loadFromFile("res/font/" + path))
+        {
+            delete font;
             return nullptr;
+        }
         else
             return font;
     }
@@ -68,7 +71,10 @@ private:
     {
         sf::SoundBuffer* soundBuffer = new sf::SoundBuffer;
         if(!soundBuffer->loadFromFile("res/audio/" + path))
+        {
+            delete soundBuffer;
             return nullptr;
+        }
         else
             return soundBuffer;
     }
@@ -77,7 +83,10 @@ private:
     {
         BitmapFont* font = new BitmapFont;
         if(!font->loadFromFile("res/bitmapfont/" + path, *this))
+        {
+            delete font;
             return nullptr;
+        }
         else
             return font;
     }
