@@ -101,7 +101,7 @@
 					</animation>
 				</animations>
 				<onCollision>
-					<changeBallProperty name="color">
+					<changeProperty name="ball:color">
 						<mod>
 							<add>
 								<var name="ball:color" />
@@ -109,7 +109,7 @@
 							</add>
 							<static value="3" />
 						</mod>
-					</changeBallProperty>
+					</changeProperty>
 				</onCollision>
 			</entity>
 

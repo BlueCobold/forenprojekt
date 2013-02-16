@@ -26,7 +26,7 @@
 #include <string>
 #include <unordered_map>
 #include <utility> // pair, make_pair, move
-#include "collision/ChangeBallPropertyCollisionHandler.hpp"
+#include "collision/ChangePropertyCollisionHandler.hpp"
 
 Level::Level(const unsigned int level, ResourceManager& resourceManager, Config& config) :
     m_number(level),
@@ -44,7 +44,7 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
 
     m_fpsShow = config.get<bool>("ShowFps");
 
-    m_bitmapfont = *m_resourceManager.getBitmapFont("gold");
+    m_bitmapfont = m_resourceManager.getBitmapFont("gold");
     m_label.setBitmapFont(m_bitmapfont);
     m_label.setPosition(10, 10);
     m_label.setRotation(0);
@@ -469,9 +469,9 @@ void Level::parseCollider(Entity* entity, tinyxml2::XMLElement* xml)
 {
     for(auto child = xml->FirstChildElement(); child != nullptr; child = child->NextSiblingElement())
     {
-        if(std::string(child->Name()) == "changeBallProperty")
+        if(std::string(child->Name()) == "changeProperty")
         {
-            std::unique_ptr<ChangeBallPropertyCollisionHandler> collider(new ChangeBallPropertyCollisionHandler(child->Attribute("name")));
+            std::unique_ptr<ChangePropertyCollisionHandler> collider(new ChangePropertyCollisionHandler(child->Attribute("name")));
             std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), collider.get()));
             collider->bindProvider(std::move(provider));
             entity->bindCollisionHandler(std::move(collider));

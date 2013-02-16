@@ -14,8 +14,8 @@ class LineLabel : public Drawable
 {
 public:
     LineLabel();
-    LineLabel(const std::string& text, const sf::Vector2f& position, const float rotation, BitmapFont& font);
-    LineLabel(const std::string& text, const float x, const float y, float rotation, BitmapFont& font);
+    LineLabel(const std::string& text, const sf::Vector2f& position, const float rotation, BitmapFont* font);
+    LineLabel(const std::string& text, const float x, const float y, float rotation, BitmapFont* font);
 
     void setText(const std::string& text);
     std::string getText() const;
@@ -28,7 +28,7 @@ public:
     void setRotation(const float angle);
     float getRotation() const;
 
-    void setBitmapFont(BitmapFont& font);
+    void setBitmapFont(BitmapFont* font);
 
     void draw(const DrawParameter& params);
 
@@ -36,7 +36,7 @@ private:
     std::string m_text;
     sf::Vector2f m_position;
     float m_rotation;
-    BitmapFont m_font;
+    BitmapFont* m_font;
 
 };
 
