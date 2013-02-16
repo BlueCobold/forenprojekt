@@ -87,6 +87,33 @@
 				</body>
 				<fixture density="0.5" friction="0.8" restitution="0.1" />
 			</physic>
+			<physic name="pump">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="-30" />
+							</mul>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
 		</physics>
 
 		<entities>
@@ -113,6 +140,23 @@
 				</onCollision>
 			</entity>
 
+			<entity name="pump_1" rep="P1">
+				<constants offset="0" />
+				<physics name="pump" shape="wall" />
+				<animations>
+					<animation texture="dark_small_quads" srcy="0" width="60" height="60" rotate="false">
+						<frameindex frames="6">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+				<onCollision>
+					<changeProperty name="offset">
+						<time />
+					</changeProperty>
+				</onCollision>
+			</entity>
+			
 			<entity name="target_1" rep="t1" type="target" collideWithBall="false">
 				<physics name="target">
 					<shape type="circle" radius="33" />
@@ -383,7 +427,7 @@ d3d2d6d6d3w1                            w2d1d3d3d6d2
 d2d5d4d2d4w3  ll        lrll        lr  w4d5d2d6d5d3
 d1d3d6d3d1w4        TT          TT      w1d2d1d4d2d1
 w5w2w4w5w2w1                            w2w5w4w1w3w6
-s4s1s6s1s3w6                            w6s4s6s2s2s1
+s4s1s6s1s3w6P1                        P1w6s4s6s2s2s1
 d6d3d3d6d1w5                            w1d2d2d3d1d5
 d3d4d5d4d6w4                            w3d3d3d2d3d2
 d5d5d3d2d3w6                            w4d2d1d1d5d3

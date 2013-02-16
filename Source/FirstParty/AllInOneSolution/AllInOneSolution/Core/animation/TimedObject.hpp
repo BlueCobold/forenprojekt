@@ -14,7 +14,7 @@ public:
         m_currentTime = time;
     }
 
-    float getPassedTime() const
+    virtual float getPassedTime() const
     {
         return m_currentTime - m_startTime;
     }
