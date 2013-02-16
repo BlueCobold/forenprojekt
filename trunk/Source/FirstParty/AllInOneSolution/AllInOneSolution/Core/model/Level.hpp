@@ -104,7 +104,7 @@ private:
     Ball* m_ball;
 
     FPSCounter m_fpsCounter;
-    BitmapFont m_bitmapfont;
+    BitmapFont* m_bitmapfont;
     LineLabel m_label;
     bool m_fpsShow;
 };

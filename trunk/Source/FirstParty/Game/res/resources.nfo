@@ -25,5 +25,5 @@
 	<sound name="test" path="test.wav" />
 </sounds>
 <bitmapfonts>
-<bitmapfont name="gold" path="bitmapfontGold.xml" />
+	<bitmapfont name="gold" path="bitmapfontGold.xml" />
 </bitmapfonts>

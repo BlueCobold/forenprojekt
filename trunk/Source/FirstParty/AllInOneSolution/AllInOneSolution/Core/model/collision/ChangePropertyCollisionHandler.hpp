@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef CHANGE_BALL_PROPERTY_COLLISION_HANDLER_HPP
-#define CHANGE_BALL_PROPERTY_COLLISION_HANDLER_HPP
+#ifndef CHANGE_PROPERTY_COLLISION_HANDLER_HPP
+#define CHANGE_PROPERTY_COLLISION_HANDLER_HPP
 
 #include "CollisionHandler.hpp"
 #include "../../animation/OrientedObject.hpp"
@@ -12,12 +12,12 @@
 #include <memory>
 #include <string>
 
-class ChangeBallPropertyCollisionHandler :
+class ChangePropertyCollisionHandler :
     public CollisionHandler,
     public AnimatedObject
 {
 public:
-    ChangeBallPropertyCollisionHandler(const std::string& name) 
+    ChangePropertyCollisionHandler(const std::string& name) 
         : m_name(name),
         m_entityA(nullptr),
         m_entityB(nullptr)
@@ -32,7 +32,10 @@ public:
     {
         m_entityA = entityA;
         m_entityB = entityB;
-        entityB->setValueOf(m_name, m_provider->getValue());
+        if(m_name.length()>=5 && m_name.substr(0, 5)=="ball:")
+            entityB->setValueOf(m_name.substr(5), m_provider->getValue());
+        else
+            entityA->setValueOf(m_name, m_provider->getValue());
         m_entityA = nullptr;
         m_entityB = nullptr;
     }
@@ -83,4 +86,4 @@ private:
     Entity* m_entityB;
 };
 
-#endif // COLLISION_HANDLER_HPP
+#endif // CHANGE_PROPERTY_COLLISION_HANDLER_HPP

@@ -29,11 +29,12 @@ BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
     if(bitmapFont != end(m_bitmapFontKeys) && bitmapFont->first == key)
     {
         std::string name = bitmapFont->first;
+        std::string path = bitmapFont->second;
         if(m_bitmapFonts.exists(name))
             return m_bitmapFonts.get(name);
         else
         {
-            if(m_bitmapFonts.load(name, [name, this](){ return loadBitmapFont(name); }))
+            if(m_bitmapFonts.load(name, [path, this](){ return loadBitmapFont(path); }))
                 return m_bitmapFonts.get(name);
         }
     }
@@ -49,12 +50,13 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
     if(sound != end(m_soundBufferKeys) && sound->first == key)
     {
         std::string name = sound->first;
+        std::string path = sound->second;
         // Sound already loaded
         if(m_soundBuffers.exists(name))
             return m_soundBuffers.get(name);
         else
         {
-            if(m_soundBuffers.load(name, [name](){ return loadSoundBuffer(name); }))
+            if(m_soundBuffers.load(name, [path](){ return loadSoundBuffer(path); }))
                 return m_soundBuffers.get(name);    
         }
     }

@@ -1,83 +1,42 @@
 <bitmapfont>
-   
-    <image name = "bitmapfontGold" />
-   
+    <image name="bitmapfontGold" />
     <height value="17" />
-    
     <glyphs>
-
-        <glyph name = "A" x = "0" y = "0" width="11" />
-
-        <glyph name = "B" x = "13" y = "0" width = "9" />
-
-        <glyph name = "C" x = "24" y= "0" width ="8" />
-
-        <glyph name = "D" x = "34" y= "0" width ="10" />
-
-        <glyph name = "E" x = "46" y= "0" width ="7" />
-
-        <glyph name = "F" x = "55" y= "0" width ="6" />
-
-        <glyph name = "G" x = "64" y= "0" width ="10" />
-
-        <glyph name = "H" x = "76" y= "0" width ="9" />
-
-        <glyph name = "I" x = "0" y= "17" width ="3" />
-
-        <glyph name = "J" x = "5" y= "17" width ="5" />
-
-        <glyph name = "K" x = "12" y= "17" width ="9" />
-
-        <glyph name = "L" x = "23" y= "17" width ="7" />
-
-        <glyph name = "M" x = "31" y= "17" width ="14" />
-
-        <glyph name = "N" x = "48" y= "17" width ="10" />
-
-        <glyph name = "O" x = "61" y= "17" width ="11" />
-
-        <glyph name = "P" x = "74" y= "17" width ="8" />
-
-        <glyph name = "Q" x = "0" y= "34" width ="12" />
-
-        <glyph name = "R" x = "13" y= "34" width ="9" />
-
-        <glyph name = "S" x = "24" y= "34" width ="7" />
-
-        <glyph name = "T" x = "32" y= "34" width ="9" />
-
-        <glyph name = "U" x = "42" y= "34" width ="10" />
-
-        <glyph name = "V" x = "54" y= "34" width ="10" />
-
-        <glyph name = "W" x = "64" y= "34" width ="16" />
-
-        <glyph name = "X" x = "82" y= "34" width ="9" />
-
-        <glyph name = "Y" x = "0" y= "51" width ="8" />
-
-        <glyph name = "Z" x = "10" y= "51" width ="7" />
-
-	<glyph name = "0" x = "19" y= "51" width ="8" />
-
-	<glyph name = "1" x = "30" y= "51" width ="7" />
-	
-	<glyph name = "2" x = "39" y= "51" width ="8" />
-
-	<glyph name = "3" x = "49" y= "51" width ="7" />
-
-	<glyph name = "4" x = "59" y= "51" width ="8" />
-
-	<glyph name = "5" x = "69" y= "51" width ="8" />
-
-	<glyph name = "6" x = "79" y= "51" width ="8" />
-
-	<glyph name = "7" x = "0" y= "68" width ="8" />
-
-	<glyph name = "8" x = "10" y= "68" width ="8" />
-
-	<glyph name = "9" x = "20" y= "68" width ="8" />
-
+        <glyph name="A" x="0" y="0" width="11" />
+        <glyph name="B" x="13" y="0" width="9" />
+        <glyph name="C" x="24" y="0" width="8" />
+        <glyph name="D" x="34" y="0" width="10" />
+        <glyph name="E" x="46" y="0" width="7" />
+        <glyph name="F" x="55" y="0" width="6" />
+        <glyph name="G" x="64" y="0" width="10" />
+        <glyph name="H" x="76" y="0" width="9" />
+        <glyph name="I" x="0" y="17" width="3" />
+        <glyph name="J" x="5" y="17" width="5" />
+        <glyph name="K" x="12" y="17" width="9" />
+        <glyph name="L" x="23" y="17" width="7" />
+        <glyph name="M" x="31" y="17" width="14" />
+        <glyph name="N" x="48" y="17" width="10" />
+        <glyph name="O" x="61" y="17" width="11" />
+        <glyph name="P" x="74" y="17" width="8" />
+        <glyph name="Q" x="0" y="34" width="12" />
+        <glyph name="R" x="13" y="34" width="9" />
+        <glyph name="S" x="24" y="34" width="7" />
+        <glyph name="T" x="32" y="34" width="9" />
+        <glyph name="U" x="42" y="34" width="10" />
+        <glyph name="V" x="54" y="34" width="10" />
+        <glyph name="W" x="64" y="34" width="16" />
+        <glyph name="X" x="82" y="34" width="9" />
+        <glyph name="Y" x="0" y="51" width="8" />
+        <glyph name="Z" x="10" y="51" width="7" />
+        <glyph name="0" x="19" y="51" width="8" />
+        <glyph name="1" x="30" y="51" width="7" />
+        <glyph name="2" x="39" y="51" width="8" />
+        <glyph name="3" x="49" y="51" width="7" />
+        <glyph name="4" x="59" y="51" width="8" />
+        <glyph name="5" x="69" y="51" width="8" />
+        <glyph name="6" x="79" y="51" width="8" />
+        <glyph name="7" x="0" y="68" width="8" />
+        <glyph name="8" x="10" y="68" width="8" />
+        <glyph name="9" x="20" y="68" width="8" />
     </glyphs>
-
 </bitmapfont>

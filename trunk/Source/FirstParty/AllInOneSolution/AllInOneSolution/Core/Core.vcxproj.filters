@@ -240,9 +240,6 @@
     <ClInclude Include="model\collision\CollisionHandler.hpp">
       <Filter>Headers\model\collision</Filter>
     </ClInclude>
-    <ClInclude Include="model\collision\ChangeBallPropertyCollisionHandler.hpp">
-      <Filter>Headers\model\collision</Filter>
-    </ClInclude>
     <ClInclude Include="animation\AnimatedObject.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
@@ -255,6 +252,9 @@
     </ClInclude>
     <ClInclude Include="gui\LineLabel.hpp">
       <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="model\collision\ChangePropertyCollisionHandler.hpp">
+      <Filter>Headers\model\collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
