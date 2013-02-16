@@ -36,7 +36,9 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_velocityIterations(4),
     m_positionIterations(4),
     m_config(config),
-    m_soundManager(resourceManager)
+    m_soundManager(resourceManager),
+    m_totalTarget(0),
+    m_remainingTarget(0)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -45,10 +47,16 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_fpsShow = config.get<bool>("ShowFps");
 
     m_bitmapfont = m_resourceManager.getBitmapFont("gold");
-    m_label.setBitmapFont(m_bitmapfont);
-    m_label.setPosition(10, 10);
-    m_label.setRotation(0);
-    m_label.setText(utility::toString<int>(0));
+    m_labelFPS.setBitmapFont(m_bitmapfont);
+    m_labelFPS.setPosition(10, 10);
+    m_labelFPS.setRotation(0);
+    m_labelFPS.setText(utility::toString<int>(0));
+
+    m_labelTarget.setBitmapFont(m_bitmapfont);
+    m_labelTarget.setBitmapFont(m_bitmapfont);
+    m_labelTarget.setPosition(10, 10);
+    m_labelTarget.setRotation(0);
+    m_labelTarget.setText(utility::toString<int>(0));
 }
 
 Level::~Level()
@@ -89,7 +97,11 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     m_world.Step(m_timeStep, m_velocityIterations, m_positionIterations);
 
     for(auto it = begin(m_entities); it != end(m_entities); ++it)
+    {
+        if((*it)->getType() == Entity::Target && (*it)->killed())
+            m_remainingTarget--;
         (*it)->update(elapsedTime);
+    }
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         m_debugDraw = !m_debugDraw;
@@ -104,8 +116,11 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         m_background->update(elapsedTime, screen.getView());
 
     m_fpsCounter.update();
-    m_label.setPosition(m_scrollView.toGlobalCoords(sf::Vector2u(10,10)));
-    m_label.setText(utility::toString<int>(m_fpsCounter.getFPS()));
+    m_labelFPS.setPosition(m_scrollView.toGlobalCoords(sf::Vector2u(10,10)));
+    m_labelFPS.setText(utility::toString<int>(m_fpsCounter.getFPS()));
+
+    m_labelTarget.setPosition(m_scrollView.getGlobalRightCorner() - 100, m_scrollView.getGlobalTopCorner() + 10);
+    m_labelTarget.setText("TARGET: " + utility::toString(m_remainingTarget) + "/" + utility::toString(m_totalTarget));
 
     if(m_debugDraw)
     {
@@ -125,7 +140,9 @@ void Level::draw(const DrawParameter& param)
         it->get()->draw(param);
 
     if(m_fpsShow)
-        m_label.draw(DrawParameter(param));
+        m_labelFPS.draw(DrawParameter(param));
+
+    m_labelTarget.draw(DrawParameter(param));
 }
 
 bool Level::load()
@@ -345,7 +362,10 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
         else if(std::string(xml->Attribute("type")) == "ball")
             entity = std::unique_ptr<Ball>(new Ball(m_config.get<float>("BallResetTime")));
         else if(std::string(xml->Attribute("type")) == "target")
+        {
             entity = std::unique_ptr<Entity>(new Entity(Entity::Target));
+            m_totalTarget++;
+        }
         else
             entity = std::unique_ptr<Entity>(new Entity(Entity::None));
     }
@@ -433,6 +453,8 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     body->SetUserData(entity.get());
 
     entity->bindBody(body);
+
+    m_remainingTarget = m_totalTarget;
 
     return std::move(entity);
 }
