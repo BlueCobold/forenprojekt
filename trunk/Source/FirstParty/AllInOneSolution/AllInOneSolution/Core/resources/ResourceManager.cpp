@@ -73,12 +73,13 @@ sf::Texture* ResourceManager::getTexture(const std::string& key)
     if(texture != end(m_textureKeys) && texture->first == key)
     {
         std::string path = texture->second.first;
+        bool smooth = texture->second.second;
         // Texture already loaded
         if(m_textures.exists(path))
             return m_textures.get(path);
         else
         {
-            if(m_textures.load(path, [path](){ return loadTexture(path, false); }))
+            if(m_textures.load(path, [path, smooth](){ return loadTexture(path, smooth); }))
                 return m_textures.get(path);
         }
     }
