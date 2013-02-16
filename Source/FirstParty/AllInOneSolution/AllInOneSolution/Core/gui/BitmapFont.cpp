@@ -1,5 +1,5 @@
 #include "BitmapFont.hpp"
-#include "resources/ResourceManager.hpp"
+#include "../resources/ResourceManager.hpp"
 
 #include <SFML/System/Err.hpp>
 

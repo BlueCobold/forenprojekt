@@ -89,12 +89,12 @@
   <ItemGroup>
     <ClCompile Include="animation\Animation.cpp" />
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="BitmapFont.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
-    <ClCompile Include="LineLabel.cpp" />
+    <ClCompile Include="gui\BitmapFont.cpp" />
+    <ClCompile Include="gui\LineLabel.cpp" />
     <ClCompile Include="LoadLevelState.cpp" />
     <ClCompile Include="model\Background.cpp" />
     <ClCompile Include="model\Ball.cpp" />
@@ -138,15 +138,11 @@
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
-    <ClInclude Include="BitmapFont.hpp" />
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
-<<<<<<< .mine
-=======
     <ClInclude Include="FPSCounter.hpp" />
-    <ClInclude Include="Glyph.hpp" />
->>>>>>> .r246
-    <ClInclude Include="LineLabel.hpp" />
+    <ClInclude Include="gui\BitmapFont.hpp" />
+    <ClInclude Include="gui\LineLabel.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />

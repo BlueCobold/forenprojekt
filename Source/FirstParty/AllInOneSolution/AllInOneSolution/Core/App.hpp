@@ -5,7 +5,7 @@
 
 #include "resources/ResourceManager.hpp"
 #include "StateManager.hpp"
-#include "LineLabel.hpp"
+#include "gui/LineLabel.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
