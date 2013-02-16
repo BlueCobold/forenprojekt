@@ -5,7 +5,7 @@
 
 #include <SFML/System/Vector2.hpp>
 
-#include "rendering/Drawable.hpp"
+#include "../rendering/Drawable.hpp"
 #include "BitmapFont.hpp"
 
 /// This class will be used to draw a single line label 

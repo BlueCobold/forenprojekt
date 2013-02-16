@@ -4,7 +4,7 @@
 #define RESOURCE_MANAGER_HPP
 
 #include "ResourceCache.hpp"
-#include "../BitmapFont.hpp"
+#include "../gui/BitmapFont.hpp"
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>

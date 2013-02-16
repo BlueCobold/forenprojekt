@@ -13,7 +13,7 @@
 #include "../ScrollView.hpp"
 #include "SoundManager.hpp"
 #include "../FPSCounter.hpp"
-#include "../LineLabel.hpp"
+#include "../gui/LineLabel.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -98,10 +98,10 @@ private:
 
     Config& m_config;
 
-	bool m_debugDraw;
+    bool m_debugDraw;
 
-	ScrollView m_scrollView;
-	Ball* m_ball;
+    ScrollView m_scrollView;
+    Ball* m_ball;
 
     FPSCounter m_fpsCounter;
     BitmapFont m_bitmapfont;
