@@ -43,7 +43,7 @@ T Config::get(const std::string& key)
 
     auto it = m_content.find(key);
 
-    if(it != m_content.end())
+    if(it != end(m_content))
         output = utility::stringTo<T>(it->second);
 
     return output;

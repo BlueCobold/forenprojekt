@@ -26,15 +26,15 @@ BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
 {
     auto bitmapFont = m_bitmapFontKeys.find(key);
     
-    if(bitmapFont != m_bitmapFontKeys.end() && bitmapFont->first == key)
+    if(bitmapFont != end(m_bitmapFontKeys) && bitmapFont->first == key)
     {
-        if(m_bitmapFonts.exists(bitmapFont->first))
-            return m_bitmapFonts.get(bitmapFont->first);
+        std::string name = bitmapFont->first;
+        if(m_bitmapFonts.exists(name))
+            return m_bitmapFonts.get(name);
         else
         {
-            if(m_bitmapFonts.load(bitmapFont->first,
-                std::bind(&ResourceManager::loadBitmapFont, bitmapFont->second, this)))
-                return m_bitmapFonts.get(bitmapFont->first);
+            if(m_bitmapFonts.load(name, [name, this](){ return loadBitmapFont(name); }))
+                return m_bitmapFonts.get(name);
         }
     }
 
@@ -46,16 +46,16 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
     // Does the key even exist?
     auto sound = m_soundBufferKeys.find(key);
 
-    if(sound != m_soundBufferKeys.end() && sound->first == key)
+    if(sound != end(m_soundBufferKeys) && sound->first == key)
     {
+        std::string name = sound->first;
         // Sound already loaded
-        if(m_soundBuffers.exists(sound->first))
-            return m_soundBuffers.get(sound->first);
+        if(m_soundBuffers.exists(name))
+            return m_soundBuffers.get(name);
         else
         {
-            if(m_soundBuffers.load(sound->first,
-                std::bind(&ResourceManager::loadSoundBuffer, sound->second)))
-                return m_soundBuffers.get(sound->first);    
+            if(m_soundBuffers.load(name, [name](){ return loadSoundBuffer(name); }))
+                return m_soundBuffers.get(name);    
         }
     }
     
@@ -68,16 +68,16 @@ sf::Texture* ResourceManager::getTexture(const std::string& key)
     // Does the key even exist?
     auto texture = m_textureKeys.find(key);
 
-    if(texture != m_textureKeys.end() && texture->first == key)
+    if(texture != end(m_textureKeys) && texture->first == key)
     {
+        std::string path = texture->second.first;
         // Texture already loaded
-        if(m_textures.exists(texture->second.first))
-            return m_textures.get(texture->second.first);
+        if(m_textures.exists(path))
+            return m_textures.get(path);
         else
         {
-            if(m_textures.load(texture->second.first,
-                std::bind(&ResourceManager::loadTexture, texture->second.first, texture->second.second)))
-                return m_textures.get(texture->second.first);
+            if(m_textures.load(path, [path](){ return loadTexture(path, false); }))
+                return m_textures.get(path);
         }
     }
     
@@ -90,16 +90,16 @@ sf::Font* ResourceManager::getFont(const std::string& key)
     // Does the key even exist?
     auto font = m_fontKeys.find(key);
 
-    if(font != m_fontKeys.end() && font->first == key)
+    if(font != end(m_fontKeys) && font->first == key)
     {
+        std::string path = font->second;
         // Texture already loaded
-        if(m_fonts.exists(font->second))
-            return m_fonts.get(font->second);
+        if(m_fonts.exists(path))
+            return m_fonts.get(path);
         else
         {
-            if(m_fonts.load(font->second,
-                std::bind(&ResourceManager::loadFont, font->second)))
-                return m_fonts.get(font->second);
+            if(m_fonts.load(path, [path](){ return loadFont(path); }))
+                return m_fonts.get(path);
         }
     }
     

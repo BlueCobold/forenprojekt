@@ -19,7 +19,7 @@ public:
 
     MultiProvider(std::vector<std::unique_ptr<ValueProvider>>& provider) : m_provider(std::move(provider))
     {
-        for(auto it = m_provider.begin(); it != m_provider.end(); ++it)
+        for(auto it = begin(m_provider); it != end(m_provider); ++it)
             if((*it) == nullptr)
                 throw std::exception("One of the providers has been passed incorrectly and is null.");
     }

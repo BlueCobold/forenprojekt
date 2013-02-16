@@ -19,7 +19,7 @@ void Background::bindLayer(std::unique_ptr<ParallaxLayer>& layer)
 void Background::restartAt(const float time)
 {
     TimedObject::restartAt(time);
-    for(auto layer = m_layers.begin(); layer != m_layers.end(); ++layer)
+    for(auto layer = begin(m_layers); layer != end(m_layers); ++layer)
         (*layer)->restartAt(time);
 }
 
@@ -28,7 +28,7 @@ void Background::update(const float time, const sf::View& view)
     updateCurrentTime(time);
 
     m_updatingAni = nullptr;
-    for(auto layer = m_layers.begin(); layer != m_layers.end(); ++layer)
+    for(auto layer = begin(m_layers); layer != end(m_layers); ++layer)
         (*layer)->update(time, view, m_size);
 }
 
@@ -48,6 +48,6 @@ void Background::setValueOf(const std::string& name, const float value)
 
 void Background::draw(const DrawParameter& param)
 {
-    for(auto layer = m_layers.begin(); layer != m_layers.end(); ++layer)
+    for(auto layer = begin(m_layers); layer != end(m_layers); ++layer)
         (*layer)->draw(param);
 }

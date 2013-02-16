@@ -73,10 +73,10 @@ private:
             return soundBuffer;
     }
 
-    static BitmapFont* loadBitmapFont(const std::string& path, ResourceManager* resourceManager)
+    BitmapFont* loadBitmapFont(const std::string& path)
     {
         BitmapFont* font = new BitmapFont;
-        if(!font->loadFromFile("res/bitmapfont/" + path, *resourceManager))
+        if(!font->loadFromFile("res/bitmapfont/" + path, *this))
             return nullptr;
         else
             return font;

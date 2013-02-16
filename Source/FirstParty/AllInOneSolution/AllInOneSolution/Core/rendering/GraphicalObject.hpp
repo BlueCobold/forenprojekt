@@ -21,7 +21,7 @@ public:
 
     virtual void draw(const DrawParameter& param)
     {
-        for(auto animation = m_animations.begin(); animation != m_animations.end(); ++animation)
+        for(auto animation = begin(m_animations); animation != end(m_animations); ++animation)
             if((*animation) != nullptr)
                 (*animation)->draw(param);
     }

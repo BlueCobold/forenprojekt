@@ -25,7 +25,7 @@ public:
     {
         float v;
         bool set = false;
-        for(auto it = getProvider().begin(); it != getProvider().end(); ++it)
+        for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
             if(!set)
             {
                 v = (*it)->getValue();

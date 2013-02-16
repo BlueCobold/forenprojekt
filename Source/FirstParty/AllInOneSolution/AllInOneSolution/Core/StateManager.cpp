@@ -13,7 +13,7 @@ StateManager::StateManager() :
 void StateManager::registerState(StateId id, std::shared_ptr<State> state)
 {
 	auto existingState = m_statesById.find(id);
-	if(existingState != m_statesById.end())
+	if(existingState != end(m_statesById))
 	{
 		std::stringstream ss;
 		ss << "The state with id " << id << " already exists.";
@@ -26,7 +26,7 @@ void StateManager::registerState(StateId id, std::shared_ptr<State> state)
 void StateManager::setState(StateId id, void* enterInformation)
 {
 	auto state = m_statesById.find(id);
-	if(state == m_statesById.end())
+	if(state == end(m_statesById))
 	{
 		std::stringstream ss;
 		ss << "The state with id " << id << " does not exist.";

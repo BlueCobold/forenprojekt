@@ -23,7 +23,7 @@ public:
     virtual float getValueOf(const std::string& name) const
     {
         auto found = m_variables.find(name);
-        if(found != m_variables.end())
+        if(found != end(m_variables))
             return found->second;
         else
             throw std::exception((std::string("The variable '") + name + std::string("' is not defined.")).c_str());
