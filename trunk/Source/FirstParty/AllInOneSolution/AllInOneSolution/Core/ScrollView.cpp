@@ -54,3 +54,20 @@ sf::Vector2f ScrollView::toGlobalCoords(const sf::Vector2u& v)
     
     return screenCoords;
 }
+
+unsigned int ScrollView::getGlobalRightCorner()
+{
+    return m_viewCenter.x + m_viewSize.x / 2;
+}
+unsigned int ScrollView::getGlobalTopCorner()
+{
+    return m_viewCenter.y - m_viewSize.y / 2;
+}
+unsigned int ScrollView::getGloablLeftCorner()
+{
+    return m_viewCenter.x - m_viewSize.x / 2;
+}
+unsigned int ScrollView::getGlobalBottomCorner()
+{
+    return m_viewCenter.y + m_viewSize.y / 2;
+}

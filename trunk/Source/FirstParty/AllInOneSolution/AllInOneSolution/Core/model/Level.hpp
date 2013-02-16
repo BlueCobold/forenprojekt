@@ -103,10 +103,15 @@ private:
     ScrollView m_scrollView;
     Ball* m_ball;
 
-    FPSCounter m_fpsCounter;
     BitmapFont* m_bitmapfont;
-    LineLabel m_label;
+
+    FPSCounter m_fpsCounter;
+    LineLabel m_labelFPS;
     bool m_fpsShow;
+
+    int m_totalTarget;
+    int m_remainingTarget;
+    LineLabel m_labelTarget;
 };
 
 #endif // LEVEL_HPP
