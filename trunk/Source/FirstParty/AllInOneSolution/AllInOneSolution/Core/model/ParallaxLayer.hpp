@@ -15,8 +15,8 @@ private:
 
 public:
 
-	ParallaxLayer(const sf::Vector2f& layerSize);
-	~ParallaxLayer();
+    ParallaxLayer(const sf::Vector2f& layerSize);
+    ~ParallaxLayer();
 
     void update(const float time, const sf::View& view, const sf::Vector2u& worldSize);
 
