@@ -21,7 +21,7 @@ private:
 public:
 
     Background(const sf::Vector2u& size);
-	~Background();
+    ~Background();
 
     virtual void restartAt(const float time);
     void update(const float time, const sf::View& view);
