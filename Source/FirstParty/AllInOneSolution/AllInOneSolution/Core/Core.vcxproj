@@ -74,6 +74,7 @@
       <PreprocessorDefinitions>SFML_STATIC;TIXML_USE_STL;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>../../../../ThirdParty/SFML/include/;../../../../ThirdParty/Box2D/include/;../../../../ThirdParty/tinyxml2/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4250</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

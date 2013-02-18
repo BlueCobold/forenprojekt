@@ -7,6 +7,18 @@
 				<vertex x="59" y="59" />
 				<vertex x="1" y="59" />
 			</shape>
+			<shape name="high_wall" type="polygon">
+				<vertex x="1" y="1" />
+				<vertex x="59" y="1" />
+				<vertex x="59" y="119" />
+				<vertex x="1" y="119" />
+			</shape>
+			<shape name="wide_wall" type="polygon">
+				<vertex x="1" y="1" />
+				<vertex x="159" y="1" />
+				<vertex x="159" y="59" />
+				<vertex x="1" y="59" />
+			</shape>
 			<shape name="left_lower" type="polygon">
 				<vertex x="1" y="6" />
 				<vertex x="6" y="6" />
@@ -30,6 +42,14 @@
 		</shapes>
 		<physics>
 			<physic name="wall">
+				<body type="static" angle="0" />
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="high_wall">
+				<body type="static" angle="0" />
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="wide_wall">
 				<body type="static" angle="0" />
 				<fixture density="0.1" friction="0.8" restitution="0" />
 			</physic>
@@ -144,9 +164,9 @@
 				<constants offset="0" />
 				<physics name="pump" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" srcy="0" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="0"/>
+					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="1"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -162,8 +182,8 @@
 					<shape type="circle" radius="30" />
 				</physics>
 				<animations>
-					<animation texture="target" frames="1" width="67" height="67" midx="33.5" midy="33.5" rotate="true">
-						<frameindex frames="1">
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true">
+						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
 					</animation>
@@ -173,8 +193,8 @@
 			<entity name="wall_1" rep="w1">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="small_quad_1" width="60" height="60" rotate="false">
-						<frameindex frames="1">
+					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
+						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
 					</animation>
@@ -183,8 +203,8 @@
 			<entity name="wall_2" rep="w2">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="small_quad_2" width="60" height="60" rotate="false">
-						<frameindex frames="1">
+					<animation texture="small_quads" srcy="60" width="60" height="60" rotate="false">
+						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
 					</animation>
@@ -193,8 +213,8 @@
 			<entity name="wall_3" rep="w3">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="small_quad_3" width="60" height="60" rotate="false">
-						<frameindex frames="1">
+					<animation texture="small_quads" srcy="120" width="60" height="60" rotate="false">
+						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
 					</animation>
@@ -203,8 +223,8 @@
 			<entity name="wall_4" rep="w4">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="small_quad_4" width="60" height="60" rotate="false">
-						<frameindex frames="1">
+					<animation texture="small_quads" srcy="180" width="60" height="60" rotate="false">
+						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
 					</animation>
@@ -213,8 +233,8 @@
 			<entity name="wall_5" rep="w5">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="small_quad_5" width="60" height="60" rotate="false">
-						<frameindex frames="1">
+					<animation texture="small_quads" srcy="240" width="60" height="60" rotate="false">
+						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
 					</animation>
@@ -223,9 +243,91 @@
 			<entity name="wall_6" rep="w6">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="small_quad_6" width="60" height="60" rotate="false">
-						<frameindex frames="1">
+					<animation texture="small_quads" srcy="300" width="60" height="60" rotate="false">
+						<frameindex frames="4">
 							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			
+			<entity name="high_wall_1" rep="h1">
+				<physics name="high_wall" shape="high_wall" />
+				<animations>
+					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
+						<frameindex frames="6">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="high_wall_2" rep="h2">
+				<physics name="high_wall" shape="high_wall" />
+				<animations>
+					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
+						<frameindex frames="6">
+							<static value="1"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="high_wall_3" rep="h3">
+				<physics name="high_wall" shape="high_wall" />
+				<animations>
+					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
+						<frameindex frames="6">
+							<static value="2"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="high_wall_4" rep="h4">
+				<physics name="high_wall" shape="high_wall" />
+				<animations>
+					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
+						<frameindex frames="6">
+							<static value="3"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="high_wall_5" rep="h5">
+				<physics name="high_wall" shape="high_wall" />
+				<animations>
+					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
+						<frameindex frames="6">
+							<static value="4"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="high_wall_6" rep="h6">
+				<physics name="high_wall" shape="high_wall" />
+				<animations>
+					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
+						<frameindex frames="6">
+							<static value="5"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			
+			<entity name="wide_wall_6" rep="W6">
+				<physics name="wide_wall" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="300" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wide_darkwall_6" rep="D6">
+				<physics name="wide_wall" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="300" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="1"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -234,9 +336,9 @@
 			<entity name="darkwall_1" rep="d1">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="0"/>
+					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="1"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -244,8 +346,8 @@
 			<entity name="darkwall_2" rep="d2">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" width="60" height="60" rotate="false">
-						<frameindex frames="6">
+					<animation texture="small_quads" srcy="60" width="60" height="60" rotate="false">
+						<frameindex frames="4">
 							<static value="1"/>
 						</frameindex>
 					</animation>
@@ -254,9 +356,9 @@
 			<entity name="darkwall_3" rep="d3">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="2"/>
+					<animation texture="small_quads" srcy="120" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="1"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -264,9 +366,9 @@
 			<entity name="darkwall_4" rep="d4">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="3"/>
+					<animation texture="small_quads" srcy="180" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="1"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -274,9 +376,9 @@
 			<entity name="darkwall_5" rep="d5">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="4"/>
+					<animation texture="small_quads" srcy="240" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="1"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -284,9 +386,9 @@
 			<entity name="darkwall_6" rep="d6">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="5"/>
+					<animation texture="small_quads" srcy="300" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="1"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -295,9 +397,9 @@
 			<entity name="darkshadowwall_1" rep="s1">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" srcy="60" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="0"/>
+					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="2"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -305,9 +407,9 @@
 			<entity name="darkshadowwall_2" rep="s2">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" srcy="60" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="1"/>
+					<animation texture="small_quads" srcy="60" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="2"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -315,8 +417,8 @@
 			<entity name="darkshadowwall_3" rep="s3">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" srcy="60" width="60" height="60" rotate="false">
-						<frameindex frames="6">
+					<animation texture="small_quads" srcy="120" width="60" height="60" rotate="false">
+						<frameindex frames="4">
 							<static value="2"/>
 						</frameindex>
 					</animation>
@@ -325,9 +427,9 @@
 			<entity name="darkshadowwall_4" rep="s4">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" srcy="60" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="3"/>
+					<animation texture="small_quads" srcy="180" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="2"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -335,9 +437,9 @@
 			<entity name="darkshadowwall_5" rep="s5">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" srcy="60" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="4"/>
+					<animation texture="small_quads" srcy="240" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="2"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -345,9 +447,9 @@
 			<entity name="darkshadowwall_6" rep="s6">
 				<physics name="wall" shape="wall" />
 				<animations>
-					<animation texture="dark_small_quads" srcy="60" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="5"/>
+					<animation texture="small_quads" srcy="300" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="2"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -412,25 +514,25 @@
 	</templates>
 
 	<grid size="60" width="2220" height="1200">
-w1            w2d4d6d5w2d1d3d1d6w3d1d4d5d4w5d6d2d6d1w5d1d4d5w3          w1
-              w4w3w4w1w3w6w4w3w2w4w2w5w1w2w3w1w5w2w3w2w3w5w6w2            
-              w5s4s2s3w4        w4        w2        w3s1s1s5w4            
-              w4d1d5d6w3    t1  w3    t1  w5  t1    w1d6d2d6w3            
-              w5d6d3d1w6        w1        w6        w3d4d6d1w1            
-              w2d2d4d2w5                            w6d2d3d4w6            
-              w3d1d3d6w2              RR            w2d2d2d2w2            
-              w4w2w1w2w4                            w3w4w4w5w5            
-              w6s6s5s4w6        BB                  w2s1s1s6w3            
-              w1d5d3d6w4                            w5d2d5d3w5            
-              w5d2d1d2w5                            w6d3d2d5w3            
+w1            w2d4d6d5w2d1d3d1d6h3d1d4d5d4w5d6d2d6d1h5d1d4d5w3          w1
+              h4w3w4w1W6  w4w3w2 3w2w5w1w2h3w1w5w2w3 5w3w5w6w2            
+               4s4s2s3h6        w4         3        w3s1s1s5w4            
+              w4d1d5d6 6    t1  h1    t1  w5  t1    w1d6d2d6w3            
+              w5D6  d1w6         1        w6        w3d4d6d1h1            
+              h2d2d4d2w5                            w6d2d3d4 1            
+               2d1d3d6w2              RR            h2d2d2d2w2            
+              w4w2w1w2w4                             2w4w4w5w5            
+              w6s6s5s4h6        BB                  w2s1s1s6w3            
+              w1d5d3d6 6                            h1d2d5d3w5            
+              w5d2d1d2w5                             1d3d2d5w3            
               w3d6d6d3w1                            w2d1d3d3w2            
               w2d4d2d4w3  ll        lrll        lr  w4d5d2d6w3            
-              w1d6d3d1w4        TT          TT      w1d2d1d4w1            
-              w5w4w5w2w1                            w2w5w4w1w6            
-              w4s6s1s3w6P1                        P1w6s4s6s2w1            
-              w6d3d6d1w5                            w1d2d2d3w5            
-              w3d5d4d6w4                            w3d3d3d2w2            
-              w5d3d2d3w6                            w4d2d1d1w3            
+              w1d6d3d1h4        TT          TT      w1d2d1d4w1            
+              w5w4w5w2 4                            h2w5w4w1w6            
+              w4s6s1s3w6P1                        P1 2s4s6s2w1            
+              h6d3d6d1h5                            w1d2d2d3h5            
+               6d5d4d6 5                            w3d3d3d2 5            
+              w5d3d2d3w4                            w4d2d1d1w3            
               w1d5d1d4w1                            w2d5d2d6w4            
               w3w1w5w3w2                            w1w1w3w4w6            
 	</grid>
@@ -438,11 +540,11 @@ w1            w2d4d6d5w2d1d3d1d6w3d1d4d5d4w5d6d2d6d1w5d1d4d5w3          w1
 		<!-- Background -->
 		<background>
 			<parallax width="1600" height="900">
-                <animation texture="pastureland_bg" width="1600" height="900" rotate="false">
-                    <frameindex frames="1">
-                        <static value="0"/>
-                    </frameindex>
-                </animation>
+				<animation texture="pastureland_bg" width="1600" height="900" rotate="false">
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+				</animation>
 				<animation texture="pastureland_clouds" width="200" height="98"><!-- small cloud -->
 					<frameindex frames="1">
 						<static value="0"/>
