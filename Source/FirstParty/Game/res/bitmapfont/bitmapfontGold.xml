@@ -40,5 +40,6 @@
         <glyph name="9" x="20" y="68" width="8" />
 	<glyph name="/" x="8" y="85" width="8" />
 	<glyph name=" " x="80" y="85" width="8" />
+	<glyph name="°" x="" y="102" width="17" />
     </glyphs>
 </bitmapfont>
