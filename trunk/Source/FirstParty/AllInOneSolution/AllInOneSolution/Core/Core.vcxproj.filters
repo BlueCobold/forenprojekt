@@ -243,10 +243,6 @@
     <ClInclude Include="animation\AnimatedObject.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
-    <ClInclude Include="model\collision\ChangeBallPropertyCollisionHandler.hpp" />
-    <ClInclude Include="model\collision\CollisionHandler.hpp" />
-    <ClInclude Include="model\collision\ChangeBallPropertyCollisionHandler.hpp" />
-    <ClInclude Include="model\collision\CollisionHandler.hpp" />
     <ClInclude Include="gui\BitmapFont.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>

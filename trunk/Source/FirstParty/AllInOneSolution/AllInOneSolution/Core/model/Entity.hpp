@@ -27,7 +27,7 @@ private:
     bool m_killed;
     bool m_collideWithBall;
     Animation* m_updatingAni;
-    std::unique_ptr<CollisionHandler> m_collisionHandler;
+    std::vector<std::unique_ptr<CollisionHandler>> m_collisionHandler;
     std::map<std::string, float> m_variables;
 
 public:

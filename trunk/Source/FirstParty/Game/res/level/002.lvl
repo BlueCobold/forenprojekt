@@ -159,10 +159,10 @@
 			
 			<entity name="target_1" rep="t1" type="target" collideWithBall="false">
 				<physics name="target">
-					<shape type="circle" radius="33" />
+					<shape type="circle" radius="30" />
 				</physics>
 				<animations>
-					<animation texture="target" frames="1" width="67" height="67" midx="33" midy="33" rotate="true">
+					<animation texture="target" frames="1" width="67" height="67" midx="33.5" midy="33.5" rotate="true">
 						<frameindex frames="1">
 							<static value="0"/>
 						</frameindex>
@@ -411,28 +411,28 @@
 		</entities>
 	</templates>
 
-	<grid size="60" width="2200" height="1200">
-d2d3d4d6d5w2d1d3d1d6w3d1d4d5d4w5d6d2d6d1w5d1d4d5d6d3
-w4w2w3w4w1w3w6w4w3w2w4w2w5w1w2w3w1w5w2w3w2w3w5w6w2w2
-s5s4s4s2s3w4        w4        w2        w3s1s1s5s3s4
-d4d6d1d5d6w3    t1  w3    t1  w5  t1    w1d6d2d6d4d3
-d5d3d6d3d1w6        w1        w6        w3d4d6d1d3d1
-d2d5d2d6d2w5                            w6d2d3d4d2d6
-d3d6d1d3d6w2              RR            w2d2d2d2d6d2
-w4w5w2w1w2w4                            w3w4w4w5w4w5
-s6s4s6s5s4w6        BB                  w2s1s1s6s5s3
-d1d2d5d3d6w4                            w5d2d5d3d6d5
-d5d4d2d1d2w5                            w6d3d2d5d3d3
-d3d2d6d6d3w1                            w2d1d3d3d6d2
-d2d5d4d2d4w3  ll        lrll        lr  w4d5d2d6d5d3
-d1d3d6d3d1w4        TT          TT      w1d2d1d4d2d1
-w5w2w4w5w2w1                            w2w5w4w1w3w6
-s4s1s6s1s3w6P1                        P1w6s4s6s2s2s1
-d6d3d3d6d1w5                            w1d2d2d3d1d5
-d3d4d5d4d6w4                            w3d3d3d2d3d2
-d5d5d3d2d3w6                            w4d2d1d1d5d3
-d1d3d5d1d4w1                            w2d5d2d6d3d4
-w3w2w1w5w3w2                            w1w1w3w4w2w6
+	<grid size="60" width="2220" height="1200">
+w1            w2d4d6d5w2d1d3d1d6w3d1d4d5d4w5d6d2d6d1w5d1d4d5w3          w1
+              w4w3w4w1w3w6w4w3w2w4w2w5w1w2w3w1w5w2w3w2w3w5w6w2            
+              w5s4s2s3w4        w4        w2        w3s1s1s5w4            
+              w4d1d5d6w3    t1  w3    t1  w5  t1    w1d6d2d6w3            
+              w5d6d3d1w6        w1        w6        w3d4d6d1w1            
+              w2d2d4d2w5                            w6d2d3d4w6            
+              w3d1d3d6w2              RR            w2d2d2d2w2            
+              w4w2w1w2w4                            w3w4w4w5w5            
+              w6s6s5s4w6        BB                  w2s1s1s6w3            
+              w1d5d3d6w4                            w5d2d5d3w5            
+              w5d2d1d2w5                            w6d3d2d5w3            
+              w3d6d6d3w1                            w2d1d3d3w2            
+              w2d4d2d4w3  ll        lrll        lr  w4d5d2d6w3            
+              w1d6d3d1w4        TT          TT      w1d2d1d4w1            
+              w5w4w5w2w1                            w2w5w4w1w6            
+              w4s6s1s3w6P1                        P1w6s4s6s2w1            
+              w6d3d6d1w5                            w1d2d2d3w5            
+              w3d5d4d6w4                            w3d3d3d2w2            
+              w5d3d2d3w6                            w4d2d1d1w3            
+              w1d5d1d4w1                            w2d5d2d6w4            
+              w3w1w5w3w2                            w1w1w3w4w6            
 	</grid>
 	<objects>
 		<!-- Background -->
