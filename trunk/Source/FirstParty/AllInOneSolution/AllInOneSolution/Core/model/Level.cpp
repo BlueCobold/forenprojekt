@@ -120,7 +120,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     m_labelFPS.setText(utility::toString<int>(m_fpsCounter.getFPS()));
 
     m_labelTarget.setPosition(m_scrollView.getGlobalRightCorner() - 100, m_scrollView.getGlobalTopCorner() + 10);
-    m_labelTarget.setText("TARGET: " + utility::toString(m_remainingTarget) + "/" + utility::toString(m_totalTarget));
+    m_labelTarget.setText("°: " + utility::toString(m_remainingTarget) + "/" + utility::toString(m_totalTarget));
 }
 
 void Level::draw(const DrawParameter& param)
