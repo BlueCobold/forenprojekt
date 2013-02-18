@@ -25,10 +25,10 @@ public:
 
     sf::Vector2f toGlobalCoords(const sf::Vector2u& v);
 
-    unsigned int getGlobalRightCorner();
-    unsigned int getGlobalTopCorner();
-    unsigned int getGloablLeftCorner();
-    unsigned int getGlobalBottomCorner();
+    float getGlobalRightCorner();
+    float getGlobalTopCorner();
+    float getGloablLeftCorner();
+    float getGlobalBottomCorner();
 
 private:
     sf::Vector2u m_viewSize;  // view dimension
