@@ -95,6 +95,7 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
+    <ClCompile Include="FPSCounterHUD.cpp" />
     <ClCompile Include="gui\BitmapFont.cpp" />
     <ClCompile Include="gui\LineLabel.cpp" />
     <ClCompile Include="LoadLevelState.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="FPSCounter.hpp" />
+    <ClInclude Include="FPSCounterHUD.hpp" />
     <ClInclude Include="gui\BitmapFont.hpp" />
     <ClInclude Include="gui\LineLabel.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
@@ -173,6 +175,7 @@
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateChangeInformation.hpp" />
     <ClInclude Include="StateManager.hpp" />
+    <ClInclude Include="TargetHUD.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <ItemGroup>

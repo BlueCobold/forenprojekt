@@ -82,6 +82,9 @@
     <ClCompile Include="gui\LineLabel.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="FPSCounterHUD.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -251,6 +254,12 @@
     </ClInclude>
     <ClInclude Include="model\collision\ChangePropertyCollisionHandler.hpp">
       <Filter>Headers\model\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSCounterHUD.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetHUD.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

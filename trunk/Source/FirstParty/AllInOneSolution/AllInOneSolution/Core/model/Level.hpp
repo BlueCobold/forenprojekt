@@ -104,11 +104,6 @@ private:
     Ball* m_ball;
 
     BitmapFont* m_bitmapfont;
-
-    FPSCounter m_fpsCounter;
-    LineLabel m_labelFPS;
-    bool m_fpsShow;
-
     int m_totalTarget;
     int m_remainingTarget;
     LineLabel m_labelTarget;
