@@ -92,11 +92,11 @@ bool Entity::isCollideWithBall() const
 
 void Entity::bindCollisionHandler(std::unique_ptr<CollisionHandler> handler)
 {
-    m_collisionHandler = std::move(handler);
+    m_collisionHandler.push_back(std::move(handler));
 }
 
 void Entity::onCollide(Entity* partner)
 {
-    if(m_collisionHandler != nullptr)
-        m_collisionHandler->OnCollision(this, partner);
+    for(auto it = begin(m_collisionHandler); it != end(m_collisionHandler); ++it)
+        (*it)->OnCollision(this, partner);
 }

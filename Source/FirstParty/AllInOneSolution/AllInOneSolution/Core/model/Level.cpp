@@ -121,14 +121,6 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
     m_labelTarget.setPosition(m_scrollView.getGlobalRightCorner() - 100, m_scrollView.getGlobalTopCorner() + 10);
     m_labelTarget.setText("TARGET: " + utility::toString(m_remainingTarget) + "/" + utility::toString(m_totalTarget));
-
-    if(m_debugDraw)
-    {
-        DebugDraw d(screen);
-        d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
-        m_world.SetDebugDraw(&d);
-        m_world.DrawDebugData();
-    }
 }
 
 void Level::draw(const DrawParameter& param)
@@ -143,6 +135,14 @@ void Level::draw(const DrawParameter& param)
         m_labelFPS.draw(DrawParameter(param));
 
     m_labelTarget.draw(DrawParameter(param));
+
+    if(m_debugDraw)
+    {
+        DebugDraw d(param.getTarget());
+        d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
+        m_world.SetDebugDraw(&d);
+        m_world.DrawDebugData();
+    }
 }
 
 bool Level::load()
@@ -498,6 +498,5 @@ void Level::parseCollider(Entity* entity, tinyxml2::XMLElement* xml)
             collider->bindProvider(std::move(provider));
             entity->bindCollisionHandler(std::move(collider));
         }
-        break;
     }
 }
