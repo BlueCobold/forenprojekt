@@ -20,7 +20,7 @@ public:
     {
     }
 
-    virtual float getValue() const
+    virtual float getValue()
     {
         float angle = fmod(utility::toDegree<float, float>(m_owner->getAngle()), 360.f);
         if(angle < 0)

@@ -23,7 +23,7 @@ public:
             throw std::exception("The passed owner of a VariableProvider may not be null.");
     }
 
-    virtual float getValue() const
+    virtual float getValue()
     {
         return m_owner->getValueOf(m_varName);
     }

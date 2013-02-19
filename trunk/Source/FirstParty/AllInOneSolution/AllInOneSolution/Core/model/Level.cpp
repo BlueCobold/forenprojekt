@@ -26,7 +26,9 @@
 #include <string>
 #include <unordered_map>
 #include <utility> // pair, make_pair, move
-#include "collision/ChangePropertyCollisionHandler.hpp"
+#include "collision/handler/ChangePropertyCollisionHandler.hpp"
+#include "collision/filter/Always.hpp"
+#include "collision/filter/Never.hpp"
 
 Level::Level(const unsigned int level, ResourceManager& resourceManager, Config& config) :
     m_number(level),
@@ -295,7 +297,6 @@ bool Level::load()
     // Load world properties
     tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
     m_world.SetGravity(b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y")));
-    m_world.SetContactFilter(&m_contactFilter);
     m_world.SetContactListener(&m_contactListener);
 
     // setup scrollview
@@ -361,14 +362,17 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
         entity = std::unique_ptr<Entity>(new Entity(Entity::None));
 
     if(xml->Attribute("collideWithBall") != nullptr)
-    {
         entity->setCollideWithBall(xml->BoolAttribute("collideWithBall"));
-    }
     else
         entity->setCollideWithBall(true);
+
     auto collider = xml->FirstChildElement("onCollision");
     if(collider != nullptr)
         parseCollider(entity.get(), collider);
+
+    auto filter = xml->FirstChildElement("collides");
+    if(filter != nullptr)
+        parseCollisionFilter(entity.get(), filter);
 
     entity->setName(std::string(xml->Attribute("name")));
     
@@ -485,6 +489,23 @@ void Level::parseCollider(Entity* entity, tinyxml2::XMLElement* xml)
             std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), collider.get()));
             collider->bindProvider(std::move(provider));
             entity->bindCollisionHandler(std::move(collider));
+        }
+    }
+}
+
+void Level::parseCollisionFilter(Entity* entity, tinyxml2::XMLElement* xml)
+{
+    for(auto child = xml->FirstChildElement(); child != nullptr; child = child->NextSiblingElement())
+    {
+        if(std::string(child->Name()) == "always")
+        {
+            std::unique_ptr<CollisionFilter> filter(new Always());
+            entity->bindCollisionFilter(std::move(filter));
+        }
+        else if(std::string(child->Name()) == "never")
+        {
+            std::unique_ptr<CollisionFilter> filter(new Never());
+            entity->bindCollisionFilter(std::move(filter));
         }
     }
 }

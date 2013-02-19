@@ -24,7 +24,7 @@ public:
                 throw std::exception("One of the providers has been passed incorrectly and is null.");
     }
 
-    virtual float getValue() const = 0;
+    virtual float getValue() = 0;
 
 protected:
 

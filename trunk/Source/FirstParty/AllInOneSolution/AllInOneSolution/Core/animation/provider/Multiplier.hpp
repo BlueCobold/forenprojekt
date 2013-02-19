@@ -19,7 +19,7 @@ public:
             throw std::exception("Multiply needs two at least one child to function.");
     }
 
-    virtual float getValue() const
+    virtual float getValue()
     {
         float v = 1.0f;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)

@@ -21,7 +21,7 @@ public:
             throw std::exception("Modulo needs two children to function.");
     }
 
-    virtual float getValue() const
+    virtual float getValue()
     {
         float dividend = getProvider()[0]->getValue();
         float divisor = getProvider()[1]->getValue();

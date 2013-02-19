@@ -23,7 +23,7 @@ class LevelFileLoader
 public:
      static std::unique_ptr<Animation> parseAnimation(
          tinyxml2::XMLElement* xml,
-         const AnimatedGraphics* animated,
+         AnimatedGraphics* animated,
          ResourceManager& resourceManager);
 
      static std::unordered_map<std::string, tinyxml2::XMLElement*> parseList(
@@ -39,7 +39,7 @@ public:
 
      static std::unique_ptr<ValueProvider> parseProvider(
          tinyxml2::XMLElement* xml, 
-         const AnimatedObject* animated);
+         AnimatedObject* animated);
 
      static void parseConstants(tinyxml2::XMLElement* xml,
          const AnimatedObject* owner,
@@ -49,15 +49,15 @@ private:
 
     static std::vector<std::unique_ptr<ValueProvider>> parseProviders(
         tinyxml2::XMLElement* xml, 
-        const AnimatedObject* animated);
+        AnimatedObject* animated);
 
     static std::unique_ptr<Animation> parseAnimation(tinyxml2::XMLElement* xml,
-        const AnimatedGraphics* animated,
+        AnimatedGraphics* animated,
         std::unique_ptr<ValueProvider> provider,
         ResourceManager& resourceManager);
 
     static std::unique_ptr<ValueProvider> findPositionController(tinyxml2::XMLElement* xml,
-        const AnimatedGraphics* animated,
+        AnimatedGraphics* animated,
         const std::string& axis);
 };
 
