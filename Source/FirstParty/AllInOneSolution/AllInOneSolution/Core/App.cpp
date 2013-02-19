@@ -24,8 +24,6 @@ App::App(Config& config) :
     // Cache often used settings
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
-    m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
-    m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
 
     // Set the Volume for sf::Sound and sf::Music
     sf::Listener::setGlobalVolume(m_config.get<float>("MasterVolume"));
@@ -42,6 +40,9 @@ App::App(Config& config) :
     }
     else
         m_screen.create(videoMode, m_windowTitle);
+
+    m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
+    m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
 
     m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config))); 
     m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
@@ -68,8 +69,6 @@ void App::update()
 
 void App::draw()
 {
-    m_screen.clear();
-
     m_stateManager.draw();
         
     m_screen.display();
@@ -124,6 +123,8 @@ void App::switchDisplayMode()
         // Enable the cursor
         m_screen.setMouseCursorVisible(true);
     }
+    m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
+    m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
 }
 
 void App::onResize()
