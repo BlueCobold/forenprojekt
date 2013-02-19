@@ -156,6 +156,7 @@
     <ClInclude Include="model\collision\filter\Always.hpp" />
     <ClInclude Include="model\collision\filter\CollisionFilter.hpp" />
     <ClInclude Include="model\collision\filter\Never.hpp" />
+    <ClInclude Include="model\collision\filter\PropertyFilter.hpp" />
     <ClInclude Include="model\collision\handler\ChangePropertyCollisionHandler.hpp" />
     <ClInclude Include="model\collision\handler\CollisionHandler.hpp" />
     <ClInclude Include="model\Entity.hpp" />

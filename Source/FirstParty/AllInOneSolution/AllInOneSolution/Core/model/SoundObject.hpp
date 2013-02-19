@@ -11,6 +11,8 @@ class SoundObject
 {
 public:
 
+    SoundObject();
+
     void bindSound(const std::string& key, SoundManager* soundManager);
     SoundManager*  getSoundManager();
     std::string getSoundName();

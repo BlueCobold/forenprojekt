@@ -1,5 +1,9 @@
 #include "SoundObject.hpp"
 
+SoundObject::SoundObject() : m_soundManager(nullptr)
+{
+}
+
 void SoundObject::bindSound(const std::string& name, SoundManager* soundManager)
 {
     m_soundManager = soundManager;
