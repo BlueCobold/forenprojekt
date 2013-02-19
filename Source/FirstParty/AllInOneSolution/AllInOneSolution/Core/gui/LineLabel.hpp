@@ -28,7 +28,7 @@ public:
     void setRotation(const float angle);
     float getRotation() const;
 
-    void setBitmapFont(BitmapFont* font);
+    void setBitmapFont(BitmapFont& font);
 
     void draw(const DrawParameter& params);
 

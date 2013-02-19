@@ -9,7 +9,7 @@ m_bitmapfont(nullptr),
 m_position(position)
 {
     m_bitmapfont = m_resourceManager.getBitmapFont(bitmapFont);
-    m_label.setBitmapFont(m_bitmapfont);
+    m_label.setBitmapFont(*m_bitmapfont);
 }
 
 void HUDElement::update(const DrawParameter& params)

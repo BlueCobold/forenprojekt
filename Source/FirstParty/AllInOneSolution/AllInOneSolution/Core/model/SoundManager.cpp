@@ -3,6 +3,7 @@
 #include <vector>
 
 #include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Listener.hpp>
 
 SoundManager::SoundManager(ResourceManager& resourceManager)
     : m_resourceManager(resourceManager)
@@ -23,7 +24,7 @@ void SoundManager::update()
     }         
 }
 
-void SoundManager::play(const std::string& key)
+void SoundManager::play(const std::string& key, const float vel)
 {
     if(m_soundKeys.count(key) <= 0)
     {
@@ -32,6 +33,10 @@ void SoundManager::play(const std::string& key)
         m_soundKeys.insert(std::pair<std::string, std::string>(key,key));
         m_sounds.front().second.play();
         m_sounds.front().second.pause();
+
+        if( vel <= sf::Listener::getGlobalVolume())
+            m_sounds.front().second.setVolume(vel);
     }
 }
+
 
