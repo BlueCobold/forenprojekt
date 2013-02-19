@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <SFML/System/NonCopyable.hpp>
 
 #include <map>
 
@@ -15,7 +16,7 @@ namespace tinyxml2
     class XMLDocument;
 }
 
-class BitmapFont
+class BitmapFont : sf::NonCopyable
 {
 public:
 

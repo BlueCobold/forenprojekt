@@ -19,7 +19,7 @@ public:
 	SoundManager(ResourceManager& resourceManager);
 
     void update();
-	void play(const std::string& key);
+	void play(const std::string& key, const float vel);
 
 private:
 	ResourceManager& m_resourceManager;
