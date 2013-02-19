@@ -270,6 +270,9 @@
     <ClInclude Include="TargetHUD.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="model\collision\filter\PropertyFilter.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

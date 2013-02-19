@@ -1,9 +1,9 @@
 #pragma once
 
-#ifndef CHANGE_PROPERTY_COLLISION_HANDLER_HPP
-#define CHANGE_PROPERTY_COLLISION_HANDLER_HPP
+#ifndef PROPERTY_FILTER
+#define PROPERTY_FILTER
 
-#include "CollisionHandler.hpp"
+#include "CollisionFilter.hpp"
 #include "../../../animation/OrientedObject.hpp"
 #include "../../../animation/provider/ValueProvider.hpp"
 #include "../../../animation/TimedObject.hpp"
@@ -12,40 +12,32 @@
 #include <memory>
 #include <string>
 
-class ChangePropertyCollisionHandler :
-    public CollisionHandler,
+class PropertyFilter :
+    public CollisionFilter,
     public AnimatedObject
 {
 public:
-    ChangePropertyCollisionHandler(const std::string& name) 
-        : m_name(name),
-        m_entityA(nullptr),
+    PropertyFilter(const bool useEntityProperties)
+        : m_entityA(nullptr),
         m_entityB(nullptr),
-        m_useValuesFromA((name.length() < 5) || (name.substr(0, 5)!="ball:"))
-    {
-        if(m_useValuesFromA)
-            m_trimmedVar = m_name;
-        else
-            m_trimmedVar = m_name.substr(5);
-    }
+        m_useValuesFromA(useEntityProperties)
+    { }
 
     void bindProvider(std::unique_ptr<ValueProvider> provider)
     {
         m_provider = std::move(provider);
     }
 
-    virtual void OnCollision(Entity* entityA, Entity* entityB)
+    virtual bool ShouldCollide(Entity* entityA, Entity* entityB)
     {
         if(m_provider == nullptr)
-            throw std::exception("Provider in property handler is null.");
+            throw std::exception("Provider in property filter is null.");
         m_entityA = entityA;
         m_entityB = entityB;
-        if(m_useValuesFromA)
-            entityA->setValueOf(m_trimmedVar, m_provider->getValue());
-        else
-            entityB->setValueOf(m_trimmedVar, m_provider->getValue());
+        float val = m_provider->getValue();
         m_entityA = nullptr;
         m_entityB = nullptr;
+        return val >= 1;
     }
     
     virtual float getValueOf(const std::string& name) const
@@ -110,10 +102,8 @@ public:
 private:
     std::unique_ptr<ValueProvider> m_provider;
     bool m_useValuesFromA;
-    std::string m_name;
-    std::string m_trimmedVar;
     Entity* m_entityA;
     Entity* m_entityB;
 };
 
-#endif // CHANGE_PROPERTY_COLLISION_HANDLER_HPP
+#endif // PROPERTY_FILTER

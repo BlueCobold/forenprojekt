@@ -29,6 +29,7 @@
 #include "collision/handler/ChangePropertyCollisionHandler.hpp"
 #include "collision/filter/Always.hpp"
 #include "collision/filter/Never.hpp"
+#include "collision/filter/PropertyFilter.hpp"
 
 Level::Level(const unsigned int level, ResourceManager& resourceManager, Config& config) :
     m_number(level),
@@ -505,6 +506,14 @@ void Level::parseCollisionFilter(Entity* entity, tinyxml2::XMLElement* xml)
         else if(std::string(child->Name()) == "never")
         {
             std::unique_ptr<CollisionFilter> filter(new Never());
+            entity->bindCollisionFilter(std::move(filter));
+        }
+        else if(std::string(child->Name()) == "propertyFilter")
+        {
+            bool target = std::string("entity") == child->Attribute("target");
+            std::unique_ptr<PropertyFilter> filter(new PropertyFilter(target));
+            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), filter.get()));
+            filter->bindProvider(std::move(provider));
             entity->bindCollisionFilter(std::move(filter));
         }
     }
