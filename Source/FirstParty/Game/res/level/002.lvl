@@ -15,8 +15,8 @@
 			</shape>
 			<shape name="wide_wall" type="polygon">
 				<vertex x="1" y="1" />
-				<vertex x="159" y="1" />
-				<vertex x="159" y="59" />
+				<vertex x="119" y="1" />
+				<vertex x="119" y="59" />
 				<vertex x="1" y="59" />
 			</shape>
 			<shape name="left_lower" type="polygon">
