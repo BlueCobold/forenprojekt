@@ -51,6 +51,9 @@ public:
     const float getWidth() const;
     const float getHeight() const;
 
+    const int getTotalTarget() const;
+    const int getRemainingTarget() const;
+
 private:
     /// Load the level after m_number
     bool load();
@@ -102,10 +105,8 @@ private:
     ScrollView m_scrollView;
     Ball* m_ball;
 
-    BitmapFont* m_bitmapfont;
     int m_totalTarget;
     int m_remainingTarget;
-    LineLabel m_labelTarget;
 };
 
 #endif // LEVEL_HPP

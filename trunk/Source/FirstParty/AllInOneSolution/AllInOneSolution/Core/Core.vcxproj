@@ -98,6 +98,8 @@
     <ClCompile Include="FPSCounterHUD.cpp" />
     <ClCompile Include="gui\BitmapFont.cpp" />
     <ClCompile Include="gui\LineLabel.cpp" />
+    <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="HUDElement.cpp" />
     <ClCompile Include="LoadLevelState.cpp" />
     <ClCompile Include="model\Background.cpp" />
     <ClCompile Include="model\Ball.cpp" />
@@ -115,6 +117,7 @@
     <ClCompile Include="resources\ResourceManager.cpp" />
     <ClCompile Include="ScrollView.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="TargetHUD.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +151,8 @@
     <ClInclude Include="FPSCounterHUD.hpp" />
     <ClInclude Include="gui\BitmapFont.hpp" />
     <ClInclude Include="gui\LineLabel.hpp" />
+    <ClInclude Include="HUD.hpp" />
+    <ClInclude Include="HUDElement.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />
