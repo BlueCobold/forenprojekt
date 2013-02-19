@@ -7,7 +7,7 @@
 
 #include <Box2D/Dynamics/b2World.h>
 
-Entity::Entity(Type type) : m_killed(false), m_type(type), m_updatingAni(nullptr)
+Entity::Entity(Type type) : m_killed(false), m_type(type), m_updatingAni(nullptr), m_collideWithBall(true)
 {
 }
 
@@ -85,7 +85,7 @@ void Entity::setCollideWithBall(bool value)
     m_collideWithBall = value;
 }
 
-bool Entity::isCollideWithBall() const
+bool Entity::doesCollideWithBall()
 {
     return m_collideWithBall;
 }
@@ -95,8 +95,20 @@ void Entity::bindCollisionHandler(std::unique_ptr<CollisionHandler> handler)
     m_collisionHandler.push_back(std::move(handler));
 }
 
+void Entity::bindCollisionFilter(std::unique_ptr<CollisionFilter> filter)
+{
+    m_collisionFilter = std::move(filter);
+}
+
 void Entity::onCollide(Entity* partner)
 {
     for(auto it = begin(m_collisionHandler); it != end(m_collisionHandler); ++it)
         (*it)->OnCollision(this, partner);
+}
+
+bool Entity::shouldCollide(Entity* partner)
+{
+    if(m_collisionFilter == nullptr)
+        return true;
+    return m_collisionFilter->ShouldCollide(this, partner);
 }

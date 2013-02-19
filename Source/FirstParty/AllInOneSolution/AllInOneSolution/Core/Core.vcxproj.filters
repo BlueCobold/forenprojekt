@@ -70,9 +70,6 @@
     <ClCompile Include="FPSCounter.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="model\collision\ContactFilter.cpp">
-      <Filter>Sources\model\collision</Filter>
-    </ClCompile>
     <ClCompile Include="model\collision\ContactListener.cpp">
       <Filter>Sources\model\collision</Filter>
     </ClCompile>
@@ -234,13 +231,7 @@
     <ClInclude Include="FPSCounter.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="model\collision\ContactFilter.hpp">
-      <Filter>Headers\model\collision</Filter>
-    </ClInclude>
     <ClInclude Include="model\collision\ContactListener.hpp">
-      <Filter>Headers\model\collision</Filter>
-    </ClInclude>
-    <ClInclude Include="model\collision\CollisionHandler.hpp">
       <Filter>Headers\model\collision</Filter>
     </ClInclude>
     <ClInclude Include="animation\AnimatedObject.hpp">
@@ -252,8 +243,26 @@
     <ClInclude Include="gui\LineLabel.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
-    <ClInclude Include="model\collision\ChangePropertyCollisionHandler.hpp">
-      <Filter>Headers\model\collision</Filter>
+    <ClInclude Include="animation\provider\Absolute.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\provider\SetVariable.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="model\collision\handler\CollisionHandler.hpp">
+      <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="model\collision\handler\ChangePropertyCollisionHandler.hpp">
+      <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="model\collision\filter\CollisionFilter.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="model\collision\filter\Always.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="model\collision\filter\Never.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
     </ClInclude>
     <ClInclude Include="FPSCounterHUD.hpp">
       <Filter>Headers\gui</Filter>
@@ -325,6 +334,12 @@
     </Filter>
     <Filter Include="Headers\gui">
       <UniqueIdentifier>{294b13b6-a8ac-4d5b-a0cf-fb969a567f07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\model\collision\handler">
+      <UniqueIdentifier>{033a1cbd-bff1-4c6d-bff3-4ce33e4f7b50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\model\collision\filter">
+      <UniqueIdentifier>{a3c301cb-d629-400b-8230-dad9457669f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

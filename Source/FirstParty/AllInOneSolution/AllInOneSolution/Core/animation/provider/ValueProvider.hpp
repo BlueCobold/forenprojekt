@@ -8,7 +8,7 @@ class ValueProvider
 {
 public:
 
-    virtual float getValue() const = 0;
+    virtual float getValue() = 0;
 };
 
 #endif //VALUE_PROVIDER_HPP

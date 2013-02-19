@@ -4,10 +4,10 @@
 #define CHANGE_PROPERTY_COLLISION_HANDLER_HPP
 
 #include "CollisionHandler.hpp"
-#include "../../animation/OrientedObject.hpp"
-#include "../../animation/provider/ValueProvider.hpp"
-#include "../../animation/TimedObject.hpp"
-#include "../../animation/VariableHandler.hpp"
+#include "../../../animation/OrientedObject.hpp"
+#include "../../../animation/provider/ValueProvider.hpp"
+#include "../../../animation/TimedObject.hpp"
+#include "../../../animation/VariableHandler.hpp"
 
 #include <memory>
 #include <string>
@@ -20,8 +20,14 @@ public:
     ChangePropertyCollisionHandler(const std::string& name) 
         : m_name(name),
         m_entityA(nullptr),
-        m_entityB(nullptr)
-    { }
+        m_entityB(nullptr),
+        m_useValuesFromA((name.length() < 5) || (name.substr(0, 5)!="ball:"))
+    {
+        if(m_useValuesFromA)
+            m_trimmedVar = m_name;
+        else
+            m_trimmedVar = m_name.substr(5);
+    }
 
     void bindProvider(std::unique_ptr<ValueProvider> provider)
     {
@@ -32,16 +38,10 @@ public:
     {
         m_entityA = entityA;
         m_entityB = entityB;
-        if(m_name.length()>=5 && m_name.substr(0, 5)=="ball:")
-        {
-            m_useValuesFromA = false;
-            entityB->setValueOf(m_name.substr(5), m_provider->getValue());
-        }
+        if(m_useValuesFromA)
+            entityA->setValueOf(m_trimmedVar, m_provider->getValue());
         else
-        {
-            m_useValuesFromA = true;
-            entityA->setValueOf(m_name, m_provider->getValue());
-        }
+            entityB->setValueOf(m_trimmedVar, m_provider->getValue());
         m_entityA = nullptr;
         m_entityB = nullptr;
     }
@@ -107,10 +107,11 @@ public:
 
 private:
     std::unique_ptr<ValueProvider> m_provider;
+    bool m_useValuesFromA;
     std::string m_name;
+    std::string m_trimmedVar;
     Entity* m_entityA;
     Entity* m_entityB;
-    bool m_useValuesFromA;
 };
 
 #endif // CHANGE_PROPERTY_COLLISION_HANDLER_HPP

@@ -101,7 +101,6 @@
     <ClCompile Include="LoadLevelState.cpp" />
     <ClCompile Include="model\Background.cpp" />
     <ClCompile Include="model\Ball.cpp" />
-    <ClCompile Include="model\collision\ContactFilter.cpp" />
     <ClCompile Include="model\collision\ContactListener.cpp" />
     <ClCompile Include="model\Entity.cpp" />
     <ClCompile Include="model\Level.cpp" />
@@ -122,6 +121,7 @@
     <ClInclude Include="animation\AnimatedObject.hpp" />
     <ClInclude Include="animation\Animation.hpp" />
     <ClInclude Include="animation\OrientedObject.hpp" />
+    <ClInclude Include="animation\provider\Absolute.hpp" />
     <ClInclude Include="animation\provider\Adder.hpp" />
     <ClInclude Include="animation\provider\AngleProvider.hpp" />
     <ClInclude Include="animation\provider\FloatToInt.hpp" />
@@ -131,6 +131,7 @@
     <ClInclude Include="animation\provider\Modulo.hpp" />
     <ClInclude Include="animation\provider\Multiplier.hpp" />
     <ClInclude Include="animation\provider\MultiProvider.hpp" />
+    <ClInclude Include="animation\provider\SetVariable.hpp" />
     <ClInclude Include="animation\provider\Sine.hpp" />
     <ClInclude Include="animation\provider\SingleProvider.hpp" />
     <ClInclude Include="animation\provider\StaticProvider.hpp" />
@@ -151,10 +152,12 @@
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />
     <ClInclude Include="model\Ball.hpp" />
-    <ClInclude Include="model\collision\ChangePropertyCollisionHandler.hpp" />
-    <ClInclude Include="model\collision\CollisionHandler.hpp" />
-    <ClInclude Include="model\collision\ContactFilter.hpp" />
     <ClInclude Include="model\collision\ContactListener.hpp" />
+    <ClInclude Include="model\collision\filter\Always.hpp" />
+    <ClInclude Include="model\collision\filter\CollisionFilter.hpp" />
+    <ClInclude Include="model\collision\filter\Never.hpp" />
+    <ClInclude Include="model\collision\handler\ChangePropertyCollisionHandler.hpp" />
+    <ClInclude Include="model\collision\handler\CollisionHandler.hpp" />
     <ClInclude Include="model\Entity.hpp" />
     <ClInclude Include="model\SoundManager.hpp" />
     <ClInclude Include="model\SoundObject.hpp" />

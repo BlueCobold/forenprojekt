@@ -21,7 +21,7 @@ public:
             throw std::exception("Minimum needs two at least one child to function.");
     }
 
-    virtual float getValue() const
+    virtual float getValue()
     {
         float v;
         bool set = false;

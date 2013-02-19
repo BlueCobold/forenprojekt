@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual float getValue() const
+    virtual float getValue()
     {
         return m_value;
     }

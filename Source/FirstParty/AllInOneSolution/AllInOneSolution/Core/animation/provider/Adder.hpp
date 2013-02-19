@@ -21,7 +21,7 @@ public:
             throw std::exception("Add needs two at least one child to function.");
     }
 
-    virtual float getValue() const
+    virtual float getValue()
     {
         float v = 0.0f;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)

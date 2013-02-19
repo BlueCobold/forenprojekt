@@ -7,7 +7,6 @@
 #include "../DebugDraw.hpp"
 #include "Background.hpp"
 #include "../animation/TimedObject.hpp"
-#include "./collision/ContactFilter.hpp"
 #include "./collision./ContactListener.hpp"
 #include "../rendering/Drawable.hpp"
 #include "../ScrollView.hpp"
@@ -63,6 +62,7 @@ private:
     std::unique_ptr<Entity> createEntity(tinyxml2::XMLElement* xml, const sf::Vector2u& position,
         tinyxml2::XMLElement* shape, tinyxml2::XMLElement* physic);
     void parseCollider(Entity* entity, tinyxml2::XMLElement* collider);
+    void parseCollisionFilter(Entity* entity, tinyxml2::XMLElement* xml);
 
     /// Construct the full level filename from the level number
     const std::string filename();
@@ -84,7 +84,6 @@ private:
 
     std::unique_ptr<Background> m_background;
 
-    ContactFilter m_contactFilter;
     ContactListener m_contactListener;
 
     float m_timeStep;

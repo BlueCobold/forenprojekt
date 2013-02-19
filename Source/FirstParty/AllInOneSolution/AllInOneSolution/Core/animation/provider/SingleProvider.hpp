@@ -23,11 +23,11 @@ public:
             throw std::exception("The rovider has been passed incorrectly and is null.");
     }
 
-    virtual float getValue() const = 0;
+    virtual float getValue() = 0;
 
 protected:
 
-    const ValueProvider* getProvider() const
+    ValueProvider* getProvider() const
     {
         return m_provider.get();
     }
