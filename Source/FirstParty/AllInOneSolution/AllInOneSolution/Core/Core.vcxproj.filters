@@ -82,6 +82,15 @@
     <ClCompile Include="FPSCounterHUD.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="HUDElement.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetHUD.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -272,6 +281,12 @@
     </ClInclude>
     <ClInclude Include="model\collision\filter\PropertyFilter.hpp">
       <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="HUDElement.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

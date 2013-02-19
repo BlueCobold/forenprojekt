@@ -1,30 +1,26 @@
 #ifndef TARGETHUD_HPP
 #define TARGETHUD_HPP
 
-#include "gui\LineLabel.hpp"
+#include "HUDElement.hpp"
 
-class ResourceManager;
-
-class TargetHUD
+/// 
+class TargetHUD : public HUDElement
 {
 private:
     int m_totalTarget;
 
     int m_remainingTarget;
 
-    LineLabel m_label;
-
-    BitmapFont* m_bitmapfont;
-
-    ResourceManager& m_resourceManager;
-
-    sf::Vector2f m_position;
+    sf::Sprite m_targetTexture;
 
 public:
+    TargetHUD(ResourceManager& resourceManager, const sf::Vector2f& position, const float rotation, std::string bitmapFont);
 
     void update(const DrawParameter& params);
 
     void draw(const DrawParameter& params);
+
+    void setTargets(int totalTarget,int remainingTarget);
 };
 
 #endif

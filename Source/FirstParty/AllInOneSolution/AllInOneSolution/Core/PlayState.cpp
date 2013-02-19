@@ -8,9 +8,8 @@
 PlayState::PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
     State(screen, resourceManager, config),
     m_level(nullptr),
-    m_fpsCounter(resourceManager,"",sf::Vector2f(10.0f,10.0f),0.f,"gold")
+    m_hud(screen, resourceManager, config)
 {
-    m_fpsShow = config.get<bool>("ShowFps");
 }
 
 PlayState::~PlayState()
@@ -37,17 +36,13 @@ StateChangeInformation PlayState::update()
         float time = m_frametime.getElapsedTime().asSeconds();
         m_level->restartAt(time);
     }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F))
-        m_fpsShow = !m_fpsShow;
 
-    m_fpsCounter.update(m_screen);
-
+    m_hud.update(m_level.get());
     return StateChangeInformation::Empty();
 }
 
 void PlayState::draw()
 {
     m_level->draw(m_screen);
-    if(m_fpsShow)
-        m_fpsCounter.draw(m_screen);
+    m_hud.draw();
 }

@@ -5,7 +5,7 @@
 
 #include "State.hpp"
 #include "model/Level.hpp"
-#include "FPSCounterHUD.hpp"
+#include "HUD.hpp"
 
 #include <SFML/System/Clock.hpp>
 
@@ -29,8 +29,8 @@ private:
 
     std::unique_ptr<Level> m_level;
     sf::Clock m_frametime;
-    FPSCounterHUD m_fpsCounter;
-    bool m_fpsShow;
+
+    HUD m_hud;
 
 };
 
