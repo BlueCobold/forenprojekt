@@ -2,8 +2,9 @@
 #include "resources\ResourceManager.hpp"
 #include "Utility.hpp"
 
-TargetHUD::TargetHUD(ResourceManager& resourceManager, const sf::Vector2f& position, const float rotation, std::string bitmapFont) :
-HUDElement(resourceManager,position,rotation,bitmapFont),
+TargetHUD::TargetHUD(ResourceManager& resourceManager, const sf::Vector2f& position, const float rotation, std::string bitmapFont,
+HorizontalReference hReference, VerticalReference vReference) :
+HUDElement(resourceManager,position,rotation,bitmapFont, hReference, vReference),
 m_remainingTarget(0),
 m_totalTarget(0)
 {
@@ -17,12 +18,9 @@ void TargetHUD::setTargets(int totalTarget,int remainingTarget)
 }
 void TargetHUD::update(const DrawParameter& params)
 {
-    sf::Vector2f screenSize = params.getTarget().getView().getSize();
-    sf::Vector2f screenCenter = params.getTarget().getView().getCenter();
+    HUDElement::update(params);
 
-    m_label.setPosition(screenCenter.x - screenSize.x / 2 + m_position.x + m_targetTexture.getTextureRect().width, screenCenter.y - screenSize.y / 2 + m_position.y);
-
-    m_targetTexture.setPosition(screenCenter.x - screenSize.x / 2 + m_position.x , screenCenter.y - screenSize.y / 2 + m_position.y);
+    m_targetTexture.setPosition(m_label.getPosition().x -22 ,m_label.getPosition().y);
 
     m_label.setText(" " + utility::toString<int>(m_remainingTarget) + "/" + utility::toString<int>(m_totalTarget));
 }
