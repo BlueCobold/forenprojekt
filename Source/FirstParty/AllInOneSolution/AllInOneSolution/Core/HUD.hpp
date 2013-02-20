@@ -28,6 +28,8 @@ private:
 
     TargetHUD m_target;
 
+    HUDElement m_points;
+
 public:
     HUD(sf::RenderTarget& screen, ResourceManager& resourceManager, Config& config);
 

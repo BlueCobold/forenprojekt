@@ -54,6 +54,8 @@ public:
     const int getTotalTarget() const;
     const int getRemainingTarget() const;
 
+    const int getPoints() const;
+
 private:
     /// Load the level after m_number
     bool load();
@@ -107,6 +109,9 @@ private:
 
     int m_totalTarget;
     int m_remainingTarget;
+
+    int m_points;
+    int m_multiHit;
 };
 
 #endif // LEVEL_HPP

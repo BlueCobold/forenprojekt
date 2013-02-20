@@ -18,6 +18,7 @@ public:
 
     void setFieldDimension(const b2Vec2 fieldDimension);
 
+    bool getBallLost();
 private:
 
     float m_ballResetTime;
@@ -26,6 +27,7 @@ private:
     b2Vec2 m_startPosition;
     b2Vec2 m_fieldDimension;
 
+    bool m_lostBall;
 private:
 
     void autoResetBall(const float elapsedTime);

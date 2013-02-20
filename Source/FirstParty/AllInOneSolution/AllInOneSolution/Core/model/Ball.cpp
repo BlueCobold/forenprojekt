@@ -7,6 +7,7 @@ Ball::Ball(float resetTime) :  m_resetTime(resetTime), Entity(Entity::Ball)
     m_ballResetTime = 0.0f;
     m_startPosition.x = 0.0f;
     m_startPosition.y = 0.0f;
+    m_lostBall = false;
 }
 void Ball::autoResetBall(const float elapsedTime)
 {
@@ -24,11 +25,14 @@ void Ball::autoResetBall(const float elapsedTime)
             m_body->SetLinearVelocity(b2Vec2(0,0));
             m_body->SetAngularVelocity(0.0f);
             m_ballResetTime = 0.0f;
+            m_lostBall = true;
         }
 }
 
 void Ball::update(const float value)
 {
+    m_lostBall = false;
+
     autoResetBall(value);
 
     Entity::update(value);
@@ -52,4 +56,9 @@ bool Ball::isOutside()
         return true;
     else
         return false;
+}
+
+bool Ball::getBallLost()
+{
+    return m_lostBall;
 }
