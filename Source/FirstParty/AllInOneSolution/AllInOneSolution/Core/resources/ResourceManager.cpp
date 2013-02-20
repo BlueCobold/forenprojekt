@@ -2,6 +2,7 @@
 
 #include <tinyxml2.h>
 
+#include <exception>
 #include <functional> // bind
 
 ResourceManager::ResourceManager()
@@ -39,7 +40,7 @@ BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
         }
     }
 
-    return nullptr;
+    throw std::exception((std::string("Bitmapfont isn't registered: ") + key).c_str());
 }
 
 sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
@@ -62,7 +63,7 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
     }
     
     // If the key doesn't exist
-    return nullptr;
+    throw std::exception((std::string("Sound isn't registered: ") + key).c_str());
 }
 
 sf::Texture* ResourceManager::getTexture(const std::string& key)
@@ -85,7 +86,7 @@ sf::Texture* ResourceManager::getTexture(const std::string& key)
     }
     
     // If the key doesn't exist
-    return nullptr;
+    throw std::exception((std::string("Texture isn't registered: ") + key).c_str());
 }
 
 sf::Font* ResourceManager::getFont(const std::string& key)
@@ -107,7 +108,7 @@ sf::Font* ResourceManager::getFont(const std::string& key)
     }
     
     // If the key doesn't exist
-    return nullptr;
+    throw std::exception((std::string("Font isn't registered: ") + key).c_str());
 }
 
 void ResourceManager::parseTextures(tinyxml2::XMLDocument& doc)

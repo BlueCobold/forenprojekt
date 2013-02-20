@@ -3,6 +3,7 @@
 #ifndef RESOURCE_CACHE_HPP
 #define RESOURCE_CACHE_HPP
 
+#include <exception>
 #include <functional> // function
 #include <map>
 #include <memory> // unique_ptr
@@ -37,7 +38,10 @@ public:
 
 		if(it == end(m_resources))
 		{
-			m_resources.insert(std::make_pair(key, std::unique_ptr<T>(func())));
+            T* resource = func();
+            if(resource == nullptr)
+                throw std::exception( (std::string("Loading failed: ") + key).c_str());
+			m_resources.insert(std::make_pair(key, std::unique_ptr<T>(resource)));
 		}
 		return true;
 	}
