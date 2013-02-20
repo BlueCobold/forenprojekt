@@ -340,12 +340,113 @@
 				</animations>
 			</entity>
 			
+			<entity name="wide_wall_1" rep="W1">
+				<physics name="wide_wall" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wide_wall_2" rep="W2">
+				<physics name="wide_wall" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="60" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wide_wall_3" rep="W3">
+				<physics name="wide_wall" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="120" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wide_wall_4" rep="W4">
+				<physics name="wide_wall" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="180" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wide_wall_5" rep="W5">
+				<physics name="wide_wall" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="240" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
 			<entity name="wide_wall_6" rep="W6">
 				<physics name="wide_wall" shape="wide_wall" />
 				<animations>
 					<animation texture="wide_quads" srcy="300" width="120" height="60" rotate="false">
 						<frameindex frames="3">
 							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			
+			<entity name="wide_darkwall_1" rep="D1">
+				<physics name="wide_wall" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="1"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wide_darkwall_2" rep="D2">
+				<physics name="wide_wall" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="60" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="1"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wide_darkwall_3" rep="D3">
+				<physics name="wide_wall" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="120" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="1"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wide_darkwall_4" rep="D4">
+				<physics name="wide_wall" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="180" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="1"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="wide_darkwall_5" rep="D5">
+				<physics name="wide_wall" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="240" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="1"/>
 						</frameindex>
 					</animation>
 				</animations>
@@ -541,46 +642,52 @@
 		</entities>
 	</templates>
 
-	<grid size="60" width="2220" height="1200">
-w1            w2d4d6d5w2d1d3d1d6h3d1d4d5d4w5d6d2d6d1h5d1d4d5w3          w1
-              h4w3w4w1W6  w4w3w2 3w2w5w1w2h3w1w5w2w3 5w3w5w6w2            
-               4s4s2s3h6        w4         3        w3s1s1s5w4            
-              w4d1d5d6 6    t1  h1    t1  w5  t1    w1d6d2d6w3            
-              w5D6  d1w6         1        w6        w3d4d6d1h1            
-              h2d2d4d2w5                            w6d2d3d4 1            
-               2d1d3d6w2              RR            h2d2d2d2w2            
-              w4w2w1w2w4                             2w4w4w5w5            
-              w6s6s5s4h6        BB                  w2s1s1s6w3            
-              w1d5d3d6 6    t1                t1    h1d2d5d3w5            
-              w5d2d1d2w5                             1d3d2d5w3            
-              w3d6d6d3w1                            w2d1d3d3w2            
-              w2d4d2d4w3  ll        lrll        lr  w4d5d2d6w3            
-              w1d6d3d1h4        TT          TT      w1d2d1d4w1            
-              w5w4w5w2 4                            h2w5w4w1w6            
-              w4s6s1s3w6P1                        P1 2s4s6s2w1            
-              h6d3d6d1h5                            w1d2d2d3h5            
-               6d5d4d6 5                            w3d3d3d2 5            
-              w5d3d2d3w4                            w4d2d1d1w3            
-              w1d5d1d4w1                            w2d5d2d6w4            
-              w3w1w5w3w2                            w1w1w3w4w6            
+	<grid size="60" width="2460" height="1410">
+                                                                                    
+                  W1 1w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2W5 5w4w6w1w2w5                  
+                  w5s4s2s6w1        w3s6s2s6s2w3        w2s4s3s2w1                  
+                  w3d4d6d1w5        w5d5d2d3d5w6        w5d1D4 4w2                  
+                  w2D4 4d3w2        h4d2D2 2d1w2        w4d3d2d2w3                  
+                  W4 4w4W6 6w6w4w3w2 3w2w5w1w2h3w1w5w2w3W5 5w5W6 6                  
+                  w3s4s2s3w2        w4         3        w3s1s1s5w4                  
+                  W1 1d5W2 2    t1  h1    t1  w5  t1    W1 1d2W4 4                  
+                  w5s6d2s1w6         1        w6        w3s4d6s1h1                  
+                  W2 2d4W3 3                            W6 6d3W5 5                  
+                  w2s1d3s6w2              RR            w2s2d3s5w2                  
+                  W4 4w1W5 5                            W2 2w4W1 1                  
+                  w6s6s5s4h6        BB                  w2s3s1s6w3                  
+                  W1 1d3W6 6    t1                t1    W1 1d5W4 4                  
+                  w5s2d1s2w5                            w1s3d2s5w3                  
+                  W3 3d6W2 2                            W2 2d3W3 3                  
+                  w2s4d2s4w3  ll        lrll        lr  w4s5d2s6w3                  
+                  W4 4d3W1 1        TT          TT      W6 6d1W1 1                  
+                  w6s6d6s1w5                            w1s2d2s3h5                  
+                  W5 5w5W3 3                            W4 4w4W2 2                  
+                  w4s4s1s3w3P1                        P1w2s4s6s2w1                  
+                  W2 2d4W6 6                            W3 3d3W5 5                  
+                  w5s3d2s3w4                            w4s2d1d1w3                  
+                  W1 1d1W4 4                            W5 5d2W6 6                  
+                  w3w1w5w3w2                            w1w1w3w4w6                  
 	</grid>
 	<objects>
 		<!-- Background -->
 		<background>
-			<parallax width="1600" height="900">
-				<animation texture="pastureland_bg" width="1600" height="900" rotate="false">
+
+			<parallax width="1920" height="1080">
+				<animation texture="pastureland_sky" width="1920" height="1080" rotate="false">
 					<frameindex frames="1">
 						<static value="0"/>
 					</frameindex>
 				</animation>
-				<animation texture="pastureland_clouds" width="200" height="98"><!-- small cloud -->
+				<animation texture="pastureland_clouds" width="200" height="98" y="260"><!-- small cloud -->
 					<frameindex frames="1">
 						<static value="0"/>
 					</frameindex>
-					<constants speed="15" offset="65" />
+					<constants speed="15" offset="65" width="2150"/>
+					<!-- (width - (speed * ((time+offset) % (width/speed)))) -->
 					<position axis="x">
 						<add>
-							<static value="1650" />
+							<var name="width" />
 							<mul>
 								<mul>
 									<var name="speed" />
@@ -595,51 +702,68 @@ w1            w2d4d6d5w2d1d3d1d6h3d1d4d5d4w5d6d2d6d1h5d1d4d5w3          w1
 										<inv>
 											<var name="speed" />
 										</inv>
-										<static value="1900" />
+										<var name="width" />
 									</mul>
 								</mod>
 							</mul>
 						</add>
-					</position>
-					<position axis="y">
-						<static value="260" />
-					</position>
-				</animation>
-				<animation texture="pastureland_clouds" width="240" height="126" srcy="98"><!-- large cloud -->
-					<frameindex frames="1">
-						<static value="0"/>
-					</frameindex>
-					<constants speed="30" offset="35" />
-					<position axis="x">
-						<add>
-							<static value="1650" />
-							<mul>
-								<mul>
-									<var name="speed" />
-									<static value="-1" />
-								</mul>
-								<mod>
-									<add>
-										<time />
-										<var name="offset" />
-									</add>
-									<mul>
-										<inv>
-											<var name="speed" />
-										</inv>
-										<static value="1900" />
-									</mul>
-								</mod>
-							</mul>
-						</add>
-					</position>
-					<position axis="y">
-						<static value="60" />
 					</position>
 				</animation>
 			</parallax>
-			<parallax width="1600" height="900">
-				<animation texture="pastureland_flowers_front2" width="149" height="187" x="268" y="605" midx="68" midy="180"><!-- 02 mid flower -->
+
+			<parallax width="1955" height="1100">
+				<animation texture="pastureland_back_mountain" x="0" y="460" width="1955" height="640" rotate="false">
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+				</animation>
+			</parallax>
+
+			<parallax width="2125" height="1196">
+				<animation texture="pastureland_middle_mountain" x="228" y="571" width="1897" height="625" rotate="false">
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+				</animation>
+			</parallax>
+
+			<parallax width="2310" height="1300">
+				<animation texture="pastureland_front_mountain" x="0" y="733" width="1689" height="567" rotate="false">
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+				</animation>
+				<animation texture="pastureland_clouds" y="160" width="240" height="126" srcy="98"><!-- large cloud -->
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+					<constants speed="20" offset="35" width="2350"/>
+					<position axis="x">
+						<add>
+							<var name="width"/>
+							<mul>
+								<mul>
+									<var name="speed" />
+									<static value="-1" />
+								</mul>
+								<mod>
+									<add>
+										<time />
+										<var name="offset" />
+									</add>
+									<mul>
+										<inv>
+											<var name="speed" />
+										</inv>
+										<var name="width" />
+									</mul>
+								</mod>
+							</mul>
+						</add>
+					</position>
+				</animation>
+
+				<animation texture="pastureland_flowers_front2" width="149" height="187" x="958" y="905" midx="68" midy="180"><!-- 02 mid flower -->
 					<frameindex frames="1">
 						<static value="0"/>
 					</frameindex>
@@ -668,7 +792,7 @@ w1            w2d4d6d5w2d1d3d1d6h3d1d4d5d4w5d6d2d6d1h5d1d4d5w3          w1
 						</add>
 					</rotation>
 				</animation>
-				<animation texture="pastureland_flowers_front" width="96" height="129" x="230" y="610" midx="48" midy="125"><!-- 01 front flower -->
+				<animation texture="pastureland_flowers_front" width="96" height="129" x="920" y="910" midx="48" midy="125"><!-- 01 front flower -->
 					<frameindex frames="1">
 						<static value="0"/>
 					</frameindex>
