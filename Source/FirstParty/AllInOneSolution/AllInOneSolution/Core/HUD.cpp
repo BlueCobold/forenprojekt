@@ -6,7 +6,7 @@ HUD::HUD(sf::RenderTarget& screen, ResourceManager& resourceManager, Config& con
 m_screen(screen),
 m_resourceManager(resourceManager),
 m_fpsCounter(resourceManager,sf::Vector2f(10.f,10.f),0.f,"gold"),
-m_target(resourceManager, sf::Vector2f(60.f,30.f),0.f, "gold", HUDElement::HR_Right),
+m_target(resourceManager, sf::Vector2f(60.f,10.f),0.f, "gold", HUDElement::HR_Right),
 m_points(resourceManager, sf::Vector2f(0.f,10.f),0.f, "gold", HUDElement::HR_Center)
 {
     m_fpsShow = config.get<bool>("ShowFps");
