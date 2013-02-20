@@ -99,9 +99,6 @@
     <ClInclude Include="Config.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="State.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="StateManager.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -287,6 +284,9 @@
     </ClInclude>
     <ClInclude Include="HUDElement.hpp">
       <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="State.hpp">
+      <Filter>Sources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
