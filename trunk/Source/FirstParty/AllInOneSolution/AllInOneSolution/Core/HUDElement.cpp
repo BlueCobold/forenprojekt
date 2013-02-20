@@ -42,10 +42,10 @@ void HUDElement::update(const DrawParameter& params)
         case HUDElement::VR_Top:
             position.y = screenCenter.y - screenSize.y / 2 + m_position.y;
         break;
-        case HUDElement::HR_Center:
+        case HUDElement::VR_Center:
             position.y = screenCenter.y;
         break;
-        case HUDElement::HR_Right:
+        case HUDElement::VR_Bottom:
             position.y = screenCenter.y + screenSize.y / 2 - m_position.y;
         break;
         default:
