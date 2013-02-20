@@ -5,6 +5,7 @@
 
 class ResourceManager;
 
+/// Basis class for HUD
 class HUDElement
 {
 protected:

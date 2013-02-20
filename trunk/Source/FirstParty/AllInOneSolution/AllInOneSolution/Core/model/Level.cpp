@@ -41,7 +41,9 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_config(config),
     m_soundManager(resourceManager),
     m_totalTarget(0),
-    m_remainingTarget(0)
+    m_remainingTarget(0),
+    m_points(0),
+    m_multiHit(0)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -88,7 +90,16 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     for(auto it = begin(m_entities); it != end(m_entities); ++it)
     {
         if((*it)->getType() == Entity::Target && (*it)->killed())
+        {
             m_remainingTarget--;
+            m_points = m_points + 100 + m_multiHit * 50;
+            m_multiHit++;
+        }
+        if((*it)->getType() == Entity::Ball && static_cast<Ball*>(it->get())->getBallLost())
+        {
+            m_points -= 10;
+            m_multiHit = 0;
+        }
         (*it)->update(elapsedTime);
     }
 
@@ -512,4 +523,8 @@ const int Level::getTotalTarget() const
 const int Level::getRemainingTarget() const
 {
     return m_remainingTarget;
+}
+const int Level::getPoints() const
+{
+    return m_points;
 }
