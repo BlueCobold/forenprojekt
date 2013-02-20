@@ -6,6 +6,7 @@ LineLabel::LineLabel()
     m_rotation(0),
     m_font(nullptr)
 {
+    setText("");
 }
 
 LineLabel::LineLabel(const std::string& text, const sf::Vector2f& position, const float rotation, BitmapFont* font)
@@ -14,6 +15,7 @@ LineLabel::LineLabel(const std::string& text, const sf::Vector2f& position, cons
     m_rotation(rotation),
     m_font(font)
 {
+    setText(text);
 }
 
 LineLabel::LineLabel(const std::string& text, const float x, const float y, float rotation, BitmapFont* font)
@@ -22,26 +24,32 @@ LineLabel::LineLabel(const std::string& text, const float x, const float y, floa
     m_rotation(rotation),
     m_font(font)
 {
+    setText(text);
 }
 
 void LineLabel::draw(const DrawParameter& params)
 {
-    float xOffset = 0;
-    for(auto it = begin(m_text); it != end(m_text); it++)
-    {
-        sf::Sprite tmp = m_font->getSprite(*it);
-        tmp.setPosition(m_position.x + xOffset, m_position.y);
-        tmp.setRotation(m_rotation);
-
-        params.getTarget().draw(tmp);
-
-        xOffset += m_font->getSprite(*it).getTextureRect().width;
-    }
+    for(auto it = begin(m_sprites); it != end(m_sprites); it++)  
+        params.getTarget().draw(*it);
 }
 
 void LineLabel::setText(const std::string& text)
 {
-    m_text = text;
+    if(text != m_text)
+    {
+        m_sprites.clear();
+        float xOffset = 0;
+        for(auto it = begin(text); it != end(text); it++)
+        {
+            m_sprites.push_back(m_font->getSprite(*it));
+            m_sprites.back().setPosition(m_position.x + xOffset, m_position.y);
+            m_sprites.back().setRotation(m_rotation);
+
+            xOffset += m_font->getSprite(*it).getTextureRect().width;
+        }
+
+        m_text = text;
+    }
 }
 
 std::string LineLabel::getText() const
@@ -51,7 +59,20 @@ std::string LineLabel::getText() const
 
 void LineLabel::setPosition(const sf::Vector2f position)
 {
-    m_position = position;
+    if(position != m_position)
+    {
+        m_sprites.clear();
+        float xOffset = 0;
+        for(auto it = begin(m_text); it != end(m_text); it++)
+        {
+            m_sprites.push_back(m_font->getSprite(*it));
+            m_sprites.back().setPosition(m_position.x + xOffset, m_position.y);
+            m_sprites.back().setRotation(m_rotation);
+
+            xOffset += m_font->getSprite(*it).getTextureRect().width;
+        }
+    }
+     m_position = position;
 }
 
 void LineLabel::setPosition(const float x, const float y)

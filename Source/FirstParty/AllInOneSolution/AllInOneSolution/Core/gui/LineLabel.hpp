@@ -37,6 +37,7 @@ private:
     sf::Vector2f m_position;
     float m_rotation;
     BitmapFont* m_font;
+    std::vector<sf::Sprite> m_sprites;
 
 };
 
