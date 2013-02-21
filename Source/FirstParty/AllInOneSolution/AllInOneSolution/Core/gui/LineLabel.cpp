@@ -61,6 +61,7 @@ void LineLabel::setPosition(const sf::Vector2f position)
 {
     if(position != m_position)
     {
+        m_position = position;
         m_sprites.clear();
         float xOffset = 0;
         for(auto it = begin(m_text); it != end(m_text); it++)
@@ -72,7 +73,6 @@ void LineLabel::setPosition(const sf::Vector2f position)
             xOffset += m_font->getSprite(*it).getTextureRect().width;
         }
     }
-     m_position = position;
 }
 
 void LineLabel::setPosition(const float x, const float y)
