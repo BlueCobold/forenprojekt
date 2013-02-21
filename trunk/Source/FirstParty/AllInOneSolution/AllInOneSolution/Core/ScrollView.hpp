@@ -12,7 +12,7 @@ class ScrollView
 {
 public:
     ScrollView();
-    ScrollView(const sf::Vector2u& levelsize, const sf::Vector2u& viewsize);
+    ScrollView(const sf::Vector2u& levelsize, const sf::Vector2f& viewsize);
 
     /*
         Adjust the view of the given render window. 
@@ -20,10 +20,10 @@ public:
     */
     void adjustView(const sf::Vector2f& scrollvec, sf::RenderTarget& window);
 
-    void setViewSize(const sf::Vector2u& v);
-    void setLevelSize(const sf::Vector2u& v);
+    void setLevelSize(const sf::Vector2f& v);
+    void setZoomFactor(const float factor);
 
-    sf::Vector2f toGlobalCoords(const sf::Vector2u& v);
+    sf::Vector2f toGlobalCoords(const sf::Vector2f& v);
 
     float getGlobalRightCorner();
     float getGlobalTopCorner();
@@ -31,8 +31,9 @@ public:
     float getGlobalBottomCorner();
 
 private:
-    sf::Vector2u m_viewSize;  // view dimension
-    sf::Vector2u m_levelSize; // level dimension
+    float m_zoomFactor;
+    sf::Vector2f m_viewSize;  // view dimension
+    sf::Vector2f m_levelSize; // level dimension
 
     sf::Vector2f m_viewCenter;
 };

@@ -186,9 +186,7 @@
 						<frameindex frames="2">
 							<mul>
 								<time />
-								<inverse>
-									<static value="5" />
-								</inverse>
+								<static value="0.5" />
 							</mul>
 							<static value="2" />
 						</frameindex>
@@ -204,9 +202,7 @@
 									<mod>
 										<mul>
 											<time />
-											<inverse>
-												<static value="5" />
-											</inverse>
+											<static value="0.5" />
 										</mul>
 										<static value="2" />
 									</mod>
