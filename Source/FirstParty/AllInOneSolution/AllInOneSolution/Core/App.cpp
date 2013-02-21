@@ -69,8 +69,16 @@ void App::update()
 
 void App::draw()
 {
+#ifdef _DEBUG
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+        m_screen.clear();
+#endif
+
     m_stateManager.draw();
-        
+
+    m_screen.setView(sf::View(sf::FloatRect(0.f, 0.f,
+        static_cast<float>(m_screen.getSize().x),
+        static_cast<float>(m_screen.getSize().y))));
     m_screen.display();
 }
 
@@ -135,11 +143,6 @@ void App::onResize()
     
     // Apply possible size changes
     m_screen.setSize(sf::Vector2u(mode.width, mode.height));
-
-    // Reset view
-    m_screen.setView(
-        sf::View(sf::FloatRect(0.f, 0.f, static_cast<float>(mode.width), static_cast<float>(mode.height)))
-        );
 }
 
 void App::adjustVideoMode(sf::VideoMode& mode)

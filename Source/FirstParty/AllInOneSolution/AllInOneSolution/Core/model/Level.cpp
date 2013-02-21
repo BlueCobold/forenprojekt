@@ -108,12 +108,20 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
     m_lastTime = elapsedTime;
 
-    m_scrollView.setViewSize(screen.getSize());
     sf::Vector2f ballpos = sf::Vector2f(utility::toPixel(m_ball->getPosition().x), utility::toPixel(m_ball->getPosition().y));
+    m_scrollView.setZoomFactor(1.0f);
     m_scrollView.adjustView(ballpos, screen);
 
     if(m_background != nullptr)
         m_background->update(elapsedTime, screen.getView());
+
+#ifdef _DEBUG
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+    {
+        m_scrollView.setZoomFactor(3.0f);
+        m_scrollView.adjustView(ballpos, screen);
+    }
+#endif
 }
 
 void Level::draw(const DrawParameter& param)
@@ -298,9 +306,7 @@ bool Level::load()
     m_world.SetContactListener(&m_contactListener);
 
     // setup scrollview
-    m_scrollView.setLevelSize(sf::Vector2u(
-        static_cast<unsigned int>(getWidth()),
-        static_cast<unsigned int>(getHeight())));
+    m_scrollView.setLevelSize(sf::Vector2f(getWidth(), getHeight()));
 
     // get the fucking ball
     for(auto it = begin(m_entities); it != end(m_entities); ++it)
