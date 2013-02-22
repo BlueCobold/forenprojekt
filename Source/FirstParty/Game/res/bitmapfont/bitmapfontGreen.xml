@@ -1,0 +1,62 @@
+<bitmapfont>
+    <image name="bitmapfontGreen" />
+	<height value="22" />
+	<glyphs>
+		<glyph name="a" x="0" y="0" width="16" />
+		<glyph name="b" x="16" y="0" width="16" />
+		<glyph name="c" x="32" y="0" width="16" />
+		<glyph name="d" x="48" y="0" width="18" />
+		<glyph name="e" x="66" y="0" width="14" />
+		<glyph name="f" x="80" y="0" width="14" />
+		<glyph name="g" x="94" y="0" width="18" />
+		<glyph name="h" x="112" y="0" width="20" />
+		<glyph name="i" x="132" y="0" width="12" />
+		<glyph name="j" x="144" y="0" width="14" />
+		<glyph name="k" x="158" y="0" width="18" />
+		<glyph name="l" x="176" y="0" width="14" />
+		<glyph name="m" x="190" y="0" width="20" />
+		<glyph name="n" x="210" y="0" width="16" />
+		<glyph name="o" x="226" y="0" width="18" />
+		<glyph name="p" x="0" y="22" width="16" />
+		<glyph name="q" x="16" y="22" width="16" />
+		<glyph name="r" x="32" y="22" width="18" />
+		<glyph name="s" x="50" y="22" width="14" />
+		<glyph name="t" x="64" y="22" width="16" />
+		<glyph name="u" x="80" y="22" width="16" />
+		<glyph name="v" x="96" y="22" width="18" />
+		<glyph name="w" x="114" y="22" width="24" />
+		<glyph name="x" x="138" y="22" width="18" />
+		<glyph name="y" x="156" y="22" width="18" />
+		<glyph name="z" x="174" y="22" width="16" />
+		<glyph name="0" x="190" y="22" width="16" />
+		<glyph name="1" x="244" y="0" width="12" />
+		<glyph name="2" x="206" y="22" width="12" />
+		<glyph name="3" x="218" y="22" width="14" />
+		<glyph name="4" x="232" y="22" width="16" />
+		<glyph name="5" x="0" y="44" width="14" />
+		<glyph name="6" x="14" y="44" width="14" />
+		<glyph name="7" x="28" y="44" width="14" />
+		<glyph name="8" x="42" y="44" width="14" />
+		<glyph name="9" x="56" y="44" width="16" />
+		<glyph name="," x="248" y="22" width="8" />
+		<glyph name="." x="72" y="44" width="10" />
+		<glyph name="!" x="82" y="44" width="12" />
+		<glyph name="?" x="94" y="44" width="12" />
+		<glyph name="`" x="106" y="44" width="12" />
+		<glyph name="´" x="118" y="44" width="12" />
+		<glyph name="-" x="130" y="44" width="10" />
+		<glyph name="+" x="140" y="44" width="14" />
+		<glyph name="/" x="154" y="44" width="14" />
+		<glyph name="(" x="168" y="44" width="12" />
+		<glyph name=")" x="180" y="44" width="12" />
+		<glyph name="[" x="192" y="44" width="12" />
+		<glyph name="]" x="204" y="44" width="12" />
+		<glyph name="{" x="216" y="44" width="12" />
+		<glyph name="}" x="228" y="44" width="12" />
+		<glyph name="$" x="240" y="44" width="14" />
+		<glyph name="%" x="0" y="66" width="18" />
+		<glyph name="&" x="18" y="66" width="16" />
+		<glyph name="'" x="34" y="66" width="10" />
+		<glyph name=" " x="44" y="66" width="10" />
+	</glyphs>
+</bitmapfont>
