@@ -12,8 +12,13 @@ ScrollView::ScrollView(const sf::Vector2u& levelsize, const sf::Vector2f& viewsi
 void ScrollView::adjustView(const sf::Vector2f& scrollvec, sf::RenderTarget& window)
 {
 	sf::View view = window.getView();
+    int width = static_cast<int>(view.getSize().x);
+    int height = static_cast<int>(view.getSize().y);
     m_viewSize = sf::Vector2f(view.getSize()) * m_zoomFactor;
-	sf::Vector2f center = scrollvec;
+    // calculate a point that will result in a perfect integer-position
+    // of the upper left corner of the view
+    sf::Vector2f center = sf::Vector2f(floorf(scrollvec.x) + (width & 1) / 2.0f,
+                                       floorf(scrollvec.y) + (height & 1) / 2.0f);
 	
 	if(m_levelSize.x < m_viewSize.x)
 		center.x = m_viewSize.x / 2.0f;

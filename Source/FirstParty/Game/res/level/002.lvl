@@ -651,7 +651,7 @@
                   W2 2d4W3 3                            W6 6d3W5 5                  
                   w2s1d3s6w2              RR            w2s2d3s5w2                  
                   W4 4w1W5 5                            W2 2w4W1 1                  
-                  w6s6s5s4h6        BB                  w2s3s1s6w3                  
+                  w6s6s5s4w6        BB                  w2s3s1s6w3                  
                   W1 1d3W6 6    t1                t1    W1 1d5W4 4                  
                   w5s2d1s2w5                            w1s3d2s5w3                  
                   W3 3d6W2 2                            W2 2d3W3 3                  
@@ -675,33 +675,55 @@
 						<static value="0"/>
 					</frameindex>
 				</animation>
-				<animation texture="pastureland_clouds" width="200" height="98" y="260"><!-- small cloud -->
+				<animation texture="pastureland_clouds" width="126" height="53" srcx="352" srcy="68" y="250"><!-- tiny cloud (1) -->
 					<frameindex frames="1">
 						<static value="0"/>
 					</frameindex>
-					<constants speed="15" offset="65" width="2150"/>
-					<!-- (width - (speed * ((time+offset) % (width/speed)))) -->
+					<constants speed="10" offset="400" width="2050" shift="-126" />
+					<!-- width - ((speed*time + offset) % width) + shift-->
 					<position axis="x">
 						<add>
 							<var name="width" />
 							<mul>
-								<mul>
-									<var name="speed" />
-									<static value="-1" />
-								</mul>
 								<mod>
 									<add>
-										<time />
+										<mul>
+											<time />
+											<var name="speed" />
+										</mul>
 										<var name="offset" />
 									</add>
-									<mul>
-										<inv>
-											<var name="speed" />
-										</inv>
-										<var name="width" />
-									</mul>
+									<var name="width" />
 								</mod>
+								<static value="-1" />
 							</mul>
+							<var name="shift" />
+						</add>
+					</position>
+				</animation>
+				<animation texture="pastureland_clouds" width="138" height="68" srcx="352" srcy="0" y="225"><!-- tiny cloud (2) -->
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+					<constants speed="10" offset="1500" width="2070" shift="-140" />
+					<!-- width - ((speed*time + offset) % width) + shift-->
+					<position axis="x">
+						<add>
+							<var name="width" />
+							<mul>
+								<mod>
+									<add>
+										<mul>
+											<time />
+											<var name="speed" />
+										</mul>
+										<var name="offset" />
+									</add>
+									<var name="width" />
+								</mod>
+								<static value="-1" />
+							</mul>
+							<var name="shift" />
 						</add>
 					</position>
 				</animation>
@@ -713,6 +735,33 @@
 						<static value="0"/>
 					</frameindex>
 				</animation>
+
+				<animation texture="pastureland_clouds" width="200" srcx="246" srcy="263" height="87" y="190"><!-- mid cloud (3) -->
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+					<constants speed="12" offset="1165" width="2170" shift="-200" />
+					<!-- width - ((speed*time + offset) % width) + shift-->
+					<position axis="x">
+						<add>
+							<var name="width" />
+							<mul>
+								<mod>
+									<add>
+										<mul>
+											<time />
+											<var name="speed" />
+										</mul>
+										<var name="offset" />
+									</add>
+									<var name="width" />
+								</mod>
+								<static value="-1" />
+							</mul>
+							<var name="shift" />
+						</add>
+					</position>
+				</animation>
 			</parallax>
 
 			<parallax width="2125" height="1196">
@@ -720,6 +769,60 @@
 					<frameindex frames="1">
 						<static value="0"/>
 					</frameindex>
+				</animation>
+
+				<animation texture="pastureland_clouds" srcx="246" srcy="138" width="240" height="125" y="150"><!-- big cloud (4) -->
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+					<constants speed="14.5" offset="2170" width="2380" shift="-250" />
+					<!-- width - ((speed*time + offset) % width) + shift-->
+					<position axis="x">
+						<add>
+							<var name="width" />
+							<mul>
+								<mod>
+									<add>
+										<mul>
+											<time />
+											<var name="speed" />
+										</mul>
+										<var name="offset" />
+									</add>
+									<var name="width" />
+								</mod>
+								<static value="-1" />
+							</mul>
+							<var name="shift" />
+						</add>
+					</position>
+				</animation>
+
+				<animation texture="pastureland_clouds" srcx="0" srcy="138" width="246" height="136" y="132"><!-- big cloud (5) -->
+					<frameindex frames="1">
+						<static value="0"/>
+					</frameindex>
+					<constants speed="14.5" offset="1100" width="2380" shift="-250" />
+					<!-- width - ((speed*time + offset) % width) + shift-->
+					<position axis="x">
+						<add>
+							<var name="width" />
+							<mul>
+								<mod>
+									<add>
+										<mul>
+											<time />
+											<var name="speed" />
+										</mul>
+										<var name="offset" />
+									</add>
+									<var name="width" />
+								</mod>
+								<static value="-1" />
+							</mul>
+							<var name="shift" />
+						</add>
+					</position>
 				</animation>
 			</parallax>
 
@@ -729,32 +832,30 @@
 						<static value="0"/>
 					</frameindex>
 				</animation>
-				<animation texture="pastureland_clouds" y="160" width="240" height="126" srcy="98"><!-- large cloud -->
+
+				<animation texture="pastureland_clouds" width="352" height="138" y="120"><!-- huge cloud (6) -->
 					<frameindex frames="1">
 						<static value="0"/>
 					</frameindex>
-					<constants speed="20" offset="35" width="2350"/>
+					<constants speed="17" offset="565" width="2640" shift="-352" />
+					<!-- width - ((speed*time + offset) % width) + shift-->
 					<position axis="x">
 						<add>
-							<var name="width"/>
+							<var name="width" />
 							<mul>
-								<mul>
-									<var name="speed" />
-									<static value="-1" />
-								</mul>
 								<mod>
 									<add>
-										<time />
+										<mul>
+											<time />
+											<var name="speed" />
+										</mul>
 										<var name="offset" />
 									</add>
-									<mul>
-										<inv>
-											<var name="speed" />
-										</inv>
-										<var name="width" />
-									</mul>
+									<var name="width" />
 								</mod>
+								<static value="-1" />
 							</mul>
+							<var name="shift" />
 						</add>
 					</position>
 				</animation>

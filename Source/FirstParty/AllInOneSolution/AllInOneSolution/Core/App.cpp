@@ -64,6 +64,11 @@ void App::update()
     handleEvents();
     handleKeyboard();
 
+    sf::View view(sf::FloatRect(0.f, 0.f,
+        static_cast<float>(m_screen.getSize().x),
+        static_cast<float>(m_screen.getSize().y)));
+    m_screen.setView(view);
+
     m_stateManager.update();
 }
 
@@ -76,9 +81,6 @@ void App::draw()
 
     m_stateManager.draw();
 
-    m_screen.setView(sf::View(sf::FloatRect(0.f, 0.f,
-        static_cast<float>(m_screen.getSize().x),
-        static_cast<float>(m_screen.getSize().y))));
     m_screen.display();
 }
 

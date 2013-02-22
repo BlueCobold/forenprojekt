@@ -494,6 +494,8 @@ void Level::parseCollider(Entity* entity, tinyxml2::XMLElement* xml)
             collider->bindProvider(std::move(provider));
             entity->bindCollisionHandler(std::move(collider));
         }
+        else
+            throw std::exception((std::string("Unknown collider specified: ") + child->Name()).c_str());
     }
 }
 
@@ -519,6 +521,8 @@ void Level::parseCollisionFilter(Entity* entity, tinyxml2::XMLElement* xml)
             filter->bindProvider(std::move(provider));
             entity->bindCollisionFilter(std::move(filter));
         }
+        else
+            throw std::exception((std::string("Unknown collision filter specified: ") + child->Name()).c_str());
     }
 }
 

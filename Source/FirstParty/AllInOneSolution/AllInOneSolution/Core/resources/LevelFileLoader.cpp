@@ -130,7 +130,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
         return std::unique_ptr<Modulo>(new Modulo(std::move(parseProviders(xml, animated))));
     else if(std::string(xml->Name())=="inv")
         return std::unique_ptr<Inverse>(new Inverse(std::move(parseProviders(xml, animated)[0])));
-    return nullptr;
+    else
+        throw std::exception((std::string("Unknown value-provider specified: ") + xml->Name()).c_str());
 }
 
 std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml, 
