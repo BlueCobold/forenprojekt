@@ -46,8 +46,18 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     int frames = 1;
     if(frameIndex != nullptr)
         frames = frameIndex->IntAttribute("frames");
-    int width = xml->IntAttribute("width");
-    int height = xml->IntAttribute("height");
+    
+    sf::Texture* texture = resourceManager.getTexture(xml->Attribute("texture"));
+    int width, height;
+    if(xml->Attribute("width") != nullptr)
+        width = xml->IntAttribute("width");
+    else
+        width = texture->getSize().x;
+    if(xml->Attribute("width") != nullptr)
+        height = xml->IntAttribute("height");
+    else
+        height = texture->getSize().y;
+
     bool rotate = xml->BoolAttribute("rotate");
     sf::Vector2f offset;
     offset.x = xml->FloatAttribute("x");
@@ -57,7 +67,6 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     origin.y = xml->FloatAttribute("midy");
     std::unique_ptr<Animation> anim(new Animation(std::move(provider), frames, width, height, rotate, origin, offset));
     sf::Vector2f sourceOffset;
-    sf::Texture* texture = resourceManager.getTexture(xml->Attribute("texture"));
     sourceOffset.x = xml->FloatAttribute("srcx");
     sourceOffset.y = xml->FloatAttribute("srcy");
 
