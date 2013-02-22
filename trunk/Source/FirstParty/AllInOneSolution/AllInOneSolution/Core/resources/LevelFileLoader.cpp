@@ -43,9 +43,9 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     ResourceManager& resourceManager)
 {
     tinyxml2::XMLElement* frameIndex = xml->FirstChildElement("frameindex");
-    if(frameIndex == nullptr)
-        return nullptr;
-    int frames = frameIndex->IntAttribute("frames");
+    int frames = 1;
+    if(frameIndex != nullptr)
+        frames = frameIndex->IntAttribute("frames");
     int width = xml->IntAttribute("width");
     int height = xml->IntAttribute("height");
     bool rotate = xml->BoolAttribute("rotate");
@@ -139,14 +139,16 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     ResourceManager& resourceManager)
 {
     tinyxml2::XMLElement* frameIndex = xml->FirstChildElement("frameindex");
+    std::unique_ptr<ValueProvider> provider;
     if(frameIndex == nullptr)
-        return nullptr;
-    tinyxml2::XMLElement* child = frameIndex->FirstChildElement();
-    if(child == nullptr)
-        return nullptr;
-    std::unique_ptr<ValueProvider> provider = std::move(parseProvider(child, animated));
-    if(provider == nullptr)
-        return nullptr;
+        provider.reset(new StaticProvider(0));
+    else
+    {
+        tinyxml2::XMLElement* child = frameIndex->FirstChildElement();
+        if(child == nullptr)
+            throw std::exception("<frameindex> specified, but no provider included");
+        provider = std::move(parseProvider(child, animated));
+    }
 
     return parseAnimation(xml, animated, std::move(provider), resourceManager);
 }
