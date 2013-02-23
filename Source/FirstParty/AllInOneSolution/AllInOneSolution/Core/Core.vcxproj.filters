@@ -91,6 +91,9 @@
     <ClCompile Include="TargetHUD.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -287,6 +290,9 @@
     </ClInclude>
     <ClInclude Include="State.hpp">
       <Filter>Sources</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\VerticalStripesTransition.h">
+      <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
