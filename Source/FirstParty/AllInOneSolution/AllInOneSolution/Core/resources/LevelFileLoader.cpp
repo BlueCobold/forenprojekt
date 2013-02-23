@@ -53,7 +53,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         width = xml->IntAttribute("width");
     else
         width = texture->getSize().x;
-    if(xml->Attribute("width") != nullptr)
+    if(xml->Attribute("height") != nullptr)
         height = xml->IntAttribute("height");
     else
         height = texture->getSize().y;
