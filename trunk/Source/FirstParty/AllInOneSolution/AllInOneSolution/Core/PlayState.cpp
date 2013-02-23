@@ -8,7 +8,7 @@
 PlayState::PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
     State(screen, resourceManager, config),
     m_level(nullptr),
-    m_hud(screen, resourceManager, config)
+    m_hud(resourceManager, config)
 {
 }
 
@@ -44,5 +44,5 @@ StateChangeInformation PlayState::update()
 void PlayState::draw()
 {
     m_level->draw(m_screen);
-    m_hud.draw();
+    m_hud.draw(m_screen);
 }
