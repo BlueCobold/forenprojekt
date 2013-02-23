@@ -15,11 +15,9 @@ namespace sf
 }
 
 /// for Displaying all the HUD Elements
-class HUD
+class HUD : public Drawable
 {
 private:
-
-    sf::RenderTarget& m_screen;
 
     ResourceManager& m_resourceManager;
 
@@ -31,11 +29,11 @@ private:
     HUDElement m_points;
 
 public:
-    HUD(sf::RenderTarget& screen, ResourceManager& resourceManager, Config& config);
+    HUD(ResourceManager& resourceManager, Config& config);
 
     void update(Level* level);
 
-    void draw();
+    void draw(const DrawParameter& params);
 
 };
 
