@@ -79,8 +79,8 @@ void LineLabel::setText(const std::string& text)
             xOffset += m_font->getSprite(*it).getTextureRect().width;
         }
 
-        m_texture.create(static_cast<unsigned int>(xOffset), m_font->getFontSize());
-
+        if(m_texture.getSize().x<800)
+            m_texture.create(static_cast<unsigned int>(800), m_font->getFontSize());
         m_texture.clear(sf::Color(0,0,0,0));
 
         for(auto it = begin(sprites); it != end(sprites); it++)  
