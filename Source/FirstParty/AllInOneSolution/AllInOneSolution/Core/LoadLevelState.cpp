@@ -6,6 +6,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 
+#include "HUD.hpp"
+
 #include <iostream>
 
 LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
@@ -20,8 +22,12 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     m_level->restartAt(time);
     m_level->update(time, m_texture);
 
+    HUD hud(resourceManager, config);
+    hud.update(m_level);
+
     m_texture.clear();
     m_level->draw(DrawParameter(m_texture));
+    hud.draw(m_texture);
     m_texture.display();
 
     m_fadedScreen = std::unique_ptr<Transition>(new VerticalStripesTransition(nullptr, &m_texture.getTexture(), 20, 0.5f));
