@@ -5,12 +5,14 @@
 HUDElement::HUDElement(ResourceManager& resourceManager, const sf::Vector2f& position, const float rotation, std::string bitmapFont,
 HorizontalReference hReference, VerticalReference vReference, std::string text) :
 m_resourceManager(resourceManager),
-LineLabel(text,sf::Vector2f(0.f,0.f),rotation,nullptr),
-m_screenPosition(position),
+m_label(text,sf::Vector2f(0.f,0.f),rotation,nullptr),
+m_bitmapfont(nullptr),
+m_position(position),
 m_verticalReference(vReference),
 m_horizontalReference(hReference)
 {
-    m_font = m_resourceManager.getBitmapFont(bitmapFont);
+    m_bitmapfont = m_resourceManager.getBitmapFont(bitmapFont);
+    m_label.setBitmapFont(*m_bitmapfont);
 }
 
 void HUDElement::update(const DrawParameter& params)
@@ -21,88 +23,52 @@ void HUDElement::update(const DrawParameter& params)
 
     switch(m_horizontalReference)
     {
-        case HR_Left:
-            position.x = screenCenter.x - screenSize.x / 2 + m_screenPosition.x;
+        case HUDElement::HR_Left:
+            position.x = screenCenter.x - screenSize.x / 2 + m_position.x;
         break;
-        case HR_Center:
+        case HUDElement::HR_Center:
             position.x = screenCenter.x;
         break;
-        case HR_Right:
-            position.x = screenCenter.x + screenSize.x / 2 - m_screenPosition.x;
+        case HUDElement::HR_Right:
+            position.x = screenCenter.x + screenSize.x / 2 - m_position.x;
         break;
         default:
-            position.x = m_screenPosition.x;
+            position.x = m_position.x;
         break;
     }
 
     switch(m_verticalReference)
     {
-        case VR_Top:
-            position.y = screenCenter.y - screenSize.y / 2 + m_screenPosition.y;
+        case HUDElement::VR_Top:
+            position.y = screenCenter.y - screenSize.y / 2 + m_position.y;
         break;
-        case VR_Center:
+        case HUDElement::VR_Center:
             position.y = screenCenter.y;
         break;
-        case VR_Bottom:
-            position.y = screenCenter.y + screenSize.y / 2 - m_screenPosition.y;
+        case HUDElement::VR_Bottom:
+            position.y = screenCenter.y + screenSize.y / 2 - m_position.y;
         break;
         default:
-            position.y = m_screenPosition.y;
+            position.y = m_position.y;
         break;
     }
 
-    setPosition(position);
+    m_label.setPosition(position);
 }
 
 void HUDElement::draw(const DrawParameter& params)
 {    
-    LineLabel::draw(params);
+    m_label.draw(params);
 }
 
-void HUDElement::setScreenPosition(sf::Vector2f position, HorizontalReference hReference , VerticalReference vReference)
+void HUDElement::setPosition(sf::Vector2f position, HorizontalReference hReference , VerticalReference vReference)
 {
-    m_screenPosition = position;
+    m_position = position;
     m_horizontalReference = hReference;
     m_verticalReference = vReference;
 }
 
-void HUDElement::setText(const std::string& text)
+void HUDElement::setText(std::string text)
 {
-    LineLabel::setText(text);
-}
-
-void HUDElement::setScreenPositionPercent(HorizontalReference hReference, float hRefPercent, VerticalReference vReference, float vRefPercent, sf::Vector2f screenSize)
-{
-    sf::Vector2f screenCenter = sf::Vector2f(screenSize.x / 2.f, screenSize.y / 2.f);
-    switch(m_horizontalReference)
-    {
-        case HR_Left:
-            m_screenPosition.x = 0.f + screenSize.x * hRefPercent;
-        break;
-        case HR_Center:
-            m_screenPosition.x = screenCenter.x + screenSize.x / 2.f * hRefPercent;
-        break;
-        case HR_Right:
-            m_screenPosition.x = screenSize.x + screenSize.x * hRefPercent;
-        break;
-        default:
-            m_screenPosition.x = 0.f + screenSize.x * hRefPercent;
-        break;
-    }
-
-    switch(m_verticalReference)
-    {
-        case VR_Top:
-            m_screenPosition.y = 0.f + screenSize.y * vRefPercent;
-        break;
-        case VR_Center:
-            m_screenPosition.y = screenCenter.y + screenSize.y / 2.f * vRefPercent;
-        break;
-        case VR_Bottom:
-            m_screenPosition.y = screenSize.y + screenSize.y * vRefPercent;
-        break;
-        default:
-            m_screenPosition.y = 0.f + screenSize.y * vRefPercent;
-        break;
-    }
+    m_label.setText(text);
 }

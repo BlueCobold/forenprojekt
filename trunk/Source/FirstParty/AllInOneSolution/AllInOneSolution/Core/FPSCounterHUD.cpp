@@ -5,7 +5,7 @@
 FPSCounterHUD::FPSCounterHUD(ResourceManager& resourceManager, const sf::Vector2f& position, const float rotation, std::string bitmapFont) :
 HUDElement(resourceManager,position,rotation,bitmapFont) 
 {
-    setText(utility::toString<int>(m_fpsCounter.getFPS()));
+    m_label.setText(utility::toString<int>(m_fpsCounter.getFPS()));
 }
 
 void FPSCounterHUD::update(const DrawParameter& params)
@@ -14,5 +14,5 @@ void FPSCounterHUD::update(const DrawParameter& params)
 
     m_fpsCounter.update();
 
-    setText(utility::toString<int>(m_fpsCounter.getFPS()));
+    m_label.setText(utility::toString<int>(m_fpsCounter.getFPS()));
 }
