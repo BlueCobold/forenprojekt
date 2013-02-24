@@ -29,6 +29,7 @@ bool BitmapFont::loadFromFile(const std::string& path, ResourceManager& resource
             sf::IntRect(it->IntAttribute("x"), it->IntAttribute("y"), it->IntAttribute("width"), height))
         );
     }
+    m_fontSize = height;
 
     return true;
 }
@@ -50,4 +51,9 @@ sf::Sprite BitmapFont::getSprite(const char key)
         return sf::Sprite(m_texture, m_glyphs.at(key));
 
     return sf::Sprite();
+}
+
+unsigned int BitmapFont::getFontSize()
+{
+    return m_fontSize;
 }

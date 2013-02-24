@@ -5,23 +5,19 @@
 
 class ResourceManager;
 
+enum VerticalReference {VR_Top, VR_Bottom, VR_Center};
+enum HorizontalReference {HR_Left, HR_Right, HR_Center};
+
 /// Basis class for HUD
-class HUDElement
+class HUDElement : protected LineLabel
 {
 public:
-    
-    enum VerticalReference {VR_Top, VR_Bottom, VR_Center};
-    enum HorizontalReference {HR_Left, HR_Right, HR_Center};
 
 protected:
 
-    LineLabel m_label;
-
-    BitmapFont* m_bitmapfont;
-
     ResourceManager& m_resourceManager;
 
-    sf::Vector2f m_position;
+    sf::Vector2f m_screenPosition;
 
     HorizontalReference m_horizontalReference;
 
@@ -35,9 +31,11 @@ public:
 
     virtual void draw(const DrawParameter& params);
 
-    void setPosition(sf::Vector2f position, HorizontalReference hReference = HR_Left, VerticalReference vReference = VR_Top);
+    void setScreenPosition(sf::Vector2f position, HorizontalReference hReference = HR_Left, VerticalReference vReference = VR_Top);
 
-    void setText(std::string text);
+    virtual void setText(const std::string& text);
+
+    void setScreenPositionPercent(HorizontalReference hReference, float hRefPercent, VerticalReference vReference, float vRefPercent, sf::Vector2f screenSize);
 };
 
 #endif

@@ -291,9 +291,6 @@
     <ClInclude Include="State.hpp">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClInclude Include="rendering\transitions\VerticalStripesTransition.h">
-      <Filter>Headers\rendering\transitions</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

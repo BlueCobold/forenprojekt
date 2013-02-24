@@ -8,7 +8,7 @@ HUDElement(resourceManager,position,rotation,bitmapFont, hReference, vReference)
 m_remainingTarget(0),
 m_totalTarget(0)
 {
-    m_label.setText(utility::toString<int>(m_remainingTarget) + "/" + utility::toString<int>(m_totalTarget));
+    setText(utility::toString<int>(m_remainingTarget) + "/" + utility::toString<int>(m_totalTarget));
     m_targetTexture.setTexture(*m_resourceManager.getTexture("targetmini"));
 }
 void TargetHUD::setTargets(int totalTarget,int remainingTarget)
@@ -20,9 +20,25 @@ void TargetHUD::update(const DrawParameter& params)
 {
     HUDElement::update(params);
 
-    m_targetTexture.setPosition(m_label.getPosition().x -22 ,m_label.getPosition().y);
+    switch(m_aligend)
+    {
+        case LeftAligend:
+            m_targetTexture.setPosition(getPosition().x - m_targetTexture.getTextureRect().width , getPosition().y);
+        break;
 
-    m_label.setText(" " + utility::toString<int>(m_remainingTarget) + "/" + utility::toString<int>(m_totalTarget));
+        case CenterAligend:
+            m_targetTexture.setPosition(getPosition().x - m_targetTexture.getTextureRect().width - getLength() / 2, getPosition().y);
+        break;
+
+        case RightAligend:
+            m_targetTexture.setPosition(getPosition().x - m_targetTexture.getTextureRect().width - getLength() , getPosition().y);
+        break;
+
+        default:
+        break;
+    };
+
+    setText(" " + utility::toString<int>(m_remainingTarget) + "/" + utility::toString<int>(m_totalTarget));
 }
 
 void TargetHUD::draw(const DrawParameter& params)
