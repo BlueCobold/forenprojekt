@@ -2,11 +2,11 @@
 
 LineLabel::LineLabel()
     : m_text(""),
+    m_position(sf::Vector2f(0,0)),
+    m_rotation(0),
     m_font(nullptr)
 {
     setText("");
-    m_position = sf::Vector2f(0.f,0.f);
-    m_rotation = 0.f;
 }
 
 LineLabel::LineLabel(const std::string& text, const sf::Vector2f& position, const float rotation, BitmapFont* font)
@@ -16,7 +16,6 @@ LineLabel::LineLabel(const std::string& text, const sf::Vector2f& position, cons
     m_font(font)
 {
     setText(text);
-    m_aligend = LeftAligend;
 }
 
 LineLabel::LineLabel(const std::string& text, const float x, const float y, float rotation, BitmapFont* font)
@@ -26,67 +25,28 @@ LineLabel::LineLabel(const std::string& text, const float x, const float y, floa
     m_font(font)
 {
     setText(text);
-    m_aligend = LeftAligend;
 }
+
 void LineLabel::draw(const DrawParameter& params)
 {
-    sf::Sprite sprite(m_texture.getTexture());
-    sprite.setPosition(m_position);
-    sprite.setRotation(m_rotation);
-
-    switch(m_aligend)
-    {
-        case LeftAligend:
-            sprite.setOrigin(0.f,0.f);
-        break;
-
-        case CenterAligend:
-            sprite.setOrigin(m_texture.getSize().x / 2.f, 0.f);
-        break;
-
-        case RightAligend:
-            sprite.setOrigin(static_cast<float>(m_texture.getSize().x), 0.f);
-        break;
-
-        default:
-            sprite.setOrigin(0.f,0.f);
-        break;
-    }
-
-    params.getTarget().draw(sprite);
+    for(auto it = begin(m_sprites); it != end(m_sprites); it++)  
+        params.getTarget().draw(*it);
 }
 
-void LineLabel::update()
-{
-    
-}
 void LineLabel::setText(const std::string& text)
 {
-    
     if(text != m_text)
     {
-        std::vector<sf::Sprite> sprites;
-
-        float xOffset = 0.f;
-
-        sprites.clear();
-  
+        m_sprites.clear();
+        float xOffset = 0;
         for(auto it = begin(text); it != end(text); it++)
         {
-            sprites.push_back(m_font->getSprite(*it));
-            sprites.back().setPosition(0 + xOffset, 0);
+            m_sprites.push_back(m_font->getSprite(*it));
+            m_sprites.back().setPosition(m_position.x + xOffset, m_position.y);
+            m_sprites.back().setRotation(m_rotation);
 
             xOffset += m_font->getSprite(*it).getTextureRect().width;
         }
-
-        if(m_texture.getSize().x<800)
-            m_texture.create(static_cast<unsigned int>(800), m_font->getFontSize());
-        m_texture.clear(sf::Color(0,0,0,0));
-
-        for(auto it = begin(sprites); it != end(sprites); it++)  
-            m_texture.draw(*it);
-
-        m_texture.display();
 
         m_text = text;
     }
@@ -99,7 +59,20 @@ std::string LineLabel::getText() const
 
 void LineLabel::setPosition(const sf::Vector2f position)
 {
-    m_position = position;
+    if(position != m_position)
+    {
+        m_position = position;
+        m_sprites.clear();
+        float xOffset = 0;
+        for(auto it = begin(m_text); it != end(m_text); it++)
+        {
+            m_sprites.push_back(m_font->getSprite(*it));
+            m_sprites.back().setPosition(m_position.x + xOffset, m_position.y);
+            m_sprites.back().setRotation(m_rotation);
+
+            xOffset += m_font->getSprite(*it).getTextureRect().width;
+        }
+    }
 }
 
 void LineLabel::setPosition(const float x, const float y)
@@ -125,14 +98,4 @@ float LineLabel::getRotation() const
 void LineLabel::setBitmapFont(BitmapFont& font)
 {
     m_font = &font;
-}
-
-int LineLabel::getLength()
-{
-    return m_texture.getSize().x;
-}
-
-void LineLabel::setAligend(Aligend value)
-{
-    m_aligend = value;
 }
