@@ -40,6 +40,29 @@
 				<vertex x="-106" y="15" />
 			</shape>
 		</shapes>
+
+		<functions>
+			<function name="cloudMovement">
+				<add>
+					<var name="width" />
+					<mul>
+						<mod>
+							<add>
+								<mul>
+									<time />
+									<var name="speed" />
+								</mul>
+								<var name="offset" />
+							</add>
+							<var name="width" />
+						</mod>
+						<static value="-1" />
+					</mul>
+					<var name="shift" />
+				</add>
+			</function>
+		</functions>
+
 		<physics>
 			<physic name="wall">
 				<body type="static" angle="0" />
@@ -666,46 +689,14 @@
 					<constants speed="10" offset="400" width="2050" shift="-126" />
 					<!-- width - ((speed*time + offset) % width) + shift-->
 					<position axis="x">
-						<add>
-							<var name="width" />
-							<mul>
-								<mod>
-									<add>
-										<mul>
-											<time />
-											<var name="speed" />
-										</mul>
-										<var name="offset" />
-									</add>
-									<var name="width" />
-								</mod>
-								<static value="-1" />
-							</mul>
-							<var name="shift" />
-						</add>
+						<function name="cloudMovement" />
 					</position>
 				</animation>
 				<animation texture="pastureland_clouds" width="138" height="68" srcx="352" srcy="0" y="225"><!-- tiny cloud (2) -->
 					<constants speed="10" offset="1500" width="2070" shift="-140" />
 					<!-- width - ((speed*time + offset) % width) + shift-->
 					<position axis="x">
-						<add>
-							<var name="width" />
-							<mul>
-								<mod>
-									<add>
-										<mul>
-											<time />
-											<var name="speed" />
-										</mul>
-										<var name="offset" />
-									</add>
-									<var name="width" />
-								</mod>
-								<static value="-1" />
-							</mul>
-							<var name="shift" />
-						</add>
+						<function name="cloudMovement" />
 					</position>
 				</animation>
 			</parallax>
@@ -717,23 +708,7 @@
 					<constants speed="12" offset="1165" width="2170" shift="-200" />
 					<!-- width - ((speed*time + offset) % width) + shift-->
 					<position axis="x">
-						<add>
-							<var name="width" />
-							<mul>
-								<mod>
-									<add>
-										<mul>
-											<time />
-											<var name="speed" />
-										</mul>
-										<var name="offset" />
-									</add>
-									<var name="width" />
-								</mod>
-								<static value="-1" />
-							</mul>
-							<var name="shift" />
-						</add>
+						<function name="cloudMovement" />
 					</position>
 				</animation>
 			</parallax>
@@ -745,23 +720,7 @@
 					<constants speed="14.5" offset="2170" width="2380" shift="-250" />
 					<!-- width - ((speed*time + offset) % width) + shift-->
 					<position axis="x">
-						<add>
-							<var name="width" />
-							<mul>
-								<mod>
-									<add>
-										<mul>
-											<time />
-											<var name="speed" />
-										</mul>
-										<var name="offset" />
-									</add>
-									<var name="width" />
-								</mod>
-								<static value="-1" />
-							</mul>
-							<var name="shift" />
-						</add>
+						<function name="cloudMovement" />
 					</position>
 				</animation>
 
@@ -769,23 +728,7 @@
 					<constants speed="14.5" offset="1100" width="2380" shift="-250" />
 					<!-- width - ((speed*time + offset) % width) + shift-->
 					<position axis="x">
-						<add>
-							<var name="width" />
-							<mul>
-								<mod>
-									<add>
-										<mul>
-											<time />
-											<var name="speed" />
-										</mul>
-										<var name="offset" />
-									</add>
-									<var name="width" />
-								</mod>
-								<static value="-1" />
-							</mul>
-							<var name="shift" />
-						</add>
+						<function name="cloudMovement" />
 					</position>
 				</animation>
 			</parallax>
@@ -797,23 +740,7 @@
 					<constants speed="17" offset="565" width="2640" shift="-352" />
 					<!-- width - ((speed*time + offset) % width) + shift-->
 					<position axis="x">
-						<add>
-							<var name="width" />
-							<mul>
-								<mod>
-									<add>
-										<mul>
-											<time />
-											<var name="speed" />
-										</mul>
-										<var name="offset" />
-									</add>
-									<var name="width" />
-								</mod>
-								<static value="-1" />
-							</mul>
-							<var name="shift" />
-						</add>
+						<function name="cloudMovement" />
 					</position>
 				</animation>
 

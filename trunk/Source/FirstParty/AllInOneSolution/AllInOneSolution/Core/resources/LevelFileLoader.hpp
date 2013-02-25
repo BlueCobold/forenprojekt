@@ -24,7 +24,8 @@ public:
      static std::unique_ptr<Animation> parseAnimation(
          tinyxml2::XMLElement* xml,
          AnimatedGraphics* animated,
-         ResourceManager& resourceManager);
+         ResourceManager& resourceManager,
+         std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 
      static std::unordered_map<std::string, tinyxml2::XMLElement*> parseList(
          tinyxml2::XMLElement* xml, const std::string& name, const std::string& key);
@@ -32,14 +33,16 @@ public:
      static std::vector<std::string> parseGrid(tinyxml2::XMLElement* xml);
 
      static void parseKinematics(tinyxml2::XMLElement* element,
-         Entity* entity);
+         Entity* entity,
+         std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 
      static sf::SoundBuffer* parseSound(tinyxml2::XMLElement* xml,
          ResourceManager& resourceManager);
 
      static std::unique_ptr<ValueProvider> parseProvider(
          tinyxml2::XMLElement* xml, 
-         AnimatedObject* animated);
+         AnimatedObject* animated,
+         std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 
      static void parseConstants(tinyxml2::XMLElement* xml,
          const AnimatedObject* owner,
@@ -49,16 +52,19 @@ private:
 
     static std::vector<std::unique_ptr<ValueProvider>> parseProviders(
         tinyxml2::XMLElement* xml, 
-        AnimatedObject* animated);
+        AnimatedObject* animated,
+        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 
     static std::unique_ptr<Animation> parseAnimation(tinyxml2::XMLElement* xml,
         AnimatedGraphics* animated,
         std::unique_ptr<ValueProvider> provider,
-        ResourceManager& resourceManager);
+        ResourceManager& resourceManager,
+        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 
     static std::unique_ptr<ValueProvider> findPositionController(tinyxml2::XMLElement* xml,
         AnimatedGraphics* animated,
-        const std::string& axis);
+        const std::string& axis,
+        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 };
 
 #endif // LEVEL_FILE_LOADER_HPP
