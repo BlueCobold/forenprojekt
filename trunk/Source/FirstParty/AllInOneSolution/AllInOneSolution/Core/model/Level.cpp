@@ -43,7 +43,8 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_totalTarget(0),
     m_remainingTarget(0),
     m_points(0),
-    m_multiHit(0)
+    m_multiHit(0),
+    m_ball(nullptr)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -150,10 +151,7 @@ bool Level::load()
     doc.LoadFile(filename().c_str());
 
     if(!validate(doc)) // Validate the XML file
-    {
-        sf::err() << "XML level file '" << filename() << "' is not valid!" << std::endl;
-        return false;
-    }
+        throw std::exception((std::string("XML level file '") + filename() + "' is not valid!").c_str());
 
     // Parse templates
     tinyxml2::XMLElement* templates = doc.FirstChildElement("level")->FirstChildElement("templates");
