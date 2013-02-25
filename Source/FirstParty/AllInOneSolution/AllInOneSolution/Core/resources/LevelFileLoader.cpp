@@ -40,7 +40,8 @@ void LevelFileLoader::parseConstants(tinyxml2::XMLElement* xml,
 std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml,
     AnimatedGraphics* animated,
     std::unique_ptr<ValueProvider> provider,
-    ResourceManager& resourceManager)
+    ResourceManager& resourceManager,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
 {
     tinyxml2::XMLElement* frameIndex = xml->FirstChildElement("frameindex");
     int frames = 1;
@@ -74,15 +75,15 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 
     std::vector<std::unique_ptr<Animation>> subAnimations;
 
-    std::unique_ptr<ValueProvider> xProvider = findPositionController(xml, animated, std::string("x"));
-    std::unique_ptr<ValueProvider> yProvider = findPositionController(xml, animated, std::string("y"));
+    std::unique_ptr<ValueProvider> xProvider = findPositionController(xml, animated, std::string("x"), functions);
+    std::unique_ptr<ValueProvider> yProvider = findPositionController(xml, animated, std::string("y"), functions);
     if((xProvider != nullptr) || (yProvider != nullptr))
         anim->bindPositionController(std::move(xProvider), std::move(yProvider));
 
     tinyxml2::XMLElement* rotation = xml->FirstChildElement("rotation");
     if(rotation != nullptr && rotation->FirstChildElement() != nullptr)
     {
-        std::unique_ptr<ValueProvider> rotProvider = parseProvider(rotation->FirstChildElement(), animated);
+        std::unique_ptr<ValueProvider> rotProvider = parseProvider(rotation->FirstChildElement(), animated, functions);
         if(rotProvider != nullptr)
             anim->bindRotationController(std::move(rotProvider));
     }
@@ -95,12 +96,22 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 }
 
 std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(tinyxml2::XMLElement* xml, 
-    AnimatedObject* animated)
+    AnimatedObject* animated,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
 {
     std::vector<std::unique_ptr<ValueProvider>> providers;
     for(auto child = xml->FirstChildElement(); child != nullptr; child = child->NextSiblingElement())
     {
-        std::unique_ptr<ValueProvider> provider = parseProvider(child, animated);
+        if(std::string(child->Name())=="function")
+        {
+            if(functions == nullptr)
+                throw std::exception("Invalid argument passed. Functions may not be null.");
+            auto function = functions->find(child->Attribute("name"));
+            if(function == end(*functions))
+                throw std::exception((std::string("No template defined for function ") + child->Attribute("name")).c_str());
+            return parseProviders(function->second, animated, functions);
+        }
+        std::unique_ptr<ValueProvider> provider = parseProvider(child, animated, functions);
         if(provider != nullptr)
             providers.push_back(std::move(provider));
     }
@@ -108,7 +119,8 @@ std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(tiny
 }
 
 std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLElement* xml, 
-    AnimatedObject* animated)
+    AnimatedObject* animated,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
 {
     if(std::string(xml->Name())=="time")
         return std::unique_ptr<TimeProvider>(new TimeProvider(animated));
@@ -120,32 +132,48 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
         return std::unique_ptr<VariableProvider>(new VariableProvider(animated, xml->Attribute("name")));
     else if(std::string(xml->Name())=="setVar")
         return std::unique_ptr<SetVariable>(new SetVariable(animated, xml->Attribute("name"),
-        std::move(parseProviders(xml, animated)[0])));
+        std::move(parseProviders(xml, animated, functions)[0])));
     else if(std::string(xml->Name())=="abs")
-        return std::unique_ptr<Absolute>(new Absolute(std::move(parseProviders(xml, animated)[0])));
+        return std::unique_ptr<Absolute>(new Absolute(std::move(parseProviders(xml, animated, functions)[0])));
     else if(std::string(xml->Name())=="sine")
-        return std::unique_ptr<Sine>(new Sine(std::move(parseProviders(xml, animated)[0])));
+        return std::unique_ptr<Sine>(new Sine(std::move(parseProviders(xml, animated, functions)[0])));
     else if(std::string(xml->Name())=="int")
-        return std::unique_ptr<FloatToInt>(new FloatToInt(std::move(parseProviders(xml, animated)[0])));
+        return std::unique_ptr<FloatToInt>(new FloatToInt(std::move(parseProviders(xml, animated, functions)[0])));
     else if(std::string(xml->Name())=="add")
-        return std::unique_ptr<Adder>(new Adder(std::move(parseProviders(xml, animated))));
+        return std::unique_ptr<Adder>(new Adder(std::move(parseProviders(xml, animated, functions))));
     else if(std::string(xml->Name())=="mul")
-        return std::unique_ptr<Multiplier>(new Multiplier(std::move(parseProviders(xml, animated))));
+        return std::unique_ptr<Multiplier>(new Multiplier(std::move(parseProviders(xml, animated, functions))));
     else if(std::string(xml->Name())=="min")
-        return std::unique_ptr<Minimum>(new Minimum(std::move(parseProviders(xml, animated))));
+        return std::unique_ptr<Minimum>(new Minimum(std::move(parseProviders(xml, animated, functions))));
     else if(std::string(xml->Name())=="max")
-        return std::unique_ptr<Maximum>(new Maximum(std::move(parseProviders(xml, animated))));
+        return std::unique_ptr<Maximum>(new Maximum(std::move(parseProviders(xml, animated, functions))));
     else if(std::string(xml->Name())=="mod")
-        return std::unique_ptr<Modulo>(new Modulo(std::move(parseProviders(xml, animated))));
+        return std::unique_ptr<Modulo>(new Modulo(std::move(parseProviders(xml, animated, functions))));
     else if(std::string(xml->Name())=="inv")
-        return std::unique_ptr<Inverse>(new Inverse(std::move(parseProviders(xml, animated)[0])));
+        return std::unique_ptr<Inverse>(new Inverse(std::move(parseProviders(xml, animated, functions)[0])));
+    else if(std::string(xml->Name())=="function")
+    {
+        if(functions == nullptr)
+            throw std::exception("Invalid argument passed. Functions may not be null.");
+        auto funcName = xml->Attribute("name");
+        if(funcName == nullptr)
+            throw std::exception("No name for function specified.");
+        auto function = functions->find(funcName);
+        if(function == end(*functions))
+            throw std::exception((std::string("No template defined for function ") + funcName).c_str());
+        auto providers = parseProviders(function->second, animated, functions);
+        if(providers.size()>0)
+            throw std::exception((std::string("The template defined too many children: ") + funcName).c_str());
+        return std::move(providers[0]);
+    }
     else
         throw std::exception((std::string("Unknown value-provider specified: ") + xml->Name()).c_str());
 }
 
 std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml, 
     AnimatedGraphics* animated,
-    ResourceManager& resourceManager)
+    ResourceManager& resourceManager,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
 {
     tinyxml2::XMLElement* frameIndex = xml->FirstChildElement("frameindex");
     std::unique_ptr<ValueProvider> provider;
@@ -156,10 +184,10 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         tinyxml2::XMLElement* child = frameIndex->FirstChildElement();
         if(child == nullptr)
             throw std::exception("<frameindex> specified, but no provider included");
-        provider = std::move(parseProvider(child, animated));
+        provider = std::move(parseProvider(child, animated, functions));
     }
 
-    return parseAnimation(xml, animated, std::move(provider), resourceManager);
+    return parseAnimation(xml, animated, std::move(provider), resourceManager, functions);
 }
 
 std::unordered_map<std::string, tinyxml2::XMLElement*> LevelFileLoader::parseList(
@@ -193,7 +221,8 @@ std::vector<std::string> LevelFileLoader::parseGrid(tinyxml2::XMLElement* xml)
     return std::move(lines);
 }
 
-void LevelFileLoader::parseKinematics(tinyxml2::XMLElement* element, Entity* entity)
+void LevelFileLoader::parseKinematics(tinyxml2::XMLElement* element, Entity* entity,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
 {
     tinyxml2::XMLElement* kinematics = element->FirstChildElement("kinematics");
     if(kinematics == nullptr)
@@ -201,12 +230,12 @@ void LevelFileLoader::parseKinematics(tinyxml2::XMLElement* element, Entity* ent
     tinyxml2::XMLElement* rotation = kinematics->FirstChildElement("rotation");
     if(rotation != nullptr && rotation->FirstChildElement() != nullptr)
     {
-        std::unique_ptr<ValueProvider> provider = parseProvider(rotation->FirstChildElement(), entity);
+        std::unique_ptr<ValueProvider> provider = parseProvider(rotation->FirstChildElement(), entity, functions);
         if(provider != nullptr)
             entity->bindRotationController(std::move(provider));
     }
-    std::unique_ptr<ValueProvider> posX = findPositionController(kinematics, entity, "x");
-    std::unique_ptr<ValueProvider> posY = findPositionController(kinematics, entity, "y");
+    std::unique_ptr<ValueProvider> posX = findPositionController(kinematics, entity, "x", functions);
+    std::unique_ptr<ValueProvider> posY = findPositionController(kinematics, entity, "y", functions);
     if(posX != nullptr || posY != nullptr)
         entity->bindPositionController(std::move(posX), std::move(posY));
 }
@@ -214,7 +243,8 @@ void LevelFileLoader::parseKinematics(tinyxml2::XMLElement* element, Entity* ent
 std::unique_ptr<ValueProvider> LevelFileLoader::findPositionController(
     tinyxml2::XMLElement* xml,
     AnimatedGraphics* animated,
-    const std::string& axis)
+    const std::string& axis,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
 {
     for(auto iterator = xml->FirstChildElement("position");
         iterator != nullptr; iterator = iterator->NextSiblingElement("position"))
@@ -223,7 +253,7 @@ std::unique_ptr<ValueProvider> LevelFileLoader::findPositionController(
             continue;
         if(iterator->FirstChildElement() == nullptr)
             throw std::exception("The position element needs a mathematical sub-tag.");
-        return parseProvider(iterator->FirstChildElement(), animated);
+        return parseProvider(iterator->FirstChildElement(), animated, functions);
     }
     return nullptr;
 }

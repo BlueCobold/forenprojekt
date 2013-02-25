@@ -159,6 +159,7 @@ bool Level::load()
     std::unordered_map<std::string, tinyxml2::XMLElement*> shapes;
     std::unordered_map<std::string, tinyxml2::XMLElement*> physics;
     std::unordered_map<std::string, tinyxml2::XMLElement*> entities;
+    std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
 
     if(templates != nullptr)
     {
@@ -166,6 +167,8 @@ bool Level::load()
              shapes = std::move(LevelFileLoader::parseList(templates->FirstChildElement("shapes"), "shape", "name"));
         if(templates->FirstChildElement("physics") != nullptr)
             physics = std::move(LevelFileLoader::parseList(templates->FirstChildElement("physics"), "physic", "name"));
+        if(templates->FirstChildElement("functions") != nullptr)
+            functions = std::move(LevelFileLoader::parseList(templates->FirstChildElement("functions"), "function", "name"));
         if(templates->FirstChildElement("entities") != nullptr)
         {
             // Add use keys 'name' (objects) and 'rep' (grid)
@@ -224,7 +227,7 @@ bool Level::load()
                 
                 // Entity is well defined
                 if(entity != nullptr && shape != nullptr && physic != nullptr)
-                    m_entities.push_back(std::move(createEntity(entity, sf::Vector2u((column/2)*size, row*size), shape, physic)));
+                    m_entities.push_back(std::move(createEntity(entity, sf::Vector2u((column/2)*size, row*size), shape, physic, &functions)));
             }
         }
 
@@ -248,7 +251,7 @@ bool Level::load()
                 parallax->FloatAttribute("height"))));
             for(auto anim = parallax->FirstChildElement("animation"); anim != nullptr;
                 anim = anim->NextSiblingElement("animation"))
-                layer->bindAnimation(std::move(LevelFileLoader::parseAnimation(anim, layer.get(), m_resourceManager)));
+                layer->bindAnimation(std::move(LevelFileLoader::parseAnimation(anim, layer.get(), m_resourceManager, &functions)));
             background->bindLayer(std::move(layer));
         }
     }
@@ -295,7 +298,7 @@ bool Level::load()
 
         // Entity is well defined
         if(entity != nullptr && shape != nullptr && physic != nullptr)
-            m_entities.push_back(std::move(createEntity(entity, position, shape, physic)));
+            m_entities.push_back(std::move(createEntity(entity, position, shape, physic, &functions)));
     }
 
     // Load world properties
@@ -341,7 +344,8 @@ bool Level::validate(const tinyxml2::XMLDocument& document)
 }
 
 std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf::Vector2u& position,
-        tinyxml2::XMLElement* shape, tinyxml2::XMLElement* physic)
+    tinyxml2::XMLElement* shape, tinyxml2::XMLElement* physic,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
 {
     std::unique_ptr<Entity> entity;
     tinyxml2::XMLElement* element = nullptr;
@@ -370,11 +374,11 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
 
     auto collider = xml->FirstChildElement("onCollision");
     if(collider != nullptr)
-        parseCollider(entity.get(), collider);
+        parseCollider(entity.get(), collider, functions);
 
     auto filter = xml->FirstChildElement("collides");
     if(filter != nullptr)
-        parseCollisionFilter(entity.get(), filter);
+        parseCollisionFilter(entity.get(), filter, functions);
 
     entity->setName(std::string(xml->Attribute("name")));
     
@@ -382,7 +386,7 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     // Load animation
     for(auto element = animations->FirstChildElement("animation"); element != nullptr;
         element = element->NextSiblingElement("animation"))
-        entity->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, entity.get(), m_resourceManager)));
+        entity->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, entity.get(), m_resourceManager, functions)));
 
     auto constants = xml->FirstChildElement("constants");
     if(constants != nullptr)
@@ -405,7 +409,7 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     bodyDef.angle = utility::toRadian<float, float>(element->FloatAttribute("angle"));
     bodyDef.fixedRotation = element->BoolAttribute("fixedRotation");
     bodyDef.angularDamping = element->BoolAttribute("angularDamping");
-    LevelFileLoader::parseKinematics(element, entity.get());
+    LevelFileLoader::parseKinematics(element, entity.get(), functions);
 
     // Load shape
     if(std::string(shape->Attribute("type")) == "polygon") // Load polygon
@@ -481,14 +485,15 @@ const float Level::getHeight() const
     return m_height;
 }
 
-void Level::parseCollider(Entity* entity, tinyxml2::XMLElement* xml)
+void Level::parseCollider(Entity* entity, tinyxml2::XMLElement* xml,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
 {
     for(auto child = xml->FirstChildElement(); child != nullptr; child = child->NextSiblingElement())
     {
         if(std::string(child->Name()) == "changeProperty")
         {
             std::unique_ptr<ChangePropertyCollisionHandler> collider(new ChangePropertyCollisionHandler(child->Attribute("name")));
-            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), collider.get()));
+            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), collider.get(), functions));
             collider->bindProvider(std::move(provider));
             entity->bindCollisionHandler(std::move(collider));
         }
@@ -497,7 +502,8 @@ void Level::parseCollider(Entity* entity, tinyxml2::XMLElement* xml)
     }
 }
 
-void Level::parseCollisionFilter(Entity* entity, tinyxml2::XMLElement* xml)
+void Level::parseCollisionFilter(Entity* entity, tinyxml2::XMLElement* xml,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
 {
     for(auto child = xml->FirstChildElement(); child != nullptr; child = child->NextSiblingElement())
     {
@@ -515,7 +521,7 @@ void Level::parseCollisionFilter(Entity* entity, tinyxml2::XMLElement* xml)
         {
             bool target = std::string("entity") == child->Attribute("target");
             std::unique_ptr<PropertyFilter> filter(new PropertyFilter(target));
-            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), filter.get()));
+            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), filter.get(), functions));
             filter->bindProvider(std::move(provider));
             entity->bindCollisionFilter(std::move(filter));
         }
