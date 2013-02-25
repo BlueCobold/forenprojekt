@@ -1,5 +1,5 @@
 
-#include "VerticalStripesTransition.h"
+#include "VerticalStripesTransition.hpp"
 
 VerticalStripesTransition::VerticalStripesTransition(
     const sf::Texture* sourceTexture,

@@ -178,7 +178,7 @@
     <ClInclude Include="rendering\DrawParameter.hpp" />
     <ClInclude Include="rendering\transitions\AlphaTransition.hpp" />
     <ClInclude Include="rendering\transitions\Transition.hpp" />
-    <ClInclude Include="rendering\transitions\VerticalStripesTransition.h" />
+    <ClInclude Include="rendering\transitions\VerticalStripesTransition.hpp" />
     <ClInclude Include="resources\LevelFileLoader.hpp" />
     <ClInclude Include="resources\ResourceCache.hpp" />
     <ClInclude Include="resources\ResourceManager.hpp" />
