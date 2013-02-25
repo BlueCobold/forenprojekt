@@ -94,6 +94,16 @@
 				</body>
 				<fixture density="0.5" friction="0.8" restitution="0.1" />
 			</physic>
+			<physic name="door">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<time />
+							<!-- 90*abs(sin(max(min(180-abs(180-(x % 540)),90),0)*pi/180)^2) -->
+						</position>
+					</kinematics>
+				</body>
+			</physic>
 			<physic name="slapper">
 				<body type="kinematic" angle="0">
 					<kinematics>
@@ -178,35 +188,32 @@
 			</entity>
 
 			<entity name="target_1" rep="t1" type="target" collideWithBall="false">
+				<constants color="0" />
 				<physics name="target">
 					<shape type="circle" radius="30" />
 				</physics>
 				<animations>
 					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true">
 						<frameindex frames="2">
-							<mul>
-								<time />
-								<static value="0.5" />
-							</mul>
-							<static value="2" />
+							<setVar name="color">
+								<mod>
+									<mul>
+										<time />
+										<static value="0.5" />
+									</mul>
+									<static value="2" />
+								</mod>
+							</setVar>
 						</frameindex>
 					</animation>
 				</animations>
 				<collides>
 					<propertyFilter target="entity">
 						<add>
-							<static value="1" />
+							<static value="2" />
 							<mul>
 								<static value="-1" />
-								<int>
-									<mod>
-										<mul>
-											<time />
-											<static value="0.5" />
-										</mul>
-										<static value="2" />
-									</mod>
-								</int>
+								<var name="color" />
 							</mul>
 						</add>
 					</propertyFilter>

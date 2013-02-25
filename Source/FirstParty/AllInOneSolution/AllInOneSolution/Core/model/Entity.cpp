@@ -51,7 +51,13 @@ void Entity::setValueOf(const std::string& name, const float value)
     if(m_updatingAni == nullptr)
         m_variables[name] = value;
     else
-        m_updatingAni->setValueOf(name, value);
+    {
+        auto match = m_variables.find(name);
+        if(match == end(m_variables))
+            m_updatingAni->setValueOf(name, value);
+        else
+            m_variables[name] = value;
+    }
 }
 
 void Entity::setName(std::string name)
