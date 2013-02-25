@@ -162,7 +162,7 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
         if(function == end(*functions))
             throw std::exception((std::string("No template defined for function ") + funcName).c_str());
         auto providers = parseProviders(function->second, animated, functions);
-        if(providers.size()>0)
+        if(providers.size()>1)
             throw std::exception((std::string("The template defined too many children: ") + funcName).c_str());
         return std::move(providers[0]);
     }

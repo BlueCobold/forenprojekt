@@ -1,6 +1,6 @@
 #include "LoadLevelState.hpp"
 #include "resources/ResourceManager.hpp"
-#include "rendering/transitions/VerticalStripesTransition.h"
+#include "rendering/transitions/VerticalStripesTransition.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
