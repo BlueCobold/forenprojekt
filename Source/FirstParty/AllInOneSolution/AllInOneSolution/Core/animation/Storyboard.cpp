@@ -13,6 +13,7 @@ Storyboard::Storyboard(const float startValue,
 
 void Storyboard::start()
 {
+	TimedObject::restartAt(0);
 	m_finished = false;
 }
 
