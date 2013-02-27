@@ -3,10 +3,10 @@
 #include "model\Level.hpp"
 
 HUD::HUD(ResourceManager& resourceManager, Config& config) :
-m_resourceManager(resourceManager),
-m_fpsCounter(resourceManager,sf::Vector2f(50.f,10.f),0.f,"gold"),
-m_target(resourceManager, sf::Vector2f(60.f,10.f),0.f, "gold", HUDElement::HR_Right),
-m_points(resourceManager, sf::Vector2f(0.f,10.f),0.f, "gold", HUDElement::HR_Center)
+	m_resourceManager(resourceManager),
+	m_fpsCounter(resourceManager,sf::Vector2f(50.f,10.f),0.f,"gold"),
+	m_target(resourceManager, sf::Vector2f(60.f,10.f),0.f, "gold", HUDElement::Right),
+	m_points(resourceManager, sf::Vector2f(0.f,10.f),0.f, "gold", HUDElement::Center)
 {
     m_fpsShow = config.get<bool>("ShowFps");
 }
