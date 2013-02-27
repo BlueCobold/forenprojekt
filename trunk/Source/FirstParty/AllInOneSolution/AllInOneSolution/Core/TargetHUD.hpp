@@ -15,7 +15,7 @@ private:
 
 public:
     TargetHUD(ResourceManager& resourceManager, const sf::Vector2f& position, const float rotation, std::string bitmapFont,
-    HorizontalReference hReference = HR_Left, VerticalReference vReference = VR_Top);
+		float hReference = HUDElement::Left, float vReference = HUDElement::Top);
 
     void update(const DrawParameter& params);
 

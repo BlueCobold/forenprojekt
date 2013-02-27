@@ -9,9 +9,13 @@ class ResourceManager;
 class HUDElement
 {
 public:
-    
-    enum VerticalReference {VR_Top, VR_Bottom, VR_Center};
-    enum HorizontalReference {HR_Left, HR_Right, HR_Center};
+
+	static const float Left;
+	static const float Right;
+	static const float Center;
+	static const float Top;
+	static const float Middle;
+	static const float Bottom;
 
 protected:
 
@@ -23,19 +27,19 @@ protected:
 
     sf::Vector2f m_position;
 
-    HorizontalReference m_horizontalReference;
+    float m_horizontalPercentage;
 
-    VerticalReference m_verticalReference;
+    float m_verticalPercentage;
 
 public:
     HUDElement(ResourceManager& resourceManager, const sf::Vector2f& position, const float rotation, std::string bitmapFont,
-    HorizontalReference hReference = HR_Left, VerticalReference vReference = VR_Top, std::string text = "");
+		float horizontalPercentage = HUDElement::Left, float verticalPercentage = HUDElement::Top, std::string text = "");
 
     virtual void update(const DrawParameter& params);
 
     virtual void draw(const DrawParameter& params);
 
-    void setPosition(sf::Vector2f position, HorizontalReference hReference = HR_Left, VerticalReference vReference = VR_Top);
+    void setPosition(sf::Vector2f position, float horizontalPercentage = HUDElement::Left, float verticalPercentage = HUDElement::Top);
 
     void setText(std::string text);
 };
