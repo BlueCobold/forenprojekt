@@ -33,6 +33,11 @@ void LineLabel::draw(const DrawParameter& params)
         params.getTarget().draw(*it);
 }
 
+void LineLabel::setColor(const sf::Color &color)
+{
+	for(auto it = m_sprites.begin(); it != m_sprites.end(); ++it) it->setColor(color);
+}
+
 void LineLabel::setText(const std::string& text)
 {
     if(text != m_text)

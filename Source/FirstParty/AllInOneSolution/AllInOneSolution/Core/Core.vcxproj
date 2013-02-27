@@ -90,6 +90,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animation\Animation.cpp" />
+    <ClCompile Include="animation\Storyboard.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -142,6 +143,7 @@
     <ClInclude Include="animation\provider\TimeProvider.hpp" />
     <ClInclude Include="animation\provider\ValueProvider.hpp" />
     <ClInclude Include="animation\provider\VariableProvider.hpp" />
+    <ClInclude Include="animation\Storyboard.hpp" />
     <ClInclude Include="animation\TimedObject.hpp" />
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
