@@ -94,6 +94,9 @@
     <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
+    <ClCompile Include="animation\Storyboard.cpp">
+      <Filter>Sources\animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -293,6 +296,9 @@
     </ClInclude>
     <ClInclude Include="rendering\transitions\VerticalStripesTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\Storyboard.hpp">
+      <Filter>Headers\animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

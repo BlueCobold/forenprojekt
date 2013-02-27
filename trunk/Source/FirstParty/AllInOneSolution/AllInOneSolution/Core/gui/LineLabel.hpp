@@ -22,6 +22,7 @@ public:
 
     void setPosition(const sf::Vector2f position);
     void setPosition(const float x, const float y);
+	void setColor(const sf::Color &color);
 
     sf::Vector2f getPosition() const;
 
