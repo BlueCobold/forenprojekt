@@ -1,4 +1,5 @@
 #summary Overview of the parallax-layer-concept
+#labels concepts
 
 = Parallax-Scrolling =
 
