@@ -51,6 +51,9 @@ void LineLabel::setText(const std::string& text)
             m_sprites.back().setRotation(m_rotation);
 
             xOffset += m_font->getSprite(*it).getTextureRect().width;
+
+            m_length = xOffset;
+
         }
 
         m_text = text;
@@ -76,6 +79,8 @@ void LineLabel::setPosition(const sf::Vector2f position)
             m_sprites.back().setRotation(m_rotation);
 
             xOffset += m_font->getSprite(*it).getTextureRect().width;
+
+            m_length = xOffset;
         }
     }
 }
@@ -103,4 +108,9 @@ float LineLabel::getRotation() const
 void LineLabel::setBitmapFont(BitmapFont& font)
 {
     m_font = &font;
+}
+
+float LineLabel::getLength()
+{
+    return m_length;
 }
