@@ -24,7 +24,6 @@ HUDElement::HUDElement(ResourceManager& resourceManager,
 {
     m_bitmapfont = m_resourceManager.getBitmapFont(bitmapFont);
     m_label.setBitmapFont(*m_bitmapfont);
-    m_aligned = AlignedLeft;
 }
 
 void HUDElement::update(const DrawParameter& params)
@@ -36,30 +35,9 @@ void HUDElement::update(const DrawParameter& params)
 	sf::Vector2f bottomRightViewEnd = screenCenter + screenSize * 0.5f;
 	sf::Vector2f delta = bottomRightViewEnd - topLeftViewStart;
 
-	sf::Vector2f position;
-
-    switch (m_aligned)
-    {
-        case AlignedRight:
-            position.x =  topLeftViewStart.x + delta.x * m_horizontalPercentage + m_position.x - m_label.getLength();
-	        position.y =  topLeftViewStart.y + delta.y * m_verticalPercentage + m_position.y;
-        break;
-
-        case AlignedCenter:
-            position.x =  topLeftViewStart.x + delta.x * m_horizontalPercentage + m_position.x - m_label.getLength() / 2.f;
-	        position.y =  topLeftViewStart.y + delta.y * m_verticalPercentage + m_position.y;
-        break;
-
-        case AlignedLeft:
-            position.x =  topLeftViewStart.x + delta.x * m_horizontalPercentage + m_position.x;
-	        position.y =  topLeftViewStart.y + delta.y * m_verticalPercentage + m_position.y;
-        break;
-
-        default:
-            position.x =  topLeftViewStart.x + delta.x * m_horizontalPercentage + m_position.x;
-	        position.y =  topLeftViewStart.y + delta.y * m_verticalPercentage + m_position.y;
-        break;
-    }
+	sf::Vector2f position; 
+	position.x =  topLeftViewStart.x + delta.x * m_horizontalPercentage + m_position.x;
+	position.y =  topLeftViewStart.y + delta.y * m_verticalPercentage + m_position.y;
 
     m_label.setPosition(position);
 }
@@ -79,9 +57,4 @@ void HUDElement::setPosition(sf::Vector2f position, float horizontalPercentage, 
 void HUDElement::setText(std::string text)
 {
     m_label.setText(text);
-}
-
-void HUDElement::setTextAligned(Aligned value)
-{
-    m_aligned = value;
 }
