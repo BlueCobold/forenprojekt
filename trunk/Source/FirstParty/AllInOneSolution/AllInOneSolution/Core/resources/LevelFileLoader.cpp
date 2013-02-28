@@ -66,7 +66,10 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     sf::Vector2f origin;
     origin.x = xml->FloatAttribute("midx");
     origin.y = xml->FloatAttribute("midy");
-    std::unique_ptr<Animation> anim(new Animation(std::move(provider), frames, width, height, rotate, origin, offset));
+    bool horizontal = true;
+    if(xml->Attribute("alignment") != nullptr)
+        horizontal = std::string("vertical") != xml->Attribute("alignment");
+    std::unique_ptr<Animation> anim(new Animation(std::move(provider), frames, width, height, rotate, origin, offset, horizontal));
     sf::Vector2f sourceOffset;
     sourceOffset.x = xml->FloatAttribute("srcx");
     sourceOffset.y = xml->FloatAttribute("srcy");

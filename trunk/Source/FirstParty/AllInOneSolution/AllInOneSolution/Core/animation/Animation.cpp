@@ -10,7 +10,8 @@ Animation::Animation(std::unique_ptr<ValueProvider> provider,
     const unsigned int frameWidth, const unsigned int frameHeight,
     const bool applyRotation,
     const sf::Vector2f& origin,
-    const sf::Vector2f& drawOffset) :
+    const sf::Vector2f& drawOffset,
+    const bool horizontal) :
     m_frameProvider(std::move(provider)),
     m_frames(frames),
     m_frame(0),
@@ -18,7 +19,8 @@ Animation::Animation(std::unique_ptr<ValueProvider> provider,
     m_frameHeight(frameHeight),
     m_applyRotation(applyRotation),
     m_drawOffset(drawOffset),
-    m_externalRotation(0.f)
+    m_externalRotation(0.f),
+    m_horizontal(horizontal)
 {
     m_sprite.setOrigin(origin);
 }
@@ -74,7 +76,10 @@ void Animation::bindTexture(const sf::Texture& texture, const sf::Vector2f& sour
 
 const sf::IntRect Animation::getTextureRect() const
 {
-    return sf::IntRect(static_cast<int>(m_frame * m_frameWidth + m_sourceOffset.x), static_cast<int>(m_sourceOffset.y), m_frameWidth, m_frameHeight);
+    if(m_horizontal)
+        return sf::IntRect(static_cast<int>(m_frame * m_frameWidth + m_sourceOffset.x), static_cast<int>(m_sourceOffset.y), m_frameWidth, m_frameHeight);
+    else
+        return sf::IntRect(static_cast<int>(m_sourceOffset.x), static_cast<int>(m_frame * m_frameHeight + m_sourceOffset.y), m_frameWidth, m_frameHeight);
 }
 
 void Animation::draw(const DrawParameter& param)
