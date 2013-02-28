@@ -25,7 +25,8 @@ public:
         const unsigned int frameHeight,
         const bool applyRotation,
         const sf::Vector2f& origin,
-        const sf::Vector2f& drawOffset);
+        const sf::Vector2f& drawOffset,
+        const bool horizontal = true);
     ~Animation();
 
     void update();
@@ -52,6 +53,7 @@ private:
     unsigned int m_frame;
     unsigned int m_frameWidth;
     unsigned int m_frameHeight;
+    bool m_horizontal;
     sf::Sprite m_sprite;
     sf::Vector2f m_sourceOffset;
     sf::Vector2f m_externalPosition;
