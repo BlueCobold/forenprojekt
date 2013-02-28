@@ -5,6 +5,8 @@
 
 class ResourceManager;
 
+enum Aligned {AlignedLeft, AlignedCenter, AlignedRight};
+
 /// Basis class for HUD
 class HUDElement
 {
@@ -31,6 +33,8 @@ protected:
 
     float m_verticalPercentage;
 
+    Aligned m_aligned;
+
 public:
     HUDElement(ResourceManager& resourceManager, const sf::Vector2f& position, const float rotation, std::string bitmapFont,
 		float horizontalPercentage = HUDElement::Left, float verticalPercentage = HUDElement::Top, std::string text = "");
@@ -42,6 +46,8 @@ public:
     void setPosition(sf::Vector2f position, float horizontalPercentage = HUDElement::Left, float verticalPercentage = HUDElement::Top);
 
     void setText(std::string text);
+
+    void setTextAligned(Aligned value);
 };
 
 #endif
