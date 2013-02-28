@@ -1,5 +1,5 @@
 #summary Lists the different modes from blending from one game-stage to another
-#labels blending
+#labels blending,concepts,mockups
 
 = Overview =
 
