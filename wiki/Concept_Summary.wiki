@@ -1,4 +1,4 @@
-#This page shall give an overview or links to mockups for concepts of the game
+#summary This page shall give an overview or links to mockups for concepts of the game
 
 == Ball-Position ==
 
