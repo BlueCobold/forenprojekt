@@ -15,7 +15,7 @@ HUDElement::HUDElement(const sf::Vector2f& position,
                        const float horizontalPercentage, 
                        const float verticalPercentage,
                        const std::string& text) :
-    m_label(text,sf::Vector2f(0.f,0.f),rotation,nullptr),
+    m_label(text, sf::Vector2f(0.f, 0.f), rotation, nullptr),
     m_position(position),
     m_verticalPercentage(verticalPercentage),
     m_horizontalPercentage(horizontalPercentage)
