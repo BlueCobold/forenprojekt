@@ -13,16 +13,29 @@
 class LineLabel : public Drawable
 {
 public:
+
+    enum Alignment
+    {
+        Left,
+        Centered,
+        Right
+    };
+
     LineLabel();
-    LineLabel(const std::string& text, const sf::Vector2f& position, const float rotation, BitmapFont* font);
-    LineLabel(const std::string& text, const float x, const float y, float rotation, BitmapFont* font);
+    LineLabel(const std::string& text,
+        const sf::Vector2f& position,
+        const float rotation,
+        BitmapFont* font,
+        const Alignment alignment = Left);
 
     void setText(const std::string& text);
     std::string getText() const;
+    float getWidth() const;
 
     void setPosition(const sf::Vector2f position);
     void setPosition(const float x, const float y);
 	void setColor(const sf::Color &color);
+    void setAlignment(const Alignment alignment);
 
     sf::Vector2f getPosition() const;
 
@@ -34,12 +47,16 @@ public:
     void draw(const DrawParameter& params);
 
 private:
+
+    void rebuild();
+
+    float m_width;
     std::string m_text;
     sf::Vector2f m_position;
     float m_rotation;
     BitmapFont* m_font;
     std::vector<sf::Sprite> m_sprites;
-
+    Alignment m_alignment;
 };
 
 #endif // LINELABEL_HPP
