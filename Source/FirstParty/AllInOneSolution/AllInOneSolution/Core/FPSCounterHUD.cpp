@@ -2,8 +2,8 @@
 #include "resources\ResourceManager.hpp"
 #include "Utility.hpp"
 
-FPSCounterHUD::FPSCounterHUD(ResourceManager& resourceManager, const sf::Vector2f& position, const float rotation, std::string bitmapFont) :
-HUDElement(resourceManager,position,rotation,bitmapFont) 
+FPSCounterHUD::FPSCounterHUD(const sf::Vector2f& position, const float rotation, BitmapFont* bitmapFont) :
+    HUDElement(position, rotation, bitmapFont) 
 {
     m_label.setText(utility::toString<int>(m_fpsCounter.getFPS()));
 }

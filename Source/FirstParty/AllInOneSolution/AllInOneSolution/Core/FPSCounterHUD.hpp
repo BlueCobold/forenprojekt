@@ -17,7 +17,7 @@ private:
 
 public:
 
-    FPSCounterHUD(ResourceManager& resourceManager, const sf::Vector2f& position, const float rotation, std::string bitmapFont);
+    FPSCounterHUD(const sf::Vector2f& position, const float rotation, BitmapFont* bitmapFont);
     
     void update(const DrawParameter& params);
 

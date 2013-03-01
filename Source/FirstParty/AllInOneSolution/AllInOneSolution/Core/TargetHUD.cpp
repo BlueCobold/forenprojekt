@@ -3,13 +3,15 @@
 #include "Utility.hpp"
 
 TargetHUD::TargetHUD(ResourceManager& resourceManager, 
-				     const sf::Vector2f& position, 
-					 const float rotation, 
-					 std::string bitmapFont,
-					 float hReference, float vReference) :
-	HUDElement(resourceManager,position,rotation,bitmapFont, hReference, vReference),
-	m_remainingTarget(0),
-	m_totalTarget(0)
+                    const sf::Vector2f& position, 
+                    const float rotation, 
+                    BitmapFont* bitmapFont,
+                    const float hReference,
+                    const float vReference) :
+    HUDElement(position,rotation,bitmapFont, hReference, vReference),
+    m_remainingTarget(0),
+    m_totalTarget(0),
+    m_resourceManager(resourceManager)
 {
     m_label.setText(utility::toString<int>(m_remainingTarget) + "/" + utility::toString<int>(m_totalTarget));
     m_targetTexture.setTexture(*m_resourceManager.getTexture("targetmini"));

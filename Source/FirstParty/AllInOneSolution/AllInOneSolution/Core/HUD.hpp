@@ -19,8 +19,6 @@ class HUD : public Drawable
 {
 private:
 
-    ResourceManager& m_resourceManager;
-
     FPSCounterHUD m_fpsCounter;
     bool m_fpsShow;
 
@@ -31,7 +29,7 @@ private:
 public:
     HUD(ResourceManager& resourceManager, Config& config);
 
-    void update(Level* level);
+    void update(const Level* level);
 
     void draw(const DrawParameter& params);
 

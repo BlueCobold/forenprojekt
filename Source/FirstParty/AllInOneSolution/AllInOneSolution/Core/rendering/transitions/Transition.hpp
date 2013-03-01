@@ -26,6 +26,9 @@ public:
         TimedObject::restartAt(m_frameTime.getElapsedTime().asSeconds());
     }
 
+    virtual ~Transition()
+    { }
+
     virtual void update()
     {
         TimedObject::updateCurrentTime(m_frameTime.getElapsedTime().asSeconds());

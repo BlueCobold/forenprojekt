@@ -100,7 +100,7 @@ float LineLabel::getRotation() const
     return m_rotation;
 }
 
-void LineLabel::setBitmapFont(BitmapFont& font)
+void LineLabel::setBitmapFont(BitmapFont* font)
 {
-    m_font = &font;
+    m_font = font;
 }

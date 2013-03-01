@@ -21,10 +21,6 @@ protected:
 
     LineLabel m_label;
 
-    BitmapFont* m_bitmapfont;
-
-    ResourceManager& m_resourceManager;
-
     sf::Vector2f m_position;
 
     float m_horizontalPercentage;
@@ -32,16 +28,22 @@ protected:
     float m_verticalPercentage;
 
 public:
-    HUDElement(ResourceManager& resourceManager, const sf::Vector2f& position, const float rotation, std::string bitmapFont,
-		float horizontalPercentage = HUDElement::Left, float verticalPercentage = HUDElement::Top, std::string text = "");
+    HUDElement(
+        const sf::Vector2f& position,
+        const float rotation,
+        BitmapFont* bitmapFont,
+		const float horizontalPercentage = HUDElement::Left,
+        const float verticalPercentage = HUDElement::Top,
+        const std::string& text = "");
+
+    virtual ~HUDElement()
+    { }
 
     virtual void update(const DrawParameter& params);
 
     virtual void draw(const DrawParameter& params);
 
-    void setPosition(sf::Vector2f position, float horizontalPercentage = HUDElement::Left, float verticalPercentage = HUDElement::Top);
-
-    void setText(std::string text);
+    void setText(const std::string& text);
 };
 
 #endif
