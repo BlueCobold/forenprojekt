@@ -23,6 +23,7 @@ void PlayState::onEnter(void *enterInformation)
     float time = m_frametime.getElapsedTime().asSeconds();
     m_level->restartAt(time);
     m_level->update(time, m_screen);
+    m_hud.update(m_level.get());
 }
 
 StateChangeInformation PlayState::update()

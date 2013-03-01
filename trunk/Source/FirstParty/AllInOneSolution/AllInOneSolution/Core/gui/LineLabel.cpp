@@ -9,20 +9,16 @@ LineLabel::LineLabel()
     setText("");
 }
 
-LineLabel::LineLabel(const std::string& text, const sf::Vector2f& position, const float rotation, BitmapFont* font)
+LineLabel::LineLabel(const std::string& text,
+                    const sf::Vector2f& position,
+                    const float rotation,
+                    BitmapFont* font,
+                    Alignment alignment)
     : m_text(text),
     m_position(position),
     m_rotation(rotation),
-    m_font(font)
-{
-    setText(text);
-}
-
-LineLabel::LineLabel(const std::string& text, const float x, const float y, float rotation, BitmapFont* font)
-    : m_text(text),
-    m_position(sf::Vector2f(x,y)),
-    m_rotation(rotation),
-    m_font(font)
+    m_font(font),
+    m_alignment(alignment)
 {
     setText(text);
 }
@@ -42,18 +38,8 @@ void LineLabel::setText(const std::string& text)
 {
     if(text != m_text)
     {
-        m_sprites.clear();
-        float xOffset = 0;
-        for(auto it = begin(text); it != end(text); it++)
-        {
-            m_sprites.push_back(m_font->getSprite(*it));
-            m_sprites.back().setPosition(m_position.x + xOffset, m_position.y);
-            m_sprites.back().setRotation(m_rotation);
-
-            xOffset += m_font->getSprite(*it).getTextureRect().width;
-        }
-
         m_text = text;
+        rebuild();
     }
 }
 
@@ -67,22 +53,50 @@ void LineLabel::setPosition(const sf::Vector2f position)
     if(position != m_position)
     {
         m_position = position;
-        m_sprites.clear();
-        float xOffset = 0;
-        for(auto it = begin(m_text); it != end(m_text); it++)
-        {
-            m_sprites.push_back(m_font->getSprite(*it));
-            m_sprites.back().setPosition(m_position.x + xOffset, m_position.y);
-            m_sprites.back().setRotation(m_rotation);
-
-            xOffset += m_font->getSprite(*it).getTextureRect().width;
-        }
+        rebuild();
     }
+}
+
+void LineLabel::rebuild()
+{
+    m_sprites.clear();
+
+    float shift = 0;
+    if(m_alignment != Centered)
+    {
+        float width = 0;
+        for(auto it = begin(m_text); it != end(m_text); it++)
+            width += m_font->getSprite(*it).getTextureRect().width;
+        if(m_alignment == Right)
+            shift -= width;
+        else
+            shift -= width/2;
+    }
+
+    float xOffset = 0;
+    for(auto it = begin(m_text); it != end(m_text); it++)
+    {
+        m_sprites.push_back(m_font->getSprite(*it));
+        m_sprites.back().setPosition(shift + m_position.x + xOffset, m_position.y);
+        m_sprites.back().setRotation(m_rotation);
+
+        xOffset += m_font->getSprite(*it).getTextureRect().width;
+    }
+    m_width = xOffset;
 }
 
 void LineLabel::setPosition(const float x, const float y)
 {
     m_position = sf::Vector2f(x, y);
+}
+
+void LineLabel::setAlignment(const Alignment alignment)
+{
+    if(m_alignment != alignment)
+    {
+        m_alignment = alignment;
+        rebuild();
+    }
 }
 
 sf::Vector2f LineLabel::getPosition() const
@@ -103,4 +117,9 @@ float LineLabel::getRotation() const
 void LineLabel::setBitmapFont(BitmapFont* font)
 {
     m_font = font;
+}
+
+float LineLabel::getWidth() const
+{
+    return m_width;
 }

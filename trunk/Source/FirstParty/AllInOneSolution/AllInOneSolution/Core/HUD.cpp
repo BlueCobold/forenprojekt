@@ -4,7 +4,7 @@
 
 HUD::HUD(ResourceManager& resourceManager, Config& config) :
     m_fpsCounter(sf::Vector2f(30.f,10.f), 0.f, resourceManager.getBitmapFont("gold")),
-    m_target(resourceManager, sf::Vector2f(-80.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Right),
+    m_target(resourceManager, sf::Vector2f(-30.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Right),
     m_points(sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Center)
 {
     m_fpsShow = config.get<bool>("ShowFps");
