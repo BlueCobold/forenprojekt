@@ -14,7 +14,7 @@ VerticalStripesTransition::VerticalStripesTransition(
         for(int i = 0; i < stripeCount; ++i)
         {
             auto sprite = new sf::Sprite(*targetTexture, sf::IntRect(i * m_stripeWidth, 0, 0, targetTexture->getSize().y));
-            sprite->setPosition(i * m_stripeWidth, 0);
+            sprite->setPosition(static_cast<float>(i * m_stripeWidth), 0);
             m_targetSprites.push_back(std::unique_ptr<sf::Sprite>(sprite));
         }
     }

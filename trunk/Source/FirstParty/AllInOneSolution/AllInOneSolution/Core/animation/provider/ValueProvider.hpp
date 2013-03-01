@@ -8,6 +8,9 @@ class ValueProvider
 {
 public:
 
+    virtual ~ValueProvider()
+    { }
+
     virtual float getValue() = 0;
 };
 
