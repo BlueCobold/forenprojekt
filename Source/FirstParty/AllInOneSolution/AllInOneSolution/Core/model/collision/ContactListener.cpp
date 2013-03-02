@@ -1,5 +1,6 @@
 #include "ContactListener.hpp"
 #include "../Entity.hpp"
+#include "../../model/Ball.hpp"
 
 #include "./handler/CollisionHandler.hpp"
 
@@ -23,12 +24,18 @@ void ContactListener::BeginContact(b2Contact* contact)
         if(entityB->getSoundName().length() > 0)
             entityB->getSoundManager()->play(entityB->getSoundName(), velocityA);
         entityB->onCollide(entityA);
+
+        if(entityB->getType() == Entity::Teeter)
+            dynamic_cast<Ball*>(entityA)->setMultiHit(false);
     }
     else if(entityB->getType() == Entity::Ball)
     {
         if(entityA->getSoundName().length() > 0)
             entityA->getSoundManager()->play(entityA->getSoundName(), velocityB);
         entityA->onCollide(entityB);
+
+        if(entityA->getType() == Entity::Teeter)
+            dynamic_cast<Ball*>(entityB)->setMultiHit(false);
     }
 }
  
