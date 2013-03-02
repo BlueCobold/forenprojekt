@@ -19,6 +19,10 @@ public:
     void setFieldDimension(const b2Vec2 fieldDimension);
 
     bool getBallLost();
+
+    bool getMultiHit();
+
+    void setMultiHit(bool value);
 private:
 
     float m_ballResetTime;
@@ -28,6 +32,8 @@ private:
     b2Vec2 m_fieldDimension;
 
     bool m_lostBall;
+
+    bool m_multiHit;
 private:
 
     void autoResetBall(const float elapsedTime);

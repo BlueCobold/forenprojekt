@@ -96,10 +96,17 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
             m_points = m_points + 100 + m_multiHit * 50;
             m_multiHit++;
         }
-        if((*it)->getType() == Entity::Ball && static_cast<Ball*>(it->get())->getBallLost())
+        if((*it)->getType() == Entity::Ball)
         {
-            m_points -= 10;
-            m_multiHit = 0;
+            if(m_ball->getBallLost())
+            {
+                m_points -= 10;
+                m_multiHit = 0;
+            }
+            else if(!m_ball->getMultiHit())
+                m_multiHit = 0;
+
+            m_ball->setMultiHit(true);
         }
         (*it)->update(elapsedTime);
     }
