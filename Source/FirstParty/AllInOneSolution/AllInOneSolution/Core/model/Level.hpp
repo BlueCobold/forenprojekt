@@ -34,7 +34,12 @@ namespace tinyxml2
 
 /// Manages the different levels and is
 /// also resposible for loading them.
-class Level : public TimedObject, public Drawable
+class Level :
+    public TimedObject,
+    public Drawable,
+    private VariableHandler,
+    private CollisionFilter,
+    private CollisionHandler
 {
 public:
     /// Construct a level from the given level number
@@ -55,8 +60,14 @@ public:
     const int getRemainingTarget() const;
 
     const int getPoints() const;
+    
+    virtual float getValueOf(const std::string& name) const;
+    virtual void setValueOf(const std::string& name, const float value);
 
 private:
+    virtual bool shouldCollide(Entity* entityA, Entity* entityB);
+    virtual void onCollision(Entity* entityA, Entity* entityB);
+
     /// Load the level after m_number
     bool load();
 
@@ -85,6 +96,8 @@ private:
 
     unsigned int m_number;
 
+    std::map<std::string, float> m_variables;
+    Entity* m_updatingEntity;
     std::vector<std::unique_ptr<Entity>> m_entities;
 
     // HACK: This should be in the Entity class, but since unique_ptr sucks with VS10...
@@ -92,7 +105,7 @@ private:
 
     std::unique_ptr<Background> m_background;
 
-    ContactListener m_contactListener;
+    std::unique_ptr<ContactListener> m_contactListener;
 
     float m_timeStep;
     int m_velocityIterations;
