@@ -109,12 +109,12 @@ void Entity::bindCollisionFilter(std::unique_ptr<CollisionFilter> filter)
 void Entity::onCollide(Entity* partner)
 {
     for(auto it = begin(m_collisionHandler); it != end(m_collisionHandler); ++it)
-        (*it)->OnCollision(this, partner);
+        (*it)->onCollision(this, partner);
 }
 
 bool Entity::shouldCollide(Entity* partner)
 {
     if(m_collisionFilter == nullptr)
         return true;
-    return m_collisionFilter->ShouldCollide(this, partner);
+    return m_collisionFilter->shouldCollide(this, partner);
 }

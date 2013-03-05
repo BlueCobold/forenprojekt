@@ -44,10 +44,12 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_remainingTarget(0),
     m_points(0),
     m_multiHit(0),
-    m_ball(nullptr)
+    m_ball(nullptr),
+    m_updatingEntity(nullptr)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
+    m_contactListener.reset(new ContactListener(this, this));
     load();
 }
 
@@ -90,12 +92,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
     for(auto it = begin(m_entities); it != end(m_entities); ++it)
     {
-        if((*it)->getType() == Entity::Target && (*it)->killed())
-        {
-            m_remainingTarget--;
-            m_points = m_points + 100 + m_multiHit * 50;
-            m_multiHit++;
-        }
+        m_updatingEntity = (*it).get();
         if((*it)->getType() == Entity::Ball)
         {
             if(m_ball->getBallLost())
@@ -103,13 +100,10 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
                 m_points -= 10;
                 m_multiHit = 0;
             }
-            else if(!m_ball->getMultiHit())
-                m_multiHit = 0;
-
-            m_ball->setMultiHit(true);
         }
         (*it)->update(elapsedTime);
     }
+    m_updatingEntity = nullptr;
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         m_debugDraw = !m_debugDraw;
@@ -130,6 +124,76 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         m_scrollView.adjustView(ballpos, screen);
     }
 #endif
+}
+
+float Level::getValueOf(const std::string& name) const
+{
+    auto match = m_variables.find(name);
+    if(match == end(m_variables))
+    {
+        if(m_updatingEntity == nullptr)
+            throw std::exception("Can't get a variable at this time.");
+        return m_updatingEntity->getValueOf(name);
+    }
+    return match->second;
+}
+
+void Level::setValueOf(const std::string& name, const float value)
+{
+    if(m_updatingEntity == nullptr)
+        m_variables[name] = value;
+    else
+    {
+        auto match = m_variables.find(name);
+        if(match == end(m_variables))
+            m_updatingEntity->setValueOf(name, value);
+        else
+            m_variables[name] = value;
+    }
+}
+
+bool Level::shouldCollide(Entity* entityA, Entity* entityB)
+{
+    if(entityB->getType() == Entity::Ball)
+    {
+        if(!entityA->shouldCollide(entityB))
+            return false;
+        if(entityA->getType() == Entity::Target)
+        {
+            entityA->kill();
+            m_remainingTarget--;
+            m_points += 100 + m_multiHit * 50;
+            m_multiHit++;
+        }
+        else if(entityA->getType() == Entity::Teeter)
+            m_multiHit = 0;
+        return entityA->doesCollideWithBall();
+    }
+    else if(entityA->getType() == Entity::Ball)
+    {
+        if(!entityB->shouldCollide(entityA))
+            return false;
+        if(entityB->getType() == Entity::Target)
+        {
+            entityB->kill();
+            m_remainingTarget--;
+            m_points += 100 + m_multiHit * 50;
+            m_multiHit++;
+        }
+        else if(entityB->getType() == Entity::Teeter)
+            m_multiHit = 0;
+        return entityB->doesCollideWithBall();
+    }
+
+    return true;
+}
+
+void Level::onCollision(Entity* entityA, Entity* entityB)
+{
+    if(entityA->getType() == Entity::Ball)
+        entityB->onCollide(entityA);
+    else if(entityB->getType() == Entity::Ball)
+        entityA->onCollide(entityB);
 }
 
 void Level::draw(const DrawParameter& param)
@@ -184,6 +248,10 @@ bool Level::load()
             entities.insert(begin(temp), end(temp));
         }
     }
+    
+    auto constants = doc.FirstChildElement("level")->FirstChildElement("constants");
+    if(constants != nullptr)
+        LevelFileLoader::parseConstants(constants, this);
 
     // ==Parse grid==
     tinyxml2::XMLElement* grid = doc.FirstChildElement("level")->FirstChildElement("grid");
@@ -258,7 +326,7 @@ bool Level::load()
                 parallax->FloatAttribute("height"))));
             for(auto anim = parallax->FirstChildElement("animation"); anim != nullptr;
                 anim = anim->NextSiblingElement("animation"))
-                layer->bindAnimation(std::move(LevelFileLoader::parseAnimation(anim, layer.get(), m_resourceManager, &functions)));
+                layer->bindAnimation(std::move(LevelFileLoader::parseAnimation(anim, layer.get(), layer.get(), m_resourceManager, &functions)));
             background->bindLayer(std::move(layer));
         }
     }
@@ -311,7 +379,7 @@ bool Level::load()
     // Load world properties
     tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
     m_world.SetGravity(b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y")));
-    m_world.SetContactListener(&m_contactListener);
+    m_world.SetContactListener(m_contactListener.get());
 
     // setup scrollview
     m_scrollView.setLevelSize(sf::Vector2f(getWidth(), getHeight()));
@@ -393,11 +461,11 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     // Load animation
     for(auto element = animations->FirstChildElement("animation"); element != nullptr;
         element = element->NextSiblingElement("animation"))
-        entity->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, entity.get(), m_resourceManager, functions)));
+        entity->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, entity.get(), this, m_resourceManager, functions)));
 
     auto constants = xml->FirstChildElement("constants");
     if(constants != nullptr)
-        LevelFileLoader::parseConstants(constants, entity.get(), entity.get());
+        LevelFileLoader::parseConstants(constants, entity.get());
 
     // Load sound
     if(xml->FirstChildElement("sound") != nullptr)
@@ -416,7 +484,7 @@ std::unique_ptr<Entity> Level::createEntity(tinyxml2::XMLElement* xml, const sf:
     bodyDef.angle = utility::toRadian<float, float>(element->FloatAttribute("angle"));
     bodyDef.fixedRotation = element->BoolAttribute("fixedRotation");
     bodyDef.angularDamping = element->BoolAttribute("angularDamping");
-    LevelFileLoader::parseKinematics(element, entity.get(), functions);
+    LevelFileLoader::parseKinematics(element, entity.get(), this, functions);
 
     // Load shape
     if(std::string(shape->Attribute("type")) == "polygon") // Load polygon
@@ -499,8 +567,8 @@ void Level::parseCollider(Entity* entity, tinyxml2::XMLElement* xml,
     {
         if(std::string(child->Name()) == "changeProperty")
         {
-            std::unique_ptr<ChangePropertyCollisionHandler> collider(new ChangePropertyCollisionHandler(child->Attribute("name")));
-            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), collider.get(), functions));
+            std::unique_ptr<ChangePropertyCollisionHandler> collider(new ChangePropertyCollisionHandler(child->Attribute("name"), this));
+            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), collider.get(), collider.get(), functions));
             collider->bindProvider(std::move(provider));
             entity->bindCollisionHandler(std::move(collider));
         }
@@ -527,8 +595,8 @@ void Level::parseCollisionFilter(Entity* entity, tinyxml2::XMLElement* xml,
         else if(std::string(child->Name()) == "propertyFilter")
         {
             bool target = std::string("entity") == child->Attribute("target");
-            std::unique_ptr<PropertyFilter> filter(new PropertyFilter(target));
-            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), filter.get(), functions));
+            std::unique_ptr<PropertyFilter> filter(new PropertyFilter(target, this));
+            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), filter.get(), filter.get(), functions));
             filter->bindProvider(std::move(provider));
             entity->bindCollisionFilter(std::move(filter));
         }

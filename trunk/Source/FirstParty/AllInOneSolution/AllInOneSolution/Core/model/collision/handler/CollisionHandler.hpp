@@ -8,8 +8,10 @@ class Entity;
 class CollisionHandler
 {
 public:
+    virtual ~CollisionHandler()
+    { }
 
-    virtual void OnCollision(Entity* entityA, Entity* entityB) = 0;
+    virtual void onCollision(Entity* entityA, Entity* entityB) = 0;
 };
 
 #endif // COLLISION_HANDLER_HPP

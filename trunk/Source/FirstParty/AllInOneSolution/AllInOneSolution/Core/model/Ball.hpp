@@ -20,9 +20,6 @@ public:
 
     bool getBallLost();
 
-    bool getMultiHit();
-
-    void setMultiHit(bool value);
 private:
 
     float m_ballResetTime;
@@ -33,7 +30,6 @@ private:
 
     bool m_lostBall;
 
-    bool m_multiHit;
 private:
 
     void autoResetBall(const float elapsedTime);

@@ -62,13 +62,3 @@ bool Ball::getBallLost()
 {
     return m_lostBall;
 }
-
-bool Ball::getMultiHit()
-{
-    return m_multiHit;
-}
-
-void Ball::setMultiHit(bool value)
-{
-    m_multiHit = value;
-}
