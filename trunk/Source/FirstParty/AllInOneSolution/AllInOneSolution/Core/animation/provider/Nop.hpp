@@ -27,9 +27,10 @@ public:
         bool first = true;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
         {
+            float val = (*it)->getValue();
             if(first)
             {
-                v = (*it)->getValue();
+                v = val;
                 first = false;
             }
         }
