@@ -18,7 +18,7 @@ public:
     Adder(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
     {
         if(getProvider().size() < 1)
-            throw std::exception("Add needs two at least one child to function.");
+            throw std::exception("Add needs two children to function.");
     }
 
     virtual float getValue()
