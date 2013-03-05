@@ -300,6 +300,24 @@
     <ClInclude Include="animation\Storyboard.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
+    <ClInclude Include="animation\provider\Substractor.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\provider\Pow.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\provider\Clamp.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\provider\Step.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\provider\Negate.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\provider\Nop.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

@@ -3,15 +3,21 @@
 #include "../animation/provider/Absolute.hpp"
 #include "../animation/provider/Adder.hpp"
 #include "../animation/provider/AngleProvider.hpp"
+#include "../animation/provider/Clamp.hpp"
 #include "../animation/provider/FloatToInt.hpp"
 #include "../animation/provider/Inverse.hpp"
 #include "../animation/provider/Maximum.hpp"
 #include "../animation/provider/Minimum.hpp"
 #include "../animation/provider/Modulo.hpp"
 #include "../animation/provider/Multiplier.hpp"
+#include "../animation/provider/Negate.hpp"
+#include "../animation/provider/Nop.hpp"
+#include "../animation/provider/Pow.hpp"
+#include "../animation/provider/SetVariable.hpp"
 #include "../animation/provider/Sine.hpp"
 #include "../animation/provider/StaticProvider.hpp"
-#include "../animation/provider/SetVariable.hpp"
+#include "../animation/provider/Step.hpp"
+#include "../animation/provider/Substractor.hpp"
 #include "../animation/provider/TimeProvider.hpp"
 #include "../animation/provider/VariableProvider.hpp"
 
@@ -152,6 +158,18 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
         return std::unique_ptr<Maximum>(new Maximum(std::move(parseProviders(xml, animated, functions))));
     else if(std::string(xml->Name())=="mod")
         return std::unique_ptr<Modulo>(new Modulo(std::move(parseProviders(xml, animated, functions))));
+    else if(std::string(xml->Name())=="pow")
+        return std::unique_ptr<Pow>(new Pow(std::move(parseProviders(xml, animated, functions))));
+    else if(std::string(xml->Name())=="nop")
+        return std::unique_ptr<Nop>(new Nop(std::move(parseProviders(xml, animated, functions))));
+    else if(std::string(xml->Name())=="clamp")
+        return std::unique_ptr<Clamp>(new Clamp(std::move(parseProviders(xml, animated, functions))));
+    else if(std::string(xml->Name())=="step")
+        return std::unique_ptr<Step>(new Step(std::move(parseProviders(xml, animated, functions))));
+    else if(std::string(xml->Name())=="sub")
+        return std::unique_ptr<Substractor>(new Substractor(std::move(parseProviders(xml, animated, functions))));
+    else if(std::string(xml->Name())=="neg")
+        return std::unique_ptr<Negate>(new Negate(std::move(parseProviders(xml, animated, functions)[0])));
     else if(std::string(xml->Name())=="inv")
         return std::unique_ptr<Inverse>(new Inverse(std::move(parseProviders(xml, animated, functions)[0])));
     else if(std::string(xml->Name())=="function")

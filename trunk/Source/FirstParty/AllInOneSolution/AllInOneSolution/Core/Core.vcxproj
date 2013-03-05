@@ -38,7 +38,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>false</LinkIncremental>
+    <LinkIncremental>true</LinkIncremental>
     <ExecutablePath>$(ExecutablePath);..\..\..\Game</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,6 +129,7 @@
     <ClInclude Include="animation\provider\Absolute.hpp" />
     <ClInclude Include="animation\provider\Adder.hpp" />
     <ClInclude Include="animation\provider\AngleProvider.hpp" />
+    <ClInclude Include="animation\provider\Clamp.hpp" />
     <ClInclude Include="animation\provider\FloatToInt.hpp" />
     <ClInclude Include="animation\provider\Inverse.hpp" />
     <ClInclude Include="animation\provider\Maximum.hpp" />
@@ -136,10 +137,15 @@
     <ClInclude Include="animation\provider\Modulo.hpp" />
     <ClInclude Include="animation\provider\Multiplier.hpp" />
     <ClInclude Include="animation\provider\MultiProvider.hpp" />
+    <ClInclude Include="animation\provider\Negate.hpp" />
+    <ClInclude Include="animation\provider\Nop.hpp" />
+    <ClInclude Include="animation\provider\Pow.hpp" />
     <ClInclude Include="animation\provider\SetVariable.hpp" />
     <ClInclude Include="animation\provider\Sine.hpp" />
     <ClInclude Include="animation\provider\SingleProvider.hpp" />
     <ClInclude Include="animation\provider\StaticProvider.hpp" />
+    <ClInclude Include="animation\provider\Step.hpp" />
+    <ClInclude Include="animation\provider\Substractor.hpp" />
     <ClInclude Include="animation\provider\TimeProvider.hpp" />
     <ClInclude Include="animation\provider\ValueProvider.hpp" />
     <ClInclude Include="animation\provider\VariableProvider.hpp" />
