@@ -20,19 +20,6 @@ void ContactListener::BeginContact(b2Contact* contact)
     Entity* entityA = static_cast<Entity*>(contact->GetFixtureA()->GetBody()->GetUserData());
     Entity* entityB = static_cast<Entity*>(contact->GetFixtureB()->GetBody()->GetUserData());
 
-    if(entityA->getType() == Entity::Ball)
-    {
-        float velocityA = abs(contact->GetFixtureA()->GetBody()->GetLinearVelocity().x) + abs(contact->GetFixtureA()->GetBody()->GetLinearVelocity().y);
-        if(entityB->getSoundName().length() > 0)
-            entityB->getSoundManager()->play(entityB->getSoundName(), velocityA);
-    }
-    else if(entityB->getType() == Entity::Ball)
-    {
-        float velocityB = abs(contact->GetFixtureB()->GetBody()->GetLinearVelocity().x) + abs(contact->GetFixtureB()->GetBody()->GetLinearVelocity().y);
-        if(entityA->getSoundName().length() > 0)
-            entityA->getSoundManager()->play(entityA->getSoundName(), velocityB);
-    }
-
     m_handler->onCollision(entityA, entityB);
 }
  

@@ -97,6 +97,9 @@
     <ClCompile Include="animation\Storyboard.cpp">
       <Filter>Sources\animation</Filter>
     </ClCompile>
+    <ClCompile Include="model\Level_LoadingPart.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">

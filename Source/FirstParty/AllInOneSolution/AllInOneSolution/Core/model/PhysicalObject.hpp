@@ -43,6 +43,11 @@ public:
         m_body->GetWorld()->DestroyBody(m_body);
     }
 
+    const b2Body* getBody()
+    {
+        return m_body;
+    }
+
     void bindRotationController(std::unique_ptr<ValueProvider> provider)
     {
         m_rotation = std::move(provider);
