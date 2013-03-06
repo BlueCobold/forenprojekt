@@ -1,10 +1,10 @@
 #ifndef TARGETHUD_HPP
 #define TARGETHUD_HPP
 
-#include "HUDElement.hpp"
+#include "LabelHUD.hpp"
 
 /// 
-class TargetHUD : public HUDElement
+class TargetHUD : public LabelHUD
 {
 private:
     int m_totalTarget;

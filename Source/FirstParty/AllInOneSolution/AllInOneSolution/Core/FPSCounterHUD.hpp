@@ -3,13 +3,13 @@
 
 #include "gui\LineLabel.hpp"
 #include "FPSCounter.hpp"
-#include "HUDElement.hpp"
+#include "LabelHUD.hpp"
 
 class ResourceManager;
 
 
 ///
-class FPSCounterHUD : public HUDElement
+class FPSCounterHUD : public LabelHUD
 {
 private:
     

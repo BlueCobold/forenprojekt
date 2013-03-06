@@ -19,8 +19,6 @@ public:
 
 protected:
 
-    LineLabel m_label;
-
     sf::Vector2f m_position;
 
     float m_horizontalPercentage;
@@ -31,19 +29,15 @@ public:
     HUDElement(
         const sf::Vector2f& position,
         const float rotation,
-        BitmapFont* bitmapFont,
 		const float horizontalPercentage = HUDElement::Left,
-        const float verticalPercentage = HUDElement::Top,
-        const std::string& text = "");
+        const float verticalPercentage = HUDElement::Top);
 
     virtual ~HUDElement()
     { }
 
-    virtual void update(const DrawParameter& params);
+    virtual void update(const DrawParameter& params) = 0;
 
-    virtual void draw(const DrawParameter& params);
-
-    void setText(const std::string& text);
+    virtual void draw(const DrawParameter& params) = 0;
 };
 
 #endif

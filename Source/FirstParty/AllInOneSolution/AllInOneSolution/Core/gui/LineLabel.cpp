@@ -62,7 +62,7 @@ void LineLabel::rebuild()
     m_sprites.clear();
 
     float shift = 0;
-    if(m_alignment != Centered)
+    if(m_alignment != Left)
     {
         float width = 0;
         for(auto it = begin(m_text); it != end(m_text); it++)

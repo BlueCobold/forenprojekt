@@ -3,14 +3,14 @@
 #include "Utility.hpp"
 
 FPSCounterHUD::FPSCounterHUD(const sf::Vector2f& position, const float rotation, BitmapFont* bitmapFont) :
-    HUDElement(position, rotation, bitmapFont) 
+    LabelHUD(position, rotation, bitmapFont) 
 {
     m_label.setText(utility::toString<int>(m_fpsCounter.getFPS()));
 }
 
 void FPSCounterHUD::update(const DrawParameter& params)
 {
-    HUDElement::update(params);
+    LabelHUD::update(params);
 
     m_fpsCounter.update();
 

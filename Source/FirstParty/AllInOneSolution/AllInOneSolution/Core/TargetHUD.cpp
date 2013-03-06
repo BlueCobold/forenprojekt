@@ -8,7 +8,7 @@ TargetHUD::TargetHUD(ResourceManager& resourceManager,
                     BitmapFont* bitmapFont,
                     const float hReference,
                     const float vReference) :
-    HUDElement(position, rotation, bitmapFont, hReference, vReference),
+    LabelHUD(position, rotation, bitmapFont, hReference, vReference),
     m_remainingTarget(0),
     m_totalTarget(0),
     m_resourceManager(resourceManager)
@@ -26,7 +26,7 @@ void TargetHUD::setTargets(int totalTarget,int remainingTarget)
 
 void TargetHUD::update(const DrawParameter& params)
 {
-    HUDElement::update(params);
+    LabelHUD::update(params);
 
     m_label.setText(" " + utility::toString<int>(m_remainingTarget) + "/" + utility::toString<int>(m_totalTarget));
 
@@ -38,5 +38,5 @@ void TargetHUD::update(const DrawParameter& params)
 void TargetHUD::draw(const DrawParameter& params)
 {
    params.getTarget().draw(m_targetTexture);
-   HUDElement::draw(params);
+   LabelHUD::draw(params);
 }
