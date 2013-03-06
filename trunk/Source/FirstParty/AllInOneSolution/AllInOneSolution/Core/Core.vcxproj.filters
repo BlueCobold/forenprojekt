@@ -100,6 +100,12 @@
     <ClCompile Include="model\Level_LoadingPart.cpp">
       <Filter>Sources\model</Filter>
     </ClCompile>
+    <ClCompile Include="ArrowHUD.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="LabelHUD.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -320,6 +326,12 @@
     </ClInclude>
     <ClInclude Include="animation\provider\Nop.hpp">
       <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="ArrowHUD.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="LabelHUD.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

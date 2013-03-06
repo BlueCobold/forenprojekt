@@ -254,3 +254,8 @@ const int Level::getPoints() const
 {
     return m_points;
 }
+const sf::Vector2f Level::getBallCoords() const
+{
+    return sf::Vector2f(utility::toPixel(m_ball->getPosition().x), 
+                        utility::toPixel(m_ball->getPosition().y));
+}

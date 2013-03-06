@@ -3,6 +3,8 @@
 
 #include "FPSCounterHUD.hpp"
 #include "TargetHUD.hpp"
+#include "ArrowHUD.hpp"
+
 #include <memory> // unique_ptr
 
 class ResourceManager;
@@ -24,7 +26,9 @@ private:
 
     TargetHUD m_target;
 
-    HUDElement m_points;
+    LabelHUD m_points;
+
+    ArrowHUD m_arrow;
 
 public:
     HUD(ResourceManager& resourceManager, Config& config);

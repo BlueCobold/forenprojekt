@@ -92,6 +92,7 @@
     <ClCompile Include="animation\Animation.cpp" />
     <ClCompile Include="animation\Storyboard.cpp" />
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="ArrowHUD.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
@@ -101,6 +102,7 @@
     <ClCompile Include="gui\LineLabel.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="HUDElement.cpp" />
+    <ClCompile Include="LabelHUD.cpp" />
     <ClCompile Include="LoadLevelState.cpp" />
     <ClCompile Include="model\Background.cpp" />
     <ClCompile Include="model\Ball.cpp" />
@@ -155,6 +157,7 @@
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="ArrowHUD.hpp" />
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="FPSCounter.hpp" />
@@ -163,6 +166,7 @@
     <ClInclude Include="gui\LineLabel.hpp" />
     <ClInclude Include="HUD.hpp" />
     <ClInclude Include="HUDElement.hpp" />
+    <ClInclude Include="LabelHUD.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />

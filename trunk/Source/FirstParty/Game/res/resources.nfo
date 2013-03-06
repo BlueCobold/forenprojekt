@@ -20,6 +20,7 @@
 	<texture name="bitmapfontGold" path="bitmapfonts/gold.png" smooth="true" />
 	<texture name="bitmapfontGreen" path="bitmapfonts/green.png" smooth="true" />
 	<texture name="bitmapfontRed" path="bitmapfonts/red.png" smooth="true" />
+	<texture name="arrowHUD" path="gui/arrows.png" smooth="true" />
 </textures>
 <fonts>
 	<font name="visitor" path="visitor.ttf" />

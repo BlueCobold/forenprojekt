@@ -64,6 +64,8 @@ public:
     virtual float getValueOf(const std::string& name) const;
     virtual void setValueOf(const std::string& name, const float value);
 
+    const sf::Vector2f getBallCoords() const;
+
 private:
     virtual bool shouldCollide(Entity* entityA, Entity* entityB);
     virtual void onCollision(Entity* entityA, Entity* entityB);
