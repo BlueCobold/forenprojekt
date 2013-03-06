@@ -142,6 +142,30 @@
 				</body>
 				<fixture density="0.1" friction="0.8" restitution="0" />
 			</physic>
+			<physic name="door2">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="x">
+							<mul>
+								<var name="gate" />
+								<min>
+									<mul>
+										<sub>
+											<time />
+											<var name="gatetime" />
+										</sub>
+										<static value="60" />
+									</mul>
+									<static value="120" />
+								</min>
+							</mul>
+							<!-- 90*abs(sin(max(min(180-abs(180-(x % 540)),90),0)*pi/180)^2) -->
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			
 			<physic name="slapper">
 				<body type="kinematic" angle="0">
 					<kinematics>
@@ -381,8 +405,32 @@
 				</animations>
 			</entity>
 
-			<entity name="wide_door_1" rep="D1">
+			<entity name="wide_door_1" rep="GL">
 				<physics name="door" shape="wide_wall" />
+				<animations>
+					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+				<onCollision>
+					<changeProperty name="global:gate">
+						<step>
+							<var name="global:gate" />
+							<nop>
+								<static value="1"/>
+								<setVar name="global:gatetime">
+									<time />
+								</setVar>
+							</nop>
+							<static value="1"/>
+						</step>
+					</changeProperty>
+				</onCollision>
+			</entity>
+			<entity name="wide_door_2" rep="GR">
+				<physics name="door2" shape="wide_wall" />
 				<animations>
 					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
 						<frameindex frames="3">
@@ -696,9 +744,9 @@
                   W1 1w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2W5 5w4w6w1w2w5                  
                   w5s4s2s6w1        w3s6s2s6s2w3        w2s4s3s2w1                  
                   w3d4d6d1w5        w5d5d2d3d5w6        w5d1D4 4w2                  
-                  w2D4 4d3w2        h4d2D2 2d1w2        w4d3d2d2w3                  
-                  W4 4w4W6 6w6D1  w2 3w2w5w1w2h3w1D1  w3W5 5w5W6 6                  
-                  w3s4s2s3w2        w4         3        w3s1s1s5w4                  
+                  w2D4 4d3w2        w4d2D2 2d1w2        w4d3d2d2w3                  
+                  W4 4w4    GL  GR      w5w1    GL  GR      w5W6 6                  
+                  w3s4s2s3w2        w4        w3        w3s1s1s5w4                  
                   W1 1d5W2 2    t1  h1    t1  w5  t1    W1 1d2W4 4                  
                   w5s6d2s1w6         1        w6        w3s4d6s1h1                  
                   W2 2d4W3 3                            W6 6d3W5 5                  
