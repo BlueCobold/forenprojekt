@@ -171,7 +171,7 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
 
 void Level::killTarget(Entity* target)
 {
-    entity->kill();
+    target->kill();
     m_remainingTarget--;
     m_points += 100 + m_multiHit * 50;
     m_multiHit++;
