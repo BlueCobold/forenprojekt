@@ -67,6 +67,7 @@ public:
 private:
     virtual bool shouldCollide(Entity* entityA, Entity* entityB);
     virtual void onCollision(Entity* entityA, Entity* entityB);
+    void killTarget(Entity* target);
 
     /// Load the level after m_number
     bool load();

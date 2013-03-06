@@ -107,6 +107,7 @@
     <ClCompile Include="model\collision\ContactListener.cpp" />
     <ClCompile Include="model\Entity.cpp" />
     <ClCompile Include="model\Level.cpp" />
+    <ClCompile Include="model\Level_LoadingPart.cpp" />
     <ClCompile Include="model\ParallaxLayer.cpp" />
     <ClCompile Include="model\PhysicalObject.cpp" />
     <ClCompile Include="model\SoundManager.cpp" />
