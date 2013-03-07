@@ -16,18 +16,8 @@ LabelHUD::LabelHUD(const sf::Vector2f& position,
 
 void LabelHUD::update(const DrawParameter& params)
 {
-    sf::Vector2f screenSize = params.getTarget().getView().getSize();
-    sf::Vector2f screenCenter = params.getTarget().getView().getCenter();
-    
-    sf::Vector2f topLeftViewStart = screenCenter - screenSize * 0.5f;
-    sf::Vector2f bottomRightViewEnd = screenCenter + screenSize * 0.5f;
-    sf::Vector2f delta = bottomRightViewEnd - topLeftViewStart;
-
-    sf::Vector2f position; 
-    position.x =  topLeftViewStart.x + delta.x * m_horizontalPercentage + m_position.x;
-    position.y =  topLeftViewStart.y + delta.y * m_verticalPercentage + m_position.y;
-
-    m_label.setPosition(position);
+    HUDElement::update(params);
+    m_label.setPosition(getPosition());
 }
 
 void LabelHUD::draw(const DrawParameter& params)
