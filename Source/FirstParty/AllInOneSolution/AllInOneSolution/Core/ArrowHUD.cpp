@@ -59,40 +59,34 @@ void ArrowHUD::update(const DrawParameter& params)
         if(position.x < left)
         {
             position.x = left + ARROW_WIDTH / 2.f;
-            position.y = top + ARROW_WIDTH / 2.f;
             m_arrow.setTextureRect(sf::IntRect(0, 0, ARROW_WIDTH, ARROW_WIDTH));
         }        
         else if(position.x > right)
         {
             position.x = right - ARROW_WIDTH / 2.f;
-            position.y = top + ARROW_WIDTH / 2.f;
             m_arrow.setTextureRect(sf::IntRect(2 * ARROW_WIDTH, 0, ARROW_WIDTH, ARROW_WIDTH));
         }
         else
-        {
-            position.y = top + ARROW_WIDTH / 2.f;
             m_arrow.setTextureRect(sf::IntRect(ARROW_WIDTH, 0, ARROW_WIDTH, ARROW_WIDTH));
-        }
+        
+         position.y = top + ARROW_WIDTH / 2.f;
     }
     else if(position.y > bottom)
     {
         if(position.x < left)
         {
             position.x = left + ARROW_WIDTH / 2.f;
-            position.y = bottom - ARROW_WIDTH / 2.f;
             m_arrow.setTextureRect(sf::IntRect(5 * ARROW_WIDTH, 0, ARROW_WIDTH, ARROW_WIDTH));
         }
         else if(position.x > right)
         {
             position.x = right - ARROW_WIDTH / 2.f;
-            position.y = bottom - ARROW_WIDTH / 2.f;
             m_arrow.setTextureRect(sf::IntRect(7 * ARROW_WIDTH, 0, ARROW_WIDTH, ARROW_WIDTH));
         }
         else
-        {
-            position.y = bottom - ARROW_WIDTH / 2.f;
             m_arrow.setTextureRect(sf::IntRect(6 * ARROW_WIDTH, 0, ARROW_WIDTH, ARROW_WIDTH));
-        }
+
+        position.y = bottom - ARROW_WIDTH / 2.f;
     }
     else if(position.x < left)
     {
