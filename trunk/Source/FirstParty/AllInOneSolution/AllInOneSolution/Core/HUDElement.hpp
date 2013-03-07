@@ -17,9 +17,10 @@ public:
 	static const float Middle;
 	static const float Bottom;
 
-protected:
+private:
 
     sf::Vector2f m_position;
+    sf::Vector2f m_currentPosition;
 
     float m_horizontalPercentage;
 
@@ -35,9 +36,12 @@ public:
     virtual ~HUDElement()
     { }
 
-    virtual void update(const DrawParameter& params) = 0;
+    virtual void update(const DrawParameter& params);
 
     virtual void draw(const DrawParameter& params) = 0;
+
+protected:
+    const sf::Vector2f getPosition() const;
 };
 
 #endif
