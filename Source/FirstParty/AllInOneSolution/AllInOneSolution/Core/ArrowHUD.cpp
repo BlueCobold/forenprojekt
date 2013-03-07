@@ -118,5 +118,5 @@ void ArrowHUD::draw(const DrawParameter& params)
 
 void ArrowHUD::setBallCoords(const sf::Vector2f& ballPos)
 {
-    m_ballPos = coords;
+    m_ballPos = ballPos;
 }
