@@ -23,7 +23,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     m_level->update(time, m_texture);
 
     HUD hud(resourceManager, config);
-    hud.update(m_level);
+    hud.update(m_level, m_frametime.getElapsedTime().asSeconds());
 
     m_texture.clear();
     m_level->draw(DrawParameter(m_texture));
