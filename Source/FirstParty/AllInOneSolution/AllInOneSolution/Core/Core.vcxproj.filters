@@ -106,6 +106,9 @@
     <ClCompile Include="LabelHUD.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="PointsHUD.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -331,6 +334,9 @@
       <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="LabelHUD.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="PointsHUD.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>

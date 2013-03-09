@@ -4,6 +4,7 @@
 #include "FPSCounterHUD.hpp"
 #include "TargetHUD.hpp"
 #include "ArrowHUD.hpp"
+#include "PointsHUD.hpp"
 
 #include <memory> // unique_ptr
 
@@ -26,14 +27,14 @@ private:
 
     TargetHUD m_target;
 
-    LabelHUD m_points;
+    PointsHUD m_points;
 
     ArrowHUD m_arrow;
 
 public:
     HUD(ResourceManager& resourceManager, Config& config);
 
-    void update(const Level* level);
+    void update(const Level* level, float elapsedTime);
 
     void draw(const DrawParameter& params);
 

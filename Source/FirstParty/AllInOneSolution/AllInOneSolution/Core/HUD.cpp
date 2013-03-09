@@ -11,11 +11,12 @@ HUD::HUD(ResourceManager& resourceManager, Config& config) :
     m_fpsShow = config.get<bool>("ShowFps");
 }
 
-void HUD::update(const Level* level)
+void HUD::update(const Level* level, float elapsedTime)
 {
     m_target.setTargets(level->getTotalTarget(), level->getRemainingTarget());
 
-    m_points.setText(utility::toString<int>(level->getPoints()));
+    m_points.setTime(elapsedTime);
+    m_points.setPoints(level->getPoints());
 
     m_arrow.setBallCoords(level->getBallCoords());
 }

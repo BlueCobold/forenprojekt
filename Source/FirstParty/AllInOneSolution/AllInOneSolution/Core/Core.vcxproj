@@ -116,6 +116,7 @@
     <ClCompile Include="model\SoundObject.cpp" />
     <ClCompile Include="model\Teeter.cpp" />
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="PointsHUD.cpp" />
     <ClCompile Include="rendering\transitions\AlphaTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp" />
     <ClCompile Include="resources\LevelFileLoader.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="model\Entity.hpp" />
     <ClInclude Include="model\SoundManager.hpp" />
     <ClInclude Include="model\SoundObject.hpp" />
+    <ClInclude Include="PointsHUD.hpp" />
     <ClInclude Include="rendering\GraphicalObject.hpp" />
     <ClInclude Include="model\Level.hpp" />
     <ClInclude Include="model\ParallaxLayer.hpp" />
