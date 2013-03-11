@@ -6,6 +6,7 @@
 
 #include "collision/handler/ChangePropertyCollisionHandler.hpp"
 #include "collision/filter/Always.hpp"
+#include "collision/filter/ChangeGravityFilter.hpp"
 #include "collision/filter/Never.hpp"
 #include "collision/filter/PropertyFilter.hpp"
 
@@ -182,7 +183,8 @@ bool Level::load()
 
     // Load world properties
     tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
-    m_world.SetGravity(b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y")));
+    m_defaultGravity = b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y"));
+    m_world.SetGravity(m_defaultGravity);
     m_world.SetContactListener(m_contactListener.get());
 
     // setup scrollview
@@ -374,6 +376,15 @@ void Level::parseCollisionFilter(
         else if(std::string(child->Name()) == "never")
         {
             std::unique_ptr<CollisionFilter> filter(new Never());
+            entity->bindCollisionFilter(std::move(filter));
+        }
+        else if(std::string(child->Name()) == "changeGravity")
+        {
+            bool target = true;//std::string("entity") == child->Attribute("target");
+            b2Vec2 gravity(child->FloatAttribute("x"), child->FloatAttribute("y"));
+            std::unique_ptr<ChangeGravityFilter> filter(new ChangeGravityFilter(m_world, gravity, target, this));
+            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), filter.get(), filter.get(), functions));
+            filter->bindProvider(std::move(provider));
             entity->bindCollisionFilter(std::move(filter));
         }
         else if(std::string(child->Name()) == "propertyFilter")

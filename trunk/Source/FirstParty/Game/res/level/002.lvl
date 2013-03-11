@@ -35,10 +35,10 @@
 				<vertex x="6" y="59" />
 			</shape>
 			<shape name="teeter" type="polygon">
-				<vertex x="-106" y="-15" />
-				<vertex x="106" y="-15" />
-				<vertex x="106" y="15" />
-				<vertex x="-106" y="15" />
+				<vertex x="-104" y="-15" />
+				<vertex x="104" y="-15" />
+				<vertex x="104" y="15" />
+				<vertex x="-104" y="15" />
 			</shape>
 		</shapes>
 
@@ -213,7 +213,7 @@
 			<entity name="Slapper" rep="RR">
 				<physics name="slapper" shape="teeter" />
 				<animations>
-					<animation texture="teeter_wooden" frames="1" width="214" height="32" midx="107" midy="16" rotate="true">
+					<animation texture="teeter_wooden" width="214" height="32" midx="107" midy="16" rotate="true">
 						<frameindex frames="1">
 							<static value="0"/>
 						</frameindex>
@@ -719,12 +719,12 @@
 				</physics>
 				<constants color="0" />
 				<animations>
-					<animation texture="ballback" frames="1" width="30" height="30" midx="15" midy="15" rotate="true">
+					<animation texture="ballback" width="30" height="30" midx="15" midy="15" rotate="true">
 						<frameindex frames="3">
 							<var name="color" />
 						</frameindex>
 					</animation>
-					<animation texture="ballshade" frames="1" width="30" height="30" midx="15" midy="15" rotate="false" />
+					<animation texture="ballshade" width="30" height="30" midx="15" midy="15" rotate="false" />
 				</animations>
 			</entity>
 
@@ -733,7 +733,7 @@
 				<physics name="teeter" shape="teeter" />
 				<sound name="test" />
 				<animations>
-					<animation texture="teeter_wooden" frames="1" width="214" height="32" midx="107" midy="16" rotate="true" />
+					<animation texture="teeter_wooden" width="208" height="32" midx="104" midy="16" rotate="true" />
 				</animations>
 			</entity>
 		</entities>

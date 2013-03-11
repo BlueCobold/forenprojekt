@@ -3,7 +3,7 @@
 #ifndef ALWAYS_HPP
 #define ALWAYS_HPP
 
-class Entity;
+#include "CollisionFilter.hpp"
 
 class Always : public CollisionFilter
 {

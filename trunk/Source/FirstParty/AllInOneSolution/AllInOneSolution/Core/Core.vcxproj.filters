@@ -339,6 +339,9 @@
     <ClInclude Include="PointsHUD.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="model\collision\filter\ChangeGravityFilter.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

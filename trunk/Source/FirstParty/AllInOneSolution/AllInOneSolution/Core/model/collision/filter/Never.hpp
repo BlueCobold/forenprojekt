@@ -3,7 +3,7 @@
 #ifndef NEVER_HPP
 #define NEVER_HPP
 
-class Entity;
+#include "CollisionFilter.hpp"
 
 class Never : public CollisionFilter
 {
