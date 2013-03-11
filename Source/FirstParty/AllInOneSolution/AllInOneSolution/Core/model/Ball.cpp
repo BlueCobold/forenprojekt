@@ -50,9 +50,10 @@ void Ball::setFieldDimension(b2Vec2 fieldDimension)
 
 bool Ball::isOutside()
 {
-    if((utility::toPixel(m_body->GetPosition().x) < - 100.f) ||
-    (utility::toPixel(m_body->GetPosition().x) > (m_fieldDimension.x + 100.f)) ||
-    (utility::toPixel(m_body->GetPosition().y) > (m_fieldDimension.y + 100.f)))
+    if( (utility::toPixel(m_body->GetPosition().y) < - 100.f)
+        || (utility::toPixel(m_body->GetPosition().x) < - 100.f)
+        || (utility::toPixel(m_body->GetPosition().x) > (m_fieldDimension.x + 100.f))
+        || (utility::toPixel(m_body->GetPosition().y) > (m_fieldDimension.y + 100.f)))
         return true;
     else
         return false;

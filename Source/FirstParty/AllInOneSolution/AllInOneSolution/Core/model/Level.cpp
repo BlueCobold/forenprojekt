@@ -86,6 +86,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
             {
                 m_points -= 10;
                 m_multiHit = 0;
+                m_world.SetGravity(m_defaultGravity);
             }
         }
         (*it)->update(elapsedTime);

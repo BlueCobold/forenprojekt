@@ -92,6 +92,7 @@ private:
 private:
 
     b2World m_world;
+    b2Vec2 m_defaultGravity;
 
     ResourceManager& m_resourceManager;
 
