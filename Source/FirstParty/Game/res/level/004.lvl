@@ -217,7 +217,7 @@
 					</animation>
 				</animations>
 			</entity>
-			
+
 			<entity name="wide_wall_1" rep="W1">
 				<physics name="wide_wall" shape="wide_wall" />
 				<animations>
@@ -319,7 +319,7 @@
 					</changeGravity>
 				</collides>
 			</entity>
-			
+
 			<!-- Ball -->
 			<entity name="Ball" rep="BB" type="ball">
 				<physics name="ball">
@@ -344,22 +344,31 @@
 					<animation texture="teeter_wooden" width="208" height="32" midx="104" midy="16" rotate="true" alignment="vertical">
 						<frameindex frames="7">
 							<min>
-								<mul>
-									<mod>
-										<add>
-											<angle />
-											<static value="45" />
-											<static value="360" />
-										</add>
-										<static value="360" />
-									</mod>
-									<inv>
-										<static value="90"/>
-									</inv>
-									<static value="7"/>
-								</mul>
-								<static value="6"/>
-							</min>
+                                <mul>
+                                	<add>
+							            <step>
+                                            <sub>
+                                                <angle />
+                                                <static value="180" />
+                                            </sub>
+                                            <angle />
+                                            <sub>
+                                                <max>
+                                                    <angle />
+                                                    <static value="315" />
+                                                </max>
+                                                <static value="360" />
+                                            </sub>
+                                        </step>
+                                        <static value="45" />
+                                    </add>
+                                    <inv>
+                                        <static value="90"/>
+                                    </inv>
+                                    <static value="7"/>
+                                </mul>
+                                <static value="6"/>
+                            </min>
 						</frameindex>
 					</animation>
 				</animations>
@@ -371,22 +380,31 @@
 					<animation texture="teeter_wooden_vertical" width="32" height="208" midx="16" midy="104" rotate="true">
 						<frameindex frames="7">
 							<min>
-								<mul>
-									<mod>
-										<add>
-											<angle />
-											<static value="45" />
-											<static value="360" />
-										</add>
-										<static value="360" />
-									</mod>
-									<inv>
-										<static value="90"/>
-									</inv>
-									<static value="7"/>
-								</mul>
-								<static value="6"/>
-							</min>
+                                <mul>
+                                	<add>
+							            <step>
+                                            <sub>
+                                                <angle />
+                                                <static value="180" />
+                                            </sub>
+                                            <angle />
+                                            <sub>
+                                                <max>
+                                                    <angle />
+                                                    <static value="315" />
+                                                </max>
+                                                <static value="360" />
+                                            </sub>
+                                        </step>
+                                        <static value="45" />
+                                    </add>
+                                    <inv>
+                                        <static value="90"/>
+                                    </inv>
+                                    <static value="7"/>
+                                </mul>
+                                <static value="6"/>
+                            </min>
 						</frameindex>
 					</animation>
 				</animations>
@@ -395,31 +413,31 @@
 	</templates>
 
 	<grid size="60" width="2460" height="1410">
-                                                                                    
-                                                                                    
-                          up                            up                          
-                          upup        TT      TT      upup                          
-                      lele  upup                    upup  riri                      
-                        lele  upup                upup  riri                        
-                          lele  upup            upup  riri                          
-                            lele  upup        upup  riri                            
-                              lele  upup    upup  riri                              
-                                lele  w1  t1w2  riri                                
-                        T2        lew1w2w4w5w1w3ri        T2                        
-                                      w3    w4                                      
-                                    t1w2    w2  t1                                  
-                                  lew3w5w4w6w1w5ri                                  
-                        T2      lele  w1    w2  riri      T2                        
-                              lele  dodo  t1dodo  riri                              
-                            lele  dodo        dodo  riri                            
-                          lele  dodo            dodo  riri                          
-                        lele  dodo    BB          dodo  riri                        
-                      lele  dodo                    dodo  riri                      
-                          dodo        TT      TT      dodo                         
-                          do                            do                        
-                                                                                    
-                                                                                    
-                                                                                    
+
+
+                          up                            up
+                          upup        TT      TT      upup
+                      lele  upup                    upup  riri
+                        lele  upup                upup  riri
+                          lele  upup            upup  riri
+                            lele  upup        upup  riri
+                              lele  upup    upup  riri
+                                lele  w1  t1w2  riri
+                        T2        lew1w2w4w5w1w3ri        T2
+                                      w3    w4
+                                    t1w2    w2  t1
+                                  lew3w5w4w6w1w5ri
+                        T2      lele  w1    w2  riri      T2
+                              lele  dodo  t1dodo  riri
+                            lele  dodo        dodo  riri
+                          lele  dodo            dodo  riri
+                        lele  dodo    BB          dodo  riri
+                      lele  dodo                    dodo  riri
+                          dodo        TT      TT      dodo
+                          do                            do
+
+
+
 	</grid>
 	<objects>
 		<!-- Background -->
