@@ -5,6 +5,8 @@
 
 #include "Utility.hpp" // stringTo
 
+#include "FileReader.hpp"
+
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -13,7 +15,7 @@
 
 
 /// This class will load configdata from a ini file
-class Config
+class Config : public FileReader
 {
 public:
 
@@ -21,18 +23,6 @@ public:
 
     template<typename T>
     T get(const std::string& data);
-    void reload(const std::string& fileName);
-
-private:
-
-    std::string eraseOverhang(std::string& data);
-
-    void readFile();
-
-private:
-
-    std::string m_fileName;
-    std::unordered_map<std::string, std::string> m_content;
 };
 
 template<typename T>

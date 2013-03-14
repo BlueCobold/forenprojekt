@@ -9,6 +9,7 @@
 #include <memory> // unique_ptr
 #include <string>
 #include <utility> // make_pair
+#include "../Utility.hpp"
 
 #include <SFML/Audio/SoundBuffer.hpp>
 
@@ -40,7 +41,7 @@ public:
 		{
             T* resource = func();
             if(resource == nullptr)
-                throw std::exception( (std::string("Loading failed: ") + key).c_str());
+                throw std::exception(utility::replace(utility::translateKey("LoadFail"), key).c_str());
 			m_resources.insert(std::make_pair(key, std::unique_ptr<T>(resource)));
 		}
 		return true;

@@ -18,7 +18,7 @@ public:
     Modulo(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
     {
         if(getProvider().size() != 2)
-            throw std::exception("Modulo needs two children to function.");
+            throw std::exception(utility::replace(utility::translateKey("TwoChilds"), "Modulo").c_str());
     }
 
     virtual float getValue()

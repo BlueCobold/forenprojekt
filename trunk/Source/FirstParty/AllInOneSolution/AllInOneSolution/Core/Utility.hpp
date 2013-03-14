@@ -34,9 +34,6 @@ namespace utility
 
 	template<>
     std::string stringTo(const std::string& str);
-    //{
-    //    return str;
-    //}
 
     template<typename T, typename Z>
     Z toDegree(T value)
@@ -63,6 +60,10 @@ namespace utility
     {
         return static_cast<T>(value*PIXEL_PER_METER);
     }
+
+    std::string translateKey(std::string key);
+
+    std::string replace(std::string string, std::string replacement);
 } // namespace utility
 
 #endif // UTILITY_HPP

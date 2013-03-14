@@ -37,13 +37,13 @@ void ParallaxLayer::update(const float time, const sf::View& view, const sf::Vec
 float ParallaxLayer::getValueOf(const std::string& name) const
 {
     if(m_updatingAni == nullptr)
-        throw std::exception("Can't evaluate a variable at this time.");
+        throw std::exception(utility::replace(utility::translateKey("GetVariable"), name).c_str());
     return m_updatingAni->getValueOf(name);
 }
 
 void ParallaxLayer::setValueOf(const std::string& name, const float value)
 {
     if(m_updatingAni == nullptr)
-        throw std::exception("Can't set a variable at this time.");
+        throw std::exception(utility::replace(utility::translateKey("SetVariable"), name).c_str());
     m_updatingAni->setValueOf(name, value);
 }

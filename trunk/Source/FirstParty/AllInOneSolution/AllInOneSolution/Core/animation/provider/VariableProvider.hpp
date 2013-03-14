@@ -20,7 +20,7 @@ public:
     VariableProvider(const VariableHandler* owner, const std::string& varName) : m_owner(owner), m_varName(varName)
     {
         if(owner == nullptr)
-            throw std::exception("The passed owner of a VariableProvider may not be null.");
+            throw std::exception(utility::replace(utility::translateKey("OwnerNull"), "VariableProvider").c_str());
     }
 
     virtual float getValue()

@@ -1,0 +1,25 @@
+[Errors]
+TwoChilds = % needs two children to function.
+ThreeChilds = % needs three children to function.
+TwoChildsMin = % needs at least two children to function.
+OneChildsMin = % needs at least one child to function.
+ProviderNull = One of the providers has been passed incorrectly and is null.
+OwnerNull = The passed owner of a % may not be null.
+TheProviderNull = The provider has been passed incorrectly and is null.
+GetVariable = Can't get a %-variable at this time.
+SetVariable = Can't set a %-variable at this time.
+ReceiveTimestamp = Can't receive an %-timestamp at this time.
+ReceiveAngle = Can't receive an %-angle at this time.
+FilterNull = Provider in property filter is null.
+HandlerNull = Provider in property handler is null.
+ParametersNull = Parameters may not be null.
+FunctionNull = Invalid argument passed. Functions may not be null.
+NoTemplate = No template defined for function %.
+NoName = No name for function specified.
+TemplateChild = The template defined too many children: %
+Unknown = Unknown value-provider specified: %
+NoProvider = <frameindex> specified, but no provider included.
+SubTag = The position element needs a mathematical sub-tag.
+MissingFile = File '%' not found.
+NoVariable = The variable '%' is not defined.
+LoadFail = Loading failed: %.

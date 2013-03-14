@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Config.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="App.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
@@ -108,6 +105,12 @@
     </ClCompile>
     <ClCompile Include="PointsHUD.cpp">
       <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="FileReader.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -342,6 +345,9 @@
     <ClInclude Include="model\collision\filter\ChangeGravityFilter.hpp">
       <Filter>Headers\model\collision\filter</Filter>
     </ClInclude>
+    <ClInclude Include="FileReader.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -426,6 +432,9 @@
     </None>
     <None Include="..\..\..\Game\res\level\002.lvl">
       <Filter>Resouces\res\level</Filter>
+    </None>
+    <None Include="language.dat">
+      <Filter>Resouces</Filter>
     </None>
   </ItemGroup>
 </Project>
