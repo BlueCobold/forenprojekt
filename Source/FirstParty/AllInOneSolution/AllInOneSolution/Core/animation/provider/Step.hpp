@@ -18,7 +18,7 @@ public:
     Step(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
     {
         if(getProvider().size() != 3)
-            throw std::exception("Step needs three children to function.");
+            throw std::exception(utility::replace(utility::translateKey("ThreeChilds"), "Step").c_str());
     }
 
     virtual float getValue()

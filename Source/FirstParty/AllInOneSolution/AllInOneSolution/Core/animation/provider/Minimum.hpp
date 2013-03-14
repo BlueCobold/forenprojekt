@@ -18,7 +18,7 @@ public:
     Minimum(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
     {
         if(getProvider().size() < 1)
-            throw std::exception("Minimum needsat least two children to function.");
+            throw std::exception(utility::replace(utility::translateKey("TwoChildsMin"), "Minimum").c_str());
     }
 
     virtual float getValue()

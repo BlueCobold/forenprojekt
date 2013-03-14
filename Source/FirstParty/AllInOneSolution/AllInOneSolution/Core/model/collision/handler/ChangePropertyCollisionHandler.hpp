@@ -44,7 +44,7 @@ public:
     virtual void onCollision(Entity* entityA, Entity* entityB)
     {
         if(m_provider == nullptr)
-            throw std::exception("Provider in property handler is null.");
+            throw std::exception(utility::translateKey("HandlerNull").c_str());
         m_entityA = entityA;
         m_entityB = entityB;
         if(m_useGlobal)
@@ -68,11 +68,11 @@ public:
         if(name.length() >= 5 && name.substr(0, 5) == "ball:")
         {
             if(m_entityB == nullptr)
-                throw std::exception("Can't get a ball-variable at this time.");
+                 throw std::exception(utility::replace(utility::translateKey("GetVariable"), "ball").c_str());
             return m_entityB->getValueOf(name.substr(5));
         }
         if(m_entityA == nullptr)
-            throw std::exception("Can't get an entity-variable at this time.");
+            throw std::exception(utility::replace(utility::translateKey("GetVariable"), "entity").c_str());
         return m_entityA->getValueOf(name);
     }
 
@@ -84,12 +84,12 @@ public:
         if(name.length() >= 5 && name.substr(5) == "ball:")
         {
             if(m_entityB == nullptr)
-                throw std::exception("Can't set a ball-variable at this time.");
+                throw std::exception(utility::replace(utility::translateKey("SetVariable"), "ball").c_str());
             m_entityB->setValueOf(name.substr(5), value);
             return;
         }
         if(m_entityA == nullptr)
-            throw std::exception("Can't set an entity-variable at this time.");
+           throw std::exception(utility::replace(utility::translateKey("SetVariable"), "entity").c_str());
         return m_entityA->setValueOf(name, value);
     }
 
@@ -98,13 +98,13 @@ public:
         if(m_useValuesFromA)
         {
             if(m_entityA == nullptr)
-                throw std::exception("Can't receive an entity-timestamp at this time.");
+                throw std::exception(utility::replace(utility::translateKey("ReceiveTimestamp"), "entity").c_str());
             return m_entityA->getPassedTime();
         }
         else
         {
             if(m_entityB == nullptr)
-                throw std::exception("Can't receive a ball-timestamp at this time.");
+                throw std::exception(utility::replace(utility::translateKey("ReceiveTimestamp"), "ball").c_str());
             return m_entityB->getPassedTime();
         }
     }
@@ -114,13 +114,13 @@ public:
         if(m_useValuesFromA)
         {
             if (m_entityA == nullptr)
-                throw std::exception("Can't receive an entity-angle at this time.");
+                throw std::exception(utility::replace(utility::translateKey("ReceiveAngle"), "entity").c_str());
             return m_entityA->getAngle();
         }
         else
         {
             if(m_entityB == nullptr)
-                throw std::exception("Can't receive a ball-angle at this time.");
+                throw std::exception(utility::replace(utility::translateKey("ReceiveAngle"), "ball").c_str());
             return m_entityB->getAngle();
         }
     }

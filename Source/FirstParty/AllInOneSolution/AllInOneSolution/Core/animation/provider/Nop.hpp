@@ -18,7 +18,7 @@ public:
     Nop(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
     {
         if(getProvider().size() < 0)
-            throw std::exception("Nop needs at least one child to function.");
+            throw std::exception(utility::replace(utility::translateKey("OneChildsMin"), "Nop").c_str());
     }
 
     virtual float getValue()

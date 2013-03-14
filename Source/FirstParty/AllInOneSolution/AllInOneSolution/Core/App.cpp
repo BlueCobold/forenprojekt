@@ -47,7 +47,6 @@ App::App(Config& config) :
     m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config))); 
     m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
     m_stateManager.setState(LoadLevelStateId);
-
 }
 
 void App::run()

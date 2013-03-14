@@ -95,6 +95,7 @@
     <ClCompile Include="ArrowHUD.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="FPSCounterHUD.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="App.hpp" />
     <ClInclude Include="ArrowHUD.hpp" />
     <ClInclude Include="Config.hpp" />
+    <ClInclude Include="FileReader.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="FPSCounter.hpp" />
     <ClInclude Include="FPSCounterHUD.hpp" />
@@ -214,6 +216,7 @@
     <None Include="..\..\..\Game\res\level\002.lvl">
       <SubType>Designer</SubType>
     </None>
+    <None Include="language.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

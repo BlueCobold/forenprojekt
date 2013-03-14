@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <vector>
+#include "../../Utility.hpp"
 
 /// Returns the sum of the values of the passed providers
 class MultiProvider : public ValueProvider
@@ -21,7 +22,7 @@ public:
     {
         for(auto it = begin(m_provider); it != end(m_provider); ++it)
             if((*it) == nullptr)
-                throw std::exception("One of the providers has been passed incorrectly and is null.");
+                throw std::exception(utility::translateKey("ProviderNull").c_str());
     }
 
     virtual float getValue() = 0;

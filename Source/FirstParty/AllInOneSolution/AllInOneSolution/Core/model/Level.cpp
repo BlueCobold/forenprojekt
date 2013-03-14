@@ -120,7 +120,7 @@ float Level::getValueOf(const std::string& name) const
     if(match == end(m_variables))
     {
         if(m_updatingEntity == nullptr)
-            throw std::exception("Can't get a variable at this time.");
+            throw std::exception(utility::replace(utility::translateKey("GetVariable"), name).c_str());
         return m_updatingEntity->getValueOf(name);
     }
     return match->second;

@@ -26,7 +26,7 @@ public:
         if(found != end(m_variables))
             return found->second;
         else
-            throw std::exception((std::string("The variable '") + name + std::string("' is not defined.")).c_str());
+            throw std::exception(utility::replace(utility::translateKey("NoVariable"), name).c_str());
         return 0;
     }
 

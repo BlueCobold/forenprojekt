@@ -115,10 +115,10 @@ std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(tiny
         if(std::string(child->Name())=="function")
         {
             if(functions == nullptr)
-                throw std::exception("Invalid argument passed. Functions may not be null.");
+                throw std::exception(utility::translateKey("FunctionNull").c_str());
             auto function = functions->find(child->Attribute("name"));
             if(function == end(*functions))
-                throw std::exception((std::string("No template defined for function ") + child->Attribute("name")).c_str());
+                throw std::exception(utility::replace(utility::translateKey("NoTemplate"), child->Attribute("name")).c_str());
             return parseProviders(function->second, animated, handler, functions);
         }
         std::unique_ptr<ValueProvider> provider = parseProvider(child, animated, handler, functions);
@@ -177,20 +177,20 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
     else if(std::string(xml->Name())=="function")
     {
         if(functions == nullptr)
-            throw std::exception("Invalid argument passed. Functions may not be null.");
+            throw std::exception(utility::translateKey("FunctionNull").c_str());
         auto funcName = xml->Attribute("name");
         if(funcName == nullptr)
-            throw std::exception("No name for function specified.");
+            throw std::exception(utility::translateKey("NoName").c_str());
         auto function = functions->find(funcName);
         if(function == end(*functions))
-            throw std::exception((std::string("No template defined for function ") + funcName).c_str());
+            throw std::exception(utility::replace(utility::translateKey("NoTemplate"), funcName).c_str());
         auto providers = parseProviders(function->second, animated, handler, functions);
         if(providers.size()>1)
-            throw std::exception((std::string("The template defined too many children: ") + funcName).c_str());
+            throw std::exception(utility::replace(utility::translateKey("TemplateChild"), funcName).c_str());
         return std::move(providers[0]);
     }
     else
-        throw std::exception((std::string("Unknown value-provider specified: ") + xml->Name()).c_str());
+        throw std::exception(utility::replace(utility::translateKey("Unknown"), xml->Name()).c_str());
 }
 
 std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml, 
@@ -207,7 +207,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     {
         tinyxml2::XMLElement* child = frameIndex->FirstChildElement();
         if(child == nullptr)
-            throw std::exception("<frameindex> specified, but no provider included");
+            throw std::exception(utility::translateKey("NoProvider").c_str());
         provider = std::move(parseProvider(child, animated, handler, functions));
     }
 
@@ -279,7 +279,7 @@ std::unique_ptr<ValueProvider> LevelFileLoader::findPositionController(
         if(std::string(iterator->Attribute("axis")) != axis)
             continue;
         if(iterator->FirstChildElement() == nullptr)
-            throw std::exception("The position element needs a mathematical sub-tag.");
+            throw std::exception(utility::translateKey("SubTag").c_str());
         return parseProvider(iterator->FirstChildElement(), animated, handler, functions);
     }
     return nullptr;
