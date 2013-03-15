@@ -63,7 +63,8 @@ void FileReader::readFile()
         } 
     } 
     else
-        throw std::exception(utility::replace(utility::translateKey("MissingFile"), m_fileName).c_str());
+        // cannot use translate here, because translate may need this file which cannot be loaded!
+        throw std::runtime_error(std::string("File missing: ") + m_fileName);
 }
 
 std::string FileReader::get(const std::string& key)
