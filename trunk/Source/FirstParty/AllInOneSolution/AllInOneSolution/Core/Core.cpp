@@ -3,7 +3,12 @@
 
 #include <iostream>
 
-int main(int argc, char* argv[])
+#ifdef _DEBUG
+    int main(int argc, char* argv[])
+#else
+    #include <Windows.h>
+    int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine, int iCmdShow)
+#endif
 {
     try
     {
