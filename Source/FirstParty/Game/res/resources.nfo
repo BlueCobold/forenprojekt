@@ -19,9 +19,10 @@
 	<texture name="teeter_wooden_vertical" path="assets/teeter/wood/small_vertical.png" smooth="true" />
 	<texture name="target" path="assets/target/target.png" smooth="true" />
 	<texture name="targetmini" path="assets/target/TargetMini.png" smooth="true" />
-	<texture name="bitmapfontGold" path="bitmapfonts/gold.png" smooth="true" />
-	<texture name="bitmapfontGreen" path="bitmapfonts/green.png" smooth="true" />
-	<texture name="bitmapfontRed" path="bitmapfonts/red.png" smooth="true" />
+	<texture name="bitmapfontGold" path="bitmapfonts/gold.png" smooth="false" />
+	<texture name="bitmapfontGreen" path="bitmapfonts/green.png" smooth="false" />
+	<texture name="bitmapfontRed" path="bitmapfonts/red.png" smooth="false" />
+	<texture name="bitmapfontGuiLarge" path="bitmapfonts/gui_large.png" smooth="false" />
 	<texture name="arrowHUD" path="gui/arrows.png" smooth="true" />
 </textures>
 <fonts>
@@ -34,4 +35,5 @@
 	<bitmapfont name="gold" path="bitmapfontGold.xml" />
 	<bitmapfont name="green" path="bitmapfontGreen.xml" />
 	<bitmapfont name="red" path="bitmapfontRed.xml" />
+	<bitmapfont name="gui_large" path="bitmapfontGuiLarge.xml" />
 </bitmapfonts>
