@@ -28,15 +28,7 @@ public:
 template<typename T>
 T Config::get(const std::string& key)
 {
-    // Default return value
-    T output = utility::stringTo<T>("0");
-
-    auto it = m_content.find(key);
-
-    if(it != end(m_content))
-        output = utility::stringTo<T>(it->second);
-
-    return output;
+    return utility::stringTo<T>(FileReader::get(key));
 }
 
 #endif // CONFIG_HPP
