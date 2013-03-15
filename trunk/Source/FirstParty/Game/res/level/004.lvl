@@ -59,6 +59,30 @@
 		</shapes>
 
 		<functions>
+			<function name="plantWobble">
+				<add>
+					<var name="minAngle" />
+					<mul>
+						<sine>
+							<mul>
+								<time />
+								<var name="perBig" />
+							</mul>
+						</sine>
+						<var name="ampBig" />
+					</mul>
+					<mul>
+						<sine>
+							<mul>
+								<time />
+								<var name="perSmall" />
+							</mul>
+						</sine>
+						<var name="ampSmall" />
+					</mul>
+				</add>
+			</function>
+
 			<function name="cloudMovement">
 				<!-- width - ((speed*time + offset) % width) + shift-->
 				<add>
@@ -688,53 +712,13 @@
 				<animation texture="pastureland_flowers_front2" width="149" height="187" x="958" y="905" midx="68" midy="180"><!-- 02 mid flower -->
 					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.6" perSmall="100" />
 					<rotation>
-						<add>
-							<var name="minAngle" />
-							<mul>
-								<sine>
-									<mul>
-										<time />
-										<var name="perBig" />
-									</mul>
-								</sine>
-								<var name="ampBig" />
-							</mul>
-							<mul>
-								<sine>
-									<mul>
-										<time />
-										<var name="perSmall" />
-									</mul>
-								</sine>
-								<var name="ampSmall" />
-							</mul>
-						</add>
+						<function name="plantWobble" />
 					</rotation>
 				</animation>
 				<animation texture="pastureland_flowers_front" width="96" height="129" x="920" y="910" midx="48" midy="125"><!-- 01 front flower -->
 					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.2" perSmall="120" />
 					<rotation>
-						<add>
-							<var name="minAngle" />
-							<mul>
-								<sine>
-									<mul>
-										<time />
-										<var name="perBig" />
-									</mul>
-								</sine>
-								<var name="ampBig" />
-							</mul>
-							<mul>
-								<sine>
-									<mul>
-										<time />
-										<var name="perSmall" />
-									</mul>
-								</sine>
-								<var name="ampSmall" />
-							</mul>
-						</add>
+						<function name="plantWobble" />
 					</rotation>
 				</animation>
 			</parallax>
