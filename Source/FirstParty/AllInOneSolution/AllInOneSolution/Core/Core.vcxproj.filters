@@ -442,7 +442,7 @@
     <None Include="..\..\..\Game\res\level\002.lvl">
       <Filter>Resouces\res\level</Filter>
     </None>
-    <None Include="language.dat">
+    <None Include="..\..\..\Game\res\language.dat">
       <Filter>Resouces</Filter>
     </None>
   </ItemGroup>

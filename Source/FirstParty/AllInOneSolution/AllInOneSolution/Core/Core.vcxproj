@@ -213,13 +213,13 @@
   <ItemGroup>
     <None Include="..\..\..\Game\Config.ini" />
     <None Include="..\..\..\Game\res\font\visitor.ttf" />
+    <None Include="..\..\..\Game\res\language.dat" />
     <None Include="..\..\..\Game\res\level\001.lvl">
       <SubType>Designer</SubType>
     </None>
     <None Include="..\..\..\Game\res\level\002.lvl">
       <SubType>Designer</SubType>
     </None>
-    <None Include="language.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

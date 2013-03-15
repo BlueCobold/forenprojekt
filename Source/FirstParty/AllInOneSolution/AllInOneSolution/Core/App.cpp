@@ -69,6 +69,8 @@ void App::update()
     m_screen.setView(view);
 
     m_stateManager.update();
+
+    utility::Mouse.capture();
 }
 
 void App::draw()

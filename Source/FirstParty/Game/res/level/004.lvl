@@ -121,107 +121,23 @@
 		<physics>
 			<physic name="wall">
 				<body type="static" angle="0" />
-				<fixture density="0.1" friction="0.8" restitution="0" />
-			</physic>
-			<physic name="arrow">
-				<body type="kinematic" angle="0">
-					<kinematics>
-						<position axis="y">
-							<step>
-								<sub>
-									<var name="direction" />
-									<static value="1"/>
-								</sub>
-								<step>
-									<var name="direction" />
-									<mul>
-										<abs>
-											<sine>
-												<mul>
-													<time />
-													<static value="180" />
-												</mul>
-											</sine>
-										</abs>
-										<static value="30" />
-									</mul>
-									<sub>
-										<static value="-30" />
-										<mul>
-											<abs>
-												<sine>
-													<mul>
-														<time />
-														<static value="180" />
-													</mul>
-												</sine>
-											</abs>
-											<static value="30" />
-										</mul>
-									</sub>
-								</step>
-								<static value="0" />
-							</step>
-						</position>
-						<position axis="x">
-							<step>
-								<sub>
-									<var name="direction" />
-									<static value="1"/>
-								</sub>
-								<static value="0" />
-								<step>
-									<sub>
-										<var name="direction" />
-										<static value="3" />
-									</sub>
-									<mul>
-										<abs>
-											<sine>
-												<mul>
-													<time />
-													<static value="180" />
-												</mul>
-											</sine>
-										</abs>
-										<static value="30" />
-									</mul>
-									<sub>
-										<static value="-30" />
-										<mul>
-											<abs>
-												<sine>
-													<mul>
-														<time />
-														<static value="180" />
-													</mul>
-												</sine>
-											</abs>
-											<static value="30" />
-										</mul>
-									</sub>
-								</step>
-							</step>
-						</position>
-					</kinematics>
-				</body>
-				<fixture density="0.1" friction="0.8" restitution="0" />
+				<fixture density="0.1" friction="0.8" restitution="0.5" />
 			</physic>
 			<physic name="high_wall">
 				<body type="static" angle="0" />
-				<fixture density="0.1" friction="0.8" restitution="0" />
+				<fixture density="0.1" friction="0.8" restitution="0.5" />
 			</physic>
 			<physic name="wide_wall">
 				<body type="static" angle="0" />
-				<fixture density="0.1" friction="0.8" restitution="0" />
+				<fixture density="0.1" friction="0.8" restitution="0.5" />
 			</physic>
 			<physic name="ball">
 				<body type="dynamic" angle="0" angularDamping="4.0" />
-				<fixture density="0.5" friction="0.7" restitution="0.4" />
+				<fixture density="0.6" friction="0.7" restitution="0.0" />
 			</physic>
 			<physic name="teeter">
 				<body type="kinematic" angle="0" />
-				<fixture density="0.5" friction="0.8" restitution="0.1" />
+				<fixture density="0.2" friction="0.8" restitution="0.4" />
 			</physic>
 			<physic name="target">
 				<body type="kinematic" angle="0" />
@@ -514,12 +430,88 @@
 			</entity>
 
 			<entity name="arrow" rep="AR" collideWithBall="false">
-				<physics name="arrow" shape="wall" />
 				<animations>
 					<animation texture="gravity_arrow" srcy="0" width="128" height="128" midx="64" midy="64" rotate="false">
 						<frameindex frames="4">
 							<var name="direction" />
 						</frameindex>
+						<position axis="y">
+							<step>
+								<sub>
+									<var name="direction" />
+									<static value="1"/>
+								</sub>
+								<step>
+									<var name="direction" />
+									<mul>
+										<abs>
+											<sine>
+												<mul>
+													<time />
+													<static value="180" />
+												</mul>
+											</sine>
+										</abs>
+										<static value="30" />
+									</mul>
+									<sub>
+										<static value="-30" />
+										<mul>
+											<abs>
+												<sine>
+													<mul>
+														<time />
+														<static value="180" />
+													</mul>
+												</sine>
+											</abs>
+											<static value="30" />
+										</mul>
+									</sub>
+								</step>
+								<static value="0" />
+							</step>
+						</position>
+						<position axis="x">
+							<step>
+								<sub>
+									<var name="direction" />
+									<static value="1"/>
+								</sub>
+								<static value="0" />
+								<step>
+									<sub>
+										<var name="direction" />
+										<static value="3" />
+									</sub>
+									<mul>
+										<abs>
+											<sine>
+												<mul>
+													<time />
+													<static value="180" />
+												</mul>
+											</sine>
+										</abs>
+										<static value="30" />
+									</mul>
+									<sub>
+										<static value="-30" />
+										<mul>
+											<abs>
+												<sine>
+													<mul>
+														<time />
+														<static value="180" />
+													</mul>
+												</sine>
+											</abs>
+											<static value="30" />
+										</mul>
+									</sub>
+								</step>
+							</step>
+						</position>
 					</animation>
 				</animations>
 			</entity>
