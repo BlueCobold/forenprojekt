@@ -20,7 +20,7 @@ public:
     SingleProvider(std::unique_ptr<ValueProvider> provider) : m_provider(std::move(provider))
     {
         if(m_provider == nullptr)
-            throw std::exception(utility::translateKey("TheProviderNull").c_str());
+            throw std::runtime_error(utility::translateKey("TheProviderNull"));
     }
 
     virtual float getValue() = 0;

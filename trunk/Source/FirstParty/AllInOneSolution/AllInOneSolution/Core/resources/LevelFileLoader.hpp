@@ -65,10 +65,12 @@ private:
         ResourceManager& resourceManager,
         std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 
-    static std::unique_ptr<ValueProvider> findPositionController(tinyxml2::XMLElement* xml,
+    static std::unique_ptr<ValueProvider> findController(tinyxml2::XMLElement* xml,
         AnimatedGraphics* animated,
         VariableHandler* handler,
-        const std::string& axis,
+        const std::string& childName,
+        const std::string& propertyName,
+        const std::string& propertyValue,
         std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 };
 

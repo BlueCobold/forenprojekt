@@ -36,6 +36,7 @@ public:
     void bindTexture(const sf::Texture& texture, const sf::Vector2f& sourceOffset);
     void bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y);
     void bindRotationController(std::unique_ptr<ValueProvider> provider);
+    void bindScaleController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y);
 
     void draw(const DrawParameter& param);
 
@@ -46,6 +47,8 @@ private:
 
     std::unique_ptr<ValueProvider> m_xPositionProvider;
     std::unique_ptr<ValueProvider> m_yPositionProvider;
+    std::unique_ptr<ValueProvider> m_xScaleProvider;
+    std::unique_ptr<ValueProvider> m_yScaleProvider;
     std::unique_ptr<ValueProvider> m_rotationProvider;
     std::unique_ptr<ValueProvider> m_frameProvider;
     bool m_applyRotation;

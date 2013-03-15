@@ -28,7 +28,7 @@ void Teeter::update(const float value)
 {
 
     float velocity  = 0;
-    float angle = utility::toDegree<float,float>(m_body->GetAngle());
+    float angle = utility::toDegree<float,float>(getAngle());
     float timeDiff = value - m_lastTime;
 
     int mouseX = sf::Mouse::getPosition().x;
@@ -40,7 +40,7 @@ void Teeter::update(const float value)
     maxVelocity = std::min(maxVelocity, std::max(minVelocity, mouseDiff));
     velocity = utility::toRadian<float,float>(maxVelocity);
    
-    m_body->SetAngularVelocity(velocity);
+    getBody()->SetAngularVelocity(velocity);
     
     m_lastTime = value;
     m_lastMouseX = mouseX;

@@ -17,6 +17,7 @@
 #include "../animation/provider/Sine.hpp"
 #include "../animation/provider/StaticProvider.hpp"
 #include "../animation/provider/Step.hpp"
+#include "../animation/provider/Stop.hpp"
 #include "../animation/provider/Substractor.hpp"
 #include "../animation/provider/TimeProvider.hpp"
 #include "../animation/provider/VariableProvider.hpp"
@@ -84,10 +85,15 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 
     std::vector<std::unique_ptr<Animation>> subAnimations;
 
-    std::unique_ptr<ValueProvider> xProvider = findPositionController(xml, animated, handler, std::string("x"), functions);
-    std::unique_ptr<ValueProvider> yProvider = findPositionController(xml, animated, handler, std::string("y"), functions);
+    std::unique_ptr<ValueProvider> xProvider = findController(xml, animated, handler, "position", "axis", "x", functions);
+    std::unique_ptr<ValueProvider> yProvider = findController(xml, animated, handler, "position", "axis", "y", functions);
     if((xProvider != nullptr) || (yProvider != nullptr))
         anim->bindPositionController(std::move(xProvider), std::move(yProvider));
+
+    std::unique_ptr<ValueProvider> xScaleProvider = findController(xml, animated, handler, "scale", "axis", "x", functions);
+    std::unique_ptr<ValueProvider> yScaleProvider = findController(xml, animated, handler, "scale", "axis", "y", functions);
+    if((xScaleProvider != nullptr) || (yScaleProvider != nullptr))
+        anim->bindScaleController(std::move(xScaleProvider), std::move(yScaleProvider));
 
     tinyxml2::XMLElement* rotation = xml->FirstChildElement("rotation");
     if(rotation != nullptr && rotation->FirstChildElement() != nullptr)
@@ -115,10 +121,10 @@ std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(tiny
         if(std::string(child->Name())=="function")
         {
             if(functions == nullptr)
-                throw std::exception(utility::translateKey("FunctionNull").c_str());
+                throw std::runtime_error(utility::translateKey("FunctionNull"));
             auto function = functions->find(child->Attribute("name"));
             if(function == end(*functions))
-                throw std::exception(utility::replace(utility::translateKey("NoTemplate"), child->Attribute("name")).c_str());
+                throw std::runtime_error(utility::replace(utility::translateKey("NoTemplate"), child->Attribute("name")));
             return parseProviders(function->second, animated, handler, functions);
         }
         std::unique_ptr<ValueProvider> provider = parseProvider(child, animated, handler, functions);
@@ -135,6 +141,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
 {
     if(std::string(xml->Name())=="time")
         return std::unique_ptr<TimeProvider>(new TimeProvider(animated));
+    else if(std::string(xml->Name())=="stop")
+        return std::unique_ptr<Stop>(new Stop(animated));
     else if(std::string(xml->Name())=="angle")
         return std::unique_ptr<AngleProvider>(new AngleProvider(animated));
     else if(std::string(xml->Name())=="static")
@@ -177,20 +185,20 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
     else if(std::string(xml->Name())=="function")
     {
         if(functions == nullptr)
-            throw std::exception(utility::translateKey("FunctionNull").c_str());
+            throw std::runtime_error(utility::translateKey("FunctionNull"));
         auto funcName = xml->Attribute("name");
         if(funcName == nullptr)
-            throw std::exception(utility::translateKey("NoName").c_str());
+            throw std::runtime_error(utility::translateKey("NoName"));
         auto function = functions->find(funcName);
         if(function == end(*functions))
-            throw std::exception(utility::replace(utility::translateKey("NoTemplate"), funcName).c_str());
+            throw std::runtime_error(utility::replace(utility::translateKey("NoTemplate"), funcName));
         auto providers = parseProviders(function->second, animated, handler, functions);
         if(providers.size()>1)
-            throw std::exception(utility::replace(utility::translateKey("TemplateChild"), funcName).c_str());
+            throw std::runtime_error(utility::replace(utility::translateKey("TemplateChild"), funcName));
         return std::move(providers[0]);
     }
     else
-        throw std::exception(utility::replace(utility::translateKey("Unknown"), xml->Name()).c_str());
+        throw std::runtime_error(utility::replace(utility::translateKey("Unknown"), xml->Name()));
 }
 
 std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml, 
@@ -207,7 +215,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     {
         tinyxml2::XMLElement* child = frameIndex->FirstChildElement();
         if(child == nullptr)
-            throw std::exception(utility::translateKey("NoProvider").c_str());
+            throw std::runtime_error(utility::translateKey("NoProvider"));
         provider = std::move(parseProvider(child, animated, handler, functions));
     }
 
@@ -260,26 +268,28 @@ void LevelFileLoader::parseKinematics(tinyxml2::XMLElement* element,
         if(provider != nullptr)
             entity->bindRotationController(std::move(provider));
     }
-    std::unique_ptr<ValueProvider> posX = findPositionController(kinematics, entity, handler, "x", functions);
-    std::unique_ptr<ValueProvider> posY = findPositionController(kinematics, entity, handler, "y", functions);
+    std::unique_ptr<ValueProvider> posX = findController(kinematics, entity, handler, "position", "axis", "x", functions);
+    std::unique_ptr<ValueProvider> posY = findController(kinematics, entity, handler, "position", "axis", "y", functions);
     if(posX != nullptr || posY != nullptr)
         entity->bindPositionController(std::move(posX), std::move(posY));
 }
 
-std::unique_ptr<ValueProvider> LevelFileLoader::findPositionController(
+std::unique_ptr<ValueProvider> LevelFileLoader::findController(
     tinyxml2::XMLElement* xml,
     AnimatedGraphics* animated,
     VariableHandler* handler,
-    const std::string& axis,
+    const std::string& childName,
+    const std::string& propertyName,
+    const std::string& propertyValue,
     std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
 {
-    for(auto iterator = xml->FirstChildElement("position");
-        iterator != nullptr; iterator = iterator->NextSiblingElement("position"))
+    for(auto iterator = xml->FirstChildElement(childName.c_str());
+        iterator != nullptr; iterator = iterator->NextSiblingElement(childName.c_str()))
     {
-        if(std::string(iterator->Attribute("axis")) != axis)
+        if(std::string(iterator->Attribute(propertyName.c_str())) != propertyValue)
             continue;
         if(iterator->FirstChildElement() == nullptr)
-            throw std::exception(utility::translateKey("SubTag").c_str());
+            throw std::runtime_error(utility::translateKey("SubTag"));
         return parseProvider(iterator->FirstChildElement(), animated, handler, functions);
     }
     return nullptr;

@@ -25,7 +25,7 @@ public:
         m_varName(varName)
     {
         if(owner == nullptr)
-            throw std::exception(utility::replace(utility::translateKey("OwnerNull"), "SetVariable-provider").c_str());
+            throw std::runtime_error(utility::replace(utility::translateKey("OwnerNull"), "SetVariable-provider"));
     }
 
     virtual float getValue()

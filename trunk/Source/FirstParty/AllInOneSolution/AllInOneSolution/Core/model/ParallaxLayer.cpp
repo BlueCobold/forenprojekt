@@ -37,13 +37,13 @@ void ParallaxLayer::update(const float time, const sf::View& view, const sf::Vec
 float ParallaxLayer::getValueOf(const std::string& name) const
 {
     if(m_updatingAni == nullptr)
-        throw std::exception(utility::replace(utility::translateKey("GetVariable"), name).c_str());
+        throw std::runtime_error(utility::replace(utility::translateKey("GetVariable"), name));
     return m_updatingAni->getValueOf(name);
 }
 
 void ParallaxLayer::setValueOf(const std::string& name, const float value)
 {
     if(m_updatingAni == nullptr)
-        throw std::exception(utility::replace(utility::translateKey("SetVariable"), name).c_str());
+        throw std::runtime_error(utility::replace(utility::translateKey("SetVariable"), name));
     m_updatingAni->setValueOf(name, value);
 }

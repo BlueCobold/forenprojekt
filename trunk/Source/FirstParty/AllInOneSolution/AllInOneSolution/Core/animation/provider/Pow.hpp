@@ -18,7 +18,7 @@ public:
     Pow(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
     {
         if(getProvider().size() != 2)
-            throw std::exception(utility::replace(utility::translateKey("TwoChilds"), "Pow").c_str());
+            throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Pow"));
     }
 
     virtual float getValue()

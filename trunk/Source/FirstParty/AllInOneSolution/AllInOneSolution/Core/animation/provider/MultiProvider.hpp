@@ -22,7 +22,7 @@ public:
     {
         for(auto it = begin(m_provider); it != end(m_provider); ++it)
             if((*it) == nullptr)
-                throw std::exception(utility::translateKey("ProviderNull").c_str());
+                throw std::runtime_error(utility::translateKey("ProviderNull"));
     }
 
     virtual float getValue() = 0;

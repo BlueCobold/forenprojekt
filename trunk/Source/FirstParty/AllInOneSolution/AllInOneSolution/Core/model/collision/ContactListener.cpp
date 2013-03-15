@@ -12,7 +12,7 @@ ContactListener::ContactListener(CollisionHandler* handler, CollisionFilter* fil
     m_filter(filter)
 {
     if(handler == nullptr || filter == nullptr)
-        throw std::exception(utility::translateKey("ParametersNull").c_str());
+        throw std::runtime_error(utility::translateKey("ParametersNull"));
 }
 
 void ContactListener::BeginContact(b2Contact* contact)

@@ -57,6 +57,8 @@ void Level::restartAt(const float time)
 
 void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 {
+    TimedObject::updateCurrentTime(elapsedTime);
+
     auto it = begin(m_entities);
     while(it != end(m_entities))
     {
@@ -68,6 +70,14 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         else
             ++it;
     }
+    for(auto it = std::begin(m_entitiesToSpawn); it != std::end(m_entitiesToSpawn); ++it)
+    {
+        auto e = std::move(*it);
+        e->restartAt(elapsedTime);
+        e->bindBody();
+        m_entities.push_back(std::move(e));
+    }
+    m_entitiesToSpawn.clear();
 
     m_soundManager.update();
 
@@ -120,7 +130,7 @@ float Level::getValueOf(const std::string& name) const
     if(match == end(m_variables))
     {
         if(m_updatingEntity == nullptr)
-            throw std::exception(utility::replace(utility::translateKey("GetVariable"), name).c_str());
+            throw std::runtime_error(utility::replace(utility::translateKey("GetVariable"), name));
         return m_updatingEntity->getValueOf(name);
     }
     return match->second;

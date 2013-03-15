@@ -14,8 +14,6 @@ public:
 
     virtual void update(const float value);
 
-    void setStartPosition(const b2Vec2 startPosition);
-
     void setFieldDimension(const b2Vec2 fieldDimension);
 
     bool getBallLost();
@@ -25,7 +23,6 @@ private:
     float m_ballResetTime;
     float m_resetTime;
 
-    b2Vec2 m_startPosition;
     b2Vec2 m_fieldDimension;
 
     bool m_lostBall;

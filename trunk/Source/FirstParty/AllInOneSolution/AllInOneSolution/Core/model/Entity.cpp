@@ -24,14 +24,16 @@ void Entity::update(const float value)
         for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
         {
             m_updatingAni = (*animation).get();
-            (*animation)->setPosition(utility::toPixel(m_body->GetPosition().x), utility::toPixel(m_body->GetPosition().y));
-            (*animation)->setRotation(m_body->GetAngle());
+            (*animation)->setPosition(utility::toPixel(getBody()->GetPosition().x), utility::toPixel(getBody()->GetPosition().y));
+            (*animation)->setRotation(getBody()->GetAngle());
             (*animation)->update();
         }
         m_updatingAni = nullptr;
 
         m_lastTime = value;
     }
+    if(isStopped())
+        kill();
 }
 
 float Entity::getValueOf(const std::string& name) const
@@ -40,7 +42,7 @@ float Entity::getValueOf(const std::string& name) const
     if(match == end(m_variables))
     {
         if(m_updatingAni == nullptr)
-            throw std::exception(utility::replace(utility::translateKey("GetVariable"), name).c_str());
+            throw std::runtime_error(utility::replace(utility::translateKey("GetVariable"), name));
         return m_updatingAni->getValueOf(name);
     }
     return match->second;
