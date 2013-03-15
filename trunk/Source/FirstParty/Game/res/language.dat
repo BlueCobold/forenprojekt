@@ -31,3 +31,4 @@ UnknownBitmapFont = Bitmapfont isn't registered: %.
 UnknownSound = Sound isn't registered: %.
 UnknownTexture = Texture isn't registered: %.
 UnknownFont = Font isn't registered: %.
+SpawnWithoutName = No entity-name defined in spawnEntity.

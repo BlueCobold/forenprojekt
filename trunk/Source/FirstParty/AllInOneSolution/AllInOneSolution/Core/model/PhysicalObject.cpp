@@ -7,6 +7,9 @@
 
 void PhysicalObject::updateKinematics(const float value, const float delta)
 {
+    if(m_body == nullptr)
+        return;
+
     if(delta == 0)
     {
         m_body->SetAngularVelocity(0.f);

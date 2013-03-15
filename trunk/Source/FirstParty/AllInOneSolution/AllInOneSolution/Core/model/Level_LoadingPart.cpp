@@ -131,6 +131,8 @@ bool Level::load()
             m_ball->setFieldDimension(b2Vec2(m_width,m_height));
         }
 
+    m_remainingTarget = m_totalTarget;
+
     return true;
 }
 
@@ -180,11 +182,7 @@ std::unique_ptr<Entity> Level::parseEntity(
             physic = templates.physics.find(std::string(physic->Attribute("name")))->second;
     }
 
-    // Entity is well defined
-    if((shape != nullptr) && (physic != nullptr))
-        return createEntity(entity, pos, shape, physic, templates, bindInstantly);
-
-    throw std::runtime_error("Cannot create entity");
+    return createEntity(entity, pos, shape, physic, templates, bindInstantly);
 }
 
 bool Level::validate(const tinyxml2::XMLDocument& document)
@@ -237,87 +235,91 @@ std::unique_ptr<Entity> Level::createEntity(
     else // No type specified == normal Entity
         entity = std::unique_ptr<Entity>(new Entity(Entity::None));
 
-    if(xml->Attribute("collideWithBall") != nullptr)
-        entity->setCollideWithBall(xml->BoolAttribute("collideWithBall"));
-    else
-        entity->setCollideWithBall(true);
-
-    if(auto collider = xml->FirstChildElement("onCollision"))
-        parseCollider(entity.get(), collider, templates);
-
-    if(auto filter = xml->FirstChildElement("collides"))
-        parseCollisionFilter(entity.get(), filter, templates);
-
     entity->setName(std::string(xml->Attribute("name")));
-    
     if(auto animations = xml->FirstChildElement("animations"))
     {
         // Load animation
         for(auto element = animations->FirstChildElement("animation"); element != nullptr;
             element = element->NextSiblingElement("animation"))
-            entity->bindAnimation(std::move(LevelFileLoader::parseAnimation(element, entity.get(), this, m_resourceManager, &templates.functions)));
+        {
+            auto animation = LevelFileLoader::parseAnimation(element, entity.get(), this, m_resourceManager, &templates.functions);
+            if(physic == nullptr)
+                animation->setPosition(static_cast<float>(position.x), static_cast<float>(position.y));
+            entity->bindAnimation(std::move(animation));
+        }
     }
-
     if(auto constants = xml->FirstChildElement("constants"))
         LevelFileLoader::parseConstants(constants, entity.get());
 
-    // Load sound
-    if(xml->FirstChildElement("sound") != nullptr)
-        entity->bindSound(std::string(xml->FirstChildElement("sound")->Attribute("name")), &m_soundManager);
-
-    // Load body
-    element = physic->FirstChildElement("body");
-    b2BodyDef bodyDef;
-    if(std::string(element->Attribute("type")) == "static")
-        bodyDef.type = b2_staticBody;
-    else if(std::string(element->Attribute("type")) == "kinematic")
-        bodyDef.type = b2_kinematicBody;
-    else if(std::string(element->Attribute("type")) == "dynamic")
-        bodyDef.type = b2_dynamicBody;
-    bodyDef.position = b2Vec2(static_cast<float>(utility::toMeter(position.x)), static_cast<float>(utility::toMeter(position.y)));
-    bodyDef.angle = utility::toRadian<float, float>(element->FloatAttribute("angle"));
-    bodyDef.fixedRotation = element->BoolAttribute("fixedRotation");
-    bodyDef.angularDamping = element->BoolAttribute("angularDamping");
-    LevelFileLoader::parseKinematics(element, entity.get(), this, &templates.functions);
-
-    // Load shape
-    if(std::string(shape->Attribute("type")) == "polygon") // Load polygon
+    if(physic != nullptr)
     {
-        std::vector<b2Vec2> vertices;
+        if(xml->Attribute("collideWithBall") != nullptr)
+            entity->setCollideWithBall(xml->BoolAttribute("collideWithBall"));
+        else
+            entity->setCollideWithBall(true);
 
-        // Iterate over the vertices
-        for(tinyxml2::XMLElement* vertexIterator = shape->FirstChildElement("vertex");
-            vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
+        if(auto collider = xml->FirstChildElement("onCollision"))
+            parseCollider(entity.get(), collider, templates);
+
+        if(auto filter = xml->FirstChildElement("collides"))
+            parseCollisionFilter(entity.get(), filter, templates);
+
+        // Load sound
+        if(xml->FirstChildElement("sound") != nullptr)
+            entity->bindSound(std::string(xml->FirstChildElement("sound")->Attribute("name")), &m_soundManager);
+
+        // Load body
+        element = physic->FirstChildElement("body");
+        b2BodyDef bodyDef;
+        if(std::string(element->Attribute("type")) == "static")
+            bodyDef.type = b2_staticBody;
+        else if(std::string(element->Attribute("type")) == "kinematic")
+            bodyDef.type = b2_kinematicBody;
+        else if(std::string(element->Attribute("type")) == "dynamic")
+            bodyDef.type = b2_dynamicBody;
+        bodyDef.position = b2Vec2(static_cast<float>(utility::toMeter(position.x)), static_cast<float>(utility::toMeter(position.y)));
+        bodyDef.angle = utility::toRadian<float, float>(element->FloatAttribute("angle"));
+        bodyDef.fixedRotation = element->BoolAttribute("fixedRotation");
+        bodyDef.angularDamping = element->BoolAttribute("angularDamping");
+        LevelFileLoader::parseKinematics(element, entity.get(), this, &templates.functions);
+
+        // Load shape
+        if(std::string(shape->Attribute("type")) == "polygon") // Load polygon
         {
-            vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
-                utility::toMeter(vertexIterator->FloatAttribute("y"))));
+            std::vector<b2Vec2> vertices;
+
+            // Iterate over the vertices
+            for(tinyxml2::XMLElement* vertexIterator = shape->FirstChildElement("vertex");
+                vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
+            {
+                vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
+                    utility::toMeter(vertexIterator->FloatAttribute("y"))));
+            }
+
+            // Construct the b2Shape
+            std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
+            ps->Set(vertices.data(), vertices.size());
+            m_shapes.push_back(std::move(ps));
+        }
+        else if(std::string(shape->Attribute("type")) == "circle") // Load circle
+        {
+            std::unique_ptr<b2CircleShape> cs(new b2CircleShape);
+            cs->m_radius = utility::toMeter(shape->FloatAttribute("radius"));
+            m_shapes.push_back(std::move(cs));
         }
 
-        // Construct the b2Shape
-        std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
-        ps->Set(vertices.data(), vertices.size());
-        m_shapes.push_back(std::move(ps));
+        // Load fixtures
+        element = physic->FirstChildElement("fixture");
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = m_shapes.back().get();
+        fixtureDef.density = element->FloatAttribute("density");
+        fixtureDef.friction = element->FloatAttribute("friction");
+        fixtureDef.restitution = element->FloatAttribute("restitution");
+
+        entity->bindDefs(fixtureDef, bodyDef, &m_world);
+        if(bindInstantly)
+            entity->bindBody();
     }
-    else if(std::string(shape->Attribute("type")) == "circle") // Load circle
-    {
-        std::unique_ptr<b2CircleShape> cs(new b2CircleShape);
-        cs->m_radius = utility::toMeter(shape->FloatAttribute("radius"));
-        m_shapes.push_back(std::move(cs));
-    }
-
-    // Load fixtures
-    element = physic->FirstChildElement("fixture");
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = m_shapes.back().get();
-    fixtureDef.density = element->FloatAttribute("density");
-    fixtureDef.friction = element->FloatAttribute("friction");
-    fixtureDef.restitution = element->FloatAttribute("restitution");
-
-    entity->bindDefs(fixtureDef, bodyDef, &m_world);
-    if(bindInstantly)
-        entity->bindBody();
-
-    m_remainingTarget = m_totalTarget;
 
     return std::move(entity);
 }
@@ -358,7 +360,7 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
     {
         auto name = xml->Attribute("name");
         if(!name)
-            throw std::runtime_error("No entity-name defined in spawnEntity.");
+            throw std::runtime_error(utility::translateKey("SpawnWithoutName"));
 
         std::unique_ptr<Entity> spawned(parseEntityFromTemplate(name, templates, sf::Vector2u(0, 0), false));
         if(spawned == nullptr)

@@ -24,8 +24,11 @@ void Entity::update(const float value)
         for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
         {
             m_updatingAni = (*animation).get();
-            (*animation)->setPosition(utility::toPixel(getBody()->GetPosition().x), utility::toPixel(getBody()->GetPosition().y));
-            (*animation)->setRotation(getBody()->GetAngle());
+            if(getBody() != nullptr)
+            {
+                (*animation)->setPosition(utility::toPixel(getBody()->GetPosition().x), utility::toPixel(getBody()->GetPosition().y));
+                (*animation)->setRotation(getBody()->GetAngle());
+            }
             (*animation)->update();
         }
         m_updatingAni = nullptr;

@@ -57,51 +57,60 @@ void Level::restartAt(const float time)
 
 void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 {
-    TimedObject::updateCurrentTime(elapsedTime);
-
-    auto it = begin(m_entities);
-    while(it != end(m_entities))
-    {
-        if((*it)->killed())
-        {
-            (*it)->unbindBody();
-            it = m_entities.erase(it);
-        }
-        else
-            ++it;
-    }
-    for(auto it = std::begin(m_entitiesToSpawn); it != std::end(m_entitiesToSpawn); ++it)
-    {
-        auto e = std::move(*it);
-        e->restartAt(elapsedTime);
-        e->bindBody();
-        m_entities.push_back(std::move(e));
-    }
-    m_entitiesToSpawn.clear();
-
     m_soundManager.update();
 
-    m_timeStep =  elapsedTime - m_lastTime;
-    m_velocityIterations = std::max(1, static_cast<int>(4 * m_timeStep * 60.0f));
+    m_timeStep = elapsedTime - m_lastTime;
+    m_velocityIterations = std::max(1, 4);
     m_positionIterations = m_velocityIterations;
 
-    m_world.Step(m_timeStep, m_velocityIterations, m_positionIterations);
-
-    for(auto it = begin(m_entities); it != end(m_entities); ++it)
+    int steps = std::min(20, std::max(1, static_cast<int>(ceilf(m_timeStep / (1 / (60.0f * 2))))));
+    float delta = 0;
+    for(int i=1; i<=steps; i++)
     {
-        m_updatingEntity = (*it).get();
-        if((*it)->getType() == Entity::Ball)
+        utility::Mouse.interpolate(steps, i);
+
+        delta = (i * m_timeStep) / steps;
+
+        TimedObject::updateCurrentTime(m_lastTime + delta);
+
+        auto it = begin(m_entities);
+        while(it != end(m_entities))
         {
-            if(m_ball->getBallLost())
+            if((*it)->killed())
             {
-                m_points -= 10;
-                m_multiHit = 0;
-                m_world.SetGravity(m_defaultGravity);
+                (*it)->unbindBody();
+                it = m_entities.erase(it);
             }
+            else
+                ++it;
         }
-        (*it)->update(elapsedTime);
+        for(auto it = std::begin(m_entitiesToSpawn); it != std::end(m_entitiesToSpawn); ++it)
+        {
+            auto e = std::move(*it);
+            e->restartAt(m_lastTime + delta);
+            e->bindBody();
+            m_entities.push_back(std::move(e));
+        }
+        m_entitiesToSpawn.clear();
+
+        m_world.Step(m_timeStep / steps, m_velocityIterations, m_positionIterations);
+
+        for(auto it = begin(m_entities); it != end(m_entities); ++it)
+        {
+            m_updatingEntity = (*it).get();
+            if((*it)->getType() == Entity::Ball)
+            {
+                if(m_ball->getBallLost())
+                {
+                    m_points -= 10;
+                    m_multiHit = 0;
+                    m_world.SetGravity(m_defaultGravity);
+                }
+            }
+            (*it)->update(m_lastTime + delta);
+        }
+        m_updatingEntity = nullptr;
     }
-    m_updatingEntity = nullptr;
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
         m_debugDraw = !m_debugDraw;

@@ -23,5 +23,7 @@ namespace utility
             string.replace(pos,1,replacement);
 
         return string;
-     }
+    }
+
+    MouseWrapper Mouse;
 }
