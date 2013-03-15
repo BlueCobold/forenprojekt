@@ -7,6 +7,11 @@
 class TimedObject
 {
 public:
+    TimedObject() : m_stopped(false)
+    { }
+
+    virtual ~TimedObject()
+    { }
 
     virtual void restartAt(const float time)
     {
@@ -17,6 +22,16 @@ public:
     virtual float getPassedTime() const
     {
         return m_currentTime - m_startTime;
+    }
+
+    virtual void stop()
+    {
+        m_stopped = true;
+    }
+
+    virtual bool isStopped() const
+    {
+        return m_stopped;
     }
 
 protected:
@@ -30,6 +45,7 @@ private:
 
     float m_startTime;
     float m_currentTime;
+    bool m_stopped;
 };
 
 #endif //TIMED_OBJECT_HPP

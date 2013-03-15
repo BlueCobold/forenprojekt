@@ -67,6 +67,16 @@ public:
     const sf::Vector2f getBallCoords() const;
 
 private:
+
+    struct Templates
+    {
+    public:
+        std::unordered_map<std::string, tinyxml2::XMLElement*> physics;
+        std::unordered_map<std::string, tinyxml2::XMLElement*> shapes;
+        std::unordered_map<std::string, tinyxml2::XMLElement*> entities;
+        std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
+    };
+
     virtual bool shouldCollide(Entity* entityA, Entity* entityB);
     virtual void onCollision(Entity* entityA, Entity* entityB);
     void killTarget(Entity* target);
@@ -78,13 +88,40 @@ private:
     bool validate(const tinyxml2::XMLDocument& document);
 
     /// Create an Entity
-    std::unique_ptr<Entity> createEntity(tinyxml2::XMLElement* xml, const sf::Vector2u& position,
-        tinyxml2::XMLElement* shape, tinyxml2::XMLElement* physic,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
-    void parseCollider(Entity* entity, tinyxml2::XMLElement* collider,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
-    void parseCollisionFilter(Entity* entity, tinyxml2::XMLElement* xml,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
+    std::unique_ptr<Entity> createEntity(
+        tinyxml2::XMLElement* xml,
+        const sf::Vector2u& position,
+        tinyxml2::XMLElement* shape,
+        tinyxml2::XMLElement* physic,
+        Templates& templates,
+        bool bindInstantly = true);
+
+    std::unique_ptr<Entity> parseEntityFromTemplate(
+        std::string name,
+        Templates& templates,
+        const sf::Vector2u& position,
+        bool bindInstantly = true);
+
+    std::unique_ptr<Entity> parseEntity(
+        tinyxml2::XMLElement* xml,
+        const sf::Vector2u& position,
+        Templates& templates,
+        bool bindInstantly = true);
+
+    void parseCollider(
+        Entity* entity,
+        tinyxml2::XMLElement* collider,
+        Templates& templates);
+
+    void parseCollisionFilter(
+        Entity* entity,
+        tinyxml2::XMLElement* xml,
+        Templates& templates);
+
+    std::unique_ptr<CollisionFilter> getCollisionFilter(
+        Entity* entity,
+        tinyxml2::XMLElement* xml,
+        Templates& templates);
 
     /// Construct the full level filename from the level number
     const std::string filename();
@@ -103,6 +140,8 @@ private:
     std::map<std::string, float> m_variables;
     Entity* m_updatingEntity;
     std::vector<std::unique_ptr<Entity>> m_entities;
+    std::vector<std::unique_ptr<Entity>> m_entitiesToSpawn;
+    std::vector<std::unique_ptr<Entity>> m_unspawnedEntities;
 
     // HACK: This should be in the Entity class, but since unique_ptr sucks with VS10...
     std::vector<std::unique_ptr<b2Shape>> m_shapes;

@@ -18,7 +18,7 @@ public:
     Clamp(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
     {
         if(getProvider().size() != 3)
-            throw std::exception(utility::replace(utility::translateKey("ThreeChilds"), "Clamp").c_str());
+            throw std::runtime_error(utility::replace(utility::translateKey("ThreeChilds"), "Clamp"));
     }
 
     virtual float getValue()

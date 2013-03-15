@@ -26,7 +26,7 @@ public:
         if(found != end(m_variables))
             return found->second;
         else
-            throw std::exception(utility::replace(utility::translateKey("NoVariable"), name).c_str());
+            throw std::runtime_error(utility::replace(utility::translateKey("NoVariable"), name));
         return 0;
     }
 

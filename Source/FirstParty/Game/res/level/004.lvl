@@ -1,5 +1,5 @@
 <level>
-	<constants gate="0" gatetime="0"/>
+	<constants direction="1" arrowtime="0"/>
 	<templates>
 		<shapes>
 			<shape name="wall" type="polygon">
@@ -32,6 +32,30 @@
 				<vertex x="15" y="104" />
 				<vertex x="15" y="-104" />
 			</shape>
+			<shape name="left" type="polygon">
+				<vertex x="60" y="0" />
+				<vertex x="60" y="240" />
+				<vertex x="-360" y="660" />
+				<vertex x="-360" y="-420" />
+			</shape>
+			<shape name="right" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="0" y="240" />
+				<vertex x="420" y="660" />
+				<vertex x="420" y="-420" />
+			</shape>
+			<shape name="up" type="polygon">
+				<vertex x="0" y="60" />
+				<vertex x="240" y="60" />
+				<vertex x="660" y="-360" />
+				<vertex x="-420" y="-360" />
+			</shape>
+			<shape name="down" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="240" y="0" />
+				<vertex x="660" y="420" />
+				<vertex x="-420" y="420" />
+			</shape>
 		</shapes>
 
 		<functions>
@@ -55,11 +79,132 @@
 					<var name="shift" />
 				</add>
 			</function>
+			
+			<function name="target_bloat">
+				<step>
+					<add>
+						<time />
+						<static value="0.75"/>
+					</add>
+					<add>
+						<static value="1" />
+						<mul>
+							<sine>
+								<mul>
+									<time />
+									<static value="360" />
+								</mul>
+							</sine>
+							<static value="0.25" />
+						</mul>
+					</add>
+					<step>
+						<add>
+							<time />
+							<static value="0.5"/>
+						</add>
+						<mul>
+							<sine>
+								<mul>
+									<time />
+									<static value="360" />
+								</mul>
+							</sine>
+							<static value="1.25" />
+						</mul>
+						<stop />
+					</step>
+				</step>
+			</function>
 		</functions>
 
 		<physics>
 			<physic name="wall">
 				<body type="static" angle="0" />
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="arrow">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<step>
+								<sub>
+									<var name="direction" />
+									<static value="1"/>
+								</sub>
+								<step>
+									<var name="direction" />
+									<mul>
+										<abs>
+											<sine>
+												<mul>
+													<time />
+													<static value="180" />
+												</mul>
+											</sine>
+										</abs>
+										<static value="30" />
+									</mul>
+									<sub>
+										<static value="-30" />
+										<mul>
+											<abs>
+												<sine>
+													<mul>
+														<time />
+														<static value="180" />
+													</mul>
+												</sine>
+											</abs>
+											<static value="30" />
+										</mul>
+									</sub>
+								</step>
+								<static value="0" />
+							</step>
+						</position>
+						<position axis="x">
+							<step>
+								<sub>
+									<var name="direction" />
+									<static value="1"/>
+								</sub>
+								<static value="0" />
+								<step>
+									<sub>
+										<var name="direction" />
+										<static value="3" />
+									</sub>
+									<mul>
+										<abs>
+											<sine>
+												<mul>
+													<time />
+													<static value="180" />
+												</mul>
+											</sine>
+										</abs>
+										<static value="30" />
+									</mul>
+									<sub>
+										<static value="-30" />
+										<mul>
+											<abs>
+												<sine>
+													<mul>
+														<time />
+														<static value="180" />
+													</mul>
+												</sine>
+											</abs>
+											<static value="30" />
+										</mul>
+									</sub>
+								</step>
+							</step>
+						</position>
+					</kinematics>
+				</body>
 				<fixture density="0.1" friction="0.8" restitution="0" />
 			</physic>
 			<physic name="high_wall">
@@ -85,11 +230,31 @@
 		</physics>
 
 		<entities>
-
+			<entity name="target_2" rep="--" collideWithBall="false">
+				<physics name="target">
+					<shape type="circle" radius="35" />
+				</physics>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true">
+						<scale axis="x">
+							<function name="target_bloat" />
+						</scale>
+						<scale axis="y">
+							<function name="target_bloat" />
+						</scale>
+					</animation>
+				</animations>
+			</entity>
+			
 			<entity name="target_1" rep="t1" type="target" collideWithBall="false">
 				<physics name="target">
 					<shape type="circle" radius="30" />
 				</physics>
+				<collides>
+					<spawnEntity name="target_2">
+						<always />
+					</spawnEntity>
+				</collides>
 				<animations>
 					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
 				</animations>
@@ -279,43 +444,55 @@
 				</animations>
 			</entity>
 
-			<entity name="change_gravity_down" rep="do" collideWithBall="false">
-				<physics name="wall" shape="wall" />
-				<animations>
-				</animations>
+			<entity name="change_gravity_down" rep="Do" collideWithBall="false">
+				<physics name="wall" shape="down" />
 				<collides>
 					<changeGravity x="0" y="40">
-						<static value="1" />
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
 					</changeGravity>
 				</collides>
 			</entity>
-			<entity name="change_gravity_right" rep="ri" collideWithBall="false">
-				<physics name="wall" shape="wall" />
-				<animations>
-				</animations>
+			<entity name="change_gravity_right" rep="Ri" collideWithBall="false">
+				<physics name="wall" shape="right" />
 				<collides>
 					<changeGravity x="40" y="0">
-						<static value="1" />
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="3" />
+							</setVar>
+						</nop>
 					</changeGravity>
 				</collides>
 			</entity>
-			<entity name="change_gravity_left" rep="le" collideWithBall="false">
-				<physics name="wall" shape="wall" />
-				<animations>
-				</animations>
+			<entity name="change_gravity_left" rep="Le" collideWithBall="false">
+				<physics name="wall" shape="left" />
 				<collides>
 					<changeGravity x="-40" y="0">
-						<static value="1" />
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="2" />
+							</setVar>
+						</nop>
 					</changeGravity>
 				</collides>
 			</entity>
-			<entity name="change_gravity_up" rep="up" collideWithBall="false">
-				<physics name="wall" shape="wall" />
-				<animations>
-				</animations>
+			<entity name="change_gravity_up" rep="Up" collideWithBall="false">
+				<physics name="wall" shape="up" />
 				<collides>
 					<changeGravity x="0" y="-40">
-						<static value="1" />
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="0" />
+							</setVar>
+						</nop>
 					</changeGravity>
 				</collides>
 			</entity>
@@ -336,6 +513,17 @@
 				</animations>
 			</entity>
 
+			<entity name="arrow" rep="AR" collideWithBall="false">
+				<physics name="arrow" shape="wall" />
+				<animations>
+					<animation texture="gravity_arrow" srcy="0" width="128" height="128" midx="64" midy="64" rotate="false">
+						<frameindex frames="4">
+							<var name="direction" />
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			
 			<!-- Teeters -->
 			<entity name="Teeter" rep="TT" type="teeter">
 				<physics name="teeter" shape="teeter" />
@@ -413,31 +601,31 @@
 	</templates>
 
 	<grid size="60" width="2460" height="1410">
-
-
-                          up                            up
-                          upup        TT      TT      upup
-                      lele  upup                    upup  riri
-                        lele  upup                upup  riri
-                          lele  upup            upup  riri
-                            lele  upup        upup  riri
-                              lele  upup    upup  riri
-                                lele  w1  t1w2  riri
-                        T2        lew1w2w4w5w1w3ri        T2
-                                      w3    w4
-                                    t1w2    w2  t1
-                                  lew3w5w4w6w1w5ri
-                        T2      lele  w1    w2  riri      T2
-                              lele  dodo  t1dodo  riri
-                            lele  dodo        dodo  riri
-                          lele  dodo            dodo  riri
-                        lele  dodo    BB          dodo  riri
-                      lele  dodo                    dodo  riri
-                          dodo        TT      TT      dodo
-                          do                            do
-
-
-
+                                                                                    
+                                                                                    
+                                                                                    
+                                      TT      TT                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                  AR              AR                                
+                                      Up                                            
+                                      h1  t1w2                                      
+                        T2        Lew1 1W4 4w1w3Ri        T2                        
+                                      w3    w4                                      
+                                    t1w2    w2  t1                                  
+                                    w3h5w4w6W1 1                                    
+                        T2             5    w2            T2                        
+                                      Do  t1                                        
+                                  AR              AR                                
+                                                                                    
+                                      BB                                            
+                                                                                    
+                                      TT      TT                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
 	</grid>
 	<objects>
 		<!-- Background -->

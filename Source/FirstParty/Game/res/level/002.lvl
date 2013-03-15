@@ -63,6 +63,43 @@
 					<var name="shift" />
 				</add>
 			</function>
+			
+			<function name="target_bloat">
+				<step>
+					<add>
+						<time />
+						<static value="0.75"/>
+					</add>
+					<add>
+						<static value="1" />
+						<mul>
+							<sine>
+								<mul>
+									<time />
+									<static value="360" />
+								</mul>
+							</sine>
+							<static value="0.25" />
+						</mul>
+					</add>
+					<step>
+						<add>
+							<time />
+							<static value="0.5"/>
+						</add>
+						<mul>
+							<sine>
+								<mul>
+									<time />
+									<static value="360" />
+								</mul>
+							</sine>
+							<static value="1.25" />
+						</mul>
+						<stop />
+					</step>
+				</step>
+			</function>
 		</functions>
 
 		<physics>
@@ -249,6 +286,22 @@
 				</onCollision>
 			</entity>
 
+			<entity name="target_2" rep="--" collideWithBall="false">
+				<physics name="target">
+					<shape type="circle" radius="35" />
+				</physics>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true">
+						<scale axis="x">
+							<function name="target_bloat" />
+						</scale>
+						<scale axis="y">
+							<function name="target_bloat" />
+						</scale>
+					</animation>
+				</animations>
+			</entity>
+			
 			<entity name="target_1" rep="t1" type="target" collideWithBall="false">
 				<constants color="0" />
 				<physics name="target">
@@ -270,15 +323,17 @@
 					</animation>
 				</animations>
 				<collides>
-					<propertyFilter target="entity">
-						<add>
-							<static value="2" />
-							<mul>
-								<static value="-1" />
-								<var name="color" />
-							</mul>
-						</add>
-					</propertyFilter>
+					<spawnEntity name="target_2">
+						<propertyFilter target="entity">
+							<add>
+								<static value="2" />
+								<mul>
+									<static value="-1" />
+									<var name="color" />
+								</mul>
+							</add>
+						</propertyFilter>
+					</spawnEntity>
 				</collides>
 			</entity>
 

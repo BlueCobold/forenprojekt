@@ -45,6 +45,14 @@ void Animation::update()
     m_sprite.setRotation(rotation);
 
     updatePosition();
+    
+    float scaleX = 1, scaleY = 1;
+    if(m_xScaleProvider != nullptr)
+        scaleX = m_xScaleProvider->getValue();
+    if(m_yScaleProvider != nullptr)
+        scaleY = m_yScaleProvider->getValue();
+    if(m_xScaleProvider != nullptr || m_yScaleProvider != nullptr)
+    m_sprite.setScale(scaleX, scaleY);
 }
 
 void Animation::setPosition(const float x, const float y)
@@ -96,4 +104,10 @@ void Animation::bindPositionController(std::unique_ptr<ValueProvider> x, std::un
 void Animation::bindRotationController(std::unique_ptr<ValueProvider> provider)
 {
     m_rotationProvider = std::move(provider);
+}
+
+void Animation::bindScaleController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y)
+{
+    m_xScaleProvider = std::move(x);
+    m_yScaleProvider = std::move(y);
 }

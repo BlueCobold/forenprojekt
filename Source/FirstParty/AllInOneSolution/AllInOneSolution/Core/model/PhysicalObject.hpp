@@ -6,6 +6,8 @@
 #include "../animation/OrientedObject.hpp"
 #include "../animation/provider/ValueProvider.hpp"
 
+#include <Box2D/Dynamics/b2Body.h>
+#include <Box2D/Dynamics/b2Fixture.h>
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
 #include <Box2D/Dynamics/b2Body.h>
@@ -23,27 +25,51 @@ private:
     std::unique_ptr<ValueProvider> m_xPositionProvider;
     std::unique_ptr<ValueProvider> m_yPositionProvider;
     b2Vec2 m_basePosition;
+    
+    b2Body* m_body;
+    b2FixtureDef m_fixtureDef;
+    b2BodyDef m_bodyDef;
+    b2World* m_world;
+
+    bool m_basePosChanged;
 
 public:
 
-    PhysicalObject()
+    PhysicalObject() : m_world(nullptr), m_body(nullptr), m_basePosChanged(false)
     { }
+
     virtual ~PhysicalObject()
     { }
 
-    /// Bind the body
-    void bindBody(b2Body* body)
+    void bindDefs(b2FixtureDef fixtureDef, b2BodyDef bodyDef, b2World* world)
     {
-        m_body = body;
-        m_basePosition = m_body->GetPosition();
+        m_fixtureDef = fixtureDef;
+        m_bodyDef = bodyDef;
+        m_world = world;
+    }
+
+    /// Bind the body
+    void bindBody()
+    {
+        if(m_world == nullptr || m_body != nullptr)
+            return;
+        // Create & bind body
+        m_body = m_world->CreateBody(&m_bodyDef);
+        m_body->CreateFixture(&m_fixtureDef);
+        // Save the entity in the body for the contact listener
+        m_body->SetUserData(this);
+        if(m_basePosChanged)
+            m_body->SetTransform(m_basePosition, m_bodyDef.angle);
+        else
+            m_basePosition = m_body->GetPosition();
     }
 
     void unbindBody()
     {
-        m_body->GetWorld()->DestroyBody(m_body);
+        m_world->DestroyBody(m_body);
     }
 
-    const b2Body* getBody()
+    b2Body* getBody()
     {
         return m_body;
     }
@@ -71,9 +97,23 @@ public:
 		return m_body->GetPosition();
 	}
 
+    void setPosition(const b2Vec2& pos)
+    {
+        if(m_body != nullptr)
+            m_body->SetTransform(pos, 0.0f);
+        else
+        {
+            m_basePosition = pos;
+            m_basePosChanged = true;
+        }
+    }
+
 protected:
 
-    b2Body* m_body;
+    const b2Vec2& getStartPosition() const
+    {
+        return m_basePosition;
+    }
 };
 
 #endif // PHYSICAL_OBJECT_HPP

@@ -40,7 +40,7 @@ BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
         }
     }
 
-    throw std::exception((std::string("Bitmapfont isn't registered: ") + key).c_str());
+    throw std::runtime_error(utility::replace(utility::translateKey("UnknownBitmapFont"), key));
 }
 
 sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
@@ -63,7 +63,7 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
     }
     
     // If the key doesn't exist
-    throw std::exception((std::string("Sound isn't registered: ") + key).c_str());
+    throw std::runtime_error(utility::replace(utility::translateKey("UnknownSound"), key));
 }
 
 sf::Texture* ResourceManager::getTexture(const std::string& key)
@@ -86,7 +86,7 @@ sf::Texture* ResourceManager::getTexture(const std::string& key)
     }
     
     // If the key doesn't exist
-    throw std::exception((std::string("Texture isn't registered: ") + key).c_str());
+    throw std::runtime_error(utility::replace(utility::translateKey("UnknownTexture"), key));
 }
 
 sf::Font* ResourceManager::getFont(const std::string& key)
@@ -108,7 +108,7 @@ sf::Font* ResourceManager::getFont(const std::string& key)
     }
     
     // If the key doesn't exist
-    throw std::exception((std::string("Font isn't registered: ") + key).c_str());
+    throw std::runtime_error(utility::replace(utility::translateKey("UnknownFont"), key));
 }
 
 void ResourceManager::parseTextures(tinyxml2::XMLDocument& doc)

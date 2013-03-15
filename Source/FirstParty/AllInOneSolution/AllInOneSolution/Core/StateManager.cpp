@@ -17,7 +17,7 @@ void StateManager::registerState(StateId id, std::shared_ptr<State> state)
 	{
 		std::stringstream ss;
 		ss << "The state with id " << id << " already exists.";
-		throw std::exception(ss.str().c_str());
+		throw std::runtime_error(ss.str());
 	}
 
 	m_statesById[id] = state;		
@@ -30,7 +30,7 @@ void StateManager::setState(StateId id, void* enterInformation)
 	{
 		std::stringstream ss;
 		ss << "The state with id " << id << " does not exist.";
-		throw std::exception(ss.str().c_str());
+		throw std::runtime_error(ss.str());
 	}
 	m_currentState = state->second;
 	m_currentState->onEnter(enterInformation);
