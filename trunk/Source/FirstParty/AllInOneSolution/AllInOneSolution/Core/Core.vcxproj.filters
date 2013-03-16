@@ -106,18 +106,18 @@
     <ClCompile Include="PointsHUD.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
-    <ClCompile Include="FileReader.cpp">
-      <Filter>Sources</Filter>
+    <ClCompile Include="resources\Config.cpp">
+      <Filter>Sources\resources</Filter>
     </ClCompile>
-    <ClCompile Include="Config.cpp">
+    <ClCompile Include="resources\FileReader.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Config.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="StateManager.hpp">
@@ -345,9 +345,6 @@
     <ClInclude Include="model\collision\filter\ChangeGravityFilter.hpp">
       <Filter>Headers\model\collision\filter</Filter>
     </ClInclude>
-    <ClInclude Include="FileReader.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="model\collision\filter\SpawnEntity.hpp">
       <Filter>Headers\model\collision\filter</Filter>
     </ClInclude>
@@ -356,6 +353,15 @@
     </ClInclude>
     <ClInclude Include="model\collision\filter\ActionFilter.hpp">
       <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\Config.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\FileReader.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

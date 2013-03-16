@@ -1,8 +1,9 @@
 #include "App.hpp"
-#include "Config.hpp"
-#include "utility.hpp" // toString
-#include "PlayState.hpp"
+#include "Input.hpp"
 #include "LoadLevelState.hpp"
+#include "PlayState.hpp"
+#include "Utility.hpp" // toString
+#include "resources/Config.hpp"
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Event.hpp>
@@ -76,7 +77,7 @@ void App::update()
 void App::draw()
 {
 #ifdef _DEBUG
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+    if(utility::Keyboard.isKeyPressed(sf::Keyboard::Z))
         m_screen.clear();
 #endif
 
@@ -88,7 +89,7 @@ void App::draw()
 void App::handleKeyboard()
 {
     // Enter to window or fullscreen mode when Press Return+LAlt
-    if(m_focus && (sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && sf::Keyboard::isKeyPressed(sf::Keyboard::LAlt)))
+    if(m_focus && (utility::Keyboard.isKeyDown(sf::Keyboard::Return) && utility::Keyboard.isKeyPressed(sf::Keyboard::LAlt)))
     {
         m_fullscreen = !m_fullscreen;
         
@@ -100,6 +101,7 @@ void App::handleEvents()
 {
     sf::Event event;
 
+    utility::Keyboard.progress();
     while(m_screen.pollEvent(event))
     {
         // Close the window
@@ -111,6 +113,10 @@ void App::handleEvents()
             m_focus = true;
         else if(event.type == sf::Event::Resized)
             onResize();
+        else if(event.type == sf::Event::KeyPressed)
+            utility::Keyboard.notifyKeyPressed(event.key.code);
+        else if(event.type == sf::Event::KeyReleased)
+            utility::Keyboard.notifyKeyReleased(event.key.code);
     }
 }
 

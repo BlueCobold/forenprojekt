@@ -93,9 +93,7 @@
     <ClCompile Include="animation\Storyboard.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="ArrowHUD.cpp" />
-    <ClCompile Include="Config.cpp" />
     <ClCompile Include="Core.cpp" />
-    <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="FPSCounterHUD.cpp" />
@@ -103,6 +101,7 @@
     <ClCompile Include="gui\LineLabel.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="HUDElement.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="LabelHUD.cpp" />
     <ClCompile Include="LoadLevelState.cpp" />
     <ClCompile Include="model\Background.cpp" />
@@ -120,6 +119,8 @@
     <ClCompile Include="PointsHUD.cpp" />
     <ClCompile Include="rendering\transitions\AlphaTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp" />
+    <ClCompile Include="resources\Config.cpp" />
+    <ClCompile Include="resources\FileReader.cpp" />
     <ClCompile Include="resources\LevelFileLoader.cpp" />
     <ClCompile Include="resources\ResourceManager.cpp" />
     <ClCompile Include="ScrollView.cpp" />
@@ -161,8 +162,6 @@
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="ArrowHUD.hpp" />
-    <ClInclude Include="Config.hpp" />
-    <ClInclude Include="FileReader.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="FPSCounter.hpp" />
     <ClInclude Include="FPSCounterHUD.hpp" />
@@ -170,6 +169,7 @@
     <ClInclude Include="gui\LineLabel.hpp" />
     <ClInclude Include="HUD.hpp" />
     <ClInclude Include="HUDElement.hpp" />
+    <ClInclude Include="Input.hpp" />
     <ClInclude Include="LabelHUD.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
@@ -200,6 +200,8 @@
     <ClInclude Include="rendering\transitions\AlphaTransition.hpp" />
     <ClInclude Include="rendering\transitions\Transition.hpp" />
     <ClInclude Include="rendering\transitions\VerticalStripesTransition.hpp" />
+    <ClInclude Include="resources\Config.hpp" />
+    <ClInclude Include="resources\FileReader.hpp" />
     <ClInclude Include="resources\LevelFileLoader.hpp" />
     <ClInclude Include="resources\ResourceCache.hpp" />
     <ClInclude Include="resources\ResourceManager.hpp" />

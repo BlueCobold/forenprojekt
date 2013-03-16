@@ -1,5 +1,4 @@
 #include "FileReader.hpp"
-#include "Utility.hpp"
 
 FileReader::FileReader(const std::string& fileName) :
     m_fileName(fileName)

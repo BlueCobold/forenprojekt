@@ -1,9 +1,10 @@
 #include "PlayState.hpp"
+#include "Input.hpp"
+#include "resources/Config.hpp"
 #include "resources/ResourceManager.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
-#include "Config.hpp"
 
 PlayState::PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
     State(screen, resourceManager, config),
@@ -30,7 +31,7 @@ StateChangeInformation PlayState::update()
 {
     m_level->update(m_frametime.getElapsedTime().asSeconds(), m_screen);
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+    if(utility::Keyboard.isKeyDown(sf::Keyboard::R))
     {
         m_level.reset();
         m_level = std::unique_ptr<Level>(new Level(2, m_resourceManager, m_config));
