@@ -1,5 +1,5 @@
 #include "ArrowHUD.hpp"
-#include "resources\ResourceManager.hpp"
+#include "../resources/ResourceManager.hpp"
 
 #include <cmath>
 

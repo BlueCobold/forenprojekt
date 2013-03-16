@@ -1,6 +1,6 @@
 #include "HUDElement.hpp"
-#include "Utility.hpp"
-#include "resources\ResourceManager.hpp"
+#include "../Utility.hpp"
+#include "../resources\ResourceManager.hpp"
 
 const float HUDElement::Left = 0.0f;
 const float HUDElement::Right = 1.0f;

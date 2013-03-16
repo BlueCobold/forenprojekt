@@ -11,7 +11,7 @@
 #include "../rendering/Drawable.hpp"
 #include "../ScrollView.hpp"
 #include "SoundManager.hpp"
-#include "../FPSCounter.hpp"
+#include "../gui/FPSCounter.hpp"
 #include "../gui/LineLabel.hpp"
 
 #include <Box2D/Dynamics/b2World.h>

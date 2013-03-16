@@ -1,7 +1,7 @@
 #ifndef HUDELEMENT_HPP
 #define HUDELEMENT_HPP
 
-#include "gui\LineLabel.hpp"
+#include "LineLabel.hpp"
 
 class ResourceManager;
 

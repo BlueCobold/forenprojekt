@@ -1,7 +1,7 @@
 #ifndef FPSCOUNTERHUD_HPP
 #define FPSCOUNTERHUD_HPP
 
-#include "gui\LineLabel.hpp"
+#include "LineLabel.hpp"
 #include "FPSCounter.hpp"
 #include "LabelHUD.hpp"
 
