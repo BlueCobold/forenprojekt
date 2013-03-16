@@ -92,17 +92,19 @@
     <ClCompile Include="animation\Animation.cpp" />
     <ClCompile Include="animation\Storyboard.cpp" />
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="ArrowHUD.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DebugDraw.cpp" />
-    <ClCompile Include="FPSCounter.cpp" />
-    <ClCompile Include="FPSCounterHUD.cpp" />
+    <ClCompile Include="gui\ArrowHUD.cpp" />
     <ClCompile Include="gui\BitmapFont.cpp" />
+    <ClCompile Include="gui\FPSCounter.cpp" />
+    <ClCompile Include="gui\FPSCounterHUD.cpp" />
+    <ClCompile Include="gui\HUD.cpp" />
+    <ClCompile Include="gui\HUDElement.cpp" />
+    <ClCompile Include="gui\LabelHUD.cpp" />
     <ClCompile Include="gui\LineLabel.cpp" />
-    <ClCompile Include="HUD.cpp" />
-    <ClCompile Include="HUDElement.cpp" />
+    <ClCompile Include="gui\PointsHUD.cpp" />
+    <ClCompile Include="gui\TargetHUD.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="LabelHUD.cpp" />
     <ClCompile Include="LoadLevelState.cpp" />
     <ClCompile Include="model\Background.cpp" />
     <ClCompile Include="model\Ball.cpp" />
@@ -116,7 +118,6 @@
     <ClCompile Include="model\SoundObject.cpp" />
     <ClCompile Include="model\Teeter.cpp" />
     <ClCompile Include="PlayState.cpp" />
-    <ClCompile Include="PointsHUD.cpp" />
     <ClCompile Include="rendering\transitions\AlphaTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp" />
     <ClCompile Include="resources\Config.cpp" />
@@ -125,7 +126,6 @@
     <ClCompile Include="resources\ResourceManager.cpp" />
     <ClCompile Include="ScrollView.cpp" />
     <ClCompile Include="StateManager.cpp" />
-    <ClCompile Include="TargetHUD.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,16 +161,18 @@
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
-    <ClInclude Include="ArrowHUD.hpp" />
     <ClInclude Include="DebugDraw.hpp" />
-    <ClInclude Include="FPSCounter.hpp" />
-    <ClInclude Include="FPSCounterHUD.hpp" />
+    <ClInclude Include="gui\ArrowHUD.hpp" />
     <ClInclude Include="gui\BitmapFont.hpp" />
+    <ClInclude Include="gui\FPSCounter.hpp" />
+    <ClInclude Include="gui\FPSCounterHUD.hpp" />
+    <ClInclude Include="gui\HUD.hpp" />
+    <ClInclude Include="gui\HUDElement.hpp" />
+    <ClInclude Include="gui\LabelHUD.hpp" />
     <ClInclude Include="gui\LineLabel.hpp" />
-    <ClInclude Include="HUD.hpp" />
-    <ClInclude Include="HUDElement.hpp" />
+    <ClInclude Include="gui\PointsHUD.hpp" />
+    <ClInclude Include="gui\TargetHUD.hpp" />
     <ClInclude Include="Input.hpp" />
-    <ClInclude Include="LabelHUD.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />
@@ -188,7 +190,6 @@
     <ClInclude Include="model\Entity.hpp" />
     <ClInclude Include="model\SoundManager.hpp" />
     <ClInclude Include="model\SoundObject.hpp" />
-    <ClInclude Include="PointsHUD.hpp" />
     <ClInclude Include="rendering\GraphicalObject.hpp" />
     <ClInclude Include="model\Level.hpp" />
     <ClInclude Include="model\ParallaxLayer.hpp" />
@@ -209,7 +210,6 @@
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateChangeInformation.hpp" />
     <ClInclude Include="StateManager.hpp" />
-    <ClInclude Include="TargetHUD.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <ItemGroup>

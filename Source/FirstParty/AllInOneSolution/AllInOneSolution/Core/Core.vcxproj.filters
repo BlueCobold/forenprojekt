@@ -64,9 +64,6 @@
     <ClCompile Include="model\SoundObject.cpp">
       <Filter>Sources\model</Filter>
     </ClCompile>
-    <ClCompile Include="FPSCounter.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="model\collision\ContactListener.cpp">
       <Filter>Sources\model\collision</Filter>
     </ClCompile>
@@ -74,18 +71,6 @@
       <Filter>Sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="gui\LineLabel.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="FPSCounterHUD.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="HUD.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="HUDElement.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="TargetHUD.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp">
@@ -97,15 +82,6 @@
     <ClCompile Include="model\Level_LoadingPart.cpp">
       <Filter>Sources\model</Filter>
     </ClCompile>
-    <ClCompile Include="ArrowHUD.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="LabelHUD.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="PointsHUD.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
     <ClCompile Include="resources\Config.cpp">
       <Filter>Sources\resources</Filter>
     </ClCompile>
@@ -114,6 +90,30 @@
     </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\TargetHUD.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\PointsHUD.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\LabelHUD.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\HUDElement.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\HUD.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPSCounterHUD.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FPSCounter.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ArrowHUD.cpp">
+      <Filter>Sources\gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -255,9 +255,6 @@
     <ClInclude Include="model\SoundObject.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
-    <ClInclude Include="FPSCounter.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="model\collision\ContactListener.hpp">
       <Filter>Headers\model\collision</Filter>
     </ClInclude>
@@ -291,20 +288,8 @@
     <ClInclude Include="model\collision\filter\Never.hpp">
       <Filter>Headers\model\collision\filter</Filter>
     </ClInclude>
-    <ClInclude Include="FPSCounterHUD.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetHUD.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="model\collision\filter\PropertyFilter.hpp">
       <Filter>Headers\model\collision\filter</Filter>
-    </ClInclude>
-    <ClInclude Include="HUD.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="HUDElement.hpp">
-      <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="State.hpp">
       <Filter>Sources</Filter>
@@ -333,15 +318,6 @@
     <ClInclude Include="animation\provider\Nop.hpp">
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="ArrowHUD.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="LabelHUD.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="PointsHUD.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="model\collision\filter\ChangeGravityFilter.hpp">
       <Filter>Headers\model\collision\filter</Filter>
     </ClInclude>
@@ -362,6 +338,30 @@
     </ClInclude>
     <ClInclude Include="Input.hpp">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ArrowHUD.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPSCounter.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPSCounterHUD.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\HUD.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\HUDElement.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\LabelHUD.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\PointsHUD.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\TargetHUD.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
