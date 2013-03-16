@@ -1,6 +1,6 @@
 #include "LabelHUD.hpp"
-#include "Utility.hpp"
-#include "resources\ResourceManager.hpp"
+#include "../Utility.hpp"
+#include "../resources/ResourceManager.hpp"
 
 LabelHUD::LabelHUD(const sf::Vector2f& position, 
                    const float rotation, 

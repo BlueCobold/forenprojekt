@@ -1,7 +1,7 @@
 #ifndef LABELHUD_HPP
 #define LABELHUD_HPP
 
-#include "gui\LineLabel.hpp"
+#include "LineLabel.hpp"
 #include "HUDElement.hpp"
 
 class ResourceManager;

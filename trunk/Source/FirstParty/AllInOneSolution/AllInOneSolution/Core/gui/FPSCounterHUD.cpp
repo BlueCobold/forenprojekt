@@ -1,6 +1,6 @@
 #include "FPSCounterHUD.hpp"
-#include "resources\ResourceManager.hpp"
-#include "Utility.hpp"
+#include "../resources\ResourceManager.hpp"
+#include "../Utility.hpp"
 
 FPSCounterHUD::FPSCounterHUD(const sf::Vector2f& position, const float rotation, BitmapFont* bitmapFont) :
     LabelHUD(position, rotation, bitmapFont) 

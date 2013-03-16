@@ -4,7 +4,7 @@
 #define POINTS_HPP
 
 #include "LabelHUD.hpp"
-#include "animation\Storyboard.hpp"
+#include "../animation/Storyboard.hpp"
 
 class PointsHUD : public LabelHUD
 {

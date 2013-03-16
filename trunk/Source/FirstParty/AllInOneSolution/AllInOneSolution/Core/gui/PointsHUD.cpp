@@ -1,5 +1,5 @@
 #include "PointsHUD.hpp"
-#include "Utility.hpp"
+#include "../Utility.hpp"
 
 PointsHUD::PointsHUD(const sf::Vector2f& position,
           const float rotation,

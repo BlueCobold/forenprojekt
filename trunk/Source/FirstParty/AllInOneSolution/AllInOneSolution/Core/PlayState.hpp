@@ -5,7 +5,7 @@
 
 #include "State.hpp"
 #include "model/Level.hpp"
-#include "HUD.hpp"
+#include "gui/HUD.hpp"
 
 #include <SFML/System/Clock.hpp>
 
