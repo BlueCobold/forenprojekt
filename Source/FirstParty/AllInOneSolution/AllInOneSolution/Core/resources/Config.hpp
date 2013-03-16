@@ -3,7 +3,7 @@
 #ifndef CONFIG_HPP
 #define CONFIG_HPP
 
-#include "Utility.hpp" // stringTo
+#include "../Utility.hpp" // stringTo
 
 #include "FileReader.hpp"
 

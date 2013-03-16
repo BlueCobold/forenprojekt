@@ -1,7 +1,7 @@
 #include "Level.hpp"
 #include "Teeter.hpp"
 
-#include "../Config.hpp"
+#include "../resources/Config.hpp"
 #include "../resources/LevelFileLoader.hpp"
 #include "../Utility.hpp"
 

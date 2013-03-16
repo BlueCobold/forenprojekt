@@ -1,5 +1,5 @@
 #include "Utility.hpp"
-#include "FileReader.hpp"
+#include "resources/FileReader.hpp"
 
 namespace utility
 {
@@ -24,6 +24,4 @@ namespace utility
 
         return string;
     }
-
-    MouseWrapper Mouse;
 }

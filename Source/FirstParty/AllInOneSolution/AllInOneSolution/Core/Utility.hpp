@@ -5,9 +5,12 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <SFML/Window/Keyboard.hpp>
 
-#include <string>
+#include <algorithm>
+#include <vector>
 #include <sstream>
+#include <string>
 
 namespace utility
 {
@@ -19,7 +22,7 @@ namespace utility
         std::ostringstream out;
 
         out << value;
-    
+
         return out.str();
     }
 
@@ -35,7 +38,7 @@ namespace utility
         return value;
     }
 
-	template<>
+    template<>
     std::string stringTo(const std::string& str);
 
     template<typename T, typename Z>
@@ -68,40 +71,6 @@ namespace utility
 
     std::string replace(std::string string, std::string replacement);
 
-    class MouseWrapper
-    {
-    public:
-        MouseWrapper()
-        {
-            capture();
-        }
-
-        const sf::Vector2f& getPosition() const
-        {
-            return m_position;
-        }
-
-        void interpolate(int steps, int current)
-        {
-            m_position = sf::Vector2f(
-                m_lastPosition.x + (sf::Mouse::getPosition().x - m_lastPosition.x) * static_cast<float>(current) / steps,
-                m_lastPosition.y + (sf::Mouse::getPosition().y - m_lastPosition.y) * static_cast<float>(current) / steps);
-        }
-
-        void capture()
-        {
-            m_lastPosition = sf::Mouse::getPosition();
-            m_position = sf::Vector2f(
-                    static_cast<float>(m_lastPosition.x),
-                    static_cast<float>(m_lastPosition.y));
-        }
-
-    private:
-        
-        sf::Vector2f m_position;
-        sf::Vector2i m_lastPosition;
-    };
-    extern MouseWrapper Mouse;
 } // namespace utility
 
 #endif // UTILITY_HPP

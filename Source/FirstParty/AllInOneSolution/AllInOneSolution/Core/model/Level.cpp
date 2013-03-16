@@ -1,14 +1,14 @@
 #include "Level.hpp"
-#include "../Config.hpp"
 #include "Entity.hpp"
 #include "../rendering/DrawParameter.hpp"
+#include "../resources/Config.hpp"
 #include "../resources/ResourceManager.hpp"
 #include "../Utility.hpp" // toString, toMeter
+#include "../Input.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <SFML/System/Err.hpp>
-#include <SFML/Window/Keyboard.hpp>
 
 #include <Box2D/Common/b2Draw.h>
 
@@ -112,7 +112,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         m_updatingEntity = nullptr;
     }
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    if(utility::Keyboard.isKeyDown(sf::Keyboard::D))
         m_debugDraw = !m_debugDraw;
 
     m_lastTime = elapsedTime;
@@ -125,7 +125,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         m_background->update(elapsedTime, screen.getView());
 
 #ifdef _DEBUG
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+    if(utility::Keyboard.isKeyPressed(sf::Keyboard::Z))
     {
         m_scrollView.setZoomFactor(3.0f);
         m_scrollView.adjustView(ballpos, screen);

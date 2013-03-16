@@ -1,5 +1,5 @@
 #include "App.hpp"
-#include "Config.hpp"
+#include "resources/Config.hpp"
 
 #include <iostream>
 
