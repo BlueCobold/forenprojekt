@@ -92,12 +92,7 @@ const sf::IntRect Animation::getTextureRect() const
 
 void Animation::draw(const DrawParameter& param)
 {
-    sf::FloatRect animRect(m_externalPosition.x, 
-                           m_externalPosition.y, 
-                           static_cast<float>(m_frameWidth), 
-                           static_cast<float>(m_frameHeight));
-
-    if(param.getScreenRect().intersects(animRect))
+    if(param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
         param.getTarget().draw(m_sprite);
 }
 
