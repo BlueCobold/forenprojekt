@@ -92,7 +92,13 @@ const sf::IntRect Animation::getTextureRect() const
 
 void Animation::draw(const DrawParameter& param)
 {
-    param.getTarget().draw(m_sprite);
+    sf::FloatRect animRect(m_externalPosition.x, 
+                           m_externalPosition.y, 
+                           static_cast<float>(m_frameWidth), 
+                           static_cast<float>(m_frameHeight));
+
+    if(param.getScreenRect().intersects(animRect))
+        param.getTarget().draw(m_sprite);
 }
 
 void Animation::bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y)
