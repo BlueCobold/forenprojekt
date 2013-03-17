@@ -37,7 +37,7 @@ public:
     void bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y);
     void bindRotationController(std::unique_ptr<ValueProvider> provider);
     void bindScaleController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y);
-
+    
     void draw(const DrawParameter& param);
 
 private:
