@@ -22,7 +22,7 @@ public:
     {
         auto view = m_target.getView();
         return sf::Rect<float>(view.getCenter().x - view.getSize().x / 2.f,
-                               m_target.getView().getCenter().y - view.getSize().y / 2.f,
+                               view.getCenter().y - view.getSize().y / 2.f,
                                static_cast<float>(view.getSize().x),
                                static_cast<float>(view.getSize().y));
     }
