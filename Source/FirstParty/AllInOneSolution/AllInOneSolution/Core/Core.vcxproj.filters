@@ -115,6 +115,9 @@
     <ClCompile Include="rendering\DebugDraw.cpp">
       <Filter>Sources\rendering</Filter>
     </ClCompile>
+    <ClCompile Include="gui\BallHUD.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -362,6 +365,9 @@
     </ClInclude>
     <ClInclude Include="rendering\DebugDraw.hpp">
       <Filter>Headers\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\BallHUD.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

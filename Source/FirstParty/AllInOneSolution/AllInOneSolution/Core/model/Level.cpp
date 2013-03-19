@@ -32,7 +32,8 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_points(0),
     m_multiHit(0),
     m_ball(nullptr),
-    m_updatingEntity(nullptr)
+    m_updatingEntity(nullptr),
+    m_remainingBall(10)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -105,6 +106,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
                     m_points -= 10;
                     m_multiHit = 0;
                     m_world.SetGravity(m_defaultGravity);
+                    m_remainingBall -= 1;
                 }
             }
             (*it)->update(m_lastTime + delta);
@@ -278,4 +280,9 @@ const sf::Vector2f Level::getBallCoords() const
 {
     return sf::Vector2f(utility::toPixel(m_ball->getPosition().x), 
                         utility::toPixel(m_ball->getPosition().y));
+}
+
+const int Level::getRemainingBall() const
+{
+    return m_remainingBall;
 }

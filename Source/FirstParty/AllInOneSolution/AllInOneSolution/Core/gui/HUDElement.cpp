@@ -37,3 +37,10 @@ const sf::Vector2f HUDElement::getPosition() const
 {
     return m_currentPosition;
 }
+
+void HUDElement::setPosition(const sf::Vector2f& position, const float horizontalPercentage, const float verticalPercentage)
+{
+    m_position = position;
+    m_verticalPercentage = verticalPercentage;
+    m_horizontalPercentage = horizontalPercentage;
+}

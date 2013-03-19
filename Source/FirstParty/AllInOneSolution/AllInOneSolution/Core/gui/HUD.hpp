@@ -5,6 +5,7 @@
 #include "TargetHUD.hpp"
 #include "ArrowHUD.hpp"
 #include "PointsHUD.hpp"
+#include "BallHUD.hpp"
 
 #include <memory> // unique_ptr
 
@@ -31,12 +32,17 @@ private:
 
     ArrowHUD m_arrow;
 
+    BallHUD m_ball;
+    bool m_ballShow;
+
 public:
     HUD(ResourceManager& resourceManager, Config& config);
 
     void update(const Level* level, float elapsedTime);
 
     void draw(const DrawParameter& params);
+
+    void setBallShow(bool ballShow);
 
 };
 

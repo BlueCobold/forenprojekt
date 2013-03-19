@@ -24,6 +24,7 @@
 	<texture name="bitmapfontRed" path="bitmapfonts/red.png" smooth="false" />
 	<texture name="bitmapfontGuiLarge" path="bitmapfonts/gui_large.png" smooth="false" />
 	<texture name="arrowHUD" path="gui/arrows.png" smooth="true" />
+	<texture name="ballmini" path="assets/ball/ballmini.png" smooth="true" />
 </textures>
 <fonts>
 	<font name="visitor" path="visitor.ttf" />
