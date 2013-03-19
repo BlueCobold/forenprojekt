@@ -13,9 +13,6 @@
     <ClCompile Include="PlayState.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="DebugDraw.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="resources\ResourceManager.cpp">
       <Filter>Sources\resources</Filter>
     </ClCompile>
@@ -115,6 +112,9 @@
     <ClCompile Include="gui\ArrowHUD.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="rendering\DebugDraw.cpp">
+      <Filter>Sources\rendering</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -127,9 +127,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="PlayState.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugDraw.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="animation\OrientedObject.hpp">
@@ -362,6 +359,9 @@
     </ClInclude>
     <ClInclude Include="gui\TargetHUD.hpp">
       <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\DebugDraw.hpp">
+      <Filter>Headers\rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
