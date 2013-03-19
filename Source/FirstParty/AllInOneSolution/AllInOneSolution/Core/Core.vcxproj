@@ -93,7 +93,6 @@
     <ClCompile Include="animation\Storyboard.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Core.cpp" />
-    <ClCompile Include="DebugDraw.cpp" />
     <ClCompile Include="gui\ArrowHUD.cpp" />
     <ClCompile Include="gui\BitmapFont.cpp" />
     <ClCompile Include="gui\FPSCounter.cpp" />
@@ -118,6 +117,7 @@
     <ClCompile Include="model\SoundObject.cpp" />
     <ClCompile Include="model\Teeter.cpp" />
     <ClCompile Include="PlayState.cpp" />
+    <ClCompile Include="rendering\DebugDraw.cpp" />
     <ClCompile Include="rendering\transitions\AlphaTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp" />
     <ClCompile Include="resources\Config.cpp" />
@@ -161,7 +161,6 @@
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
-    <ClInclude Include="DebugDraw.hpp" />
     <ClInclude Include="gui\ArrowHUD.hpp" />
     <ClInclude Include="gui\BitmapFont.hpp" />
     <ClInclude Include="gui\FPSCounter.hpp" />
@@ -196,6 +195,7 @@
     <ClInclude Include="model\PhysicalObject.hpp" />
     <ClInclude Include="model\Teeter.hpp" />
     <ClInclude Include="PlayState.hpp" />
+    <ClInclude Include="rendering\DebugDraw.hpp" />
     <ClInclude Include="rendering\Drawable.hpp" />
     <ClInclude Include="rendering\DrawParameter.hpp" />
     <ClInclude Include="rendering\transitions\AlphaTransition.hpp" />

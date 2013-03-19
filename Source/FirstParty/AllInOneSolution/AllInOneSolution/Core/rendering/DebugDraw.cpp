@@ -1,6 +1,6 @@
 #include "DebugDraw.hpp"
 
-#include "Utility.hpp"
+#include "../Utility.hpp"
 
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/CircleShape.hpp>

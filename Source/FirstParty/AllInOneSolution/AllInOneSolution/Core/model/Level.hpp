@@ -4,7 +4,7 @@
 #define LEVEL_HPP
 
 #include "Ball.hpp"
-#include "../DebugDraw.hpp"
+#include "../rendering/DebugDraw.hpp"
 #include "Background.hpp"
 #include "../animation/TimedObject.hpp"
 #include "./collision./ContactListener.hpp"
