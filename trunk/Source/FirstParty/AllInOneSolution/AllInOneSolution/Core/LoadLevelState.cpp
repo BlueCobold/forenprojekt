@@ -24,7 +24,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
 
     HUD hud(resourceManager, config);
 
-    if(m_level->getRemainingBall() > 1)
+    if(m_level->getRemainingBall() > 0)
         hud.setBallShow(true);
 
     hud.update(m_level, m_frametime.getElapsedTime().asSeconds());
