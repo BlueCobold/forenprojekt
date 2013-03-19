@@ -40,6 +40,8 @@ public:
 
     virtual void draw(const DrawParameter& params) = 0;
 
+    void setPosition(const sf::Vector2f& position, const float horizontalPercentage = HUDElement::Left, const float verticalPercentage = HUDElement::Top);
+
 protected:
     const sf::Vector2f getPosition() const;
 };

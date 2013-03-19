@@ -94,6 +94,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="gui\ArrowHUD.cpp" />
+    <ClCompile Include="gui\BallHUD.cpp" />
     <ClCompile Include="gui\BitmapFont.cpp" />
     <ClCompile Include="gui\FPSCounter.cpp" />
     <ClCompile Include="gui\FPSCounterHUD.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="gui\ArrowHUD.hpp" />
+    <ClInclude Include="gui\BallHUD.hpp" />
     <ClInclude Include="gui\BitmapFont.hpp" />
     <ClInclude Include="gui\FPSCounter.hpp" />
     <ClInclude Include="gui\FPSCounterHUD.hpp" />

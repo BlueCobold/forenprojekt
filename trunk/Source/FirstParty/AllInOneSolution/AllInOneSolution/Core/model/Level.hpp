@@ -60,6 +60,7 @@ public:
     const int getRemainingTarget() const;
 
     const int getPoints() const;
+    const int getRemainingBall() const;
     
     virtual float getValueOf(const std::string& name) const;
     virtual void setValueOf(const std::string& name, const float value);
@@ -164,7 +165,9 @@ private:
     bool m_debugDraw;
 
     ScrollView m_scrollView;
+
     Ball* m_ball;
+    int m_remainingBall;
 
     int m_totalTarget;
     int m_remainingTarget;
