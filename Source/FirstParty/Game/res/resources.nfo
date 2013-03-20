@@ -13,6 +13,7 @@
 	<texture name="small_triangles" path="walls/sand/small_quad/triangles.png" smooth="false" />
 	<texture name="ballback" path="assets/ball/ballback.png" smooth="true" />
 	<texture name="ballshade" path="assets/ball/ballshade.png" smooth="true" />
+	<texture name="ball_twirl" path="assets/ball/ball_twirl.png" smooth="true" />
 	<texture name="teeter_wooden" path="assets/teeter/wood/small.png" smooth="true" />
 	<texture name="gravity_arrow" path="assets/misc/gravity_arrow.png" smooth="false" />
 	<texture name="teeter_wooden_vertical" path="assets/teeter/wood/small_vertical.png" smooth="true" />
