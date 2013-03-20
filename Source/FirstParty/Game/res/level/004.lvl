@@ -1,37 +1,14 @@
 <level>
 	<constants direction="1" arrowtime="0"/>
 	<templates>
+		<include file="assets/ball/default.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="sandy/walls.inc" />
+
+		<include file="pastureland/templates.inc" />
+		
 		<shapes>
-			<shape name="wall" type="polygon">
-				<vertex x="1" y="1" />
-				<vertex x="59" y="1" />
-				<vertex x="59" y="59" />
-				<vertex x="1" y="59" />
-			</shape>
-			<shape name="high_wall" type="polygon">
-				<vertex x="1" y="1" />
-				<vertex x="59" y="1" />
-				<vertex x="59" y="119" />
-				<vertex x="1" y="119" />
-			</shape>
-			<shape name="wide_wall" type="polygon">
-				<vertex x="1" y="1" />
-				<vertex x="119" y="1" />
-				<vertex x="119" y="59" />
-				<vertex x="1" y="59" />
-			</shape>
-			<shape name="teeter" type="polygon">
-				<vertex x="-104" y="-15" />
-				<vertex x="104" y="-15" />
-				<vertex x="104" y="15" />
-				<vertex x="-104" y="15" />
-			</shape>
-			<shape name="teeter2" type="polygon">
-				<vertex x="-15" y="-104" />
-				<vertex x="-15" y="104" />
-				<vertex x="15" y="104" />
-				<vertex x="15" y="-104" />
-			</shape>
 			<shape name="left" type="polygon">
 				<vertex x="60" y="0" />
 				<vertex x="60" y="240" />
@@ -58,332 +35,7 @@
 			</shape>
 		</shapes>
 
-		<functions>
-			<function name="plantWobble">
-				<add>
-					<var name="minAngle" />
-					<mul>
-						<sine>
-							<mul>
-								<time />
-								<var name="perBig" />
-							</mul>
-						</sine>
-						<var name="ampBig" />
-					</mul>
-					<mul>
-						<sine>
-							<mul>
-								<time />
-								<var name="perSmall" />
-							</mul>
-						</sine>
-						<var name="ampSmall" />
-					</mul>
-				</add>
-			</function>
-
-			<function name="cloudMovement">
-				<!-- width - ((speed*time + offset) % width) + shift-->
-				<add>
-					<var name="width" />
-					<mul>
-						<mod>
-							<add>
-								<mul>
-									<time />
-									<var name="speed" />
-								</mul>
-								<var name="offset" />
-							</add>
-							<var name="width" />
-						</mod>
-						<static value="-1" />
-					</mul>
-					<var name="shift" />
-				</add>
-			</function>
-			
-			<function name="target_bloat">
-				<step>
-					<add>
-						<time />
-						<static value="0.75"/>
-					</add>
-					<add>
-						<static value="1" />
-						<mul>
-							<sine>
-								<mul>
-									<time />
-									<static value="360" />
-								</mul>
-							</sine>
-							<static value="0.25" />
-						</mul>
-					</add>
-					<step>
-						<add>
-							<time />
-							<static value="0.5"/>
-						</add>
-						<mul>
-							<sine>
-								<mul>
-									<time />
-									<static value="360" />
-								</mul>
-							</sine>
-							<static value="1.25" />
-						</mul>
-						<stop />
-					</step>
-				</step>
-			</function>
-		</functions>
-
-		<physics>
-			<physic name="wall">
-				<body type="static" angle="0" />
-				<fixture density="0.1" friction="0.8" restitution="0.5" />
-			</physic>
-			<physic name="high_wall">
-				<body type="static" angle="0" />
-				<fixture density="0.1" friction="0.8" restitution="0.5" />
-			</physic>
-			<physic name="wide_wall">
-				<body type="static" angle="0" />
-				<fixture density="0.1" friction="0.8" restitution="0.5" />
-			</physic>
-			<physic name="ball">
-				<body type="dynamic" angle="0" angularDamping="4.0" />
-				<fixture density="0.6" friction="0.7" restitution="0.0" />
-			</physic>
-			<physic name="teeter">
-				<body type="kinematic" angle="0" />
-				<fixture density="0.2" friction="0.8" restitution="0.4" />
-			</physic>
-			<physic name="target">
-				<body type="kinematic" angle="0" />
-				<fixture density="0.5" friction="0.8" restitution="0.1" />
-			</physic>
-		</physics>
-
 		<entities>
-			<entity name="target_2" rep="--" collideWithBall="false">
-				<physics name="target">
-					<shape type="circle" radius="35" />
-				</physics>
-				<animations>
-					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true">
-						<scale axis="x">
-							<function name="target_bloat" />
-						</scale>
-						<scale axis="y">
-							<function name="target_bloat" />
-						</scale>
-					</animation>
-				</animations>
-			</entity>
-			
-			<entity name="target_1" rep="t1" type="target" collideWithBall="false">
-				<physics name="target">
-					<shape type="circle" radius="30" />
-				</physics>
-				<collides>
-					<spawnEntity name="target_2">
-						<always />
-					</spawnEntity>
-				</collides>
-				<animations>
-					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
-				</animations>
-			</entity>
-
-			<!-- Walls -->
-			<entity name="wall_1" rep="w1">
-				<physics name="wall" shape="wall" />
-				<animations>
-					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="wall_2" rep="w2">
-				<physics name="wall" shape="wall" />
-				<animations>
-					<animation texture="small_quads" srcy="60" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="wall_3" rep="w3">
-				<physics name="wall" shape="wall" />
-				<animations>
-					<animation texture="small_quads" srcy="120" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="wall_4" rep="w4">
-				<physics name="wall" shape="wall" />
-				<animations>
-					<animation texture="small_quads" srcy="180" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="wall_5" rep="w5">
-				<physics name="wall" shape="wall" />
-				<animations>
-					<animation texture="small_quads" srcy="240" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="wall_6" rep="w6">
-				<physics name="wall" shape="wall" />
-				<animations>
-					<animation texture="small_quads" srcy="300" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-
-			<entity name="high_wall_1" rep="h1">
-				<physics name="high_wall" shape="high_wall" />
-				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="high_wall_2" rep="h2">
-				<physics name="high_wall" shape="high_wall" />
-				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="1"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="high_wall_3" rep="h3">
-				<physics name="high_wall" shape="high_wall" />
-				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="2"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="high_wall_4" rep="h4">
-				<physics name="high_wall" shape="high_wall" />
-				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="3"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="high_wall_5" rep="h5">
-				<physics name="high_wall" shape="high_wall" />
-				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="4"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="high_wall_6" rep="h6">
-				<physics name="high_wall" shape="high_wall" />
-				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="5"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-
-			<entity name="wide_wall_1" rep="W1">
-				<physics name="wide_wall" shape="wide_wall" />
-				<animations>
-					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="wide_wall_2" rep="W2">
-				<physics name="wide_wall" shape="wide_wall" />
-				<animations>
-					<animation texture="wide_quads" srcy="60" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="wide_wall_3" rep="W3">
-				<physics name="wide_wall" shape="wide_wall" />
-				<animations>
-					<animation texture="wide_quads" srcy="120" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="wide_wall_4" rep="W4">
-				<physics name="wide_wall" shape="wide_wall" />
-				<animations>
-					<animation texture="wide_quads" srcy="180" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="wide_wall_5" rep="W5">
-				<physics name="wide_wall" shape="wide_wall" />
-				<animations>
-					<animation texture="wide_quads" srcy="240" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="wide_wall_6" rep="W6">
-				<physics name="wide_wall" shape="wide_wall" />
-				<animations>
-					<animation texture="wide_quads" srcy="300" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-
 			<entity name="change_gravity_down" rep="Do" collideWithBall="false">
 				<physics name="wall" shape="down" />
 				<collides>
@@ -435,22 +87,6 @@
 						</nop>
 					</changeGravity>
 				</collides>
-			</entity>
-
-			<!-- Ball -->
-			<entity name="Ball" rep="BB" type="ball">
-				<physics name="ball">
-					<shape type="circle" radius="14" />
-				</physics>
-				<constants color="0" />
-				<animations>
-					<animation texture="ballback" width="30" height="30" midx="15" midy="15" rotate="true">
-						<frameindex frames="3">
-							<var name="color" />
-						</frameindex>
-					</animation>
-					<animation texture="ballshade" width="30" height="30" midx="15" midy="15" rotate="false" />
-				</animations>
 			</entity>
 
 			<entity name="arrow" rep="AR" collideWithBall="false">
@@ -540,79 +176,6 @@
 				</animations>
 			</entity>
 			
-			<!-- Teeters -->
-			<entity name="Teeter" rep="TT" type="teeter">
-				<physics name="teeter" shape="teeter" />
-				<sound name="test" />
-				<animations>
-					<animation texture="teeter_wooden" width="208" height="32" midx="104" midy="16" rotate="true" alignment="vertical">
-						<frameindex frames="7">
-							<min>
-                                <mul>
-                                	<add>
-							            <step>
-                                            <sub>
-                                                <angle />
-                                                <static value="180" />
-                                            </sub>
-                                            <angle />
-                                            <sub>
-                                                <max>
-                                                    <angle />
-                                                    <static value="315" />
-                                                </max>
-                                                <static value="360" />
-                                            </sub>
-                                        </step>
-                                        <static value="45" />
-                                    </add>
-                                    <inv>
-                                        <static value="90"/>
-                                    </inv>
-                                    <static value="7"/>
-                                </mul>
-                                <static value="6"/>
-                            </min>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="Teeter2" rep="T2" type="teeter">
-				<physics name="teeter" shape="teeter2" />
-				<sound name="test" />
-				<animations>
-					<animation texture="teeter_wooden_vertical" width="32" height="208" midx="16" midy="104" rotate="true">
-						<frameindex frames="7">
-							<min>
-                                <mul>
-                                	<add>
-							            <step>
-                                            <sub>
-                                                <angle />
-                                                <static value="180" />
-                                            </sub>
-                                            <angle />
-                                            <sub>
-                                                <max>
-                                                    <angle />
-                                                    <static value="315" />
-                                                </max>
-                                                <static value="360" />
-                                            </sub>
-                                        </step>
-                                        <static value="45" />
-                                    </add>
-                                    <inv>
-                                        <static value="90"/>
-                                    </inv>
-                                    <static value="7"/>
-                                </mul>
-                                <static value="6"/>
-                            </min>
-						</frameindex>
-					</animation>
-				</animations>
-			</entity>
 		</entities>
 	</templates>
 
@@ -627,18 +190,18 @@
                                   AR              AR                                
                                       Up                                            
                                       h1  t1w2                                      
-                        T2        Lew1 1W4 4w1w3Ri        T2                        
+                        T2        Lew1 1W4 4w1w3Ri          T2                      
                                       w3    w4                                      
                                     t1w2    w2  t1                                  
                                     w3h5w4w6W1 1                                    
-                        T2             5    w2            T2                        
+                        T2             5    w2              T2                      
                                       Do  t1                                        
                                   AR              AR                                
                                                                                     
                                       BB                                            
                                                                                     
-                                      TT      TT                                    
                                                                                     
+                                      TT      TT                                    
                                                                                     
                                                                                     
                                                                                     

@@ -10,8 +10,7 @@
 	<texture name="high_quads" path="walls/sand/high_quad/high_quads.png" smooth="false" />
 	<texture name="wide_quads" path="walls/sand/wide_quad/wide_quads.png" smooth="false" />
 	<texture name="dark_small_quads" path="walls/sand/small_quad/main/dark.png" smooth="false" />
-	<texture name="small_left" path="walls/sand/small_quad/left_lower/v1.png" smooth="false" />
-	<texture name="small_right" path="walls/sand/small_quad/right_lower/v1.png" smooth="false" />
+	<texture name="small_triangles" path="walls/sand/small_quad/triangles.png" smooth="false" />
 	<texture name="ballback" path="assets/ball/ballback.png" smooth="true" />
 	<texture name="ballshade" path="assets/ball/ballshade.png" smooth="true" />
 	<texture name="teeter_wooden" path="assets/teeter/wood/small.png" smooth="true" />
