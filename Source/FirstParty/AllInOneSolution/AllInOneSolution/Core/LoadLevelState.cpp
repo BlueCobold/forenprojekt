@@ -15,7 +15,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     m_level(nullptr),
     m_fadedScreen(nullptr)
 {
-    m_level = new Level(4, m_resourceManager, m_config);
+    m_level = new Level(5, m_resourceManager, m_config);
     bool fromImage = m_texture.create(screen.getSize().x, screen.getSize().y);
 
     float time = m_frametime.getElapsedTime().asSeconds();
@@ -23,9 +23,6 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     m_level->update(time, m_texture);
 
     HUD hud(resourceManager, config);
-
-    if(m_level->getRemainingBall() > 0)
-        hud.setBallShow(true);
 
     hud.update(m_level, m_frametime.getElapsedTime().asSeconds());
 
