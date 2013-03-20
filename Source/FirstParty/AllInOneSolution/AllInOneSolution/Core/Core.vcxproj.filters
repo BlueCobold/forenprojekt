@@ -291,9 +291,6 @@
     <ClInclude Include="model\collision\filter\PropertyFilter.hpp">
       <Filter>Headers\model\collision\filter</Filter>
     </ClInclude>
-    <ClInclude Include="State.hpp">
-      <Filter>Sources</Filter>
-    </ClInclude>
     <ClInclude Include="rendering\transitions\VerticalStripesTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
@@ -368,6 +365,9 @@
     </ClInclude>
     <ClInclude Include="gui\BallHUD.hpp">
       <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="State.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
