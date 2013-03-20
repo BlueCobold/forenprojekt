@@ -42,8 +42,8 @@ public:
 
     void draw(const DrawParameter& params);
 
+private:
     void setBallShow(bool ballShow);
-
 };
 
 #endif

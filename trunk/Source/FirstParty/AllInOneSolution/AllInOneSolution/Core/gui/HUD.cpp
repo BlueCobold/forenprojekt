@@ -22,6 +22,9 @@ void HUD::update(const Level* level, float elapsedTime)
 
     m_arrow.setBallCoords(level->getBallCoords());
 
+    if(level->getRemainingBall() > 0 && !m_ballShow)
+        setBallShow(true);
+
     m_ball.setBalls(level->getRemainingBall());
 }
 
