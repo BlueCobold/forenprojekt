@@ -86,6 +86,11 @@ private:
     bool load();
 
     bool validate(const tinyxml2::XMLDocument& document);
+    
+    void parseObjects(
+        Templates& templates,
+        tinyxml2::XMLElement* root,
+        std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs);
 
     void parseTemplates(
         Templates& templates,

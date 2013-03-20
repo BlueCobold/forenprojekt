@@ -65,9 +65,40 @@ bool Level::load()
                 m_entities.push_back(std::move(entity));
         }
 
-    tinyxml2::XMLElement* objects = doc.FirstChildElement("level")->FirstChildElement("objects");
-    tinyxml2::XMLElement* backgroundXml = objects->FirstChildElement("background");
+    parseObjects(templates, doc.FirstChildElement("level"), docs);
+    
     tinyxml2::XMLElement* world = doc.FirstChildElement("level")->FirstChildElement("world");
+    // Load world properties
+    tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
+    m_defaultGravity = b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y"));
+    m_world.SetGravity(m_defaultGravity);
+    m_world.SetContactListener(m_contactListener.get());
+
+    // setup scrollview
+    m_scrollView.setLevelSize(sf::Vector2f(getWidth(), getHeight()));
+
+    // get the fucking ball
+    for(auto it = begin(m_entities); it != end(m_entities); ++it)
+        if((*it)->getType() == Entity::Ball)
+        {
+            m_ball = dynamic_cast<Ball*>((*it).get());
+            m_ball->setFieldDimension(b2Vec2(m_width,m_height));
+        }
+    if(m_ball == nullptr)
+        throw std::runtime_error("No ball located in the level!");
+
+    m_remainingTarget = m_totalTarget;
+
+    return true;
+}
+
+void Level::parseObjects(
+    Templates& templates,
+    tinyxml2::XMLElement* root,
+    std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs)
+{
+    tinyxml2::XMLElement* objects = root->FirstChildElement("objects");
+    tinyxml2::XMLElement* backgroundXml = objects->FirstChildElement("background");
     
     tinyxml2::XMLElement* element = nullptr; // Temp object
 
@@ -96,29 +127,17 @@ bool Level::load()
     {
         m_entities.push_back(std::move(parseEntity(entitiesIterator, sf::Vector2u(0, 0), templates)));
     }
-
-    // Load world properties
-    tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
-    m_defaultGravity = b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y"));
-    m_world.SetGravity(m_defaultGravity);
-    m_world.SetContactListener(m_contactListener.get());
-
-    // setup scrollview
-    m_scrollView.setLevelSize(sf::Vector2f(getWidth(), getHeight()));
-
-    // get the fucking ball
-    for(auto it = begin(m_entities); it != end(m_entities); ++it)
-        if((*it)->getType() == Entity::Ball)
-        {
-            m_ball = dynamic_cast<Ball*>((*it).get());
-            m_ball->setFieldDimension(b2Vec2(m_width,m_height));
-        }
-    if(m_ball == nullptr)
-        throw std::runtime_error("No ball located in the level!");
-
-    m_remainingTarget = m_totalTarget;
-
-    return true;
+   
+    for(auto child = objects->FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
+    {
+        std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
+        std::string filename = pathname() + child->Attribute("file");
+        doc->LoadFile(filename.c_str());            
+        if(!validate(*(doc.get())))
+            throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
+        parseObjects(templates, doc->RootElement(), docs);
+        docs.push_back(std::move(doc));
+    }
 }
 
 void Level::parseTemplates(
@@ -155,18 +174,15 @@ void Level::parseTemplates(
             templates.entities.insert(begin(temp), end(temp));
         }
         
-        if(tinyxml2::XMLElement* includes = xmlTemplates->FirstChildElement("include"))
+        for(auto child = xmlTemplates->FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
         {
-            for(auto child = xmlTemplates->FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
-            {
-                std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-                std::string filename = pathname() + child->Attribute("file");
-                doc->LoadFile(filename.c_str());            
-                if(!validate(*(doc.get())))
-                    throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
-                parseTemplates(templates, doc->RootElement(), docs);
-                docs.push_back(std::move(doc));
-            }
+            std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
+            std::string filename = pathname() + child->Attribute("file");
+            doc->LoadFile(filename.c_str());            
+            if(!validate(*(doc.get())))
+                throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
+            parseTemplates(templates, doc->RootElement(), docs);
+            docs.push_back(std::move(doc));
         }
     }
 }
