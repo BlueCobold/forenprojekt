@@ -98,16 +98,15 @@ void Level::parseObjects(
     std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs)
 {
     tinyxml2::XMLElement* objects = root->FirstChildElement("objects");
-    tinyxml2::XMLElement* backgroundXml = objects->FirstChildElement("background");
-    
-    tinyxml2::XMLElement* element = nullptr; // Temp object
+    if(objects == nullptr)
+        return;
 
     // Load background-image
-    std::unique_ptr<Background> background(new Background(sf::Vector2u(
-        static_cast<unsigned int>(m_width),
-        static_cast<unsigned int>(m_height))));
-    if(backgroundXml != nullptr)
+    if(tinyxml2::XMLElement* backgroundXml = objects->FirstChildElement("background"))
     {
+        std::unique_ptr<Background> background(new Background(sf::Vector2u(
+            static_cast<unsigned int>(m_width),
+            static_cast<unsigned int>(m_height))));
         for(auto parallax = backgroundXml->FirstChildElement("parallax"); parallax != nullptr;
             parallax = parallax->NextSiblingElement("parallax"))
         {
@@ -119,8 +118,8 @@ void Level::parseObjects(
                 layer->bindAnimation(std::move(LevelFileLoader::parseAnimation(anim, layer.get(), layer.get(), m_resourceManager, &templates.functions)));
             background->bindLayer(std::move(layer));
         }
+        m_background = std::move(background);
     }
-    m_background = std::move(background);
 
     for(tinyxml2::XMLElement* entitiesIterator = objects->FirstChildElement("entity");
         entitiesIterator != nullptr; entitiesIterator = entitiesIterator->NextSiblingElement("entity"))
@@ -135,6 +134,7 @@ void Level::parseObjects(
         doc->LoadFile(filename.c_str());            
         if(!validate(*(doc.get())))
             throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
+        parseTemplates(templates, doc->RootElement(), docs);
         parseObjects(templates, doc->RootElement(), docs);
         docs.push_back(std::move(doc));
     }
@@ -145,45 +145,47 @@ void Level::parseTemplates(
     tinyxml2::XMLElement* root,
     std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs)
 {
-    if(tinyxml2::XMLElement* xmlTemplates = root->FirstChildElement("templates"))
+    tinyxml2::XMLElement* xmlTemplates = root->FirstChildElement("templates");
+    if(xmlTemplates == nullptr)
+        return;
+
+    if(tinyxml2::XMLElement* shapes = xmlTemplates->FirstChildElement("shapes"))
     {
-        if(tinyxml2::XMLElement* shapes = xmlTemplates->FirstChildElement("shapes"))
-        {
-            auto values = std::move(LevelFileLoader::parseList(shapes, "shape", "name"));
-            templates.shapes.insert(begin(values), end(values));
-        }
+        auto values = std::move(LevelFileLoader::parseList(shapes, "shape", "name"));
+        templates.shapes.insert(begin(values), end(values));
+    }
 
-        if(tinyxml2::XMLElement* physics = xmlTemplates->FirstChildElement("physics"))
-        {
-            auto values = std::move(LevelFileLoader::parseList(physics, "physic", "name"));
-            templates.physics.insert(begin(values), end(values));
-        }
+    if(tinyxml2::XMLElement* physics = xmlTemplates->FirstChildElement("physics"))
+    {
+        auto values = std::move(LevelFileLoader::parseList(physics, "physic", "name"));
+        templates.physics.insert(begin(values), end(values));
+    }
 
-        if(tinyxml2::XMLElement* functions = xmlTemplates->FirstChildElement("functions"))
-        {
-            auto values = std::move(LevelFileLoader::parseList(functions, "function", "name"));
-            templates.functions.insert(begin(values), end(values));
-        }
+    if(tinyxml2::XMLElement* functions = xmlTemplates->FirstChildElement("functions"))
+    {
+        auto values = std::move(LevelFileLoader::parseList(functions, "function", "name"));
+        templates.functions.insert(begin(values), end(values));
+    }
 
-        if(tinyxml2::XMLElement* entities = xmlTemplates->FirstChildElement("entities"))
-        {
-            // Add use keys 'name' (objects) and 'rep' (grid)
-            auto reps = std::move(LevelFileLoader::parseList(entities, "entity", "rep"));
-            templates.entities.insert(begin(reps), end(reps));
-            auto temp = std::move(LevelFileLoader::parseList(entities, "entity", "name"));
-            templates.entities.insert(begin(temp), end(temp));
-        }
-        
-        for(auto child = xmlTemplates->FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
-        {
-            std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-            std::string filename = pathname() + child->Attribute("file");
-            doc->LoadFile(filename.c_str());            
-            if(!validate(*(doc.get())))
-                throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
-            parseTemplates(templates, doc->RootElement(), docs);
-            docs.push_back(std::move(doc));
-        }
+    if(tinyxml2::XMLElement* entities = xmlTemplates->FirstChildElement("entities"))
+    {
+        // Add use keys 'name' (objects) and 'rep' (grid)
+        auto reps = std::move(LevelFileLoader::parseList(entities, "entity", "rep"));
+        templates.entities.insert(begin(reps), end(reps));
+        auto temp = std::move(LevelFileLoader::parseList(entities, "entity", "name"));
+        templates.entities.insert(begin(temp), end(temp));
+    }
+
+    for(auto child = xmlTemplates->FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
+    {
+        std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
+        std::string filename = pathname() + child->Attribute("file");
+        doc->LoadFile(filename.c_str());            
+        if(!validate(*(doc.get())))
+            throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
+        parseTemplates(templates, doc->RootElement(), docs);
+        parseObjects(templates, doc->RootElement(), docs);
+        docs.push_back(std::move(doc));
     }
 }
 

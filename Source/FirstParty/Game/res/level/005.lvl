@@ -5,8 +5,6 @@
 		<include file="assets/target/static.inc" />
 		<include file="assets/teeter/wood.inc" />
 		<include file="sandy/walls.inc" />
-		
-		<include file="pastureland/templates.inc" />
 	</templates>
 
 	<grid size="60" width="2460" height="1410">
