@@ -85,10 +85,13 @@ private:
     /// Load the level after m_number
     bool load();
 
-    /// Validate the XML file
     bool validate(const tinyxml2::XMLDocument& document);
 
-    /// Create an Entity
+    void parseTemplates(
+        Templates& templates,
+        tinyxml2::XMLElement* root,
+        std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs);
+
     std::unique_ptr<Entity> createEntity(
         tinyxml2::XMLElement* xml,
         const sf::Vector2u& position,
@@ -126,6 +129,7 @@ private:
 
     /// Construct the full level filename from the level number
     const std::string filename();
+    const std::string pathname() const;
 
 private:
 

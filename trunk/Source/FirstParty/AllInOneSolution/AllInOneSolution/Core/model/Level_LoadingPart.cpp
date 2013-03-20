@@ -33,25 +33,8 @@ bool Level::load()
 
     // Parse templates
     Templates templates;
-    if(tinyxml2::XMLElement* xmlTemplates = doc.FirstChildElement("level")->FirstChildElement("templates"))
-    {
-        if(tinyxml2::XMLElement* shapes = xmlTemplates->FirstChildElement("shapes"))
-            templates.shapes = std::move(LevelFileLoader::parseList(shapes, "shape", "name"));
-
-        if(tinyxml2::XMLElement* physics = xmlTemplates->FirstChildElement("physics"))
-            templates.physics = std::move(LevelFileLoader::parseList(physics, "physic", "name"));
-
-        if(tinyxml2::XMLElement* functions = xmlTemplates->FirstChildElement("functions"))
-            templates.functions = std::move(LevelFileLoader::parseList(functions, "function", "name"));
-
-        if(tinyxml2::XMLElement* entities = xmlTemplates->FirstChildElement("entities"))
-        {
-            // Add use keys 'name' (objects) and 'rep' (grid)
-            templates.entities = std::move(LevelFileLoader::parseList(entities, "entity", "rep"));
-            auto temp = LevelFileLoader::parseList(entities, "entity", "name");
-            templates.entities.insert(begin(temp), end(temp));
-        }
-    }
+    std::vector<std::unique_ptr<tinyxml2::XMLDocument>> docs;
+    parseTemplates(templates, doc.FirstChildElement("level"), docs);
     
     auto constants = doc.FirstChildElement("level")->FirstChildElement("constants");
     if(constants != nullptr)
@@ -76,7 +59,7 @@ bool Level::load()
             // Ignore empty 'tiles'
             if(name == "  ")
                 continue;
-            
+
             std::unique_ptr<Entity> entity = parseEntityFromTemplate(name, templates, sf::Vector2u((column/2)*size, row*size));
             if(entity != nullptr)
                 m_entities.push_back(std::move(entity));
@@ -130,10 +113,62 @@ bool Level::load()
             m_ball = dynamic_cast<Ball*>((*it).get());
             m_ball->setFieldDimension(b2Vec2(m_width,m_height));
         }
+    if(m_ball == nullptr)
+        throw std::runtime_error("No ball located in the level!");
 
     m_remainingTarget = m_totalTarget;
 
     return true;
+}
+
+void Level::parseTemplates(
+    Templates& templates,
+    tinyxml2::XMLElement* root,
+    std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs)
+{
+    if(tinyxml2::XMLElement* xmlTemplates = root->FirstChildElement("templates"))
+    {
+        if(tinyxml2::XMLElement* shapes = xmlTemplates->FirstChildElement("shapes"))
+        {
+            auto values = std::move(LevelFileLoader::parseList(shapes, "shape", "name"));
+            templates.shapes.insert(begin(values), end(values));
+        }
+
+        if(tinyxml2::XMLElement* physics = xmlTemplates->FirstChildElement("physics"))
+        {
+            auto values = std::move(LevelFileLoader::parseList(physics, "physic", "name"));
+            templates.physics.insert(begin(values), end(values));
+        }
+
+        if(tinyxml2::XMLElement* functions = xmlTemplates->FirstChildElement("functions"))
+        {
+            auto values = std::move(LevelFileLoader::parseList(functions, "function", "name"));
+            templates.functions.insert(begin(values), end(values));
+        }
+
+        if(tinyxml2::XMLElement* entities = xmlTemplates->FirstChildElement("entities"))
+        {
+            // Add use keys 'name' (objects) and 'rep' (grid)
+            auto reps = std::move(LevelFileLoader::parseList(entities, "entity", "rep"));
+            templates.entities.insert(begin(reps), end(reps));
+            auto temp = std::move(LevelFileLoader::parseList(entities, "entity", "name"));
+            templates.entities.insert(begin(temp), end(temp));
+        }
+        
+        if(tinyxml2::XMLElement* includes = xmlTemplates->FirstChildElement("include"))
+        {
+            for(auto child = xmlTemplates->FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
+            {
+                std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
+                std::string filename = pathname() + child->Attribute("file");
+                doc->LoadFile(filename.c_str());            
+                if(!validate(*(doc.get())))
+                    throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
+                parseTemplates(templates, doc->RootElement(), docs);
+                docs.push_back(std::move(doc));
+            }
+        }
+    }
 }
 
 std::unique_ptr<Entity> Level::parseEntityFromTemplate(

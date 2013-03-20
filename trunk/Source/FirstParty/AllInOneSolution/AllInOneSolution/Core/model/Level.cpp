@@ -239,9 +239,14 @@ const unsigned int Level::number()
     return m_number;
 }
 
+const std::string Level::pathname() const
+{
+    return std::string("res/level/");
+}
+
 const std::string Level::filename()
 {
-    std::string filename("res/level/");
+    std::string filename = pathname();
     if(m_number < 10)
         filename.append("00" + utility::toString(m_number) + ".lvl");
     else if(m_number < 100)

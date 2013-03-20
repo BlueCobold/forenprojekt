@@ -1,41 +1,40 @@
 <level>
-	<constants gate="0" gatetime="0"/>
+	<constants direction="1" arrowtime="0"/>
 	<templates>
 		<include file="assets/ball/default.inc" />
-		<include file="assets/target/movement.inc" />
-		<include file="assets/target/phase_out.inc" />
 		<include file="assets/target/static.inc" />
 		<include file="assets/teeter/wood.inc" />
-
+		<include file="sandy/walls.inc" />
+		
 		<include file="pastureland/templates.inc" />
 	</templates>
 
 	<grid size="60" width="2460" height="1410">
-
-
-                                    t1
-
-
-
-
-                                    TT
-
-
-
-
-                                          TT
-                                    BB
-
-
-
-                                    TT
-
-
-
-
-
-
-
+                                                                                    
+                                                                                    
+                                                                                    
+                                      TT      TT                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                        /1\3                                        
+                                      /2w5w4\1                                      
+                                    /3h1w2w6w2\2                                    
+                        T2        /1w1 1W4 4w1w3\1          T2                      
+                                /1w3w5w3    w4w1w2\3                                
+                                (2w6w1w2    w2w3w5)1                                
+                                  (3w3h5w4w6W1 1)3                                  
+                        T2          (1 5w3w1w2)2            T2                      
+                                      (2w6w4)1                                      
+                                        (1)3                                        
+                                                                                    
+                                      BB                                            
+                                                                                    
+                                                                                    
+                                      TT      TT                                    
+                                                                                    
+                                                                                    
+                                                                                    
 	</grid>
 	<objects>
 		<!-- Background -->
