@@ -8,8 +8,6 @@
 		<include file="assets/teeter/wood.inc" />
 		
 		<include file="sandy/walls.inc" />
-
-		<include file="pastureland/templates.inc" />
 		
 		<physics>
 			<physic name="door">

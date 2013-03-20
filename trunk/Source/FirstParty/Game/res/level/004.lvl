@@ -5,8 +5,6 @@
 		<include file="assets/teeter/wood.inc" />
 		<include file="assets/target/static.inc" />
 		<include file="sandy/walls.inc" />
-
-		<include file="pastureland/templates.inc" />
 		
 		<shapes>
 			<shape name="left" type="polygon">
