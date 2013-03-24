@@ -120,6 +120,8 @@
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="rendering\DebugDraw.cpp" />
     <ClCompile Include="rendering\transitions\AlphaTransition.cpp" />
+    <ClCompile Include="rendering\transitions\HorizontalHalvesTransition.cpp" />
+    <ClCompile Include="rendering\transitions\HorizontalStripesTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp" />
     <ClCompile Include="resources\Config.cpp" />
     <ClCompile Include="resources\FileReader.cpp" />
@@ -201,6 +203,8 @@
     <ClInclude Include="rendering\Drawable.hpp" />
     <ClInclude Include="rendering\DrawParameter.hpp" />
     <ClInclude Include="rendering\transitions\AlphaTransition.hpp" />
+    <ClInclude Include="rendering\transitions\HorizontalHalvesTransition.hpp" />
+    <ClInclude Include="rendering\transitions\HorizontalStripesTransition.hpp" />
     <ClInclude Include="rendering\transitions\Transition.hpp" />
     <ClInclude Include="rendering\transitions\VerticalStripesTransition.hpp" />
     <ClInclude Include="resources\Config.hpp" />

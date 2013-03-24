@@ -118,6 +118,12 @@
     <ClCompile Include="gui\BallHUD.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="rendering\transitions\HorizontalStripesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering\transitions\HorizontalHalvesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -368,6 +374,12 @@
     </ClInclude>
     <ClInclude Include="State.hpp">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\HorizontalStripesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\HorizontalHalvesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
