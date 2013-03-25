@@ -13,6 +13,7 @@
 #include "../animation/provider/Negate.hpp"
 #include "../animation/provider/Nop.hpp"
 #include "../animation/provider/Pow.hpp"
+#include "../animation/provider/RandomProvider.hpp"
 #include "../animation/provider/SetVariable.hpp"
 #include "../animation/provider/Sine.hpp"
 #include "../animation/provider/StaticProvider.hpp"
@@ -180,6 +181,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
         return std::unique_ptr<Substractor>(new Substractor(std::move(parseProviders(xml, animated, handler, functions))));
     else if(std::string(xml->Name())=="neg")
         return std::unique_ptr<Negate>(new Negate(std::move(parseProviders(xml, animated, handler, functions)[0])));
+    else if(std::string(xml->Name())=="random")
+        return std::unique_ptr<RandomProvider>(new RandomProvider(xml->FloatAttribute("min"), xml->FloatAttribute("max")));
     else if(std::string(xml->Name())=="inv")
         return std::unique_ptr<Inverse>(new Inverse(std::move(parseProviders(xml, animated, handler, functions)[0])));
     else if(std::string(xml->Name())=="function")
