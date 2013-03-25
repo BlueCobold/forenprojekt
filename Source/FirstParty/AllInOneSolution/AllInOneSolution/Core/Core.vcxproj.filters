@@ -121,7 +121,10 @@
     <ClCompile Include="rendering\transitions\HorizontalStripesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\transitions\HorizontalHalvesTransition.cpp">
+    <ClCompile Include="rendering\transitions\HorizontalSlidingStripesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering\transitions\VerticalSlidingStripesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -378,7 +381,10 @@
     <ClInclude Include="rendering\transitions\HorizontalStripesTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
-    <ClInclude Include="rendering\transitions\HorizontalHalvesTransition.hpp">
+    <ClInclude Include="rendering\transitions\HorizontalSlidingStripesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\VerticalSlidingStripesTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
   </ItemGroup>
