@@ -127,6 +127,12 @@
     <ClCompile Include="rendering\transitions\VerticalSlidingStripesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
+    <ClCompile Include="rendering\transitions\GrowingRectangleTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering\transitions\GrowingCircleTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -386,6 +392,15 @@
     </ClInclude>
     <ClInclude Include="rendering\transitions\VerticalSlidingStripesTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\GrowingRectangleTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\GrowingCircleTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\provider\RandomProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef VERTICALHALVES_TRANSITION_HPP
-#define VERTICALHALVES_TRANSITION_HPP
+#ifndef GROWINGRECTANGLE_TRANSITION_HPP
+#define GROWINGRECTANGLE_TRANSITION_HPP
 
 #include "Transition.hpp"
 
@@ -10,14 +10,13 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-class VerticalSlidingStripesTransition : public Transition
+class GrowingRectangleTransition : public Transition
 {
 public:
     
-    VerticalSlidingStripesTransition(
+    GrowingRectangleTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
-        const int stripeCount,
         const float duration);
 
     void update();
@@ -26,9 +25,9 @@ public:
 
 private:
     sf::Sprite m_sourceSprite;
-    std::vector<std::unique_ptr<sf::Sprite>> m_targetSprites;
-    int m_stripeWidth;
-    int m_stripeHeight;
+    sf::Sprite m_targetSprites;
+    int m_RectangleStartX;
+    int m_RectangleStartY;
 };
 
-#endif // VERTICALHALVES_TRANSITION_HPP
+#endif // GROWINGRECTANGLE_TRANSITION_HPP
