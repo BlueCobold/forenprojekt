@@ -16,6 +16,11 @@ The new scene will expand as vertical stripes:
 
 https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/vertical_stripes.gif
 
+== Horizontal Stripes ==
+The new scene will expand as horizontal stripes:
+
+https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/horizontal_stripes.gif
+
 == Vertical Sliding Stripes ==
 The old scene will be slided up and down in stripes and the new scene will be attached to these stripes and slide in:
 
