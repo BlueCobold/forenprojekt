@@ -1,6 +1,6 @@
-#include "HorizontalSlidingStripesTransition.hpp"
+#include "HorizontalMaskingStripesTransition.hpp"
 
-HorizontalSlidingStripesTransition::HorizontalSlidingStripesTransition(
+HorizontalMaskingStripesTransition::HorizontalMaskingStripesTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
     const int stripeCount,
@@ -25,7 +25,7 @@ HorizontalSlidingStripesTransition::HorizontalSlidingStripesTransition(
     }
 }
 
-void HorizontalSlidingStripesTransition::update()
+void HorizontalMaskingStripesTransition::update()
 {
     Transition::update();
 
@@ -55,7 +55,7 @@ void HorizontalSlidingStripesTransition::update()
     }
 }
 
-void HorizontalSlidingStripesTransition::draw(const DrawParameter& param)
+void HorizontalMaskingStripesTransition::draw(const DrawParameter& param)
 {
     if (getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);

@@ -121,16 +121,16 @@
     <ClCompile Include="rendering\transitions\HorizontalStripesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\transitions\HorizontalSlidingStripesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
-    </ClCompile>
-    <ClCompile Include="rendering\transitions\VerticalSlidingStripesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
-    </ClCompile>
     <ClCompile Include="rendering\transitions\GrowingRectangleTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\GrowingCircleTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering\transitions\VerticalMaskingStripesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering\transitions\HorizontalMaskingStripesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -387,12 +387,6 @@
     <ClInclude Include="rendering\transitions\HorizontalStripesTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
-    <ClInclude Include="rendering\transitions\HorizontalSlidingStripesTransition.hpp">
-      <Filter>Headers\rendering\transitions</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering\transitions\VerticalSlidingStripesTransition.hpp">
-      <Filter>Headers\rendering\transitions</Filter>
-    </ClInclude>
     <ClInclude Include="rendering\transitions\GrowingRectangleTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
@@ -401,6 +395,12 @@
     </ClInclude>
     <ClInclude Include="animation\provider\RandomProvider.hpp">
       <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\VerticalMaskingStripesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\HorizontalMaskingStripesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

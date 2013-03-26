@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef VERTICALHALVES_TRANSITION_HPP
-#define VERTICALHALVES_TRANSITION_HPP
+#ifndef HORIZONTALMASKINGSTRIPES_TRANSITION_HPP
+#define HORIZONTALMASKINGSTRIPES_TRANSITION_HPP
 
 #include "Transition.hpp"
 
@@ -10,11 +10,11 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
-class VerticalSlidingStripesTransition : public Transition
+class HorizontalMaskingStripesTransition : public Transition
 {
 public:
     
-    VerticalSlidingStripesTransition(
+    HorizontalMaskingStripesTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
         const int stripeCount,
@@ -31,4 +31,4 @@ private:
     int m_stripeHeight;
 };
 
-#endif // VERTICALHALVES_TRANSITION_HPP
+#endif // HORIZONTALMASKINGSTRIPES_TRANSITION_HPP

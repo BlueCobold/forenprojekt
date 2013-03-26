@@ -1,6 +1,6 @@
-#include "VerticalSlidingStripesTransition.hpp"
+#include "VerticalMaskingStripesTransition.hpp"
 
-VerticalSlidingStripesTransition::VerticalSlidingStripesTransition(
+VerticalMaskingStripesTransition::VerticalMaskingStripesTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
     const int stripeCount,
@@ -25,7 +25,7 @@ VerticalSlidingStripesTransition::VerticalSlidingStripesTransition(
     }
 }
 
-void VerticalSlidingStripesTransition::update()
+void VerticalMaskingStripesTransition::update()
 {
     Transition::update();
 
@@ -54,7 +54,7 @@ void VerticalSlidingStripesTransition::update()
     }
 }
 
-void VerticalSlidingStripesTransition::draw(const DrawParameter& param)
+void VerticalMaskingStripesTransition::draw(const DrawParameter& param)
 {
     if (getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);
