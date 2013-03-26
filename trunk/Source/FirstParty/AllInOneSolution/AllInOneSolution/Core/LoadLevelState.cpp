@@ -1,6 +1,6 @@
 #include "LoadLevelState.hpp"
 #include "resources/ResourceManager.hpp"
-#include "rendering/transitions/GrowingRectangleTransition.hpp"
+#include "rendering/transitions/GrowingCircleTransition.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -31,7 +31,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     hud.draw(m_texture);
     m_texture.display();
 
-    m_fadedScreen = std::unique_ptr<Transition>(new GrowingRectangleTransition(nullptr, &m_texture.getTexture(), 0.5f));
+    m_fadedScreen = std::unique_ptr<Transition>(new GrowingCircleTransition(nullptr, &m_texture.getTexture(), 0.5f));
 }
 
 LoadLevelState::~LoadLevelState()
