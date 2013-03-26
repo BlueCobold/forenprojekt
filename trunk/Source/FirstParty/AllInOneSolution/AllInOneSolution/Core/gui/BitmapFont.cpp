@@ -5,6 +5,27 @@
 
 #include <tinyxml2.h>
 
+BitmapFont::Glyph::Glyph(const sf::Texture& texture) : Sprite(texture), m_spacing(texture.getSize().x)
+{
+}
+
+BitmapFont::Glyph::Glyph(const sf::Texture& texture, int spacing) : Sprite(texture), m_spacing(spacing)
+{
+}
+
+BitmapFont::Glyph::Glyph(const sf::Texture& texture, const sf::IntRect& rectangle) : Sprite(texture, rectangle), m_spacing(rectangle.width)
+{
+}
+
+BitmapFont::Glyph::Glyph(const sf::Texture& texture, const sf::IntRect& rectangle, int spacing) : Sprite(texture, rectangle), m_spacing(spacing)
+{
+}
+
+int BitmapFont::Glyph::getSpacing() const
+{
+    return m_spacing * getScale().x;
+}
+
 bool BitmapFont::loadFromFile(const std::string& path, ResourceManager& resourceManager)
 {
 
@@ -23,10 +44,13 @@ bool BitmapFont::loadFromFile(const std::string& path, ResourceManager& resource
     height = bitmapfont->FirstChildElement("height")->IntAttribute("value"); 
     for(auto it = bitmapfont->FirstChildElement("glyphs")->FirstChildElement("glyph"); it != nullptr; it = it->NextSiblingElement("glyph"))
     {
+        int width = it->IntAttribute("width");
+        int spacing = width;
+        it->QueryIntAttribute("spacing", &spacing);
         m_glyphs.insert
         ( 
-            std::make_pair<char, sf::IntRect>(it->Attribute("name")[0], 
-            sf::IntRect(it->IntAttribute("x"), it->IntAttribute("y"), it->IntAttribute("width"), height))
+            std::make_pair<char, BitmapFont::Glyph>(it->Attribute("name")[0], 
+            BitmapFont::Glyph(m_texture, sf::IntRect(it->IntAttribute("x"), it->IntAttribute("y"), width, height), spacing))
         );
     }
     m_fontSize = height;
@@ -45,12 +69,12 @@ bool BitmapFont::validate(const tinyxml2::XMLDocument& document)
     return true;
 }
 
-sf::Sprite BitmapFont::getSprite(const char key)
+BitmapFont::Glyph BitmapFont::getGlyph(const char key) const
 {
     if(m_glyphs.count(key))
-        return sf::Sprite(m_texture, m_glyphs.at(key));
+        return m_glyphs.at(key);
 
-    return sf::Sprite();
+    throw std::runtime_error(utility::replace(utility::translateKey("UnknownGlyph"), utility::toString(key)));
 }
 
 unsigned int BitmapFont::getFontSize()
