@@ -26,6 +26,11 @@ The old scene will be slided up and down in stripes and the new scene will be at
 
 https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/vertical_stripes_up_down.gif
 
+== Vertical Masking Stripes ==
+Vertical bars will slide up and down and will unmask the new scene behind the old one. The scene-images themselves will not move:
+
+https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/blendmodes/vertical_masking_stripes.gif
+
 == Horizontal Halves ==
 The old scene will be slided sidewards in two bars, beneath the new scene will become visible:
 
