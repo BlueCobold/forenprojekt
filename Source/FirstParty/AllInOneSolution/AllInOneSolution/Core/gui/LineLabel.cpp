@@ -25,13 +25,15 @@ LineLabel::LineLabel(const std::string& text,
 
 void LineLabel::draw(const DrawParameter& params)
 {
-    for(auto it = begin(m_sprites); it != end(m_sprites); it++)  
+    for(auto it = begin(m_glyphs); it != end(m_glyphs); it++) 
+    {
         params.getTarget().draw(*it);
+    }
 }
 
 void LineLabel::setColor(const sf::Color &color)
 {
-	for(auto it = m_sprites.begin(); it != m_sprites.end(); ++it) it->setColor(color);
+	for(auto it = m_glyphs.begin(); it != m_glyphs.end(); ++it) it->setColor(color);
 }
 
 void LineLabel::setText(const std::string& text)
@@ -59,14 +61,14 @@ void LineLabel::setPosition(const sf::Vector2f position)
 
 void LineLabel::rebuild()
 {
-    m_sprites.clear();
+    m_glyphs.clear();
 
     float shift = 0;
     if(m_alignment != Left)
     {
         float width = 0;
         for(auto it = begin(m_text); it != end(m_text); it++)
-            width += m_font->getSprite(*it).getTextureRect().width;
+            width += m_font->getGlyph(*it).getSpacing();
         if(m_alignment == Right)
             shift -= width;
         else
@@ -76,11 +78,11 @@ void LineLabel::rebuild()
     float xOffset = 0;
     for(auto it = begin(m_text); it != end(m_text); it++)
     {
-        m_sprites.push_back(m_font->getSprite(*it));
-        m_sprites.back().setPosition(shift + m_position.x + xOffset, m_position.y);
-        m_sprites.back().setRotation(m_rotation);
+        m_glyphs.push_back(m_font->getGlyph(*it));
+        m_glyphs.back().setPosition(shift + m_position.x + xOffset, m_position.y);
+        m_glyphs.back().setRotation(m_rotation);
 
-        xOffset += m_font->getSprite(*it).getTextureRect().width;
+        xOffset += m_font->getGlyph(*it).getSpacing();
     }
     m_width = xOffset;
 }
