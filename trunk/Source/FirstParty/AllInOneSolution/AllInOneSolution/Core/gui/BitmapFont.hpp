@@ -25,16 +25,19 @@ public:
     {
     public:
 
-        Glyph(const sf::Texture& texture);
-        Glyph(const sf::Texture& texture, int spacing);
-        Glyph(const sf::Texture& texture, const sf::IntRect& rectangle);
-        Glyph(const sf::Texture& texture, const sf::IntRect& rectangle, int spacing);
+        Glyph(const sf::Texture& texture, int xOffset);
+        Glyph(const sf::Texture& texture, int spacing, int xOffset);
+        Glyph(const sf::Texture& texture, const sf::IntRect& rectangle, int xOffset);
+        Glyph(const sf::Texture& texture, const sf::IntRect& rectangle, int spacing, int xOffset);
 
         int getSpacing() const;
 
     private:
 
+        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+
         int m_spacing;
+        int m_xOffset;
     };
 
     bool loadFromFile(const std::string& path, ResourceManager& resourceManager);

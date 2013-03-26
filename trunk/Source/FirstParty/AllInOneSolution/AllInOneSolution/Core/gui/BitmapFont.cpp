@@ -2,28 +2,36 @@
 #include "../resources/ResourceManager.hpp"
 
 #include <SFML/System/Err.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 
 #include <tinyxml2.h>
 
-BitmapFont::Glyph::Glyph(const sf::Texture& texture) : Sprite(texture), m_spacing(texture.getSize().x)
+BitmapFont::Glyph::Glyph(const sf::Texture& texture, int xOffset) : Sprite(texture), m_spacing(texture.getSize().x), m_xOffset(xOffset)
 {
 }
 
-BitmapFont::Glyph::Glyph(const sf::Texture& texture, int spacing) : Sprite(texture), m_spacing(spacing)
+BitmapFont::Glyph::Glyph(const sf::Texture& texture, int spacing, int xOffset) : Sprite(texture), m_spacing(spacing), m_xOffset(xOffset)
 {
 }
 
-BitmapFont::Glyph::Glyph(const sf::Texture& texture, const sf::IntRect& rectangle) : Sprite(texture, rectangle), m_spacing(rectangle.width)
+BitmapFont::Glyph::Glyph(const sf::Texture& texture, const sf::IntRect& rectangle, int xOffset) : Sprite(texture, rectangle), m_spacing(rectangle.width), m_xOffset(xOffset)
 {
 }
 
-BitmapFont::Glyph::Glyph(const sf::Texture& texture, const sf::IntRect& rectangle, int spacing) : Sprite(texture, rectangle), m_spacing(spacing)
+BitmapFont::Glyph::Glyph(const sf::Texture& texture, const sf::IntRect& rectangle, int spacing, int xOffset) : Sprite(texture, rectangle), m_spacing(spacing), m_xOffset(xOffset)
 {
 }
 
 int BitmapFont::Glyph::getSpacing() const
 {
     return m_spacing * getScale().x;
+}
+
+void BitmapFont::Glyph::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+    sf::Sprite tmp = *this;
+    tmp.move(m_xOffset, 0);
+    target.draw(tmp, states);
 }
 
 bool BitmapFont::loadFromFile(const std::string& path, ResourceManager& resourceManager)
@@ -50,7 +58,7 @@ bool BitmapFont::loadFromFile(const std::string& path, ResourceManager& resource
         m_glyphs.insert
         ( 
             std::make_pair<char, BitmapFont::Glyph>(it->Attribute("name")[0], 
-            BitmapFont::Glyph(m_texture, sf::IntRect(it->IntAttribute("x"), it->IntAttribute("y"), width, height), spacing))
+            BitmapFont::Glyph(m_texture, sf::IntRect(it->IntAttribute("x"), it->IntAttribute("y"), width, height), spacing, it->IntAttribute("xoffset")))
         );
     }
     m_fontSize = height;
