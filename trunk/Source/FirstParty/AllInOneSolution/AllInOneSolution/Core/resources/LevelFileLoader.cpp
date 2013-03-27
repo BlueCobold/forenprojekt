@@ -95,14 +95,12 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     std::unique_ptr<ValueProvider> yScaleProvider = findController(xml, animated, handler, "scale", "axis", "y", functions);
     anim->bindScaleController(std::move(xScaleProvider), std::move(yScaleProvider));
 
-    std::unique_ptr<ValueProvider> red = findController(xml, animated, handler, "color", "channel", "red", functions);
-    std::unique_ptr<ValueProvider> green = findController(xml, animated, handler, "color", "channel", "green", functions);
-    std::unique_ptr<ValueProvider> blue = findController(xml, animated, handler, "color", "channel", "blue", functions);
-    std::unique_ptr<ValueProvider> alpha = findController(xml, animated, handler, "color", "channel", "alpha", functions);
-
+    std::unique_ptr<ValueProvider> red, green, blue, alpha, tmp;
     tinyxml2::XMLElement* static_color_element = xml->FirstChildElement("color");
     const char* value;
-    while(static_color_element && !(value = static_color_element->Attribute("value"))) static_color_element = static_color_element->NextSiblingElement("color");
+    while(static_color_element && !(value = static_color_element->Attribute("value")))
+        static_color_element = static_color_element->NextSiblingElement("color");
+
     if(static_color_element && value)
     {
         sf::Color col = utility::hexToColor(value);
@@ -111,6 +109,16 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         blue = std::unique_ptr<ValueProvider>(new StaticProvider(col.b / 255.f));
         alpha = std::unique_ptr<ValueProvider>(new StaticProvider(col.a / 255.f));
     }
+
+    tmp = findController(xml, animated, handler, "color", "channel", "red", functions);
+    if(tmp != nullptr) red = std::move(tmp);
+    tmp = findController(xml, animated, handler, "color", "channel", "green", functions);
+    if(tmp != nullptr) green = std::move(tmp);
+    tmp = findController(xml, animated, handler, "color", "channel", "blue", functions);
+    if(tmp != nullptr) blue = std::move(tmp);
+    tmp = findController(xml, animated, handler, "color", "channel", "alpha", functions);
+    if(tmp != nullptr) alpha = std::move(tmp);
+
     anim->bindColorController(std::move(red), std::move(green), std::move(blue), std::move(alpha));
 
     if(auto blend = xml->Attribute("blending"))
