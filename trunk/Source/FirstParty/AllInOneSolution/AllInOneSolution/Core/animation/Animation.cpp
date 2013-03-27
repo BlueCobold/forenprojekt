@@ -4,7 +4,6 @@
 #include <SFML/Graphics/Rect.hpp>
 
 #include <cmath>
-#include <SFML/System/Clock.hpp>
 
 Animation::Animation(std::unique_ptr<ValueProvider> provider,
     const unsigned int frames,
