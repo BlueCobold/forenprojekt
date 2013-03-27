@@ -33,6 +33,7 @@ public:
 
     void setPosition(const float x, const float y);
     void setRotation(const float radians);
+    void setBlending(const sf::BlendMode mode);
     void bindTexture(const sf::Texture& texture, const sf::Vector2f& sourceOffset);
     void bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y);
     void bindRotationController(std::unique_ptr<ValueProvider> provider);
@@ -73,6 +74,7 @@ private:
     sf::Vector2f m_externalPosition;
     float m_externalRotation;
     sf::Vector2f m_drawOffset;
+    sf::BlendMode m_blending;
 };
 
 #endif // ANIMATION_HPP

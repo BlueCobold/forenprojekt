@@ -30,9 +30,6 @@ Animation::~Animation()
 
 void Animation::update()
 {
-    sf::Sprite s(m_sprite);
-    m_sprite = s;
-
     if(m_frameProvider == nullptr)
         m_frame = 0;
     else
@@ -87,6 +84,11 @@ void Animation::setRotation(const float radians)
         m_externalRotation = utility::toDegree<float, float>(radians);
 }
 
+void Animation::setBlending(const sf::BlendMode mode)
+{
+    m_blending = mode;
+}
+
 void Animation::bindTexture(const sf::Texture& texture, const sf::Vector2f& sourceOffset)
 {
     m_sourceOffset = sourceOffset;
@@ -104,7 +106,7 @@ const sf::IntRect Animation::getTextureRect() const
 void Animation::draw(const DrawParameter& param)
 {
     if(param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
-        param.getTarget().draw(m_sprite);
+        param.getTarget().draw(m_sprite, sf::RenderStates(m_blending));
 }
 
 void Animation::bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y)

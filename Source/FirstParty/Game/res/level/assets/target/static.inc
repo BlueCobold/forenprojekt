@@ -64,7 +64,7 @@
 		<entities>
 			<entity name="target_particles" rep="--" collideWithBall="false">
 				<animations>
-					<animation copies="20" texture="sparkles" width="32" height="32" midx="16" midy="16" rotate="true">
+					<animation copies="20" texture="sparkles" blending="add" width="32" height="32" midx="16" midy="16" rotate="true">
 						<constants time="0" size="1" />
 						<position axis="x">
 							<step>
@@ -131,7 +131,7 @@
 								<static value="1" />
 								<mul>
 									<cache>
-										<random min="0.0" max="0.6" />
+										<random min="0.0" max="0.9" />
 									</cache>
 									<var name="time" />
 								</mul>
@@ -142,7 +142,7 @@
 								<static value="1" />
 								<mul>
 									<cache>
-										<random min="0.0" max="0.6" />
+										<random min="0.0" max="0.9" />
 									</cache>
 									<var name="time" />
 								</mul>
@@ -153,7 +153,7 @@
 								<static value="1" />
 								<mul>
 									<cache>
-										<random min="0.0" max="0.6" />
+										<random min="0.0" max="0.9" />
 									</cache>
 									<var name="time" />
 								</mul>
