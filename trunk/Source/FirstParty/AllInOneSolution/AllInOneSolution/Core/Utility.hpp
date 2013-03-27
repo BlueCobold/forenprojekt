@@ -3,6 +3,7 @@
 #ifndef UTILITY_HPP
 #define UTILITY_HPP
 
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -66,6 +67,11 @@ namespace utility
     {
         return static_cast<T>(value*PIXEL_PER_METER);
     }
+
+    int hexToInt(const std::string& hex);
+
+    // "RRGGBBAA"
+    sf::Color hexToColor(const std::string& hex);
 
     std::string translateKey(std::string key);
 

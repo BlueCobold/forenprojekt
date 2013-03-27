@@ -99,6 +99,18 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     std::unique_ptr<ValueProvider> green = findController(xml, animated, handler, "color", "channel", "green", functions);
     std::unique_ptr<ValueProvider> blue = findController(xml, animated, handler, "color", "channel", "blue", functions);
     std::unique_ptr<ValueProvider> alpha = findController(xml, animated, handler, "color", "channel", "alpha", functions);
+
+    tinyxml2::XMLElement* static_color_element = xml->FirstChildElement("color");
+    const char* value;
+    while(static_color_element && !(value = static_color_element->Attribute("value"))) static_color_element = static_color_element->NextSiblingElement("color");
+    if(static_color_element && value)
+    {
+        sf::Color col = utility::hexToColor(value);
+        red = std::unique_ptr<ValueProvider>(new StaticProvider(col.r / 255.f));
+        green = std::unique_ptr<ValueProvider>(new StaticProvider(col.g / 255.f));
+        blue = std::unique_ptr<ValueProvider>(new StaticProvider(col.b / 255.f));
+        alpha = std::unique_ptr<ValueProvider>(new StaticProvider(col.a / 255.f));
+    }
     anim->bindColorController(std::move(red), std::move(green), std::move(blue), std::move(alpha));
 
     if(auto blend = xml->Attribute("blending"))
@@ -305,7 +317,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::findController(
     for(auto iterator = xml->FirstChildElement(childName.c_str());
         iterator != nullptr; iterator = iterator->NextSiblingElement(childName.c_str()))
     {
-        if(std::string(iterator->Attribute(propertyName.c_str())) != propertyValue)
+        const char* value = iterator->Attribute(propertyName.c_str());
+        if(value == nullptr || value != propertyValue)
             continue;
         if(iterator->FirstChildElement() == nullptr)
             throw std::runtime_error(utility::translateKey("SubTag"));

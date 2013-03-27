@@ -10,6 +10,25 @@ namespace utility
         return str;
     }
 
+    int hexToInt(const std::string& hex)
+    {
+        std::stringstream ss;
+        ss << std::hex << hex;
+        int i;
+        ss >> i;
+        return i;
+    }
+
+    sf::Color hexToColor(const std::string& hex)
+    {
+        sf::Color color;
+        color.r = hexToInt(hex.substr(0, 2));
+        color.g = hexToInt(hex.substr(2, 2));
+        color.b = hexToInt(hex.substr(4, 2));
+        color.a = hexToInt(hex.substr(6, 2));
+        return color;
+    }
+
     std::string translateKey(std::string key)
     {
         static FileReader File("./res/language.dat");
