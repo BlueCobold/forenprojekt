@@ -66,7 +66,8 @@ public:
 
     void unbindBody()
     {
-        m_world->DestroyBody(m_body);
+        if(m_world != nullptr)
+            m_world->DestroyBody(m_body);
     }
 
     b2Body* getBody()
@@ -92,10 +93,12 @@ public:
 
     void updateKinematics(const float value, const float delta);
 
-	const b2Vec2& getPosition() const
-	{
-		return m_body->GetPosition();
-	}
+    const b2Vec2& getPosition() const
+    {
+        if(m_body != nullptr)
+            return m_body->GetPosition();
+        return m_basePosition;
+    }
 
     void setPosition(const b2Vec2& pos)
     {

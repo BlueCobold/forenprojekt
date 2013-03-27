@@ -23,13 +23,12 @@ void Entity::update(const float value)
         updateKinematics(getPassedTime(), value - m_lastTime);
         for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
         {
-            m_updatingAni = (*animation).get();
+            auto ani = (*animation).get();
+            m_updatingAni = ani;
+            ani->setPosition(utility::toPixel(getPosition().x), utility::toPixel(getPosition().y));
             if(getBody() != nullptr)
-            {
-                (*animation)->setPosition(utility::toPixel(getBody()->GetPosition().x), utility::toPixel(getBody()->GetPosition().y));
-                (*animation)->setRotation(getBody()->GetAngle());
-            }
-            (*animation)->update();
+                ani->setRotation(getBody()->GetAngle());
+            ani->update();
         }
         m_updatingAni = nullptr;
 

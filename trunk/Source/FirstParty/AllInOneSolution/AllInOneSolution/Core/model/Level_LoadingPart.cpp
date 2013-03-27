@@ -295,10 +295,18 @@ std::unique_ptr<Entity> Level::createEntity(
         for(auto element = animations->FirstChildElement("animation"); element != nullptr;
             element = element->NextSiblingElement("animation"))
         {
-            auto animation = LevelFileLoader::parseAnimation(element, entity.get(), this, m_resourceManager, &templates.functions);
-            if(physic == nullptr)
-                animation->setPosition(static_cast<float>(position.x), static_cast<float>(position.y));
-            entity->bindAnimation(std::move(animation));
+            int copies = 1;
+            element->QueryIntAttribute("copies", &copies);
+            for(int copy=0; copy<copies; copy++)
+            {
+                auto animation = LevelFileLoader::parseAnimation(element, entity.get(), this, m_resourceManager, &templates.functions);
+                if(physic == nullptr)
+                    entity->setPosition(
+                        b2Vec2(
+                            static_cast<float>(utility::toMeter(position.x)),
+                            static_cast<float>(utility::toMeter(position.y))));
+                entity->bindAnimation(std::move(animation));
+            }
         }
     }
     if(auto constants = xml->FirstChildElement("constants"))
