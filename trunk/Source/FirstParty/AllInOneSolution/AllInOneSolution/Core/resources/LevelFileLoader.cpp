@@ -101,6 +101,16 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     std::unique_ptr<ValueProvider> alpha = findController(xml, animated, handler, "color", "channel", "alpha", functions);
     anim->bindColorController(std::move(red), std::move(green), std::move(blue), std::move(alpha));
 
+    if(auto blend = xml->Attribute("blending"))
+    {
+        sf::BlendMode mode = sf::BlendAlpha;
+        if(std::string("add") == blend)
+            mode = sf::BlendAdd;
+        else if(std::string("mul") == blend)
+            mode = sf::BlendMultiply;
+        anim->setBlending(mode);
+    }
+
     tinyxml2::XMLElement* rotation = xml->FirstChildElement("rotation");
     if(rotation != nullptr && rotation->FirstChildElement() != nullptr)
     {
