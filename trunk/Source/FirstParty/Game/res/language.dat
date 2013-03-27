@@ -33,3 +33,5 @@ UnknownSound = Sound isn't registered: %.
 UnknownTexture = Texture isn't registered: %.
 UnknownFont = Font isn't registered: %.
 SpawnWithoutName = No entity-name defined in spawnEntity.
+TargetTexture = % needs a texture of the target.
+SourceTexture = % needs a texture of the source.
