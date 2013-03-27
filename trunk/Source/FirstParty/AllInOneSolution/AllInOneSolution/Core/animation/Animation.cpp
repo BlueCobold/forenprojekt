@@ -4,6 +4,7 @@
 #include <SFML/Graphics/Rect.hpp>
 
 #include <cmath>
+#include <SFML/System/Clock.hpp>
 
 Animation::Animation(std::unique_ptr<ValueProvider> provider,
     const unsigned int frames,
@@ -53,6 +54,17 @@ void Animation::update()
         scaleY = m_yScaleProvider->getValue();
     if(m_xScaleProvider != nullptr || m_yScaleProvider != nullptr)
     m_sprite.setScale(scaleX, scaleY);
+
+    sf::Color color(255, 255, 255);
+    if(m_colorProviders[Red] != nullptr)
+        color.r = static_cast<sf::Uint8>(255*m_colorProviders[Red]->getValue());
+    if(m_colorProviders[Green] != nullptr)
+        color.g = static_cast<sf::Uint8>(255*m_colorProviders[Green]->getValue());
+    if(m_colorProviders[Blue] != nullptr)
+        color.b = static_cast<sf::Uint8>(255*m_colorProviders[Blue]->getValue());
+    if(m_colorProviders[Alpha] != nullptr)
+        color.a = static_cast<sf::Uint8>(255*m_colorProviders[Alpha]->getValue());
+    m_sprite.setColor(color);
 }
 
 void Animation::setPosition(const float x, const float y)
@@ -111,4 +123,15 @@ void Animation::bindScaleController(std::unique_ptr<ValueProvider> x, std::uniqu
 {
     m_xScaleProvider = std::move(x);
     m_yScaleProvider = std::move(y);
+}
+
+void Animation::bindColorController(std::unique_ptr<ValueProvider> red,
+    std::unique_ptr<ValueProvider> green,
+    std::unique_ptr<ValueProvider> blue,
+    std::unique_ptr<ValueProvider> alpha)
+{
+    m_colorProviders[Red] = std::move(red);
+    m_colorProviders[Green] = std::move(green);
+    m_colorProviders[Blue] = std::move(blue);
+    m_colorProviders[Alpha] = std::move(alpha);
 }

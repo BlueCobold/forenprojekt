@@ -141,6 +141,7 @@
     <ClInclude Include="animation\provider\Absolute.hpp" />
     <ClInclude Include="animation\provider\Adder.hpp" />
     <ClInclude Include="animation\provider\AngleProvider.hpp" />
+    <ClInclude Include="animation\provider\CachedProvider.hpp" />
     <ClInclude Include="animation\provider\Clamp.hpp" />
     <ClInclude Include="animation\provider\FloatToInt.hpp" />
     <ClInclude Include="animation\provider\Inverse.hpp" />

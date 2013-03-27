@@ -37,10 +37,20 @@ public:
     void bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y);
     void bindRotationController(std::unique_ptr<ValueProvider> provider);
     void bindScaleController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y);
+    void bindColorController(
+        std::unique_ptr<ValueProvider> red,
+        std::unique_ptr<ValueProvider> green,
+        std::unique_ptr<ValueProvider> blue,
+        std::unique_ptr<ValueProvider> alpha);
     
     void draw(const DrawParameter& param);
 
 private:
+
+    enum ColorChannels
+    {
+        Red, Green, Blue, Alpha
+    };
 
     void updatePosition();
     const sf::IntRect Animation::getTextureRect() const;
@@ -51,6 +61,7 @@ private:
     std::unique_ptr<ValueProvider> m_yScaleProvider;
     std::unique_ptr<ValueProvider> m_rotationProvider;
     std::unique_ptr<ValueProvider> m_frameProvider;
+    std::unique_ptr<ValueProvider> m_colorProviders[4];
     bool m_applyRotation;
     unsigned int m_frames;
     unsigned int m_frame;
