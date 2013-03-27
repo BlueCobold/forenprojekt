@@ -1,0 +1,90 @@
+﻿<bitmapfont>
+	<image name="buttonHoverFont" />
+	<height value="36" />
+	<glyphs>
+		<glyph name="A" x="0" y="0" width="26" xoffset="-1" spacing="22" />
+		<glyph name="B" x="26" y="0" width="26" xoffset="-2" spacing="22" />
+		<glyph name="C" x="52" y="0" width="24" xoffset="-2" spacing="18" />
+		<glyph name="D" x="76" y="0" width="26" xoffset="-2" spacing="22" />
+		<glyph name="E" x="102" y="0" width="22" xoffset="-2" spacing="18" />
+		<glyph name="F" x="124" y="0" width="22" xoffset="-2" spacing="18" />
+		<glyph name="G" x="146" y="0" width="26" xoffset="-2" spacing="22" />
+		<glyph name="H" x="172" y="0" width="30" xoffset="-2" spacing="24" />
+		<glyph name="I" x="202" y="0" width="18" xoffset="-2" spacing="12" />
+		<glyph name="J" x="220" y="0" width="20" xoffset="-1" spacing="16" />
+		<glyph name="K" x="240" y="0" width="28" xoffset="-2" spacing="24" />
+		<glyph name="L" x="268" y="0" width="22" xoffset="-2" spacing="18" />
+		<glyph name="M" x="290" y="0" width="32" xoffset="-2" spacing="26" />
+		<glyph name="N" x="322" y="0" width="26" xoffset="-2" spacing="20" />
+		<glyph name="O" x="348" y="0" width="26" xoffset="-2" spacing="22" />
+		<glyph name="P" x="374" y="0" width="26" xoffset="-2" spacing="22" />
+		<glyph name="Q" x="400" y="0" width="26" xoffset="-2" spacing="22" />
+		<glyph name="R" x="426" y="0" width="26" xoffset="-2" spacing="22" />
+		<glyph name="S" x="452" y="0" width="22" xoffset="-2" spacing="16" />
+		<glyph name="T" x="474" y="0" width="24" xoffset="-1" spacing="20" />
+		<glyph name="U" x="0" y="36" width="26" xoffset="-2" spacing="22" />
+		<glyph name="V" x="26" y="36" width="26" xoffset="-1" spacing="22" />
+		<glyph name="W" x="52" y="36" width="36" xoffset="-1" spacing="34" />
+		<glyph name="X" x="88" y="36" width="28" xoffset="-1" spacing="24" />
+		<glyph name="Y" x="116" y="36" width="28" xoffset="-2" spacing="22" />
+		<glyph name="Z" x="144" y="36" width="26" xoffset="-1" spacing="22" />
+		<glyph name="a" x="170" y="36" width="22" spacing="18" />
+		<glyph name="b" x="192" y="36" width="22" xoffset="-2" spacing="18" />
+		<glyph name="c" x="214" y="36" width="20" xoffset="-2" spacing="16" />
+		<glyph name="d" x="234" y="36" width="22" xoffset="-1" spacing="18" />
+		<glyph name="e" x="256" y="36" width="20" xoffset="-1" spacing="16" />
+		<glyph name="f" x="276" y="36" width="20" xoffset="-2" spacing="14" />
+		<glyph name="g" x="296" y="36" width="22" xoffset="-1" spacing="18" />
+		<glyph name="h" x="318" y="36" width="24" xoffset="-2" spacing="20" />
+		<glyph name="i" x="342" y="36" width="16" xoffset="-2" spacing="10" />
+		<glyph name="j" x="358" y="36" width="18" xoffset="-1" spacing="14" />
+		<glyph name="k" x="376" y="36" width="24" xoffset="-2" spacing="20" />
+		<glyph name="l" x="400" y="36" width="18" xoffset="-1" spacing="14" />
+		<glyph name="m" x="418" y="36" width="26" xoffset="-1" spacing="22" />
+		<glyph name="n" x="444" y="36" width="22" xoffset="-2" spacing="16" />
+		<glyph name="o" x="466" y="36" width="24" xoffset="-2" spacing="18" />
+		<glyph name="p" x="490" y="36" width="22" xoffset="-2" spacing="18" />
+		<glyph name="q" x="0" y="72" width="24" xoffset="-2" spacing="18" />
+		<glyph name="r" x="24" y="72" width="22" xoffset="-2" spacing="18" />
+		<glyph name="s" x="46" y="72" width="18" xoffset="-1" spacing="14" />
+		<glyph name="t" x="64" y="72" width="22" xoffset="-2" spacing="18" />
+		<glyph name="u" x="86" y="72" width="24" xoffset="-2" spacing="18" />
+		<glyph name="v" x="110" y="72" width="22" xoffset="-2" spacing="18" />
+		<glyph name="w" x="132" y="72" width="32" xoffset="-2" spacing="26" />
+		<glyph name="x" x="164" y="72" width="24" xoffset="-1" spacing="20" />
+		<glyph name="y" x="188" y="72" width="22" xoffset="-1" spacing="20" />
+		<glyph name="z" x="210" y="72" width="20" xoffset="-1" spacing="18" />
+		<glyph name="0" x="230" y="72" width="24" xoffset="-2" spacing="20" />
+		<glyph name="1" x="254" y="72" width="18" xoffset="-1" spacing="14" />
+		<glyph name="2" x="272" y="72" width="20" xoffset="-1" spacing="16" />
+		<glyph name="3" x="292" y="72" width="20" spacing="17" />
+		<glyph name="4" x="312" y="72" width="24" xoffset="-1" spacing="20" />
+		<glyph name="5" x="336" y="72" width="20" xoffset="-1" spacing="16" />
+		<glyph name="6" x="356" y="72" width="22" xoffset="-2" spacing="16" />
+		<glyph name="7" x="378" y="72" width="22" xoffset="-1" spacing="18" />
+		<glyph name="8" x="400" y="72" width="22" xoffset="-2" spacing="18" />
+		<glyph name="9" x="422" y="72" width="22" xoffset="-2" spacing="18" />
+		<glyph name="," x="444" y="72" width="12" xoffset="-1" spacing="8" />
+		<glyph name="." x="456" y="72" width="14" xoffset="-2" spacing="8" />
+		<glyph name="!" x="470" y="72" width="16" xoffset="-2" spacing="10" />
+		<glyph name="?" x="486" y="72" width="20" xoffset="-1" spacing="16" />
+		<glyph name="`" x="0" y="108" width="18" xoffset="-2" spacing="12" />
+		<glyph name="´" x="18" y="108" width="18" xoffset="-1" spacing="14" />
+		<glyph name="-" x="36" y="108" width="16" xoffset="-1" spacing="12" />
+		<glyph name="+" x="52" y="108" width="18" xoffset="-1" spacing="16" />
+		<glyph name="/" x="70" y="108" width="20" xoffset="-1" spacing="16" />
+		<glyph name="(" x="90" y="108" width="16" xoffset="-2" spacing="12" />
+		<glyph name=")" x="106" y="108" width="16" xoffset="-1" spacing="12" />
+		<glyph name="[" x="122" y="108" width="18" xoffset="-2" spacing="14" />
+		<glyph name="]" x="140" y="108" width="18" xoffset="-1" spacing="14" />
+		<glyph name="{" x="158" y="108" width="18" xoffset="-1" spacing="14" />
+		<glyph name="}" x="176" y="108" width="18" xoffset="-1" spacing="14" />
+		<glyph name="$" x="194" y="108" width="20" xoffset="-2" spacing="14" />
+		<glyph name="%" x="214" y="108" width="30" xoffset="-2" spacing="24" />
+		<glyph name="&" x="244" y="108" width="24" xoffset="-2" spacing="20" />
+		<glyph name="'" x="268" y="108" width="12" xoffset="-1" spacing="10" />
+		<glyph name=":" x="280" y="108" width="14" spacing="10" />
+		<glyph name=";" x="294" y="108" width="14" xoffset="-2" spacing="8" />
+		<glyph name="*" x="308" y="108" width="18" xoffset="-1" spacing="14" />
+	</glyphs>
+</bitmapfont>

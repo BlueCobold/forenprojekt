@@ -23,6 +23,8 @@
 	<texture name="bitmapfontGreen" path="bitmapfonts/green.png" smooth="false" />
 	<texture name="bitmapfontRed" path="bitmapfonts/red.png" smooth="false" />
 	<texture name="bitmapfontGuiLarge" path="bitmapfonts/gui_large.png" smooth="false" />
+	<texture name="buttonHoverFont" path="bitmapfonts/button_hover.png" smooth="false" />
+	<texture name="buttonIdleFont" path="bitmapfonts/button_idle.png" smooth="false" />
 	<texture name="arrowHUD" path="gui/arrows.png" smooth="true" />
 	<texture name="ballmini" path="assets/ball/ballmini.png" smooth="true" />
 	<texture name="sparkles" path="assets/misc/sparkles.png" smooth="false" />
@@ -38,4 +40,6 @@
 	<bitmapfont name="green" path="bitmapfontGreen.xml" />
 	<bitmapfont name="red" path="bitmapfontRed.xml" />
 	<bitmapfont name="gui_large" path="bitmapfontGuiLarge.xml" />
+	<bitmapfont name="buttonIdleFont" path="buttonIdleFont.xml" />
+	<bitmapfont name="buttonHoverFont" path="buttonHoverFont.xml" />
 </bitmapfonts>
