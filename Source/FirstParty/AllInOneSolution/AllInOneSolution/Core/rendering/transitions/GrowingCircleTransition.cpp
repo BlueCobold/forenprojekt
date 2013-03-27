@@ -1,4 +1,5 @@
 #include "GrowingCircleTransition.hpp"
+#include "../../Utility.hpp"
 #include <math.h>
 
 GrowingCircleTransition::GrowingCircleTransition(
@@ -17,6 +18,9 @@ GrowingCircleTransition::GrowingCircleTransition(
         m_targetSprites.setPosition(targetTexture->getSize().x / 2.f, targetTexture->getSize().y / 2.f);
         m_targetSprites.setRadius(0);
     }
+    else
+        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "GrowingCircleTransition"));
+
     if (sourceTexture != nullptr)
     {
         m_sourceSprite.setTexture(*sourceTexture, true);

@@ -133,6 +133,12 @@
     <ClCompile Include="rendering\transitions\HorizontalMaskingStripesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
+    <ClCompile Include="rendering\transitions\VerticalSlidingStripesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering\transitions\HorizontSlidingStripesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -250,9 +256,6 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="rendering\Drawable.hpp">
-      <Filter>Headers\rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering\DrawParameter.hpp">
       <Filter>Headers\rendering</Filter>
     </ClInclude>
     <ClInclude Include="rendering\GraphicalObject.hpp">
@@ -404,6 +407,15 @@
     </ClInclude>
     <ClInclude Include="animation\provider\CachedProvider.hpp">
       <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\DrawParameter.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\VerticalSlidingStripesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\HorizontalSlidingStripesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

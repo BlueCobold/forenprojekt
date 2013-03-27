@@ -1,4 +1,5 @@
 #include "GrowingRectangleTransition.hpp"
+#include "../../Utility.hpp"
 
 GrowingRectangleTransition::GrowingRectangleTransition(
     const sf::Texture* sourceTexture,
@@ -14,6 +15,8 @@ GrowingRectangleTransition::GrowingRectangleTransition(
         m_targetSprites.setTextureRect(sf::IntRect(m_RectangleStartX, m_RectangleStartY, 0, 0));
         m_targetSprites.setPosition(targetTexture->getSize().x / 2.f, targetTexture->getSize().y / 2.f);
     }
+    else
+        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "GrowingRectangleTransition"));
     if (sourceTexture != nullptr)
     {
         m_sourceSprite.setTexture(*sourceTexture, true);

@@ -1,5 +1,5 @@
-
 #include "VerticalStripesTransition.hpp"
+#include "../../Utility.hpp"
 
 VerticalStripesTransition::VerticalStripesTransition(
     const sf::Texture* sourceTexture,
@@ -18,6 +18,8 @@ VerticalStripesTransition::VerticalStripesTransition(
             m_targetSprites.push_back(std::unique_ptr<sf::Sprite>(sprite));
         }
     }
+    else
+        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "VerticalStripesTransition"));
     if (sourceTexture != nullptr)
     {
         m_sourceSprite.setTexture(*sourceTexture, true);
