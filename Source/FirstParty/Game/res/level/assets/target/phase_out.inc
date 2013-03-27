@@ -23,15 +23,17 @@
 				</animations>
 				<collides>
 					<spawnEntity name="target_2">
-						<propertyFilter target="entity">
-							<add>
-								<static value="2" />
-								<mul>
-									<static value="-1" />
-									<var name="color" />
-								</mul>
-							</add>
-						</propertyFilter>
+						<spawnEntity name="target_particles">
+							<propertyFilter target="entity">
+								<add>
+									<static value="2" />
+									<mul>
+										<static value="-1" />
+										<var name="color" />
+									</mul>
+								</add>
+							</propertyFilter>
+						</spawnEntity>
 					</spawnEntity>
 				</collides>
 			</entity>

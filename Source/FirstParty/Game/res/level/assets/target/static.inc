@@ -62,10 +62,86 @@
 		</physics>
 		
 		<entities>
+			<entity name="target_particles" rep="--" collideWithBall="false">
+				<animations>
+					<animation copies="20" texture="sparkles" width="32" height="32" midx="16" midy="16" rotate="true">
+						<constants posx="0" posy="0" shape="0" init="0" time="0" size="1"/>
+						<position axis="x">
+							<step>
+								<add>
+									<setVar name="time">
+										<sub>
+											<time />
+											<static value="0.40" />
+										</sub>
+									</setVar>
+									<static value="1" />
+								</add>
+								<static value="0" />
+								<mul>
+									<pow>
+										<max>
+											<var name="time" />
+											<static value="0" />
+										</max>
+										<static value="0.4" />
+									</pow>
+									<step>
+										<var name="init" />
+										<nop>
+											<setVar name="posx">
+												<random min="-80" max="80" />
+											</setVar>
+											<setVar name="posy">
+												<random min="-80" max="80" />
+											</setVar>
+											<setVar name="size">
+												<random min="0.3" max="1.0" />
+											</setVar>
+											<setVar name="shape">
+												<int>
+													<random min="0" max="8" />
+												</int>
+											</setVar>
+											<setVar name="init">
+												<static value="1" />
+											</setVar>
+										</nop>
+										<var name="posx" />
+									</step>
+								</mul>
+							</step>
+						</position>
+						<position axis="y">
+							<mul>
+								<pow>
+									<max>
+										<var name="time" />
+										<static value="0" />
+									</max>
+									<static value="0.4" />
+								</pow>
+								<var name="posy" />
+							</mul>
+						</position>
+						<scale axis="x">
+							<var name="size" />
+						</scale>
+						<scale axis="y">
+							<var name="size" />
+						</scale>
+						<frameindex frames="8">
+							<step>
+								<var name="time" />
+								<var name="shape" />
+								<stop />
+							</step>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			
 			<entity name="target_2" rep="--" collideWithBall="false">
-				<physics name="target">
-					<shape type="circle" radius="35" />
-				</physics>
 				<animations>
 					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true">
 						<scale axis="x">
@@ -84,7 +160,9 @@
 				</physics>
 				<collides>
 					<spawnEntity name="target_2">
-						<always />
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
 					</spawnEntity>
 				</collides>
 				<animations>
