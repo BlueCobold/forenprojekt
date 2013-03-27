@@ -65,7 +65,7 @@
 			<entity name="target_particles" rep="--" collideWithBall="false">
 				<animations>
 					<animation copies="20" texture="sparkles" width="32" height="32" midx="16" midy="16" rotate="true">
-						<constants posx="0" posy="0" shape="0" init="0" time="0" size="1"/>
+						<constants time="0" size="1" />
 						<position axis="x">
 							<step>
 								<add>
@@ -84,56 +84,115 @@
 											<var name="time" />
 											<static value="0" />
 										</max>
-										<static value="0.4" />
+										<static value="0.5" />
 									</pow>
-									<step>
-										<var name="init" />
-										<nop>
-											<setVar name="posx">
-												<random min="-80" max="80" />
-											</setVar>
-											<setVar name="posy">
-												<random min="-80" max="80" />
-											</setVar>
-											<setVar name="size">
-												<random min="0.3" max="1.0" />
-											</setVar>
-											<setVar name="shape">
-												<int>
-													<random min="0" max="8" />
-												</int>
-											</setVar>
-											<setVar name="init">
-												<static value="1" />
-											</setVar>
-										</nop>
-										<var name="posx" />
-									</step>
+									<cache>
+										<random min="-80" max="80" />
+									</cache>
 								</mul>
 							</step>
 						</position>
 						<position axis="y">
-							<mul>
-								<pow>
-									<max>
-										<var name="time" />
-										<static value="0" />
-									</max>
-									<static value="0.4" />
-								</pow>
-								<var name="posy" />
-							</mul>
+							<step>
+								<add>
+									<var name="time" />
+									<static value="1" />
+								</add>
+								<static value="0" />
+								<mul>
+									<pow>
+										<max>
+											<var name="time" />
+											<static value="0" />
+										</max>
+										<static value="0.5" />
+									</pow>
+									<cache>
+										<random min="-80" max="80" />
+									</cache>
+								</mul>
+							</step>
 						</position>
 						<scale axis="x">
-							<var name="size" />
+							<cache>
+								<setVar name="size">
+									<random min="0.3" max="1.0" />
+								</setVar>
+							</cache>
 						</scale>
 						<scale axis="y">
-							<var name="size" />
+							<cache>
+								<var name="size" />
+							</cache>
 						</scale>
+						
+						<color channel="red">
+							<sub>
+								<static value="1" />
+								<mul>
+									<cache>
+										<random min="0.0" max="0.6" />
+									</cache>
+									<var name="time" />
+								</mul>
+							</sub>
+						</color>
+						<color channel="green">
+							<sub>
+								<static value="1" />
+								<mul>
+									<cache>
+										<random min="0.0" max="0.6" />
+									</cache>
+									<var name="time" />
+								</mul>
+							</sub>
+						</color>
+						<color channel="blue">
+							<sub>
+								<static value="1" />
+								<mul>
+									<cache>
+										<random min="0.0" max="0.6" />
+									</cache>
+									<var name="time" />
+								</mul>
+							</sub>
+						</color>
+						<color channel="alpha">
+							<step>
+								<add>
+									<var name="time" />
+									<static value="0.5" />
+								</add>
+								<static value="1" />
+								<max>
+									<static value="0" />
+									<sub>
+										<static value="1" />
+										<pow>
+											<mul>
+												<sub>
+													<var name="time" />
+													<static value="0.5" />
+												</sub>
+												<static value="2" />
+											</mul>
+											<static value="0.7" />
+										</pow>
+									</sub>
+								</max>
+							</step>
+						</color>
+
 						<frameindex frames="8">
 							<step>
 								<var name="time" />
-								<var name="shape" />
+								<cache>
+									<int>
+										<random min="0" max="8" />
+									</int>
+								</cache>
 								<stop />
 							</step>
 						</frameindex>

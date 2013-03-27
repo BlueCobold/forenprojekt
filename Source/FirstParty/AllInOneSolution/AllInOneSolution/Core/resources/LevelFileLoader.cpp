@@ -3,6 +3,7 @@
 #include "../animation/provider/Absolute.hpp"
 #include "../animation/provider/Adder.hpp"
 #include "../animation/provider/AngleProvider.hpp"
+#include "../animation/provider/CachedProvider.hpp"
 #include "../animation/provider/Clamp.hpp"
 #include "../animation/provider/FloatToInt.hpp"
 #include "../animation/provider/Inverse.hpp"
@@ -88,20 +89,23 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 
     std::unique_ptr<ValueProvider> xProvider = findController(xml, animated, handler, "position", "axis", "x", functions);
     std::unique_ptr<ValueProvider> yProvider = findController(xml, animated, handler, "position", "axis", "y", functions);
-    if((xProvider != nullptr) || (yProvider != nullptr))
-        anim->bindPositionController(std::move(xProvider), std::move(yProvider));
+    anim->bindPositionController(std::move(xProvider), std::move(yProvider));
 
     std::unique_ptr<ValueProvider> xScaleProvider = findController(xml, animated, handler, "scale", "axis", "x", functions);
     std::unique_ptr<ValueProvider> yScaleProvider = findController(xml, animated, handler, "scale", "axis", "y", functions);
-    if((xScaleProvider != nullptr) || (yScaleProvider != nullptr))
-        anim->bindScaleController(std::move(xScaleProvider), std::move(yScaleProvider));
+    anim->bindScaleController(std::move(xScaleProvider), std::move(yScaleProvider));
+
+    std::unique_ptr<ValueProvider> red = findController(xml, animated, handler, "color", "channel", "red", functions);
+    std::unique_ptr<ValueProvider> green = findController(xml, animated, handler, "color", "channel", "green", functions);
+    std::unique_ptr<ValueProvider> blue = findController(xml, animated, handler, "color", "channel", "blue", functions);
+    std::unique_ptr<ValueProvider> alpha = findController(xml, animated, handler, "color", "channel", "alpha", functions);
+    anim->bindColorController(std::move(red), std::move(green), std::move(blue), std::move(alpha));
 
     tinyxml2::XMLElement* rotation = xml->FirstChildElement("rotation");
     if(rotation != nullptr && rotation->FirstChildElement() != nullptr)
     {
         std::unique_ptr<ValueProvider> rotProvider = parseProvider(rotation->FirstChildElement(), animated, handler, functions);
-        if(rotProvider != nullptr)
-            anim->bindRotationController(std::move(rotProvider));
+        anim->bindRotationController(std::move(rotProvider));
     }
 
     tinyxml2::XMLElement* constants = xml->FirstChildElement("constants");
@@ -157,6 +161,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
         return std::unique_ptr<Absolute>(new Absolute(std::move(parseProviders(xml, animated, handler, functions)[0])));
     else if(std::string(xml->Name())=="sine")
         return std::unique_ptr<Sine>(new Sine(std::move(parseProviders(xml, animated, handler, functions)[0])));
+    else if(std::string(xml->Name())=="cache")
+        return std::unique_ptr<CachedProvider>(new CachedProvider(std::move(parseProviders(xml, animated, handler, functions)[0])));
     else if(std::string(xml->Name())=="int")
         return std::unique_ptr<FloatToInt>(new FloatToInt(std::move(parseProviders(xml, animated, handler, functions)[0])));
     else if(std::string(xml->Name())=="add")
