@@ -297,7 +297,7 @@ std::unique_ptr<Entity> Level::createEntity(
         {
             int copies = 1;
             element->QueryIntAttribute("copies", &copies);
-            for(int copy=0; copy<copies; copy++)
+            for(int copy = 0; copy < copies; copy++)
             {
                 auto animation = LevelFileLoader::parseAnimation(element, entity.get(), this, m_resourceManager, &templates.functions);
                 if(physic == nullptr)
