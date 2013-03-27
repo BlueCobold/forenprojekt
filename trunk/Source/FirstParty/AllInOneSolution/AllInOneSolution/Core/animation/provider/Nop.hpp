@@ -10,31 +10,26 @@
 #include <memory>
 #include <vector>
 
-/// Returns the sum of the values of the passed providers
+/// Executes all passed providers and returns the value of the first
 class Nop : public MultiProvider
 {
 public:
     
     Nop(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
     {
-        if(getProvider().size() < 0)
+        if(getProvider().size() < 1)
             throw std::runtime_error(utility::replace(utility::translateKey("OneChildsMin"), "Nop"));
     }
 
     virtual float getValue()
     {
-        float v = 0.0f;
-        bool first = true;
-        for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
-        {
-            float val = (*it)->getValue();
-            if(first)
-            {
-                v = val;
-                first = false;
-            }
-        }
-        return v;
+        auto it = begin(getProvider());
+        float ret = (*it)->getValue();
+
+        for(++it; it != end(getProvider()); ++it)
+            (*it)->getValue();
+
+        return ret;
     }
 };
 
