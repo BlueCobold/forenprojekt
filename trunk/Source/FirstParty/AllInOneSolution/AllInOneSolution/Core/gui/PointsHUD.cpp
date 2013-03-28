@@ -24,7 +24,7 @@ void PointsHUD::setPoints(int points)
     if(static_cast<float>(points) != m_pointCounter.getTargetValue())
     {
         m_pointCounter.set(m_pointCounter.getCurrentValue(), static_cast<float>(points), 1.f);
-        m_pointCounter.start();
+        m_pointCounter.restartAt(m_elapsedTime);
     }
 }
 

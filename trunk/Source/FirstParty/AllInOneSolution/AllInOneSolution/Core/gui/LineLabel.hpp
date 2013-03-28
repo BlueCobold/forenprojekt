@@ -3,10 +3,13 @@
 
 #pragma once
 
-#include <SFML/System/Vector2.hpp>
-
+#include "../animation/Interpolation.hpp"
 #include "../rendering/Drawable.hpp"
 #include "BitmapFont.hpp"
+
+#include <SFML/System/Vector2.hpp>
+
+#include <memory>
 
 /// This class will be used to draw a single line label 
 /// with bitmapfonts
@@ -37,6 +40,12 @@ public:
 	void setColor(const sf::Color &color);
     void setAlignment(const Alignment alignment);
 
+    void attachPositionProgress(const Interpolation& x, const Interpolation& y);
+    void attachAlphaProgress(const Interpolation& alpha);
+    void updateProgress(const float time);
+    bool progressRunning();
+    bool progressFinished();
+
     sf::Vector2f getPosition() const;
 
     void setRotation(const float angle);
@@ -57,6 +66,10 @@ private:
     BitmapFont* m_font;
     std::vector<BitmapFont::Glyph> m_glyphs;
     Alignment m_alignment;
+
+    Interpolation m_xPosChange;
+    Interpolation m_yPosChange;
+    Interpolation m_alphaChange;
 };
 
 #endif // LINELABEL_HPP

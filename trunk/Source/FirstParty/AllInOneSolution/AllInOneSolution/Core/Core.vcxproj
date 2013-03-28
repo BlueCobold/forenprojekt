@@ -90,7 +90,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animation\Animation.cpp" />
-    <ClCompile Include="animation\Storyboard.cpp" />
+    <ClCompile Include="animation\Interpolation.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="gui\ArrowHUD.cpp" />
@@ -124,7 +124,6 @@
     <ClCompile Include="rendering\transitions\GrowingRectangleTransition.cpp" />
     <ClCompile Include="rendering\transitions\HorizontalMaskingStripesTransition.cpp" />
     <ClCompile Include="rendering\transitions\HorizontalStripesTransition.cpp" />
-    <ClCompile Include="rendering\transitions\HorizontSlidingStripesTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalMaskingStripesTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalSlidingStripesTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp" />
@@ -139,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="animation\AnimatedObject.hpp" />
     <ClInclude Include="animation\Animation.hpp" />
+    <ClInclude Include="animation\Interpolation.hpp" />
     <ClInclude Include="animation\OrientedObject.hpp" />
     <ClInclude Include="animation\provider\Absolute.hpp" />
     <ClInclude Include="animation\provider\Adder.hpp" />
@@ -166,7 +166,6 @@
     <ClInclude Include="animation\provider\TimeProvider.hpp" />
     <ClInclude Include="animation\provider\ValueProvider.hpp" />
     <ClInclude Include="animation\provider\VariableProvider.hpp" />
-    <ClInclude Include="animation\Storyboard.hpp" />
     <ClInclude Include="animation\TimedObject.hpp" />
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
@@ -213,7 +212,6 @@
     <ClInclude Include="rendering\transitions\GrowingCircleTransition.hpp" />
     <ClInclude Include="rendering\transitions\GrowingRectangleTransition.hpp" />
     <ClInclude Include="rendering\transitions\HorizontalMaskingStripesTransition.hpp" />
-    <ClInclude Include="rendering\transitions\HorizontalSlidingStripesTransition.hpp" />
     <ClInclude Include="rendering\transitions\HorizontalStripesTransition.hpp" />
     <ClInclude Include="rendering\transitions\Transition.hpp" />
     <ClInclude Include="rendering\transitions\VerticalMaskingStripesTransition.hpp" />

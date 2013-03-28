@@ -73,9 +73,6 @@
     <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
-    <ClCompile Include="animation\Storyboard.cpp">
-      <Filter>Sources\animation</Filter>
-    </ClCompile>
     <ClCompile Include="model\Level_LoadingPart.cpp">
       <Filter>Sources\model</Filter>
     </ClCompile>
@@ -133,10 +130,10 @@
     <ClCompile Include="rendering\transitions\HorizontalMaskingStripesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\transitions\VerticalSlidingStripesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+    <ClCompile Include="animation\Interpolation.cpp">
+      <Filter>Sources\animation</Filter>
     </ClCompile>
-    <ClCompile Include="rendering\transitions\HorizontSlidingStripesTransition.cpp">
+    <ClCompile Include="rendering\transitions\VerticalSlidingStripesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -312,9 +309,6 @@
     <ClInclude Include="rendering\transitions\VerticalStripesTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
-    <ClInclude Include="animation\Storyboard.hpp">
-      <Filter>Headers\animation</Filter>
-    </ClInclude>
     <ClInclude Include="animation\provider\Substractor.hpp">
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
@@ -408,13 +402,13 @@
     <ClInclude Include="animation\provider\CachedProvider.hpp">
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
+    <ClInclude Include="animation\Interpolation.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
     <ClInclude Include="rendering\DrawParameter.hpp">
       <Filter>Headers\rendering</Filter>
     </ClInclude>
     <ClInclude Include="rendering\transitions\VerticalSlidingStripesTransition.hpp">
-      <Filter>Headers\rendering\transitions</Filter>
-    </ClInclude>
-    <ClInclude Include="rendering\transitions\HorizontalSlidingStripesTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,7 +6,7 @@ LineLabel::LineLabel()
     m_rotation(0),
     m_font(nullptr)
 {
-    setText("");
+    rebuild();
 }
 
 LineLabel::LineLabel(const std::string& text,
@@ -20,14 +20,23 @@ LineLabel::LineLabel(const std::string& text,
     m_font(font),
     m_alignment(alignment)
 {
-    setText(text);
+    rebuild();
 }
 
 void LineLabel::draw(const DrawParameter& params)
 {
     for(auto it = begin(m_glyphs); it != end(m_glyphs); it++) 
     {
-        params.getTarget().draw(*it);
+        auto glyph = (*it);
+        auto pos = glyph.getPosition();
+        if(m_xPosChange.isStarted())
+            pos.x += floorf(m_xPosChange.getCurrentValue());
+        if(m_yPosChange.isStarted())
+            pos.y += floorf(m_yPosChange.getCurrentValue());
+        glyph.setPosition(pos.x, pos.y);
+        if(m_alphaChange.isStarted())
+            glyph.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(255 * m_alphaChange.getCurrentValue())));
+        params.getTarget().draw(glyph);
     }
 }
 
@@ -124,4 +133,43 @@ void LineLabel::setBitmapFont(BitmapFont* font)
 float LineLabel::getWidth() const
 {
     return m_width;
+}
+
+void LineLabel::attachPositionProgress(const Interpolation& x, const Interpolation& y)
+{
+    m_xPosChange = x;
+    if(!m_xPosChange.isStarted())
+        m_xPosChange.start();
+
+    m_yPosChange = y;
+    if(!m_yPosChange.isStarted())
+        m_yPosChange.start();
+}
+
+void LineLabel::attachAlphaProgress(const Interpolation& alpha)
+{
+    m_alphaChange = alpha;
+    if(!m_alphaChange.isStarted())
+        m_alphaChange.start();
+}
+
+void LineLabel::updateProgress(const float time)
+{
+    if(m_xPosChange.isStarted() && !m_xPosChange.isFinished())
+        m_xPosChange.update(time);
+    if(m_yPosChange.isStarted() && !m_yPosChange.isFinished())
+        m_yPosChange.update(time);
+    if(m_alphaChange.isStarted() && !m_alphaChange.isFinished())
+        m_alphaChange.update(time);
+}
+
+bool LineLabel::progressRunning()
+{
+    return (m_xPosChange.isStarted() || m_yPosChange.isStarted() || m_alphaChange.isStarted())
+        && (!progressFinished());
+}
+
+bool LineLabel::progressFinished()
+{
+    return m_xPosChange.isFinished() || m_yPosChange.isFinished() || m_alphaChange.isFinished();
 }

@@ -4,7 +4,7 @@
 #define POINTS_HPP
 
 #include "LabelHUD.hpp"
-#include "../animation/Storyboard.hpp"
+#include "../animation/Interpolation.hpp"
 
 class PointsHUD : public LabelHUD
 {
@@ -12,7 +12,7 @@ public:
     PointsHUD(const sf::Vector2f& position,
               const float rotation,
               BitmapFont* bitmapFont,
-		      const float horizontalPercentage = HUDElement::Left,
+              const float horizontalPercentage = HUDElement::Left,
               const float verticalPercentage = HUDElement::Top);
 
     void update(const DrawParameter& params);
@@ -22,7 +22,7 @@ public:
     void setTime(float time);
 
 private:
-    Storyboard m_pointCounter;
+    Interpolation m_pointCounter;
 
     float m_elapsedTime;
 };
