@@ -112,6 +112,8 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
             (*it)->update(m_lastTime + delta);
         }
         m_updatingEntity = nullptr;
+
+        updatePointLabels();
     }
 
     if(utility::Keyboard.isKeyDown(sf::Keyboard::D))
@@ -133,6 +135,35 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         m_scrollView.adjustView(ballpos, screen);
     }
 #endif
+}
+
+void Level::updatePointLabels()
+{
+    auto lit = begin(m_pointLabels);
+    while(lit != end(m_pointLabels))
+    {
+        auto timedLabel = (*lit).get();
+        timedLabel->label->updateProgress(getPassedTime());
+        if(getPassedTime() - timedLabel->time > 1)
+        {
+            if(timedLabel->label->progressFinished())
+            {
+                lit = m_pointLabels.erase(lit);
+                continue;
+            }
+            ++lit;
+            if(timedLabel->label->progressRunning())
+                continue;
+            timedLabel->label->attachPositionProgress(
+                Interpolation(0, 0, 1, getPassedTime()),
+                Interpolation(0, -50, 1, getPassedTime()));
+            timedLabel->label->attachAlphaProgress(
+                Interpolation(1, 0, 1, getPassedTime()));
+            timedLabel->label->updateProgress(getPassedTime());
+        }
+        else
+            ++lit;
+    }
 }
 
 float Level::getValueOf(const std::string& name) const
@@ -195,8 +226,19 @@ void Level::killTarget(Entity* target)
 {
     target->kill();
     m_remainingTarget--;
-    m_points += 100 + m_multiHit * 50;
+    int earned = 100 + m_multiHit * 50;
+    m_points += earned;
     m_multiHit++;
+    std::unique_ptr<LineLabel> label(new LineLabel(
+            std::string("+") + utility::toString(earned),
+            sf::Vector2f(
+                utility::toPixel(target->getPosition().x), 
+                utility::toPixel(target->getPosition().y)),
+            0,
+            m_resourceManager.getBitmapFont("green"),
+            LineLabel::Centered));
+
+    m_pointLabels.push_back(std::unique_ptr<TimedLabel>(new TimedLabel(std::move(label), getPassedTime())));
 }
 
 void Level::onCollision(Entity* entityA, Entity* entityB)
@@ -223,7 +265,10 @@ void Level::draw(const DrawParameter& param)
         m_background->draw(param);
 
     for(auto it = begin(m_entities); it != end(m_entities); ++it)
-        it->get()->draw(param);
+        (*it)->draw(param);
+
+    for(auto it = begin(m_pointLabels); it != end(m_pointLabels); ++it)
+        (*it)->label->draw(param);
 
     if(m_debugDraw)
     {

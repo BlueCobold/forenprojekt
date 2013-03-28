@@ -7,8 +7,13 @@
 class TimedObject
 {
 public:
-    TimedObject() : m_stopped(false)
+    TimedObject() : m_stopped(false), m_startTime(0), m_currentTime(0)
     { }
+
+    TimedObject(const float time) : m_stopped(false)
+    {
+        restartAt(time);
+    }
 
     virtual ~TimedObject()
     { }
@@ -39,6 +44,11 @@ protected:
     void updateCurrentTime(const float time)
     {
         m_currentTime = time;
+    }
+
+    float getCurrentTime()
+    {
+        return m_currentTime;
     }
 
 private:

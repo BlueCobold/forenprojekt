@@ -24,13 +24,13 @@ BitmapFont::Glyph::Glyph(const sf::Texture& texture, const sf::IntRect& rectangl
 
 int BitmapFont::Glyph::getSpacing() const
 {
-    return m_spacing * getScale().x;
+    return static_cast<int>(m_spacing * getScale().x);
 }
 
 void BitmapFont::Glyph::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
     sf::Sprite tmp = *this;
-    tmp.move(m_xOffset, 0);
+    tmp.move(static_cast<float>(m_xOffset), 0);
     target.draw(tmp, states);
 }
 

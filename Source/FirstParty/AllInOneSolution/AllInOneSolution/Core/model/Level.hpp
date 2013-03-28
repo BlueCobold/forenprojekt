@@ -78,6 +78,7 @@ private:
         std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
     };
 
+    void updatePointLabels();
     virtual bool shouldCollide(Entity* entityA, Entity* entityB);
     virtual void onCollision(Entity* entityA, Entity* entityB);
     void killTarget(Entity* target);
@@ -183,6 +184,22 @@ private:
 
     int m_points;
     int m_multiHit;
+
+    struct TimedLabel
+    {
+    public:
+
+        TimedLabel(std::unique_ptr<LineLabel> label, const float time)
+        {
+            this->label = std::move(label);
+            this->time = time;
+        }
+
+        std::unique_ptr<LineLabel> label;
+        float time;
+    };
+    
+    std::vector<std::unique_ptr<TimedLabel>> m_pointLabels;
 };
 
 #endif // LEVEL_HPP
