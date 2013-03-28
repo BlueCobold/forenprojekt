@@ -40,8 +40,6 @@ public:
     const sf::Vector2f getPosition() const;
     void setAlignment(const Alignment alignment);
 
-	void setColor(const sf::Color &color);
-
     void attachPositionProgress(const Interpolation& x, const Interpolation& y);
     void attachAlphaProgress(const Interpolation& alpha);
     void updateProgress(const float time);
