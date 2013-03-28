@@ -146,13 +146,13 @@ void Level::updatePointLabels()
         timedLabel->label->updateProgress(getPassedTime());
         if(getPassedTime() - timedLabel->time > 1)
         {
-            if(timedLabel->label->progressFinished())
+            if(timedLabel->label->allProgressesFinished())
             {
                 lit = m_pointLabels.erase(lit);
                 continue;
             }
             ++lit;
-            if(timedLabel->label->progressRunning())
+            if(timedLabel->label->anyProgressRunning())
                 continue;
             timedLabel->label->attachPositionProgress(
                 Interpolation(0, 0, 1, getPassedTime()),

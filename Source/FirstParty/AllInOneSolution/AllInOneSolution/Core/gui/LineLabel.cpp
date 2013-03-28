@@ -3,6 +3,7 @@
 LineLabel::LineLabel()
     : m_text(""),
     m_position(sf::Vector2f(0,0)),
+    m_progressPosition(0, 0),
     m_rotation(0),
     m_font(nullptr)
 {
@@ -16,6 +17,7 @@ LineLabel::LineLabel(const std::string& text,
                     Alignment alignment)
     : m_text(text),
     m_position(position),
+    m_progressPosition(0, 0),
     m_rotation(rotation),
     m_font(font),
     m_alignment(alignment)
@@ -28,12 +30,10 @@ void LineLabel::draw(const DrawParameter& params)
     for(auto it = begin(m_glyphs); it != end(m_glyphs); it++) 
     {
         auto glyph = (*it);
-        auto pos = glyph.getPosition();
-        if(m_xPosChange.isStarted())
-            pos.x += floorf(m_xPosChange.getCurrentValue());
-        if(m_yPosChange.isStarted())
-            pos.y += floorf(m_yPosChange.getCurrentValue());
-        glyph.setPosition(pos.x, pos.y);
+        glyph.setPosition(
+            glyph.getPosition().x + m_progressPosition.x,
+            glyph.getPosition().y + m_progressPosition.y);
+
         if(m_alphaChange.isStarted())
             glyph.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(255 * m_alphaChange.getCurrentValue())));
         params.getTarget().draw(glyph);
@@ -110,9 +110,9 @@ void LineLabel::setAlignment(const Alignment alignment)
     }
 }
 
-sf::Vector2f LineLabel::getPosition() const
+const sf::Vector2f LineLabel::getPosition() const
 {
-    return m_position;
+    return m_position + m_progressPosition;
 }
 
 void LineLabel::setRotation(const float rotation)
@@ -155,21 +155,31 @@ void LineLabel::attachAlphaProgress(const Interpolation& alpha)
 
 void LineLabel::updateProgress(const float time)
 {
+    sf::Vector2f pos(0, 0);
     if(m_xPosChange.isStarted() && !m_xPosChange.isFinished())
+    {
         m_xPosChange.update(time);
+        pos.x = floorf(m_xPosChange.getCurrentValue());
+    }
     if(m_yPosChange.isStarted() && !m_yPosChange.isFinished())
+    {
         m_yPosChange.update(time);
+        pos.y = floorf(m_yPosChange.getCurrentValue());
+    }
+    m_progressPosition = pos;
+
     if(m_alphaChange.isStarted() && !m_alphaChange.isFinished())
         m_alphaChange.update(time);
 }
 
-bool LineLabel::progressRunning()
+bool LineLabel::anyProgressRunning()
 {
-    return (m_xPosChange.isStarted() || m_yPosChange.isStarted() || m_alphaChange.isStarted())
-        && (!progressFinished());
+    return m_xPosChange.isStarted() || m_yPosChange.isStarted() || m_alphaChange.isStarted();
 }
 
-bool LineLabel::progressFinished()
+bool LineLabel::allProgressesFinished()
 {
-    return m_xPosChange.isFinished() || m_yPosChange.isFinished() || m_alphaChange.isFinished();
+    return (m_xPosChange.isStarted() && m_xPosChange.isFinished())
+        && (m_yPosChange.isStarted() && m_yPosChange.isFinished())
+        && (m_alphaChange.isStarted() && m_alphaChange.isFinished());
 }

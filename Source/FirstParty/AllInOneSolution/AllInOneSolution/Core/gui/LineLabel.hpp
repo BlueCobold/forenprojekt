@@ -37,16 +37,16 @@ public:
 
     void setPosition(const sf::Vector2f position);
     void setPosition(const float x, const float y);
-	void setColor(const sf::Color &color);
+    const sf::Vector2f getPosition() const;
     void setAlignment(const Alignment alignment);
+
+	void setColor(const sf::Color &color);
 
     void attachPositionProgress(const Interpolation& x, const Interpolation& y);
     void attachAlphaProgress(const Interpolation& alpha);
     void updateProgress(const float time);
-    bool progressRunning();
-    bool progressFinished();
-
-    sf::Vector2f getPosition() const;
+    bool anyProgressRunning();
+    bool allProgressesFinished();
 
     void setRotation(const float angle);
     float getRotation() const;
@@ -67,6 +67,7 @@ private:
     std::vector<BitmapFont::Glyph> m_glyphs;
     Alignment m_alignment;
 
+    sf::Vector2f m_progressPosition;
     Interpolation m_xPosChange;
     Interpolation m_yPosChange;
     Interpolation m_alphaChange;
