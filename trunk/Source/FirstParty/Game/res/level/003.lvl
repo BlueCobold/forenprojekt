@@ -9,31 +9,31 @@
 	</templates>
 
 	<grid size="60" width="2460" height="1410">
-
-
-                                    t1
-
-
-
-
-                                    TT
-
-
-
-
-                                          TT
-                                    BB
-
-
-
-                                    TT
-
-
-
-
-
-
-
+                                                                                    
+                                                                                    
+                                    t1                                              
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                    TT                                              
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                          TT                                        
+                                    BB                                              
+                                                                                    
+                                                                                    
+                                                                                    
+                                    TT                                              
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
 	</grid>
 	<objects>
 		<include file="pastureland/background.inc" />

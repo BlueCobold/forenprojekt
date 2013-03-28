@@ -1,0 +1,47 @@
+<level>
+	<constants direction="1" arrowtime="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+	</templates>
+
+	<grid size="60" width="2460" height="1650">
+                                W6 6W1 1W4 4W2 2W1 1w3                              
+                                w1)2              (2w5                              
+                                w5                  w5                              
+                                w3    \3          /3w5                              
+                                w2  t1w5      t1/2w5w6                              
+                                w6    w2      /5w3w2w1                              
+                                w3    w1          (1w4                              
+                                w1    w4            w3                              
+                                w6    w2    TT      w5                              
+                                w5    w6\5          w2                              
+                                w3  t1w3w1\4  t1    w6                              
+                                w1    w4w1w1\1      w1                              
+                                w3    w1)4          w5                              
+                                w2    w5            w4                              
+                                w4    w6        TT  w1                              
+                                w3    w2          /1w2                              
+                                w6  t1w1      t1/2w4w6                              
+                                w1    w4      /4w2w1w4                              
+                                w5    w6          (3w1                              
+                                w1    w2            w2                              
+                                w4    w4    TT      w3                              
+                                w2    w1\3          w5                              
+                                w6  t1w5w2\1  t1    w1                              
+                                w1    w6w3w5\6      w4                              
+                                w2    w2)1    BB    w6                              
+                                w5    w3            w1                              
+                                w4    w4        TT  w2                              
+                                w3    w1            w4                              
+                                w1    w3            w5                              
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+</level>
