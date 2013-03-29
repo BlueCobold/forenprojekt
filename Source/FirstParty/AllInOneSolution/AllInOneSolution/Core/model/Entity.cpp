@@ -7,7 +7,7 @@
 
 #include <Box2D/Dynamics/b2World.h>
 
-Entity::Entity(Type type) : m_killed(false), m_type(type), m_updatingAni(nullptr), m_collideWithBall(true)
+Entity::Entity(Type type) : m_freeze(0.0f), m_killed(false), m_type(type), m_updatingAni(nullptr), m_collideWithBall(true)
 {
 }
 
@@ -15,23 +15,40 @@ Entity::~Entity()
 {
 }
 
+void Entity::updateFreeze(const float delta)
+{
+    b2Body* body = getBody();
+    m_freeze -= delta;
+    if(m_freeze <= 0.0f)
+    {
+        if(body)
+            body->SetActive(true);
+        m_freeze = 0.0f;
+    }
+    else if(body)
+        body->SetActive(false);
+}
+
 void Entity::update(const float value)
 {
     if(!m_killed)
     {
-        updateCurrentTime(value);
-        updateKinematics(getPassedTime(), value - m_lastTime);
-        for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
+        updateFreeze(value - m_lastTime);
+        if(!frozen())
         {
-            auto ani = (*animation).get();
-            m_updatingAni = ani;
-            ani->setPosition(utility::toPixel(getPosition().x), utility::toPixel(getPosition().y));
-            if(getBody() != nullptr)
-                ani->setRotation(getBody()->GetAngle());
-            ani->update();
+            updateCurrentTime(value);
+            updateKinematics(getPassedTime(), value - m_lastTime);
+            for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
+            {
+                auto ani = (*animation).get();
+                m_updatingAni = ani;
+                ani->setPosition(utility::toPixel(getPosition().x), utility::toPixel(getPosition().y));
+                if(getBody() != nullptr)
+                    ani->setRotation(getBody()->GetAngle());
+                ani->update();
+            }
+            m_updatingAni = nullptr;
         }
-        m_updatingAni = nullptr;
-
         m_lastTime = value;
     }
     if(isStopped())
@@ -78,6 +95,16 @@ void Entity::restartAt(const float value)
 {
     TimedObject::restartAt(value);
     m_lastTime = value;
+}
+
+void Entity::setFreeze(float freeze)
+{
+    m_freeze = freeze;
+}
+
+bool Entity::frozen() const
+{
+    return m_freeze > 0.0f;
 }
 
 void Entity::kill()

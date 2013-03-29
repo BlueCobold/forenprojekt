@@ -17,12 +17,12 @@ public:
     {
         b2Body* ballBody;
 
-        if(entityA->getType() == Entity::Ball)
+        if(entityA && entityA->getType() == Entity::Ball)
             ballBody = entityA->getBody();
-        else if(entityB->getType() == Entity::Ball)
+        else if(entityB && entityB->getType() == Entity::Ball)
             ballBody = entityB->getBody();
         else
-            throw std::runtime_error("ApplyImpulseCollisionHandler: Ball does not collide.");
+            throw std::runtime_error(utility::replace(utility::translateKey("EntityNoCollision"), "Ball"));
 
         ballBody->ApplyLinearImpulse(b2Vec2(m_xImpulse, m_yImpulse), ballBody->GetWorldCenter(), false);
     }

@@ -25,12 +25,15 @@ private:
     std::string m_name;
     Type m_type;
     float m_lastTime;
+    float m_freeze;
     bool m_killed;
     bool m_collideWithBall;
     Animation* m_updatingAni;
     std::vector<std::unique_ptr<CollisionHandler>> m_collisionHandler;
     std::unique_ptr<CollisionFilter> m_collisionFilter;
     std::map<std::string, float> m_variables;
+
+    void updateFreeze(const float value);
 
 public:
     Entity(Type type);
@@ -41,6 +44,9 @@ public:
 
     void setName(std::string name);
     const Type& getType() const;
+
+    void setFreeze(float freeze);
+    bool frozen() const;
 
     void kill();
     bool killed() const;
