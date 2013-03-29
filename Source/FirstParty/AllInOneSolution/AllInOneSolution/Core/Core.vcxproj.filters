@@ -429,6 +429,9 @@
     <ClInclude Include="rendering\transitions\VerticalHalvesTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
+    <ClInclude Include="model\collision\handler\ApplyImpulseCollisionHandler.hpp">
+      <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
