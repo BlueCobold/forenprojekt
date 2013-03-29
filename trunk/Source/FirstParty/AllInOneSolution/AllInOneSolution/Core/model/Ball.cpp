@@ -35,6 +35,9 @@ void Ball::update(const float value)
     autoResetBall(value);
 
     Entity::update(value);
+
+    if(m_lostBall)
+        setFreeze(1.0f);
 }
 
 void Ball::setFieldDimension(b2Vec2 fieldDimension)
