@@ -111,13 +111,17 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     }
 
     tmp = findController(xml, animated, handler, "color", "channel", "red", functions);
-    if(tmp != nullptr) red = std::move(tmp);
+    if(tmp != nullptr)
+        red = std::move(tmp);
     tmp = findController(xml, animated, handler, "color", "channel", "green", functions);
-    if(tmp != nullptr) green = std::move(tmp);
+    if(tmp != nullptr)
+        green = std::move(tmp);
     tmp = findController(xml, animated, handler, "color", "channel", "blue", functions);
-    if(tmp != nullptr) blue = std::move(tmp);
+    if(tmp != nullptr)
+        blue = std::move(tmp);
     tmp = findController(xml, animated, handler, "color", "channel", "alpha", functions);
-    if(tmp != nullptr) alpha = std::move(tmp);
+    if(tmp != nullptr)
+        alpha = std::move(tmp);
 
     anim->bindColorController(std::move(red), std::move(green), std::move(blue), std::move(alpha));
 
