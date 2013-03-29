@@ -5,6 +5,7 @@
 #include "../resources/LevelFileLoader.hpp"
 #include "../Utility.hpp"
 
+#include "collision/handler/ApplyImpulseCollisionHandler.hpp"
 #include "collision/handler/ChangePropertyCollisionHandler.hpp"
 #include "collision/filter/Always.hpp"
 #include "collision/filter/ChangeGravityFilter.hpp"
@@ -397,6 +398,11 @@ void Level::parseCollider(
             std::unique_ptr<ChangePropertyCollisionHandler> collider(new ChangePropertyCollisionHandler(child->Attribute("name"), this));
             std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), collider.get(), collider.get(), &templates.functions));
             collider->bindProvider(std::move(provider));
+            entity->bindCollisionHandler(std::move(collider));
+        }
+        else if(std::string(child->Name()) == "applyImpulse")
+        {
+            std::unique_ptr<ApplyImpulseCollisionHandler> collider(new ApplyImpulseCollisionHandler(child->FloatAttribute("x"), child->FloatAttribute("y")));
             entity->bindCollisionHandler(std::move(collider));
         }
         else
