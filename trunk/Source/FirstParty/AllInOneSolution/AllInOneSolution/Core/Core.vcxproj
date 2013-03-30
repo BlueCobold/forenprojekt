@@ -124,10 +124,12 @@
     <ClCompile Include="rendering\transitions\GrowingRectangleTransition.cpp" />
     <ClCompile Include="rendering\transitions\HorizontalHalvesTransition.cpp" />
     <ClCompile Include="rendering\transitions\HorizontalMaskingStripesTransition.cpp" />
+    <ClCompile Include="rendering\transitions\HorizontalSlicesTransition.cpp" />
     <ClCompile Include="rendering\transitions\HorizontalStripesTransition.cpp" />
     <ClCompile Include="rendering\transitions\HorizontalSlidingStripesTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalHalvesTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalMaskingStripesTransition.cpp" />
+    <ClCompile Include="rendering\transitions\VerticalSlicesTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalSlidingStripesTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp" />
     <ClCompile Include="resources\Config.cpp" />
@@ -217,11 +219,13 @@
     <ClInclude Include="rendering\transitions\GrowingRectangleTransition.hpp" />
     <ClInclude Include="rendering\transitions\HorizontalHalvesTransition.hpp" />
     <ClInclude Include="rendering\transitions\HorizontalMaskingStripesTransition.hpp" />
+    <ClInclude Include="rendering\transitions\HorizontalSlicesTransition.hpp" />
     <ClInclude Include="rendering\transitions\HorizontalSlidingStripesTransition.hpp" />
     <ClInclude Include="rendering\transitions\HorizontalStripesTransition.hpp" />
     <ClInclude Include="rendering\transitions\Transition.hpp" />
     <ClInclude Include="rendering\transitions\VerticalHalvesTransition.hpp" />
     <ClInclude Include="rendering\transitions\VerticalMaskingStripesTransition.hpp" />
+    <ClInclude Include="rendering\transitions\VerticalSlicesTransition.hpp" />
     <ClInclude Include="rendering\transitions\VerticalSlidingStripesTransition.hpp" />
     <ClInclude Include="rendering\transitions\VerticalStripesTransition.hpp" />
     <ClInclude Include="resources\Config.hpp" />

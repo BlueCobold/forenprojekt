@@ -11,6 +11,8 @@
 #include "rendering/transitions/HorizontalSlidingStripesTransition.hpp"
 #include "rendering/transitions/HorizontalHalvesTransition.hpp"
 #include "rendering/transitions/VerticalHalvesTransition.hpp"
+#include "rendering/transitions/HorizontalSlicesTransition.hpp"
+#include "rendering/transitions/VerticalSlicesTransition.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -53,7 +55,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     m_texture2.display();
     //end testing*/
 
-    m_fadedScreen = std::unique_ptr<Transition>(new HorizontalHalvesTransition(&m_texture2.getTexture(), &m_texture.getTexture(), 2, 2.5f));
+    m_fadedScreen = std::unique_ptr<Transition>(new VerticalSlicesTransition(&m_texture2.getTexture(), &m_texture.getTexture(), 16, 0.5f));
 }
 
 LoadLevelState::~LoadLevelState()
