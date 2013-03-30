@@ -145,6 +145,12 @@
     <ClCompile Include="rendering\transitions\VerticalHalvesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
+    <ClCompile Include="rendering\transitions\HorizontalSlicesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="rendering\transitions\VerticalSlicesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -431,6 +437,12 @@
     </ClInclude>
     <ClInclude Include="model\collision\handler\ApplyImpulseCollisionHandler.hpp">
       <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\HorizontalSlicesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\VerticalSlicesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
