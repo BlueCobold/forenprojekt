@@ -13,6 +13,7 @@
 #include "rendering/transitions/VerticalHalvesTransition.hpp"
 #include "rendering/transitions/HorizontalSlicesTransition.hpp"
 #include "rendering/transitions/VerticalSlicesTransition.hpp"
+#include "rendering/transitions/RotatingSquaresTransition.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -27,7 +28,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     m_level(nullptr),
     m_fadedScreen(nullptr)
 {
-    m_level = new Level(6, m_resourceManager, m_config);
+    m_level = new Level(3, m_resourceManager, m_config);
     bool fromImage = m_texture.create(screen.getSize().x, screen.getSize().y);
 
     float time = m_frametime.getElapsedTime().asSeconds();
@@ -43,19 +44,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     hud.draw(m_texture);
     m_texture.display();
 
-    // for testing
-    m_level2 = new Level(2, m_resourceManager, m_config);
-    bool fromImage2 = m_texture2.create(screen.getSize().x, screen.getSize().y);
-
-    m_level2->restartAt(time);
-    m_level2->update(time, m_texture2);
-
-    m_texture2.clear();
-    m_level2->draw(DrawParameter(m_texture2));
-    m_texture2.display();
-    //end testing*/
-
-    m_fadedScreen = std::unique_ptr<Transition>(new VerticalSlicesTransition(&m_texture2.getTexture(), &m_texture.getTexture(), 16, 0.5f));
+    m_fadedScreen = std::unique_ptr<Transition>(new RotatingSquaresTransition(nullptr, &m_texture.getTexture(), 10,10, 0.5f));
 }
 
 LoadLevelState::~LoadLevelState()

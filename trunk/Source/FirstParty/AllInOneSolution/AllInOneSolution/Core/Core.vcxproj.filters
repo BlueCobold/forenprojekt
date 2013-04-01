@@ -151,6 +151,9 @@
     <ClCompile Include="rendering\transitions\VerticalSlicesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
+    <ClCompile Include="rendering\transitions\RotatingSquaresTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -442,6 +445,9 @@
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
     <ClInclude Include="rendering\transitions\VerticalSlicesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\RotatingSquaresTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
   </ItemGroup>
