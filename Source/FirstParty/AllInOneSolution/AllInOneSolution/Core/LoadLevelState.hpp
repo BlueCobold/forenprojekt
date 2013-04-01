@@ -32,10 +32,6 @@ private:
     std::unique_ptr<Transition> m_fadedScreen;
     sf::Clock m_frametime;
     sf::RenderTexture m_texture;
-
-    /// for testing
-    Level *m_level2; 
-    sf::RenderTexture m_texture2;
 };
 
 #endif // LOADLEVELSTATE_HPP
