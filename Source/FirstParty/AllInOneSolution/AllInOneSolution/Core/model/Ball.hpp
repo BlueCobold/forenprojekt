@@ -22,6 +22,7 @@ private:
 
     float m_ballResetTime;
     float m_resetTime;
+    float m_hideTime;
 
     b2Vec2 m_fieldDimension;
 

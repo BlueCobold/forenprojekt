@@ -111,6 +111,25 @@ public:
         }
     }
 
+    void freeze()
+    {
+        if(m_body != nullptr)
+            m_body->SetActive(false);
+    }
+
+    void unfreeze()
+    {
+        if(m_body != nullptr)
+            m_body->SetActive(true);
+    }
+
+    bool frozen() const
+    {
+        if(m_body != nullptr)
+            return !m_body->IsActive();
+        return false;
+    }
+
 protected:
 
     const b2Vec2& getStartPosition() const
