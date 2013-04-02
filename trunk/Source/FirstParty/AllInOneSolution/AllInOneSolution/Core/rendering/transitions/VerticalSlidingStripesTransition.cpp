@@ -8,10 +8,14 @@ VerticalSlidingStripesTransition::VerticalSlidingStripesTransition(
     const float duration) :
     Transition(sourceTexture, targetTexture, duration)
 {
-    if (targetTexture != nullptr)
+    if(targetTexture != nullptr)
     {
         m_stripeHeight = targetTexture->getSize().y;
         m_stripeWidth = targetTexture->getSize().x / stripeCount;
+
+        if(static_cast<unsigned int>(m_stripeWidth * stripeCount) < targetTexture->getSize().x)
+            m_stripeWidth++;
+
         for(int i = 0; i < stripeCount; ++i)
         {
             auto sprite = new sf::Sprite(*targetTexture, sf::IntRect(i * m_stripeWidth, 0, m_stripeWidth, 0));
@@ -22,7 +26,7 @@ VerticalSlidingStripesTransition::VerticalSlidingStripesTransition(
     else
         throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "VerticalSlidingStripesTransition"));
 
-    if (sourceTexture != nullptr)
+    if(sourceTexture != nullptr)
     {
         for(int i = 0; i < stripeCount; ++i)
         {
@@ -67,6 +71,8 @@ void VerticalSlidingStripesTransition::update()
         count++;
     }
     
+    count = 0;
+
     for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)
     {
         if(count % 2 == 0)
@@ -93,19 +99,11 @@ void VerticalSlidingStripesTransition::update()
 
 void VerticalSlidingStripesTransition::draw(const DrawParameter& param)
 {
-    if (getSourceTexture() != nullptr)
-    {
+    if(getSourceTexture() != nullptr)
         for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)
-        {
             param.getTarget().draw(**it);
-        }
-    }
 
-    if (getTargetTexture() != nullptr)
-    {
+    if(getTargetTexture() != nullptr)
         for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)
-        {
             param.getTarget().draw(**it);
-        }
-    }
 }

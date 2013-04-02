@@ -8,9 +8,13 @@ HorizontalHalvesTransition::HorizontalHalvesTransition(
     const float duration) :
     Transition(sourceTexture, targetTexture, duration)
 {
-    if (sourceTexture != nullptr)
+    if(sourceTexture != nullptr)
     {
         m_stripeHeight = sourceTexture->getSize().y / stripeCount;
+
+        if(static_cast<unsigned int>(m_stripeHeight * stripeCount) < sourceTexture->getSize().y)
+            m_stripeHeight++;
+
         m_stripeWidth = sourceTexture->getSize().x;
         for(int i = 0; i < stripeCount; ++i)
         {
@@ -20,9 +24,9 @@ HorizontalHalvesTransition::HorizontalHalvesTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "HorizontalMaskingStripesTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "HorizontalHalvesTransition"));
 
-    if (targetTexture != nullptr)
+    if(targetTexture != nullptr)
     {
         m_targetSprite.setTexture(*targetTexture, true);
         m_targetSprite.setPosition(0, 0);
@@ -36,6 +40,7 @@ void HorizontalHalvesTransition::update()
     float scale = getProgress();
 
     int count = 0;
+
     for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)
     {
         if(count % 2 == 0)
@@ -52,7 +57,7 @@ void HorizontalHalvesTransition::update()
                                               m_stripeWidth - static_cast<int>(m_stripeWidth * scale),
                                               m_stripeHeight));
 
-            (*it)->setPosition(static_cast<float>(static_cast<int>(m_stripeWidth * scale)),
+            (*it)->setPosition(m_stripeWidth * scale,
                               (*it)->getPosition().y);
         }
         count++;
@@ -61,14 +66,10 @@ void HorizontalHalvesTransition::update()
 
 void HorizontalHalvesTransition::draw(const DrawParameter& param)
 {
-    if (getSourceTexture() != nullptr)
+    if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_targetSprite);
 
-    if (getTargetTexture() != nullptr)
-    {
+    if(getTargetTexture() != nullptr)
         for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)
-        {
             param.getTarget().draw(**it);
-        }
-    }
 }

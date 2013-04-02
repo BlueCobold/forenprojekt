@@ -8,7 +8,7 @@ GrowingCircleTransition::GrowingCircleTransition(
     const float duration) :
     Transition(sourceTexture, targetTexture, duration)
 {
-    if (targetTexture != nullptr)
+    if(targetTexture != nullptr)
     {
         m_RectangleStartY = targetTexture->getSize().y / 2;
         m_RectangleStartX = targetTexture->getSize().x / 2;
@@ -21,7 +21,7 @@ GrowingCircleTransition::GrowingCircleTransition(
     else
         throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "GrowingCircleTransition"));
 
-    if (sourceTexture != nullptr)
+    if(sourceTexture != nullptr)
     {
         m_sourceSprite.setTexture(*sourceTexture, true);
         m_sourceSprite.setPosition(0, 0);
@@ -49,8 +49,8 @@ void GrowingCircleTransition::update()
 
 void GrowingCircleTransition::draw(const DrawParameter& param)
 {
-    if (getSourceTexture() != nullptr)
+    if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);
-    if (getTargetTexture() != nullptr)
+    if(getTargetTexture() != nullptr)
         param.getTarget().draw(m_targetSprites);
 }

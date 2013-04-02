@@ -8,10 +8,14 @@ VerticalMaskingStripesTransition::VerticalMaskingStripesTransition(
     const float duration) :
     Transition(sourceTexture, targetTexture, duration)
 {
-    if (targetTexture != nullptr)
+    if(targetTexture != nullptr)
     {
         m_stripeHeight = targetTexture->getSize().y;
         m_stripeWidth = targetTexture->getSize().x / stripeCount;
+
+        if(static_cast<unsigned int>(m_stripeWidth * stripeCount) < sourceTexture->getSize().x)
+            m_stripeWidth++;
+
         for(int i = 0; i < stripeCount; ++i)
         {
             auto sprite = new sf::Sprite(*targetTexture, sf::IntRect(i * m_stripeWidth, 0, m_stripeWidth, 0));
@@ -22,7 +26,7 @@ VerticalMaskingStripesTransition::VerticalMaskingStripesTransition(
     else
         throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "VerticalMaskingStripesTransition"));
 
-    if (sourceTexture != nullptr)
+    if(sourceTexture != nullptr)
     {
         m_sourceSprite.setTexture(*sourceTexture, true);
         m_sourceSprite.setPosition(0, 0);
@@ -60,13 +64,9 @@ void VerticalMaskingStripesTransition::update()
 
 void VerticalMaskingStripesTransition::draw(const DrawParameter& param)
 {
-    if (getSourceTexture() != nullptr)
+    if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);
-    if (getTargetTexture() != nullptr)
-    {
+    if(getTargetTexture() != nullptr)
         for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)
-        {
             param.getTarget().draw(**it);
-        }
-    }
 }
