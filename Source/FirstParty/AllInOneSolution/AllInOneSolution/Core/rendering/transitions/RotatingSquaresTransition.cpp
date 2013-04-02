@@ -11,10 +11,15 @@ RotatingSquaresTransition::RotatingSquaresTransition(
     m_rows(rows),
     Transition(sourceTexture, targetTexture, duration)
 {
-    if (targetTexture != nullptr)
+    if(targetTexture != nullptr)
     {
-        m_rectWidth = targetTexture->getSize().x / rows;
-        m_rectHeigth = targetTexture->getSize().y / columns;
+        m_rectWidth = targetTexture->getSize().x / columns;
+        if(static_cast<unsigned int>(m_rectWidth * columns) < targetTexture->getSize().x)
+            m_rectWidth++;
+
+        m_rectHeigth = targetTexture->getSize().y / rows;
+        if(static_cast<unsigned int>(m_rectHeigth * rows) < targetTexture->getSize().y)
+            m_rectHeigth++;
 
         int spriteCount = columns * rows;
 
@@ -23,18 +28,18 @@ RotatingSquaresTransition::RotatingSquaresTransition(
 
         for(int i = 0; i < spriteCount; ++i)
         {
-            column = i / rows;
-            row = i % columns;
-            auto sprite = new sf::Sprite(*targetTexture, sf::IntRect(row * m_rectWidth + m_rectWidth / 2, column * m_rectHeigth + m_rectHeigth / 2, 0, 0));
-            sprite->setOrigin(30, 30);
-            sprite->setPosition(row * m_rectWidth + m_rectWidth / 2.f -30, column * m_rectHeigth + m_rectHeigth / 2.f-30);
+            column = i % columns;
+            row = i / columns;
+            auto sprite = new sf::Sprite(*targetTexture, sf::IntRect(column * m_rectWidth, row * m_rectHeigth, m_rectWidth, m_rectHeigth));
+            sprite->setOrigin(m_rectWidth / 2.f,m_rectHeigth / 2.f);
+            sprite->setPosition(column * m_rectWidth + m_rectWidth / 2.f, row * m_rectHeigth + m_rectHeigth / 2.f);
             m_targetSprites.push_back(std::unique_ptr<sf::Sprite>(sprite));
         }
     }
     else
         throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "RotatingSquaresTransition"));
 
-    if (sourceTexture != nullptr)
+    if(sourceTexture != nullptr)
     {
         m_sourceSprite.setTexture(*sourceTexture, true);
         m_sourceSprite.setPosition(0, 0);
@@ -47,7 +52,7 @@ void RotatingSquaresTransition::update()
 
     float scale = getProgress();
 
-    int spriteCount = 0;
+    /*int spriteCount = 0;
 
     int column = 0;
     int row = 0;
@@ -56,16 +61,18 @@ void RotatingSquaresTransition::update()
     float centreY = 0;
 
     float sizeX = scale * m_rectWidth / 2.f;
-    float sizeY = scale * m_rectHeigth / 2.f;
+    float sizeY = scale * m_rectHeigth / 2.f;*/
+
+    sf::Uint8 alpha = static_cast<sf::Uint8>(255 * scale);
 
     for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)
     {
 
-        column = spriteCount / m_rows;
-        row = spriteCount % m_columns;
+        /*column = spriteCount % m_columns;
+        row = spriteCount / m_columns;
 
-        centreX = row * m_rectWidth + m_rectWidth / 2.f;
-        centreY = column * m_rectHeigth + m_rectHeigth / 2.f;
+        centreX = column * m_rectWidth + m_rectWidth / 2.f;
+        centreY = row * m_rectHeigth + m_rectHeigth / 2.f;
 
         auto rect = (*it)->getTextureRect();
 
@@ -78,21 +85,19 @@ void RotatingSquaresTransition::update()
         (*it)->setOrigin(sizeX, sizeY);
 
         (*it)->setTextureRect(rect);
-        (*it)->setRotation(270.f + 90.f * scale);
 
-        spriteCount++;
+        spriteCount++;*/
+
+        (*it)->setColor(sf::Color(255, 255, 255, alpha));
+        (*it)->setRotation(270.f + 90.f * scale);
     }
 }
 
 void RotatingSquaresTransition::draw(const DrawParameter& param)
 {
-    if (getSourceTexture() != nullptr)
+    if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);
-    if (getTargetTexture() != nullptr)
-    {
+    if(getTargetTexture() != nullptr)
         for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)
-        {
             param.getTarget().draw(**it);
-        }
-    }
 }

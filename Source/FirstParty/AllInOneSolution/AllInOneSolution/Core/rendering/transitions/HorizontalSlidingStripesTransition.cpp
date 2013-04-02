@@ -8,9 +8,13 @@ HorizontalSlidingStripesTransition::HorizontalSlidingStripesTransition(
     const float duration) :
     Transition(sourceTexture, targetTexture, duration)
 {
-    if (targetTexture != nullptr)
+    if(targetTexture != nullptr)
     {
         m_stripeHeight = targetTexture->getSize().y / stripeCount;
+
+        if(static_cast<unsigned int>(m_stripeHeight * stripeCount) < targetTexture->getSize().y)
+            m_stripeHeight++;
+
         m_stripeWidth = targetTexture->getSize().x;
         for(int i = 0; i < stripeCount; ++i)
         {
@@ -22,7 +26,7 @@ HorizontalSlidingStripesTransition::HorizontalSlidingStripesTransition(
     else
         throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "HorizontalSlidingStripesTransition"));
 
-    if (sourceTexture != nullptr)
+    if(sourceTexture != nullptr)
     {
         for(int i = 0; i < stripeCount; ++i)
         {
@@ -66,7 +70,9 @@ void HorizontalSlidingStripesTransition::update()
         }
         count++;
     }
-    
+
+    count = 0;
+
     for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)
     {
         if(count % 2 == 0)
@@ -92,19 +98,11 @@ void HorizontalSlidingStripesTransition::update()
 
 void HorizontalSlidingStripesTransition::draw(const DrawParameter& param)
 {
-    if (getSourceTexture() != nullptr)
-    {
+    if(getSourceTexture() != nullptr)
         for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)
-        {
             param.getTarget().draw(**it);
-        }
-    }
 
-    if (getTargetTexture() != nullptr)
-    {
+    if(getTargetTexture() != nullptr)
         for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)
-        {
             param.getTarget().draw(**it);
-        }
-    }
 }

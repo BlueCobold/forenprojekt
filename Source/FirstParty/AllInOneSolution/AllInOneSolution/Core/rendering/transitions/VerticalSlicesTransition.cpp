@@ -8,9 +8,13 @@ VerticalSlicesTransition::VerticalSlicesTransition(
     const float duration) :
     Transition(sourceTexture, targetTexture, duration)
 {
-    if (targetTexture != nullptr)
+    if(targetTexture != nullptr)
     {
         m_stripeHeight = targetTexture->getSize().y / stripeCount;
+
+        if(static_cast<unsigned int>(m_stripeHeight * stripeCount) < targetTexture->getSize().y)
+            m_stripeHeight++;
+
         m_stripeWidth = targetTexture->getSize().x;
 
         m_offset = m_stripeWidth / stripeCount;
@@ -27,7 +31,7 @@ VerticalSlicesTransition::VerticalSlicesTransition(
     else
         throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "HorizontalSlicesTransition"));
 
-    if (sourceTexture != nullptr)
+    if(sourceTexture != nullptr)
     {
         m_sourceSprite.setTexture(*sourceTexture, true);
         m_sourceSprite.setPosition(0, 0);
@@ -57,13 +61,9 @@ void VerticalSlicesTransition::update()
 
 void VerticalSlicesTransition::draw(const DrawParameter& param)
 {
-    if (getSourceTexture() != nullptr)
+    if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);
-    if (getTargetTexture() != nullptr)
-    {
+    if(getTargetTexture() != nullptr)
         for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)
-        {
             param.getTarget().draw(**it);
-        }
-    }
 }
