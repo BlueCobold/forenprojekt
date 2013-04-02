@@ -16,11 +16,34 @@ class GraphicalObject : public Drawable
 private:
 
     std::vector<std::unique_ptr<Animation>> m_animations;
+    bool m_hide;
 
 public:
 
+    GraphicalObject() : m_hide(false)
+    {
+    }
+
+    void hide()
+    {
+        m_hide = true;
+    }
+
+    void unhide()
+    {
+        m_hide = false;
+    }
+
+    bool hidden() const
+    {
+        return m_hide;
+    }
+
     virtual void draw(const DrawParameter& param)
     {
+        if(m_hide)
+            return;
+
         for(auto animation = begin(m_animations); animation != end(m_animations); ++animation)
             if((*animation) != nullptr)
                 (*animation)->draw(param);

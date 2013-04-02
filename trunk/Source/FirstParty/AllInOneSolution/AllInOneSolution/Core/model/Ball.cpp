@@ -2,7 +2,7 @@
 #include "../Utility.hpp"
 #include <iostream>
 
-Ball::Ball(float resetTime) :  m_resetTime(resetTime), Entity(Entity::Ball)
+Ball::Ball(float resetTime) :  m_resetTime(resetTime), m_hideTime(1.0f), Entity(Entity::Ball)
 {
     m_ballResetTime = 0.0f;
     m_lostBall = false;
@@ -14,17 +14,24 @@ void Ball::autoResetBall(const float elapsedTime)
     if(isOutside() && (m_ballResetTime == 0.0f))
         m_ballResetTime = elapsedTime + m_resetTime;
     // if ball back in field
-    else if(!isOutside() && (m_ballResetTime > 0.0f))
+    else if(!isOutside() && (m_ballResetTime > 0.0f) && elapsedTime < m_ballResetTime)
         m_ballResetTime = 0.0f;
     // if timer up, reset the ball
     else if(m_ballResetTime > 0.0f)
-        if(elapsedTime > m_ballResetTime)
+        if(elapsedTime > m_ballResetTime + m_hideTime && frozen())
+        {
+            unfreeze();
+            unhide();
+            m_ballResetTime = 0.0f;
+        }
+        else if(elapsedTime > m_ballResetTime && !frozen())
         {
             getBody()->SetTransform(getStartPosition(), 0.0f);
             getBody()->SetLinearVelocity(b2Vec2(0,0));
             getBody()->SetAngularVelocity(0.0f);
-            m_ballResetTime = 0.0f;
             m_lostBall = true;
+            freeze();
+            hide();
         }
 }
 
@@ -35,9 +42,6 @@ void Ball::update(const float value)
     autoResetBall(value);
 
     Entity::update(value);
-
-    if(m_lostBall)
-        setFreeze(1.0f);
 }
 
 void Ball::setFieldDimension(b2Vec2 fieldDimension)
