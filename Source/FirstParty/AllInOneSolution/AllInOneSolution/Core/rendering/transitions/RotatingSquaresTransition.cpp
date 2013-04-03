@@ -17,9 +17,9 @@ RotatingSquaresTransition::RotatingSquaresTransition(
         if(static_cast<unsigned int>(m_rectWidth * columns) < targetTexture->getSize().x)
             m_rectWidth++;
 
-        m_rectHeigth = targetTexture->getSize().y / rows;
-        if(static_cast<unsigned int>(m_rectHeigth * rows) < targetTexture->getSize().y)
-            m_rectHeigth++;
+        m_rectHeight = targetTexture->getSize().y / rows;
+        if(static_cast<unsigned int>(m_rectHeight * rows) < targetTexture->getSize().y)
+            m_rectHeight++;
 
         int spriteCount = columns * rows;
 
@@ -30,9 +30,9 @@ RotatingSquaresTransition::RotatingSquaresTransition(
         {
             column = i % columns;
             row = i / columns;
-            auto sprite = new sf::Sprite(*targetTexture, sf::IntRect(column * m_rectWidth, row * m_rectHeigth, m_rectWidth, m_rectHeigth));
-            sprite->setOrigin(m_rectWidth / 2.f,m_rectHeigth / 2.f);
-            sprite->setPosition(column * m_rectWidth + m_rectWidth / 2.f, row * m_rectHeigth + m_rectHeigth / 2.f);
+            auto sprite = new sf::Sprite(*targetTexture, sf::IntRect(column * m_rectWidth, row * m_rectHeight, m_rectWidth, m_rectHeight));
+            sprite->setOrigin(m_rectWidth / 2.f,m_rectHeight / 2.f);
+            sprite->setPosition(column * m_rectWidth + m_rectWidth / 2.f, row * m_rectHeight + m_rectHeight / 2.f);
             m_targetSprites.push_back(std::unique_ptr<sf::Sprite>(sprite));
         }
     }
@@ -61,7 +61,7 @@ void RotatingSquaresTransition::update()
     float centreY = 0;
 
     float sizeX = scale * m_rectWidth / 2.f;
-    float sizeY = scale * m_rectHeigth / 2.f;*/
+    float sizeY = scale * m_rectHeight / 2.f;*/
 
     sf::Uint8 alpha = static_cast<sf::Uint8>(255 * scale);
 
@@ -72,7 +72,7 @@ void RotatingSquaresTransition::update()
         row = spriteCount / m_columns;
 
         centreX = column * m_rectWidth + m_rectWidth / 2.f;
-        centreY = row * m_rectHeigth + m_rectHeigth / 2.f;
+        centreY = row * m_rectHeight + m_rectHeight / 2.f;
 
         auto rect = (*it)->getTextureRect();
 
