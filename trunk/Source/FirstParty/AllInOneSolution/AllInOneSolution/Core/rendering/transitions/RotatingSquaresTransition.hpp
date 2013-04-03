@@ -29,7 +29,7 @@ private:
     sf::Sprite m_sourceSprite;
     std::vector<std::unique_ptr<sf::Sprite>> m_targetSprites;
     int m_rectWidth;
-    int m_rectHeigth;
+    int m_rectHeight;
     int m_columns;
     int m_rows;
 };
