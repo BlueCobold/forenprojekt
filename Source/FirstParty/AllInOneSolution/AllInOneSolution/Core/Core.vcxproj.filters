@@ -154,6 +154,9 @@
     <ClCompile Include="rendering\transitions\RotatingSquaresTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
+    <ClCompile Include="rendering\transitions\RandomTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -448,6 +451,9 @@
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
     <ClInclude Include="rendering\transitions\RotatingSquaresTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="rendering\transitions\RandomTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
   </ItemGroup>

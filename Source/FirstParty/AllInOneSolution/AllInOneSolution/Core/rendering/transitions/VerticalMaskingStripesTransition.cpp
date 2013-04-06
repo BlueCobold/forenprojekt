@@ -13,7 +13,7 @@ VerticalMaskingStripesTransition::VerticalMaskingStripesTransition(
         m_stripeHeight = targetTexture->getSize().y;
         m_stripeWidth = targetTexture->getSize().x / stripeCount;
 
-        if(static_cast<unsigned int>(m_stripeWidth * stripeCount) < sourceTexture->getSize().x)
+        if(static_cast<unsigned int>(m_stripeWidth * stripeCount) < targetTexture->getSize().x)
             m_stripeWidth++;
 
         for(int i = 0; i < stripeCount; ++i)

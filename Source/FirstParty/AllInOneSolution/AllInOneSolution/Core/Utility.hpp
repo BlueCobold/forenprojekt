@@ -7,6 +7,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include "rendering/transitions/Transition.hpp"
 
 #include <algorithm>
 #include <vector>
@@ -76,6 +77,10 @@ namespace utility
     std::string translateKey(std::string key);
 
     std::string replace(std::string string, std::string replacement);
+
+    Transition* getRandomTransition(const sf::Texture* sourceTexture,
+                                    const sf::Texture* targetTexture,
+                                    const float duration);
 
 } // namespace utility
 

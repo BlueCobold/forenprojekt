@@ -29,7 +29,8 @@ public:
 private:
 
     Level *m_level;
-    std::unique_ptr<Transition> m_fadedScreen;
+    //std::unique_ptr<Transition> m_fadedScreen;
+    Transition* m_fadedScreen;
     sf::Clock m_frametime;
     sf::RenderTexture m_texture;
 };
