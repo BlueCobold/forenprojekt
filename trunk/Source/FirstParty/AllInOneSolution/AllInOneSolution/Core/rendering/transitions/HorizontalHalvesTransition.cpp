@@ -66,10 +66,10 @@ void HorizontalHalvesTransition::update()
 
 void HorizontalHalvesTransition::draw(const DrawParameter& param)
 {
-    if(getSourceTexture() != nullptr)
+    if(getTargetTexture() != nullptr)
         param.getTarget().draw(m_targetSprite);
 
-    if(getTargetTexture() != nullptr)
+    if(getSourceTexture() != nullptr)
         for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)
             param.getTarget().draw(**it);
 }

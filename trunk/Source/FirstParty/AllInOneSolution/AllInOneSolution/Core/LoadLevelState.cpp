@@ -1,19 +1,5 @@
 #include "LoadLevelState.hpp"
-#include "resources/ResourceManager.hpp"
-#include "rendering/transitions/GrowingRectangleTransition.hpp"
-#include "rendering/transitions/GrowingCircleTransition.hpp"
-#include "rendering/transitions/HorizontalMaskingStripesTransition.hpp"
-#include "rendering/transitions/VerticalMaskingStripesTransition.hpp"
-#include "rendering/transitions/VerticalStripesTransition.hpp"
-#include "rendering/transitions/HorizontalStripesTransition.hpp"
-#include "rendering/transitions/AlphaTransition.hpp"
-#include "rendering/transitions/VerticalSlidingStripesTransition.hpp"
-#include "rendering/transitions/HorizontalSlidingStripesTransition.hpp"
-#include "rendering/transitions/HorizontalHalvesTransition.hpp"
-#include "rendering/transitions/VerticalHalvesTransition.hpp"
-#include "rendering/transitions/HorizontalSlicesTransition.hpp"
-#include "rendering/transitions/VerticalSlicesTransition.hpp"
-#include "rendering/transitions/RotatingSquaresTransition.hpp"
+#include "Utility.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -44,7 +30,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     hud.draw(m_texture);
     m_texture.display();
 
-    m_fadedScreen = std::unique_ptr<Transition>(new RotatingSquaresTransition(nullptr, &m_texture.getTexture(), 10,10, 0.5f));
+    m_fadedScreen = utility::getRandomTransition(nullptr, &m_texture.getTexture(), .5);
 }
 
 LoadLevelState::~LoadLevelState()

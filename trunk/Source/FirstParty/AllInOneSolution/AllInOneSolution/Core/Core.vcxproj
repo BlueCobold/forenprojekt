@@ -127,6 +127,7 @@
     <ClCompile Include="rendering\transitions\HorizontalSlicesTransition.cpp" />
     <ClCompile Include="rendering\transitions\HorizontalStripesTransition.cpp" />
     <ClCompile Include="rendering\transitions\HorizontalSlidingStripesTransition.cpp" />
+    <ClCompile Include="rendering\transitions\RandomTransition.cpp" />
     <ClCompile Include="rendering\transitions\RotatingSquaresTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalHalvesTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalMaskingStripesTransition.cpp" />
@@ -223,6 +224,7 @@
     <ClInclude Include="rendering\transitions\HorizontalSlicesTransition.hpp" />
     <ClInclude Include="rendering\transitions\HorizontalSlidingStripesTransition.hpp" />
     <ClInclude Include="rendering\transitions\HorizontalStripesTransition.hpp" />
+    <ClInclude Include="rendering\transitions\RandomTransition.hpp" />
     <ClInclude Include="rendering\transitions\RotatingSquaresTransition.hpp" />
     <ClInclude Include="rendering\transitions\Transition.hpp" />
     <ClInclude Include="rendering\transitions\VerticalHalvesTransition.hpp" />

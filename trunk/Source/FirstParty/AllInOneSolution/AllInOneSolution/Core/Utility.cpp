@@ -1,5 +1,6 @@
 #include "Utility.hpp"
 #include "resources/FileReader.hpp"
+#include "rendering\transitions\RandomTransition.hpp"
 
 namespace utility
 {
@@ -42,5 +43,13 @@ namespace utility
             string.replace(pos,1,replacement);
 
         return string;
+    }
+
+    Transition* getRandomTransition(const sf::Texture* sourceTexture,
+                                    const sf::Texture* targetTexture,
+                                    const float duration)
+    {
+        static RandomTransition Transition(21,21);
+        return Transition.getRandomTransition(sourceTexture, targetTexture, duration);
     }
 }

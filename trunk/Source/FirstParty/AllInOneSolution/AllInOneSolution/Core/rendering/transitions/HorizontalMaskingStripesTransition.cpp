@@ -12,7 +12,7 @@ HorizontalMaskingStripesTransition::HorizontalMaskingStripesTransition(
     {
         m_stripeHeight = targetTexture->getSize().y / stripeCount;
 
-        if(static_cast<unsigned int>(m_stripeHeight * stripeCount) < sourceTexture->getSize().y)
+        if(static_cast<unsigned int>(m_stripeHeight * stripeCount) < targetTexture->getSize().y)
             m_stripeHeight++;
 
         m_stripeWidth = targetTexture->getSize().x;
