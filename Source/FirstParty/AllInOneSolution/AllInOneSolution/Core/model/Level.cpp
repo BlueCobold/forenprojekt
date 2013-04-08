@@ -107,6 +107,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
                     m_multiHit = 0;
                     m_world.SetGravity(m_defaultGravity);
                     m_remainingBall -= 1;
+                    createLabelAt(m_ball, "red", -10);
                 }
             }
             (*it)->update(m_lastTime + delta);
@@ -229,13 +230,22 @@ void Level::killTarget(Entity* target)
     int earned = 100 + m_multiHit * 50;
     m_points += earned;
     m_multiHit++;
+    createLabelAt(target, "green", earned);
+}
+
+void Level::createLabelAt(Entity* target, std::string fontName, int points)
+{
+    std::string prefix;
+    if(points > 0)
+        prefix = std::string("+");
+
     std::unique_ptr<LineLabel> label(new LineLabel(
-            std::string("+") + utility::toString(earned),
+            prefix + utility::toString(points),
             sf::Vector2f(
                 utility::toPixel(target->getPosition().x), 
                 utility::toPixel(target->getPosition().y)),
             0,
-            m_resourceManager.getBitmapFont("green"),
+            m_resourceManager.getBitmapFont(fontName),
             LineLabel::Centered));
 
     m_pointLabels.push_back(std::unique_ptr<TimedLabel>(new TimedLabel(std::move(label), getPassedTime())));
