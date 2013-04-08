@@ -289,6 +289,19 @@ void Level::draw(const DrawParameter& param)
     }
 }
 
+void Level::discardMouseInput(const float time, sf::RenderTarget& screen)
+{
+    for(auto it = m_entities.begin(); it != m_entities.end(); it++)
+        if((*it)->getType() == Entity::Teeter)
+            (*it)->getBody()->SetActive(false);
+
+    update(time, screen);
+
+    for(auto it = m_entities.begin(); it != m_entities.end(); it++)
+        if((*it)->getType() == Entity::Teeter)
+            (*it)->getBody()->SetActive(true);
+}
+
 const unsigned int Level::number()
 {
     return m_number;

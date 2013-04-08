@@ -4,6 +4,7 @@
 #define LOADLEVELSTATE_HPP
 
 #include "State.hpp"
+#include "EnterStateInformation.hpp"
 #include "model/Level.hpp"
 #include "rendering/transitions/Transition.hpp"
 
@@ -33,6 +34,9 @@ private:
     Transition* m_fadedScreen;
     sf::Clock m_frametime;
     sf::RenderTexture m_texture;
+
+    EnterPlayStateInformation m_playStateInfo;
+    EnterTransitionStateInformation m_transitionStateInfo;
 };
 
 #endif // LOADLEVELSTATE_HPP
