@@ -38,7 +38,7 @@ Transition* RandomTransition::getRandomTransition(const sf::Texture* sourceTextu
         if((*it)->isFinished())
             m_transition.erase(it);
 
-    auto transition = creatTransition(sourceTexture,
+    auto transition = createTransition(sourceTexture,
                                       targetTexture,
                                       duration,
                                       randomNumber(sourceExist, targetExist));
@@ -67,20 +67,21 @@ int RandomTransition::randomNumber(bool sourceExist, bool targetExist)
     }
     
     int random = static_cast<int>(RandomProvider(min, max).getValue());
-
-    if(random == m_lastTransition)
-        random = randomNumber(sourceExist, targetExist);
+    
+    while(random == m_lastTransition)
+        random = static_cast<int>(RandomProvider(min, max).getValue());
 
     m_lastTransition = random;
 
     return random;
 }
 
-Transition* RandomTransition::creatTransition(const sf::Texture* sourceTexture,
+Transition* RandomTransition::createTransition(const sf::Texture* sourceTexture,
                                               const sf::Texture* targetTexture,
                                               const float duration,
                                               int randomCount)
 {
+
     TransitionType type = static_cast<TransitionType>(randomCount);
 
     int vertical = static_cast<int>(RandomProvider(2, m_maxVerticalLines).getValue());
@@ -90,46 +91,32 @@ Transition* RandomTransition::creatTransition(const sf::Texture* sourceTexture,
     {
         case HorizontalHalves:
             return (new HorizontalHalvesTransition(sourceTexture, targetTexture, horizontal, duration));
-        break;
         case VerticalHalves:
             return (new VerticalHalvesTransition(sourceTexture, targetTexture, vertical, duration));
-        break;
         case Alpha:
             return (new AlphaTransition(sourceTexture, targetTexture, duration));
-        break;
         case GrowingCircle:
             return (new GrowingCircleTransition(sourceTexture, targetTexture, duration));
-        break;
         case GrowingRectangle:
             return (new GrowingRectangleTransition(sourceTexture, targetTexture, duration));
-        break;
         case HorizontalMaskingStripes:
             return (new HorizontalMaskingStripesTransition(sourceTexture, targetTexture, horizontal, duration));
-        break;
         case HorizontalSlices:
             return (new HorizontalSlicesTransition(sourceTexture, targetTexture, horizontal, duration));
-        break;
         case HorizontalStripes:
             return (new HorizontalStripesTransition(sourceTexture, targetTexture, horizontal, duration));
-        break;
         case RotatingSquares:
             return (new RotatingSquaresTransition(sourceTexture, targetTexture, horizontal, vertical, duration));
-        break;
         case VerticalMaskingStripes:
             return (new VerticalMaskingStripesTransition(sourceTexture, targetTexture, vertical, duration));
-        break;
         case VerticalSlices:
             return (new VerticalSlicesTransition(sourceTexture, targetTexture, vertical, duration));
-        break;
         case VerticalStripes:
             return (new VerticalStripesTransition(sourceTexture, targetTexture, vertical, duration));
-        break;
         case VerticalSlidingStripes:
             return (new VerticalSlidingStripesTransition(sourceTexture, targetTexture, vertical, duration));
-        break;
         case HorizontalSlidingStripes:
             return (new HorizontalSlidingStripesTransition(sourceTexture, targetTexture, horizontal, duration));
-        break;
         case TypeCount:
         default:
         break;

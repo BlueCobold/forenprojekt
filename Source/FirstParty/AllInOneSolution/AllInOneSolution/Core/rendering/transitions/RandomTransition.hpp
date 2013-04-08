@@ -41,10 +41,10 @@ private:
 
     int randomNumber(bool sourceExist, bool targetExist);
 
-    Transition* creatTransition(const sf::Texture* sourceTexture,
-                                const sf::Texture* targetTexture,
-                                const float duration,
-                                int randomCount);
+    Transition* createTransition(const sf::Texture* sourceTexture,
+                                 const sf::Texture* targetTexture,
+                                 const float duration,
+                                 int randomCount);
 public:
     Transition* getRandomTransition(const sf::Texture* sourceTexture,
                                     const sf::Texture* targetTexture,
