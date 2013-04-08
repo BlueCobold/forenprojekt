@@ -77,8 +77,10 @@ private:
         std::unordered_map<std::string, tinyxml2::XMLElement*> entities;
         std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
     };
-
+    
+    void createLabelAt(Entity* target, std::string fontName, int points);
     void updatePointLabels();
+
     virtual bool shouldCollide(Entity* entityA, Entity* entityB);
     virtual void onCollision(Entity* entityA, Entity* entityB);
     void killTarget(Entity* target);
