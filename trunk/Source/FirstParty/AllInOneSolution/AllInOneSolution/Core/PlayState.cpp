@@ -58,6 +58,9 @@ StateChangeInformation PlayState::update()
         m_timeShift = time;
         sf::Texture* source = new sf::Texture;
         source->create(m_screen.getSize().x, m_screen.getSize().y);
+        // BUG: updating the texture with the background is incorrect. The level+hud should be rendered into it.
+        // This bug causes a tiny movement when the state starts - hard to see, but if you update step by step,
+        // it gets visible. The further the ball moved in last level->update(), the bigger this movement is.
         source->update(m_screen);
         m_pauseStateInfo.m_background = std::unique_ptr<sf::Texture>(source);
         m_pauseStateInfo.m_level = m_level.get();

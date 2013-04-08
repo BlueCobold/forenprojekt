@@ -157,6 +157,12 @@
     <ClCompile Include="rendering\transitions\RandomTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
+    <ClCompile Include="PauseState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="TransitionState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">

@@ -20,12 +20,12 @@ public:
 
     StateChangeInformation update();
     void draw();
-	void onEnter(void *enterInformation);
+    void onEnter(void *enterInformation);
 
 private:
 
     std::unique_ptr<sf::Texture> m_background;
-    sf::Texture m_foreground;
+    const sf::Texture* m_foreground;
     sf::RenderTexture m_renderTexture;
     Level* m_level;
     LineLabel m_label;
