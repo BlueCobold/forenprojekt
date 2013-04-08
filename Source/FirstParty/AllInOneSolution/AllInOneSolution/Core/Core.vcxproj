@@ -117,6 +117,7 @@
     <ClCompile Include="model\SoundManager.cpp" />
     <ClCompile Include="model\SoundObject.cpp" />
     <ClCompile Include="model\Teeter.cpp" />
+    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="rendering\DebugDraw.cpp" />
     <ClCompile Include="rendering\transitions\AlphaTransition.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="resources\ResourceManager.cpp" />
     <ClCompile Include="ScrollView.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="TransitionState.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>

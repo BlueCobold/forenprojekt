@@ -42,14 +42,14 @@ void PauseState::onEnter(void *enterInformation)
     m_label.draw(m_renderTexture);
     m_renderTexture.display();
 
-    m_foreground = m_renderTexture.getTexture();
+    m_foreground = &m_renderTexture.getTexture();
 
     m_transitionStateInfo.m_followingState = PauseStateId;
     m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
     // MEMORY LEAK
     // TEMPORARY SOLUTION
     // REPLACE AS SOON AS utility::getRandomTransition() works properly.
-    m_transitionStateInfo.m_transition = new GrowingRectangleTransition(m_background.get(), &m_foreground, 1.0f); //utility::getRandomTransition(m_background.get(), &m_foreground, 1.0f);
+    m_transitionStateInfo.m_transition = new GrowingRectangleTransition(m_background.get(), m_foreground, 1.0f); //utility::getRandomTransition(m_background.get(), &m_foreground, 1.0f);
     m_pauseStateInfo.m_enterPauseTransition = false;
 }
 
@@ -66,7 +66,7 @@ StateChangeInformation PauseState::update()
         // MEMORY LEAK
         // TEMPORARY SOLUTION
         // REPLACE AS SOON AS utility::getRandomTransition() works properly.
-        m_transitionStateInfo.m_transition = new GrowingRectangleTransition(&m_foreground, m_background.get(), 1.0f); //utility::getRandomTransition(&m_foreground, m_background.get(), 1);
+        m_transitionStateInfo.m_transition = new GrowingRectangleTransition(m_foreground, m_background.get(), 1.0f); //utility::getRandomTransition(&m_foreground, m_background.get(), 1);
         m_playStateInfo.m_level = m_level;
         m_playStateInfo.m_returnFromPause = true;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
@@ -77,7 +77,7 @@ StateChangeInformation PauseState::update()
 
 void PauseState::draw()
 {
-    sf::Sprite foreground(m_foreground);
-    foreground.setPosition(0,0);
+    sf::Sprite foreground(*m_foreground);
+    foreground.setPosition(0, 0);
     m_screen.draw(foreground);
 }

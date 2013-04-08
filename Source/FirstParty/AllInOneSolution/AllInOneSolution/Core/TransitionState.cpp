@@ -30,5 +30,8 @@ StateChangeInformation TransitionState::update()
 
 void TransitionState::draw()
 {
+    auto view = m_screen.getView();
+    view.setCenter(sf::Vector2f( m_screen.getSize().x / 2, m_screen.getSize().y / 2));
+    m_screen.setView(view);
     m_transition->draw(m_screen);
 }
