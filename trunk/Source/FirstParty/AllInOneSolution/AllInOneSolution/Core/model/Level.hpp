@@ -50,6 +50,8 @@ public:
     void update(const float dt, sf::RenderTarget& screen);
     void draw(const DrawParameter& param);
 
+    void discardMouseInput(const float time, sf::RenderTarget& screen);
+
     /// Return the level number
     const unsigned int number();
 

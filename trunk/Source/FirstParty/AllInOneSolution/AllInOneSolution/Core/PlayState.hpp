@@ -4,6 +4,7 @@
 #define PLAYSTATE_HPP
 
 #include "State.hpp"
+#include "EnterStateInformation.hpp"
 #include "model/Level.hpp"
 #include "gui/HUD.hpp"
 
@@ -32,6 +33,8 @@ private:
 
     HUD m_hud;
 
+    EnterPauseStateInformation m_pauseStateInfo;
+    float m_timeShift;
 };
 
 #endif // PLAYSTATE_HPP

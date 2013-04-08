@@ -42,7 +42,10 @@ void StateManager::update()
 	{
 		StateChangeInformation changeInformation = m_currentState->update();
 		if(changeInformation != StateChangeInformation::Empty())
+        {
 			setState(changeInformation.getStateId(), changeInformation.getUserData());
+            update();
+        }
 	}
 }
 

@@ -16,6 +16,8 @@ enum StateId
     None,
     PlayStateId,
     LoadLevelStateId,
+    PauseStateId,
+    TransitionStateId
 };
 
 #include "StateChangeInformation.hpp"

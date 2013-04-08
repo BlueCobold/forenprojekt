@@ -11,8 +11,7 @@
 
 LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
     State(screen, resourceManager, config),
-    m_level(nullptr),
-    m_fadedScreen(nullptr)
+    m_level(nullptr)
 {
     m_level = new Level(3, m_resourceManager, m_config);
     bool fromImage = m_texture.create(screen.getSize().x, screen.getSize().y);
@@ -30,7 +29,12 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     hud.draw(m_texture);
     m_texture.display();
 
-    m_fadedScreen = utility::getRandomTransition(nullptr, &m_texture.getTexture(), .5);
+    m_transitionStateInfo.m_followingState = PlayStateId;
+    m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+    m_transitionStateInfo.m_transition = utility::getRandomTransition(nullptr, &m_texture.getTexture(), 1.0f);
+
+    m_playStateInfo.m_level = m_level;
+    m_playStateInfo.m_returnFromPause = false;
 }
 
 LoadLevelState::~LoadLevelState()
@@ -44,15 +48,9 @@ void LoadLevelState::onEnter(void* enterInformation)
 
 StateChangeInformation LoadLevelState::update()
 {
-    m_fadedScreen->update();
-    if(m_fadedScreen->isFinished())
-        return StateChangeInformation(PlayStateId, m_level);
-
-    return StateChangeInformation::Empty();
+    return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 }
 
 void LoadLevelState::draw()
 {
-    m_screen.clear();
-    m_fadedScreen->draw(DrawParameter(m_screen));
 }
