@@ -28,6 +28,12 @@ private:
       /*Last Target ->*/ VerticalStripes,          /* needs only target*/
                          VerticalSlidingStripes,   /* needs both texture*/
                          HorizontalSlidingStripes, /* needs both texture*/
+                         HorizontalCompress,       /* needs both texture*/
+                         VerticalCompress,         /* needs both texture*/
+                         HorizontalExpand,         /* needs both texture*/
+                         VerticalExpand,           /* needs both texture*/
+                         HorizontalSpring,         /* needs both texture*/
+                         VerticalSpring,           /* needs both texture*/
                          /* TypeCount must allways be the last entry*/
      /*Type Counter ->*/ TypeCount};
 
