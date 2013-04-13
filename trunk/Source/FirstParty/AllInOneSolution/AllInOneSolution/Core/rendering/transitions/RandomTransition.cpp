@@ -13,6 +13,13 @@
 #include "HorizontalSlicesTransition.hpp"
 #include "VerticalSlicesTransition.hpp"
 #include "RotatingSquaresTransition.hpp"
+#include "HorizontalCompressTransition.hpp"
+#include "VerticalCompressTransition.hpp"
+#include "HorizontalExpandTransition.hpp"
+#include "VerticalExpandTransition.hpp"
+#include "HorizontalSpringTransition.hpp"
+#include "VerticalSpringTransition.hpp"
+
 #include "../../animation/Provider/RandomProvider.hpp"
 
 RandomTransition::RandomTransition(int maxHorizontalLines, int maxVerticalLines) :
@@ -117,6 +124,18 @@ Transition* RandomTransition::createTransition(const sf::Texture* sourceTexture,
             return (new VerticalSlidingStripesTransition(sourceTexture, targetTexture, vertical, duration));
         case HorizontalSlidingStripes:
             return (new HorizontalSlidingStripesTransition(sourceTexture, targetTexture, horizontal, duration));
+        case HorizontalCompress:
+            return (new HorizontalCompressTransition(sourceTexture, targetTexture, horizontal, duration));
+        case VerticalCompress:
+            return (new VerticalCompressTransition(sourceTexture, targetTexture, vertical, duration));
+        case HorizontalExpand:
+            return (new HorizontalExpandTransition(sourceTexture, targetTexture, horizontal, duration));
+        case VerticalExpand:
+            return (new VerticalExpandTransition(sourceTexture, targetTexture, vertical, duration));
+        case HorizontalSpring:
+            return (new HorizontalSpringTransition(sourceTexture, targetTexture, horizontal - 1, duration));
+        case VerticalSpring:
+            return (new VerticalSpringTransition(sourceTexture, targetTexture, vertical - 1, duration));
         case TypeCount:
         default:
         break;
