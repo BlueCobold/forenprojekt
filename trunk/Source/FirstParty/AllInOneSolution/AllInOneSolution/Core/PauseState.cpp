@@ -49,7 +49,7 @@ void PauseState::onEnter(void *enterInformation)
     // MEMORY LEAK
     // TEMPORARY SOLUTION
     // REPLACE AS SOON AS utility::getRandomTransition() works properly.
-    m_transitionStateInfo.m_transition = new GrowingRectangleTransition(m_background.get(), m_foreground, 1.0f); //utility::getRandomTransition(m_background.get(), &m_foreground, 1.0f);
+    m_transitionStateInfo.m_transition = new GrowingRectangleTransition(m_background.get(), m_foreground, 0.5f); //utility::getRandomTransition(m_background.get(), &m_foreground, 0.5f);
     m_pauseStateInfo.m_enterPauseTransition = false;
 }
 
@@ -66,7 +66,7 @@ StateChangeInformation PauseState::update()
         // MEMORY LEAK
         // TEMPORARY SOLUTION
         // REPLACE AS SOON AS utility::getRandomTransition() works properly.
-        m_transitionStateInfo.m_transition = new GrowingRectangleTransition(m_foreground, m_background.get(), 1.0f); //utility::getRandomTransition(&m_foreground, m_background.get(), 1);
+        m_transitionStateInfo.m_transition = new GrowingRectangleTransition(m_foreground, m_background.get(), 0.5f); //utility::getRandomTransition(&m_foreground, m_background.get(), 0.5f);
         m_playStateInfo.m_level = m_level;
         m_playStateInfo.m_returnFromPause = true;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);

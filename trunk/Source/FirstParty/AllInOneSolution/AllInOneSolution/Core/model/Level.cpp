@@ -1,5 +1,6 @@
 #include "Level.hpp"
 #include "Entity.hpp"
+#include "Teeter.hpp"
 #include "../rendering/DrawParameter.hpp"
 #include "../resources/Config.hpp"
 #include "../resources/ResourceManager.hpp"
@@ -311,17 +312,11 @@ void Level::draw(const DrawParameter& param)
     }
 }
 
-void Level::discardMouseInput(const float time, sf::RenderTarget& screen)
+void Level::adaptToMouse()
 {
     for(auto it = m_entities.begin(); it != m_entities.end(); it++)
         if((*it)->getType() == Entity::Teeter)
-            (*it)->getBody()->SetActive(false);
-
-    update(time, screen);
-
-    for(auto it = m_entities.begin(); it != m_entities.end(); it++)
-        if((*it)->getType() == Entity::Teeter)
-            (*it)->getBody()->SetActive(true);
+            dynamic_cast<Teeter*>((*it).get())->adaptToMouse();
 }
 
 const unsigned int Level::number()

@@ -23,12 +23,12 @@ void PlayState::onEnter(void *enterInformation)
     EnterPlayStateInformation* info = (EnterPlayStateInformation*)enterInformation;
     m_level = std::unique_ptr<Level>(info->m_level);
     float time = m_frametime.getElapsedTime().asSeconds();
+    
+    utility::Mouse.capture();
+    m_level->adaptToMouse();
 
     if(info->m_returnFromPause)
-    {
         m_timeShift = time - m_timeShift;
-        m_level->discardMouseInput(time - m_timeShift, m_screen);
-    }
 
     else
     {
