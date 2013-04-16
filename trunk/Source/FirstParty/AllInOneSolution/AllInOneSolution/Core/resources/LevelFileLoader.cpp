@@ -190,7 +190,7 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
         return std::unique_ptr<VariableProvider>(new VariableProvider(handler, xml->Attribute("name")));
     else if(std::string(xml->Name())=="setVar")
         return std::unique_ptr<SetVariable>(new SetVariable(handler, xml->Attribute("name"),
-        std::move(parseProviders(xml, animated, handler, functions)[0])));
+        std::move(parseProviders(xml, animated, handler, functions)[0]), xml->BoolAttribute("print")));
     else if(std::string(xml->Name())=="abs")
         return std::unique_ptr<Absolute>(new Absolute(std::move(parseProviders(xml, animated, handler, functions)[0])));
     else if(std::string(xml->Name())=="sine")

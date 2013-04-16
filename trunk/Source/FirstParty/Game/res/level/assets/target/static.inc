@@ -14,7 +14,7 @@
 				<vertex x="15" y="-104" />
 			</shape>
 		</shapes>
-		
+
 		<functions>
 			<function name="target_bloat">
 				<step>
@@ -60,7 +60,7 @@
 				<fixture density="0.5" friction="0.8" restitution="0.1" />
 			</physic>
 		</physics>
-		
+
 		<entities>
 			<entity name="target_particles" rep="--" collideWithBall="false">
 				<animations>
@@ -212,7 +212,7 @@
 					</animation>
 				</animations>
 			</entity>
-			
+
 			<entity name="target_1" rep="t1" type="target" collideWithBall="false">
 				<physics name="target">
 					<shape type="circle" radius="30" />

@@ -10,13 +10,15 @@ class Ball : public Entity
 {
 public:
 
-    Ball(float resetTime);
+    Ball(float resetTime, const Entity* spawnAnimationEntity = nullptr);
 
     virtual void update(const float value);
 
     void setFieldDimension(const b2Vec2 fieldDimension);
 
     bool getBallLost();
+
+    const Entity* getSpawnAnimationEntity() const;
 
 private:
 
@@ -27,6 +29,7 @@ private:
     b2Vec2 m_fieldDimension;
 
     bool m_lostBall;
+    const Entity* m_spawnAnimationEntity;
 
 private:
 

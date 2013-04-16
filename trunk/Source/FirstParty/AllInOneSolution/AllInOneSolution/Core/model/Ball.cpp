@@ -2,11 +2,14 @@
 #include "../Utility.hpp"
 #include <iostream>
 
-Ball::Ball(float resetTime) :  m_resetTime(resetTime), m_hideTime(1.0f), Entity(Entity::Ball)
-{
-    m_ballResetTime = 0.0f;
-    m_lostBall = false;
-}
+Ball::Ball(float resetTime, const Entity* spawnAnimationEntity) :
+    m_resetTime(resetTime),
+    m_hideTime(1.0f),
+    Entity(Entity::Ball),
+    m_spawnAnimationEntity(spawnAnimationEntity),
+    m_lostBall(false),
+    m_ballResetTime(0.0f)
+{ }
 
 void Ball::autoResetBall(const float elapsedTime)
 {
@@ -42,6 +45,11 @@ void Ball::update(const float value)
     autoResetBall(value);
 
     Entity::update(value);
+}
+
+const Entity* Ball::getSpawnAnimationEntity() const
+{
+    return m_spawnAnimationEntity;
 }
 
 void Ball::setFieldDimension(b2Vec2 fieldDimension)
