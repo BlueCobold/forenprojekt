@@ -80,6 +80,8 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
             if((*it)->killed())
             {
                 (*it)->unbindBody();
+                if((*it)->isRespawnable())
+                    m_unspawnedEntities.push_back(std::move(*it));
                 it = m_entities.erase(it);
             }
             else

@@ -13,7 +13,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
     State(screen, resourceManager, config),
     m_level(nullptr)
 {
-    m_level = new Level(3, m_resourceManager, m_config);
+    m_level = new Level(6, m_resourceManager, m_config);
     bool fromImage = m_texture.create(screen.getSize().x, screen.getSize().y);
 
     float time = m_frametime.getElapsedTime().asSeconds();

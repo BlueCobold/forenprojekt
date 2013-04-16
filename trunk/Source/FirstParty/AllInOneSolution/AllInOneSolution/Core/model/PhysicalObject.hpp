@@ -67,7 +67,10 @@ public:
     void unbindBody()
     {
         if(m_world != nullptr)
+        {
             m_world->DestroyBody(m_body);
+            m_body = nullptr;
+        }
     }
 
     b2Body* getBody()

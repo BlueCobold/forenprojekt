@@ -22,6 +22,7 @@ public:
     {
         m_startTime = time;
         m_currentTime = time;
+        m_stopped = false;
     }
 
     virtual float getPassedTime() const

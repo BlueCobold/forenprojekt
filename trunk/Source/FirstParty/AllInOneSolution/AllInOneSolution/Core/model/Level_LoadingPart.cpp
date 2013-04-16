@@ -272,6 +272,8 @@ std::unique_ptr<Entity> Level::createEntity(
     std::unique_ptr<Entity> entity;
     tinyxml2::XMLElement* element = nullptr;
     
+    bool respawnable = xml->BoolAttribute("respawnable");
+
     if(xml->Attribute("type") != nullptr)
     {
         if(std::string(xml->Attribute("type")) == "teeter")
@@ -280,14 +282,14 @@ std::unique_ptr<Entity> Level::createEntity(
             entity = std::unique_ptr<Ball>(new Ball(m_config.get<float>("BallResetTime")));
         else if(std::string(xml->Attribute("type")) == "target")
         {
-            entity = std::unique_ptr<Entity>(new Entity(Entity::Target));
+            entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable));
             m_totalTarget++;
         }
         else
-            entity = std::unique_ptr<Entity>(new Entity(Entity::None));
+            entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable));
     }
     else // No type specified == normal Entity
-        entity = std::unique_ptr<Entity>(new Entity(Entity::None));
+        entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable));
 
     entity->setName(std::string(xml->Attribute("name")));
     if(auto animations = xml->FirstChildElement("animations"))
