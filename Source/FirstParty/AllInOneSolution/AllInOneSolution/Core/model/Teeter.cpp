@@ -12,21 +12,24 @@
 #include <algorithm>
 #include <cmath>
 
-Teeter::Teeter(const float mouseScale) : Entity(Entity::Teeter)
-{
-    m_lastMouseX = utility::Mouse.getPosition().x;
-    m_lastTime = -1;
-
-    m_mouseScale = mouseScale;
-}
+Teeter::Teeter(const float mouseScale) :
+    Entity(Entity::Teeter),
+    m_lastMouseX(utility::Mouse.getPosition().x),
+    m_lastTime(-1),
+    m_mouseScale(mouseScale)
+{ }
 
 Teeter::~Teeter()
 {
 }
 
+void Teeter::adaptToMouse()
+{
+    m_lastMouseX = utility::Mouse.getPosition().x;
+}
+
 void Teeter::update(const float value)
 {
-
     float velocity  = 0;
     float angle = utility::toDegree<float,float>(getAngle());
     float timeDiff = value - m_lastTime;
@@ -41,7 +44,7 @@ void Teeter::update(const float value)
     velocity = utility::toRadian<float, float>(maxVelocity);
 
     getBody()->SetAngularVelocity(velocity);
-    
+
     m_lastTime = value;
     m_lastMouseX = mouseX;
     Entity::update(value);

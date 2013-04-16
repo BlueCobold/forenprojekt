@@ -20,6 +20,7 @@ public:
 
     virtual void update(const float value);
 
+    void adaptToMouse();
 };
 
 #endif //TEETER_HPP
