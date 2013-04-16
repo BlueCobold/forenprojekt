@@ -74,45 +74,16 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
         TimedObject::updateCurrentTime(m_lastTime + delta);
 
-        auto it = begin(m_entities);
-        while(it != end(m_entities))
-        {
-            if((*it)->killed())
-            {
-                (*it)->unbindBody();
-                if((*it)->isRespawnable())
-                    m_unspawnedEntities.push_back(std::move(*it));
-                it = m_entities.erase(it);
-            }
-            else
-                ++it;
-        }
-        for(auto it = std::begin(m_entitiesToSpawn); it != std::end(m_entitiesToSpawn); ++it)
-        {
-            auto e = std::move(*it);
-            e->restartAt(m_lastTime + delta);
-            e->bindBody();
-            m_entities.push_back(std::move(e));
-        }
-        m_entitiesToSpawn.clear();
+        cleanupKilledEntities();
+        respawnDeadBalls();
+        spawnPendingEntities(m_lastTime + delta);
 
         m_world.Step(m_timeStep / steps, m_velocityIterations, m_positionIterations);
 
         for(auto it = begin(m_entities); it != end(m_entities); ++it)
         {
             m_updatingEntity = (*it).get();
-            if((*it)->getType() == Entity::Ball)
-            {
-                if(m_ball->getBallLost())
-                {
-                    m_points -= 10;
-                    m_multiHit = 0;
-                    m_world.SetGravity(m_defaultGravity);
-                    m_remainingBall -= 1;
-                    createLabelAt(m_ball, "red", -10);
-                }
-            }
-            (*it)->update(m_lastTime + delta);
+            m_updatingEntity->update(m_lastTime + delta);
         }
         m_updatingEntity = nullptr;
 
@@ -138,6 +109,55 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         m_scrollView.adjustView(ballpos, screen);
     }
 #endif
+}
+
+void Level::respawnDeadBalls()
+{
+    for(auto it = begin(m_entities); it != end(m_entities); ++it)
+    {
+        m_updatingEntity = (*it).get();
+        if((*it)->getType() != Entity::Ball || !m_ball->getBallLost())
+            continue;
+
+        m_points -= 10;
+        m_multiHit = 0;
+        m_world.SetGravity(m_defaultGravity);
+        m_remainingBall -= 1;
+        createLabelAt(m_ball, "red", -10);
+
+        const Ball* ball = dynamic_cast<const Ball*>((*it).get());
+        if(ball->getSpawnAnimationEntity() != nullptr)
+            prepareEntityForSpawn(ball, ball->getSpawnAnimationEntity());
+    }
+}
+
+void Level::spawnPendingEntities(float currentTime)
+{
+    for(auto it = std::begin(m_entitiesToSpawn); it != std::end(m_entitiesToSpawn); ++it)
+    {
+        auto e = std::move(*it);
+        e->restartAt(currentTime);
+        e->bindBody();
+        m_entities.push_back(std::move(e));
+    }
+    m_entitiesToSpawn.clear();
+}
+
+void Level::cleanupKilledEntities()
+{
+    auto it = begin(m_entities);
+    while(it != end(m_entities))
+    {
+        if((*it)->killed())
+        {
+            (*it)->unbindBody();
+            if((*it)->isRespawnable())
+                m_unspawnedEntities.push_back(std::move(*it));
+            it = m_entities.erase(it);
+        }
+        else
+            ++it;
+    }
 }
 
 void Level::updatePointLabels()

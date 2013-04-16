@@ -279,7 +279,11 @@ std::unique_ptr<Entity> Level::createEntity(
         if(std::string(xml->Attribute("type")) == "teeter")
             entity = std::unique_ptr<Teeter>(new Teeter(m_config.get<float>("MouseScale")));
         else if(std::string(xml->Attribute("type")) == "ball")
-            entity = std::unique_ptr<Ball>(new Ball(m_config.get<float>("BallResetTime")));
+        {
+            std::unique_ptr<Entity> spawn = parseBallSpawnAnimation(xml, templates);
+            entity = std::unique_ptr<Ball>(new Ball(m_config.get<float>("BallResetTime"), spawn.get()));
+            m_unspawnedEntities.push_back(std::move(spawn));
+        }
         else if(std::string(xml->Attribute("type")) == "target")
         {
             entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable));
@@ -439,17 +443,7 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
 
         std::unique_ptr<SpawnEntity> filter(new SpawnEntity([this](const Entity* owner, const Entity* spawned)
         {
-            for(auto it = std::begin(m_unspawnedEntities); it != std::end(m_unspawnedEntities); ++it)
-            {
-                if(it->get() == spawned)
-                {
-                    auto e = std::move(*it);
-                    m_unspawnedEntities.erase(it);
-                    e->setPosition(owner->getPosition());
-                    m_entitiesToSpawn.push_back(std::move(e));
-                    break;
-                }
-            }
+            prepareEntityForSpawn(owner, spawned);
         }, entity, spawned.get(), std::move(subFilter)));
         m_unspawnedEntities.push_back(std::move(spawned));
         return std::move(filter);
@@ -481,4 +475,39 @@ void Level::parseCollisionFilter(
     Templates& templates)
 {
     entity->bindCollisionFilter(getCollisionFilter(entity, xml->FirstChildElement(), templates));
+}
+
+std::unique_ptr<Entity> Level::parseBallSpawnAnimation(
+    tinyxml2::XMLElement* xml,
+    Templates& templates)
+{
+    auto spawn = xml->FirstChildElement("onRespawn");
+    if(spawn == nullptr)
+        return nullptr;
+    auto action = spawn->FirstChildElement("spawnEntity");
+    if(action == nullptr)
+        return nullptr;
+    auto name = action->Attribute("name");
+    if(!name)
+        throw std::runtime_error(utility::translateKey("SpawnWithoutName"));
+
+    std::unique_ptr<Entity> spawned(parseEntityFromTemplate(name, templates, sf::Vector2u(0, 0), false));
+    if(spawned == nullptr)
+        throw std::runtime_error(utility::replace(utility::translateKey("UnknownEntityName"), name));
+    return spawned;
+}
+
+void Level::prepareEntityForSpawn(const Entity* owner, const Entity* spawn)
+{
+    for(auto it = std::begin(m_unspawnedEntities); it != std::end(m_unspawnedEntities); ++it)
+    {
+        if(it->get() == spawn)
+        {
+            auto e = std::move(*it);
+            m_unspawnedEntities.erase(it);
+            e->setPosition(owner->getPosition());
+            m_entitiesToSpawn.push_back(std::move(e));
+            break;
+        }
+    }
 }

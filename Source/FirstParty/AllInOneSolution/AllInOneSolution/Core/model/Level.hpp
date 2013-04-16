@@ -81,11 +81,15 @@ private:
     };
     
     void createLabelAt(Entity* target, std::string fontName, int points);
+    void respawnDeadBalls();
+    void spawnPendingEntities(float currentTime);
+    void cleanupKilledEntities();
     void updatePointLabels();
 
     virtual bool shouldCollide(Entity* entityA, Entity* entityB);
     virtual void onCollision(Entity* entityA, Entity* entityB);
     void killTarget(Entity* target);
+    void prepareEntityForSpawn(const Entity* owner, const Entity* spawn);
 
     /// Load the level after m_number
     bool load();
@@ -134,6 +138,10 @@ private:
 
     std::unique_ptr<CollisionFilter> getCollisionFilter(
         Entity* entity,
+        tinyxml2::XMLElement* xml,
+        Templates& templates);
+
+    std::unique_ptr<Entity> parseBallSpawnAnimation(
         tinyxml2::XMLElement* xml,
         Templates& templates);
 
