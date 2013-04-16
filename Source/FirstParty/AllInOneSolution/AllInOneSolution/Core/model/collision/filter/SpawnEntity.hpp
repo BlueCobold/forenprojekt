@@ -35,7 +35,7 @@ public:
     virtual bool shouldCollide(Entity* entityA, Entity* entityB)
     {
         bool collides = ActionFilter::shouldCollide(entityA, entityB);
-        if(!m_spawned && collides)
+        if((!m_spawned || m_spawn->isRespawnable()) && collides)
         {
             m_spawned = true;
             m_handler(m_owner, m_spawn);

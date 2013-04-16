@@ -7,7 +7,12 @@
 
 #include <Box2D/Dynamics/b2World.h>
 
-Entity::Entity(Type type) : m_killed(false), m_type(type), m_updatingAni(nullptr), m_collideWithBall(true)
+Entity::Entity(Type type, bool respawnable) :
+    m_killed(false),
+    m_type(type),
+    m_updatingAni(nullptr),
+    m_collideWithBall(true),
+    m_respawnable(respawnable)
 {
 }
 
@@ -78,6 +83,7 @@ void Entity::restartAt(const float value)
 {
     TimedObject::restartAt(value);
     m_lastTime = value;
+    m_killed = false;
 }
 
 void Entity::kill()
@@ -88,6 +94,11 @@ void Entity::kill()
 bool Entity::killed() const
 {
     return m_killed;
+}
+
+bool Entity::isRespawnable() const
+{
+    return m_respawnable;
 }
 
 void Entity::setCollideWithBall(bool value)

@@ -31,9 +31,10 @@ private:
     std::vector<std::unique_ptr<CollisionHandler>> m_collisionHandler;
     std::unique_ptr<CollisionFilter> m_collisionFilter;
     std::map<std::string, float> m_variables;
+    bool m_respawnable;
 
 public:
-    Entity(Type type);
+    Entity(Type type, bool respawnable = false);
     virtual ~Entity();
 
     virtual void update(const float value);
@@ -44,6 +45,7 @@ public:
 
     void kill();
     bool killed() const;
+    bool isRespawnable() const;
 
     void setCollideWithBall(bool value);
     bool doesCollideWithBall();
