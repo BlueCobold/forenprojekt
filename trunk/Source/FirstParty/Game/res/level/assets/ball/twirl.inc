@@ -191,7 +191,11 @@
 							<var name="color" />
 						</frameindex>
 					</animation>
-					<animation texture="ball_twirl" width="32" height="32" srcx="96" midx="16" midy="16" rotate="false" />
+					<animation texture="ball_twirl" width="32" height="32" srcx="96" midx="16" midy="16" rotate="false">
+						<frameindex frames="3">
+							<var name="color" />
+						</frameindex>
+					</animation>
 				</animations>
 			</entity>
 		</entities>
