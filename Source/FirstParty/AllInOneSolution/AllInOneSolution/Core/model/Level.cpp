@@ -256,14 +256,19 @@ void Level::killTarget(Entity* target)
     createLabelAt(target, "green", earned);
 }
 
-void Level::createLabelAt(Entity* target, std::string fontName, int points)
+void Level::createLabelAt(Entity* target, std::string fontName, int number)
 {
     std::string prefix;
-    if(points > 0)
+    if(number > 0)
         prefix = std::string("+");
+    createLabelAt(target, fontName, prefix + utility::toString(number));
+}
+
+void Level::createLabelAt(Entity* target, std::string fontName, std::string text)
+{
 
     std::unique_ptr<LineLabel> label(new LineLabel(
-            prefix + utility::toString(points),
+            text,
             sf::Vector2f(
                 utility::toPixel(target->getPosition().x), 
                 utility::toPixel(target->getPosition().y)),

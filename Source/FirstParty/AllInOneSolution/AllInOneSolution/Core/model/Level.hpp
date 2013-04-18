@@ -81,6 +81,7 @@ private:
     };
     
     void createLabelAt(Entity* target, std::string fontName, int points);
+    void createLabelAt(Entity* target, std::string fontName, std::string text);
     void respawnDeadBalls();
     void spawnPendingEntities(float currentTime);
     void cleanupKilledEntities();
