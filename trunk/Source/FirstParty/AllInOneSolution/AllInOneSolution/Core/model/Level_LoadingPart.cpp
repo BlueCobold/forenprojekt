@@ -88,6 +88,9 @@ bool Level::load()
         }
     if(m_ball == nullptr)
         throw std::runtime_error("No ball located in the level!");
+    m_ball->registerForCheckpointChanges([this](){
+        createLabelAt(m_ball, "green", "checkpoint");
+    });
 
     m_remainingTarget = m_totalTarget;
 

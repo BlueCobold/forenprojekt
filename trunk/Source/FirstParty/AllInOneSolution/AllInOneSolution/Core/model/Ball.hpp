@@ -15,6 +15,8 @@ public:
     virtual void restartAt(const float value);
     virtual void update(const float value);
 
+    void registerForCheckpointChanges(std::function<void()> handler);
+
     void setFieldDimension(const b2Vec2 fieldDimension);
     void checkpointReached(const b2Vec2 position);
     bool getBallLost();
@@ -32,6 +34,7 @@ private:
 
     bool m_lostBall;
     const Entity* m_spawnAnimationEntity;
+    std::function<void()> m_checkpointHandler;
 
 private:
 

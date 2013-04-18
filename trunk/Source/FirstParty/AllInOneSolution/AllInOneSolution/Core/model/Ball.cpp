@@ -60,6 +60,9 @@ const Entity* Ball::getSpawnAnimationEntity() const
 
 void Ball::checkpointReached(const b2Vec2 position)
 {
+    if(m_checkpointHandler!=nullptr &&
+        (position.x != m_spawnPosition.x || position.y != m_spawnPosition.y) )
+        m_checkpointHandler();
     m_spawnPosition = position;
 }
 
@@ -82,4 +85,9 @@ bool Ball::isOutside()
 bool Ball::getBallLost()
 {
     return m_lostBall;
+}
+
+void Ball::registerForCheckpointChanges(std::function<void()> handler)
+{
+    m_checkpointHandler = handler;
 }
