@@ -8,6 +8,7 @@
 #include "collision/handler/ApplyImpulseCollisionHandler.hpp"
 #include "collision/handler/ChangePropertyCollisionHandler.hpp"
 #include "collision/filter/Always.hpp"
+#include "collision/filter/ChangeBallSpawnFilter.hpp"
 #include "collision/filter/ChangeGravityFilter.hpp"
 #include "collision/filter/Never.hpp"
 #include "collision/filter/PropertyFilter.hpp"
@@ -218,6 +219,10 @@ std::unique_ptr<Entity> Level::parseEntity(
         pos.x = entity->IntAttribute("x");
     if(entity->Attribute("y") != nullptr)
         pos.y = entity->IntAttribute("y");
+    if(entity->Attribute("offsetx") != nullptr)
+        pos.x += entity->IntAttribute("offsetx");
+    if(entity->Attribute("offsety") != nullptr)
+        pos.y += entity->IntAttribute("offsety");
 
     // Physics tag exists?
     physic = entity->FirstChildElement("physics");
@@ -446,6 +451,12 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
             prepareEntityForSpawn(owner, spawned);
         }, entity, spawned.get(), std::move(subFilter)));
         m_unspawnedEntities.push_back(std::move(spawned));
+        return std::move(filter);
+    }
+    else if(std::string(xml->Name()) == "copySpawnLocation")
+    {
+        std::unique_ptr<CollisionFilter> subFilter = getCollisionFilter(entity, xml->FirstChildElement(), templates);
+        std::unique_ptr<ChangeBallSpawnFilter> filter(new ChangeBallSpawnFilter(std::move(subFilter)));
         return std::move(filter);
     }
     else if(std::string(xml->Name()) == "changeGravity")

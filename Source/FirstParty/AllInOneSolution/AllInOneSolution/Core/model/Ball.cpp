@@ -29,13 +29,19 @@ void Ball::autoResetBall(const float elapsedTime)
         }
         else if(elapsedTime > m_ballResetTime && !frozen())
         {
-            getBody()->SetTransform(getStartPosition(), 0.0f);
+            getBody()->SetTransform(m_spawnPosition, 0.0f);
             getBody()->SetLinearVelocity(b2Vec2(0,0));
             getBody()->SetAngularVelocity(0.0f);
             m_lostBall = true;
             freeze();
             hide();
         }
+}
+
+void Ball::restartAt(const float value)
+{
+    Entity::restartAt(value);
+    m_spawnPosition = getStartPosition();
 }
 
 void Ball::update(const float value)
@@ -50,6 +56,11 @@ void Ball::update(const float value)
 const Entity* Ball::getSpawnAnimationEntity() const
 {
     return m_spawnAnimationEntity;
+}
+
+void Ball::checkpointReached(const b2Vec2 position)
+{
+    m_spawnPosition = position;
 }
 
 void Ball::setFieldDimension(b2Vec2 fieldDimension)
