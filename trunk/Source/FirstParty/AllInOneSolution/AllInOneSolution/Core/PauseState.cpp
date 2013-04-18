@@ -11,7 +11,7 @@
 
 PauseState::PauseState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
     State(screen, resourceManager, config), m_background(nullptr),
-    m_label("game paused", sf::Vector2f(screen.getSize().x / 2, screen.getSize().y / 2), 0, resourceManager.getBitmapFont("green"), LineLabel::Centered)
+    m_label("game paused", sf::Vector2f(screen.getSize().x / 2.f, screen.getSize().y / 2.f), 0, resourceManager.getBitmapFont("green"), LineLabel::Centered)
 {
     m_renderTexture.create(m_screen.getSize().x, m_screen.getSize().y);
 }
@@ -36,7 +36,10 @@ void PauseState::onEnter(void *enterInformation)
     background.setPosition(0,0);
     m_renderTexture.draw(background);
     sf::RectangleShape whiteRect;
-    whiteRect.setSize(sf::Vector2f(m_background->getSize().x, m_background->getSize().y));
+    whiteRect.setSize(
+        sf::Vector2f(
+            static_cast<float>(m_background->getSize().x),
+            static_cast<float>(m_background->getSize().y)));
     whiteRect.setFillColor(sf::Color(255, 255, 255, 128));
     m_renderTexture.draw(whiteRect);
     m_label.draw(m_renderTexture);

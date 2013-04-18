@@ -204,6 +204,7 @@
     <ClInclude Include="model\collision\ContactListener.hpp" />
     <ClInclude Include="model\collision\filter\ActionFilter.hpp" />
     <ClInclude Include="model\collision\filter\Always.hpp" />
+    <ClInclude Include="model\collision\filter\ChangeBallSpawnFilter.hpp" />
     <ClInclude Include="model\collision\filter\ChangeGravityFilter.hpp" />
     <ClInclude Include="model\collision\filter\CollisionFilter.hpp" />
     <ClInclude Include="model\collision\filter\Never.hpp" />

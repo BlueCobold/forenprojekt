@@ -5,7 +5,34 @@
 		<include file="assets/teeter/wood.inc" />
 		<include file="sandy/walls.inc" />
 
+		<shapes>
+			<shape name="checkpointArea" type="polygon">
+				<vertex x="-180" y="-180" />
+				<vertex x="180" y="-180" />
+				<vertex x="180" y="360" />
+				<vertex x="-180" y="360" />
+			</shape>
+		</shapes>
+
 		<entities>
+
+			<entity name="respawnLoc1" rep="R1" collideWithBall="false">
+				<physics name="wall" shape="checkpointArea" />
+				<collides>
+					<copySpawnLocation>
+						<always />
+					</copySpawnLocation>
+				</collides>
+			</entity>
+			<entity name="respawnLoc2" rep="R2" offsety="60" collideWithBall="false">
+				<physics name="wall" shape="checkpointArea" />
+				<collides>
+					<copySpawnLocation>
+						<always />
+					</copySpawnLocation>
+				</collides>
+			</entity>
+
 			<entity name="change_wall" rep="x1">
 				<physics name="wall" shape="wide_wall" />
 				<onCollision>
@@ -84,35 +111,35 @@
 	</templates>
 
 	<grid size="60" width="2460" height="1650">
-                                W6 6W1  W4 4W2 2W1 1w3                              
-                                w1)2  X1          (2w5                              
-                                w5                  w5                              
-                                w3    w3          /3w5                              
-                                w2  t1w5      t1/2w5w6                              
-                                w6    w2      /5w3w2w1                              
-                                w3    w1          (1w4                              
-                                w1    w4            w3w4w6w1w2w4w1w6                
-                                w6    w2    TT      w5w6w1x1  w1w2w4                
-                                w5    w6\5          w2w3)4    (4w3w6                
-                                w3  t1w3w1\4  t1    (6)2        (1w4                
-                                w1    w4w1w1\1                    w5                
-                                w3    w1)4                        w3                
-                                w2    w5                          w1                
-                                w4    w6        TT  /1      TT    w2                
-                                w3    w2          /1w2            w1                
-                                w6  t1w1      t1/2w4w6            w4                
-                                w1    w4      /4w2w1w4            w2                
-                                w5    w6          (3w1            w6                
-                                w1    w2            w2            w1                
-                                w4    w4    TT      w3            w4                
-                                w2    w1\3          w5            w2                
-                                w6  t1w5w2\1  t1    w1            w6                
-                                w1    w6w3w5\6      w4            w1                
-                                w2    w2)1      BB  w6            w3                
-                                w5    w3            w1            w4                
-                                w4    w4        TT  w2            w2                
-                                w3    w1            w4            w5                
-                                w1    w3            w5            w1                
+                            W6 6W1  W4 4W2 2W1 1w3                                  
+                            w1)2  X1          (2w5                                  
+                            w5                  w5                                  
+                            w3    w3          /3w5                                  
+                            w2  t1w5      t1/2w5w6                                  
+                            w6    w2      /5w3w2w1                                  
+                            w3    w1          (1w4                                  
+                            w1    w4            w3w4w6w1w2w4w1w6                    
+                            w6    w2    TT      w5w6w1x1  w1w2w4                    
+                            w5    w6\5          w2w3)4    (4w3w6                    
+                            w3  t1w3w1\4  t1    (6)2        (1w4                    
+                            w1    w4w1w1\1                    w5                    
+                            w3    w1)4                  R1    w3                    
+                            w2    w5                          w1                    
+                            w4    w6        TT  /1      TT    w2                    
+                            w3    w2          /1w2            w1                    
+                            w6  t1w1      t1/2w4w6            w4                    
+                            w1    w4      /4w2w1w4            w2                    
+                            w5    w6          (3w1            w6                    
+                            w1    w2            w2            w1                    
+                            w4    w4    TT      w3            w4                    
+                            w2    w1\3          w5            w2                    
+                            w6  t1w5w2\1  t1    w1            w6                    
+                            w1    w6w3w5\6  R2  w4            w1                    
+                            w2    w2)1      BB  w6            w3                    
+                            w5    w3            w1            w4                    
+                            w4    w4        TT  w2            w2                    
+                            w3    w1            w4            w5                    
+                            w1    w3            w5            w1                    
 	</grid>
 	<objects>
 		<include file="pastureland/background.inc" />

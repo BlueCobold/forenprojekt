@@ -498,6 +498,9 @@
     <ClInclude Include="rendering\transitions\HorizontalSpringTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
+    <ClInclude Include="model\collision\filter\ChangeBallSpawnFilter.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

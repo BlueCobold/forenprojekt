@@ -31,7 +31,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resour
 
     m_transitionStateInfo.m_followingState = PlayStateId;
     m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
-    m_transitionStateInfo.m_transition = utility::getRandomTransition(nullptr, &m_texture.getTexture(), 1.0f);
+    m_transitionStateInfo.m_transition = utility::getRandomTransition(nullptr, &m_texture.getTexture(), 0.5f);
 
     m_playStateInfo.m_level = m_level;
     m_playStateInfo.m_returnFromPause = false;

@@ -10,7 +10,7 @@
 		<entities>
 			<entity respawnable="true" name="ballspawn_particles" rep="--" collideWithBall="false">
 				<animations>
-					<animation copies="20" texture="sparkles" blending="add" width="32" height="32" midx="16" midy="16" rotate="true">
+					<animation copies="30" texture="sparkles" blending="add" width="32" height="32" midx="16" midy="16" rotate="true">
 						<constants duration="0" size="1" time="0"/>
 						<position axis="x">
 							<step>
@@ -61,7 +61,7 @@
 										<static value="1" />
 									</min>
 									<cache>
-										<random min="-80" max="80" />
+										<random min="-110" max="110" />
 									</cache>
 								</mul>
 							</step>
@@ -87,7 +87,7 @@
 										<static value="1" />
 									</min>
 									<cache>
-										<random min="-80" max="80" />
+										<random min="-110" max="110" />
 									</cache>
 								</mul>
 							</step>

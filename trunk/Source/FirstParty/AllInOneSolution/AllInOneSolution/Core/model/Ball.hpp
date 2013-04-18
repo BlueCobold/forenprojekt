@@ -12,10 +12,11 @@ public:
 
     Ball(float resetTime, const Entity* spawnAnimationEntity = nullptr);
 
+    virtual void restartAt(const float value);
     virtual void update(const float value);
 
     void setFieldDimension(const b2Vec2 fieldDimension);
-
+    void checkpointReached(const b2Vec2 position);
     bool getBallLost();
 
     const Entity* getSpawnAnimationEntity() const;
@@ -26,6 +27,7 @@ private:
     float m_resetTime;
     float m_hideTime;
 
+    b2Vec2 m_spawnPosition;
     b2Vec2 m_fieldDimension;
 
     bool m_lostBall;

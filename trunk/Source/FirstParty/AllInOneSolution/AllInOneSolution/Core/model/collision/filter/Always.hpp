@@ -15,4 +15,4 @@ public:
     }
 };
 
-#endif // COLLISION_FILTER_HPP
+#endif // ALWAYS_HPP
