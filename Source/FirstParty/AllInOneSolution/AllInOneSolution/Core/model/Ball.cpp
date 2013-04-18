@@ -60,8 +60,8 @@ const Entity* Ball::getSpawnAnimationEntity() const
 
 void Ball::checkpointReached(const b2Vec2 position)
 {
-    if(m_checkpointHandler!=nullptr &&
-        (position.x != m_spawnPosition.x || position.y != m_spawnPosition.y) )
+    if(m_checkpointHandler != nullptr &&
+        (fabsf(position.x - m_spawnPosition.x)>0.01f || fabsf(position.y - m_spawnPosition.y)>0.01f) )
         m_checkpointHandler();
     m_spawnPosition = position;
 }
