@@ -6,8 +6,6 @@
 #include "ActionFilter.hpp"
 #include "../../Ball.hpp"
 
-#include <exception>
-
 class ChangeBallSpawnFilter : public ActionFilter
 {
 public:
