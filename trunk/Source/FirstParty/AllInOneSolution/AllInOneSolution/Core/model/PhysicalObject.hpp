@@ -48,6 +48,11 @@ public:
         m_world = world;
     }
 
+    bool hasPhysics()
+    {
+        return m_world != nullptr;
+    }
+
     /// Bind the body
     void bindBody()
     {
@@ -91,7 +96,9 @@ public:
 
     virtual float getAngle() const
     {
-        return m_body->GetAngle();
+        if(m_body != nullptr)
+            return m_body->GetAngle();
+        return 0.f;
     }
 
     void updateKinematics(const float value, const float delta);
