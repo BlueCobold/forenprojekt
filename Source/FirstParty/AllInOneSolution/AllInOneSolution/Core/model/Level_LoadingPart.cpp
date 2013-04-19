@@ -283,26 +283,29 @@ std::unique_ptr<Entity> Level::createEntity(
     
     bool respawnable = xml->BoolAttribute("respawnable");
 
-    if(xml->Attribute("type") != nullptr)
-    {
-        if(std::string(xml->Attribute("type")) == "teeter")
-            entity = std::unique_ptr<Teeter>(new Teeter(m_config.get<float>("MouseScale")));
-        else if(std::string(xml->Attribute("type")) == "ball")
+    if(auto name = xml->Attribute("base"))
+        entity = parseEntityFromTemplate(name, templates, position, false);
+    else
+        if(xml->Attribute("type") != nullptr)
         {
-            std::unique_ptr<Entity> spawn = parseBallSpawnAnimation(xml, templates);
-            entity = std::unique_ptr<Ball>(new Ball(m_config.get<float>("BallResetTime"), spawn.get()));
-            m_unspawnedEntities.push_back(std::move(spawn));
+            if(std::string(xml->Attribute("type")) == "teeter")
+                entity = std::unique_ptr<Teeter>(new Teeter(m_config.get<float>("MouseScale")));
+            else if(std::string(xml->Attribute("type")) == "ball")
+            {
+                std::unique_ptr<Entity> spawn = parseBallSpawnAnimation(xml, templates);
+                entity = std::unique_ptr<Ball>(new Ball(m_config.get<float>("BallResetTime"), spawn.get()));
+                m_unspawnedEntities.push_back(std::move(spawn));
+            }
+            else if(std::string(xml->Attribute("type")) == "target")
+            {
+                entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable));
+                m_totalTarget++;
+            }
+            else
+                entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable));
         }
-        else if(std::string(xml->Attribute("type")) == "target")
-        {
-            entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable));
-            m_totalTarget++;
-        }
-        else
+        else // No type specified == normal Entity
             entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable));
-    }
-    else // No type specified == normal Entity
-        entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable));
 
     entity->setName(std::string(xml->Attribute("name")));
     if(auto animations = xml->FirstChildElement("animations"))
@@ -327,24 +330,13 @@ std::unique_ptr<Entity> Level::createEntity(
     }
     if(auto constants = xml->FirstChildElement("constants"))
         LevelFileLoader::parseConstants(constants, entity.get());
+    
+    // Load sound
+    if(xml->FirstChildElement("sound") != nullptr)
+        entity->bindSound(std::string(xml->FirstChildElement("sound")->Attribute("name")), &m_soundManager);
 
     if(physic != nullptr)
     {
-        if(xml->Attribute("collideWithBall") != nullptr)
-            entity->setCollideWithBall(xml->BoolAttribute("collideWithBall"));
-        else
-            entity->setCollideWithBall(true);
-
-        if(auto collider = xml->FirstChildElement("onCollision"))
-            parseCollider(entity.get(), collider, templates);
-
-        if(auto filter = xml->FirstChildElement("collides"))
-            parseCollisionFilter(entity.get(), filter, templates);
-
-        // Load sound
-        if(xml->FirstChildElement("sound") != nullptr)
-            entity->bindSound(std::string(xml->FirstChildElement("sound")->Attribute("name")), &m_soundManager);
-
         // Load body
         element = physic->FirstChildElement("body");
         b2BodyDef bodyDef;
@@ -394,6 +386,21 @@ std::unique_ptr<Entity> Level::createEntity(
         fixtureDef.restitution = element->FloatAttribute("restitution");
 
         entity->bindDefs(fixtureDef, bodyDef, &m_world);
+    }
+
+    if(entity->hasPhysics())
+    {
+        if(xml->Attribute("collideWithBall") != nullptr)
+            entity->setCollideWithBall(xml->BoolAttribute("collideWithBall"));
+        else
+            entity->setCollideWithBall(true);
+
+        if(auto collider = xml->FirstChildElement("onCollision"))
+            parseCollider(entity.get(), collider, templates);
+
+        if(auto filter = xml->FirstChildElement("collides"))
+            parseCollisionFilter(entity.get(), filter, templates);
+
         if(bindInstantly)
             entity->bindBody();
     }
