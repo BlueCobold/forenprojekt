@@ -84,6 +84,9 @@ void Entity::restartAt(const float value)
     TimedObject::restartAt(value);
     m_lastTime = value;
     m_killed = false;
+
+    for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
+        (*animation)->reset();
 }
 
 void Entity::kill()

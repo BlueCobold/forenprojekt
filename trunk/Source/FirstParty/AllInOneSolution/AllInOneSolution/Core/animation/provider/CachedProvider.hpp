@@ -14,9 +14,10 @@ class CachedProvider : public SingleProvider
 {
 public:
     
-    CachedProvider(std::unique_ptr<ValueProvider> provider) :
+    CachedProvider(std::unique_ptr<ValueProvider> provider, const bool persistent = false) :
         SingleProvider(std::move(provider)),
-        m_inited(false)
+        m_inited(false),
+        m_persistent(persistent)
     { }
 
     virtual float getValue()
@@ -29,9 +30,16 @@ public:
         return m_value;
     }
 
+    virtual void reset()
+    {
+        if(!m_persistent)
+            m_inited = false;
+    }
+
 private:
 
     bool m_inited;
+    bool m_persistent;
     float m_value;
 };
 

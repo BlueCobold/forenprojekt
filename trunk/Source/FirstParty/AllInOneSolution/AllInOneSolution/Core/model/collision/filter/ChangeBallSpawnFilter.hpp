@@ -4,10 +4,9 @@
 #define CHANGE_BALL_SPAWN_FILTER_HPP
 
 #include "ActionFilter.hpp"
+#include "../../Ball.hpp"
 
-#include <functional>
 #include <exception>
-#include <memory>
 
 class ChangeBallSpawnFilter : public ActionFilter
 {

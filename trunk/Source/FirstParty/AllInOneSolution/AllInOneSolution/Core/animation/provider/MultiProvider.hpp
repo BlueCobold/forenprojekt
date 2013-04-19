@@ -27,6 +27,12 @@ public:
 
     virtual float getValue() = 0;
 
+    virtual void reset()
+    {
+        for(auto it = begin(m_provider); it != end(m_provider); ++it)
+            (*it)->reset();
+    }
+
 protected:
 
     const std::vector<std::unique_ptr<ValueProvider>>& getProvider() const
