@@ -9,6 +9,7 @@
 #include "collision/handler/ChangePropertyCollisionHandler.hpp"
 #include "collision/filter/Always.hpp"
 #include "collision/filter/ChangeBallSpawnFilter.hpp"
+#include "collision/filter/ChangeBallVelocityFilter.hpp"
 #include "collision/filter/ChangeGravityFilter.hpp"
 #include "collision/filter/Never.hpp"
 #include "collision/filter/PropertyFilter.hpp"
@@ -460,6 +461,15 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
     {
         std::unique_ptr<CollisionFilter> subFilter = getCollisionFilter(entity, xml->FirstChildElement(), templates);
         std::unique_ptr<ChangeBallSpawnFilter> filter(new ChangeBallSpawnFilter(std::move(subFilter)));
+        return std::move(filter);
+    }
+    else if(std::string(xml->Name()) == "setBallVelocity")
+    {
+        std::unique_ptr<CollisionFilter> subFilter = getCollisionFilter(entity, xml->FirstChildElement(), templates);
+        std::unique_ptr<ChangeBallVelocityFilter> filter(new ChangeBallVelocityFilter(
+            xml->FloatAttribute("x"),
+            xml->FloatAttribute("y"),
+            std::move(subFilter)));
         return std::move(filter);
     }
     else if(std::string(xml->Name()) == "changeGravity")
