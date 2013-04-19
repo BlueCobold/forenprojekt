@@ -30,6 +30,7 @@ public:
     ~Animation();
 
     void update();
+    void reset();
 
     void setPosition(const float x, const float y);
     void setRotation(const float radians);

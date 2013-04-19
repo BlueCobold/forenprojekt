@@ -25,6 +25,11 @@ public:
 
     virtual float getValue() = 0;
 
+    virtual void reset()
+    {
+        m_provider->reset();
+    }
+
 protected:
 
     ValueProvider* getProvider() const

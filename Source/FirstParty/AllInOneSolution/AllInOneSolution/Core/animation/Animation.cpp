@@ -63,6 +63,29 @@ void Animation::update()
     m_sprite.setColor(color);
 }
 
+void Animation::reset()
+{
+    if(m_frameProvider == nullptr)
+        m_frameProvider->reset();
+
+    if(m_xPositionProvider != nullptr)
+        m_xPositionProvider->reset();
+    if(m_yPositionProvider != nullptr)
+        m_yPositionProvider->reset();
+
+    if(m_rotationProvider != nullptr)
+        m_rotationProvider->reset();
+
+    if(m_xScaleProvider != nullptr)
+        m_xScaleProvider->reset();
+    if(m_yScaleProvider != nullptr)
+        m_yScaleProvider->reset();
+
+    for(int i = 0; i < 4; i++)
+        if(m_colorProviders[i] != nullptr)
+            m_colorProviders[i]->reset();
+}
+
 void Animation::setPosition(const float x, const float y)
 {
     m_externalPosition = sf::Vector2f(x, y);

@@ -14,6 +14,9 @@ public:
     { }
 
     virtual float getValue() = 0;
+
+    virtual void reset()
+    { }
 };
 
 #endif //VALUE_PROVIDER_HPP

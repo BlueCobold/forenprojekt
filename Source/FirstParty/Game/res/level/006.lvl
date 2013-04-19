@@ -12,6 +12,12 @@
 				<vertex x="180" y="360" />
 				<vertex x="-180" y="360" />
 			</shape>
+			<shape name="checkpointArea2" type="polygon">
+				<vertex x="-240" y="-180" />
+				<vertex x="120" y="-180" />
+				<vertex x="120" y="360" />
+				<vertex x="-240" y="360" />
+			</shape>
 		</shapes>
 
 		<entities>
@@ -25,7 +31,7 @@
 				</collides>
 			</entity>
 			<entity name="respawnLoc2" rep="R2" offsety="60" collideWithBall="false">
-				<physics name="wall" shape="checkpointArea" />
+				<physics name="wall" shape="checkpointArea2" />
 				<collides>
 					<copySpawnLocation>
 						<always />

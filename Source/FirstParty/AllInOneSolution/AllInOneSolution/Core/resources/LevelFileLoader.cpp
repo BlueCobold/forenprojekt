@@ -196,7 +196,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
     else if(std::string(xml->Name())=="sine")
         return std::unique_ptr<Sine>(new Sine(std::move(parseProviders(xml, animated, handler, functions)[0])));
     else if(std::string(xml->Name())=="cache")
-        return std::unique_ptr<CachedProvider>(new CachedProvider(std::move(parseProviders(xml, animated, handler, functions)[0])));
+        return std::unique_ptr<CachedProvider>(new CachedProvider(std::move(parseProviders(xml, animated, handler, functions)[0]),
+            xml->Attribute("reset") ? std::string("true") != xml->Attribute("reset") : false));
     else if(std::string(xml->Name())=="int")
         return std::unique_ptr<FloatToInt>(new FloatToInt(std::move(parseProviders(xml, animated, handler, functions)[0])));
     else if(std::string(xml->Name())=="add")
