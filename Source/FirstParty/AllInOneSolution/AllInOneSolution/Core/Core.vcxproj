@@ -185,6 +185,7 @@
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="EnterStateInformation.hpp" />
     <ClInclude Include="gui\ArrowHUD.hpp" />
     <ClInclude Include="gui\BallHUD.hpp" />
     <ClInclude Include="gui\BitmapFont.hpp" />

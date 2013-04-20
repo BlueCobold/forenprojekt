@@ -510,6 +510,9 @@
     <ClInclude Include="PauseState.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="EnterStateInformation.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
