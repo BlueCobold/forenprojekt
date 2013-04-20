@@ -22,16 +22,14 @@
 
 #include "../../animation/Provider/RandomProvider.hpp"
 
-RandomTransition::RandomTransition(int maxHorizontalLines, int maxVerticalLines) :
-m_maxHorizontalLines(maxHorizontalLines),
-m_maxVerticalLines(maxVerticalLines)
-{
-    m_lastTransition = static_cast<TransitionType>(TypeCount);
-}
+int RandomTransition::m_lastTransition = static_cast<RandomTransition::TransitionType>(TypeCount);
 
-Transition* RandomTransition::getRandomTransition(const sf::Texture* sourceTexture,
-                                                  const sf::Texture* targetTexture,
-                                                  const float duration)
+RandomTransition::RandomTransition(const sf::Texture* sourceTexture,
+                                   const sf::Texture* targetTexture,
+                                   const float duration) :
+m_maxHorizontalLines(21),
+m_maxVerticalLines(21),
+m_transition(nullptr)
 {
     bool sourceExist = false;
     bool targetExist = false;
@@ -41,18 +39,12 @@ Transition* RandomTransition::getRandomTransition(const sf::Texture* sourceTextu
     if(targetTexture != nullptr)
         targetExist = true;
 
-    for(auto it = m_transition.begin(); it != m_transition.end(); ++it)
-        if((*it)->isFinished())
-            m_transition.erase(it);
-
     auto transition = createTransition(sourceTexture,
-                                      targetTexture,
-                                      duration,
-                                      randomNumber(sourceExist, targetExist));
+                                       targetTexture,
+                                       duration,
+                                       randomNumber(sourceExist, targetExist));
 
-    m_transition.push_back(std::unique_ptr<Transition>(transition));
-
-    return m_transition.back().get();
+    m_transition.reset(transition);
 }
 
 int RandomTransition::randomNumber(bool sourceExist, bool targetExist)
@@ -84,15 +76,15 @@ int RandomTransition::randomNumber(bool sourceExist, bool targetExist)
 }
 
 Transition* RandomTransition::createTransition(const sf::Texture* sourceTexture,
-                                              const sf::Texture* targetTexture,
-                                              const float duration,
-                                              int randomCount)
+                                               const sf::Texture* targetTexture,
+                                               const float duration,
+                                               int randomCount)
 {
 
     TransitionType type = static_cast<TransitionType>(randomCount);
 
-    int vertical = static_cast<int>(RandomProvider(2, m_maxVerticalLines).getValue());
-    int horizontal = static_cast<int>(RandomProvider(2, m_maxHorizontalLines).getValue());
+    int vertical = static_cast<int>(RandomProvider(2, static_cast<float>(m_maxVerticalLines)).getValue());
+    int horizontal = static_cast<int>(RandomProvider(2, static_cast<float>(m_maxHorizontalLines)).getValue());
 
     switch(type)
     {
@@ -141,4 +133,19 @@ Transition* RandomTransition::createTransition(const sf::Texture* sourceTexture,
         break;
     }
     throw std::runtime_error(utility::replace(utility::translateKey("RandomTransition"), utility::toString(randomCount)));
+}
+
+bool RandomTransition::isFinished()
+{
+    return m_transition->isFinished();
+}
+
+void RandomTransition::update()
+{
+    m_transition->update();
+}
+
+void RandomTransition::draw(const DrawParameter& param)
+{
+    m_transition->draw(param);
 }

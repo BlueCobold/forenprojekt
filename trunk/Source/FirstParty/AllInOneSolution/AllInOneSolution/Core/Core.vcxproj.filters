@@ -504,6 +504,12 @@
     <ClInclude Include="model\collision\filter\ChangeBallVelocityFilter.hpp">
       <Filter>Headers\model\collision\filter</Filter>
     </ClInclude>
+    <ClInclude Include="TransitionState.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
