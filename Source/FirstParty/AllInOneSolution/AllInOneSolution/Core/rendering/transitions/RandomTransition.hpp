@@ -13,7 +13,7 @@ namespace sf
 
 class RandomTransition
 {
-private:
+public:
     enum TransitionType {HorizontalHalves = 0,     /* needs only source*/
       /*Last Source ->*/ VerticalHalves,           /* needs only source*/
       /*neutral     ->*/ Alpha,                    /* no source or target needed */
@@ -36,14 +36,14 @@ private:
                          VerticalSpring,           /* needs both texture*/
                          /* TypeCount must allways be the last entry*/
      /*Type Counter ->*/ TypeCount};
-
+private:
     int m_maxHorizontalLines;
 
     int m_maxVerticalLines;
 
-    int m_lastTransition;
+    static int m_lastTransition;
 
-    std::vector<std::unique_ptr<Transition>> m_transition;
+    std::unique_ptr<Transition> m_transition;
 
     int randomNumber(bool sourceExist, bool targetExist);
 
@@ -51,12 +51,18 @@ private:
                                  const sf::Texture* targetTexture,
                                  const float duration,
                                  int randomCount);
-public:
-    Transition* getRandomTransition(const sf::Texture* sourceTexture,
-                                    const sf::Texture* targetTexture,
-                                    const float duration);
 
-    RandomTransition(int maxHorizontalLines, int maxVerticalLines);
+public:
+
+    RandomTransition(const sf::Texture* sourceTexture,
+                     const sf::Texture* targetTexture,
+                     const float duration);
+
+    bool isFinished();
+
+    void update();
+
+    void draw(const DrawParameter& param);
 };
 
 #endif // RANDOMTRANSITION_HPP

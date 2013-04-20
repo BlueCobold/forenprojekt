@@ -4,6 +4,7 @@
 #define ENTERSTATEINFORMATION_HPP
 
 #include "model/Level.hpp"
+#include "rendering\transitions\RandomTransition.hpp"
 
 #include <memory>
 
@@ -16,7 +17,7 @@ struct EnterPauseStateInformation
 
 struct EnterTransitionStateInformation
 {
-    Transition* m_transition;
+    RandomTransition* m_transition;
     StateId m_followingState;
     void* m_onEnterInformation;
 };

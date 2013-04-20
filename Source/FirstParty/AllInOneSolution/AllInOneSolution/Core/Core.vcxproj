@@ -217,6 +217,7 @@
     <ClInclude Include="model\Entity.hpp" />
     <ClInclude Include="model\SoundManager.hpp" />
     <ClInclude Include="model\SoundObject.hpp" />
+    <ClInclude Include="PauseState.hpp" />
     <ClInclude Include="rendering\GraphicalObject.hpp" />
     <ClInclude Include="model\Level.hpp" />
     <ClInclude Include="model\ParallaxLayer.hpp" />
@@ -257,6 +258,7 @@
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateChangeInformation.hpp" />
     <ClInclude Include="StateManager.hpp" />
+    <ClInclude Include="TransitionState.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <ItemGroup>

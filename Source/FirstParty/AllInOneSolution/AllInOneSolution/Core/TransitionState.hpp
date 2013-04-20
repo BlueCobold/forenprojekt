@@ -4,7 +4,7 @@
 #define TRANSITIONSTATE_HPP
 
 #include "State.hpp"
-#include "rendering/transitions/Transition.hpp"
+#include "rendering/transitions/RandomTransition.hpp"
 
 #include <memory>
 
@@ -22,7 +22,7 @@ public:
 
 private:
 
-    Transition* m_transition;
+    RandomTransition* m_transition;
     StateId m_followingState;
     void* m_followingEnterInformation;
 
