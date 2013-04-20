@@ -22,7 +22,7 @@ public:
 
 private:
 
-    RandomTransition* m_transition;
+    std::unique_ptr<RandomTransition> m_transition;
     StateId m_followingState;
     void* m_followingEnterInformation;
 
