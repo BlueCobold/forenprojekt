@@ -5,22 +5,23 @@ HorizontalSpringTransition::HorizontalSpringTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
     const int stripeCount,
-    const float duration) :
-    Transition(sourceTexture, targetTexture, duration)
+    const float duration,
+    const sf::Vector2u& size) :
+    Transition(sourceTexture, targetTexture, duration, size)
 {
     if(targetTexture != nullptr)
     {
-        m_stripeHeight = targetTexture->getSize().y / stripeCount;
+        m_stripeHeight = size.y / stripeCount;
 
-        if(static_cast<unsigned int>(m_stripeHeight * stripeCount) < targetTexture->getSize().y)
+        if(static_cast<unsigned int>(m_stripeHeight * stripeCount) < size.y)
             m_stripeHeight++;
 
-        m_stripeWidth = targetTexture->getSize().x;
+        m_stripeWidth = size.x;
         for(int i = 0; i < stripeCount; ++i)
         {
-            auto sprite = new sf::Sprite(*targetTexture, sf::IntRect(0, i * m_stripeHeight, m_stripeWidth, m_stripeHeight));
+            auto sprite = std::unique_ptr<sf::Sprite>(new sf::Sprite(*targetTexture, sf::IntRect(0, i * m_stripeHeight, m_stripeWidth, m_stripeHeight)));
             sprite->setPosition(0, static_cast<float>(i * m_stripeHeight));
-            m_targetSprites.push_back(std::unique_ptr<sf::Sprite>(sprite));
+            m_targetSprites.push_back(std::move(sprite));
         }
     }
     else
@@ -30,9 +31,9 @@ HorizontalSpringTransition::HorizontalSpringTransition(
     {
         for(int i = 0; i < stripeCount; ++i)
         {
-            auto sprite = new sf::Sprite(*sourceTexture, sf::IntRect(0, i * m_stripeHeight, m_stripeWidth, m_stripeHeight));
+            auto sprite = std::unique_ptr<sf::Sprite>(new sf::Sprite(*sourceTexture, sf::IntRect(0, i * m_stripeHeight, m_stripeWidth, m_stripeHeight)));
             sprite->setPosition(0, static_cast<float>(i * m_stripeHeight));
-            m_sourceSprites.push_back(std::unique_ptr<sf::Sprite>(sprite));
+            m_sourceSprites.push_back(std::move(sprite));
         }
     }
     else

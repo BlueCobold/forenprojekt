@@ -23,13 +23,19 @@ void Background::restartAt(const float time)
         (*layer)->restartAt(time);
 }
 
-void Background::update(const float time, const sf::View& view)
+void Background::update(const float time)
 {
     updateCurrentTime(time);
 
     m_updatingAni = nullptr;
     for(auto layer = begin(m_layers); layer != end(m_layers); ++layer)
-        (*layer)->update(time, view, m_size);
+        (*layer)->update(time);
+}
+
+void Background::updateParallax(const sf::View& view)
+{
+    for(auto layer = begin(m_layers); layer != end(m_layers); ++layer)
+        (*layer)->updatePosition(view, m_size);
 }
 
 float Background::getValueOf(const std::string& name) const

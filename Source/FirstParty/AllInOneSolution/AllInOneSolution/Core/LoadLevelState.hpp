@@ -6,6 +6,7 @@
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
 #include "model/Level.hpp"
+#include "gui/HUD.hpp"
 #include "rendering/transitions/Transition.hpp"
 
 #include <SFML/System/Clock.hpp>
@@ -29,7 +30,8 @@ public:
 
 private:
 
-    Level *m_level;
+    std::unique_ptr<HUD> m_hud;
+    std::unique_ptr<Level> m_level;
     //std::unique_ptr<Transition> m_fadedScreen;
     Transition* m_fadedScreen;
     sf::Clock m_frametime;

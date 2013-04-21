@@ -4,8 +4,9 @@
 AlphaTransition::AlphaTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
-    const float duration) :
-    Transition(sourceTexture, targetTexture, duration)
+    const float duration,
+    const sf::Vector2u& size) :
+    Transition(sourceTexture, targetTexture, duration, size)
 {
     if(targetTexture != nullptr)
     {

@@ -17,7 +17,8 @@ public:
     GrowingRectangleTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
-        const float duration);
+        const float duration,
+        const sf::Vector2u& size);
 
     void update();
 

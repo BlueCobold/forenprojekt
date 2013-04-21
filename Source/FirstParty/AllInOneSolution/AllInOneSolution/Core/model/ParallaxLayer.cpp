@@ -12,12 +12,10 @@ ParallaxLayer::~ParallaxLayer()
 {
 }
 
-void ParallaxLayer::update(const float time, const sf::View& view, const sf::Vector2u& worldSize)
+void ParallaxLayer::updatePosition(const sf::View& view, const sf::Vector2u& worldSize)
 {
-    updateCurrentTime(time);
-    
     sf::Vector2f diff = sf::Vector2f(worldSize.x - view.getSize().x, 
-                                     worldSize.y - view.getSize().y);
+        worldSize.y - view.getSize().y);
     sf::Vector2f viewPos = view.getCenter() - 0.5f * view.getSize();
     sf::Vector2f percent = sf::Vector2f(viewPos.x / diff.x, viewPos.y / diff.y);
 
@@ -26,9 +24,15 @@ void ParallaxLayer::update(const float time, const sf::View& view, const sf::Vec
         -(m_layerSize.y - view.getSize().y) * percent.y);
 
     for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
+        (*animation)->setPosition(offset.x, offset.y);
+}
+
+void ParallaxLayer::update(const float time)
+{
+    updateCurrentTime(time);
+    for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
     {
         m_updatingAni = (*animation).get();
-        (*animation)->setPosition(offset.x, offset.y);
         (*animation)->update();
     }
     m_updatingAni = nullptr;

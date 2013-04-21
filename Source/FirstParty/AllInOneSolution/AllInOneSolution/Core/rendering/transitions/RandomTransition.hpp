@@ -3,15 +3,16 @@
 #ifndef RANDOMTRANSITION_HPP
 #define RANDOMTRANSITION_HPP
 
-#include <vector>
 #include "Transition.hpp"
+
+#include <memory>
 
 namespace sf
 {
     class Texture;
 }
 
-class RandomTransition
+class RandomTransition : public Transition
 {
 public:
     enum TransitionType {HorizontalHalves = 0,     /* needs only source*/
@@ -34,35 +35,29 @@ public:
                          VerticalExpand,           /* needs both texture*/
                          HorizontalSpring,         /* needs both texture*/
                          VerticalSpring,           /* needs both texture*/
-                         /* TypeCount must allways be the last entry*/
+                         /* TypeCount must always be the last entry*/
      /*Type Counter ->*/ TypeCount};
 private:
     int m_maxHorizontalLines;
-
     int m_maxVerticalLines;
 
     static int m_lastTransition;
-
     std::unique_ptr<Transition> m_transition;
 
     int randomNumber(bool sourceExist, bool targetExist);
 
-    Transition* createTransition(const sf::Texture* sourceTexture,
-                                 const sf::Texture* targetTexture,
-                                 const float duration,
-                                 int randomCount);
+    std::unique_ptr<Transition> createTransition(int randomCount);
 
 public:
 
     RandomTransition(const sf::Texture* sourceTexture,
                      const sf::Texture* targetTexture,
-                     const float duration);
+                     const float duration,
+                     const sf::Vector2u& size);
 
-    bool isFinished();
+    virtual void update();
 
-    void update();
-
-    void draw(const DrawParameter& param);
+    virtual void draw(const DrawParameter& param);
 };
 
 #endif // RANDOMTRANSITION_HPP

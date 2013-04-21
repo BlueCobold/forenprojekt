@@ -7,11 +7,11 @@ LabelHUD::LabelHUD(const sf::Vector2f& position,
                    BitmapFont* bitmapFont,
                    const float horizontalPercentage, 
                    const float verticalPercentage,
-                   const std::string& text) :
+                   const std::string& text,
+                   const LineLabel::Alignment alignment) :
     HUDElement(position, rotation, horizontalPercentage, verticalPercentage),
-    m_label(text, sf::Vector2f(0.f, 0.f), rotation, nullptr)
+    m_label(text, sf::Vector2f(0.f, 0.f), rotation, bitmapFont, alignment)
 {
-    m_label.setBitmapFont(bitmapFont);
 }
 
 void LabelHUD::update(const DrawParameter& params)

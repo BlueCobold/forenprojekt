@@ -4,27 +4,27 @@
 #define ENTERSTATEINFORMATION_HPP
 
 #include "model/Level.hpp"
-#include "rendering\transitions\RandomTransition.hpp"
+#include "rendering\transitions\Transition.hpp"
 
 #include <memory>
 
 struct EnterPauseStateInformation
 {
     std::unique_ptr<sf::Texture> m_background;
-    Level* m_level;
+    std::unique_ptr<Level> m_level;
     bool m_enterPauseTransition;
 };
 
 struct EnterTransitionStateInformation
 {
-    std::unique_ptr<RandomTransition> m_transition;
+    std::unique_ptr<Transition> m_transition;
     StateId m_followingState;
     void* m_onEnterInformation;
 };
 
 struct EnterPlayStateInformation
 {
-    Level* m_level;
+    std::unique_ptr<Level> m_level;
     bool m_returnFromPause;
 };
 

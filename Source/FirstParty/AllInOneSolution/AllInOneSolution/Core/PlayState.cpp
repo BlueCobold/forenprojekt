@@ -21,7 +21,7 @@ PlayState::~PlayState()
 void PlayState::onEnter(void *enterInformation)
 {
     EnterPlayStateInformation* info = (EnterPlayStateInformation*)enterInformation;
-    m_level = std::unique_ptr<Level>(info->m_level);
+    m_level = std::move(info->m_level);
     float time = m_frametime.getElapsedTime().asSeconds();
     
     utility::Mouse.capture();
@@ -56,14 +56,14 @@ StateChangeInformation PlayState::update()
     if(utility::Keyboard.isKeyDown(sf::Keyboard::P) || utility::Keyboard.isKeyDown(sf::Keyboard::Pause))
     {
         m_timeShift = time;
-        sf::Texture* source = new sf::Texture;
+        auto source = std::unique_ptr<sf::Texture>(new sf::Texture);
         source->create(m_screen.getSize().x, m_screen.getSize().y);
         // BUG: updating the texture with the background is incorrect. The level+hud should be rendered into it.
         // This bug causes a tiny movement when the state starts - hard to see, but if you update step by step,
         // it gets visible. The further the ball moved in last level->update(), the bigger this movement is.
         source->update(m_screen);
-        m_pauseStateInfo.m_background = std::unique_ptr<sf::Texture>(source);
-        m_pauseStateInfo.m_level = m_level.get();
+        m_pauseStateInfo.m_background = std::move(source);
+        m_pauseStateInfo.m_level = std::move(m_level);
         m_pauseStateInfo.m_enterPauseTransition = true;
         return StateChangeInformation(PauseStateId, &m_pauseStateInfo);
     }

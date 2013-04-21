@@ -5,18 +5,19 @@
 GrowingCircleTransition::GrowingCircleTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
-    const float duration) :
-    Transition(sourceTexture, targetTexture, duration),
+    const float duration,
+    const sf::Vector2u& size) :
+    Transition(sourceTexture, targetTexture, duration, size),
     m_targetSprites(0, 32)
 {
     if(targetTexture != nullptr)
     {
-        m_RectangleStartY = targetTexture->getSize().y / 2;
-        m_RectangleStartX = targetTexture->getSize().x / 2;
+        m_RectangleStartY = size.y / 2;
+        m_RectangleStartX = size.x / 2;
         m_radius = sqrt(static_cast<float>(m_RectangleStartY * m_RectangleStartY + m_RectangleStartX * m_RectangleStartX));
         m_targetSprites.setTexture(targetTexture);
         m_targetSprites.setTextureRect(sf::IntRect(m_RectangleStartX, m_RectangleStartY, 0, 0));
-        m_targetSprites.setPosition(targetTexture->getSize().x / 2.f, targetTexture->getSize().y / 2.f);
+        m_targetSprites.setPosition(size.x / 2.f, size.y / 2.f);
     }
     else
         throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "GrowingCircleTransition"));
