@@ -5,6 +5,7 @@
 
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
+#include "gui/LabelHUD.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 
@@ -22,13 +23,14 @@ public:
     void draw();
     void onEnter(void *enterInformation);
 
+    void renderStateTexture();
+    void render(sf::RenderTarget& m_renderTexture);
 private:
 
     std::unique_ptr<sf::Texture> m_background;
-    const sf::Texture* m_foreground;
     sf::RenderTexture m_renderTexture;
-    Level* m_level;
-    LineLabel m_label;
+    std::unique_ptr<Level> m_level;
+    LabelHUD m_label;
 
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;

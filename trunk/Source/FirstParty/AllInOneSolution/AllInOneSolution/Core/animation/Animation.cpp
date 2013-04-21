@@ -89,16 +89,19 @@ void Animation::reset()
 void Animation::setPosition(const float x, const float y)
 {
     m_externalPosition = sf::Vector2f(x, y);
+    sf::Vector2f pos = m_externalPosition + m_dynamicPosition + m_drawOffset;
+    m_sprite.setPosition(pos);
 }
 
 void Animation::updatePosition()
 {
-    sf::Vector2f pos = sf::Vector2f(m_externalPosition.x, m_externalPosition.y) + m_drawOffset;
+    m_dynamicPosition = sf::Vector2f(0, 0);
     if(m_xPositionProvider != nullptr)
-        pos.x += m_xPositionProvider->getValue();
+        m_dynamicPosition.x += m_xPositionProvider->getValue();
     if(m_yPositionProvider != nullptr)
-        pos.y += m_yPositionProvider->getValue();
-    m_sprite.setPosition(pos.x, pos.y);
+        m_dynamicPosition.y += m_yPositionProvider->getValue();
+    sf::Vector2f pos = m_externalPosition + m_dynamicPosition + m_drawOffset;
+    m_sprite.setPosition(pos);
 }
 
 void Animation::setRotation(const float radians)

@@ -5,15 +5,16 @@ HorizontalSlicesTransition::HorizontalSlicesTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
     const int stripeCount,
-    const float duration) :
-    Transition(sourceTexture, targetTexture, duration)
+    const float duration,
+    const sf::Vector2u& size) :
+    Transition(sourceTexture, targetTexture, duration, size)
 {
     if(targetTexture != nullptr)
     {
-        m_stripeHeight = targetTexture->getSize().y;
-        m_stripeWidth = targetTexture->getSize().x / stripeCount;
+        m_stripeHeight = size.y;
+        m_stripeWidth = size.x / stripeCount;
 
-        if(static_cast<unsigned int>(stripeCount * m_stripeWidth) < targetTexture->getSize().x)
+        if(static_cast<unsigned int>(stripeCount * m_stripeWidth) < size.x)
             m_stripeWidth++;
 
         m_offset = m_stripeHeight / stripeCount;
@@ -22,9 +23,9 @@ HorizontalSlicesTransition::HorizontalSlicesTransition(
 
         for(int i = 0; i < stripeCount; ++i)
         {
-            auto sprite = new sf::Sprite(*targetTexture, sf::IntRect(i * m_stripeWidth, m_stripeHeight, m_stripeWidth, 0));
+            auto sprite = std::unique_ptr<sf::Sprite>(new sf::Sprite(*targetTexture, sf::IntRect(i * m_stripeWidth, m_stripeHeight, m_stripeWidth, 0)));
             sprite->setPosition(static_cast<float>(i * m_stripeWidth), 0);
-            m_targetSprites.push_back(std::unique_ptr<sf::Sprite>(sprite));
+            m_targetSprites.push_back(std::move(sprite));
         }
     }
     else

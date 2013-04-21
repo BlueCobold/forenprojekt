@@ -5,22 +5,23 @@ VerticalExpandTransition::VerticalExpandTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
     const int stripeCount,
-    const float duration) :
-    Transition(sourceTexture, targetTexture, duration)
+    const float duration,
+    const sf::Vector2u& size) :
+    Transition(sourceTexture, targetTexture, duration, size)
 {
     if(targetTexture != nullptr)
     {
-        m_stripeHeight = targetTexture->getSize().y;
-        m_stripeWidth = targetTexture->getSize().x / stripeCount;
+        m_stripeHeight = size.y;
+        m_stripeWidth = size.x / stripeCount;
 
-        if(static_cast<unsigned int>(m_stripeWidth * stripeCount) < targetTexture->getSize().x)
+        if(static_cast<unsigned int>(m_stripeWidth * stripeCount) < size.x)
             m_stripeWidth++;
 
         for(int i = 0; i < stripeCount; ++i)
         {
-            auto sprite = new sf::Sprite(*targetTexture, sf::IntRect(i * m_stripeWidth, 0, m_stripeWidth, m_stripeHeight));
+            auto sprite = std::unique_ptr<sf::Sprite>(new sf::Sprite(*targetTexture, sf::IntRect(i * m_stripeWidth, 0, m_stripeWidth, m_stripeHeight)));
             sprite->setPosition(static_cast<float>(i * m_stripeWidth), 0);
-            m_targetSprites.push_back(std::unique_ptr<sf::Sprite>(sprite));
+            m_targetSprites.push_back(std::move(sprite));
         }
     }
     else
@@ -30,9 +31,9 @@ VerticalExpandTransition::VerticalExpandTransition(
     {
         for(int i = 0; i < stripeCount; ++i)
         {
-            auto sprite = new sf::Sprite(*sourceTexture, sf::IntRect(i * m_stripeWidth, 0, m_stripeWidth, m_stripeHeight));
+            auto sprite = std::unique_ptr<sf::Sprite>(new sf::Sprite(*sourceTexture, sf::IntRect(i * m_stripeWidth, 0, m_stripeWidth, m_stripeHeight)));
             sprite->setPosition(static_cast<float>(i * m_stripeWidth), 0);
-            m_sourceSprites.push_back(std::unique_ptr<sf::Sprite>(sprite));
+            m_sourceSprites.push_back(std::move(sprite));
         }
     }
     else

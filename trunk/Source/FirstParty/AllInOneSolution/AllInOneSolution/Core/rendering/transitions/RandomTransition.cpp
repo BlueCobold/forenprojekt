@@ -26,10 +26,12 @@ int RandomTransition::m_lastTransition = static_cast<RandomTransition::Transitio
 
 RandomTransition::RandomTransition(const sf::Texture* sourceTexture,
                                    const sf::Texture* targetTexture,
-                                   const float duration) :
-m_maxHorizontalLines(21),
-m_maxVerticalLines(21),
-m_transition(nullptr)
+                                   const float duration,
+                                   const sf::Vector2u& size) :
+    Transition(sourceTexture, targetTexture, duration, size),
+    m_maxHorizontalLines(21),
+    m_maxVerticalLines(21),
+    m_transition(nullptr)
 {
     bool sourceExist = false;
     bool targetExist = false;
@@ -39,12 +41,7 @@ m_transition(nullptr)
     if(targetTexture != nullptr)
         targetExist = true;
 
-    auto transition = createTransition(sourceTexture,
-                                       targetTexture,
-                                       duration,
-                                       randomNumber(sourceExist, targetExist));
-
-    m_transition.reset(transition);
+    m_transition = std::move(createTransition(randomNumber(sourceExist, targetExist)));
 }
 
 int RandomTransition::randomNumber(bool sourceExist, bool targetExist)
@@ -52,14 +49,14 @@ int RandomTransition::randomNumber(bool sourceExist, bool targetExist)
     float min = 0;
     float max = static_cast<float>(TypeCount);
     
-    if(sourceExist == false && targetExist == false)
-        return static_cast<int>(Alpha);        
-    else if(sourceExist && targetExist == false)
+    if(!sourceExist && !targetExist)
+        return static_cast<int>(Alpha);
+    else if(!targetExist)
     {
         min = static_cast<float>(HorizontalHalves);
         max = static_cast<float>(Alpha);
     }
-    else if(targetExist && sourceExist == false)
+    else if(!sourceExist)
     {
         min = static_cast<float>(Alpha);
         max = static_cast<float>(VerticalStripes);
@@ -75,10 +72,7 @@ int RandomTransition::randomNumber(bool sourceExist, bool targetExist)
     return random;
 }
 
-Transition* RandomTransition::createTransition(const sf::Texture* sourceTexture,
-                                               const sf::Texture* targetTexture,
-                                               const float duration,
-                                               int randomCount)
+std::unique_ptr<Transition> RandomTransition::createTransition(int randomCount)
 {
 
     TransitionType type = static_cast<TransitionType>(randomCount);
@@ -86,48 +80,71 @@ Transition* RandomTransition::createTransition(const sf::Texture* sourceTexture,
     int vertical = static_cast<int>(RandomProvider(2, static_cast<float>(m_maxVerticalLines)).getValue());
     int horizontal = static_cast<int>(RandomProvider(2, static_cast<float>(m_maxHorizontalLines)).getValue());
 
+    auto sourceTexture = getSourceTexture();
+    auto targetTexture = getTargetTexture();
+    auto duration = getDuration();
     switch(type)
     {
         case HorizontalHalves:
-            return (new HorizontalHalvesTransition(sourceTexture, targetTexture, horizontal, duration));
+            return std::unique_ptr<Transition>(
+                new HorizontalHalvesTransition(sourceTexture, targetTexture, horizontal, duration, getSize()));
         case VerticalHalves:
-            return (new VerticalHalvesTransition(sourceTexture, targetTexture, vertical, duration));
+            return std::unique_ptr<Transition>(
+                new VerticalHalvesTransition(sourceTexture, targetTexture, vertical, duration, getSize()));
         case Alpha:
-            return (new AlphaTransition(sourceTexture, targetTexture, duration));
+            return std::unique_ptr<Transition>(
+                new AlphaTransition(sourceTexture, targetTexture, duration, getSize()));
         case GrowingCircle:
-            return (new GrowingCircleTransition(sourceTexture, targetTexture, duration));
+            return std::unique_ptr<Transition>(
+                new GrowingCircleTransition(sourceTexture, targetTexture, duration, getSize()));
         case GrowingRectangle:
-            return (new GrowingRectangleTransition(sourceTexture, targetTexture, duration));
+            return std::unique_ptr<Transition>(
+                new GrowingRectangleTransition(sourceTexture, targetTexture, duration, getSize()));
         case HorizontalMaskingStripes:
-            return (new HorizontalMaskingStripesTransition(sourceTexture, targetTexture, horizontal, duration));
+            return std::unique_ptr<Transition>(
+                new HorizontalMaskingStripesTransition(sourceTexture, targetTexture, horizontal, duration, getSize()));
         case HorizontalSlices:
-            return (new HorizontalSlicesTransition(sourceTexture, targetTexture, horizontal, duration));
+            return std::unique_ptr<Transition>(
+                new HorizontalSlicesTransition(sourceTexture, targetTexture, horizontal, duration, getSize()));
         case HorizontalStripes:
-            return (new HorizontalStripesTransition(sourceTexture, targetTexture, horizontal, duration));
+            return std::unique_ptr<Transition>(
+                new HorizontalStripesTransition(sourceTexture, targetTexture, horizontal, duration, getSize()));
         case RotatingSquares:
-            return (new RotatingSquaresTransition(sourceTexture, targetTexture, horizontal, vertical, duration));
+            return std::unique_ptr<Transition>(
+                new RotatingSquaresTransition(sourceTexture, targetTexture, horizontal, vertical, duration, getSize()));
         case VerticalMaskingStripes:
-            return (new VerticalMaskingStripesTransition(sourceTexture, targetTexture, vertical, duration));
+            return std::unique_ptr<Transition>(
+                new VerticalMaskingStripesTransition(sourceTexture, targetTexture, vertical, duration, getSize()));
         case VerticalSlices:
-            return (new VerticalSlicesTransition(sourceTexture, targetTexture, vertical, duration));
+            return std::unique_ptr<Transition>(
+                new VerticalSlicesTransition(sourceTexture, targetTexture, vertical, duration, getSize()));
         case VerticalStripes:
-            return (new VerticalStripesTransition(sourceTexture, targetTexture, vertical, duration));
+            return std::unique_ptr<Transition>(
+                new VerticalStripesTransition(sourceTexture, targetTexture, vertical, duration, getSize()));
         case VerticalSlidingStripes:
-            return (new VerticalSlidingStripesTransition(sourceTexture, targetTexture, vertical, duration));
+            return std::unique_ptr<Transition>(
+                new VerticalSlidingStripesTransition(sourceTexture, targetTexture, vertical, duration, getSize()));
         case HorizontalSlidingStripes:
-            return (new HorizontalSlidingStripesTransition(sourceTexture, targetTexture, horizontal, duration));
+            return std::unique_ptr<Transition>(
+                new HorizontalSlidingStripesTransition(sourceTexture, targetTexture, horizontal, duration, getSize()));
         case HorizontalCompress:
-            return (new HorizontalCompressTransition(sourceTexture, targetTexture, horizontal, duration));
+            return std::unique_ptr<Transition>(
+                new HorizontalCompressTransition(sourceTexture, targetTexture, horizontal, duration, getSize()));
         case VerticalCompress:
-            return (new VerticalCompressTransition(sourceTexture, targetTexture, vertical, duration));
+            return std::unique_ptr<Transition>(
+                new VerticalCompressTransition(sourceTexture, targetTexture, vertical, duration, getSize()));
         case HorizontalExpand:
-            return (new HorizontalExpandTransition(sourceTexture, targetTexture, horizontal, duration));
+            return std::unique_ptr<Transition>(
+                new HorizontalExpandTransition(sourceTexture, targetTexture, horizontal, duration, getSize()));
         case VerticalExpand:
-            return (new VerticalExpandTransition(sourceTexture, targetTexture, vertical, duration));
+            return std::unique_ptr<Transition>
+                (new VerticalExpandTransition(sourceTexture, targetTexture, vertical, duration, getSize()));
         case HorizontalSpring:
-            return (new HorizontalSpringTransition(sourceTexture, targetTexture, horizontal - 1, duration));
+            return std::unique_ptr<Transition>(
+                new HorizontalSpringTransition(sourceTexture, targetTexture, horizontal - 1, duration, getSize()));
         case VerticalSpring:
-            return (new VerticalSpringTransition(sourceTexture, targetTexture, vertical - 1, duration));
+            return std::unique_ptr<Transition>(
+                new VerticalSpringTransition(sourceTexture, targetTexture, vertical - 1, duration, getSize()));
         case TypeCount:
         default:
         break;
@@ -135,13 +152,9 @@ Transition* RandomTransition::createTransition(const sf::Texture* sourceTexture,
     throw std::runtime_error(utility::replace(utility::translateKey("RandomTransition"), utility::toString(randomCount)));
 }
 
-bool RandomTransition::isFinished()
-{
-    return m_transition->isFinished();
-}
-
 void RandomTransition::update()
 {
+    Transition::update();
     m_transition->update();
 }
 

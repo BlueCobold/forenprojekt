@@ -20,7 +20,8 @@ public:
         BitmapFont* bitmapFont,
 		const float horizontalPercentage = HUDElement::Left,
         const float verticalPercentage = HUDElement::Top,
-        const std::string& text = "");
+        const std::string& text = "",
+        const LineLabel::Alignment alignment = LineLabel::Left);
 
     virtual ~LabelHUD()
     { }

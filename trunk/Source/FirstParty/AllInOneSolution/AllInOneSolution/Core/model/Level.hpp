@@ -49,6 +49,7 @@ public:
     virtual void restartAt(const float time);
     void update(const float dt, sf::RenderTarget& screen);
     void draw(const DrawParameter& param);
+    void adjustView(sf::RenderTarget& screen);
 
     void adaptToMouse();
 

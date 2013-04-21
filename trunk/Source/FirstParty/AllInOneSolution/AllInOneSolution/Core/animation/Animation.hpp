@@ -73,6 +73,7 @@ private:
     sf::Sprite m_sprite;
     sf::Vector2f m_sourceOffset;
     sf::Vector2f m_externalPosition;
+    sf::Vector2f m_dynamicPosition;
     float m_externalRotation;
     sf::Vector2f m_drawOffset;
     sf::BlendMode m_blending;

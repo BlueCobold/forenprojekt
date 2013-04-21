@@ -18,7 +18,8 @@ public:
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
         const int stripeCount,
-        const float duration);
+        const float duration,
+        const sf::Vector2u& size);
 
     void update();
 

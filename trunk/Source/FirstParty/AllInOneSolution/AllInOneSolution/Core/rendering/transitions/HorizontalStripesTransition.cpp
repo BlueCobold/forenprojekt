@@ -5,17 +5,18 @@ HorizontalStripesTransition::HorizontalStripesTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
     const int stripeCount,
-    const float duration) :
-    Transition(sourceTexture, targetTexture, duration)
+    const float duration,
+    const sf::Vector2u& size) :
+    Transition(sourceTexture, targetTexture, duration, size)
 {
     if (targetTexture != nullptr)
     {
-        m_stripeHeight = targetTexture->getSize().y / stripeCount;
+        m_stripeHeight = size.y / stripeCount;
         for(int i = 0; i < stripeCount; ++i)
         {
-            auto sprite = new sf::Sprite(*targetTexture, sf::IntRect(0, i * m_stripeHeight, targetTexture->getSize().x, 0));
+            auto sprite = std::unique_ptr<sf::Sprite>(new sf::Sprite(*targetTexture, sf::IntRect(0, i * m_stripeHeight, size.x, 0)));
             sprite->setPosition(0, static_cast<float>(i * m_stripeHeight));
-            m_targetSprites.push_back(std::unique_ptr<sf::Sprite>(sprite));
+            m_targetSprites.push_back(std::move(sprite));
         }
     }
     else

@@ -5,22 +5,23 @@ HorizontalHalvesTransition::HorizontalHalvesTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
     const int stripeCount,
-    const float duration) :
-    Transition(sourceTexture, targetTexture, duration)
+    const float duration,
+    const sf::Vector2u& size) :
+    Transition(sourceTexture, targetTexture, duration, size)
 {
     if(sourceTexture != nullptr)
     {
-        m_stripeHeight = sourceTexture->getSize().y / stripeCount;
+        m_stripeHeight = size.y / stripeCount;
 
-        if(static_cast<unsigned int>(m_stripeHeight * stripeCount) < sourceTexture->getSize().y)
+        if(static_cast<unsigned int>(m_stripeHeight * stripeCount) < size.y)
             m_stripeHeight++;
 
-        m_stripeWidth = sourceTexture->getSize().x;
+        m_stripeWidth = size.x;
         for(int i = 0; i < stripeCount; ++i)
         {
-            auto sprite = new sf::Sprite(*sourceTexture, sf::IntRect(0, i * m_stripeHeight, m_stripeWidth, m_stripeHeight));
+            auto sprite = std::unique_ptr<sf::Sprite>(new sf::Sprite(*sourceTexture, sf::IntRect(0, i * m_stripeHeight, m_stripeWidth, m_stripeHeight)));
             sprite->setPosition(0, static_cast<float>(i * m_stripeHeight));
-            m_sourceSprites.push_back(std::unique_ptr<sf::Sprite>(sprite));
+            m_sourceSprites.push_back(std::move(sprite));
         }
     }
     else

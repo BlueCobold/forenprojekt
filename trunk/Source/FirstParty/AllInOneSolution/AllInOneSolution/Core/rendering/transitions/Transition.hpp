@@ -17,11 +17,13 @@ public:
     Transition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
-        const float duration) :
+        const float duration,
+        const sf::Vector2u& size) :
         m_sourceTexture(sourceTexture),
         m_targetTexture(targetTexture),
         m_duration(duration),
-        m_isFinished(false)
+        m_isFinished(false),
+        m_size(size)
     {
         TimedObject::restartAt(m_frameTime.getElapsedTime().asSeconds());
     }
@@ -51,12 +53,14 @@ protected:
     const sf::Texture* getTargetTexture() const { return m_targetTexture; };
     const sf::Texture* getSourceTexture() const { return m_sourceTexture; };
     const float getDuration() const { return m_duration; }
+    const sf::Vector2u& getSize() const { return m_size; }
 
 private:
 
     Transition( const Transition& other );
     Transition& operator=( const Transition& );
-
+    
+    const sf::Vector2u m_size;
     const sf::Texture* m_targetTexture;
     const sf::Texture* m_sourceTexture;
     sf::Clock m_frameTime;
