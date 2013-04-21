@@ -54,12 +54,12 @@ int RandomTransition::randomNumber(bool sourceExist, bool targetExist)
     
     if(sourceExist == false && targetExist == false)
         return static_cast<int>(Alpha);        
-    else if(sourceExist)
+    else if(sourceExist && targetExist == false)
     {
         min = static_cast<float>(HorizontalHalves);
         max = static_cast<float>(Alpha);
     }
-    else if(targetExist)
+    else if(targetExist && sourceExist == false)
     {
         min = static_cast<float>(Alpha);
         max = static_cast<float>(VerticalStripes);
