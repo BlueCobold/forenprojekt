@@ -11,8 +11,7 @@
 LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
     State(screen, resourceManager, config),
     m_level(nullptr),
-    m_lastLevel(nullptr),
-    m_hud(new HUD(resourceManager, config))
+    m_lastLevel(nullptr)
 {
 }
 
@@ -36,10 +35,6 @@ StateChangeInformation LoadLevelState::update(const float time)
     updateTime(time);
     m_level = std::unique_ptr<Level>(new Level(6, m_resourceManager, m_config));
     m_lastLevel = m_level.get();
-
-    m_level->restartAt(getCurrentTime());
-    m_level->update(getCurrentTime(), m_screen);
-    m_hud->update(m_level.get(), getCurrentTime());
     
     m_playStateInfo.m_returnFromPause = false;
     m_playStateInfo.m_level = m_lastLevel;
@@ -51,8 +46,4 @@ StateChangeInformation LoadLevelState::update(const float time)
 
 void LoadLevelState::draw(const DrawParameter& params)
 {
-    m_lastLevel->adjustView(params.getTarget());
-    m_lastLevel->draw(params);
-    m_hud->update(m_lastLevel, getCurrentTime());
-    m_hud->draw(params);
 }

@@ -25,15 +25,15 @@ void TransitionState::onEnter(const EnterStateInformation* enterInformation, con
     m_followingEnterInformation = info->m_onEnterInformation;
     
     auto r = m_screen.getSize();
-    r.x -= 0;
     m_sourceImage.setView(utility::getDefaultView(m_sourceImage, r));
+    m_sourceImage.clear();
     info->m_source->pause(getCurrentTime());
     info->m_source->draw(m_sourceImage);
     m_sourceImage.display();
 
     m_targetImage.setView(utility::getDefaultView(m_targetImage, r));
+    m_targetImage.clear();
     info->m_target->onEnter(info->m_onEnterInformation, getCurrentTime());
-    info->m_target->pause(getCurrentTime());
     info->m_target->update(getCurrentTime());
     info->m_target->draw(m_targetImage);
     m_targetImage.display();
@@ -53,7 +53,6 @@ StateChangeInformation TransitionState::update(const float time)
 
 void TransitionState::draw(const DrawParameter& params)
 {
-    params.getTarget().clear();
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), params.getTarget().getSize()));
     m_transition->draw(params);
 }

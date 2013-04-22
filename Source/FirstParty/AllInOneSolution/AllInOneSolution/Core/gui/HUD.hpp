@@ -38,7 +38,8 @@ private:
 public:
     HUD(ResourceManager& resourceManager, Config& config);
 
-    void update(const Level* level, float elapsedTime);
+    void update(const Level* level, const float time);
+    void restartAt(const float time);
 
     void draw(const DrawParameter& params);
 

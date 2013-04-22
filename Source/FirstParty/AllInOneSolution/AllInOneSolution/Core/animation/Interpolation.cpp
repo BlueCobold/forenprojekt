@@ -37,6 +37,12 @@ void Interpolation::start()
     update(getCurrentTime());
 }
 
+void Interpolation::stop()
+{
+    m_started = false;
+    m_currentValue = m_targetValue;
+}
+
 void Interpolation::restartAt(const float time)
 {
     TimedObject::restartAt(time);

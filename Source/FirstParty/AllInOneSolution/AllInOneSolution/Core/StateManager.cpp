@@ -47,6 +47,7 @@ void StateManager::setState(StateId id, EnterStateInformation* enterInformation)
     m_currentStateId = id;
 	m_currentState = state;
     m_currentState->onEnter(enterInformation, m_currentTime);
+    m_currentState->resume(m_currentTime);
 }
 
 State* StateManager::getState(StateId id) const

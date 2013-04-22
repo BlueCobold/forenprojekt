@@ -32,7 +32,6 @@ public:
 
 private:
 
-    std::unique_ptr<HUD> m_hud;
     std::unique_ptr<Level> m_level;
     Level* m_lastLevel;
 

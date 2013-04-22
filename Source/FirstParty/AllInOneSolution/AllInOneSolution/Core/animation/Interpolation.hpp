@@ -18,6 +18,7 @@ public:
     Interpolation();
 
     void start();
+    void stop();
     virtual void restartAt(const float time);
     void update(const float elapsedTime);
 

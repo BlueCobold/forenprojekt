@@ -41,21 +41,24 @@ StateChangeInformation PlayState::update(const float time)
 {
     updateTime(time);
 
-    m_level->update(time, m_screen);
-    if(utility::Keyboard.isKeyDown(sf::Keyboard::R))
+    if(!isPaused())
     {
-        // BUG! Memory leak!
-        m_level = new Level(2, m_resourceManager, m_config);
-        m_level->restartAt(getCurrentTime());
-    }
+        m_level->update(getCurrentTime(), m_screen);
+        if(utility::Keyboard.isKeyDown(sf::Keyboard::R))
+        {
+            // BUG! Memory leak!
+            m_level = new Level(2, m_resourceManager, m_config);
+            m_level->restartAt(getCurrentTime());
+        }
 
-    if(utility::Keyboard.isKeyDown(sf::Keyboard::P) || utility::Keyboard.isKeyDown(sf::Keyboard::Pause))
-    {
-        m_pauseStateInfo.m_levelTime = getCurrentTime();
-        m_pauseStateInfo.m_level = m_level;
-        m_transitionStateInfo.m_followingState = PauseStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
-        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+        if(utility::Keyboard.isKeyDown(sf::Keyboard::P) || utility::Keyboard.isKeyDown(sf::Keyboard::Pause))
+        {
+            m_pauseStateInfo.m_levelTime = getCurrentTime();
+            m_pauseStateInfo.m_level = m_level;
+            m_transitionStateInfo.m_followingState = PauseStateId;
+            m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+            return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+        }
     }
 
     m_hud.update(m_level, getCurrentTime());

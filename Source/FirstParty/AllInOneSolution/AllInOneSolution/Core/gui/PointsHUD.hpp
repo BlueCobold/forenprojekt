@@ -16,6 +16,7 @@ public:
               const float verticalPercentage = HUDElement::Top);
 
     void update(const DrawParameter& params);
+    void restartAt(const float time);
 
     void setPoints(int points);
 
