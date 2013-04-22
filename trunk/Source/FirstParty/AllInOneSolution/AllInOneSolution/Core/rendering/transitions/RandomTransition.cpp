@@ -77,7 +77,7 @@ std::unique_ptr<Transition> RandomTransition::createTransition(int randomCount)
     auto sourceTexture = getSourceTexture();
     auto targetTexture = getTargetTexture();
     auto duration = getDuration();
-    type = GrowingCircle;
+
     switch(type)
     {
         case HorizontalHalves:

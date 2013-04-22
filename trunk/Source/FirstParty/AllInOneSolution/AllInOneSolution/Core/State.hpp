@@ -42,7 +42,6 @@ public:
     virtual void draw(const DrawParameter& params) = 0;
     virtual void onEnter(const EnterStateInformation* enterInformation, const float time)
     {
-        resume(time);
         updateTime(time);
     }
 
@@ -50,15 +49,15 @@ public:
 
     void pause(const float time)
     {
-        m_pause = true;
         if(!isPaused())
             m_pauseStart = time;
+        m_pause = true;
     }
 
     void resume(const float time)
     {
         if(isPaused())
-            m_pauseDelay += m_pauseStart;
+            m_pauseDelay += time - m_pauseStart;
         m_pause = false;
     }
 

@@ -19,6 +19,11 @@ void PointsHUD::update(const DrawParameter& params)
     LabelHUD::update(params);
 }
 
+void PointsHUD::restartAt(const float time)
+{
+    m_pointCounter.stop();
+}
+
 void PointsHUD::setPoints(int points)
 {
     if(static_cast<float>(points) != m_pointCounter.getTargetValue())

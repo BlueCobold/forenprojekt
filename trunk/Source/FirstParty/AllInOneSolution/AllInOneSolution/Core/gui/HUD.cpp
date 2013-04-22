@@ -13,7 +13,7 @@ HUD::HUD(ResourceManager& resourceManager, Config& config) :
     m_fpsShow = config.get<bool>("ShowFps");
 }
 
-void HUD::update(const Level* level, float elapsedTime)
+void HUD::update(const Level* level, const float elapsedTime)
 {
     m_target.setTargets(level->getTotalTarget(), level->getRemainingTarget());
 
@@ -26,6 +26,11 @@ void HUD::update(const Level* level, float elapsedTime)
         setBallShow(true);
 
     m_ball.setBalls(level->getRemainingBall());
+}
+
+void HUD::restartAt(const float time)
+{
+    m_points.restartAt(time);
 }
 
 void HUD::draw(const DrawParameter& params)

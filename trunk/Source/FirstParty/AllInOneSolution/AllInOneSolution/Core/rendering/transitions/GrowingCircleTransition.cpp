@@ -26,6 +26,7 @@ GrowingCircleTransition::GrowingCircleTransition(
     {
         m_sourceSprite.setTexture(*sourceTexture, true);
         m_sourceSprite.setPosition(0, 0);
+        m_sourceSprite.setTextureRect(sf::IntRect(0, 0, size.x, size.y));
     }
 }
 
