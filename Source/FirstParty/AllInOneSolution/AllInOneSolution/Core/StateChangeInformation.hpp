@@ -4,6 +4,7 @@
 #define STATECHANGEINFORMATION_HPP
 
 #include "State.hpp"
+#include "EnterStateInformation.hpp"
 
 class StateChangeInformation
 {
@@ -13,7 +14,7 @@ public:
 
 public:
 
-    StateChangeInformation(StateId id, void* userData):
+    StateChangeInformation(StateId id, EnterStateInformation* userData):
         m_stateId(id),
         m_userData(userData) { }
 
@@ -30,12 +31,12 @@ public:
     }
 
     StateId getStateId() const { return m_stateId; }
-    void* getUserData() const { return m_userData; }
+    EnterStateInformation* getUserData() const { return m_userData; }
 
 private:
 
     StateId m_stateId;
-    void* m_userData;
+    EnterStateInformation* m_userData;
 };
 
 #endif

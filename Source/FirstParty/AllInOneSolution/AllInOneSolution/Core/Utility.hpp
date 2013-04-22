@@ -4,6 +4,8 @@
 #define UTILITY_HPP
 
 #include <SFML/Graphics/Color.hpp>
+#include "SFML/Graphics/RenderTarget.hpp"
+#include "SFML/Graphics/View.hpp"
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -77,6 +79,7 @@ namespace utility
 
     std::string replace(std::string string, std::string replacement);
 
+    sf::View getDefaultView(const sf::RenderTarget& target, const sf::Vector2u viewSize);
 } // namespace utility
 
 #endif // UTILITY_HPP

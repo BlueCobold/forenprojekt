@@ -1,11 +1,16 @@
 #include "StateManager.hpp"
 
+#include "LoadLevelState.hpp"
+
 #include <utility> // move
 #include <exception>
 #include <sstream>
 
-StateManager::StateManager() :
-	m_currentState(nullptr)
+StateManager::StateManager(sf::RenderWindow& screen) :
+    m_screen(screen),
+	m_currentState(nullptr),
+    m_currentStateId(None),
+    m_currentLevel(nullptr)
 {
 
 }
@@ -23,36 +28,58 @@ void StateManager::registerState(StateId id, std::shared_ptr<State> state)
 	m_statesById[id] = state;		
 }
 
-void StateManager::setState(StateId id, void* enterInformation)
+void StateManager::setState(StateId id, EnterStateInformation* enterInformation)
 {
-	auto state = m_statesById.find(id);
+    if(m_currentState != nullptr)
+        m_currentState->pause(m_currentTime);
+
+	auto state = getState(id);
+    if(id == TransitionStateId)
+    {
+        EnterTransitionStateInformation* info = dynamic_cast<EnterTransitionStateInformation*>(enterInformation);
+        info->m_source = m_currentState;
+        info->m_target = getState(info->m_followingState);
+    }
+    if(m_currentStateId == LoadLevelStateId)
+        m_currentLevel = std::move((dynamic_cast<LoadLevelState*>(m_currentState))->gainLevel());
+    if(m_currentLevel != nullptr)
+        enterInformation->m_level = m_currentLevel.get();
+    m_currentStateId = id;
+	m_currentState = state;
+    m_currentState->onEnter(enterInformation, m_currentTime);
+}
+
+State* StateManager::getState(StateId id) const
+{
+    auto state = m_statesById.find(id);
 	if(state == end(m_statesById))
 	{
 		std::stringstream ss;
 		ss << "The state with id " << id << " does not exist.";
 		throw std::runtime_error(ss.str());
 	}
-	m_currentState = state->second;
-	m_currentState->onEnter(enterInformation);
+    return state->second.get();
 }
 
 void StateManager::update()
 {
-	if(m_currentState.get() && !m_currentState->isPaused())
-	{
-		StateChangeInformation changeInformation = m_currentState->update();
+    m_currentTime = m_frametime.getElapsedTime().asSeconds();
+	if(m_currentState == nullptr)
+        return;
+
+	StateChangeInformation changeInformation = StateChangeInformation::Empty();
+    do
+    {
+        changeInformation = m_currentState->update(m_currentTime);
 		if(changeInformation != StateChangeInformation::Empty())
-        {
 			setState(changeInformation.getStateId(), changeInformation.getUserData());
-            update();
-        }
-	}
+    } while(changeInformation != StateChangeInformation::Empty());
 }
 
 void StateManager::draw()
 {
-    if(m_currentState.get() && !m_currentState->isPaused())
+    if(m_currentState !=nullptr )
 	{
-		m_currentState->draw();
+		m_currentState->draw(m_screen);
 	}
 }
