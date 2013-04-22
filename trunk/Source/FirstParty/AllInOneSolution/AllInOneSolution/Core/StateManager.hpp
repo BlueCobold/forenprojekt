@@ -4,6 +4,10 @@
 #define STATE_MANAGER_HPP
 
 #include "State.hpp"
+#include "model/Level.hpp"
+#include "EnterStateInformation.hpp"
+
+#include "SFML/Graphics/RenderWindow.hpp"
 
 #include <memory> // unique_ptr
 #include <vector>
@@ -15,18 +19,24 @@ class StateManager
 {
 public:
 
-    StateManager();
+    StateManager(sf::RenderWindow& screen);
 
 	void registerState(StateId id, std::shared_ptr<State> state);
-    void setState(StateId id, void* enterInformation= nullptr);
+    void setState(StateId id, EnterStateInformation* enterInformation = nullptr);
 
     void draw();
     void update();
 
 private:
+    State* getState(StateId id) const;
 
+    sf::RenderWindow& m_screen;
+    sf::Clock m_frametime;
+    float m_currentTime;
 	std::map<StateId, std::shared_ptr<State>> m_statesById;
-    std::shared_ptr<State> m_currentState;
+    State* m_currentState;
+    StateId m_currentStateId;
+    std::unique_ptr<Level> m_currentLevel;
 };
 
 #endif // STATE_MANAGER_HPP

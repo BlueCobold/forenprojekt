@@ -18,62 +18,53 @@ PlayState::~PlayState()
 
 }
 
-void PlayState::onEnter(void *enterInformation)
+void PlayState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
-    EnterPlayStateInformation* info = (EnterPlayStateInformation*)enterInformation;
-    m_level = std::move(info->m_level);
-    float time = m_frametime.getElapsedTime().asSeconds();
+    State::onEnter(enterInformation, time);
+
+    const EnterPlayStateInformation* info = dynamic_cast<const EnterPlayStateInformation*>(enterInformation);
+    m_level = info->m_level;
     
     utility::Mouse.capture();
     m_level->adaptToMouse();
 
-    if(info->m_returnFromPause)
-        m_timeShift = time - m_timeShift;
-
-    else
+    if(!info->m_returnFromPause)
     {
         m_level->restartAt(time);
         m_level->update(time, m_screen);
-        m_hud.update(m_level.get(), time);
+        m_hud.update(m_level, time);
         m_timeShift = 0.0f;
     }
 }
 
-StateChangeInformation PlayState::update()
+StateChangeInformation PlayState::update(const float time)
 {
-    float time = m_frametime.getElapsedTime().asSeconds() - m_timeShift;
-    m_level->update(time, m_screen);
+    updateTime(time);
 
+    m_level->update(time, m_screen);
     if(utility::Keyboard.isKeyDown(sf::Keyboard::R))
     {
-        m_timeShift = 0.0f;
-        m_level.reset();
-        m_level = std::unique_ptr<Level>(new Level(2, m_resourceManager, m_config));
-        float time = m_frametime.getElapsedTime().asSeconds();
-        m_level->restartAt(time);
+        // BUG! Memory leak!
+        m_level = new Level(2, m_resourceManager, m_config);
+        m_level->restartAt(getCurrentTime());
     }
 
     if(utility::Keyboard.isKeyDown(sf::Keyboard::P) || utility::Keyboard.isKeyDown(sf::Keyboard::Pause))
     {
-        m_timeShift = time;
-        auto source = std::unique_ptr<sf::Texture>(new sf::Texture);
-        source->create(m_screen.getSize().x, m_screen.getSize().y);
-        // BUG: updating the texture with the background is incorrect. The level+hud should be rendered into it.
-        // This bug causes a tiny movement when the state starts - hard to see, but if you update step by step,
-        // it gets visible. The further the ball moved in last level->update(), the bigger this movement is.
-        source->update(m_screen);
-        m_pauseStateInfo.m_background = std::move(source);
-        m_pauseStateInfo.m_level = std::move(m_level);
-        m_pauseStateInfo.m_enterPauseTransition = true;
-        return StateChangeInformation(PauseStateId, &m_pauseStateInfo);
+        m_pauseStateInfo.m_levelTime = getCurrentTime();
+        m_pauseStateInfo.m_level = m_level;
+        m_transitionStateInfo.m_followingState = PauseStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 
-    m_hud.update(m_level.get(), time);
+    m_hud.update(m_level, getCurrentTime());
     return StateChangeInformation::Empty();
 }
 
-void PlayState::draw()
+void PlayState::draw(const DrawParameter& params)
 {
-    m_level->draw(m_screen);
-    m_hud.draw(m_screen);
+    m_level->adjustView(params.getTarget());
+    m_level->draw(params);
+    m_hud.draw(params);
 }

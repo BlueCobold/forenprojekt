@@ -5,6 +5,7 @@
 
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
+#include "gui/HUD.hpp"
 #include "gui/LabelHUD.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
@@ -19,23 +20,24 @@ public:
     PauseState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
     ~PauseState();
 
-    StateChangeInformation update();
-    void draw();
-    void onEnter(void *enterInformation);
+    virtual StateChangeInformation update(const float time);
+    virtual void draw(const DrawParameter& params);
+	virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
 
+private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
-private:
 
     std::unique_ptr<sf::Texture> m_background;
     sf::RenderTexture m_renderTexture;
-    std::unique_ptr<Level> m_level;
+    Level* m_level;
+    HUD m_HUD;
     LabelHUD m_label;
 
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPauseStateInformation m_pauseStateInfo;
-    bool m_enterPauseTransition;
+    float m_timeDiff;
 };
 
 #endif // PAUSESTATE_HPP

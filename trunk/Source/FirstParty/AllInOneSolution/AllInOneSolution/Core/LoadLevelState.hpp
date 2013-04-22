@@ -24,18 +24,17 @@ public:
     LoadLevelState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
     ~LoadLevelState();
 
-    StateChangeInformation update();
-    void draw();
-    void onEnter(void *enterInformation);
+    virtual void draw(const DrawParameter& params);
+
+    StateChangeInformation update(const float time);
+    void onEnter(const EnterStateInformation *enterInformation, const float time);
+    std::unique_ptr<Level> gainLevel();
 
 private:
 
     std::unique_ptr<HUD> m_hud;
     std::unique_ptr<Level> m_level;
-    //std::unique_ptr<Transition> m_fadedScreen;
-    Transition* m_fadedScreen;
-    sf::Clock m_frametime;
-    sf::RenderTexture m_texture;
+    Level* m_lastLevel;
 
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;

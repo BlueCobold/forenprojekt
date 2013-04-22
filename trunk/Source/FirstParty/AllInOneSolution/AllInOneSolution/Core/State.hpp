@@ -24,7 +24,7 @@ enum StateId
 
 /// This class will be used to discribe a State
 /// and to be managed by the StateManager
-class State
+class State : public Drawable
 {
 public:
     
@@ -32,24 +32,34 @@ public:
         m_screen(screen),
         m_resourceManager(resourceManager),
         m_pause(false),
+        m_pauseDelay(0),
         m_config(config)
     { }
 
     virtual ~State()
     { }
 
-    virtual StateChangeInformation update() = 0;
-    virtual void draw() = 0;
-	virtual void onEnter(void *enterInformation) = 0;
-
-    void pause()
+    virtual void draw(const DrawParameter& params) = 0;
+    virtual void onEnter(const EnterStateInformation* enterInformation, const float time)
     {
-         m_pause = true;
+        resume(time);
+        updateTime(time);
     }
 
-    void resume()
+    virtual StateChangeInformation update(const float time) = 0;
+
+    void pause(const float time)
     {
-         m_pause = false;
+        m_pause = true;
+        if(!isPaused())
+            m_pauseStart = time;
+    }
+
+    void resume(const float time)
+    {
+        if(isPaused())
+            m_pauseDelay += m_pauseStart;
+        m_pause = false;
     }
 
     const bool isPaused()
@@ -59,14 +69,27 @@ public:
 
 protected:
     
+    void updateTime(const float time)
+    {
+        if(isPaused())
+            return;
+        m_currentTime = time;
+    }
+
+    float getCurrentTime() const
+    {
+        return m_currentTime - m_pauseDelay;
+    }
+
     sf::RenderWindow& m_screen;
     ResourceManager& m_resourceManager;
     Config& m_config;
 
 private:
-
     bool m_pause;
-
+    float m_pauseStart;
+    float m_currentTime;
+    float m_pauseDelay;
 };
 
 #endif // STATE_HPP

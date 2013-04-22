@@ -33,14 +33,8 @@ RandomTransition::RandomTransition(const sf::Texture* sourceTexture,
     m_maxVerticalLines(21),
     m_transition(nullptr)
 {
-    bool sourceExist = false;
-    bool targetExist = false;
-
-    if(sourceTexture != nullptr)
-        sourceExist = true;
-    if(targetTexture != nullptr)
-        targetExist = true;
-
+    bool sourceExist = sourceTexture != nullptr;
+    bool targetExist = targetTexture != nullptr;
     m_transition = std::move(createTransition(randomNumber(sourceExist, targetExist)));
 }
 
@@ -83,6 +77,7 @@ std::unique_ptr<Transition> RandomTransition::createTransition(int randomCount)
     auto sourceTexture = getSourceTexture();
     auto targetTexture = getTargetTexture();
     auto duration = getDuration();
+    type = GrowingCircle;
     switch(type)
     {
         case HorizontalHalves:

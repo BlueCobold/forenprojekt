@@ -22,7 +22,8 @@ App::App(Config& config) :
     m_windowTitle("Rickety Racket"),
     m_fullscreen(false),
     m_focus(true),
-    m_soundBuffer(nullptr)
+    m_soundBuffer(nullptr),
+    m_stateManager(m_screen)
 {
     // Cache often used settings
     m_windowTitle = m_config.get<std::string>("WindowName");

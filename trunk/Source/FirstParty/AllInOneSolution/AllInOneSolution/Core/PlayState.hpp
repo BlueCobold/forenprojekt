@@ -22,17 +22,16 @@ public:
     PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
     ~PlayState();
 
-    StateChangeInformation update();
-    void draw();
-	void onEnter(void *enterInformation);
+    virtual StateChangeInformation update(const float time);
+    virtual void draw(const DrawParameter& params);
+	virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
 
 private:
 
-    std::unique_ptr<Level> m_level;
-    sf::Clock m_frametime;
-
+    Level* m_level;
     HUD m_hud;
 
+    EnterTransitionStateInformation m_transitionStateInfo;
     EnterPauseStateInformation m_pauseStateInfo;
     float m_timeShift;
 };

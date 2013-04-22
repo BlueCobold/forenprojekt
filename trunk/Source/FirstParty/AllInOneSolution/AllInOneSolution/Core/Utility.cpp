@@ -1,6 +1,5 @@
 #include "Utility.hpp"
 #include "resources/FileReader.hpp"
-#include "rendering\transitions\RandomTransition.hpp"
 
 namespace utility
 {
@@ -43,5 +42,17 @@ namespace utility
             string.replace(pos,1,replacement);
 
         return string;
+    }
+
+    sf::View getDefaultView(const sf::RenderTarget& target, const sf::Vector2u viewSize)
+    {
+        auto view = sf::View(
+            sf::FloatRect(0, 0,
+            static_cast<float>(viewSize.x),
+            static_cast<float>(viewSize.y)));
+        view.setViewport(sf::FloatRect(0, 0,
+            viewSize.x / static_cast<float>(target.getSize().x),
+            viewSize.y / static_cast<float>(target.getSize().y)));
+        return view;
     }
 }

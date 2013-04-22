@@ -11,6 +11,7 @@
 LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
     State(screen, resourceManager, config),
     m_level(nullptr),
+    m_lastLevel(nullptr),
     m_hud(new HUD(resourceManager, config))
 {
 }
@@ -20,38 +21,38 @@ LoadLevelState::~LoadLevelState()
 
 }
 
-void LoadLevelState::onEnter(void* enterInformation)
+void LoadLevelState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
+    State::onEnter(enterInformation, time);
 }
 
-StateChangeInformation LoadLevelState::update()
+std::unique_ptr<Level> LoadLevelState::gainLevel()
 {
-    m_level = std::unique_ptr<Level>(new Level(6, m_resourceManager, m_config));
-    bool fromImage = m_texture.create(m_screen.getSize().x, m_screen.getSize().y);
+    return std::move(m_level);
+}
 
-    float time = m_frametime.getElapsedTime().asSeconds();
-    m_level->restartAt(time);
-    m_level->update(time, m_texture);
+StateChangeInformation LoadLevelState::update(const float time)
+{
+    updateTime(time);
+    m_level = std::unique_ptr<Level>(new Level(7, m_resourceManager, m_config));
+    m_lastLevel = m_level.get();
 
-    m_hud->update(m_level.get(), m_frametime.getElapsedTime().asSeconds());
-
-    m_texture.clear();
-    m_level->draw(DrawParameter(m_texture));
-    m_hud->draw(m_texture);
-    m_texture.display();
-
+    m_level->restartAt(getCurrentTime());
+    m_level->update(getCurrentTime(), m_screen);
+    m_hud->update(m_level.get(), getCurrentTime());
+    
+    m_playStateInfo.m_returnFromPause = false;
+    m_playStateInfo.m_level = m_lastLevel;
     m_transitionStateInfo.m_followingState = PlayStateId;
     m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
-    std::unique_ptr<Transition> state = std::unique_ptr<RandomTransition>(
-        new RandomTransition(nullptr, &m_texture.getTexture(), 0.5f, m_screen.getSize()));
-    m_transitionStateInfo.m_transition = std::move(state);
-
-    m_playStateInfo.m_level = std::move(m_level);
-    m_playStateInfo.m_returnFromPause = false;
 
     return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 }
 
-void LoadLevelState::draw()
+void LoadLevelState::draw(const DrawParameter& params)
 {
+    m_lastLevel->adjustView(params.getTarget());
+    m_lastLevel->draw(params);
+    m_hud->update(m_lastLevel, getCurrentTime());
+    m_hud->draw(params);
 }
