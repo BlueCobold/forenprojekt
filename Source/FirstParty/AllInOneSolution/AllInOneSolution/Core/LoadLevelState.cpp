@@ -34,7 +34,7 @@ std::unique_ptr<Level> LoadLevelState::gainLevel()
 StateChangeInformation LoadLevelState::update(const float time)
 {
     updateTime(time);
-    m_level = std::unique_ptr<Level>(new Level(7, m_resourceManager, m_config));
+    m_level = std::unique_ptr<Level>(new Level(6, m_resourceManager, m_config));
     m_lastLevel = m_level.get();
 
     m_level->restartAt(getCurrentTime());

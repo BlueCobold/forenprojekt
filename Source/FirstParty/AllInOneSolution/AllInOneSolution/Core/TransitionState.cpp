@@ -38,7 +38,7 @@ void TransitionState::onEnter(const EnterStateInformation* enterInformation, con
     info->m_target->draw(m_targetImage);
     m_targetImage.display();
 
-    m_transition.reset(new RandomTransition(&m_sourceImage.getTexture(), &m_targetImage.getTexture(), 3.5f, m_screen.getSize()));
+    m_transition.reset(new RandomTransition(&m_sourceImage.getTexture(), &m_targetImage.getTexture(), 0.5f, m_screen.getSize()));
 }
 
 StateChangeInformation TransitionState::update(const float time)
