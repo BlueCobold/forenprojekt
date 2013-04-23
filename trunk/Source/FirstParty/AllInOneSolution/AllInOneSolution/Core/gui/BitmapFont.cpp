@@ -48,7 +48,7 @@ bool BitmapFont::loadFromFile(const std::string& path, ResourceManager& resource
     }
 
     tinyxml2::XMLElement* bitmapfont = doc.FirstChildElement("bitmapfont");
-    m_texture = *resourceManager.getTexture(bitmapfont->FirstChildElement("image")->Attribute("name"));
+    m_texture = resourceManager.getTexture(bitmapfont->FirstChildElement("image")->Attribute("name"));
     height = bitmapfont->FirstChildElement("height")->IntAttribute("value"); 
     for(auto it = bitmapfont->FirstChildElement("glyphs")->FirstChildElement("glyph"); it != nullptr; it = it->NextSiblingElement("glyph"))
     {
@@ -58,7 +58,7 @@ bool BitmapFont::loadFromFile(const std::string& path, ResourceManager& resource
         m_glyphs.insert
         ( 
             std::make_pair<char, BitmapFont::Glyph>(it->Attribute("name")[0], 
-            BitmapFont::Glyph(m_texture, sf::IntRect(it->IntAttribute("x"), it->IntAttribute("y"), width, height), spacing, it->IntAttribute("xoffset")))
+            BitmapFont::Glyph(*m_texture, sf::IntRect(it->IntAttribute("x"), it->IntAttribute("y"), width, height), spacing, it->IntAttribute("xoffset")))
         );
     }
     m_fontSize = height;

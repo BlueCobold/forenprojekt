@@ -50,7 +50,7 @@ private:
 
 private:
     std::map<char, Glyph> m_glyphs;
-    sf::Texture m_texture;
+    sf::Texture* m_texture;
     unsigned int m_fontSize;
 };
 
