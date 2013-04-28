@@ -2,6 +2,7 @@
 #define ARROW_HPP
 
 #include "HUDElement.hpp"
+#include <SFML/Graphics/Sprite.hpp>
 
 class ArrowHUD : public HUDElement
 {

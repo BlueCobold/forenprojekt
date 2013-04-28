@@ -64,6 +64,8 @@ public:
 
     const int getPoints() const;
     const int getRemainingBall() const;
+
+    const bool isLevelPassed() const;
     
     virtual float getValueOf(const std::string& name) const;
     virtual void setValueOf(const std::string& name, const float value);
@@ -214,6 +216,8 @@ private:
     };
     
     std::vector<std::unique_ptr<TimedLabel>> m_pointLabels;
+
+    bool m_levelPass;
 };
 
 #endif // LEVEL_HPP

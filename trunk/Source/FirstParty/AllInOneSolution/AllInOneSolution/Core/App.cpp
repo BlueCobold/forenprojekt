@@ -4,6 +4,7 @@
 #include "PauseState.hpp"
 #include "PlayState.hpp"
 #include "TransitionState.hpp"
+#include "LevelPassState.hpp"
 #include "Utility.hpp" // toString
 #include "resources/Config.hpp"
 
@@ -52,6 +53,7 @@ App::App(Config& config) :
     m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
     m_stateManager.registerState(PauseStateId, std::unique_ptr<PauseState>(new PauseState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(TransitionStateId, std::unique_ptr<TransitionState>(new TransitionState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.registerState(LevelPassStateId, std::unique_ptr<LevelPassState>(new LevelPassState(m_screen, m_resourceManager, m_config)));
     m_stateManager.setState(LoadLevelStateId);
 }
 

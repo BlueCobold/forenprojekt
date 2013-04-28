@@ -93,7 +93,11 @@ void LineLabel::rebuild()
 
 void LineLabel::setPosition(const float x, const float y)
 {
-    m_position = sf::Vector2f(x, y);
+    if(m_position != sf::Vector2f(x, y))
+    {
+        m_position = sf::Vector2f(x, y);
+        rebuild();
+    }
 }
 
 void LineLabel::setAlignment(const Alignment alignment)
@@ -122,7 +126,11 @@ float LineLabel::getRotation() const
 
 void LineLabel::setBitmapFont(BitmapFont* font)
 {
-    m_font = font;
+    if(m_font != font)
+    {
+        m_font = font;
+        rebuild();
+    }
 }
 
 float LineLabel::getWidth() const
@@ -177,4 +185,8 @@ bool LineLabel::allProgressesFinished()
     return (m_xPosChange.isStarted() && m_xPosChange.isFinished())
         && (m_yPosChange.isStarted() && m_yPosChange.isFinished())
         && (m_alphaChange.isStarted() && m_alphaChange.isFinished());
+}
+unsigned int LineLabel::getFontSize()
+{
+    return m_font->getFontSize();
 }

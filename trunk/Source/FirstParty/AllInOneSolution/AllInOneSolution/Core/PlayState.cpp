@@ -59,6 +59,15 @@ StateChangeInformation PlayState::update(const float time)
             m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
+
+        if(m_level->isLevelPassed())
+        {
+            m_pauseStateInfo.m_levelTime = getCurrentTime();
+            m_pauseStateInfo.m_level = m_level;
+            m_transitionStateInfo.m_followingState = LevelPassStateId;
+            m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+            return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+        }
     }
 
     m_hud.update(m_level, getCurrentTime());
