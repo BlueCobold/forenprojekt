@@ -53,6 +53,8 @@ public:
 
     void draw(const DrawParameter& params);
 
+    unsigned int getFontSize();
+
 private:
 
     void rebuild();

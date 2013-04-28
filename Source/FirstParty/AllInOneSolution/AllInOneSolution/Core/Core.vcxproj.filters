@@ -181,6 +181,12 @@
     <ClCompile Include="rendering\transitions\VerticalSpringTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
+    <ClCompile Include="LevelPassState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\Button.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -512,6 +518,12 @@
     </ClInclude>
     <ClInclude Include="EnterStateInformation.hpp">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelPassState.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Button.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

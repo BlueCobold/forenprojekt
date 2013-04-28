@@ -96,6 +96,7 @@
     <ClCompile Include="gui\ArrowHUD.cpp" />
     <ClCompile Include="gui\BallHUD.cpp" />
     <ClCompile Include="gui\BitmapFont.cpp" />
+    <ClCompile Include="gui\Button.cpp" />
     <ClCompile Include="gui\FPSCounter.cpp" />
     <ClCompile Include="gui\FPSCounterHUD.cpp" />
     <ClCompile Include="gui\HUD.cpp" />
@@ -105,6 +106,7 @@
     <ClCompile Include="gui\PointsHUD.cpp" />
     <ClCompile Include="gui\TargetHUD.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="LevelPassState.cpp" />
     <ClCompile Include="LoadLevelState.cpp" />
     <ClCompile Include="model\Background.cpp" />
     <ClCompile Include="model\Ball.cpp" />
@@ -189,6 +191,7 @@
     <ClInclude Include="gui\ArrowHUD.hpp" />
     <ClInclude Include="gui\BallHUD.hpp" />
     <ClInclude Include="gui\BitmapFont.hpp" />
+    <ClInclude Include="gui\Button.hpp" />
     <ClInclude Include="gui\FPSCounter.hpp" />
     <ClInclude Include="gui\FPSCounterHUD.hpp" />
     <ClInclude Include="gui\HUD.hpp" />
@@ -198,6 +201,7 @@
     <ClInclude Include="gui\PointsHUD.hpp" />
     <ClInclude Include="gui\TargetHUD.hpp" />
     <ClInclude Include="Input.hpp" />
+    <ClInclude Include="LevelPassState.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />

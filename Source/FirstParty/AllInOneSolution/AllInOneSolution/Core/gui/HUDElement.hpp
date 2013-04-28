@@ -1,7 +1,8 @@
 #ifndef HUDELEMENT_HPP
 #define HUDELEMENT_HPP
 
-#include "LineLabel.hpp"
+#include <SFML/System/Vector2.hpp>
+#include "../rendering/Drawable.hpp"
 
 class ResourceManager;
 
@@ -10,12 +11,12 @@ class HUDElement
 {
 public:
 
-	static const float Left;
-	static const float Right;
-	static const float Center;
-	static const float Top;
-	static const float Middle;
-	static const float Bottom;
+    static const float Left;
+    static const float Right;
+    static const float Center;
+    static const float Top;
+    static const float Middle;
+    static const float Bottom;
 
 private:
 
@@ -30,7 +31,7 @@ public:
     HUDElement(
         const sf::Vector2f& position,
         const float rotation,
-		const float horizontalPercentage = HUDElement::Left,
+        const float horizontalPercentage = HUDElement::Left,
         const float verticalPercentage = HUDElement::Top);
 
     virtual ~HUDElement()
