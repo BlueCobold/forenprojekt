@@ -10,7 +10,7 @@ m_mainMenu(sf::Vector2f(0, 0), "Main Menu", "buttonIdleFont", resourceManager, "
 m_nextLevel(sf::Vector2f(0, 0), "Next Level", "buttonIdleFont", resourceManager, "ButtonIdle", sf::Vector2f(0, -2)),
 m_continue(sf::Vector2f(0, 0), "Continue", "buttonIdleFont", resourceManager, "ButtonIdle", sf::Vector2f(0, -2))
 {
-    m_activButtons = static_cast<int>(Buttons);
+    m_activButtons = Buttons;
 
     m_menuBackround.setTexture(*resourceManager.getTexture("Window"));
     m_menuBackround.setPosition(m_position);
@@ -121,9 +121,9 @@ void GameMenu::rebuild()
     }
     if(Continue == static_cast<ButtonFlag>(m_activButtons & static_cast<int>(Continue)))
     {
-        m_playAgain.setPosition(sf::Vector2f(m_position.x + m_size.x / 2.f - m_playAgain.getSize().x / 2.f, m_menuBackround.getPosition().y + distance));
-        m_playAgain.bindHover("ButtonHover", "buttonHoverFont", sf::Vector2f(0, 0), sf::Vector2f(0, -2));
-        m_playAgain.bindPressed("ButtonPressed", "buttonHoverFont", sf::Vector2f(0, 0), sf::Vector2f(10, 5));
+        m_continue.setPosition(sf::Vector2f(m_position.x + m_size.x / 2.f - m_continue.getSize().x / 2.f, m_menuBackround.getPosition().y + distance));
+        m_continue.bindHover("ButtonHover", "buttonHoverFont", sf::Vector2f(0, 0), sf::Vector2f(0, -2));
+        m_continue.bindPressed("ButtonPressed", "buttonHoverFont", sf::Vector2f(0, 0), sf::Vector2f(10, 5));
         distance += 60;
     }
     if(NextLevel == static_cast<ButtonFlag>(m_activButtons & static_cast<int>(NextLevel)))
