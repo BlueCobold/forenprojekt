@@ -28,7 +28,7 @@ m_continue(sf::Vector2f(0, 0), "Continue", "buttonIdleFont", resourceManager, "B
         m_playAgain.bindPressed("ButtonPressed", "buttonHoverFont", sf::Vector2f(0, 0), sf::Vector2f(10, 5));
         distance += 60;
     }
-    if(PlayAgain == static_cast<ButtonFlag>(m_activButtons & static_cast<int>(Continue)))
+    if(Continue == static_cast<ButtonFlag>(m_activButtons & static_cast<int>(Continue)))
     {
         m_continue.setPosition(sf::Vector2f(m_position.x + m_size.x / 2.f - m_continue.getSize().x / 2.f, m_menuBackround.getPosition().y + distance));
         m_continue.bindHover("ButtonHover", "buttonHoverFont", sf::Vector2f(0, 0), sf::Vector2f(0, -2));
@@ -65,7 +65,7 @@ void GameMenu::draw(const DrawParameter& params)
     if(MainMenu == static_cast<ButtonFlag>(m_activButtons & static_cast<int>(MainMenu)))
         m_mainMenu.draw(params);
 
-    if(MainMenu == static_cast<ButtonFlag>(m_activButtons & static_cast<int>(Continue)))
+    if(Continue == static_cast<ButtonFlag>(m_activButtons & static_cast<int>(Continue)))
         m_continue.draw(params);
 }
 
@@ -89,7 +89,7 @@ bool GameMenu::isPressed(ButtonFlag button)
         return m_nextLevel.isPressed();
     if(MainMenu == static_cast<ButtonFlag>(m_activButtons & static_cast<int>(button)))
         return m_mainMenu.isPressed();
-    if(MainMenu == static_cast<ButtonFlag>(m_activButtons & static_cast<int>(button)))
+    if(Continue == static_cast<ButtonFlag>(m_activButtons & static_cast<int>(button)))
         return m_continue.isPressed();
 
     return false;
@@ -119,7 +119,7 @@ void GameMenu::rebuild()
         m_playAgain.bindPressed("ButtonPressed", "buttonHoverFont", sf::Vector2f(0, 0), sf::Vector2f(10, 5));
         distance += 60;
     }
-    if(PlayAgain == static_cast<ButtonFlag>(m_activButtons & static_cast<int>(Continue)))
+    if(Continue == static_cast<ButtonFlag>(m_activButtons & static_cast<int>(Continue)))
     {
         m_playAgain.setPosition(sf::Vector2f(m_position.x + m_size.x / 2.f - m_playAgain.getSize().x / 2.f, m_menuBackround.getPosition().y + distance));
         m_playAgain.bindHover("ButtonHover", "buttonHoverFont", sf::Vector2f(0, 0), sf::Vector2f(0, -2));
