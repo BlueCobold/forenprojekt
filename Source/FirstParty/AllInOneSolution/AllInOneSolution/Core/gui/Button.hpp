@@ -10,16 +10,10 @@
 #include "LineLabel.hpp"
 #include "../resources/ResourceManager.hpp"
 
+/// this class represent a Button
 class Button
 {
 public:
-
-	static const float Left;
-	static const float Right;
-	static const float Center;
-	static const float Top;
-	static const float Middle;
-	static const float Bottom;
 
     struct ButtonData 
     {
@@ -49,8 +43,6 @@ private:
 
     ResourceManager& m_resourceManager;
 
-    sf::RenderWindow& m_window;
-
     bool m_pressed[2];
 
 public:
@@ -59,16 +51,13 @@ public:
            const std::string labelText,
            const std::string font,
            ResourceManager& resourceManager,
-           sf::RenderWindow& window,
            const std::string buttonIdlePicture,
-           const sf::Vector2f& textOffset = sf::Vector2f(0, 0),
-		   const float horizontalPercentage = Button::Left,
-           const float verticalPercentage = Button::Top);
+           const sf::Vector2f& textOffset = sf::Vector2f(0, 0));
 
     virtual ~Button()
     { }
 
-    virtual void update();
+    virtual void update(const sf::RenderWindow& screen);
 
     virtual void draw(const DrawParameter& params);
 
@@ -82,7 +71,7 @@ public:
                      sf::Vector2f spriteOffset = sf::Vector2f(0, 0),
                      sf::Vector2f textOffset = sf::Vector2f(0, 0));
 
-    void setPosition(const sf::Vector2f& position, const float horizontalPercentage = Button::Left, const float verticalPercentage = Button::Top);
+    void setPosition(const sf::Vector2f& position);
 
     sf::Vector2i getSize();
 

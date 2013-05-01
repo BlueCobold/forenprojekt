@@ -7,6 +7,7 @@
 #include "EnterStateInformation.hpp"
 #include "gui/Button.hpp"
 #include "gui/HUD.hpp"
+#include "GameMenu.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 
@@ -27,21 +28,18 @@ public:
 private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
-    void rebuild();
 
     std::unique_ptr<sf::Texture> m_background;
     sf::RenderTexture m_renderTexture;
     Level* m_level;
 
     HUD m_HUD;
+    GameMenu m_gameMenu;
 
-    Button m_playAgain;
-    LineLabel m_label;
-    sf::Sprite m_menuBackround;
+    sf::Vector2u m_screenSize;
 
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
-    EnterPauseStateInformation m_pauseStateInfo;
     float m_timeDiff;
 };
 
