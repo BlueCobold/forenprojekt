@@ -86,5 +86,6 @@
 		<glyph name=":" x="170" y="180" width="10" />
 		<glyph name=";" x="180" y="180" width="8" />
 		<glyph name="*" x="188" y="180" width="14" />
+		<glyph name=" " x="202" y="180" width="8" />
 	</glyphs>
 </bitmapfont>

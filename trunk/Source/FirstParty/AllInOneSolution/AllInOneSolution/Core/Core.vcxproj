@@ -93,6 +93,7 @@
     <ClCompile Include="animation\Interpolation.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="gui\ArrowHUD.cpp" />
     <ClCompile Include="gui\BallHUD.cpp" />
     <ClCompile Include="gui\BitmapFont.cpp" />
@@ -108,6 +109,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LevelPassState.cpp" />
     <ClCompile Include="LoadLevelState.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="model\Background.cpp" />
     <ClCompile Include="model\Ball.cpp" />
     <ClCompile Include="model\collision\ContactListener.cpp" />
@@ -188,6 +190,7 @@
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="EnterStateInformation.hpp" />
+    <ClInclude Include="GameMenu.hpp" />
     <ClInclude Include="gui\ArrowHUD.hpp" />
     <ClInclude Include="gui\BallHUD.hpp" />
     <ClInclude Include="gui\BitmapFont.hpp" />
@@ -203,6 +206,7 @@
     <ClInclude Include="Input.hpp" />
     <ClInclude Include="LevelPassState.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
+    <ClInclude Include="Menu.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />
     <ClInclude Include="model\Ball.hpp" />

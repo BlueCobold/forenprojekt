@@ -1,26 +1,14 @@
 #include "Button.hpp"
-
-const float Button::Left = 0.0f;
-const float Button::Right = 1.0f;
-const float Button::Center = 0.5f;
-const float Button::Top = 0.0f;
-const float Button::Middle = 0.5f;
-const float Button::Bottom = 1.0f;
+#include <SFML/Window/Event.hpp>
 
 Button::Button(const sf::Vector2f& position,
                const std::string labelText,
                const std::string font,
                ResourceManager& resourceManager,
-               sf::RenderWindow& window,
                const std::string buttonIdlePicture,
-               const sf::Vector2f& textOffset,
-		       const float horizontalPercentage,
-               const float verticalPercentage) :
+               const sf::Vector2f& textOffset) :
     m_position(position),
-    m_verticalPercentage(verticalPercentage),
-    m_horizontalPercentage(horizontalPercentage),
     m_resourceManager(resourceManager),
-    m_window(window),
     m_buttonLabel(labelText, sf::Vector2f(0, 0), 0, resourceManager.getBitmapFont(font), LineLabel::Centered)
 {
     m_pressed[0] = m_pressed[1] = false;
@@ -45,21 +33,21 @@ Button::Button(const sf::Vector2f& position,
     m_size.y = m_buttonSprite.getTextureRect().height;
 }
 
-void Button::update()
+void Button::update(const sf::RenderWindow& screen)
 {
-    sf::FloatRect buttonRect(m_position.x, m_position.y,
-                             static_cast<float>(m_buttonSprite.getTextureRect().width),
-                             static_cast<float>(m_buttonSprite.getTextureRect().height));
-    
-    if(buttonRect.contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(m_window))) &&
-       sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    sf::FloatRect buttonRect(m_position.x + 2, m_position.y + 2,
+                             static_cast<float>(m_buttonSprite.getTextureRect().width - 2),
+                             static_cast<float>(m_buttonSprite.getTextureRect().height - 2));
+
+    if(buttonRect.contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(screen))) &&
+        sf::Mouse::isButtonPressed(sf::Mouse::Left))
     {
         if(m_pressedData.m_bound)
         {
             m_buttonSprite.setTexture(*m_resourceManager.getTexture(m_pressedData.m_buttonSprite));
             m_buttonLabel.setBitmapFont(m_resourceManager.getBitmapFont(m_pressedData.m_buttonfont));
-            m_buttonSprite.setPosition(m_position.x + m_pressedData.m_spriteOffset.x,
-                                       m_position.y + m_pressedData.m_spriteOffset.y);
+
+            m_buttonSprite.setPosition(m_position.x + m_pressedData.m_spriteOffset.x, m_position.y + m_pressedData.m_spriteOffset.y);
             
             float labelPositionX = m_position.x + m_buttonSprite.getTextureRect().width / 2 + m_pressedData.m_textOffset.x;
             float labelPositionY = m_position.y + m_buttonSprite.getTextureRect().height / 2 + m_pressedData.m_textOffset.y - m_buttonLabel.getFontSize() / 2;
@@ -69,15 +57,14 @@ void Button::update()
             m_pressed[0] = true;
         }
     }
-    else if(buttonRect.contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(m_window))))
+    else if(buttonRect.contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(screen))))
     {
         if(m_hoverData.m_bound)
         {
             m_buttonSprite.setTexture(*m_resourceManager.getTexture(m_hoverData.m_buttonSprite));
             m_buttonLabel.setBitmapFont(m_resourceManager.getBitmapFont(m_hoverData.m_buttonfont));
 
-            m_buttonSprite.setPosition(m_position.x + m_hoverData.m_spriteOffset.x,
-                                       m_position.y + m_hoverData.m_spriteOffset.y);
+            m_buttonSprite.setPosition(m_position.x + m_hoverData.m_spriteOffset.x, m_position.y + m_hoverData.m_spriteOffset.y);
 
             float labelPositionX = m_position.x + m_buttonSprite.getTextureRect().width / 2 + m_hoverData.m_textOffset.x;
             float labelPositionY = m_position.y + m_buttonSprite.getTextureRect().height / 2 + m_hoverData.m_textOffset.y - m_buttonLabel.getFontSize() / 2;
@@ -92,8 +79,7 @@ void Button::update()
         m_buttonSprite.setTexture(*m_resourceManager.getTexture(m_idleData.m_buttonSprite));
         m_buttonLabel.setBitmapFont(m_resourceManager.getBitmapFont(m_idleData.m_buttonfont));
 
-        m_buttonSprite.setPosition(m_position.x + m_idleData.m_spriteOffset.x,
-                                   m_position.y + m_idleData.m_spriteOffset.y);
+        m_buttonSprite.setPosition(m_position.x + m_idleData.m_spriteOffset.x, m_position.y + m_idleData.m_spriteOffset.y);
 
         float labelPositionX = m_position.x + m_buttonSprite.getTextureRect().width / 2 + m_idleData.m_textOffset.x;
         float labelPositionY = m_position.y + m_buttonSprite.getTextureRect().height / 2 + m_idleData.m_textOffset.y - m_buttonLabel.getFontSize() / 2;
@@ -140,17 +126,9 @@ void Button::bindPressed(std::string buttonSprite,
     m_pressedData.m_textOffset = textOffset;
 }
 
-void Button::setPosition(const sf::Vector2f& position, const float horizontalPercentage, const float verticalPercentage)
+void Button::setPosition(const sf::Vector2f& position)
 {
     m_position = position;
-    m_verticalPercentage = verticalPercentage;
-    m_horizontalPercentage = horizontalPercentage;
-    /*
-    float labelPositionX = m_position.x + m_buttonSprite.getTextureRect().width / 2 + m_idleData.m_textOffset.x;
-    float labelPositionY = m_position.y + m_buttonSprite.getTextureRect().height / 2 + m_idleData.m_textOffset.y - m_buttonLabel.getFontSize() / 2;
-
-    m_buttonLabel.setPosition(labelPositionX, labelPositionY);
-    m_buttonSprite.setPosition(m_position);*/
 }
 
 sf::Vector2i Button::getSize()

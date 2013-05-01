@@ -187,6 +187,12 @@
     <ClCompile Include="gui\Button.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMenu.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -524,6 +530,12 @@
     </ClInclude>
     <ClInclude Include="gui\Button.hpp">
       <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMenu.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
