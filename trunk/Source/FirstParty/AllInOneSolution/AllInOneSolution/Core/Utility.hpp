@@ -80,6 +80,13 @@ namespace utility
     std::string replace(std::string string, std::string replacement);
 
     sf::View getDefaultView(const sf::RenderTarget& target, const sf::Vector2u viewSize);
+
+    struct Event {enum EventTyp {NoEvent,
+                                 LostFocus,
+                                 GainFocus,
+                                 Resized};
+
+                EventTyp m_eventType;};
 } // namespace utility
 
 #endif // UTILITY_HPP

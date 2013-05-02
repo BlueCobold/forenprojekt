@@ -5,7 +5,6 @@
 #include "PlayState.hpp"
 #include "TransitionState.hpp"
 #include "LevelPassState.hpp"
-#include "Utility.hpp" // toString
 #include "resources/Config.hpp"
 
 #include <SFML/Graphics/Color.hpp>
@@ -26,6 +25,8 @@ App::App(Config& config) :
     m_soundBuffer(nullptr),
     m_stateManager(m_screen)
 {
+    m_event.m_eventType = utility::Event::NoEvent;
+
     // Cache often used settings
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
@@ -49,11 +50,11 @@ App::App(Config& config) :
     m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
     m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
 
-    m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config))); 
-    m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
-    m_stateManager.registerState(PauseStateId, std::unique_ptr<PauseState>(new PauseState(m_screen, m_resourceManager, m_config)));
-    m_stateManager.registerState(TransitionStateId, std::unique_ptr<TransitionState>(new TransitionState(m_screen, m_resourceManager, m_config)));
-    m_stateManager.registerState(LevelPassStateId, std::unique_ptr<LevelPassState>(new LevelPassState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config, m_event))); 
+    m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config, m_event))); 
+    m_stateManager.registerState(PauseStateId, std::unique_ptr<PauseState>(new PauseState(m_screen, m_resourceManager, m_config, m_event)));
+    m_stateManager.registerState(TransitionStateId, std::unique_ptr<TransitionState>(new TransitionState(m_screen, m_resourceManager, m_config, m_event)));
+    m_stateManager.registerState(LevelPassStateId, std::unique_ptr<LevelPassState>(new LevelPassState(m_screen, m_resourceManager, m_config, m_event)));
     m_stateManager.setState(LoadLevelStateId);
 }
 
@@ -68,9 +69,6 @@ void App::run()
 
 void App::update()
 {
-    handleEvents();
-    handleKeyboard();
-
     sf::View view(sf::FloatRect(0.f, 0.f,
         static_cast<float>(m_screen.getSize().x),
         static_cast<float>(m_screen.getSize().y)));
@@ -79,6 +77,9 @@ void App::update()
     m_stateManager.update();
 
     utility::Mouse.capture();
+
+    handleEvents();
+    handleKeyboard();
 }
 
 void App::draw()
@@ -111,15 +112,25 @@ void App::handleEvents()
     utility::Keyboard.progress();
     while(m_screen.pollEvent(event))
     {
+        m_event.m_eventType = utility::Event::NoEvent;
         // Close the window
         if(event.type == sf::Event::Closed)
             m_screen.close();
         else if(event.type == sf::Event::LostFocus)
+        {
+            m_event.m_eventType = utility::Event::LostFocus;
             m_focus = false;
+        }
         else if(event.type == sf::Event::GainedFocus)
+        {
+            m_event.m_eventType = utility::Event::GainFocus;
             m_focus = true;
+        }
         else if(event.type == sf::Event::Resized)
+        {
+            m_event.m_eventType = utility::Event::Resized;
             onResize();
+        }
         else if(event.type == sf::Event::KeyPressed)
             utility::Keyboard.notifyKeyPressed(event.key.code);
         else if(event.type == sf::Event::KeyReleased)
