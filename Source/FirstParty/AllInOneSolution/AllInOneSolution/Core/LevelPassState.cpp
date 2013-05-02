@@ -10,8 +10,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 
-LevelPassState::LevelPassState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
-    State(screen, resourceManager, config), m_background(nullptr),
+LevelPassState::LevelPassState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident) :
+    State(screen, resourceManager, config, incident), m_background(nullptr),
     m_gameMenu(sf::Vector2f(0, 0), "Congratulation!", GameMenu::PlayAgain, screen, resourceManager),
     m_HUD(resourceManager, config)
 {

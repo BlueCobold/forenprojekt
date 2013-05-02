@@ -19,7 +19,7 @@ class PlayState : public State
 {
 public:
 
-    PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
+    PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident);
     ~PlayState();
 
     virtual StateChangeInformation update(const float time);

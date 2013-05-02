@@ -5,9 +5,10 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Event.hpp>
 
-PlayState::PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
-    State(screen, resourceManager, config),
+PlayState::PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident) :
+    State(screen, resourceManager, config, incident),
     m_level(nullptr),
     m_hud(resourceManager, config)
 {
@@ -51,7 +52,7 @@ StateChangeInformation PlayState::update(const float time)
             m_level->restartAt(getCurrentTime());
         }
 
-        if(utility::Keyboard.isKeyDown(sf::Keyboard::P) || utility::Keyboard.isKeyDown(sf::Keyboard::Pause))
+        if((m_event.m_eventType == utility::Event::LostFocus) || utility::Keyboard.isKeyDown(sf::Keyboard::P) || utility::Keyboard.isKeyDown(sf::Keyboard::Pause))
         {
             m_pauseStateInfo.m_levelTime = getCurrentTime();
             m_pauseStateInfo.m_level = m_level;
@@ -70,7 +71,7 @@ StateChangeInformation PlayState::update(const float time)
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
     }
-
+    
     m_hud.update(m_level, getCurrentTime());
     return StateChangeInformation::Empty();
 }

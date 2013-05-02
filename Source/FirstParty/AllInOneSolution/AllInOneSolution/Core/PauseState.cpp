@@ -11,8 +11,8 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
-PauseState::PauseState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
-    State(screen, resourceManager, config), m_background(nullptr),
+PauseState::PauseState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident) :
+    State(screen, resourceManager, config, incident), m_background(nullptr),
     m_gameMenu(sf::Vector2f(0, 0), "Game Paused", GameMenu::Continue, screen, resourceManager),
     m_HUD(resourceManager, config)
 {

@@ -4,6 +4,7 @@
 #define APP_HPP
 
 #include "resources/ResourceManager.hpp"
+#include "Utility.hpp" // toString
 #include "StateManager.hpp"
 #include "gui/LineLabel.hpp"
 
@@ -42,13 +43,14 @@ private:
     void adjustVideoMode(sf::VideoMode& mode);
 
 private:
-
     sf::RenderWindow m_screen;
 
     Config& m_config;
     std::string m_windowTitle;
     bool m_fullscreen;
     bool m_focus;
+
+    utility::Event m_event;
 
     ResourceManager m_resourceManager;
     sf::SoundBuffer* m_soundBuffer;

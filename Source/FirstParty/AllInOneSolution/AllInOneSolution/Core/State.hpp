@@ -22,6 +22,7 @@ enum StateId
 };
 
 #include "StateChangeInformation.hpp"
+#include "Utility.hpp"
 
 /// This class will be used to discribe a State
 /// and to be managed by the StateManager
@@ -29,12 +30,13 @@ class State : public Drawable
 {
 public:
     
-    State(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
+    State(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident) :
         m_screen(screen),
         m_resourceManager(resourceManager),
         m_pause(false),
         m_pauseDelay(0),
-        m_config(config)
+        m_config(config),
+        m_event(incident)
     { }
 
     virtual ~State()
@@ -84,6 +86,7 @@ protected:
     sf::RenderWindow& m_screen;
     ResourceManager& m_resourceManager;
     Config& m_config;
+    utility::Event& m_event;
 
 private:
     bool m_pause;

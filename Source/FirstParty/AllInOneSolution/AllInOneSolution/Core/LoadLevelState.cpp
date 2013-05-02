@@ -8,8 +8,8 @@
 
 #include <memory>
 
-LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
-    State(screen, resourceManager, config),
+LoadLevelState::LoadLevelState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident) :
+    State(screen, resourceManager, config, incident),
     m_level(nullptr),
     m_lastLevel(nullptr)
 {
