@@ -6,7 +6,7 @@
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
 #include "gui/hud/HUD.hpp"
-#include "gui/hud/LabelHUD.hpp"
+#include "gui/GameMenu.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 
@@ -31,8 +31,11 @@ private:
     std::unique_ptr<sf::Texture> m_background;
     sf::RenderTexture m_renderTexture;
     Level* m_level;
+
     HUD m_HUD;
-    LabelHUD m_label;
+    GameMenu m_gameMenu;
+
+    sf::Vector2u m_screenSize;
 
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;

@@ -12,7 +12,7 @@
 
 LevelPassState::LevelPassState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
     State(screen, resourceManager, config), m_background(nullptr),
-    m_gameMenu(sf::Vector2f(0, 0), "congratulation", GameMenu::PlayAgain, screen, resourceManager),
+    m_gameMenu(sf::Vector2f(0, 0), "Congratulation!", GameMenu::PlayAgain, screen, resourceManager),
     m_HUD(resourceManager, config)
 {
     m_gameMenu.setPosition(sf::Vector2f(screen.getSize().x / 2.f - m_gameMenu.getSize().x / 2.f, screen.getSize().y / 2.f - m_gameMenu.getSize().y / 2.f));
