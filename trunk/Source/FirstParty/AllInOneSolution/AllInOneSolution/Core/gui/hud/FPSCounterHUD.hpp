@@ -1,8 +1,8 @@
 #ifndef FPSCOUNTERHUD_HPP
 #define FPSCOUNTERHUD_HPP
 
-#include "LineLabel.hpp"
-#include "FPSCounter.hpp"
+#include "../LineLabel.hpp"
+#include "../FPSCounter.hpp"
 #include "LabelHUD.hpp"
 
 class ResourceManager;

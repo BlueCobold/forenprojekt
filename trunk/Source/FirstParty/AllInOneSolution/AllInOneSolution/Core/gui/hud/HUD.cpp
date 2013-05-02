@@ -1,6 +1,6 @@
 #include "HUD.hpp"
-#include "../resources/Config.hpp"
-#include "../model/Level.hpp"
+#include "../../resources/Config.hpp"
+#include "../../model/Level.hpp"
 
 HUD::HUD(ResourceManager& resourceManager, Config& config) :
     m_fpsCounter(sf::Vector2f(30.f,10.f), 0.f, resourceManager.getBitmapFont("gold")),

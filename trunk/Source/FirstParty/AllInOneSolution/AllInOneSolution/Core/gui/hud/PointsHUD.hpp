@@ -4,7 +4,7 @@
 #define POINTS_HPP
 
 #include "LabelHUD.hpp"
-#include "../animation/Interpolation.hpp"
+#include "../../animation/Interpolation.hpp"
 
 class PointsHUD : public LabelHUD
 {

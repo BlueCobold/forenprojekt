@@ -1,5 +1,5 @@
 #include "Menu.hpp"
-#include "resources/ResourceManager.hpp"
+#include "../resources/ResourceManager.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 
 Menu::Menu(sf::Vector2f position, sf::RenderWindow& screen, ResourceManager& resourceManager) :

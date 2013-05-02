@@ -3,7 +3,7 @@
 #ifndef BALLHUD_HPP
 #define BALLHUD_HPP
 
-#include "../gui/LabelHUD.hpp"
+#include "LabelHUD.hpp"
 
 /// 
 class BallHUD : public LabelHUD

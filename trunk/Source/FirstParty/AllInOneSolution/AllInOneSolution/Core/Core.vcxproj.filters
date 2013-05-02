@@ -85,35 +85,11 @@
     <ClCompile Include="Input.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="gui\TargetHUD.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\PointsHUD.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\LabelHUD.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\HUDElement.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\HUD.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FPSCounterHUD.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
     <ClCompile Include="gui\FPSCounter.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\ArrowHUD.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="rendering\DebugDraw.cpp">
       <Filter>Sources\rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\BallHUD.cpp">
-      <Filter>Sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\HorizontalStripesTransition.cpp">
       <Filter>Sources\rendering\transitions</Filter>
@@ -187,11 +163,35 @@
     <ClCompile Include="gui\Button.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Sources</Filter>
+    <ClCompile Include="gui\Menu.cpp">
+      <Filter>Sources\gui</Filter>
     </ClCompile>
-    <ClCompile Include="GameMenu.cpp">
-      <Filter>Sources</Filter>
+    <ClCompile Include="gui\GameMenu.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\hud\ArrowHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\hud\BallHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\hud\FPSCounterHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\hud\HUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\hud\HUDElement.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\hud\LabelHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\hud\PointsHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\hud\TargetHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -405,35 +405,8 @@
     <ClInclude Include="Input.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="gui\ArrowHUD.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FPSCounter.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FPSCounterHUD.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\HUD.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\HUDElement.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\LabelHUD.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\PointsHUD.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\TargetHUD.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="rendering\DebugDraw.hpp">
       <Filter>Headers\rendering</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\BallHUD.hpp">
-      <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="State.hpp">
       <Filter>Headers</Filter>
@@ -531,11 +504,38 @@
     <ClInclude Include="gui\Button.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.hpp">
-      <Filter>Headers</Filter>
+    <ClInclude Include="gui\Menu.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
-    <ClInclude Include="GameMenu.hpp">
-      <Filter>Headers</Filter>
+    <ClInclude Include="gui\GameMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FPSCounter.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\hud\BallHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\hud\ArrowHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\hud\FPSCounterHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\hud\HUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\hud\HUDElement.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\hud\LabelHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\hud\PointsHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\hud\TargetHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -607,6 +607,12 @@
     </Filter>
     <Filter Include="Headers\model\collision\filter">
       <UniqueIdentifier>{a3c301cb-d629-400b-8230-dad9457669f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\gui\hud">
+      <UniqueIdentifier>{ac4ab7f7-af03-4f30-bcb9-62f0f160565f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\gui\hud">
+      <UniqueIdentifier>{86d846fa-6ac3-433e-8fa5-648986be7160}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

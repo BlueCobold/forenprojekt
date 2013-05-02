@@ -4,7 +4,7 @@
 #define GAMEMENU_HPP
 
 #include "Menu.hpp"
-#include "gui\Button.hpp"
+#include "Button.hpp"
 
 /// Gamemenu
 class GameMenu : public Menu

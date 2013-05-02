@@ -1,6 +1,6 @@
 #include "TargetHUD.hpp"
-#include "../resources/ResourceManager.hpp"
-#include "../Utility.hpp"
+#include "../../resources/ResourceManager.hpp"
+#include "../../Utility.hpp"
 
 TargetHUD::TargetHUD(ResourceManager& resourceManager, 
                     const sf::Vector2f& position, 

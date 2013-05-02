@@ -41,6 +41,7 @@ StateChangeInformation PauseState::update(const float time)
     {
         m_playStateInfo.m_returnFromPause = true;
         m_playStateInfo.m_level = m_level;
+        m_transitionStateInfo.m_level = m_level;
         m_transitionStateInfo.m_followingState = PlayStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);

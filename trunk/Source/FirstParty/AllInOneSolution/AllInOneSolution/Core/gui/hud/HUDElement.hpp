@@ -2,12 +2,12 @@
 #define HUDELEMENT_HPP
 
 #include <SFML/System/Vector2.hpp>
-#include "../rendering/Drawable.hpp"
+#include "../../rendering/Drawable.hpp"
 
 class ResourceManager;
 
 /// Basis class for HUD
-class HUDElement
+class HUDElement : Drawable
 {
 public:
 

@@ -1,5 +1,5 @@
 #include "GameMenu.hpp"
-#include "resources/ResourceManager.hpp"
+#include "../resources/ResourceManager.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 
 GameMenu::GameMenu(sf::Vector2f position, std::string caption, int Buttons, sf::RenderWindow& screen, ResourceManager& resourceManager) :

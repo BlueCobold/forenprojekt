@@ -6,7 +6,7 @@
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
 #include "model/Level.hpp"
-#include "gui/HUD.hpp"
+#include "gui/hud/HUD.hpp"
 #include "rendering/transitions/Transition.hpp"
 
 #include <SFML/System/Clock.hpp>

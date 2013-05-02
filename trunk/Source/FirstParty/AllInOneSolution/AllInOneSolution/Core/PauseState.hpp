@@ -5,8 +5,8 @@
 
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
-#include "gui/HUD.hpp"
-#include "gui/LabelHUD.hpp"
+#include "gui/hud/HUD.hpp"
+#include "gui/hud/LabelHUD.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 
