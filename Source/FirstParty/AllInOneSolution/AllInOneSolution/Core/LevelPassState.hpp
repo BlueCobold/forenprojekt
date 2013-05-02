@@ -6,8 +6,8 @@
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
 #include "gui/Button.hpp"
-#include "gui/HUD.hpp"
-#include "GameMenu.hpp"
+#include "gui/hud/HUD.hpp"
+#include "gui/GameMenu.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 

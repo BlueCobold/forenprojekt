@@ -1,6 +1,6 @@
 #include "BallHUD.hpp"
-#include "../resources/ResourceManager.hpp"
-#include "../Utility.hpp"
+#include "../../resources/ResourceManager.hpp"
+#include "../../Utility.hpp"
 
 BallHUD::BallHUD(ResourceManager& resourceManager, 
                     const sf::Vector2f& position, 
