@@ -74,12 +74,12 @@ void App::update()
         static_cast<float>(m_screen.getSize().y)));
     m_screen.setView(view);
 
+    handleEvents();
+    handleKeyboard();
+
     m_stateManager.update();
 
     utility::Mouse.capture();
-
-    handleEvents();
-    handleKeyboard();
 }
 
 void App::draw()
@@ -112,7 +112,6 @@ void App::handleEvents()
     utility::Keyboard.progress();
     while(m_screen.pollEvent(event))
     {
-        m_event.m_eventType = utility::Event::NoEvent;
         // Close the window
         if(event.type == sf::Event::Closed)
             m_screen.close();
