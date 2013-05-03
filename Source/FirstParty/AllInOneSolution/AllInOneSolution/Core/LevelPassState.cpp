@@ -37,8 +37,8 @@ StateChangeInformation LevelPassState::update(const float time)
 {
     if(m_screenSize != m_screen.getSize())
     {   
-        m_screenSize = m_screen.getSize();
         m_gameMenu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_gameMenu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_gameMenu.getSize().y / 2.f));
+        m_screenSize = m_screen.getSize();
     }
 
     updateTime(time - m_timeDiff);

@@ -86,7 +86,7 @@ namespace utility
                                  GainFocus,
                                  Resized};
 
-                EventTyp m_eventType;};
+                      EventTyp m_eventType;};
 } // namespace utility
 
 #endif // UTILITY_HPP
