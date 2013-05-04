@@ -35,8 +35,6 @@ private:
     HUD m_HUD;
     GameMenu m_gameMenu;
 
-    sf::Vector2u m_screenSize;
-
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPauseStateInformation m_pauseStateInfo;

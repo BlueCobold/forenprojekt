@@ -16,8 +16,6 @@ PauseState::PauseState(sf::RenderWindow& screen, ResourceManager& resourceManage
     m_gameMenu(sf::Vector2f(0, 0), "Game Paused", GameMenu::Continue, screen, resourceManager),
     m_HUD(resourceManager, config)
 {
-    m_gameMenu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_gameMenu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_gameMenu.getSize().y / 2.f));
-    m_screenSize = m_screen.getSize();
 }
 
 PauseState::~PauseState()
@@ -32,14 +30,16 @@ void PauseState::onEnter(const EnterStateInformation* enterInformation, const fl
     m_timeDiff = time - info->m_levelTime;
     State::onEnter(enterInformation, time - m_timeDiff);
     m_HUD.restartAt(getCurrentTime());
+
+    m_gameMenu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_gameMenu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_gameMenu.getSize().y / 2.f));
 }
 
 StateChangeInformation PauseState::update(const float time)
 {
-    if(m_screenSize != m_screen.getSize())
+    if(m_event.m_eventType == utility::Event::Resized)
     {   
         m_gameMenu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_gameMenu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_gameMenu.getSize().y / 2.f));
-        m_screenSize = m_screen.getSize();
+        m_event.m_eventType = utility::Event::NoEvent;
     }
 
     updateTime(time - m_timeDiff);
