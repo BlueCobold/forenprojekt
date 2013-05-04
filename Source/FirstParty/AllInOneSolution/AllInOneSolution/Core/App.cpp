@@ -149,6 +149,7 @@ void App::switchDisplayMode()
         m_screen.create(sf::VideoMode(videoMode), m_windowTitle, sf::Style::Fullscreen);
         // Disable the cursor
         m_screen.setMouseCursorVisible(false);
+        m_event.m_eventType = utility::Event::Resized;
     }
     else
     {
@@ -156,6 +157,7 @@ void App::switchDisplayMode()
         m_screen.create(sf::VideoMode(videoMode), m_windowTitle);
         // Enable the cursor
         m_screen.setMouseCursorVisible(true);
+        m_event.m_eventType = utility::Event::Resized;
     }
     m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
     m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
