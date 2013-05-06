@@ -57,8 +57,31 @@
 		</physics>
 
 		<entities>
-			<entity name="wall_1" rep="w1">
+			<entity name="base_wall" rep="bw">
+			</entity>
+			<entity base="base_wall" name="small_quad" rep="sq">
 				<physics name="wall" shape="wall" />
+			</entity>
+			<entity base="base_wall" name="high_quad" rep="hq">
+				<physics name="wall" shape="high_wall" />
+			</entity>
+			<entity base="base_wall" name="wide_quad" rep="wq">
+				<physics name="wall" shape="wide_wall" />
+			</entity>
+			<entity base="base_wall" name="lu_base" rep="lu">
+				<physics name="wall" shape="left_upper" />
+			</entity>
+			<entity base="base_wall" name="ll_base" rep="ll">
+				<physics name="wall" shape="left_lower" />
+			</entity>
+			<entity base="base_wall" name="ru_base" rep="ru">
+				<physics name="wall" shape="right_upper" />
+			</entity>
+			<entity base="base_wall" name="rl_base" rep="rl">
+				<physics name="wall" shape="right_lower" />
+			</entity>
+
+			<entity base="small_quad" name="wall_1" rep="w1">
 				<animations>
 					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
 						<frameindex frames="4">
@@ -67,8 +90,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="wall_2" rep="w2">
-				<physics name="wall" shape="wall" />
+			<entity base="small_quad" name="wall_2" rep="w2">
 				<animations>
 					<animation texture="small_quads" srcy="60" width="60" height="60" rotate="false">
 						<frameindex frames="4">
@@ -77,8 +99,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="wall_3" rep="w3">
-				<physics name="wall" shape="wall" />
+			<entity base="small_quad" name="wall_3" rep="w3">
 				<animations>
 					<animation texture="small_quads" srcy="120" width="60" height="60" rotate="false">
 						<frameindex frames="4">
@@ -87,8 +108,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="wall_4" rep="w4">
-				<physics name="wall" shape="wall" />
+			<entity base="small_quad" name="wall_4" rep="w4">
 				<animations>
 					<animation texture="small_quads" srcy="180" width="60" height="60" rotate="false">
 						<frameindex frames="4">
@@ -97,8 +117,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="wall_5" rep="w5">
-				<physics name="wall" shape="wall" />
+			<entity base="small_quad" name="wall_5" rep="w5">
 				<animations>
 					<animation texture="small_quads" srcy="240" width="60" height="60" rotate="false">
 						<frameindex frames="4">
@@ -107,8 +126,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="wall_6" rep="w6">
-				<physics name="wall" shape="wall" />
+			<entity base="small_quad" name="wall_6" rep="w6">
 				<animations>
 					<animation texture="small_quads" srcy="300" width="60" height="60" rotate="false">
 						<frameindex frames="4">
@@ -117,7 +135,6 @@
 					</animation>
 				</animations>
 			</entity>
-
 
 			<entity name="darkwall_1" rep="d1">
 				<animations>
@@ -173,7 +190,6 @@
 					</animation>
 				</animations>
 			</entity>
-
 
 			<entity name="darkshadowwall_1" rep="s1">
 				<animations>
@@ -231,8 +247,7 @@
 			</entity>
 
 
-			<entity name="high_wall_1" rep="h1">
-				<physics name="wall" shape="high_wall" />
+			<entity base="high_quad" name="high_wall_1" rep="h1">
 				<animations>
 					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
 						<frameindex frames="6">
@@ -241,8 +256,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="high_wall_2" rep="h2">
-				<physics name="wall" shape="high_wall" />
+			<entity base="high_quad" name="high_wall_2" rep="h2">
 				<animations>
 					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
 						<frameindex frames="6">
@@ -251,8 +265,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="high_wall_3" rep="h3">
-				<physics name="wall" shape="high_wall" />
+			<entity base="high_quad" name="high_wall_3" rep="h3">
 				<animations>
 					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
 						<frameindex frames="6">
@@ -261,8 +274,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="high_wall_4" rep="h4">
-				<physics name="wall" shape="high_wall" />
+			<entity base="high_quad" name="high_wall_4" rep="h4">
 				<animations>
 					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
 						<frameindex frames="6">
@@ -271,8 +283,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="high_wall_5" rep="h5">
-				<physics name="wall" shape="high_wall" />
+			<entity base="high_quad" name="high_wall_5" rep="h5">
 				<animations>
 					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
 						<frameindex frames="6">
@@ -281,8 +292,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="high_wall_6" rep="h6">
-				<physics name="wall" shape="high_wall" />
+			<entity base="high_quad" name="high_wall_6" rep="h6">
 				<animations>
 					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
 						<frameindex frames="6">
@@ -293,8 +303,7 @@
 			</entity>
 
 
-			<entity name="wide_wall_1" rep="W1">
-				<physics name="wall" shape="wide_wall" />
+			<entity base="wide_quad" name="wide_wall_1" rep="W1">
 				<animations>
 					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
 						<frameindex frames="3">
@@ -303,8 +312,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="wide_wall_2" rep="W2">
-				<physics name="wall" shape="wide_wall" />
+			<entity base="wide_quad" name="wide_wall_2" rep="W2">
 				<animations>
 					<animation texture="wide_quads" srcy="60" width="120" height="60" rotate="false">
 						<frameindex frames="3">
@@ -313,8 +321,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="wide_wall_3" rep="W3">
-				<physics name="wall" shape="wide_wall" />
+			<entity base="wide_quad" name="wide_wall_3" rep="W3">
 				<animations>
 					<animation texture="wide_quads" srcy="120" width="120" height="60" rotate="false">
 						<frameindex frames="3">
@@ -323,8 +330,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="wide_wall_4" rep="W4">
-				<physics name="wall" shape="wide_wall" />
+			<entity base="wide_quad" name="wide_wall_4" rep="W4">
 				<animations>
 					<animation texture="wide_quads" srcy="180" width="120" height="60" rotate="false">
 						<frameindex frames="3">
@@ -333,8 +339,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="wide_wall_5" rep="W5">
-				<physics name="wall" shape="wide_wall" />
+			<entity base="wide_quad" name="wide_wall_5" rep="W5">
 				<animations>
 					<animation texture="wide_quads" srcy="240" width="120" height="60" rotate="false">
 						<frameindex frames="3">
@@ -343,8 +348,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="wide_wall_6" rep="W6">
-				<physics name="wall" shape="wide_wall" />
+			<entity base="wide_quad" name="wide_wall_6" rep="W6">
 				<animations>
 					<animation texture="wide_quads" srcy="300" width="120" height="60" rotate="false">
 						<frameindex frames="3">
@@ -411,14 +415,12 @@
 			</entity>
 
 
-			<entity name="left_upper" rep=")1">
-				<physics name="wall" shape="left_upper" />
+			<entity base="lu_base" name="left_upper" rep=")1">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="120" rotate="false" />
 				</animations>
 			</entity>
-			<entity name="left_upper" rep=")2">
-				<physics name="wall" shape="left_upper" />
+			<entity base="lu_base" name="left_upper" rep=")2">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="120" rotate="false">
 						<frameindex frames="6">
@@ -427,8 +429,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="left_upper" rep=")3">
-				<physics name="wall" shape="left_upper" />
+			<entity base="lu_base" name="left_upper" rep=")3">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="120" rotate="false">
 						<frameindex frames="6">
@@ -437,8 +438,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="left_upper" rep=")4">
-				<physics name="wall" shape="left_upper" />
+			<entity base="lu_base" name="left_upper" rep=")4">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="120" rotate="false">
 						<frameindex frames="6">
@@ -447,8 +447,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="left_upper" rep=")5">
-				<physics name="wall" shape="left_upper" />
+			<entity base="lu_base" name="left_upper" rep=")5">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="120" rotate="false">
 						<frameindex frames="6">
@@ -457,8 +456,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="left_upper" rep=")6">
-				<physics name="wall" shape="left_upper" />
+			<entity base="lu_base" name="left_upper" rep=")6">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="120" rotate="false">
 						<frameindex frames="6">
@@ -469,14 +467,12 @@
 			</entity>
 
 
-			<entity name="left_lower" rep="\1">
-				<physics name="wall" shape="left_lower" />
+			<entity base="ll_base" name="left_lower" rep="\1">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="60" rotate="false" />
 				</animations>
 			</entity>
-			<entity name="left_lower" rep="\2">
-				<physics name="wall" shape="left_lower" />
+			<entity base="ll_base" name="left_lower" rep="\2">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="60" rotate="false">
 						<frameindex frames="6">
@@ -485,8 +481,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="left_lower" rep="\3">
-				<physics name="wall" shape="left_lower" />
+			<entity base="ll_base" name="left_lower" rep="\3">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="60" rotate="false">
 						<frameindex frames="6">
@@ -495,8 +490,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="left_lower" rep="\4">
-				<physics name="wall" shape="left_lower" />
+			<entity base="ll_base" name="left_lower" rep="\4">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="60" rotate="false">
 						<frameindex frames="6">
@@ -505,8 +499,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="left_lower" rep="\5">
-				<physics name="wall" shape="left_lower" />
+			<entity base="ll_base" name="left_lower" rep="\5">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="60" rotate="false">
 						<frameindex frames="6">
@@ -515,8 +508,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="left_lower" rep="\6">
-				<physics name="wall" shape="left_lower" />
+			<entity base="ll_base" name="left_lower" rep="\6">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="60" rotate="false">
 						<frameindex frames="6">
@@ -527,14 +519,12 @@
 			</entity>
 
 
-			<entity name="right_upper" rep="(1">
-				<physics name="wall" shape="right_upper" />
+			<entity base="ru_base" name="right_upper" rep="(1">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="180" rotate="false" />
 				</animations>
 			</entity>
-			<entity name="right_upper" rep="(2">
-				<physics name="wall" shape="right_upper" />
+			<entity base="ru_base" name="right_upper" rep="(2">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="180" rotate="false">
 						<frameindex frames="6">
@@ -543,8 +533,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="right_upper" rep="(3">
-				<physics name="wall" shape="right_upper" />
+			<entity base="ru_base" name="right_upper" rep="(3">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="180" rotate="false">
 						<frameindex frames="6">
@@ -553,8 +542,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="right_upper" rep="(4">
-				<physics name="wall" shape="right_upper" />
+			<entity base="ru_base" name="right_upper" rep="(4">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="180" rotate="false">
 						<frameindex frames="6">
@@ -563,8 +551,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="right_upper" rep="(5">
-				<physics name="wall" shape="right_upper" />
+			<entity base="ru_base" name="right_upper" rep="(5">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="180" rotate="false">
 						<frameindex frames="6">
@@ -573,8 +560,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="right_upper" rep="(6">
-				<physics name="wall" shape="right_upper" />
+			<entity base="ru_base" name="right_upper" rep="(6">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" srcy="180" rotate="false">
 						<frameindex frames="6">
@@ -585,14 +571,12 @@
 			</entity>
 
 
-			<entity name="right_lower" rep="/1">
-				<physics name="wall" shape="right_lower" />
+			<entity base="rl_base" name="right_lower" rep="/1">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" rotate="false" />
 				</animations>
 			</entity>
-			<entity name="right_lower" rep="/2">
-				<physics name="wall" shape="right_lower" />
+			<entity base="rl_base" name="right_lower" rep="/2">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" rotate="false">
 						<frameindex frames="6">
@@ -601,8 +585,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="right_lower" rep="/3">
-				<physics name="wall" shape="right_lower" />
+			<entity base="rl_base" name="right_lower" rep="/3">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" rotate="false">
 						<frameindex frames="6">
@@ -611,8 +594,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="right_lower" rep="/4">
-				<physics name="wall" shape="right_lower" />
+			<entity base="rl_base" name="right_lower" rep="/4">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" rotate="false">
 						<frameindex frames="6">
@@ -621,8 +603,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="right_lower" rep="/5">
-				<physics name="wall" shape="right_lower" />
+			<entity base="rl_base" name="right_lower" rep="/5">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" rotate="false">
 						<frameindex frames="6">
@@ -631,8 +612,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="right_lower" rep="/6">
-				<physics name="wall" shape="right_lower" />
+			<entity base="rl_base" name="right_lower" rep="/6">
 				<animations>
 					<animation texture="small_triangles" width="60" height="60" rotate="false">
 						<frameindex frames="6">
