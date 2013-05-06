@@ -30,13 +30,12 @@ class State : public Drawable
 {
 public:
     
-    State(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident) :
+    State(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
         m_screen(screen),
         m_resourceManager(resourceManager),
         m_pause(false),
         m_pauseDelay(0),
-        m_config(config),
-        m_event(incident)
+        m_config(config)
     { }
 
     virtual ~State()
@@ -69,6 +68,10 @@ public:
         return m_pause;
     }
 
+    virtual void onEvent(utility::Event::EventType type)
+    {
+    }
+
 protected:
     
     void updateTime(const float time)
@@ -86,7 +89,6 @@ protected:
     sf::RenderWindow& m_screen;
     ResourceManager& m_resourceManager;
     Config& m_config;
-    utility::Event& m_event;
 
 private:
     bool m_pause;

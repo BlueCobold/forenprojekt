@@ -26,6 +26,7 @@ public:
 
     void draw();
     void update();
+    void passEvent(utility::Event::EventType type);
 
 private:
     State* getState(StateId id) const;

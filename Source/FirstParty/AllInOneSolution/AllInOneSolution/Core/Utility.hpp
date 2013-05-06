@@ -81,12 +81,17 @@ namespace utility
 
     sf::View getDefaultView(const sf::RenderTarget& target, const sf::Vector2u viewSize);
 
-    struct Event {enum EventTyp {NoEvent,
-                                 LostFocus,
-                                 GainFocus,
-                                 Resized};
-
-                      EventTyp m_eventType;};
+    struct Event
+    {
+        enum EventType
+        {
+            NoEvent,
+            LostFocus,
+            GainFocus,
+            Resized
+        };
+        EventType m_eventType;
+    };
 } // namespace utility
 
 #endif // UTILITY_HPP

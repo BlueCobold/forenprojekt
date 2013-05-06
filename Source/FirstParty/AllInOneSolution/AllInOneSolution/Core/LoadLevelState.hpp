@@ -21,7 +21,7 @@ class LoadLevelState : public State
 {
 public:
 
-    LoadLevelState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident);
+    LoadLevelState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
     ~LoadLevelState();
 
     virtual void draw(const DrawParameter& params);

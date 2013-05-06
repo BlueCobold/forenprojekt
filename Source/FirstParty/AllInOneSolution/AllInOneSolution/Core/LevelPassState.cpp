@@ -10,8 +10,11 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 
-LevelPassState::LevelPassState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident) :
-    State(screen, resourceManager, config, incident), m_background(nullptr),
+LevelPassState::LevelPassState(sf::RenderWindow& screen, 
+                               ResourceManager& resourceManager, 
+                               Config& config) :
+    State(screen, resourceManager, config),
+    m_background(nullptr),
     m_menu(sf::Vector2f(0, 0), screen, resourceManager),
     m_HUD(resourceManager, config),
     m_replay(false)
@@ -41,11 +44,7 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
 
 StateChangeInformation LevelPassState::update(const float time)
 {
-    if(m_event.m_eventType == utility::Event::Resized)
-    {   
-        m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
-        m_event.m_eventType = utility::Event::NoEvent;
-    }
+    m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
     updateTime(time - m_timeDiff);
 

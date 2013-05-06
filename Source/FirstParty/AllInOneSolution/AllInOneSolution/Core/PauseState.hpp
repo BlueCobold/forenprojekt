@@ -17,7 +17,7 @@ class PauseState : public State
 {
 public:
 
-    PauseState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident);
+    PauseState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
     ~PauseState();
 
     virtual StateChangeInformation update(const float time);

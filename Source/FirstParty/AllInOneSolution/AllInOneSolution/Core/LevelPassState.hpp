@@ -18,7 +18,7 @@ class LevelPassState : public State
 {
 public:
 
-    LevelPassState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident);
+    LevelPassState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
     ~LevelPassState();
 
     virtual StateChangeInformation update(const float time);
