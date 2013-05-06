@@ -34,7 +34,7 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
     m_replay = false;
     const EnterPauseStateInformation* info = dynamic_cast<const EnterPauseStateInformation*>(enterInformation);
     m_level = info->m_level;
-    
+
     m_timeDiff = time - info->m_levelTime;
     State::onEnter(enterInformation, time - m_timeDiff);
     m_HUD.restartAt(getCurrentTime());
