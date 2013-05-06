@@ -115,6 +115,11 @@ void Animation::setBlending(const sf::BlendMode mode)
     m_blending = mode;
 }
 
+void Animation::bindFrameProvider(std::unique_ptr<ValueProvider> frames)
+{
+    m_frameProvider = std::move(frames);
+}
+
 void Animation::bindTexture(const sf::Texture& texture, const sf::Vector2f& sourceOffset)
 {
     m_sourceOffset = sourceOffset;

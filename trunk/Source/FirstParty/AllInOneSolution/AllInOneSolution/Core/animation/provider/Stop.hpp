@@ -13,10 +13,10 @@ class Stop : public ValueProvider
 {
 private:
 
-    TimedObject* m_owner;
+    Stoppable* m_owner;
 
 public:
-    Stop(TimedObject* owner) : m_owner(owner)
+    Stop(Stoppable* owner) : m_owner(owner)
     {
     }
 

@@ -59,5 +59,18 @@ namespace utility
         m_position = sf::Vector2f(
             static_cast<float>(m_lastPosition.x),
             static_cast<float>(m_lastPosition.y));
+        bool last = m_leftPressed;
+        m_leftPressed = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+        m_leftReleased = last && !m_leftPressed;
+    }
+
+    bool MouseWrapper::leftButtonPressed() const
+    {
+        return m_leftPressed;
+    }
+
+    bool MouseWrapper::leftButtonReleased() const
+    {
+        return m_leftReleased;
     }
 }

@@ -3,6 +3,7 @@
 #ifndef ANIMATION_HPP
 #define ANIMATION_HPP
 
+#include "Stoppable.hpp"
 #include "provider/ValueProvider.hpp"
 #include "../rendering/Drawable.hpp"
 
@@ -15,7 +16,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-class Animation : Drawable, public VariableHolder
+class Animation : public Drawable, public VariableHolder, public Stoppable
 {
 public:
 
@@ -36,6 +37,7 @@ public:
     void setRotation(const float radians);
     void setBlending(const sf::BlendMode mode);
     void bindTexture(const sf::Texture& texture, const sf::Vector2f& sourceOffset);
+    void bindFrameProvider(std::unique_ptr<ValueProvider> frames);
     void bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y);
     void bindRotationController(std::unique_ptr<ValueProvider> provider);
     void bindScaleController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y);

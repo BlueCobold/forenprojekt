@@ -11,11 +11,19 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
-PauseState::PauseState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident) :
-    State(screen, resourceManager, config, incident), m_background(nullptr),
-    m_gameMenu(sf::Vector2f(0, 0), "Game Paused", GameMenu::Continue, screen, resourceManager),
+PauseState::PauseState(sf::RenderWindow& screen,
+                       ResourceManager& resourceManager,
+                       Config& config,
+                       utility::Event& incident) :
+    State(screen, resourceManager, config, incident),
+    m_background(nullptr),
+    m_menu(sf::Vector2f(0, 0), screen, resourceManager),
     m_HUD(resourceManager, config)
 {
+    m_menu.registerOnClick([this](const Button& sender)
+    {
+        m_continue = (sender.getId() == PauseMenu::BUTTON_CONTINUE);
+    });
 }
 
 PauseState::~PauseState()
@@ -24,6 +32,8 @@ PauseState::~PauseState()
 
 void PauseState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
+    m_continue = false;
+
     const EnterPauseStateInformation* info = dynamic_cast<const EnterPauseStateInformation*>(enterInformation);
     m_level = info->m_level;
     
@@ -31,23 +41,23 @@ void PauseState::onEnter(const EnterStateInformation* enterInformation, const fl
     State::onEnter(enterInformation, time - m_timeDiff);
     m_HUD.restartAt(getCurrentTime());
 
-    m_gameMenu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_gameMenu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_gameMenu.getSize().y / 2.f));
+    m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 }
 
 StateChangeInformation PauseState::update(const float time)
 {
     if(m_event.m_eventType == utility::Event::Resized)
     {   
-        m_gameMenu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_gameMenu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_gameMenu.getSize().y / 2.f));
+        m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
         m_event.m_eventType = utility::Event::NoEvent;
     }
 
     updateTime(time - m_timeDiff);
 
-    m_gameMenu.update(m_screen);
+    m_menu.update(m_screen);
 
     if(utility::Keyboard.isKeyDown(sf::Keyboard::P) || utility::Keyboard.isKeyDown(sf::Keyboard::Pause)
-        || utility::Keyboard.isKeyDown(sf::Keyboard::Escape) || m_gameMenu.isPressed(GameMenu::Continue))
+        || m_continue)
     {
         m_playStateInfo.m_returnFromPause = true;
         m_playStateInfo.m_level = m_level;
@@ -74,5 +84,5 @@ void PauseState::draw(const DrawParameter& params)
     whiteRect.setFillColor(sf::Color(255, 255, 255, 128));
     params.getTarget().draw(whiteRect);
 
-    m_gameMenu.draw(params);
+    m_menu.draw(params);
 }

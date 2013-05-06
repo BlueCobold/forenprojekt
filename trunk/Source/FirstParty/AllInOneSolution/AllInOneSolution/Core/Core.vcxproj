@@ -93,7 +93,7 @@
     <ClCompile Include="animation\Interpolation.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Core.cpp" />
-    <ClCompile Include="gui\GameMenu.cpp" />
+    <ClCompile Include="gui\CaptionMenu.cpp" />
     <ClCompile Include="gui\hud\ArrowHUD.cpp" />
     <ClCompile Include="gui\hud\BallHUD.cpp" />
     <ClCompile Include="gui\BitmapFont.cpp" />
@@ -106,6 +106,8 @@
     <ClCompile Include="gui\LineLabel.cpp" />
     <ClCompile Include="gui\hud\PointsHUD.cpp" />
     <ClCompile Include="gui\hud\TargetHUD.cpp" />
+    <ClCompile Include="gui\PauseMenu.cpp" />
+    <ClCompile Include="gui\ReplayMenu.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="LevelPassState.cpp" />
     <ClCompile Include="LoadLevelState.cpp" />
@@ -185,12 +187,13 @@
     <ClInclude Include="animation\provider\TimeProvider.hpp" />
     <ClInclude Include="animation\provider\ValueProvider.hpp" />
     <ClInclude Include="animation\provider\VariableProvider.hpp" />
+    <ClInclude Include="animation\Stoppable.hpp" />
     <ClInclude Include="animation\TimedObject.hpp" />
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="EnterStateInformation.hpp" />
-    <ClInclude Include="gui\GameMenu.hpp" />
+    <ClInclude Include="gui\CaptionMenu.hpp" />
     <ClInclude Include="gui\hud\ArrowHUD.hpp" />
     <ClInclude Include="gui\hud\BallHUD.hpp" />
     <ClInclude Include="gui\BitmapFont.hpp" />
@@ -203,6 +206,8 @@
     <ClInclude Include="gui\LineLabel.hpp" />
     <ClInclude Include="gui\hud\PointsHUD.hpp" />
     <ClInclude Include="gui\hud\TargetHUD.hpp" />
+    <ClInclude Include="gui\PauseMenu.hpp" />
+    <ClInclude Include="gui\ReplayMenu.hpp" />
     <ClInclude Include="Input.hpp" />
     <ClInclude Include="LevelPassState.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />

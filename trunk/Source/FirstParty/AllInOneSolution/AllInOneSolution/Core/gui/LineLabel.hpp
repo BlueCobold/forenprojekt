@@ -35,8 +35,9 @@ public:
     std::string getText() const;
     float getWidth() const;
 
-    void setPosition(const sf::Vector2f position);
+    void setPosition(const sf::Vector2f& position);
     void setPosition(const float x, const float y);
+    void setOffset(const sf::Vector2f& offset);
     const sf::Vector2f getPosition() const;
     void setAlignment(const Alignment alignment);
 
@@ -62,6 +63,7 @@ private:
     float m_width;
     std::string m_text;
     sf::Vector2f m_position;
+    sf::Vector2f m_offset;
     float m_rotation;
     BitmapFont* m_font;
     std::vector<BitmapFont::Glyph> m_glyphs;

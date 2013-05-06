@@ -20,7 +20,8 @@ LineLabel::LineLabel(const std::string& text,
     m_progressPosition(0, 0),
     m_rotation(rotation),
     m_font(font),
-    m_alignment(alignment)
+    m_alignment(alignment),
+    m_offset(sf::Vector2f(0,0))
 {
     rebuild();
 }
@@ -54,11 +55,20 @@ std::string LineLabel::getText() const
     return m_text;
 }
 
-void LineLabel::setPosition(const sf::Vector2f position)
+void LineLabel::setPosition(const sf::Vector2f& position)
 {
     if(position != m_position)
     {
         m_position = position;
+        rebuild();
+    }
+}
+
+void LineLabel::setOffset(const sf::Vector2f& offset)
+{
+    if(offset != m_offset)
+    {
+        m_offset = offset;
         rebuild();
     }
 }
@@ -83,7 +93,7 @@ void LineLabel::rebuild()
     for(auto it = begin(m_text); it != end(m_text); it++)
     {
         m_glyphs.push_back(m_font->getGlyph(*it));
-        m_glyphs.back().setPosition(shift + m_position.x + xOffset, m_position.y);
+        m_glyphs.back().setPosition(shift + m_position.x + xOffset + m_offset.x, m_position.y + m_offset.y);
         m_glyphs.back().setRotation(m_rotation);
 
         xOffset += m_font->getGlyph(*it).getSpacing();

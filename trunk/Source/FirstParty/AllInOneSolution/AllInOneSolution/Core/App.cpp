@@ -19,7 +19,7 @@
 
 App::App(Config& config) :
     m_config(config),
-    m_windowTitle("Rickety Racket"),
+    m_windowTitle("Rickety Racquet"),
     m_fullscreen(false),
     m_focus(true),
     m_soundBuffer(nullptr),

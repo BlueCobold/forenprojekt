@@ -418,7 +418,7 @@ void Level::parseCollider(
         if(std::string(child->Name()) == "changeProperty")
         {
             std::unique_ptr<ChangePropertyCollisionHandler> collider(new ChangePropertyCollisionHandler(child->Attribute("name"), this));
-            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), collider.get(), collider.get(), &templates.functions));
+            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), collider.get(), collider.get(), nullptr, &templates.functions));
             collider->bindProvider(std::move(provider));
             entity->bindCollisionHandler(std::move(collider));
         }
@@ -484,7 +484,7 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
         bool target = true;//std::string("entity") == child->Attribute("target");
         b2Vec2 gravity(xml->FloatAttribute("x"), xml->FloatAttribute("y"));
         std::unique_ptr<ChangeGravityFilter> filter(new ChangeGravityFilter(m_world, gravity, target, this));
-        std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(xml->FirstChildElement(), filter.get(), filter.get(), &templates.functions));
+        std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(xml->FirstChildElement(), filter.get(), filter.get(), nullptr, &templates.functions));
         filter->bindProvider(std::move(provider));
         return std::move(filter);
     }
@@ -492,7 +492,7 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
     {
         bool target = std::string("entity") == xml->Attribute("target");
         std::unique_ptr<PropertyFilter> filter(new PropertyFilter(target, this));
-        std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(xml->FirstChildElement(), filter.get(), filter.get(), &templates.functions));
+        std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(xml->FirstChildElement(), filter.get(), filter.get(), nullptr, &templates.functions));
         filter->bindProvider(std::move(provider));
         return std::move(filter);
     }

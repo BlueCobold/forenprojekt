@@ -166,7 +166,7 @@
     <ClCompile Include="gui\Menu.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
-    <ClCompile Include="gui\GameMenu.cpp">
+    <ClCompile Include="gui\CaptionMenu.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="gui\hud\ArrowHUD.cpp">
@@ -192,6 +192,12 @@
     </ClCompile>
     <ClCompile Include="gui\hud\TargetHUD.cpp">
       <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\PauseMenu.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ReplayMenu.cpp">
+      <Filter>Sources\gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -507,7 +513,7 @@
     <ClInclude Include="gui\Menu.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
-    <ClInclude Include="gui\GameMenu.hpp">
+    <ClInclude Include="gui\CaptionMenu.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\FPSCounter.hpp">
@@ -536,6 +542,15 @@
     </ClInclude>
     <ClInclude Include="gui\hud\TargetHUD.hpp">
       <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\Stoppable.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\PauseMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ReplayMenu.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

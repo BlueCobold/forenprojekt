@@ -24,6 +24,8 @@ void Entity::update(const float value)
 {
     if(!m_killed)
     {
+        removeStoppedAnimations();
+
         updateCurrentTime(value);
         updateKinematics(getPassedTime(), value - m_lastTime);
         for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)

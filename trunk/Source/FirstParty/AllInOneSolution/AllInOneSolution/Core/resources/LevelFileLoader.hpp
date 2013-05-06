@@ -45,6 +45,7 @@ public:
         tinyxml2::XMLElement* xml, 
         AnimatedObject* animated,
         VariableHandler* handler,
+        Stoppable* stoppable,
         std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 
     static void parseConstants(tinyxml2::XMLElement* xml,
@@ -56,18 +57,13 @@ private:
         tinyxml2::XMLElement* xml, 
         AnimatedObject* animated,
         VariableHandler* handler,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
-
-    static std::unique_ptr<Animation> parseAnimation(tinyxml2::XMLElement* xml,
-        AnimatedGraphics* animated,
-        VariableHandler* handler,
-        std::unique_ptr<ValueProvider> provider,
-        ResourceManager& resourceManager,
+        Stoppable* stoppable,
         std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 
     static std::unique_ptr<ValueProvider> findController(tinyxml2::XMLElement* xml,
         AnimatedGraphics* animated,
         VariableHandler* handler,
+        Stoppable* stoppable,
         const std::string& childName,
         const std::string& propertyName,
         const std::string& propertyValue,
