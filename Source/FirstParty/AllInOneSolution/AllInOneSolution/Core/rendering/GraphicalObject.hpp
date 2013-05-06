@@ -56,6 +56,18 @@ public:
 
 protected:
 
+    void removeStoppedAnimations()
+    {
+        auto it = begin(m_animations);
+        while(it != end(m_animations))
+        {
+            if((*it)->isStopped())
+                it = m_animations.erase(it);
+            else
+                ++it;
+        }
+    }
+
     const std::vector<std::unique_ptr<Animation>>& getAnimations() const
     {
         return m_animations;

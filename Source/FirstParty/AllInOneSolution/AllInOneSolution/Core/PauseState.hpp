@@ -6,7 +6,7 @@
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
 #include "gui/hud/HUD.hpp"
-#include "gui/GameMenu.hpp"
+#include "gui/PauseMenu.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 
@@ -33,7 +33,8 @@ private:
     Level* m_level;
 
     HUD m_HUD;
-    GameMenu m_gameMenu;
+    PauseMenu m_menu;
+    bool m_continue;
 
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;

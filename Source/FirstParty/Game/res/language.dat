@@ -37,3 +37,9 @@ SpawnWithoutName = No entity-name defined in spawnEntity.
 TargetTexture = % needs a texture of the target.
 SourceTexture = % needs a texture of the source.
 RandomTransition = % is a unknown Transition.
+
+[GUI]
+gui_game_paused = Game Paused
+gui_continue = Continue
+gui_level_success = Congratulations!
+gui_play_again = Play Again

@@ -37,7 +37,7 @@ namespace utility
     class MouseWrapper
     {
     public:
-        MouseWrapper()
+        MouseWrapper() : m_leftPressed(false)
         {
             capture();
         }
@@ -48,8 +48,14 @@ namespace utility
 
         void capture();
 
+        bool leftButtonPressed() const;
+
+        bool leftButtonReleased() const;
+
     private:
 
+        bool m_leftPressed;
+        bool m_leftReleased;
         sf::Vector2f m_position;
         sf::Vector2i m_lastPosition;
     };

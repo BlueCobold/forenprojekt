@@ -3,14 +3,16 @@
 #ifndef TIMED_OBJECT_HPP
 #define TIMED_OBJECT_HPP
 
+#include "Stoppable.hpp"
+
 /// Used for objects which have a time-based behavior.
-class TimedObject
+class TimedObject : public Stoppable
 {
 public:
-    TimedObject() : m_stopped(false), m_startTime(0), m_currentTime(0)
+    TimedObject() : m_startTime(0), m_currentTime(0)
     { }
 
-    TimedObject(const float time) : m_stopped(false)
+    TimedObject(const float time)
     {
         restartAt(time);
     }
@@ -22,22 +24,12 @@ public:
     {
         m_startTime = time;
         m_currentTime = time;
-        m_stopped = false;
+        Stoppable::continueNow();
     }
 
     virtual float getPassedTime() const
     {
         return m_currentTime - m_startTime;
-    }
-
-    virtual void stop()
-    {
-        m_stopped = true;
-    }
-
-    virtual bool isStopped() const
-    {
-        return m_stopped;
     }
 
 protected:
@@ -56,7 +48,6 @@ private:
 
     float m_startTime;
     float m_currentTime;
-    bool m_stopped;
 };
 
 #endif //TIMED_OBJECT_HPP

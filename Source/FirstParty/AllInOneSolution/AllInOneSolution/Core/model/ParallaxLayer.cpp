@@ -29,6 +29,8 @@ void ParallaxLayer::updatePosition(const sf::View& view, const sf::Vector2u& wor
 
 void ParallaxLayer::update(const float time)
 {
+    removeStoppedAnimations();
+
     updateCurrentTime(time);
     for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
     {
