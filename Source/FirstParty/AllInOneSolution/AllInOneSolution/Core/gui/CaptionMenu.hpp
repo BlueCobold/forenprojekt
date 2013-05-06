@@ -4,7 +4,6 @@
 #define CAPTIONMENU_HPP
 
 #include "Menu.hpp"
-#include "Button.hpp"
 
 class CaptionMenu : public Menu
 {

@@ -24,7 +24,7 @@ public:
 
     virtual StateChangeInformation update(const float time);
     virtual void draw(const DrawParameter& params);
-	virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
+    virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
     virtual void onEvent(utility::Event::EventType type);
 
 private:
