@@ -19,17 +19,19 @@ class PlayState : public State
 {
 public:
 
-    PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident);
+    PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
     ~PlayState();
 
     virtual StateChangeInformation update(const float time);
     virtual void draw(const DrawParameter& params);
 	virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
+    virtual void onEvent(utility::Event::EventType type);
 
 private:
 
     Level* m_level;
     HUD m_hud;
+    bool m_shouldPause;
 
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPauseStateInformation m_pauseStateInfo;

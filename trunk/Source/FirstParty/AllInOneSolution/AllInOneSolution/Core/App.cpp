@@ -25,8 +25,6 @@ App::App(Config& config) :
     m_soundBuffer(nullptr),
     m_stateManager(m_screen)
 {
-    m_event.m_eventType = utility::Event::NoEvent;
-
     // Cache often used settings
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
@@ -50,11 +48,11 @@ App::App(Config& config) :
     m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
     m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
 
-    m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config, m_event))); 
-    m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config, m_event))); 
-    m_stateManager.registerState(PauseStateId, std::unique_ptr<PauseState>(new PauseState(m_screen, m_resourceManager, m_config, m_event)));
-    m_stateManager.registerState(TransitionStateId, std::unique_ptr<TransitionState>(new TransitionState(m_screen, m_resourceManager, m_config, m_event)));
-    m_stateManager.registerState(LevelPassStateId, std::unique_ptr<LevelPassState>(new LevelPassState(m_screen, m_resourceManager, m_config, m_event)));
+    m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config))); 
+    m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
+    m_stateManager.registerState(PauseStateId, std::unique_ptr<PauseState>(new PauseState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.registerState(TransitionStateId, std::unique_ptr<TransitionState>(new TransitionState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.registerState(LevelPassStateId, std::unique_ptr<LevelPassState>(new LevelPassState(m_screen, m_resourceManager, m_config)));
     m_stateManager.setState(LoadLevelStateId);
 }
 
@@ -77,6 +75,7 @@ void App::update()
     handleEvents();
     handleKeyboard();
 
+    m_stateManager.passEvent(m_event.m_eventType);
     m_stateManager.update();
 
     utility::Mouse.capture();
@@ -108,6 +107,7 @@ void App::handleKeyboard()
 void App::handleEvents()
 {
     sf::Event event;
+    m_event.m_eventType = utility::Event::NoEvent;
 
     utility::Keyboard.progress();
     while(m_screen.pollEvent(event))

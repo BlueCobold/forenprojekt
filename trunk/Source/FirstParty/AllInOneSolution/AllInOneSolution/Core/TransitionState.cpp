@@ -3,8 +3,10 @@
 
 #include "rendering/transitions/RandomTransition.hpp"
 
-TransitionState::TransitionState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident) :
-    State(screen, resourceManager, config, incident)
+TransitionState::TransitionState(sf::RenderWindow& screen,
+                                 ResourceManager& resourceManager, 
+                                 Config& config) :
+    State(screen, resourceManager, config)
 {
     // BUG: the PC might not be able to handle this size!
     // we still need a texture as big as possible to handle screen-size-changes during the gameplay

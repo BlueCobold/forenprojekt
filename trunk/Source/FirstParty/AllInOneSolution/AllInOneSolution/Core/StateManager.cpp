@@ -75,6 +75,12 @@ void StateManager::update()
     } while(changeInformation != StateChangeInformation::Empty());
 }
 
+void StateManager::passEvent(utility::Event::EventType type)
+{
+    if(m_currentState != nullptr && type != utility::Event::NoEvent)
+        m_currentState->onEvent(type);
+}
+
 void StateManager::draw()
 {
     if(m_currentState !=nullptr )

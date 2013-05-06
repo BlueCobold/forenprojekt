@@ -7,10 +7,13 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 
-PlayState::PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config, utility::Event& incident) :
-    State(screen, resourceManager, config, incident),
+PlayState::PlayState(sf::RenderWindow& screen, 
+                     ResourceManager& resourceManager, 
+                     Config& config) :
+    State(screen, resourceManager, config),
     m_level(nullptr),
-    m_hud(resourceManager, config)
+    m_hud(resourceManager, config),
+    m_shouldPause(false)
 {
 }
 
@@ -21,6 +24,7 @@ PlayState::~PlayState()
 
 void PlayState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
+    m_shouldPause = false;
     State::onEnter(enterInformation, time);
 
     const EnterPlayStateInformation* info = dynamic_cast<const EnterPlayStateInformation*>(enterInformation);
@@ -52,15 +56,13 @@ StateChangeInformation PlayState::update(const float time)
             m_level->restartAt(getCurrentTime());
         }
 
-        if(m_event.m_eventType == utility::Event::LostFocus || utility::Keyboard.isKeyDown(sf::Keyboard::P) || 
-            utility::Keyboard.isKeyDown(sf::Keyboard::Pause))
+        if(m_shouldPause || utility::Keyboard.isKeyDown(sf::Keyboard::P) || utility::Keyboard.isKeyDown(sf::Keyboard::Pause))
         {
             m_pauseStateInfo.m_levelTime = getCurrentTime();
             m_pauseStateInfo.m_level = m_level;
             m_transitionStateInfo.m_level = m_level;
             m_transitionStateInfo.m_followingState = PauseStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
-            m_event.m_eventType = utility::Event::NoEvent;
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
 
@@ -83,4 +85,10 @@ void PlayState::draw(const DrawParameter& params)
     m_level->adjustView(params.getTarget());
     m_level->draw(params);
     m_hud.draw(params);
+}
+
+void PlayState::onEvent(utility::Event::EventType type)
+{
+    if(type == utility::Event::LostFocus)
+        m_shouldPause = true;
 }
