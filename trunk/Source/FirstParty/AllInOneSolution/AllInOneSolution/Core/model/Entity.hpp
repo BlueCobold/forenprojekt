@@ -32,9 +32,10 @@ private:
     std::unique_ptr<CollisionFilter> m_collisionFilter;
     std::map<std::string, float> m_variables;
     bool m_respawnable;
+    bool m_autoKill;
 
 public:
-    Entity(Type type, bool respawnable = false);
+    Entity(Type type, bool respawnable = false, bool autoKill = false);
     virtual ~Entity();
 
     virtual void update(const float value);
@@ -55,7 +56,7 @@ public:
 
     void bindCollisionHandler(std::unique_ptr<CollisionHandler> handler);
     void bindCollisionFilter(std::unique_ptr<CollisionFilter> filter);
-    void onCollide(Entity* partner);
+    void onCollide(Entity* partner, const b2Vec2& point);
     bool shouldCollide(Entity* partner);
 };
 

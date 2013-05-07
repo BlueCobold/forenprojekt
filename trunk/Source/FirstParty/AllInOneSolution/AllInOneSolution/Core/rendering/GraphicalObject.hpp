@@ -45,7 +45,7 @@ public:
             return;
 
         for(auto animation = begin(m_animations); animation != end(m_animations); ++animation)
-            if((*animation) != nullptr)
+            if((*animation) != nullptr && !(*animation)->isStopped())
                 (*animation)->draw(param);
     }
 
@@ -58,14 +58,14 @@ protected:
 
     void removeStoppedAnimations()
     {
-        auto it = begin(m_animations);
-        while(it != end(m_animations))
-        {
-            if((*it)->isStopped())
-                it = m_animations.erase(it);
-            else
-                ++it;
-        }
+        //auto it = begin(m_animations);
+        //while(it != end(m_animations))
+        //{
+        //    if((*it)->isStopped())
+        //        it = m_animations.erase(it);
+        //    else
+        //        ++it;
+        //}
     }
 
     const std::vector<std::unique_ptr<Animation>>& getAnimations() const

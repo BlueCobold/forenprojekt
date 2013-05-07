@@ -30,6 +30,9 @@ Animation::~Animation()
 
 void Animation::update()
 {
+    if(isStopped())
+        return;
+
     if(m_frameProvider == nullptr)
         m_frame = 0;
     else
@@ -65,6 +68,8 @@ void Animation::update()
 
 void Animation::reset()
 {
+    Stoppable::continueNow();
+
     if(m_frameProvider == nullptr)
         m_frameProvider->reset();
 
@@ -136,6 +141,8 @@ const sf::IntRect Animation::getTextureRect() const
 
 void Animation::draw(const DrawParameter& param)
 {
+    if(isStopped())
+        return;
     if(param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
         param.getTarget().draw(m_sprite, sf::RenderStates(m_blending));
 }

@@ -66,15 +66,26 @@
 				<animations>
 					<animation copies="20" texture="sparkles" blending="add" width="32" height="32" midx="16" midy="16" rotate="true">
 						<constants time="0" size="1" />
+						<frameindex frames="8">
+							<step>
+								<setVar name="time">
+									<sub>
+										<time />
+										<static value="0.40" />
+									</sub>
+								</setVar>
+								<cache>
+									<int>
+										<random min="0" max="8" />
+									</int>
+								</cache>
+								<stop />
+							</step>
+						</frameindex>
 						<position axis="x">
 							<step>
 								<add>
-									<setVar name="time">
-										<sub>
-											<time />
-											<static value="0.40" />
-										</sub>
-									</setVar>
+									<var name="time" />
 									<static value="1" />
 								</add>
 								<static value="0" />
@@ -184,18 +195,6 @@
 								</max>
 							</step>
 						</color>
-
-						<frameindex frames="8">
-							<step>
-								<var name="time" />
-								<cache>
-									<int>
-										<random min="0" max="8" />
-									</int>
-								</cache>
-								<stop />
-							</step>
-						</frameindex>
 					</animation>
 				</animations>
 			</entity>

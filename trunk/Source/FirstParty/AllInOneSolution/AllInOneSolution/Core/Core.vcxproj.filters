@@ -552,6 +552,9 @@
     <ClInclude Include="gui\ReplayMenu.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="model\collision\handler\SpawnEntityCollisionHandler.hpp">
+      <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

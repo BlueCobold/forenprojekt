@@ -91,9 +91,9 @@ private:
     void updatePointLabels();
 
     virtual bool shouldCollide(Entity* entityA, Entity* entityB);
-    virtual void onCollision(Entity* entityA, Entity* entityB);
+    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point);
     void killTarget(Entity* target);
-    void prepareEntityForSpawn(const Entity* owner, const Entity* spawn);
+    void prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn);
 
     /// Load the level after m_number
     bool load();
