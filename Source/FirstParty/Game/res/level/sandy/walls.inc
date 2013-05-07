@@ -57,7 +57,94 @@
 		</physics>
 
 		<entities>
+			<entity respawnable="true" stopWithLastAnimation="true" name="wall_hit_particles" rep="--" collideWithBall="false">
+				<animations>
+					<animation copies="7" texture="sparkles" srcx="256" width="32" height="32" midx="16" midy="16" rotate="true">
+						<constants size="1" time="0"/>
+						<frameindex frames="8">
+							<step>
+								<setVar name="time">
+									<clamp>
+										<mul>
+											<time />
+											<cache>
+												<random min="0.9" max="1.3" />
+											</cache>
+										</mul>
+										<static value="0" />
+										<static value="1" />
+									</clamp>
+								</setVar>
+								<cache>
+									<int>
+										<random min="0" max="8" />
+									</int>
+								</cache>
+								<stopAnimation />
+							</step>
+						</frameindex>
+						<position axis="x">
+							<mul>
+								<var name="time" />
+								<cache>
+									<random min="-20" max="20" />
+								</cache>
+							</mul>
+						</position>
+						<position axis="y">
+							<mul>
+								<var name="time" />
+								<cache>
+									<random min="-20" max="20" />
+								</cache>
+							</mul>
+						</position>
+						<scale axis="x">
+							<cache>
+								<setVar name="size">
+									<random min="0.2" max="0.7" />
+								</setVar>
+							</cache>
+						</scale>
+						<scale axis="y">
+							<cache>
+								<var name="size" />
+							</cache>
+						</scale>
+
+						<color channel="red">
+							<cache>
+								<random min="0.40" max="0.55" />
+							</cache>
+						</color>
+						<color channel="green">
+							<cache>
+								<random min="0.30" max="0.45" />
+							</cache>
+						</color>
+						<color channel="blue">
+							<cache>
+								<random min="0.05" max="0.20" />
+							</cache>
+						</color>
+						<color channel="alpha">
+							<clamp>
+								<sub>
+									<static value="1" />
+									<var name="time" />
+								</sub>
+								<static value="0" />
+								<static value="1" />
+							</clamp>
+						</color>
+					</animation>
+				</animations>
+			</entity>
+
 			<entity name="base_wall" rep="bw">
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
 			</entity>
 			<entity base="base_wall" name="small_quad" rep="sq">
 				<physics name="wall" shape="wall" />

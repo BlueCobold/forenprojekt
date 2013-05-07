@@ -138,7 +138,7 @@ void Level::respawnDeadBalls()
 
         const Ball* ball = dynamic_cast<const Ball*>((*it).get());
         if(ball->getSpawnAnimationEntity() != nullptr)
-            prepareEntityForSpawn(ball, ball->getSpawnAnimationEntity());
+            prepareEntityForSpawn(ball->getPosition(), ball->getSpawnAnimationEntity());
     }
 }
 
@@ -291,21 +291,21 @@ void Level::createLabelAt(Entity* target, std::string fontName, std::string text
     m_pointLabels.push_back(std::unique_ptr<TimedLabel>(new TimedLabel(std::move(label), getPassedTime())));
 }
 
-void Level::onCollision(Entity* entityA, Entity* entityB)
+void Level::onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point)
 {
     if(entityA->getType() == Entity::Ball)
     {
         float velocityA = abs(entityA->getBody()->GetLinearVelocity().x) + abs(entityA->getBody()->GetLinearVelocity().y);
         if(entityB->getSoundName().length() > 0)
             entityB->getSoundManager()->play(entityB->getSoundName(), velocityA);
-        entityB->onCollide(entityA);
+        entityB->onCollide(entityA, point);
     }
     else if(entityB->getType() == Entity::Ball)
     {
         float velocityB = abs(entityB->getBody()->GetLinearVelocity().x) + abs(entityB->getBody()->GetLinearVelocity().y);
         if(entityA->getSoundName().length() > 0)
             entityA->getSoundManager()->play(entityA->getSoundName(), velocityB);
-        entityA->onCollide(entityB);
+        entityA->onCollide(entityB, point);
     }
 }
 

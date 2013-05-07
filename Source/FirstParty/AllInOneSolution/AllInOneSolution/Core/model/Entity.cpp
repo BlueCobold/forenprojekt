@@ -7,12 +7,13 @@
 
 #include <Box2D/Dynamics/b2World.h>
 
-Entity::Entity(Type type, bool respawnable) :
+Entity::Entity(Type type, bool respawnable, bool autoKill) :
     m_killed(false),
     m_type(type),
     m_updatingAni(nullptr),
     m_collideWithBall(true),
-    m_respawnable(respawnable)
+    m_respawnable(respawnable),
+    m_autoKill(autoKill)
 {
 }
 
@@ -28,17 +29,24 @@ void Entity::update(const float value)
 
         updateCurrentTime(value);
         updateKinematics(getPassedTime(), value - m_lastTime);
+        bool running = false;
         for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
         {
             auto ani = (*animation).get();
+            if(ani->isStopped())
+                continue;
             m_updatingAni = ani;
             ani->setPosition(utility::toPixel(getPosition().x), utility::toPixel(getPosition().y));
             if(getBody() != nullptr)
                 ani->setRotation(getBody()->GetAngle());
             ani->update();
+            running |= !ani->isStopped();
         }
         m_updatingAni = nullptr;
         m_lastTime = value;
+
+        if(!running && m_autoKill)
+            kill();
     }
     
     if(isStopped())
@@ -126,10 +134,10 @@ void Entity::bindCollisionFilter(std::unique_ptr<CollisionFilter> filter)
     m_collisionFilter = std::move(filter);
 }
 
-void Entity::onCollide(Entity* partner)
+void Entity::onCollide(Entity* partner, const b2Vec2& point)
 {
     for(auto it = begin(m_collisionHandler); it != end(m_collisionHandler); ++it)
-        (*it)->onCollision(this, partner);
+        (*it)->onCollision(this, partner, point);
 }
 
 bool Entity::shouldCollide(Entity* partner)

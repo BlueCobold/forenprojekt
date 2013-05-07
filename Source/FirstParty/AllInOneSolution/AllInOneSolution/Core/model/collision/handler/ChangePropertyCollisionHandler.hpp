@@ -41,7 +41,7 @@ public:
         m_provider = std::move(provider);
     }
 
-    virtual void onCollision(Entity* entityA, Entity* entityB)
+    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point)
     {
         if(m_provider == nullptr)
             throw std::runtime_error(utility::translateKey("HandlerNull"));
@@ -59,7 +59,7 @@ public:
         m_entityA = nullptr;
         m_entityB = nullptr;
     }
-    
+
     virtual float getValueOf(const std::string& name) const
     {
         if(m_globalHandler != nullptr && name.length() > 7 && name.substr(0,7) == "global:")

@@ -7,6 +7,7 @@
 
 #include "collision/handler/ApplyImpulseCollisionHandler.hpp"
 #include "collision/handler/ChangePropertyCollisionHandler.hpp"
+#include "collision/handler/SpawnEntityCollisionHandler.hpp"
 #include "collision/filter/Always.hpp"
 #include "collision/filter/ChangeBallSpawnFilter.hpp"
 #include "collision/filter/ChangeBallVelocityFilter.hpp"
@@ -282,6 +283,7 @@ std::unique_ptr<Entity> Level::createEntity(
     tinyxml2::XMLElement* element = nullptr;
     
     bool respawnable = xml->BoolAttribute("respawnable");
+    bool autoStop = xml->BoolAttribute("stopWithLastAnimation");
 
     if(auto name = xml->Attribute("base"))
         entity = parseEntityFromTemplate(name, templates, position, false);
@@ -298,14 +300,14 @@ std::unique_ptr<Entity> Level::createEntity(
             }
             else if(std::string(xml->Attribute("type")) == "target")
             {
-                entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable));
+                entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable, autoStop));
                 m_totalTarget++;
             }
             else
-                entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable));
+                entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable, autoStop));
         }
         else // No type specified == normal Entity
-            entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable));
+            entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable, autoStop));
 
     entity->setName(std::string(xml->Attribute("name")));
     if(auto animations = xml->FirstChildElement("animations"))
@@ -387,6 +389,9 @@ std::unique_ptr<Entity> Level::createEntity(
 
         entity->bindDefs(fixtureDef, bodyDef, &m_world);
     }
+    
+    if(auto collider = xml->FirstChildElement("onCollision"))
+        parseCollider(entity.get(), collider, templates);
 
     if(entity->hasPhysics())
     {
@@ -394,9 +399,6 @@ std::unique_ptr<Entity> Level::createEntity(
             entity->setCollideWithBall(xml->BoolAttribute("collideWithBall"));
         else
             entity->setCollideWithBall(true);
-
-        if(auto collider = xml->FirstChildElement("onCollision"))
-            parseCollider(entity.get(), collider, templates);
 
         if(auto filter = xml->FirstChildElement("collides"))
             parseCollisionFilter(entity.get(), filter, templates);
@@ -408,11 +410,19 @@ std::unique_ptr<Entity> Level::createEntity(
     return std::move(entity);
 }
 
+enum SpawnLocation
+{
+    BallLoc = 1,
+    OwnerLoc = 2,
+    ContactPoint = 3
+};
+
 void Level::parseCollider(
     Entity* entity,
     tinyxml2::XMLElement* xml,
     Templates& templates)
 {
+
     for(auto child = xml->FirstChildElement(); child != nullptr; child = child->NextSiblingElement())
     {
         if(std::string(child->Name()) == "changeProperty")
@@ -426,6 +436,42 @@ void Level::parseCollider(
         {
             std::unique_ptr<ApplyImpulseCollisionHandler> collider(new ApplyImpulseCollisionHandler(child->FloatAttribute("x"), child->FloatAttribute("y")));
             entity->bindCollisionHandler(std::move(collider));
+        }
+        else if(std::string(child->Name()) == "spawnEntity")
+        {
+            auto name = child->Attribute("name");
+            if(!name)
+                throw std::runtime_error(utility::translateKey("SpawnWithoutName"));
+
+            std::unique_ptr<Entity> spawned(parseEntityFromTemplate(name, templates, sf::Vector2u(0, 0), false));
+            if(spawned == nullptr)
+                throw std::runtime_error(utility::replace(utility::translateKey("UnknownEntityName"), name));
+
+            SpawnLocation location = BallLoc;
+            auto loc = child->Attribute("location");
+            if(loc && std::string("contact") == loc)
+                location = ContactPoint;
+            else if(loc && std::string("entity") == loc)
+                location = OwnerLoc;
+
+            std::unique_ptr<SpawnEntityCollisionHandler> handler(new SpawnEntityCollisionHandler(
+            [=](const Entity* owner, const Entity* spawned, const b2Vec2& contactPoint)
+            {
+                switch(location)
+                {
+                    case BallLoc:
+                        prepareEntityForSpawn(m_ball->getPosition(), spawned);
+                        break;
+                    case OwnerLoc:
+                        prepareEntityForSpawn(owner->getPosition(), spawned);
+                        break;
+                    case ContactPoint:
+                        prepareEntityForSpawn(contactPoint, spawned);
+                        break;
+                }
+            }, entity, spawned.get()));
+            m_unspawnedEntities.push_back(std::move(spawned));
+            entity->bindCollisionHandler(std::move(handler));
         }
         else
             throw std::runtime_error(utility::replace(utility::translateKey("UnknownCollider"), child->Name()));
@@ -459,7 +505,7 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
 
         std::unique_ptr<SpawnEntity> filter(new SpawnEntity([this](const Entity* owner, const Entity* spawned)
         {
-            prepareEntityForSpawn(owner, spawned);
+            prepareEntityForSpawn(owner->getPosition(), spawned);
         }, entity, spawned.get(), std::move(subFilter)));
         m_unspawnedEntities.push_back(std::move(spawned));
         return std::move(filter);
@@ -528,7 +574,7 @@ std::unique_ptr<Entity> Level::parseBallSpawnAnimation(
     return spawned;
 }
 
-void Level::prepareEntityForSpawn(const Entity* owner, const Entity* spawn)
+void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn)
 {
     for(auto it = std::begin(m_unspawnedEntities); it != std::end(m_unspawnedEntities); ++it)
     {
@@ -536,7 +582,7 @@ void Level::prepareEntityForSpawn(const Entity* owner, const Entity* spawn)
         {
             auto e = std::move(*it);
             m_unspawnedEntities.erase(it);
-            e->setPosition(owner->getPosition());
+            e->setPosition(position);
             m_entitiesToSpawn.push_back(std::move(e));
             break;
         }
