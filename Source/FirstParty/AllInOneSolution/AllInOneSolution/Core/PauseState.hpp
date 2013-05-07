@@ -22,7 +22,7 @@ public:
 
     virtual StateChangeInformation update(const float time);
     virtual void draw(const DrawParameter& params);
-	virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
+    virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
 
 private:
     void renderStateTexture();
@@ -34,7 +34,6 @@ private:
 
     HUD m_HUD;
     PauseMenu m_menu;
-    bool m_continue;
 
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;

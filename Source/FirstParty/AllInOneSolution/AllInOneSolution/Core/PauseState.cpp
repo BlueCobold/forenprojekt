@@ -19,10 +19,6 @@ PauseState::PauseState(sf::RenderWindow& screen,
     m_menu(sf::Vector2f(0, 0), screen, resourceManager),
     m_HUD(resourceManager, config)
 {
-    m_menu.registerOnClick([this](const Button& sender)
-    {
-        m_continue = (sender.getId() == PauseMenu::BUTTON_CONTINUE);
-    });
 }
 
 PauseState::~PauseState()
@@ -31,28 +27,27 @@ PauseState::~PauseState()
 
 void PauseState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
-    m_continue = false;
-
     const EnterPauseStateInformation* info = dynamic_cast<const EnterPauseStateInformation*>(enterInformation);
     m_level = info->m_level;
     
     m_timeDiff = time - info->m_levelTime;
     State::onEnter(enterInformation, time - m_timeDiff);
     m_HUD.restartAt(getCurrentTime());
-
-    m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 }
 
 StateChangeInformation PauseState::update(const float time)
-{  
+{
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
     updateTime(time - m_timeDiff);
 
+    int clicked = -1;
+    m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
     m_menu.update(m_screen);
 
-    if(utility::Keyboard.isKeyDown(sf::Keyboard::P) || utility::Keyboard.isKeyDown(sf::Keyboard::Pause)
-        || m_continue)
+    if(utility::Keyboard.isKeyDown(sf::Keyboard::P)
+        || utility::Keyboard.isKeyDown(sf::Keyboard::Pause)
+        || PauseMenu::BUTTON_CONTINUE == clicked)
     {
         m_playStateInfo.m_returnFromPause = true;
         m_playStateInfo.m_level = m_level;
@@ -61,7 +56,7 @@ StateChangeInformation PauseState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
-    
+
     return StateChangeInformation::Empty();
 }
 
@@ -71,7 +66,7 @@ void PauseState::draw(const DrawParameter& params)
     m_level->draw(params);
     m_HUD.update(m_level, getCurrentTime());
     m_HUD.draw(params);
-    
+
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 
     sf::RectangleShape whiteRect;
