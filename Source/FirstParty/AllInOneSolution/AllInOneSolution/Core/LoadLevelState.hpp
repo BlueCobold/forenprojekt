@@ -8,9 +8,11 @@
 #include "model/Level.hpp"
 #include "gui/hud/HUD.hpp"
 #include "rendering/transitions/Transition.hpp"
+#include "Utility.hpp"
 
 #include <SFML/System/Clock.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
+#include <SFML/System/Thread.hpp>
 
 #include <memory> // unique_ptr
 
@@ -35,8 +37,18 @@ private:
     std::unique_ptr<Level> m_level;
     Level* m_lastLevel;
 
+    LineLabel m_label;
+
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
+
+    bool m_loaded;
+    bool m_loadInProgress;
+
+    sf::Thread loadingLevelThrerad;
+
+    void loadLevel();
+    void onEvent(utility::Event::EventType type);
 };
 
 #endif // LOADLEVELSTATE_HPP
