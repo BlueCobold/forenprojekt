@@ -43,3 +43,4 @@ gui_game_paused = Game Paused
 gui_continue = Continue
 gui_level_success = Congratulations!
 gui_play_again = Play Again
+gui_loading_screen = loading

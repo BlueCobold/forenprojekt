@@ -12,13 +12,14 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
                                ResourceManager& resourceManager, 
                                Config& config) :
     State(screen, resourceManager, config),
+    m_label(utility::translateKey("gui_loading_screen"), sf::Vector2f(screen.getSize().x / 2.f, screen.getSize().y / 2.f), 0, resourceManager.getBitmapFont("red"), LineLabel::Left),
     m_level(nullptr),
     m_lastLevel(nullptr),
-    m_label("loading", sf::Vector2f(screen.getSize().x / 2.f, screen.getSize().y / 2.f), 0, resourceManager.getBitmapFont("red"), LineLabel::Left),
-    loadingLevelThrerad(&LoadLevelState::loadLevel, this),
+    loadingLevelThrerad(nullptr),    
     m_loaded(false),
     m_loadInProgress(false)
 {
+    loadingLevelThrerad = std::unique_ptr<sf::Thread>(new sf::Thread(&LoadLevelState::loadLevel, this));
     m_label.setPosition(m_screen.getSize().x / 2.f - m_label.getWidth() / 2.f, m_screen.getSize().y / 2.f);
 }
 
@@ -41,6 +42,7 @@ std::unique_ptr<Level> LoadLevelState::gainLevel()
 StateChangeInformation LoadLevelState::update(const float time)
 {
     int step = static_cast<int>(time * 2) % 4;
+    std::string text(utility::translateKey("gui_loading_screen"));
 
     updateTime(time);
 
@@ -55,16 +57,12 @@ StateChangeInformation LoadLevelState::update(const float time)
     }
     
     if(!m_loadInProgress)
-        loadingLevelThrerad.launch();
+        loadingLevelThrerad->launch();
     
-    if(step == 0)
-        m_label.setText("loading");
-    else if(step == 1)
-        m_label.setText("loading.");
-    else if(step == 2)
-        m_label.setText("loading..");
-    else if(step == 3)
-        m_label.setText("loading...");
+    for (int i = 0;i < step;++i)
+        text.append(".");
+
+    m_label.setText(text);
 
     return StateChangeInformation::Empty();
 }

@@ -45,7 +45,7 @@ private:
     bool m_loaded;
     bool m_loadInProgress;
 
-    sf::Thread loadingLevelThrerad;
+    std::unique_ptr<sf::Thread> loadingLevelThrerad;
 
     void loadLevel();
     void onEvent(utility::Event::EventType type);
