@@ -22,6 +22,12 @@
         getchar();
         return 1;
     }
+    catch(...)
+    {
+        std::cout << "A serious unknown error occurred!";
+        getchar();
+        return 1;
+    }
 
     return 0;
 }
