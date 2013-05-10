@@ -28,7 +28,7 @@ private:
 
     LineLabel* m_label;
     sf::Sprite* m_sprite;
-        
+
     std::function<void (const Button& sender)> m_callback;
 
 public:

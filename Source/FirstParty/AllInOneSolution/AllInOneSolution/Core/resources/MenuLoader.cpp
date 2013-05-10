@@ -7,7 +7,7 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
 {
     tinyxml2::XMLDocument doc;
     doc.LoadFile(path.c_str());
-    
+
     if(doc.Error())
     {
         doc.PrintError();

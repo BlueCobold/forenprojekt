@@ -21,7 +21,7 @@ void SoundManager::update()
             m_soundKeys.erase(m_sounds.front().first);
             m_sounds.pop();
         }
-    }         
+    }
 }
 
 void SoundManager::play(const std::string& key, const float volume)

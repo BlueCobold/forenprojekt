@@ -16,14 +16,14 @@
 class SoundManager 
 {
 public:
-	SoundManager(ResourceManager& resourceManager);
+    SoundManager(ResourceManager& resourceManager);
 
     void update();
-	void play(const std::string& key, const float volume);
+    void play(const std::string& key, const float volume);
 
 private:
-	ResourceManager& m_resourceManager;
-	std::queue< std::pair<std::string, sf::Sound> > m_sounds;
+    ResourceManager& m_resourceManager;
+    std::queue< std::pair<std::string, sf::Sound> > m_sounds;
     std::map<std::string, std::string> m_soundKeys;
 
 };

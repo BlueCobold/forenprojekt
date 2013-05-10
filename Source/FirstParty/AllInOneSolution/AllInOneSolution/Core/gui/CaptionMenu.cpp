@@ -24,6 +24,6 @@ void CaptionMenu::draw(const DrawParameter& params)
 void CaptionMenu::setPosition(const sf::Vector2f& position)
 {
     Menu::setPosition(position);
-    
+
     m_caption.setPosition(position.x + getSize().x / 2.f, position.y);
 }
