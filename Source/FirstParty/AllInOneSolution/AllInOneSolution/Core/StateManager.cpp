@@ -10,7 +10,8 @@ StateManager::StateManager(sf::RenderWindow& screen) :
     m_screen(screen),
 	m_currentState(nullptr),
     m_currentStateId(None),
-    m_currentLevel(nullptr)
+    m_currentLevel(nullptr),
+    m_currentTime(m_frametime.getElapsedTime().asSeconds())
 {
 
 }
@@ -44,6 +45,11 @@ void StateManager::setState(StateId id, EnterStateInformation* enterInformation)
         m_currentLevel = std::move((dynamic_cast<LoadLevelState*>(m_currentState))->gainLevel());
     m_currentStateId = id;
 	m_currentState = state;
+
+    EnterStateInformation info;
+    if(enterInformation == nullptr)
+        enterInformation = &info;
+    enterInformation->m_prepareOnly = false;
     m_currentState->onEnter(enterInformation, m_currentTime);
     m_currentState->resume(m_currentTime);
 }
