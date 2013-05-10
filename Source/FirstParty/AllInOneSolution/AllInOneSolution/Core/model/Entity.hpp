@@ -56,7 +56,7 @@ public:
 
     void bindCollisionHandler(std::unique_ptr<CollisionHandler> handler);
     void bindCollisionFilter(std::unique_ptr<CollisionFilter> filter);
-    void onCollide(Entity* partner, const b2Vec2& point);
+    void onCollide(Entity* partner, const b2Vec2& point, const float impulse);
     bool shouldCollide(Entity* partner);
 };
 

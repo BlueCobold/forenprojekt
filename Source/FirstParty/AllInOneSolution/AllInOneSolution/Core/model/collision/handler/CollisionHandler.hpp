@@ -13,7 +13,7 @@ public:
     virtual ~CollisionHandler()
     { }
 
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point) = 0;
+    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse) = 0;
 };
 
 #endif // COLLISION_HANDLER_HPP

@@ -134,10 +134,10 @@ void Entity::bindCollisionFilter(std::unique_ptr<CollisionFilter> filter)
     m_collisionFilter = std::move(filter);
 }
 
-void Entity::onCollide(Entity* partner, const b2Vec2& point)
+void Entity::onCollide(Entity* partner, const b2Vec2& point, const float impulse)
 {
     for(auto it = begin(m_collisionHandler); it != end(m_collisionHandler); ++it)
-        (*it)->onCollision(this, partner, point);
+        (*it)->onCollision(this, partner, point, impulse);
 }
 
 bool Entity::shouldCollide(Entity* partner)

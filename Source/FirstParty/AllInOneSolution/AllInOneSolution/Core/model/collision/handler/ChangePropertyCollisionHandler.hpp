@@ -41,7 +41,7 @@ public:
         m_provider = std::move(provider);
     }
 
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point)
+    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse)
     {
         if(m_provider == nullptr)
             throw std::runtime_error(utility::translateKey("HandlerNull"));
