@@ -3,17 +3,16 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-CaptionMenu::CaptionMenu(const sf::Vector2f& position,
-                   const std::string& caption,
-                   sf::RenderWindow& screen,
-                   ResourceManager& resourceManager,
-                   const std::string& backgroundName) :
-    Menu(position, screen, resourceManager, backgroundName)
+CaptionMenu::CaptionMenu(const MenuTemplate& menuTemplate,
+                         const sf::Vector2f& position,
+                         sf::RenderWindow& screen) :
+    Menu(menuTemplate, position, screen)
 {
-    m_caption.setBitmapFont(resourceManager.getBitmapFont("gui_large"));
-    m_caption.setPosition(position.x + getSize().x / 2.f, position.y + 40);
+    m_caption.setBitmapFont(menuTemplate.captionFont);
+    m_caption.setPosition(position.x + getSize().x / 2.f, position.y);
+    m_caption.setOffset(menuTemplate.captionOffset);
     m_caption.setAlignment(LineLabel::Centered);
-    m_caption.setText(caption);
+    m_caption.setText(utility::translateKey(menuTemplate.captionResourceKey));
 }
 
 void CaptionMenu::draw(const DrawParameter& params)
@@ -26,5 +25,5 @@ void CaptionMenu::setPosition(const sf::Vector2f& position)
 {
     Menu::setPosition(position);
     
-    m_caption.setPosition(position.x + getSize().x / 2.f, position.y + 40);
+    m_caption.setPosition(position.x + getSize().x / 2.f, position.y);
 }

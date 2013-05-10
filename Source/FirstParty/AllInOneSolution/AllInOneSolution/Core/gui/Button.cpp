@@ -3,70 +3,42 @@
 
 #include <SFML/Window/Event.hpp>
 
-Button::Button(const sf::Vector2f& position,
-               const std::string& text,
-               BitmapFont* font,
-               const sf::Sprite& buttonIdlePicture,
-               const int id,
-               const sf::Vector2f& offset,
-               const sf::Vector2f& textOffset) :
+Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset) :
     m_position(position),
-    m_buttonLabel(text, sf::Vector2f(0, 0), 0, font, LineLabel::Centered),
     m_id(id),
     m_offset(offset),
-    m_textOffset(textOffset)
+    m_style(style)
 {
-    m_idleData.m_bound = true;
-    m_idleData.m_font = font;
-    m_idleData.m_sprite = buttonIdlePicture;
-    m_idleData.m_spriteOffset = sf::Vector2f(0, 0);
-    m_idleData.m_fontOffset = sf::Vector2f(0, 0);
+    m_sprite = &m_style.idleStyle.sprite;
+    m_label = &m_style.idleStyle.label;
 
-    m_hoverData.m_bound = m_pressedData.m_bound = false;
-    m_buttonSprite = buttonIdlePicture;
-    m_buttonSprite.setPosition(m_position + offset);
+    setPosition(position);
 
-    m_textOffset.x += buttonIdlePicture.getTextureRect().width / 2;
-    m_textOffset.y += buttonIdlePicture.getTextureRect().height / 2 - font->getFontSize() / 2;
-
-    m_buttonLabel.setPosition(position + offset + m_textOffset);
-
-    m_size.x = m_buttonSprite.getTextureRect().width;
-    m_size.y = m_buttonSprite.getTextureRect().height;
+    m_size.x = m_style.idleStyle.sprite.getTextureRect().width;
+    m_size.y = m_style.idleStyle.sprite.getTextureRect().height;
 }
 
 void Button::update(const sf::RenderWindow& screen)
 {
-    sf::FloatRect buttonRect(m_position.x + m_offset.x + m_idleData.m_spriteOffset.x + 2,
-                             m_position.y + m_offset.y + m_idleData.m_spriteOffset.y + 2,
-                             static_cast<float>(m_idleData.m_sprite.getTextureRect().width - 2),
-                             static_cast<float>(m_idleData.m_sprite.getTextureRect().height - 2));
+    sf::IntRect buttonRect(static_cast<int>(m_position.x + m_offset.x + m_style.mouseRect.left - getSize().x / 2),
+                           static_cast<int>(m_position.y + m_offset.y + m_style.mouseRect.top),
+                           m_style.mouseRect.width,
+                           m_style.mouseRect.height);
 
-    if(buttonRect.contains(static_cast<sf::Vector2f>(sf::Mouse::getPosition(screen))))
+    if(buttonRect.contains(sf::Mouse::getPosition(screen)))
     {
         if(utility::Mouse.leftButtonPressed())
         {
-            if (m_pressedData.m_bound)
-            {
-                m_buttonSprite = m_pressedData.m_sprite;
-                m_buttonLabel.setOffset(m_pressedData.m_fontOffset);
-                m_buttonLabel.setBitmapFont(m_pressedData.m_font);
-            }
+            m_sprite = &m_style.pressedStyle.sprite;
+            m_label = &m_style.pressedStyle.label;
+            setPosition(m_position);
         } 
         else
         {
-            if(m_hoverData.m_bound)
-            {
-                m_buttonSprite = m_hoverData.m_sprite;
-                m_buttonLabel.setOffset(m_hoverData.m_fontOffset);
-                m_buttonLabel.setBitmapFont(m_hoverData.m_font);
-            }
-            else
-            {
-                m_buttonSprite = m_idleData.m_sprite;
-                m_buttonLabel.setOffset(m_idleData.m_fontOffset);
-                m_buttonLabel.setBitmapFont(m_idleData.m_font);
-            }
+            m_sprite = &m_style.hoverStyle.sprite;
+            m_label = &m_style.hoverStyle.label;
+            setPosition(m_position);
+
             if(utility::Mouse.leftButtonReleased() && m_callback != nullptr)
                 m_callback(*this);
         }
@@ -74,42 +46,16 @@ void Button::update(const sf::RenderWindow& screen)
     }
     else
     {
-        m_buttonSprite = m_idleData.m_sprite;
-        m_buttonLabel.setOffset(m_idleData.m_fontOffset);
-        m_buttonLabel.setBitmapFont(m_idleData.m_font);
+        m_sprite = &m_style.idleStyle.sprite;
+        m_label = &m_style.idleStyle.label;
+        setPosition(m_position);
     }
 }
 
 void Button::draw(const DrawParameter& params)
 {
-    params.getTarget().draw(m_buttonSprite);
-    m_buttonLabel.draw(params);
-}
-
-void Button::bindHover(const sf::Sprite& sprite,
-                       BitmapFont* font,
-                       const sf::Vector2f& spriteOffset,
-                       const sf::Vector2f& fontOffset)
-{
-    m_hoverData.m_bound = true;
-    m_hoverData.m_sprite = sprite;
-    m_hoverData.m_sprite.setPosition(m_position + m_offset + spriteOffset);
-    m_hoverData.m_spriteOffset = spriteOffset;
-    m_hoverData.m_font = font;
-    m_hoverData.m_fontOffset = fontOffset;
-}
-
-void Button::bindPressed(const sf::Sprite& sprite,
-                         BitmapFont* font,
-                         const sf::Vector2f& spriteOffset,
-                         const sf::Vector2f& fontOffset)
-{
-    m_pressedData.m_bound = true;
-    m_pressedData.m_sprite = sprite;
-    m_pressedData.m_sprite.setPosition(m_position + m_offset + spriteOffset);
-    m_pressedData.m_spriteOffset = spriteOffset;
-    m_pressedData.m_font = font;
-    m_pressedData.m_fontOffset = fontOffset;
+    params.getTarget().draw(*m_sprite);
+    m_label->draw(params);
 }
 
 void Button::registerOnPressed(std::function<void (const Button& sender)> callback)
@@ -120,14 +66,15 @@ void Button::registerOnPressed(std::function<void (const Button& sender)> callba
 void Button::setPosition(const sf::Vector2f& position)
 {
     m_position = position;
-    m_idleData.m_sprite.setPosition(m_position + m_offset + m_idleData.m_spriteOffset);
-    m_buttonLabel.setPosition(m_position + m_offset + m_textOffset);
+    sf::Vector2f half = sf::Vector2f(getSize().x / 2.f, 0);
+    m_style.idleStyle.sprite.setPosition(m_position + m_offset + m_style.idleStyle.spriteOffset - half);
+    m_style.idleStyle.label.setPosition(m_position + m_offset + m_style.idleStyle.textOffset);
+    
+    m_style.hoverStyle.sprite.setPosition(m_position + m_offset + m_style.hoverStyle.spriteOffset - half);
+    m_style.hoverStyle.label.setPosition(m_position + m_offset + m_style.hoverStyle.textOffset);
 
-    if(m_hoverData.m_bound)
-        m_hoverData.m_sprite.setPosition(m_position + m_offset + m_hoverData.m_spriteOffset);
-
-    if(m_pressedData.m_bound)
-        m_pressedData.m_sprite.setPosition(m_position + m_offset + m_pressedData.m_spriteOffset);
+    m_style.pressedStyle.sprite.setPosition(m_position + m_offset + m_style.pressedStyle.spriteOffset - half);
+    m_style.pressedStyle.label.setPosition(m_position + m_offset + m_style.pressedStyle.textOffset);
 }
 
 const sf::Vector2i& Button::getSize() const

@@ -16,7 +16,7 @@ ParametersNull = Parameters may not be null.
 FunctionNull = Invalid argument passed. Functions may not be null.
 NoTemplate = No template defined for function %.
 NoName = No name for function specified.
-TemplateChild = The template defined too many children: %
+TemplateChild = The template defined too many children: %.
 Unknown = Unknown value-provider specified: %
 NoProvider = <frameindex> specified, but no provider included.
 SubTag = The position element needs a mathematical sub-tag.
@@ -37,6 +37,9 @@ SpawnWithoutName = No entity-name defined in spawnEntity.
 TargetTexture = % needs a texture of the target.
 SourceTexture = % needs a texture of the source.
 RandomTransition = % is a unknown Transition.
+MenuFileInvalid = The file is corrupt: %.
+MenuEntryMissing = No <menu> entry found in %.
+UnknownMenuTemplate = The menu template isn't registered: %.
 
 [GUI]
 gui_game_paused = Game Paused

@@ -5,6 +5,7 @@
 
 #include "../rendering/Drawable.hpp"
 #include "Button.hpp"
+#include "MenuTemplate.hpp"
 
 #include <SFML/System/Vector2.hpp>
 
@@ -24,25 +25,23 @@ class Menu : public Drawable
 protected:
 
     sf::RenderWindow& m_screen;
-
-    ResourceManager& m_resourceManager;
     
-    void createButton(const sf::Vector2f& position, const sf::Vector2f& offset, const std::string& text, const int id);
+    void createButton(const ButtonInfo& info);
+    MenuTemplate& getTemplate();
 
 private:
 
+    MenuTemplate m_template;
     std::vector<std::unique_ptr<Button>> m_buttons;
-    sf::Sprite m_background;
     sf::Vector2i m_size;
     sf::Vector2f m_position;
     std::function<void(const Button& sender)> m_clickCallback;
 
 public:
 
-    Menu(const sf::Vector2f& position,
-         sf::RenderWindow& screen,
-         ResourceManager& resourceManager,
-         const std::string& backgroundName);
+    Menu(const MenuTemplate& menuTemplate,
+         const sf::Vector2f& position,
+         sf::RenderWindow& screen);
 
     virtual ~Menu();
 

@@ -151,6 +151,7 @@
     <ClCompile Include="resources\Config.cpp" />
     <ClCompile Include="resources\FileReader.cpp" />
     <ClCompile Include="resources\LevelFileLoader.cpp" />
+    <ClCompile Include="resources\MenuLoader.cpp" />
     <ClCompile Include="resources\ResourceManager.cpp" />
     <ClCompile Include="ScrollView.cpp" />
     <ClCompile Include="StateManager.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="EnterStateInformation.hpp" />
+    <ClInclude Include="gui\ButtonStyle.hpp" />
     <ClInclude Include="gui\CaptionMenu.hpp" />
     <ClInclude Include="gui\hud\ArrowHUD.hpp" />
     <ClInclude Include="gui\hud\BallHUD.hpp" />
@@ -207,6 +209,7 @@
     <ClInclude Include="gui\LineLabel.hpp" />
     <ClInclude Include="gui\hud\PointsHUD.hpp" />
     <ClInclude Include="gui\hud\TargetHUD.hpp" />
+    <ClInclude Include="gui\MenuTemplate.hpp" />
     <ClInclude Include="gui\PauseMenu.hpp" />
     <ClInclude Include="gui\ReplayMenu.hpp" />
     <ClInclude Include="Input.hpp" />
@@ -268,6 +271,7 @@
     <ClInclude Include="resources\Config.hpp" />
     <ClInclude Include="resources\FileReader.hpp" />
     <ClInclude Include="resources\LevelFileLoader.hpp" />
+    <ClInclude Include="resources\MenuLoader.hpp" />
     <ClInclude Include="resources\ResourceCache.hpp" />
     <ClInclude Include="resources\ResourceManager.hpp" />
     <ClInclude Include="ScrollView.hpp" />

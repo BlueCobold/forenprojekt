@@ -199,6 +199,9 @@
     <ClCompile Include="gui\ReplayMenu.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="resources\MenuLoader.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -554,6 +557,15 @@
     </ClInclude>
     <ClInclude Include="model\collision\handler\SpawnEntityCollisionHandler.hpp">
       <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ButtonStyle.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MenuTemplate.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\MenuLoader.hpp">
+      <Filter>Headers\resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

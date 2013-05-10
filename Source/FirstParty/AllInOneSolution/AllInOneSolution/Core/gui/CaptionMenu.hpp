@@ -9,11 +9,9 @@ class CaptionMenu : public Menu
 {
 public:
 
-    CaptionMenu(const sf::Vector2f& position, 
-                const std::string&, 
-                sf::RenderWindow& screen, 
-                ResourceManager& resourceManager,
-                const std::string& backgroundName);
+    CaptionMenu(const MenuTemplate& menuTemplate,
+                const sf::Vector2f& position,
+                sf::RenderWindow& screen);
 
     virtual void draw(const DrawParameter& params);
 

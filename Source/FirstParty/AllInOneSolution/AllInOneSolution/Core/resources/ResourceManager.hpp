@@ -5,6 +5,7 @@
 
 #include "ResourceCache.hpp"
 #include "../gui/BitmapFont.hpp"
+#include "../gui/MenuTemplate.hpp"
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -31,6 +32,7 @@ public:
     sf::Font* getFont(const std::string& key);
     sf::SoundBuffer* getSoundBuffer(const std::string& key);
     BitmapFont* getBitmapFont(const std::string& key);
+    const MenuTemplate* getMenuTemplate(const std::string& name);
 
 private:
 
@@ -38,7 +40,7 @@ private:
     void parseFonts(tinyxml2::XMLDocument& doc);
     void parseSounds(tinyxml2::XMLDocument& doc);
     void parseBitmapFonts(tinyxml2::XMLDocument& doc);
-
+    void parseMenus(tinyxml2::XMLDocument& doc);
 
     static sf::Texture* loadTexture(const std::string& path, bool smooth)
     {
@@ -97,12 +99,13 @@ private:
     std::unordered_map<std::string, std::string> m_fontKeys;
     std::unordered_map<std::string, std::string> m_soundBufferKeys;
     std::unordered_map<std::string, std::string> m_bitmapFontKeys;
+    std::unordered_map<std::string, std::string> m_menuKeys;
 
     ResourceCache<sf::Texture> m_textures;
     ResourceCache<sf::Font> m_fonts;
     ResourceCache<sf::SoundBuffer> m_soundBuffers;
     ResourceCache<BitmapFont> m_bitmapFonts;
-
+    ResourceCache<MenuTemplate> m_menus;
 };
 
 #endif // RESOURCE_MANAGER_HPP

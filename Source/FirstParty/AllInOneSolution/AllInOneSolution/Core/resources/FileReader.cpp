@@ -69,7 +69,7 @@ void FileReader::readFile()
 std::string FileReader::get(const std::string& key)
 {
     // Default return value
-    std::string output = "0";
+    std::string output = std::string("Key not found: ") + key;
 
     auto it = m_content.find(key);
 

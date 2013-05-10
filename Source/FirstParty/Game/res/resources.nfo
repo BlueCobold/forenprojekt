@@ -32,7 +32,6 @@
 	<texture name="ButtonIdle" path="gui/Button_Idle.png" smooth="false" />
 	<texture name="ButtonPressed" path="gui/Button_pressed.png" smooth="false" />
 	<texture name="Window" path="gui/window.png" smooth="false" />
-
 </textures>
 <fonts>
 	<font name="visitor" path="visitor.ttf" />
@@ -40,6 +39,10 @@
 <sounds>
 	<sound name="test" path="test.wav" />
 </sounds>
+<menus>
+	<menu name="pauseMenu" path="pauseMenu.xml" />
+	<menu name="replayMenu" path="replayMenu.xml" />
+</menus>
 <bitmapfonts>
 	<bitmapfont name="gold" path="bitmapfontGold.xml" />
 	<bitmapfont name="green" path="bitmapfontGreen.xml" />
