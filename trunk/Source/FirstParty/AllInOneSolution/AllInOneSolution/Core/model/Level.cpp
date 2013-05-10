@@ -291,21 +291,20 @@ void Level::createLabelAt(Entity* target, std::string fontName, std::string text
     m_pointLabels.push_back(std::unique_ptr<TimedLabel>(new TimedLabel(std::move(label), getPassedTime())));
 }
 
-void Level::onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point)
+void Level::onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse)
 {
+    float volume = std::min(100.f, std::max(impulse/4.f, 0.f));
     if(entityA->getType() == Entity::Ball)
     {
-        float velocityA = abs(entityA->getBody()->GetLinearVelocity().x) + abs(entityA->getBody()->GetLinearVelocity().y);
-        if(entityB->getSoundName().length() > 0)
-            entityB->getSoundManager()->play(entityB->getSoundName(), velocityA);
-        entityB->onCollide(entityA, point);
+        if(entityB->getSoundName().length() > 0 && volume > 10)
+            entityB->getSoundManager()->play(entityB->getSoundName(), volume);
+        entityB->onCollide(entityA, point, impulse);
     }
     else if(entityB->getType() == Entity::Ball)
     {
-        float velocityB = abs(entityB->getBody()->GetLinearVelocity().x) + abs(entityB->getBody()->GetLinearVelocity().y);
-        if(entityA->getSoundName().length() > 0)
-            entityA->getSoundManager()->play(entityA->getSoundName(), velocityB);
-        entityA->onCollide(entityB, point);
+        if(entityA->getSoundName().length() > 0 && volume > 10)
+            entityA->getSoundManager()->play(entityA->getSoundName(), volume);
+        entityA->onCollide(entityB, point, impulse);
     }
 }
 

@@ -37,7 +37,7 @@
 	<font name="visitor" path="visitor.ttf" />
 </fonts>
 <sounds>
-	<sound name="test" path="test.wav" />
+	<sound name="bounce" path="bounce.wav" />
 </sounds>
 <menus>
 	<menu name="pauseMenu" path="pauseMenu.xml" />

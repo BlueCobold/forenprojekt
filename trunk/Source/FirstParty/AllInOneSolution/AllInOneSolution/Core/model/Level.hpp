@@ -91,7 +91,7 @@ private:
     void updatePointLabels();
 
     virtual bool shouldCollide(Entity* entityA, Entity* entityB);
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point);
+    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse);
     void killTarget(Entity* target);
     void prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn);
 

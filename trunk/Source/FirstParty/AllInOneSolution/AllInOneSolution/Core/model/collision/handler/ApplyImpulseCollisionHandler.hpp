@@ -13,7 +13,7 @@ public:
     {
     }
 
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point)
+    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse)
     {
         b2Body* ballBody;
 

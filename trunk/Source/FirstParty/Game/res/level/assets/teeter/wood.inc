@@ -14,7 +14,7 @@
 				<vertex x="15" y="-104" />
 			</shape>
 		</shapes>
-		
+
 		<physics>
 			<physic name="teeter">
 				<body type="kinematic" angle="0" />
@@ -29,7 +29,7 @@
 		<entities>
 			<entity name="Teeter" rep="TT" type="teeter">
 				<physics name="teeter" shape="teeter" />
-				<sound name="test" />
+				<sound name="bounce" />
 				<animations>
 					<animation texture="teeter_wooden" width="208" height="32" midx="104" midy="16" rotate="true" alignment="vertical">
 						<frameindex frames="7">
@@ -65,7 +65,7 @@
 			</entity>
 			<entity name="Teeter2" rep="T2" type="teeter">
 				<physics name="teeter" shape="teeter2" />
-				<sound name="test" />
+				<sound name="bounce" />
 				<animations>
 					<animation texture="teeter_wooden_vertical" width="32" height="208" midx="16" midy="104" rotate="true">
 						<frameindex frames="7">

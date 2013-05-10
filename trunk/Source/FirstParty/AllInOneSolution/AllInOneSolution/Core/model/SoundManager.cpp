@@ -24,7 +24,7 @@ void SoundManager::update()
     }         
 }
 
-void SoundManager::play(const std::string& key, const float vel)
+void SoundManager::play(const std::string& key, const float volume)
 {
     if(m_soundKeys.count(key) <= 0)
     {
@@ -34,8 +34,8 @@ void SoundManager::play(const std::string& key, const float vel)
         m_sounds.front().second.play();
         m_sounds.front().second.pause();
 
-        if( vel <= sf::Listener::getGlobalVolume())
-            m_sounds.front().second.setVolume(vel);
+        if( volume <= sf::Listener::getGlobalVolume())
+            m_sounds.front().second.setVolume(volume);
     }
 }
 
