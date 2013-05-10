@@ -149,6 +149,8 @@ private:
         tinyxml2::XMLElement* xml,
         Templates& templates);
 
+    void praseOptionalAttributs(tinyxml2::XMLElement* xml);
+
     /// Construct the full level filename from the level number
     const std::string filename();
     const std::string pathname() const;
