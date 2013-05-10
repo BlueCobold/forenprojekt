@@ -25,7 +25,7 @@ class Menu : public Drawable
 protected:
 
     sf::RenderWindow& m_screen;
-    
+
     void createButton(const ButtonInfo& info);
     MenuTemplate& getTemplate();
 

@@ -16,7 +16,7 @@ class ResourceManager;
 class MenuLoader
 {
 public:
-    
+
     static MenuTemplate* loadMenuTemplate(const std::string& path, ResourceManager& resourceManager);
 
 private:

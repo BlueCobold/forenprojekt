@@ -40,6 +40,8 @@ RandomTransition = % is a unknown Transition.
 MenuFileInvalid = The file is corrupt: %.
 MenuEntryMissing = No <menu> entry found in %.
 UnknownMenuTemplate = The menu template isn't registered: %.
+StateExist = The state with id % already exists.
+StateUnknow = The state with id % does not exist.
 
 [GUI]
 gui_game_paused = Game Paused

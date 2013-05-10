@@ -30,6 +30,7 @@ LoadLevelState::~LoadLevelState()
 void LoadLevelState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
     State::onEnter(enterInformation, time);
+    m_label.setPosition(m_screen.getSize().x / 2.f - m_label.getWidth() / 2.f, m_screen.getSize().y / 2.f);
     if(!enterInformation->m_prepareOnly)
     {
         m_loaded = false;

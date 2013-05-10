@@ -35,7 +35,7 @@ const sf::Vector2i& Menu::getSize() const
 void Menu::setPosition(const sf::Vector2f& position)
 {
     m_position = position;
-    
+
     m_template.background.setPosition(m_position);
 
     for(auto it = begin(m_buttons); it != end(m_buttons); ++it)

@@ -16,7 +16,6 @@ TransitionState::TransitionState(sf::RenderWindow& screen,
 
 TransitionState::~TransitionState()
 {
-
 }
 
 void TransitionState::onEnter(const EnterStateInformation* enterInformation, const float time)
@@ -25,7 +24,7 @@ void TransitionState::onEnter(const EnterStateInformation* enterInformation, con
     const EnterTransitionStateInformation* info = dynamic_cast<const EnterTransitionStateInformation*>(enterInformation);
     m_followingState = info->m_followingState;
     m_followingEnterInformation = info->m_onEnterInformation;
-    
+
     auto r = m_screen.getSize();
     m_sourceImage.setView(utility::getDefaultView(m_sourceImage, r));
     m_sourceImage.clear();
