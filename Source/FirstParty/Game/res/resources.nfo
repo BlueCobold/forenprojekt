@@ -38,6 +38,8 @@
 </fonts>
 <sounds>
 	<sound name="bounce" path="bounce.wav" />
+	<sound name="switch" path="switch.wav" />
+	<sound name="refuse" path="refuse.wav" />
 </sounds>
 <menus>
 	<menu name="pauseMenu" path="pauseMenu.xml" />

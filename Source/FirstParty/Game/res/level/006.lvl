@@ -41,6 +41,7 @@
 
 			<entity name="change_wall" rep="x1">
 				<physics name="wall" shape="wide_wall" />
+				<sound name="switch" />
 				<onCollision>
 					<changeProperty name="ball:color">
 						<mod>
@@ -94,6 +95,7 @@
 
 			<entity name="door_wall" rep="X1">
 				<physics name="wall" shape="high_wall" />
+				<sound name="refuse" />
 				<collides>
 					<propertyFilter target="ball">
 						<abs>
