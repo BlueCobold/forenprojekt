@@ -34,7 +34,7 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_multiHit(0),
     m_ball(nullptr),
     m_updatingEntity(nullptr),
-    m_remainingBall(10),
+    m_remainingBall(-1),
     m_levelPass(false)
 {
     m_world.SetAllowSleeping(false);

@@ -44,6 +44,13 @@ bool Level::load()
     if(constants != nullptr)
         LevelFileLoader::parseConstants(constants, this);
 
+    // get optional Attribute
+    auto optionalAttribut = doc.FirstChildElement("level")->FirstChildElement("optional");
+    if(optionalAttribut != nullptr)
+        praseOptionalAttributs(optionalAttribut);
+    else
+        m_remainingBall = -1;
+
     // ==Parse grid==
     tinyxml2::XMLElement* grid = doc.FirstChildElement("level")->FirstChildElement("grid");
 
@@ -587,4 +594,13 @@ void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn)
             break;
         }
     }
+}
+
+void Level::praseOptionalAttributs(tinyxml2::XMLElement* xml)
+{
+    int balls = xml->IntAttribute("maxBalls");
+    if(balls >= 0)
+        m_remainingBall = balls;
+    else
+        m_remainingBall = -1;
 }
