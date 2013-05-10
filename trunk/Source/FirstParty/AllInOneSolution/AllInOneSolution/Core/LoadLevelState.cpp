@@ -15,11 +15,11 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
     m_label(utility::translateKey("gui_loading_screen"), sf::Vector2f(screen.getSize().x / 2.f, screen.getSize().y / 2.f), 0, resourceManager.getBitmapFont("red"), LineLabel::Left),
     m_level(nullptr),
     m_lastLevel(nullptr),
-    loadingLevelThrerad(nullptr),    
+    loadingLevelThread(nullptr),    
     m_loaded(false),
     m_loadInProgress(false)
 {
-    loadingLevelThrerad = std::unique_ptr<sf::Thread>(new sf::Thread(&LoadLevelState::loadLevel, this));
+    loadingLevelThread = std::unique_ptr<sf::Thread>(new sf::Thread(&LoadLevelState::loadLevel, this));
     m_label.setPosition(m_screen.getSize().x / 2.f - m_label.getWidth() / 2.f, m_screen.getSize().y / 2.f);
 }
 
@@ -30,8 +30,11 @@ LoadLevelState::~LoadLevelState()
 void LoadLevelState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
     State::onEnter(enterInformation, time);
-    m_loaded = false;
-    m_loadInProgress = false;
+    if(!enterInformation->m_prepareOnly)
+    {
+        m_loaded = false;
+        m_loadInProgress = false;
+    }
 }
 
 std::unique_ptr<Level> LoadLevelState::gainLevel()
@@ -41,10 +44,10 @@ std::unique_ptr<Level> LoadLevelState::gainLevel()
 
 StateChangeInformation LoadLevelState::update(const float time)
 {
-    int step = static_cast<int>(time * 2) % 4;
     std::string text(utility::translateKey("gui_loading_screen"));
 
     updateTime(time);
+    int step = static_cast<int>(getPassedTime() * 2) % 4;
 
     if(m_loaded)
     {
@@ -55,9 +58,14 @@ StateChangeInformation LoadLevelState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
-    
+
     if(!m_loadInProgress)
-        loadingLevelThrerad->launch();
+    {
+        // set this variable first, because if it gets set in the thread, nobody can assure
+        // that this update-method will not get entered again before the variable gets set
+        m_loadInProgress = true;
+        loadingLevelThread->launch();
+    }
     
     for (int i = 0;i < step;++i)
         text.append(".");
@@ -66,9 +74,9 @@ StateChangeInformation LoadLevelState::update(const float time)
 
     return StateChangeInformation::Empty();
 }
+
 void LoadLevelState::loadLevel()
 {
-    m_loadInProgress = true;
     m_level = std::unique_ptr<Level>(new Level(7, m_resourceManager, m_config));
     m_lastLevel = m_level.get();
     m_loaded = true;

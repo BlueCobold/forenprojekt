@@ -45,6 +45,7 @@ public:
     virtual void onEnter(const EnterStateInformation* enterInformation, const float time)
     {
         updateTime(time);
+        m_enterTime = time;
     }
 
     virtual StateChangeInformation update(const float time) = 0;
@@ -86,12 +87,18 @@ protected:
         return m_currentTime - m_pauseDelay;
     }
 
+    float getPassedTime() const
+    {
+        return m_currentTime - m_enterTime;
+    }
+
     sf::RenderWindow& m_screen;
     ResourceManager& m_resourceManager;
     Config& m_config;
 
 private:
     bool m_pause;
+    float m_enterTime;
     float m_pauseStart;
     float m_currentTime;
     float m_pauseDelay;

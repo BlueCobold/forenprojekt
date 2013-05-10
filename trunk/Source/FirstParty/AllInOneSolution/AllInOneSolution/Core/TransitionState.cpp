@@ -35,6 +35,7 @@ void TransitionState::onEnter(const EnterStateInformation* enterInformation, con
 
     m_targetImage.setView(utility::getDefaultView(m_targetImage, r));
     m_targetImage.clear();
+    info->m_onEnterInformation->m_prepareOnly = true;
     info->m_target->onEnter(info->m_onEnterInformation, getCurrentTime());
     info->m_target->update(getCurrentTime());
     info->m_target->draw(m_targetImage);
