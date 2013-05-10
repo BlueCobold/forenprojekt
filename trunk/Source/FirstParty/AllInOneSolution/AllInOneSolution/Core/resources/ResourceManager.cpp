@@ -1,4 +1,5 @@
 #include "ResourceManager.hpp"
+#include "MenuLoader.hpp"
 
 #include <tinyxml2.h>
 
@@ -21,6 +22,7 @@ ResourceManager::ResourceManager()
     parseTextures(doc);
     parseFonts(doc);
     parseBitmapFonts(doc);
+    parseMenus(doc);
 }
 
 BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
@@ -41,6 +43,25 @@ BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
     }
 
     throw std::runtime_error(utility::replace(utility::translateKey("UnknownBitmapFont"), key));
+}
+
+const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& name)
+{
+    auto menuEntry = m_menuKeys.find(name);
+    
+    if(menuEntry != end(m_menuKeys) && menuEntry->first == name)
+    {
+        std::string path = menuEntry->second;
+        if(m_menus.exists(name))
+            return m_menus.get(name);
+        else
+        {
+            if(m_menus.load(name, [path, this](){ return MenuLoader::loadMenuTemplate(std::string("res/menus/") + path, *this); }))
+                return m_menus.get(name);
+        }
+    }
+
+    throw std::runtime_error(utility::replace(utility::translateKey("UnknownMenuTemplate"), name));
 }
 
 sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
@@ -159,6 +180,18 @@ void ResourceManager::parseBitmapFonts(tinyxml2::XMLDocument& doc)
         it != nullptr; it = it->NextSiblingElement("bitmapfont"))
     {
         m_bitmapFontKeys.insert(std::make_pair<std::string, std::string>(
+            std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
+    }
+}
+
+void ResourceManager::parseMenus(tinyxml2::XMLDocument& doc)
+{
+    tinyxml2::XMLElement* menus = doc.FirstChildElement("menus");
+
+    for(auto it = menus->FirstChildElement("menu");
+        it != nullptr; it = it->NextSiblingElement("menu"))
+    {
+        m_menuKeys.insert(std::make_pair<std::string, std::string>(
             std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
     }
 }

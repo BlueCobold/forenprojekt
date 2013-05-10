@@ -11,7 +11,9 @@ public:
 
     static const int BUTTON_PLAY_AGAIN = 0;
 
-    ReplayMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
+    ReplayMenu(const sf::Vector2f& position,
+               sf::RenderWindow& screen,
+               ResourceManager& resourceManager);
 };
 
 #endif // REPLAY_MENU_HPP
