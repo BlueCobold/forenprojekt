@@ -599,8 +599,14 @@ void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn)
 void Level::praseOptionalAttributs(tinyxml2::XMLElement* xml)
 {
     int balls = xml->IntAttribute("maxBalls");
+    float remainingTime = xml->FloatAttribute("time");
     if(balls > 0)
         m_remainingBall = balls;
     else
         m_remainingBall = -1;
+
+    if(time > 0)
+        m_remainingTime = remainingTime;
+    else
+        m_remainingTime = -1.f;
 }
