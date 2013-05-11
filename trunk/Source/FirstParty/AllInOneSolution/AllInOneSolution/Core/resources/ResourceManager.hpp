@@ -11,6 +11,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/OpenGL.hpp>
 
 //#include <memory>
 #include <string>
@@ -53,6 +54,7 @@ private:
         else
         {
             texture->setSmooth(smooth);
+            glFlush();
             return texture;
         }
     }
