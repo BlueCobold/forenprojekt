@@ -11,7 +11,7 @@ class BallHUD : public LabelHUD
 private:
     int m_remainingBall;
 
-    sf::Sprite m_ballTexture;
+    sf::Sprite m_ball;
     ResourceManager& m_resourceManager;
 
 public:

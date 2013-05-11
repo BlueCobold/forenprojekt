@@ -12,7 +12,7 @@ private:
 
     int m_totalSeconds;
 
-    sf::Sprite m_clockTexture;
+    sf::Sprite m_clock;
     ResourceManager& m_resourceManager;
 
 public:
