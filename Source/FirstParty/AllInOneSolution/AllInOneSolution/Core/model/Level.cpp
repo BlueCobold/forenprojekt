@@ -64,6 +64,12 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     m_soundManager.update();
 
     m_timeStep = elapsedTime - m_lastTime;
+
+    // BUG: after reload a level m_timestep is negativ
+    // minus * minus is plus so is m_remainingTime more as in Level-File specified
+    // Temp solution
+    if(m_timeStep < 0)
+        m_timeStep = 1/60.f;
     m_remainingTime -= m_timeStep;
     m_velocityIterations = std::max(1, 4);
     m_positionIterations = m_velocityIterations;
