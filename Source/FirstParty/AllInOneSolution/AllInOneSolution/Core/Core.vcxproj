@@ -53,7 +53,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalIncludeDirectories>../../../../ThirdParty/SFML/include/;../../../../ThirdParty/Box2D/include/;../../../../ThirdParty/tinyxml2/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
-      <ExceptionHandling>Async</ExceptionHandling>
+      <ExceptionHandling>Sync</ExceptionHandling>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
