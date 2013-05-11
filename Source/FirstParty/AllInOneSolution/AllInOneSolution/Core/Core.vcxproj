@@ -104,6 +104,7 @@
     <ClCompile Include="gui\hud\HUD.cpp" />
     <ClCompile Include="gui\hud\HUDElement.cpp" />
     <ClCompile Include="gui\hud\LabelHUD.cpp" />
+    <ClCompile Include="gui\hud\TimeHUD.cpp" />
     <ClCompile Include="gui\LineLabel.cpp" />
     <ClCompile Include="gui\hud\PointsHUD.cpp" />
     <ClCompile Include="gui\hud\TargetHUD.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="gui\hud\HUD.hpp" />
     <ClInclude Include="gui\hud\HUDElement.hpp" />
     <ClInclude Include="gui\hud\LabelHUD.hpp" />
+    <ClInclude Include="gui\hud\TimeHUD.hpp" />
     <ClInclude Include="gui\LineLabel.hpp" />
     <ClInclude Include="gui\hud\PointsHUD.hpp" />
     <ClInclude Include="gui\hud\TargetHUD.hpp" />

@@ -66,7 +66,9 @@ public:
     const int getRemainingBall() const;
 
     const bool isLevelPassed() const;
-    
+
+    const float getRemainigTime() const;
+
     virtual float getValueOf(const std::string& name) const;
     virtual void setValueOf(const std::string& name, const float value);
 
@@ -202,6 +204,8 @@ private:
 
     int m_points;
     int m_multiHit;
+
+    float m_remainingTime;
 
     struct TimedLabel
     {

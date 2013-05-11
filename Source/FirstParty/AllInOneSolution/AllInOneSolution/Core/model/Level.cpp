@@ -35,7 +35,8 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_ball(nullptr),
     m_updatingEntity(nullptr),
     m_remainingBall(-1),
-    m_levelPass(false)
+    m_levelPass(false),
+    m_remainingTime(-1)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -63,6 +64,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     m_soundManager.update();
 
     m_timeStep = elapsedTime - m_lastTime;
+    m_remainingTime -= m_timeStep;
     m_velocityIterations = std::max(1, 4);
     m_positionIterations = m_velocityIterations;
 
@@ -397,4 +399,9 @@ const int Level::getRemainingBall() const
 const bool Level::isLevelPassed() const
 {
     return m_levelPass;
+}
+
+const float Level::getRemainigTime() const
+{
+    return m_remainingTime;
 }

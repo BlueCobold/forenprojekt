@@ -17,7 +17,11 @@ private:
 
 public:
 
-    FPSCounterHUD(const sf::Vector2f& position, const float rotation, BitmapFont* bitmapFont);
+    FPSCounterHUD(const sf::Vector2f& position,
+                  const float rotation,
+                  BitmapFont* bitmapFont,
+                  float hReference = HUDElement::Left,
+                  float vReference = HUDElement::Top);
     
     void update(const DrawParameter& params);
 

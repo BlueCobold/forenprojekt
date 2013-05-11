@@ -6,6 +6,7 @@
 #include "ArrowHUD.hpp"
 #include "PointsHUD.hpp"
 #include "BallHUD.hpp"
+#include "TimeHUD.hpp"
 
 #include <memory> // unique_ptr
 
@@ -35,6 +36,9 @@ private:
     BallHUD m_ball;
     bool m_ballShow;
 
+    TimeHUD m_time;
+    bool m_timeShow;
+
 public:
     HUD(ResourceManager& resourceManager, Config& config);
 
@@ -45,6 +49,7 @@ public:
 
 private:
     void setBallShow(bool ballShow);
+    void setTimeShow(bool timeShow);
 };
 
 #endif
