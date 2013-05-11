@@ -49,7 +49,10 @@ bool Level::load()
     if(optionalAttribut != nullptr)
         praseOptionalAttributs(optionalAttribut);
     else
+    {
         m_remainingBall = -1;
+        m_remainingTime = -1.f;
+    }
 
     // ==Parse grid==
     tinyxml2::XMLElement* grid = doc.FirstChildElement("level")->FirstChildElement("grid");
