@@ -15,13 +15,13 @@ StateManager::StateManager(sf::RenderWindow& screen) :
 {
 }
 
-void StateManager::registerState(StateId id, std::shared_ptr<State> state)
+void StateManager::registerState(StateId id, std::unique_ptr<State> state)
 {
     auto existingState = m_statesById.find(id);
     if(existingState != end(m_statesById))
         throw std::runtime_error(utility::replace(utility::translateKey("StateExist"), utility::toString(id)));
 
-    m_statesById[id] = state;
+    m_statesById[id] = std::move(state);
 }
 
 void StateManager::setState(StateId id, EnterStateInformation* enterInformation)
