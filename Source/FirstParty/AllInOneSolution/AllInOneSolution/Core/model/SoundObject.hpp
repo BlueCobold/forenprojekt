@@ -5,24 +5,28 @@
 
 #include "SoundManager.hpp"
 
-/// This class is used to be link to the sound manager
-
+/// This class is used to link to the sound manager
 class SoundObject
 {
 public:
 
     SoundObject();
+    virtual ~SoundObject();
 
     void bindSound(const std::string& key, SoundManager* soundManager);
-    SoundManager*  getSoundManager();
-    std::string getSoundName();
 
-    void fixVolume(float volume);
+    void fixVolume(const float volume);
     void unfixVolume();
-    float getVolume(float impactStrength);
+    bool hasFixedVolume() const;
+    void playSound(const float volume);
+
+protected:
+
+    SoundManager* getSoundManager();
+    const std::string& getSoundName();
 
 private:
-    
+
     std::string m_soundName;
     SoundManager* m_soundManager;
 
