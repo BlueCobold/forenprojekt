@@ -4,23 +4,33 @@ SoundObject::SoundObject() : m_soundManager(nullptr)
 {
 }
 
+SoundObject::~SoundObject()
+{
+}
+
 void SoundObject::bindSound(const std::string& name, SoundManager* soundManager)
 {
     m_soundManager = soundManager;
     m_soundName = name;
 }
 
-std::string SoundObject::getSoundName()
+const std::string& SoundObject::getSoundName()
 {
     return m_soundName;
 }
 
-SoundManager* SoundObject::getSoundManager()
+void SoundObject::playSound(const float volume)
 {
-    return m_soundManager;
+    if(m_soundName.length() <= 0 || m_soundManager == nullptr)
+        return;
+
+    if(m_volumeFixed)
+        m_soundManager->play(m_soundName, m_volume);
+    else
+        m_soundManager->play(m_soundName, volume);
 }
 
-void SoundObject::fixVolume(float volume)
+void SoundObject::fixVolume(const float volume)
 {
     m_volumeFixed = true;
     m_volume = volume;
@@ -31,9 +41,7 @@ void SoundObject::unfixVolume()
     m_volumeFixed = false;
 }
 
-float SoundObject::getVolume(float impactStrength)
+bool SoundObject::hasFixedVolume() const
 {
-    if(m_volumeFixed)
-        return m_volume;
-    return std::min(100.0f, std::max(0.0f, impactStrength));
+    return m_volumeFixed;
 }
