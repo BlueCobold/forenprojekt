@@ -17,10 +17,17 @@ public:
     SoundManager*  getSoundManager();
     std::string getSoundName();
 
+    void fixVolume(float volume);
+    void unfixVolume();
+    float getVolume(float impactStrength);
+
 private:
     
     std::string m_soundName;
     SoundManager* m_soundManager;
+
+    bool m_volumeFixed;
+    float m_volume;
 };
 
 #endif // SOUND_OBJECT
