@@ -342,10 +342,16 @@ std::unique_ptr<Entity> Level::createEntity(
     }
     if(auto constants = xml->FirstChildElement("constants"))
         LevelFileLoader::parseConstants(constants, entity.get());
-    
+
     // Load sound
     if(xml->FirstChildElement("sound") != nullptr)
+    {
         entity->bindSound(std::string(xml->FirstChildElement("sound")->Attribute("name")), &m_soundManager);
+        if(xml->FirstChildElement("sound")->Attribute("volume"))
+            entity->fixVolume(xml->FirstChildElement("sound")->FloatAttribute("volume"));
+        else
+            entity->unfixVolume();
+    }
 
     if(physic != nullptr)
     {
