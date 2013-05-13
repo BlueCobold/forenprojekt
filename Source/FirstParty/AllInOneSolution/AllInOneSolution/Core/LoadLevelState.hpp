@@ -36,6 +36,7 @@ private:
 
     std::unique_ptr<Level> m_level;
     Level* m_lastLevel;
+    char m_loadingErrorMessage[100];
 
     LineLabel m_label;
 

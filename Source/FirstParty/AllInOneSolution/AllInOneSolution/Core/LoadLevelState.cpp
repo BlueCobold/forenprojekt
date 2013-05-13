@@ -7,6 +7,7 @@
 #include "rendering/transitions/RandomTransition.hpp"
 
 #include <memory>
+#include <cstring>
 
 LoadLevelState::LoadLevelState(sf::RenderWindow& screen, 
                                ResourceManager& resourceManager, 
@@ -19,6 +20,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
     m_loaded(false),
     m_loadInProgress(false)
 {
+    m_loadingErrorMessage[0] = '\0';
     loadingLevelThread = std::unique_ptr<sf::Thread>(new sf::Thread(&LoadLevelState::loadLevel, this));
     m_label.setPosition(m_screen.getSize().x / 2.f - m_label.getWidth() / 2.f, m_screen.getSize().y / 2.f);
 }
@@ -52,6 +54,9 @@ StateChangeInformation LoadLevelState::update(const float time)
 
     if(m_loaded)
     {
+        if(m_loadingErrorMessage[0] != '\0')
+            throw std::exception(m_loadingErrorMessage);
+
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = m_lastLevel;
         m_transitionStateInfo.m_level = m_lastLevel;
@@ -78,8 +83,16 @@ StateChangeInformation LoadLevelState::update(const float time)
 
 void LoadLevelState::loadLevel()
 {
-    m_level = std::unique_ptr<Level>(new Level(7, m_resourceManager, m_config));
-    m_lastLevel = m_level.get();
+    m_loadingErrorMessage[0] = '\0';
+    try
+    {
+        m_level = std::unique_ptr<Level>(new Level(7, m_resourceManager, m_config));
+        m_lastLevel = m_level.get();
+    }
+    catch(std::runtime_error e)
+    {
+        strcpy_s(m_loadingErrorMessage, sizeof(m_loadingErrorMessage), e.what());
+    }
     m_loaded = true;
 }
 
