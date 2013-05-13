@@ -301,19 +301,10 @@ void Level::createLabelAt(Entity* target, std::string fontName, std::string text
 
 void Level::onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse)
 {
-    float volume = std::min(100.f, std::max(impulse/4.f, 0.f));
     if(entityA->getType() == Entity::Ball)
-    {
-        if(volume > 10 || entityB->hasFixedVolume())
-            entityB->playSound(volume);
         entityB->onCollide(entityA, point, impulse);
-    }
     else if(entityB->getType() == Entity::Ball)
-    {
-        if(volume > 10 || entityA->hasFixedVolume())
-            entityA->playSound(volume);
         entityA->onCollide(entityB, point, impulse);
-    }
 }
 
 void Level::draw(const DrawParameter& param)

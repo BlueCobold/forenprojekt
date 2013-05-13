@@ -14,7 +14,7 @@
 
 /// This class will be used to draw objects that have a binding
 /// to Box2D 
-class Entity : public PhysicalObject, public AnimatedGraphics, public SoundObject
+class Entity : public PhysicalObject, public AnimatedGraphics
 {
 public:
 
@@ -33,8 +33,10 @@ private:
     std::map<std::string, float> m_variables;
     bool m_respawnable;
     bool m_autoKill;
+    std::unique_ptr<SoundObject> m_collisionSound;
 
 public:
+
     Entity(Type type, bool respawnable = false, bool autoKill = false);
     virtual ~Entity();
 
@@ -50,6 +52,7 @@ public:
 
     void setCollideWithBall(bool value);
     bool doesCollideWithBall();
+    void bindCollisionSound(std::unique_ptr<SoundObject> sound);
 
     virtual float getValueOf(const std::string& name) const;
     virtual void setValueOf(const std::string& name, const float value);
