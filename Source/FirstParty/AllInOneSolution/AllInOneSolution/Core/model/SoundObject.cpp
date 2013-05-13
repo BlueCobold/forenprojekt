@@ -1,33 +1,35 @@
 #include "SoundObject.hpp"
 
-SoundObject::SoundObject() : m_soundManager(nullptr)
+SoundObject::SoundObject(const std::string& name, SoundManager& soundManager) :
+    m_soundManager(soundManager),
+    m_soundName(name),
+    m_volumeFixed(false),
+    m_volume(100)
 {
+    if(m_soundName.length() <= 0)
+        throw std::runtime_error(utility::translateKey("NoSoundName"));
 }
 
 SoundObject::~SoundObject()
 {
 }
 
-void SoundObject::bindSound(const std::string& name, SoundManager* soundManager)
-{
-    m_soundManager = soundManager;
-    m_soundName = name;
-}
-
-const std::string& SoundObject::getSoundName()
+const std::string& SoundObject::getSoundName() const
 {
     return m_soundName;
 }
 
-void SoundObject::playSound(const float volume)
+SoundManager& SoundObject::getSoundManager() const
 {
-    if(m_soundName.length() <= 0 || m_soundManager == nullptr)
-        return;
+    return m_soundManager;
+}
 
+void SoundObject::play(const float volume)
+{
     if(m_volumeFixed)
-        m_soundManager->play(m_soundName, m_volume);
+        m_soundManager.play(m_soundName, m_volume);
     else
-        m_soundManager->play(m_soundName, volume);
+        m_soundManager.play(m_soundName, volume);
 }
 
 void SoundObject::fixVolume(const float volume)

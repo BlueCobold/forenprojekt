@@ -10,25 +10,23 @@ class SoundObject
 {
 public:
 
-    SoundObject();
+    SoundObject(const std::string& key, SoundManager& soundManager);
     virtual ~SoundObject();
-
-    void bindSound(const std::string& key, SoundManager* soundManager);
 
     void fixVolume(const float volume);
     void unfixVolume();
     bool hasFixedVolume() const;
-    void playSound(const float volume);
+    void play(const float volume);
 
 protected:
 
-    SoundManager* getSoundManager();
-    const std::string& getSoundName();
+    SoundManager& getSoundManager() const;
+    const std::string& getSoundName() const;
 
 private:
 
     std::string m_soundName;
-    SoundManager* m_soundManager;
+    SoundManager& m_soundManager;
 
     bool m_volumeFixed;
     float m_volume;

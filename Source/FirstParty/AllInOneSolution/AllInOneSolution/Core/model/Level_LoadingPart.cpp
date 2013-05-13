@@ -346,11 +346,10 @@ std::unique_ptr<Entity> Level::createEntity(
     // Load sound
     if(xml->FirstChildElement("sound") != nullptr)
     {
-        entity->bindSound(std::string(xml->FirstChildElement("sound")->Attribute("name")), &m_soundManager);
+        auto sound = std::unique_ptr<SoundObject>(new SoundObject(std::string(xml->FirstChildElement("sound")->Attribute("name")), m_soundManager));
         if(xml->FirstChildElement("sound")->Attribute("volume"))
-            entity->fixVolume(xml->FirstChildElement("sound")->FloatAttribute("volume"));
-        else
-            entity->unfixVolume();
+            sound->fixVolume(xml->FirstChildElement("sound")->FloatAttribute("volume"));
+        entity->bindCollisionSound(std::move(sound));
     }
 
     if(physic != nullptr)

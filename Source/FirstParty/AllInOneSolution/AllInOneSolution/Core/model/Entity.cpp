@@ -124,6 +124,11 @@ bool Entity::doesCollideWithBall()
     return m_collideWithBall;
 }
 
+void Entity::bindCollisionSound(std::unique_ptr<SoundObject> sound)
+{
+    m_collisionSound = std::move(sound);
+}
+
 void Entity::bindCollisionHandler(std::unique_ptr<CollisionHandler> handler)
 {
     m_collisionHandler.push_back(std::move(handler));
@@ -136,6 +141,13 @@ void Entity::bindCollisionFilter(std::unique_ptr<CollisionFilter> filter)
 
 void Entity::onCollide(Entity* partner, const b2Vec2& point, const float impulse)
 {
+    if(m_collisionSound != nullptr)
+    {
+        float volume = std::min(100.f, std::max(impulse/4.f, 0.f));
+        if(volume > 10 || m_collisionSound->hasFixedVolume())
+            m_collisionSound->play(volume);
+    }
+
     for(auto it = begin(m_collisionHandler); it != end(m_collisionHandler); ++it)
         (*it)->onCollision(this, partner, point, impulse);
 }
