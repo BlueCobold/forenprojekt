@@ -53,7 +53,6 @@ private:
     utility::Event m_event;
 
     ResourceManager m_resourceManager;
-    sf::SoundBuffer* m_soundBuffer;
 
     StateManager m_stateManager;
 

@@ -22,7 +22,6 @@ App::App(Config& config) :
     m_windowTitle("Rickety Racquet"),
     m_fullscreen(false),
     m_focus(true),
-    m_soundBuffer(nullptr),
     m_stateManager(m_screen)
 {
     // Cache often used settings

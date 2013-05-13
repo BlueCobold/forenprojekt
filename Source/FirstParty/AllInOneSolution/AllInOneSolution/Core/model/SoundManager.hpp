@@ -10,6 +10,7 @@
 #include <queue>
 #include <string>
 #include <map>
+#include <memory>
 
 /// This class will be used to manage all the sounds
 /// of the game
@@ -23,7 +24,7 @@ public:
 
 private:
     ResourceManager& m_resourceManager;
-    std::queue< std::pair<std::string, sf::Sound> > m_sounds;
+    std::queue<std::pair<std::string, std::unique_ptr<sf::Sound>>> m_sounds;
     std::map<std::string, std::string> m_soundKeys;
 
 };
