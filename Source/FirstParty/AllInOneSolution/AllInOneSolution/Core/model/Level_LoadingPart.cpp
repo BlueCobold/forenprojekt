@@ -47,7 +47,7 @@ bool Level::load()
     // get optional Attribute
     auto gameplay = doc.FirstChildElement("level")->FirstChildElement("gameplay");
     if(gameplay != nullptr)
-        praseGameplayAttributs(gameplay);
+        parseGameplayAttributes(gameplay);
     else
     {
         m_remainingBall = -1;
@@ -604,7 +604,7 @@ void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn)
     }
 }
 
-void Level::praseGameplayAttributs(tinyxml2::XMLElement* xml)
+void Level::parseGameplayAttributes(tinyxml2::XMLElement* xml)
 {
     int balls = xml->IntAttribute("maxBalls");
     float remainingTime = xml->FloatAttribute("time");

@@ -151,7 +151,7 @@ private:
         tinyxml2::XMLElement* xml,
         Templates& templates);
 
-    void praseGameplayAttributs(tinyxml2::XMLElement* xml);
+    void parseGameplayAttributes(tinyxml2::XMLElement* xml);
 
     /// Construct the full level filename from the level number
     const std::string filename();
