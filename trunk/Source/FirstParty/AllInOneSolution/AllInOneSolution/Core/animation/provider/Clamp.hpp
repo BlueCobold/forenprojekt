@@ -24,8 +24,8 @@ public:
     virtual float getValue()
     {
         float actual = getProvider()[0]->getValue();
-        float minv = getProvider()[0]->getValue();
-        float maxv = getProvider()[0]->getValue();
+        float minv = getProvider()[1]->getValue();
+        float maxv = getProvider()[2]->getValue();
         return std::min(std::max(actual, minv), maxv);
     }
 };
