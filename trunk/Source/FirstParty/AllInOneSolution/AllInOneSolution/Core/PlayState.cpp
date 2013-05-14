@@ -35,9 +35,9 @@ void PlayState::onEnter(const EnterStateInformation* enterInformation, const flo
 
     if(!info->m_returnFromPause)
     {
-        m_level->restartAt(time);
-        m_level->update(time, m_screen);
-        m_hud.update(m_level, time);
+        m_level->restartAt(getCurrentTime());
+        m_level->update(getCurrentTime(), m_screen);
+        m_hud.update(m_level, getCurrentTime());
         m_timeShift = 0.0f;
     }
 }

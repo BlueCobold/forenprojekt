@@ -36,7 +36,8 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_updatingEntity(nullptr),
     m_remainingBall(-1),
     m_levelPass(false),
-    m_remainingTime(-1)
+    m_remainingTime(-1),
+    m_totalTime(-1)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -65,12 +66,9 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
     m_timeStep = elapsedTime - m_lastTime;
 
-    // BUG: after reload a level m_timestep is negativ
-    // minus * minus is plus so is m_remainingTime more as in Level-File specified
-    // Temp solution
-    if(m_timeStep < 0)
-        m_timeStep = 1/60.f;
-    m_remainingTime -= m_timeStep;
+    if(m_totalTime > 0)
+        m_remainingTime -= m_timeStep;
+
     m_velocityIterations = std::max(1, 4);
     m_positionIterations = m_velocityIterations;
 
@@ -413,6 +411,8 @@ const float Level::getRemainigTime() const
 const bool Level::isLevelFailed() const
 {
     bool value = m_remainingBall < 1 && m_remainingBall > -1;
-    value |= m_remainingTime < 0 && m_remainingTime > -1.f;
+    // don't use the same variable to check - it can cause negative times
+    // I had that quite often when debugging or lagging (dragging the window)
+    value |= m_remainingTime < 0 && m_totalTime > -1.f;
     return value;
 }
