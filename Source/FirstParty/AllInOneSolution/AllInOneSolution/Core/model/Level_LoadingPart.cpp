@@ -658,7 +658,7 @@ void Level::parseGameplayAttributes(tinyxml2::XMLElement* xml)
     else
         m_remainingBall = -1;
 
-    if(time > 0)
+    if(remainingTime > 0)
     {
         m_remainingTime = remainingTime;
         m_totalTime = m_remainingTime;
