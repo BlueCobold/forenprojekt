@@ -205,6 +205,12 @@
     <ClCompile Include="gui\hud\TimeHUD.cpp">
       <Filter>Sources\gui\hud</Filter>
     </ClCompile>
+    <ClCompile Include="LevelFailState.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FailMenu.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -304,9 +310,6 @@
       <Filter>Headers\model</Filter>
     </ClInclude>
     <ClInclude Include="model\Teeter.hpp">
-      <Filter>Headers\model</Filter>
-    </ClInclude>
-    <ClInclude Include="model\AnimatedGraphics.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
     <ClInclude Include="animation\Animation.hpp">
@@ -572,6 +575,15 @@
     </ClInclude>
     <ClInclude Include="gui\hud\TimeHUD.hpp">
       <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="model\AnimatedGraphics.hpp">
+      <Filter>Headers\model\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelFailState.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FailMenu.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

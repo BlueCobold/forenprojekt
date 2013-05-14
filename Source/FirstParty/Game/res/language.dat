@@ -50,3 +50,4 @@ gui_continue = Continue
 gui_level_success = Congratulations!
 gui_play_again = Play Again
 gui_loading_screen = loading
+gui_level_unsuccessful = Level Failed!

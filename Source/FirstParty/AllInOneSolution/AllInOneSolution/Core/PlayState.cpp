@@ -49,6 +49,7 @@ StateChangeInformation PlayState::update(const float time)
     if(!isPaused())
     {
         m_level->update(getCurrentTime(), m_screen);
+        m_hud.update(m_level, getCurrentTime());
         if(utility::Keyboard.isKeyDown(sf::Keyboard::R))
         {
             // BUG! Memory leak!
@@ -74,9 +75,17 @@ StateChangeInformation PlayState::update(const float time)
             m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
+
+        if(m_level->isLevelFailed())
+        {
+            m_pauseStateInfo.m_levelTime = getCurrentTime();
+            m_pauseStateInfo.m_level = m_level;
+            m_transitionStateInfo.m_followingState = LevelFailStateId;
+            m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+            return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+        }
     }
-    
-    m_hud.update(m_level, getCurrentTime());
+
     return StateChangeInformation::Empty();
 }
 

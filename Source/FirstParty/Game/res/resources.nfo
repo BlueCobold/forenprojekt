@@ -44,6 +44,7 @@
 <menus>
 	<menu name="pauseMenu" path="pauseMenu.xml" />
 	<menu name="replayMenu" path="replayMenu.xml" />
+	<menu name="failMenu" path="failMenu.xml" />
 </menus>
 <bitmapfonts>
 	<bitmapfont name="gold" path="bitmapfontGold.xml" />
