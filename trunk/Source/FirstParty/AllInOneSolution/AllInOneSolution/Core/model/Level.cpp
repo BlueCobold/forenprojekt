@@ -402,3 +402,10 @@ const float Level::getRemainigTime() const
 {
     return m_remainingTime;
 }
+
+const bool Level::isLevelFailed() const
+{
+    bool value = m_remainingBall < 1 && m_remainingBall > -1;
+    value |= m_remainingTime < 0 && m_remainingTime > -1.f;
+    return value;
+}

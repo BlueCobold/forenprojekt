@@ -66,6 +66,7 @@ public:
     const int getRemainingBall() const;
 
     const bool isLevelPassed() const;
+    const bool isLevelFailed() const;
 
     const float getRemainigTime() const;
 

@@ -18,7 +18,8 @@ enum StateId
     LoadLevelStateId,
     PauseStateId,
     TransitionStateId,
-    LevelPassStateId
+    LevelPassStateId,
+    LevelFailStateId
 };
 
 #include "StateChangeInformation.hpp"
