@@ -98,6 +98,8 @@ void LoadLevelState::loadLevel()
 
 void LoadLevelState::draw(const DrawParameter& params)
 {
+    params.getTarget().setView(utility::getDefaultView(params.getTarget(), params.getTarget().getSize()));
+
     sf::RectangleShape whiteRect;
     whiteRect.setSize(m_screen.getView().getSize());
     whiteRect.setFillColor(sf::Color(255, 255, 255, 255));
