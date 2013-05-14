@@ -239,6 +239,7 @@
     <ClInclude Include="model\collision\handler\ChangePropertyCollisionHandler.hpp" />
     <ClInclude Include="model\collision\handler\CollisionHandler.hpp" />
     <ClInclude Include="model\collision\handler\SpawnEntityCollisionHandler.hpp" />
+    <ClInclude Include="model\collision\handler\GenericCollisionHandler.hpp" />
     <ClInclude Include="model\Entity.hpp" />
     <ClInclude Include="model\SoundManager.hpp" />
     <ClInclude Include="model\SoundObject.hpp" />

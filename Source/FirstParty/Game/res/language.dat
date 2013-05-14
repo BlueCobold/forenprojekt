@@ -51,3 +51,8 @@ gui_level_success = Congratulations!
 gui_play_again = Play Again
 gui_loading_screen = loading
 gui_level_unsuccessful = Level Failed!
+
+[Levels]
+levelBlocked1 = blocked
+levelBlocked2 = wrong color
+levelBlocked3 = not allowed

@@ -86,8 +86,9 @@ private:
         std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
     };
     
-    void createLabelAt(Entity* target, std::string fontName, int points);
-    void createLabelAt(Entity* target, std::string fontName, std::string text);
+    void createLabelAt(const Entity* target, const std::string& fontName, const int points);
+    void createLabelAt(const Entity* target, const std::string& fontName, const std::string& text);
+    void createLabelAt(const sf::Vector2f& position, const std::string& fontName, const std::string& text);
     void respawnDeadBalls();
     void spawnPendingEntities(float currentTime);
     void cleanupKilledEntities();
@@ -153,6 +154,8 @@ private:
         Templates& templates);
 
     void parseGameplayAttributes(tinyxml2::XMLElement* xml);
+
+    std::unique_ptr<CollisionHandler> parseShowLabelHandler(tinyxml2::XMLElement* xml);
 
     /// Construct the full level filename from the level number
     const std::string filename();

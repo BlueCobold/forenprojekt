@@ -8,6 +8,7 @@
 #include "collision/handler/ApplyImpulseCollisionHandler.hpp"
 #include "collision/handler/ChangePropertyCollisionHandler.hpp"
 #include "collision/handler/SpawnEntityCollisionHandler.hpp"
+#include "collision/handler/GenericCollisionHandler.hpp"
 #include "collision/filter/Always.hpp"
 #include "collision/filter/ChangeBallSpawnFilter.hpp"
 #include "collision/filter/ChangeBallVelocityFilter.hpp"
@@ -15,6 +16,9 @@
 #include "collision/filter/Never.hpp"
 #include "collision/filter/PropertyFilter.hpp"
 #include "collision/filter/SpawnEntity.hpp"
+#include "../animation/provider/RandomProvider.hpp"
+
+#include <cmath>
 
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
 #include <Box2D/Collision/Shapes/b2CircleShape.h>
@@ -452,6 +456,11 @@ void Level::parseCollider(
             std::unique_ptr<ApplyImpulseCollisionHandler> collider(new ApplyImpulseCollisionHandler(child->FloatAttribute("x"), child->FloatAttribute("y")));
             entity->bindCollisionHandler(std::move(collider));
         }
+        else if(std::string(child->Name()) == "showLabel")
+        {
+            std::unique_ptr<CollisionHandler> collider = parseShowLabelHandler(child);
+            entity->bindCollisionHandler(std::move(collider));
+        }
         else if(std::string(child->Name()) == "spawnEntity")
         {
             auto name = child->Attribute("name");
@@ -491,6 +500,41 @@ void Level::parseCollider(
         else
             throw std::runtime_error(utility::replace(utility::translateKey("UnknownCollider"), child->Name()));
     }
+}
+
+std::unique_ptr<CollisionHandler> Level::parseShowLabelHandler(tinyxml2::XMLElement* xml)
+{
+    std::string font(xml->Attribute("font"));
+    auto distance = xml->FloatAttribute("offset");
+    
+    std::vector<std::string> labels;
+    for(auto child = xml->FirstChildElement("label"); child != nullptr; child = child->NextSiblingElement("label"))
+        labels.push_back(utility::translateKey(child->GetText()));
+
+    float time = -1;
+    return std::unique_ptr<GenericCollisionHandler>(
+        new GenericCollisionHandler([=](Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse)
+        mutable {
+            // prevent a spam of labels... only one per second per entity!
+            if(time > getPassedTime())
+                return;
+
+            time = getPassedTime() + 1;
+            RandomProvider lengthRandom(0.f, distance);
+            RandomProvider angleRandom(0.f, utility::toRadian<float, float>(360.f));
+            RandomProvider textIndex(0.f, static_cast<float>(labels.size()));
+
+            std::string text = labels[static_cast<int>(textIndex.getValue())];
+            auto angle = angleRandom.getValue();
+            auto length = lengthRandom.getValue();
+
+            auto pos = sf::Vector2f(
+                utility::toPixel(entityB->getPosition().x), 
+                utility::toPixel(entityB->getPosition().y));
+            sf::Vector2f offset(length * sinf(angle), length * cosf(angle));
+
+            this->createLabelAt(offset + pos, font, text);
+        }));
 }
 
 std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
