@@ -124,6 +124,13 @@
 						</abs>
 					</propertyFilter>
 				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
 				<animations>
 					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
 						<frameindex frames="6">

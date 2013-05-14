@@ -276,7 +276,7 @@ void Level::killTarget(Entity* target)
         m_levelPass = true;
 }
 
-void Level::createLabelAt(Entity* target, std::string fontName, int number)
+void Level::createLabelAt(const Entity* target, const std::string& fontName, const int number)
 {
     std::string prefix;
     if(number > 0)
@@ -284,14 +284,21 @@ void Level::createLabelAt(Entity* target, std::string fontName, int number)
     createLabelAt(target, fontName, prefix + utility::toString(number));
 }
 
-void Level::createLabelAt(Entity* target, std::string fontName, std::string text)
+void Level::createLabelAt(const Entity* target, const std::string& fontName, const std::string& text)
+{
+    return createLabelAt(sf::Vector2f(
+                utility::toPixel(target->getPosition().x), 
+                utility::toPixel(target->getPosition().y)),
+                fontName,
+                text);
+}
+
+void Level::createLabelAt(const sf::Vector2f& position, const std::string& fontName, const std::string& text)
 {
 
     std::unique_ptr<LineLabel> label(new LineLabel(
             text,
-            sf::Vector2f(
-                utility::toPixel(target->getPosition().x), 
-                utility::toPixel(target->getPosition().y)),
+            position,
             0,
             m_resourceManager.getBitmapFont(fontName),
             LineLabel::Centered));

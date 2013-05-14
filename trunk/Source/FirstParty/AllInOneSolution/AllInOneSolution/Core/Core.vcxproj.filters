@@ -585,6 +585,9 @@
     <ClInclude Include="gui\FailMenu.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="model\collision\handler\GenericCollisionHandler.hpp">
+      <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
