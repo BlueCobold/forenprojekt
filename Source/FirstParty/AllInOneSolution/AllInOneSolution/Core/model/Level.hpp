@@ -210,6 +210,7 @@ private:
     int m_multiHit;
 
     float m_remainingTime;
+    float m_totalTime;
 
     struct TimedLabel
     {

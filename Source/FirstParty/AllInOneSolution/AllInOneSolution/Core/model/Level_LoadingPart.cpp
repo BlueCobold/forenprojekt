@@ -56,6 +56,7 @@ bool Level::load()
     {
         m_remainingBall = -1;
         m_remainingTime = -1.f;
+        m_totalTime = -1.f;
     }
 
     // ==Parse grid==
@@ -658,7 +659,13 @@ void Level::parseGameplayAttributes(tinyxml2::XMLElement* xml)
         m_remainingBall = -1;
 
     if(time > 0)
+    {
         m_remainingTime = remainingTime;
+        m_totalTime = m_remainingTime;
+    }
     else
+    {
         m_remainingTime = -1.f;
+        m_totalTime = -1.f;
+    }
 }

@@ -32,7 +32,7 @@ void HUD::update(const Level* level, const float elapsedTime)
 
     m_ball.setBalls(level->getRemainingBall());
 
-    m_time.setTime(static_cast<int>(level->getRemainigTime()));
+    m_time.setTime(static_cast<int>(level->getRemainigTime() + 1));
 }
 
 void HUD::restartAt(const float time)
