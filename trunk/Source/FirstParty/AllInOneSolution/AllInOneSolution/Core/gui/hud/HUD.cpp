@@ -42,10 +42,11 @@ void HUD::restartAt(const float time)
 
 void HUD::draw(const DrawParameter& params)
 {
-    params.getTarget().setView(utility::getDefaultView(params.getTarget(), params.getTarget().getSize()));
     m_arrow.update(params);
     m_arrow.draw(params);
 
+    params.getTarget().setView(utility::getDefaultView(params.getTarget(), params.getTarget().getSize()));
+   
     m_target.update(params);
     m_target.draw(params);
 
