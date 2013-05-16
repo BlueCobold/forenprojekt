@@ -10,6 +10,7 @@
 #include "collision/handler/SpawnEntityCollisionHandler.hpp"
 #include "collision/handler/GenericCollisionHandler.hpp"
 #include "collision/filter/Always.hpp"
+#include "collision/filter/ApplyForceFilter.hpp"
 #include "collision/filter/ChangeBallSpawnFilter.hpp"
 #include "collision/filter/ChangeBallVelocityFilter.hpp"
 #include "collision/filter/ChangeGravityFilter.hpp"
@@ -97,14 +98,20 @@ bool Level::load()
     m_scrollView.setLevelSize(sf::Vector2f(getWidth(), getHeight()));
 
     // get the fucking ball
+    auto ballIt = end(m_entities);
     for(auto it = begin(m_entities); it != end(m_entities); ++it)
         if((*it)->getType() == Entity::Ball)
         {
+            ballIt = it;
             m_ball = dynamic_cast<Ball*>((*it).get());
             m_ball->setFieldDimension(b2Vec2(m_width,m_height));
         }
     if(m_ball == nullptr)
         throw std::runtime_error("No ball located in the level!");
+    auto ball = std::move(*ballIt);
+    // always make the ball go last in everything
+    m_entities.erase(ballIt);
+    m_entities.push_back(std::move(ball));
     m_ball->registerForCheckpointChanges([this](){
         createLabelAt(m_ball, "green", "checkpoint");
     });
@@ -583,6 +590,13 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
             xml->FloatAttribute("x"),
             xml->FloatAttribute("y"),
             std::move(subFilter)));
+        return std::move(filter);
+    }
+    else if(std::string(xml->Name()) == "applyForce")
+    {
+        b2Vec2 force(xml->FloatAttribute("x"), xml->FloatAttribute("y"));
+        std::unique_ptr<CollisionFilter> subFilter = getCollisionFilter(entity, xml->FirstChildElement(), templates);
+        std::unique_ptr<ApplyForceFilter> filter(new ApplyForceFilter(force, std::move(subFilter)));
         return std::move(filter);
     }
     else if(std::string(xml->Name()) == "changeGravity")

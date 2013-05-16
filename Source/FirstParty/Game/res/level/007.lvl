@@ -14,6 +14,12 @@
 				<vertex x="420" y="0" />
 				<vertex x="-120" y="0" />
 			</shape>
+			<shape name="drifting" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="240" y="0" />
+				<vertex x="240" y="60" />
+				<vertex x="0" y="60" />
+			</shape>
 		</shapes>
 
 		<entities>
@@ -24,6 +30,198 @@
 						<always />
 					</copySpawnLocation>
 				</collides>
+			</entity>
+
+			<entity name="right" rep="ra" collideWithBall="false">
+				<physics name="wall" shape="drifting" />
+				<collides>
+					<applyForce x="20" y="0">
+						<always />
+					</applyForce>
+				</collides>
+				<animations>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="3" />
+						</frameindex>
+						<position axis="y">
+							<static value="12" />
+						</position>
+						<position axis="x">
+							<add>
+								<static value="12" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+						<color channel="alpha">
+							<mod>
+								<mul>
+									<time />
+									<inv>
+										<static value="1" />
+									</inv>
+								</mul>
+								<static value="1" />
+							</mod>
+						</color>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="3" />
+						</frameindex>
+						<position axis="y">
+							<static value="12" />
+						</position>
+						<position axis="x">
+							<add>
+								<static value="72" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="3" />
+						</frameindex>
+						<position axis="y">
+							<static value="12" />
+						</position>
+						<position axis="x">
+							<add>
+								<static value="132" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+						<color channel="alpha">
+							<sub>
+								<static value="1" />
+								<mod>
+									<mul>
+										<time />
+										<inv>
+											<static value="1" />
+										</inv>
+									</mul>
+									<static value="1" />
+								</mod>
+							</sub>
+						</color>
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="left" rep="la" collideWithBall="false">
+				<physics name="wall" shape="drifting" />
+				<collides>
+					<applyForce x="-20" y="0">
+						<always />
+					</applyForce>
+				</collides>
+				<animations>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="2" />
+						</frameindex>
+						<position axis="y">
+							<static value="12" />
+						</position>
+						<position axis="x">
+							<sub>
+								<static value="72" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</sub>
+						</position>
+						<color channel="alpha">
+							<sub>
+								<static value="1" />
+								<mod>
+									<mul>
+										<time />
+										<inv>
+											<static value="1" />
+										</inv>
+									</mul>
+									<static value="1" />
+								</mod>
+							</sub>
+						</color>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="2" />
+						</frameindex>
+						<position axis="y">
+							<static value="12" />
+						</position>
+						<position axis="x">
+							<sub>
+								<static value="132" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</sub>
+						</position>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="2" />
+						</frameindex>
+						<position axis="y">
+							<static value="12" />
+						</position>
+						<position axis="x">
+							<sub>
+								<static value="192" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</sub>
+						</position>
+						<color channel="alpha">
+							<mod>
+								<mul>
+									<time />
+									<inv>
+										<static value="1" />
+									</inv>
+								</mul>
+								<static value="1" />
+							</mod>
+						</color>
+					</animation>
+				</animations>
 			</entity>
 
 			<entity name="timer" rep="ti" collideWithBall="false">
@@ -53,7 +251,7 @@
 				</physics>
 			</entity>
 
-			<entity name="GhostTeeter" rep="T2" type="teeter">
+			<entity name="GhostTeeter" rep="GT" type="teeter">
 				<physics name="teeter" shape="teeter" />
 				<sound name="bounce" />
 				<collides>
@@ -128,11 +326,11 @@
             w5d3d5w3    t1  w3    t1        t1   1    t1        t1  w2d4d6w3        
             w3d5d2w4        w4                  w2                  w5d3d1w6        
             w4d2d6w5    BB  w1    R1            w4    R1            w4d6d4w2        
-            w2d6d4w1    T2        T2  /4    T2        T2  /1    T2  w6d2d2w1        
-            w6d1d3w6                  w6                  h6        w2d5d1w4        
-            w4d3d5w2                  w1                   6        w3d2d4w5        
-            w1d5d4w5    TT        TT  w3    TT        TT  w5    TT  w4d3d5w1        
-            w4d1d3w6    ti            w2                  w1        w5d1d6w2        
+            w2d6d4w1    GT        GT  /4    GT        GT  /1    GT  w6d2d2w1        
+            w6d1d3w6la        ra      w6la        ra      h6la      w2d5d1w4        
+            w4d3d5w2la        ra      w1la        ra       6la      w3d2d4w5        
+            w1d5d4w5la  TT    ra  TT  w3la  TT    ra  TT  w5la  TT  w4d3d5w1        
+            w4d1d3w6la  ti    ra      w2la        ra      w1la      w5d1d6w2        
             w3d2d6w2                  w6                  w5        w2d5d3w1        
             w1d5d2w5                  w5                  w2        w4d2d6w2        
             w4d2d1w3                  w1                  w4        w3d4d1w4        
