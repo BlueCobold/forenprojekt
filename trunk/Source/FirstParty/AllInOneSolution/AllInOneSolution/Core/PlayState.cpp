@@ -39,6 +39,7 @@ void PlayState::onEnter(const EnterStateInformation* enterInformation, const flo
         m_level->update(getCurrentTime(), m_screen);
         m_hud.update(m_level, getCurrentTime());
         m_timeShift = 0.0f;
+        m_hud.skipInterpolation();
     }
 }
 

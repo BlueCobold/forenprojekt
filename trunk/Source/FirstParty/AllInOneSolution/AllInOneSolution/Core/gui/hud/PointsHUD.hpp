@@ -15,6 +15,8 @@ public:
               const float horizontalPercentage = HUDElement::Left,
               const float verticalPercentage = HUDElement::Top);
 
+    void skipInterpolation();
+
     void update(const DrawParameter& params);
     void restartAt(const float time);
 

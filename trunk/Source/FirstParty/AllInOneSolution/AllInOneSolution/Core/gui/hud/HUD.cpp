@@ -15,6 +15,11 @@ HUD::HUD(ResourceManager& resourceManager, Config& config) :
     m_fpsShow = config.get<bool>("ShowFps");
 }
 
+void HUD::skipInterpolation()
+{
+    m_points.skipInterpolation();
+}
+
 void HUD::update(const Level* level, const float elapsedTime)
 {
     m_target.setTargets(level->getTotalTarget(), level->getRemainingTarget());
