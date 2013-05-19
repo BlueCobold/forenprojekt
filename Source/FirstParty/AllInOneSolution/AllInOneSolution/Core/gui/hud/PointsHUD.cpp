@@ -12,6 +12,11 @@ m_elapsedTime(0.f)
 {
 }
 
+void PointsHUD::skipInterpolation()
+{
+    m_pointCounter.set(m_pointCounter.getTargetValue(), m_pointCounter.getTargetValue(), 0.0f);
+}
+
 void PointsHUD::update(const DrawParameter& params)
 {
     m_pointCounter.update(m_elapsedTime);

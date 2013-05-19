@@ -42,6 +42,8 @@ private:
 public:
     HUD(ResourceManager& resourceManager, Config& config);
 
+    void skipInterpolation();
+
     void update(const Level* level, const float time);
     void restartAt(const float time);
 
