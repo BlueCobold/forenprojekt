@@ -237,6 +237,7 @@
     <ClInclude Include="model\collision\filter\PropertyFilter.hpp" />
     <ClInclude Include="model\collision\filter\SpawnEntity.hpp" />
     <ClInclude Include="model\collision\handler\ApplyImpulseCollisionHandler.hpp" />
+    <ClInclude Include="model\collision\handler\BonusTimeCollisionHandler.hpp" />
     <ClInclude Include="model\collision\handler\ChangePropertyCollisionHandler.hpp" />
     <ClInclude Include="model\collision\handler\CollisionHandler.hpp" />
     <ClInclude Include="model\collision\handler\SpawnEntityCollisionHandler.hpp" />
