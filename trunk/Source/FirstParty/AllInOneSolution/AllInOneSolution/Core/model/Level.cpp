@@ -382,6 +382,11 @@ const int Level::getRemainingTarget() const
     return m_remainingTarget;
 }
 
+void Level::addRemainingTime(float time)
+{
+    m_remainingTime += time;
+}
+
 const int Level::getPoints() const
 {
     return m_points;
