@@ -43,6 +43,7 @@ UnknownMenuTemplate = The menu template isn't registered: %.
 StateExist = The state with id % already exists.
 StateUnknow = The state with id % does not exist.
 NoSoundName = A sound without name has been specified.
+InvalidColorFormat = Color-values must be in the format RRGGBBAA.
 
 [GUI]
 gui_game_paused = Game Paused

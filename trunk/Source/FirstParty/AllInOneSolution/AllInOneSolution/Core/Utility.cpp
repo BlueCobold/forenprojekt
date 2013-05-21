@@ -1,6 +1,8 @@
 #include "Utility.hpp"
 #include "resources/FileReader.hpp"
 
+#include <exception>
+
 namespace utility
 {
 	/// Specialized Function String 2 String
@@ -22,6 +24,8 @@ namespace utility
     sf::Color hexToColor(const std::string& hex)
     {
         sf::Color color;
+        if(hex.length() < 8)
+            throw std::runtime_error(translateKey("InvalidColorFormat"));
         color.r = hexToInt(hex.substr(0, 2));
         color.g = hexToInt(hex.substr(2, 2));
         color.b = hexToInt(hex.substr(4, 2));
