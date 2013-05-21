@@ -45,6 +45,8 @@ void LevelFileLoader::parseConstants(tinyxml2::XMLElement* xml,
     }
 }
 
+#include <iostream>
+
 std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml,
     AnimatedGraphics* animated,
     VariableHandler* handler,
@@ -116,6 +118,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 
     if(static_color_element && value)
     {
+        std::cout<<value;
         sf::Color col = utility::hexToColor(value);
         red = std::unique_ptr<ValueProvider>(new StaticProvider(col.r / 255.f));
         green = std::unique_ptr<ValueProvider>(new StaticProvider(col.g / 255.f));

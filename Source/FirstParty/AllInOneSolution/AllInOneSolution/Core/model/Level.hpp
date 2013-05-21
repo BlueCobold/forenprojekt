@@ -69,7 +69,6 @@ public:
     const bool isLevelFailed() const;
 
     const float getRemainigTime() const;
-    void addRemainingTime(float time);
 
     virtual float getValueOf(const std::string& name) const;
     virtual void setValueOf(const std::string& name, const float value);
