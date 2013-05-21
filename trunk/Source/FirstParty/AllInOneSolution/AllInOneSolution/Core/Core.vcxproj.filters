@@ -591,9 +591,6 @@
     <ClInclude Include="model\collision\filter\ApplyForceFilter.hpp">
       <Filter>Headers\model\collision\filter</Filter>
     </ClInclude>
-    <ClInclude Include="model\collision\handler\BonusTimeCollisionHandler.hpp">
-      <Filter>Headers\model\collision\handler</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
