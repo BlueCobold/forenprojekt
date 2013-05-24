@@ -32,7 +32,7 @@ void HUD::update(const Level* level, const float elapsedTime)
     if(level->getRemainingBall() > 0 && !m_ballShow)
         setBallShow(true);
 
-    if(level->getRemainingBall() > 0 && !m_timeShow)
+    if(level->getRemainigTime() > 0 && !m_timeShow)
         setTimeShow(true);
 
     m_ball.setBalls(level->getRemainingBall());

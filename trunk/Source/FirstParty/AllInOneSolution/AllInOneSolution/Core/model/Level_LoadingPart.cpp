@@ -322,7 +322,8 @@ std::unique_ptr<Entity> Level::createEntity(
             }
             else if(std::string(xml->Attribute("type")) == "target")
             {
-                entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable, autoStop));
+                entity = std::unique_ptr<Entity>(new Entity(Entity::Target, true, autoStop));
+                //entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable, autoStop));
                 m_totalTarget++;
             }
             else
@@ -664,6 +665,8 @@ void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn)
     {
         if(it->get() == spawn)
         {
+            if(it->get()->getType() == Entity::Target)
+                int c = 1;
             auto e = std::move(*it);
             m_unspawnedEntities.erase(it);
             e->setPosition(position);
