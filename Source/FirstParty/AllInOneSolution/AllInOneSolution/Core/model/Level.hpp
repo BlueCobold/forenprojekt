@@ -75,6 +75,8 @@ public:
 
     const sf::Vector2f getBallCoords() const;
 
+    void setTimeAttackMode(bool timeAttackMode);
+
 private:
 
     struct Templates
@@ -98,6 +100,8 @@ private:
     virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse);
     void killTarget(Entity* target);
     void prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn);
+
+    void updateTimeAttackeMode(const float elapsedTime);
 
     /// Load the level after m_number
     bool load();
@@ -229,6 +233,23 @@ private:
     std::vector<std::unique_ptr<TimedLabel>> m_pointLabels;
 
     bool m_levelPass;
+
+    bool m_timeAttackMode;
+
+    struct TargetToRespawn
+    {
+    public:
+        TargetToRespawn(Entity* target, const float time)
+        {
+            this->respawnAt = time;
+            this->target = target;
+        }
+
+        float respawnAt;
+        Entity* target;
+    };
+
+    std::vector<TargetToRespawn> m_unspawnedTarget;
 };
 
 #endif // LEVEL_HPP

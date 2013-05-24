@@ -37,7 +37,8 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_remainingBall(-1),
     m_levelPass(false),
     m_remainingTime(-1),
-    m_totalTime(-1)
+    m_totalTime(-1),
+    m_timeAttackMode(false)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -97,6 +98,9 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
         updatePointLabels();
     }
+
+    if(m_timeAttackMode)
+        updateTimeAttackeMode(elapsedTime);
 
     if(utility::Keyboard.isKeyDown(sf::Keyboard::D))
         m_debugDraw = !m_debugDraw;
@@ -264,14 +268,27 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
 
 void Level::killTarget(Entity* target)
 {
-    target->kill();
-    m_remainingTarget--;
+    if(target->isRespawnable() && m_timeAttackMode)
+    {
+        for(auto it = m_unspawnedTarget.begin(); it != m_unspawnedTarget.end(); ++it)
+            if(it->target == target)
+                return;
+
+        TargetToRespawn targetToRespawn(target, Level::TimedObject::getCurrentTime() + 5.f);
+        m_unspawnedTarget.push_back(targetToRespawn);
+    }
+    else
+    {
+        target->kill();
+        if(m_remainingTarget < 1)
+            m_levelPass = true;
+    }
+
     int earned = 100 + m_multiHit * 50;
     m_points += earned;
     m_multiHit++;
+    m_remainingTarget--;
     createLabelAt(target, "green", earned);
-    if(m_remainingTarget < 1)
-        m_levelPass = true;
 }
 
 void Level::createLabelAt(const Entity* target, const std::string& fontName, const int number)
@@ -415,4 +432,36 @@ const bool Level::isLevelFailed() const
     // I had that quite often when debugging or lagging (dragging the window)
     value |= m_remainingTime < 0 && m_totalTime > -1.f;
     return value;
+}
+void Level::setTimeAttackMode(bool timeAttackMode)
+{
+    m_timeAttackMode = timeAttackMode;
+
+    if(m_timeAttackMode)
+    {
+        m_remainingTime = 120.f;
+        m_totalTime = 120.f;
+    }
+}
+
+void Level::updateTimeAttackeMode(const float elapsedTime)
+{
+    auto it = begin(m_unspawnedTarget);
+    while(it != end(m_unspawnedTarget))
+    {
+        if(!it->target->hidden() && !it->target->frozen())
+        {
+            it->target->hide();
+            it->target->freeze();
+        }
+        if(it->respawnAt < elapsedTime)
+        {
+            it->target->unfreeze();
+            it->target->unhide();
+            m_remainingTarget++;
+            it = m_unspawnedTarget.erase(it);
+        }
+        else
+            ++it;
+    }
 }
