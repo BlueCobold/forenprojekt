@@ -272,12 +272,6 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
 
 void Level::killTarget(Entity* target)
 {
-    int earned = 100 + m_multiHit * 50;
-    m_points += earned;
-    m_multiHit++;
-    m_remainingTarget--;
-    createLabelAt(target, "green", earned);
-
     if(target->isRespawnable() && m_timeAttackMode)
     {
         for(auto it = m_unspawnedTarget.begin(); it != m_unspawnedTarget.end(); ++it)
@@ -285,14 +279,21 @@ void Level::killTarget(Entity* target)
                 return;
 
         TargetToRespawn targetToRespawn(target, Level::TimedObject::getCurrentTime() + 5.f);
+        m_remainingTarget--;
         m_unspawnedTarget.push_back(targetToRespawn);
     }
     else
     {
         target->kill();
+        m_remainingTarget--;
         if(m_remainingTarget < 1)
             m_levelPass = true;
     }
+
+    int earned = 100 + m_multiHit * 50;
+    m_points += earned;
+    m_multiHit++;
+    createLabelAt(target, "green", earned);
 }
 void Level::killBonusTarget(Entity* target)
 {
