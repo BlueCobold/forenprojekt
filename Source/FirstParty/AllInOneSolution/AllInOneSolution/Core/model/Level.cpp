@@ -247,6 +247,8 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
             killTarget(entityA);
         else if(entityA->getType() == Entity::Teeter)
             m_multiHit = 0;
+        else if(entityA->getType() == Entity::BonusTarget)
+            killBonusTarget(entityA);
 
         return entityA->doesCollideWithBall();
     }
@@ -259,6 +261,8 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
             killTarget(entityB);
         else if(entityB->getType() == Entity::Teeter)
             m_multiHit = 0;
+        else if(entityA->getType() == Entity::BonusTarget)
+            killBonusTarget(entityA);
 
         return entityB->doesCollideWithBall();
     }
@@ -290,7 +294,14 @@ void Level::killTarget(Entity* target)
     m_remainingTarget--;
     createLabelAt(target, "green", earned);
 }
-
+void Level::killBonusTarget(Entity* target)
+{
+    target->kill();
+    int earned = 10 + m_multiHit * 50;
+    m_points += earned;
+    m_multiHit++;
+    createLabelAt(target, "green", earned);
+}
 void Level::createLabelAt(const Entity* target, const std::string& fontName, const int number)
 {
     std::string prefix;
