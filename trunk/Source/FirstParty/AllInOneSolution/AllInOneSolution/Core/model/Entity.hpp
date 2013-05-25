@@ -18,7 +18,7 @@ class Entity : public PhysicalObject, public AnimatedGraphics
 {
 public:
 
-    enum Type {Teeter, Ball, Target, None};
+    enum Type {Teeter, Ball, Target, BonusTarget, None};
 
 private:
 

@@ -326,6 +326,10 @@ std::unique_ptr<Entity> Level::createEntity(
                 //entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable, autoStop));
                 m_totalTarget++;
             }
+            else if(std::string(xml->Attribute("type")) == "bonustarget")
+            {
+                entity = std::unique_ptr<Entity>(new Entity(Entity::BonusTarget, respawnable, autoStop));
+            }
             else
                 entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable, autoStop));
         }
