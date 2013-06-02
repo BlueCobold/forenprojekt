@@ -108,6 +108,7 @@
     <ClCompile Include="gui\LineLabel.cpp" />
     <ClCompile Include="gui\hud\PointsHUD.cpp" />
     <ClCompile Include="gui\hud\TargetHUD.cpp" />
+    <ClCompile Include="gui\MainMenu.cpp" />
     <ClCompile Include="gui\PauseMenu.cpp" />
     <ClCompile Include="gui\ReplayMenu.cpp" />
     <ClCompile Include="gui\FailMenu.cpp" />
@@ -116,6 +117,7 @@
     <ClCompile Include="LevelPassState.cpp" />
     <ClCompile Include="LoadLevelState.cpp" />
     <ClCompile Include="gui\Menu.cpp" />
+    <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="model\Background.cpp" />
     <ClCompile Include="model\Ball.cpp" />
     <ClCompile Include="model\collision\ContactListener.cpp" />
@@ -157,6 +159,7 @@
     <ClCompile Include="resources\MenuLoader.cpp" />
     <ClCompile Include="resources\ResourceManager.cpp" />
     <ClCompile Include="ScrollView.cpp" />
+    <ClCompile Include="StartState.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="TransitionState.cpp" />
     <ClCompile Include="Utility.cpp" />
@@ -214,6 +217,7 @@
     <ClInclude Include="gui\LineLabel.hpp" />
     <ClInclude Include="gui\hud\PointsHUD.hpp" />
     <ClInclude Include="gui\hud\TargetHUD.hpp" />
+    <ClInclude Include="gui\MainMenu.hpp" />
     <ClInclude Include="gui\MenuTemplate.hpp" />
     <ClInclude Include="gui\PauseMenu.hpp" />
     <ClInclude Include="gui\ReplayMenu.hpp" />
@@ -223,6 +227,7 @@
     <ClInclude Include="LevelPassState.hpp" />
     <ClInclude Include="LoadLevelState.hpp" />
     <ClInclude Include="gui\Menu.hpp" />
+    <ClInclude Include="MainMenuState.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />
     <ClInclude Include="model\Ball.hpp" />
@@ -284,6 +289,7 @@
     <ClInclude Include="resources\ResourceCache.hpp" />
     <ClInclude Include="resources\ResourceManager.hpp" />
     <ClInclude Include="ScrollView.hpp" />
+    <ClInclude Include="StartState.hpp" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateChangeInformation.hpp" />
     <ClInclude Include="StateManager.hpp" />
