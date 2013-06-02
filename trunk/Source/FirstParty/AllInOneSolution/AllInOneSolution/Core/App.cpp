@@ -6,6 +6,8 @@
 #include "TransitionState.hpp"
 #include "LevelPassState.hpp"
 #include "LevelFailState.hpp"
+#include "MainMenuState.hpp"
+#include "StartState.hpp"
 #include "resources/Config.hpp"
 
 #include <SFML/Graphics/Color.hpp>
@@ -54,7 +56,9 @@ App::App(Config& config) :
     m_stateManager.registerState(TransitionStateId, std::unique_ptr<TransitionState>(new TransitionState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(LevelPassStateId, std::unique_ptr<LevelPassState>(new LevelPassState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(LevelFailStateId, std::unique_ptr<LevelFailState>(new LevelFailState(m_screen, m_resourceManager, m_config)));
-    m_stateManager.setState(LoadLevelStateId);
+    m_stateManager.registerState(MainMenuStateId, std::unique_ptr<MainMenuState>(new MainMenuState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.registerState(StartStateId, std::unique_ptr<StartState>(new StartState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.setState(StartStateId);
 }
 
 void App::run()

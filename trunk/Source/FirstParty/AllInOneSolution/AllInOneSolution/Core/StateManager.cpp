@@ -38,6 +38,7 @@ void StateManager::setState(StateId id, EnterStateInformation* enterInformation)
     }
     if(m_currentStateId == LoadLevelStateId)
         m_currentLevel = std::move((dynamic_cast<LoadLevelState*>(m_currentState))->gainLevel());
+
     m_currentStateId = id;
     m_currentState = state;
 
