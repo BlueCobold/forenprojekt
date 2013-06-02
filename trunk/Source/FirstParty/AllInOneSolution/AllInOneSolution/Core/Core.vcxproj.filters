@@ -591,6 +591,9 @@
     <ClInclude Include="model\collision\filter\ApplyForceFilter.hpp">
       <Filter>Headers\model\collision\filter</Filter>
     </ClInclude>
+    <ClInclude Include="gui\ButtonSound.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

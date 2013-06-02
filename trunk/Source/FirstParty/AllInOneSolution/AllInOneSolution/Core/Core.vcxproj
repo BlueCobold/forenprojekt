@@ -198,6 +198,7 @@
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="EnterStateInformation.hpp" />
+    <ClInclude Include="gui\ButtonSound.hpp" />
     <ClInclude Include="gui\ButtonStyle.hpp" />
     <ClInclude Include="gui\CaptionMenu.hpp" />
     <ClInclude Include="gui\hud\ArrowHUD.hpp" />

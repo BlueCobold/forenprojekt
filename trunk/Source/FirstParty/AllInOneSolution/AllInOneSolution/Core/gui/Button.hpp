@@ -8,6 +8,7 @@
 #include "LineLabel.hpp"
 #include "../resources/ResourceManager.hpp"
 #include "ButtonStyle.hpp"
+#include "ButtonSound.hpp"
 
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -22,6 +23,7 @@ private:
 
     int m_id;
     ButtonStyle m_style;
+    ButtonSound m_sound;
     sf::Vector2f m_position;
     sf::Vector2f m_offset;
     sf::Vector2i m_size;
@@ -33,7 +35,7 @@ private:
 
 public:
 
-    Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset);
+    Button(int id, ButtonStyle style, ButtonSound sound, const sf::Vector2f& position, const sf::Vector2f& offset);
 
     virtual ~Button()
     { }

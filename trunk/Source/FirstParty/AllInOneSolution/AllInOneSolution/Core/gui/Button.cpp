@@ -3,11 +3,12 @@
 
 #include <SFML/Window/Event.hpp>
 
-Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset) :
+Button::Button(int id, ButtonStyle style, ButtonSound sound, const sf::Vector2f& position, const sf::Vector2f& offset) :
     m_position(position),
     m_id(id),
     m_offset(offset),
-    m_style(style)
+    m_style(style),
+    m_sound(sound)
 {
     m_sprite = &m_style.idleStyle.sprite;
     m_label = &m_style.idleStyle.label;
@@ -20,6 +21,7 @@ Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf
 
 void Button::update(const sf::RenderWindow& screen)
 {
+    static bool playHoverSound = false;
     sf::IntRect buttonRect(static_cast<int>(m_position.x + m_offset.x + m_style.mouseRect.left - getSize().x / 2),
                            static_cast<int>(m_position.y + m_offset.y + m_style.mouseRect.top),
                            m_style.mouseRect.width,
@@ -27,6 +29,12 @@ void Button::update(const sf::RenderWindow& screen)
 
     if(buttonRect.contains(sf::Mouse::getPosition(screen)))
     {
+        if(!playHoverSound)
+        {
+            playHoverSound = true;
+            m_sound.hoverSound.play();
+        }
+
         if(utility::Mouse.leftButtonPressed())
         {
             m_sprite = &m_style.pressedStyle.sprite;
@@ -46,6 +54,7 @@ void Button::update(const sf::RenderWindow& screen)
     }
     else
     {
+        playHoverSound = false;
         m_sprite = &m_style.idleStyle.sprite;
         m_label = &m_style.idleStyle.label;
         setPosition(m_position);
