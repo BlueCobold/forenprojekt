@@ -15,7 +15,12 @@
 				font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
 		</buttonStyle>
 	</styles>
+	<sounds>
+		<buttonSound name="default">
+			<hover sound="bounce"/>
+		</buttonSound>
+	</sounds>
 	<elements>
-		<button id="0" text="gui_play_again" style="default" x="261" y="110" />
+		<button id="0" text="gui_play_again" style="default" sound="default" x="261" y="110" />
 	</elements>
 </menu>

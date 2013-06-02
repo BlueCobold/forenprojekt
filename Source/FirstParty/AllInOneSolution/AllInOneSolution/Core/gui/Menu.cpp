@@ -62,7 +62,7 @@ void Menu::update(const sf::RenderWindow& screen)
 
 void Menu::createButton(const ButtonInfo& info)
 {
-    std::unique_ptr<Button> button(new Button(info.id, info.style, m_position, info.position));
+    std::unique_ptr<Button> button(new Button(info.id, info.style, info.sound, m_position, info.position));
 
     button->registerOnPressed([this](const Button& sender)
     {

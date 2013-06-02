@@ -29,9 +29,11 @@ private:
         MenuTemplate& menu, 
         tinyxml2::XMLElement* menuXml, 
         std::unordered_map<std::string, ButtonStyle>& buttonStyles, 
+        std::unordered_map<std::string, ButtonSound>& buttonSounds,
         ResourceManager& resourceManager);
 
     static std::unordered_map<std::string, ButtonStyle> parseStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, ButtonSound> parseSounds(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
 
     static ButtonStateStyle loadButtonStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
 };

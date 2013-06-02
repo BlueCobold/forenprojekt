@@ -4,6 +4,7 @@
 #define MENU_TEMPLATE_HPP
 
 #include "ButtonStyle.hpp"
+#include "ButtonSound.hpp"
 
 #include <tinyxml2.h>
 
@@ -13,6 +14,7 @@
 struct ButtonInfo
 {
     ButtonStyle style;
+    ButtonSound sound;
     sf::Vector2f position;
     std::string textResourceKey;
     int id;
