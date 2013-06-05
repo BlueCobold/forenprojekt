@@ -8,7 +8,8 @@ Button::Button(int id, ButtonStyle style, ButtonSound sound, const sf::Vector2f&
     m_id(id),
     m_offset(offset),
     m_style(style),
-    m_sound(sound)
+    m_sound(sound),
+    m_playHoverSound(false)
 {
     m_sprite = &m_style.idleStyle.sprite;
     m_label = &m_style.idleStyle.label;
@@ -21,7 +22,6 @@ Button::Button(int id, ButtonStyle style, ButtonSound sound, const sf::Vector2f&
 
 void Button::update(const sf::RenderWindow& screen)
 {
-    static bool playHoverSound = false;
     sf::IntRect buttonRect(static_cast<int>(m_position.x + m_offset.x + m_style.mouseRect.left - getSize().x / 2),
                            static_cast<int>(m_position.y + m_offset.y + m_style.mouseRect.top),
                            m_style.mouseRect.width,
@@ -29,9 +29,9 @@ void Button::update(const sf::RenderWindow& screen)
 
     if(buttonRect.contains(sf::Mouse::getPosition(screen)))
     {
-        if(!playHoverSound)
+        if(!m_playHoverSound)
         {
-            playHoverSound = true;
+            m_playHoverSound = true;
             m_sound.hoverSound.play();
         }
 
@@ -54,7 +54,7 @@ void Button::update(const sf::RenderWindow& screen)
     }
     else
     {
-        playHoverSound = false;
+        m_playHoverSound = false;
         m_sprite = &m_style.idleStyle.sprite;
         m_label = &m_style.idleStyle.label;
         setPosition(m_position);

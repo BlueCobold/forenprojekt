@@ -31,6 +31,8 @@ private:
     LineLabel* m_label;
     sf::Sprite* m_sprite;
 
+    bool m_playHoverSound;
+
     std::function<void (const Button& sender)> m_callback;
 
 public:
