@@ -23,16 +23,20 @@ public:
 
     const Entity* getSpawnAnimationEntity() const;
 
+    void kill();
+
 private:
 
     float m_ballResetTime;
     float m_resetTime;
     float m_hideTime;
+    float m_killTime;
 
     b2Vec2 m_spawnPosition;
     b2Vec2 m_fieldDimension;
 
     bool m_lostBall;
+    bool m_killed;
     const Entity* m_spawnAnimationEntity;
     std::function<void()> m_checkpointHandler;
 
