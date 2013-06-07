@@ -5,10 +5,12 @@
 Ball::Ball(float resetTime, const Entity* spawnAnimationEntity) :
     m_resetTime(resetTime),
     m_hideTime(1.0f),
+    m_killTime(1.0f),
     Entity(Entity::Ball),
     m_spawnAnimationEntity(spawnAnimationEntity),
     m_lostBall(false),
-    m_ballResetTime(0.0f)
+    m_ballResetTime(0.0f),
+    m_killed(false)
 { }
 
 void Ball::autoResetBall(const float elapsedTime)
@@ -16,8 +18,10 @@ void Ball::autoResetBall(const float elapsedTime)
     // If Ball outside of field
     if(isOutside() && (m_ballResetTime == 0.0f))
         m_ballResetTime = elapsedTime + m_resetTime;
+    else if(m_killed && m_ballResetTime == 0.0f)
+        m_ballResetTime = elapsedTime + m_killTime;
     // if ball back in field
-    else if(!isOutside() && (m_ballResetTime > 0.0f) && elapsedTime < m_ballResetTime)
+    else if(!m_killed && !isOutside() && (m_ballResetTime > 0.0f) && elapsedTime < m_ballResetTime)
         m_ballResetTime = 0.0f;
     // if timer up, reset the ball
     else if(m_ballResetTime > 0.0f)
@@ -27,8 +31,9 @@ void Ball::autoResetBall(const float elapsedTime)
             unhide();
             m_ballResetTime = 0.0f;
         }
-        else if(elapsedTime > m_ballResetTime && !frozen())
+        else if(elapsedTime > m_ballResetTime && (!frozen() || m_killed))
         {
+            m_killed = false;
             getBody()->SetTransform(m_spawnPosition, 0.0f);
             getBody()->SetLinearVelocity(b2Vec2(0,0));
             getBody()->SetAngularVelocity(0.0f);
@@ -48,6 +53,11 @@ void Ball::update(const float value)
 {
     m_lostBall = false;
 
+    if(m_killed && !frozen())
+        freeze();
+    if(m_killed && !hidden())
+        hide();
+
     autoResetBall(value);
 
     Entity::update(value);
@@ -56,6 +66,11 @@ void Ball::update(const float value)
 const Entity* Ball::getSpawnAnimationEntity() const
 {
     return m_spawnAnimationEntity;
+}
+
+void Ball::kill()
+{
+    m_killed = true;
 }
 
 void Ball::checkpointReached(const b2Vec2 position)

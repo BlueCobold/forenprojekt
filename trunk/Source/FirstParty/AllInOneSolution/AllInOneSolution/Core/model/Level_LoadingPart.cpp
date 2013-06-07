@@ -479,6 +479,17 @@ void Level::parseCollider(
             }));
             entity->bindCollisionHandler(std::move(collider));
         }
+        else if(std::string(child->Name()) == "killBall")
+        {
+            std::unique_ptr<GenericCollisionHandler> collider(new GenericCollisionHandler(
+            [=](Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse)
+            {
+                if(entityA->getType() != Entity::Ball && entityB->getType() != Entity::Ball)
+                    throw std::runtime_error(utility::replace(utility::translateKey("EntityNoCollision"), "Ball"));
+                m_ball->kill();
+            }));
+            entity->bindCollisionHandler(std::move(collider));
+        }
         else if(std::string(child->Name()) == "showLabel")
         {
             std::unique_ptr<CollisionHandler> collider = parseShowLabelHandler(child);
