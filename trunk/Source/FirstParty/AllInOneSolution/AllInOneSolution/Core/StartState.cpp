@@ -17,6 +17,7 @@ StartState::~StartState()
 
 void StartState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
+    State::onEnter(enterInformation,time);
 }
 
 StateChangeInformation StartState::update(const float time)
