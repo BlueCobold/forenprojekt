@@ -34,7 +34,7 @@ private:
     MainMenu m_menu;
     bool m_newGame;
 
-    EnterPlayStateInformation m_playStateInfo;
+    EnterStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
     float m_timeDiff;
 };

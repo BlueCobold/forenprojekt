@@ -19,7 +19,7 @@ public:
 
 private:
     EnterTransitionStateInformation m_transitionStateInfo;
-    EnterPlayStateInformation m_playStateInfo;
+    EnterStateInformation m_stateInfo;
 };
 
 #endif // STARTSTATE_HPP

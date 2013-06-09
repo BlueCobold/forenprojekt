@@ -47,10 +47,10 @@ StateChangeInformation MainMenuState::update(const float time)
 
     if(m_newGame)
     {
-        m_playStateInfo.m_returnFromPause = false;
-        m_playStateInfo.m_level = nullptr;
+        m_stateInfo.m_prepareOnly = false;
+        m_stateInfo.m_level = nullptr;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     
