@@ -22,10 +22,10 @@ void StartState::onEnter(const EnterStateInformation* enterInformation, const fl
 
 StateChangeInformation StartState::update(const float time)
 {
-    m_playStateInfo.m_returnFromPause = false;
-    m_playStateInfo.m_level = nullptr;
-    m_transitionStateInfo.m_followingState = MainMenuStateId;
-    m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+    m_stateInfo.m_prepareOnly = false;
+    m_stateInfo.m_level = nullptr;
+    m_transitionStateInfo.m_followingState = LoadLevelStateId;
+    m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
     return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 }
 
