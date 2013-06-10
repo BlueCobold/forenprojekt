@@ -486,7 +486,7 @@ void Level::parseCollider(
             {
                 if(entityA->getType() != Entity::Ball && entityB->getType() != Entity::Ball)
                     throw std::runtime_error(utility::replace(utility::translateKey("EntityNoCollision"), "Ball"));
-                m_ball->kill();
+                m_ball->blowUp();
             }));
             entity->bindCollisionHandler(std::move(collider));
         }
