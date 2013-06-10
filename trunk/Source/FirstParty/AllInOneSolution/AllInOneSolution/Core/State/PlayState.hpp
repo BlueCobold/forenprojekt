@@ -5,8 +5,8 @@
 
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
-#include "model/Level.hpp"
-#include "gui/hud/HUD.hpp"
+#include "../model/Level.hpp"
+#include "../gui/hud/HUD.hpp"
 
 #include <SFML/System/Clock.hpp>
 

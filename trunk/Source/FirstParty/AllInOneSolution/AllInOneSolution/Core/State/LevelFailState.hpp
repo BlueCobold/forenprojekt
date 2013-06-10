@@ -5,9 +5,9 @@
 
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
-#include "gui/Button.hpp"
-#include "gui/hud/HUD.hpp"
-#include "gui/FailMenu.hpp"
+#include "../gui/Button.hpp"
+#include "../gui/hud/HUD.hpp"
+#include "../gui/FailMenu.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 

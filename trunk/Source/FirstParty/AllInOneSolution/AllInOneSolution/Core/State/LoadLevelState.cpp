@@ -4,7 +4,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
-#include "rendering/transitions/RandomTransition.hpp"
+#include "../rendering/transitions/RandomTransition.hpp"
 
 #include <memory>
 #include <cstring>

@@ -1,24 +1,24 @@
 #pragma once
 
-#ifndef MAINMENUSTATE_HPP
-#define MAINMENUSTATE_HPP
+#ifndef PAUSESTATE_HPP
+#define PAUSESTATE_HPP
 
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
-#include "gui/Button.hpp"
-#include "gui/MainMenu.hpp"
+#include "../gui/hud/HUD.hpp"
+#include "../gui/PauseMenu.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 
 #include <memory>
 
-/// This is the main menu.
-class MainMenuState : public State
+/// This is the active game state when the game is paused.
+class PauseState : public State
 {
 public:
 
-    MainMenuState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
-    ~MainMenuState();
+    PauseState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
+    ~PauseState();
 
     virtual StateChangeInformation update(const float time);
     virtual void draw(const DrawParameter& params);
@@ -30,13 +30,15 @@ private:
 
     std::unique_ptr<sf::Texture> m_background;
     sf::RenderTexture m_renderTexture;
+    Level* m_level;
 
-    MainMenu m_menu;
-    bool m_newGame;
+    HUD m_HUD;
+    PauseMenu m_menu;
 
-    EnterStateInformation m_stateInfo;
+    EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
+    EnterPauseStateInformation m_pauseStateInfo;
     float m_timeDiff;
 };
 
-#endif // MAINMENUSTATE_HPP
+#endif // PAUSESTATE_HPP

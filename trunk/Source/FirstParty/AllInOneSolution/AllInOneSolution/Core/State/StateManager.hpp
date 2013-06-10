@@ -4,7 +4,7 @@
 #define STATE_MANAGER_HPP
 
 #include "State.hpp"
-#include "model/Level.hpp"
+#include "../model/Level.hpp"
 #include "EnterStateInformation.hpp"
 
 #include "SFML/Graphics/RenderWindow.hpp"

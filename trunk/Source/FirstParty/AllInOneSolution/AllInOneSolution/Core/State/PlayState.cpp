@@ -1,7 +1,7 @@
 #include "PlayState.hpp"
-#include "Input.hpp"
-#include "resources/Config.hpp"
-#include "resources/ResourceManager.hpp"
+#include "../Input.hpp"
+#include "../resources/Config.hpp"
+#include "../resources/ResourceManager.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>

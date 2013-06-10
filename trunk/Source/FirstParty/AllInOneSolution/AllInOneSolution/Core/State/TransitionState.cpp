@@ -1,7 +1,7 @@
 #include "TransitionState.hpp"
 #include "EnterStateInformation.hpp"
 
-#include "rendering/transitions/RandomTransition.hpp"
+#include "../rendering/transitions/RandomTransition.hpp"
 
 TransitionState::TransitionState(sf::RenderWindow& screen,
                                  ResourceManager& resourceManager, 

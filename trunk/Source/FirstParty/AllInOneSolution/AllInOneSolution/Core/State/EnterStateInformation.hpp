@@ -3,7 +3,7 @@
 #ifndef ENTERSTATEINFORMATION_HPP
 #define ENTERSTATEINFORMATION_HPP
 
-#include "model/Level.hpp"
+#include "../model/Level.hpp"
 
 #include <memory>
 

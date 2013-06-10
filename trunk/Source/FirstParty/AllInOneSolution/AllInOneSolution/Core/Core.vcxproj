@@ -113,11 +113,7 @@
     <ClCompile Include="gui\ReplayMenu.cpp" />
     <ClCompile Include="gui\FailMenu.cpp" />
     <ClCompile Include="Input.cpp" />
-    <ClCompile Include="LevelFailState.cpp" />
-    <ClCompile Include="LevelPassState.cpp" />
-    <ClCompile Include="LoadLevelState.cpp" />
     <ClCompile Include="gui\Menu.cpp" />
-    <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="model\Background.cpp" />
     <ClCompile Include="model\Ball.cpp" />
     <ClCompile Include="model\collision\ContactListener.cpp" />
@@ -129,8 +125,6 @@
     <ClCompile Include="model\SoundManager.cpp" />
     <ClCompile Include="model\SoundObject.cpp" />
     <ClCompile Include="model\Teeter.cpp" />
-    <ClCompile Include="PauseState.cpp" />
-    <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="rendering\DebugDraw.cpp" />
     <ClCompile Include="rendering\transitions\AlphaTransition.cpp" />
     <ClCompile Include="rendering\transitions\GrowingCircleTransition.cpp" />
@@ -159,9 +153,15 @@
     <ClCompile Include="resources\MenuLoader.cpp" />
     <ClCompile Include="resources\ResourceManager.cpp" />
     <ClCompile Include="ScrollView.cpp" />
-    <ClCompile Include="StartState.cpp" />
-    <ClCompile Include="StateManager.cpp" />
-    <ClCompile Include="TransitionState.cpp" />
+    <ClCompile Include="State\LevelFailState.cpp" />
+    <ClCompile Include="State\LevelPassState.cpp" />
+    <ClCompile Include="State\LoadLevelState.cpp" />
+    <ClCompile Include="State\MainMenuState.cpp" />
+    <ClCompile Include="State\PauseState.cpp" />
+    <ClCompile Include="State\PlayState.cpp" />
+    <ClCompile Include="State\StartState.cpp" />
+    <ClCompile Include="State\StateManager.cpp" />
+    <ClCompile Include="State\TransitionState.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -200,7 +200,6 @@
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
-    <ClInclude Include="EnterStateInformation.hpp" />
     <ClInclude Include="gui\ButtonSound.hpp" />
     <ClInclude Include="gui\ButtonStyle.hpp" />
     <ClInclude Include="gui\CaptionMenu.hpp" />
@@ -217,17 +216,12 @@
     <ClInclude Include="gui\LineLabel.hpp" />
     <ClInclude Include="gui\hud\PointsHUD.hpp" />
     <ClInclude Include="gui\hud\TargetHUD.hpp" />
-    <ClInclude Include="gui\MainMenu.hpp" />
     <ClInclude Include="gui\MenuTemplate.hpp" />
     <ClInclude Include="gui\PauseMenu.hpp" />
     <ClInclude Include="gui\ReplayMenu.hpp" />
     <ClInclude Include="gui\FailMenu.hpp" />
     <ClInclude Include="Input.hpp" />
-    <ClInclude Include="LevelFailState.hpp" />
-    <ClInclude Include="LevelPassState.hpp" />
-    <ClInclude Include="LoadLevelState.hpp" />
     <ClInclude Include="gui\Menu.hpp" />
-    <ClInclude Include="MainMenuState.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
     <ClInclude Include="model\Background.hpp" />
     <ClInclude Include="model\Ball.hpp" />
@@ -250,13 +244,11 @@
     <ClInclude Include="model\Entity.hpp" />
     <ClInclude Include="model\SoundManager.hpp" />
     <ClInclude Include="model\SoundObject.hpp" />
-    <ClInclude Include="PauseState.hpp" />
     <ClInclude Include="rendering\GraphicalObject.hpp" />
     <ClInclude Include="model\Level.hpp" />
     <ClInclude Include="model\ParallaxLayer.hpp" />
     <ClInclude Include="model\PhysicalObject.hpp" />
     <ClInclude Include="model\Teeter.hpp" />
-    <ClInclude Include="PlayState.hpp" />
     <ClInclude Include="rendering\DebugDraw.hpp" />
     <ClInclude Include="rendering\Drawable.hpp" />
     <ClInclude Include="rendering\DrawParameter.hpp" />
@@ -289,11 +281,18 @@
     <ClInclude Include="resources\ResourceCache.hpp" />
     <ClInclude Include="resources\ResourceManager.hpp" />
     <ClInclude Include="ScrollView.hpp" />
-    <ClInclude Include="StartState.hpp" />
-    <ClInclude Include="State.hpp" />
-    <ClInclude Include="StateChangeInformation.hpp" />
-    <ClInclude Include="StateManager.hpp" />
-    <ClInclude Include="TransitionState.hpp" />
+    <ClInclude Include="State\EnterStateInformation.hpp" />
+    <ClInclude Include="State\LevelFailState.hpp" />
+    <ClInclude Include="State\LevelPassState.hpp" />
+    <ClInclude Include="State\LoadLevelState.hpp" />
+    <ClInclude Include="State\MainMenuState.hpp" />
+    <ClInclude Include="State\PauseState.hpp" />
+    <ClInclude Include="State\PlayState.hpp" />
+    <ClInclude Include="State\StartState.hpp" />
+    <ClInclude Include="State\State.hpp" />
+    <ClInclude Include="State\StateChangeInformation.hpp" />
+    <ClInclude Include="State\StateManager.hpp" />
+    <ClInclude Include="State\TransitionState.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <ItemGroup>

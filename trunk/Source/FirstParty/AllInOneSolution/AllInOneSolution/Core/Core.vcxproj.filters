@@ -7,12 +7,6 @@
     <ClCompile Include="Core.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="StateManager.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayState.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="resources\ResourceManager.cpp">
       <Filter>Sources\resources</Filter>
     </ClCompile>
@@ -48,9 +42,6 @@
     </ClCompile>
     <ClCompile Include="model\ParallaxLayer.cpp">
       <Filter>Sources\model</Filter>
-    </ClCompile>
-    <ClCompile Include="LoadLevelState.cpp">
-      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\AlphaTransition.cpp">
       <Filter>Sources\animation\rendering\transitions</Filter>
@@ -133,12 +124,6 @@
     <ClCompile Include="rendering\transitions\RandomTransition.cpp">
       <Filter>Sources\animation\rendering\transitions</Filter>
     </ClCompile>
-    <ClCompile Include="PauseState.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="TransitionState.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="rendering\transitions\HorizontalCompressTransition.cpp">
       <Filter>Sources\animation\rendering\transitions</Filter>
     </ClCompile>
@@ -156,9 +141,6 @@
     </ClCompile>
     <ClCompile Include="rendering\transitions\VerticalSpringTransition.cpp">
       <Filter>Sources\animation\rendering\transitions</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelPassState.cpp">
-      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="gui\Button.cpp">
       <Filter>Sources\gui</Filter>
@@ -205,33 +187,45 @@
     <ClCompile Include="gui\hud\TimeHUD.cpp">
       <Filter>Sources\gui\hud</Filter>
     </ClCompile>
-    <ClCompile Include="LevelFailState.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
     <ClCompile Include="gui\FailMenu.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="gui\MainMenu.cpp">
-      <Filter>Sources</Filter>
+      <Filter>Sources\gui</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenuState.cpp">
-      <Filter>Sources</Filter>
+    <ClCompile Include="State\LevelFailState.cpp">
+      <Filter>Sources\State</Filter>
     </ClCompile>
-    <ClCompile Include="StartState.cpp">
-      <Filter>Sources</Filter>
+    <ClCompile Include="State\LevelPassState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\LoadLevelState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\MainMenuState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PauseState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\PlayState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\StartState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\StateManager.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State\TransitionState.cpp">
+      <Filter>Sources\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="StateManager.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Utility.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayState.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="animation\OrientedObject.hpp">
@@ -326,12 +320,6 @@
     </ClInclude>
     <ClInclude Include="model\ParallaxLayer.hpp">
       <Filter>Headers\model</Filter>
-    </ClInclude>
-    <ClInclude Include="LoadLevelState.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="StateChangeInformation.hpp">
-      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="rendering\Drawable.hpp">
       <Filter>Headers\rendering</Filter>
@@ -432,9 +420,6 @@
     <ClInclude Include="rendering\DebugDraw.hpp">
       <Filter>Headers\rendering</Filter>
     </ClInclude>
-    <ClInclude Include="State.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="rendering\transitions\HorizontalStripesTransition.hpp">
       <Filter>Headers\rendering\transitions</Filter>
     </ClInclude>
@@ -513,18 +498,6 @@
     <ClInclude Include="model\collision\filter\ChangeBallVelocityFilter.hpp">
       <Filter>Headers\model\collision\filter</Filter>
     </ClInclude>
-    <ClInclude Include="TransitionState.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="PauseState.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="EnterStateInformation.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelPassState.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="gui\Button.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
@@ -588,9 +561,6 @@
     <ClInclude Include="model\AnimatedGraphics.hpp">
       <Filter>Headers\model\collision</Filter>
     </ClInclude>
-    <ClInclude Include="LevelFailState.hpp">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="gui\FailMenu.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
@@ -603,14 +573,41 @@
     <ClInclude Include="gui\ButtonSound.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
-    <ClInclude Include="gui\MainMenu.hpp">
-      <Filter>Headers</Filter>
+    <ClInclude Include="State\EnterStateInformation.hpp">
+      <Filter>Headers\State</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenuState.hpp">
-      <Filter>Headers</Filter>
+    <ClInclude Include="State\LevelFailState.hpp">
+      <Filter>Headers\State</Filter>
     </ClInclude>
-    <ClInclude Include="StartState.hpp">
-      <Filter>Headers</Filter>
+    <ClInclude Include="State\LevelPassState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\LoadLevelState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\MainMenuState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PauseState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\PlayState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\StartState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\State.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\StateChangeInformation.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\StateManager.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\TransitionState.hpp">
+      <Filter>Headers\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -688,6 +685,12 @@
     </Filter>
     <Filter Include="Sources\animation\rendering\transitions">
       <UniqueIdentifier>{dafee3bd-2f74-4c28-84de-e0c4d161420c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\State">
+      <UniqueIdentifier>{e3ef5e35-62c9-4074-a6a9-de0f78fa092e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\State">
+      <UniqueIdentifier>{f34a6103-1abb-48f9-952b-68f10e8af582}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
