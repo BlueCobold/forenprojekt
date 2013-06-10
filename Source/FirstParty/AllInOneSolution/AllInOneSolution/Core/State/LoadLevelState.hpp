@@ -5,10 +5,10 @@
 
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
-#include "model/Level.hpp"
-#include "gui/hud/HUD.hpp"
-#include "rendering/transitions/Transition.hpp"
-#include "Utility.hpp"
+#include "../model/Level.hpp"
+#include "../gui/hud/HUD.hpp"
+#include "../rendering/transitions/Transition.hpp"
+#include "../Utility.hpp"
 
 #include <SFML/System/Clock.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>

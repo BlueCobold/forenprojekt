@@ -1,8 +1,8 @@
 #include "MainMenuState.hpp"
-#include "Input.hpp"
-#include "resources/Config.hpp"
-#include "resources/ResourceManager.hpp"
-#include "rendering/transitions/RandomTransition.hpp"
+#include "../Input.hpp"
+#include "../resources/Config.hpp"
+#include "../resources/ResourceManager.hpp"
+#include "../rendering/transitions/RandomTransition.hpp"
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>

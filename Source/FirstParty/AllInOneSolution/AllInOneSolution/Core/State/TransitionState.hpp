@@ -4,7 +4,7 @@
 #define TRANSITIONSTATE_HPP
 
 #include "State.hpp"
-#include "rendering/transitions/Transition.hpp"
+#include "../rendering/transitions/Transition.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 

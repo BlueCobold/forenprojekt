@@ -5,7 +5,7 @@
 
 #include "resources/ResourceManager.hpp"
 #include "Utility.hpp" // toString
-#include "StateManager.hpp"
+#include "State/StateManager.hpp"
 #include "gui/LineLabel.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>

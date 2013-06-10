@@ -1,6 +1,6 @@
 #include "StartState.hpp"
-#include "resources/Config.hpp"
-#include "resources/ResourceManager.hpp"
+#include "../resources/Config.hpp"
+#include "../resources/ResourceManager.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 
 
