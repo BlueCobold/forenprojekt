@@ -5,6 +5,7 @@
 
 #include "ButtonStyle.hpp"
 #include "ButtonSound.hpp"
+#include "CheckBoxStyle.hpp"
 
 #include <tinyxml2.h>
 
@@ -20,9 +21,18 @@ struct ButtonInfo
     int id;
 };
 
+struct CheckBoxInfo
+{
+    CheckBoxStyle style;
+    sf::Vector2f position;
+    std::string textResourceKey;
+    int id;
+};
+
 struct MenuTemplate
 {
     std::vector<ButtonInfo> buttons;
+    std::vector<CheckBoxInfo> checkboxes;
     std::string captionResourceKey;
     BitmapFont* captionFont;
     sf::Vector2f captionOffset;

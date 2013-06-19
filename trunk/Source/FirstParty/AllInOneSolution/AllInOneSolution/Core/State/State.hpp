@@ -21,7 +21,8 @@ enum StateId
     LevelPassStateId,
     LevelFailStateId,
     MainMenuStateId,
-    StartStateId
+    StartStateId,
+    OptionMenuStateId
 };
 
 #include "StateChangeInformation.hpp"

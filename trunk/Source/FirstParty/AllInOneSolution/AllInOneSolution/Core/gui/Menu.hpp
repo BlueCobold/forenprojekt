@@ -6,6 +6,8 @@
 #include "../rendering/Drawable.hpp"
 #include "Button.hpp"
 #include "MenuTemplate.hpp"
+#include "CheckBox.hpp"
+#include "../resources/Config.hpp"
 
 #include <SFML/System/Vector2.hpp>
 
@@ -25,8 +27,10 @@ class Menu : public Drawable
 protected:
 
     sf::RenderWindow& m_screen;
+    std::vector<std::unique_ptr<CheckBox>> m_checkBoxes;
 
     void createButton(const ButtonInfo& info);
+    void createCheckBox(const CheckBoxInfo& info);
     MenuTemplate& getTemplate();
 
 private:

@@ -31,9 +31,11 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
         menu.captionResourceKey = caption->Attribute("text");
         menu.captionOffset = sf::Vector2f(caption->FloatAttribute("offsetx"), caption->FloatAttribute("offsety"));
     }
-    std::unordered_map<std::string, ButtonStyle> buttonStyles = parseStyles(menuXml, resourceManager);
+    std::unordered_map<std::string, ButtonStyle> buttonStyles = parseButtonStyles(menuXml, resourceManager);
     std::unordered_map<std::string, ButtonSound> buttonSounds = parseSounds(menuXml, resourceManager);
+    std::unordered_map<std::string, CheckBoxStyle> checkboxStyles = parseCheckBoxStyles(menuXml, resourceManager);
     parseButtons(menu, menuXml, buttonStyles, buttonSounds, resourceManager);
+    parseCheckBoxes(menu, menuXml, checkboxStyles, resourceManager);
     return new MenuTemplate(menu);
 }
 
@@ -80,8 +82,42 @@ void MenuLoader::parseButtons(
         }
     }
 }
+void MenuLoader::parseCheckBoxes(
+    MenuTemplate& menu, 
+    tinyxml2::XMLElement* menuXml, 
+    std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles, 
+    ResourceManager& resourceManager)
+{
+    if(auto styles = menuXml->FirstChildElement("elements"))
+    {
+        for(auto checkboxXml = styles->FirstChildElement("checkbox");
+            checkboxXml != nullptr; checkboxXml = checkboxXml->NextSiblingElement("checkbox"))
+        {
+            CheckBoxInfo checkBox;
+            auto style = checkBoxStyles.find(checkboxXml->Attribute("style"));
+            if(style == end(checkBoxStyles))
+                throw std::runtime_error(utility::replace(utility::translateKey("UnknownCheckBoxStyle"), checkboxXml->Attribute("style")));
+            checkBox.style = style->second;
+            
+            checkBox.position = sf::Vector2f(checkboxXml->FloatAttribute("x"), checkboxXml->FloatAttribute("y"));
+            checkBox.id = checkboxXml->IntAttribute("id");
+            checkBox.textResourceKey = checkboxXml->Attribute("text");
 
-std::unordered_map<std::string, ButtonStyle> MenuLoader::parseStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+            checkBox.style.uncheckedStyle.label = LineLabel(
+                utility::translateKey(checkBox.textResourceKey), 
+                checkBox.position, 0, checkBox.style.uncheckedStyle.font, LineLabel::Left);
+            checkBox.style.uncheckedStyle.label.setOffset(checkBox.style.uncheckedStyle.textOffset);
+
+            checkBox.style.checkedStyle.label = LineLabel(
+                utility::translateKey(checkBox.textResourceKey), 
+                checkBox.position, 0, checkBox.style.checkedStyle.font, LineLabel::Left);
+            checkBox.style.checkedStyle.label.setOffset(checkBox.style.checkedStyle.textOffset);
+            menu.checkboxes.push_back(checkBox);
+        }
+    }
+}
+
+std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, ButtonStyle> buttonStyles;
     if(auto styles = menuXml->FirstChildElement("styles"))
@@ -123,6 +159,42 @@ std::unordered_map<std::string, ButtonSound> MenuLoader::parseSounds(tinyxml2::X
 ButtonStateStyle MenuLoader::loadButtonStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
 {
     ButtonStateStyle style;
+    style.font = resourceManager.getBitmapFont(xml->Attribute("font"));
+    style.textOffset = sf::Vector2f(xml->FloatAttribute("fontoffsetx"), xml->FloatAttribute("fontoffsety"));
+    style.spriteOffset = sf::Vector2f(xml->FloatAttribute("offsetx"), xml->FloatAttribute("offsety"));
+    style.sprite = sf::Sprite(*resourceManager.getTexture(xml->Attribute("texture")));
+    style.sprite.setTextureRect(sf::IntRect(
+            xml->IntAttribute("srcx"), xml->IntAttribute("srcy"),
+            xml->IntAttribute("width"), xml->IntAttribute("height")));
+    return style;
+}
+
+std::unordered_map<std::string, CheckBoxStyle> MenuLoader::parseCheckBoxStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+{
+    std::unordered_map<std::string, CheckBoxStyle> checkboxStyles;
+    if(auto styles = menuXml->FirstChildElement("styles"))
+    {
+        for(auto styleXml = styles->FirstChildElement("checkboxStyle");
+            styleXml != nullptr; styleXml = styleXml->NextSiblingElement("checkboxStyle"))
+        {
+            CheckBoxStyle style;
+            
+            style.uncheckedStyle = loadCheckBoxStateStyle(styleXml->FirstChildElement("unchecked"), resourceManager);
+ 
+            style.checkedStyle = loadCheckBoxStateStyle(styleXml->FirstChildElement("checked"), resourceManager);
+            if(auto rect = styleXml->FirstChildElement("mouseRect"))
+                style.mouseRect = sf::IntRect(
+                    rect->IntAttribute("left"), rect->IntAttribute("top"),
+                    rect->IntAttribute("width"), rect->IntAttribute("height"));
+            checkboxStyles[styleXml->Attribute("name")] = style;
+        }
+    }
+    return checkboxStyles;
+}
+
+CheckBoxStateStyle MenuLoader::loadCheckBoxStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
+{
+    CheckBoxStateStyle style;
     style.font = resourceManager.getBitmapFont(xml->Attribute("font"));
     style.textOffset = sf::Vector2f(xml->FloatAttribute("fontoffsetx"), xml->FloatAttribute("fontoffsety"));
     style.spriteOffset = sf::Vector2f(xml->FloatAttribute("offsetx"), xml->FloatAttribute("offsety"));
