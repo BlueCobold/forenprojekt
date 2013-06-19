@@ -17,6 +17,9 @@ Menu::Menu(const MenuTemplate& menuTemplate,
 
     for(auto button = begin(m_template.buttons); button != end(m_template.buttons); ++button)
         createButton(*button);
+
+    for(auto checkbox = begin(m_template.checkboxes); checkbox != end(m_template.checkboxes); ++checkbox)
+        createCheckBox(*checkbox);
 }
 
 Menu::~Menu()
@@ -40,6 +43,9 @@ void Menu::setPosition(const sf::Vector2f& position)
 
     for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
         (*it)->setPosition(m_position);
+
+    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
+        (*it)->setPosition(m_position);
 }
 
 const sf::Vector2f& Menu::getPosition() const
@@ -52,11 +58,17 @@ void Menu::draw(const DrawParameter& params)
     params.getTarget().draw(m_template.background);
     for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
         (*it)->draw(params);
+
+    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
+        (*it)->draw(params);
 }
 
 void Menu::update(const sf::RenderWindow& screen)
 {
     for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
+        (*it)->update(screen);
+
+    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
         (*it)->update(screen);
 }
 
@@ -71,6 +83,13 @@ void Menu::createButton(const ButtonInfo& info)
     });
 
     m_buttons.push_back(std::move(button));
+}
+
+void Menu::createCheckBox(const CheckBoxInfo& info)
+{
+    std::unique_ptr<CheckBox> checkbox(new CheckBox(info.id, info.style, m_position, info.position));
+
+    m_checkBoxes.push_back(std::move(checkbox));
 }
 
 void Menu::registerOnClick(std::function<void(const Button& sender)> callback)

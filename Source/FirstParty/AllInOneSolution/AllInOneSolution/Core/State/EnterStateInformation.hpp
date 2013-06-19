@@ -41,5 +41,10 @@ public:
     bool m_returnFromPause;
 };
 
+class EnterOptionStateInformation : public EnterStateInformation
+{
+public:
+    StateId m_comeFromState;
+};
 
 #endif // ENTERSTATEINFORMATION_HPP

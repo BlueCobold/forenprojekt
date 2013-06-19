@@ -220,6 +220,15 @@
     <ClCompile Include="State\TransitionState.cpp">
       <Filter>Sources\State</Filter>
     </ClCompile>
+    <ClCompile Include="State\OptionMenuState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\OptionMenu.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CheckBox.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -608,6 +617,21 @@
     </ClInclude>
     <ClInclude Include="State\TransitionState.hpp">
       <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State\OptionMenuState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MainMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\OptionMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CheckBox.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CheckboxStyle.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

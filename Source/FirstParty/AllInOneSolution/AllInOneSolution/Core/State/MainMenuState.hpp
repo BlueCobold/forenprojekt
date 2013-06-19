@@ -28,14 +28,11 @@ private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
 
-    std::unique_ptr<sf::Texture> m_background;
-    sf::RenderTexture m_renderTexture;
-
     MainMenu m_menu;
-    bool m_newGame;
 
     EnterStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
+    EnterOptionStateInformation m_optionStateInfo;
     float m_timeDiff;
 };
 

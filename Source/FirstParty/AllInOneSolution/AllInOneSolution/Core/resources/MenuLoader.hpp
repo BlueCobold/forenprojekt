@@ -32,10 +32,18 @@ private:
         std::unordered_map<std::string, ButtonSound>& buttonSounds,
         ResourceManager& resourceManager);
 
-    static std::unordered_map<std::string, ButtonStyle> parseStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static void parseCheckBoxes(
+        MenuTemplate& menu, 
+        tinyxml2::XMLElement* menuXml, 
+        std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles, 
+        ResourceManager& resourceManager);
+
+    static std::unordered_map<std::string, ButtonStyle> parseButtonStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
     static std::unordered_map<std::string, ButtonSound> parseSounds(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, CheckBoxStyle> parseCheckBoxStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
 
     static ButtonStateStyle loadButtonStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
+    static CheckBoxStateStyle loadCheckBoxStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
 };
 
 #endif // MENU_LOADER_HPP
