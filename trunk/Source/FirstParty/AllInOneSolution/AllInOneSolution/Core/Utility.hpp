@@ -10,6 +10,8 @@
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
+#include <Box2D\Common\b2Math.h>
+
 #include <algorithm>
 #include <vector>
 #include <sstream>
@@ -69,6 +71,8 @@ namespace utility
     {
         return static_cast<T>(value*PIXEL_PER_METER);
     }
+
+    b2Vec2 rotate(const b2Vec2& v, float angle);
 
     int hexToInt(const std::string& hex);
 

@@ -38,7 +38,10 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_levelPass(false),
     m_remainingTime(-1),
     m_totalTime(-1),
-    m_timeAttackMode(false)
+    m_timeAttackMode(false),
+    m_ballTravelDistance(0.0f),
+    m_ballImpulseTime(0.0f),
+    m_ballImpulseAngle(-20.0f, 20.0f)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -105,6 +108,17 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     if(utility::Keyboard.isKeyDown(sf::Keyboard::D))
         m_debugDraw = !m_debugDraw;
 
+    if(utility::Keyboard.isKeyDown(sf::Keyboard::Space) && utility::toPixel(m_ballTravelDistance) < 60 && m_ballImpulseTime < elapsedTime - 1.0f)
+    {
+        m_ballImpulseTime = elapsedTime;
+        float angle = m_ballImpulseAngle.getValue();
+        float g = m_world.GetGravity().Length();
+        float strength = m_ball->getBody()->GetMass() * sqrt(2 * g * utility::toMeter<float>(100.0f));
+        m_ball->getBody()->ApplyLinearImpulse(utility::rotate(-strength / g * m_world.GetGravity(), utility::toRadian<float, float>(angle)), m_ball->getBody()->GetWorldCenter(), false);
+    }
+
+    trackBallMovement(elapsedTime);
+
     m_lastTime = elapsedTime;
 
     if(m_background != nullptr)
@@ -150,6 +164,22 @@ void Level::respawnDeadBalls()
         if(ball->getSpawnAnimationEntity() != nullptr)
             prepareEntityForSpawn(ball->getPosition(), ball->getSpawnAnimationEntity());
     }
+}
+
+void Level::trackBallMovement(float elapsedTime)
+{
+    b2Vec2 ballPos = m_ball->getPosition();
+    float distance = (ballPos - m_lastBallPosition).Length();
+    m_ballTravelDistances.push(BallMovement(elapsedTime, distance));
+    m_ballTravelDistance += distance;
+    for(float t = m_ballTravelDistances.front().time; t < elapsedTime - 1.5;)
+    {
+        auto f = m_ballTravelDistances.front();
+        m_ballTravelDistance -= f.distance;
+        m_ballTravelDistances.pop();
+        t = m_ballTravelDistances.front().time;
+    }
+    m_lastBallPosition = ballPos;
 }
 
 void Level::spawnPendingEntities(float currentTime)

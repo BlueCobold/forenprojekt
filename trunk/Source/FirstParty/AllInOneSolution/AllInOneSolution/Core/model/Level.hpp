@@ -7,6 +7,7 @@
 #include "../rendering/DebugDraw.hpp"
 #include "Background.hpp"
 #include "../animation/TimedObject.hpp"
+#include "../animation/provider/RandomProvider.hpp"
 #include "./collision./ContactListener.hpp"
 #include "../rendering/Drawable.hpp"
 #include "../ScrollView.hpp"
@@ -21,6 +22,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <queue>
 
 class Config;
 
@@ -92,6 +94,7 @@ private:
     void createLabelAt(const Entity* target, const std::string& fontName, const std::string& text);
     void createLabelAt(const sf::Vector2f& position, const std::string& fontName, const std::string& text);
     void respawnDeadBalls();
+    void trackBallMovement(float elapsedTime);
     void spawnPendingEntities(float currentTime);
     void cleanupKilledEntities();
     void updatePointLabels();
@@ -207,6 +210,20 @@ private:
 
     Ball* m_ball;
     int m_remainingBall;
+
+    // For trackBallMovement().
+    struct BallMovement
+    {
+        BallMovement() : time(0.0f), distance(0.0f) {}
+        BallMovement(float time, float dist) : time(time), distance(dist) {}
+        float time;
+        float distance;
+    };
+    std::queue<BallMovement> m_ballTravelDistances;
+    float m_ballImpulseTime;
+    b2Vec2 m_lastBallPosition;
+    float m_ballTravelDistance;
+    RandomProvider m_ballImpulseAngle;
 
     int m_totalTarget;
     int m_remainingTarget;
