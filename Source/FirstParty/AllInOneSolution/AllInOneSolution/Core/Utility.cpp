@@ -12,6 +12,11 @@ namespace utility
         return str;
     }
 
+    b2Vec2 rotate(const b2Vec2& v, float angle)
+    {
+        return b2Vec2(cos(angle) * v.x + sin(angle) * v.y, -sin(angle) * v.x + cos(angle) * v.y);
+    }
+
     int hexToInt(const std::string& hex)
     {
         std::stringstream ss;
