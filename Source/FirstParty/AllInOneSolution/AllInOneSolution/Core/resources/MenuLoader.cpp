@@ -34,8 +34,11 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     std::unordered_map<std::string, ButtonStyle> buttonStyles = parseButtonStyles(menuXml, resourceManager);
     std::unordered_map<std::string, ButtonSound> buttonSounds = parseSounds(menuXml, resourceManager);
     std::unordered_map<std::string, CheckBoxStyle> checkboxStyles = parseCheckBoxStyles(menuXml, resourceManager);
+    std::unordered_map<std::string, SliderStyle> sliderStyles = parseSliderStyles(menuXml, resourceManager);
+
     parseButtons(menu, menuXml, buttonStyles, buttonSounds, resourceManager);
     parseCheckBoxes(menu, menuXml, checkboxStyles, resourceManager);
+    parseSliders(menu, menuXml, sliderStyles, resourceManager);
     return new MenuTemplate(menu);
 }
 
@@ -116,7 +119,40 @@ void MenuLoader::parseCheckBoxes(
         }
     }
 }
+void MenuLoader::parseSliders(
+    MenuTemplate& menu, 
+    tinyxml2::XMLElement* menuXml, 
+    std::unordered_map<std::string, SliderStyle>& sliderStyles,
+    ResourceManager& resourceManager)
+{
+    if(auto styles = menuXml->FirstChildElement("elements"))
+    {
+        for(auto sliderXml = styles->FirstChildElement("slider");
+            sliderXml != nullptr; sliderXml = sliderXml->NextSiblingElement("slider"))
+        {
+            SliderInfo slider;
+            auto style = sliderStyles.find(sliderXml->Attribute("style"));
+            if(style == end(sliderStyles))
+                throw std::runtime_error(utility::replace(utility::translateKey("UnknownSliderStyle"), sliderXml->Attribute("style")));
+            slider.style = style->second;
+            slider.position = sf::Vector2f(sliderXml->FloatAttribute("x"), sliderXml->FloatAttribute("y"));
+            slider.id = sliderXml->IntAttribute("id");
+            slider.textResourceKey = sliderXml->Attribute("text");
 
+            slider.style.selected.label = LineLabel(
+                utility::translateKey(slider.textResourceKey), 
+                slider.position, 0, slider.style.selected.font, LineLabel::Left);
+            slider.style.selected.label.setOffset(slider.style.selected.textOffset);
+
+            slider.style.unselected.label = LineLabel(
+                utility::translateKey(slider.textResourceKey), 
+                slider.position, 0, slider.style.unselected.font, LineLabel::Left);
+            slider.style.unselected.label.setOffset(slider.style.unselected.textOffset);
+
+            menu.slider.push_back(slider);
+        }
+    }
+}
 std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, ButtonStyle> buttonStyles;
@@ -202,5 +238,51 @@ CheckBoxStateStyle MenuLoader::loadCheckBoxStateStyle(tinyxml2::XMLElement* xml,
     style.sprite.setTextureRect(sf::IntRect(
             xml->IntAttribute("srcx"), xml->IntAttribute("srcy"),
             xml->IntAttribute("width"), xml->IntAttribute("height")));
+    return style;
+}
+
+std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+{
+    std::unordered_map<std::string, SliderStyle> sliderStyles;
+    if(auto styles = menuXml->FirstChildElement("styles"))
+    {
+        for(auto styleXml = styles->FirstChildElement("sliderStyle");
+            styleXml != nullptr; styleXml = styleXml->NextSiblingElement("sliderStyle"))
+        {
+            SliderStyle style;
+            
+            style.unselected = loadSliderStateStyle(styleXml->FirstChildElement("unselected"), resourceManager);
+            style.selected = loadSliderStateStyle(styleXml->FirstChildElement("selected"), resourceManager);
+            
+            if(auto rect = styleXml->FirstChildElement("mouseRect"))
+                style.mouseRect = sf::IntRect(
+                    rect->IntAttribute("left"), rect->IntAttribute("top"),
+                    rect->IntAttribute("width"), rect->IntAttribute("height"));
+            if(auto value = styleXml->FirstChildElement("value"))
+            {
+                style.min = value->FloatAttribute("min");
+                style.max = value->FloatAttribute("max");
+            }
+            sliderStyles[styleXml->Attribute("name")] = style;
+        }
+    }
+    return sliderStyles;
+}
+
+SliderStateStyle MenuLoader::loadSliderStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
+{
+    SliderStateStyle style;
+    style.font = resourceManager.getBitmapFont(xml->Attribute("font"));
+    style.textOffset = sf::Vector2f(xml->FloatAttribute("fontoffsetx"), xml->FloatAttribute("fontoffsety"));
+    style.spriteOffset = sf::Vector2f(xml->FloatAttribute("backroundoffsetx"), xml->FloatAttribute("backroundoffsety"));
+    style.spriteBackround = sf::Sprite(*resourceManager.getTexture(xml->Attribute("backroundtexture")));
+    style.spriteBackround.setTextureRect(sf::IntRect(
+            xml->IntAttribute("backroundsrcx"), xml->IntAttribute("backroundsrcy"),
+            xml->IntAttribute("backroundwidth"), xml->IntAttribute("backroundheight")));
+
+    style.spriteSlider = sf::Sprite(*resourceManager.getTexture(xml->Attribute("slidertexture")));
+    style.spriteSlider.setTextureRect(sf::IntRect(
+            xml->IntAttribute("slidersrcx"), xml->IntAttribute("slidersrcy"),
+            xml->IntAttribute("sliderwidth"), xml->IntAttribute("sliderheight")));
     return style;
 }

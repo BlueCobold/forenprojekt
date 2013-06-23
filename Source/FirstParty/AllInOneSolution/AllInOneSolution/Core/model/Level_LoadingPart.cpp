@@ -322,6 +322,7 @@ std::unique_ptr<Entity> Level::createEntity(
             }
             else if(std::string(xml->Attribute("type")) == "target")
             {
+                // TODO: remove when having fixed the xml
                 entity = std::unique_ptr<Entity>(new Entity(Entity::Target, true, autoStop));
                 //entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable, autoStop));
                 m_totalTarget++;

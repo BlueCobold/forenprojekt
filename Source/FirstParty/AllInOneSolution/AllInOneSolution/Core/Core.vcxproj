@@ -114,6 +114,7 @@
     <ClCompile Include="gui\PauseMenu.cpp" />
     <ClCompile Include="gui\ReplayMenu.cpp" />
     <ClCompile Include="gui\FailMenu.cpp" />
+    <ClCompile Include="gui\Slider.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="gui\Menu.cpp" />
     <ClCompile Include="model\Background.cpp" />
@@ -227,6 +228,8 @@
     <ClInclude Include="gui\PauseMenu.hpp" />
     <ClInclude Include="gui\ReplayMenu.hpp" />
     <ClInclude Include="gui\FailMenu.hpp" />
+    <ClInclude Include="gui\Slider.hpp" />
+    <ClInclude Include="gui\SliderStyle.hpp" />
     <ClInclude Include="Input.hpp" />
     <ClInclude Include="gui\Menu.hpp" />
     <ClInclude Include="model\AnimatedGraphics.hpp" />
