@@ -6,6 +6,7 @@
 #include "ButtonStyle.hpp"
 #include "ButtonSound.hpp"
 #include "CheckBoxStyle.hpp"
+#include "SliderStyle.hpp"
 
 #include <tinyxml2.h>
 
@@ -29,10 +30,19 @@ struct CheckBoxInfo
     int id;
 };
 
+struct SliderInfo
+{
+    SliderStyle style;
+    sf::Vector2f position;
+    std::string textResourceKey;
+    int id;
+};
+
 struct MenuTemplate
 {
     std::vector<ButtonInfo> buttons;
     std::vector<CheckBoxInfo> checkboxes;
+    std::vector<SliderInfo> slider;
     std::string captionResourceKey;
     BitmapFont* captionFont;
     sf::Vector2f captionOffset;

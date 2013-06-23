@@ -1,5 +1,6 @@
 #include "OptionMenu.hpp"
 #include "../resources/Config.hpp"
+#include <SFML/Audio/Listener.hpp>
 
 OptionMenu::OptionMenu(const sf::Vector2f& position,
                        sf::RenderWindow& screen,
@@ -11,16 +12,22 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
 {
     m_fullScreen = m_config.get<bool>("IsFullScreen");
 
+    m_masterVolume = m_config.get<float>("MasterVolume");
+    sf::Listener::setGlobalVolume(m_masterVolume);
+
     for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
         if(it->get()->getId() == CHECKBOX_FULLSCREEN)
             it->get()->setChecked(m_fullScreen);
+
+    for(auto it = begin(m_slider); it != end(m_slider); ++it)
+        if(it->get()->getId() == SLIDER_MASTERVOLUMEN)
+            it->get()->setValue(static_cast<float>(m_masterVolume));
 }
 
 void OptionMenu::applyChanges()
 {
     for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
     {
-        
         if(it->get()->getId() == CHECKBOX_FULLSCREEN && (it->get()->getChecked() != m_fullScreen))
         {
             sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
@@ -32,6 +39,14 @@ void OptionMenu::applyChanges()
                 m_screen.create(sf::VideoMode(videoMode), utility::translateKey("gui_rickety_racquet"));
 
             m_fullScreen = it->get()->getChecked();
+        }
+    }
+    for(auto it = begin(m_slider); it != end(m_slider); ++it)
+    {
+        if(it->get()->getId() == SLIDER_MASTERVOLUMEN && (it->get()->getValue() != m_masterVolume))
+        {
+            m_masterVolume = it->get()->getValue();
+            sf::Listener::setGlobalVolume(m_masterVolume);
         }
     }
 }

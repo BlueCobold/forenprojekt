@@ -47,6 +47,7 @@ StateUnknow = The state with id % does not exist.
 NoSoundName = A sound without name has been specified.
 InvalidColorFormat = Color-values must be in the format RRGGBBAA.
 UnknownCheckBoxStyle = CheckBoxStyle isn't registered: %.
+UnknownSliderStyle = SliderStyle isn't registered: %.
 
 [GUI]
 gui_game_paused = Game Paused
@@ -63,6 +64,7 @@ gui_credit = Credits
 gui_close = Close
 gui_optin_menu = Option Menu
 gui_label_fullscreen = fullscreen
+gui_label_mastervolumen = mastervolumen
 
 [Levels]
 levelBlocked1 = blocked

@@ -7,6 +7,7 @@
 #include "Button.hpp"
 #include "MenuTemplate.hpp"
 #include "CheckBox.hpp"
+#include "Slider.hpp"
 #include "../resources/Config.hpp"
 
 #include <SFML/System/Vector2.hpp>
@@ -28,9 +29,11 @@ protected:
 
     sf::RenderWindow& m_screen;
     std::vector<std::unique_ptr<CheckBox>> m_checkBoxes;
+    std::vector<std::unique_ptr<Slider>> m_slider;
 
     void createButton(const ButtonInfo& info);
     void createCheckBox(const CheckBoxInfo& info);
+    void createSlider(const SliderInfo& info);
     MenuTemplate& getTemplate();
 
 private:

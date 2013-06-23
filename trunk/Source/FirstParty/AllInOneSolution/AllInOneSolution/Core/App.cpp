@@ -32,9 +32,6 @@ App::App(Config& config) :
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
 
-    // Set the Volume for sf::Sound and sf::Music
-    sf::Listener::setGlobalVolume(m_config.get<float>("MasterVolume"));
-
     sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
 
     adjustVideoMode(videoMode);

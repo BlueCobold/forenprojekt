@@ -229,6 +229,9 @@
     <ClCompile Include="gui\CheckBox.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="gui\Slider.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -631,6 +634,12 @@
       <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\CheckboxStyle.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Slider.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\SliderStyle.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>

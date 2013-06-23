@@ -20,6 +20,9 @@ Menu::Menu(const MenuTemplate& menuTemplate,
 
     for(auto checkbox = begin(m_template.checkboxes); checkbox != end(m_template.checkboxes); ++checkbox)
         createCheckBox(*checkbox);
+
+    for(auto slider = begin(m_template.slider); slider != end(m_template.slider); ++slider)
+        createSlider(*slider);
 }
 
 Menu::~Menu()
@@ -46,6 +49,9 @@ void Menu::setPosition(const sf::Vector2f& position)
 
     for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
         (*it)->setPosition(m_position);
+
+    for(auto it = begin(m_slider); it != end(m_slider); ++it)
+        (*it)->setPosition(m_position);
 }
 
 const sf::Vector2f& Menu::getPosition() const
@@ -61,6 +67,9 @@ void Menu::draw(const DrawParameter& params)
 
     for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
         (*it)->draw(params);
+
+    for(auto it = begin(m_slider); it != end(m_slider); ++it)
+        (*it)->draw(params);
 }
 
 void Menu::update(const sf::RenderWindow& screen)
@@ -69,6 +78,9 @@ void Menu::update(const sf::RenderWindow& screen)
         (*it)->update(screen);
 
     for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
+        (*it)->update(screen);
+
+    for(auto it = begin(m_slider); it != end(m_slider); ++it)
         (*it)->update(screen);
 }
 
@@ -90,6 +102,13 @@ void Menu::createCheckBox(const CheckBoxInfo& info)
     std::unique_ptr<CheckBox> checkbox(new CheckBox(info.id, info.style, m_position, info.position));
 
     m_checkBoxes.push_back(std::move(checkbox));
+}
+
+void Menu::createSlider(const SliderInfo& info)
+{
+    std::unique_ptr<Slider> slider(new Slider(info.id, info.style, m_position, info.position));
+
+    m_slider.push_back(std::move(slider));
 }
 
 void Menu::registerOnClick(std::function<void(const Button& sender)> callback)

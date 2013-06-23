@@ -5,9 +5,7 @@
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <functional>
-#include "LineLabel.hpp"
-#include "../resources/ResourceManager.hpp"
+#include "CheckboxStyle.hpp"
 
 class CheckBox
 {
