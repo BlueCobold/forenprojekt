@@ -291,8 +291,8 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
             killTarget(entityB);
         else if(entityB->getType() == Entity::Teeter)
             m_multiHit = 0;
-        else if(entityA->getType() == Entity::BonusTarget)
-            killBonusTarget(entityA);
+        else if(entityB->getType() == Entity::BonusTarget)
+            killBonusTarget(entityB);
 
         return entityB->doesCollideWithBall();
     }
