@@ -39,6 +39,7 @@ void OptionMenu::applyChanges()
                 m_screen.create(sf::VideoMode(videoMode), utility::translateKey("gui_rickety_racquet"));
 
             m_fullScreen = it->get()->getChecked();
+            m_config.set("IsFullScreen", m_fullScreen);
         }
     }
     for(auto it = begin(m_slider); it != end(m_slider); ++it)
@@ -47,8 +48,10 @@ void OptionMenu::applyChanges()
         {
             m_masterVolume = it->get()->getValue();
             sf::Listener::setGlobalVolume(m_masterVolume);
+            m_config.set("MasterVolume", m_masterVolume);
         }
     }
+    m_config.save();
 }
 
 void OptionMenu::adjustVideoMode(sf::VideoMode& mode, bool fullScreen)

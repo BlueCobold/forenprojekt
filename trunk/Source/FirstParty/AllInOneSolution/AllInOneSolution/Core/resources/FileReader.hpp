@@ -17,9 +17,16 @@ public:
 
     virtual ~FileReader() {};
 
+    std::string getFileName();
     virtual std::string get(const std::string& key);
+    std::unordered_map<std::string, std::string>::const_iterator beginIterator();
+    std::unordered_map<std::string, std::string>::const_iterator endIterator();
 
     void reload(const std::string& fileName);
+
+protected:
+
+    void set(const std::string& key, const std::string& value);
 
 private:
 
