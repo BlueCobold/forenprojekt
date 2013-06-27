@@ -23,12 +23,23 @@ public:
 
     template<typename T>
     T get(const std::string& data);
+
+    template<typename T>
+    void set(const std::string& key, const T& value);
+
+    void save();
 };
 
 template<typename T>
 T Config::get(const std::string& key)
 {
     return utility::stringTo<T>(FileReader::get(key));
+}
+
+template<typename T>
+void Config::set(const std::string& key, const T& value)
+{
+    FileReader::set(key, utility::toString(value));
 }
 
 #endif // CONFIG_HPP

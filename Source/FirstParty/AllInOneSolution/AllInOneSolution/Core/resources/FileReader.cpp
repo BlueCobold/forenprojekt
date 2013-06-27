@@ -29,6 +29,11 @@ void FileReader::reload(const std::string& fileName)
     readFile();
 }
 
+void FileReader::set(const std::string& key, const std::string& value)
+{
+    m_content[key] = value;
+}
+
 void FileReader::readFile()
 {
     // Open file
@@ -77,4 +82,19 @@ std::string FileReader::get(const std::string& key)
         output = it->second;
 
     return output;
+}
+
+std::string FileReader::getFileName()
+{
+    return m_fileName;
+}
+
+std::unordered_map<std::string, std::string>::const_iterator FileReader::beginIterator()
+{
+    return m_content.cbegin();
+}
+
+std::unordered_map<std::string, std::string>::const_iterator FileReader::endIterator()
+{
+    return m_content.cend();
 }
