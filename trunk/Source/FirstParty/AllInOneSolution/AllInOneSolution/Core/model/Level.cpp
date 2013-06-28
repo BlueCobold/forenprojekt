@@ -201,6 +201,8 @@ void Level::cleanupKilledEntities()
     {
         if((*it)->killed())
         {
+            if((*it)->getType() == Entity::Target)
+                int c = 0;
             (*it)->unbindBody();
             if((*it)->isRespawnable())
                 m_unspawnedEntities.push_back(std::move(*it));

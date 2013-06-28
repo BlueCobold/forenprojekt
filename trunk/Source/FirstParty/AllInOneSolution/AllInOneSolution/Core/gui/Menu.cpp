@@ -23,6 +23,9 @@ Menu::Menu(const MenuTemplate& menuTemplate,
 
     for(auto slider = begin(m_template.slider); slider != end(m_template.slider); ++slider)
         createSlider(*slider);
+
+    for(auto label = begin(m_template.labels); label != end(m_template.labels); ++label)
+        createLabel(*label);
 }
 
 Menu::~Menu()
@@ -52,6 +55,9 @@ void Menu::setPosition(const sf::Vector2f& position)
 
     for(auto it = begin(m_slider); it != end(m_slider); ++it)
         (*it)->setPosition(m_position);
+
+    for(auto it = begin(m_labels); it != end(m_labels); ++it)
+        (*it)->setPosition(m_position);
 }
 
 const sf::Vector2f& Menu::getPosition() const
@@ -69,6 +75,9 @@ void Menu::draw(const DrawParameter& params)
         (*it)->draw(params);
 
     for(auto it = begin(m_slider); it != end(m_slider); ++it)
+        (*it)->draw(params);
+
+    for(auto it = begin(m_labels); it != end(m_labels); ++it)
         (*it)->draw(params);
 }
 
@@ -111,6 +120,12 @@ void Menu::createSlider(const SliderInfo& info)
     m_slider.push_back(std::move(slider));
 }
 
+void Menu::createLabel(const LineLabel& info)
+{
+    std::unique_ptr<LineLabel> label(new LineLabel(info));
+
+    m_labels.push_back(std::move(label));
+}
 void Menu::registerOnClick(std::function<void(const Button& sender)> callback)
 {
     m_clickCallback = callback;

@@ -34,12 +34,14 @@ protected:
     void createButton(const ButtonInfo& info);
     void createCheckBox(const CheckBoxInfo& info);
     void createSlider(const SliderInfo& info);
+    void createLabel(const LineLabel& info);
     MenuTemplate& getTemplate();
 
 private:
 
     MenuTemplate m_template;
     std::vector<std::unique_ptr<Button>> m_buttons;
+    std::vector<std::unique_ptr<LineLabel>> m_labels;
     sf::Vector2i m_size;
     sf::Vector2f m_position;
     std::function<void(const Button& sender)> m_clickCallback;

@@ -39,6 +39,7 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     parseButtons(menu, menuXml, buttonStyles, buttonSounds, resourceManager);
     parseCheckBoxes(menu, menuXml, checkboxStyles, resourceManager);
     parseSliders(menu, menuXml, sliderStyles, resourceManager);
+    parseLabels(menu, menuXml, resourceManager);
     return new MenuTemplate(menu);
 }
 
@@ -150,6 +151,23 @@ void MenuLoader::parseSliders(
             slider.style.unselected.label.setOffset(slider.style.unselected.textOffset);
 
             menu.slider.push_back(slider);
+        }
+    }
+}
+
+void MenuLoader::parseLabels(MenuTemplate& menu, tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+{
+    if(auto styles = menuXml->FirstChildElement("elements"))
+    {
+        for(auto labelXml = styles->FirstChildElement("label");
+            labelXml != nullptr; labelXml = labelXml->NextSiblingElement("label"))
+        {
+            LineLabel label;
+            label.setBitmapFont(resourceManager.getBitmapFont(labelXml->Attribute("font")));
+            label.setText(utility::translateKey(labelXml->Attribute("text")));
+            label.setAlignment(static_cast<LineLabel::Alignment>(labelXml->IntAttribute("aligment")));
+            label.setOffset(sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")));
+            menu.labels.push_back(label);
         }
     }
 }
