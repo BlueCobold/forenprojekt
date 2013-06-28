@@ -232,6 +232,12 @@
     <ClCompile Include="gui\Slider.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="State\CreditMenuState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CreditMenu.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -640,6 +646,12 @@
       <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\SliderStyle.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="State\CreditMenuState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CreditMenu.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>

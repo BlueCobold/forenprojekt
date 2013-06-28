@@ -7,6 +7,7 @@
 #include "ButtonSound.hpp"
 #include "CheckBoxStyle.hpp"
 #include "SliderStyle.hpp"
+#include "LineLabel.hpp"
 
 #include <tinyxml2.h>
 
@@ -43,6 +44,7 @@ struct MenuTemplate
     std::vector<ButtonInfo> buttons;
     std::vector<CheckBoxInfo> checkboxes;
     std::vector<SliderInfo> slider;
+    std::vector<LineLabel> labels;
     std::string captionResourceKey;
     BitmapFont* captionFont;
     sf::Vector2f captionOffset;

@@ -50,6 +50,7 @@
 	<menu name="failMenu" path="failMenu.xml" />
 	<menu name="MainMenu" path="MainMenu.xml" />
 	<menu name="OptionMenu" path="OptionMenu.xml" />
+	<menu name="CreditMenu" path="CreditMenu.xml" />
 </menus>
 <bitmapfonts>
 	<bitmapfont name="gold" path="bitmapfontGold.xml" />

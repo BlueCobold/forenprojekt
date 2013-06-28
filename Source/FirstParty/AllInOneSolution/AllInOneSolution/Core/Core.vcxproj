@@ -96,6 +96,7 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="gui\CaptionMenu.cpp" />
     <ClCompile Include="gui\CheckBox.cpp" />
+    <ClCompile Include="gui\CreditMenu.cpp" />
     <ClCompile Include="gui\hud\ArrowHUD.cpp" />
     <ClCompile Include="gui\hud\BallHUD.cpp" />
     <ClCompile Include="gui\BitmapFont.cpp" />
@@ -156,6 +157,7 @@
     <ClCompile Include="resources\MenuLoader.cpp" />
     <ClCompile Include="resources\ResourceManager.cpp" />
     <ClCompile Include="ScrollView.cpp" />
+    <ClCompile Include="State\CreditMenuState.cpp" />
     <ClCompile Include="State\LevelFailState.cpp" />
     <ClCompile Include="State\LevelPassState.cpp" />
     <ClCompile Include="State\LoadLevelState.cpp" />
@@ -209,6 +211,7 @@
     <ClInclude Include="gui\CaptionMenu.hpp" />
     <ClInclude Include="gui\CheckBox.hpp" />
     <ClInclude Include="gui\CheckboxStyle.hpp" />
+    <ClInclude Include="gui\CreditMenu.hpp" />
     <ClInclude Include="gui\hud\ArrowHUD.hpp" />
     <ClInclude Include="gui\hud\BallHUD.hpp" />
     <ClInclude Include="gui\BitmapFont.hpp" />
@@ -291,6 +294,7 @@
     <ClInclude Include="resources\ResourceCache.hpp" />
     <ClInclude Include="resources\ResourceManager.hpp" />
     <ClInclude Include="ScrollView.hpp" />
+    <ClInclude Include="State\CreditMenuState.hpp" />
     <ClInclude Include="State\EnterStateInformation.hpp" />
     <ClInclude Include="State\LevelFailState.hpp" />
     <ClInclude Include="State\LevelPassState.hpp" />

@@ -679,10 +679,11 @@ void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn)
 {
     for(auto it = std::begin(m_unspawnedEntities); it != std::end(m_unspawnedEntities); ++it)
     {
+        
         if(it->get() == spawn)
         {
-            if(it->get()->getType() == Entity::Target)
-                int c = 1;
+            if((*it)->getType() == Entity::Target)
+                int c = 0;
             auto e = std::move(*it);
             m_unspawnedEntities.erase(it);
             e->setPosition(position);
