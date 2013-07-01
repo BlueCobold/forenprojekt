@@ -40,6 +40,7 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     parseCheckBoxes(menu, menuXml, checkboxStyles, resourceManager);
     parseSliders(menu, menuXml, sliderStyles, resourceManager);
     parseLabels(menu, menuXml, resourceManager);
+    parseImages(menu, menuXml, resourceManager);
     return new MenuTemplate(menu);
 }
 
@@ -168,6 +169,25 @@ void MenuLoader::parseLabels(MenuTemplate& menu, tinyxml2::XMLElement* menuXml, 
             label.setAlignment(static_cast<LineLabel::Alignment>(labelXml->IntAttribute("aligment")));
             label.setOffset(sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")));
             menu.labels.push_back(label);
+        }
+    }
+}
+
+void MenuLoader::parseImages(MenuTemplate& menu, tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+{
+    if(auto styles = menuXml->FirstChildElement("elements"))
+    {
+        for(auto imageXml = styles->FirstChildElement("image");
+            imageXml != nullptr; imageXml = imageXml->NextSiblingElement("image"))
+        {
+            MenuSprite sprite;
+            sprite.setTexture(*resourceManager.getTexture(imageXml->Attribute("texture")));
+            sprite.setTextureRect(sf::IntRect(imageXml->IntAttribute("scrx"),
+                                              imageXml->IntAttribute("scry"),
+                                              imageXml->IntAttribute("width"),
+                                              imageXml->IntAttribute("height")));
+            sprite.setOffset(sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")));
+            menu.sprites.push_back(sprite);
         }
     }
 }

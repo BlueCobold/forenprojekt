@@ -26,6 +26,9 @@ Menu::Menu(const MenuTemplate& menuTemplate,
 
     for(auto label = begin(m_template.labels); label != end(m_template.labels); ++label)
         createLabel(*label);
+
+    for(auto sprite = begin(m_template.sprites); sprite != end(m_template.sprites); ++sprite)
+        createSprite(*sprite);
 }
 
 Menu::~Menu()
@@ -58,6 +61,9 @@ void Menu::setPosition(const sf::Vector2f& position)
 
     for(auto it = begin(m_labels); it != end(m_labels); ++it)
         (*it)->setPosition(m_position);
+
+    for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
+        (*it)->setPosition(m_position);
 }
 
 const sf::Vector2f& Menu::getPosition() const
@@ -78,6 +84,9 @@ void Menu::draw(const DrawParameter& params)
         (*it)->draw(params);
 
     for(auto it = begin(m_labels); it != end(m_labels); ++it)
+        (*it)->draw(params);
+
+    for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
         (*it)->draw(params);
 }
 
@@ -125,6 +134,13 @@ void Menu::createLabel(const LineLabel& info)
     std::unique_ptr<LineLabel> label(new LineLabel(info));
 
     m_labels.push_back(std::move(label));
+}
+
+void Menu::createSprite(const MenuSprite& info)
+{
+    std::unique_ptr<MenuSprite> sprite(new MenuSprite(info));
+
+    m_sprites.push_back(std::move(sprite));
 }
 void Menu::registerOnClick(std::function<void(const Button& sender)> callback)
 {
