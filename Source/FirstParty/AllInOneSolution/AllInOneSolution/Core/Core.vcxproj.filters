@@ -238,6 +238,9 @@
     <ClCompile Include="gui\CreditMenu.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="gui\MenuSprite.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -652,6 +655,9 @@
       <Filter>Headers\State</Filter>
     </ClInclude>
     <ClInclude Include="gui\CreditMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MenuSprite.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>

@@ -49,6 +49,11 @@ private:
         tinyxml2::XMLElement* menuXml, 
         ResourceManager& resourceManager);
 
+    static void parseImages(
+        MenuTemplate& menu, 
+        tinyxml2::XMLElement* menuXml, 
+        ResourceManager& resourceManager);
+
     static std::unordered_map<std::string, ButtonStyle> parseButtonStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
     static std::unordered_map<std::string, ButtonSound> parseSounds(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
     static std::unordered_map<std::string, CheckBoxStyle> parseCheckBoxStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
