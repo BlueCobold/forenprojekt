@@ -1,5 +1,6 @@
 #include "LevelPassState.hpp"
 #include "../Input.hpp"
+#include "../model/Level.hpp"
 #include "../resources/Config.hpp"
 #include "../resources/ResourceManager.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"

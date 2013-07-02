@@ -2,7 +2,7 @@
 #include "../resources/Config.hpp"
 #include "../resources/ResourceManager.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
-
+#include <SFML/Graphics/RenderWindow.hpp>
 
 StartState::StartState(sf::RenderWindow& screen, 
                        ResourceManager& resourceManager, 

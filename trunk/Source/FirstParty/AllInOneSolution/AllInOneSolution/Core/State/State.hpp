@@ -28,6 +28,7 @@ enum StateId
 
 #include "StateChangeInformation.hpp"
 #include "../Utility.hpp"
+#include "../rendering/Drawable.hpp"
 
 /// This class will be used to discribe a State
 /// and to be managed by the StateManager

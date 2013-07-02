@@ -57,6 +57,7 @@ StateChangeInformation PlayState::update(const float time)
             m_level = new Level(2, m_resourceManager, m_config);
             m_level->restartAt(getCurrentTime());
         }
+
         if(utility::Keyboard.isKeyDown(sf::Keyboard::T))
         {
             m_level->setTimeAttackMode(true);

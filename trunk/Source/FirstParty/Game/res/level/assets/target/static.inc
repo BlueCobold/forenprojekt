@@ -62,7 +62,7 @@
 		</physics>
 
 		<entities>
-			<entity name="target_particles" rep="--" collideWithBall="false">
+			<entity respawnable="true" stopWithLastAnimation="true" name="target_particles" rep="--" collideWithBall="false">
 				<animations>
 					<animation copies="20" texture="sparkles" blending="add" width="32" height="32" midx="16" midy="16" rotate="true">
 						<constants time="0" size="1" />
@@ -199,7 +199,7 @@
 				</animations>
 			</entity>
 
-			<entity name="target_2" rep="--" collideWithBall="false">
+			<entity respawnable="true" stopWithLastAnimation="true" name="target_2" rep="--" collideWithBall="false">
 				<animations>
 					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true">
 						<scale axis="x">
@@ -212,7 +212,7 @@
 				</animations>
 			</entity>
 
-			<entity name="target_1" rep="t1" type="target" collideWithBall="false">
+			<entity name="target_1" respawnable="true" rep="t1" type="target" collideWithBall="false">
 				<physics name="target">
 					<shape type="circle" radius="30" />
 				</physics>
@@ -228,7 +228,7 @@
 				</animations>
 			</entity>
 
-			<entity name="bonustarget_1" rep="bt" type="bonustarget" collideWithBall="false">
+			<entity name="bonustarget_1" respawnable="true" rep="bt" type="bonustarget" collideWithBall="false">
 				<physics name="target">
 					<shape type="circle" radius="30" />
 				</physics>
