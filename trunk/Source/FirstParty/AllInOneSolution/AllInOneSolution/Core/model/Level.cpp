@@ -202,8 +202,6 @@ void Level::cleanupKilledEntities()
         auto entity = it->get();
         if(entity->killed())
         {
-            if(entity->getType() == Entity::Target)
-                int c = 0;
             entity->unbindBody();
             if(entity->isRespawnable())
             {
