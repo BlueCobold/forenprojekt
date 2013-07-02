@@ -103,7 +103,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     }
 
     if(m_timeAttackMode)
-        updateTimeAttackeMode(elapsedTime);
+        handleAutoRespawn();
 
     if(utility::Keyboard.isKeyDown(sf::Keyboard::D))
         m_debugDraw = !m_debugDraw;
@@ -199,13 +199,19 @@ void Level::cleanupKilledEntities()
     auto it = begin(m_entities);
     while(it != end(m_entities))
     {
-        if((*it)->killed())
+        auto entity = it->get();
+        if(entity->killed())
         {
-            if((*it)->getType() == Entity::Target)
+            if(entity->getType() == Entity::Target)
                 int c = 0;
-            (*it)->unbindBody();
-            if((*it)->isRespawnable())
-                m_unspawnedEntities.push_back(std::move(*it));
+            entity->unbindBody();
+            if(entity->isRespawnable())
+            {
+                if(entity->getType() == Entity::Target || entity->getType() == Entity::BonusTarget)
+                    m_unspawnedEntities.push_back(EntitySpawn(std::move(*it), getCurrentTime() + 5.f));
+                else
+                    m_unspawnedEntities.push_back(EntitySpawn(std::move(*it)));
+            }
             it = m_entities.erase(it);
         }
         else
@@ -304,23 +310,11 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
 
 void Level::killTarget(Entity* target)
 {
-    if(target->isRespawnable() && m_timeAttackMode)
-    {
-        for(auto it = m_unspawnedTarget.begin(); it != m_unspawnedTarget.end(); ++it)
-            if(it->target == target)
-                return;
+    target->kill();
+    m_remainingTarget--;
 
-        TargetToRespawn targetToRespawn(target, Level::TimedObject::getCurrentTime() + 5.f);
-        m_remainingTarget--;
-        m_unspawnedTarget.push_back(targetToRespawn);
-    }
-    else
-    {
-        target->kill();
-        m_remainingTarget--;
-        if(m_remainingTarget < 1)
-            m_levelPass = true;
-    }
+    if(!m_timeAttackMode && m_remainingTarget < 1)
+        m_levelPass = true;
 
     int earned = 100 + m_multiHit * 50;
     m_points += earned;
@@ -477,6 +471,7 @@ const bool Level::isLevelFailed() const
     value |= m_remainingTime < 0 && m_totalTime > -1.f;
     return value;
 }
+
 void Level::setTimeAttackMode(bool timeAttackMode)
 {
     m_timeAttackMode = timeAttackMode;
@@ -488,22 +483,15 @@ void Level::setTimeAttackMode(bool timeAttackMode)
     }
 }
 
-void Level::updateTimeAttackeMode(const float elapsedTime)
+void Level::handleAutoRespawn()
 {
-    auto it = begin(m_unspawnedTarget);
-    while(it != end(m_unspawnedTarget))
+    auto it = begin(m_unspawnedEntities);
+    while(it != end(m_unspawnedEntities))
     {
-        if(!it->target->hidden() && !it->target->frozen())
+        if(it->respawnAt > 0 && it->respawnAt < getCurrentTime())
         {
-            it->target->hide();
-            it->target->freeze();
-        }
-        if(it->respawnAt < elapsedTime)
-        {
-            it->target->unfreeze();
-            it->target->unhide();
-            m_remainingTarget++;
-            it = m_unspawnedTarget.erase(it);
+            m_entitiesToSpawn.push_back(std::move(it->target));
+            it = m_unspawnedEntities.erase(it);
         }
         else
             ++it;

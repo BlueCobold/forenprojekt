@@ -318,13 +318,11 @@ std::unique_ptr<Entity> Level::createEntity(
             {
                 std::unique_ptr<Entity> spawn = parseBallSpawnAnimation(xml, templates);
                 entity = std::unique_ptr<Ball>(new Ball(m_config.get<float>("BallResetTime"), spawn.get()));
-                m_unspawnedEntities.push_back(std::move(spawn));
+                m_unspawnedEntities.push_back(EntitySpawn(std::move(spawn)));
             }
             else if(std::string(xml->Attribute("type")) == "target")
             {
-                // TODO: remove when having fixed the xml
-                entity = std::unique_ptr<Entity>(new Entity(Entity::Target, true, autoStop));
-                //entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable, autoStop));
+                entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable, autoStop));
                 m_totalTarget++;
             }
             else if(std::string(xml->Attribute("type")) == "bonustarget")
@@ -529,7 +527,7 @@ void Level::parseCollider(
                         break;
                 }
             }, entity, spawned.get()));
-            m_unspawnedEntities.push_back(std::move(spawned));
+            m_unspawnedEntities.push_back(EntitySpawn(std::move(spawned)));
             entity->bindCollisionHandler(std::move(handler));
         }
         else
@@ -601,7 +599,7 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
         {
             prepareEntityForSpawn(owner->getPosition(), spawned);
         }, entity, spawned.get(), std::move(subFilter)));
-        m_unspawnedEntities.push_back(std::move(spawned));
+        m_unspawnedEntities.push_back(EntitySpawn(std::move(spawned)));
         return std::move(filter);
     }
     else if(std::string(xml->Name()) == "copySpawnLocation")
@@ -679,15 +677,12 @@ void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn)
 {
     for(auto it = std::begin(m_unspawnedEntities); it != std::end(m_unspawnedEntities); ++it)
     {
-        
-        if(it->get() == spawn)
+        if(it->target.get() == spawn)
         {
-            if((*it)->getType() == Entity::Target)
-                int c = 0;
-            auto e = std::move(*it);
+            it->target->setPosition(position);
+            m_entitiesToSpawn.push_back(std::move(it->target));
             m_unspawnedEntities.erase(it);
-            e->setPosition(position);
-            m_entitiesToSpawn.push_back(std::move(e));
+            //it->target.reset();
             break;
         }
     }

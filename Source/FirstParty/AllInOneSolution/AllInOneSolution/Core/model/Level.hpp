@@ -81,6 +81,29 @@ public:
 
 private:
 
+    struct EntitySpawn
+    {
+    public:
+        EntitySpawn(std::unique_ptr<Entity> target) : respawnAt(-1.f), target(std::move(target))
+        { }
+
+        EntitySpawn(std::unique_ptr<Entity> target, const float time) : respawnAt(time), target(std::move(target))
+        { }
+
+        EntitySpawn(EntitySpawn&& source) : target(std::move(source.target)), respawnAt(source.respawnAt)
+        { }
+
+        EntitySpawn& operator=(EntitySpawn&& source)
+        {
+            target = std::move(source.target);
+            respawnAt = source.respawnAt;
+            return *this;
+        }
+
+        float respawnAt;
+        std::unique_ptr<Entity> target;
+    };
+
     struct Templates
     {
     public:
@@ -105,7 +128,7 @@ private:
     void killBonusTarget(Entity* target);
     void prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn);
 
-    void updateTimeAttackeMode(const float elapsedTime);
+    void handleAutoRespawn();
 
     /// Load the level after m_number
     bool load();
@@ -184,7 +207,7 @@ private:
     Entity* m_updatingEntity;
     std::vector<std::unique_ptr<Entity>> m_entities;
     std::vector<std::unique_ptr<Entity>> m_entitiesToSpawn;
-    std::vector<std::unique_ptr<Entity>> m_unspawnedEntities;
+    std::vector<EntitySpawn> m_unspawnedEntities;
 
     // HACK: This should be in the Entity class, but since unique_ptr sucks with VS10...
     std::vector<std::unique_ptr<b2Shape>> m_shapes;
@@ -253,21 +276,6 @@ private:
     bool m_levelPass;
 
     bool m_timeAttackMode;
-
-    struct TargetToRespawn
-    {
-    public:
-        TargetToRespawn(Entity* target, const float time)
-        {
-            this->respawnAt = time;
-            this->target = target;
-        }
-
-        float respawnAt;
-        Entity* target;
-    };
-
-    std::vector<TargetToRespawn> m_unspawnedTarget;
 };
 
 #endif // LEVEL_HPP
