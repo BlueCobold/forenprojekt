@@ -5,7 +5,8 @@ LineLabel::LineLabel()
     m_position(sf::Vector2f(0,0)),
     m_progressPosition(0, 0),
     m_rotation(0),
-    m_font(nullptr)
+    m_font(nullptr),
+    m_id(-1)
 {
     rebuild();
 }
@@ -14,14 +15,16 @@ LineLabel::LineLabel(const std::string& text,
                     const sf::Vector2f& position,
                     const float rotation,
                     BitmapFont* font,
-                    Alignment alignment)
+                    Alignment alignment,
+                    int id)
     : m_text(text),
     m_position(position),
     m_progressPosition(0, 0),
     m_rotation(rotation),
     m_font(font),
     m_alignment(alignment),
-    m_offset(sf::Vector2f(0,0))
+    m_offset(sf::Vector2f(0,0)),
+    m_id(id)
 {
     rebuild();
 }
@@ -199,4 +202,8 @@ bool LineLabel::allProgressesFinished()
 unsigned int LineLabel::getFontSize()
 {
     return m_font->getFontSize();
+}
+const int LineLabel::getId() const
+{
+    return m_id;
 }

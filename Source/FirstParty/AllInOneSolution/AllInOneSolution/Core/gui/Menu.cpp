@@ -170,3 +170,13 @@ sf::RenderWindow& Menu::getRenderWindow()
 {
     return m_screen;
 }
+
+LineLabel& Menu::getLabel(int id)
+{
+    for(auto it = begin(m_labels); it != end(m_labels); ++it)
+    {
+        if(it->get()->getId() == id)
+            return *it->get();
+    }
+    throw std::runtime_error(utility::replace(utility::translateKey("LineLabelId"), utility::toString(id)));
+}

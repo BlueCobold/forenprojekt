@@ -6,3 +6,8 @@ ReplayMenu::ReplayMenu(const sf::Vector2f& position,
     CaptionMenu(*resourceManager.getMenuTemplate("replayMenu"), position, screen)
 {
 }
+
+void ReplayMenu::setPoints(int points)
+{
+    Menu::getLabel(LABEL_POINTS).setText(utility::toString(points));
+}

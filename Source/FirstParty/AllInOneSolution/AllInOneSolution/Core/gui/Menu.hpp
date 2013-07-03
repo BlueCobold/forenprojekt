@@ -35,6 +35,7 @@ protected:
 
     CheckBox& getCheckboxes(int id);
     Slider& getSlider(int id);
+    LineLabel& getLabel(int id);
     sf::RenderWindow& getRenderWindow();
 
     MenuTemplate& getTemplate();
