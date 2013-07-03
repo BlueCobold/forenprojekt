@@ -15,41 +15,33 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
     m_masterVolume = m_config.get<float>("MasterVolume");
     sf::Listener::setGlobalVolume(m_masterVolume);
 
-    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
-        if(it->get()->getId() == CHECKBOX_FULLSCREEN)
-            it->get()->setChecked(m_fullScreen);
+    Menu::getCheckboxes(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
-    for(auto it = begin(m_slider); it != end(m_slider); ++it)
-        if(it->get()->getId() == SLIDER_MASTERVOLUMEN)
-            it->get()->setValue(static_cast<float>(m_masterVolume));
+    Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
 }
 
 void OptionMenu::applyChanges()
 {
-    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
+
+    if(Menu::getCheckboxes(CHECKBOX_FULLSCREEN).getChecked() != m_fullScreen)
     {
-        if(it->get()->getId() == CHECKBOX_FULLSCREEN && (it->get()->getChecked() != m_fullScreen))
-        {
-            sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
-            adjustVideoMode(videoMode, it->get()->getChecked());
+        sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+        adjustVideoMode(videoMode, !m_fullScreen);
 
-            if(it->get()->getChecked())
-                m_screen.create(videoMode, utility::translateKey("gui_rickety_racquet"), sf::Style::Fullscreen);
-            if(!it->get()->getChecked())
-                m_screen.create(sf::VideoMode(videoMode), utility::translateKey("gui_rickety_racquet"));
+        if(!m_fullScreen)
+            Menu::getRenderWindow().create(videoMode, utility::translateKey("gui_rickety_racquet"), sf::Style::Fullscreen);
+        if(m_fullScreen)
+            Menu::getRenderWindow().create(sf::VideoMode(videoMode), utility::translateKey("gui_rickety_racquet"));
 
-            m_fullScreen = it->get()->getChecked();
-            m_config.set("IsFullScreen", m_fullScreen);
-        }
+        m_fullScreen = !m_fullScreen;
+        m_config.set("IsFullScreen", m_fullScreen);
     }
-    for(auto it = begin(m_slider); it != end(m_slider); ++it)
+
+    if(Menu::getSlider(SLIDER_MASTERVOLUMEN).getValue() != m_masterVolume)
     {
-        if(it->get()->getId() == SLIDER_MASTERVOLUMEN && (it->get()->getValue() != m_masterVolume))
-        {
-            m_masterVolume = it->get()->getValue();
-            sf::Listener::setGlobalVolume(m_masterVolume);
-            m_config.set("MasterVolume", m_masterVolume);
-        }
+        m_masterVolume = Menu::getSlider(SLIDER_MASTERVOLUMEN).getValue();
+        sf::Listener::setGlobalVolume(m_masterVolume);
+        m_config.set("MasterVolume", m_masterVolume);
     }
     m_config.save();
 }

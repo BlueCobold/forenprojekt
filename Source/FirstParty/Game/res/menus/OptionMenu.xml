@@ -26,14 +26,14 @@
 		<sliderStyle name="default">
 			<mouseRect left="7" top="0" width="107" height="31" />
 			<value min="0" max ="100" />
-			<unselected backroundtexture="slider" backroundsrcx="0" backroundsrcy="0" 
+			<idle backroundtexture="slider" backroundsrcx="0" backroundsrcy="0" 
 				backroundwidth="128" backroundheight="18" 
 				backroundoffsetx="0" backroundoffsety="0" 
 				slidertexture="slider" slidersrcx="0" slidersrcy="19" 
 				sliderwidth="7" sliderheight="31" 
 				slideroffsetx="0" slideroffsety="0" 
 				font="buttonHoverFont" fontoffsetx="70" fontoffsety="-5" />
-			<selected backroundtexture="slider" backroundsrcx="0" backroundsrcy="0" 
+			<active backroundtexture="slider" backroundsrcx="0" backroundsrcy="0" 
 				backroundwidth="128" backroundheight="18" 
 				backroundoffsetx="0" backroundoffsety="0" 
 				slidertexture="slider" slidersrcx="8" slidersrcy="19" 

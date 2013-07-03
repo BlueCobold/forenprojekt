@@ -141,15 +141,15 @@ void MenuLoader::parseSliders(
             slider.id = sliderXml->IntAttribute("id");
             slider.textResourceKey = sliderXml->Attribute("text");
 
-            slider.style.selected.label = LineLabel(
+            slider.style.active.label = LineLabel(
                 utility::translateKey(slider.textResourceKey), 
-                slider.position, 0, slider.style.selected.font, LineLabel::Left);
-            slider.style.selected.label.setOffset(slider.style.selected.textOffset);
+                slider.position, 0, slider.style.active.font, LineLabel::Left);
+            slider.style.active.label.setOffset(slider.style.active.textOffset);
 
-            slider.style.unselected.label = LineLabel(
+            slider.style.idle.label = LineLabel(
                 utility::translateKey(slider.textResourceKey), 
-                slider.position, 0, slider.style.unselected.font, LineLabel::Left);
-            slider.style.unselected.label.setOffset(slider.style.unselected.textOffset);
+                slider.position, 0, slider.style.idle.font, LineLabel::Left);
+            slider.style.idle.label.setOffset(slider.style.idle.textOffset);
 
             menu.slider.push_back(slider);
         }
@@ -289,8 +289,8 @@ std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(tinyx
         {
             SliderStyle style;
             
-            style.unselected = loadSliderStateStyle(styleXml->FirstChildElement("unselected"), resourceManager);
-            style.selected = loadSliderStateStyle(styleXml->FirstChildElement("selected"), resourceManager);
+            style.idle = loadSliderStateStyle(styleXml->FirstChildElement("idle"), resourceManager);
+            style.active = loadSliderStateStyle(styleXml->FirstChildElement("active"), resourceManager);
             
             if(auto rect = styleXml->FirstChildElement("mouseRect"))
                 style.mouseRect = sf::IntRect(
