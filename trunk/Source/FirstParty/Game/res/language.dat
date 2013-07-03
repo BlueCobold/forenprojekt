@@ -48,8 +48,9 @@ NoSoundName = A sound without name has been specified.
 InvalidColorFormat = Color-values must be in the format RRGGBBAA.
 UnknownCheckBoxStyle = CheckBoxStyle isn't registered: %.
 UnknownSliderStyle = SliderStyle isn't registered: %.
-SliderId = The slider with id % dont exist.
-CheckboxId = The checkbox with id % dont exist.
+SliderId = The slider with id % don't exist.
+CheckboxId = The checkbox with id % don't exist.
+LineLabelId = The label with id % don't exist.
 
 [GUI]
 gui_game_paused = Game Paused

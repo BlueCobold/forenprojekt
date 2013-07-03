@@ -29,7 +29,8 @@ public:
         const sf::Vector2f& position,
         const float rotation,
         BitmapFont* font,
-        const Alignment alignment = Left);
+        const Alignment alignment = Left,
+        int id = -1);
 
     void setText(const std::string& text);
     std::string getText() const;
@@ -55,6 +56,7 @@ public:
     void draw(const DrawParameter& params);
 
     unsigned int getFontSize();
+    const int getId() const;
 
 private:
 
@@ -68,6 +70,7 @@ private:
     BitmapFont* m_font;
     std::vector<BitmapFont::Glyph> m_glyphs;
     Alignment m_alignment;
+    int m_id;
 
     sf::Vector2f m_progressPosition;
     Interpolation m_xPosChange;

@@ -163,10 +163,13 @@ void MenuLoader::parseLabels(MenuTemplate& menu, tinyxml2::XMLElement* menuXml, 
         for(auto labelXml = styles->FirstChildElement("label");
             labelXml != nullptr; labelXml = labelXml->NextSiblingElement("label"))
         {
-            LineLabel label;
-            label.setBitmapFont(resourceManager.getBitmapFont(labelXml->Attribute("font")));
-            label.setText(utility::translateKey(labelXml->Attribute("text")));
-            label.setAlignment(static_cast<LineLabel::Alignment>(labelXml->IntAttribute("aligment")));
+            LineLabel label(utility::translateKey(labelXml->Attribute("text")),
+                            sf::Vector2f(0, 0),
+                            0,
+                            resourceManager.getBitmapFont(labelXml->Attribute("font")),
+                            static_cast<LineLabel::Alignment>(labelXml->IntAttribute("aligment")),
+                            labelXml->IntAttribute("id"));
+
             label.setOffset(sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")));
             menu.labels.push_back(label);
         }
