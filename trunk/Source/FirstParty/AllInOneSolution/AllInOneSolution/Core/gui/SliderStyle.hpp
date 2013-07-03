@@ -21,8 +21,8 @@ struct SliderStateStyle
 
 struct SliderStyle
 {
-    SliderStateStyle unselected;
-    SliderStateStyle selected;
+    SliderStateStyle idle;
+    SliderStateStyle active;
     sf::IntRect mouseRect;
     float min;
     float max;

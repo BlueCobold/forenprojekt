@@ -146,3 +146,27 @@ void Menu::registerOnClick(std::function<void(const Button& sender)> callback)
 {
     m_clickCallback = callback;
 }
+
+CheckBox& Menu::getCheckboxes(int id)
+{
+    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
+    {
+        if(it->get()->getId() == id)
+            return *it->get();
+    }
+    throw std::runtime_error(utility::replace(utility::translateKey("sliderID"), utility::toString(id)));
+}
+
+Slider& Menu::getSlider(int id)
+{
+    for(auto it = begin(m_slider); it != end(m_slider); ++it)
+    {
+        if(it->get()->getId() == id)
+            return *it->get();
+    }
+    throw std::runtime_error(utility::replace(utility::translateKey("CheckboxId"), utility::toString(id)));
+}
+sf::RenderWindow& Menu::getRenderWindow()
+{
+    return m_screen;
+}

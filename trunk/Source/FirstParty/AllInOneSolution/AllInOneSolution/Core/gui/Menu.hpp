@@ -20,22 +20,23 @@ class ResourceManager;
 namespace sf
 {
     class RenderWindow;
-}
+};
 
 /// Base-class for menus
 class Menu : public Drawable
 {
 protected:
 
-    sf::RenderWindow& m_screen;
-    std::vector<std::unique_ptr<CheckBox>> m_checkBoxes;
-    std::vector<std::unique_ptr<Slider>> m_slider;
-
     void createButton(const ButtonInfo& info);
     void createCheckBox(const CheckBoxInfo& info);
     void createSlider(const SliderInfo& info);
     void createLabel(const LineLabel& info);
     void createSprite(const MenuSprite& info);
+
+    CheckBox& getCheckboxes(int id);
+    Slider& getSlider(int id);
+    sf::RenderWindow& getRenderWindow();
+
     MenuTemplate& getTemplate();
 
 private:
@@ -44,8 +45,11 @@ private:
     std::vector<std::unique_ptr<Button>> m_buttons;
     std::vector<std::unique_ptr<LineLabel>> m_labels;
     std::vector<std::unique_ptr<MenuSprite>> m_sprites;
+    std::vector<std::unique_ptr<CheckBox>> m_checkBoxes;
+    std::vector<std::unique_ptr<Slider>> m_slider;
     sf::Vector2i m_size;
     sf::Vector2f m_position;
+    sf::RenderWindow& m_screen;
     std::function<void(const Button& sender)> m_clickCallback;
 
 public:

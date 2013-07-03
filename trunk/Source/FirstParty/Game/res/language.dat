@@ -48,6 +48,8 @@ NoSoundName = A sound without name has been specified.
 InvalidColorFormat = Color-values must be in the format RRGGBBAA.
 UnknownCheckBoxStyle = CheckBoxStyle isn't registered: %.
 UnknownSliderStyle = SliderStyle isn't registered: %.
+SliderId = The slider with id % dont exist.
+CheckboxId = The checkbox with id % dont exist.
 
 [GUI]
 gui_game_paused = Game Paused
@@ -66,6 +68,7 @@ gui_optin_menu = Option Menu
 gui_label_fullscreen = fullscreen
 gui_label_mastervolumen = mastervolumen
 gui_core_member = CORE MEMBER
+gui_score = Score
 
 [Levels]
 levelBlocked1 = blocked

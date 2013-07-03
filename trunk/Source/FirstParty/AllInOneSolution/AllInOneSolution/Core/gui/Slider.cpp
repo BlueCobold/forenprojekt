@@ -8,10 +8,10 @@ Slider::Slider(int id, SliderStyle style, const sf::Vector2f& position, const sf
     m_offset(offset),
     m_style(style)
 {
-    m_label = &m_style.unselected.label;
+    m_label = &m_style.idle.label;
 
-    m_spriteSlider = &m_style.unselected.spriteSlider;
-    m_spriteBackround = &m_style.unselected.spriteBackround;
+    m_spriteSlider = &m_style.idle.spriteSlider;
+    m_spriteBackround = &m_style.idle.spriteBackround;
 
     m_sliderPosition.y = m_position.y + m_offset.y + m_style.mouseRect.top;
 
@@ -29,15 +29,15 @@ void Slider::update(const sf::RenderWindow& screen)
     if(utility::Mouse.leftButtonPressed() && sliderRect.contains(sf::Mouse::getPosition(screen)))
     {
         calculateValue(sliderRect, sf::Mouse::getPosition(screen));
-        m_label = &m_style.selected.label;
-        m_spriteSlider = &m_style.selected.spriteSlider;
-        m_spriteBackround = &m_style.selected.spriteBackround;
+        m_label = &m_style.active.label;
+        m_spriteSlider = &m_style.active.spriteSlider;
+        m_spriteBackround = &m_style.active.spriteBackround;
     }
     else
     {
-        m_label = &m_style.unselected.label;
-        m_spriteSlider = &m_style.unselected.spriteSlider;
-        m_spriteBackround = &m_style.unselected.spriteBackround;
+        m_label = &m_style.idle.label;
+        m_spriteSlider = &m_style.idle.spriteSlider;
+        m_spriteBackround = &m_style.idle.spriteBackround;
     }
     calculateSliderPosition(sliderRect);
     m_spriteSlider->setPosition(m_sliderPosition);
@@ -63,15 +63,15 @@ void Slider::setPosition(sf::Vector2f position)
 {
     m_position = position;
 
-    m_style.selected.spriteBackround.setPosition(m_position + m_offset + m_style.selected.spriteOffset);
-    m_style.selected.label.setPosition(m_position + m_offset + m_style.selected.textOffset);
+    m_style.active.spriteBackround.setPosition(m_position + m_offset + m_style.active.spriteOffset);
+    m_style.active.label.setPosition(m_position + m_offset + m_style.active.textOffset);
 
-    m_style.unselected.spriteBackround.setPosition(m_position + m_offset + m_style.unselected.spriteOffset);
-    m_style.unselected.label.setPosition(m_position + m_offset + m_style.unselected.textOffset);
+    m_style.idle.spriteBackround.setPosition(m_position + m_offset + m_style.idle.spriteOffset);
+    m_style.idle.label.setPosition(m_position + m_offset + m_style.idle.textOffset);
 
     m_sliderPosition.y = m_position.y + m_offset.y + m_style.mouseRect.top - 
-                         m_style.unselected.spriteSlider.getTextureRect().height / 2.f +
-                         m_style.unselected.spriteBackround.getTextureRect().height / 2.f;
+                         m_style.idle.spriteSlider.getTextureRect().height / 2.f +
+                         m_style.idle.spriteBackround.getTextureRect().height / 2.f;
 }
 
 void Slider::setValue(float value)
