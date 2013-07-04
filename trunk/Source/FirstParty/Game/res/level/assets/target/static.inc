@@ -62,7 +62,7 @@
 		</physics>
 
 		<entities>
-			<entity respawnable="true" stopWithLastAnimation="true" name="target_particles" rep="--" collideWithBall="false">
+			<entity name="target_particles" respawnable="true" stopWithLastAnimation="true" rep="--" collideWithBall="false">
 				<animations>
 					<animation copies="20" texture="sparkles" blending="add" width="32" height="32" midx="16" midy="16" rotate="true">
 						<constants time="0" size="1" />
@@ -199,7 +199,7 @@
 				</animations>
 			</entity>
 
-			<entity respawnable="true" stopWithLastAnimation="true" name="target_2" rep="--" collideWithBall="false">
+			<entity name="target_2" respawnable="true" stopWithLastAnimation="true" rep="--" collideWithBall="false">
 				<animations>
 					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true">
 						<scale axis="x">
@@ -212,7 +212,20 @@
 				</animations>
 			</entity>
 
-			<entity name="target_1" respawnable="true" rep="t1" type="target" collideWithBall="false">
+			<entity name="bonustarget_2" respawnable="true" stopWithLastAnimation="true" rep="--" collideWithBall="false">
+				<animations>
+					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true">
+						<scale axis="x">
+							<function name="target_bloat" />
+						</scale>
+						<scale axis="y">
+							<function name="target_bloat" />
+						</scale>
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="target_1" rep="t1" type="target" collideWithBall="false">
 				<physics name="target">
 					<shape type="circle" radius="30" />
 				</physics>
@@ -228,19 +241,19 @@
 				</animations>
 			</entity>
 
-			<entity name="bonustarget_1" respawnable="true" rep="bt" type="bonustarget" collideWithBall="false">
+			<entity name="bonustarget_1" rep="bt" type="bonustarget" collideWithBall="false">
 				<physics name="target">
-					<shape type="circle" radius="30" />
+					<shape type="circle" radius="21" />
 				</physics>
 				<collides>
-					<spawnEntity name="target_2">
+					<spawnEntity name="bonustarget_2">
 						<spawnEntity name="target_particles">
 							<always />
 						</spawnEntity>
 					</spawnEntity>
 				</collides>
 				<animations>
-					<animation texture="bonustarget" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true" />
 				</animations>
 			</entity>
 		</entities>
