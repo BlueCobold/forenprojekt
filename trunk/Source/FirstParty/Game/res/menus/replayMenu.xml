@@ -24,5 +24,6 @@
 		<button id="0" text="gui_play_again" style="default" sound="default" x="261" y="170" />
 		<label id="1" text="gui_score" font="buttonHoverFont" aligment="2" x="411" y="110" />
 		<label id="2" text="gui_score" font="buttonHoverFont" aligment="0" x="110" y="110" />
+		<image id="3" texture="GuiElements" x="125" y="-100" scrx="0" scry="58" width="260" height="84"/>
 	</elements>
 </menu>
