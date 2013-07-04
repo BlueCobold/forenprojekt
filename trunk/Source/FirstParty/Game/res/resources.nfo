@@ -28,9 +28,7 @@
 	<texture name="arrowHUD" path="gui/arrows.png" smooth="true" />
 	<texture name="guiMisc" path="gui/misc.png" smooth="false" />
 	<texture name="sparkles" path="assets/misc/sparkles.png" smooth="false" />
-	<texture name="ButtonHover" path="gui/Button_Hover.png" smooth="false" />
-	<texture name="ButtonIdle" path="gui/Button_Idle.png" smooth="false" />
-	<texture name="ButtonPressed" path="gui/Button_pressed.png" smooth="false" />
+	<texture name="GuiElements" path="gui/gui_elements.png" smooth="false" />
 	<texture name="Window" path="gui/window.png" smooth="false" />
 	<texture name="bonustarget" path="assets/target/bonustarget.png" smooth="true" />
 	<texture name="checkbox" path="gui/checkbox.png" smooth="true" />
