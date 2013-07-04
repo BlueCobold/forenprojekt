@@ -11,11 +11,8 @@
 
 struct CheckBoxStateStyle
 {
-    BitmapFont* font;
     sf::Vector2f spriteOffset;
-    sf::Vector2f textOffset;
     sf::Sprite sprite;
-    LineLabel label;
 };
 
 struct CheckBoxStyle

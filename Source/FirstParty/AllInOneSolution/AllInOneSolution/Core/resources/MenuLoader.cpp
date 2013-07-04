@@ -106,17 +106,8 @@ void MenuLoader::parseCheckBoxes(
             
             checkBox.position = sf::Vector2f(checkboxXml->FloatAttribute("x"), checkboxXml->FloatAttribute("y"));
             checkBox.id = checkboxXml->IntAttribute("id");
-            checkBox.textResourceKey = checkboxXml->Attribute("text");
+            //checkBox.textResourceKey = checkboxXml->Attribute("text");
 
-            checkBox.style.uncheckedStyle.label = LineLabel(
-                utility::translateKey(checkBox.textResourceKey), 
-                checkBox.position, 0, checkBox.style.uncheckedStyle.font, LineLabel::Left);
-            checkBox.style.uncheckedStyle.label.setOffset(checkBox.style.uncheckedStyle.textOffset);
-
-            checkBox.style.checkedStyle.label = LineLabel(
-                utility::translateKey(checkBox.textResourceKey), 
-                checkBox.position, 0, checkBox.style.checkedStyle.font, LineLabel::Left);
-            checkBox.style.checkedStyle.label.setOffset(checkBox.style.checkedStyle.textOffset);
             menu.checkboxes.push_back(checkBox);
         }
     }
@@ -139,17 +130,6 @@ void MenuLoader::parseSliders(
             slider.style = style->second;
             slider.position = sf::Vector2f(sliderXml->FloatAttribute("x"), sliderXml->FloatAttribute("y"));
             slider.id = sliderXml->IntAttribute("id");
-            slider.textResourceKey = sliderXml->Attribute("text");
-
-            slider.style.active.label = LineLabel(
-                utility::translateKey(slider.textResourceKey), 
-                slider.position, 0, slider.style.active.font, LineLabel::Left);
-            slider.style.active.label.setOffset(slider.style.active.textOffset);
-
-            slider.style.idle.label = LineLabel(
-                utility::translateKey(slider.textResourceKey), 
-                slider.position, 0, slider.style.idle.font, LineLabel::Left);
-            slider.style.idle.label.setOffset(slider.style.idle.textOffset);
 
             menu.slider.push_back(slider);
         }
@@ -274,8 +254,6 @@ std::unordered_map<std::string, CheckBoxStyle> MenuLoader::parseCheckBoxStyles(t
 CheckBoxStateStyle MenuLoader::loadCheckBoxStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
 {
     CheckBoxStateStyle style;
-    style.font = resourceManager.getBitmapFont(xml->Attribute("font"));
-    style.textOffset = sf::Vector2f(xml->FloatAttribute("fontoffsetx"), xml->FloatAttribute("fontoffsety"));
     style.spriteOffset = sf::Vector2f(xml->FloatAttribute("offsetx"), xml->FloatAttribute("offsety"));
     style.sprite = sf::Sprite(*resourceManager.getTexture(xml->Attribute("texture")));
     style.sprite.setTextureRect(sf::IntRect(
@@ -315,8 +293,6 @@ std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(tinyx
 SliderStateStyle MenuLoader::loadSliderStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
 {
     SliderStateStyle style;
-    style.font = resourceManager.getBitmapFont(xml->Attribute("font"));
-    style.textOffset = sf::Vector2f(xml->FloatAttribute("fontoffsetx"), xml->FloatAttribute("fontoffsety"));
     style.spriteOffset = sf::Vector2f(xml->FloatAttribute("backroundoffsetx"), xml->FloatAttribute("backroundoffsety"));
     style.spriteBackround = sf::Sprite(*resourceManager.getTexture(xml->Attribute("backroundtexture")));
     style.spriteBackround.setTextureRect(sf::IntRect(

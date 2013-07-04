@@ -8,8 +8,6 @@ Slider::Slider(int id, SliderStyle style, const sf::Vector2f& position, const sf
     m_offset(offset),
     m_style(style)
 {
-    m_label = &m_style.idle.label;
-
     m_spriteSlider = &m_style.idle.spriteSlider;
     m_spriteBackround = &m_style.idle.spriteBackround;
 
@@ -29,13 +27,11 @@ void Slider::update(const sf::RenderWindow& screen)
     if(utility::Mouse.leftButtonPressed() && sliderRect.contains(sf::Mouse::getPosition(screen)))
     {
         calculateValue(sliderRect, sf::Mouse::getPosition(screen));
-        m_label = &m_style.active.label;
         m_spriteSlider = &m_style.active.spriteSlider;
         m_spriteBackround = &m_style.active.spriteBackround;
     }
     else
     {
-        m_label = &m_style.idle.label;
         m_spriteSlider = &m_style.idle.spriteSlider;
         m_spriteBackround = &m_style.idle.spriteBackround;
     }
@@ -47,7 +43,6 @@ void Slider::draw(const DrawParameter& params)
 {
     params.getTarget().draw(*m_spriteBackround);
     params.getTarget().draw(*m_spriteSlider);
-    m_label->draw(params);
 }
 
 int Slider::getId() const
@@ -64,10 +59,8 @@ void Slider::setPosition(sf::Vector2f position)
     m_position = position;
 
     m_style.active.spriteBackround.setPosition(m_position + m_offset + m_style.active.spriteOffset);
-    m_style.active.label.setPosition(m_position + m_offset + m_style.active.textOffset);
 
     m_style.idle.spriteBackround.setPosition(m_position + m_offset + m_style.idle.spriteOffset);
-    m_style.idle.label.setPosition(m_position + m_offset + m_style.idle.textOffset);
 
     m_sliderPosition.y = m_position.y + m_offset.y + m_style.mouseRect.top - 
                          m_style.idle.spriteSlider.getTextureRect().height / 2.f +

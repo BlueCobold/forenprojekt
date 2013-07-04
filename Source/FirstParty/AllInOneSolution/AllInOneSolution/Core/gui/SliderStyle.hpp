@@ -11,12 +11,9 @@
 
 struct SliderStateStyle
 {
-    BitmapFont* font;
     sf::Vector2f spriteOffset;
-    sf::Vector2f textOffset;
     sf::Sprite spriteBackround;
     sf::Sprite spriteSlider;
-    LineLabel label;
 };
 
 struct SliderStyle

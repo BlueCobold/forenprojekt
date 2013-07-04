@@ -27,8 +27,7 @@ struct ButtonInfo
 struct CheckBoxInfo
 {
     CheckBoxStyle style;
-    sf::Vector2f position;
-    std::string textResourceKey;
+    sf::Vector2f position;;
     int id;
 };
 
@@ -36,7 +35,6 @@ struct SliderInfo
 {
     SliderStyle style;
     sf::Vector2f position;
-    std::string textResourceKey;
     int id;
 };
 
