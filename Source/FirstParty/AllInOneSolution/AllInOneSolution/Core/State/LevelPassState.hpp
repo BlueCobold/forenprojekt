@@ -40,6 +40,8 @@ private:
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
     float m_timeDiff;
+
+    void setMedal(int medal);
 };
 
 #endif // LEVELPASSSTATE_HPP

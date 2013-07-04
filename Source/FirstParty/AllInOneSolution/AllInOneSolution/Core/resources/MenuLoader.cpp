@@ -183,13 +183,15 @@ void MenuLoader::parseImages(MenuTemplate& menu, tinyxml2::XMLElement* menuXml, 
         for(auto imageXml = styles->FirstChildElement("image");
             imageXml != nullptr; imageXml = imageXml->NextSiblingElement("image"))
         {
-            MenuSprite sprite;
+            MenuSprite sprite(sf::Vector2f(0, 0),
+                              sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")),
+                              imageXml->IntAttribute("id"));
+
             sprite.setTexture(*resourceManager.getTexture(imageXml->Attribute("texture")));
             sprite.setTextureRect(sf::IntRect(imageXml->IntAttribute("scrx"),
                                               imageXml->IntAttribute("scry"),
                                               imageXml->IntAttribute("width"),
                                               imageXml->IntAttribute("height")));
-            sprite.setOffset(sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")));
             menu.sprites.push_back(sprite);
         }
     }

@@ -79,6 +79,9 @@ public:
 
     void setTimeAttackMode(bool timeAttackMode);
 
+    enum Medals {Gold, Silver, Bronze, none};
+    Level::Medals getMedal();
+
 private:
 
     struct EntitySpawn
@@ -276,6 +279,11 @@ private:
     bool m_levelPass;
 
     bool m_timeAttackMode;
+
+    int m_goldMedal;
+    int m_silverMedal;
+    int m_bronzeMedal;
+    Medals m_currentMedal;
 };
 
 #endif // LEVEL_HPP

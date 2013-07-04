@@ -43,6 +43,7 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
 
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
     m_menu.setPoints(m_level->getPoints());
+    setMedal(m_level->getMedal()); 
 }
 
 StateChangeInformation LevelPassState::update(const float time)
@@ -82,4 +83,23 @@ void LevelPassState::draw(const DrawParameter& params)
     params.getTarget().draw(whiteRect);
 
     m_menu.draw(params);
+}
+void LevelPassState::setMedal(int medal)
+{
+    /* 
+    texture = GuiElements
+    0 stars: x=0, y=58, w=260, h=84
+    1 stars: x=260, y=58, w=260, h=84
+    2 stars: x=520, y=58, w=260, h=84
+    3 stars: x=0, y=142, w=260, h=84 
+    */
+    medal = static_cast<Level::Medals>(medal);
+    if(medal == Level::Gold)
+        m_menu.setSymbol(m_resourceManager,sf::IntRect(0, 142, 260, 84));
+    else if(medal == Level::Silver)
+        m_menu.setSymbol(m_resourceManager,sf::IntRect(520, 58, 260, 84));
+    else if(medal == Level::Bronze)
+        m_menu.setSymbol(m_resourceManager,sf::IntRect(260, 58, 260, 84));
+    else
+        m_menu.setSymbol(m_resourceManager,sf::IntRect(0, 58, 260, 84));
 }

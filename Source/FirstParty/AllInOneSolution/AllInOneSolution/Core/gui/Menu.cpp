@@ -180,3 +180,13 @@ LineLabel& Menu::getLabel(int id)
     }
     throw std::runtime_error(utility::replace(utility::translateKey("LineLabelId"), utility::toString(id)));
 }
+
+MenuSprite& Menu::getSprite(int id)
+{
+    for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
+    {
+        if(it->get()->getId() == id)
+            return *it->get();
+    }
+    throw std::runtime_error(utility::replace(utility::translateKey("MenuSpriteId"), utility::toString(id)));
+}

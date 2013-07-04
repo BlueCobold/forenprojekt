@@ -37,6 +37,7 @@ protected:
     Slider& getSlider(int id);
     LineLabel& getLabel(int id);
     sf::RenderWindow& getRenderWindow();
+    MenuSprite& getSprite(int id);
 
     MenuTemplate& getTemplate();
 

@@ -41,7 +41,10 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_timeAttackMode(false),
     m_ballTravelDistance(0.0f),
     m_ballImpulseTime(0.0f),
-    m_ballImpulseAngle(-20.0f, 20.0f)
+    m_ballImpulseAngle(-20.0f, 20.0f),
+    m_goldMedal(0),
+    m_silverMedal(0),
+    m_bronzeMedal(0)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -494,4 +497,15 @@ void Level::handleAutoRespawn()
         else
             ++it;
     }
+}
+Level::Medals Level::getMedal()
+{
+    if(m_points >= m_goldMedal)
+        return Level::Gold;
+    else if(m_points >= m_silverMedal)
+        return Level::Silver;
+    else if(m_points >= m_bronzeMedal)
+        return Level::Bronze;
+    else
+        return Level::none;
 }
