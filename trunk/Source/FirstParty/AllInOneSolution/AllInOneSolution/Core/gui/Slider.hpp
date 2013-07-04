@@ -35,8 +35,6 @@ private:
     sf::Vector2f m_sliderPosition;
 
     sf::Vector2f m_offset;
-    
-    LineLabel* m_label;
 
     sf::Sprite* m_spriteSlider;
     sf::Sprite* m_spriteBackround;
