@@ -1,15 +1,18 @@
 #include "MenuSprite.hpp"
 
 MenuSprite::MenuSprite() :
-m_position(sf::Vector2f(0, 0)),
-m_offset(sf::Vector2f(0, 0))
+    m_position(sf::Vector2f(0, 0)),
+    m_offset(sf::Vector2f(0, 0)),
+    m_id(-1),
+    m_visible(true)
 {
 }
 
-MenuSprite::MenuSprite(sf::Vector2f position, sf::Vector2f offset, int id) :
-m_position(position),
-m_offset(offset),
-m_id(id)
+MenuSprite::MenuSprite(const sf::Vector2f& position, const sf::Vector2f& offset, const int id) :
+    m_position(position),
+    m_offset(offset),
+    m_id(id),
+    m_visible(true)
 {
 }
     
@@ -37,10 +40,16 @@ sf::Vector2f MenuSprite::getPosition()
 
 void MenuSprite::draw(const DrawParameter& params)
 {
-    params.getTarget().draw(*this);
+    if(m_visible)
+        params.getTarget().draw(*this);
 }
 
-void MenuSprite::setId(int id)
+void MenuSprite::setVisible(const bool visible)
+{
+    m_visible = visible;
+}
+
+void MenuSprite::setId(const int id)
 {
     m_id = id;
 }
