@@ -13,20 +13,22 @@ public:
     sf::Vector2f m_position;
     
     MenuSprite();
-    MenuSprite(sf::Vector2f position, sf::Vector2f offset, int id);
+    MenuSprite(const sf::Vector2f& position, const sf::Vector2f& offset, const int id);
 
     void setOffset(sf::Vector2f offset);
     void setPosition(sf::Vector2f offset);
-    void setId(int id);
+    void setId(const int id);
 
     sf::Vector2f getOffset();
     sf::Vector2f getPosition();
     int getId();
 
+    void setVisible(const bool visible);
     void draw(const DrawParameter& params);
 
 private:
 
+    bool m_visible;
     int m_id;
 };
 

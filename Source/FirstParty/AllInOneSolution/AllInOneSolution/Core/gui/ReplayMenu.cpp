@@ -11,10 +11,11 @@ void ReplayMenu::setPoints(int points)
 {
     Menu::getLabel(LABEL_POINTS).setText(utility::toString(points));
 }
-void ReplayMenu::setSymbol(ResourceManager& resourceManager, sf::IntRect textureRect, std::string textureKey)
-{
-    if(textureKey != "")
-        Menu::getSprite(SPRITE_SYMBOL).setTexture(*resourceManager.getTexture(textureKey));
 
-    Menu::getSprite(SPRITE_SYMBOL).setTextureRect(textureRect);
+void ReplayMenu::setGrade(int grade)
+{
+    Menu::getSprite(SPRITE_SYMBOL_NONE).setVisible(grade == 3);
+    Menu::getSprite(SPRITE_SYMBOL_BRONCE).setVisible(grade == 2);
+    Menu::getSprite(SPRITE_SYMBOL_SILVER).setVisible(grade == 1);
+    Menu::getSprite(SPRITE_SYMBOL_GOLD).setVisible(grade == 0);
 }
