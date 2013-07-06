@@ -1,4 +1,5 @@
 <level>
+	<levelinfo name="Level 7" />
 	<constants solid="0" />
 	<gameplay maxBalls="5" time="180"/>
 	<templates>
@@ -441,4 +442,5 @@
 	<world>
 		<gravity x="0" y="40" />
 	</world>
+	<medal bronze="400" silver="500" gold="600" />
 </level>

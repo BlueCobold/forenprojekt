@@ -1,4 +1,5 @@
 <level>
+	<levelinfo name="Level 2" />
 	<constants gate="0" gatetime="0"/>
 	<templates>
 		<include file="assets/ball/default.inc" />
@@ -224,4 +225,5 @@
 	<world>
 		<gravity x="0" y="40" />
 	</world>
+	<medal bronze="400" silver="500" gold="600" />
 </level>

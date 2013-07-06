@@ -62,7 +62,8 @@ StateChangeInformation LoadLevelState::update(const float time)
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = m_lastLevel;
         m_transitionStateInfo.m_level = m_lastLevel;
-        m_transitionStateInfo.m_followingState = PlayStateId;
+        //m_transitionStateInfo.m_followingState = PlayStateId;
+        m_transitionStateInfo.m_followingState = LevelPreviewStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
@@ -88,7 +89,7 @@ void LoadLevelState::loadLevel()
     m_loadingErrorMessage[0] = '\0';
     try
     {
-        m_level = std::unique_ptr<Level>(new Level(6, m_resourceManager, m_config));
+        m_level = std::unique_ptr<Level>(new Level(1, m_resourceManager, m_config));
         m_lastLevel = m_level.get();
     }
     catch(std::runtime_error e)

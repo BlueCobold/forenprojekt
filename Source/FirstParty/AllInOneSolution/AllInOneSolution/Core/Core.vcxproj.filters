@@ -241,6 +241,12 @@
     <ClCompile Include="gui\MenuSprite.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="gui\LevelPreviewMenu.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="State\LevelPreviewState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -659,6 +665,12 @@
     </ClInclude>
     <ClInclude Include="gui\MenuSprite.hpp">
       <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\LevelPreviewMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="State\LevelPreviewState.hpp">
+      <Filter>Headers\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

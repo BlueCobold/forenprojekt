@@ -49,6 +49,7 @@
 	<menu name="MainMenu" path="MainMenu.xml" />
 	<menu name="OptionMenu" path="OptionMenu.xml" />
 	<menu name="CreditMenu" path="CreditMenu.xml" />
+	<menu name="LevelPreviewMenu" path="LevelPreviewMenu.xml" />
 </menus>
 <bitmapfonts>
 	<bitmapfont name="gold" path="bitmapfontGold.xml" />
