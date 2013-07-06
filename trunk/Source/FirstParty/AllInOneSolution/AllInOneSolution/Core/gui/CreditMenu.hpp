@@ -4,7 +4,6 @@
 #define CREDITNMENU_HPP
 
 #include "CaptionMenu.hpp"
-#include "../gui/CheckBox.hpp"
 
 class Config;
 

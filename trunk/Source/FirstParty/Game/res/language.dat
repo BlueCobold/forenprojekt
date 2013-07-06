@@ -71,6 +71,8 @@ gui_label_fullscreen = fullscreen
 gui_label_mastervolumen = mastervolumen
 gui_core_member = CORE MEMBER
 gui_score = Score
+gui_start = Start
+gui_levelname = Levelname
 
 [Levels]
 levelBlocked1 = blocked

@@ -80,7 +80,8 @@ public:
     void setTimeAttackMode(bool timeAttackMode);
 
     enum Medals {Gold, Silver, Bronze, none};
-    Level::Medals getMedal();
+    const Level::Medals getMedal() const;
+    const std::string getLevelName() const;
 
 private:
 
@@ -284,6 +285,8 @@ private:
     int m_silverMedal;
     int m_bronzeMedal;
     Medals m_currentMedal;
+
+    std::string m_levelName;
 };
 
 #endif // LEVEL_HPP

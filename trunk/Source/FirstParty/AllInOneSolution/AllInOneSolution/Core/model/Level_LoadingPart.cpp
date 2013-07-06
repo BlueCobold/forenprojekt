@@ -59,10 +59,13 @@ bool Level::load()
         m_remainingTime = -1.f;
         m_totalTime = -1.f;
     }
-    // Medals
+    // get Medal values
     m_bronzeMedal = doc.FirstChildElement("level")->FirstChildElement("medal")->IntAttribute("bronze");
     m_silverMedal = doc.FirstChildElement("level")->FirstChildElement("medal")->IntAttribute("silver");
     m_goldMedal = doc.FirstChildElement("level")->FirstChildElement("medal")->IntAttribute("gold");
+
+    // get LevelName
+    m_levelName = doc.FirstChildElement("level")->FirstChildElement("levelinfo")->Attribute("name");
 
     // ==Parse grid==
     tinyxml2::XMLElement* grid = doc.FirstChildElement("level")->FirstChildElement("grid");

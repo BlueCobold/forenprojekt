@@ -1,4 +1,5 @@
 <level>
+	<levelinfo name="Level 4" />
 	<constants direction="1" arrowtime="0"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />
@@ -210,4 +211,5 @@
 	<world>
 		<gravity x="0" y="40" />
 	</world>
+	<medal bronze="350" silver="380" gold="400" />
 </level>
