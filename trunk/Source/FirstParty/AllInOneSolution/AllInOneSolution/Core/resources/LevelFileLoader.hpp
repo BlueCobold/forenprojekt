@@ -38,9 +38,6 @@ public:
         VariableHandler* handler,
         std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 
-    static sf::SoundBuffer* parseSound(tinyxml2::XMLElement* xml,
-        ResourceManager& resourceManager);
-
     static std::unique_ptr<ValueProvider> parseProvider(
         tinyxml2::XMLElement* xml, 
         AnimatedObject* animated,

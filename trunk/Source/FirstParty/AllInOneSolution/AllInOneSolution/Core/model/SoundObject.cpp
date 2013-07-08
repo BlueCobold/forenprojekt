@@ -1,5 +1,9 @@
 #include "SoundObject.hpp"
 
+#include "../Utility.hpp"
+
+#include <exception>
+
 SoundObject::SoundObject(const std::string& name, SoundManager& soundManager) :
     m_soundManager(soundManager),
     m_soundName(name),
@@ -10,10 +14,6 @@ SoundObject::SoundObject(const std::string& name, SoundManager& soundManager) :
         throw std::runtime_error(utility::translateKey("NoSoundName"));
 }
 
-SoundObject::~SoundObject()
-{
-}
-
 const std::string& SoundObject::getSoundName() const
 {
     return m_soundName;
@@ -22,6 +22,11 @@ const std::string& SoundObject::getSoundName() const
 SoundManager& SoundObject::getSoundManager() const
 {
     return m_soundManager;
+}
+
+void SoundObject::play()
+{
+    play(1.0f);
 }
 
 void SoundObject::play(const float volume)

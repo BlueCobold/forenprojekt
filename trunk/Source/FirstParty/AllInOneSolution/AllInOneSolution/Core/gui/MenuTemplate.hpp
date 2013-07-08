@@ -4,11 +4,11 @@
 #define MENU_TEMPLATE_HPP
 
 #include "ButtonStyle.hpp"
-#include "ButtonSound.hpp"
 #include "CheckBoxStyle.hpp"
 #include "SliderStyle.hpp"
 #include "LineLabel.hpp"
 #include "MenuSprite.hpp"
+#include "../model/SoundObject.hpp"
 
 #include <tinyxml2.h>
 
@@ -17,8 +17,11 @@
 
 struct ButtonInfo
 {
+public:
+    ButtonInfo(const SoundObject& sound) : sound(sound)
+    { }
     ButtonStyle style;
-    ButtonSound sound;
+    SoundObject sound;
     sf::Vector2f position;
     std::string textResourceKey;
     int id;

@@ -3,7 +3,7 @@
 
 #include <SFML/Window/Event.hpp>
 
-Button::Button(int id, ButtonStyle style, ButtonSound sound, const sf::Vector2f& position, const sf::Vector2f& offset) :
+Button::Button(int id, ButtonStyle style, const SoundObject& sound, const sf::Vector2f& position, const sf::Vector2f& offset) :
     m_position(position),
     m_id(id),
     m_offset(offset),
@@ -32,7 +32,7 @@ void Button::update(const sf::RenderWindow& screen)
         if(!m_playHoverSound)
         {
             m_playHoverSound = true;
-            m_sound.hoverSound.play();
+            m_sound.play();
         }
 
         if(utility::Mouse.leftButtonPressed())

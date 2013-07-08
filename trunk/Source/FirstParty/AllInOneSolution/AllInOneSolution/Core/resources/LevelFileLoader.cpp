@@ -27,14 +27,6 @@
 #include <map>
 #include <vector>
 
-sf::SoundBuffer* LevelFileLoader::parseSound(tinyxml2::XMLElement* xml,
-    ResourceManager& resourceManager)
-{
-     sf::SoundBuffer* sound = resourceManager.getSoundBuffer(xml->Attribute("name"));
-
-     return sound;
-}
-
 void LevelFileLoader::parseConstants(tinyxml2::XMLElement* xml,
     VariableHandler* holder)
 {

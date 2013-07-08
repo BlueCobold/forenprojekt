@@ -597,9 +597,6 @@
     <ClInclude Include="model\collision\filter\ApplyForceFilter.hpp">
       <Filter>Headers\model\collision\filter</Filter>
     </ClInclude>
-    <ClInclude Include="gui\ButtonSound.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="State\EnterStateInformation.hpp">
       <Filter>Headers\State</Filter>
     </ClInclude>
@@ -665,6 +662,9 @@
     </ClInclude>
     <ClInclude Include="gui\MenuSprite.hpp">
       <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\SoundBufferManager.hpp">
+      <Filter>Headers\resources</Filter>
     </ClInclude>
     <ClInclude Include="gui\LevelPreviewMenu.hpp">
       <Filter>Headers\gui</Filter>

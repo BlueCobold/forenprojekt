@@ -30,7 +30,6 @@
 	<texture name="sparkles" path="assets/misc/sparkles.png" smooth="false" />
 	<texture name="GuiElements" path="gui/gui_elements.png" smooth="false" />
 	<texture name="Window" path="gui/window.png" smooth="false" />
-	<texture name="bonustarget" path="assets/target/bonustarget.png" smooth="true" />
 	<texture name="checkbox" path="gui/checkbox.png" smooth="true" />
 	<texture name="slider" path="gui/slider.png" smooth="true" />
 </textures>

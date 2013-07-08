@@ -209,7 +209,6 @@
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
-    <ClInclude Include="gui\ButtonSound.hpp" />
     <ClInclude Include="gui\ButtonStyle.hpp" />
     <ClInclude Include="gui\CaptionMenu.hpp" />
     <ClInclude Include="gui\CheckBox.hpp" />
@@ -298,6 +297,7 @@
     <ClInclude Include="resources\MenuLoader.hpp" />
     <ClInclude Include="resources\ResourceCache.hpp" />
     <ClInclude Include="resources\ResourceManager.hpp" />
+    <ClInclude Include="resources\SoundBufferManager.hpp" />
     <ClInclude Include="ScrollView.hpp" />
     <ClInclude Include="State\CreditMenuState.hpp" />
     <ClInclude Include="State\EnterStateInformation.hpp" />

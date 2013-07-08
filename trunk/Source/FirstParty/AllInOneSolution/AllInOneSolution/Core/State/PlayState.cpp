@@ -51,12 +51,12 @@ StateChangeInformation PlayState::update(const float time)
     {
         m_level->update(getCurrentTime(), m_screen);
         m_hud.update(m_level, getCurrentTime());
-        if(utility::Keyboard.isKeyDown(sf::Keyboard::R))
-        {
-            // BUG! Memory leak!
-            m_level = new Level(2, m_resourceManager, m_config);
-            m_level->restartAt(getCurrentTime());
-        }
+        //if(utility::Keyboard.isKeyDown(sf::Keyboard::R))
+        //{
+        //    // BUG! Memory leak!
+        //    m_level = new Level(2, m_resourceManager, m_config);
+        //    m_level->restartAt(getCurrentTime());
+        //}
 
         if(utility::Keyboard.isKeyDown(sf::Keyboard::T))
         {

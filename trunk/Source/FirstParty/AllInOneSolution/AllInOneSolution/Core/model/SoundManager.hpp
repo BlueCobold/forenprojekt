@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "../resources/ResourceManager.hpp"
+#include "../resources/SoundBufferManager.hpp"
 
 #include <SFML/Audio/Sound.hpp>
 
@@ -17,16 +17,15 @@
 class SoundManager 
 {
 public:
-    SoundManager(ResourceManager& resourceManager);
+    SoundManager(SoundBufferManager& resourceManager);
 
     void update();
     void play(const std::string& key, const float volume);
 
 private:
-    ResourceManager& m_resourceManager;
+    SoundBufferManager& m_resourceManager;
     std::queue<std::pair<std::string, std::unique_ptr<sf::Sound>>> m_sounds;
     std::map<std::string, std::string> m_soundKeys;
-
 };
 
 #endif // SOUND_MANAGER

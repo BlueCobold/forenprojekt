@@ -8,6 +8,7 @@
 #include "../model/Level.hpp"
 #include "../gui/hud/HUD.hpp"
 #include "../rendering/transitions/Transition.hpp"
+#include "../resources/ResourceManager.hpp"
 #include "../Utility.hpp"
 
 #include <SFML/System/Clock.hpp>
@@ -15,8 +16,6 @@
 #include <SFML/System/Thread.hpp>
 
 #include <memory> // unique_ptr
-
-class ResourceManager;
 
 /// The State where the level will be loaded and faded in.
 class LoadLevelState : public State

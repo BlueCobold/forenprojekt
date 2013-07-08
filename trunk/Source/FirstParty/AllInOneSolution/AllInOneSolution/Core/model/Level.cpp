@@ -27,7 +27,6 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_velocityIterations(4),
     m_positionIterations(4),
     m_config(config),
-    m_soundManager(resourceManager),
     m_totalTarget(0),
     m_remainingTarget(0),
     m_points(0),
@@ -71,8 +70,6 @@ void Level::restartAt(const float time)
 
 void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 {
-    m_soundManager.update();
-
     m_timeStep = elapsedTime - m_lastTime;
 
     if(m_totalTime > 0)

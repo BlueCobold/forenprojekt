@@ -4,6 +4,7 @@
 #define MENU_LOADER_HPP
 
 #include "../gui/MenuTemplate.hpp"
+#include "../model/SoundObject.hpp"
 
 #include <string>
 #include <iostream>
@@ -29,7 +30,7 @@ private:
         MenuTemplate& menu, 
         tinyxml2::XMLElement* menuXml, 
         std::unordered_map<std::string, ButtonStyle>& buttonStyles, 
-        std::unordered_map<std::string, ButtonSound>& buttonSounds,
+        std::unordered_map<std::string, SoundObject>& buttonSounds,
         ResourceManager& resourceManager);
 
     static void parseCheckBoxes(
@@ -55,7 +56,7 @@ private:
         ResourceManager& resourceManager);
 
     static std::unordered_map<std::string, ButtonStyle> parseButtonStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
-    static std::unordered_map<std::string, ButtonSound> parseSounds(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, SoundObject> parseSounds(tinyxml2::XMLElement* menuXml, SoundManager& soundManager);
     static std::unordered_map<std::string, CheckBoxStyle> parseCheckBoxStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
     static std::unordered_map<std::string, SliderStyle> parseSliderStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
 

@@ -6,6 +6,7 @@
 #include "ResourceCache.hpp"
 #include "../gui/BitmapFont.hpp"
 #include "../gui/MenuTemplate.hpp"
+#include "SoundBufferManager.hpp"
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -13,7 +14,7 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/OpenGL.hpp>
 
-//#include <memory>
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <utility> // pair
@@ -23,7 +24,7 @@ namespace tinyxml2
     class XMLDocument;
 }
 
-class ResourceManager
+class ResourceManager : public SoundBufferManager
 {
 public:
 
@@ -31,9 +32,10 @@ public:
 
     sf::Texture* getTexture(const std::string& key);
     sf::Font* getFont(const std::string& key);
-    sf::SoundBuffer* getSoundBuffer(const std::string& key);
+    sf::SoundBuffer* getSoundBuffer(const std::string& key) override;
     BitmapFont* getBitmapFont(const std::string& key);
     const MenuTemplate* getMenuTemplate(const std::string& name);
+    SoundManager& getSoundManager();
 
 private:
 
@@ -103,6 +105,7 @@ private:
     std::unordered_map<std::string, std::string> m_bitmapFontKeys;
     std::unordered_map<std::string, std::string> m_menuKeys;
 
+    std::unique_ptr<SoundManager> m_soundManager;
     ResourceCache<sf::Texture> m_textures;
     ResourceCache<sf::Font> m_fonts;
     ResourceCache<sf::SoundBuffer> m_soundBuffers;

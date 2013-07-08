@@ -24,6 +24,7 @@ MissingFile = File '%' not found.
 NoVariable = The variable '%' is not defined.
 LoadFail = Loading failed: %.
 InvalidXml = The XML file % is not valid!
+InvalidLevelNumber = The number for the level is invalid.
 EntityNoCollision = Entity does not collide: %.
 UnknownCollider = The collider is unknown: %.
 UnknownEntityName = Unknown entity-name specified in spawnEntity: %.
