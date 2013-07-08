@@ -135,7 +135,7 @@ private:
     void handleAutoRespawn();
 
     /// Load the level after m_number
-    bool load();
+    void load();
 
     bool validate(const tinyxml2::XMLDocument& document);
     
@@ -202,8 +202,6 @@ private:
     b2Vec2 m_defaultGravity;
 
     ResourceManager& m_resourceManager;
-
-    SoundManager m_soundManager;
 
     unsigned int m_number;
 

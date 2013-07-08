@@ -29,10 +29,10 @@
 
 #include <tinyxml2.h>
 
-bool Level::load()
+void Level::load()
 {
     if(m_number == 0) // Level start from 1
-        return false;
+        throw std::runtime_error(utility::replace(utility::translateKey("InvalidLevelNumber"), filename()));
 
     tinyxml2::XMLDocument doc;
     doc.LoadFile(filename().c_str());
@@ -124,8 +124,6 @@ bool Level::load()
     });
 
     m_remainingTarget = m_totalTarget;
-
-    return true;
 }
 
 void Level::parseObjects(
@@ -369,7 +367,7 @@ std::unique_ptr<Entity> Level::createEntity(
     // Load sound
     if(xml->FirstChildElement("sound") != nullptr)
     {
-        auto sound = std::unique_ptr<SoundObject>(new SoundObject(std::string(xml->FirstChildElement("sound")->Attribute("name")), m_soundManager));
+        auto sound = std::unique_ptr<SoundObject>(new SoundObject(std::string(xml->FirstChildElement("sound")->Attribute("name")), m_resourceManager.getSoundManager()));
         if(xml->FirstChildElement("sound")->Attribute("volume"))
             sound->fixVolume(xml->FirstChildElement("sound")->FloatAttribute("volume"));
         entity->bindCollisionSound(std::move(sound));

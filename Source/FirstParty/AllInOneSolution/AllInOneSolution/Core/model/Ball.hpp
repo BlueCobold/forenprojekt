@@ -5,6 +5,8 @@
 
 #include "Entity.hpp"
 
+#include <functional>
+
 /// This class will be used to bind the physical setting and the control to a entity of a ball
 class Ball : public Entity
 {

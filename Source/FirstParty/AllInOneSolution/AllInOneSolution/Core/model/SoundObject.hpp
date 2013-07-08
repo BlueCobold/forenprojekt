@@ -11,12 +11,12 @@ class SoundObject
 public:
 
     SoundObject(const std::string& key, SoundManager& soundManager);
-    virtual ~SoundObject();
 
     void fixVolume(const float volume);
     void unfixVolume();
     bool hasFixedVolume() const;
     void play(const float volume);
+    void play();
 
 protected:
 

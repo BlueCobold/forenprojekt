@@ -53,9 +53,7 @@ private:
     utility::Event m_event;
 
     ResourceManager m_resourceManager;
-
     StateManager m_stateManager;
-
 };
 
 #endif // APP_HPP

@@ -5,7 +5,7 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Audio/Listener.hpp>
 
-SoundManager::SoundManager(ResourceManager& resourceManager)
+SoundManager::SoundManager(SoundBufferManager& resourceManager)
     : m_resourceManager(resourceManager)
 {
 }

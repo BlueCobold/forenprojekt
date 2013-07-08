@@ -8,6 +8,7 @@
 
 ResourceManager::ResourceManager()
 {
+    m_soundManager = std::unique_ptr<SoundManager>(new SoundManager(*this));
     // Parse resource information
     tinyxml2::XMLDocument doc;
     doc.LoadFile("res/resources.nfo");
@@ -185,4 +186,9 @@ void ResourceManager::parseMenus(tinyxml2::XMLDocument& doc)
         m_menuKeys.insert(std::make_pair<std::string, std::string>(
             std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
     }
+}
+
+SoundManager& ResourceManager::getSoundManager()
+{
+    return *m_soundManager;
 }

@@ -10,7 +10,7 @@
 #include <cstring>
 
 LoadLevelState::LoadLevelState(sf::RenderWindow& screen, 
-                               ResourceManager& resourceManager, 
+                               ResourceManager& resourceManager,
                                Config& config) :
     State(screen, resourceManager, config),
     m_label(utility::translateKey("gui_loading_screen"), sf::Vector2f(screen.getSize().x / 2.f, screen.getSize().y / 2.f), 0, resourceManager.getBitmapFont("red"), LineLabel::Left),
