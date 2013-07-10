@@ -100,6 +100,9 @@ void Menu::update(const sf::RenderWindow& screen)
 
     for(auto it = begin(m_slider); it != end(m_slider); ++it)
         (*it)->update(screen);
+
+    for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
+        (*it)->update(screen);
 }
 
 void Menu::createButton(const ButtonInfo& info)

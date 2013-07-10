@@ -1,10 +1,13 @@
 #include "MenuSprite.hpp"
+#include <SFML/Window/Mouse.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 MenuSprite::MenuSprite() :
     m_position(sf::Vector2f(0, 0)),
     m_offset(sf::Vector2f(0, 0)),
     m_id(-1),
-    m_visible(true)
+    m_visible(true),
+    m_showToolTip(false)
 {
 }
 
@@ -12,7 +15,8 @@ MenuSprite::MenuSprite(const sf::Vector2f& position, const sf::Vector2f& offset,
     m_position(position),
     m_offset(offset),
     m_id(id),
-    m_visible(true)
+    m_visible(true),
+    m_showToolTip(false)
 {
 }
     
@@ -41,7 +45,11 @@ sf::Vector2f MenuSprite::getPosition()
 void MenuSprite::draw(const DrawParameter& params)
 {
     if(m_visible)
+    {
         params.getTarget().draw(*this);
+        if(m_showToolTip)
+            m_toolTip.draw(params);
+    }
 }
 
 void MenuSprite::setVisible(const bool visible)
@@ -57,4 +65,25 @@ void MenuSprite::setId(const int id)
 int MenuSprite::getId()
 {
     return m_id;
+}
+void MenuSprite::setToolTip(ToolTip& toolTip)
+{
+    m_toolTip = toolTip;
+}
+
+void MenuSprite::update(const sf::RenderWindow& screen)
+{
+    sf::IntRect rect = sf::IntRect(static_cast<int>(Sprite::getPosition().x),
+                                   static_cast<int>(Sprite::getPosition().y),
+                                   Sprite::getTextureRect().width,
+                                   Sprite::getTextureRect().height);
+
+    sf::Vector2i mouseposition = sf::Mouse::getPosition(screen);
+    if(rect.contains(mouseposition))
+    {
+        m_showToolTip = true;
+        m_toolTip.setPosition(static_cast<const sf::Vector2f>(mouseposition));
+    }
+    else
+        m_showToolTip = false;  
 }

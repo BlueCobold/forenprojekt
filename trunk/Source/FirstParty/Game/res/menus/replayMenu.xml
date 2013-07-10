@@ -20,13 +20,39 @@
 			<hover sound="bounce"/>
 		</buttonSound>
 	</sounds>
+	<tooltips>
+		<tooltip name="gold" offsetx="0" offsety="20">
+			<text textkey="tooltip_gold" font="gold" offsetx="0" offsety="5"/>
+			<left texture="tooltip" srcx="0" srcy="0" width="5" height="32" />
+			<center texture="tooltip" srcx="6" srcy="0" width="32" height="32" />
+			<right texture="tooltip" srcx="123" srcy="0" width="5" height="32" />
+		</tooltip>
+		<tooltip name="silver" offsetx="0" offsety="20">
+			<text textkey="tooltip_silver" font="gold" offsetx="0" offsety="5"/>
+			<left texture="tooltip" srcx="0" srcy="0" width="5" height="32" />
+			<center texture="tooltip" srcx="6" srcy="0" width="32" height="32" />
+			<right texture="tooltip" srcx="123" srcy="0" width="5" height="32" />
+		</tooltip>
+		<tooltip name="bronze" offsetx="0" offsety="20">
+			<text textkey="tooltip_bronze" font="gold" offsetx="0" offsety="5"/>
+			<left texture="tooltip" srcx="0" srcy="0" width="5" height="32" />
+			<center texture="tooltip" srcx="6" srcy="0" width="32" height="32" />
+			<right texture="tooltip" srcx="123" srcy="0" width="5" height="32" />
+		</tooltip>
+		<tooltip name="none" offsetx="0" offsety="20">
+			<text textkey="tooltip_none" font="gold" offsetx="0" offsety="5"/>
+			<left texture="tooltip" srcx="0" srcy="0" width="5" height="32" />
+			<center texture="tooltip" srcx="6" srcy="0" width="32" height="32" />
+			<right texture="tooltip" srcx="123" srcy="0" width="5" height="32" />
+		</tooltip>
+	</tooltips>
 	<elements>
 		<button id="0" text="gui_play_again" style="default" sound="default" x="261" y="170" />
 		<label id="1" text="gui_score" font="buttonHoverFont" aligment="2" x="411" y="110" />
 		<label id="2" text="gui_score" font="buttonHoverFont" aligment="0" x="110" y="110" />
-		<image id="3" texture="GuiElements" x="82" y="-69" scrx="0" scry="58" width="352" height="109"/>
-		<image id="4" texture="GuiElements" x="82" y="-69" scrx="352" scry="66" width="352" height="109"/>
-		<image id="5" texture="GuiElements" x="82" y="-69" scrx="" scry="167" width="352" height="109"/>
-		<image id="6" texture="GuiElements" x="82" y="-69" scrx="352" scry="175" width="352" height="109"/>
+		<image id="3" tooltip="none" texture="GuiElements" x="82" y="-69" scrx="0" scry="58" width="352" height="109"/>
+		<image id="4" tooltip="bronze" texture="GuiElements" x="82" y="-69" scrx="352" scry="66" width="352" height="109"/>
+		<image id="5" tooltip="silver" texture="GuiElements" x="82" y="-69" scrx="" scry="167" width="352" height="109"/>
+		<image id="6" tooltip="gold" texture="GuiElements" x="82" y="-69" scrx="352" scry="175" width="352" height="109"/>
 	</elements>
 </menu>

@@ -4,6 +4,7 @@
 #define MENU_LOADER_HPP
 
 #include "../gui/MenuTemplate.hpp"
+#include "../gui/ToolTip.hpp"
 #include "../model/SoundObject.hpp"
 
 #include <string>
@@ -52,13 +53,15 @@ private:
 
     static void parseImages(
         MenuTemplate& menu, 
-        tinyxml2::XMLElement* menuXml, 
+        tinyxml2::XMLElement* menuXml,
+        std::unordered_map<std::string, ToolTip>& toolTip,
         ResourceManager& resourceManager);
 
     static std::unordered_map<std::string, ButtonStyle> parseButtonStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
     static std::unordered_map<std::string, SoundObject> parseSounds(tinyxml2::XMLElement* menuXml, SoundManager& soundManager);
     static std::unordered_map<std::string, CheckBoxStyle> parseCheckBoxStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
     static std::unordered_map<std::string, SliderStyle> parseSliderStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, ToolTip> parseToolTip(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
 
     static ButtonStateStyle loadButtonStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
     static CheckBoxStateStyle loadCheckBoxStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager);

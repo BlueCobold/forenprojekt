@@ -32,6 +32,7 @@
 	<texture name="Window" path="gui/window.png" smooth="false" />
 	<texture name="checkbox" path="gui/checkbox.png" smooth="true" />
 	<texture name="slider" path="gui/slider.png" smooth="true" />
+	<texture name="tooltip" path="gui/tooltip.png" smooth="true" />
 </textures>
 <fonts>
 	<font name="visitor" path="visitor.ttf" />
