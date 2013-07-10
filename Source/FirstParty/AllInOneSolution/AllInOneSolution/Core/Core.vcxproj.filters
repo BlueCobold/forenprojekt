@@ -247,6 +247,9 @@
     <ClCompile Include="State\LevelPreviewState.cpp">
       <Filter>Sources\State</Filter>
     </ClCompile>
+    <ClCompile Include="gui\ToolTip.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -671,6 +674,9 @@
     </ClInclude>
     <ClInclude Include="State\LevelPreviewState.hpp">
       <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ToolTip.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

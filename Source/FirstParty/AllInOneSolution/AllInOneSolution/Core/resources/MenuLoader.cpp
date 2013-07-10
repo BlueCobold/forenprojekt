@@ -1,8 +1,7 @@
-
 #include "MenuLoader.hpp"
 #include "ResourceManager.hpp"
 #include "../gui/LineLabel.hpp"
-
+ 
 MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager)
 {
     tinyxml2::XMLDocument doc;
@@ -35,12 +34,13 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     std::unordered_map<std::string, SoundObject> buttonSounds = parseSounds(menuXml, resourceManager.getSoundManager());
     std::unordered_map<std::string, CheckBoxStyle> checkboxStyles = parseCheckBoxStyles(menuXml, resourceManager);
     std::unordered_map<std::string, SliderStyle> sliderStyles = parseSliderStyles(menuXml, resourceManager);
+    std::unordered_map<std::string, ToolTip> toolTip = parseToolTip(menuXml, resourceManager);
 
     parseButtons(menu, menuXml, buttonStyles, buttonSounds, resourceManager);
     parseCheckBoxes(menu, menuXml, checkboxStyles, resourceManager);
     parseSliders(menu, menuXml, sliderStyles, resourceManager);
     parseLabels(menu, menuXml, resourceManager);
-    parseImages(menu, menuXml, resourceManager);
+    parseImages(menu, menuXml, toolTip, resourceManager);
     return new MenuTemplate(menu);
 }
 
@@ -106,7 +106,6 @@ void MenuLoader::parseCheckBoxes(
             
             checkBox.position = sf::Vector2f(checkboxXml->FloatAttribute("x"), checkboxXml->FloatAttribute("y"));
             checkBox.id = checkboxXml->IntAttribute("id");
-            //checkBox.textResourceKey = checkboxXml->Attribute("text");
 
             menu.checkboxes.push_back(checkBox);
         }
@@ -156,7 +155,10 @@ void MenuLoader::parseLabels(MenuTemplate& menu, tinyxml2::XMLElement* menuXml, 
     }
 }
 
-void MenuLoader::parseImages(MenuTemplate& menu, tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+void MenuLoader::parseImages(MenuTemplate& menu, 
+                             tinyxml2::XMLElement* menuXml,
+                             std::unordered_map<std::string, ToolTip>& toolTip,
+                             ResourceManager& resourceManager)
 {
     if(auto styles = menuXml->FirstChildElement("elements"))
     {
@@ -172,6 +174,12 @@ void MenuLoader::parseImages(MenuTemplate& menu, tinyxml2::XMLElement* menuXml, 
                                               imageXml->IntAttribute("scry"),
                                               imageXml->IntAttribute("width"),
                                               imageXml->IntAttribute("height")));
+            
+            auto tooltip = toolTip.find(imageXml->Attribute("tooltip"));
+            if(tooltip == end(toolTip))
+                throw std::runtime_error(utility::replace(utility::translateKey("UnknownToolTip"), imageXml->Attribute("tooltip")));
+            sprite.setToolTip(tooltip->second);
+
             menu.sprites.push_back(sprite);
         }
     }
@@ -302,4 +310,47 @@ SliderStateStyle MenuLoader::loadSliderStateStyle(tinyxml2::XMLElement* xml, Res
             xml->IntAttribute("slidersrcx"), xml->IntAttribute("slidersrcy"),
             xml->IntAttribute("sliderwidth"), xml->IntAttribute("sliderheight")));
     return style;
+}
+
+std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTip(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+{
+    std::unordered_map<std::string, ToolTip> toolTip;
+    if(auto styles = menuXml->FirstChildElement("tooltips"))
+    {
+        for(auto tooltipXml = styles->FirstChildElement("tooltip");
+            tooltipXml != nullptr; tooltipXml = tooltipXml->NextSiblingElement("tooltip"))
+        {
+            sf::Sprite leftTexture;
+            sf::Sprite centerTexture;
+            sf::Sprite rightTexture;
+            leftTexture.setTexture(*resourceManager.getTexture(tooltipXml->FirstChildElement("left")->Attribute("texture")));
+            leftTexture.setTextureRect(sf::IntRect(tooltipXml->FirstChildElement("left")->IntAttribute("srcx"),
+                                                   tooltipXml->FirstChildElement("left")->IntAttribute("srcy"),
+                                                   tooltipXml->FirstChildElement("left")->IntAttribute("width"),
+                                                   tooltipXml->FirstChildElement("left")->IntAttribute("height")));
+            centerTexture.setTexture(*resourceManager.getTexture(tooltipXml->FirstChildElement("center")->Attribute("texture")));
+            centerTexture.setTextureRect(sf::IntRect(tooltipXml->FirstChildElement("center")->IntAttribute("srcx"),
+                                                     tooltipXml->FirstChildElement("center")->IntAttribute("srcy"),
+                                                     tooltipXml->FirstChildElement("center")->IntAttribute("width"),
+                                                     tooltipXml->FirstChildElement("center")->IntAttribute("height")));
+            rightTexture.setTexture(*resourceManager.getTexture(tooltipXml->FirstChildElement("right")->Attribute("texture")));
+            rightTexture.setTextureRect(sf::IntRect(tooltipXml->FirstChildElement("right")->IntAttribute("srcx"),
+                                                     tooltipXml->FirstChildElement("right")->IntAttribute("srcy"),
+                                                     tooltipXml->FirstChildElement("right")->IntAttribute("width"),
+                                                     tooltipXml->FirstChildElement("right")->IntAttribute("height")));
+            
+            ToolTip tempToolTip(utility::translateKey(tooltipXml->FirstChildElement("text")->Attribute("textkey")),
+                                resourceManager.getBitmapFont(tooltipXml->FirstChildElement("text")->Attribute("font")),
+                                sf::Vector2f(tooltipXml->FirstChildElement("text")->FloatAttribute("offsetx"),
+                                             tooltipXml->FirstChildElement("text")->FloatAttribute("offsety")),
+                                sf::Vector2f(tooltipXml->FloatAttribute("offsetx"), 
+                                             tooltipXml->FloatAttribute("offsety")),
+                                leftTexture,
+                                centerTexture,
+                                rightTexture);
+            
+            toolTip[tooltipXml->Attribute("name")] = tempToolTip;
+        }
+    }
+    return toolTip;
 }
