@@ -10,7 +10,7 @@
 class Slider
 {
 public:
-    Slider(int id, SliderStyle style, const sf::Vector2f& position, const sf::Vector2f& offset);
+    Slider(const int id, const SliderStyle style, const sf::Vector2f& position, const sf::Vector2f& offset);
 
     virtual void update(const sf::RenderWindow& screen);
 
@@ -20,16 +20,18 @@ public:
 
     float getValue() const;
 
-    void setPosition(sf::Vector2f position);
+    void setPosition(const sf::Vector2f& position);
 
-    void Slider::setValue(float value);
+    void Slider::setValue(const float value);
 
 private:
+    bool m_active;
     int m_id;
 
     float m_value;
     float m_min;
     float m_max;
+    int m_pick;
 
     sf::Vector2f m_position;
     sf::Vector2f m_sliderPosition;
@@ -41,8 +43,8 @@ private:
 
     SliderStyle m_style;
 
-    void calculateSliderPosition(sf::IntRect rect);
-    void calculateValue(sf::IntRect rect, sf::Vector2i mousePosition);
+    void calculateSliderPosition(const sf::IntRect& rect);
+    void calculateValue(const int left, const int mousex);
 };
 
 #endif // SLIDER_HPP

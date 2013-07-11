@@ -2,11 +2,13 @@
 #include "../Input.hpp"
 #include "../Utility.hpp"
 
-Slider::Slider(int id, SliderStyle style, const sf::Vector2f& position, const sf::Vector2f& offset) :
+Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& position, const sf::Vector2f& offset) :
     m_id(id),
     m_position(position),
     m_offset(offset),
-    m_style(style)
+    m_style(style),
+    m_active(false),
+    m_pick(0)
 {
     m_spriteSlider = &m_style.idle.spriteSlider;
     m_spriteBackround = &m_style.idle.spriteBackround;
@@ -19,24 +21,45 @@ Slider::Slider(int id, SliderStyle style, const sf::Vector2f& position, const sf
 
 void Slider::update(const sf::RenderWindow& screen)
 {
-    sf::IntRect sliderRect(static_cast<int>(m_position.x + m_offset.x + m_style.mouseRect.left),
-                           static_cast<int>(m_position.y + m_offset.y + m_style.mouseRect.top),
+    int x = static_cast<int>(m_position.x + m_offset.x + m_style.mouseRect.left);
+    sf::IntRect sliderRect(x, static_cast<int>(m_position.y + m_offset.y + m_style.mouseRect.top),
                            m_style.mouseRect.width,
                            m_style.mouseRect.height);
-
-    if(utility::Mouse.leftButtonPressed() && sliderRect.contains(sf::Mouse::getPosition(screen)))
+    
+    sf::Vector2f offset(0, 0);
+    if(!utility::Mouse.leftButtonPressed())
     {
-        calculateValue(sliderRect, sf::Mouse::getPosition(screen));
-        m_spriteSlider = &m_style.active.spriteSlider;
-        m_spriteBackround = &m_style.active.spriteBackround;
+        m_active = false;
+        m_pick = 0;
     }
-    else
+    else if(!m_active)
+    {
+        sliderRect.left += static_cast<int>(m_sliderPosition.x);
+        sf::Vector2i mousePos = sf::Mouse::getPosition(screen);
+        if(sliderRect.contains(mousePos))
+        {
+            m_active = true;
+            m_pick = mousePos.x - sliderRect.left;
+        }
+    }
+
+    if(!m_active)
     {
         m_spriteSlider = &m_style.idle.spriteSlider;
         m_spriteBackround = &m_style.idle.spriteBackround;
+        offset = m_style.idle.sliderOffset;
     }
-    calculateSliderPosition(sliderRect);
-    m_spriteSlider->setPosition(m_sliderPosition);
+    else
+    {
+        sf::Vector2i mousePos = sf::Mouse::getPosition(screen);
+        calculateValue(x, mousePos.x - m_pick);
+        m_spriteSlider = &m_style.active.spriteSlider;
+        m_spriteBackround = &m_style.active.spriteBackround;
+        offset = m_style.active.sliderOffset;
+    }
+    m_sliderPosition.x = (m_value - m_min) * m_style.width / m_max;
+    offset.x += x;
+    m_spriteSlider->setPosition(m_sliderPosition + offset);
 }
 
 void Slider::draw(const DrawParameter& params)
@@ -54,32 +77,30 @@ float Slider::getValue() const
 {
     return m_value;
 }
-void Slider::setPosition(sf::Vector2f position)
+
+void Slider::setPosition(const sf::Vector2f& position)
 {
     m_position = position;
 
-    m_style.active.spriteBackround.setPosition(m_position + m_offset + m_style.active.spriteOffset);
+    m_style.active.spriteBackround.setPosition(m_position + m_offset + m_style.active.backgroundOffset);
+    m_style.idle.spriteBackround.setPosition(m_position + m_offset + m_style.idle.backgroundOffset);
 
-    m_style.idle.spriteBackround.setPosition(m_position + m_offset + m_style.idle.spriteOffset);
-
-    m_sliderPosition.y = m_position.y + m_offset.y + m_style.mouseRect.top - 
-                         m_style.idle.spriteSlider.getTextureRect().height / 2.f +
-                         m_style.idle.spriteBackround.getTextureRect().height / 2.f;
+    m_sliderPosition.y = m_position.y + m_offset.y + m_style.mouseRect.top;
 }
 
-void Slider::setValue(float value)
+void Slider::setValue(const float value)
 {
     m_value = value;
 }
 
-void Slider::calculateSliderPosition(sf::IntRect rect)
+void Slider::calculateSliderPosition(const sf::IntRect& rect)
 {
     float posx = rect.width * (m_value / m_max);
     m_sliderPosition.x = rect.left + posx;
 }
 
-void Slider::calculateValue(sf::IntRect rect, sf::Vector2i mousePosition)
+void Slider::calculateValue(const int left, const int mousex)
 {
-    float value = static_cast<float>(mousePosition.x - rect.left) / rect.width * m_max;
-    m_value = value;
+    float value = m_min + static_cast<float>(mousex - left) / m_style.width * (m_max - m_min);
+    m_value = std::max(std::min(value, m_max), m_min);
 }
