@@ -83,6 +83,7 @@ void App::update()
     handleEvents();
     handleKeyboard();
 
+    m_resourceManager.getSoundManager().update();
     m_stateManager.passEvent(m_event.m_eventType);
     m_stateManager.update();
 

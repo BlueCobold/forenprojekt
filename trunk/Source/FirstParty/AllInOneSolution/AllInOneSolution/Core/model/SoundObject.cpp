@@ -26,7 +26,7 @@ SoundManager& SoundObject::getSoundManager() const
 
 void SoundObject::play()
 {
-    play(1.0f);
+    play(100.0f);
 }
 
 void SoundObject::play(const float volume)

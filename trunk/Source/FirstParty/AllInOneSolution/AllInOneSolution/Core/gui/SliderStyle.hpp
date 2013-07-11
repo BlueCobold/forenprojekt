@@ -11,7 +11,8 @@
 
 struct SliderStateStyle
 {
-    sf::Vector2f spriteOffset;
+    sf::Vector2f backgroundOffset;
+    sf::Vector2f sliderOffset;
     sf::Sprite spriteBackround;
     sf::Sprite spriteSlider;
 };
@@ -23,5 +24,6 @@ struct SliderStyle
     sf::IntRect mouseRect;
     float min;
     float max;
+    float width;
 };
 #endif //SLIDER_STYLE_HPP

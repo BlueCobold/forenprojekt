@@ -15,27 +15,27 @@
 				font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
 		</buttonStyle>
 		<checkboxStyle name="default">
-			<mouseRect left="0" top="0" width="16" height="16" />
-			<unchecked texture="checkbox" srcx="0" srcy="0" width="16" height="16"
-				offsetx="0" offsety="0" />
-			<checked texture="checkbox" srcx="16" srcy="0" width="16" height="16"
+			<mouseRect left="1" top="5" width="27" height="27" />
+			<unchecked texture="GuiElements" srcx="704" srcy="66" width="38" height="37"
+				offsetx="0" offsety="4" />
+			<checked texture="GuiElements" srcx="962" srcy="41" width="38" height="41"
 				offsetx="0" offsety="0" />
 		</checkboxStyle>
 		<sliderStyle name="default">
-			<mouseRect left="7" top="0" width="107" height="31" />
-			<value min="0" max ="100" />
-			<idle backroundtexture="slider" backroundsrcx="0" backroundsrcy="0" 
-				backroundwidth="128" backroundheight="18" 
+			<mouseRect left="8" top="-3" width="26" height="36" />
+			<value min="0" max="100" width="83"/>
+			<idle backroundtexture="GuiElements" backroundsrcx="742" backroundsrcy="96" 
+				backroundwidth="118" backroundheight="22" 
+				backroundoffsetx="8" backroundoffsety="8" 
+				slidertexture="GuiElements" slidersrcx="860" slidersrcy="104" 
+				sliderwidth="32" sliderheight="46" 
+				slideroffsetx="0" slideroffsety="-1" />
+			<active backroundtexture="GuiElements" backroundsrcx="742" backroundsrcy="66" 
+				backroundwidth="124" backroundheight="30" 
 				backroundoffsetx="0" backroundoffsety="0" 
-				slidertexture="slider" slidersrcx="0" slidersrcy="19" 
-				sliderwidth="7" sliderheight="31" 
-				slideroffsetx="0" slideroffsety="0" />
-			<active backroundtexture="slider" backroundsrcx="0" backroundsrcy="0" 
-				backroundwidth="128" backroundheight="18" 
-				backroundoffsetx="0" backroundoffsety="0" 
-				slidertexture="slider" slidersrcx="8" slidersrcy="19" 
-				sliderwidth="7" sliderheight="31" 
-				slideroffsetx="0" slideroffsety="0" />
+				slidertexture="GuiElements" slidersrcx="984" slidersrcy="82" 
+				sliderwidth="38" sliderheight="54" 
+				slideroffsetx="-6" slideroffsety="-9" />
 		</sliderStyle>
 	</styles>
 	<sounds>
@@ -45,9 +45,9 @@
 	</sounds>
 	<elements>
 		<button id="0" text="gui_close" style="default" sound="default" x="261" y="270" />
-		<checkbox id="1" style="default" x="90" y="110" />
-		<slider id="2" style="default" x="90" y="150" />
-		<label id="3" text="gui_label_mastervolumen" font="buttonHoverFont" aligment="0" x="230" y="140" />
-		<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" aligment="0" x="120" y="100" />
+		<checkbox id="1" style="default" x="170" y="110" />
+		<slider id="2" style="default" x="84" y="160" />
+		<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" aligment="0" x="210" y="110" />
+		<label id="3" text="gui_label_mastervolumen" font="buttonHoverFont" aligment="0" x="210" y="155" />
 	</elements>
 </menu>

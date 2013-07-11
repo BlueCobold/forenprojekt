@@ -289,6 +289,7 @@ std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(tinyx
             {
                 style.min = value->FloatAttribute("min");
                 style.max = value->FloatAttribute("max");
+                style.width = value->FloatAttribute("width");
             }
             sliderStyles[styleXml->Attribute("name")] = style;
         }
@@ -299,12 +300,13 @@ std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(tinyx
 SliderStateStyle MenuLoader::loadSliderStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
 {
     SliderStateStyle style;
-    style.spriteOffset = sf::Vector2f(xml->FloatAttribute("backroundoffsetx"), xml->FloatAttribute("backroundoffsety"));
+    style.backgroundOffset = sf::Vector2f(xml->FloatAttribute("backroundoffsetx"), xml->FloatAttribute("backroundoffsety"));
     style.spriteBackround = sf::Sprite(*resourceManager.getTexture(xml->Attribute("backroundtexture")));
     style.spriteBackround.setTextureRect(sf::IntRect(
             xml->IntAttribute("backroundsrcx"), xml->IntAttribute("backroundsrcy"),
             xml->IntAttribute("backroundwidth"), xml->IntAttribute("backroundheight")));
 
+    style.sliderOffset = sf::Vector2f(xml->FloatAttribute("slideroffsetx"), xml->FloatAttribute("slideroffsety"));
     style.spriteSlider = sf::Sprite(*resourceManager.getTexture(xml->Attribute("slidertexture")));
     style.spriteSlider.setTextureRect(sf::IntRect(
             xml->IntAttribute("slidersrcx"), xml->IntAttribute("slidersrcy"),
