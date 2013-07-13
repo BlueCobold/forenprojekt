@@ -7,6 +7,7 @@
 #include "PointsHUD.hpp"
 #include "BallHUD.hpp"
 #include "TimeHUD.hpp"
+#include "GoodieHUD.hpp"
 
 #include <memory> // unique_ptr
 
@@ -38,6 +39,8 @@ private:
 
     TimeHUD m_time;
     bool m_timeShow;
+
+    GoodieHUD m_doubleGravity;
 
 public:
     HUD(ResourceManager& resourceManager, Config& config);

@@ -94,6 +94,8 @@
     <ClCompile Include="animation\Interpolation.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="Goodie.cpp" />
+    <ClCompile Include="GravityGoodie.cpp" />
     <ClCompile Include="gui\CaptionMenu.cpp" />
     <ClCompile Include="gui\CheckBox.cpp" />
     <ClCompile Include="gui\CreditMenu.cpp" />
@@ -103,6 +105,7 @@
     <ClCompile Include="gui\Button.cpp" />
     <ClCompile Include="gui\FPSCounter.cpp" />
     <ClCompile Include="gui\hud\FPSCounterHUD.cpp" />
+    <ClCompile Include="gui\hud\GoodieHUD.cpp" />
     <ClCompile Include="gui\hud\HUD.cpp" />
     <ClCompile Include="gui\hud\HUDElement.cpp" />
     <ClCompile Include="gui\hud\LabelHUD.cpp" />
@@ -210,6 +213,8 @@
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="Goodie.hpp" />
+    <ClInclude Include="GravityGoodie.hpp" />
     <ClInclude Include="gui\ButtonStyle.hpp" />
     <ClInclude Include="gui\CaptionMenu.hpp" />
     <ClInclude Include="gui\CheckBox.hpp" />
@@ -221,6 +226,7 @@
     <ClInclude Include="gui\Button.hpp" />
     <ClInclude Include="gui\FPSCounter.hpp" />
     <ClInclude Include="gui\hud\FPSCounterHUD.hpp" />
+    <ClInclude Include="gui\hud\GoodieHUD.hpp" />
     <ClInclude Include="gui\hud\HUD.hpp" />
     <ClInclude Include="gui\hud\HUDElement.hpp" />
     <ClInclude Include="gui\hud\LabelHUD.hpp" />

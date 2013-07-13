@@ -14,6 +14,7 @@
 #include "SoundManager.hpp"
 #include "../gui/FPSCounter.hpp"
 #include "../gui/LineLabel.hpp"
+#include "../GravityGoodie.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -285,6 +286,8 @@ private:
     Medals m_currentMedal;
 
     std::string m_levelName;
+
+    GravityGoodie m_doubelGravity;
 };
 
 #endif // LEVEL_HPP
