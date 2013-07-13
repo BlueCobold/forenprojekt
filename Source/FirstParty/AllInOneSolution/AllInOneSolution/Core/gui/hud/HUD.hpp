@@ -40,7 +40,8 @@ private:
     TimeHUD m_time;
     bool m_timeShow;
 
-    GoodieHUD m_doubleGravity;
+    GoodieHUD m_gravityGoodie;
+    GoodieHUD m_invulnerableGoodie;
 
 public:
     HUD(ResourceManager& resourceManager, Config& config);

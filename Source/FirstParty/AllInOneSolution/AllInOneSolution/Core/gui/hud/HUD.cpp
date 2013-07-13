@@ -10,7 +10,8 @@ HUD::HUD(ResourceManager& resourceManager, Config& config) :
     m_arrow(resourceManager),
     m_ball(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.66f),
     m_time(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.33f),
-    m_doubleGravity(resourceManager, "goodie", sf::IntRect(0,0,32,32), sf::Vector2f(0,50)),
+    m_gravityGoodie(resourceManager, "goodie", sf::IntRect(0,0,32,32), sf::Vector2f(0,50)),
+    m_invulnerableGoodie(resourceManager, "goodie", sf::IntRect(32,0,32,32), sf::Vector2f(0,82)),
     m_ballShow(false),
     m_timeShow(false)
 {
@@ -72,8 +73,11 @@ void HUD::draw(const DrawParameter& params)
     if(m_fpsShow)
         m_fpsCounter.draw(params);
 
-    m_doubleGravity.update(params);
-    m_doubleGravity.draw(params);
+    m_gravityGoodie.update(params);
+    m_gravityGoodie.draw(params);
+
+    m_invulnerableGoodie.update(params);
+    m_invulnerableGoodie.draw(params);
 }
 
 void HUD::setBallShow(bool ballShow)
