@@ -45,12 +45,14 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_silverMedal(0),
     m_bronzeMedal(0),
     m_levelName(""),
-    m_lastTime(0)
+    m_lastTime(0),
+    m_doubelGravity(sf::Keyboard::Num1, 2.f)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
     m_contactListener.reset(new ContactListener(this, this));
     load();
+    m_doubelGravity.setNormalGravity(m_world.GetGravity());
 }
 
 Level::~Level()
@@ -103,6 +105,9 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
         updatePointLabels();
     }
+
+    m_doubelGravity.update(elapsedTime);
+    m_world.SetGravity(m_doubelGravity.getGravity());
 
     if(m_timeAttackMode)
         handleAutoRespawn();

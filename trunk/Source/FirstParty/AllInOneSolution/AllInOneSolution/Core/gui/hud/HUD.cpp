@@ -10,6 +10,7 @@ HUD::HUD(ResourceManager& resourceManager, Config& config) :
     m_arrow(resourceManager),
     m_ball(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.66f),
     m_time(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.33f),
+    m_doubleGravity(resourceManager, "goodie", sf::IntRect(0,0,32,32), sf::Vector2f(0,50)),
     m_ballShow(false),
     m_timeShow(false)
 {
@@ -70,6 +71,9 @@ void HUD::draw(const DrawParameter& params)
     m_fpsCounter.update(params);
     if(m_fpsShow)
         m_fpsCounter.draw(params);
+
+    m_doubleGravity.update(params);
+    m_doubleGravity.draw(params);
 }
 
 void HUD::setBallShow(bool ballShow)

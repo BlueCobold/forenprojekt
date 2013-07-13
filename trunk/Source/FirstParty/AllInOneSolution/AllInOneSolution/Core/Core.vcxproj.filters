@@ -250,6 +250,15 @@
     <ClCompile Include="gui\ToolTip.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="gui\hud\GoodieHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="Goodie.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GravityGoodie.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -677,6 +686,15 @@
     </ClInclude>
     <ClInclude Include="gui\ToolTip.hpp">
       <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\hud\GoodieHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="Goodie.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityGoodie.hpp">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
