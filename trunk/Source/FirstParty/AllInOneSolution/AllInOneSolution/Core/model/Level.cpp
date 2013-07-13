@@ -46,13 +46,14 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_bronzeMedal(0),
     m_levelName(""),
     m_lastTime(0),
-    m_doubelGravity(sf::Keyboard::Num1, 2.f)
+    m_gravityGoodie(sf::Keyboard::Num1, 2.f),
+    m_invulnerableGoodie(sf::Keyboard::Num2, 2.f)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
     m_contactListener.reset(new ContactListener(this, this));
     load();
-    m_doubelGravity.setNormalGravity(m_world.GetGravity());
+    m_gravityGoodie.setNormalGravity(m_world.GetGravity());
 }
 
 Level::~Level()
@@ -106,8 +107,9 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         updatePointLabels();
     }
 
-    m_doubelGravity.update(elapsedTime);
-    m_world.SetGravity(m_doubelGravity.getGravity());
+    m_gravityGoodie.update(elapsedTime);
+    m_invulnerableGoodie.update(elapsedTime);
+    m_world.SetGravity(m_gravityGoodie.getGravity());
 
     if(m_timeAttackMode)
         handleAutoRespawn();
@@ -160,12 +162,14 @@ void Level::respawnDeadBalls()
         m_updatingEntity = (*it).get();
         if((*it)->getType() != Entity::Ball || !m_ball->getBallLost())
             continue;
-
-        m_points -= 10;
-        m_multiHit = 0;
-        m_world.SetGravity(m_defaultGravity);
-        m_remainingBall -= 1;
-        createLabelAt(m_ball, "red", -10);
+        if(!m_invulnerableGoodie.isActive())
+        {
+            m_points -= 10;
+            m_multiHit = 0;
+            m_world.SetGravity(m_defaultGravity);
+            m_remainingBall -= 1;
+            createLabelAt(m_ball, "red", -10);
+        }
 
         const Ball* ball = dynamic_cast<const Ball*>((*it).get());
         if(ball->getSpawnAnimationEntity() != nullptr)
@@ -315,6 +319,9 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
 
 void Level::killTarget(Entity* target)
 {
+    if(m_invulnerableGoodie.isActive())
+        return;
+
     target->kill();
     m_remainingTarget--;
 
@@ -328,6 +335,8 @@ void Level::killTarget(Entity* target)
 }
 void Level::killBonusTarget(Entity* target)
 {
+    if(m_invulnerableGoodie.isActive())
+        return;
     target->kill();
     int earned = 10 + m_multiHit * 50;
     m_points += earned;

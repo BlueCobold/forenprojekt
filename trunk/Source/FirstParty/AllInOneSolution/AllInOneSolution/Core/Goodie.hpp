@@ -20,9 +20,8 @@ public:
     Goodie(const sf::Keyboard::Key key, const float durationTime = 0, const float cooldownTime = 0, 
            const int chrages = -1);
 
-    virtual void update(const float elapsedTime) = 0;
+    virtual void update(const float elapsedTime);
 
-protected:
     const bool isActive() const;
 };
 

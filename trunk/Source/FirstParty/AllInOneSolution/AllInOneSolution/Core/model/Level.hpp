@@ -287,7 +287,8 @@ private:
 
     std::string m_levelName;
 
-    GravityGoodie m_doubelGravity;
+    GravityGoodie m_gravityGoodie;
+    Goodie m_invulnerableGoodie;
 };
 
 #endif // LEVEL_HPP
