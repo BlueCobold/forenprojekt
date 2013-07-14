@@ -107,8 +107,8 @@ void App::handleKeyboard()
     // Enter to window or fullscreen mode when Press Return+LAlt
     if(m_focus && (utility::Keyboard.isKeyDown(sf::Keyboard::Return) && utility::Keyboard.isKeyPressed(sf::Keyboard::LAlt)))
     {
-        m_fullscreen = !m_fullscreen;
-        
+        m_fullscreen = !m_config.get<bool>("IsFullScreen");
+        m_config.set("IsFullScreen", m_fullscreen);
         switchDisplayMode();
     }
 }

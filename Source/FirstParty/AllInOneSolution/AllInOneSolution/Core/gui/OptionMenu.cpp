@@ -43,7 +43,6 @@ void OptionMenu::applyChanges()
         sf::Listener::setGlobalVolume(m_masterVolume);
         m_config.set("MasterVolume", m_masterVolume);
     }
-    m_config.save();
 }
 
 void OptionMenu::adjustVideoMode(sf::VideoMode& mode, bool fullScreen)
@@ -82,4 +81,16 @@ void OptionMenu::adjustVideoMode(sf::VideoMode& mode, bool fullScreen)
         if(mode.height > sf::VideoMode::getDesktopMode().height)
             mode.height = sf::VideoMode::getDesktopMode().height;
     }
+}
+
+void OptionMenu::onEnter()
+{
+    m_fullScreen = m_config.get<bool>("IsFullScreen");
+
+    m_masterVolume = m_config.get<float>("MasterVolume");
+    sf::Listener::setGlobalVolume(m_masterVolume);
+
+    Menu::getCheckboxes(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
+
+    Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
 }
