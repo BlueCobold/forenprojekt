@@ -21,6 +21,8 @@ public:
 
     Config(const std::string& fileName);
 
+    ~Config();
+
     template<typename T>
     T get(const std::string& data);
 

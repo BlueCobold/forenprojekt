@@ -5,6 +5,11 @@ FileReader(fileName)
 {
 }
 
+Config::~Config()
+{
+    save();
+}
+
 void Config::save()
 {
     std::ofstream configFile(getFileName(), std::ios_base::out | std::ios_base::trunc);

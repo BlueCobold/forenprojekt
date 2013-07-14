@@ -19,7 +19,7 @@ public:
     OptionMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
     
     void applyChanges();
-    
+    void onEnter();
 private:
 
     bool m_fullScreen;
