@@ -319,9 +319,6 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
 
 void Level::killTarget(Entity* target)
 {
-    if(m_invulnerableGoodie.isActive())
-        return;
-
     target->kill();
     m_remainingTarget--;
 
@@ -335,8 +332,6 @@ void Level::killTarget(Entity* target)
 }
 void Level::killBonusTarget(Entity* target)
 {
-    if(m_invulnerableGoodie.isActive())
-        return;
     target->kill();
     int earned = 10 + m_multiHit * 50;
     m_points += earned;
