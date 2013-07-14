@@ -54,7 +54,7 @@ CheckboxId = The checkbox with id % don't exist.
 LineLabelId = The label with id % don't exist.
 MenuSpriteId = The menusprite with id % don't exist.
 UnknownToolTip = ToolTip isn't registered: %.
-
+IncludeFileInvalid = Include File '%' is corrupt.
 [GUI]
 gui_game_paused = Game Paused
 gui_continue = Continue
