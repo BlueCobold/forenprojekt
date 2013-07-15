@@ -1,8 +1,6 @@
 <menu>
 	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
-	<styles>
-		<buttonStyle source="Style/ButtonStyle.inc"/>
-	</styles>
+	<styles source="Styles.inc"/>
 	<sounds>
 		<buttonSound name="default">
 			<hover sound="bounce"/>
