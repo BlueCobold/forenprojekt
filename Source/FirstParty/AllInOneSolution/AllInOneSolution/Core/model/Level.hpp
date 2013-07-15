@@ -212,12 +212,9 @@ private:
     std::vector<std::unique_ptr<Entity>> m_entitiesToSpawn;
     std::vector<EntitySpawn> m_unspawnedEntities;
 
-    // HACK: This should be in the Entity class, but since unique_ptr sucks with VS10...
-    std::vector<std::unique_ptr<b2Shape>> m_shapes;
-
     std::unique_ptr<Background> m_background;
 
-    std::unique_ptr<ContactListener> m_contactListener;
+    ContactListener  m_contactListener;
 
     float m_timeStep;
     int m_velocityIterations;

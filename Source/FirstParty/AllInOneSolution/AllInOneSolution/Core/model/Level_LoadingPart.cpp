@@ -99,7 +99,7 @@ void Level::load()
     tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
     m_defaultGravity = b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y"));
     m_world.SetGravity(m_defaultGravity);
-    m_world.SetContactListener(m_contactListener.get());
+    m_world.SetContactListener(&m_contactListener);
 
     // setup scrollview
     m_scrollView.setLevelSize(sf::Vector2f(getWidth(), getHeight()));
@@ -261,9 +261,12 @@ std::unique_ptr<Entity> Level::parseEntity(
     if(physic != nullptr)
     {
         // Shape template exists
-        if(physic->Attribute("shape") != nullptr &&
-            templates.shapes.find(std::string(physic->Attribute("shape"))) != end(templates.shapes))
-            shape = templates.shapes.find(std::string(physic->Attribute("shape")))->second;
+        if(physic->Attribute("shape") != nullptr)
+        {
+            std::string name(physic->Attribute("shape"));
+            if(templates.shapes.find(name) != end(templates.shapes))
+                shape = templates.shapes.find(std::string(physic->Attribute("shape")))->second;
+        }
         // Physics doesn't use a template
         else
             shape = physic->FirstChildElement("shape");
@@ -390,11 +393,11 @@ std::unique_ptr<Entity> Level::createEntity(
         bodyDef.angularDamping = element->BoolAttribute("angularDamping");
         LevelFileLoader::parseKinematics(element, entity.get(), this, &templates.functions);
 
+        std::vector<std::unique_ptr<b2Shape>> shapes;
         // Load shape
         if(std::string(shape->Attribute("type")) == "polygon") // Load polygon
         {
             std::vector<b2Vec2> vertices;
-
             // Iterate over the vertices
             for(tinyxml2::XMLElement* vertexIterator = shape->FirstChildElement("vertex");
                 vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
@@ -402,28 +405,46 @@ std::unique_ptr<Entity> Level::createEntity(
                 vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
                     utility::toMeter(vertexIterator->FloatAttribute("y"))));
             }
-
             // Construct the b2Shape
             std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
             ps->Set(vertices.data(), vertices.size());
-            m_shapes.push_back(std::move(ps));
+            shapes.push_back(std::move(ps));
+        }
+        else if(std::string(shape->Attribute("type")) == "complex_polygon") // Load polygon
+        {
+            for(auto polyIterator = shape->FirstChildElement("polygon");
+                polyIterator != nullptr; polyIterator = polyIterator->NextSiblingElement("polygon"))
+            {
+                std::vector<b2Vec2> vertices;
+                // Iterate over the vertices
+                for(auto vertexIterator = polyIterator->FirstChildElement("vertex");
+                    vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
+                {
+                    vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
+                        utility::toMeter(vertexIterator->FloatAttribute("y"))));
+                }
+                // Construct the b2Shape
+                std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
+                ps->Set(vertices.data(), vertices.size());
+                shapes.push_back(std::move(ps));
+            }
         }
         else if(std::string(shape->Attribute("type")) == "circle") // Load circle
         {
             std::unique_ptr<b2CircleShape> cs(new b2CircleShape);
             cs->m_radius = utility::toMeter(shape->FloatAttribute("radius"));
-            m_shapes.push_back(std::move(cs));
+            shapes.push_back(std::move(cs));
         }
 
         // Load fixtures
         element = physic->FirstChildElement("fixture");
         b2FixtureDef fixtureDef;
-        fixtureDef.shape = m_shapes.back().get();
+        //fixtureDef.shape = &shapes.g m_shapes.back().get();
         fixtureDef.density = element->FloatAttribute("density");
         fixtureDef.friction = element->FloatAttribute("friction");
         fixtureDef.restitution = element->FloatAttribute("restitution");
 
-        entity->bindDefs(fixtureDef, bodyDef, &m_world);
+        entity->bindDefs(fixtureDef, shapes, bodyDef, &m_world);
     }
     
     if(auto collider = xml->FirstChildElement("onCollision"))

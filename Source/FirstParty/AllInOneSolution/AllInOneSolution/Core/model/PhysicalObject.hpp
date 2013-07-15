@@ -27,9 +27,10 @@ private:
     b2Vec2 m_basePosition;
     
     b2Body* m_body;
-    b2FixtureDef m_fixtureDef;
+    std::vector<b2FixtureDef> m_fixtureDefs;
     b2BodyDef m_bodyDef;
     b2World* m_world;
+    std::vector<std::unique_ptr<b2Shape>> m_shapes;
 
     bool m_basePosChanged;
 
@@ -41,9 +42,21 @@ public:
     virtual ~PhysicalObject()
     { }
 
-    void bindDefs(b2FixtureDef fixtureDef, b2BodyDef bodyDef, b2World* world)
+    void bindDefs(
+        const b2FixtureDef& fixtureDef,
+        std::vector<std::unique_ptr<b2Shape>>& shapes,
+        const b2BodyDef& bodyDef, b2World* world)
     {
-        m_fixtureDef = fixtureDef;
+        m_shapes = std::move(shapes);
+        for(auto shape = begin(m_shapes); shape != end(m_shapes); ++shape)
+        {
+            b2FixtureDef def;
+            def.density = fixtureDef.density;
+            def.friction = fixtureDef.friction;
+            def.restitution = fixtureDef.restitution;
+            def.shape = shape->get();
+            m_fixtureDefs.push_back(def);
+        }
         m_bodyDef = bodyDef;
         m_world = world;
     }
@@ -60,7 +73,8 @@ public:
             return;
         // Create & bind body
         m_body = m_world->CreateBody(&m_bodyDef);
-        m_body->CreateFixture(&m_fixtureDef);
+        for(auto fixture = begin(m_fixtureDefs); fixture != end(m_fixtureDefs); ++fixture)
+            m_body->CreateFixture(&(*fixture));
         // Save the entity in the body for the contact listener
         m_body->SetUserData(this);
         if(m_basePosChanged)

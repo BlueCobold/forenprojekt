@@ -1,5 +1,6 @@
 <level>
-	<levelinfo name="Level 7" />
+	<medal bronze="800" silver="1000" gold="1400" />
+	<levelinfo name="Up and Down" />
 	<constants solid="0" />
 	<gameplay maxBalls="5" time="180"/>
 	<templates>
@@ -7,6 +8,7 @@
 		<include file="assets/target/static.inc" />
 		<include file="assets/teeter/wood.inc" />
 		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
 
 		<shapes>
 			<shape name="checkpointArea" type="polygon">
@@ -419,10 +421,10 @@
         w6d4d3d2d1d3d6d4d3d2d1d3d2d4d1d5d5d2d4d5d3d6d1d2d6d4d1d3d5d6d1d5d3w2        
         w3d3d1w3w2w5w1w4w5w2w3w2w6w1w2w3w1w4w6w1w5w2w3w1w2w5w6w5w2w6w5d6d4w1        
         w1d2d2w1        w6                    h1                    w1d2d5w5        
-        w5d3d5w3    t1  w3    t1          t1   1    t1          t1  w2d4d6w3        
+        w5d3d5w3    t1  w3                     1                    w2d4d6w3        
         w3d5d2w4        w4                    w2                    w5d3d1w6        
         w4d2d6w5    BB  w1    R1              w4    R1              w4d6d4w2        
-        w2d6d4w1    GT        GT  /4\1    GT        GT  /1\3    GT  w6d2d2w1        
+        w2d6d4w1    GT        GT  ^O^X    GT        GT  ^O^X    GT  w6d2d2w1        
         w6d1d3w6la        ra      w6w2la        ra      w6w2la      w2d5d1w4        
         w4d3d5brla        ra      blbrla        ra      blbrla      w3d2d4w5        
         w1d5d4brla  TT    ra  TT  blbrla  TT    ra  TT  blbrla  TT  w4d3d5w1        

@@ -51,7 +51,7 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
-    m_contactListener.reset(new ContactListener(this, this));
+    m_contactListener = ContactListener(this, this);
     load();
     m_gravityGoodie.setNormalGravity(m_world.GetGravity());
 }
