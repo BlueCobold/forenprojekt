@@ -47,7 +47,7 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_levelName(""),
     m_lastTime(0),
     m_gravityGoodie(sf::Keyboard::Num1, 2.f),
-    m_invulnerableGoodie(sf::Keyboard::Num2, 2.f)
+    m_invulnerableGoodie(sf::Keyboard::Num2, 3.f)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;

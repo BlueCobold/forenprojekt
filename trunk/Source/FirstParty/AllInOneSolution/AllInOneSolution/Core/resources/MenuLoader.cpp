@@ -30,11 +30,12 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
         menu.captionResourceKey = caption->Attribute("text");
         menu.captionOffset = sf::Vector2f(caption->FloatAttribute("offsetx"), caption->FloatAttribute("offsety"));
     }
+    
     std::unordered_map<std::string, ButtonStyle> buttonStyles = parseButtonStyles(menuXml, resourceManager);
-    std::unordered_map<std::string, SoundObject> buttonSounds = parseSounds(menuXml, resourceManager.getSoundManager());
     std::unordered_map<std::string, CheckBoxStyle> checkboxStyles = parseCheckBoxStyles(menuXml, resourceManager);
     std::unordered_map<std::string, SliderStyle> sliderStyles = parseSliderStyles(menuXml, resourceManager);
     std::unordered_map<std::string, ToolTip> toolTip = parseToolTipStyle(menuXml, resourceManager);
+    std::unordered_map<std::string, SoundObject> buttonSounds = parseSounds(menuXml, resourceManager.getSoundManager());
 
     parseButtons(menu, menuXml, buttonStyles, buttonSounds, resourceManager);
     parseCheckBoxes(menu, menuXml, checkboxStyles, resourceManager);
@@ -188,7 +189,7 @@ void MenuLoader::parseImages(MenuTemplate& menu,
 std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, ButtonStyle> buttonStyles;
-    if(auto styles = menuXml->FirstChildElement("styles")->FirstChildElement("buttonStyle"))
+    if(auto styles = menuXml->FirstChildElement("styles"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
         std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
@@ -200,7 +201,7 @@ std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(tinyx
             throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
         }
 
-        for(auto styleXml = doc->FirstChildElement("buttonStyle");
+        for(auto styleXml = doc->FirstChildElement("styles")->FirstChildElement("buttonStyle");
             styleXml != nullptr; styleXml = styleXml->NextSiblingElement("buttonStyle"))
         {
             ButtonStyle style;
@@ -248,7 +249,7 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(tinyxml2::XMLElement* xml, Res
 std::unordered_map<std::string, CheckBoxStyle> MenuLoader::parseCheckBoxStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, CheckBoxStyle> checkboxStyles;
-    if(auto styles = menuXml->FirstChildElement("styles")->FirstChildElement("checkboxStyle"))
+    if(auto styles = menuXml->FirstChildElement("styles"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
         std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
@@ -260,7 +261,7 @@ std::unordered_map<std::string, CheckBoxStyle> MenuLoader::parseCheckBoxStyles(t
             throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
         }
 
-        for(auto styleXml = doc->FirstChildElement("checkboxStyle");
+        for(auto styleXml = doc->FirstChildElement("styles")->FirstChildElement("checkboxStyle");
             styleXml != nullptr; styleXml = styleXml->NextSiblingElement("checkboxStyle"))
         {
             CheckBoxStyle style;
@@ -292,7 +293,7 @@ CheckBoxStateStyle MenuLoader::loadCheckBoxStateStyle(tinyxml2::XMLElement* xml,
 std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, SliderStyle> sliderStyles;
-    if(auto styles = menuXml->FirstChildElement("styles")->FirstChildElement("sliderStyle"))
+    if(auto styles = menuXml->FirstChildElement("styles"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
         std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
@@ -304,7 +305,7 @@ std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(tinyx
             throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
         }
 
-        for(auto styleXml = doc->FirstChildElement("sliderStyle");
+        for(auto styleXml = doc->FirstChildElement("styles")->FirstChildElement("sliderStyle");
             styleXml != nullptr; styleXml = styleXml->NextSiblingElement("sliderStyle"))
         {
             SliderStyle style;
@@ -348,7 +349,7 @@ SliderStateStyle MenuLoader::loadSliderStateStyle(tinyxml2::XMLElement* xml, Res
 std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, ToolTip> toolTip;
-    if(auto styles = menuXml->FirstChildElement("styles")->FirstChildElement("tooltipStyle"))
+    if(auto styles = menuXml->FirstChildElement("styles"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
         std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
@@ -360,7 +361,7 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(tinyxml2:
             throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
         }
 
-        for(auto tooltipXml = doc->FirstChildElement("tooltipStyle");
+        for(auto tooltipXml = doc->FirstChildElement("styles")->FirstChildElement("tooltipStyle");
             tooltipXml != nullptr; tooltipXml = tooltipXml->NextSiblingElement("tooltipStyle"))
         {
             sf::Sprite leftTexture;

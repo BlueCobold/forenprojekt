@@ -1,11 +1,7 @@
 <menu>
 	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
 	<caption font="gui_large" text="gui_optin_menu" offsetx="0" offsety="50" />
-	<styles>
-		<buttonStyle source="Style/ButtonStyle.inc"/>
-		<checkboxStyle source="Style/CheckBoxStyle.inc" />
-		<sliderStyle source="Style/SliderStyle.inc" />
-	</styles>
+	<styles source="Styles.inc"/>
 	<sounds>
 		<buttonSound name="default">
 			<hover sound="bounce"/>
