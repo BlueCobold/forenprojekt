@@ -2,7 +2,7 @@
 	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
 	<caption font="gui_large" text="gui_level_unsuccessful" offsetx="0" offsety="50" />
 	<styles>
-		<buttonStyle source="ButtonStyle.inc"/>
+		<buttonStyle source="Style/ButtonStyle.inc"/>
 	</styles>
 	<sounds>
 		<buttonSound name="default">

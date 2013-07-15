@@ -1,7 +1,7 @@
 <menu>
 	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
 	<styles>
-		<buttonStyle source="ButtonStyle.inc"/>
+		<buttonStyle source="Style/ButtonStyle.inc"/>
 	</styles>
 	<sounds>
 		<buttonSound name="default">
