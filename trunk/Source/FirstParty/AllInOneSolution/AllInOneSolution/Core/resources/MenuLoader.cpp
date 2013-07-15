@@ -190,7 +190,7 @@ std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(tinyx
     if(auto styles = menuXml->FirstChildElement("styles")->FirstChildElement("buttonStyle"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-        std::string filename = utility::toString("res/menus/Style/") + styles->Attribute("source");
+        std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
         doc->LoadFile(filename.c_str());     
 
         if(doc->Error())
@@ -250,7 +250,7 @@ std::unordered_map<std::string, CheckBoxStyle> MenuLoader::parseCheckBoxStyles(t
     if(auto styles = menuXml->FirstChildElement("styles")->FirstChildElement("checkboxStyle"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-        std::string filename = utility::toString("res/menus/Style/") + styles->Attribute("source");
+        std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
         doc->LoadFile(filename.c_str());     
 
         if(doc->Error())
@@ -294,7 +294,7 @@ std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(tinyx
     if(auto styles = menuXml->FirstChildElement("styles")->FirstChildElement("sliderStyle"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-        std::string filename = utility::toString("res/menus/Style/") + styles->Attribute("source");
+        std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
         doc->LoadFile(filename.c_str());     
 
         if(doc->Error())
