@@ -28,6 +28,8 @@ public:
      virtual void draw(const DrawParameter& params);
 
      void setPosition(const sf::Vector2f& position);
+
+     void setText(const std::string& text);
 };
 
 #endif // TOOLTIP_HPP

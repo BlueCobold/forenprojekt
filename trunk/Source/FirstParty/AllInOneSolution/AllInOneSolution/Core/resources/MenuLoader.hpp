@@ -61,7 +61,7 @@ private:
     static std::unordered_map<std::string, SoundObject> parseSounds(tinyxml2::XMLElement* menuXml, SoundManager& soundManager);
     static std::unordered_map<std::string, CheckBoxStyle> parseCheckBoxStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
     static std::unordered_map<std::string, SliderStyle> parseSliderStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
-    static std::unordered_map<std::string, ToolTip> parseToolTip(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, ToolTip> parseToolTipStyle(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
 
     static ButtonStateStyle loadButtonStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
     static CheckBoxStateStyle loadCheckBoxStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager);

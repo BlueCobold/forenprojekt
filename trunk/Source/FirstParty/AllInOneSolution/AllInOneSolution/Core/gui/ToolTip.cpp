@@ -46,3 +46,10 @@ void ToolTip::setPosition(const sf::Vector2f& position)
     m_rightTexture.setPosition(m_position.x + m_offset.x + length, m_position.y + m_offset.y);
     m_centerTexture.setPosition(m_position.x + m_offset.x - length, m_position.y + m_offset.y);
 }
+
+void ToolTip::setText(const std::string& text)
+{
+    m_label.setText(text);
+    m_scalefactor = m_label.getWidth() / m_centerTexture.getTextureRect().width;
+    m_centerTexture.setScale(m_scalefactor, 1.f);
+}
