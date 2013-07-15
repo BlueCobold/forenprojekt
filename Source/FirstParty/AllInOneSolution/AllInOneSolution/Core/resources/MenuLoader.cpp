@@ -34,7 +34,7 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     std::unordered_map<std::string, SoundObject> buttonSounds = parseSounds(menuXml, resourceManager.getSoundManager());
     std::unordered_map<std::string, CheckBoxStyle> checkboxStyles = parseCheckBoxStyles(menuXml, resourceManager);
     std::unordered_map<std::string, SliderStyle> sliderStyles = parseSliderStyles(menuXml, resourceManager);
-    std::unordered_map<std::string, ToolTip> toolTip = parseToolTip(menuXml, resourceManager);
+    std::unordered_map<std::string, ToolTip> toolTip = parseToolTipStyle(menuXml, resourceManager);
 
     parseButtons(menu, menuXml, buttonStyles, buttonSounds, resourceManager);
     parseCheckBoxes(menu, menuXml, checkboxStyles, resourceManager);
@@ -178,6 +178,7 @@ void MenuLoader::parseImages(MenuTemplate& menu,
             auto tooltip = toolTip.find(imageXml->Attribute("tooltip"));
             if(tooltip == end(toolTip))
                 throw std::runtime_error(utility::replace(utility::translateKey("UnknownToolTip"), imageXml->Attribute("tooltip")));
+            tooltip->second.setText(utility::translateKey(imageXml->Attribute("tooltiptext")));
             sprite.setToolTip(tooltip->second);
 
             menu.sprites.push_back(sprite);
@@ -344,13 +345,23 @@ SliderStateStyle MenuLoader::loadSliderStateStyle(tinyxml2::XMLElement* xml, Res
     return style;
 }
 
-std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTip(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, ToolTip> toolTip;
-    if(auto styles = menuXml->FirstChildElement("tooltips"))
+    if(auto styles = menuXml->FirstChildElement("styles")->FirstChildElement("tooltipStyle"))
     {
-        for(auto tooltipXml = styles->FirstChildElement("tooltip");
-            tooltipXml != nullptr; tooltipXml = tooltipXml->NextSiblingElement("tooltip"))
+        std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
+        std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
+        doc->LoadFile(filename.c_str());     
+
+        if(doc->Error())
+        {
+            doc->PrintError();
+            throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
+        }
+
+        for(auto tooltipXml = doc->FirstChildElement("tooltipStyle");
+            tooltipXml != nullptr; tooltipXml = tooltipXml->NextSiblingElement("tooltipStyle"))
         {
             sf::Sprite leftTexture;
             sf::Sprite centerTexture;
@@ -371,7 +382,7 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTip(tinyxml2::XMLE
                                                      tooltipXml->FirstChildElement("right")->IntAttribute("width"),
                                                      tooltipXml->FirstChildElement("right")->IntAttribute("height")));
             
-            ToolTip tempToolTip(utility::translateKey(tooltipXml->FirstChildElement("text")->Attribute("textkey")),
+            ToolTip tempToolTip("",
                                 resourceManager.getBitmapFont(tooltipXml->FirstChildElement("text")->Attribute("font")),
                                 sf::Vector2f(tooltipXml->FirstChildElement("text")->FloatAttribute("offsetx"),
                                              tooltipXml->FirstChildElement("text")->FloatAttribute("offsety")),
