@@ -12,6 +12,7 @@ class ContactListener : public b2ContactListener
 {
 public:
 
+    ContactListener();
     ContactListener(CollisionHandler* handler, CollisionFilter* filter);
 
     void BeginContact(b2Contact* contact);

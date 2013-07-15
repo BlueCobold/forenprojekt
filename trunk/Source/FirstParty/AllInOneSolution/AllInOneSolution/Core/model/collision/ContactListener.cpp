@@ -7,6 +7,11 @@
 
 #include <exception>
 
+ContactListener::ContactListener()
+    : m_handler(nullptr),
+    m_filter(nullptr)
+{ }
+
 ContactListener::ContactListener(CollisionHandler* handler, CollisionFilter* filter)
     : m_handler(handler),
     m_filter(filter)

@@ -1,19 +1,5 @@
 <include>
 	<templates>
-		<shapes>
-			<shape name="teeter" type="polygon">
-				<vertex x="-104" y="-15" />
-				<vertex x="104" y="-15" />
-				<vertex x="104" y="15" />
-				<vertex x="-104" y="15" />
-			</shape>
-			<shape name="teeter2" type="polygon">
-				<vertex x="-15" y="-104" />
-				<vertex x="-15" y="104" />
-				<vertex x="15" y="104" />
-				<vertex x="15" y="-104" />
-			</shape>
-		</shapes>
 
 		<functions>
 			<function name="target_bloat">
