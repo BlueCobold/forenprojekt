@@ -185,7 +185,8 @@ private:
         tinyxml2::XMLElement* xml,
         Templates& templates);
 
-    std::unique_ptr<Entity> parseBallSpawnAnimation(
+    std::unique_ptr<Entity> parseBallAnimation(
+        const std::string& key,
         tinyxml2::XMLElement* xml,
         Templates& templates);
 

@@ -324,9 +324,11 @@ std::unique_ptr<Entity> Level::createEntity(
                 entity = std::unique_ptr<Teeter>(new Teeter(m_config.get<float>("MouseScale")));
             else if(std::string(xml->Attribute("type")) == "ball")
             {
-                std::unique_ptr<Entity> spawn = parseBallSpawnAnimation(xml, templates);
-                entity = std::unique_ptr<Ball>(new Ball(m_config.get<float>("BallResetTime"), spawn.get()));
+                std::unique_ptr<Entity> spawn = parseBallAnimation("onRespawn", xml, templates);
+                std::unique_ptr<Entity> kill = parseBallAnimation("onKill", xml, templates);
+                entity = std::unique_ptr<Ball>(new Ball(m_config.get<float>("BallResetTime"), spawn.get(), kill.get()));
                 m_unspawnedEntities.push_back(EntitySpawn(std::move(spawn)));
+                m_unspawnedEntities.push_back(EntitySpawn(std::move(kill)));
             }
             else if(std::string(xml->Attribute("type")) == "target")
             {
@@ -512,6 +514,8 @@ void Level::parseCollider(
                 if(entityA->getType() != Entity::Ball && entityB->getType() != Entity::Ball)
                     throw std::runtime_error(utility::replace(utility::translateKey("EntityNoCollision"), "Ball"));
                 m_ball->blowUp();
+                if(m_ball->getKillAnimationEntity() != nullptr)
+                    prepareEntityForSpawn(m_ball->getPosition(), m_ball->getKillAnimationEntity());
             }));
             entity->bindCollisionHandler(std::move(collider));
         }
@@ -679,11 +683,12 @@ void Level::parseCollisionFilter(
     entity->bindCollisionFilter(getCollisionFilter(entity, xml->FirstChildElement(), templates));
 }
 
-std::unique_ptr<Entity> Level::parseBallSpawnAnimation(
+std::unique_ptr<Entity> Level::parseBallAnimation(
+    const std::string& key,
     tinyxml2::XMLElement* xml,
     Templates& templates)
 {
-    auto spawn = xml->FirstChildElement("onRespawn");
+    auto spawn = xml->FirstChildElement(key.c_str());
     if(spawn == nullptr)
         return nullptr;
     auto action = spawn->FirstChildElement("spawnEntity");
