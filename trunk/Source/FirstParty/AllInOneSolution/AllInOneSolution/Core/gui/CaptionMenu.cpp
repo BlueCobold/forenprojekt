@@ -15,9 +15,8 @@ CaptionMenu::CaptionMenu(const MenuTemplate& menuTemplate,
     m_caption.setText(utility::translateKey(menuTemplate.captionResourceKey));
 }
 
-void CaptionMenu::draw(const DrawParameter& params)
+void CaptionMenu::drawAdditionalBackground(const DrawParameter& params)
 {
-    Menu::draw(params);
     m_caption.draw(params);
 }
 
