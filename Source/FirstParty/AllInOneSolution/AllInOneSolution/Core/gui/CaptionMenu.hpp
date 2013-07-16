@@ -13,9 +13,11 @@ public:
                 const sf::Vector2f& position,
                 sf::RenderWindow& screen);
 
-    virtual void draw(const DrawParameter& params);
-
-    virtual void setPosition(const sf::Vector2f& position);
+    virtual void setPosition(const sf::Vector2f& position) override;
+    
+protected:
+    
+    virtual void drawAdditionalBackground(const DrawParameter& params) override;
 
 private:
 

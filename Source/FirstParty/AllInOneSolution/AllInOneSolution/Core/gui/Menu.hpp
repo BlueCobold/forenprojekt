@@ -73,6 +73,10 @@ public:
     const sf::Vector2i& getSize() const;
 
     void registerOnClick(std::function<void(const Button& sender)> callback);
+
+protected:
+    
+    virtual void drawAdditionalBackground(const DrawParameter& params);
 };
 
 #endif // MENU_HPP

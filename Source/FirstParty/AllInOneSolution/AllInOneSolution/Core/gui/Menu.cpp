@@ -74,6 +74,8 @@ const sf::Vector2f& Menu::getPosition() const
 void Menu::draw(const DrawParameter& params)
 {
     params.getTarget().draw(m_template.background);
+    drawAdditionalBackground(params);
+
     for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
         (*it)->draw(params);
 
@@ -88,6 +90,10 @@ void Menu::draw(const DrawParameter& params)
 
     for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
         (*it)->draw(params);
+}
+
+void Menu::drawAdditionalBackground(const DrawParameter& params)
+{
 }
 
 void Menu::update(const sf::RenderWindow& screen)
