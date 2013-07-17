@@ -79,6 +79,7 @@ gui_levelname = Levelname
 gui_balls = Balls available:
 gui_time = Time:
 gui_unlimited = %
+gui_ball_lost = Balls lost:
 
 [ToolTip]
 tooltip_gold = you finish the level in gold

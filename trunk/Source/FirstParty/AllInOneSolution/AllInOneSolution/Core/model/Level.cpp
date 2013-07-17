@@ -33,6 +33,7 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_points(0),
     m_multiHit(0),
     m_ball(nullptr),
+    m_lostBallCounter(0),
     m_updatingEntity(nullptr),
     m_remainingBall(-1),
     m_levelPass(false),
@@ -169,6 +170,7 @@ void Level::respawnDeadBalls()
             m_gravity = m_defaultGravity;
             m_remainingBall -= 1;
             createLabelAt(m_ball, "red", -10);
+            m_lostBallCounter++;
         }
 
         const Ball* ball = dynamic_cast<const Ball*>((*it).get());
@@ -521,4 +523,9 @@ const Level::Medals Level::getMedal() const
 const std::string Level::getLevelName() const
 {
     return m_levelName;
+}
+
+const int Level::getLostBalls() const
+{
+    return m_lostBallCounter;
 }

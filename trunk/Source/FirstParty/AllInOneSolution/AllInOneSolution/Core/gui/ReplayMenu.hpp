@@ -15,6 +15,7 @@ public:
     static const int SPRITE_SYMBOL_BRONCE = 4;
     static const int SPRITE_SYMBOL_SILVER = 5;
     static const int SPRITE_SYMBOL_GOLD = 6;
+    static const int LABEL_LOSTBALLS = 7;
 
     ReplayMenu(const sf::Vector2f& position,
                sf::RenderWindow& screen,
@@ -22,6 +23,7 @@ public:
 
     void setPoints(int points);
     void setGrade(int grade);
+    void setLostBalls(int lostBalls);
 
 };
 
