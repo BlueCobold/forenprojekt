@@ -54,6 +54,9 @@ void Animation::update()
     if(m_xScaleProvider != nullptr || m_yScaleProvider != nullptr)
     m_sprite.setScale(scaleX, scaleY);
 
+    if(m_origins.size() != 0)
+        m_sprite.setOrigin(static_cast<float>(m_origins[m_frame].x), static_cast<float>(m_origins[m_frame].y));
+
     sf::Color color(255, 255, 255);
     if(m_colorProviders[Red] != nullptr)
         color.r = static_cast<sf::Uint8>(255*m_colorProviders[Red]->getValue());
@@ -94,8 +97,7 @@ void Animation::reset()
 void Animation::setPosition(const float x, const float y)
 {
     m_externalPosition = sf::Vector2f(x, y);
-    sf::Vector2f pos = m_externalPosition + m_dynamicPosition + m_drawOffset;
-    m_sprite.setPosition(pos);
+    m_sprite.setPosition(m_externalPosition + m_dynamicPosition + m_drawOffset);
 }
 
 void Animation::updatePosition()
@@ -105,8 +107,7 @@ void Animation::updatePosition()
         m_dynamicPosition.x += m_xPositionProvider->getValue();
     if(m_yPositionProvider != nullptr)
         m_dynamicPosition.y += m_yPositionProvider->getValue();
-    sf::Vector2f pos = m_externalPosition + m_dynamicPosition + m_drawOffset;
-    m_sprite.setPosition(pos);
+    m_sprite.setPosition(m_externalPosition + m_dynamicPosition + m_drawOffset);
 }
 
 void Animation::setRotation(const float radians)
@@ -133,10 +134,16 @@ void Animation::bindTexture(const sf::Texture& texture, const sf::Vector2f& sour
 
 const sf::IntRect Animation::getTextureRect() const
 {
-    if(m_horizontal)
-        return sf::IntRect(static_cast<int>(m_frame * m_frameWidth + m_sourceOffset.x), static_cast<int>(m_sourceOffset.y), m_frameWidth, m_frameHeight);
+    if(m_sizes.size() != 0 && m_srcOffsets.size() != 0)
+        return sf::IntRect(static_cast<int>(m_srcOffsets[m_frame].x), static_cast<int>(m_srcOffsets[m_frame].y),
+            static_cast<int>(m_sizes[m_frame].x), static_cast<int>(m_sizes[m_frame].y));
     else
-        return sf::IntRect(static_cast<int>(m_sourceOffset.x), static_cast<int>(m_frame * m_frameHeight + m_sourceOffset.y), m_frameWidth, m_frameHeight);
+        if(m_horizontal)
+            return sf::IntRect(static_cast<int>(m_frame * m_frameWidth + m_sourceOffset.x),
+                static_cast<int>(m_sourceOffset.y), m_frameWidth, m_frameHeight);
+        else
+            return sf::IntRect(static_cast<int>(m_sourceOffset.x),
+                static_cast<int>(m_frame * m_frameHeight + m_sourceOffset.y), m_frameWidth, m_frameHeight);
 }
 
 void Animation::draw(const DrawParameter& param)
@@ -173,4 +180,14 @@ void Animation::bindColorController(std::unique_ptr<ValueProvider> red,
     m_colorProviders[Green] = std::move(green);
     m_colorProviders[Blue] = std::move(blue);
     m_colorProviders[Alpha] = std::move(alpha);
+}
+
+void Animation::setLayout(
+    const std::vector<sf::Vector2i>& srcOffsets,
+    const std::vector<sf::Vector2i>& sizes,
+    const std::vector<sf::Vector2i>& origins)
+{
+    m_srcOffsets = srcOffsets;
+    m_sizes = sizes;
+    m_origins = origins;
 }

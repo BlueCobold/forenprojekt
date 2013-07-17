@@ -46,6 +46,10 @@ public:
         std::unique_ptr<ValueProvider> green,
         std::unique_ptr<ValueProvider> blue,
         std::unique_ptr<ValueProvider> alpha);
+    void setLayout(
+        const std::vector<sf::Vector2i>& srcOffsets,
+        const std::vector<sf::Vector2i>& sizes,
+        const std::vector<sf::Vector2i>& origins);
     
     void draw(const DrawParameter& param);
 
@@ -66,6 +70,9 @@ private:
     std::unique_ptr<ValueProvider> m_rotationProvider;
     std::unique_ptr<ValueProvider> m_frameProvider;
     std::unique_ptr<ValueProvider> m_colorProviders[4];
+    std::vector<sf::Vector2i> m_srcOffsets;
+    std::vector<sf::Vector2i> m_sizes;
+    std::vector<sf::Vector2i> m_origins;
     bool m_applyRotation;
     unsigned int m_frames;
     unsigned int m_frame;
