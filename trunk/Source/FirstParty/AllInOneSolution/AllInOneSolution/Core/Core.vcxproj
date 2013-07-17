@@ -94,8 +94,6 @@
     <ClCompile Include="animation\Interpolation.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Core.cpp" />
-    <ClCompile Include="Goodie.cpp" />
-    <ClCompile Include="GravityGoodie.cpp" />
     <ClCompile Include="gui\CaptionMenu.cpp" />
     <ClCompile Include="gui\CheckBox.cpp" />
     <ClCompile Include="gui\CreditMenu.cpp" />
@@ -128,6 +126,8 @@
     <ClCompile Include="model\Ball.cpp" />
     <ClCompile Include="model\collision\ContactListener.cpp" />
     <ClCompile Include="model\Entity.cpp" />
+    <ClCompile Include="model\Goodie.cpp" />
+    <ClCompile Include="model\GravityGoodie.cpp" />
     <ClCompile Include="model\Level.cpp" />
     <ClCompile Include="model\Level_LoadingPart.cpp" />
     <ClCompile Include="model\ParallaxLayer.cpp" />
@@ -213,8 +213,6 @@
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
-    <ClInclude Include="Goodie.hpp" />
-    <ClInclude Include="GravityGoodie.hpp" />
     <ClInclude Include="gui\ButtonStyle.hpp" />
     <ClInclude Include="gui\CaptionMenu.hpp" />
     <ClInclude Include="gui\CheckBox.hpp" />
@@ -267,6 +265,8 @@
     <ClInclude Include="model\collision\handler\SpawnEntityCollisionHandler.hpp" />
     <ClInclude Include="model\collision\handler\GenericCollisionHandler.hpp" />
     <ClInclude Include="model\Entity.hpp" />
+    <ClInclude Include="model\Goodie.hpp" />
+    <ClInclude Include="model\GravityGoodie.hpp" />
     <ClInclude Include="model\SoundManager.hpp" />
     <ClInclude Include="model\SoundObject.hpp" />
     <ClInclude Include="rendering\GraphicalObject.hpp" />

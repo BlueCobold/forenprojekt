@@ -14,7 +14,7 @@
 #include "SoundManager.hpp"
 #include "../gui/FPSCounter.hpp"
 #include "../gui/LineLabel.hpp"
-#include "../GravityGoodie.hpp"
+#include "GravityGoodie.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -51,7 +51,7 @@ public:
 
     virtual void restartAt(const float time);
     void update(const float dt, sf::RenderTarget& screen);
-    void draw(const DrawParameter& param);
+    virtual void draw(const DrawParameter& param) override;
     void adjustView(sf::RenderTarget& screen);
 
     void adaptToMouse();
@@ -73,8 +73,8 @@ public:
 
     const float getRemainigTime() const;
 
-    virtual float getValueOf(const std::string& name) const;
-    virtual void setValueOf(const std::string& name, const float value);
+    virtual float getValueOf(const std::string& name) const override;
+    virtual void setValueOf(const std::string& name, const float value) override;
 
     const sf::Vector2f getBallCoords() const;
 
@@ -202,6 +202,8 @@ private:
 
     b2World m_world;
     b2Vec2 m_defaultGravity;
+    b2Vec2 m_gravity;
+    float m_gravityFactor;
 
     ResourceManager& m_resourceManager;
 

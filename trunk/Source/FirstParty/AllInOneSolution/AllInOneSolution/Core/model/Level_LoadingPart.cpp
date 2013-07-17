@@ -98,7 +98,7 @@ void Level::load()
     // Load world properties
     tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
     m_defaultGravity = b2Vec2(gravity->FloatAttribute("x"), gravity->FloatAttribute("y"));
-    m_world.SetGravity(m_defaultGravity);
+    m_gravity = m_defaultGravity;
     m_world.SetContactListener(&m_contactListener);
 
     // setup scrollview
@@ -660,7 +660,7 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
     {
         bool target = true;//std::string("entity") == child->Attribute("target");
         b2Vec2 gravity(xml->FloatAttribute("x"), xml->FloatAttribute("y"));
-        std::unique_ptr<ChangeGravityFilter> filter(new ChangeGravityFilter(m_world, gravity, target, this));
+        std::unique_ptr<ChangeGravityFilter> filter(new ChangeGravityFilter(m_gravity, gravity, target, this));
         std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(xml->FirstChildElement(), filter.get(), filter.get(), nullptr, &templates.functions));
         filter->bindProvider(std::move(provider));
         return std::move(filter);

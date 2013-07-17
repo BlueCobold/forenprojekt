@@ -33,7 +33,7 @@ void Goodie::update(const float elapsedTime)
         m_active = false;
 }
 
-const bool Goodie::isActive() const
+bool Goodie::isActive() const
 {
     return m_active;
 }

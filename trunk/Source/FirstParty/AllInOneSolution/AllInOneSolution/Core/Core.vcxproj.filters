@@ -253,11 +253,11 @@
     <ClCompile Include="gui\hud\GoodieHUD.cpp">
       <Filter>Sources\gui\hud</Filter>
     </ClCompile>
-    <ClCompile Include="Goodie.cpp">
-      <Filter>Sources</Filter>
+    <ClCompile Include="model\Goodie.cpp">
+      <Filter>Sources\model</Filter>
     </ClCompile>
-    <ClCompile Include="GravityGoodie.cpp">
-      <Filter>Sources</Filter>
+    <ClCompile Include="model\GravityGoodie.cpp">
+      <Filter>Sources\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -690,11 +690,11 @@
     <ClInclude Include="gui\hud\GoodieHUD.hpp">
       <Filter>Headers\gui\hud</Filter>
     </ClInclude>
-    <ClInclude Include="Goodie.hpp">
-      <Filter>Headers</Filter>
+    <ClInclude Include="model\Goodie.hpp">
+      <Filter>Headers\model</Filter>
     </ClInclude>
-    <ClInclude Include="GravityGoodie.hpp">
-      <Filter>Headers</Filter>
+    <ClInclude Include="model\GravityGoodie.hpp">
+      <Filter>Headers\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

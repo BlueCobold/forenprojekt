@@ -26,6 +26,7 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_timeStep(1.f / 60.f),
     m_velocityIterations(4),
     m_positionIterations(4),
+    m_gravityFactor(1),
     m_config(config),
     m_totalTarget(0),
     m_remainingTarget(0),
@@ -46,14 +47,13 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_bronzeMedal(0),
     m_levelName(""),
     m_lastTime(0),
-    m_gravityGoodie(sf::Keyboard::Num1, 2.f),
+    m_gravityGoodie(sf::Keyboard::Num1, 2.f, m_gravity),
     m_invulnerableGoodie(sf::Keyboard::Num2, 3.f)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
     m_contactListener = ContactListener(this, this);
     load();
-    m_gravityGoodie.setNormalGravity(m_world.GetGravity());
 }
 
 Level::~Level()
@@ -91,6 +91,10 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
         TimedObject::updateCurrentTime(m_lastTime + delta);
 
+        m_gravityGoodie.update(m_lastTime + delta);
+        m_invulnerableGoodie.update(m_lastTime + delta);
+        m_world.SetGravity(m_gravityGoodie.getGravity());
+
         cleanupKilledEntities();
         respawnDeadBalls();
         spawnPendingEntities(m_lastTime + delta);
@@ -106,10 +110,6 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
         updatePointLabels();
     }
-
-    m_gravityGoodie.update(elapsedTime);
-    m_invulnerableGoodie.update(elapsedTime);
-    m_world.SetGravity(m_gravityGoodie.getGravity());
 
     if(m_timeAttackMode)
         handleAutoRespawn();
@@ -166,7 +166,7 @@ void Level::respawnDeadBalls()
         {
             m_points -= 10;
             m_multiHit = 0;
-            m_world.SetGravity(m_defaultGravity);
+            m_gravity = m_defaultGravity;
             m_remainingBall -= 1;
             createLabelAt(m_ball, "red", -10);
         }

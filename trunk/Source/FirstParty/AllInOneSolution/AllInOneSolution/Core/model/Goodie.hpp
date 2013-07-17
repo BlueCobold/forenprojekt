@@ -3,7 +3,7 @@
 #ifndef GOODIE_HPP
 #define GOODIE_HPP
 
-#include "Input.hpp"
+#include "../Input.hpp"
 
 class Goodie
 {
@@ -22,7 +22,7 @@ public:
 
     virtual void update(const float elapsedTime);
 
-    const bool isActive() const;
+    virtual bool isActive() const;
 };
 
 #endif
