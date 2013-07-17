@@ -37,6 +37,28 @@ void LevelFileLoader::parseConstants(tinyxml2::XMLElement* xml,
     }
 }
 
+std::vector<sf::Vector2i> parseValueList(tinyxml2::XMLElement* xml, const std::string& x, const std::string& y)
+{
+    std::vector<sf::Vector2i> result;
+    auto xxml = xml->FirstChildElement(x.c_str());
+    auto yxml = xml->FirstChildElement(y.c_str());
+    if(!xxml || !yxml)
+        return result;
+
+    std::istringstream tokens(xxml->GetText());
+    std::string token;
+    while (std::getline(tokens, token, ',')) {
+        result.push_back(sf::Vector2i(utility::stringTo<int>(token), 0));
+    }
+    tokens = std::istringstream(yxml->GetText());
+    int i = 0;
+    while (std::getline(tokens, token, ',')) {
+        result[i].y = utility::stringTo<int>(token);
+        ++i;
+    }
+    return result;
+}
+
 std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml,
     AnimatedGraphics* animated,
     VariableHandler* handler,
@@ -99,6 +121,14 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     std::unique_ptr<ValueProvider> xScaleProvider = findController(xml, animated, handler, anim.get(), "scale", "axis", "x", functions);
     std::unique_ptr<ValueProvider> yScaleProvider = findController(xml, animated, handler, anim.get(), "scale", "axis", "y", functions);
     anim->bindScaleController(std::move(xScaleProvider), std::move(yScaleProvider));
+
+    if(auto layout = xml->FirstChildElement("layout"))
+    {
+        std::vector<sf::Vector2i> srcoffsets = parseValueList(layout, "srcxoffset", "srcyoffset");
+        std::vector<sf::Vector2i> sizes = parseValueList(layout, "width", "height");
+        std::vector<sf::Vector2i> origins = parseValueList(layout, "midx", "midy");
+        anim->setLayout(srcoffsets, sizes, origins);
+    }
 
     std::unique_ptr<ValueProvider> red, green, blue, alpha, tmp;
     tinyxml2::XMLElement* static_color_element = xml->FirstChildElement("color");
