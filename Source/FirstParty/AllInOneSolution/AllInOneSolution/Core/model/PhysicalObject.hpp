@@ -108,7 +108,7 @@ public:
         m_yPositionProvider = std::move(y);
     }
 
-    virtual float getAngle() const
+    virtual float getAngle() const override
     {
         if(m_body != nullptr)
             return m_body->GetAngle();

@@ -17,7 +17,7 @@ public:
     Negate(std::unique_ptr<ValueProvider> provider) : SingleProvider(std::move(provider))
     { }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         float value = getProvider()->getValue();
         return -1 * value;

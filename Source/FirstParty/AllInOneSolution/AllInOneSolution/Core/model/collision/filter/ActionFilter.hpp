@@ -20,7 +20,7 @@ public:
     virtual ~ActionFilter()
     { }
 
-    virtual bool shouldCollide(Entity* entityA, Entity* entityB)
+    virtual bool shouldCollide(Entity* entityA, Entity* entityB) override
     {
         return m_child->shouldCollide(entityA, entityB);
     }

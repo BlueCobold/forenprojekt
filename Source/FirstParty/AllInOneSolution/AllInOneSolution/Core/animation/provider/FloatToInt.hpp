@@ -17,7 +17,7 @@ public:
     FloatToInt(std::unique_ptr<ValueProvider> provider) : SingleProvider(std::move(provider))
     { }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         return static_cast<float>(static_cast<int>(getProvider()->getValue()));
     }

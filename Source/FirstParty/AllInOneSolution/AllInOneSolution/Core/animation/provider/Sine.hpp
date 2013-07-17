@@ -18,7 +18,7 @@ public:
     Sine(std::unique_ptr<ValueProvider> provider) : SingleProvider(std::move(provider))
     { }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         return sinf(utility::toRadian<float, float>(getProvider()->getValue()));
     }

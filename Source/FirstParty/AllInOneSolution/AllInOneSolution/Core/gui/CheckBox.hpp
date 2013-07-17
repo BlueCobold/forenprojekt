@@ -3,18 +3,20 @@
 #ifndef CHECKBOX_HPP
 #define CHECKBOX_HPP
 
+#include "../rendering/Drawable.hpp"
+
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "CheckboxStyle.hpp"
 
-class CheckBox
+class CheckBox : public Drawable
 {
 public:
     CheckBox(int id, CheckBoxStyle style, const sf::Vector2f& position, const sf::Vector2f& offset);
 
     virtual void update(const sf::RenderWindow& screen);
 
-    virtual void draw(const DrawParameter& params);
+    virtual void draw(const DrawParameter& params) override;
 
     int getId() const;
 

@@ -22,7 +22,7 @@ public:
 	    m_random_engine.seed(std::random_device()());
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
 	    return m_distribution(m_random_engine);
     }

@@ -18,7 +18,7 @@ public:
     {
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         return m_owner->getPassedTime();
     }

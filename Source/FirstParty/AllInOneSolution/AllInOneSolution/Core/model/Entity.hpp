@@ -41,7 +41,7 @@ public:
     virtual ~Entity();
 
     virtual void update(const float value);
-    virtual void restartAt(const float value);
+    virtual void restartAt(const float value) override;
 
     void setName(std::string name);
     const Type& getType() const;
@@ -54,8 +54,8 @@ public:
     bool doesCollideWithBall();
     void bindCollisionSound(std::unique_ptr<SoundObject> sound);
 
-    virtual float getValueOf(const std::string& name) const;
-    virtual void setValueOf(const std::string& name, const float value);
+    virtual float getValueOf(const std::string& name) const override;
+    virtual void setValueOf(const std::string& name, const float value) override;
 
     void bindCollisionHandler(std::unique_ptr<CollisionHandler> handler);
     void bindCollisionFilter(std::unique_ptr<CollisionFilter> filter);

@@ -51,7 +51,7 @@ public:
         const std::vector<sf::Vector2i>& sizes,
         const std::vector<sf::Vector2i>& origins);
     
-    void draw(const DrawParameter& param);
+    virtual void draw(const DrawParameter& param) override;
 
 private:
 

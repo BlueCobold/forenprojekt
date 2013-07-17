@@ -18,7 +18,7 @@ public:
     Teeter(const float mouseScale);
     ~Teeter();
 
-    virtual void update(const float value);
+    virtual void update(const float value) override;
 
     void adaptToMouse();
 };

@@ -9,7 +9,7 @@ class Always : public CollisionFilter
 {
 public:
 
-    virtual bool shouldCollide(Entity* entityA, Entity* entityB)
+    virtual bool shouldCollide(Entity* entityA, Entity* entityB) override
     {
         return true;
     }

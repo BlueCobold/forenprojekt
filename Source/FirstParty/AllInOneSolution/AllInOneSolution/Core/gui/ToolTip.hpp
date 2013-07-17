@@ -22,10 +22,17 @@ private:
     float m_scalefactor;
 
 public:
-     ToolTip(const std::string& text, BitmapFont* font, const sf::Vector2f& textOffset, const sf::Vector2f& offset,
-             const sf::Sprite& leftTexture, const sf::Sprite& centerTexture, const sf::Sprite& rightTexture);
+     ToolTip(const std::string& text,
+             BitmapFont* font, 
+             const sf::Vector2f& textOffset, 
+             const sf::Vector2f& offset,
+             const sf::Sprite& leftTexture, 
+             const sf::Sprite& centerTexture, 
+             const sf::Sprite& rightTexture);
+
      ToolTip();
-     virtual void draw(const DrawParameter& params);
+
+     virtual void draw(const DrawParameter& params) override;
 
      void setPosition(const sf::Vector2f& position);
 

@@ -25,7 +25,7 @@ public:
 
     virtual float getValue() = 0;
 
-    virtual void reset()
+    virtual void reset() override
     {
         m_provider->reset();
     }

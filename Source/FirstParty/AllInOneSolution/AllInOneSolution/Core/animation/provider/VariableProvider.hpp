@@ -23,7 +23,7 @@ public:
             throw std::runtime_error(utility::replace(utility::translateKey("OwnerNull"), "VariableProvider"));
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         return m_owner->getValueOf(m_varName);
     }

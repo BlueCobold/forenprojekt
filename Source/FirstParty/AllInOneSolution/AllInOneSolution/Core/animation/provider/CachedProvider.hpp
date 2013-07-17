@@ -20,7 +20,7 @@ public:
         m_persistent(persistent)
     { }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         if(!m_inited)
         {
@@ -30,7 +30,7 @@ public:
         return m_value;
     }
 
-    virtual void reset()
+    virtual void reset() override
     {
         if(!m_persistent)
             m_inited = false;

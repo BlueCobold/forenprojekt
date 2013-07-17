@@ -17,7 +17,7 @@
 #include <functional>
 
 /// this class represent a Button
-class Button
+class Button : public Drawable
 {
 private:
 
@@ -44,7 +44,7 @@ public:
 
     virtual void update(const sf::RenderWindow& screen);
 
-    virtual void draw(const DrawParameter& params);
+    virtual void draw(const DrawParameter& params) override;
 
     void registerOnPressed(std::function<void (const Button& sender)> callback);
 

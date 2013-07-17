@@ -21,7 +21,7 @@ public:
             throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Add"));
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         float v = 0.0f;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)

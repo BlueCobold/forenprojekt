@@ -14,8 +14,8 @@ public:
 
     Ball(float resetTime, const Entity* spawnAnimationEntity = nullptr, const Entity* killAnimationEntity = nullptr);
 
-    virtual void restartAt(const float value);
-    virtual void update(const float value);
+    virtual void restartAt(const float value) override;
+    virtual void update(const float value) override;
 
     void registerForCheckpointChanges(std::function<void()> handler);
 

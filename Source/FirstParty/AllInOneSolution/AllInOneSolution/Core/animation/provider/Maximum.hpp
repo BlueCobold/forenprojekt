@@ -21,7 +21,7 @@ public:
             throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Maximum"));
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         float v;
         bool set = false;

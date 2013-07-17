@@ -21,7 +21,7 @@ public:
             throw std::runtime_error(utility::replace(utility::translateKey("ThreeChilds"), "Clamp"));
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         float actual = getProvider()[0]->getValue();
         float minv = getProvider()[1]->getValue();

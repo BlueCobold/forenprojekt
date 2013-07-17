@@ -19,7 +19,7 @@ public:
             throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Multiply"));
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         float v = 1.0f;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
