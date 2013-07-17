@@ -11,32 +11,30 @@ class ChangeGravityFilter : public PropertyFilter
 {
 public:
     ChangeGravityFilter(
-            b2World& world,
+            b2Vec2& targetGravity,
             const b2Vec2& gravity,
             const bool useEntityProperties,
             VariableHandler* handler = nullptr) :
         PropertyFilter(useEntityProperties, handler),
-        m_world(world),
-        m_gravity(gravity)
+        m_gravity(gravity),
+        m_targetGravity(targetGravity)
     { }
 
     virtual ~ChangeGravityFilter()
     { }
 
-    virtual bool shouldCollide(Entity* entityA, Entity* entityB)
+    virtual bool shouldCollide(Entity* entityA, Entity* entityB) override
     {
         bool should = PropertyFilter::shouldCollide(entityA, entityB);
         if(should)
-        {
-            m_world.SetGravity(m_gravity);
-        }
+            m_targetGravity = m_gravity;
         return should;
     }
 
 private:
 
-    b2World& m_world;
     b2Vec2 m_gravity;
+    b2Vec2& m_targetGravity;
 };
 
 #endif // CHANGE_GRAVITY_FILTER_HPP
