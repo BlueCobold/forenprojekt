@@ -21,7 +21,7 @@ public:
             throw std::runtime_error(utility::replace(utility::translateKey("OneChildsMin"), "Nop"));
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         auto it = begin(getProvider());
         float ret = (*it)->getValue();

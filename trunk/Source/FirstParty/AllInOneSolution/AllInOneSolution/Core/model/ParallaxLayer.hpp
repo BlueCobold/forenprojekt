@@ -21,9 +21,9 @@ public:
     void updatePosition(const sf::View& view, const sf::Vector2u& worldSize);
     void update(const float time);
 
-    virtual float getValueOf(const std::string& name) const;
+    virtual float getValueOf(const std::string& name) const override;
 
-    virtual void setValueOf(const std::string& name, const float value);
+    virtual void setValueOf(const std::string& name, const float value) override;
 };
 
 #endif	//PARALLAX_LAYER_HPP

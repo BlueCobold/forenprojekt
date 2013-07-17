@@ -35,7 +35,7 @@ public:
             throw std::runtime_error(utility::replace(utility::translateKey("OwnerNull"), "SetVariable-provider"));
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         float value = getProvider()->getValue();
         m_owner->setValueOf(m_varName, value);

@@ -17,7 +17,7 @@ public:
     Absolute(std::unique_ptr<ValueProvider> provider) : SingleProvider(std::move(provider))
     { }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         return fabsf(getProvider()->getValue());
     }

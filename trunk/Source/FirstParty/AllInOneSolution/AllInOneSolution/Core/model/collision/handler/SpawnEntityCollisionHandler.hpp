@@ -20,7 +20,7 @@ public:
     {
     }
 
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse)
+    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse) override
     {
         if(!m_spawned || m_spawn->isRespawnable())
         {

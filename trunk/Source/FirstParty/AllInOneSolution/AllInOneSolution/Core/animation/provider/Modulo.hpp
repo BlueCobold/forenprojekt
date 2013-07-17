@@ -21,7 +21,7 @@ public:
             throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Modulo"));
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         float dividend = getProvider()[0]->getValue();
         float divisor = getProvider()[1]->getValue();

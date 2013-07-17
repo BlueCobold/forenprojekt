@@ -27,7 +27,7 @@ public:
 
     virtual float getValue() = 0;
 
-    virtual void reset()
+    virtual void reset() override
     {
         for(auto it = begin(m_provider); it != end(m_provider); ++it)
             (*it)->reset();

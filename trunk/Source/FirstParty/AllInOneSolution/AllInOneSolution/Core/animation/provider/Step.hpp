@@ -21,7 +21,7 @@ public:
             throw std::runtime_error(utility::replace(utility::translateKey("ThreeChilds"), "Step"));
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         if(getProvider()[0]->getValue() < 1)
             return getProvider()[1]->getValue();

@@ -23,16 +23,16 @@ public:
     Background(const sf::Vector2u& size);
     ~Background();
 
-    virtual void restartAt(const float time);
+    virtual void restartAt(const float time) override;
     void update(const float time);
     void updateParallax(const sf::View& view);
 
     void bindLayer(std::unique_ptr<ParallaxLayer>& layer);
 
-    virtual float getValueOf(const std::string& name) const;
-    virtual void setValueOf(const std::string& name, const float value);
+    virtual float getValueOf(const std::string& name) const override;
+    virtual void setValueOf(const std::string& name, const float value) override;
 
-    void draw(const DrawParameter& param);
+    virtual void draw(const DrawParameter& param) override;
 };
 
 #endif	//BACKGROUND_HPP

@@ -32,7 +32,7 @@ public:
     virtual ~SpawnEntity()
     { }
 
-    virtual bool shouldCollide(Entity* entityA, Entity* entityB)
+    virtual bool shouldCollide(Entity* entityA, Entity* entityB) override
     {
         bool collides = ActionFilter::shouldCollide(entityA, entityB);
         if((!m_spawned || m_spawn->isRespawnable()) && collides)

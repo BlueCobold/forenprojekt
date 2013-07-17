@@ -20,7 +20,7 @@ public:
     {
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         m_owner->stop();
         return 0;

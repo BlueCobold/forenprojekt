@@ -21,7 +21,7 @@ public:
             throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Pow"));
     }
 
-    virtual float getValue()
+    virtual float getValue() override
     {
         float base = getProvider()[0]->getValue();
         float exponent = getProvider()[1]->getValue();

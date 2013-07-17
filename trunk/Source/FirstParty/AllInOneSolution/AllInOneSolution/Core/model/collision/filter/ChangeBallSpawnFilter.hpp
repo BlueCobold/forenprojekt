@@ -17,7 +17,7 @@ public:
     virtual ~ChangeBallSpawnFilter()
     { }
 
-    virtual bool shouldCollide(Entity* entityA, Entity* entityB)
+    virtual bool shouldCollide(Entity* entityA, Entity* entityB) override
     {
         bool collides = ActionFilter::shouldCollide(entityA, entityB);
         if(collides)

@@ -41,7 +41,7 @@ public:
         m_provider = std::move(provider);
     }
 
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse)
+    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse) override
     {
         if(m_provider == nullptr)
             throw std::runtime_error(utility::translateKey("HandlerNull"));
@@ -60,7 +60,7 @@ public:
         m_entityB = nullptr;
     }
 
-    virtual float getValueOf(const std::string& name) const
+    virtual float getValueOf(const std::string& name) const override
     {
         if(m_globalHandler != nullptr && name.length() > 7 && name.substr(0,7) == "global:")
             return m_globalHandler->getValueOf(name.substr(7));
@@ -76,7 +76,7 @@ public:
         return m_entityA->getValueOf(name);
     }
 
-    virtual void setValueOf(const std::string& name, const float value)
+    virtual void setValueOf(const std::string& name, const float value) override
     {
         if(m_globalHandler != nullptr && name.length() > 7 && name.substr(0,7) == "global:")
             return m_globalHandler->setValueOf(name.substr(7), value);
@@ -93,7 +93,7 @@ public:
         return m_entityA->setValueOf(name, value);
     }
 
-    virtual float getPassedTime() const
+    virtual float getPassedTime() const override
     {
         if(m_useValuesFromA)
         {
@@ -109,7 +109,7 @@ public:
         }
     }
 
-    virtual float getAngle() const
+    virtual float getAngle() const override
     {
         if(m_useValuesFromA)
         {

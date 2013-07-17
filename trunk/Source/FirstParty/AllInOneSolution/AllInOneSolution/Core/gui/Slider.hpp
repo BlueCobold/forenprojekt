@@ -3,18 +3,19 @@
 #ifndef SLIDER_HPP
 #define SLIDER_HPP
 
+#include "../rendering/Drawable.hpp"
 #include "SliderStyle.hpp"
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-class Slider
+class Slider : public Drawable
 {
 public:
     Slider(const int id, const SliderStyle style, const sf::Vector2f& position, const sf::Vector2f& offset);
 
     virtual void update(const sf::RenderWindow& screen);
 
-    virtual void draw(const DrawParameter& params);
+    virtual void draw(const DrawParameter& params) override;
 
     int getId() const;
 

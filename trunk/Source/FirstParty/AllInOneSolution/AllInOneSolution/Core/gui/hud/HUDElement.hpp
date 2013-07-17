@@ -7,7 +7,7 @@
 class ResourceManager;
 
 /// Basis class for HUD
-class HUDElement : Drawable
+class HUDElement : public Drawable
 {
 public:
 

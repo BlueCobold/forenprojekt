@@ -39,6 +39,7 @@ void Interpolation::start()
 
 void Interpolation::stop()
 {
+    Stoppable::stop();
     m_started = false;
     m_currentValue = m_targetValue;
 }

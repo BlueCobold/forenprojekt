@@ -18,8 +18,8 @@ public:
     Interpolation();
 
     void start();
-    void stop();
-    virtual void restartAt(const float time);
+    virtual void stop() override;
+    virtual void restartAt(const float time) override;
     void update(const float elapsedTime);
 
     bool isFinished() const { return m_finished; }

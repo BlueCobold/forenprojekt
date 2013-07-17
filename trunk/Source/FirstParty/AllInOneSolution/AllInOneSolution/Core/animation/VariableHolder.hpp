@@ -20,7 +20,7 @@ private:
 
 public:
 
-    virtual float getValueOf(const std::string& name) const
+    virtual float getValueOf(const std::string& name) const override
     {
         auto found = m_variables.find(name);
         if(found != end(m_variables))
@@ -30,7 +30,7 @@ public:
         return 0;
     }
 
-    virtual void setValueOf(const std::string& name, const float value)
+    virtual void setValueOf(const std::string& name, const float value) override
     {
         m_variables[name] = value;
     }
