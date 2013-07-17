@@ -77,6 +77,7 @@ public:
     virtual void setValueOf(const std::string& name, const float value) override;
 
     const sf::Vector2f getBallCoords() const;
+    const int getLostBalls() const;
 
     void setTimeAttackMode(bool timeAttackMode);
 
@@ -236,6 +237,7 @@ private:
 
     Ball* m_ball;
     int m_remainingBall;
+    int m_lostBallCounter;
 
     // For trackBallMovement().
     struct BallMovement

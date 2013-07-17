@@ -19,3 +19,7 @@ void ReplayMenu::setGrade(int grade)
     Menu::getSprite(SPRITE_SYMBOL_SILVER).setVisible(grade == 1);
     Menu::getSprite(SPRITE_SYMBOL_GOLD).setVisible(grade == 0);
 }
+void ReplayMenu::setLostBalls(int lostBalls)
+{
+    Menu::getLabel(LABEL_LOSTBALLS).setText(utility::toString(lostBalls));
+}
