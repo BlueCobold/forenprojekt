@@ -55,7 +55,7 @@ LineLabelId = The label with id % don't exist.
 MenuSpriteId = The menusprite with id % don't exist.
 UnknownToolTip = ToolTip isn't registered: %.
 IncludeFileInvalid = Include File '%' is corrupt.
-
+InvalidLayout = The layout-part '%' has a bad number of elements.
 [GUI]
 gui_game_paused = Game Paused
 gui_continue = Continue

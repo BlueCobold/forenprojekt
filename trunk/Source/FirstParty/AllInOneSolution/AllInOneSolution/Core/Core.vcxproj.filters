@@ -250,14 +250,14 @@
     <ClCompile Include="gui\ToolTip.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
-    <ClCompile Include="gui\hud\GoodieHUD.cpp">
+    <ClCompile Include="model\Goody.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="model\GravityGoody.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\hud\GoodyHUD.cpp">
       <Filter>Sources\gui\hud</Filter>
-    </ClCompile>
-    <ClCompile Include="model\Goodie.cpp">
-      <Filter>Sources\model</Filter>
-    </ClCompile>
-    <ClCompile Include="model\GravityGoodie.cpp">
-      <Filter>Sources\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -687,14 +687,17 @@
     <ClInclude Include="gui\ToolTip.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
-    <ClInclude Include="gui\hud\GoodieHUD.hpp">
+    <ClInclude Include="model\InvulnerableGoody.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\Goody.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="model\GravityGoody.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\hud\GoodyHUD.hpp">
       <Filter>Headers\gui\hud</Filter>
-    </ClInclude>
-    <ClInclude Include="model\Goodie.hpp">
-      <Filter>Headers\model</Filter>
-    </ClInclude>
-    <ClInclude Include="model\GravityGoodie.hpp">
-      <Filter>Headers\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,16 +1,16 @@
 #pragma once
 
-#ifndef GOODIEHUD_HPP
-#define GOODIEHUD_HPP
+#ifndef GOODYHUD_HPP
+#define GOODYHUD_HPP
 
 #include "HUDElement.hpp"
 #include <SFML/Graphics/Sprite.hpp>
 #include <iostream>
 
-class GoodieHUD : public HUDElement
+class GoodyHUD : public HUDElement
 {
 public:
-    GoodieHUD(ResourceManager& resourceManager,
+    GoodyHUD(ResourceManager& resourceManager,
               const std::string& iconKey,
               const sf::IntRect& textureRect,
               const sf::Vector2f& position,
@@ -24,4 +24,4 @@ private:
     sf::Sprite m_icon;
 };
 
-#endif // GOODIE_HPP
+#endif // GOODY_HPP

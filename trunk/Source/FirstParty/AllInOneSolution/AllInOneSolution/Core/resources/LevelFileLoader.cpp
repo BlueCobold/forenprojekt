@@ -47,15 +47,20 @@ std::vector<sf::Vector2i> parseValueList(tinyxml2::XMLElement* xml, const std::s
 
     std::istringstream tokens(xxml->GetText());
     std::string token;
-    while (std::getline(tokens, token, ',')) {
+    while (std::getline(tokens, token, ','))
         result.push_back(sf::Vector2i(utility::stringTo<int>(token), 0));
-    }
+
     tokens = std::istringstream(yxml->GetText());
-    int i = 0;
-    while (std::getline(tokens, token, ',')) {
+    size_t i = 0;
+    while (std::getline(tokens, token, ','))
+    {
+        if(i > result.size())
+            throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), y));
         result[i].y = utility::stringTo<int>(token);
         ++i;
     }
+    if(i != result.size())
+        throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), y));
     return result;
 }
 

@@ -21,13 +21,13 @@ public:
 
     void setFieldDimension(const b2Vec2 fieldDimension);
     void checkpointReached(const b2Vec2 position);
-    bool getBallLost();
+    bool getBallLost() const;
 
     const Entity* getSpawnAnimationEntity() const;
     const Entity* getKillAnimationEntity() const;
 
     void blowUp();
-    bool blownUp();
+    bool blownUp() const;
 
 private:
 

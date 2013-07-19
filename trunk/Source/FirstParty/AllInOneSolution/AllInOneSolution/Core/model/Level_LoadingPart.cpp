@@ -511,7 +511,7 @@ void Level::parseCollider(
             std::unique_ptr<GenericCollisionHandler> collider(new GenericCollisionHandler(
             [&](Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse)
             {
-                if(m_invulnerableGoodie.isActive())
+                if(m_invulnerableGoody.isActive())
                     return;
                 if(entityA->getType() != Entity::Ball && entityB->getType() != Entity::Ball)
                     throw std::runtime_error(utility::replace(utility::translateKey("EntityNoCollision"), "Ball"));

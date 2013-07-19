@@ -48,8 +48,8 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_bronzeMedal(0),
     m_levelName(""),
     m_lastTime(0),
-    m_gravityGoodie(sf::Keyboard::Num1, 2.f, m_gravity),
-    m_invulnerableGoodie(sf::Keyboard::Num2, 3.f)
+    m_gravityGoody(sf::Keyboard::Num1, 2.f, m_gravity),
+    m_invulnerableGoody(sf::Keyboard::Num2, 3.f, m_ball)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -92,9 +92,9 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
         TimedObject::updateCurrentTime(m_lastTime + delta);
 
-        m_gravityGoodie.update(m_lastTime + delta);
-        m_invulnerableGoodie.update(m_lastTime + delta);
-        m_world.SetGravity(m_gravityGoodie.getGravity());
+        m_gravityGoody.update(m_lastTime + delta);
+        m_invulnerableGoody.update(m_lastTime + delta);
+        m_world.SetGravity(m_gravityGoody.getGravity());
 
         cleanupKilledEntities();
         respawnDeadBalls();
@@ -160,10 +160,9 @@ void Level::respawnDeadBalls()
 {
     for(auto it = begin(m_entities); it != end(m_entities); ++it)
     {
-        m_updatingEntity = (*it).get();
         if((*it)->getType() != Entity::Ball || !m_ball->getBallLost())
             continue;
-        if(!m_invulnerableGoodie.isActive())
+        if(!m_invulnerableGoody.isActive())
         {
             m_points -= 10;
             m_multiHit = 0;
