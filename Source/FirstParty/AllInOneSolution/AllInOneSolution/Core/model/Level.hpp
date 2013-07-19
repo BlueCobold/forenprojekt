@@ -292,6 +292,8 @@ private:
 
     GravityGoody m_gravityGoody;
     InvulnerableGoody m_invulnerableGoody;
+    Goody m_extraBallGoody;
+    Goody m_extraTimeGoody;
 };
 
 #endif // LEVEL_HPP

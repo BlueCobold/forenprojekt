@@ -42,6 +42,8 @@ private:
 
     GoodyHUD m_gravityGoody;
     GoodyHUD m_invulnerableGoody;
+    GoodyHUD m_extraBallGoody;
+    GoodyHUD m_extraTimeGoody;
 
 public:
     HUD(ResourceManager& resourceManager, Config& config);
