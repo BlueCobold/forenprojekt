@@ -79,7 +79,7 @@ void Ball::blowUp()
     m_blownUp = true;
 }
 
-bool Ball::blownUp()
+bool Ball::blownUp() const
 {
     return m_blownUp;
 }
@@ -108,7 +108,7 @@ bool Ball::isOutside()
         return false;
 }
 
-bool Ball::getBallLost()
+bool Ball::getBallLost() const
 {
     return m_lostBall;
 }

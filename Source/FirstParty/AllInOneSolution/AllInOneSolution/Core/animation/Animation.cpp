@@ -187,7 +187,15 @@ void Animation::setLayout(
     const std::vector<sf::Vector2i>& sizes,
     const std::vector<sf::Vector2i>& origins)
 {
+    if(m_frames > srcOffsets.size())
+        throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "srcOffsets"));
     m_srcOffsets = srcOffsets;
+
+    if(m_frames > sizes.size())
+        throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "sizes"));
     m_sizes = sizes;
+
+    if(m_frames > origins.size())
+        throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "origins"));
     m_origins = origins;
 }

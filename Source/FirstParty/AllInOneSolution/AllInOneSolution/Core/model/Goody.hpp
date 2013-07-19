@@ -1,11 +1,11 @@
 #pragma once
 
-#ifndef GOODIE_HPP
-#define GOODIE_HPP
+#ifndef GOODY_HPP
+#define GOODY_HPP
 
 #include "../Input.hpp"
 
-class Goodie
+class Goody
 {
 private:
     sf::Keyboard::Key m_key;
@@ -17,12 +17,13 @@ private:
     float m_durationUntilTime;
 
 public:
-    Goodie(const sf::Keyboard::Key key, const float durationTime = 0, const float cooldownTime = 0, 
-           const int chrages = -1);
+    Goody(const sf::Keyboard::Key key, const float durationTime = 0, const float cooldownTime = 0, 
+           const int charges = -1);
 
     virtual void update(const float elapsedTime);
 
     virtual bool isActive() const;
+    virtual bool canActivate() const;
 };
 
 #endif

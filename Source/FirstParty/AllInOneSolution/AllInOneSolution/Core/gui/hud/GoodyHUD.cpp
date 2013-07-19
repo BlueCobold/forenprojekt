@@ -1,7 +1,7 @@
-#include "GoodieHUD.hpp"
+#include "GoodyHUD.hpp"
 #include "../../resources/ResourceManager.hpp"
 
-GoodieHUD::GoodieHUD(ResourceManager& resourceManager,
+GoodyHUD::GoodyHUD(ResourceManager& resourceManager,
                      const std::string& iconKey,
                      const sf::IntRect& textureRect,
                      const sf::Vector2f& position,
@@ -13,13 +13,13 @@ GoodieHUD::GoodieHUD(ResourceManager& resourceManager,
     m_icon.setTextureRect(textureRect);
 }
 
-void GoodieHUD::update(const DrawParameter& params)
+void GoodyHUD::update(const DrawParameter& params)
 {
     HUDElement::update(params);
     m_icon.setPosition(getPosition());
 }
 
-void GoodieHUD::draw(const DrawParameter& params)
+void GoodyHUD::draw(const DrawParameter& params)
 {
     params.getTarget().draw(m_icon);
 }

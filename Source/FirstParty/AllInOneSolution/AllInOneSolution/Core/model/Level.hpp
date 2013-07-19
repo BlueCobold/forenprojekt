@@ -14,7 +14,8 @@
 #include "SoundManager.hpp"
 #include "../gui/FPSCounter.hpp"
 #include "../gui/LineLabel.hpp"
-#include "GravityGoodie.hpp"
+#include "GravityGoody.hpp"
+#include "InvulnerableGoody.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -289,8 +290,8 @@ private:
 
     std::string m_levelName;
 
-    GravityGoodie m_gravityGoodie;
-    Goodie m_invulnerableGoodie;
+    GravityGoody m_gravityGoody;
+    InvulnerableGoody m_invulnerableGoody;
 };
 
 #endif // LEVEL_HPP
