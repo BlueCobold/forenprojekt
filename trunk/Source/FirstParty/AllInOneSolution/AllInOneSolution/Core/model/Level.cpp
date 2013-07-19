@@ -49,7 +49,9 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_levelName(""),
     m_lastTime(0),
     m_gravityGoody(sf::Keyboard::Num1, 2.f, m_gravity),
-    m_invulnerableGoody(sf::Keyboard::Num2, 3.f, m_ball)
+    m_invulnerableGoody(sf::Keyboard::Num2, 3.f, m_ball),
+    m_extraBallGoody(sf::Keyboard::Num3, 0, 0, 1),
+    m_extraTimeGoody(sf::Keyboard::Num4, 0, 0, 1)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -92,10 +94,6 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
         TimedObject::updateCurrentTime(m_lastTime + delta);
 
-        m_gravityGoody.update(m_lastTime + delta);
-        m_invulnerableGoody.update(m_lastTime + delta);
-        m_world.SetGravity(m_gravityGoody.getGravity());
-
         cleanupKilledEntities();
         respawnDeadBalls();
         spawnPendingEntities(m_lastTime + delta);
@@ -111,6 +109,17 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
         updatePointLabels();
     }
+
+    m_gravityGoody.update(m_lastTime + delta);
+    m_invulnerableGoody.update(m_lastTime + delta);
+    m_extraBallGoody.update(m_lastTime + delta);
+    m_extraTimeGoody.update(m_lastTime + delta);
+    m_world.SetGravity(m_gravityGoody.getGravity());
+
+    if(m_extraBallGoody.isActive() && m_remainingBall > 0)
+        m_remainingBall++;
+    if(m_extraTimeGoody.isActive() && m_totalTime > 0)
+        m_remainingTime += 30.f;
 
     if(m_timeAttackMode)
         handleAutoRespawn();

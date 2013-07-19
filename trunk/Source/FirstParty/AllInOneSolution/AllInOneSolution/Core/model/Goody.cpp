@@ -26,7 +26,7 @@ void Goody::update(const float elapsedTime)
         if(m_durationTime > 0)
             m_durationUntilTime = elapsedTime + m_durationTime;
     }
-    else if(utility::Keyboard.isKeyPressed(m_key) && m_charges != 0 && m_nextUseTime < elapsedTime)
+    else if(utility::Keyboard.isKeyPressed(m_key) && m_charges == -1 && m_nextUseTime < elapsedTime)
     {
         if(canActivate())
             m_active = true;
