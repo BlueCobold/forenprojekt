@@ -20,10 +20,6 @@ LevelFailState::LevelFailState(sf::RenderWindow& screen,
     m_HUD(resourceManager, config),
     m_replay(false)
 {
-    m_menu.registerOnClick([this](const Button& sender)
-    {
-        m_replay = (sender.getId() == FailMenu::BUTTON_PLAY_AGAIN);
-    });
 }
 
 LevelFailState::~LevelFailState()
@@ -51,13 +47,23 @@ StateChangeInformation LevelFailState::update(const float time)
 
     m_HUD.update(m_level, getCurrentTime());
 
+    int clicked = -1;
+    m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
     m_menu.update(m_screen);
 
-    if(m_replay)
+    if(clicked == FailMenu::BUTTON_PLAY_AGAIN)
     {
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = m_level;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+    }
+    else if(clicked == FailMenu::BUTTON_MAIN_MENU)
+    {
+        m_playStateInfo.m_returnFromPause = false;
+        m_playStateInfo.m_level = nullptr;
+        m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }

@@ -16,6 +16,7 @@ public:
     static const int SPRITE_SYMBOL_SILVER = 5;
     static const int SPRITE_SYMBOL_GOLD = 6;
     static const int LABEL_LOSTBALLS = 7;
+    static const int BUTTON_MAIN_MENU = 9;
 
     ReplayMenu(const sf::Vector2f& position,
                sf::RenderWindow& screen,
