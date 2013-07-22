@@ -80,7 +80,7 @@ gui_balls = Balls available:
 gui_time = Time:
 gui_unlimited = %
 gui_ball_lost = Balls lost:
-
+gui_mainmenu = Main Menu
 [ToolTip]
 tooltip_gold = you finish the level in gold
 tooltip_silver = you finish the level in silver
