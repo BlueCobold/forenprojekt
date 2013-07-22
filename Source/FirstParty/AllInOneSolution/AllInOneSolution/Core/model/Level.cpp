@@ -31,6 +31,7 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_totalTarget(0),
     m_remainingTarget(0),
     m_points(0),
+    m_bonusTargetPoints(0),
     m_multiHit(0),
     m_ball(nullptr),
     m_lostBallCounter(0),
@@ -343,7 +344,7 @@ void Level::killTarget(Entity* target)
 void Level::killBonusTarget(Entity* target)
 {
     target->kill();
-    int earned = 10 + m_multiHit * 50;
+    int earned = m_bonusTargetPoints + m_multiHit * 50;
     m_points += earned;
     m_multiHit++;
     createLabelAt(target, "green", earned);

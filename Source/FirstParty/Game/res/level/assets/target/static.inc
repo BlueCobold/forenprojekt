@@ -227,7 +227,7 @@
 				</animations>
 			</entity>
 
-			<entity name="bonustarget_1" rep="bt" type="bonustarget" collideWithBall="false">
+			<entity name="bonustarget_1" rep="bt" type="bonustarget" points="10" collideWithBall="false">
 				<physics name="target">
 					<shape type="circle" radius="21" />
 				</physics>
