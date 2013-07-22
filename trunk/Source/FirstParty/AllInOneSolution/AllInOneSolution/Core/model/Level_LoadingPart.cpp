@@ -338,6 +338,7 @@ std::unique_ptr<Entity> Level::createEntity(
             else if(std::string(xml->Attribute("type")) == "bonustarget")
             {
                 entity = std::unique_ptr<Entity>(new Entity(Entity::BonusTarget, respawnable, autoStop));
+                m_bonusTargetPoints = xml->IntAttribute("points");
             }
             else
                 entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable, autoStop));

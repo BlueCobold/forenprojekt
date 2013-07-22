@@ -258,6 +258,7 @@ private:
     int m_remainingTarget;
 
     int m_points;
+    int m_bonusTargetPoints;
     int m_multiHit;
 
     float m_remainingTime;
