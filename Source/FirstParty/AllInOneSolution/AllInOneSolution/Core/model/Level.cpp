@@ -31,7 +31,8 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, Config&
     m_totalTarget(0),
     m_remainingTarget(0),
     m_points(0),
-    m_bonusTargetPoints(0),
+    m_bonusTargetPoints(10),
+    m_normalTargetPoints(100),
     m_multiHit(0),
     m_ball(nullptr),
     m_lostBallCounter(0),
@@ -85,6 +86,11 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     m_velocityIterations = std::max(1, 4);
     m_positionIterations = m_velocityIterations;
 
+    m_gravityGoody.update(elapsedTime);
+    m_invulnerableGoody.update(elapsedTime);
+    m_extraBallGoody.update(elapsedTime);
+    m_extraTimeGoody.update(elapsedTime);
+
     int steps = std::min(20, std::max(1, static_cast<int>(ceilf(m_timeStep / (1 / (60.0f * 2))))));
     float delta = 0;
     for(int i=1; i<=steps; i++)
@@ -94,6 +100,8 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         delta = (i * m_timeStep) / steps;
 
         TimedObject::updateCurrentTime(m_lastTime + delta);
+
+        m_world.SetGravity(m_gravityGoody.getGravity());
 
         cleanupKilledEntities();
         respawnDeadBalls();
@@ -110,12 +118,6 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
         updatePointLabels();
     }
-
-    m_gravityGoody.update(m_lastTime + delta);
-    m_invulnerableGoody.update(m_lastTime + delta);
-    m_extraBallGoody.update(m_lastTime + delta);
-    m_extraTimeGoody.update(m_lastTime + delta);
-    m_world.SetGravity(m_gravityGoody.getGravity());
 
     if(m_extraBallGoody.isActive() && m_remainingBall > 0)
         m_remainingBall++;
@@ -336,7 +338,7 @@ void Level::killTarget(Entity* target)
     if(!m_timeAttackMode && m_remainingTarget < 1)
         m_levelPass = true;
 
-    int earned = 100 + m_multiHit * 50;
+    int earned = m_normalTargetPoints + m_multiHit * 50;
     m_points += earned;
     m_multiHit++;
     createLabelAt(target, "green", earned);
