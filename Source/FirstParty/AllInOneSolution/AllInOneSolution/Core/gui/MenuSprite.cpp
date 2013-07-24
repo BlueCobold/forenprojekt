@@ -66,7 +66,7 @@ int MenuSprite::getId()
 {
     return m_id;
 }
-void MenuSprite::setToolTip(ToolTip& toolTip)
+void MenuSprite::setToolTip(const ToolTip& toolTip)
 {
     m_toolTip = toolTip;
 }

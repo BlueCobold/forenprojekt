@@ -19,7 +19,7 @@ public:
     void setOffset(const sf::Vector2f& offset);
     void setPosition(const sf::Vector2f& position);
     void setId(const int id);
-    void setToolTip(ToolTip& toolTip);
+    void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text);
     sf::Vector2f getOffset();
     sf::Vector2f getPosition();
