@@ -20,7 +20,7 @@ MenuSprite::MenuSprite(const sf::Vector2f& position, const sf::Vector2f& offset,
 {
 }
     
-void MenuSprite::setOffset(sf::Vector2f offset)
+void MenuSprite::setOffset(const sf::Vector2f& offset)
 {
     m_offset = offset;
     sf::Sprite::setPosition(m_offset + m_position);
@@ -31,7 +31,7 @@ sf::Vector2f MenuSprite::getOffset()
     return m_offset;
 }
 
-void MenuSprite::setPosition(sf::Vector2f position)
+void MenuSprite::setPosition(const sf::Vector2f& position)
 {
     m_position = position;
     sf::Sprite::setPosition(m_offset + m_position);
@@ -86,4 +86,8 @@ void MenuSprite::update(const sf::RenderWindow& screen)
     }
     else
         m_showToolTip = false;  
+}
+void MenuSprite::setToolTipText(const std::string& text)
+{
+    m_toolTip.setText(text);
 }

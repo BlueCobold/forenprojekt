@@ -34,10 +34,16 @@
 			sliderwidth="38" sliderheight="54" 
 			slideroffsetx="-6" slideroffsety="-9" />
 	</sliderStyle>
-	<tooltipStyle name="default" offsetx="0" offsety="20">
-		<text font="gold" offsetx="0" offsety="5"/>
-		<left texture="tooltip" srcx="0" srcy="0" width="5" height="32" />
-		<center texture="tooltip" srcx="6" srcy="0" width="32" height="32" />
-		<right texture="tooltip" srcx="123" srcy="0" width="5" height="32" />
+	<tooltipStyle name="default" offsetx="0" offsety="23">
+		<text font="gold" offsetx="0" offsety="0"/>
+		<backround id="1" texture="tooltip" srcx="0" srcy="0" width="4" height="4" />
+		<backround id="2" texture="tooltip" srcx="5" srcy="0" width="32" height="4" />
+		<backround id="3" texture="tooltip" srcx="124" srcy="0" width="4" height="4" />
+		<backround id="4" texture="tooltip" srcx="0" srcy="4" width="4" height="20" />
+		<backround id="5" texture="tooltip" srcx="5" srcy="4" width="32" height="20" />
+		<backround id="6" texture="tooltip" srcx="124" srcy="4" width="4" height="20" />
+		<backround id="7" texture="tooltip" srcx="0" srcy="28" width="4" height="4" />
+		<backround id="8" texture="tooltip" srcx="5" srcy="28" width="32" height="4" />
+		<backround id="9" texture="tooltip" srcx="124" srcy="28" width="4" height="4" />
 	</tooltipStyle>
 </styles>

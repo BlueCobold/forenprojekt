@@ -23,3 +23,10 @@ void ReplayMenu::setLostBalls(int lostBalls)
 {
     Menu::getLabel(LABEL_LOSTBALLS).setText(utility::toString(lostBalls));
 }
+void ReplayMenu::setMedalToolTipText(const std::string& text)
+{
+    Menu::getSprite(SPRITE_SYMBOL_NONE).setToolTipText(text);
+    Menu::getSprite(SPRITE_SYMBOL_BRONCE).setToolTipText(text);
+    Menu::getSprite(SPRITE_SYMBOL_SILVER).setToolTipText(text);
+    Menu::getSprite(SPRITE_SYMBOL_GOLD).setToolTipText(text);
+}

@@ -11,10 +11,10 @@
 		<button id="0" text="gui_play_again" style="default" sound="default" x="261" y="215" />
 		<label id="1" text="gui_score" font="buttonHoverFont" aligment="2" x="440" y="100" />
 		<label id="2" text="gui_score" font="buttonHoverFont" aligment="0" x="70" y="100" />
-		<image id="3" tooltip="default" tooltiptext="tooltip_none" texture="GuiElements" x="82" y="-69" scrx="0" scry="58" width="352" height="109"/>
-		<image id="4" tooltip="default" tooltiptext="tooltip_bronze" texture="GuiElements" x="82" y="-69" scrx="352" scry="66" width="352" height="109"/>
-		<image id="5" tooltip="default" tooltiptext="tooltip_silver" texture="GuiElements" x="82" y="-69" scrx="" scry="167" width="352" height="109"/>
-		<image id="6" tooltip="default" tooltiptext="tooltip_gold" texture="GuiElements" x="82" y="-69" scrx="352" scry="175" width="352" height="109"/>
+		<image id="3" tooltip="default" tooltiptext="tooltip_medals" texture="GuiElements" x="82" y="-69" scrx="0" scry="58" width="352" height="109"/>
+		<image id="4" tooltip="default" tooltiptext="tooltip_medals" texture="GuiElements" x="82" y="-69" scrx="352" scry="66" width="352" height="109"/>
+		<image id="5" tooltip="default" tooltiptext="tooltip_medals" texture="GuiElements" x="82" y="-69" scrx="" scry="167" width="352" height="109"/>
+		<image id="6" tooltip="default" tooltiptext="tooltip_medals" texture="GuiElements" x="82" y="-69" scrx="352" scry="175" width="352" height="109"/>
 		<label id="7" text="gui_ball_lost" font="buttonHoverFont" aligment="2" x="440" y="140" />
 		<label id="8" text="gui_ball_lost" font="buttonHoverFont" aligment="0" x="70" y="140" />
 		<button id="9" text="gui_mainmenu" style="default" sound="default" x="261" y="270" />

@@ -540,3 +540,14 @@ const int Level::getLostBalls() const
 {
     return m_lostBallCounter;
 }
+const int Level::getMedal(const Level::Medals medal) const
+{
+    if(medal == Medals::Bronze)
+        return m_bronzeMedal;
+    else if(medal == Medals::Gold)
+        return m_goldMedal;
+    else if(medal == Medals::Silver)
+        return m_silverMedal;
+    else
+        return 0;
+}
