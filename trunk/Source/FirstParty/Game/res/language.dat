@@ -57,6 +57,7 @@ UnknownToolTip = ToolTip isn't registered: %.
 IncludeFileInvalid = Include File '%' is corrupt.
 InvalidLayout = The layout-part '%' has a bad number of elements.
 InvalidToolTipBackround = The backround layout of a tooltip is corrupt.
+UnknownButtonToolTip = ButtonToolTip isn't registered: %.
 
 [GUI]
 gui_game_paused = Game Paused
@@ -86,6 +87,7 @@ gui_mainmenu = Main Menu
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
+tooltip_start_game = start a new level.
 
 [Levels]
 levelBlocked1 = blocked

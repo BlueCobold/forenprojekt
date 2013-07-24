@@ -27,7 +27,8 @@ void Button::update(const sf::RenderWindow& screen)
                            m_style.mouseRect.width,
                            m_style.mouseRect.height);
 
-    if(buttonRect.contains(sf::Mouse::getPosition(screen)))
+    sf::Vector2i mouseposition = sf::Mouse::getPosition(screen);
+    if(buttonRect.contains(mouseposition))
     {
         if(!m_playHoverSound)
         {
@@ -35,6 +36,9 @@ void Button::update(const sf::RenderWindow& screen)
             m_sound.play();
         }
 
+        m_showToolTip = true;
+        m_toolTip.setPosition(static_cast<const sf::Vector2f>(mouseposition));
+        
         if(utility::Mouse.leftButtonPressed())
         {
             m_sprite = &m_style.pressedStyle.sprite;
@@ -50,7 +54,6 @@ void Button::update(const sf::RenderWindow& screen)
             if(utility::Mouse.leftButtonReleased() && m_callback != nullptr)
                 m_callback(*this);
         }
-
     }
     else
     {
@@ -58,6 +61,7 @@ void Button::update(const sf::RenderWindow& screen)
         m_sprite = &m_style.idleStyle.sprite;
         m_label = &m_style.idleStyle.label;
         setPosition(m_position);
+        m_showToolTip = false;
     }
 }
 
@@ -94,4 +98,20 @@ const sf::Vector2i& Button::getSize() const
 int Button::getId() const
 {
     return m_id;
+}
+
+void Button::setToolTip(const ToolTip& toolTip)
+{
+    m_toolTip = toolTip;
+}
+
+void Button::setToolTipText(const std::string& text)
+{
+    m_toolTip.setText(text);
+}
+
+void Button::drawAdditionalForeground(const DrawParameter& params)
+{
+    if(m_showToolTip)
+        m_toolTip.draw(params);
 }

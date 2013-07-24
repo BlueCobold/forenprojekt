@@ -8,6 +8,7 @@
 #include "SliderStyle.hpp"
 #include "LineLabel.hpp"
 #include "MenuSprite.hpp"
+#include "ToolTip.hpp"
 #include "../model/SoundObject.hpp"
 
 #include <tinyxml2.h>
@@ -25,6 +26,7 @@ public:
     sf::Vector2f position;
     std::string textResourceKey;
     int id;
+    ToolTip toolTip;
 };
 
 struct CheckBoxInfo

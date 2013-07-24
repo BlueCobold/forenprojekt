@@ -37,7 +37,7 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     std::unordered_map<std::string, ToolTip> toolTip = parseToolTipStyle(menuXml, resourceManager);
     std::unordered_map<std::string, SoundObject> buttonSounds = parseSounds(menuXml, resourceManager.getSoundManager());
 
-    parseButtons(menu, menuXml, buttonStyles, buttonSounds, resourceManager);
+    parseButtons(menu, menuXml, buttonStyles, buttonSounds, toolTip, resourceManager);
     parseCheckBoxes(menu, menuXml, checkboxStyles, resourceManager);
     parseSliders(menu, menuXml, sliderStyles, resourceManager);
     parseLabels(menu, menuXml, resourceManager);
@@ -50,6 +50,7 @@ void MenuLoader::parseButtons(
     tinyxml2::XMLElement* menuXml, 
     std::unordered_map<std::string, ButtonStyle>& buttonStyles, 
     std::unordered_map<std::string, SoundObject>& buttonSounds,
+    std::unordered_map<std::string, ToolTip>& toolTip,
     ResourceManager& resourceManager)
 {
     if(auto styles = menuXml->FirstChildElement("elements"))
@@ -69,6 +70,16 @@ void MenuLoader::parseButtons(
             button.position = sf::Vector2f(buttonXml->FloatAttribute("x"), buttonXml->FloatAttribute("y"));
             button.id = buttonXml->IntAttribute("id");
             button.textResourceKey = buttonXml->Attribute("text");
+
+            auto tooltipAvailable = buttonXml->Attribute("tooltip");
+            if(tooltipAvailable != nullptr)
+            {
+                auto tooltip = toolTip.find(tooltipAvailable);
+                if(tooltip == end(toolTip))
+                    throw std::runtime_error(utility::replace(utility::translateKey("UnknownButtonToolTip"), buttonXml->Attribute("tooltip")));
+                button.toolTip = tooltip->second;
+                button.toolTip.setText(utility::translateKey(buttonXml->Attribute("tooltiptext")));
+            }
 
             button.style.idleStyle.label = LineLabel(
                 utility::translateKey(button.textResourceKey), 

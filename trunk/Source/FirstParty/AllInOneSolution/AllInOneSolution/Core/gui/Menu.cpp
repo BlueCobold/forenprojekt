@@ -90,6 +90,9 @@ void Menu::draw(const DrawParameter& params)
 
     for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
         (*it)->draw(params);
+
+    for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
+        (*it)->drawAdditionalForeground(params);
 }
 
 void Menu::drawAdditionalBackground(const DrawParameter& params)
@@ -120,6 +123,8 @@ void Menu::createButton(const ButtonInfo& info)
         if(m_clickCallback != nullptr)
             m_clickCallback(sender);
     });
+
+    button->setToolTip(info.toolTip);
 
     m_buttons.push_back(std::move(button));
 }

@@ -9,6 +9,7 @@
 #include "../resources/ResourceManager.hpp"
 #include "ButtonStyle.hpp"
 #include "../model/SoundObject.hpp"
+#include "ToolTip.hpp"
 
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -27,6 +28,8 @@ private:
     sf::Vector2f m_position;
     sf::Vector2f m_offset;
     sf::Vector2i m_size;
+    ToolTip m_toolTip;
+    bool m_showToolTip;
 
     LineLabel* m_label;
     sf::Sprite* m_sprite;
@@ -53,6 +56,12 @@ public:
     const sf::Vector2i& getSize() const;
 
     int getId() const;
+
+    void setToolTip(const ToolTip& toolTip);
+
+    void setToolTipText(const std::string& text);
+
+    virtual void drawAdditionalForeground(const DrawParameter& params);
 };
 
 #endif // BUTTON_HPP

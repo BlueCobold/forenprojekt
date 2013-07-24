@@ -32,6 +32,7 @@ private:
         tinyxml2::XMLElement* menuXml, 
         std::unordered_map<std::string, ButtonStyle>& buttonStyles, 
         std::unordered_map<std::string, SoundObject>& buttonSounds,
+        std::unordered_map<std::string, ToolTip>& toolTip,
         ResourceManager& resourceManager);
 
     static void parseCheckBoxes(
