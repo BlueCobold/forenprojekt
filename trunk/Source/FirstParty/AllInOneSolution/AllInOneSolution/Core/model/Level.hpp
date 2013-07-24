@@ -84,6 +84,7 @@ public:
 
     enum Medals {Gold, Silver, Bronze, none};
     const Level::Medals getMedal() const;
+    const int getMedal(const Level::Medals medal) const;
     const std::string getLevelName() const;
 
 private:

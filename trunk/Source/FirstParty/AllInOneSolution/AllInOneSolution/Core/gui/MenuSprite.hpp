@@ -16,10 +16,11 @@ public:
     MenuSprite();
     MenuSprite(const sf::Vector2f& position, const sf::Vector2f& offset, const int id);
 
-    void setOffset(sf::Vector2f offset);
-    void setPosition(sf::Vector2f offset);
+    void setOffset(const sf::Vector2f& offset);
+    void setPosition(const sf::Vector2f& position);
     void setId(const int id);
     void setToolTip(ToolTip& toolTip);
+    void setToolTipText(const std::string& text);
     sf::Vector2f getOffset();
     sf::Vector2f getPosition();
     int getId();

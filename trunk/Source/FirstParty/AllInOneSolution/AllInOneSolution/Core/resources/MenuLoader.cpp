@@ -364,34 +364,32 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(tinyxml2:
         for(auto tooltipXml = doc->FirstChildElement("styles")->FirstChildElement("tooltipStyle");
             tooltipXml != nullptr; tooltipXml = tooltipXml->NextSiblingElement("tooltipStyle"))
         {
-            sf::Sprite leftTexture;
-            sf::Sprite centerTexture;
-            sf::Sprite rightTexture;
-            leftTexture.setTexture(*resourceManager.getTexture(tooltipXml->FirstChildElement("left")->Attribute("texture")));
-            leftTexture.setTextureRect(sf::IntRect(tooltipXml->FirstChildElement("left")->IntAttribute("srcx"),
-                                                   tooltipXml->FirstChildElement("left")->IntAttribute("srcy"),
-                                                   tooltipXml->FirstChildElement("left")->IntAttribute("width"),
-                                                   tooltipXml->FirstChildElement("left")->IntAttribute("height")));
-            centerTexture.setTexture(*resourceManager.getTexture(tooltipXml->FirstChildElement("center")->Attribute("texture")));
-            centerTexture.setTextureRect(sf::IntRect(tooltipXml->FirstChildElement("center")->IntAttribute("srcx"),
-                                                     tooltipXml->FirstChildElement("center")->IntAttribute("srcy"),
-                                                     tooltipXml->FirstChildElement("center")->IntAttribute("width"),
-                                                     tooltipXml->FirstChildElement("center")->IntAttribute("height")));
-            rightTexture.setTexture(*resourceManager.getTexture(tooltipXml->FirstChildElement("right")->Attribute("texture")));
-            rightTexture.setTextureRect(sf::IntRect(tooltipXml->FirstChildElement("right")->IntAttribute("srcx"),
-                                                     tooltipXml->FirstChildElement("right")->IntAttribute("srcy"),
-                                                     tooltipXml->FirstChildElement("right")->IntAttribute("width"),
-                                                     tooltipXml->FirstChildElement("right")->IntAttribute("height")));
-            
+            sf::Sprite texture;
+            std::unordered_map<int, sf::Sprite> backroundMap;
+            int id = 0;
+            int counter = 0;
+            for(auto backround = tooltipXml->FirstChildElement("backround");
+            backround != nullptr; backround = backround->NextSiblingElement("backround"))
+            {
+                id = backround->IntAttribute("id");
+                texture.setTexture(*resourceManager.getTexture(backround->Attribute("texture")));
+                texture.setTextureRect(sf::IntRect(backround->IntAttribute("srcx"),
+                                                   backround->IntAttribute("srcy"),
+                                                   backround->IntAttribute("width"),
+                                                   backround->IntAttribute("height")));
+                backroundMap[id] = texture;
+                ++counter;
+            }
+            if(counter < 9)
+                throw std::runtime_error(utility::translateKey("InvalidToolTipBackround")); 
+
             ToolTip tempToolTip("",
                                 resourceManager.getBitmapFont(tooltipXml->FirstChildElement("text")->Attribute("font")),
                                 sf::Vector2f(tooltipXml->FirstChildElement("text")->FloatAttribute("offsetx"),
                                              tooltipXml->FirstChildElement("text")->FloatAttribute("offsety")),
                                 sf::Vector2f(tooltipXml->FloatAttribute("offsetx"), 
                                              tooltipXml->FloatAttribute("offsety")),
-                                leftTexture,
-                                centerTexture,
-                                rightTexture);
+                                backroundMap);
             
             toolTip[tooltipXml->Attribute("name")] = tempToolTip;
         }

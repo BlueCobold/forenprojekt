@@ -56,6 +56,8 @@ MenuSpriteId = The menusprite with id % don't exist.
 UnknownToolTip = ToolTip isn't registered: %.
 IncludeFileInvalid = Include File '%' is corrupt.
 InvalidLayout = The layout-part '%' has a bad number of elements.
+InvalidToolTipBackround = The backround layout of a tooltip is corrupt.
+
 [GUI]
 gui_game_paused = Game Paused
 gui_continue = Continue
@@ -81,11 +83,9 @@ gui_time = Time:
 gui_unlimited = %
 gui_ball_lost = Balls lost:
 gui_mainmenu = Main Menu
+
 [ToolTip]
-tooltip_gold = you finish the level in gold
-tooltip_silver = you finish the level in silver
-tooltip_bronze = you finish the level in bronze
-tooltip_none = you finish the level
+tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
 
 [Levels]
 levelBlocked1 = blocked

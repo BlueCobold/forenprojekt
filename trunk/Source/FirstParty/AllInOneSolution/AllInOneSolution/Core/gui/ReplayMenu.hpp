@@ -25,6 +25,7 @@ public:
     void setPoints(int points);
     void setGrade(int grade);
     void setLostBalls(int lostBalls);
+    void setMedalToolTipText(const std::string& text);
 
 };
 
