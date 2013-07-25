@@ -52,10 +52,18 @@ namespace utility
 
         bool leftButtonReleased() const;
 
+        void notifyWheelMoved(const int delta);
+
+        bool isWheelMovedUp() const;
+
+        bool isWheelMovedDown() const;
+
     private:
 
         bool m_leftPressed;
         bool m_leftReleased;
+        bool m_mouseWheelUp;
+        bool m_mouseWheelDown;
         sf::Vector2f m_position;
         sf::Vector2i m_lastPosition;
     };

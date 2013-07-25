@@ -1,5 +1,5 @@
 #include "LevelPreviewState.hpp"
-#include "../resources/Config.hpp"
+#include "../resources/AppConfig.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include "../model/Level.hpp"
 
@@ -27,6 +27,8 @@ void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, c
     m_menu.setLevelInfo(m_level->getLevelName(),
                         m_level->getRemainigTime(),
                         m_level->getRemainingBall());
+    m_menu.setCoinToolTipText(utility::replace(utility::translateKey("tooltip_coins"), 
+                                           utility::toString(m_config.get<int>("coins"))));
 }
 
 StateChangeInformation LevelPreviewState::update(const float time)

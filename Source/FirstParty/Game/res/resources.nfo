@@ -32,6 +32,7 @@
 	<texture name="Window" path="gui/window.png" smooth="false" />
 	<texture name="tooltip" path="gui/tooltip.png" smooth="true" />
 	<texture name="goodie" path="gui/Goodies.png" smooth="true" />
+	<texture name="coins" path="gui/coins.png" smooth="true" />
 </textures>
 <fonts>
 	<font name="visitor" path="visitor.ttf" />

@@ -62,6 +62,9 @@ namespace utility
         bool last = m_leftPressed;
         m_leftPressed = sf::Mouse::isButtonPressed(sf::Mouse::Left);
         m_leftReleased = last && !m_leftPressed;
+
+        m_mouseWheelDown = false;
+        m_mouseWheelUp = false;
     }
 
     bool MouseWrapper::leftButtonPressed() const
@@ -72,5 +75,29 @@ namespace utility
     bool MouseWrapper::leftButtonReleased() const
     {
         return m_leftReleased;
+    }
+
+    void  MouseWrapper::notifyWheelMoved(const int delta)
+    {
+        if(delta > 0)
+        {
+            m_mouseWheelUp = true;
+            m_mouseWheelDown = false;
+        }
+        else if(delta < 0)
+        {
+            m_mouseWheelDown = true;
+            m_mouseWheelUp = false;
+        }
+    }
+
+    bool MouseWrapper::isWheelMovedUp() const
+    {
+        return m_mouseWheelUp;
+    }
+
+    bool MouseWrapper::isWheelMovedDown() const
+    {
+        return m_mouseWheelDown;
     }
 }

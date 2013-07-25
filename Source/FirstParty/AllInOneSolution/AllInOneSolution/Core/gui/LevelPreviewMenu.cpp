@@ -28,3 +28,8 @@ void LevelPreviewMenu::setLevelInfo(const std::string& levelName,
         else
             Menu::getLabel(LABEL_TIME).setText(utility::toString(minutes) + ":" + utility::toString(seconds));
 }
+
+void LevelPreviewMenu::setCoinToolTipText(const std::string& text)
+{
+    Menu::getSprite(SPRITE_COINS).setToolTipText(text);
+}
