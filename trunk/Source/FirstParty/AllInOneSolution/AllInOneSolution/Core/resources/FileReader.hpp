@@ -23,6 +23,7 @@ public:
     std::unordered_map<std::string, std::string>::const_iterator endIterator();
 
     void reload(const std::string& fileName);
+    const bool existKey(const std::string& key) const;
 
 protected:
 

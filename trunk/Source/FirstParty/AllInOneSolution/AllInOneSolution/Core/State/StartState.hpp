@@ -10,7 +10,7 @@ class StartState : public State
 {
 public:
 
-    StartState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
+    StartState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~StartState();
 
     virtual StateChangeInformation update(const float time);

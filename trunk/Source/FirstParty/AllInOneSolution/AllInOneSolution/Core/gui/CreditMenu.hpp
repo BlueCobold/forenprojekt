@@ -5,8 +5,6 @@
 
 #include "CaptionMenu.hpp"
 
-class Config;
-
 class CreditMenu : public CaptionMenu
 {
 public:

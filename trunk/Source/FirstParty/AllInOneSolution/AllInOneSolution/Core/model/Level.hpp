@@ -26,7 +26,7 @@
 #include <vector>
 #include <queue>
 
-class Config;
+class AppConfig;
 
 class ResourceManager;
 
@@ -47,7 +47,7 @@ class Level :
 {
 public:
     /// Construct a level from the given level number
-    Level(const unsigned int level, ResourceManager& resourceManager, Config& config);
+    Level(const unsigned int level, ResourceManager& resourceManager, AppConfig& config);
     ~Level();
 
     virtual void restartAt(const float time);
@@ -231,7 +231,7 @@ private:
 
     float m_lastTime;
 
-    Config& m_config;
+    AppConfig& m_config;
 
     bool m_debugDraw;
 

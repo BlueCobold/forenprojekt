@@ -1,5 +1,5 @@
 #include "App.hpp"
-#include "resources/Config.hpp"
+#include "resources/AppConfig.hpp"
 
 #include <iostream>
 
@@ -12,7 +12,7 @@
 {
     try
     {
-        Config configFile("Config.ini");
+        AppConfig configFile("Config.ini", "stash.dat");
         App app(configFile);
         app.run();
     }

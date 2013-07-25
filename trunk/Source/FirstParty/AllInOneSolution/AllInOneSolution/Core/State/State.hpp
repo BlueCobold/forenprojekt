@@ -3,7 +3,7 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
-class Config;
+class AppConfig;
 class ResourceManager;
 
 namespace sf
@@ -37,7 +37,7 @@ class State : public Drawable
 {
 public:
     
-    State(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config) :
+    State(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config) :
         m_screen(screen),
         m_resourceManager(resourceManager),
         m_pause(false),
@@ -101,7 +101,7 @@ protected:
 
     sf::RenderWindow& m_screen;
     ResourceManager& m_resourceManager;
-    Config& m_config;
+    AppConfig& m_config;
 
 private:
     bool m_pause;

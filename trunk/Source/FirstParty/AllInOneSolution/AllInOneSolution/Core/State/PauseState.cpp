@@ -14,7 +14,7 @@
 
 PauseState::PauseState(sf::RenderWindow& screen,
                        ResourceManager& resourceManager,
-                       Config& config) :
+                       AppConfig& config) :
     State(screen, resourceManager, config),
     m_background(nullptr),
     m_menu(sf::Vector2f(0, 0), screen, resourceManager),

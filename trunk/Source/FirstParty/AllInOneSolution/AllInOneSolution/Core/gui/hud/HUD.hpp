@@ -12,7 +12,7 @@
 #include <memory> // unique_ptr
 
 class ResourceManager;
-class Config;
+class AppConfig;
 class Level;
 
 namespace sf
@@ -46,7 +46,7 @@ private:
     GoodyHUD m_extraTimeGoody;
 
 public:
-    HUD(ResourceManager& resourceManager, Config& config);
+    HUD(ResourceManager& resourceManager, AppConfig& config);
 
     void skipInterpolation();
 

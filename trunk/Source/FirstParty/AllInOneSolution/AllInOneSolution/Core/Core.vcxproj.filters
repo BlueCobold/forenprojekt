@@ -259,6 +259,9 @@
     <ClCompile Include="gui\hud\GoodyHUD.cpp">
       <Filter>Sources\gui\hud</Filter>
     </ClCompile>
+    <ClCompile Include="resources\AppConfig.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -698,6 +701,9 @@
     </ClInclude>
     <ClInclude Include="gui\hud\GoodyHUD.hpp">
       <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\AppConfig.hpp">
+      <Filter>Headers\resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

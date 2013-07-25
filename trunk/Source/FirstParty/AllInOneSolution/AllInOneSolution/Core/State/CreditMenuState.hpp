@@ -11,7 +11,7 @@ class CreditMenuState : public State
 {
 public:
 
-    CreditMenuState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
+    CreditMenuState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~CreditMenuState();
 
     virtual StateChangeInformation update(const float time);

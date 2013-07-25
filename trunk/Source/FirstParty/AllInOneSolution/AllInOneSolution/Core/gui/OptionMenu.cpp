@@ -1,11 +1,11 @@
 #include "OptionMenu.hpp"
-#include "../resources/Config.hpp"
+#include "../resources/AppConfig.hpp"
 #include <SFML/Audio/Listener.hpp>
 
 OptionMenu::OptionMenu(const sf::Vector2f& position,
                        sf::RenderWindow& screen,
                        ResourceManager& resourceManager,
-                       Config& config) :
+                       AppConfig& config) :
     CaptionMenu(*resourceManager.getMenuTemplate("OptionMenu"), position, screen),
     m_config(config),
     m_fullScreen(false)

@@ -8,7 +8,6 @@
 #include "MenuTemplate.hpp"
 #include "CheckBox.hpp"
 #include "Slider.hpp"
-#include "../resources/Config.hpp"
 
 #include <SFML/System/Vector2.hpp>
 

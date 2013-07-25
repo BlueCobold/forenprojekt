@@ -14,7 +14,7 @@ class LevelPreviewState : public State
 {
 public:
 
-    LevelPreviewState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
+    LevelPreviewState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~LevelPreviewState();
 
     virtual StateChangeInformation update(const float time);

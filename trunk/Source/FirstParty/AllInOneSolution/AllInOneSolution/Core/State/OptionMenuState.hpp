@@ -14,7 +14,7 @@ class OptionMenuState : public State
 {
 public:
 
-    OptionMenuState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
+    OptionMenuState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~OptionMenuState();
 
     virtual StateChangeInformation update(const float time);
