@@ -259,6 +259,9 @@
     <ClCompile Include="gui\hud\GoodyHUD.cpp">
       <Filter>Sources\gui\hud</Filter>
     </ClCompile>
+    <ClCompile Include="animation\provider\KeyProvider.cpp">
+      <Filter>Sources\animation\providers</Filter>
+    </ClCompile>
     <ClCompile Include="resources\AppConfig.cpp">
       <Filter>Sources\resources</Filter>
     </ClCompile>
@@ -702,6 +705,9 @@
     <ClInclude Include="gui\hud\GoodyHUD.hpp">
       <Filter>Headers\gui\hud</Filter>
     </ClInclude>
+    <ClInclude Include="animation\provider\KeyProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
     <ClInclude Include="resources\AppConfig.hpp">
       <Filter>Headers\resources</Filter>
     </ClInclude>
@@ -787,6 +793,9 @@
     </Filter>
     <Filter Include="Sources\State">
       <UniqueIdentifier>{f34a6103-1abb-48f9-952b-68f10e8af582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\animation\providers">
+      <UniqueIdentifier>{1f0bc342-a831-4fb5-ac98-bc0015501aad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
