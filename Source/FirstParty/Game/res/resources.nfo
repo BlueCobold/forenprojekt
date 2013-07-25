@@ -41,6 +41,9 @@
 	<sound name="bounce" path="bounce.wav" />
 	<sound name="switch" path="switch.wav" />
 	<sound name="refuse" path="refuse.wav" />
+	<sound name="stars1" path="stars1.wav" />
+	<sound name="stars2" path="stars2.wav" />
+	<sound name="stars3" path="stars3.wav" />
 </sounds>
 <menus>
 	<menu name="pauseMenu" path="pauseMenu.xml" />
