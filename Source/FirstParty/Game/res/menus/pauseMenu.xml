@@ -10,5 +10,7 @@
 	<elements>
 		<button id="0" text="gui_continue" style="default" sound="default" x="261" y="110" />
 		<button id="1" text="gui_option" style="default" sound="default" x="261" y="165" />
+		<button id="2" text="gui_mainmenu" style="default" sound="default" 
+			tooltip="default" tooltiptext="tooltip_mainmenu" x="261" y="220" />
 	</elements>
 </menu>

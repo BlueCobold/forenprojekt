@@ -89,6 +89,7 @@ gui_mainmenu = Main Menu
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
 tooltip_start_game = start a new level.
 tooltip_coins = you currently have % coins
+tooltip_mainmenu = return to main menu.
 
 [Levels]
 levelBlocked1 = blocked
