@@ -67,14 +67,6 @@ StateChangeInformation PauseState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_optionStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
-    else if(clicked == PauseMenu::BUTTON_MAINMENU)
-    {
-      m_playStateInfo.m_returnFromPause = false;
-      m_playStateInfo.m_level = nullptr;
-      m_transitionStateInfo.m_followingState = MainMenuStateId;
-      m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
-      return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
-    }
     return StateChangeInformation::Empty();
 }
 
