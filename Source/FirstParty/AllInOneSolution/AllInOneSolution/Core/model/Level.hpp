@@ -230,6 +230,7 @@ private:
     float m_height;
 
     float m_lastTime;
+    float m_levelEndingTime;
 
     AppConfig& m_config;
 

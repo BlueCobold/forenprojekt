@@ -41,6 +41,7 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConf
     m_levelPass(false),
     m_remainingTime(-1),
     m_totalTime(-1),
+    m_levelEndingTime(0),
     m_timeAttackMode(false),
     m_ballTravelDistance(0.0f),
     m_ballImpulseTime(0.0f),
@@ -90,6 +91,9 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     m_invulnerableGoody.update(elapsedTime);
     m_extraBallGoody.update(elapsedTime);
     m_extraTimeGoody.update(elapsedTime);
+
+    if(!m_levelPass)
+        m_levelEndingTime = elapsedTime + 1.0f;
 
     int steps = std::min(20, std::max(1, static_cast<int>(ceilf(m_timeStep / (1 / (60.0f * 2))))));
     float delta = 0;
@@ -180,8 +184,9 @@ void Level::respawnDeadBalls()
             m_multiHit = 0;
             m_gravity = m_defaultGravity;
             m_remainingBall -= 1;
-            createLabelAt(m_ball, "red", -10);
             m_lostBallCounter++;
+            if(!(m_remainingBall < 1 && m_remainingBall > -1))
+                createLabelAt(m_ball, "red", -10);
         }
 
         const Ball* ball = dynamic_cast<const Ball*>((*it).get());
@@ -477,7 +482,10 @@ const int Level::getRemainingBall() const
 
 const bool Level::isLevelPassed() const
 {
-    return m_levelPass;
+    if(m_levelEndingTime < m_lastTime)
+        return m_levelPass;
+    else
+        return false;
 }
 
 const float Level::getRemainigTime() const
