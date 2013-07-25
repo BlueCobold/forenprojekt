@@ -11,6 +11,7 @@ public:
 
     static const int BUTTON_CONTINUE = 0;
     static const int BUTTON_OPTIONS = 1;
+    static const int BUTTON_MAINMENU = 2; // The button to go to the main menu.
 
     PauseMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
 };
