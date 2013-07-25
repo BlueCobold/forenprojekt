@@ -64,7 +64,9 @@ StateChangeInformation MainMenuState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
-    
+    else if(clicked == MainMenu::BUTTON_CLOSE)
+        State::m_screen.close();
+
     return StateChangeInformation::Empty();
 }
 
