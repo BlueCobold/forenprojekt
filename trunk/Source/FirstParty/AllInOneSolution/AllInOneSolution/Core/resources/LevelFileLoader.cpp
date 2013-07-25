@@ -22,6 +22,7 @@
 #include "../animation/provider/Stop.hpp"
 #include "../animation/provider/Substractor.hpp"
 #include "../animation/provider/TimeProvider.hpp"
+#include "../animation/provider/KeyProvider.hpp"
 #include "../animation/provider/VariableProvider.hpp"
 
 #include <map>
@@ -274,6 +275,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
         return std::unique_ptr<RandomProvider>(new RandomProvider(xml->FloatAttribute("min"), xml->FloatAttribute("max")));
     else if(std::string(xml->Name())=="inv")
         return std::unique_ptr<Inverse>(new Inverse(std::move(parseProviders(xml, animated, handler, stoppable, functions)[0])));
+    else if(std::string(xml->Name())=="keyDown")
+      return std::unique_ptr<KeyProvider>(new KeyProvider((int)(xml->Attribute("key")[0])));
     else if(std::string(xml->Name())=="function")
     {
         if(functions == nullptr)

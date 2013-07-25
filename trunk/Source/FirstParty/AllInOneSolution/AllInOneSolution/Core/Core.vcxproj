@@ -40,6 +40,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <ExecutablePath>$(ExecutablePath);..\..\..\Game</ExecutablePath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -92,6 +94,7 @@
   <ItemGroup>
     <ClCompile Include="animation\Animation.cpp" />
     <ClCompile Include="animation\Interpolation.cpp" />
+    <ClCompile Include="animation\provider\KeyProvider.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="gui\CaptionMenu.cpp" />
@@ -190,6 +193,7 @@
     <ClInclude Include="animation\provider\Clamp.hpp" />
     <ClInclude Include="animation\provider\FloatToInt.hpp" />
     <ClInclude Include="animation\provider\Inverse.hpp" />
+    <ClInclude Include="animation\provider\KeyProvider.hpp" />
     <ClInclude Include="animation\provider\Maximum.hpp" />
     <ClInclude Include="animation\provider\Minimum.hpp" />
     <ClInclude Include="animation\provider\Modulo.hpp" />
