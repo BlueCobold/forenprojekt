@@ -4,7 +4,7 @@
 
 CreditMenuState::CreditMenuState(sf::RenderWindow& screen, 
                                  ResourceManager& resourceManager, 
-                                 Config& config) :
+                                 AppConfig& config) :
     State(screen, resourceManager, config),
     m_menu(sf::Vector2f(0, 0), screen, resourceManager)
 {

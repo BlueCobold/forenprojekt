@@ -2,7 +2,7 @@
 #include "Entity.hpp"
 #include "Teeter.hpp"
 #include "../rendering/DrawParameter.hpp"
-#include "../resources/Config.hpp"
+#include "../resources/AppConfig.hpp"
 #include "../resources/ResourceManager.hpp"
 #include "../Utility.hpp" // toString, toMeter
 #include "../Input.hpp"
@@ -19,7 +19,7 @@
 #include <unordered_map>
 #include <utility> // pair, make_pair, move
 
-Level::Level(const unsigned int level, ResourceManager& resourceManager, Config& config) :
+Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConfig& config) :
     m_number(level),
     m_resourceManager(resourceManager),
     m_world(b2Vec2(0.f, 9.81f)),

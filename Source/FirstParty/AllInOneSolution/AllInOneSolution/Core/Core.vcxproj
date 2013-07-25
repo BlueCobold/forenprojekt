@@ -157,6 +157,7 @@
     <ClCompile Include="rendering\transitions\VerticalSlidingStripesTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalSpringTransition.cpp" />
     <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp" />
+    <ClCompile Include="resources\AppConfig.cpp" />
     <ClCompile Include="resources\Config.cpp" />
     <ClCompile Include="resources\FileReader.cpp" />
     <ClCompile Include="resources\LevelFileLoader.cpp" />
@@ -300,6 +301,7 @@
     <ClInclude Include="rendering\transitions\VerticalSlidingStripesTransition.hpp" />
     <ClInclude Include="rendering\transitions\VerticalSpringTransition.hpp" />
     <ClInclude Include="rendering\transitions\VerticalStripesTransition.hpp" />
+    <ClInclude Include="resources\AppConfig.hpp" />
     <ClInclude Include="resources\Config.hpp" />
     <ClInclude Include="resources\FileReader.hpp" />
     <ClInclude Include="resources\LevelFileLoader.hpp" />

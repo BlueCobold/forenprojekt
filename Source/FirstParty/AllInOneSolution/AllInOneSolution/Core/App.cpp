@@ -11,7 +11,7 @@
 #include "../Core/State/OptionMenuState.hpp"
 #include "../Core/State/CreditMenuState.hpp"
 #include "../Core/State/LevelPreviewState.hpp"
-#include "resources/Config.hpp"
+#include "resources/AppConfig.hpp"
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Event.hpp>
@@ -23,7 +23,7 @@
 #include <sstream>
 #include <utility> // move
 
-App::App(Config& config) :
+App::App(AppConfig& config) :
     m_config(config),
     m_windowTitle("Rickety Racquet"),
     m_fullscreen(false),
@@ -33,7 +33,6 @@ App::App(Config& config) :
     // Cache often used settings
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
-
     sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
 
     adjustVideoMode(videoMode);

@@ -17,7 +17,7 @@ class MainMenuState : public State
 {
 public:
 
-    MainMenuState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
+    MainMenuState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~MainMenuState();
 
     virtual StateChangeInformation update(const float time);

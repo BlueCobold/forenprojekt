@@ -19,7 +19,7 @@ class LevelFailState : public State
 {
 public:
 
-    LevelFailState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
+    LevelFailState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~LevelFailState();
 
     virtual StateChangeInformation update(const float time);

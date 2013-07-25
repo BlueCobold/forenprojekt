@@ -7,6 +7,7 @@
 #include "Utility.hpp" // toString
 #include "State/StateManager.hpp"
 #include "gui/LineLabel.hpp"
+#include "resources/AppConfig.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Font.hpp>
@@ -16,7 +17,7 @@
 
 #include <string>
 
-class Config;
+class AppConfig;
 
 /// This class will be used to handle the window or fullscreen
 /// and to handle the rendering
@@ -24,7 +25,7 @@ class App
 {
 public:
 
-    App(Config& config);
+    App(AppConfig& config);
 
     void run();
 
@@ -45,7 +46,7 @@ private:
 private:
     sf::RenderWindow m_screen;
 
-    Config& m_config;
+    AppConfig& m_config;
     std::string m_windowTitle;
     bool m_fullscreen;
     bool m_focus;

@@ -1,9 +1,9 @@
 #include "HUD.hpp"
-#include "../../resources/Config.hpp"
+#include "../../resources/AppConfig.hpp"
 #include "../../model/Level.hpp"
 #include "../../resources/ResourceManager.hpp"
 
-HUD::HUD(ResourceManager& resourceManager, Config& config) :
+HUD::HUD(ResourceManager& resourceManager, AppConfig& config) :
     m_fpsCounter(sf::Vector2f(30.f,-30.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Left, HUDElement::Bottom),
     m_target(resourceManager, sf::Vector2f(-30.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Right),
     m_points(sf::Vector2f(30.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Left),

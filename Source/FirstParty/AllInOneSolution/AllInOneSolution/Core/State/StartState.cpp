@@ -6,7 +6,7 @@
 
 StartState::StartState(sf::RenderWindow& screen, 
                        ResourceManager& resourceManager, 
-                       Config& config) :
+                       AppConfig& config) :
     State(screen, resourceManager, config)
 {
 }

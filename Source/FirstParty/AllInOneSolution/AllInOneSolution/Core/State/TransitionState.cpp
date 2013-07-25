@@ -7,7 +7,7 @@
 
 TransitionState::TransitionState(sf::RenderWindow& screen,
                                  ResourceManager& resourceManager, 
-                                 Config& config) :
+                                 AppConfig& config) :
     State(screen, resourceManager, config)
 {
     // BUG: the PC might not be able to handle this size!

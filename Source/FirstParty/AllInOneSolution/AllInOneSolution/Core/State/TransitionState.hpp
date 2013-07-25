@@ -15,7 +15,7 @@ class TransitionState : public State
 {
 public:
 
-    TransitionState(sf::RenderWindow& screen, ResourceManager& resourceManager, Config& config);
+    TransitionState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~TransitionState();
 
     virtual StateChangeInformation update(const float time);
