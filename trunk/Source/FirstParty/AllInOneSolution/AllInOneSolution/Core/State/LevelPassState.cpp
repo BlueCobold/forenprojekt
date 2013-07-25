@@ -1,7 +1,7 @@
 #include "LevelPassState.hpp"
 #include "../Input.hpp"
 #include "../model/Level.hpp"
-#include "../resources/Config.hpp"
+#include "../resources/AppConfig.hpp"
 #include "../resources/ResourceManager.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
 
@@ -35,7 +35,6 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
     m_timeDiff = time - info->m_levelTime;
     State::onEnter(enterInformation, time - m_timeDiff);
     m_HUD.restartAt(getCurrentTime());
-    m_level->getPoints();
 
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
     m_menu.setPoints(m_level->getPoints());
@@ -46,6 +45,8 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
                                         utility::toString(m_level->getMedal(Level::Silver))), // second replace 
                                         utility::toString(m_level->getMedal(Level::Bronze))); // third replace
     m_menu.setMedalToolTipText(text);
+    if(!enterInformation->m_prepareOnly && m_level->getPoints() > 0)
+        m_config.set<int>("coins", m_config.get<int>("coins") + m_level->getPoints());
 }
 
 StateChangeInformation LevelPassState::update(const float time)
