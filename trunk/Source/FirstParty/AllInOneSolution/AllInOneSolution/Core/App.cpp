@@ -142,6 +142,8 @@ void App::handleEvents()
             utility::Keyboard.notifyKeyPressed(event.key.code);
         else if(event.type == sf::Event::KeyReleased)
             utility::Keyboard.notifyKeyReleased(event.key.code);
+        else if(event.type == sf::Event::MouseWheelMoved)
+            utility::Mouse.notifyWheelMoved(event.mouseWheel.delta);
     }
 }
 

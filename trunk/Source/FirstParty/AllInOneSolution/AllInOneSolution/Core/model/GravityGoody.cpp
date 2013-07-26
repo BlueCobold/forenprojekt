@@ -3,7 +3,7 @@
 GravityGoody::GravityGoody(const sf::Keyboard::Key key,
                            const float gravityFactor,
                            b2Vec2& gravity) :
-    Goody(key),
+    Goody(key, Goody::GravityGoody),
     m_gravityFactor(gravityFactor),
     m_currentGravity(gravity)
 {
