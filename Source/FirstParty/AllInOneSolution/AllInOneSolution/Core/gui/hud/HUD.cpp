@@ -10,10 +10,10 @@ HUD::HUD(ResourceManager& resourceManager, AppConfig& config) :
     m_arrow(resourceManager),
     m_ball(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.66f),
     m_time(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.33f),
-    m_gravityGoody(resourceManager, "goodie", sf::IntRect(0,0,32,32), sf::Vector2f(0,50), 32),
-    m_invulnerableGoody(resourceManager, "goodie", sf::IntRect(32,0,32,32), sf::Vector2f(0,87), 32),
-    m_extraBallGoody(resourceManager, "goodie", sf::IntRect(64,0,32,32), sf::Vector2f(0,124), 32),
-    m_extraTimeGoody(resourceManager, "goodie", sf::IntRect(96,0,32,32), sf::Vector2f(0,161), 32),
+    m_gravityGoody(resourceManager, "goodie", sf::IntRect(0,0,32,32), sf::Vector2f(0,50)),
+    m_invulnerableGoody(resourceManager, "goodie", sf::IntRect(32,0,32,32), sf::Vector2f(0,87)),
+    m_extraBallGoody(resourceManager, "goodie", sf::IntRect(64,0,32,32), sf::Vector2f(0,124)),
+    m_extraTimeGoody(resourceManager, "goodie", sf::IntRect(96,0,32,32), sf::Vector2f(0,161)),
     m_ballShow(false),
     m_timeShow(false)
 {
