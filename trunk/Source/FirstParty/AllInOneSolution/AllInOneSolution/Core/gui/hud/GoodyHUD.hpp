@@ -12,17 +12,11 @@ class Goody;
 class GoodyHUD : public HUDElement
 {
 public:
-    enum State {Disabled,
-                Active,
-                Selected,
-                Deselected
-                };
 
     GoodyHUD(ResourceManager& resourceManager,
               const std::string& iconKey,
               const sf::IntRect& textureRect,
               const sf::Vector2f& position,
-              const int goodyIconHeight,
               float hReference = HUDElement::Left,
               float vReference = HUDElement::Top);
 
@@ -30,8 +24,15 @@ public:
 
     void draw(const DrawParameter& params);
 
-    void updateGoodyState(const Goody &goody);
+    void updateState(const Goody &goody);
 private:
+    static const int Deselected = 0;
+    static const int Active = 1;
+    static const int Selected = 2;
+    static const int Disabled = 3;
+    static const int DisabledSelected = 4;
+
+
     sf::Sprite m_icon;
     sf::IntRect m_startRect;
     int m_iconHeight;
