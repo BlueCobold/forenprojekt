@@ -1,6 +1,7 @@
 #include "Goody.hpp"
 
 Goody::Goody(const sf::Keyboard::Key key,
+             const Type type,
              const float durationTime,
              const float cooldownTime, 
              const int charges) :
@@ -9,13 +10,16 @@ Goody::Goody(const sf::Keyboard::Key key,
     m_cooldownTime(cooldownTime),
     m_charges(charges),
     m_nextUseTime(0),
-    m_durationUntilTime(0)
+    m_durationUntilTime(0),
+    m_selected(false),
+    m_type(type)
 {
 }
 
 void Goody::update(const float elapsedTime)
 {
-    if(utility::Keyboard.isKeyDown(m_key) && m_charges != 0 && m_nextUseTime < elapsedTime)
+    if((utility::Keyboard.isKeyDown(m_key) || (m_selected && utility::Mouse.leftButtonDown()))
+       && m_charges != 0 && m_nextUseTime < elapsedTime)
     {
         if(canActivate())
             m_active = true;
@@ -26,7 +30,8 @@ void Goody::update(const float elapsedTime)
         if(m_durationTime > 0)
             m_durationUntilTime = elapsedTime + m_durationTime;
     }
-    else if(utility::Keyboard.isKeyPressed(m_key) && m_charges == -1 && m_nextUseTime < elapsedTime)
+    else if((utility::Keyboard.isKeyPressed(m_key) || (m_selected && utility::Mouse.leftButtonPressed()))
+            && m_charges == -1 && m_nextUseTime < elapsedTime)
     {
         if(canActivate())
             m_active = true;
@@ -48,4 +53,13 @@ bool Goody::isActive() const
 bool Goody::canActivate() const
 {
     return true;
+}
+
+void Goody::setSelected(const bool selected)
+{
+    m_selected = selected;
+}
+const Goody::Type Goody::getType() const
+{
+    return m_type;
 }

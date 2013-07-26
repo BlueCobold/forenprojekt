@@ -52,6 +52,8 @@ namespace utility
 
         bool leftButtonReleased() const;
 
+        bool leftButtonDown() const;
+
         void notifyWheelMoved(const int delta);
 
         bool isWheelMovedUp() const;
@@ -60,6 +62,7 @@ namespace utility
 
     private:
 
+        bool m_leftDown;
         bool m_leftPressed;
         bool m_leftReleased;
         bool m_mouseWheelUp;

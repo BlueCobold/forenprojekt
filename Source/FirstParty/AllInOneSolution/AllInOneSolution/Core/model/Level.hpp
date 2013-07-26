@@ -129,6 +129,7 @@ private:
     void spawnPendingEntities(float currentTime);
     void cleanupKilledEntities();
     void updatePointLabels();
+    void updateGoodyChoice();
 
     virtual bool shouldCollide(Entity* entityA, Entity* entityB);
     virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse);
@@ -298,6 +299,7 @@ private:
     InvulnerableGoody m_invulnerableGoody;
     Goody m_extraBallGoody;
     Goody m_extraTimeGoody;
+    int m_currentSeletedGoody;
 };
 
 #endif // LEVEL_HPP

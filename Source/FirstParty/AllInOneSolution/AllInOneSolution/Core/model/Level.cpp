@@ -53,8 +53,9 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConf
     m_lastTime(0),
     m_gravityGoody(sf::Keyboard::Num1, 2.f, m_gravity),
     m_invulnerableGoody(sf::Keyboard::Num2, 3.f, m_ball),
-    m_extraBallGoody(sf::Keyboard::Num3, 0, 0, 1),
-    m_extraTimeGoody(sf::Keyboard::Num4, 0, 0, 1)
+    m_extraBallGoody(sf::Keyboard::Num3, Goody::ExtraBallGoody, 0, 0, 1),
+    m_extraTimeGoody(sf::Keyboard::Num4, Goody::ExtraTimeGoody, 0, 0, 1),
+    m_currentSeletedGoody(0)
 {
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
@@ -87,6 +88,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     m_velocityIterations = std::max(1, 4);
     m_positionIterations = m_velocityIterations;
 
+    updateGoodyChoice();
     m_gravityGoody.update(elapsedTime);
     m_invulnerableGoody.update(elapsedTime);
     m_extraBallGoody.update(elapsedTime);
@@ -558,4 +560,24 @@ const int Level::getMedal(const Level::Medals medal) const
         return m_silverMedal;
     else
         return 0;
+}
+void Level::updateGoodyChoice()
+{
+    if(utility::Mouse.isWheelMovedDown())
+    {
+        m_currentSeletedGoody++;
+        if(m_currentSeletedGoody == Goody::Counter)
+            m_currentSeletedGoody = 0;
+    }
+    if(utility::Mouse.isWheelMovedUp())
+    {
+        m_currentSeletedGoody--;
+        if(m_currentSeletedGoody < 0)
+            m_currentSeletedGoody = Goody::Counter - 1;
+    }
+
+    m_gravityGoody.setSelected(m_gravityGoody.getType() == m_currentSeletedGoody);
+    m_invulnerableGoody.setSelected(m_invulnerableGoody.getType() == m_currentSeletedGoody);
+    m_extraBallGoody.setSelected(m_extraBallGoody.getType() == m_currentSeletedGoody);
+    m_extraTimeGoody.setSelected(m_extraTimeGoody.getType() == m_currentSeletedGoody);
 }

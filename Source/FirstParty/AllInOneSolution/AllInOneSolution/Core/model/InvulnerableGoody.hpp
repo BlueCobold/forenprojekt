@@ -14,7 +14,7 @@ private:
 
 public:
     InvulnerableGoody(const sf::Keyboard::Key key, const float durationTime, const Ball* const& ball)
-        : Goody(key, durationTime),
+        : Goody(key, Goody::InvulnerableGoody, durationTime),
         m_ball(ball)
     { }
     
