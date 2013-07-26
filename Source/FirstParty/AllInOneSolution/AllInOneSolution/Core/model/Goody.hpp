@@ -33,6 +33,8 @@ public:
 
     virtual bool isActive() const;
     virtual bool canActivate() const;
+    virtual bool isSelected() const;
+    virtual int getCharges() const;
     const Type getType() const;
     void setSelected(const bool selected);
 };

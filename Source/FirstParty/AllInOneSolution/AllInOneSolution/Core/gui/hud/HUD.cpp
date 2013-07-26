@@ -10,10 +10,10 @@ HUD::HUD(ResourceManager& resourceManager, AppConfig& config) :
     m_arrow(resourceManager),
     m_ball(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.66f),
     m_time(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.33f),
-    m_gravityGoody(resourceManager, "goodie", sf::IntRect(0,0,32,32), sf::Vector2f(0,50)),
-    m_invulnerableGoody(resourceManager, "goodie", sf::IntRect(32,0,32,32), sf::Vector2f(0,87)),
-    m_extraBallGoody(resourceManager, "goodie", sf::IntRect(64,0,32,32), sf::Vector2f(0,124)),
-    m_extraTimeGoody(resourceManager, "goodie", sf::IntRect(96,0,32,32), sf::Vector2f(0,161)),
+    m_gravityGoody(resourceManager, "goodie", sf::IntRect(0,0,32,32), sf::Vector2f(0,50), 32),
+    m_invulnerableGoody(resourceManager, "goodie", sf::IntRect(32,0,32,32), sf::Vector2f(0,87), 32),
+    m_extraBallGoody(resourceManager, "goodie", sf::IntRect(64,0,32,32), sf::Vector2f(0,124), 32),
+    m_extraTimeGoody(resourceManager, "goodie", sf::IntRect(96,0,32,32), sf::Vector2f(0,161), 32),
     m_ballShow(false),
     m_timeShow(false)
 {
@@ -43,6 +43,11 @@ void HUD::update(const Level* level, const float elapsedTime)
     m_ball.setBalls(level->getRemainingBall());
 
     m_time.setTime(static_cast<int>(level->getRemainigTime() + 1));
+
+    m_gravityGoody.updateGoodyState(level->getGoody(Goody::GravityGoody));
+    m_invulnerableGoody.updateGoodyState(level->getGoody(Goody::InvulnerableGoody));
+    m_extraTimeGoody.updateGoodyState(level->getGoody(Goody::ExtraTimeGoody));
+    m_extraBallGoody.updateGoodyState(level->getGoody(Goody::ExtraBallGoody));
 }
 
 void HUD::restartAt(const float time)

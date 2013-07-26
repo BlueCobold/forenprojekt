@@ -7,13 +7,22 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <iostream>
 
+class Goody;
+
 class GoodyHUD : public HUDElement
 {
 public:
+    enum State {Disabled,
+                Active,
+                Selected,
+                Deselected
+                };
+
     GoodyHUD(ResourceManager& resourceManager,
               const std::string& iconKey,
               const sf::IntRect& textureRect,
               const sf::Vector2f& position,
+              const int goodyIconHeight,
               float hReference = HUDElement::Left,
               float vReference = HUDElement::Top);
 
@@ -21,11 +30,13 @@ public:
 
     void draw(const DrawParameter& params);
 
-    void setSelected(const bool selected);
+    void updateGoodyState(const Goody &goody);
 private:
     sf::Sprite m_icon;
-    sf::Sprite m_selectionSheen;
-    bool m_selected;
+    sf::Sprite m_activeIcon;
+    sf::Sprite m_selectedIcon;
+    sf::Sprite m_disabledIcon;
+    State m_goodyState;
 };
 
 #endif // GOODY_HPP
