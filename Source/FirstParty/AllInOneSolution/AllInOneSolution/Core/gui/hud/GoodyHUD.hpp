@@ -20,8 +20,12 @@ public:
     void update(const DrawParameter& params);
 
     void draw(const DrawParameter& params);
+
+    void setSelected(const bool selected);
 private:
     sf::Sprite m_icon;
+    sf::Sprite m_selectionSheen;
+    bool m_selected;
 };
 
 #endif // GOODY_HPP
