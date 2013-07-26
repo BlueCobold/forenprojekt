@@ -44,10 +44,10 @@ void HUD::update(const Level* level, const float elapsedTime)
 
     m_time.setTime(static_cast<int>(level->getRemainigTime() + 1));
 
-    m_gravityGoody.updateGoodyState(level->getGoody(Goody::GravityGoody));
-    m_invulnerableGoody.updateGoodyState(level->getGoody(Goody::InvulnerableGoody));
-    m_extraTimeGoody.updateGoodyState(level->getGoody(Goody::ExtraTimeGoody));
-    m_extraBallGoody.updateGoodyState(level->getGoody(Goody::ExtraBallGoody));
+    m_gravityGoody.updateState(level->getGoody(Goody::GravityGoody));
+    m_invulnerableGoody.updateState(level->getGoody(Goody::InvulnerableGoody));
+    m_extraTimeGoody.updateState(level->getGoody(Goody::ExtraTimeGoody));
+    m_extraBallGoody.updateState(level->getGoody(Goody::ExtraBallGoody));
 }
 
 void HUD::restartAt(const float time)
