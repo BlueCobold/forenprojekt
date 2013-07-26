@@ -495,6 +495,19 @@ const float Level::getRemainigTime() const
     return m_remainingTime;
 }
 
+const Goody Level::getGoody (const Goody::Type &type) const
+{
+    if(type == Goody::InvulnerableGoody)
+        return m_invulnerableGoody;
+    else if(type == Goody::GravityGoody)
+        return m_gravityGoody;
+    else if(type == Goody::ExtraTimeGoody)
+        return m_extraTimeGoody;
+    else if(type == Goody::ExtraBallGoody)
+        return m_extraBallGoody;
+    throw new std::runtime_error("Failed to find goody for the given type!");
+}
+
 const bool Level::isLevelFailed() const
 {
     bool value = m_remainingBall < 1 && m_remainingBall > -1;

@@ -50,9 +50,19 @@ bool Goody::isActive() const
     return m_active;
 }
 
+bool Goody::isSelected() const
+{
+    return m_selected;
+}
+
 bool Goody::canActivate() const
 {
     return true;
+}
+
+int Goody::getCharges() const
+{
+    return m_charges;
 }
 
 void Goody::setSelected(const bool selected)
