@@ -35,8 +35,13 @@ private:
     sf::Sprite m_icon;
     sf::Sprite m_activeIcon;
     sf::Sprite m_selectedIcon;
-    sf::Sprite m_disabledIcon;
+    sf::Sprite m_disabledSelIcon;
+    sf::Sprite m_disabledUnSelIcon;
     State m_goodyState;
+
+    bool m_selected;
+    bool m_disabled;
+    bool m_active;
 };
 
 #endif // GOODY_HPP
