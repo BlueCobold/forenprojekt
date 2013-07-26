@@ -16,46 +16,33 @@ GoodyHUD::GoodyHUD(ResourceManager& resourceManager,
     m_icon.setTexture(*resourceManager.getTexture(iconKey));
     m_icon.setTextureRect(textureRect);
 
-    m_activeIcon.setTexture(*resourceManager.getTexture(iconKey));
-    m_activeIcon.setTextureRect(sf::IntRect(textureRect.left, textureRect.top + goodyIconHeight, textureRect.width, textureRect.height));
-    
-    m_selectedIcon.setTexture(*resourceManager.getTexture(iconKey));
-    m_selectedIcon.setTextureRect(sf::IntRect(textureRect.left, textureRect.top + goodyIconHeight * 2, textureRect.width, textureRect.height));
-
-    m_disabledUnSelIcon.setTexture(*resourceManager.getTexture(iconKey));
-    m_disabledUnSelIcon.setTextureRect(sf::IntRect(textureRect.left, textureRect.top + goodyIconHeight * 3, textureRect.width, textureRect.height));
-
-    m_disabledSelIcon.setTexture(*resourceManager.getTexture(iconKey));
-    m_disabledSelIcon.setTextureRect(sf::IntRect(textureRect.left, textureRect.top + goodyIconHeight * 4, textureRect.width, textureRect.height));
-
-    m_goodyState = Disabled;
+    m_startRect = textureRect;
+    m_iconHeight = goodyIconHeight;
 }
 
 void GoodyHUD::update(const DrawParameter& params)
 {
     HUDElement::update(params);
     m_icon.setPosition(getPosition());
-    m_activeIcon.setPosition(getPosition());
-    m_selectedIcon.setPosition(getPosition());
-    m_disabledSelIcon.setPosition(getPosition());
-    m_disabledUnSelIcon.setPosition(getPosition());
+
+    if(m_disabled)
+    {
+        if(m_selected)
+            m_icon.setTextureRect(sf::IntRect(m_startRect.left, m_startRect.top + m_iconHeight * 4, m_startRect.width, m_startRect.height));
+        else
+            m_icon.setTextureRect(sf::IntRect(m_startRect.left, m_startRect.top + m_iconHeight * 3, m_startRect.width, m_startRect.height));
+    }
+    else if(m_active)
+        m_icon.setTextureRect(sf::IntRect(m_startRect.left, m_startRect.top + m_iconHeight, m_startRect.width, m_startRect.height));
+    else if(m_selected)
+        m_icon.setTextureRect(sf::IntRect(m_startRect.left, m_startRect.top + m_iconHeight * 2, m_startRect.width, m_startRect.height));
+    else
+        m_icon.setTextureRect(m_startRect);
 }
 
 void GoodyHUD::draw(const DrawParameter& params)
 {
-    if(m_disabled)
-    {
-        if(m_selected)
-            params.getTarget().draw(m_disabledSelIcon);    
-        else
-            params.getTarget().draw(m_disabledUnSelIcon);
-    }
-    else if(m_active)
-        params.getTarget().draw(m_activeIcon);
-    else if(m_selected)
-        params.getTarget().draw(m_selectedIcon);
-    else
-        params.getTarget().draw(m_icon);
+    params.getTarget().draw(m_icon);
 }
 
 void GoodyHUD::updateGoodyState(const Goody &goody)
