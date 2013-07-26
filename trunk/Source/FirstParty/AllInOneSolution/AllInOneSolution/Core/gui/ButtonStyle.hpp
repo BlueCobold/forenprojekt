@@ -8,6 +8,9 @@
 
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <memory>
+
+class SoundObject;
 
 struct ButtonStateStyle
 {
@@ -16,6 +19,7 @@ struct ButtonStateStyle
     sf::Vector2f textOffset;
     sf::Sprite sprite;
     LineLabel label;
+    std::shared_ptr<SoundObject> sound;
 };
 
 struct ButtonStyle

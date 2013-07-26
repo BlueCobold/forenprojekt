@@ -3,12 +3,11 @@
 
 #include <SFML/Window/Event.hpp>
 
-Button::Button(int id, ButtonStyle style, const SoundObject& sound, const sf::Vector2f& position, const sf::Vector2f& offset) :
+Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset) :
     m_position(position),
     m_id(id),
     m_offset(offset),
     m_style(style),
-    m_sound(sound),
     m_playHoverSound(false)
 {
     m_sprite = &m_style.idleStyle.sprite;
@@ -30,10 +29,10 @@ void Button::update(const sf::RenderWindow& screen)
     sf::Vector2i mouseposition = sf::Mouse::getPosition(screen);
     if(buttonRect.contains(mouseposition))
     {
-        if(!m_playHoverSound)
+        if(!m_playHoverSound && m_style.hoverStyle.sound)
         {
             m_playHoverSound = true;
-            m_sound.play();
+            m_style.hoverStyle.sound->play();
         }
 
         m_showToolTip = true;

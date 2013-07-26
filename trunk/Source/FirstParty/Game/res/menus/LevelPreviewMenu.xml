@@ -1,13 +1,8 @@
 <menu>
 	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
 	<styles source="Styles.inc"/>
-	<sounds>
-		<buttonSound name="default">
-			<hover sound="bounce"/>
-		</buttonSound>
-	</sounds>
 	<elements>
-		<button id="0" text="gui_start" style="default" sound="default" x="261" y="270" />
+		<button id="0" text="gui_start" style="default" x="261" y="270" />
 		<label id="1" text="gui_levelname" font="gui_large" aligment="1" x="255" y="50" />
 		<label id="2" text="gui_balls" font="buttonHoverFont" aligment="0" x="70" y="100" />
 		<label id="3" text="gui_balls" font="buttonHoverFont" aligment="2" x="440" y="100" />

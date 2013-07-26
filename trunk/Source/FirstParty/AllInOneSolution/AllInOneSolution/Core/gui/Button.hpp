@@ -24,7 +24,6 @@ private:
 
     int m_id;
     ButtonStyle m_style;
-    SoundObject m_sound;
     sf::Vector2f m_position;
     sf::Vector2f m_offset;
     sf::Vector2i m_size;
@@ -40,7 +39,7 @@ private:
 
 public:
 
-    Button(int id, ButtonStyle style, const SoundObject& sound, const sf::Vector2f& position, const sf::Vector2f& offset);
+    Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset);
 
     virtual ~Button()
     { }
