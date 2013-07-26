@@ -2,13 +2,8 @@
 	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
 	<caption font="gui_large" text="gui_credit" offsetx="0" offsety="50" />
 	<styles source="Styles.inc"/>
-	<sounds>
-		<buttonSound name="default">
-			<hover sound="bounce"/>
-		</buttonSound>
-	</sounds>
 	<elements>
-		<button id="0" text="gui_close" style="default" sound="default" x="261" y="270" />
+		<button id="0" text="gui_close" style="default" x="261" y="270" />
 		<label text="gui_core_member" font="buttonIdleFont" aligment="1" x="255" y="100" />
 		<label text="bc" font="buttonHoverFont" aligment="1" x="255" y="140" />
 		<label text="dp" font="buttonHoverFont" aligment="1" x="255" y="175" />

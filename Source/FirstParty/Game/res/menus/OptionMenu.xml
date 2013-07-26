@@ -2,13 +2,8 @@
 	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
 	<caption font="gui_large" text="gui_optin_menu" offsetx="0" offsety="50" />
 	<styles source="Styles.inc"/>
-	<sounds>
-		<buttonSound name="default">
-			<hover sound="bounce"/>
-		</buttonSound>
-	</sounds>
 	<elements>
-		<button id="0" text="gui_close" style="default" sound="default" x="261" y="270" />
+		<button id="0" text="gui_close" style="default" x="261" y="270" />
 		<checkbox id="1" style="default" x="170" y="110" />
 		<slider id="2" style="default" x="84" y="160" />
 		<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" aligment="0" x="210" y="110" />

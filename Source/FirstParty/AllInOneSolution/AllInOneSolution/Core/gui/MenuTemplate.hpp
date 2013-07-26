@@ -19,10 +19,8 @@
 struct ButtonInfo
 {
 public:
-    ButtonInfo(const SoundObject& sound) : sound(sound)
-    { }
+
     ButtonStyle style;
-    SoundObject sound;
     sf::Vector2f position;
     std::string textResourceKey;
     int id;

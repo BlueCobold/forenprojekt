@@ -35,9 +35,8 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     std::unordered_map<std::string, CheckBoxStyle> checkboxStyles = parseCheckBoxStyles(menuXml, resourceManager);
     std::unordered_map<std::string, SliderStyle> sliderStyles = parseSliderStyles(menuXml, resourceManager);
     std::unordered_map<std::string, ToolTip> toolTip = parseToolTipStyle(menuXml, resourceManager);
-    std::unordered_map<std::string, SoundObject> buttonSounds = parseSounds(menuXml, resourceManager.getSoundManager());
 
-    parseButtons(menu, menuXml, buttonStyles, buttonSounds, toolTip, resourceManager);
+    parseButtons(menu, menuXml, buttonStyles, toolTip, resourceManager);
     parseCheckBoxes(menu, menuXml, checkboxStyles, resourceManager);
     parseSliders(menu, menuXml, sliderStyles, resourceManager);
     parseLabels(menu, menuXml, resourceManager);
@@ -49,7 +48,6 @@ void MenuLoader::parseButtons(
     MenuTemplate& menu, 
     tinyxml2::XMLElement* menuXml, 
     std::unordered_map<std::string, ButtonStyle>& buttonStyles, 
-    std::unordered_map<std::string, SoundObject>& buttonSounds,
     std::unordered_map<std::string, ToolTip>& toolTip,
     ResourceManager& resourceManager)
 {
@@ -58,11 +56,7 @@ void MenuLoader::parseButtons(
         for(auto buttonXml = styles->FirstChildElement("button");
             buttonXml != nullptr; buttonXml = buttonXml->NextSiblingElement("button"))
         {
-            auto sound = buttonSounds.find(buttonXml->Attribute("sound"));
-            if(sound == end(buttonSounds))
-                throw std::runtime_error(utility::replace(utility::translateKey("UnknownButtonSound"), buttonXml->Attribute("sound")));
-            ButtonInfo button(sound->second);
-
+            ButtonInfo button;
             auto style = buttonStyles.find(buttonXml->Attribute("style"));
             if(style == end(buttonStyles))
                 throw std::runtime_error(utility::replace(utility::translateKey("UnknownButtonStyle"), buttonXml->Attribute("style")));
@@ -229,21 +223,6 @@ std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(tinyx
     return buttonStyles;
 }
 
-std::unordered_map<std::string, SoundObject> MenuLoader::parseSounds(tinyxml2::XMLElement* menuXml, SoundManager& soundManager)
-{
-    std::unordered_map<std::string, SoundObject> buttonSounds;
-    if(auto sounds = menuXml->FirstChildElement("sounds"))
-    {
-        for(auto soundXml = sounds->FirstChildElement("buttonSound");
-            soundXml != nullptr; soundXml = soundXml->NextSiblingElement("buttonSound"))
-        {
-            buttonSounds.insert(std::make_pair<std::string, SoundObject>(std::string(soundXml->Attribute("name")),
-                SoundObject(soundXml->FirstChildElement("hover")->Attribute("sound"), soundManager)));
-        }
-    }
-    return buttonSounds;
-}
-
 ButtonStateStyle MenuLoader::loadButtonStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
 {
     ButtonStateStyle style;
@@ -254,6 +233,8 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(tinyxml2::XMLElement* xml, Res
     style.sprite.setTextureRect(sf::IntRect(
             xml->IntAttribute("srcx"), xml->IntAttribute("srcy"),
             xml->IntAttribute("width"), xml->IntAttribute("height")));
+    if(auto soundName = xml->Attribute("sound"))
+        style.sound = std::shared_ptr<SoundObject>(new SoundObject(soundName, resourceManager.getSoundManager()));
     return style;
 }
 
