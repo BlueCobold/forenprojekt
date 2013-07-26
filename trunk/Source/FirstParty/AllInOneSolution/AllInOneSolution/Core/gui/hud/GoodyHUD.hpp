@@ -33,11 +33,8 @@ public:
     void updateGoodyState(const Goody &goody);
 private:
     sf::Sprite m_icon;
-    sf::Sprite m_activeIcon;
-    sf::Sprite m_selectedIcon;
-    sf::Sprite m_disabledSelIcon;
-    sf::Sprite m_disabledUnSelIcon;
-    State m_goodyState;
+    sf::IntRect m_startRect;
+    int m_iconHeight;
 
     bool m_selected;
     bool m_disabled;
