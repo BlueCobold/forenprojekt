@@ -495,7 +495,7 @@ const float Level::getRemainigTime() const
     return m_remainingTime;
 }
 
-const Goody Level::getGoody (const Goody::Type &type) const
+const Goody Level::getGoody (const Goody::Type& type) const
 {
     if(type == Goody::InvulnerableGoody)
         return m_invulnerableGoody;
@@ -505,7 +505,7 @@ const Goody Level::getGoody (const Goody::Type &type) const
         return m_extraTimeGoody;
     else if(type == Goody::ExtraBallGoody)
         return m_extraBallGoody;
-    throw new std::runtime_error("Failed to find goody for the given type!");
+    throw new std::runtime_error(utility::translateKey("InvalidGoody"));
 }
 
 const bool Level::isLevelFailed() const

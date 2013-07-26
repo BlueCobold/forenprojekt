@@ -17,13 +17,16 @@ GoodyHUD::GoodyHUD(ResourceManager& resourceManager,
     m_icon.setTextureRect(textureRect);
 
     m_activeIcon.setTexture(*resourceManager.getTexture(iconKey));
-    m_activeIcon.setTextureRect(sf::IntRect(textureRect.left, textureRect.top+goodyIconHeight, textureRect.width, textureRect.height));
+    m_activeIcon.setTextureRect(sf::IntRect(textureRect.left, textureRect.top + goodyIconHeight, textureRect.width, textureRect.height));
     
     m_selectedIcon.setTexture(*resourceManager.getTexture(iconKey));
-    m_selectedIcon.setTextureRect(sf::IntRect(textureRect.left, textureRect.top+goodyIconHeight*2, textureRect.width, textureRect.height));
+    m_selectedIcon.setTextureRect(sf::IntRect(textureRect.left, textureRect.top + goodyIconHeight * 2, textureRect.width, textureRect.height));
 
-    m_disabledIcon.setTexture(*resourceManager.getTexture(iconKey));
-    m_disabledIcon.setTextureRect(sf::IntRect(textureRect.left, textureRect.top+goodyIconHeight*3, textureRect.width, textureRect.height));
+    m_disabledUnSelIcon.setTexture(*resourceManager.getTexture(iconKey));
+    m_disabledUnSelIcon.setTextureRect(sf::IntRect(textureRect.left, textureRect.top + goodyIconHeight * 3, textureRect.width, textureRect.height));
+
+    m_disabledSelIcon.setTexture(*resourceManager.getTexture(iconKey));
+    m_disabledSelIcon.setTextureRect(sf::IntRect(textureRect.left, textureRect.top + goodyIconHeight * 4, textureRect.width, textureRect.height));
 
     m_goodyState = Disabled;
 }
@@ -34,36 +37,30 @@ void GoodyHUD::update(const DrawParameter& params)
     m_icon.setPosition(getPosition());
     m_activeIcon.setPosition(getPosition());
     m_selectedIcon.setPosition(getPosition());
-    m_disabledIcon.setPosition(getPosition());
+    m_disabledSelIcon.setPosition(getPosition());
+    m_disabledUnSelIcon.setPosition(getPosition());
 }
 
 void GoodyHUD::draw(const DrawParameter& params)
 {
-    switch(m_goodyState)
+    if(m_disabled)
     {
-        case Deselected:
-            params.getTarget().draw(m_icon);
-            break;
-        case Active:
-            params.getTarget().draw(m_activeIcon);
-            break;
-        case Selected:
-            params.getTarget().draw(m_selectedIcon);
-            break;
-        case Disabled:
-            params.getTarget().draw(m_disabledIcon);
-            break;
+        if(m_selected)
+            params.getTarget().draw(m_disabledSelIcon);    
+        else
+            params.getTarget().draw(m_disabledUnSelIcon);
     }
+    else if(m_active)
+        params.getTarget().draw(m_activeIcon);
+    else if(m_selected)
+        params.getTarget().draw(m_selectedIcon);
+    else
+        params.getTarget().draw(m_icon);
 }
 
 void GoodyHUD::updateGoodyState(const Goody &goody)
 {
-    if(goody.isActive())
-        m_goodyState = Active;
-    else if(goody.getCharges() == 0)
-        m_goodyState = Disabled;
-    else if(goody.isSelected())
-        m_goodyState = Selected;
-    else if(!goody.isSelected())
-        m_goodyState = Deselected;
+    m_selected = goody.isSelected();
+    m_active = goody.isActive();
+    m_disabled = (goody.getCharges() == 0);
 }

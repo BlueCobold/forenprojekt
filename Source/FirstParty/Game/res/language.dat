@@ -58,6 +58,7 @@ IncludeFileInvalid = Include File '%' is corrupt.
 InvalidLayout = The layout-part '%' has a bad number of elements.
 InvalidToolTipBackround = The backround layout of a tooltip is corrupt.
 UnknownButtonToolTip = ButtonToolTip isn't registered: %.
+InvalidGoody = Failed to find goody for the given type.
 
 [GUI]
 gui_game_paused = Game Paused
