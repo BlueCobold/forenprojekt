@@ -25,7 +25,7 @@ public:
 template<typename T>
 T AppConfig::get(const std::string& key)
 {
-    if(m_config.existKey(key))
+    if(m_config.keyExists(key))
         return m_config.get<T>(key);
     else
         return m_stash.get<T>(key);
@@ -34,9 +34,9 @@ T AppConfig::get(const std::string& key)
 template<typename T>
 void AppConfig::set(const std::string& key, const T& value)
 {
-    if(m_config.existKey(key))
+    if(m_config.keyExists(key))
         m_config.set<T>(key, value);
-    if(m_stash.existKey(key))
+    if(m_stash.keyExists(key))
         m_stash.set<T>(key, value);
 }
 

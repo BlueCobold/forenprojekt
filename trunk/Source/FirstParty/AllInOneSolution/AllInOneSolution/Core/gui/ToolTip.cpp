@@ -63,48 +63,35 @@ void ToolTip::setPosition(const sf::Vector2f& position)
             it->second.setPosition(position.x + m_offset.x + m_textOffset.x,
                                    position.y + m_textOffset.y + m_offset.y + it->first * m_height / m_lines);
 
-        for(auto it = begin(m_backround); it != end(m_backround); ++it)
-        {
-            switch(it->first)
-            {
-                case TopLeft:
-                    it->second.setPosition(position.x - m_width / 2.f - it->second.getTextureRect().width + m_offset.x,
-                                           position.y - it->second.getTextureRect().height + m_offset.y);
-                break;
-                case TopCenter:
-                    it->second.setPosition(position.x - m_width / 2.f + m_offset.x,
-                                           position.y - it->second.getTextureRect().height + m_offset.y);
-                break;
-                case TopRight:
-                    it->second.setPosition(position.x + m_width / 2.f + m_offset.x,
-                                           position.y - it->second.getTextureRect().height + m_offset.y);
-                break;
-                case MiddleLeft:
-                    it->second.setPosition(position.x - m_width / 2.f - it->second.getTextureRect().width + m_offset.x,
-                                           position.y + m_offset.y);
-                break;
-                case MiddleCenter:
-                    it->second.setPosition(position.x - m_width / 2.f + m_offset.x,
-                                           position.y + m_offset.y);
-                break;
-                case MiddleRight:
-                    it->second.setPosition(position.x + m_width / 2.f + m_offset.x,
-                                           position.y + m_offset.y);
-                break;
-                case BottomLeft:
-                    it->second.setPosition(position.x - m_width / 2.f - it->second.getTextureRect().width + m_offset.x,
-                                           position.y + m_height + m_offset.y);
-                break;
-                case BottomCenter:
-                    it->second.setPosition(position.x - m_width / 2.f + m_offset.x,
-                                           position.y + m_height + m_offset.y);
-                break;
-                case BottomRight:
-                    it->second.setPosition(position.x + m_width / 2.f + m_offset.x,
-                                           position.y + m_height + m_offset.y);
-                break;
-            }
-        }
+        auto height = m_backround[TopLeft].getTextureRect().height;
+        auto width = m_backround[TopLeft].getTextureRect().width;
+
+        m_backround[TopLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x,
+                                         position.y - height + m_offset.y);
+
+        m_backround[TopCenter].setPosition(position.x - m_width / 2.f + m_offset.x,
+                                           position.y - height + m_offset.y);
+
+        m_backround[TopRight].setPosition(position.x + m_width / 2.f + m_offset.x,
+                                          position.y - height + m_offset.y);
+
+        m_backround[MiddleLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x,
+                                            position.y + m_offset.y);
+
+        m_backround[MiddleCenter].setPosition(position.x - m_width / 2.f + m_offset.x,
+                                              position.y + m_offset.y);
+
+        m_backround[MiddleRight].setPosition(position.x + m_width / 2.f + m_offset.x,
+                                             position.y + m_offset.y);
+
+        m_backround[BottomLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x,
+                                            position.y + m_height + m_offset.y);
+
+        m_backround[BottomCenter].setPosition(position.x - m_width / 2.f + m_offset.x,
+                                              position.y + m_height + m_offset.y);
+
+        m_backround[BottomRight].setPosition(position.x + m_width / 2.f + m_offset.x,
+                                             position.y + m_height + m_offset.y);
     }
 }
 
@@ -165,25 +152,9 @@ const int ToolTip::findLongestLine() const
 
 void ToolTip::strechBackround()
 {
-    for(auto it = begin(m_backround); it != end(m_backround); ++it)
-    {
-        switch(it->first)
-        {
-            case BottomCenter:
-                it->second.setScale(m_scalefactorHorizontal, 1.f);
-            break;
-            case MiddleCenter:
-                it->second.setScale(m_scalefactorHorizontal, m_scalefactorVertical);
-            break;
-            case TopCenter:
-                it->second.setScale(m_scalefactorHorizontal, 1.f);
-            break;
-            case MiddleLeft:
-                it->second.setScale(1.f, m_scalefactorVertical);
-            break;
-            case MiddleRight:
-                it->second.setScale(1.f, m_scalefactorVertical);
-            break;
-        }
-    }
+    m_backround[BottomCenter].setScale(m_scalefactorHorizontal, 1.f);
+    m_backround[MiddleCenter].setScale(m_scalefactorHorizontal, m_scalefactorVertical);
+    m_backround[TopCenter].setScale(m_scalefactorHorizontal, 1.f);
+    m_backround[MiddleLeft].setScale(1.f, m_scalefactorVertical);
+    m_backround[MiddleRight].setScale(1.f, m_scalefactorVertical);
 }
