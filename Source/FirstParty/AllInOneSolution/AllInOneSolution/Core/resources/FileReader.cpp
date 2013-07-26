@@ -99,7 +99,7 @@ std::unordered_map<std::string, std::string>::const_iterator FileReader::endIter
     return m_content.cend();
 }
 
-const bool FileReader::existKey(const std::string& key) const
+const bool FileReader::keyExists(const std::string& key) const
 {
     for(auto it = begin(m_content); it != end(m_content); ++it)
     {
