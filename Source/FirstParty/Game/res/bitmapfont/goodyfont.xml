@@ -1,0 +1,18 @@
+<bitmapfont>
+	<image name="bitmapfontGoody" />
+	<height value="9" />
+	<glyphs>
+		<glyph name="0" x="104" y="1" width="6" />
+		<glyph name="1" x="2" y="1" width="6" />
+		<glyph name="2" x="11" y="1" width="6" />
+		<glyph name="3" x="20" y="1" width="6" />
+		<glyph name="4" x="29" y="1" width="6" />
+		<glyph name="5" x="38" y="1" width="6" />
+		<glyph name="6" x="47" y="1" width="6" />
+		<glyph name="7" x="56" y="1" width="6" />
+		<glyph name="8" x="65" y="1" width="6" />
+		<glyph name="9" x="74" y="1" width="6" />
+		<glyph name="+" x="83" y="1" width="6" />
+		<glyph name="#" x="92" y="1" width="10" />
+	</glyphs>
+</bitmapfont>
