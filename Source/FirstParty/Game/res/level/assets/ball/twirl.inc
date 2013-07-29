@@ -10,8 +10,15 @@
 		<entities>
 		
 			<entity name="ball_explosion" respawnable="true" stopWithLastAnimation="true" rep="--" collideWithBall="false">
+				<constants frame="-1" />
 				<animations>
-					<animation copies="8" texture="sparkles" blending="add" width="32" height="32" midx="16" midy="16" rotate="true">
+					<animation copies="7" texture="ball_twirl" srcy="32" width="32" height="32" midx="16" midy="16" rotate="true">
+						<rotation>
+							<mul>
+								<time />
+								<static value="60" />
+							</mul>
+						</rotation>
 						<position axis="x">
 							<mul>
 								<time />
@@ -43,13 +50,23 @@
 									<time />
 								</sub>
 								<stop />
-								<static value="1" />
+								<sub>
+									<static value="1" />
+									<ramp min="0.5" max="1">
+										<time />
+									</ramp>
+								</sub>
 							</step>
 						</color>
 
-						<frameindex frames="8">
+						<frameindex frames="7">
 							<cache>
-								<count start="0" increment="1" />
+								<setVar name="frame">
+									<add>
+										<var name="frame" />
+										<static value="1" />
+									</add>
+								</setVar>
 							</cache>
 						</frameindex>
 					</animation>

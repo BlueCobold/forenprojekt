@@ -5,8 +5,6 @@
 
 #include "ValueProvider.hpp"
 
-#include <random>
-
 /// Returns start+x*increment, where x is the number of calls to "getValue"
 class Count : public ValueProvider
 {

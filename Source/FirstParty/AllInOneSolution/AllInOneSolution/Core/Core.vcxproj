@@ -203,6 +203,7 @@
     <ClInclude Include="animation\provider\Negate.hpp" />
     <ClInclude Include="animation\provider\Nop.hpp" />
     <ClInclude Include="animation\provider\Pow.hpp" />
+    <ClInclude Include="animation\provider\Ramp.hpp" />
     <ClInclude Include="animation\provider\RandomProvider.hpp" />
     <ClInclude Include="animation\provider\SetVariable.hpp" />
     <ClInclude Include="animation\provider\Sine.hpp" />
