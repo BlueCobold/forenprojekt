@@ -711,6 +711,9 @@
     <ClInclude Include="resources\AppConfig.hpp">
       <Filter>Headers\resources</Filter>
     </ClInclude>
+    <ClInclude Include="animation\provider\Count.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

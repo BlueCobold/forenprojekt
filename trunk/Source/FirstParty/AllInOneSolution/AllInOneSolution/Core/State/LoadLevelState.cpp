@@ -57,7 +57,7 @@ StateChangeInformation LoadLevelState::update(const float time)
     if(m_loaded)
     {
         if(m_loadingErrorMessage[0] != '\0')
-            throw std::exception(m_loadingErrorMessage);
+            throw std::runtime_error(m_loadingErrorMessage);
 
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = m_lastLevel;
