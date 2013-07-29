@@ -181,12 +181,14 @@ void MenuLoader::parseImages(MenuTemplate& menu,
                                               imageXml->IntAttribute("width"),
                                               imageXml->IntAttribute("height")));
             
-            auto tooltip = toolTip.find(imageXml->Attribute("tooltip"));
-            if(tooltip == end(toolTip))
-                throw std::runtime_error(utility::replace(utility::translateKey("UnknownToolTip"), imageXml->Attribute("tooltip")));
-            tooltip->second.setText(utility::translateKey(imageXml->Attribute("tooltiptext")));
-            sprite.setToolTip(tooltip->second);
-
+            if(auto toolTipName = imageXml->Attribute("tooltip"))
+            {
+                auto tooltip = toolTip.find(toolTipName);
+                if(tooltip == end(toolTip))
+                    throw std::runtime_error(utility::replace(utility::translateKey("UnknownToolTip"), imageXml->Attribute("tooltip")));
+                tooltip->second.setText(utility::translateKey(imageXml->Attribute("tooltiptext")));
+                sprite.setToolTip(tooltip->second);
+            }
             menu.sprites.push_back(sprite);
         }
     }

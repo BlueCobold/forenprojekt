@@ -3,10 +3,11 @@
 	<caption font="gui_large" text="gui_rickety_racquet" offsetx="0" offsety="50" />
 	<styles source="Styles.inc"/>
 	<elements>
-		<button id="0" text="gui_start_new_game" style="default" x="261" y="110" />
-		<button id="1" text="gui_select_level" style="default" x="261" y="165" />
-		<button id="2" text="gui_option" style="default" x="261" y="220" />
-		<button id="3" text="gui_credit" style="default" x="261" y="275" />
-		<button id="4" text="gui_close" style="default" x="261" y="330" />
+		<image id="5" texture="GuiElements" x="124" y="-67" scrx="704" scry="150" width="258" height="107"/>
+		<button id="0" text="gui_start_new_game" style="default" x="261" y="50" />
+		<button id="1" text="gui_select_level" style="default" x="261" y="105" />
+		<button id="2" text="gui_option" style="default" x="261" y="160" />
+		<button id="3" text="gui_credit" style="default" x="261" y="215" />
+		<button id="4" text="gui_close" style="default" x="261" y="270" />
 	</elements>
 </menu>

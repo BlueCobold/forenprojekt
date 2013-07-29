@@ -66,6 +66,7 @@ int MenuSprite::getId()
 {
     return m_id;
 }
+
 void MenuSprite::setToolTip(const ToolTip& toolTip)
 {
     m_toolTip = toolTip;
@@ -87,6 +88,7 @@ void MenuSprite::update(const sf::RenderWindow& screen)
     else
         m_showToolTip = false;  
 }
+
 void MenuSprite::setToolTipText(const std::string& text)
 {
     m_toolTip.setText(text);
