@@ -29,12 +29,16 @@ void Goody::update(const float elapsedTime)
             m_nextUseTime = elapsedTime + m_cooldownTime;
         if(m_durationTime > 0)
             m_durationUntilTime = elapsedTime + m_durationTime;
+
+        m_callback(*this);
     }
     else if((utility::Keyboard.isKeyPressed(m_key) || (m_selected && utility::Mouse.leftButtonPressed()))
             && m_charges == -1 && m_nextUseTime < elapsedTime)
     {
         if(canActivate())
             m_active = true;
+
+        m_callback(*this);
     }
     else if(m_durationUntilTime > elapsedTime)
     {
@@ -72,4 +76,9 @@ void Goody::setSelected(const bool selected)
 const Goody::Type Goody::getType() const
 {
     return m_type;
+}
+
+void Goody::registerCallback(std::function<void(Goody& sender)> callback)
+{
+    m_callback = callback;
 }

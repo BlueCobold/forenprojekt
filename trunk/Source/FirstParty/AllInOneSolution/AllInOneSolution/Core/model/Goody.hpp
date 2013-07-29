@@ -5,6 +5,8 @@
 
 #include "../Input.hpp"
 
+#include <functional>
+
 class Goody
 {
 public:
@@ -24,6 +26,7 @@ private:
     float m_durationUntilTime;
     bool m_selected;
     Type m_type;
+    std::function<void(Goody& sender)>m_callback;
 
 public:
     Goody(const sf::Keyboard::Key key, const Type type, const float durationTime = 0, const float cooldownTime = 0, 
@@ -37,6 +40,7 @@ public:
     virtual int getCharges() const;
     const Type getType() const;
     void setSelected(const bool selected);
+    void registerCallback(std::function<void(Goody& sender)> callback);
 };
 
 #endif

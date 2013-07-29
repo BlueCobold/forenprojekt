@@ -57,6 +57,23 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConf
     m_extraTimeGoody(sf::Keyboard::Num4, Goody::ExtraTimeGoody, 0, 0, 1),
     m_currentSeletedGoody(0)
 {
+    m_gravityGoody.registerCallback([this](Goody& sender)
+    {
+        this->goodySelectionCallback(sender);
+    });
+    m_invulnerableGoody.registerCallback([this](Goody& sender)
+    {
+        this->goodySelectionCallback(sender);
+    });
+    m_extraBallGoody.registerCallback([this](Goody& sender)
+    {
+        this->goodySelectionCallback(sender);
+    });
+    m_extraTimeGoody.registerCallback([this](Goody& sender)
+    {
+        this->goodySelectionCallback(sender);
+    });
+
     m_world.SetAllowSleeping(false);
     m_debugDraw = false;
     m_contactListener = ContactListener(this, this);
@@ -506,6 +523,16 @@ const Goody Level::getGoody (const Goody::Type& type) const
     else if(type == Goody::ExtraBallGoody)
         return m_extraBallGoody;
     throw new std::runtime_error(utility::translateKey("InvalidGoody"));
+}
+
+void Level::goodySelectionCallback(Goody &sender)
+{
+    m_invulnerableGoody.setSelected(false);
+    m_gravityGoody.setSelected(false);
+    m_extraTimeGoody.setSelected(false);
+    m_extraBallGoody.setSelected(false);
+
+    m_currentSeletedGoody = sender.getType();
 }
 
 const bool Level::isLevelFailed() const
