@@ -34,6 +34,7 @@ private:
     sf::Sprite* m_sprite;
 
     bool m_playHoverSound;
+    bool m_playPressedSound;
 
     std::function<void (const Button& sender)> m_callback;
 
