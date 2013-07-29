@@ -28,6 +28,7 @@ enum StateId
 };
 
 #include "StateChangeInformation.hpp"
+#include "../Input.hpp"
 #include "../Utility.hpp"
 #include "../rendering/Drawable.hpp"
 
@@ -51,6 +52,7 @@ public:
     virtual void draw(const DrawParameter& params) = 0;
     virtual void onEnter(const EnterStateInformation* enterInformation, const float time)
     {
+        utility::Mouse.capture();
         updateTime(time);
         m_enterTime = time;
     }

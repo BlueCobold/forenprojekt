@@ -30,6 +30,7 @@ ToolTip::ToolTip(const std::string& text,
         strechBackround();
     }
 }
+
 ToolTip::ToolTip() :
     m_offset(sf::Vector2f(0, 0)),
     m_textOffset(sf::Vector2f(0, 0)),
@@ -46,6 +47,9 @@ ToolTip::ToolTip() :
 
 void ToolTip::draw(const DrawParameter& params)
 {
+    if(m_label.size() == 0)
+        return;
+
     if(m_lines != -1)
     {
         for(auto it = begin(m_backround); it != end(m_backround); ++it)
