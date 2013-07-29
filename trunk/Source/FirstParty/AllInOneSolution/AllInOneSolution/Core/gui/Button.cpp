@@ -43,9 +43,16 @@ void Button::update(const sf::RenderWindow& screen)
             m_sprite = &m_style.pressedStyle.sprite;
             m_label = &m_style.pressedStyle.label;
             setPosition(m_position);
+
+            if(!m_playPressedSound && m_style.pressedStyle.sound)
+            {
+                m_playPressedSound = true;
+                m_style.pressedStyle.sound->play();
+            }
         } 
         else
         {
+            m_playPressedSound = false;
             m_sprite = &m_style.hoverStyle.sprite;
             m_label = &m_style.hoverStyle.label;
             setPosition(m_position);
@@ -57,6 +64,7 @@ void Button::update(const sf::RenderWindow& screen)
     else
     {
         m_playHoverSound = false;
+        m_playPressedSound = false;
         m_sprite = &m_style.idleStyle.sprite;
         m_label = &m_style.idleStyle.label;
         setPosition(m_position);
