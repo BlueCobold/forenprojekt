@@ -26,7 +26,7 @@ public:
 
     virtual float getValue() override
     {
-	    return m_start + (m_calls++) * m_increment;
+        return m_start + (m_calls++) * m_increment;
     }
 
     virtual void reset() override
