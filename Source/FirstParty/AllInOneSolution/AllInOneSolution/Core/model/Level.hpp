@@ -25,6 +25,7 @@
 #include <unordered_map>
 #include <vector>
 #include <queue>
+#include <functional>
 
 class AppConfig;
 
@@ -75,6 +76,7 @@ public:
     const float getRemainigTime() const;
 
     const Goody getGoody(const Goody::Type& type) const;
+    void goodySelectionCallback(Goody& goody);
 
     virtual float getValueOf(const std::string& name) const override;
     virtual void setValueOf(const std::string& name, const float value) override;
