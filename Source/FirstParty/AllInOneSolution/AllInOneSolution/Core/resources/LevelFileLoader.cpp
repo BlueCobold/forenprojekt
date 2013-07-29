@@ -5,6 +5,7 @@
 #include "../animation/provider/AngleProvider.hpp"
 #include "../animation/provider/CachedProvider.hpp"
 #include "../animation/provider/Clamp.hpp"
+#include "../animation/provider/Count.hpp"
 #include "../animation/provider/FloatToInt.hpp"
 #include "../animation/provider/Inverse.hpp"
 #include "../animation/provider/Maximum.hpp"
@@ -247,6 +248,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
     else if(std::string(xml->Name())=="cache")
         return std::unique_ptr<CachedProvider>(new CachedProvider(std::move(parseProviders(xml, animated, handler, stoppable, functions)[0]),
             xml->Attribute("reset") ? std::string("true") != xml->Attribute("reset") : false));
+    else if(std::string(xml->Name())=="count")
+        return std::unique_ptr<Count>(new Count(xml->FloatAttribute("start"), xml->FloatAttribute("increment")));
     else if(std::string(xml->Name())=="int")
         return std::unique_ptr<FloatToInt>(new FloatToInt(std::move(parseProviders(xml, animated, handler, stoppable, functions)[0])));
     else if(std::string(xml->Name())=="add")
