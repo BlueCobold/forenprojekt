@@ -239,7 +239,9 @@ private:
 
     AppConfig& m_config;
 
+#ifdef _DEBUG
     bool m_debugDraw;
+#endif
 
     ScrollView m_scrollView;
 
