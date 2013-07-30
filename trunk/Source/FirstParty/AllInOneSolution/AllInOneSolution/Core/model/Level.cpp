@@ -57,22 +57,14 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConf
     m_extraTimeGoody(sf::Keyboard::Num4, Goody::ExtraTimeGoody, 0, 0, 1),
     m_currentSeletedGoody(0)
 {
-    m_gravityGoody.registerCallback([this](Goody& sender)
+    auto func = [this](Goody& sender)
     {
-        this->goodySelectionCallback(sender);
-    });
-    m_invulnerableGoody.registerCallback([this](Goody& sender)
-    {
-        this->goodySelectionCallback(sender);
-    });
-    m_extraBallGoody.registerCallback([this](Goody& sender)
-    {
-        this->goodySelectionCallback(sender);
-    });
-    m_extraTimeGoody.registerCallback([this](Goody& sender)
-    {
-        this->goodySelectionCallback(sender);
-    });
+        this->onGoodyActivated(sender);
+    };
+    m_gravityGoody.registerForActivation(func);
+    m_invulnerableGoody.registerForActivation(func);
+    m_extraBallGoody.registerForActivation(func);
+    m_extraTimeGoody.registerForActivation(func);
 
     m_world.SetAllowSleeping(false);
 #ifdef _DEBUG
@@ -531,7 +523,7 @@ const Goody Level::getGoody (const Goody::Type& type) const
     throw new std::runtime_error(utility::translateKey("InvalidGoody"));
 }
 
-void Level::goodySelectionCallback(Goody &sender)
+void Level::onGoodyActivated(Goody &sender)
 {
     m_invulnerableGoody.setSelected(false);
     m_gravityGoody.setSelected(false);
@@ -596,6 +588,7 @@ const int Level::getLostBalls() const
 {
     return m_lostBallCounter;
 }
+
 const int Level::getMedal(const Level::Medals medal) const
 {
     if(medal == Bronze)
@@ -607,6 +600,7 @@ const int Level::getMedal(const Level::Medals medal) const
     else
         return 0;
 }
+
 void Level::updateGoodyChoice()
 {
     if(utility::Mouse.isWheelMovedDown())
