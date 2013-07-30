@@ -11,6 +11,7 @@ public:
 
     static const int BUTTON_CONTINUE = 0;
     static const int BUTTON_OPTIONS = 1;
+    static const int BUTTON_RESTART_LEVEL = 2;
 
     PauseMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
 };

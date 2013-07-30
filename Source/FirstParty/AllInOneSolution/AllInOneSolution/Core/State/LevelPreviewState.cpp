@@ -46,6 +46,15 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
+    if(clicked == LevelPreviewMenu::BUTTON_MAIN_MENU)
+    {
+        m_playStateInfo.m_prepareOnly = false;
+        m_playStateInfo.m_returnFromPause = false;
+        m_playStateInfo.m_level = m_level;
+        m_transitionStateInfo.m_followingState = MainMenuStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+    }
 
     return StateChangeInformation::Empty();
 }

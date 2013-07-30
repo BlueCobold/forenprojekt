@@ -28,15 +28,15 @@ void GoodyHUD::update(const DrawParameter& params)
     m_icon.setPosition(getPosition());
     m_charges.setPosition(getPosition());
 
-    if(m_disabled)
+    if(m_active)
+        m_icon.setTextureRect(sf::IntRect(m_startRect.left, m_startRect.top + m_iconHeight * Active, m_startRect.width, m_startRect.height));
+    else if(m_disabled)
     {
         if(m_selected)
             m_icon.setTextureRect(sf::IntRect(m_startRect.left, m_startRect.top + m_iconHeight * DisabledSelected, m_startRect.width, m_startRect.height));
         else
             m_icon.setTextureRect(sf::IntRect(m_startRect.left, m_startRect.top + m_iconHeight * Disabled, m_startRect.width, m_startRect.height));
     }
-    else if(m_active)
-        m_icon.setTextureRect(sf::IntRect(m_startRect.left, m_startRect.top + m_iconHeight * Active, m_startRect.width, m_startRect.height));
     else if(m_selected)
         m_icon.setTextureRect(sf::IntRect(m_startRect.left, m_startRect.top + m_iconHeight * Selected, m_startRect.width, m_startRect.height));
     else

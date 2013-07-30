@@ -85,6 +85,7 @@ gui_time = Time:
 gui_unlimited = %
 gui_ball_lost = Balls lost:
 gui_mainmenu = Main Menu
+gui_restart = Restart Level
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
