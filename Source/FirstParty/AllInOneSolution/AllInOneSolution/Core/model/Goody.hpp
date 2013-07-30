@@ -40,7 +40,7 @@ public:
     virtual int getCharges() const;
     const Type getType() const;
     void setSelected(const bool selected);
-    void registerCallback(std::function<void(Goody& sender)> callback);
+    void registerForActivation(std::function<void(Goody& sender)> callback);
 };
 
 #endif

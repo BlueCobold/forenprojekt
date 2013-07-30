@@ -76,7 +76,7 @@ public:
     const float getRemainigTime() const;
 
     const Goody getGoody(const Goody::Type& type) const;
-    void goodySelectionCallback(Goody& goody);
+    void onGoodyActivated(Goody& goody);
 
     virtual float getValueOf(const std::string& name) const override;
     virtual void setValueOf(const std::string& name, const float value) override;
