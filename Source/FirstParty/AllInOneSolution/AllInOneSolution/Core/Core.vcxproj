@@ -121,6 +121,7 @@
     <ClCompile Include="gui\PauseMenu.cpp" />
     <ClCompile Include="gui\ReplayMenu.cpp" />
     <ClCompile Include="gui\FailMenu.cpp" />
+    <ClCompile Include="gui\LevelSelectMenu.cpp" />
     <ClCompile Include="gui\Slider.cpp" />
     <ClCompile Include="gui\SubWindow.cpp" />
     <ClCompile Include="gui\ToolTip.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="State\LevelFailState.cpp" />
     <ClCompile Include="State\LevelPassState.cpp" />
     <ClCompile Include="State\LevelPreviewState.cpp" />
+    <ClCompile Include="State\LevelSelectState.cpp" />
     <ClCompile Include="State\LoadLevelState.cpp" />
     <ClCompile Include="State\MainMenuState.cpp" />
     <ClCompile Include="State\OptionMenuState.cpp" />
@@ -248,6 +250,7 @@
     <ClInclude Include="gui\PauseMenu.hpp" />
     <ClInclude Include="gui\ReplayMenu.hpp" />
     <ClInclude Include="gui\FailMenu.hpp" />
+    <ClInclude Include="gui\LevelSelectMenu.hpp" />
     <ClInclude Include="gui\Slider.hpp" />
     <ClInclude Include="gui\SliderStyle.hpp" />
     <ClInclude Include="gui\SubWindow.hpp" />
@@ -323,6 +326,7 @@
     <ClInclude Include="State\LevelFailState.hpp" />
     <ClInclude Include="State\LevelPassState.hpp" />
     <ClInclude Include="State\LevelPreviewState.hpp" />
+    <ClInclude Include="State\LevelSelectState.hpp" />
     <ClInclude Include="State\LoadLevelState.hpp" />
     <ClInclude Include="State\MainMenuState.hpp" />
     <ClInclude Include="State\OptionMenuState.hpp" />

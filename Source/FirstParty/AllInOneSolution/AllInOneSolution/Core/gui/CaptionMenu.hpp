@@ -14,6 +14,7 @@ public:
                 sf::RenderWindow& screen);
 
     virtual void setPosition(const sf::Vector2f& position) override;
+    virtual void setCaption(const std::string& caption);
     
 protected:
     

@@ -11,6 +11,7 @@
 #include "../Core/State/OptionMenuState.hpp"
 #include "../Core/State/CreditMenuState.hpp"
 #include "../Core/State/LevelPreviewState.hpp"
+#include "../Core/State/LevelSelectState.hpp"
 #include "resources/AppConfig.hpp"
 
 #include <SFML/Graphics/Color.hpp>
@@ -60,6 +61,7 @@ App::App(AppConfig& config) :
     m_stateManager.registerState(OptionMenuStateId, std::unique_ptr<OptionMenuState>(new OptionMenuState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(CreditMenuStateId, std::unique_ptr<CreditMenuState>(new CreditMenuState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(LevelPreviewStateId, std::unique_ptr<LevelPreviewState>(new LevelPreviewState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.registerState(LevelSelectStateId, std::unique_ptr<LevelSelectState>(new LevelSelectState(m_screen, m_resourceManager, m_config)));
     m_stateManager.setState(StartStateId);
 }
 

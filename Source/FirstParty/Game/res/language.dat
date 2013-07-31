@@ -86,6 +86,8 @@ gui_unlimited = %
 gui_ball_lost = Balls lost:
 gui_mainmenu = Main Menu
 gui_restart = Restart Level
+gui_show_details = Show Details
+gui_levelselect = Select Level 
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %

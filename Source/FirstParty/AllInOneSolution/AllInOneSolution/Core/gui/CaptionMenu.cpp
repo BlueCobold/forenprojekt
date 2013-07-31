@@ -26,3 +26,7 @@ void CaptionMenu::setPosition(const sf::Vector2f& position)
 
     m_caption.setPosition(position.x + getSize().x / 2.f, position.y);
 }
+void CaptionMenu::setCaption(const std::string& caption)
+{
+    m_caption.setText(caption);
+}
