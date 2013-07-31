@@ -17,7 +17,8 @@ SubWindow::SubWindow(const sf::Vector2f& position,
     m_innerPosition(innerPosition),
     m_center(sf::Vector2f(0, 0)),
     m_startValue(0),
-    m_endValue(0)
+    m_endValue(0),
+    m_active(false)
 {
     m_windowRect.setPosition(m_position.x + m_offset.x,
                              m_position.y + m_offset.y);
@@ -117,8 +118,11 @@ void SubWindow::update(const sf::RenderWindow& screen)
     }
     
     if(sliderRect.contains(sf::Mouse::getPosition(screen)) && utility::Mouse.leftButtonDown())
+    {
         m_startValue = sf::Mouse::getPosition().y;
-    else if(utility::Mouse.leftButtonPressed())
+        m_active = true;
+    }
+    else if(utility::Mouse.leftButtonPressed() && m_active)
     {
         m_endValue = sf::Mouse::getPosition().y - m_startValue;
         m_center.y += sliderPixelToWindowPixel(m_endValue);
@@ -127,6 +131,9 @@ void SubWindow::update(const sf::RenderWindow& screen)
         else if(m_center.y > (m_innerPosition.y + m_innerHeight - m_size.y / 2.f))
             m_center.y = m_innerPosition.y + m_innerHeight - m_size.y / 2.f;
     }
+    else if(utility::Mouse.leftButtonReleased())
+        m_active = false;
+
     setSliderPosition();
 }
 void SubWindow::setOffset(const sf::Vector2f& offset)

@@ -28,6 +28,7 @@ private:
 
     int m_startValue;
     int m_endValue;
+    bool m_active;
 
     sf::RectangleShape m_windowRect;
     sf::RectangleShape m_sliderRect;

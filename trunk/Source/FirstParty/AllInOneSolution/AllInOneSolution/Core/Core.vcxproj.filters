@@ -268,6 +268,12 @@
     <ClCompile Include="gui\SubWindow.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="State\LevelSelectState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\LevelSelectMenu.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -721,6 +727,12 @@
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
     <ClInclude Include="gui\SubWindow.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="State\LevelSelectState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\LevelSelectMenu.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
