@@ -16,7 +16,8 @@ SubWindow::SubWindow(const sf::Vector2f& position,
     m_innerHeight(innerHeight),
     m_innerPosition(innerPosition),
     m_center(sf::Vector2f(0, 0)),
-    m_pick(0)
+    m_startValue(0),
+    m_endValue(0)
 {
     m_windowRect.setPosition(m_position.x + m_offset.x,
                              m_position.y + m_offset.y);
@@ -98,24 +99,35 @@ void SubWindow::draw(const DrawParameter& params)
 void SubWindow::update(const sf::RenderWindow& screen)
 {
     sf::IntRect mouseRect(static_cast<sf::Vector2i>(m_windowRect.getPosition()), static_cast<sf::Vector2i>(m_windowRect.getSize()));
+    sf::IntRect sliderRect(static_cast<sf::Vector2i>(m_positionRect.getPosition()), static_cast<sf::Vector2i>(m_positionRect.getSize()));
 
     if(mouseRect.contains(sf::Mouse::getPosition(screen)) && utility::Mouse.isWheelMovedDown())
     {
-        m_center.y++;
-        if(m_center.y > m_innerPosition.y + m_innerHeight - m_size.y / 2.f)
-            m_center.y--;
+        if((m_center.y + percentToWindowPixels()) < (m_innerPosition.y + m_innerHeight - m_size.y / 2.f))
+            m_center.y += percentToWindowPixels();
+        else
+            m_center.y = m_innerPosition.y + m_innerHeight - m_size.y / 2.f;
     }
-    if(mouseRect.contains(sf::Mouse::getPosition(screen)) && utility::Mouse.isWheelMovedUp())
+    else if(mouseRect.contains(sf::Mouse::getPosition(screen)) && utility::Mouse.isWheelMovedUp())
     {
-        m_center.y--;
-        if(m_center.y < m_innerPosition.y + m_size.y / 2.f)
-            m_center.y++;
+        if((m_center.y - percentToWindowPixels()) > (m_innerPosition.y + m_size.y / 2.f))
+            m_center.y -= percentToWindowPixels();
+        else
+            m_center.y = m_innerPosition.y + m_size.y / 2.f;
     }
-
-    float currentPercent = (m_innerPosition.y + m_size.y / 2.f - m_center.y) / (m_innerHeight - m_size.y);
-    int currentPosition = static_cast<int>((m_sliderRect.getSize().y - m_positionRect.getSize().y) * -currentPercent);
-    m_positionRect.setPosition(m_position.x + m_offset.x + m_size.x + 2,
-                               m_position.y + m_offset.y + currentPosition);
+    
+    if(sliderRect.contains(sf::Mouse::getPosition(screen)) && utility::Mouse.leftButtonDown())
+        m_startValue = sf::Mouse::getPosition().y;
+    else if(utility::Mouse.leftButtonPressed())
+    {
+        m_endValue = sf::Mouse::getPosition().y - m_startValue;
+        m_center.y += sliderPixelToWindowPixel(m_endValue);
+        if(m_center.y < (m_innerPosition.y + m_size.y / 2.f))
+            m_center.y = m_innerPosition.y + m_size.y / 2.f;
+        else if(m_center.y > (m_innerPosition.y + m_innerHeight - m_size.y / 2.f))
+            m_center.y = m_innerPosition.y + m_innerHeight - m_size.y / 2.f;
+    }
+    setSliderPosition();
 }
 void SubWindow::setOffset(const sf::Vector2f& offset)
 {
@@ -201,4 +213,21 @@ void SubWindow::createSprite(const MenuSprite& info)
     std::unique_ptr<MenuSprite> sprite(new MenuSprite(info));
 
     m_sprites.push_back(std::move(sprite));
+}
+
+float SubWindow::percentToWindowPixels(float percent)
+{
+    return static_cast<float>(m_innerHeight - m_size.y) / 100.f * percent;
+}
+float SubWindow::sliderPixelToWindowPixel(int pixel)
+{
+    float pixelPercent = static_cast<float>(pixel / static_cast<float>(m_sliderRect.getSize().y - m_positionRect.getSize().y));
+    return percentToWindowPixels(pixelPercent);
+}
+void SubWindow::setSliderPosition()
+{
+    float currentPercent = (m_innerPosition.y + m_size.y / 2.f - m_center.y) / (m_innerHeight - m_size.y) ;
+    int currentPosition = static_cast<int>((m_sliderRect.getSize().y - m_positionRect.getSize().y) * -currentPercent);
+    m_positionRect.setPosition(m_position.x + m_offset.x + m_size.x + 2,
+                                m_position.y + m_offset.y + currentPosition);
 }
