@@ -4,9 +4,13 @@
 	<styles source="Styles.inc"/>
 	<elements>
 		<button id="0" text="gui_close" style="default" x="261" y="270" />
-		<label text="gui_core_member" font="buttonIdleFont" aligment="1" x="255" y="100" />
-		<label text="bc" font="buttonHoverFont" aligment="1" x="255" y="140" />
-		<label text="dp" font="buttonHoverFont" aligment="1" x="255" y="175" />
-		<label text="ko" font="buttonHoverFont" aligment="1" x="255" y="210" />
+		<subwindow x="80" y="100" sizex="340" sizey="150" innerheight="300" virtualx="0" virtualy="90">
+			<elements>
+				<label text="gui_core_member" font="buttonIdleFont" aligment="1" x="170" y="100" />
+				<label text="bc" font="buttonHoverFont" aligment="1" x="170" y="140" />
+				<label text="dp" font="buttonHoverFont" aligment="1" x="170" y="175" />
+				<label text="ko" font="buttonHoverFont" aligment="1" x="170" y="210" />
+			</elements>
+		</subwindow>
 	</elements>
 </menu>

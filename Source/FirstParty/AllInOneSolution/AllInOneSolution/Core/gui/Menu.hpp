@@ -8,7 +8,7 @@
 #include "MenuTemplate.hpp"
 #include "CheckBox.hpp"
 #include "Slider.hpp"
-
+#include "SubWindow.hpp"
 #include <SFML/System/Vector2.hpp>
 
 #include <functional>
@@ -31,6 +31,7 @@ protected:
     void createSlider(const SliderInfo& info);
     void createLabel(const LineLabel& info);
     void createSprite(const MenuSprite& info);
+    void createSubWindow(const SubWindowInfo& info);
 
     CheckBox& getCheckboxes(int id);
     Slider& getSlider(int id);
@@ -48,6 +49,7 @@ private:
     std::vector<std::unique_ptr<MenuSprite>> m_sprites;
     std::vector<std::unique_ptr<CheckBox>> m_checkBoxes;
     std::vector<std::unique_ptr<Slider>> m_slider;
+    std::vector<std::unique_ptr<SubWindow>> m_subWindow;
     sf::Vector2i m_size;
     sf::Vector2f m_position;
     sf::RenderWindow& m_screen;

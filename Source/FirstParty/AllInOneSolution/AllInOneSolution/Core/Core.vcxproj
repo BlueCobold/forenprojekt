@@ -122,6 +122,7 @@
     <ClCompile Include="gui\ReplayMenu.cpp" />
     <ClCompile Include="gui\FailMenu.cpp" />
     <ClCompile Include="gui\Slider.cpp" />
+    <ClCompile Include="gui\SubWindow.cpp" />
     <ClCompile Include="gui\ToolTip.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="gui\Menu.cpp" />
@@ -249,6 +250,7 @@
     <ClInclude Include="gui\FailMenu.hpp" />
     <ClInclude Include="gui\Slider.hpp" />
     <ClInclude Include="gui\SliderStyle.hpp" />
+    <ClInclude Include="gui\SubWindow.hpp" />
     <ClInclude Include="gui\ToolTip.hpp" />
     <ClInclude Include="Input.hpp" />
     <ClInclude Include="gui\Menu.hpp" />

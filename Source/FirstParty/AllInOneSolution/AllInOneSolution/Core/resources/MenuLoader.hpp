@@ -28,34 +28,43 @@ private:
     }
 
     static void parseButtons(
-        MenuTemplate& menu, 
+        MenuElements& elements, 
         tinyxml2::XMLElement* menuXml, 
         std::unordered_map<std::string, ButtonStyle>& buttonStyles, 
         std::unordered_map<std::string, ToolTip>& toolTip,
         ResourceManager& resourceManager);
 
     static void parseCheckBoxes(
-        MenuTemplate& menu, 
+        MenuElements& elements, 
         tinyxml2::XMLElement* menuXml, 
         std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles, 
         ResourceManager& resourceManager);
 
     static void parseSliders(
-        MenuTemplate& menu, 
+        MenuElements& elements, 
         tinyxml2::XMLElement* menuXml, 
         std::unordered_map<std::string, SliderStyle>& sliderStyles, 
         ResourceManager& resourceManager);
 
     static void parseLabels(
-        MenuTemplate& menu, 
+        MenuElements& elements, 
         tinyxml2::XMLElement* menuXml, 
         ResourceManager& resourceManager);
 
     static void parseImages(
-        MenuTemplate& menu, 
+        MenuElements& elements,
         tinyxml2::XMLElement* menuXml,
         std::unordered_map<std::string, ToolTip>& toolTip,
         ResourceManager& resourceManager);
+
+    static void parseSubWindow(
+        MenuTemplate& menu,
+        tinyxml2::XMLElement* menuXml,
+        ResourceManager& resourceManager,
+        std::unordered_map<std::string, ToolTip>& toolTip,
+        std::unordered_map<std::string, SliderStyle>& sliderStyles,
+        std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles,
+        std::unordered_map<std::string, ButtonStyle>& buttonStyles);
 
     static std::unordered_map<std::string, ButtonStyle> parseButtonStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
     static std::unordered_map<std::string, SoundObject> parseSounds(tinyxml2::XMLElement* menuXml, SoundManager& soundManager);

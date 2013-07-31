@@ -15,20 +15,24 @@ Menu::Menu(const MenuTemplate& menuTemplate,
 
     m_size = sf::Vector2i(m_template.background.getTextureRect().width, m_template.background.getTextureRect().height);
 
-    for(auto button = begin(m_template.buttons); button != end(m_template.buttons); ++button)
+    for(auto button = begin(m_template.menuElements.buttons); button != end(m_template.menuElements.buttons); ++button)
         createButton(*button);
 
-    for(auto checkbox = begin(m_template.checkboxes); checkbox != end(m_template.checkboxes); ++checkbox)
+    for(auto checkbox = begin(m_template.menuElements.checkboxes); checkbox != end(m_template.menuElements.checkboxes); ++checkbox)
         createCheckBox(*checkbox);
 
-    for(auto slider = begin(m_template.slider); slider != end(m_template.slider); ++slider)
+    for(auto slider = begin(m_template.menuElements.slider); slider != end(m_template.menuElements.slider); ++slider)
         createSlider(*slider);
 
-    for(auto label = begin(m_template.labels); label != end(m_template.labels); ++label)
+    for(auto label = begin(m_template.menuElements.labels); label != end(m_template.menuElements.labels); ++label)
         createLabel(*label);
 
-    for(auto sprite = begin(m_template.sprites); sprite != end(m_template.sprites); ++sprite)
+    for(auto sprite = begin(m_template.menuElements.sprites); sprite != end(m_template.menuElements.sprites); ++sprite)
         createSprite(*sprite);
+
+    for(auto subWindow = begin(m_template.subWindow); subWindow != end(m_template.subWindow); ++subWindow)
+        createSubWindow(*subWindow);
+
 }
 
 Menu::~Menu()
@@ -64,6 +68,9 @@ void Menu::setPosition(const sf::Vector2f& position)
 
     for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
         (*it)->setPosition(m_position);
+
+    for(auto it = begin(m_subWindow); it != end(m_subWindow); ++it)
+        (*it)->setPosition(m_position);
 }
 
 const sf::Vector2f& Menu::getPosition() const
@@ -91,6 +98,9 @@ void Menu::draw(const DrawParameter& params)
     for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
         (*it)->draw(params);
 
+    for(auto it = begin(m_subWindow); it != end(m_subWindow); ++it)
+        (*it)->draw(params);
+
     for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
         (*it)->drawAdditionalForeground(params);
 }
@@ -111,6 +121,9 @@ void Menu::update(const sf::RenderWindow& screen)
         (*it)->update(screen);
 
     for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
+        (*it)->update(screen);
+
+    for(auto it = begin(m_subWindow); it != end(m_subWindow); ++it)
         (*it)->update(screen);
 }
 
@@ -156,6 +169,15 @@ void Menu::createSprite(const MenuSprite& info)
 
     m_sprites.push_back(std::move(sprite));
 }
+
+void Menu::createSubWindow(const SubWindowInfo& info)
+{
+    //std::unique_ptr<Button> button(new Button(info.id, info.style, m_position, info.position));
+    std::unique_ptr<SubWindow> subWindow(new SubWindow(m_position, info.size, info.virtualPosition, info.position, info.innerHeight, info.menuElements));
+
+    m_subWindow.push_back(std::move(subWindow));
+}
+
 void Menu::registerOnClick(std::function<void(const Button& sender)> callback)
 {
     m_clickCallback = callback;
@@ -168,7 +190,7 @@ CheckBox& Menu::getCheckboxes(int id)
         if(it->get()->getId() == id)
             return *it->get();
     }
-    throw std::runtime_error(utility::replace(utility::translateKey("sliderID"), utility::toString(id)));
+    throw std::runtime_error(utility::replace(utility::translateKey("CheckboxId"), utility::toString(id)));
 }
 
 Slider& Menu::getSlider(int id)
@@ -178,7 +200,7 @@ Slider& Menu::getSlider(int id)
         if(it->get()->getId() == id)
             return *it->get();
     }
-    throw std::runtime_error(utility::replace(utility::translateKey("CheckboxId"), utility::toString(id)));
+    throw std::runtime_error(utility::replace(utility::translateKey("sliderID"), utility::toString(id)));
 }
 sf::RenderWindow& Menu::getRenderWindow()
 {
