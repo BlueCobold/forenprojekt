@@ -26,7 +26,8 @@ private:
     sf::Vector2f m_innerPosition;
     sf::View m_orginalView;
 
-    int m_pick;
+    int m_startValue;
+    int m_endValue;
 
     sf::RectangleShape m_windowRect;
     sf::RectangleShape m_sliderRect;
@@ -47,6 +48,10 @@ private:
     void createSprite(const MenuSprite& info);
 
     std::function<void(const Button& sender)> m_clickCallback;
+
+    float percentToWindowPixels(float percent = 1.f);
+    void setSliderPosition();
+    float sliderPixelToWindowPixel(int pixel = 1);
 public:
     void draw(const DrawParameter& params);
     void update(const sf::RenderWindow& screen);
@@ -57,13 +62,9 @@ public:
               const int innerHeight,
               const MenuElements& elements);
 
-    SubWindow(SubWindow&& source);
-
     void setOffset(const sf::Vector2f& offset);
     void setPosition(const sf::Vector2f& position);
     void setInnerPosition(const sf::Vector2f& position);
-
-    SubWindow& operator=(SubWindow&& source);
 };
 
 #endif
