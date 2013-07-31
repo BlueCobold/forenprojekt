@@ -3,6 +3,10 @@
 #ifndef MENU_TEMPLATE_HPP
 #define MENU_TEMPLATE_HPP
 
+#include <tinyxml2.h>
+#include <string>
+#include <vector>
+
 #include "ButtonStyle.hpp"
 #include "CheckBoxStyle.hpp"
 #include "SliderStyle.hpp"
@@ -10,11 +14,6 @@
 #include "MenuSprite.hpp"
 #include "ToolTip.hpp"
 #include "../model/SoundObject.hpp"
-
-#include <tinyxml2.h>
-
-#include <string>
-#include <vector>
 
 struct ButtonInfo
 {
@@ -41,13 +40,28 @@ struct SliderInfo
     int id;
 };
 
-struct MenuTemplate
+struct MenuElements
 {
     std::vector<ButtonInfo> buttons;
     std::vector<CheckBoxInfo> checkboxes;
     std::vector<SliderInfo> slider;
     std::vector<LineLabel> labels;
     std::vector<MenuSprite> sprites;
+};
+
+struct SubWindowInfo
+{
+    MenuElements menuElements;
+    sf::Vector2f position;
+    sf::Vector2f size;
+    sf::Vector2f virtualPosition;
+    int innerHeight;
+};
+
+struct MenuTemplate
+{
+    MenuElements menuElements;
+    std::vector<SubWindowInfo> subWindow;
     std::string captionResourceKey;
     BitmapFont* captionFont;
     sf::Vector2f captionOffset;

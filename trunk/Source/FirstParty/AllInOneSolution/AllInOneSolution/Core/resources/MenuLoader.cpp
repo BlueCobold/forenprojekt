@@ -17,6 +17,7 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
         throw std::runtime_error(utility::replace(utility::translateKey("MenuEntryMissing"), path));
 
     MenuTemplate menu;
+    MenuElements elements;
     if(auto background = menuXml->FirstChildElement("background"))
     {
         menu.background = sf::Sprite(*resourceManager.getTexture(background->Attribute("texture")));
@@ -36,16 +37,20 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     std::unordered_map<std::string, SliderStyle> sliderStyles = parseSliderStyles(menuXml, resourceManager);
     std::unordered_map<std::string, ToolTip> toolTip = parseToolTipStyle(menuXml, resourceManager);
 
-    parseButtons(menu, menuXml, buttonStyles, toolTip, resourceManager);
-    parseCheckBoxes(menu, menuXml, checkboxStyles, resourceManager);
-    parseSliders(menu, menuXml, sliderStyles, resourceManager);
-    parseLabels(menu, menuXml, resourceManager);
-    parseImages(menu, menuXml, toolTip, resourceManager);
+    parseButtons(elements, menuXml, buttonStyles, toolTip, resourceManager);
+    parseCheckBoxes(elements, menuXml, checkboxStyles, resourceManager);
+    parseSliders(elements, menuXml, sliderStyles, resourceManager);
+    parseLabels(elements, menuXml, resourceManager);
+    parseImages(elements, menuXml, toolTip, resourceManager);
+    parseSubWindow(menu, menuXml, resourceManager, toolTip, sliderStyles, checkboxStyles, buttonStyles);
+    
+    menu.menuElements = elements;
+
     return new MenuTemplate(menu);
 }
 
 void MenuLoader::parseButtons(
-    MenuTemplate& menu, 
+    MenuElements& elements, 
     tinyxml2::XMLElement* menuXml, 
     std::unordered_map<std::string, ButtonStyle>& buttonStyles, 
     std::unordered_map<std::string, ToolTip>& toolTip,
@@ -89,12 +94,12 @@ void MenuLoader::parseButtons(
                 utility::translateKey(button.textResourceKey), 
                 button.position, 0, button.style.pressedStyle.font, LineLabel::Centered);
             button.style.pressedStyle.label.setOffset(button.style.pressedStyle.textOffset);
-            menu.buttons.push_back(button);
+            elements.buttons.push_back(button);
         }
     }
 }
 void MenuLoader::parseCheckBoxes(
-    MenuTemplate& menu, 
+    MenuElements& elements, 
     tinyxml2::XMLElement* menuXml, 
     std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles, 
     ResourceManager& resourceManager)
@@ -113,12 +118,12 @@ void MenuLoader::parseCheckBoxes(
             checkBox.position = sf::Vector2f(checkboxXml->FloatAttribute("x"), checkboxXml->FloatAttribute("y"));
             checkBox.id = checkboxXml->IntAttribute("id");
 
-            menu.checkboxes.push_back(checkBox);
+            elements.checkboxes.push_back(checkBox);
         }
     }
 }
 void MenuLoader::parseSliders(
-    MenuTemplate& menu, 
+    MenuElements& elements, 
     tinyxml2::XMLElement* menuXml, 
     std::unordered_map<std::string, SliderStyle>& sliderStyles,
     ResourceManager& resourceManager)
@@ -136,12 +141,15 @@ void MenuLoader::parseSliders(
             slider.position = sf::Vector2f(sliderXml->FloatAttribute("x"), sliderXml->FloatAttribute("y"));
             slider.id = sliderXml->IntAttribute("id");
 
-            menu.slider.push_back(slider);
+            elements.slider.push_back(slider);
         }
     }
 }
 
-void MenuLoader::parseLabels(MenuTemplate& menu, tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+void MenuLoader::parseLabels(
+    MenuElements& elements,
+    tinyxml2::XMLElement* menuXml,
+    ResourceManager& resourceManager)
 {
     if(auto styles = menuXml->FirstChildElement("elements"))
     {
@@ -156,12 +164,12 @@ void MenuLoader::parseLabels(MenuTemplate& menu, tinyxml2::XMLElement* menuXml, 
                             labelXml->IntAttribute("id"));
 
             label.setOffset(sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")));
-            menu.labels.push_back(label);
+            elements.labels.push_back(label);
         }
     }
 }
 
-void MenuLoader::parseImages(MenuTemplate& menu, 
+void MenuLoader::parseImages(MenuElements& elements, 
                              tinyxml2::XMLElement* menuXml,
                              std::unordered_map<std::string, ToolTip>& toolTip,
                              ResourceManager& resourceManager)
@@ -189,7 +197,37 @@ void MenuLoader::parseImages(MenuTemplate& menu,
                 tooltip->second.setText(utility::translateKey(imageXml->Attribute("tooltiptext")));
                 sprite.setToolTip(tooltip->second);
             }
-            menu.sprites.push_back(sprite);
+            elements.sprites.push_back(sprite);
+        }
+    }
+}
+
+void MenuLoader::parseSubWindow(MenuTemplate& menu,
+                                tinyxml2::XMLElement* menuXml,
+                                ResourceManager& resourceManager,
+                                std::unordered_map<std::string, ToolTip>& toolTip,
+                                std::unordered_map<std::string, SliderStyle>& sliderStyles,
+                                std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles,
+                                std::unordered_map<std::string, ButtonStyle>& buttonStyles)
+{
+    if(auto element = menuXml->FirstChildElement("elements"))
+    {
+        for(auto subXml = element->FirstChildElement("subwindow");
+            subXml != nullptr; subXml = subXml->NextSiblingElement("subwindow"))
+        {
+            MenuElements ownElements;
+            SubWindowInfo subWindowInfo;
+            subWindowInfo.position = sf::Vector2f(subXml->FloatAttribute("x"), subXml->FloatAttribute("y"));
+            subWindowInfo.size = sf::Vector2f(subXml->FloatAttribute("sizex"), subXml->FloatAttribute("sizey"));
+            subWindowInfo.innerHeight = subXml->IntAttribute("innerheight");
+            subWindowInfo.virtualPosition = sf::Vector2f(subXml->FloatAttribute("virtualx"), subXml->FloatAttribute("virtualy"));
+            parseButtons(ownElements, subXml, buttonStyles, toolTip, resourceManager);
+            parseCheckBoxes(ownElements, subXml, checkBoxStyles, resourceManager);
+            parseSliders(ownElements, subXml, sliderStyles, resourceManager);
+            parseLabels(ownElements, subXml, resourceManager);
+            parseImages(ownElements, subXml, toolTip, resourceManager);
+            subWindowInfo.menuElements = ownElements;
+            menu.subWindow.push_back(subWindowInfo);
         }
     }
 }
