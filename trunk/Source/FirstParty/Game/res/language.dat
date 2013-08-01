@@ -53,6 +53,7 @@ SliderId = The slider with id % don't exist.
 CheckboxId = The checkbox with id % don't exist.
 LineLabelId = The label with id % don't exist.
 MenuSpriteId = The menusprite with id % don't exist.
+ButtonId = The button with id % don't exist.
 UnknownToolTip = ToolTip isn't registered: %.
 IncludeFileInvalid = Include File '%' is corrupt.
 InvalidLayout = The layout-part '%' has a bad number of elements.

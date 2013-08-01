@@ -23,7 +23,8 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
     m_lastLevel(nullptr),
     loadingLevelThread(nullptr),    
     m_loaded(false),
-    m_loadInProgress(false)
+    m_loadInProgress(false),
+    m_currentLevel(1)
 {
     m_loadingErrorMessage[0] = '\0';
     loadingLevelThread = std::unique_ptr<sf::Thread>(new sf::Thread(&LoadLevelState::loadLevel, this));
@@ -45,6 +46,8 @@ void LoadLevelState::onEnter(const EnterStateInformation* enterInformation, cons
     }
     else
         m_loadInProgress = true;
+
+    m_currentLevel = enterInformation->m_levelNumber;
 }
 
 std::unique_ptr<Level> LoadLevelState::gainLevel()
@@ -94,7 +97,7 @@ void LoadLevelState::loadLevel()
     m_loadingErrorMessage[0] = '\0';
     try
     {
-        m_level = std::unique_ptr<Level>(new Level(1, m_resourceManager, m_config));
+        m_level = std::unique_ptr<Level>(new Level(m_currentLevel, m_resourceManager, m_config));
         m_lastLevel = m_level.get();
     }
     catch(std::runtime_error e)

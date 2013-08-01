@@ -1,6 +1,8 @@
 <level>
 	<medal bronze="800" silver="1000" gold="1400" />
-	<levelinfo name="Up and Down" />
+	<levelinfo name="Up and Down">
+		<infoimage scrx="0" scry="0" width ="192" height="108" />
+	</levelinfo>
 	<constants solid="0" />
 	<gameplay maxBalls="5" time="180"/>
 	<templates>

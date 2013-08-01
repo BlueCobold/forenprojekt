@@ -27,7 +27,7 @@ void Button::update(const sf::RenderWindow& screen)
                            m_style.mouseRect.height);
 
     sf::Vector2i mouseposition = sf::Mouse::getPosition(screen);
-    if(buttonRect.contains(mouseposition))
+    if(buttonRect.contains(mouseposition) && isVisible())
     {
         if(!m_playHoverSound && m_style.hoverStyle.sound)
         {

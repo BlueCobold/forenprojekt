@@ -232,7 +232,15 @@ MenuSprite& Menu::getSprite(int id)
     }
     throw std::runtime_error(utility::replace(utility::translateKey("MenuSpriteId"), utility::toString(id)));
 }
-
+Button& Menu::getButton(int id)
+{
+    for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
+    {
+        if(it->get()->getId() == id)
+            return *it->get();
+    }
+    throw std::runtime_error(utility::replace(utility::translateKey("ButtonId"), utility::toString(id)));
+}
 void Menu::changeIdleSprite(const int id, const sf::Sprite& sprite)
 {
     for(auto button = begin(m_buttons); button != end(m_buttons); ++button)

@@ -1,5 +1,7 @@
 <level>
-	<levelinfo name="Level 3" />
+	<levelinfo name="Level 3">
+		<infoimage scrx="0" scry="0" width ="192" height="108" />
+	</levelinfo>
 	<constants gate="0" gatetime="0"/>
 	<templates>
 		<include file="assets/ball/default.inc" />

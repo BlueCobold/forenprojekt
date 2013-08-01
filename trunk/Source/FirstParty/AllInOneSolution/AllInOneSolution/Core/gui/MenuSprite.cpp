@@ -50,3 +50,7 @@ void MenuSprite::setToolTipText(const std::string& text)
 {
     m_toolTip.setText(text);
 }
+void MenuSprite::setTextureRect(const sf::IntRect& textureRect)
+{
+    m_sprite.setTextureRect(textureRect);
+}

@@ -1,5 +1,7 @@
 <level>
-	<levelinfo name="Level 4" />
+	<levelinfo name="Level 4">
+		<infoimage scrx="0" scry="0" width ="192" height="108" />
+	</levelinfo>
 	<constants direction="1" arrowtime="0"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />
