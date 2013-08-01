@@ -77,12 +77,12 @@ public:
         return m_position;
     }
 
-protected:
-
     bool isVisible() const
     {
         return m_visible;
     }
+
+protected:
 
     virtual void onPositionChanged()
     { }

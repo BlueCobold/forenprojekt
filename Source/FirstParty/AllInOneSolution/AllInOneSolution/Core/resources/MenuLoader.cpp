@@ -203,6 +203,8 @@ void MenuLoader::parseImages(MenuElements& elements,
                 tooltip->second.setText(utility::translateKey(imageXml->Attribute("tooltiptext")));
                 sprite.setToolTip(tooltip->second);
             }
+            if(auto visibleWhenId = imageXml->IntAttribute("visibleWhen"))
+                sprite.setVisibleWhenId(visibleWhenId);
             elements.sprites.push_back(sprite);
         }
     }
