@@ -1,5 +1,8 @@
 #include "LevelPreviewMenu.hpp"
 
+#include "../resources/ResourceManager.hpp"
+#include "../Utility.hpp"
+
 LevelPreviewMenu::LevelPreviewMenu(const sf::Vector2f& position,
                                    sf::RenderWindow& screen,
                                    ResourceManager& resourceManager) :

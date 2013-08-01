@@ -1,5 +1,12 @@
 #include "Menu.hpp"
+
 #include "Button.hpp"
+#include "CheckBox.hpp"
+#include "LineLabel.hpp"
+#include "MenuSprite.hpp"
+#include "Slider.hpp"
+#include "SubWindow.hpp"
+
 #include "../resources/ResourceManager.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>

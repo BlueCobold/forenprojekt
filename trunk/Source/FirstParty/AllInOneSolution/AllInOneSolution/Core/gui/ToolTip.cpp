@@ -130,11 +130,11 @@ void ToolTip::setLines(const std::string& text)
     {
         token = tokens.substr(0, pos);
         tokens.erase(0, pos + 4);
-        LineLabel label(token, sf::Vector2f(0, 0), 0, m_font, LineLabel::Centered);
+        LineLabel label(token, sf::Vector2f(), sf::Vector2f(), 0, m_font, LineLabel::Centered);
         m_label[m_lines++] = label;
     }
     // single line or last multiline
-    LineLabel label(tokens, sf::Vector2f(0, 0), 0, m_font, LineLabel::Centered);
+    LineLabel label(tokens, sf::Vector2f(), sf::Vector2f(), 0, m_font, LineLabel::Centered);
     m_label[m_lines++] = label;
 }
 

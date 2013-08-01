@@ -3,9 +3,7 @@
 #include "../Utility.hpp"
 
 Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& position, const sf::Vector2f& offset) :
-    m_id(id),
-    m_position(position),
-    m_offset(offset),
+    MenuElement(id, MenuElementType::Slider, position, offset),
     m_style(style),
     m_active(false),
     m_pick(0)
@@ -13,7 +11,7 @@ Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& positi
     m_spriteSlider = &m_style.idle.spriteSlider;
     m_spriteBackround = &m_style.idle.spriteBackround;
 
-    m_sliderPosition.y = m_position.y + m_offset.y + m_style.mouseRect.top;
+    m_sliderPosition.y = position.y + offset.y + m_style.mouseRect.top;
 
     m_min = m_style.min;
     m_max = m_style.max;
@@ -21,8 +19,10 @@ Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& positi
 
 void Slider::update(const sf::RenderWindow& screen)
 {
-    int x = static_cast<int>(m_position.x + m_offset.x + m_style.mouseRect.left);
-    sf::IntRect sliderRect(x, static_cast<int>(m_position.y + m_offset.y + m_style.mouseRect.top),
+    auto position = getPosition();
+    auto eoffset = getOffset();
+    int x = static_cast<int>(position.x + eoffset.x + m_style.mouseRect.left);
+    sf::IntRect sliderRect(x, static_cast<int>(position.y + eoffset.y + m_style.mouseRect.top),
                            m_style.mouseRect.width,
                            m_style.mouseRect.height);
     
@@ -68,24 +68,19 @@ void Slider::draw(const DrawParameter& params)
     params.getTarget().draw(*m_spriteSlider);
 }
 
-int Slider::getId() const
-{
-    return m_id;
-}
-
 float Slider::getValue() const
 {
     return m_value;
 }
 
-void Slider::setPosition(const sf::Vector2f& position)
+void Slider::onPositionChanged()
 {
-    m_position = position;
+    auto position = getPosition();
+    auto offset = getOffset();
+    m_style.active.spriteBackround.setPosition(position + offset + m_style.active.backgroundOffset);
+    m_style.idle.spriteBackround.setPosition(position + offset + m_style.idle.backgroundOffset);
 
-    m_style.active.spriteBackround.setPosition(m_position + m_offset + m_style.active.backgroundOffset);
-    m_style.idle.spriteBackround.setPosition(m_position + m_offset + m_style.idle.backgroundOffset);
-
-    m_sliderPosition.y = m_position.y + m_offset.y + m_style.mouseRect.top;
+    m_sliderPosition.y = position.y + offset.y + m_style.mouseRect.top;
 }
 
 void Slider::setValue(const float value)

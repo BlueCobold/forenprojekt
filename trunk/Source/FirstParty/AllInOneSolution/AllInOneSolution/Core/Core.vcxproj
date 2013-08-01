@@ -244,6 +244,7 @@
     <ClInclude Include="gui\hud\PointsHUD.hpp" />
     <ClInclude Include="gui\hud\TargetHUD.hpp" />
     <ClInclude Include="gui\MainMenu.hpp" />
+    <ClInclude Include="gui\MenuElement.hpp" />
     <ClInclude Include="gui\MenuSprite.hpp" />
     <ClInclude Include="gui\MenuTemplate.hpp" />
     <ClInclude Include="gui\OptionMenu.hpp" />

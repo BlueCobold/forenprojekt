@@ -4,10 +4,7 @@
 #define MENU_HPP
 
 #include "../rendering/Drawable.hpp"
-#include "Button.hpp"
 #include "MenuTemplate.hpp"
-#include "CheckBox.hpp"
-#include "Slider.hpp"
 #include "SubWindow.hpp"
 #include <SFML/System/Vector2.hpp>
 
@@ -15,6 +12,12 @@
 #include <vector>
 
 class ResourceManager;
+
+class Button;
+class CheckBox;
+class LineLabel;
+class MenuSprite;
+class Slider;
 
 namespace sf
 {

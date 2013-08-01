@@ -3,25 +3,46 @@
 #ifndef SCROLLWINDOW_HPP
 #define SCROLLWINDOW_HPP
 
+#include "MenuElement.hpp"
+#include "MenuTemplate.hpp"
+
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
-#include "MenuTemplate.hpp"
+
 #include <functional>
 #include <vector>
 #include <memory>
 
-class DrawParameter;
 class Button;
 class CheckBox;
+class LineLabel;
+class MenuSprite;
 class Slider;
 
-class SubWindow
+class SubWindow : public MenuElement
 {
+public:
+
+    SubWindow(const sf::Vector2f& position,
+              const sf::Vector2f& size,
+              const sf::Vector2f& innerPosition,
+              const sf::Vector2f& offset,
+              const int innerHeight,
+              const MenuElements& elements);
+
+    virtual void draw(const DrawParameter& params) override;
+    virtual void update(const sf::RenderWindow& screen) override;
+
+    void setInnerPosition(const sf::Vector2f& position);
+    
+protected:
+
+    virtual void onPositionChanged() override;
+
 private:
+
     int m_innerHeight;
     sf::Vector2f m_center;
-    sf::Vector2f m_position;
-    sf::Vector2f m_offset;
     sf::Vector2f m_size;
     sf::Vector2f m_innerPosition;
     sf::View m_orginalView;
@@ -53,19 +74,6 @@ private:
     float percentToWindowPixels(float percent = 1.f);
     void setSliderPosition();
     float sliderPixelToWindowPixel(int pixel = 1);
-public:
-    void draw(const DrawParameter& params);
-    void update(const sf::RenderWindow& screen);
-    SubWindow(const sf::Vector2f& position,
-              const sf::Vector2f& size,
-              const sf::Vector2f& innerPosition,
-              const sf::Vector2f& offset,
-              const int innerHeight,
-              const MenuElements& elements);
-
-    void setOffset(const sf::Vector2f& offset);
-    void setPosition(const sf::Vector2f& position);
-    void setInnerPosition(const sf::Vector2f& position);
 };
 
 #endif

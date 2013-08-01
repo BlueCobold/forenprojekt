@@ -10,7 +10,7 @@ LabelHUD::LabelHUD(const sf::Vector2f& position,
                    const std::string& text,
                    const LineLabel::Alignment alignment) :
     HUDElement(position, rotation, horizontalPercentage, verticalPercentage),
-    m_label(text, sf::Vector2f(0.f, 0.f), rotation, bitmapFont, alignment)
+    m_label(text, sf::Vector2f(), sf::Vector2f(), rotation, bitmapFont, alignment)
 {
 }
 

@@ -1,8 +1,14 @@
 #include "SubWindow.hpp"
+
 #include "Button.hpp"
-#include "../rendering/DrawParameter.hpp"
-#include "../Input.hpp"
+#include "CheckBox.hpp"
+#include "LineLabel.hpp"
+#include "MenuSprite.hpp"
+#include "Slider.hpp"
+
 #include "../gui/Menu.hpp"
+#include "../Input.hpp"
+#include "../rendering/DrawParameter.hpp"
 
 SubWindow::SubWindow(const sf::Vector2f& position,
                      const sf::Vector2f& size,
@@ -10,9 +16,8 @@ SubWindow::SubWindow(const sf::Vector2f& position,
                      const sf::Vector2f& offset,
                      const int innerHeight,
                      const MenuElements& elements) :
-    m_position(position),
+    MenuElement(-1, MenuElementType::SubWindow, position, offset),
     m_size(size),
-    m_offset(offset),
     m_innerHeight(innerHeight),
     m_innerPosition(innerPosition),
     m_center(sf::Vector2f(0, 0)),
@@ -20,18 +25,18 @@ SubWindow::SubWindow(const sf::Vector2f& position,
     m_endValue(0),
     m_active(false)
 {
-    m_windowRect.setPosition(m_position.x + m_offset.x,
-                             m_position.y + m_offset.y);
+    m_windowRect.setPosition(position.x + offset.x,
+                             position.y + offset.y);
     m_windowRect.setSize(size);
     m_windowRect.setFillColor(sf::Color(255,128,128,80));
 
-    m_sliderRect.setPosition(m_position.x + m_offset.x + m_size.x,
-                             m_position.y + m_offset.y);
+    m_sliderRect.setPosition(position.x + offset.x + m_size.x,
+                             position.y + offset.y);
     m_sliderRect.setSize(sf::Vector2f(14, m_size.y));
     m_sliderRect.setFillColor(sf::Color(128,255,128,128));
 
-    m_positionRect.setPosition(m_position.x + m_offset.x + m_size.x + 2,
-                               m_position.y + m_offset.y);
+    m_positionRect.setPosition(position.x + offset.x + m_size.x + 2,
+                               position.y + offset.y);
 
     float positionSize = 1.f - (m_innerHeight - m_size.y) / m_innerHeight;
     if(positionSize > 1.f)
@@ -61,10 +66,12 @@ SubWindow::SubWindow(const sf::Vector2f& position,
 
 void SubWindow::on(const DrawParameter& params)
 {
+    auto position = getPosition();
+    auto offset = getOffset();
     auto orginalScreenRect = params.getTarget().getSize();
     sf::FloatRect windowViewport;
-    windowViewport.left = (m_position.x + m_offset.x) / (orginalScreenRect.x - 0.2f);
-    windowViewport.top = (m_position.y + m_offset.y) / (orginalScreenRect.y - 0.2f);
+    windowViewport.left = (position.x + offset.x) / (orginalScreenRect.x - 0.2f);
+    windowViewport.top = (position.y + offset.y) / (orginalScreenRect.y - 0.2f);
     windowViewport.width = m_size.x / (orginalScreenRect.x - 0.2f);
     windowViewport.height = m_size.y / (orginalScreenRect.y - 0.2f);
     sf::View windowView;
@@ -139,28 +146,16 @@ void SubWindow::update(const sf::RenderWindow& screen)
     setSliderPosition();
 }
 
-void SubWindow::setOffset(const sf::Vector2f& offset)
+void SubWindow::onPositionChanged()
 {
-    m_offset = offset;
-
-    m_windowRect.setPosition(m_position.x + m_offset.x,
-                             m_position.y + m_offset.y);
-    m_sliderRect.setPosition(m_position.x + m_offset.x + m_size.x,
-                             m_position.y + m_offset.y);
-    m_positionRect.setPosition(m_position.x + m_offset.x + m_size.x + 2,
-                               m_position.y + m_offset.y);
-}
-
-void SubWindow::setPosition(const sf::Vector2f& position)
-{
-    m_position = position;
-
-    m_windowRect.setPosition(m_position.x + m_offset.x,
-                             m_position.y + m_offset.y);
-    m_sliderRect.setPosition(m_position.x + m_offset.x + m_size.x,
-                             m_position.y + m_offset.y);
-    m_positionRect.setPosition(m_position.x + m_offset.x + m_size.x + 2,
-                               m_position.y + m_offset.y);
+    auto position = getPosition();
+    auto offset = getOffset();
+    m_windowRect.setPosition(position.x + offset.x,
+                             position.y + offset.y);
+    m_sliderRect.setPosition(position.x + offset.x + m_size.x,
+                             position.y + offset.y);
+    m_positionRect.setPosition(position.x + offset.x + m_size.x + 2,
+                               position.y + offset.y);
 }
 
 void SubWindow::setInnerPosition(const sf::Vector2f& position)
@@ -185,21 +180,21 @@ void SubWindow::setInnerPosition(const sf::Vector2f& position)
 
 void SubWindow::createCheckBox(const CheckBoxInfo& info)
 {
-    std::unique_ptr<CheckBox> checkbox(new CheckBox(info.id, info.style, m_position, info.position));
+    std::unique_ptr<CheckBox> checkbox(new CheckBox(info.id, info.style, getPosition(), info.position));
 
     m_checkBoxes.push_back(std::move(checkbox));
 }
 
 void SubWindow::createSlider(const SliderInfo& info)
 {
-    std::unique_ptr<Slider> slider(new Slider(info.id, info.style, m_position, info.position));
+    std::unique_ptr<Slider> slider(new Slider(info.id, info.style, getPosition(), info.position));
 
     m_slider.push_back(std::move(slider));
 }
 
 void SubWindow::createButton(const ButtonInfo& info)
 {
-    std::unique_ptr<Button> button(new Button(info.id, info.style, m_position, info.position));
+    std::unique_ptr<Button> button(new Button(info.id, info.style, getPosition(), info.position));
 
     button->registerOnPressed([this](const Button& sender)
     {
@@ -239,8 +234,10 @@ float SubWindow::sliderPixelToWindowPixel(int pixel)
 
 void SubWindow::setSliderPosition()
 {
+    auto position = getPosition();
+    auto offset = getOffset();
     float currentPercent = (m_innerPosition.y + m_size.y / 2.f - m_center.y) / (m_innerHeight - m_size.y) ;
     int currentPosition = static_cast<int>((m_sliderRect.getSize().y - m_positionRect.getSize().y) * -currentPercent);
-    m_positionRect.setPosition(m_position.x + m_offset.x + m_size.x + 2,
-                                m_position.y + m_offset.y + currentPosition);
+    m_positionRect.setPosition(position.x + offset.x + m_size.x + 2,
+                                position.y + offset.y + currentPosition);
 }

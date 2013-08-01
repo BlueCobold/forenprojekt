@@ -6,13 +6,14 @@
 CaptionMenu::CaptionMenu(const MenuTemplate& menuTemplate,
                          const sf::Vector2f& position,
                          sf::RenderWindow& screen) :
-    Menu(menuTemplate, position, screen)
+    Menu(menuTemplate, position, screen),
+    m_caption(utility::translateKey(menuTemplate.captionResourceKey),
+              sf::Vector2f(position.x + getSize().x / 2.f, position.y),
+              menuTemplate.captionOffset,
+              0,
+              menuTemplate.captionFont,
+              LineLabel::Centered)
 {
-    m_caption.setBitmapFont(menuTemplate.captionFont);
-    m_caption.setPosition(position.x + getSize().x / 2.f, position.y);
-    m_caption.setOffset(menuTemplate.captionOffset);
-    m_caption.setAlignment(LineLabel::Centered);
-    m_caption.setText(utility::translateKey(menuTemplate.captionResourceKey));
 }
 
 void CaptionMenu::drawAdditionalBackground(const DrawParameter& params)
@@ -26,6 +27,7 @@ void CaptionMenu::setPosition(const sf::Vector2f& position)
 
     m_caption.setPosition(position.x + getSize().x / 2.f, position.y);
 }
+
 void CaptionMenu::setCaption(const std::string& caption)
 {
     m_caption.setText(caption);

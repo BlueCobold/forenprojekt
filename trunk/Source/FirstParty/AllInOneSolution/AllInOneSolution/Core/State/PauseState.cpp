@@ -1,4 +1,6 @@
 #include "PauseState.hpp"
+
+#include "../gui/Button.hpp"
 #include "../Input.hpp"
 #include "../model/Level.hpp"
 #include "../resources/Config.hpp"
