@@ -62,6 +62,10 @@ public:
     void setToolTipText(const std::string& text);
 
     virtual void drawAdditionalForeground(const DrawParameter& params);
+
+    void changeIdleSprite(const sf::Sprite& sprite);
+    void changeHoverSprite(const sf::Sprite& sprite);
+    void changePressedSprite(const sf::Sprite& sprite);
 };
 
 #endif // BUTTON_HPP
