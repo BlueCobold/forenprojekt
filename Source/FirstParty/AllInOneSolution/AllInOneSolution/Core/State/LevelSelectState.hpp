@@ -20,9 +20,10 @@ public:
 private:
     LevelSelectMenu m_menu;
     std::map<int, std::string> m_levelNames;
+    std::map<int, sf::IntRect> m_textureCoordinates;
+    int m_currentLevelNumber;
 
-    void loadLevelNames();
-
+    void loadLevelInfos();
     EnterStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
 };

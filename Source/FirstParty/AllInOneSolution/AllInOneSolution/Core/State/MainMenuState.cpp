@@ -43,6 +43,7 @@ StateChangeInformation MainMenuState::update(const float time)
     {
         m_stateInfo.m_prepareOnly = false;
         m_stateInfo.m_level = nullptr;
+        m_stateInfo.m_levelNumber = 1;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);

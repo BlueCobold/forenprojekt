@@ -38,7 +38,7 @@ private:
     char m_loadingErrorMessage[200];
 
     LineLabel m_label;
-
+    int m_currentLevel;
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
 

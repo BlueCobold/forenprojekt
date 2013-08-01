@@ -20,6 +20,7 @@ public:
 
     Level* m_level;
     bool m_prepareOnly;
+    int m_levelNumber;
 };
 
 class EnterPauseStateInformation : public EnterStateInformation

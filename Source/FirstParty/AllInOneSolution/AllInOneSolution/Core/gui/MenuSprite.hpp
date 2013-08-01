@@ -16,6 +16,7 @@ public:
 
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text);
+    void setTextureRect(const sf::IntRect& textureRect);
 
     virtual void draw(const DrawParameter& params) override;
     virtual void update(const sf::RenderWindow& screen) override;
