@@ -84,7 +84,7 @@ public:
     void changePressedSprite(const int id, const sf::Sprite& sprite);
 
 protected:
-    
+
     virtual void drawAdditionalBackground(const DrawParameter& params);
 };
 

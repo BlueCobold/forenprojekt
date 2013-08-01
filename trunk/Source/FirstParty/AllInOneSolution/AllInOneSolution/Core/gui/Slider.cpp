@@ -25,7 +25,7 @@ void Slider::update(const sf::RenderWindow& screen)
     sf::IntRect sliderRect(x, static_cast<int>(position.y + eoffset.y + m_style.mouseRect.top),
                            m_style.mouseRect.width,
                            m_style.mouseRect.height);
-    
+
     sf::Vector2f offset(0, 0);
     if(!utility::Mouse.leftButtonPressed())
     {

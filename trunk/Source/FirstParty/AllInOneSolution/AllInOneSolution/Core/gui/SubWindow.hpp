@@ -34,7 +34,7 @@ public:
     virtual void update(const sf::RenderWindow& screen) override;
 
     void setInnerPosition(const sf::Vector2f& position);
-    
+
 protected:
 
     virtual void onPositionChanged() override;

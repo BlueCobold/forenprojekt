@@ -124,7 +124,7 @@ void ToolTip::setLines(const std::string& text)
 
     std::string tokens = text.c_str();
     std::string token;
-    
+
     // multilines
     for(int pos = tokens.find("\\r\\n"); pos != std::string::npos; pos = tokens.find("\\r\\n"))
     {
@@ -142,7 +142,7 @@ const int ToolTip::findLongestLine() const
 {
     int longestLine = -1;
     float longestwidth = 0;
-    
+
     for(auto it = begin(m_label); it != end(m_label); ++it)
     {
         if( longestwidth < it->second.getWidth())

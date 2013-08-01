@@ -47,6 +47,8 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
     m_menu.setMedalToolTipText(text);
     if(!enterInformation->m_prepareOnly && m_level->getPoints() > 0)
         m_config.set<int>("coins", m_config.get<int>("coins") + m_level->getPoints());
+
+    m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 }
 
 StateChangeInformation LevelPassState::update(const float time)

@@ -11,7 +11,7 @@
 class MenuSprite : public MenuElement
 {
 public:
-    
+
     MenuSprite(const sf::Sprite& sprite, const sf::Vector2f& position, const sf::Vector2f& offset, const int id);
 
     void setToolTip(const ToolTip& toolTip);
@@ -26,7 +26,7 @@ protected:
     virtual void onPositionChanged() override;
 
 private:
-    
+
     sf::Sprite m_sprite;
     ToolTip m_toolTip;
     bool m_showToolTip;

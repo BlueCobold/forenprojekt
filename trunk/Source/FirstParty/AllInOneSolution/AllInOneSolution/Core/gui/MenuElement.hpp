@@ -25,7 +25,6 @@ namespace MenuElementType
 class MenuElement : public Drawable
 {
 public:
-    
 
     MenuElement(const int id,
                 const MenuElementType::Type type,
@@ -45,7 +44,7 @@ public:
     { }
     virtual void draw(const DrawParameter& params) override = 0;
     void setPosition(const sf::Vector2f& position)
-    {   
+    {
         if(position != m_position)
         {
             m_position = position;
