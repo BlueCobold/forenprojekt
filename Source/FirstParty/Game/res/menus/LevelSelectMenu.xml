@@ -5,5 +5,6 @@
 	<elements>
 		<button id="0" text="gui_show_details" style="default" x="261" y="215" />
 		<button id="1" text="gui_mainmenu" style="default" x="261" y="270" />
+		<image id="2" texture="GuiElements" x="159" y="100" scrx="0" scry="280" width="192" height="108"/>
 	</elements>
 </menu>
