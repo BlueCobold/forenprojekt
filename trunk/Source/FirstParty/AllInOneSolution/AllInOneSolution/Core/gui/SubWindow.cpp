@@ -63,10 +63,10 @@ void SubWindow::on(const DrawParameter& params)
 {
     auto orginalScreenRect = params.getTarget().getSize();
     sf::FloatRect windowViewport;
-    windowViewport.left = (m_position.x + m_offset.x) / (orginalScreenRect.x + 0.2f);
-    windowViewport.top = (m_position.y + m_offset.y) / (orginalScreenRect.y + 0.2f);
-    windowViewport.width = m_size.x / (orginalScreenRect.x + 0.2f);
-    windowViewport.height = m_size.y / (orginalScreenRect.y + 0.2f);
+    windowViewport.left = (m_position.x + m_offset.x) / (orginalScreenRect.x - 0.2f);
+    windowViewport.top = (m_position.y + m_offset.y) / (orginalScreenRect.y - 0.2f);
+    windowViewport.width = m_size.x / (orginalScreenRect.x - 0.2f);
+    windowViewport.height = m_size.y / (orginalScreenRect.y - 0.2f);
     sf::View windowView;
     windowView.setViewport(windowViewport);
     windowView.setCenter(m_center);
