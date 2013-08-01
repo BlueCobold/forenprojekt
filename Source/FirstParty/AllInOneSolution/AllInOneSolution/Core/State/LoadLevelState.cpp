@@ -69,6 +69,7 @@ StateChangeInformation LoadLevelState::update(const float time)
 
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = m_lastLevel;
+        m_playStateInfo.m_levelNumber = m_currentLevel;
         m_transitionStateInfo.m_level = m_lastLevel;
         //m_transitionStateInfo.m_followingState = PlayStateId;
         m_transitionStateInfo.m_followingState = LevelPreviewStateId;

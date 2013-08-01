@@ -41,6 +41,8 @@ void PlayState::onEnter(const EnterStateInformation* enterInformation, const flo
         m_timeShift = 0.0f;
         m_hud.skipInterpolation();
     }
+
+    m_pauseStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 }
 
 StateChangeInformation PlayState::update(const float time)

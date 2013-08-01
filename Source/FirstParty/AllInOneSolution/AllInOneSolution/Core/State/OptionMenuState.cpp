@@ -23,7 +23,7 @@ OptionMenuState::~OptionMenuState()
 void OptionMenuState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
     State::onEnter(enterInformation,time);
-    
+
     const EnterOptionStateInformation* info = dynamic_cast<const EnterOptionStateInformation*>(enterInformation);
     m_transitionStateInfo.m_followingState = info->m_comeFromState;
     m_level = info->m_level;
@@ -52,7 +52,7 @@ StateChangeInformation OptionMenuState::update(const float time)
 }
 
 void OptionMenuState::draw(const DrawParameter& params)
-{    
+{
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 
     sf::RectangleShape whiteRect;

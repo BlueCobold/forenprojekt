@@ -25,7 +25,7 @@ private:
     sf::Vector2i m_size;
     ToolTip m_toolTip;
     bool m_showToolTip;
-    
+
     LineLabel* m_label;
     sf::Sprite* m_sprite;
 
@@ -60,7 +60,7 @@ public:
     void changePressedSprite(const sf::Sprite& sprite);
 
 protected:
-    
+
     virtual void onPositionChanged() override;
 };
 

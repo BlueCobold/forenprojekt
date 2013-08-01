@@ -56,7 +56,7 @@ public:
     unsigned int getFontSize();
 
 protected:
-    
+
     virtual void onPositionChanged() override;
 
 private:
