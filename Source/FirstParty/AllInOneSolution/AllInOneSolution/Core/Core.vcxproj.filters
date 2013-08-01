@@ -735,6 +735,9 @@
     <ClInclude Include="gui\LevelSelectMenu.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="gui\MenuElement.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

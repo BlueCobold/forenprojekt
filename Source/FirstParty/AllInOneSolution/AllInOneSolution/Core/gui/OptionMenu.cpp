@@ -1,5 +1,9 @@
 #include "OptionMenu.hpp"
+
+#include "Slider.hpp"
 #include "../resources/AppConfig.hpp"
+#include "../resources/ResourceManager.hpp"
+
 #include <SFML/Audio/Listener.hpp>
 
 OptionMenu::OptionMenu(const sf::Vector2f& position,

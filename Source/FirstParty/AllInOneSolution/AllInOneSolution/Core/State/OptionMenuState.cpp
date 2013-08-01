@@ -1,7 +1,10 @@
 #include "OptionMenuState.hpp"
-#include "../resources/Config.hpp"
-#include <SFML/Graphics/RectangleShape.hpp>
+
+#include "../gui/Button.hpp"
 #include "../model/Level.hpp"
+#include "../resources/Config.hpp"
+
+#include <SFML/Graphics/RectangleShape.hpp>
 
 OptionMenuState::OptionMenuState(sf::RenderWindow& screen, 
                                  ResourceManager& resourceManager, 

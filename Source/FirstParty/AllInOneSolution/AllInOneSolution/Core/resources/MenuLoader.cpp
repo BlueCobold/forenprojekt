@@ -86,18 +86,18 @@ void MenuLoader::parseButtons(
 
             button.style.idleStyle.label = LineLabel(
                 button.textResourceKey, 
-                button.position, 0, button.style.idleStyle.font, LineLabel::Centered);
-            button.style.idleStyle.label.setOffset(button.style.idleStyle.textOffset);
+                button.position, button.style.idleStyle.textOffset,
+                0, button.style.idleStyle.font, LineLabel::Centered);
 
             button.style.hoverStyle.label = LineLabel(
                 button.textResourceKey, 
-                button.position, 0, button.style.hoverStyle.font, LineLabel::Centered);
-            button.style.hoverStyle.label.setOffset(button.style.hoverStyle.textOffset);
+                button.position, button.style.hoverStyle.textOffset,
+                0, button.style.hoverStyle.font, LineLabel::Centered);
 
             button.style.pressedStyle.label = LineLabel(
                 button.textResourceKey, 
-                button.position, 0, button.style.pressedStyle.font, LineLabel::Centered);
-            button.style.pressedStyle.label.setOffset(button.style.pressedStyle.textOffset);
+                button.position, button.style.pressedStyle.textOffset,
+                0, button.style.pressedStyle.font, LineLabel::Centered);
             elements.buttons.push_back(button);
         }
     }
@@ -162,12 +162,12 @@ void MenuLoader::parseLabels(
         {
             LineLabel label(utility::translateKey(labelXml->Attribute("text")),
                             sf::Vector2f(0, 0),
+                            sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
                             0,
                             resourceManager.getBitmapFont(labelXml->Attribute("font")),
                             static_cast<LineLabel::Alignment>(labelXml->IntAttribute("aligment")),
                             labelXml->IntAttribute("id"));
 
-            label.setOffset(sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")));
             elements.labels.push_back(label);
         }
     }
@@ -183,15 +183,17 @@ void MenuLoader::parseImages(MenuElements& elements,
         for(auto imageXml = styles->FirstChildElement("image");
             imageXml != nullptr; imageXml = imageXml->NextSiblingElement("image"))
         {
-            MenuSprite sprite(sf::Vector2f(0, 0),
+            sf::Sprite baseSprite;
+            baseSprite.setTexture(*resourceManager.getTexture(imageXml->Attribute("texture")));
+            baseSprite.setTextureRect(sf::IntRect(imageXml->IntAttribute("scrx"),
+                                                  imageXml->IntAttribute("scry"),
+                                                  imageXml->IntAttribute("width"),
+                                                  imageXml->IntAttribute("height")));
+
+            MenuSprite sprite(baseSprite,
+                              sf::Vector2f(0, 0),
                               sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")),
                               imageXml->IntAttribute("id"));
-
-            sprite.setTexture(*resourceManager.getTexture(imageXml->Attribute("texture")));
-            sprite.setTextureRect(sf::IntRect(imageXml->IntAttribute("scrx"),
-                                              imageXml->IntAttribute("scry"),
-                                              imageXml->IntAttribute("width"),
-                                              imageXml->IntAttribute("height")));
             
             if(auto toolTipName = imageXml->Attribute("tooltip"))
             {

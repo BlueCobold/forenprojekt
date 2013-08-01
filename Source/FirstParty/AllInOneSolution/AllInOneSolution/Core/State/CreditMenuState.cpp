@@ -1,5 +1,8 @@
 #include "CreditMenuState.hpp"
+
+#include "../gui/Button.hpp"
 #include "../resources/Config.hpp"
+
 #include <SFML/Graphics/RectangleShape.hpp>
 
 CreditMenuState::CreditMenuState(sf::RenderWindow& screen, 

@@ -1,6 +1,10 @@
 #include "LevelSelectState.hpp"
+
+#include "../gui/Button.hpp"
 #include "../resources/Config.hpp"
+
 #include <SFML/Graphics/RectangleShape.hpp>
+
 #include <fstream> 
 #include <tinyxml2.h>
 

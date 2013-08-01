@@ -3,9 +3,10 @@
 
 #pragma once
 
+#include "BitmapFont.hpp"
+#include "MenuElement.hpp"
 #include "../animation/Interpolation.hpp"
 #include "../rendering/Drawable.hpp"
-#include "BitmapFont.hpp"
 
 #include <SFML/System/Vector2.hpp>
 
@@ -13,7 +14,7 @@
 
 /// This class will be used to draw a single line label 
 /// with bitmapfonts
-class LineLabel : public Drawable
+class LineLabel : public MenuElement
 {
 public:
 
@@ -27,19 +28,18 @@ public:
     LineLabel();
     LineLabel(const std::string& text,
         const sf::Vector2f& position,
+        const sf::Vector2f& offset,
         const float rotation,
         BitmapFont* font,
         const Alignment alignment = Left,
         int id = -1);
 
+    virtual void draw(const DrawParameter& params) override;
+
     void setText(const std::string& text);
     std::string getText() const;
     float getWidth() const;
 
-    void setPosition(const sf::Vector2f& position);
-    void setPosition(const float x, const float y);
-    void setOffset(const sf::Vector2f& offset);
-    const sf::Vector2f getPosition() const;
     void setAlignment(const Alignment alignment);
 
     void attachPositionProgress(const Interpolation& x, const Interpolation& y);
@@ -53,10 +53,11 @@ public:
 
     void setBitmapFont(BitmapFont* font);
 
-    void draw(const DrawParameter& params);
-
     unsigned int getFontSize();
-    const int getId() const;
+
+protected:
+    
+    virtual void onPositionChanged() override;
 
 private:
 
@@ -64,13 +65,10 @@ private:
 
     float m_width;
     std::string m_text;
-    sf::Vector2f m_position;
-    sf::Vector2f m_offset;
     float m_rotation;
     BitmapFont* m_font;
     std::vector<BitmapFont::Glyph> m_glyphs;
     Alignment m_alignment;
-    int m_id;
 
     sf::Vector2f m_progressPosition;
     Interpolation m_xPosChange;

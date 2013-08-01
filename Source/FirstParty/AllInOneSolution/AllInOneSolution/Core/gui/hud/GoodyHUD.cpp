@@ -11,15 +11,13 @@ GoodyHUD::GoodyHUD(ResourceManager& resourceManager,
                    float hReference,
                    float vReference) :
     HUDElement(position, 0, hReference, vReference),
-    m_charges("", position, 0, resourceManager.getBitmapFont("goodyFont"))
+    m_charges("", position, sf::Vector2f(5, 20), 0, resourceManager.getBitmapFont("goodyFont"))
 {
     m_icon.setTexture(*resourceManager.getTexture(iconKey));
     m_icon.setTextureRect(textureRect);
 
     m_startRect = textureRect;
     m_iconHeight = m_startRect.height;
-
-    m_charges.setOffset(sf::Vector2f(5, 20));
 }
 
 void GoodyHUD::update(const DrawParameter& params)
