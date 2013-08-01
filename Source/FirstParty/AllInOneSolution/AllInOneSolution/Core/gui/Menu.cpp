@@ -172,7 +172,6 @@ void Menu::createSprite(const MenuSprite& info)
 
 void Menu::createSubWindow(const SubWindowInfo& info)
 {
-    //std::unique_ptr<Button> button(new Button(info.id, info.style, m_position, info.position));
     std::unique_ptr<SubWindow> subWindow(new SubWindow(m_position, info.size, info.virtualPosition, info.position, info.innerHeight, info.menuElements));
 
     m_subWindow.push_back(std::move(subWindow));
@@ -225,4 +224,25 @@ MenuSprite& Menu::getSprite(int id)
             return *it->get();
     }
     throw std::runtime_error(utility::replace(utility::translateKey("MenuSpriteId"), utility::toString(id)));
+}
+
+void Menu::changeIdleSprite(const int id, const sf::Sprite& sprite)
+{
+    for(auto button = begin(m_buttons); button != end(m_buttons); ++button)
+        if(button->get()->getId() == id)
+            button->get()->changeIdleSprite(sprite);
+}
+
+void Menu::changeHoverSprite(const int id, const sf::Sprite& sprite)
+{
+    for(auto button = begin(m_buttons); button != end(m_buttons); ++button)
+        if(button->get()->getId() == id)
+            button->get()->changeHoverSprite(sprite);
+}
+
+void Menu::changePressedSprite(const int id, const sf::Sprite& sprite)
+{
+    for(auto button = begin(m_buttons); button != end(m_buttons); ++button)
+        if(button->get()->getId() == id)
+            button->get()->changePressedSprite(sprite);
 }

@@ -122,3 +122,17 @@ void Button::drawAdditionalForeground(const DrawParameter& params)
     if(m_showToolTip)
         m_toolTip.draw(params);
 }
+void Button::changeIdleSprite(const sf::Sprite& sprite)
+{
+    m_style.idleStyle.sprite = sprite;
+}
+
+void Button::changeHoverSprite(const sf::Sprite& sprite)
+{
+    m_style.hoverStyle.sprite = sprite;
+}
+
+void Button::changePressedSprite(const sf::Sprite& sprite)
+{
+    m_style.pressedStyle.sprite = sprite;
+}
