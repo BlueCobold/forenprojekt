@@ -5,24 +5,18 @@
 MenuSprite::MenuSprite(const sf::Sprite& sprite, const sf::Vector2f& position, const sf::Vector2f& offset, const int id) :
     MenuElement(id, MenuElementType::Image, position, offset),
     m_sprite(sprite),
-    m_visible(true),
     m_showToolTip(false)
 {
 }
 
 void MenuSprite::draw(const DrawParameter& params)
 {
-    if(m_visible)
-    {
-        params.getTarget().draw(m_sprite);
-        if(m_showToolTip)
-            m_toolTip.draw(params);
-    }
-}
+    if(!isVisible())
+        return;
 
-void MenuSprite::setVisible(const bool visible)
-{
-    m_visible = visible;
+    params.getTarget().draw(m_sprite);
+    if(m_showToolTip)
+        m_toolTip.draw(params);
 }
 
 void MenuSprite::setToolTip(const ToolTip& toolTip)

@@ -64,6 +64,9 @@ void Slider::update(const sf::RenderWindow& screen)
 
 void Slider::draw(const DrawParameter& params)
 {
+    if(!isVisible())
+        return;
+
     params.getTarget().draw(*m_spriteBackround);
     params.getTarget().draw(*m_spriteSlider);
 }

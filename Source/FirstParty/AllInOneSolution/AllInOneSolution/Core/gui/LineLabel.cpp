@@ -29,6 +29,9 @@ LineLabel::LineLabel(const std::string& text,
 
 void LineLabel::draw(const DrawParameter& params)
 {
+    if(!isVisible())
+        return;
+
     for(auto it = begin(m_glyphs); it != end(m_glyphs); it++) 
     {
         auto glyph = (*it);
