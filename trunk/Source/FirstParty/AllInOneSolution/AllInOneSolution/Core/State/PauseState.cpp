@@ -36,6 +36,8 @@ void PauseState::onEnter(const EnterStateInformation* enterInformation, const fl
     m_timeDiff = time - info->m_levelTime;
     State::onEnter(enterInformation, time - m_timeDiff);
     m_HUD.restartAt(getCurrentTime());
+
+    m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 }
 
 StateChangeInformation PauseState::update(const float time)
