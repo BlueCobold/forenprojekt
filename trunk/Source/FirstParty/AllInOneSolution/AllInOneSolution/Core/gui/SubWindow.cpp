@@ -88,6 +88,9 @@ void SubWindow::off(const DrawParameter& params)
 
 void SubWindow::draw(const DrawParameter& params)
 {
+    if(!isVisible())
+        return;
+
     params.getTarget().draw(m_windowRect);
     params.getTarget().draw(m_sliderRect);
     params.getTarget().draw(m_positionRect);

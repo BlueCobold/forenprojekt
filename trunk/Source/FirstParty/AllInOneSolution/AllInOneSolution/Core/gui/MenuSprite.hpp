@@ -17,7 +17,6 @@ public:
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text);
 
-    void setVisible(const bool visible);
     virtual void draw(const DrawParameter& params) override;
     virtual void update(const sf::RenderWindow& screen) override;
 
@@ -28,7 +27,6 @@ protected:
 private:
     
     sf::Sprite m_sprite;
-    bool m_visible;
     ToolTip m_toolTip;
     bool m_showToolTip;
 };

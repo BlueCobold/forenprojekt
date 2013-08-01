@@ -74,6 +74,9 @@ void Button::update(const sf::RenderWindow& screen)
 
 void Button::draw(const DrawParameter& params)
 {
+    if(!isVisible())
+        return;
+
     params.getTarget().draw(*m_sprite);
     m_label->draw(params);
 }
@@ -115,9 +118,10 @@ void Button::setToolTipText(const std::string& text)
 
 void Button::drawAdditionalForeground(const DrawParameter& params)
 {
-    if(m_showToolTip)
+    if(m_showToolTip && isVisible())
         m_toolTip.draw(params);
 }
+
 void Button::changeIdleSprite(const sf::Sprite& sprite)
 {
     m_style.idleStyle.sprite = sprite;

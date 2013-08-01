@@ -34,7 +34,8 @@ public:
         m_id(id),
         m_type(type),
         m_position(position),
-        m_offset(offset)
+        m_offset(offset),
+        m_visible(true)
     { }
 
     virtual ~MenuElement()
@@ -50,6 +51,11 @@ public:
             m_position = position;
             onPositionChanged();
         }
+    }
+
+    void setVisible(const bool visible)
+    {
+        m_visible = visible;
     }
 
     void setPosition(const float x, const float y)
@@ -74,6 +80,11 @@ public:
 
 protected:
 
+    bool isVisible() const
+    {
+        return m_visible;
+    }
+
     virtual void onPositionChanged()
     { }
 
@@ -85,6 +96,7 @@ protected:
 private:
 
     int m_id;
+    bool m_visible;
     MenuElementType::Type m_type;
     sf::Vector2f m_position;
     sf::Vector2f m_offset;
