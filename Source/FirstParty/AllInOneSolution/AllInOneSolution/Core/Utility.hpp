@@ -83,6 +83,7 @@ namespace utility
 
     std::string replace(std::string string, std::string replacement);
 
+    sf::View getDefaultView(const sf::RenderTarget& target, const sf::Vector2f viewSize);
     sf::View getDefaultView(const sf::RenderTarget& target, const sf::Vector2u viewSize);
 
     struct Event

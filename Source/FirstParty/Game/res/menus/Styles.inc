@@ -8,7 +8,7 @@
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
 		<pressed texture="GuiElements" srcx="634" srcy="0" width="325" height="66"
-			offsetx="-6" offsety="-6"
+			offsetx="-6" offsety="-6" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
 	</buttonStyle>
 	<checkboxStyle name="default">

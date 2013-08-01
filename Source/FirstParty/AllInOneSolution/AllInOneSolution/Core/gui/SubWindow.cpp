@@ -61,23 +61,24 @@ SubWindow::SubWindow(const sf::Vector2f& position,
 
 void SubWindow::on(const DrawParameter& params)
 {
-    m_orginalView = params.getTarget().getView();
-    sf::View windowView;
-    sf::FloatRect orginalScreenRect = params.getScreenRect();
+    auto orginalScreenRect = params.getTarget().getSize();
     sf::FloatRect windowViewport;
-    windowViewport.left = (m_position.x + m_offset.x) / orginalScreenRect.width;
-    windowViewport.top = (m_position.y + m_offset.y) / orginalScreenRect.height;
-    windowViewport.width = m_size.x / orginalScreenRect.width;
-    windowViewport.height = m_size.y / orginalScreenRect.height;
+    windowViewport.left = (m_position.x + m_offset.x) / (orginalScreenRect.x + 0.2f);
+    windowViewport.top = (m_position.y + m_offset.y) / (orginalScreenRect.y + 0.2f);
+    windowViewport.width = m_size.x / (orginalScreenRect.x + 0.2f);
+    windowViewport.height = m_size.y / (orginalScreenRect.y + 0.2f);
+    sf::View windowView;
     windowView.setViewport(windowViewport);
     windowView.setCenter(m_center);
     windowView.setSize(m_size);
     params.getTarget().setView(windowView);
 }
+
 void SubWindow::off(const DrawParameter& params)
 {
     params.getTarget().setView(m_orginalView);
 }
+
 void SubWindow::draw(const DrawParameter& params)
 {
     params.getTarget().draw(m_windowRect);
@@ -97,6 +98,7 @@ void SubWindow::draw(const DrawParameter& params)
         (*it)->draw(params);
     off(params);    
 }
+
 void SubWindow::update(const sf::RenderWindow& screen)
 {
     sf::IntRect mouseRect(static_cast<sf::Vector2i>(m_windowRect.getPosition()), static_cast<sf::Vector2i>(m_windowRect.getSize()));
@@ -116,7 +118,7 @@ void SubWindow::update(const sf::RenderWindow& screen)
         else
             m_center.y = m_innerPosition.y + m_size.y / 2.f;
     }
-    
+
     if(sliderRect.contains(sf::Mouse::getPosition(screen)) && utility::Mouse.leftButtonDown())
     {
         m_startValue = sf::Mouse::getPosition().y;
@@ -136,6 +138,7 @@ void SubWindow::update(const sf::RenderWindow& screen)
 
     setSliderPosition();
 }
+
 void SubWindow::setOffset(const sf::Vector2f& offset)
 {
     m_offset = offset;
@@ -159,6 +162,7 @@ void SubWindow::setPosition(const sf::Vector2f& position)
     m_positionRect.setPosition(m_position.x + m_offset.x + m_size.x + 2,
                                m_position.y + m_offset.y);
 }
+
 void SubWindow::setInnerPosition(const sf::Vector2f& position)
 {
     m_innerPosition = position;
@@ -226,11 +230,13 @@ float SubWindow::percentToWindowPixels(float percent)
 {
     return static_cast<float>(m_innerHeight - m_size.y) / 100.f * percent;
 }
+
 float SubWindow::sliderPixelToWindowPixel(int pixel)
 {
     float pixelPercent = static_cast<float>(pixel / static_cast<float>(m_sliderRect.getSize().y - m_positionRect.getSize().y));
     return percentToWindowPixels(pixelPercent);
 }
+
 void SubWindow::setSliderPosition()
 {
     float currentPercent = (m_innerPosition.y + m_size.y / 2.f - m_center.y) / (m_innerHeight - m_size.y) ;
