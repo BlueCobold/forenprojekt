@@ -72,7 +72,7 @@ void MenuLoader::parseButtons(
             if(text != nullptr && std::string(text) != "")
                 button.textResourceKey = utility::translateKey(text);
             else
-                    button.textResourceKey = "";
+                button.textResourceKey = "";
 
             auto tooltipAvailable = buttonXml->Attribute("tooltip");
             if(tooltipAvailable != nullptr)
