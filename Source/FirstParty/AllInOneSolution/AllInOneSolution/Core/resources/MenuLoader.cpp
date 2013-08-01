@@ -68,7 +68,11 @@ void MenuLoader::parseButtons(
             button.style = style->second;
             button.position = sf::Vector2f(buttonXml->FloatAttribute("x"), buttonXml->FloatAttribute("y"));
             button.id = buttonXml->IntAttribute("id");
-            button.textResourceKey = buttonXml->Attribute("text");
+            auto text = buttonXml->Attribute("text");
+            if(text != nullptr && std::string(text) != "")
+                button.textResourceKey = utility::translateKey(text);
+            else
+                    button.textResourceKey = "";
 
             auto tooltipAvailable = buttonXml->Attribute("tooltip");
             if(tooltipAvailable != nullptr)
@@ -81,17 +85,17 @@ void MenuLoader::parseButtons(
             }
 
             button.style.idleStyle.label = LineLabel(
-                utility::translateKey(button.textResourceKey), 
+                button.textResourceKey, 
                 button.position, 0, button.style.idleStyle.font, LineLabel::Centered);
             button.style.idleStyle.label.setOffset(button.style.idleStyle.textOffset);
 
             button.style.hoverStyle.label = LineLabel(
-                utility::translateKey(button.textResourceKey), 
+                button.textResourceKey, 
                 button.position, 0, button.style.hoverStyle.font, LineLabel::Centered);
             button.style.hoverStyle.label.setOffset(button.style.hoverStyle.textOffset);
 
             button.style.pressedStyle.label = LineLabel(
-                utility::translateKey(button.textResourceKey), 
+                button.textResourceKey, 
                 button.position, 0, button.style.pressedStyle.font, LineLabel::Centered);
             button.style.pressedStyle.label.setOffset(button.style.pressedStyle.textOffset);
             elements.buttons.push_back(button);
