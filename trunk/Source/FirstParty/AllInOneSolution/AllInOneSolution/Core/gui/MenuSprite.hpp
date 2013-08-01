@@ -17,6 +17,8 @@ public:
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text);
     void setTextureRect(const sf::IntRect& textureRect);
+    void setVisibleWhenId(const int id);
+    const int getVisibleWhenId() const;
 
     virtual void draw(const DrawParameter& params) override;
     virtual void update(const sf::RenderWindow& screen) override;
@@ -30,6 +32,7 @@ private:
     sf::Sprite m_sprite;
     ToolTip m_toolTip;
     bool m_showToolTip;
+    int m_visibleWhenId;
 };
 
 #endif // MENUSPRITE_HPP

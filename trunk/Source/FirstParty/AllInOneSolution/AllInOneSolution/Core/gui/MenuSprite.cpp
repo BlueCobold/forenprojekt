@@ -5,7 +5,8 @@
 MenuSprite::MenuSprite(const sf::Sprite& sprite, const sf::Vector2f& position, const sf::Vector2f& offset, const int id) :
     MenuElement(id, MenuElementType::Image, position, offset),
     m_sprite(sprite),
-    m_showToolTip(false)
+    m_showToolTip(false),
+    m_visibleWhenId(-1)
 {
 }
 
@@ -53,4 +54,14 @@ void MenuSprite::setToolTipText(const std::string& text)
 void MenuSprite::setTextureRect(const sf::IntRect& textureRect)
 {
     m_sprite.setTextureRect(textureRect);
+}
+
+void MenuSprite::setVisibleWhenId(const int id)
+{
+    m_visibleWhenId = id;
+}
+
+const int MenuSprite::getVisibleWhenId() const
+{
+    return m_visibleWhenId;
 }
