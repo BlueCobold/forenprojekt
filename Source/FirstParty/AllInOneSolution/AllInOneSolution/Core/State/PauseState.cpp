@@ -38,6 +38,7 @@ void PauseState::onEnter(const EnterStateInformation* enterInformation, const fl
     m_HUD.restartAt(getCurrentTime());
 
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
+    m_optionStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 }
 
 StateChangeInformation PauseState::update(const float time)
