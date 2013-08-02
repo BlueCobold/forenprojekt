@@ -358,7 +358,7 @@ void Level::killTarget(Entity* target)
     if(!m_timeAttackMode && m_remainingTarget < 1)
         m_levelPass = true;
 
-    int earned = m_normalTargetPoints + m_multiHit * 50;
+    int earned = m_normalTargetPoints + m_multiHit * 50 + m_gravityGoody.getBonusPoints();
     m_points += earned;
     m_multiHit++;
     createLabelAt(target, "green", earned);
@@ -366,7 +366,7 @@ void Level::killTarget(Entity* target)
 void Level::killBonusTarget(Entity* target)
 {
     target->kill();
-    int earned = m_bonusTargetPoints + m_multiHit * 50;
+    int earned = m_bonusTargetPoints + m_multiHit * 50 + m_gravityGoody.getBonusPoints();
     m_points += earned;
     m_multiHit++;
     createLabelAt(target, "green", earned);
