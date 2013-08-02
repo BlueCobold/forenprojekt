@@ -13,7 +13,8 @@ Goody::Goody(const sf::Keyboard::Key key,
     m_durationUntilTime(0),
     m_selected(false),
     m_type(type),
-    m_callback(nullptr)
+    m_callback(nullptr),
+    m_active(false)
 {
 }
 

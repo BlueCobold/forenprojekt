@@ -20,6 +20,7 @@ public:
     void registerForCheckpointChanges(std::function<void()> handler);
 
     void setFieldDimension(const b2Vec2 fieldDimension);
+    void setInvulnerable(const bool value);
     void checkpointReached(const b2Vec2 position);
     bool getBallLost() const;
 
@@ -41,6 +42,7 @@ private:
 
     bool m_lostBall;
     bool m_blownUp;
+    bool m_isInvulnerable;
     const Entity* m_spawnAnimationEntity;
     const Entity* m_killAnimationEntity;
     std::function<void()> m_checkpointHandler;

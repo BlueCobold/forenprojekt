@@ -105,6 +105,8 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     m_extraBallGoody.update(elapsedTime);
     m_extraTimeGoody.update(elapsedTime);
 
+    m_ball->setInvulnerable(m_invulnerableGoody.isActive());
+
     if(!m_levelPass)
         m_levelEndingTime = elapsedTime + 1.0f;
 
