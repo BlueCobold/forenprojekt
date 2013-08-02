@@ -59,7 +59,7 @@ private:
     sf::RenderWindow& m_screen;
     std::function<void(const Button& sender)> m_clickCallback;
 
-    const bool checkVisibleState(const int id) const;
+    void setCorrelation();
 public:
 
     Menu(const MenuTemplate& menuTemplate,
