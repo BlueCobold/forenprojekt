@@ -58,7 +58,7 @@ void GoodyHUD::updateState(const Goody& goody)
     if(charges == -1)
         m_charges.setText(utility::toString("#"));
     else if(charges > 9)
-        m_charges.setText(utility::toString("9+"));
+        m_charges.setText(utility::toString("+"));
     else
         m_charges.setText(utility::toString(goody.getCharges()));
 }
