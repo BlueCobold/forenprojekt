@@ -40,6 +40,7 @@ Menu::Menu(const MenuTemplate& menuTemplate,
     for(auto subWindow = begin(m_template.subWindow); subWindow != end(m_template.subWindow); ++subWindow)
         createSubWindow(*subWindow);
 
+    setCorrelation();
 }
 
 Menu::~Menu()
@@ -128,12 +129,7 @@ void Menu::update(const sf::RenderWindow& screen)
         (*it)->update(screen);
 
     for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
-    {
-        if((*it)->getVisibleWhenId() != -1)
-            (*it)->setVisible(checkVisibleState((*it)->getVisibleWhenId()));
-
         (*it)->update(screen);
-    }
 
     for(auto it = begin(m_subWindow); it != end(m_subWindow); ++it)
         (*it)->update(screen);
@@ -269,31 +265,36 @@ void Menu::changePressedSprite(const int id, const sf::Sprite& sprite)
             button->get()->changePressedSprite(sprite);
 }
 
-const bool Menu::checkVisibleState(const int id) const
+void Menu::setCorrelation()
 {
-    for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
-        if((*it)->getId() == id)
-            return (*it)->isVisible();
+    for(auto sprite = begin(m_sprites); sprite != end(m_sprites); ++sprite)
+    {
+        auto id = (*sprite)->getVisibleWhenId();
+        if(id != -1)
+        {
+            for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
+                if((*it)->getId() == id)
+                    sprite->get()->setVisibleWhenSubject(it->get());
 
-    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
-        if((*it)->getId() == id)
-            return (*it)->isVisible();
+            for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
+                if((*it)->getId() == id)
+                    sprite->get()->setVisibleWhenSubject(it->get());
 
-    for(auto it = begin(m_slider); it != end(m_slider); ++it)
-        if((*it)->getId() == id)
-            return (*it)->isVisible();
+            for(auto it = begin(m_slider); it != end(m_slider); ++it)
+                if((*it)->getId() == id)
+                    sprite->get()->setVisibleWhenSubject(it->get());
 
-    for(auto it = begin(m_labels); it != end(m_labels); ++it)
-        if((*it)->getId() == id)
-            return (*it)->isVisible();
+            for(auto it = begin(m_labels); it != end(m_labels); ++it)
+                if((*it)->getId() == id)
+                    sprite->get()->setVisibleWhenSubject(it->get());
 
-    for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
-        if((*it)->getId() == id)
-            return (*it)->isVisible();
+            for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
+                if((*it)->getId() == id)
+                    sprite->get()->setVisibleWhenSubject(it->get());
 
-    for(auto it = begin(m_subWindow); it != end(m_subWindow); ++it)
-        if((*it)->getId() == id)
-            return (*it)->isVisible();
-
-    return true;
+            for(auto it = begin(m_subWindow); it != end(m_subWindow); ++it)
+                if((*it)->getId() == id)
+                    sprite->get()->setVisibleWhenSubject(it->get());
+        }
+    }
 }
