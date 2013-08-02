@@ -79,11 +79,23 @@ StateChangeInformation LevelSelectState::update(const float time)
     if(m_levelNames.find(m_currentLevelNumber - 1) == end(m_levelNames))
         m_menu.hideLeftButton(true);
     else
+    {
+        sf::Sprite sprite(*getResourceManager().getTexture("GuiElements"), m_textureCoordinates.find(m_currentLevelNumber-1)->second);
+        m_menu.changeIdleSprite(LevelSelectMenu::BUTTON_LEFT, sprite);
+        m_menu.changeHoverSprite(LevelSelectMenu::BUTTON_LEFT, sprite);
+        m_menu.changePressedSprite(LevelSelectMenu::BUTTON_LEFT, sprite);
         m_menu.hideLeftButton(false);
+    }
     if(m_levelNames.find(m_currentLevelNumber + 1) == end(m_levelNames))
         m_menu.hideRightButton(true);
     else
+    {
+        sf::Sprite sprite(*getResourceManager().getTexture("GuiElements"), m_textureCoordinates.find(m_currentLevelNumber+1)->second);
+        m_menu.changeIdleSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
+        m_menu.changeHoverSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
+        m_menu.changePressedSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
         m_menu.hideRightButton(false);
+    }
 
     return StateChangeInformation::Empty();
 }

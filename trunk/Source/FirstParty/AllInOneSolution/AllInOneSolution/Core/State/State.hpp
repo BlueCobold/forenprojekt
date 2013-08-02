@@ -102,11 +102,16 @@ protected:
         return m_currentTime - m_enterTime;
     }
 
+    ResourceManager& getResourceManager() const
+    {
+        return m_resourceManager;
+    }
+
     sf::RenderWindow& m_screen;
-    ResourceManager& m_resourceManager;
     AppConfig& m_config;
 
 private:
+    ResourceManager& m_resourceManager;
     bool m_pause;
     float m_enterTime;
     float m_pauseStart;
