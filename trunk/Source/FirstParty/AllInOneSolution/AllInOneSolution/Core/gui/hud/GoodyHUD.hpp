@@ -28,8 +28,8 @@ public:
     void updateState(const Goody& goody);
 private:
     static const int Deselected = 0;
-    static const int Active = 1;
-    static const int Selected = 2;
+    static const int Selected = 1;
+    static const int Active = 2;
     static const int Disabled = 3;
     static const int DisabledSelected = 4;
 

@@ -1,18 +1,18 @@
 <bitmapfont>
-	<image name="bitmapfontGoody" />
-	<height value="9" />
+	<image name="goodie" />
+	<height value="18" />
 	<glyphs>
-		<glyph name="0" x="104" y="1" width="6" />
-		<glyph name="1" x="2" y="1" width="6" />
-		<glyph name="2" x="11" y="1" width="6" />
-		<glyph name="3" x="20" y="1" width="6" />
-		<glyph name="4" x="29" y="1" width="6" />
-		<glyph name="5" x="38" y="1" width="6" />
-		<glyph name="6" x="47" y="1" width="6" />
-		<glyph name="7" x="56" y="1" width="6" />
-		<glyph name="8" x="65" y="1" width="6" />
-		<glyph name="9" x="74" y="1" width="6" />
-		<glyph name="+" x="83" y="1" width="6" />
-		<glyph name="#" x="92" y="1" width="10" />
+		<glyph name="0" x="224" y="0" width="18" />
+		<glyph name="1" x="242" y="0" width="18" />
+		<glyph name="2" x="260" y="0" width="18" />
+		<glyph name="3" x="224" y="18" width="18" />
+		<glyph name="4" x="242" y="18" width="18" />
+		<glyph name="5" x="260" y="18" width="18" />
+		<glyph name="6" x="224" y="36" width="18" />
+		<glyph name="7" x="242" y="36" width="18" />
+		<glyph name="8" x="260" y="36" width="18" />
+		<glyph name="9" x="224" y="54" width="18" />
+		<glyph name="+" x="242" y="54" width="18" />
+		<glyph name="#" x="260" y="54" width="18" />
 	</glyphs>
 </bitmapfont>
