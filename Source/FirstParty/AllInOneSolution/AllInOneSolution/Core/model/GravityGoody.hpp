@@ -11,6 +11,8 @@ class GravityGoody : public Goody
 private:
     float m_gravityFactor;
     float m_currentFactor;
+    float m_activeStartTime;
+    float m_activeTime;
     b2Vec2& m_currentGravity;
 
 public:
@@ -19,6 +21,8 @@ public:
     virtual void update(const float elapsedTime) override;
 
     b2Vec2 getGravity() const;
+
+    const int getBonusPoints() const;
 };
 
 #endif // GRAVITYGOODY_HPP
