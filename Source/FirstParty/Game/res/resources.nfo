@@ -33,7 +33,6 @@
 	<texture name="tooltip" path="gui/tooltip.png" smooth="true" />
 	<texture name="goodie" path="gui/Goodies.png" smooth="true" />
 	<texture name="coins" path="gui/coins.png" smooth="true" />
-	<texture name="bitmapfontGoody" path="bitmapfonts/GoodyFont.png" smooth="true" />
 </textures>
 <fonts>
 	<font name="visitor" path="visitor.ttf" />
