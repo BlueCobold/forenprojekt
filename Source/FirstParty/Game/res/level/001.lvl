@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Beginner Level">
-		<infoimage scrx="0" scry="280" width="192" height="108" />
+		<infoimage scrx="526" scry="287" width="192" height="108" />
 	</levelinfo>
 	<constants gate="0" gatetime="0"/>
 	<templates>

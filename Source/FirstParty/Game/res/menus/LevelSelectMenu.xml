@@ -5,8 +5,28 @@
 	<elements>
 		<button id="0" text="gui_show_details" style="default" x="261" y="215" />
 		<button id="1" text="gui_mainmenu" style="default" x="261" y="270" />
-		<image id="2" texture="GuiElements" x="159" y="100" scrx="0" scry="280" width="192" height="108"/>
-		<button id="3" style="default" x="-100" y="154" />
-		<button id="4" style="default" x="625" y="154" />
+		<image id="2" texture="GuiElements" x="159" y="102" scrx="526" scry="287" width="192" height="108"/>
+		<button id="3" style="selectLevel" x="-9" y="101" />
+		<button id="4" style="selectLevel" x="519" y="101" />
+		<image id="5" texture="GuiElements" x="155" y="99" scrx="962" scry="104" width="20" height="119"/>
+		<image id="6" texture="GuiElements" x="175" y="99" scrx="718" scry="311" width="163" height="19"/>
+		<image id="7" texture="GuiElements" x="338" y="99" scrx="982" scry="136" width="20" height="119"/>
+		<image id="8" texture="GuiElements" x="175" y="207" scrx="704" scry="257" width="163" height="19"/>
+		
+		<image id="9" visibleWhen="3" texture="GuiElements" x="-93" y="67" scrx="38" scry="276" width="148" height="36"/>
+		<image id="10" visibleWhen="3" texture="GuiElements" x="-93" y="209" scrx="868" scry="257" width="150" height="54"/>
+		<image id="11" visibleWhen="3" texture="GuiElements" x="-131" y="80" scrx="0" scry="276" width="38" height="158"/>
+		<image id="12" visibleWhen="3" texture="GuiElements" x="-109" y="99" scrx="962" scry="104" width="20" height="119"/>
+		<image id="13" visibleWhen="3" texture="GuiElements" x="-89" y="99" scrx="718" scry="311" width="163" height="19"/>
+		<image id="14" visibleWhen="3" texture="GuiElements" x="74" y="99" scrx="982" scry="136" width="20" height="119"/>
+		<image id="15" visibleWhen="3" texture="GuiElements" x="-89" y="207" scrx="704" scry="257" width="163" height="19"/>
+		
+		<image id="16" visibleWhen="4" texture="GuiElements" x="455" y="45" scrx="390" scry="284" width="136" height="58"/>
+		<image id="17" visibleWhen="4" texture="GuiElements" x="591" y="45" scrx="322" scry="284" width="68" height="200"/>
+		<image id="18" visibleWhen="4" texture="GuiElements" x="456" y="209" scrx="186" scry="276" width="136" height="37"/>
+		<image id="19" visibleWhen="4" texture="GuiElements" x="419" y="99" scrx="962" scry="104" width="20" height="119"/>
+		<image id="20" visibleWhen="4" texture="GuiElements" x="439" y="99" scrx="718" scry="311" width="163" height="19"/>
+		<image id="21" visibleWhen="4" texture="GuiElements" x="602" y="99" scrx="982" scry="136" width="20" height="119"/>
+		<image id="22" visibleWhen="4" texture="GuiElements" x="439" y="207" scrx="704" scry="257" width="163" height="19"/>
 	</elements>
 </menu>

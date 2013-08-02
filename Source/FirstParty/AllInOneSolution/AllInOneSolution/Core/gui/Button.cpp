@@ -124,15 +124,21 @@ void Button::drawAdditionalForeground(const DrawParameter& params)
 
 void Button::changeIdleSprite(const sf::Sprite& sprite)
 {
-    m_style.idleStyle.sprite = sprite;
+    sf::Sprite s(sprite);
+    s.setPosition(m_style.idleStyle.sprite.getPosition());
+    m_style.idleStyle.sprite = s;
 }
 
 void Button::changeHoverSprite(const sf::Sprite& sprite)
 {
-    m_style.hoverStyle.sprite = sprite;
+    sf::Sprite s(sprite);
+    s.setPosition(m_style.hoverStyle.sprite.getPosition());
+    m_style.hoverStyle.sprite = s;
 }
 
 void Button::changePressedSprite(const sf::Sprite& sprite)
 {
-    m_style.pressedStyle.sprite = sprite;
+    sf::Sprite s(sprite);
+    s.setPosition(m_style.pressedStyle.sprite.getPosition());
+    m_style.pressedStyle.sprite = s;
 }

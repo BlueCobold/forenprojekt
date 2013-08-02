@@ -11,6 +11,18 @@
 			offsetx="-6" offsety="-6" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
 	</buttonStyle>
+	<buttonStyle name="selectLevel">
+		<mouseRect left="0" top="0" width="192" height="108" />
+		<idle texture="GuiElements" srcx="0" srcy="0" width="192" height="108"
+			offsetx="0" offsety="0"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="0" />
+		<hover texture="GuiElements" srcx="0" srcy="0" width="192" height="108"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
+		<pressed texture="GuiElements" srcx="0" srcy="0" width="192" height="108"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
+	</buttonStyle>
 	<checkboxStyle name="default">
 		<mouseRect left="1" top="5" width="27" height="27" />
 		<unchecked texture="GuiElements" srcx="704" srcy="66" width="38" height="37"
