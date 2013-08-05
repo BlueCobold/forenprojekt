@@ -34,7 +34,9 @@ public:
         m_type(type),
         m_position(position),
         m_offset(offset),
-        m_visible(true)
+        m_visible(true),
+        m_visibleWhen(nullptr),
+        m_masterId(-1)
     { }
 
     virtual ~MenuElement()
@@ -79,7 +81,22 @@ public:
 
     bool isVisible() const
     {
-        return m_visible;
+        return m_visible && (m_visibleWhen == nullptr || m_visibleWhen->isVisible());
+    }
+
+    void setVisibleWhenId(const int id)
+    {
+        m_masterId = id;
+    }
+
+    int getVisibleWhenId() const
+    {
+        return m_masterId;
+    }
+
+    void setVisibleWhenSubject(const MenuElement* subject)
+    {
+        m_visibleWhen = subject;
     }
 
 protected:
@@ -96,6 +113,8 @@ private:
 
     int m_id;
     bool m_visible;
+    int m_masterId;
+    const MenuElement* m_visibleWhen;
     MenuElementType::Type m_type;
     sf::Vector2f m_position;
     sf::Vector2f m_offset;

@@ -9,6 +9,7 @@
 #include "../gui/Menu.hpp"
 #include "../Input.hpp"
 #include "../rendering/DrawParameter.hpp"
+#include "../Utility.hpp"
 
 SubWindow::SubWindow(const sf::Vector2f& position,
                      const sf::Vector2f& size,
@@ -66,6 +67,7 @@ SubWindow::SubWindow(const sf::Vector2f& position,
 
 void SubWindow::on(const DrawParameter& params)
 {
+    m_orginalView = params.getTarget().getView();
     auto position = getPosition();
     auto offset = getOffset();
     auto orginalScreenRect = params.getTarget().getSize();

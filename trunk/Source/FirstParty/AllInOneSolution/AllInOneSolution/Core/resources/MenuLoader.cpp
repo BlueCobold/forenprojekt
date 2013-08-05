@@ -225,6 +225,7 @@ void MenuLoader::parseSubWindow(MenuTemplate& menu,
         {
             MenuElements ownElements;
             SubWindowInfo subWindowInfo;
+            subWindowInfo.id = subXml->IntAttribute("id");
             subWindowInfo.position = sf::Vector2f(subXml->FloatAttribute("x"), subXml->FloatAttribute("y"));
             subWindowInfo.size = sf::Vector2f(subXml->FloatAttribute("sizex"), subXml->FloatAttribute("sizey"));
             subWindowInfo.innerHeight = subXml->IntAttribute("innerheight");
