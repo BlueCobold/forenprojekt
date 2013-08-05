@@ -4,13 +4,35 @@
 	<styles source="Styles.inc"/>
 	<elements>
 		<button id="0" text="gui_close" style="default" x="261" y="270" />
-		<subwindow x="80" y="100" sizex="340" sizey="150" innerheight="300" virtualx="0" virtualy="90">
+		<subwindow id="1" x="80" y="108" sizex="340" sizey="150" innerheight="700" virtualx="0" virtualy="90">
 			<elements>
-				<label text="gui_core_member" font="buttonIdleFont" aligment="1" x="170" y="100" />
-				<label text="bc" font="buttonHoverFont" aligment="1" x="170" y="140" />
-				<label text="dp" font="buttonHoverFont" aligment="1" x="170" y="175" />
-				<label text="ko" font="buttonHoverFont" aligment="1" x="170" y="210" />
+				<label text="gui_team_lead" font="buttonIdleFont" aligment="1" x="170" y="100" />
+				<label text="gui_design" font="buttonIdleFont" aligment="1" x="170" y="140" />
+				<label text="gui_graphics" font="buttonIdleFont" aligment="1" x="170" y="180" />
+				<label text="bc" font="buttonHoverFont" aligment="1" x="170" y="220" />
+				
+				<label text="gui_core_code" font="buttonIdleFont" aligment="1" x="170" y="280" />
+				<label text="bc" font="buttonHoverFont" aligment="1" x="170" y="320" />
+				<label text="ko" font="buttonHoverFont" aligment="1" x="170" y="360" />
+				
+				<label text="gui_more_code" font="buttonIdleFont" aligment="1" x="170" y="420" />
+				<label text="ae" font="buttonHoverFont" aligment="1" x="170" y="460" />
+				<label text="dp" font="buttonHoverFont" aligment="1" x="170" y="500" />
+				<label text="ed" font="buttonHoverFont" aligment="1" x="170" y="540" />
+				<label text="ex" font="buttonHoverFont" aligment="1" x="170" y="580" />
+				<label text="ft" font="buttonHoverFont" aligment="1" x="170" y="620" />
+				<label text="mi" font="buttonHoverFont" aligment="1" x="170" y="660" />
+				<label text="tr" font="buttonHoverFont" aligment="1" x="170" y="700" />
+				<label text="ya" font="buttonHoverFont" aligment="1" x="170" y="740" />
 			</elements>
 		</subwindow>
+		<image id="2" texture="GuiElements" x="76" y="105" scrx="962" scry="104" width="20" height="100"/>
+		<image id="3" texture="GuiElements" x="76" y="205" scrx="962" scry="163" width="20" height="60"/>
+		<image id="4" texture="GuiElements" x="96" y="105" scrx="718" scry="311" width="163" height="19"/>
+		<image id="5" texture="GuiElements" x="259" y="105" scrx="718" scry="311" width="163" height="19"/>
+		<image id="6" texture="GuiElements" x="422" y="105" scrx="982" scry="136" width="20" height="100"/>
+		<image id="7" texture="GuiElements" x="422" y="205" scrx="982" scry="195" width="20" height="60"/>
+		<image id="8" texture="GuiElements" x="96" y="254" scrx="704" scry="257" width="163" height="19"/>
+		<image id="9" texture="GuiElements" x="259" y="254" scrx="704" scry="257" width="163" height="19"/>
 	</elements>
 </menu>
