@@ -9,6 +9,6 @@
 		<label id="3" text="gui_balls" font="buttonHoverFont" aligment="2" x="440" y="100" />
 		<label id="4" text="gui_time" font="buttonHoverFont" aligment="0" x="70" y="140" />
 		<label id="5" text="gui_time" font="buttonHoverFont" aligment="2" x="440" y="140" />
-		<image id="6" tooltip="default" tooltiptext="tooltip_coins" texture="coins" x="70" y="-25" scrx="0" scry="0" width="55" height="56"/>
+		<image id="6" tooltip="default" tooltiptext="tooltip_coins" texture="GuiElements" x="59" y="-21" scrx="230" scry="484" width="116" height="61"/>
 	</elements>
 </menu>
