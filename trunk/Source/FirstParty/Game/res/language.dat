@@ -74,26 +74,29 @@ gui_select_level = Select Level
 gui_option = Options
 gui_credit = Credits
 gui_close = Close
-gui_optin_menu = Option Menu
-gui_label_fullscreen = fullscreen
-gui_label_mastervolumen = mastervolumen
-gui_core_member = CORE MEMBER
+gui_optin_menu = Options
+gui_label_fullscreen = Fullscreen
+gui_label_mastervolumen = Mastervolume
 gui_score = Score
 gui_start = Start
 gui_levelname = Levelname
 gui_balls = Balls available:
 gui_time = Time:
 gui_unlimited = %
-gui_ball_lost = Balls lost:
+gui_ball_lost = Balls Lost:
 gui_mainmenu = Main Menu
 gui_restart = Restart Level
 gui_show_details = Show Details
-gui_levelselect = Select Level 
+gui_levelselect = Select Level
+gui_core_code = Core Code
+gui_team_lead = Team Leader
+gui_design = Game Design
+gui_graphics = Graphics
+gui_more_code = Additional Code
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
-tooltip_start_game = start a new level.
-tooltip_coins = you currently have % coins
+tooltip_coins = you currently have % coins.
 
 [Levels]
 levelBlocked1 = blocked
@@ -101,6 +104,13 @@ levelBlocked2 = wrong color
 levelBlocked3 = not allowed
 
 []
+ae = Aeqwa
 bc = Blue Cobold
-dp = default player
+dp = Default Player
+ed = EuadeLuxe
+ex = Expl0it3r
+ft = ftb
 ko = Koschi
+mi = Michi95
+tr = TrommlBomml
+ya = Yannic
