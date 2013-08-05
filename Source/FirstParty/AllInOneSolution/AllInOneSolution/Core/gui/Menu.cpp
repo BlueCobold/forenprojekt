@@ -6,8 +6,9 @@
 #include "MenuSprite.hpp"
 #include "Slider.hpp"
 #include "SubWindow.hpp"
-
 #include "../resources/ResourceManager.hpp"
+
+#include <algorithm>
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
@@ -41,6 +42,11 @@ Menu::Menu(const MenuTemplate& menuTemplate,
         createSubWindow(*subWindow);
 
     setCorrelation();
+    std::sort(m_elements.begin(), m_elements.end(), 
+        [](const std::unique_ptr<MenuElement>& a, const std::unique_ptr<MenuElement>& b) -> bool
+    { 
+        return a->getId() < b->getId(); 
+    });
 }
 
 Menu::~Menu()
@@ -61,23 +67,8 @@ void Menu::setPosition(const sf::Vector2f& position)
     m_position = position;
 
     m_template.background.setPosition(m_position);
-
-    for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
-        (*it)->setPosition(m_position);
-
-    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
-        (*it)->setPosition(m_position);
-
-    for(auto it = begin(m_slider); it != end(m_slider); ++it)
-        (*it)->setPosition(m_position);
-
-    for(auto it = begin(m_labels); it != end(m_labels); ++it)
-        (*it)->setPosition(m_position);
-
-    for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
-        (*it)->setPosition(m_position);
-
-    for(auto it = begin(m_subWindow); it != end(m_subWindow); ++it)
+    
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
         (*it)->setPosition(m_position);
 }
 
@@ -90,27 +81,9 @@ void Menu::draw(const DrawParameter& params)
 {
     params.getTarget().draw(m_template.background);
     drawAdditionalBackground(params);
-
-    for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
+    
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
         (*it)->draw(params);
-
-    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
-        (*it)->draw(params);
-
-    for(auto it = begin(m_slider); it != end(m_slider); ++it)
-        (*it)->draw(params);
-
-    for(auto it = begin(m_labels); it != end(m_labels); ++it)
-        (*it)->draw(params);
-
-    for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
-        (*it)->draw(params);
-
-    for(auto it = begin(m_subWindow); it != end(m_subWindow); ++it)
-        (*it)->draw(params);
-
-    for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
-        (*it)->drawAdditionalForeground(params);
 }
 
 void Menu::drawAdditionalBackground(const DrawParameter& params)
@@ -119,19 +92,7 @@ void Menu::drawAdditionalBackground(const DrawParameter& params)
 
 void Menu::update(const sf::RenderWindow& screen)
 {
-    for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
-        (*it)->update(screen);
-
-    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
-        (*it)->update(screen);
-
-    for(auto it = begin(m_slider); it != end(m_slider); ++it)
-        (*it)->update(screen);
-
-    for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
-        (*it)->update(screen);
-
-    for(auto it = begin(m_subWindow); it != end(m_subWindow); ++it)
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
         (*it)->update(screen);
 }
 
@@ -146,43 +107,37 @@ void Menu::createButton(const ButtonInfo& info)
     });
 
     button->setToolTip(info.toolTip);
-
-    m_buttons.push_back(std::move(button));
+    m_elements.push_back(std::move(button));
 }
 
 void Menu::createCheckBox(const CheckBoxInfo& info)
 {
     std::unique_ptr<CheckBox> checkbox(new CheckBox(info.id, info.style, m_position, info.position));
-
-    m_checkBoxes.push_back(std::move(checkbox));
+    m_elements.push_back(std::move(checkbox));
 }
 
 void Menu::createSlider(const SliderInfo& info)
 {
     std::unique_ptr<Slider> slider(new Slider(info.id, info.style, m_position, info.position));
-
-    m_slider.push_back(std::move(slider));
+    m_elements.push_back(std::move(slider));
 }
 
 void Menu::createLabel(const LineLabel& info)
 {
     std::unique_ptr<LineLabel> label(new LineLabel(info));
-
-    m_labels.push_back(std::move(label));
+    m_elements.push_back(std::move(label));
 }
 
 void Menu::createSprite(const MenuSprite& info)
 {
     std::unique_ptr<MenuSprite> sprite(new MenuSprite(info));
-
-    m_sprites.push_back(std::move(sprite));
+    m_elements.push_back(std::move(sprite));
 }
 
 void Menu::createSubWindow(const SubWindowInfo& info)
 {
     std::unique_ptr<SubWindow> subWindow(new SubWindow(m_position, info.size, info.virtualPosition, info.position, info.innerHeight, info.menuElements));
-
-    m_subWindow.push_back(std::move(subWindow));
+    m_elements.push_back(std::move(subWindow));
 }
 
 void Menu::registerOnClick(std::function<void(const Button& sender)> callback)
@@ -192,23 +147,24 @@ void Menu::registerOnClick(std::function<void(const Button& sender)> callback)
 
 CheckBox& Menu::getCheckboxes(int id)
 {
-    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
     {
-        if(it->get()->getId() == id)
-            return *it->get();
+        if(it->get()->getType() == MenuElementType::CheckBox && it->get()->getId() == id)
+            return *dynamic_cast<CheckBox*>(it->get());
     }
     throw std::runtime_error(utility::replace(utility::translateKey("CheckboxId"), utility::toString(id)));
 }
 
 Slider& Menu::getSlider(int id)
 {
-    for(auto it = begin(m_slider); it != end(m_slider); ++it)
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
     {
-        if(it->get()->getId() == id)
-            return *it->get();
+        if(it->get()->getType() == MenuElementType::Slider && it->get()->getId() == id)
+            return *dynamic_cast<Slider*>(it->get());
     }
     throw std::runtime_error(utility::replace(utility::translateKey("sliderID"), utility::toString(id)));
 }
+
 sf::RenderWindow& Menu::getRenderWindow()
 {
     return m_screen;
@@ -216,85 +172,68 @@ sf::RenderWindow& Menu::getRenderWindow()
 
 LineLabel& Menu::getLabel(int id)
 {
-    for(auto it = begin(m_labels); it != end(m_labels); ++it)
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
     {
-        if(it->get()->getId() == id)
-            return *it->get();
+        if(it->get()->getType() == MenuElementType::Label && it->get()->getId() == id)
+            return *dynamic_cast<LineLabel*>(it->get());
     }
     throw std::runtime_error(utility::replace(utility::translateKey("LineLabelId"), utility::toString(id)));
 }
 
 MenuSprite& Menu::getSprite(int id)
 {
-    for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
     {
-        if(it->get()->getId() == id)
-            return *it->get();
+        if(it->get()->getType() == MenuElementType::Image && it->get()->getId() == id)
+            return *dynamic_cast<MenuSprite*>(it->get());
     }
     throw std::runtime_error(utility::replace(utility::translateKey("MenuSpriteId"), utility::toString(id)));
 }
 
 Button& Menu::getButton(int id)
 {
-    for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
     {
-        if(it->get()->getId() == id)
-            return *it->get();
+        if(it->get()->getType() == MenuElementType::Button && it->get()->getId() == id)
+            return *dynamic_cast<Button*>(it->get());
     }
     throw std::runtime_error(utility::replace(utility::translateKey("ButtonId"), utility::toString(id)));
 }
 
 void Menu::changeIdleSprite(const int id, const sf::Sprite& sprite)
 {
-    for(auto button = begin(m_buttons); button != end(m_buttons); ++button)
-        if(button->get()->getId() == id)
-            button->get()->changeIdleSprite(sprite);
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
+        if((*it)->getType() == MenuElementType::Button && (*it)->getId() == id)
+            dynamic_cast<Button*>(it->get())->changeIdleSprite(sprite);
 }
 
 void Menu::changeHoverSprite(const int id, const sf::Sprite& sprite)
 {
-    for(auto button = begin(m_buttons); button != end(m_buttons); ++button)
-        if(button->get()->getId() == id)
-            button->get()->changeHoverSprite(sprite);
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
+        if((*it)->getType() == MenuElementType::Button && (*it)->getId() == id)
+            dynamic_cast<Button*>(it->get())->changeHoverSprite(sprite);
 }
 
 void Menu::changePressedSprite(const int id, const sf::Sprite& sprite)
 {
-    for(auto button = begin(m_buttons); button != end(m_buttons); ++button)
-        if(button->get()->getId() == id)
-            button->get()->changePressedSprite(sprite);
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
+        if((*it)->getType() == MenuElementType::Button && (*it)->getId() == id)
+            dynamic_cast<Button*>(it->get())->changePressedSprite(sprite);
 }
 
 void Menu::setCorrelation()
 {
-    for(auto sprite = begin(m_sprites); sprite != end(m_sprites); ++sprite)
+    for(auto s = begin(m_elements); s != end(m_elements); ++s)
     {
-        auto id = (*sprite)->getVisibleWhenId();
-        if(id != -1)
-        {
-            for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
-                if((*it)->getId() == id)
-                    sprite->get()->setVisibleWhenSubject(it->get());
+        if ((*s)->getType() != MenuElementType::Image)
+            continue;
+        auto sprite = dynamic_cast<MenuSprite*>(s->get());
+        auto id = sprite->getVisibleWhenId();
+        if(id == -1 || sprite->getId() == id)
+            continue;
 
-            for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
-                if((*it)->getId() == id)
-                    sprite->get()->setVisibleWhenSubject(it->get());
-
-            for(auto it = begin(m_slider); it != end(m_slider); ++it)
-                if((*it)->getId() == id)
-                    sprite->get()->setVisibleWhenSubject(it->get());
-
-            for(auto it = begin(m_labels); it != end(m_labels); ++it)
-                if((*it)->getId() == id)
-                    sprite->get()->setVisibleWhenSubject(it->get());
-
-            for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
-                if((*it)->getId() == id)
-                    sprite->get()->setVisibleWhenSubject(it->get());
-
-            for(auto it = begin(m_subWindow); it != end(m_subWindow); ++it)
-                if((*it)->getId() == id)
-                    sprite->get()->setVisibleWhenSubject(it->get());
-        }
+        for(auto it = begin(m_elements); it != end(m_elements); ++it)
+            if((*it)->getId() == id)
+                sprite->setVisibleWhenSubject(it->get());
     }
 }

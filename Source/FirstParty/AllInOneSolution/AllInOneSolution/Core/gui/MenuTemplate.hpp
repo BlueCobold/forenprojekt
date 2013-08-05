@@ -29,7 +29,7 @@ public:
 struct CheckBoxInfo
 {
     CheckBoxStyle style;
-    sf::Vector2f position;;
+    sf::Vector2f position;
     int id;
 };
 
@@ -56,6 +56,7 @@ struct SubWindowInfo
     sf::Vector2f size;
     sf::Vector2f virtualPosition;
     int innerHeight;
+    int id;
 };
 
 struct MenuTemplate

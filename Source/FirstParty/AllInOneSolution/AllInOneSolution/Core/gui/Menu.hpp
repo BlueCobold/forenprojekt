@@ -48,18 +48,14 @@ protected:
 private:
 
     MenuTemplate m_template;
-    std::vector<std::unique_ptr<Button>> m_buttons;
-    std::vector<std::unique_ptr<LineLabel>> m_labels;
-    std::vector<std::unique_ptr<MenuSprite>> m_sprites;
-    std::vector<std::unique_ptr<CheckBox>> m_checkBoxes;
-    std::vector<std::unique_ptr<Slider>> m_slider;
-    std::vector<std::unique_ptr<SubWindow>> m_subWindow;
+    std::vector<std::unique_ptr<MenuElement>> m_elements;
     sf::Vector2i m_size;
     sf::Vector2f m_position;
     sf::RenderWindow& m_screen;
     std::function<void(const Button& sender)> m_clickCallback;
 
     void setCorrelation();
+
 public:
 
     Menu(const MenuTemplate& menuTemplate,

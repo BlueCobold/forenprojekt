@@ -31,9 +31,6 @@ void MenuSprite::onPositionChanged()
 
 void MenuSprite::update(const sf::RenderWindow& screen)
 {
-    if(m_visibleWhen.id != -1)
-        this->setVisible(m_visibleWhen.subject->isVisible());
-
     sf::IntRect rect = sf::IntRect(static_cast<int>(m_sprite.getPosition().x),
                                    static_cast<int>(m_sprite.getPosition().y),
                                    m_sprite.getTextureRect().width,
@@ -53,22 +50,8 @@ void MenuSprite::setToolTipText(const std::string& text)
 {
     m_toolTip.setText(text);
 }
+
 void MenuSprite::setTextureRect(const sf::IntRect& textureRect)
 {
     m_sprite.setTextureRect(textureRect);
-}
-
-void MenuSprite::setVisibleWhenId(const int id)
-{
-    m_visibleWhen.id = id;
-}
-
-int MenuSprite::getVisibleWhenId() const
-{
-    return  m_visibleWhen.id;
-}
-
-void MenuSprite::setVisibleWhenSubject(const MenuElement* subject)
-{
-    m_visibleWhen.subject = subject;
 }

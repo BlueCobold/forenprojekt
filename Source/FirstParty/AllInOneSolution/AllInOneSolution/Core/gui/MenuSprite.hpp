@@ -17,9 +17,6 @@ public:
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text);
     void setTextureRect(const sf::IntRect& textureRect);
-    void setVisibleWhenId(const int id);
-    int getVisibleWhenId() const;
-    void setVisibleWhenSubject(const MenuElement* subject);
 
     virtual void draw(const DrawParameter& params) override;
     virtual void update(const sf::RenderWindow& screen) override;
@@ -33,16 +30,6 @@ private:
     sf::Sprite m_sprite;
     ToolTip m_toolTip;
     bool m_showToolTip;
-
-    struct Correlation
-    {
-        Correlation() : id(-1), subject(nullptr)
-        {}
-        int id;
-        const MenuElement* subject;
-    };
-
-    Correlation m_visibleWhen;
 };
 
 #endif // MENUSPRITE_HPP
