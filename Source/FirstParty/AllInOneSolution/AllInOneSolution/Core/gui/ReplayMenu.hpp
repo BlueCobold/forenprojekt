@@ -10,13 +10,14 @@ class ReplayMenu : public CaptionMenu
 public:
 
     static const int BUTTON_PLAY_AGAIN = 0;
-    static const int LABEL_POINTS = 1;
-    static const int SPRITE_SYMBOL_NONE = 3;
-    static const int SPRITE_SYMBOL_BRONCE = 4;
-    static const int SPRITE_SYMBOL_SILVER = 5;
-    static const int SPRITE_SYMBOL_GOLD = 6;
-    static const int LABEL_LOSTBALLS = 7;
-    static const int BUTTON_MAIN_MENU = 9;
+    static const int BUTTON_PLAY_NEXT = 1;
+    static const int BUTTON_MAIN_MENU = 2;
+    static const int SPRITE_SYMBOL_NONE = 14;
+    static const int SPRITE_SYMBOL_BRONCE = 15;
+    static const int SPRITE_SYMBOL_SILVER = 16;
+    static const int SPRITE_SYMBOL_GOLD = 17;
+    static const int LABEL_POINTS = 10;
+    static const int LABEL_LOSTBALLS = 12;
 
     ReplayMenu(const sf::Vector2f& position,
                sf::RenderWindow& screen,

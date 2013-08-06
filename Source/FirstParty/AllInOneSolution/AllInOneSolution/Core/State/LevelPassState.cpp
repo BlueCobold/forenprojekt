@@ -59,6 +59,8 @@ StateChangeInformation LevelPassState::update(const float time)
 
     m_HUD.update(m_level, getCurrentTime());
 
+    m_menu.getButton(ReplayMenu::BUTTON_PLAY_NEXT).setVisible(m_playStateInfo.m_levelNumber < 7);
+
     int clicked = -1;
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
     m_menu.update(m_screen);
@@ -69,6 +71,15 @@ StateChangeInformation LevelPassState::update(const float time)
         m_playStateInfo.m_level = m_level;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+    }
+    else if(clicked == ReplayMenu::BUTTON_PLAY_NEXT)
+    {
+        m_stateInfo.m_level = nullptr;
+        m_stateInfo.m_prepareOnly = false;
+        m_stateInfo.m_levelNumber = m_playStateInfo.m_levelNumber + 1;
+        m_transitionStateInfo.m_followingState = LoadLevelStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == ReplayMenu::BUTTON_MAIN_MENU)

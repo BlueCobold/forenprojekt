@@ -11,6 +11,18 @@
 			offsetx="-6" offsety="-6" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
 	</buttonStyle>
+	<buttonStyle name="small">
+		<mouseRect left="2" top="2" width="141" height="46" />
+		<idle texture="GuiElements" srcx="0" srcy="529" width="152" height="58"
+			offsetx="0" offsety="0"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
+		<hover texture="GuiElements" srcx="346" srcy="503" width="152" height="58"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
+		<pressed texture="GuiElements" srcx="152" srcy="545" width="160" height="66"
+			offsetx="-6" offsety="-6" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
+	</buttonStyle>
 	<buttonStyle name="selectLevel">
 		<mouseRect left="0" top="0" width="192" height="108" />
 		<idle texture="GuiElements" srcx="0" srcy="0" width="192" height="108"
