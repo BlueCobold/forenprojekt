@@ -19,7 +19,7 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
     m_masterVolume = m_config.get<float>("MasterVolume");
     sf::Listener::setGlobalVolume(m_masterVolume);
 
-    Menu::getCheckboxes(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
+    Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
     Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
 }
@@ -27,7 +27,7 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
 void OptionMenu::applyChanges()
 {
 
-    if(Menu::getCheckboxes(CHECKBOX_FULLSCREEN).getChecked() != m_fullScreen)
+    if(Menu::getCheckbox(CHECKBOX_FULLSCREEN).getChecked() != m_fullScreen)
     {
         sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
         adjustVideoMode(videoMode, !m_fullScreen);
@@ -94,7 +94,7 @@ void OptionMenu::onEnter()
     m_masterVolume = m_config.get<float>("MasterVolume");
     sf::Listener::setGlobalVolume(m_masterVolume);
 
-    Menu::getCheckboxes(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
+    Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
     Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
 }

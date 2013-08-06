@@ -18,6 +18,7 @@ SubWindow::SubWindow(const sf::Vector2f& position,
                      const int innerHeight,
                      const MenuElements& elements) :
     MenuElement(-1, MenuElementType::SubWindow, position, offset),
+    m_panel(elements, position),
     m_size(size),
     m_innerHeight(innerHeight),
     m_innerPosition(innerPosition),
@@ -48,21 +49,6 @@ SubWindow::SubWindow(const sf::Vector2f& position,
 
     m_center.x = m_innerPosition.x + m_size.x / 2.f;
     m_center.y = m_innerPosition.y + m_size.y / 2.f;
-
-    for(auto label = begin(elements.labels); label != end(elements.labels); ++label)
-        createLabel(*label);
-
-    for(auto sprite = begin(elements.sprites); sprite != end(elements.sprites); ++sprite)
-        createSprite(*sprite);
-
-    for(auto checkbox = begin(elements.checkboxes); checkbox != end(elements.checkboxes); ++checkbox)
-        createCheckBox(*checkbox);
-
-    for(auto slider = begin(elements.slider); slider != end(elements.slider); ++slider)
-        createSlider(*slider);
-
-    for(auto button = begin(elements.buttons); button != end(elements.buttons); ++button)
-        createButton(*button);
 }
 
 void SubWindow::on(const DrawParameter& params)
@@ -98,16 +84,7 @@ void SubWindow::draw(const DrawParameter& params)
     params.getTarget().draw(m_positionRect);
 
     on(params);
-    for(auto it = begin(m_labels); it != end(m_labels); ++it)
-        (*it)->draw(params);
-    for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
-        (*it)->draw(params);
-    for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
-        (*it)->draw(params);
-    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
-        (*it)->draw(params);
-    for(auto it = begin(m_slider); it != end(m_slider); ++it)
-        (*it)->draw(params);
+    m_panel.draw(params);
     off(params);    
 }
 
@@ -166,64 +143,7 @@ void SubWindow::onPositionChanged()
 void SubWindow::setInnerPosition(const sf::Vector2f& position)
 {
     m_innerPosition = position;
-
-    for(auto it = begin(m_buttons); it != end(m_buttons); ++it)
-        (*it)->setPosition(m_innerPosition);
-
-    for(auto it = begin(m_checkBoxes); it != end(m_checkBoxes); ++it)
-        (*it)->setPosition(m_innerPosition);
-
-    for(auto it = begin(m_slider); it != end(m_slider); ++it)
-        (*it)->setPosition(m_innerPosition);
-
-    for(auto it = begin(m_labels); it != end(m_labels); ++it)
-        (*it)->setPosition(m_innerPosition);
-
-    for(auto it = begin(m_sprites); it != end(m_sprites); ++it)
-        (*it)->setPosition(m_innerPosition);
-}
-
-void SubWindow::createCheckBox(const CheckBoxInfo& info)
-{
-    std::unique_ptr<CheckBox> checkbox(new CheckBox(info.id, info.style, getPosition(), info.position));
-
-    m_checkBoxes.push_back(std::move(checkbox));
-}
-
-void SubWindow::createSlider(const SliderInfo& info)
-{
-    std::unique_ptr<Slider> slider(new Slider(info.id, info.style, getPosition(), info.position));
-
-    m_slider.push_back(std::move(slider));
-}
-
-void SubWindow::createButton(const ButtonInfo& info)
-{
-    std::unique_ptr<Button> button(new Button(info.id, info.style, getPosition(), info.position));
-
-    button->registerOnPressed([this](const Button& sender)
-    {
-        if(m_clickCallback != nullptr)
-            m_clickCallback(sender);
-    });
-
-    button->setToolTip(info.toolTip);
-
-    m_buttons.push_back(std::move(button));
-}
-
-void SubWindow::createLabel(const LineLabel& info)
-{
-    std::unique_ptr<LineLabel> label(new LineLabel(info));
-
-    m_labels.push_back(std::move(label));
-}
-
-void SubWindow::createSprite(const MenuSprite& info)
-{
-    std::unique_ptr<MenuSprite> sprite(new MenuSprite(info));
-
-    m_sprites.push_back(std::move(sprite));
+    m_panel.setPosition(position);
 }
 
 float SubWindow::percentToWindowPixels(float percent)
