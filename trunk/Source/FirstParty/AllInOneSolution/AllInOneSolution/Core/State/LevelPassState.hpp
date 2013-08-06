@@ -37,6 +37,7 @@ private:
     ReplayMenu m_menu;
     bool m_replay;
 
+    EnterStateInformation m_stateInfo;
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
     float m_timeDiff;
