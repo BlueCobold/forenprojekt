@@ -3,21 +3,17 @@
 #ifndef MENU_HPP
 #define MENU_HPP
 
-#include "../rendering/Drawable.hpp"
+#include "MenuPanel.hpp"
 #include "MenuTemplate.hpp"
-#include "SubWindow.hpp"
+#include "../rendering/Drawable.hpp"
 #include <SFML/System/Vector2.hpp>
 
 #include <functional>
+#include <string>
 #include <vector>
 
 class ResourceManager;
-
-class Button;
-class CheckBox;
-class LineLabel;
-class MenuSprite;
-class Slider;
+class MenuElement;
 
 namespace sf
 {
@@ -27,35 +23,6 @@ namespace sf
 /// Base-class for menus
 class Menu : public Drawable
 {
-protected:
-
-    void createButton(const ButtonInfo& info);
-    void createCheckBox(const CheckBoxInfo& info);
-    void createSlider(const SliderInfo& info);
-    void createLabel(const LineLabel& info);
-    void createSprite(const MenuSprite& info);
-    void createSubWindow(const SubWindowInfo& info);
-
-    CheckBox& getCheckboxes(int id);
-    Slider& getSlider(int id);
-    LineLabel& getLabel(int id);
-    Button& getButton(int id);
-    sf::RenderWindow& getRenderWindow();
-    MenuSprite& getSprite(int id);
-
-    MenuTemplate& getTemplate();
-
-private:
-
-    MenuTemplate m_template;
-    std::vector<std::unique_ptr<MenuElement>> m_elements;
-    sf::Vector2i m_size;
-    sf::Vector2f m_position;
-    sf::RenderWindow& m_screen;
-    std::function<void(const Button& sender)> m_clickCallback;
-
-    void setCorrelation();
-
 public:
 
     Menu(const MenuTemplate& menuTemplate,
@@ -64,7 +31,7 @@ public:
 
     virtual ~Menu();
 
-    virtual void draw(const DrawParameter& params);
+    virtual void draw(const DrawParameter& params) override;
 
     virtual void update(const sf::RenderWindow& screen);
 
@@ -80,9 +47,28 @@ public:
     void changeHoverSprite(const int id, const sf::Sprite& sprite);
     void changePressedSprite(const int id, const sf::Sprite& sprite);
 
+    sf::RenderWindow& getRenderWindow() const;
+
+    CheckBox& getCheckbox(int id) const;
+    Slider& getSlider(int id) const;
+    LineLabel& getLabel(int id) const;
+    Button& getButton(int id) const;
+    MenuSprite& getSprite(int id) const;
+
 protected:
 
     virtual void drawAdditionalBackground(const DrawParameter& params);
+
+private:
+
+    template<class T>
+    T& find(int id, const MenuElementType::Type type, const std::string& errorKey) const;
+
+    MenuPanel m_panel;
+    MenuTemplate m_template;
+    sf::Vector2i m_size;
+    sf::Vector2f m_position;
+    sf::RenderWindow& m_screen;
 };
 
 #endif // MENU_HPP

@@ -4,6 +4,7 @@
 #define SCROLLWINDOW_HPP
 
 #include "MenuElement.hpp"
+#include "MenuPanel.hpp"
 #include "MenuTemplate.hpp"
 
 #include <SFML/Graphics/View.hpp>
@@ -41,6 +42,7 @@ protected:
 
 private:
 
+    MenuPanel m_panel;
     int m_innerHeight;
     sf::Vector2f m_center;
     sf::Vector2f m_size;
@@ -55,19 +57,8 @@ private:
     sf::RectangleShape m_sliderRect;
     sf::RectangleShape m_positionRect;
 
-    std::vector<std::unique_ptr<LineLabel>> m_labels;
-    std::vector<std::unique_ptr<MenuSprite>> m_sprites;
-    std::vector<std::unique_ptr<CheckBox>> m_checkBoxes;
-    std::vector<std::unique_ptr<Button>> m_buttons;
-    std::vector<std::unique_ptr<Slider>> m_slider;
-
     void on(const DrawParameter& params);
     void off(const DrawParameter& params);
-    void createCheckBox(const CheckBoxInfo& info);
-    void createSlider(const SliderInfo& info);
-    void createButton(const ButtonInfo& info);
-    void createLabel(const LineLabel& info);
-    void createSprite(const MenuSprite& info);
 
     std::function<void(const Button& sender)> m_clickCallback;
 

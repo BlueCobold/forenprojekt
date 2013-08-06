@@ -274,6 +274,9 @@
     <ClCompile Include="gui\LevelSelectMenu.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="gui\MenuPanel.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -736,6 +739,9 @@
       <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\MenuElement.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MenuPanel.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>

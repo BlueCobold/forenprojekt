@@ -116,6 +116,7 @@
     <ClCompile Include="gui\hud\PointsHUD.cpp" />
     <ClCompile Include="gui\hud\TargetHUD.cpp" />
     <ClCompile Include="gui\MainMenu.cpp" />
+    <ClCompile Include="gui\MenuPanel.cpp" />
     <ClCompile Include="gui\MenuSprite.cpp" />
     <ClCompile Include="gui\OptionMenu.cpp" />
     <ClCompile Include="gui\PauseMenu.cpp" />
@@ -245,6 +246,7 @@
     <ClInclude Include="gui\hud\TargetHUD.hpp" />
     <ClInclude Include="gui\MainMenu.hpp" />
     <ClInclude Include="gui\MenuElement.hpp" />
+    <ClInclude Include="gui\MenuPanel.hpp" />
     <ClInclude Include="gui\MenuSprite.hpp" />
     <ClInclude Include="gui\MenuTemplate.hpp" />
     <ClInclude Include="gui\OptionMenu.hpp" />
