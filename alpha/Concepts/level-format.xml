@@ -1,0 +1,108 @@
+<!-- Definition -->
+<level>
+ <background>
+  <animation texture="string" frames="float" width="float" height="float" x="float" y="float" rotate="bool" scrx="float" scry="float">
+   <!-- optional, but one of the two --><timed delay="float"/>
+   <!-- optional, but one of the two --><static value="float"/>
+  </animation>
+ </background>
+ <objects>
+  <entity name="string" rep="char" size="unsigned int" orientation="square OR vertical OR horizontal">
+   <physics>
+    <body type="static OR kinematic OR dynamic" x="float" y="float" angle="float" fixedRotation="true" />
+	<fixture density="float" friction="float" restitution="float">
+     <shape type="polygon">
+	  <vertex x="float" y="float" />
+	  <!-- as many more vertices are wanted/needed -->
+	 </shape>
+	 <shape type="circle" radius="float" />
+	</fixture>
+   </physics>
+   <!-- optional --><animation texture="string" frames="float" width="float" height="float" x="float" y="float" rotate="bool" scrx="float" scry="float">
+    <!-- optional, but one of the three --><static value="float"/>
+    <!-- optional, but one of the three --><timed delay="float"/>
+    <!-- optional, but one of the three --><angled min="float" step="float"/>
+    <!-- optional, multiple allowed --><animation texture="string" frames="float" width="float" height="float" x="float" y="float" rotate="bool" scrx="float" scry="float">
+     <!-- optional, but one of the two --><static value="float"/>
+     <!-- optional, but one of the two --><timed delay="float"/>
+	<!-- optional --></animation>
+   </animation>
+  </entity>
+  <teeter <!-- identical to entity --> >
+  </teeter>
+ </objects>
+ <world>
+  <gravity x="float" y="float" />
+ </world>
+ <grid width="unsigned int" height="unsigned int" size="unsigned int">
+  char[][]
+ </grid>
+</level>
+
+<!-- Example -->
+<level>
+ <background file="background01.jpeg" width="1600" height="900" x="0" y="0" />
+ <objects>
+  <entity name="WallV" rep="W" size="2" orientation="vertical">
+   <physics>
+    <body type="static" x="0" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon">
+	  <vertex x="0" y="0" />
+	  <vertex x="1" y="0" />
+	  <vertex x="1" y="2" />
+	  <vertex x="0" y="2" />
+	 </shape>
+	</fixture>
+   </physics>
+   <animation texture="walls/sand/small_quad/left_lower/v1.png" width="60" height="60" rotate="false">
+    <static value="0"/>
+   </animation>
+  </entity>
+  <entity name="WallH" rep="w" size="2" orientation="horizontal">
+   <physics>
+    <body type="static" x="10" y="0" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon">
+	  <vertex x="0" y="0" />
+	  <vertex x="2" y="0" />
+	  <vertex x="2" y="1" />
+	  <vertex x="0" y="1" />
+	 </shape>
+	</fixture>
+   </physics>
+   <animation texture="walls/sand/small_quad/left_lower/v1.png" width="60" height="60" rotate="false">
+    <static value="0"/>
+   </animation>
+  </entity>
+  <entity name="Ball" rep="B" size="1" orientation="square">
+   <physics>
+    <body type="kinematic" x="20" y="20" angle="0" fixedRotation="true" />
+	<fixture density="0" friction="0" restitution="0">
+	 <shape type="polygon" num="4">
+	  <vertex x="0" y="0" />
+	  <vertex x="1" y="0" />
+	  <vertex x="1" y="1" />
+	  <vertex x="0" y="1" />
+	 </shape>
+	</fixture>
+   </physics>
+   <texture file="assets/ball/ball.png" width="480" height="60" />
+   <animation texture="walls/sand/small_quad/left_lower/v1.png" width="60" height="60" rotate="true">
+    <static value="0"/>
+   </animation>
+  </entity>
+ </objects>
+ <grid width="unsigned int" height="unsigned int" size="unsigned int">
+wwwwwwwwww
+W        W
+W        W
+W        W
+W    B   W
+W        W
+W        W
+W        W
+W        W
+wwwwwwwwww
+ </grid>
+</level>

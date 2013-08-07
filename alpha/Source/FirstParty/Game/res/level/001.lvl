@@ -1,0 +1,36 @@
+<level>
+	<levelinfo name="Beginner Level">
+		<infoimage scrx="526" scry="287" width="192" height="108" />
+	</levelinfo>
+	<constants gate="0" gatetime="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+	</templates>
+
+	<grid size="60" width="2460" height="1410">
+                                                                                    
+                  W1 1w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2W5
+                  w2s4w2                        W2 2d3
+                  w1s3w2  t1                t1  w1s3d2
+                  W6 6w1                        W4 4d3
+                  w2s3w1                        w6s6s5
+                  w6s6w5            BB          w2s3s1                  
+                  W1 1d3\1                    /2W1 1d5                  
+                  w5s2d1s2\1                /2w4w1s3d2                  
+                  W3 3d6W2 2\1            /2W2 2W2 2d3                  
+                  w2s4d2s4w3s2\1        /2w2s4d2w4s5d2                  
+                  W4 4d3W1 1w4w4    TT  W6 6d1w4W6 6d1                 
+                 
+                                  
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="180" silver="190" gold="200" />
+</level>

@@ -1,0 +1,64 @@
+<textures>
+	<texture name="pastureland_sky" path="backgrounds/pastureland/sky.jpg" smooth="false" />
+	<texture name="pastureland_front_mountain" path="backgrounds/pastureland/front/mountain.png" smooth="true" />
+	<texture name="pastureland_middle_mountain" path="backgrounds/pastureland/middle/mountain.png" smooth="true" />
+	<texture name="pastureland_back_mountain" path="backgrounds/pastureland/back/mountain.png" smooth="true" />
+	<texture name="pastureland_clouds" path="backgrounds/pastureland/clouds.png" smooth="false" />
+	<texture name="pastureland_flowers_front" path="backgrounds/pastureland/flowery/front/01_tiny.png" smooth="true" />
+	<texture name="pastureland_flowers_front2" path="backgrounds/pastureland/flowery/front/02_mid.png" smooth="true" />
+	<texture name="small_quads" path="walls/sand/small_quad/main/small_quads.png" smooth="false" />
+	<texture name="high_quads" path="walls/sand/high_quad/high_quads.png" smooth="false" />
+	<texture name="wide_quads" path="walls/sand/wide_quad/wide_quads.png" smooth="false" />
+	<texture name="dark_small_quads" path="walls/sand/small_quad/main/dark.png" smooth="false" />
+	<texture name="small_triangles" path="walls/sand/small_quad/triangles.png" smooth="false" />
+	<texture name="ballback" path="assets/ball/ballback.png" smooth="true" />
+	<texture name="ballshade" path="assets/ball/ballshade.png" smooth="true" />
+	<texture name="ball_twirl" path="assets/ball/ball_twirl.png" smooth="true" />
+	<texture name="teeter_wooden" path="assets/teeter/wood/small.png" smooth="true" />
+	<texture name="gravity_arrow" path="assets/misc/gravity_arrow.png" smooth="false" />
+	<texture name="teeter_wooden_vertical" path="assets/teeter/wood/small_vertical.png" smooth="true" />
+	<texture name="target" path="assets/target/target.png" smooth="true" />
+	<texture name="targetmini" path="assets/target/TargetMini.png" smooth="true" />
+	<texture name="bitmapfontGold" path="bitmapfonts/gold.png" smooth="false" />
+	<texture name="bitmapfontGreen" path="bitmapfonts/green.png" smooth="false" />
+	<texture name="bitmapfontRed" path="bitmapfonts/red.png" smooth="false" />
+	<texture name="gui_large" path="bitmapfonts/gui_large.png" smooth="false" />
+	<texture name="buttonHoverFont" path="bitmapfonts/button_hover.png" smooth="false" />
+	<texture name="buttonIdleFont" path="bitmapfonts/button_idle.png" smooth="false" />
+	<texture name="arrowHUD" path="gui/arrows.png" smooth="true" />
+	<texture name="guiMisc" path="gui/misc.png" smooth="false" />
+	<texture name="sparkles" path="assets/misc/sparkles.png" smooth="false" />
+	<texture name="GuiElements" path="gui/gui_elements.png" smooth="false" />
+	<texture name="Window" path="gui/window.png" smooth="false" />
+	<texture name="goodie" path="gui/Goodies.png" smooth="true" />
+</textures>
+<fonts>
+	<font name="visitor" path="visitor.ttf" />
+</fonts>
+<sounds>
+	<sound name="bounce" path="bounce.wav" />
+	<sound name="switch" path="switch.wav" />
+	<sound name="refuse" path="refuse.wav" />
+	<sound name="stars1" path="stars1.wav" />
+	<sound name="stars2" path="stars2.wav" />
+	<sound name="stars3" path="stars3.wav" />
+</sounds>
+<menus>
+	<menu name="pauseMenu" path="pauseMenu.xml" />
+	<menu name="replayMenu" path="replayMenu.xml" />
+	<menu name="failMenu" path="failMenu.xml" />
+	<menu name="MainMenu" path="MainMenu.xml" />
+	<menu name="OptionMenu" path="OptionMenu.xml" />
+	<menu name="CreditMenu" path="CreditMenu.xml" />
+	<menu name="LevelPreviewMenu" path="LevelPreviewMenu.xml" />
+	<menu name="LevelSelectMenu" path="LevelSelectMenu.xml" />
+</menus>
+<bitmapfonts>
+	<bitmapfont name="gold" path="bitmapfontGold.xml" />
+	<bitmapfont name="green" path="bitmapfontGreen.xml" />
+	<bitmapfont name="red" path="bitmapfontRed.xml" />
+	<bitmapfont name="gui_large" path="bitmapfontGuiLarge.xml" />
+	<bitmapfont name="buttonIdleFont" path="buttonIdleFont.xml" />
+	<bitmapfont name="buttonHoverFont" path="buttonHoverFont.xml" />
+	<bitmapfont name="goodyFont" path="goodyfont.xml" />
+</bitmapfonts>

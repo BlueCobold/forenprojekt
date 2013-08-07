@@ -1,0 +1,450 @@
+<level>
+	<medal bronze="800" silver="1000" gold="1400" />
+	<levelinfo name="Up and Down">
+		<infoimage scrx="774" scry="438" width ="192" height="108" />
+	</levelinfo>
+	<constants solid="0" />
+	<gameplay maxBalls="5" time="180"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+
+		<shapes>
+			<shape name="checkpointArea" type="polygon">
+				<vertex x="-120" y="-120" />
+				<vertex x="420" y="-120" />
+				<vertex x="420" y="0" />
+				<vertex x="-120" y="0" />
+			</shape>
+			<shape name="drifting" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="240" y="0" />
+				<vertex x="240" y="60" />
+				<vertex x="0" y="60" />
+			</shape>
+		</shapes>
+
+		<entities>
+			<entity name="respawnLoc1" rep="R1" collideWithBall="false">
+				<physics name="wall" shape="checkpointArea" />
+				<collides>
+					<copySpawnLocation>
+						<always />
+					</copySpawnLocation>
+				</collides>
+			</entity>
+
+			<entity name="right" rep="ra" collideWithBall="false">
+				<physics name="wall" shape="drifting" />
+				<collides>
+					<applyForce x="20" y="0">
+						<always />
+					</applyForce>
+				</collides>
+				<animations>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="3" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<add>
+								<static value="13" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+						<color channel="alpha">
+							<mod>
+								<mul>
+									<time />
+									<inv>
+										<static value="1" />
+									</inv>
+								</mul>
+								<static value="1" />
+							</mod>
+						</color>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="3" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<add>
+								<static value="73" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="3" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<add>
+								<static value="133" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+						<color channel="alpha">
+							<sub>
+								<static value="1" />
+								<mod>
+									<mul>
+										<time />
+										<inv>
+											<static value="1" />
+										</inv>
+									</mul>
+									<static value="1" />
+								</mod>
+							</sub>
+						</color>
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="left" rep="la" collideWithBall="false">
+				<physics name="wall" shape="drifting" />
+				<collides>
+					<applyForce x="-20" y="0">
+						<always />
+					</applyForce>
+				</collides>
+				<animations>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="2" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<sub>
+								<static value="73" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</sub>
+						</position>
+						<color channel="alpha">
+							<sub>
+								<static value="1" />
+								<mod>
+									<mul>
+										<time />
+										<inv>
+											<static value="1" />
+										</inv>
+									</mul>
+									<static value="1" />
+								</mod>
+							</sub>
+						</color>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="2" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<sub>
+								<static value="133" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</sub>
+						</position>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="2" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<sub>
+								<static value="193" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</sub>
+						</position>
+						<color channel="alpha">
+							<mod>
+								<mul>
+									<time />
+									<inv>
+										<static value="1" />
+									</inv>
+								</mul>
+								<static value="1" />
+							</mod>
+						</color>
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="timer" rep="ti" collideWithBall="false">
+				<physics name="timer" shape="teeter">
+					<body type="kinematic" angle="0">
+						<kinematics>
+							<position axis="x">
+								<setVar name="solid">
+									<clamp>
+										<int>
+											<sub>
+												<mod>
+													<time />
+													<static value="4" />
+												</mod>
+												<static value="1" />
+											</sub>
+										</int>
+										<static value="0" />
+										<static value="1" />
+									</clamp>
+								</setVar>
+							</position>
+						</kinematics>
+					</body>
+					<fixture density="0.5" friction="0.8" restitution="0.1" />
+				</physics>
+			</entity>
+
+			<entity name="GhostTeeter" rep="GT" type="teeter">
+				<physics name="teeter" shape="teeter" />
+				<sound name="bounce" />
+				<collides>
+					<propertyFilter target="ball">
+						<sub>
+							<static value="1" />
+							<var name="global:solid" />
+						</sub>
+					</propertyFilter>
+				</collides>
+				<animations>
+					<animation texture="teeter_wooden" width="208" height="32" midx="104" midy="16" rotate="true" alignment="vertical">
+						<frameindex frames="7">
+							<min>
+								<mul>
+									<add>
+										<step>
+											<sub>
+												<angle />
+												<static value="180" />
+											</sub>
+											<angle />
+											<sub>
+												<max>
+													<angle />
+													<static value="315" />
+												</max>
+												<static value="360" />
+											</sub>
+										</step>
+										<static value="45" />
+									</add>
+									<inv>
+										<static value="90"/>
+									</inv>
+									<static value="7"/>
+								</mul>
+								<static value="6"/>
+							</min>
+						</frameindex>
+						<color channel="alpha">
+							<sub>
+								<static value="1" />
+								<mul>
+									<var name="solid" />
+									<static value="0.5" />
+								</mul>
+							</sub>
+						</color>
+					</animation>
+				</animations>
+			</entity>
+
+			<entity base="base_wall" name="bounce_right" rep="br">
+				<physics name="wall" shape="wall" />
+				<constants start="-2" />
+				<onCollision>
+					<changeProperty name="start">
+						<time />
+					</changeProperty>
+					<applyImpulse x="50" y="0" />
+				</onCollision>
+				<animations>
+					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="0"/>
+						</frameindex>
+						<color value="60FFFFFF" />
+					</animation>
+
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="3" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<add>
+								<static value="13" />
+								<mul>
+									<static value="12" />
+									<sine>
+										<mul>
+											<static value="360" />
+											<min>
+												<static value="0.5" />
+												<sub>
+													<time />
+													<var name="start" />
+												</sub>
+											</min>
+										</mul>
+									</sine>
+								</mul>
+							</add>
+						</position>
+					</animation>
+				</animations>
+			</entity>
+			
+			<entity base="base_wall" name="bounce_left" rep="bl">
+				<physics name="wall" shape="wall" />
+				<constants start="-2" />
+				<onCollision>
+					<changeProperty name="start">
+						<time />
+					</changeProperty>
+					<applyImpulse x="-50" y="0" />
+				</onCollision>
+				<animations>
+					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="0"/>
+						</frameindex>
+						<color value="60FFFFFF" />
+					</animation>
+
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="2" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<sub>
+								<static value="13" />
+								<mul>
+									<static value="12" />
+									<sine>
+										<mul>
+											<static value="360" />
+											<min>
+												<static value="0.5" />
+												<sub>
+													<time />
+													<var name="start" />
+												</sub>
+											</min>
+										</mul>
+									</sine>
+								</mul>
+							</sub>
+						</position>
+					</animation>
+				</animations>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="2460" height="1650">
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+        w2w1w4w2w2w4w1w3w1w5w6w2w5w3w2w1w4w2w1w6w4w1w5w6w1w2w5w3w2w3w6w2w4w6        
+        w3s2s5s3s6s4s4s1s2s3s5s1s3s5s3s6s1s3s5s1s2s3s4s1s3s5s6s2s1s4s2s3s5w6        
+        w6d4d3d2d1d3d6d4d3d2d1d3d2d4d1d5d5d2d4d5d3d6d1d2d6d4d1d3d5d6d1d5d3w2        
+        w3d3d1w3w2w5w1w4w5w2w3w2w6w1w2w3w1w4w6w1w5w2w3w1w2w5w6w5w2w6w5d6d4w1        
+        w1d2d2w1        w6                    h1                    w1d2d5w5        
+        w5d3d5w3    t1  w3        BB           1                    w2d4d6w3        
+        w3d5d2w4        w4                    w2                    w5d3d1w6        
+        w4d2d6w5     B  w1    R1              w4    R1              w4d6d4w2        
+        w2d6d4w1    GT        GT  ^O^X    GT        GT  ^O^X    GT  w6d2d2w1        
+        w6d1d3w6la        ra      w6w2la        ra      w6w2la      w2d5d1w4        
+        w4d3d5brla        ra      blbrla        ra      blbrla      w3d2d4w5        
+        w1d5d4brla  TT    ra  TT  blbrla  TT    ra  TT  blbrla  TT  w4d3d5w1        
+        w4d1d3w6la  ti    ra      w2w1la        ra      w1w4la      w5d1d6w2        
+        w3d2d6w2                  w6w5                  w5w6        w2d5d3w1        
+        w1d5d2w5                  w5h1                  h2w1        w4d2d6w2        
+        w4d2d1w3                  w1 1                   2w2        w3d4d1w4        
+        w6d4d3w1                  w2w3                  w2h3        w1d5d2w6        
+        w2d6d5w2                  h4w5                  w3 3        w3d1d4w5        
+        w1d1d1w4                   4w3                  w1w2        w6d3d6w1        
+        w2d3d4w6                  w1w4                  h5w6        w1d2d1w4        
+        w5d2d3w2                  w2w6                   5w4        w2d4d5w2        
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="400" silver="500" gold="600" />
+</level>
