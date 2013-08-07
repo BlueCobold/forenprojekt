@@ -226,10 +226,30 @@ void MenuLoader::parseSubWindow(MenuTemplate& menu,
             MenuElements ownElements;
             SubWindowInfo subWindowInfo;
             subWindowInfo.id = subXml->IntAttribute("id");
+            if(auto style = subXml->FirstChildElement("style"))
+            {
+                if(auto sprite = style->FirstChildElement("scrollTop"))
+                {
+                    subWindowInfo.style.scrollbarTop = sf::Sprite(*resourceManager.getTexture(sprite->Attribute("texture")),
+                        sf::IntRect(sprite->IntAttribute("srcx"), sprite->IntAttribute("srcy"),
+                                    sprite->IntAttribute("width"), sprite->IntAttribute("height")));
+                }
+                if(auto sprite = style->FirstChildElement("scrollMiddle"))
+                {
+                    subWindowInfo.style.scrollbarMiddle = sf::Sprite(*resourceManager.getTexture(sprite->Attribute("texture")),
+                        sf::IntRect(sprite->IntAttribute("srcx"), sprite->IntAttribute("srcy"),
+                                    sprite->IntAttribute("width"), sprite->IntAttribute("height")));
+                }
+                if(auto sprite = style->FirstChildElement("scrollBottom"))
+                {
+                    subWindowInfo.style.scrollbarBottom = sf::Sprite(*resourceManager.getTexture(sprite->Attribute("texture")),
+                        sf::IntRect(sprite->IntAttribute("srcx"), sprite->IntAttribute("srcy"),
+                                    sprite->IntAttribute("width"), sprite->IntAttribute("height")));
+                }
+            }
             subWindowInfo.position = sf::Vector2f(subXml->FloatAttribute("x"), subXml->FloatAttribute("y"));
             subWindowInfo.size = sf::Vector2f(subXml->FloatAttribute("sizex"), subXml->FloatAttribute("sizey"));
             subWindowInfo.innerHeight = subXml->IntAttribute("innerheight");
-            subWindowInfo.virtualPosition = sf::Vector2f(subXml->FloatAttribute("virtualx"), subXml->FloatAttribute("virtualy"));
             parseButtons(ownElements, subXml, buttonStyles, toolTip, resourceManager);
             parseCheckBoxes(ownElements, subXml, checkBoxStyles, resourceManager);
             parseSliders(ownElements, subXml, sliderStyles, resourceManager);
@@ -240,6 +260,7 @@ void MenuLoader::parseSubWindow(MenuTemplate& menu,
         }
     }
 }
+
 std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, ButtonStyle> buttonStyles;

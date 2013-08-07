@@ -49,14 +49,21 @@ struct MenuElements
     std::vector<MenuSprite> sprites;
 };
 
+struct SubWindowStyle
+{
+    sf::Sprite scrollbarTop;
+    sf::Sprite scrollbarMiddle;
+    sf::Sprite scrollbarBottom;
+};
+
 struct SubWindowInfo
 {
     MenuElements menuElements;
     sf::Vector2f position;
     sf::Vector2f size;
-    sf::Vector2f virtualPosition;
     int innerHeight;
     int id;
+    SubWindowStyle style;
 };
 
 struct MenuTemplate

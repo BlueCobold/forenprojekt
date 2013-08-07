@@ -26,15 +26,13 @@ public:
 
     SubWindow(const sf::Vector2f& position,
               const sf::Vector2f& size,
-              const sf::Vector2f& innerPosition,
               const sf::Vector2f& offset,
               const int innerHeight,
-              const MenuElements& elements);
+              const MenuElements& elements,
+              const SubWindowStyle& style);
 
     virtual void draw(const DrawParameter& params) override;
     virtual void update(const sf::RenderWindow& screen) override;
-
-    void setInnerPosition(const sf::Vector2f& position);
 
 protected:
 
@@ -46,13 +44,13 @@ private:
     int m_innerHeight;
     sf::Vector2f m_center;
     sf::Vector2f m_size;
-    sf::Vector2f m_innerPosition;
     sf::View m_orginalView;
 
     int m_startValue;
     int m_endValue;
     bool m_active;
 
+    SubWindowStyle m_style;
     sf::RectangleShape m_windowRect;
     sf::RectangleShape m_sliderRect;
     sf::RectangleShape m_positionRect;
@@ -62,9 +60,7 @@ private:
 
     std::function<void(const Button& sender)> m_clickCallback;
 
-    float percentToWindowPixels(float percent = 1.f);
-    void setSliderPosition();
-    float sliderPixelToWindowPixel(int pixel = 1);
+    float sliderPixelToWindowPixel(float pixel = 1.f);
 };
 
 #endif

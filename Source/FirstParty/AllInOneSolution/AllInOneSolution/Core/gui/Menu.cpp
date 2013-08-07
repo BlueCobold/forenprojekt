@@ -26,7 +26,7 @@ Menu::Menu(const MenuTemplate& menuTemplate,
 
     for(auto info = begin(menuTemplate.subWindow); info != end(menuTemplate.subWindow); ++info)
     {
-        std::unique_ptr<SubWindow> subWindow(new SubWindow(m_position, info->size, info->virtualPosition, info->position, info->innerHeight, info->menuElements));
+        std::unique_ptr<SubWindow> subWindow(new SubWindow(m_position, info->size, info->position, info->innerHeight, info->menuElements, info->style));
         m_panel.add(std::move(subWindow));
     }
 }
