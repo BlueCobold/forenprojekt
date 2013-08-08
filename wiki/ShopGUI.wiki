@@ -1,5 +1,5 @@
-# Mockups for the goody-shop
+#Mockups for the goody-shop
 
-= Introduction =
+= Mockup: =
 
 https://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/gui/shop_mock.png
