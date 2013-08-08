@@ -1,4 +1,4 @@
-#Mockups for the goody-shop
+#summary Mockups for the goody-shop
 
 = Mockup: =
 
