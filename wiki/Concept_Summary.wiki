@@ -17,3 +17,7 @@ The background in the game is simulating a 3D-environment by using parallax-scro
 
 Between different scenes or menus, the game displays transitions/blends from one state to the next.
 An overview of the existing or planned modes can be found here: [Blendmodes]
+
+== Shop gui ==
+A mock for the layout and items in the shop can be found here:
+[ShopGUI]
