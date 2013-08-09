@@ -15,7 +15,9 @@ public:
     static const int LABEL_LEVELNAME = 1;
     static const int LABEL_BALLS = 3;
     static const int LABEL_TIME = 5;
-    static const int SPRITE_COINS = 6;
+    // Unused since the coins icon was changed into a button
+    //static const int SPRITE_COINS = 6;
+    static const int BUTTON_COINS = 8;
     static const int BUTTON_MAIN_MENU = 7;
 
     LevelPreviewMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);

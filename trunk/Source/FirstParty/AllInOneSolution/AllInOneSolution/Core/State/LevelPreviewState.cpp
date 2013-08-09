@@ -62,6 +62,14 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
+    if(clicked == LevelPreviewMenu::BUTTON_COINS)
+    {
+        m_coinShopInfo.m_level = m_level;
+        m_coinShopInfo.m_prepareOnly = false;
+        m_transitionStateInfo.m_followingState = CoinShopStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_coinShopInfo;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+    }
 
     return StateChangeInformation::Empty();
 }

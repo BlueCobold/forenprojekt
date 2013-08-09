@@ -11,6 +11,18 @@
 			offsetx="-6" offsety="-6" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
 	</buttonStyle>
+	<buttonStyle name="coins">
+		<mouseRect left="2" top="2" width="112" height="57" />
+		<idle texture="GuiElements" srcx="230" srcy="484" width="116" height="61"
+			offsetx="0" offsety="0"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
+		<hover texture="GuiElements" srcx="230" srcy="484" width="116" height="61"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
+		<pressed texture="GuiElements" srcx="230" srcy="484" width="116" height="61"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
+	</buttonStyle>
 	<buttonStyle name="small">
 		<mouseRect left="2" top="2" width="141" height="46" />
 		<idle texture="GuiElements" srcx="0" srcy="529" width="152" height="58"

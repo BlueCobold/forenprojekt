@@ -94,6 +94,7 @@ gui_team_lead = Team Leader
 gui_design = Game Design
 gui_graphics = Graphics
 gui_more_code = Additional Code
+gui_coin_shop_title = Shop
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
