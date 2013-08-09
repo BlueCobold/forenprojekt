@@ -48,6 +48,9 @@ App::App(AppConfig& config) :
     else
         m_screen.create(videoMode, m_windowTitle);
 
+    if(m_windowIcon.loadFromFile(m_config.get<std::string>("WindowIcon")))
+        m_screen.setIcon(m_windowIcon.getSize().x, m_windowIcon.getSize().y, m_windowIcon.getPixelsPtr());
+
     m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
     m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
 
