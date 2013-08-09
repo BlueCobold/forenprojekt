@@ -28,6 +28,7 @@ private:
     HUD m_HUD;
 
     EnterPlayStateInformation m_playStateInfo;
+    EnterStateInformation m_coinShopInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
 };
 

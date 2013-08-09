@@ -25,7 +25,8 @@ enum StateId
     OptionMenuStateId,
     CreditMenuStateId,
     LevelPreviewStateId,
-    LevelSelectStateId
+    LevelSelectStateId,
+    CoinShopStateId
 };
 
 #include "StateChangeInformation.hpp"

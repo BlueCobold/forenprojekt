@@ -100,6 +100,7 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="gui\CaptionMenu.cpp" />
     <ClCompile Include="gui\CheckBox.cpp" />
+    <ClCompile Include="gui\CoinShopMenu.cpp" />
     <ClCompile Include="gui\CreditMenu.cpp" />
     <ClCompile Include="gui\hud\ArrowHUD.cpp" />
     <ClCompile Include="gui\hud\BallHUD.cpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="resources\MenuLoader.cpp" />
     <ClCompile Include="resources\ResourceManager.cpp" />
     <ClCompile Include="ScrollView.cpp" />
+    <ClCompile Include="State\CoinShopState.cpp" />
     <ClCompile Include="State\CreditMenuState.cpp" />
     <ClCompile Include="State\LevelFailState.cpp" />
     <ClCompile Include="State\LevelPassState.cpp" />
@@ -229,6 +231,7 @@
     <ClInclude Include="gui\CaptionMenu.hpp" />
     <ClInclude Include="gui\CheckBox.hpp" />
     <ClInclude Include="gui\CheckboxStyle.hpp" />
+    <ClInclude Include="gui\CoinShopMenu.hpp" />
     <ClInclude Include="gui\CreditMenu.hpp" />
     <ClInclude Include="gui\hud\ArrowHUD.hpp" />
     <ClInclude Include="gui\hud\BallHUD.hpp" />
@@ -342,6 +345,7 @@
     <ClInclude Include="State\StateChangeInformation.hpp" />
     <ClInclude Include="State\StateManager.hpp" />
     <ClInclude Include="State\TransitionState.hpp" />
+    <ClInclude Include="State\CoinShopState.hpp" />
     <ClInclude Include="Utility.hpp" />
   </ItemGroup>
   <ItemGroup>

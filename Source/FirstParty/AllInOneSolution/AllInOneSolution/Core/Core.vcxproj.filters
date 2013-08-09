@@ -277,6 +277,12 @@
     <ClCompile Include="gui\MenuPanel.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="gui\CoinShopMenu.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="State\CoinShopState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -746,6 +752,12 @@
     </ClInclude>
     <ClInclude Include="Resources.h">
       <Filter>Resouces</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CoinShopMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="State\CoinShopState.hpp">
+      <Filter>Headers\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

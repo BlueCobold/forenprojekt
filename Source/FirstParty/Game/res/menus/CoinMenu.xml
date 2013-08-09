@@ -1,0 +1,8 @@
+<menu>
+	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
+	<caption font="gui_large" text="gui_coin_shop_title" offsetx="0" offsety="50" />
+	<styles source="Styles.inc"/>
+	<elements>
+		<button id="0" text="gui_close" style="default" x="261" y="270" />
+	</elements>
+</menu>

@@ -3,6 +3,8 @@
 #include "../resources/ResourceManager.hpp"
 #include "../Utility.hpp"
 
+#include "Button.hpp"
+
 LevelPreviewMenu::LevelPreviewMenu(const sf::Vector2f& position,
                                    sf::RenderWindow& screen,
                                    ResourceManager& resourceManager) :
@@ -34,5 +36,6 @@ void LevelPreviewMenu::setLevelInfo(const std::string& levelName,
 
 void LevelPreviewMenu::setCoinToolTipText(const std::string& text)
 {
-    Menu::getSprite(SPRITE_COINS).setToolTipText(text);
+    //Menu::getSprite(SPRITE_COINS).setToolTipText(text);
+    Menu::getButton(BUTTON_COINS).setToolTipText(text);
 }

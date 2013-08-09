@@ -52,6 +52,7 @@
 	<menu name="CreditMenu" path="CreditMenu.xml" />
 	<menu name="LevelPreviewMenu" path="LevelPreviewMenu.xml" />
 	<menu name="LevelSelectMenu" path="LevelSelectMenu.xml" />
+	<menu name="CoinShopMenu" path="CoinMenu.xml" />
 </menus>
 <bitmapfonts>
 	<bitmapfont name="gold" path="bitmapfontGold.xml" />
