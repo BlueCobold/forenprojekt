@@ -49,7 +49,6 @@ private:
 
     AppConfig& m_config;
     std::string m_windowTitle;
-    sf::Image m_windowIcon;
     bool m_fullscreen;
     bool m_focus;
 
