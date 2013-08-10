@@ -7,6 +7,7 @@ MenuSprite::MenuSprite(const sf::Sprite& sprite, const sf::Vector2f& position, c
     m_sprite(sprite),
     m_showToolTip(false)
 {
+    onPositionChanged();
 }
 
 void MenuSprite::draw(const DrawParameter& params)
