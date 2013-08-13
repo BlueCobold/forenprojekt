@@ -1,7 +1,10 @@
 #include "Goody.hpp"
 
+const float Goody::SaleModifier = 0.8f;
+
 Goody::Goody(const sf::Keyboard::Key key,
              const Type type,
+             const int price,
              const float durationTime,
              const float cooldownTime, 
              const int charges) :
@@ -14,7 +17,9 @@ Goody::Goody(const sf::Keyboard::Key key,
     m_selected(false),
     m_type(type),
     m_callback(nullptr),
-    m_active(false)
+    m_active(false),
+    m_buyValue(price),
+    m_saleValue(static_cast<int>(m_buyValue * SaleModifier))
 {
 }
 
@@ -81,4 +86,14 @@ const Goody::Type Goody::getType() const
 void Goody::registerForActivation(std::function<void(Goody& sender)> callback)
 {
     m_callback = callback;
+}
+
+int Goody::getBuyValue() const
+{
+    return m_buyValue;
+}
+
+int Goody::getSaleValue() const
+{
+    return m_saleValue;
 }

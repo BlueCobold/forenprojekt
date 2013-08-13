@@ -26,11 +26,15 @@ private:
     float m_durationUntilTime;
     bool m_selected;
     Type m_type;
+    int m_buyValue;
+    int m_saleValue;
     std::function<void(Goody& sender)>m_callback;
 
+    static const float SaleModifier;
+
 public:
-    Goody(const sf::Keyboard::Key key, const Type type, const float durationTime = 0, const float cooldownTime = 0, 
-           const int charges = -1);
+    Goody(const sf::Keyboard::Key key, const Type type, const int price, const float durationTime = 0,
+          const float cooldownTime = 0, const int charges = -1);
 
     virtual void update(const float elapsedTime);
 
@@ -39,6 +43,8 @@ public:
     virtual bool isSelected() const;
     virtual int getCharges() const;
     const Type getType() const;
+    int getBuyValue() const;
+    int getSaleValue() const;
     void setSelected(const bool selected);
     void registerForActivation(std::function<void(Goody& sender)> callback);
 };
