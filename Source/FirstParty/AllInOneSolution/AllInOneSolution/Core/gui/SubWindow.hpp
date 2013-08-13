@@ -24,7 +24,8 @@ class SubWindow : public MenuElement
 {
 public:
 
-    SubWindow(const sf::Vector2f& position,
+    SubWindow(const int id,
+              const sf::Vector2f& position,
               const sf::Vector2f& size,
               const sf::Vector2f& offset,
               const int innerHeight,
@@ -34,6 +35,7 @@ public:
     virtual void draw(const DrawParameter& params) override;
     virtual void update(const sf::RenderWindow& screen) override;
 
+    MenuPanel* getPanel();
 protected:
 
     virtual void onPositionChanged() override;
