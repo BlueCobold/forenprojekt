@@ -7,6 +7,7 @@
 #include "../rendering/transitions/RandomTransition.hpp"
 #include "../model/Level.hpp"
 #include "EnterStateInformation.hpp"
+#include "../resources/AppConfig.hpp"
 
 #include <memory>
 
@@ -32,10 +33,10 @@ void CoinShopState::onEnter(const EnterStateInformation* enterInformation, const
     m_level = enterInformation->m_level;
     m_levelNumber = enterInformation->m_levelNumber;
 
-    m_coinShopMenu.SetGoodyCharges(Goody::GravityGoody, m_level->getGoody(Goody::GravityGoody).getCharges());
-    m_coinShopMenu.SetGoodyCharges(Goody::InvulnerableGoody, m_level->getGoody(Goody::InvulnerableGoody).getCharges());
-    m_coinShopMenu.SetGoodyCharges(Goody::ExtraBallGoody, m_level->getGoody(Goody::ExtraBallGoody).getCharges());
-    m_coinShopMenu.SetGoodyCharges(Goody::ExtraTimeGoody, m_level->getGoody(Goody::ExtraTimeGoody).getCharges());
+    m_coinShopMenu.SetGoodyCharges(Goody::GravityGoody, m_config.get<int>("goodygravity"));
+    m_coinShopMenu.SetGoodyCharges(Goody::InvulnerableGoody, m_config.get<int>("goodyinvulnerable"));
+    m_coinShopMenu.SetGoodyCharges(Goody::ExtraBallGoody, m_config.get<int>("goodyextraball"));
+    m_coinShopMenu.SetGoodyCharges(Goody::ExtraTimeGoody, m_config.get<int>("goodyextratime"));
 }
 
 StateChangeInformation CoinShopState::update(const float time)
