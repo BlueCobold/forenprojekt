@@ -11,13 +11,14 @@
 #include "../rendering/DrawParameter.hpp"
 #include "../Utility.hpp"
 
-SubWindow::SubWindow(const sf::Vector2f& position,
+SubWindow::SubWindow(const int id,
+                     const sf::Vector2f& position,
                      const sf::Vector2f& size,
                      const sf::Vector2f& offset,
                      const int innerHeight,
                      const MenuElements& elements,
                      const SubWindowStyle& style) :
-    MenuElement(-1, MenuElementType::SubWindow, position, offset),
+    MenuElement(id, MenuElementType::SubWindow, position, offset),
     m_panel(elements, position),
     m_size(size),
     m_innerHeight(innerHeight),
@@ -49,6 +50,11 @@ SubWindow::SubWindow(const sf::Vector2f& position,
 
     m_center.x = m_size.x / 2.f;
     m_center.y = m_size.y / 2.f;
+}
+
+MenuPanel* SubWindow::getPanel()
+{
+    return &m_panel;
 }
 
 void SubWindow::on(const DrawParameter& params)

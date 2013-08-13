@@ -26,7 +26,7 @@ Menu::Menu(const MenuTemplate& menuTemplate,
 
     for(auto info = begin(menuTemplate.subWindow); info != end(menuTemplate.subWindow); ++info)
     {
-        std::unique_ptr<SubWindow> subWindow(new SubWindow(m_position, info->size, info->position, info->innerHeight, info->menuElements, info->style));
+        std::unique_ptr<SubWindow> subWindow(new SubWindow(info->id, m_position, info->size, info->position, info->innerHeight, info->menuElements, info->style));
         m_panel.add(std::move(subWindow));
     }
 }
@@ -82,7 +82,26 @@ sf::RenderWindow& Menu::getRenderWindow() const
 template<class T>
 T& Menu::find(int id, const MenuElementType::Type type, const std::string& errorKey) const
 {
-    return m_panel.find<T>(id, type, errorKey);
+    try
+    {
+        return m_panel.find<T>(id, type, errorKey);
+    }
+    catch(...)
+    {
+        for(auto it = m_template.subWindow.begin(); it != m_template.subWindow.end(); ++it)
+        {
+            MenuPanel* panel = m_panel.find<SubWindow>(it->id, MenuElementType::SubWindow, "SubWindowId").getPanel();
+            try
+            {
+                return panel->find<T>(id, type, errorKey);
+            }
+            catch(...)
+            {
+                continue;
+            }
+        }
+    }
+    throw std::runtime_error(utility::replace(utility::translateKey(errorKey), utility::toString(id)));
 }
 
 CheckBox& Menu::getCheckbox(int id) const
