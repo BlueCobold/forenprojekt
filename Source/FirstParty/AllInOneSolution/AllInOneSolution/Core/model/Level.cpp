@@ -51,10 +51,10 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConf
     m_bronzeMedal(0),
     m_levelName(""),
     m_lastTime(0),
-    m_gravityGoody(sf::Keyboard::Num1, 2.f, m_gravity, config.get<int>("goodygravity")),
-    m_invulnerableGoody(sf::Keyboard::Num2, 3.f, m_ball, config.get<int>("goodyinvulnerable")),
-    m_extraBallGoody(sf::Keyboard::Num3, Goody::ExtraBallGoody, 0, 0, config.get<int>("goodyextraball")),
-    m_extraTimeGoody(sf::Keyboard::Num4, Goody::ExtraTimeGoody, 0, 0, config.get<int>("goodyextratime")),
+    m_gravityGoody(sf::Keyboard::Num1, 1000, 2.f, m_gravity, config.get<int>("goodygravity")),
+    m_invulnerableGoody(sf::Keyboard::Num2, 400, 3.f, m_ball, config.get<int>("goodyinvulnerable")),
+    m_extraBallGoody(sf::Keyboard::Num3, Goody::ExtraBallGoody, 400, 0, 0, config.get<int>("goodyextraball")),
+    m_extraTimeGoody(sf::Keyboard::Num4, Goody::ExtraTimeGoody, 500, 0, 0, config.get<int>("goodyextratime")),
     m_currentSeletedGoody(0)
 {
     auto func = [this](Goody& sender)
