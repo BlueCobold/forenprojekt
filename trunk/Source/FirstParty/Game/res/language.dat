@@ -49,11 +49,12 @@ NoSoundName = A sound without name has been specified.
 InvalidColorFormat = Color-values must be in the format RRGGBBAA.
 UnknownCheckBoxStyle = CheckBoxStyle isn't registered: %.
 UnknownSliderStyle = SliderStyle isn't registered: %.
-SliderId = The slider with id % don't exist.
-CheckboxId = The checkbox with id % don't exist.
-LineLabelId = The label with id % don't exist.
-MenuSpriteId = The menusprite with id % don't exist.
-ButtonId = The button with id % don't exist.
+SliderId = The slider with id % doesn't exist.
+CheckboxId = The checkbox with id % doesn't exist.
+LineLabelId = The label with id % doesn't exist.
+MenuSpriteId = The menusprite with id % doesn't exist.
+ButtonId = The button with id % doesn't exist.
+SubWindowId = The subwindow with id % doesn't exist.
 UnknownToolTip = ToolTip isn't registered: %.
 IncludeFileInvalid = Include File '%' is corrupt.
 InvalidLayout = The layout-part '%' has a bad number of elements.
@@ -95,10 +96,15 @@ gui_design = Game Design
 gui_graphics = Graphics
 gui_more_code = Additional Code
 gui_coin_shop_title = Shop
+gui_goody_gravity = Gravity
+gui_goody_invulnerable = Invulnerable
+gui_goody_extra_ball = Extra ball
+gui_goody_extra_time = Extra time
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
 tooltip_coins = you currently have % coins.
+tooltip_goody_speed = gives the double speed.
 
 [Levels]
 levelBlocked1 = blocked
