@@ -16,8 +16,8 @@ private:
     b2Vec2& m_currentGravity;
 
 public:
-    GravityGoody(const sf::Keyboard::Key key, const float gravityFactor, b2Vec2& m_currentGravity);
-    
+    GravityGoody(const sf::Keyboard::Key key, const float gravityFactor, b2Vec2& m_currentGravity, const int charge);
+
     virtual void update(const float elapsedTime) override;
 
     b2Vec2 getGravity() const;

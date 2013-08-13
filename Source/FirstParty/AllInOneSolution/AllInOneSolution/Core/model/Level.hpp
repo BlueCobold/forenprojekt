@@ -134,6 +134,7 @@ private:
     void cleanupKilledEntities();
     void updatePointLabels();
     void updateGoodyChoice();
+    void updateGoodyCharges();
 
     virtual bool shouldCollide(Entity* entityA, Entity* entityB);
     virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse);

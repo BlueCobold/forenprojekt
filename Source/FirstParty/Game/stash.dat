@@ -1,1 +1,5 @@
-coins = 4150
+coins = 30135
+goodyinvulnerable = 5
+goodygravity = -1
+goodyextratime = 5
+goodyextraball = 5

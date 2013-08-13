@@ -2,8 +2,9 @@
 
 GravityGoody::GravityGoody(const sf::Keyboard::Key key,
                            const float gravityFactor,
-                           b2Vec2& gravity) :
-    Goody(key, Goody::GravityGoody),
+                           b2Vec2& gravity, 
+                           const int charge) :
+    Goody(key, Goody::GravityGoody, 0, 0, charge),
     m_gravityFactor(gravityFactor),
     m_currentGravity(gravity),
     m_activeStartTime(0),
