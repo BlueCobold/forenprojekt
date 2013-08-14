@@ -33,10 +33,10 @@ void CoinShopState::onEnter(const EnterStateInformation* enterInformation, const
     m_level = enterInformation->m_level;
     m_levelNumber = enterInformation->m_levelNumber;
 
-    m_coinShopMenu.SetGoodyCharges(Goody::GravityGoody, m_config.get<int>("goodygravity"));
-    m_coinShopMenu.SetGoodyCharges(Goody::InvulnerableGoody, m_config.get<int>("goodyinvulnerable"));
-    m_coinShopMenu.SetGoodyCharges(Goody::ExtraBallGoody, m_config.get<int>("goodyextraball"));
-    m_coinShopMenu.SetGoodyCharges(Goody::ExtraTimeGoody, m_config.get<int>("goodyextratime"));
+    m_coinShopMenu.setGoodyCharges(Goody::GravityGoody, m_config.get<int>("goodygravity"));
+    m_coinShopMenu.setGoodyCharges(Goody::InvulnerableGoody, m_config.get<int>("goodyinvulnerable"));
+    m_coinShopMenu.setGoodyCharges(Goody::ExtraBallGoody, m_config.get<int>("goodyextraball"));
+    m_coinShopMenu.setGoodyCharges(Goody::ExtraTimeGoody, m_config.get<int>("goodyextratime"));
 }
 
 StateChangeInformation CoinShopState::update(const float time)

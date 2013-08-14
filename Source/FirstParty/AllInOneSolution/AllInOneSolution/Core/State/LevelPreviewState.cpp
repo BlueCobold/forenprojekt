@@ -1,4 +1,4 @@
-#include "LevelPreviewState.hpp"
+ #include "LevelPreviewState.hpp"
 
 #include "../gui/Button.hpp"
 #include "../model/Level.hpp"
@@ -64,10 +64,10 @@ StateChangeInformation LevelPreviewState::update(const float time)
     }
     if(clicked == LevelPreviewMenu::BUTTON_COINS)
     {
-        m_coinShopInfo.m_level = m_level;
-        m_coinShopInfo.m_prepareOnly = false;
+        m_playStateInfo.m_level = m_level;
+        m_playStateInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_followingState = CoinShopStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_coinShopInfo;
+        m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 
