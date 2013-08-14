@@ -13,8 +13,8 @@ private:
     const Ball* const& m_ball;
 
 public:
-    InvulnerableGoody(const sf::Keyboard::Key key, const int price, const float durationTime, const Ball* const& ball, const int charge)
-        : Goody(key, Goody::InvulnerableGoody, price, durationTime, 0, charge),
+    InvulnerableGoody(const sf::Keyboard::Key key, const float durationTime, const Ball* const& ball, const int charge)
+        : Goody(key, Goody::InvulnerableGoody, durationTime, 0, charge),
         m_ball(ball)
     { }
 
