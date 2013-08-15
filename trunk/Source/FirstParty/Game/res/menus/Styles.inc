@@ -4,7 +4,7 @@
 		<idle texture="GuiElements" srcx="0" srcy="0" width="317" height="58"
 			offsetx="0" offsety="0"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
-		<hover texture="GuiElements" srcx="317" srcy="0" width="317" height="58"
+		<hover texture="GuiElements" srcx="318" srcy="0" width="317" height="58"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
 		<pressed texture="GuiElements" srcx="634" srcy="0" width="325" height="66"
