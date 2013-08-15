@@ -21,6 +21,7 @@ public:
     virtual void draw(const DrawParameter& params) override;
     virtual void update(const sf::RenderWindow& screen) override;
 
+    void drawAdditionalForeground(const DrawParameter& params);
 protected:
 
     virtual void onPositionChanged() override;

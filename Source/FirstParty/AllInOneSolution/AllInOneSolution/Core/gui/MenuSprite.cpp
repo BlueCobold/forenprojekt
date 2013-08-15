@@ -16,8 +16,6 @@ void MenuSprite::draw(const DrawParameter& params)
         return;
 
     params.getTarget().draw(m_sprite);
-    if(m_showToolTip)
-        m_toolTip.draw(params);
 }
 
 void MenuSprite::setToolTip(const ToolTip& toolTip)
@@ -55,4 +53,10 @@ void MenuSprite::setToolTipText(const std::string& text)
 void MenuSprite::setTextureRect(const sf::IntRect& textureRect)
 {
     m_sprite.setTextureRect(textureRect);
+}
+
+void MenuSprite::drawAdditionalForeground(const DrawParameter& params)
+{
+    if(m_showToolTip && isVisible())
+        m_toolTip.draw(params);
 }
