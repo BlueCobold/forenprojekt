@@ -32,9 +32,6 @@
 	<texture name="Window" path="gui/window.png" smooth="false" />
 	<texture name="goodie" path="gui/Goodies.png" smooth="true" />
 </textures>
-<fonts>
-	<font name="visitor" path="visitor.ttf" />
-</fonts>
 <sounds>
 	<sound name="bounce" path="bounce.wav" />
 	<sound name="switch" path="switch.wav" />
@@ -62,4 +59,5 @@
 	<bitmapfont name="buttonIdleFont" path="buttonIdleFont.xml" />
 	<bitmapfont name="buttonHoverFont" path="buttonHoverFont.xml" />
 	<bitmapfont name="goodyFont" path="goodyfont.xml" />
+	<bitmapfont name="labelSmallFont" path="labelSmallFont.xml" />
 </bitmapfonts>

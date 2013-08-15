@@ -131,60 +131,70 @@ sf::Font* ResourceManager::getFont(const std::string& key)
 
 void ResourceManager::parseTextures(tinyxml2::XMLDocument& doc)
 {
-    tinyxml2::XMLElement* textures = doc.FirstChildElement("textures");
-    for(auto textureIterator = textures->FirstChildElement("texture");
-        textureIterator != nullptr; textureIterator = textureIterator->NextSiblingElement("texture"))
+    if(auto textures = doc.FirstChildElement("textures"))
     {
-        auto properties = std::make_pair<std::string, bool>(
-            std::string(textureIterator->Attribute("path")),
-            textureIterator->BoolAttribute("smooth"));
+        for(auto textureIterator = textures->FirstChildElement("texture");
+            textureIterator != nullptr; textureIterator = textureIterator->NextSiblingElement("texture"))
+        {
+            auto properties = std::make_pair<std::string, bool>(
+                std::string(textureIterator->Attribute("path")),
+                textureIterator->BoolAttribute("smooth"));
 
-        m_textureKeys.insert(std::make_pair<std::string, std::pair<std::string, bool>>(
-            std::string(textureIterator->Attribute("name")), properties));
+            m_textureKeys.insert(std::make_pair<std::string, std::pair<std::string, bool>>(
+                std::string(textureIterator->Attribute("name")), properties));
+        }
     }
 }
 
 void ResourceManager::parseFonts(tinyxml2::XMLDocument& doc)
 {
-    tinyxml2::XMLElement* fonts = doc.FirstChildElement("fonts");
-    for(auto fontIterator = fonts->FirstChildElement("font");
-        fontIterator != nullptr; fontIterator = fontIterator->NextSiblingElement("font"))
+    if(auto fonts = doc.FirstChildElement("fonts"))
     {
-        m_fontKeys.insert(std::make_pair<std::string, std::string>(
-            std::string(fontIterator->Attribute("name")), std::string(fontIterator->Attribute("path"))));
+        for(auto fontIterator = fonts->FirstChildElement("font");
+            fontIterator != nullptr; fontIterator = fontIterator->NextSiblingElement("font"))
+        {
+            m_fontKeys.insert(std::make_pair<std::string, std::string>(
+                std::string(fontIterator->Attribute("name")), std::string(fontIterator->Attribute("path"))));
+        }
     }
 }
 
 void ResourceManager::parseSounds(tinyxml2::XMLDocument& doc)
 {
-    tinyxml2::XMLElement* sounds = doc.FirstChildElement("sounds");
-    for(auto soundIterator = sounds->FirstChildElement("sound");
-        soundIterator != nullptr; soundIterator = soundIterator->NextSiblingElement("sound"))
+    if(auto sounds = doc.FirstChildElement("sounds"))
     {
-        m_soundBufferKeys.insert(std::make_pair<std::string, std::string>(
-            std::string(soundIterator->Attribute("name")), std::string(soundIterator->Attribute("path"))));
+        for(auto soundIterator = sounds->FirstChildElement("sound");
+            soundIterator != nullptr; soundIterator = soundIterator->NextSiblingElement("sound"))
+        {
+            m_soundBufferKeys.insert(std::make_pair<std::string, std::string>(
+                std::string(soundIterator->Attribute("name")), std::string(soundIterator->Attribute("path"))));
+        }
     }
 }
 
 void ResourceManager::parseBitmapFonts(tinyxml2::XMLDocument& doc)
 {
-    tinyxml2::XMLElement* bitmapFonts = doc.FirstChildElement("bitmapfonts");
-    for(auto it = bitmapFonts->FirstChildElement("bitmapfont");
-        it != nullptr; it = it->NextSiblingElement("bitmapfont"))
+    if(auto bitmapFonts = doc.FirstChildElement("bitmapfonts"))
     {
-        m_bitmapFontKeys.insert(std::make_pair<std::string, std::string>(
-            std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
+        for(auto it = bitmapFonts->FirstChildElement("bitmapfont");
+            it != nullptr; it = it->NextSiblingElement("bitmapfont"))
+        {
+            m_bitmapFontKeys.insert(std::make_pair<std::string, std::string>(
+                std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
+        }
     }
 }
 
 void ResourceManager::parseMenus(tinyxml2::XMLDocument& doc)
 {
-    tinyxml2::XMLElement* menus = doc.FirstChildElement("menus");
-    for(auto it = menus->FirstChildElement("menu");
-        it != nullptr; it = it->NextSiblingElement("menu"))
+    if(auto menus = doc.FirstChildElement("menus"))
     {
-        m_menuKeys.insert(std::make_pair<std::string, std::string>(
-            std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
+        for(auto it = menus->FirstChildElement("menu");
+            it != nullptr; it = it->NextSiblingElement("menu"))
+        {
+            m_menuKeys.insert(std::make_pair<std::string, std::string>(
+                std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
+        }
     }
 }
 

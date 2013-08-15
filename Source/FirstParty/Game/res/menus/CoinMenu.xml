@@ -11,26 +11,26 @@
 			</style>
 			<elements>
 				<image id="1" texture="goodie" x="0" y="0" scrx="0" scry="8" width="48" height="48" />
-				<label text="gui_goody_gravity" font="buttonHoverFont" alignment="0" x="50" y="8" />
-				<label id="2" text="" font="buttonHoverFont" alignment="2" x="240" y="8" />
+				<label text="gui_goody_gravity" font="labelSmallFont" alignment="0" x="50" y="8" />
+				<label id="2" text="" font="labelSmallFont" alignment="2" x="240" y="8" />
 				<button id="3" text="" style="plus" x="268" y="8" />
 				<button id="4" text="" style="minus" x="300" y="8" />
 				
 				<image id="5" texture="goodie" x="0" y="53" scrx="56" scry="8" width="48" height="48" />
-				<label text="gui_goody_invulnerable" font="buttonHoverFont" alignment="0" x="50" y="65" />
-				<label id="6" text="" font="buttonHoverFont" alignment="2" x="240" y="65" />
+				<label text="gui_goody_invulnerable" font="labelSmallFont" alignment="0" x="50" y="65" />
+				<label id="6" text="" font="labelSmallFont" alignment="2" x="240" y="65" />
 				<button id="7" text="" style="plus" x="268" y="65" />
 				<button id="8" text="" style="minus" x="300" y="65" />
 				
 				<image id="9" texture="goodie" x="0" y="106" scrx="112" scry="8" width="48" height="48" />
-				<label text="gui_goody_extra_ball" font="buttonHoverFont" alignment="0" x="50" y="118" />
-				<label id="10" text="" font="buttonHoverFont" alignment="2" x="240" y="118" />
+				<label text="gui_goody_extra_ball" font="labelSmallFont" alignment="0" x="50" y="118" />
+				<label id="10" text="" font="labelSmallFont" alignment="2" x="240" y="118" />
 				<button id="11" text="" style="plus" x="268" y="118" />
 				<button id="12" text="" style="minus" x="300" y="118" />
 				
 				<image id="13" texture="goodie" x="0" y="159" scrx="168" scry="8" width="48" height="48" />
-				<label text="gui_goody_extra_time" font="buttonHoverFont" alignment="0" x="50" y="171" />
-				<label id="14" text="" font="buttonHoverFont" alignment="2" x="240" y="171" />
+				<label text="gui_goody_extra_time" font="labelSmallFont" alignment="0" x="50" y="171" />
+				<label id="14" text="" font="labelSmallFont" alignment="2" x="240" y="171" />
 				<button id="15" text="" style="plus" x="268" y="171" />
 				<button id="16" text="" style="minus" x="300" y="171" />
 			</elements>
