@@ -61,8 +61,13 @@ void MenuPanel::draw(const DrawParameter& params)
         (*it)->draw(params);
     
     for(auto it = begin(m_elements); it != end(m_elements); ++it)
+    {
         if((*it)->getType() == MenuElementType::Button)
             dynamic_cast<Button*>(it->get())->drawAdditionalForeground(params);
+
+        if((*it)->getType() == MenuElementType::Image)
+            dynamic_cast<MenuSprite*>(it->get())->drawAdditionalForeground(params);
+    }
 }
 
 void MenuPanel::update(const sf::RenderWindow& screen)

@@ -122,6 +122,8 @@ void ToolTip::setLines(const std::string& text)
 
     m_lines = 0;
 
+    m_label.clear();
+
     std::string tokens = text.c_str();
     std::string token;
 
