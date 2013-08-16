@@ -10,29 +10,29 @@
 				<scrollBottom texture="GuiElements" srcx="1000" srcy="10" width="20" height="11" />
 			</style>
 			<elements>
-				<image id="1" texture="goodie" x="0" y="0" scrx="0" scry="8" width="48" height="48" />
+				<image id="1" tooltip="default" tooltiptext="tooltip_goody_gravity" texture="goodie" x="0" y="0" scrx="0" scry="8" width="48" height="48" />
 				<label text="gui_goody_gravity" font="labelSmallFont" alignment="0" x="50" y="8" />
 				<label id="2" text="" font="labelSmallFont" alignment="2" x="240" y="8" />
-				<button id="3" text="" style="plus" x="268" y="8" />
-				<button id="4" text="" style="minus" x="300" y="8" />
+				<button id="3" tooltip="default" tooltiptext="tooltip_goody_cost" text="" style="plus" x="268" y="8" />
+				<button id="4" tooltip="default" tooltiptext="tooltip_goody_refund" text="" style="minus" x="300" y="8" />
 				
-				<image id="5" texture="goodie" x="0" y="53" scrx="56" scry="8" width="48" height="48" />
+				<image id="5" tooltip="default" tooltiptext="tooltip_goody_invulnerable" texture="goodie" x="0" y="53" scrx="56" scry="8" width="48" height="48" />
 				<label text="gui_goody_invulnerable" font="labelSmallFont" alignment="0" x="50" y="65" />
 				<label id="6" text="" font="labelSmallFont" alignment="2" x="240" y="65" />
-				<button id="7" text="" style="plus" x="268" y="65" />
-				<button id="8" text="" style="minus" x="300" y="65" />
+				<button id="7" tooltip="default" tooltiptext="tooltip_goody_cost" text="" style="plus" x="268" y="65" />
+				<button id="8" tooltip="default" tooltiptext="tooltip_goody_refund" text="" style="minus" x="300" y="65" />
 				
-				<image id="9" texture="goodie" x="0" y="106" scrx="112" scry="8" width="48" height="48" />
+				<image id="9" tooltip="default" tooltiptext="tooltip_goody_extraball" texture="goodie" x="0" y="106" scrx="112" scry="8" width="48" height="48" />
 				<label text="gui_goody_extra_ball" font="labelSmallFont" alignment="0" x="50" y="118" />
 				<label id="10" text="" font="labelSmallFont" alignment="2" x="240" y="118" />
-				<button id="11" text="" style="plus" x="268" y="118" />
-				<button id="12" text="" style="minus" x="300" y="118" />
+				<button id="11" tooltip="default" tooltiptext="tooltip_goody_cost" text="" style="plus" x="268" y="118" />
+				<button id="12" tooltip="default" tooltiptext="tooltip_goody_refund" text="" style="minus" x="300" y="118" />
 				
-				<image id="13" texture="goodie" x="0" y="159" scrx="168" scry="8" width="48" height="48" />
+				<image id="13" tooltip="default" tooltiptext="tooltip_goody_extratime" texture="goodie" x="0" y="159" scrx="168" scry="8" width="48" height="48" />
 				<label text="gui_goody_extra_time" font="labelSmallFont" alignment="0" x="50" y="171" />
 				<label id="14" text="" font="labelSmallFont" alignment="2" x="240" y="171" />
-				<button id="15" text="" style="plus" x="268" y="171" />
-				<button id="16" text="" style="minus" x="300" y="171" />
+				<button id="15" tooltip="default" tooltiptext="tooltip_goody_cost" text="" style="plus" x="268" y="171" />
+				<button id="16" tooltip="default" tooltiptext="tooltip_goody_refund" text="" style="minus" x="300" y="171" />
 			</elements>
 		</subwindow>
 		<button id="17" text="gui_close" style="default" x="261" y="270" />
