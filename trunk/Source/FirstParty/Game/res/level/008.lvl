@@ -1,0 +1,106 @@
+<level>
+	<levelinfo name="Four Chambers">
+		<infoimage scrx="0" scry="0" width="192" height="108" />
+	</levelinfo>
+	<constants gate="0" gatetime="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+
+		<shapes>
+			<shape name="checkpointArea" type="polygon">
+				<vertex x="-90" y="-90" />
+				<vertex x="90" y="-90" />
+				<vertex x="90" y="150" />
+				<vertex x="-90" y="150" />
+			</shape>
+		</shapes>
+		
+		<entities>
+
+			<entity name="respawnLoc1" rep="R1" collideWithBall="false">
+				<physics name="wall" shape="checkpointArea" />
+				<collides>
+					<copySpawnLocation>
+						<always />
+					</copySpawnLocation>
+				</collides>
+			</entity>
+			<entity name="target_1" rep="t2" type="target" collideWithBall="false">
+				<constants color="0" />
+				<physics name="target">
+					<shape type="circle" radius="30" />
+				</physics>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true">
+						<frameindex frames="2">
+							<setVar name="color">
+								<mod>
+									<mul>
+										<time />
+										<static value="0.5" />
+									</mul>
+									<static value="2" />
+								</mod>
+							</setVar>
+						</frameindex>
+					</animation>
+				</animations>
+				<collides>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<propertyFilter target="entity">
+								<add>
+									<static value="2" />
+									<mul>
+										<static value="-1" />
+										<var name="color" />
+									</mul>
+								</add>
+							</propertyFilter>
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+			</entity>
+		</entities>
+
+	</templates>
+
+	<grid size="60" width="2740" height="1410">
+                                                                                    
+                  W1 1w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2W5W1 1w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2w1
+                  w2s4w2                                                            W2 2d3
+                  w1s3w2  t2                t2                t1                t1  w1s3d2
+                  W6 6w1                                                            W4 4d3
+                  w2s3w1                          /5^O^X\5                          w6s6s5
+                  w6s6w5                        /2s3s1w6s6\5                        w2s3s1
+                  W1 1d3\1          R1        /2W1 1d5W1 1d3\1          R1        /2W1 1d5
+                  w5s2d1s2\1                /2w4w1s3d2w5s2d1s2\1                /2w4w1s3d2
+                  W3 3d6W2 2\1            /2W2 2W2 2d3W3 3d6W2 2\1            /2W2 2W2 2d3
+                  w2s4d2s4w3s2\1        /2w2s4d2w4s5d2w2s4d2s4w3s2\1        /2w2s4d2w4s5d2
+                  W4 4d3W1 1w4w4    TT  W6 6w1w4W6 6d1W4 4d3W1 1w4w4    TT  W6 6w1w4W6 6w1
+                  W1 1w3                        w3w2w5w1w1w3                        w3w2w2
+                  w2s4w2  t2                t2  W2 2d3w2s4w2                        W2 2d3
+                  w2s4w2                        W2 2d3w1s3w2  t1                t1  w1s3d2
+                  W6 6w1                        W4 4d3W6 6w1                        W4 4d3
+                  w2s3w1                        w6s6s5w2s3w1                        w6s6s5
+                  w6s6w5                        w2s3s1w6s6w5            BB          w2s3s1
+                  W1 1d3\1                    /2W1 1d5W1 1d3\1                    /2W1 1d5
+                  w5s2d1s2\1                /2w4w1s3d2w5s2d1s2\1                /2w4w1s3d2
+                  W3 3d6W2 2\1            /2W2 2W2 2d3W3 3d6W2 2\1            /2W2 2W2 2d3
+                  w2s4d2s4w3s2\1        /2w2s4d2w4s5d2w2s4d2s4w3s2\1        /2w2s4d2w4s5d2
+                  W4 4d3W1 1w4w4    TT  W6 6d1w4W6 6d1W4 4d3W1 1w4w4    TT  W6 6d1w4W6 6d1
+                 
+                                  
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="780" silver="790" gold="800" />
+</level>
