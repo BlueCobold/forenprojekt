@@ -85,7 +85,7 @@ public:
 
     void unbindBody()
     {
-        if(m_world != nullptr)
+        if(m_world != nullptr && m_body != nullptr)
         {
             m_world->DestroyBody(m_body);
             m_body = nullptr;

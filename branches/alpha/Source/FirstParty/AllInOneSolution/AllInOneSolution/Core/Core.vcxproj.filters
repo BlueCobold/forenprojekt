@@ -744,6 +744,9 @@
     <ClInclude Include="gui\MenuPanel.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="Resources.h">
+      <Filter>Resouces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -847,5 +850,10 @@
     <None Include="..\..\..\Game\res\language.dat">
       <Filter>Resouces</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Resouces</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

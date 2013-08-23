@@ -20,6 +20,7 @@
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <SFML/Audio/Listener.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 #include <sstream>
 #include <utility> // move
@@ -46,6 +47,11 @@ App::App(AppConfig& config) :
     }
     else
         m_screen.create(videoMode, m_windowTitle);
+
+    sf::Image icon; icon.create(16, 16);
+    sf::Image texture = m_resourceManager.getTexture("GuiElements")->copyToImage();
+    icon.copy(texture, 0, 0, sf::IntRect(910, 330, 926, 346));
+    m_screen.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
     m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));

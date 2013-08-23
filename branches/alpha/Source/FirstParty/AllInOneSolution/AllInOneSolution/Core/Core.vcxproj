@@ -45,6 +45,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>RicketyRacquet</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -315,6 +316,7 @@
     <ClInclude Include="rendering\transitions\VerticalSlidingStripesTransition.hpp" />
     <ClInclude Include="rendering\transitions\VerticalSpringTransition.hpp" />
     <ClInclude Include="rendering\transitions\VerticalStripesTransition.hpp" />
+    <ClInclude Include="Resources.h" />
     <ClInclude Include="resources\AppConfig.hpp" />
     <ClInclude Include="resources\Config.hpp" />
     <ClInclude Include="resources\FileReader.hpp" />
@@ -352,6 +354,9 @@
     <None Include="..\..\..\Game\res\level\002.lvl">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
