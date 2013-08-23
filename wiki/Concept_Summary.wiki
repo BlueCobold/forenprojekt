@@ -21,3 +21,8 @@ An overview of the existing or planned modes can be found here: [Blendmodes]
 == Shop gui ==
 A mock for the layout and items in the shop can be found here:
 [ShopGUI]
+
+== Selecting resolution ==
+To select the resolution, a simple control with two arrow-buttons and a label will be built:
+
+http://spieleprogrammierer-forenprojekt.googlecode.com/svn/trunk/Concepts/graphical/gui/resolution_selector.png
