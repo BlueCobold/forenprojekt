@@ -17,7 +17,7 @@ Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf
     m_size.y = m_style.idleStyle.sprite.getTextureRect().height;
 }
 
-void Button::update(const sf::RenderWindow& screen)
+void Button::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
 {
     auto position = getPosition();
     auto offset = getOffset();
@@ -27,7 +27,7 @@ void Button::update(const sf::RenderWindow& screen)
                            m_style.mouseRect.height);
 
     sf::Vector2i mouseposition = sf::Mouse::getPosition(screen);
-    if(buttonRect.contains(mouseposition) && isVisible())
+    if(buttonRect.contains(mouseposition + mouseOffset) && isVisible())
     {
         if(!m_playHoverSound && m_style.hoverStyle.sound)
         {

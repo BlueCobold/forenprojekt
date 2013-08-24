@@ -15,7 +15,7 @@ public:
 
     CheckBox(int id, CheckBoxStyle style, const sf::Vector2f& position, const sf::Vector2f& offset);
 
-    virtual void update(const sf::RenderWindow& screen) override;
+    virtual void update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     virtual void draw(const DrawParameter& params) override;
     
     bool getChecked();

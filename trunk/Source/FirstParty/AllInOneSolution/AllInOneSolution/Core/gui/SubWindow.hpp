@@ -33,7 +33,8 @@ public:
               const SubWindowStyle& style);
 
     virtual void draw(const DrawParameter& params) override;
-    virtual void update(const sf::RenderWindow& screen) override;
+    void drawAdditionalForeground(const DrawParameter& params) override;
+    virtual void update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 
     MenuPanel* getPanel();
 protected:
@@ -64,6 +65,8 @@ private:
 
     float sliderPixelToWindowPixel(float pixel);
     float windowPixelToSliderPixel(float pixel);
+
+    sf::Vector2i getMouseOffset(const sf::RenderWindow& screen);
 };
 
 #endif

@@ -42,9 +42,11 @@ public:
     virtual ~MenuElement()
     { }
 
-    virtual void update(const sf::RenderWindow& screen)
+    virtual void update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0))
     { }
     virtual void draw(const DrawParameter& params) override = 0;
+    virtual void drawAdditionalForeground(const DrawParameter& params)
+    { }
     void setPosition(const sf::Vector2f& position)
     {
         if(position != m_position)

@@ -10,7 +10,7 @@ CheckBox::CheckBox(int id, CheckBoxStyle style, const sf::Vector2f& position, co
     onPositionChanged();
 }
 
-void CheckBox::update(const sf::RenderWindow& screen)
+void CheckBox::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
 {
     auto position = getPosition();
     auto offset = getOffset();
@@ -20,13 +20,13 @@ void CheckBox::update(const sf::RenderWindow& screen)
                              m_style.mouseRect.height);
     if(utility::Mouse.leftButtonReleased())
     {
-        if(checkboxRect.contains(sf::Mouse::getPosition(screen)) && !m_checked)
+        if(checkboxRect.contains(sf::Mouse::getPosition(screen) + mouseOffset) && !m_checked)
         {
             m_checked = true;
             m_sprite = &m_style.checkedStyle.sprite;
             onPositionChanged();
         }
-        else if(checkboxRect.contains(sf::Mouse::getPosition(screen)) && m_checked)
+        else if(checkboxRect.contains(sf::Mouse::getPosition(screen) + mouseOffset) && m_checked)
         {
             m_checked = false;
             m_sprite = &m_style.uncheckedStyle.sprite;

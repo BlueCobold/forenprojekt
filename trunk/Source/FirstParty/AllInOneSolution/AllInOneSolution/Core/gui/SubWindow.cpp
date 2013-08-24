@@ -97,9 +97,9 @@ void SubWindow::draw(const DrawParameter& params)
     off(params);
 }
 
-void SubWindow::update(const sf::RenderWindow& screen)
+void SubWindow::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
 {
-    sf::IntRect mouseRect(static_cast<sf::Vector2i>(m_windowRect.getPosition()), static_cast<sf::Vector2i>(m_windowRect.getSize()));
+    sf::IntRect mouseRect(static_cast<sf::Vector2i>(m_windowRect.getPosition()) + mouseOffset, static_cast<sf::Vector2i>(m_windowRect.getSize()));
     sf::IntRect sliderRect(static_cast<sf::Vector2i>(m_positionRect.getPosition()), static_cast<sf::Vector2i>(m_positionRect.getSize()));
 
     float scroll = 0;
@@ -147,6 +147,11 @@ void SubWindow::update(const sf::RenderWindow& screen)
                     - m_style.scrollbarBottom.getTextureRect().height;
     m_style.scrollbarMiddle.setScale(1, height/m_style.scrollbarMiddle.getTextureRect().height);
     m_style.scrollbarBottom.setPosition(pos.x, pos.y + height + m_style.scrollbarTop.getTextureRect().height);
+
+    if(mouseRect.contains(sf::Mouse::getPosition(screen)))
+        m_panel.update(screen, getMouseOffset(screen));
+    else
+        m_panel.update(screen,static_cast<sf::Vector2i>(screen.getSize()));
 }
 
 void SubWindow::onPositionChanged()
@@ -170,4 +175,17 @@ float SubWindow::sliderPixelToWindowPixel(float pixel)
 float SubWindow::windowPixelToSliderPixel(float pixel)
 {
     return pixel * (m_sliderRect.getSize().y - m_positionRect.getSize().y) / (m_innerHeight - m_size.y);
+}
+
+sf::Vector2i SubWindow::getMouseOffset(const sf::RenderWindow& screen)
+{
+    sf::Vector2i mouseOffset = - static_cast<sf::Vector2i>(getPosition() + getOffset()) +
+                                 sf::Vector2i(static_cast<int>(m_center.x - m_size.x / 2.f), static_cast<int>(m_center.y - m_size.y / 2.f));
+
+    return mouseOffset;
+}
+
+void SubWindow::drawAdditionalForeground(const DrawParameter& params)
+{
+    m_panel.drawAdditionalForeground(params);
 }

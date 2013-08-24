@@ -19,7 +19,7 @@ Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& positi
     onPositionChanged();
 }
 
-void Slider::update(const sf::RenderWindow& screen)
+void Slider::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
 {
     auto position = getPosition();
     auto eoffset = getOffset();
@@ -53,7 +53,7 @@ void Slider::update(const sf::RenderWindow& screen)
     }
     else
     {
-        sf::Vector2i mousePos = sf::Mouse::getPosition(screen);
+        sf::Vector2i mousePos = sf::Mouse::getPosition(screen) + mouseOffset;
         calculateValue(x, mousePos.x - m_pick);
         m_spriteSlider = &m_style.active.spriteSlider;
         m_spriteBackround = &m_style.active.spriteBackround;

@@ -58,10 +58,16 @@ void Menu::draw(const DrawParameter& params)
     params.getTarget().draw(m_template.background);
     drawAdditionalBackground(params);
     m_panel.draw(params);
+    drawAdditionalForeground(params);
 }
 
 void Menu::drawAdditionalBackground(const DrawParameter& params)
 {
+}
+
+void Menu::drawAdditionalForeground(const DrawParameter& params)
+{
+    m_panel.drawAdditionalForeground(params);
 }
 
 void Menu::update(const sf::RenderWindow& screen)

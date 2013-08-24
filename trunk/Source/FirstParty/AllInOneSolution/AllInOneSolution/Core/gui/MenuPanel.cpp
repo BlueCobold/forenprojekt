@@ -59,21 +59,12 @@ void MenuPanel::draw(const DrawParameter& params)
 {
     for(auto it = begin(m_elements); it != end(m_elements); ++it)
         (*it)->draw(params);
-    
-    for(auto it = begin(m_elements); it != end(m_elements); ++it)
-    {
-        if((*it)->getType() == MenuElementType::Button)
-            dynamic_cast<Button*>(it->get())->drawAdditionalForeground(params);
-
-        if((*it)->getType() == MenuElementType::Image)
-            dynamic_cast<MenuSprite*>(it->get())->drawAdditionalForeground(params);
-    }
 }
 
-void MenuPanel::update(const sf::RenderWindow& screen)
+void MenuPanel::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
 {
     for(auto it = begin(m_elements); it != end(m_elements); ++it)
-        (*it)->update(screen);
+        (*it)->update(screen, mouseOffset);
 }
 
 void MenuPanel::setCorrelation()
@@ -134,4 +125,10 @@ void MenuPanel::createSprite(const MenuSprite& info)
 void MenuPanel::registerOnClick(std::function<void(const Button& sender)> callback)
 {
     m_clickCallback = callback;
+}
+
+void MenuPanel::drawAdditionalForeground(const DrawParameter& params)
+{
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
+        it->get()->drawAdditionalForeground(params);
 }

@@ -26,7 +26,8 @@ public:
     const sf::Vector2f& getPosition() const;
 
     virtual void draw(const DrawParameter& params) override;
-    virtual void update(const sf::RenderWindow& screen);
+    void drawAdditionalForeground(const DrawParameter& params);
+    virtual void update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0));
 
     void registerOnClick(std::function<void(const Button& sender)> callback);
 

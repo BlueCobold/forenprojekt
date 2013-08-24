@@ -41,7 +41,7 @@ public:
     virtual ~Button()
     { }
 
-    virtual void update(const sf::RenderWindow& screen) override;
+    virtual void update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 
     virtual void draw(const DrawParameter& params) override;
 
@@ -53,7 +53,7 @@ public:
 
     void setToolTipText(const std::string& text);
 
-    virtual void drawAdditionalForeground(const DrawParameter& params);
+    virtual void drawAdditionalForeground(const DrawParameter& params) override;
 
     void changeIdleSprite(const sf::Sprite& sprite);
     void changeHoverSprite(const sf::Sprite& sprite);
