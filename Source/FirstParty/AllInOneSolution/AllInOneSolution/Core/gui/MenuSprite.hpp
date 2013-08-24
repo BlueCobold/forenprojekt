@@ -19,9 +19,9 @@ public:
     void setTextureRect(const sf::IntRect& textureRect);
 
     virtual void draw(const DrawParameter& params) override;
-    virtual void update(const sf::RenderWindow& screen) override;
+    virtual void update(const sf::RenderWindow& screen, const sf::Vector2i& offset = sf::Vector2i(0, 0)) override;
 
-    void drawAdditionalForeground(const DrawParameter& params);
+    void drawAdditionalForeground(const DrawParameter& params) override;
 protected:
 
     virtual void onPositionChanged() override;

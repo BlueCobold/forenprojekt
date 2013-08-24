@@ -28,10 +28,10 @@
 		<idle texture="GuiElements" srcx="910" srcy="346" width="32" height="32"
 			offsetx="0" offsety="0"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
-		<hover texture="GuiElements" srcx="910" srcy="346" width="116" height="61"
+		<hover texture="GuiElements" srcx="910" srcy="346" width="32" height="32"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
-		<pressed texture="GuiElements" srcx="910" srcy="346" width="116" height="61"
+		<pressed texture="GuiElements" srcx="910" srcy="346" width="32" height="32"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
 	</buttonStyle>
@@ -40,10 +40,10 @@
 		<idle texture="GuiElements" srcx="910" srcy="378" width="32" height="32"
 			offsetx="0" offsety="0"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
-		<hover texture="GuiElements" srcx="910" srcy="378" width="116" height="61"
+		<hover texture="GuiElements" srcx="910" srcy="378" width="32" height="32"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
-		<pressed texture="GuiElements" srcx="910" srcy="378" width="116" height="61"
+		<pressed texture="GuiElements" srcx="910" srcy="378" width="32" height="32"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
 	</buttonStyle>

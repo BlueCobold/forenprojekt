@@ -58,7 +58,7 @@ public:
 protected:
 
     virtual void drawAdditionalBackground(const DrawParameter& params);
-
+    virtual void drawAdditionalForeground(const DrawParameter& params);
 private:
 
     template<class T>

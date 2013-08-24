@@ -28,15 +28,17 @@ void MenuSprite::onPositionChanged()
     m_sprite.setPosition(getPosition() + getOffset());
 }
 
-void MenuSprite::update(const sf::RenderWindow& screen)
+void MenuSprite::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
 {
+    if(MenuElement::getId() == 1)
+        int c = 0;
     sf::IntRect rect = sf::IntRect(static_cast<int>(m_sprite.getPosition().x),
                                    static_cast<int>(m_sprite.getPosition().y),
                                    m_sprite.getTextureRect().width,
                                    m_sprite.getTextureRect().height);
 
     sf::Vector2i mouseposition = sf::Mouse::getPosition(screen);
-    if(rect.contains(mouseposition))
+    if(rect.contains(mouseposition + mouseOffset))
     {
         m_showToolTip = true;
         m_toolTip.setPosition(static_cast<const sf::Vector2f>(mouseposition));

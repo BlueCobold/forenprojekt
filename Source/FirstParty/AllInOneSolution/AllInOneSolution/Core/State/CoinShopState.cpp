@@ -60,6 +60,51 @@ StateChangeInformation CoinShopState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_levelPreviewInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
+    else if(clicked == CoinShopMenu::BUTTON_GRAVITY_PLUS)
+    {
+        int cost = m_coinShopMenu.getBuyCost(Goody::GravityGoody);
+        int coins = m_config.get<int>("coins");
+        int charge = m_config.get<int>("goodygravity");
+        if(coins >= cost)
+        {
+            m_config.set<int>("goodygravity", ++charge);
+            m_config.set<int>("coins", coins - cost);
+        }
+    }
+    else if(clicked == CoinShopMenu::BUTTON_INVULNERABLE_PLUS)
+    {
+        int cost = m_coinShopMenu.getBuyCost(Goody::InvulnerableGoody);
+        int coins = m_config.get<int>("coins");
+        int charge = m_config.get<int>("goodyinvulnerable");
+        if(coins >= cost)
+        {
+            m_config.set<int>("goodyinvulnerable", ++charge);
+            m_config.set<int>("coins", coins - cost);
+        }
+    }
+    else if(clicked == CoinShopMenu::BUTTON_EXTRA_BALL_PLUS)
+    {
+        int cost = m_coinShopMenu.getBuyCost(Goody::ExtraBallGoody);
+        int coins = m_config.get<int>("coins");
+        int charge = m_config.get<int>("goodyextraball");
+        if(coins >= cost)
+        {
+            m_config.set<int>("goodyextraball", ++charge);
+            m_config.set<int>("coins", coins - cost);
+        }
+    }
+    else if(clicked == CoinShopMenu::BUTTON_EXTRA_TIME_PLUS)
+    {
+        int cost = m_coinShopMenu.getBuyCost(Goody::ExtraTimeGoody);
+        int coins = m_config.get<int>("coins");
+        int charge = m_config.get<int>("goodyextratime");
+        if(coins >= cost)
+        {
+            m_config.set<int>("goodyextratime", ++charge);
+            m_config.set<int>("coins", coins - cost);
+        }
+    }
+
     return StateChangeInformation::Empty();
 }
 

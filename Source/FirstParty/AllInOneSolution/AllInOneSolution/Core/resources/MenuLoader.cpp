@@ -194,7 +194,7 @@ void MenuLoader::parseImages(MenuElements& elements,
                               sf::Vector2f(0, 0),
                               sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")),
                               imageXml->IntAttribute("id"));
-            
+
             if(auto toolTipName = imageXml->Attribute("tooltip"))
             {
                 auto tooltip = toolTip.find(toolTipName);
