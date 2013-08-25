@@ -55,9 +55,9 @@ void CoinShopMenu::setGoodyIcon(const Goody::Type& goody, const int charges)
 {
     sf::IntRect textureRect;
     if(charges != 0)
-        textureRect = sf::IntRect(goody * 56, Deselected * 64, 56 ,64);
+        textureRect = sf::IntRect(goody * 48 + goody * 8, Deselected * 48 + 8, 48 ,48);
     else
-        textureRect = sf::IntRect(goody * 56, Disabled * 64, 56 ,64);
+        textureRect = sf::IntRect(goody * 48 + goody * 8, Disabled * 48 + 56, 48 ,48);
 
     if(goody == Goody::GravityGoody)
         Menu::getSprite(SPRITE_GRAVITY).setTextureRect(textureRect);
