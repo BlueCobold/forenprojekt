@@ -38,7 +38,10 @@ CoinShopMenu::CoinShopMenu(const sf::Vector2f& position,
 void CoinShopMenu::setGoodyCharges(const Goody::Type& goody, const int charges)
 {
     if(goody == Goody::GravityGoody)
-        Menu::getLabel(LABEL_GRAVITY).setText(utility::toString<int>(charges));
+        if(charges == -1)
+            Menu::getLabel(LABEL_GRAVITY).setText(utility::toString("~"));
+        else
+            Menu::getLabel(LABEL_GRAVITY).setText(utility::toString<int>(charges));
     else if(goody == Goody::InvulnerableGoody)
         Menu::getLabel(LABEL_INVULNERABLE).setText(utility::toString<int>(charges));
     else if(goody == Goody::ExtraBallGoody)
@@ -55,9 +58,9 @@ void CoinShopMenu::setGoodyIcon(const Goody::Type& goody, const int charges)
 {
     sf::IntRect textureRect;
     if(charges != 0)
-        textureRect = sf::IntRect(goody * 48 + goody * 8, Deselected * 48 + 8, 48 ,48);
+        textureRect = sf::IntRect(goody * 48 + goody * 8, 8, 48 ,48);
     else
-        textureRect = sf::IntRect(goody * 48 + goody * 8, Disabled * 48 + 56, 48 ,48);
+        textureRect = sf::IntRect(goody * 48 + goody * 8, 200, 48 ,48);
 
     if(goody == Goody::GravityGoody)
         Menu::getSprite(SPRITE_GRAVITY).setTextureRect(textureRect);

@@ -91,6 +91,7 @@ public:
     const int getMedal(const Level::Medals medal) const;
     const std::string getLevelName() const;
 
+    void onEnter();
 private:
 
     struct EntitySpawn
@@ -307,6 +308,7 @@ private:
     Goody m_extraBallGoody;
     Goody m_extraTimeGoody;
     int m_currentSeletedGoody;
+    bool m_playing;
 };
 
 #endif // LEVEL_HPP

@@ -38,6 +38,7 @@ public:
     virtual bool canActivate() const;
     virtual bool isSelected() const;
     virtual int getCharges() const;
+    void setCharges(const int charges);
     const Type getType() const;
     void setSelected(const bool selected);
     void registerForActivation(std::function<void(Goody& sender)> callback);

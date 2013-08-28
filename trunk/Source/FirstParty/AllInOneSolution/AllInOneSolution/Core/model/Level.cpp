@@ -55,7 +55,8 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConf
     m_invulnerableGoody(sf::Keyboard::Num2, 3.f, m_ball, config.get<int>("goodyinvulnerable")),
     m_extraBallGoody(sf::Keyboard::Num3, Goody::ExtraBallGoody, 0, 0, config.get<int>("goodyextraball")),
     m_extraTimeGoody(sf::Keyboard::Num4, Goody::ExtraTimeGoody, 0, 0, config.get<int>("goodyextratime")),
-    m_currentSeletedGoody(0)
+    m_currentSeletedGoody(0),
+    m_playing(false)
 {
     auto func = [this](Goody& sender)
     {
@@ -104,7 +105,8 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     m_invulnerableGoody.update(elapsedTime);
     m_extraBallGoody.update(elapsedTime);
     m_extraTimeGoody.update(elapsedTime);
-    updateGoodyCharges();
+    if(m_playing)
+        updateGoodyCharges();
 
     m_ball->setInvulnerable(m_invulnerableGoody.isActive());
 
@@ -630,4 +632,13 @@ void Level::updateGoodyCharges()
     m_config.set<int>("goodyinvulnerable", m_invulnerableGoody.getCharges());
     m_config.set<int>("goodyextraball", m_extraBallGoody.getCharges());
     m_config.set<int>("goodyextratime", m_extraTimeGoody.getCharges());
+}
+void Level::onEnter()
+{
+    m_playing = true;
+
+    m_gravityGoody.setCharges(m_config.get<int>("goodygravity"));
+    m_invulnerableGoody.setCharges(m_config.get<int>("goodyinvulnerable"));
+    m_extraBallGoody.setCharges(m_config.get<int>("goodyextraball"));
+    m_extraTimeGoody.setCharges(m_config.get<int>("goodyextratime"));
 }

@@ -82,3 +82,8 @@ void Goody::registerForActivation(std::function<void(Goody& sender)> callback)
 {
     m_callback = callback;
 }
+
+void Goody::setCharges(const int charges)
+{
+    m_charges = charges;
+}
