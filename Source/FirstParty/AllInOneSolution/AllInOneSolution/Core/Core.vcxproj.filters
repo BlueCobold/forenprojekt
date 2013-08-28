@@ -55,9 +55,6 @@
     <ClCompile Include="model\collision\ContactListener.cpp">
       <Filter>Sources\model\collision</Filter>
     </ClCompile>
-    <ClCompile Include="gui\BitmapFont.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
     <ClCompile Include="gui\LineLabel.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
@@ -282,6 +279,9 @@
     </ClCompile>
     <ClCompile Include="State\CoinShopState.cpp">
       <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\BitmapFont.cpp">
+      <Filter>Sources\gui\hud</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

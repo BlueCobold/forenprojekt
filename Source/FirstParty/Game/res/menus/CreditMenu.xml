@@ -11,24 +11,24 @@
 				<scrollBottom texture="GuiElements" srcx="1000" srcy="10" width="20" height="11" />
 			</style>
 			<elements>
-				<label text="gui_team_lead" font="buttonIdleFont" aligment="1" x="170" y="10" />
-				<label text="gui_design" font="buttonIdleFont" aligment="1" x="170" y="50" />
-				<label text="gui_graphics" font="buttonIdleFont" aligment="1" x="170" y="90" />
-				<label text="bc" font="buttonHoverFont" aligment="1" x="170" y="130" />
+				<label text="gui_team_lead" font="buttonIdleFont" alignment="1" x="170" y="10" />
+				<label text="gui_design" font="buttonIdleFont" alignment="1" x="170" y="50" />
+				<label text="gui_graphics" font="buttonIdleFont" alignment="1" x="170" y="90" />
+				<label text="bc" font="buttonHoverFont" alignment="1" x="170" y="130" />
 				
-				<label text="gui_core_code" font="buttonIdleFont" aligment="1" x="170" y="190" />
-				<label text="bc" font="buttonHoverFont" aligment="1" x="170" y="230" />
-				<label text="ko" font="buttonHoverFont" aligment="1" x="170" y="270" />
+				<label text="gui_core_code" font="buttonIdleFont" alignment="1" x="170" y="190" />
+				<label text="bc" font="buttonHoverFont" alignment="1" x="170" y="230" />
+				<label text="ko" font="buttonHoverFont" alignment="1" x="170" y="270" />
 				
-				<label text="gui_more_code" font="buttonIdleFont" aligment="1" x="170" y="330" />
-				<label text="ae" font="buttonHoverFont" aligment="1" x="170" y="370" />
-				<label text="dp" font="buttonHoverFont" aligment="1" x="170" y="410" />
-				<label text="ed" font="buttonHoverFont" aligment="1" x="170" y="450" />
-				<label text="ex" font="buttonHoverFont" aligment="1" x="170" y="490" />
-				<label text="ft" font="buttonHoverFont" aligment="1" x="170" y="530" />
-				<label text="mi" font="buttonHoverFont" aligment="1" x="170" y="570" />
-				<label text="tr" font="buttonHoverFont" aligment="1" x="170" y="610" />
-				<label text="ya" font="buttonHoverFont" aligment="1" x="170" y="650" />
+				<label text="gui_more_code" font="buttonIdleFont" alignment="1" x="170" y="330" />
+				<label text="ae" font="buttonHoverFont" alignment="1" x="170" y="370" />
+				<label text="dp" font="buttonHoverFont" alignment="1" x="170" y="410" />
+				<label text="ed" font="buttonHoverFont" alignment="1" x="170" y="450" />
+				<label text="ex" font="buttonHoverFont" alignment="1" x="170" y="490" />
+				<label text="ft" font="buttonHoverFont" alignment="1" x="170" y="530" />
+				<label text="mi" font="buttonHoverFont" alignment="1" x="170" y="570" />
+				<label text="tr" font="buttonHoverFont" alignment="1" x="170" y="610" />
+				<label text="ya" font="buttonHoverFont" alignment="1" x="170" y="650" />
 			</elements>
 		</subwindow>
 		<image id="2" texture="GuiElements" x="76" y="105" scrx="962" scry="104" width="20" height="100"/>

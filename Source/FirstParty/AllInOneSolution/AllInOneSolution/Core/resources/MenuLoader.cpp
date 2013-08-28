@@ -165,7 +165,7 @@ void MenuLoader::parseLabels(
                             sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
                             0,
                             resourceManager.getBitmapFont(labelXml->Attribute("font")),
-                            static_cast<LineLabel::Alignment>(labelXml->IntAttribute("aligment")),
+                            static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
                             labelXml->IntAttribute("id"));
 
             elements.labels.push_back(label);

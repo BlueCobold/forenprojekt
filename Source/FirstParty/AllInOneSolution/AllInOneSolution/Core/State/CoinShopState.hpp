@@ -26,6 +26,7 @@ private:
     CoinShopMenu m_coinShopMenu;
     Level* m_level;
     int m_levelNumber;
+    int m_clicked;
 
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPlayStateInformation m_levelPreviewInfo;

@@ -189,3 +189,4 @@ void SubWindow::drawAdditionalForeground(const DrawParameter& params)
 {
     m_panel.drawAdditionalForeground(params);
 }
+

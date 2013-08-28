@@ -34,9 +34,6 @@ public:
     int getSellRefund(const Goody::Type& goody) const;
 
 private:
-    // icon
-    static const int Deselected = 0;
-    static const int Disabled = 3;
 
     // price
     static const int Price_Gravity = 1000;
