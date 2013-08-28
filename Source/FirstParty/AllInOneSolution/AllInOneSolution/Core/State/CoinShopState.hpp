@@ -31,6 +31,8 @@ private:
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPlayStateInformation m_levelPreviewInfo;
     StateId m_comeFromState;
+
+    void updateButtons();
 };
 
 #endif

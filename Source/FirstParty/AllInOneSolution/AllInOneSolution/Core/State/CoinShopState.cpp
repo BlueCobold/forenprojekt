@@ -57,6 +57,7 @@ StateChangeInformation CoinShopState::update(const float time)
 
     m_clicked = -1;
     m_coinShopMenu.update(m_screen);
+    updateButtons();
 
     if(m_clicked == CoinShopMenu::BUTTON_CLOSE)
     {
@@ -186,4 +187,42 @@ void CoinShopState::draw(const DrawParameter& params)
     params.getTarget().draw(whiteRect);
 
     m_coinShopMenu.draw(params);
+}
+
+void CoinShopState::updateButtons()
+{
+    int coins = m_config.get<int>("coins");
+    if(coins < m_coinShopMenu.getBuyCost(Goody::GravityGoody))
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_GRAVITY_PLUS).setVisible(false);
+    else
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_GRAVITY_PLUS).setVisible(true);
+    if(coins < m_coinShopMenu.getBuyCost(Goody::InvulnerableGoody))
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_PLUS).setVisible(false);
+    else
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_PLUS).setVisible(true);
+    if(coins < m_coinShopMenu.getBuyCost(Goody::ExtraBallGoody))
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_PLUS).setVisible(false);
+    else
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_PLUS).setVisible(true);
+    if(coins < m_coinShopMenu.getBuyCost(Goody::ExtraTimeGoody))
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_PLUS).setVisible(false);
+    else
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_PLUS).setVisible(true);
+
+    if(m_config.get<int>("goodygravity") == 0)
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_GRAVITY_MINUS).setVisible(false);
+    else
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_GRAVITY_MINUS).setVisible(true);
+    if(m_config.get<int>("goodyinvulnerable") == 0)
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_MINUS).setVisible(false);
+    else
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_MINUS).setVisible(true);
+    if(m_config.get<int>("goodyextraball") == 0)
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_MINUS).setVisible(false);
+    else
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_MINUS).setVisible(true);
+    if(m_config.get<int>("goodyextratime") == 0)
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_MINUS).setVisible(false);
+    else
+        m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_MINUS).setVisible(true);
 }
