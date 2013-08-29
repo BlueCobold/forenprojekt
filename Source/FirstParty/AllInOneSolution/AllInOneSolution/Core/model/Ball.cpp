@@ -117,7 +117,11 @@ void Ball::registerForCheckpointChanges(std::function<void()> handler)
 {
     m_checkpointHandler = handler;
 }
+
 void Ball::setInvulnerable(const bool value)
 {
-    m_isInvulnerable = value;
+    if(value)
+        setValueOf("isInvulnerable", 1.0f);
+    else
+        setValueOf("isInvulnerable", 0.0f);
 }

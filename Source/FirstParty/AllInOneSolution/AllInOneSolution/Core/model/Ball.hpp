@@ -42,7 +42,6 @@ private:
 
     bool m_lostBall;
     bool m_blownUp;
-    bool m_isInvulnerable;
     const Entity* m_spawnAnimationEntity;
     const Entity* m_killAnimationEntity;
     std::function<void()> m_checkpointHandler;
