@@ -1,0 +1,492 @@
+<level>
+	<levelinfo name="Paternoster">
+		<infoimage scrx="0" scry="0" width="192" height="108" />
+	</levelinfo>
+	<constants gate="0" gatetime="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+
+		<shapes>
+			<shape name="drifting1" type="polygon">
+				<vertex x="-60" y="0" />
+				<vertex x="60" y="0" />
+				<vertex x="60" y="-360" />
+				<vertex x="-60" y="-360" />
+			</shape>
+			<shape name="drifting2" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="120" y="0" />
+				<vertex x="120" y="-360" />
+				<vertex x="0" y="-360" />
+			</shape>
+			<shape name="drifting3" type="polygon">
+				<vertex x="-60" y="0" />
+				<vertex x="900" y="0" />
+				<vertex x="900" y="60" />
+				<vertex x="-60" y="60" />
+			</shape>
+			<shape name="drifting" type="polygon">
+				<vertex x="240" y="0" />
+				<vertex x="-720" y="0" />
+				<vertex x="-720" y="60" />
+				<vertex x="240" y="60" />
+			</shape>
+		</shapes>
+
+		<entities>
+			<entity name="rightup" rep="up" collideWithBall="false">
+				<physics name="wall" shape="drifting1" />
+				<collides>
+					<applyForce x="-20" y="-180">
+						<always />
+					</applyForce>
+				</collides>
+				<animations>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="1">
+							<static value="3" />
+						</frameindex>
+						<position axis="x">
+							<static value="13" />
+						</position>
+						<position axis="y">
+							<add>
+								<static value="13" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="-60" />
+								</mod>
+							</add>
+						</position>
+						<color channel="alpha">
+							<mod>
+								<mul>
+									<time />
+									<inv>
+										<static value="1" />
+									</inv>
+								</mul>
+								<static value="1" />
+							</mod>
+						</color>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="1">
+							<static value="3" />
+						</frameindex>
+						<position axis="x">
+							<static value="13" />
+						</position>
+						<position axis="y">
+							<add>
+								<static value="73" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="1">
+							<static value="3" />
+						</frameindex>
+						<position axis="x">
+							<static value="13" />
+						</position>
+						<position axis="y">
+							<add>
+								<static value="133" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+						<color channel="alpha">
+							<sub>
+								<static value="1" />
+								<mod>
+									<mul>
+										<time />
+										<inv>
+											<static value="1" />
+										</inv>
+									</mul>
+									<static value="1" />
+								</mod>
+							</sub>
+						</color>
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="rightup" rep="ur" collideWithBall="false">
+				<physics name="wall" shape="drifting2" />
+				<collides>
+					<applyForce x="20" y="-180">
+						<always />
+					</applyForce>
+				</collides>
+				<animations>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="1">
+							<static value="3" />
+						</frameindex>
+						<position axis="x">
+							<static value="13" />
+						</position>
+						<position axis="y">
+							<add>
+								<static value="13" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="-60" />
+								</mod>
+							</add>
+						</position>
+						<color channel="alpha">
+							<mod>
+								<mul>
+									<time />
+									<inv>
+										<static value="1" />
+									</inv>
+								</mul>
+								<static value="1" />
+							</mod>
+						</color>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="1">
+							<static value="3" />
+						</frameindex>
+						<position axis="x">
+							<static value="13" />
+						</position>
+						<position axis="y">
+							<add>
+								<static value="73" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="1">
+							<static value="3" />
+						</frameindex>
+						<position axis="x">
+							<static value="13" />
+						</position>
+						<position axis="y">
+							<add>
+								<static value="133" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+						<color channel="alpha">
+							<sub>
+								<static value="1" />
+								<mod>
+									<mul>
+										<time />
+										<inv>
+											<static value="1" />
+										</inv>
+									</mul>
+									<static value="1" />
+								</mod>
+							</sub>
+						</color>
+					</animation>
+				</animations>
+			</entity>
+			
+			<entity name="right" rep="ra" collideWithBall="false">
+				<physics name="wall" shape="drifting3" />
+				<collides>
+					<applyForce x="50" y="0">
+						<always />
+					</applyForce>
+				</collides>
+				<animations>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="3" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<add>
+								<static value="13" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+						<color channel="alpha">
+							<mod>
+								<mul>
+									<time />
+									<inv>
+										<static value="1" />
+									</inv>
+								</mul>
+								<static value="1" />
+							</mod>
+						</color>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="3" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<add>
+								<static value="73" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="3" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<add>
+								<static value="133" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</add>
+						</position>
+						<color channel="alpha">
+							<sub>
+								<static value="1" />
+								<mod>
+									<mul>
+										<time />
+										<inv>
+											<static value="1" />
+										</inv>
+									</mul>
+									<static value="1" />
+								</mod>
+							</sub>
+						</color>
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="left" rep="la" collideWithBall="false">
+				<physics name="wall" shape="drifting" />
+				<collides>
+					<applyForce x="-50" y="0">
+						<always />
+					</applyForce>
+				</collides>
+				<animations>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="2" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<sub>
+								<static value="73" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</sub>
+						</position>
+						<color channel="alpha">
+							<sub>
+								<static value="1" />
+								<mod>
+									<mul>
+										<time />
+										<inv>
+											<static value="1" />
+										</inv>
+									</mul>
+									<static value="1" />
+								</mod>
+							</sub>
+						</color>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="2" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<sub>
+								<static value="133" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</sub>
+						</position>
+					</animation>
+					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+						<frameindex frames="4">
+							<static value="2" />
+						</frameindex>
+						<position axis="y">
+							<static value="13" />
+						</position>
+						<position axis="x">
+							<sub>
+								<static value="193" />
+								<mod>
+									<mul>
+										<time />
+										<static value="60" />
+									</mul>
+									<static value="60" />
+								</mod>
+							</sub>
+						</position>
+						<color channel="alpha">
+							<mod>
+								<mul>
+									<time />
+									<inv>
+										<static value="1" />
+									</inv>
+								</mul>
+								<static value="1" />
+							</mod>
+						</color>
+					</animation>
+				</animations>
+			</entity>
+
+		</entities>
+
+	</templates>
+
+	<grid size="60" width="2810" height="3300">
+                          
+                  W1 1w3W2 2w5W2 2w2w4w1W2 2W2 2w1w4w1W6 6w2w1W2 2w2w4w1W4 4W2 2w4w1w2W5 5w2w3
+                  w2  o^x^o^x^o^x^o^x^o^x^o^x^o^x^o^x^o^x^o^x^o^x^o^x^o^x^o^x^o^x^o^x^o^x^  w2
+                  w1                                                                        w1
+                  w6                d1d1d1                          d1d1d1        t1        w4
+                  w2                d1  d1                          d1  d1                  w6
+                  w6                d1d1d1                          d1d1d1                  w2
+                  w1        t1      d1  d1                          d1  d1                  w1
+                  w3                d1d1d1la        ur  T2up    ra  d1d1d1                  w2
+                  w2  w2w2w2w2w2w2w2w2w2w2w2w2w2                w2w2w2w2w2w2w2w2w2w2w2w2w2  w4
+                  w4  o^x^o^x^o^x^  d1d1d1                          d1d1d1                  w6
+                  w2                    d1                              d1              t1  w4
+                  w4                    d1              T2              d1                  w6
+                  w1                  d1                              d1                    w3
+                  w1                  d1  la        ur    up    ra    d1                    w3
+                  w1  w2w2w2w2w2w2w2w2w2w2w2w2w2                w2w2w2w2w2w2w2w2w2w2w2w2w2  w3
+                  w2                d1d1d1              T2          d1d1d1o^x^o^x^o^x^      w2
+                  w2                d1                              d1                      w1
+                  w6              t1d1d1d1                          d1d1d1                  w4
+                  w3                d1  d1                          d1  d1                  w2
+                  w2                d1d1d1la        ur  T2up    ra  d1d1d1                  w4
+                  w4  w2w2w2w2w2w2w2w2w2w2w2w2w2                w2w2w2w2w2w2w2w2w2w2w2w2w2  w6
+                  w1                d1d1d1                          d1d1d1o^x^o^x^o^x^      w3
+                  w1              t1d1                              d1                      w3
+                  w1                d1d1d1              T2          d1d1d1                  w3
+                  w2                    d1                              d1                  w2
+                  w2                d1d1d1la        ur    up    ra  d1d1d1                  w1
+                  w6  w2w2w2w2w2w2w2w2w2w2w2w2w2                w2w2w2w2w2w2w2w2w2w2w2w2w2  w4
+                  w3    o^x^o^x^o^x^d1                  T2          d1    o^x^o^x^o^x^      w2
+                  w2                d1  d1                          d1  d1                  w4
+                  w4                d1d1d1                          d1d1d1                  w6
+                  w1                    d1                              d1                  w3
+                  w1                    d1  la      ur  T2up    ra      d1                  w3
+                  w1  w2w2w2w2w2w2w2w2w2w2w2w2w2                w2w2w2w2w2w2w2w2w2w2w2w2w2  w3
+                  w2                d1d1d1                          d1d1d1                  w2
+                  w2                    d1                              d1                  w1
+                  w6                  d1d1              T2            d1d1    t1            w4
+                  w3  t1                d1                              d1                  w2
+                  w2                d1d1d1la        ur    up    ra  d1d1d1                  w4
+                  w4  w2w2w2w2w2w2w2w2w2w2w2w2w2                w2w2w2w2w2w2w2w2w2w2w2w2w2  w6
+                  w1                d1d1                T2          d1d1  o^x^o^x^o^x^      w3
+                  w1                    d1  t1                          d1                  w3
+                  w1                  d1                                d1                  w3
+                  w2                d1                                d1                    w2
+                  w2                d1d1d1la            T2          d1                      w1
+                  w6  w2w2w2w2w2w2w2w2w2w2w2w2w2    ur    up    ra  d1d1d1                  w4
+                  w2                    d1                      w2w2w2w2w2w2w2w2w2w2w2w2w2  w1
+                  w6                  d1d1                              d1o^x^o^x^o^x^      w2
+                  w1                d1  d1              T2            d1d1                  w3 
+                  w5              t1    d1                      BB  d1  d1                  w2
+                  w3                    d1                              d1                  w3
+                  w2  ra                d1          ur    up            d1          la      w2
+                  W4 4w3W1 1w4W4 4W3 3w5W4 4W4 4w2w1    TT  W1 1W1 1W1 1W6 6w1w4W3 3W6 6w1w4w6
+                                  
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="800" silver="850" gold="900" />
+</level>
