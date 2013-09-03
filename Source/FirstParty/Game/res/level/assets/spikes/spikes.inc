@@ -65,6 +65,70 @@
 					<vertex x="52" y="32" />
 				</polygon>
 			</shape>
+			<shape name="spike_okpart2" type="complex_polygon">
+				<polygon>
+					<vertex x="0" y="0" />
+					<vertex x="8" y="27" />
+					<vertex x="16" y="27" />
+					<vertex x="23" y="0" />
+				</polygon>
+				<polygon>
+					<vertex x="24" y="0" />
+					<vertex x="32" y="27" />
+					<vertex x="40" y="27" />
+					<vertex x="47" y="0" />
+				</polygon>
+				<polygon>
+					<vertex x="48" y="0" />
+					<vertex x="56" y="27" />
+					<vertex x="64" y="27" />
+					<vertex x="71" y="0" />
+				</polygon>
+				<polygon>
+					<vertex x="72" y="0" />
+					<vertex x="80" y="27" />
+					<vertex x="88" y="27" />
+					<vertex x="95" y="0" />
+				</polygon>
+				<polygon>
+					<vertex x="96" y="0" />
+					<vertex x="104" y="27" />
+					<vertex x="112" y="27" />
+					<vertex x="119" y="0" />
+				</polygon>
+			</shape>
+			<shape name="spike_killer2" type="complex_polygon">
+				<polygon>
+					<vertex x="-52" y="27" />
+					<vertex x="-48" y="40" />
+					<vertex x="-47" y="40" />
+					<vertex x="-44" y="27" />
+				</polygon>
+				<polygon>
+					<vertex x="-28" y="27" />
+					<vertex x="-24" y="40" />
+					<vertex x="-23" y="40" />
+					<vertex x="-20" y="27" />
+				</polygon>
+				<polygon>
+					<vertex x="-4" y="27" />
+					<vertex x="0" y="40" />
+					<vertex x="1" y="40" />
+					<vertex x="4" y="27" />
+				</polygon>
+				<polygon>
+					<vertex x="20" y="27" />
+					<vertex x="24" y="40" />
+					<vertex x="25" y="40" />
+					<vertex x="28" y="27" />
+				</polygon>
+				<polygon>
+					<vertex x="44" y="27" />
+					<vertex x="48" y="40" />
+					<vertex x="49" y="40" />
+					<vertex x="52" y="27" />
+				</polygon>
+			</shape>
 		</shapes>
 
 		<physics>
@@ -87,6 +151,22 @@
 			</entity>
 			<entity name="spike_okpart" rep="^X" type="entity" collideWithBall="true">
 				<physics name="spike_okpart" shape="spike_killer" />
+				<onCollision>
+					<killBall />
+				</onCollision>
+			</entity>
+			<entity name="spike_okpart2" rep="o^" type="entity" collideWithBall="true">
+				<physics name="spike_okpart" shape="spike_okpart2" />
+				<animations>
+					<animation texture="gravity_arrow" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="24" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="48" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="72" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="96" y="0" srcx="248" srcy="128" width="24" height="40" />
+				</animations>
+			</entity>
+			<entity name="spike_okpart2" rep="x^" type="entity" collideWithBall="true">
+				<physics name="spike_okpart" shape="spike_killer2" />
 				<onCollision>
 					<killBall />
 				</onCollision>
