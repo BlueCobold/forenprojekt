@@ -437,11 +437,11 @@
                   w1        t1      d1  d1                          d1  d1                  w1
                   w3                d1d1d1la        ur  T2up    ra  d1d1d1                  w2
                   w2  w2w2w2w2w2w2w2w2w2w2w2w2w2                w2w2w2w2w2w2w2w2w2w2w2w2w2  w4
-                  w4  o^x^o^x^o^x^  d1d1d1                          d1d1d1                  w6
+                  w4                d1d1d1                          d1d1d1                  w6
                   w2                    d1                              d1              t1  w4
                   w4                    d1              T2              d1                  w6
-                  w1                  d1                              d1                    w3
-                  w1                  d1  la        ur    up    ra    d1                    w3
+                  w1                  d1o>                            d1                    w3
+                  w1                  d1x>la        ur    up    ra    d1                    w3
                   w1  w2w2w2w2w2w2w2w2w2w2w2w2w2                w2w2w2w2w2w2w2w2w2w2w2w2w2  w3
                   w2                d1d1d1              T2          d1d1d1o^x^o^x^o^x^      w2
                   w2                d1                              d1                      w1
@@ -455,11 +455,11 @@
                   w2                    d1                              d1                  w2
                   w2                d1d1d1la        ur    up    ra  d1d1d1                  w1
                   w6  w2w2w2w2w2w2w2w2w2w2w2w2w2                w2w2w2w2w2w2w2w2w2w2w2w2w2  w4
-                  w3    o^x^o^x^o^x^d1                  T2          d1    o^x^o^x^o^x^      w2
-                  w2                d1  d1                          d1  d1                  w4
-                  w4                d1d1d1                          d1d1d1                  w6
-                  w1                    d1                              d1                  w3
-                  w1                    d1  la      ur  T2up    ra      d1                  w3
+                  w3                d1                  T2          d1                      w2
+                  w2                d1  d1o>                        d1  d1                  w4
+                  w4                d1d1d1x>                        d1d1d1                  w6
+                  w1                    d1                            >od1                  w3
+                  w1                    d1  la      ur  T2up    ra    >xd1                  w3
                   w1  w2w2w2w2w2w2w2w2w2w2w2w2w2                w2w2w2w2w2w2w2w2w2w2w2w2w2  w3
                   w2                d1d1d1                          d1d1d1                  w2
                   w2                    d1                              d1                  w1
@@ -467,16 +467,16 @@
                   w3  t1                d1                              d1                  w2
                   w2                d1d1d1la        ur    up    ra  d1d1d1                  w4
                   w4  w2w2w2w2w2w2w2w2w2w2w2w2w2                w2w2w2w2w2w2w2w2w2w2w2w2w2  w6
-                  w1                d1d1                T2          d1d1  o^x^o^x^o^x^      w3
-                  w1                    d1  t1                          d1                  w3
-                  w1                  d1                                d1                  w3
-                  w2                d1                                d1                    w2
-                  w2                d1d1d1la            T2          d1                      w1
+                  w1          w1o>  d1d1                T2          d1d1  o^x^o^x^o^x^      w3
+                  w1          w1x>      d1                            >od1                  w3
+                  w1                  d1                              >xd1                  w3
+                  w2          w3o>  d1                                d1                    w2
+                  w2          w3x>  d1d1d1la            T2          d1                      w1
                   w6  w2w2w2w2w2w2w2w2w2w2w2w2w2    ur    up    ra  d1d1d1                  w4
-                  w2                    d1                      w2w2w2w2w2w2w2w2w2w2w2w2w2  w1
-                  w6                  d1d1                              d1o^x^o^x^o^x^      w2
-                  w1                d1  d1              T2            d1d1                  w3 
-                  w5              t1    d1                      BB  d1  d1                  w2
+                  w2                    d1o>                    w2w2w2w2w2w2w2w2w2w2w2w2w2  w1
+                  w6                  d1d1x>                            d1o^x^o^x^o^x^      w2
+                  w1                d1  d1o>            T2            d1d1                  w3 
+                  w5                    d1x>                    BB  d1  d1                  w2
                   w3                    d1                              d1                  w3
                   w2  ra                d1          ur    up            d1          la      w2
                   W4 4w3W1 1w4W4 4W3 3w5W4 4W4 4w2w1    TT  W1 1W1 1W1 1W6 6w1w4W3 3W6 6w1w4w6
