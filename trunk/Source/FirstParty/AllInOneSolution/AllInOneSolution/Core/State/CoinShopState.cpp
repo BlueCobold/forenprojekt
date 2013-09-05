@@ -21,6 +21,7 @@ CoinShopState::CoinShopState(sf::RenderWindow& screen,
                              AppConfig& config) :
     State(screen, resourceManager, config),
     m_coinShopMenu(sf::Vector2f(0.0f, 0.0f), screen, resourceManager),
+    m_HUD(resourceManager, config),
     m_clicked(-1)
 {
     m_coinShopMenu.getButton(CoinShopMenu::BUTTON_GRAVITY_PLUS).registerOnPressed([&](const Button& sender){ m_clicked = sender.getId(); });
@@ -183,10 +184,27 @@ void CoinShopState::draw(const DrawParameter& params)
 
     sf::RectangleShape whiteRect;
     whiteRect.setSize(m_screen.getView().getSize());
-    whiteRect.setFillColor(sf::Color(255, 255, 255, 255));
+    if(m_level != nullptr)
+    {
+        m_level->adjustView(params.getTarget());
+        m_HUD.update(m_level, getCurrentTime());
+        m_level->draw(params);
+        m_HUD.draw(params);
+        whiteRect.setFillColor(sf::Color(255, 255, 255, 128));
+    }
+    else
+        whiteRect.setFillColor(sf::Color(255, 255, 255, 255));
     params.getTarget().draw(whiteRect);
 
     m_coinShopMenu.draw(params);
+    /*params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
+
+    sf::RectangleShape whiteRect;
+    whiteRect.setSize(m_screen.getView().getSize());
+    whiteRect.setFillColor(sf::Color(255, 255, 255, 255));
+    params.getTarget().draw(whiteRect);
+
+    m_coinShopMenu.draw(params);*/
 }
 
 void CoinShopState::updateButtons()

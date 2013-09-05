@@ -6,6 +6,7 @@
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
 #include "../gui/CoinShopMenu.hpp"
+#include "../gui/hud/HUD.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 
@@ -25,12 +26,12 @@ public:
 private:
     CoinShopMenu m_coinShopMenu;
     Level* m_level;
+    HUD m_HUD;
     int m_levelNumber;
     int m_clicked;
 
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPlayStateInformation m_levelPreviewInfo;
-    StateId m_comeFromState;
 
     void updateButtons();
 };
