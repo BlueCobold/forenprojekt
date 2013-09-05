@@ -62,7 +62,7 @@ protected:
 private:
 
     template<class T>
-    T& find(int id, const MenuElementType::Type type, const std::string& errorKey) const;
+    T* find(int id, const MenuElementType::Type type) const;
 
     MenuPanel m_panel;
     MenuTemplate m_template;

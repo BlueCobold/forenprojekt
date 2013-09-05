@@ -86,53 +86,45 @@ sf::RenderWindow& Menu::getRenderWindow() const
 }
 
 template<class T>
-T& Menu::find(int id, const MenuElementType::Type type, const std::string& errorKey) const
+T* Menu::find(int id, const MenuElementType::Type type) const
 {
-    try
-    {
-        return m_panel.find<T>(id, type, errorKey);
-    }
-    catch(...)
+    if(auto result = m_panel.find<T>(id, type))
+        return result;
+    else
     {
         for(auto it = m_template.subWindow.begin(); it != m_template.subWindow.end(); ++it)
         {
-            MenuPanel* panel = m_panel.find<SubWindow>(it->id, MenuElementType::SubWindow, "SubWindowId").getPanel();
-            try
-            {
-                return panel->find<T>(id, type, errorKey);
-            }
-            catch(...)
-            {
-                continue;
-            }
+            MenuPanel* panel = m_panel.find<SubWindow>(it->id, MenuElementType::SubWindow)->getPanel();
+            if(auto result2 = panel->find<T>(id, type))
+                return result2;
         }
     }
-    throw std::runtime_error(utility::replace(utility::translateKey(errorKey), utility::toString(id)));
+    return nullptr;
 }
 
 CheckBox& Menu::getCheckbox(int id) const
 {
-    return find<CheckBox>(id, MenuElementType::CheckBox, "CheckboxId");
+    return *find<CheckBox>(id, MenuElementType::CheckBox);
 }
 
 Slider& Menu::getSlider(int id) const
 {
-    return find<Slider>(id, MenuElementType::Slider, "sliderID");
+    return *find<Slider>(id, MenuElementType::Slider);
 }
 
 LineLabel& Menu::getLabel(int id) const
 {
-    return find<LineLabel>(id, MenuElementType::Label, "LineLabelId");
+    return *find<LineLabel>(id, MenuElementType::Label);
 }
 
 MenuSprite& Menu::getSprite(int id) const
 {
-    return find<MenuSprite>(id, MenuElementType::Image, "MenuSpriteId");
+    return *find<MenuSprite>(id, MenuElementType::Image);
 }
 
 Button& Menu::getButton(int id) const
 {
-    return find<Button>(id, MenuElementType::Button, "ButtonId");
+    return *find<Button>(id, MenuElementType::Button);
 }
 
 void Menu::changeIdleSprite(const int id, const sf::Sprite& sprite)

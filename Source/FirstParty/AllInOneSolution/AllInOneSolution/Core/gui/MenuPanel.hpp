@@ -32,14 +32,15 @@ public:
     void registerOnClick(std::function<void(const Button& sender)> callback);
 
     template<class T>
-    T& find(int id, const MenuElementType::Type type, const std::string& errorKey) const
+    T* find(int id, const MenuElementType::Type type) const
     {
         for(auto it = begin(m_elements); it != end(m_elements); ++it)
         {
             if(it->get()->getType() == type && it->get()->getId() == id)
-                return *dynamic_cast<T*>(it->get());
+                return dynamic_cast<T*>(it->get());
         }
-        throw std::runtime_error(utility::replace(utility::translateKey(errorKey), utility::toString(id)));
+        return nullptr;
+        //throw std::runtime_error(utility::replace(utility::translateKey(errorKey), utility::toString(id)));
     }
 
     void add(std::unique_ptr<MenuElement> element);
