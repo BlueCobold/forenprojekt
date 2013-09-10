@@ -7,6 +7,7 @@
 #include "provider/ValueProvider.hpp"
 #include "../rendering/Drawable.hpp"
 
+#include <array>
 #include <memory> // unique_ptr
 
 #include "VariableHolder.hpp"
@@ -69,7 +70,7 @@ private:
     std::unique_ptr<ValueProvider> m_yScaleProvider;
     std::unique_ptr<ValueProvider> m_rotationProvider;
     std::unique_ptr<ValueProvider> m_frameProvider;
-    std::unique_ptr<ValueProvider> m_colorProviders[4];
+    std::array<std::unique_ptr<ValueProvider>, 4> m_colorProviders;
     std::vector<sf::Vector2i> m_srcOffsets;
     std::vector<sf::Vector2i> m_sizes;
     std::vector<sf::Vector2i> m_origins;
