@@ -60,7 +60,8 @@ private:
 
     std::function<void(const Button& sender)> m_clickCallback;
 
-    float sliderPixelToWindowPixel(float pixel = 1.f);
+    float sliderPixelToWindowPixel(float pixel);
+    float windowPixelToSliderPixel(float pixel);
 };
 
 #endif
