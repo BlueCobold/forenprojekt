@@ -15,6 +15,8 @@ Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& positi
 
     m_min = m_style.min;
     m_max = m_style.max;
+
+    onPositionChanged();
 }
 
 void Slider::update(const sf::RenderWindow& screen)
