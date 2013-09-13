@@ -96,19 +96,20 @@ void SubWindow::update(const sf::RenderWindow& screen)
     sf::IntRect mouseRect(static_cast<sf::Vector2i>(m_windowRect.getPosition()), static_cast<sf::Vector2i>(m_windowRect.getSize()));
     sf::IntRect sliderRect(static_cast<sf::Vector2i>(m_positionRect.getPosition()), static_cast<sf::Vector2i>(m_positionRect.getSize()));
 
+    float scroll = 0;
     if(mouseRect.contains(sf::Mouse::getPosition(screen)) && utility::Mouse.isWheelMovedDown())
-    {
-        if((m_center.y + 15) < (m_innerHeight - m_size.y / 2.f))
-            m_center.y += 15;
-        else
-            m_center.y = m_innerHeight - m_size.y / 2.f;
-    }
+        scroll = 15;
     else if(mouseRect.contains(sf::Mouse::getPosition(screen)) && utility::Mouse.isWheelMovedUp())
+        scroll = -15;
+    if (scroll != 0)
     {
-        if((m_center.y - 15) > (m_size.y / 2.f))
-            m_center.y -= 15;
-        else
-            m_center.y = m_size.y / 2.f;
+        float y = m_positionRect.getPosition().y + ceilf(windowPixelToSliderPixel(scroll));
+        if(y < getPosition().y + getOffset().y)
+            y = getPosition().y + getOffset().y;
+        if(y > getPosition().y + getOffset().y + m_size.y - m_positionRect.getSize().y)
+            y = getPosition().y + getOffset().y + m_size.y - m_positionRect.getSize().y;
+        m_positionRect.setPosition(m_positionRect.getPosition().x, y);
+        m_center.y = floorf(m_size.y / 2.f + sliderPixelToWindowPixel(m_positionRect.getPosition().y - getPosition().y - getOffset().y));
     }
 
     if(sliderRect.contains(sf::Mouse::getPosition(screen)) && utility::Mouse.leftButtonDown())
@@ -158,4 +159,9 @@ void SubWindow::onPositionChanged()
 float SubWindow::sliderPixelToWindowPixel(float pixel)
 {
     return pixel * (m_innerHeight - m_size.y) / (m_sliderRect.getSize().y - m_positionRect.getSize().y);
+}
+
+float SubWindow::windowPixelToSliderPixel(float pixel)
+{
+    return pixel * (m_sliderRect.getSize().y - m_positionRect.getSize().y) / (m_innerHeight - m_size.y);
 }
