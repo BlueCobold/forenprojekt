@@ -423,7 +423,7 @@
         w6d4d3d2d1d3d6d4d3d2d1d3d2d4d1d5d5d2d4d5d3d6d1d2d6d4d1d3d5d6d1d5d3w2        
         w3d3d1w3w2w5w1w4w5w2w3w2w6w1w2w3w1w4w6w1w5w2w3w1w2w5w6w5w2w6w5d6d4w1        
         w1d2d2w1        w6                    h1                    w1d2d5w5        
-        w5d3d5w3    t1  w3        BB           1                    w2d4d6w3        
+        w5d3d5w3    t1  w3        BB           1                t1  w2d4d6w3        
         w3d5d2w4        w4                    w2                    w5d3d1w6        
         w4d2d6w5     B  w1    R1              w4    R1              w4d6d4w2        
         w2d6d4w1    GT        GT  ^O^X    GT        GT  ^O^X    GT  w6d2d2w1        
@@ -446,5 +446,5 @@
 	<world>
 		<gravity x="0" y="40" />
 	</world>
-	<medal bronze="400" silver="500" gold="600" />
+	<medal bronze="150" silver="180" gold="200" />
 </level>
