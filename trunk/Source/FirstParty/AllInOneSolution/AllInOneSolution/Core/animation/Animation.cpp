@@ -12,7 +12,7 @@ Animation::Animation(std::unique_ptr<ValueProvider> provider,
     const sf::Vector2f& origin,
     const sf::Vector2f& drawOffset,
     const bool horizontal) :
-    m_blending(sf::BlendMode::BlendAlpha),
+    m_blending(sf::BlendAlpha),
     m_frameProvider(std::move(provider)),
     m_frames(frames),
     m_frame(0),
