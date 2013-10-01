@@ -34,6 +34,8 @@ private:
     EnterPlayStateInformation m_levelPreviewInfo;
 
     void updateButtons();
+    void buy(const Goody::Type type, const std::string& propertyName);
+    void sell(const Goody::Type type, const std::string& propertyName);
 };
 
 #endif
