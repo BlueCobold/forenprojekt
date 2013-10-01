@@ -26,11 +26,11 @@ void PlayState::onEnter(const EnterStateInformation* enterInformation, const flo
 {
     m_shouldPause = false;
     State::onEnter(enterInformation, time);
-
     const EnterPlayStateInformation* info = dynamic_cast<const EnterPlayStateInformation*>(enterInformation);
     m_level = info->m_level;
     
     utility::Mouse.capture();
+    utility::Mouse.hideSystemCursor(m_screen);
     m_level->adaptToMouse();
 
     if(!info->m_returnFromPause)
