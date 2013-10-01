@@ -106,4 +106,14 @@ namespace utility
     {
         return m_leftDown;
     }
+
+    void MouseWrapper::hideSystemCursor(sf::RenderWindow& window)
+    {
+        window.setMouseCursorVisible(false);
+    }
+
+    void MouseWrapper::showSystemCursor(sf::RenderWindow& window)
+    {
+        window.setMouseCursorVisible(true);
+    }
 }

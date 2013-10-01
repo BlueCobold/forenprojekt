@@ -5,9 +5,12 @@
 
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
+
 
 #include <algorithm>
 #include <vector>
+
 
 namespace utility
 {
@@ -59,6 +62,9 @@ namespace utility
         bool isWheelMovedUp() const;
 
         bool isWheelMovedDown() const;
+
+        void hideSystemCursor(sf::RenderWindow& window);
+        void showSystemCursor(sf::RenderWindow& window);
 
     private:
 

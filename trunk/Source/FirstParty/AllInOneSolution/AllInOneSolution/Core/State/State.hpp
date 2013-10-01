@@ -55,6 +55,7 @@ public:
     virtual void onEnter(const EnterStateInformation* enterInformation, const float time)
     {
         utility::Mouse.capture();
+        utility::Mouse.showSystemCursor(m_screen);
         updateTime(time);
         m_enterTime = time;
     }
