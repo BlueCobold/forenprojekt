@@ -43,6 +43,7 @@ private:
     static const float SellModifier;
 
     void setGoodyIcon(const Goody::Type& goody, const int charges);
+    void setToolTip(int id, const std::string& textKey, int costs);
 };
 
 #endif
