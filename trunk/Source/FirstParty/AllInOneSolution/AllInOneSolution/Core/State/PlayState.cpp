@@ -66,7 +66,8 @@ StateChangeInformation PlayState::update(const float time)
             m_level->setTimeAttackMode(true);
         }
 
-        if(m_shouldPause || utility::Keyboard.isKeyDown(sf::Keyboard::P) || utility::Keyboard.isKeyDown(sf::Keyboard::Pause))
+        if(m_shouldPause || utility::Keyboard.isKeyDown(sf::Keyboard::P) || 
+           utility::Keyboard.isKeyDown(sf::Keyboard::Pause) || utility::Keyboard.isKeyDown(sf::Keyboard::Escape))
         {
             m_pauseStateInfo.m_levelTime = getCurrentTime();
             m_pauseStateInfo.m_level = m_level;
