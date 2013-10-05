@@ -81,6 +81,9 @@ void CoinShopState::sell(const Goody::Type type, const std::string& propertyKey)
 
 StateChangeInformation CoinShopState::update(const float time)
 {
+    if(State::isPaused())
+        return StateChangeInformation::Empty();
+
     m_coinShopMenu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_coinShopMenu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_coinShopMenu.getSize().y / 2.f));
 
     updateTime(time);
