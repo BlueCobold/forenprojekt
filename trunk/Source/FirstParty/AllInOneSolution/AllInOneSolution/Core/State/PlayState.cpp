@@ -95,6 +95,15 @@ StateChangeInformation PlayState::update(const float time)
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
     }
+    else
+    {
+        m_pauseStateInfo.m_levelTime = getCurrentTime();
+        m_pauseStateInfo.m_level = m_level;
+        m_transitionStateInfo.m_level = m_level;
+        m_transitionStateInfo.m_followingState = PauseStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+    }
 
     return StateChangeInformation::Empty();
 }

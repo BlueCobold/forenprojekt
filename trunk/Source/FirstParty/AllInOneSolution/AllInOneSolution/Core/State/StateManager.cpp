@@ -11,7 +11,8 @@ StateManager::StateManager(sf::RenderWindow& screen) :
     m_currentState(nullptr),
     m_currentStateId(None),
     m_currentLevel(nullptr),
-    m_currentTime(m_frametime.getElapsedTime().asSeconds())
+    m_currentTime(m_frametime.getElapsedTime().asSeconds()),
+    m_pause(false)
 {
 }
 
@@ -47,7 +48,10 @@ void StateManager::setState(StateId id, EnterStateInformation* enterInformation)
         enterInformation = &info;
     enterInformation->m_prepareOnly = false;
     m_currentState->onEnter(enterInformation, m_currentTime);
-    m_currentState->resume(m_currentTime);
+    if(m_pause)
+        m_currentState->pause(m_currentTime);
+    else
+        m_currentState->resume(m_currentTime);
 }
 
 State* StateManager::getState(StateId id) const
@@ -77,7 +81,14 @@ void StateManager::update()
 void StateManager::passEvent(utility::Event::EventType type)
 {
     if(m_currentState != nullptr && type != utility::Event::NoEvent)
+    {
+        if(type == utility::Event::LostFocus)
+            m_pause = true;
+        else if(type == utility::Event::GainFocus)
+            m_pause = false;
+
         m_currentState->onEvent(type);
+    }
 }
 
 void StateManager::draw()

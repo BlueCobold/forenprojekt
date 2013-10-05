@@ -83,6 +83,10 @@ public:
 
     virtual void onEvent(utility::Event::EventType type)
     {
+        if(type == utility::Event::LostFocus)
+            pause(m_currentTime);
+        else if(type == utility::Event::GainFocus)
+            resume(m_currentTime);
     }
 
 protected:
