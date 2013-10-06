@@ -16,12 +16,16 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
 {
     m_fullScreen = m_config.get<bool>("IsFullScreen");
 
+    m_muteSoundWhenInactive = m_config.get<bool>("MuteSoundWhenInactiv");
+
     m_masterVolume = m_config.get<float>("MasterVolume");
     sf::Listener::setGlobalVolume(m_masterVolume);
 
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
     Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
+
+    Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
 }
 
 void OptionMenu::applyChanges()
@@ -46,6 +50,12 @@ void OptionMenu::applyChanges()
         m_masterVolume = Menu::getSlider(SLIDER_MASTERVOLUMEN).getValue();
         sf::Listener::setGlobalVolume(m_masterVolume);
         m_config.set("MasterVolume", m_masterVolume);
+    }
+
+    if(Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).getChecked() != m_muteSoundWhenInactive)
+    {
+        m_muteSoundWhenInactive = !m_muteSoundWhenInactive;
+        m_config.set("MuteSoundWhenInactiv", m_muteSoundWhenInactive);
     }
 }
 
@@ -91,10 +101,14 @@ void OptionMenu::onEnter()
 {
     m_fullScreen = m_config.get<bool>("IsFullScreen");
 
+    m_muteSoundWhenInactive = m_config.get<bool>("MuteSoundWhenInactiv");
+
     m_masterVolume = m_config.get<float>("MasterVolume");
     sf::Listener::setGlobalVolume(m_masterVolume);
 
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
     Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
+
+    Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
 }
