@@ -3,7 +3,6 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
-class AppConfig;
 class ResourceManager;
 
 namespace sf
@@ -33,6 +32,8 @@ enum StateId
 #include "../Input.hpp"
 #include "../Utility.hpp"
 #include "../rendering/Drawable.hpp"
+#include "../resources/AppConfig.hpp"
+#include <SFML/Audio/Listener.hpp>
 
 /// This class will be used to discribe a State
 /// and to be managed by the StateManager
@@ -67,6 +68,8 @@ public:
         if(!isPaused())
             m_pauseStart = time;
         m_pause = true;
+        if(m_config.get<bool>("MuteSoundWhenInactiv"))
+           sf::Listener::setGlobalVolume(0.0f);
     }
 
     void resume(const float time)
@@ -74,6 +77,7 @@ public:
         if(isPaused())
             m_pauseDelay += time - m_pauseStart;
         m_pause = false;
+        sf::Listener::setGlobalVolume(m_config.get<float>("MasterVolume"));
     }
 
     const bool isPaused()

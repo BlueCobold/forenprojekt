@@ -100,6 +100,8 @@ gui_goody_gravity = Gravity
 gui_goody_invulnerable = Invulnerable
 gui_goody_extra_ball = Extra ball
 gui_goody_extra_time = Extra time
+gui_label_mutesound = Mute Sound 
+gui_label_wheninactive = when inactive
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %

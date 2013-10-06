@@ -8,5 +8,8 @@
 		<slider id="2" style="default" x="84" y="160" />
 		<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" alignment="0" x="210" y="110" />
 		<label id="3" text="gui_label_mastervolumen" font="buttonHoverFont" alignment="0" x="210" y="155" />
+		<checkbox id="5" style="default" x="170" y="215" />
+		<label id="6" text="gui_label_mutesound" font="buttonHoverFont" alignment="0" x="210" y="200" />
+		<label id="7" text="gui_label_wheninactive" font="buttonHoverFont" alignment="0" x="210" y="230" />
 	</elements>
 </menu>
