@@ -26,6 +26,8 @@ private:
     Level* m_level;
     HUD m_HUD;
 
+    int m_clicked;
+
     EnterPauseStateInformation m_pauseStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
 };

@@ -3,9 +3,9 @@
 #ifndef MAIN_MENU_HPP
 #define MAIN_MENU_HPP
 
-#include "CaptionMenu.hpp"
+#include "Menu.hpp"
 
-class MainMenu : public CaptionMenu
+class MainMenu : public Menu
 {
 public:
 

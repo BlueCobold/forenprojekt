@@ -70,7 +70,7 @@ gui_play_again = Again
 gui_play_next = Next
 gui_loading_screen = loading
 gui_level_unsuccessful = Level Failed!
-gui_rickety_racquet = +
+gui_rickety_racquet = Rickety Racquet
 gui_start_new_game = Start New Game
 gui_select_level = Select Level
 gui_option = Options
@@ -102,6 +102,7 @@ gui_goody_extra_ball = Extra ball
 gui_goody_extra_time = Extra time
 gui_label_mutesound = Mute Sound 
 gui_label_wheninactive = when inactive
+gui_label_resolution = 800 x 600
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %

@@ -71,6 +71,30 @@
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 	</buttonStyle>
+	<buttonStyle name="arrowleft">
+		<mouseRect left="0" top="0" width="58" height="43" />
+		<idle texture="arrowHUD" srcx="195" srcy="11" width="58" height="43"
+			offsetx="0" offsety="0"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="0" />
+		<hover texture="arrowHUD" srcx="195" srcy="11" width="58" height="43"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
+		<pressed texture="arrowHUD" srcx="195" srcy="11" width="58" height="43"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
+	</buttonStyle>
+	<buttonStyle name="arrowright">
+		<mouseRect left="0" top="0" width="58" height="43" />
+		<idle texture="arrowHUD" srcx="258" srcy="11" width="58" height="43"
+			offsetx="0" offsety="0"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="0" />
+		<hover texture="arrowHUD" srcx="258" srcy="11" width="58" height="43"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
+		<pressed texture="arrowHUD" srcx="258" srcy="11" width="58" height="43"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
+	</buttonStyle>
 	<checkboxStyle name="default">
 		<mouseRect left="1" top="5" width="27" height="27" />
 		<unchecked texture="GuiElements" srcx="704" srcy="66" width="38" height="37"

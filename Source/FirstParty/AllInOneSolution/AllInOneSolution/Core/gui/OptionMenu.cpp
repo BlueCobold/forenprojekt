@@ -26,23 +26,44 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
     Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
 
     Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
+
+    for(auto it = begin(sf::VideoMode::getFullscreenModes()); it != end(sf::VideoMode::getFullscreenModes()); ++ it)
+    {
+        if(acceptableVideoMode(*it) && it->bitsPerPixel == 32)
+            m_availableVideoMode.push_back(std::move(*it));
+    }
+
+    m_currentVideoMode = sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+
+    m_icon.create(16, 16);
+    sf::Image texture = resourceManager.getTexture("GuiElements")->copyToImage();
+    m_icon.copy(texture, 0, 0, sf::IntRect(910, 330, 926, 346));
 }
 
 void OptionMenu::applyChanges()
 {
-
-    if(Menu::getCheckbox(CHECKBOX_FULLSCREEN).getChecked() != m_fullScreen)
+    if(Menu::getCheckbox(CHECKBOX_FULLSCREEN).getChecked() != m_fullScreen ||
+       m_currentVideoMode.width != m_config.get<unsigned int>("ResolutionX") ||
+       m_currentVideoMode.height != m_config.get<unsigned int>("ResolutionY"))
     {
-        sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
-        adjustVideoMode(videoMode, !m_fullScreen);
+        if( Menu::getCheckbox(CHECKBOX_FULLSCREEN).getChecked() != m_fullScreen)
+            m_fullScreen = !m_fullScreen;
 
-        if(!m_fullScreen)
-            Menu::getRenderWindow().create(videoMode, utility::translateKey("gui_rickety_racquet"), sf::Style::Fullscreen);
+        sf::VideoMode videoMode(m_currentVideoMode.width, m_currentVideoMode.height);
+        adjustVideoMode(videoMode, m_fullScreen);
+
         if(m_fullScreen)
-            Menu::getRenderWindow().create(sf::VideoMode(videoMode), utility::translateKey("gui_rickety_racquet"));
+            Menu::getRenderWindow().create(videoMode, utility::translateKey("gui_rickety_racquet"), sf::Style::Fullscreen);
+        if(!m_fullScreen)
+        {
+            Menu::getRenderWindow().create(sf::VideoMode(videoMode), utility::translateKey("gui_rickety_racquet")); 
+            Menu::getRenderWindow().setIcon(m_icon.getSize().x, m_icon.getSize().y, m_icon.getPixelsPtr());
+        }
 
-        m_fullScreen = !m_fullScreen;
+        //m_fullScreen = !m_fullScreen;
         m_config.set("IsFullScreen", m_fullScreen);
+        m_config.set("ResolutionX", m_currentVideoMode.width);
+        m_config.set("ResolutionY", m_currentVideoMode.height);
     }
 
     if(Menu::getSlider(SLIDER_MASTERVOLUMEN).getValue() != m_masterVolume)
@@ -111,4 +132,58 @@ void OptionMenu::onEnter()
     Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
 
     Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
+}
+
+void OptionMenu::prevVideoMode()
+{
+    for(unsigned int i = 0; i < m_availableVideoMode.size(); ++i)
+    {
+        if(m_currentVideoMode == m_availableVideoMode[i] && (i + 1) < m_availableVideoMode.size())
+        {
+            m_currentVideoMode = m_availableVideoMode[i + 1];
+            this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
+                                                     utility::toString(" x ") + 
+                                                     utility::toString(m_currentVideoMode.height));
+            return;
+        }
+        else if(m_currentVideoMode == m_availableVideoMode[i] && (i + 1) == m_availableVideoMode.size())
+        {
+            m_currentVideoMode = m_availableVideoMode[0];
+            this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
+                                                     utility::toString(" x ") + 
+                                                     utility::toString(m_currentVideoMode.height));
+            return;
+        }
+    }
+}
+
+void OptionMenu::nextVideoMode()
+{
+    for(unsigned int i = 0; i < m_availableVideoMode.size(); ++i)
+    {
+        if(m_currentVideoMode == m_availableVideoMode[i] && (i - 1) != -1)
+        {
+            m_currentVideoMode = m_availableVideoMode[i - 1];
+            this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
+                                                     utility::toString(" x ") + 
+                                                     utility::toString(m_currentVideoMode.height));
+            return;
+        }
+        else if(m_currentVideoMode == m_availableVideoMode[i] && (i - 1) == -1)
+        {
+            m_currentVideoMode = m_availableVideoMode[m_availableVideoMode.size() - 1];
+            this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
+                                                     utility::toString(" x ") + 
+                                                     utility::toString(m_currentVideoMode.height));
+            return;
+        }
+    }
+}
+
+bool OptionMenu::acceptableVideoMode(const sf::VideoMode videoMode)
+{
+    if(videoMode.width > 1920 || videoMode.width < 800 || videoMode.height > 1080 || videoMode.height < 600)
+        return false;
+
+    return true;
 }
