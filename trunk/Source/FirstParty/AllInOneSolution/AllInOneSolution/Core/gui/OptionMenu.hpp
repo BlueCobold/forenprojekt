@@ -13,23 +13,33 @@ class OptionMenu : public CaptionMenu
 public:
 
     static const int BUTTON_CLOSE = 0;
-    static const int CHECKBOX_FULLSCREEN = 1;
-    static const int SLIDER_MASTERVOLUMEN = 2;
-    static const int CHECKBOX_MUTEINACTIVE = 5;
+    static const int CHECKBOX_FULLSCREEN = 2;
+    static const int SLIDER_MASTERVOLUMEN = 3;
+    static const int CHECKBOX_MUTEINACTIVE = 6;
+    static const int BUTTON_ARROW_RIGHT = 9;
+    static const int BUTTON_ARROW_LEFT = 10;
+    static const int LABEL_RESOLUTION = 11;
 
     OptionMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     
     void applyChanges();
     void onEnter();
+    void nextVideoMode();
+    void prevVideoMode();
+
 private:
 
     bool m_fullScreen;
     float m_masterVolume;
     bool m_muteSoundWhenInactive;
+    std::vector<sf::VideoMode> m_availableVideoMode;
+    sf::VideoMode m_currentVideoMode;
+    sf::Image m_icon;
 
     AppConfig& m_config;
 
     void adjustVideoMode(sf::VideoMode& mode, bool fullScreen);
+    bool acceptableVideoMode(const sf::VideoMode videoMode);
 };
 
 #endif // OPTIONMENU_HPP

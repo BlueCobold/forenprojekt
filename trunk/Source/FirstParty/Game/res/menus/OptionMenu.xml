@@ -4,12 +4,34 @@
 	<styles source="Styles.inc"/>
 	<elements>
 		<button id="0" text="gui_close" style="default" x="261" y="270" />
-		<checkbox id="1" style="default" x="170" y="110" />
-		<slider id="2" style="default" x="84" y="160" />
-		<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" alignment="0" x="210" y="110" />
-		<label id="3" text="gui_label_mastervolumen" font="buttonHoverFont" alignment="0" x="210" y="155" />
-		<checkbox id="5" style="default" x="170" y="215" />
-		<label id="6" text="gui_label_mutesound" font="buttonHoverFont" alignment="0" x="210" y="200" />
-		<label id="7" text="gui_label_wheninactive" font="buttonHoverFont" alignment="0" x="210" y="230" />
+		<subwindow id="1" x="70" y="108" sizex="372" sizey="150" innerheight="225">
+			<style>
+				<scrollTop texture="GuiElements" srcx="1000" srcy="0" width="20" height="10" />
+				<scrollMiddle texture="GuiElements" srcx="1000" srcy="10" width="20" height="1" />
+				<scrollBottom texture="GuiElements" srcx="1000" srcy="10" width="20" height="11" />
+			</style>
+			<elements>
+				<checkbox id="2" style="default" x="86" y="10" />
+				<slider id="3" style="default" x="0" y="100" />
+				<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" alignment="0" x="130" y="10" />
+				<label id="5" text="gui_label_mastervolumen" font="buttonHoverFont" alignment="0" x="130" y="100" />
+				<checkbox id="6" style="default" x="86" y="165" />
+				<label id="7" text="gui_label_mutesound" font="buttonHoverFont" alignment="0" x="130" y="150" />
+				<label id="8" text="gui_label_wheninactive" font="buttonHoverFont" alignment="0" x="130" y="180" />
+				<button id="9" text="" style="arrowright" x="300" y="49" />
+				<button id="10" text="" style="arrowleft" x="50" y="49" />
+				<label id="11" text="gui_label_resolution" font="buttonHoverFont" alignment="1" x="177" y="55" />				
+			</elements>
+		</subwindow>
+		<image id="20" texture="GuiElements" x="66" y="105" scrx="962" scry="104" width="20" height="100"/>
+		<image id="21" texture="GuiElements" x="66" y="205" scrx="962" scry="163" width="20" height="60"/>
+		<image id="22" texture="GuiElements" x="86" y="105" scrx="718" scry="311" width="163" height="19"/>
+		<image id="23" texture="GuiElements" x="249" y="105" scrx="718" scry="311" width="20" height="19"/>
+		<image id="24" texture="GuiElements" x="269" y="105" scrx="718" scry="311" width="163" height="19"/>
+		<image id="25" texture="GuiElements" x="432" y="105" scrx="982" scry="136" width="20" height="100"/>
+		<image id="26" texture="GuiElements" x="432" y="205" scrx="982" scry="195" width="20" height="60"/>
+		<image id="27" texture="GuiElements" x="86" y="254" scrx="704" scry="257" width="163" height="19"/>
+		<image id="28" texture="GuiElements" x="249" y="254" scrx="704" scry="257" width="20" height="19"/>
+		<image id="29" texture="GuiElements" x="269" y="254" scrx="704" scry="257" width="163" height="19"/>
 	</elements>
 </menu>

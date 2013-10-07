@@ -38,10 +38,10 @@ void Slider::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOff
     {
         sliderRect.left += static_cast<int>(m_sliderPosition.x);
         sf::Vector2i mousePos = sf::Mouse::getPosition(screen);
-        if(sliderRect.contains(mousePos))
+        if(sliderRect.contains(mousePos + mouseOffset))
         {
             m_active = true;
-            m_pick = mousePos.x - sliderRect.left;
+            m_pick = mousePos.x - sliderRect.left + mouseOffset.x;
         }
     }
 

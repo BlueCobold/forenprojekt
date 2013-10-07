@@ -12,8 +12,13 @@ OptionMenuState::OptionMenuState(sf::RenderWindow& screen,
     State(screen, resourceManager, config),
     m_menu(sf::Vector2f(0, 0), screen, resourceManager, config),
     m_HUD(resourceManager, config),
-    m_level(nullptr)
+    m_level(nullptr),
+    m_clicked(-1)
 {
+    auto buttonFunc = [&](const Button& sender){ m_clicked = sender.getId(); };
+    m_menu.getButton(OptionMenu::BUTTON_ARROW_LEFT).registerOnPressed(buttonFunc);
+    m_menu.getButton(OptionMenu::BUTTON_ARROW_RIGHT).registerOnPressed(buttonFunc);
+    m_menu.getButton(OptionMenu::BUTTON_CLOSE).registerOnPressed(buttonFunc);
 }
 
 OptionMenuState::~OptionMenuState()
@@ -32,6 +37,8 @@ void OptionMenuState::onEnter(const EnterStateInformation* enterInformation, con
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
     m_pauseStateInfo.m_levelNumber = enterInformation->m_levelNumber;
+
+    m_menu.getLabel(OptionMenu::LABEL_RESOLUTION).setText(utility::toString(m_config.get<unsigned int>("ResolutionX")) + utility::toString(" x ") + utility::toString(m_config.get<unsigned int>("ResolutionY")));
 }
 
 StateChangeInformation OptionMenuState::update(const float time)
@@ -41,17 +48,21 @@ StateChangeInformation OptionMenuState::update(const float time)
 
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
-    int clicked = -1;
-    m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
+    m_clicked = -1;
+
     m_menu.update(m_screen);
 
-    if(clicked == OptionMenu::BUTTON_CLOSE)
+    if(m_clicked == OptionMenu::BUTTON_CLOSE)
     {
         m_pauseStateInfo.m_level = m_level;
         m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
         m_menu.applyChanges();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
+    else if(m_clicked == OptionMenu::BUTTON_ARROW_LEFT)
+        m_menu.prevVideoMode();
+    else if(m_clicked == OptionMenu::BUTTON_ARROW_RIGHT)
+        m_menu.nextVideoMode();
 
     return StateChangeInformation::Empty();
 }
