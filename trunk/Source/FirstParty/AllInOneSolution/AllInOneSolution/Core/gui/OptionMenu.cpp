@@ -60,6 +60,8 @@ void OptionMenu::applyChanges()
             Menu::getRenderWindow().setIcon(m_icon.getSize().x, m_icon.getSize().y, m_icon.getPixelsPtr());
         }
 
+        Menu::getRenderWindow().setMouseCursorVisible(false);
+
         //m_fullScreen = !m_fullScreen;
         m_config.set("IsFullScreen", m_fullScreen);
         m_config.set("ResolutionX", m_currentVideoMode.width);

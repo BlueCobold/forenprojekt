@@ -283,6 +283,9 @@
     <ClCompile Include="gui\BitmapFont.cpp">
       <Filter>Sources\gui\hud</Filter>
     </ClCompile>
+    <ClCompile Include="gui\Cursor.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -861,6 +864,9 @@
     </None>
     <None Include="..\..\..\Game\res\language.dat">
       <Filter>Resouces</Filter>
+    </None>
+    <None Include="gui\Cursor.hpp">
+      <Filter>Headers\gui</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

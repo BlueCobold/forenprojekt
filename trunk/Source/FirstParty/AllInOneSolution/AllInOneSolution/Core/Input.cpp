@@ -109,11 +109,16 @@ namespace utility
 
     void MouseWrapper::hideSystemCursor(sf::RenderWindow& window)
     {
-        window.setMouseCursorVisible(false);
+        m_cursorVisible = false;
     }
 
     void MouseWrapper::showSystemCursor(sf::RenderWindow& window)
     {
-        window.setMouseCursorVisible(true);
+        m_cursorVisible = true;
+    }
+
+    bool MouseWrapper::isCursorVisible() const
+    {
+        return m_cursorVisible;
     }
 }
