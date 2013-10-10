@@ -31,6 +31,7 @@
 	<texture name="GuiElements" path="gui/gui_elements.png" smooth="false" />
 	<texture name="Window" path="gui/window.png" smooth="false" />
 	<texture name="goodie" path="gui/Goodies.png" smooth="true" />
+	<texture name="cursor" path="gui/cursor.png" smooth="False" />
 </textures>
 <sounds>
 	<sound name="bounce" path="bounce.wav" />

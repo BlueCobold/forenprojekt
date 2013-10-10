@@ -6,6 +6,7 @@
 #include "resources/ResourceManager.hpp"
 #include "Utility.hpp" // toString
 #include "State/StateManager.hpp"
+#include "gui/Cursor.hpp"
 #include "gui/LineLabel.hpp"
 #include "resources/AppConfig.hpp"
 
@@ -46,6 +47,7 @@ private:
 
 private:
     sf::RenderWindow m_screen;
+    Cursor m_cursor;
 
     AppConfig& m_config;
     std::string m_windowTitle;

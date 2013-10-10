@@ -102,6 +102,7 @@
     <ClCompile Include="gui\CheckBox.cpp" />
     <ClCompile Include="gui\CoinShopMenu.cpp" />
     <ClCompile Include="gui\CreditMenu.cpp" />
+    <ClCompile Include="gui\Cursor.cpp" />
     <ClCompile Include="gui\hud\ArrowHUD.cpp" />
     <ClCompile Include="gui\hud\BallHUD.cpp" />
     <ClCompile Include="gui\BitmapFont.cpp" />
@@ -358,6 +359,7 @@
     <None Include="..\..\..\Game\res\level\002.lvl">
       <SubType>Designer</SubType>
     </None>
+    <None Include="gui\Cursor.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />

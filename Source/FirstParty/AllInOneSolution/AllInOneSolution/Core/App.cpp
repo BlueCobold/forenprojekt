@@ -27,6 +27,7 @@
 #include <utility> // move
 
 App::App(AppConfig& config) :
+    m_cursor(m_screen),
     m_config(config),
     m_windowTitle("Rickety Racquet"),
     m_fullscreen(false),
@@ -48,6 +49,9 @@ App::App(AppConfig& config) :
     }
     else
         m_screen.create(videoMode, m_windowTitle);
+
+    m_screen.setMouseCursorVisible(false);
+    m_cursor.setResourceManager(m_resourceManager);
 
     sf::Image icon; icon.create(16, 16);
     sf::Image texture = m_resourceManager.getTexture("GuiElements")->copyToImage();
@@ -97,6 +101,7 @@ void App::update()
     m_stateManager.update();
 
     utility::Mouse.capture();
+    m_cursor.update();
 }
 
 void App::draw()
@@ -107,6 +112,7 @@ void App::draw()
 #endif
 
     m_stateManager.draw();
+    m_cursor.draw(m_screen);
 
     m_screen.display();
 }
@@ -179,6 +185,7 @@ void App::switchDisplayMode()
         m_screen.setMouseCursorVisible(true);
         m_event.m_eventType = utility::Event::Resized;
     }
+    m_screen.setMouseCursorVisible(false);
     m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
     m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
 }

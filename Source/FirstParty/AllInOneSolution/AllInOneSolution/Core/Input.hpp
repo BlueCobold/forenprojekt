@@ -66,8 +66,11 @@ namespace utility
         void hideSystemCursor(sf::RenderWindow& window);
         void showSystemCursor(sf::RenderWindow& window);
 
+        bool isCursorVisible() const;
+
     private:
 
+        bool m_cursorVisible;
         bool m_leftDown;
         bool m_leftPressed;
         bool m_leftReleased;
