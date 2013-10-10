@@ -47,7 +47,7 @@ private:
 
 private:
     sf::RenderWindow m_screen;
-    Cursor m_cursor;
+    std::unique_ptr<Cursor> m_cursor;
 
     AppConfig& m_config;
     std::string m_windowTitle;
