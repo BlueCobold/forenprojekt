@@ -27,7 +27,6 @@
 #include <utility> // move
 
 App::App(AppConfig& config) :
-    m_cursor(m_screen),
     m_config(config),
     m_windowTitle("Rickety Racquet"),
     m_fullscreen(false),
@@ -51,7 +50,7 @@ App::App(AppConfig& config) :
         m_screen.create(videoMode, m_windowTitle);
 
     m_screen.setMouseCursorVisible(false);
-    m_cursor.setResourceManager(m_resourceManager);
+    m_cursor = std::unique_ptr<Cursor>(new Cursor(m_resourceManager, m_screen));
 
     sf::Image icon; icon.create(16, 16);
     sf::Image texture = m_resourceManager.getTexture("GuiElements")->copyToImage();
@@ -101,7 +100,7 @@ void App::update()
     m_stateManager.update();
 
     utility::Mouse.capture();
-    m_cursor.update();
+    m_cursor->update();
 }
 
 void App::draw()
@@ -112,7 +111,7 @@ void App::draw()
 #endif
 
     m_stateManager.draw();
-    m_cursor.draw(m_screen);
+    m_cursor->draw(m_screen);
 
     m_screen.display();
 }
