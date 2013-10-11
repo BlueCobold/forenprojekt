@@ -47,6 +47,7 @@ namespace utility
 
         const sf::Vector2f& getPosition() const;
 
+        void startInterpolation(const sf::Window& relativeTo);
         void interpolate(int steps, int current);
 
         void capture();
@@ -78,6 +79,7 @@ namespace utility
         bool m_mouseWheelDown;
         sf::Vector2f m_position;
         sf::Vector2i m_lastPosition;
+        sf::Vector2i m_totalPosition;
     };
     extern MouseWrapper Mouse;
 } // namespace utility

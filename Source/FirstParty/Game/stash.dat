@@ -1,5 +1,5 @@
-coins = 30135
-goodyinvulnerable = 5
+coins = 600
+goodyinvulnerable = 2
 goodygravity = -1
-goodyextratime = 5
-goodyextraball = 5
+goodyextratime = 2
+goodyextraball = 2
