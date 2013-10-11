@@ -46,16 +46,24 @@ namespace utility
         return m_position;
     }
 
+    void MouseWrapper::startInterpolation(const sf::Window& relativeTo)
+    {
+        auto pos = sf::Mouse::getPosition(relativeTo);
+        m_totalPosition.x += pos.x - relativeTo.getSize().x/2;
+        m_totalPosition.y += pos.y - relativeTo.getSize().y/2;
+        sf::Mouse::setPosition(sf::Vector2i(relativeTo.getSize().x/2, relativeTo.getSize().y/2), relativeTo);
+    }
+
     void MouseWrapper::interpolate(int steps, int current)
     {
         m_position = sf::Vector2f(
-            m_lastPosition.x + (sf::Mouse::getPosition().x - m_lastPosition.x) * static_cast<float>(current) / steps,
-            m_lastPosition.y + (sf::Mouse::getPosition().y - m_lastPosition.y) * static_cast<float>(current) / steps);
+            m_lastPosition.x + (m_totalPosition.x - m_lastPosition.x) * static_cast<float>(current) / steps,
+            m_lastPosition.y + (m_totalPosition.y - m_lastPosition.y) * static_cast<float>(current) / steps);
     }
 
     void MouseWrapper::capture()
     {
-        m_lastPosition = sf::Mouse::getPosition();
+        m_lastPosition = m_totalPosition;
         m_position = sf::Vector2f(
             static_cast<float>(m_lastPosition.x),
             static_cast<float>(m_lastPosition.y));
