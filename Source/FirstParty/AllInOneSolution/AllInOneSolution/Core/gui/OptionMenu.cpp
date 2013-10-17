@@ -140,17 +140,9 @@ void OptionMenu::prevVideoMode()
 {
     for(unsigned int i = 0; i < m_availableVideoMode.size(); ++i)
     {
-        if(m_currentVideoMode == m_availableVideoMode[i] && (i + 1) < m_availableVideoMode.size())
+        if(m_currentVideoMode == m_availableVideoMode[i])
         {
-            m_currentVideoMode = m_availableVideoMode[i + 1];
-            this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
-                                                     utility::toString(" x ") + 
-                                                     utility::toString(m_currentVideoMode.height));
-            return;
-        }
-        else if(m_currentVideoMode == m_availableVideoMode[i] && (i + 1) == m_availableVideoMode.size())
-        {
-            m_currentVideoMode = m_availableVideoMode[0];
+            m_currentVideoMode = m_availableVideoMode[(i + 1) % m_availableVideoMode.size()];
             this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
                                                      utility::toString(" x ") + 
                                                      utility::toString(m_currentVideoMode.height));
@@ -163,17 +155,9 @@ void OptionMenu::nextVideoMode()
 {
     for(unsigned int i = 0; i < m_availableVideoMode.size(); ++i)
     {
-        if(m_currentVideoMode == m_availableVideoMode[i] && (i - 1) != -1)
+        if(m_currentVideoMode == m_availableVideoMode[i])
         {
-            m_currentVideoMode = m_availableVideoMode[i - 1];
-            this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
-                                                     utility::toString(" x ") + 
-                                                     utility::toString(m_currentVideoMode.height));
-            return;
-        }
-        else if(m_currentVideoMode == m_availableVideoMode[i] && (i - 1) == -1)
-        {
-            m_currentVideoMode = m_availableVideoMode[m_availableVideoMode.size() - 1];
+            m_currentVideoMode = m_availableVideoMode[(i - 1 + m_availableVideoMode.size()) % m_availableVideoMode.size()];
             this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
                                                      utility::toString(" x ") + 
                                                      utility::toString(m_currentVideoMode.height));
