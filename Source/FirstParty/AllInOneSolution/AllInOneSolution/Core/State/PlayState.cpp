@@ -52,7 +52,7 @@ StateChangeInformation PlayState::update(const float time)
 
     if(!isPaused())
     {
-        utility::Mouse.startInterpolation((sf::Window&)m_screen);
+        utility::Mouse.startInterpolation(dynamic_cast<sf::Window&>(m_screen));
         m_level->update(getCurrentTime(), m_screen);
         m_hud.update(m_level, getCurrentTime());
         //if(utility::Keyboard.isKeyDown(sf::Keyboard::R))
