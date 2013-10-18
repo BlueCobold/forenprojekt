@@ -28,6 +28,12 @@ public:
         float maxv = getProvider()[2]->getValue();
         return std::min(std::max(actual, minv), maxv);
     }
+
+    virtual Clamp* clone() const override
+    {
+        auto list = std::move(cloneProviders());
+        return new Clamp(list);
+    }
 };
 
 #endif //CLAMP_HPP

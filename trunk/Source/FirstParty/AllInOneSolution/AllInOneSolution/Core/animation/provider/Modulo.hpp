@@ -27,6 +27,12 @@ public:
         float divisor = getProvider()[1]->getValue();
         return fmodf(dividend, divisor);
     }
+
+    virtual Modulo* clone() const override
+    {
+        auto list = std::move(cloneProviders());
+        return new Modulo(list);
+    }
 };
 
 #endif //MODULO_HPP

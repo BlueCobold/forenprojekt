@@ -21,6 +21,7 @@
 #include "VerticalSpringTransition.hpp"
 
 #include "../../animation/Provider/RandomProvider.hpp"
+#include "../../Utility.hpp"
 
 int RandomTransition::m_lastTransition = static_cast<RandomTransition::TransitionType>(TypeCount);
 

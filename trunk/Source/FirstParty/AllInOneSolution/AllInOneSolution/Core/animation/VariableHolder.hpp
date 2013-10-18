@@ -11,6 +11,8 @@
 #include <map>
 #include <string>
 
+#include "../Utility.hpp"
+
 /// This interface specifies an object that can store and return variables.
 class VariableHolder : public virtual VariableHandler
 {

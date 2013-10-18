@@ -3,6 +3,7 @@
 #ifndef ANIMATION_HPP
 #define ANIMATION_HPP
 
+#include "Cloneable.hpp"
 #include "Stoppable.hpp"
 #include "provider/ValueProvider.hpp"
 #include "../rendering/Drawable.hpp"
@@ -17,7 +18,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-class Animation : public Drawable, public VariableHolder, public Stoppable
+class Animation : public Drawable, public VariableHolder, public Stoppable, public Cloneable
 {
 public:
 
@@ -53,6 +54,8 @@ public:
         const std::vector<sf::Vector2i>& origins);
     
     virtual void draw(const DrawParameter& param) override;
+
+    virtual Animation* clone() const override;
 
 private:
 

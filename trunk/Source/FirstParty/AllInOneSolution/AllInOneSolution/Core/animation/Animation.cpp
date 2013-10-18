@@ -66,7 +66,15 @@ void Animation::update()
     if(m_colorProviders[Blue] != nullptr)
         color.b = static_cast<sf::Uint8>(255*m_colorProviders[Blue]->getValue());
     if(m_colorProviders[Alpha] != nullptr)
-        color.a = static_cast<sf::Uint8>(255*m_colorProviders[Alpha]->getValue());
+    {
+        float alpha = m_colorProviders[Alpha]->getValue();
+        if(alpha < 0)
+        {
+            stop();
+            return;
+        }
+        color.a = static_cast<sf::Uint8>(255*alpha);
+    }
     m_sprite.setColor(color);
 }
 
@@ -199,4 +207,34 @@ void Animation::setLayout(
     if(m_frames > origins.size())
         throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "origins"));
     m_origins = origins;
+}
+
+Animation* Animation::clone() const
+{
+    auto ani = new Animation(std::unique_ptr<ValueProvider>(m_frameProvider->clone()),
+        m_frames, m_frameWidth, m_frameHeight,
+        m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal);
+    
+    ani->m_sourceOffset = m_sourceOffset;
+    ani->m_sprite = m_sprite;
+
+    std::array<std::unique_ptr<ValueProvider>, 4> colors;
+    for(int i = 0; i < 4; i++)
+        if(m_colorProviders[i])
+            ani->m_colorProviders[i] = std::unique_ptr<ValueProvider>(m_colorProviders[i]->clone());
+
+    if(m_xScaleProvider)
+        ani->m_xScaleProvider = std::unique_ptr<ValueProvider>(m_xScaleProvider->clone());
+    if(m_yScaleProvider)
+        ani->m_yScaleProvider = std::unique_ptr<ValueProvider>(m_yScaleProvider->clone());
+    
+    if(m_rotationProvider)
+        ani->m_rotationProvider = std::unique_ptr<ValueProvider>(m_rotationProvider->clone());
+    
+    if(m_xPositionProvider)
+        ani->m_xPositionProvider = std::unique_ptr<ValueProvider>(m_xPositionProvider->clone());
+    if(m_yPositionProvider)
+        ani->m_yPositionProvider = std::unique_ptr<ValueProvider>(m_yPositionProvider->clone());
+
+    return ani;
 }

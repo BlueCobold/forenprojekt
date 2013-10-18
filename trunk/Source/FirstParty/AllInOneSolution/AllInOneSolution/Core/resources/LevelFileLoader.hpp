@@ -4,6 +4,7 @@
 #define LEVEL_FILE_LOADER_HPP
 
 #include "../animation/Animation.hpp"
+#include "../animation/ParticleTrail.hpp"
 #include "../animation/provider/ValueProvider.hpp"
 #include "../model/SoundObject.hpp"
 #include "../model/AnimatedGraphics.hpp"
@@ -47,6 +48,12 @@ public:
 
     static void parseConstants(tinyxml2::XMLElement* xml,
         VariableHandler* holder);
+
+    static std::unique_ptr<ParticleTrail> parseTrail(
+        AnimatedGraphics* animated,
+        tinyxml2::XMLElement* xml,
+        ResourceManager& resourceManager,
+        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 
 private:
 

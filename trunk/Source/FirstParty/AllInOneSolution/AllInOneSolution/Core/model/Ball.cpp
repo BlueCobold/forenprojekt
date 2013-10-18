@@ -31,6 +31,8 @@ void Ball::autoResetBall(const float elapsedTime)
             unfreeze();
             unhide();
             m_ballResetTime = 0.0f;
+            if(m_trail != nullptr)
+                m_trail->setTo(getPosition().x, getPosition().y);
         }
         else if(elapsedTime > m_ballResetTime && (!frozen() || blownUp()))
         {
@@ -48,6 +50,8 @@ void Ball::restartAt(const float value)
 {
     Entity::restartAt(value);
     m_spawnPosition = getStartPosition();
+    if(m_trail != nullptr)
+        m_trail->setTo(getPosition().x, getPosition().y);
 }
 
 void Ball::update(const float value)
@@ -59,9 +63,48 @@ void Ball::update(const float value)
     if(blownUp() && !hidden())
         hide();
 
+    if(m_trail != nullptr && !frozen() && !hidden())
+    {
+        if(value <= 0)
+            m_trail->setTo(getPosition().x, getPosition().y);
+        if(getBody() != nullptr && getBody()->GetLinearVelocity().Length() >= m_trail->getSpeedMin())
+            m_trail->moveTo(getPosition().x, getPosition().y);
+        else
+            m_trail->setTo(getPosition().x, getPosition().y);
+    }
+
     autoResetBall(value);
 
     Entity::update(value);
+    if(m_trail != nullptr)
+    {
+        m_trail->update();
+    }
+}
+
+float Ball::getValueOf(const std::string& name) const
+{
+    if(m_trail == nullptr)
+        return Entity::getValueOf(name);
+    if(auto current = m_trail->getCurrentAnimation())
+        return current->getValueOf(name);
+    return Entity::getValueOf(name);
+}
+
+void Ball::setValueOf(const std::string& name, const float value)
+{
+    if(m_trail == nullptr)
+        return Entity::setValueOf(name, value);
+    if(auto current = m_trail->getCurrentAnimation())
+        return current->setValueOf(name, value);
+    return Entity::setValueOf(name, value);
+}
+
+void Ball::draw(const DrawParameter& params)
+{
+    if(m_trail != nullptr)
+        m_trail->draw(params);
+    Entity::draw(params);
 }
 
 const Entity* Ball::getSpawnAnimationEntity() const
@@ -124,4 +167,9 @@ void Ball::setInvulnerable(const bool value)
         setValueOf("isInvulnerable", 1.0f);
     else
         setValueOf("isInvulnerable", 0.0f);
+}
+
+void Ball::bindTrail(std::unique_ptr<ParticleTrail> trail)
+{
+    m_trail = std::move(trail);
 }

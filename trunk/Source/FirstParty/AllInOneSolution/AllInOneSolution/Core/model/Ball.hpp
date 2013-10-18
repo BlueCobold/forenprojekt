@@ -6,6 +6,7 @@
 #include "Entity.hpp"
 
 #include <functional>
+#include "../animation/ParticleTrail.hpp"
 
 /// This class will be used to bind the physical setting and the control to a entity of a ball
 class Ball : public Entity
@@ -16,6 +17,10 @@ public:
 
     virtual void restartAt(const float value) override;
     virtual void update(const float value) override;
+    virtual void draw(const DrawParameter& params) override;
+    
+    virtual float getValueOf(const std::string& name) const override;
+    virtual void setValueOf(const std::string& name, const float value) override;
 
     void registerForCheckpointChanges(std::function<void()> handler);
 
@@ -29,6 +34,8 @@ public:
 
     void blowUp();
     bool blownUp() const;
+
+    void bindTrail(std::unique_ptr<ParticleTrail> trail);
 
 private:
 
@@ -45,6 +52,7 @@ private:
     const Entity* m_spawnAnimationEntity;
     const Entity* m_killAnimationEntity;
     std::function<void()> m_checkpointHandler;
+    std::unique_ptr<ParticleTrail> m_trail;
 
 private:
 

@@ -7,6 +7,7 @@
 #include "../animation/provider/Clamp.hpp"
 #include "../animation/provider/Count.hpp"
 #include "../animation/provider/FloatToInt.hpp"
+#include "../animation/provider/IfPositive.hpp"
 #include "../animation/provider/Inverse.hpp"
 #include "../animation/provider/Maximum.hpp"
 #include "../animation/provider/Minimum.hpp"
@@ -255,6 +256,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
         return std::unique_ptr<FloatToInt>(new FloatToInt(std::move(parseProviders(xml, animated, handler, stoppable, functions)[0])));
     else if(std::string(xml->Name())=="add")
         return std::unique_ptr<Adder>(new Adder(std::move(parseProviders(xml, animated, handler, stoppable, functions))));
+    else if(std::string(xml->Name())=="ifpositive")
+        return std::unique_ptr<IfPositive>(new IfPositive(std::move(parseProviders(xml, animated, handler, stoppable, functions))));
     else if(std::string(xml->Name())=="mul")
         return std::unique_ptr<Multiplier>(new Multiplier(std::move(parseProviders(xml, animated, handler, stoppable, functions))));
     else if(std::string(xml->Name())=="min")
@@ -270,7 +273,11 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
     else if(std::string(xml->Name())=="clamp")
         return std::unique_ptr<Clamp>(new Clamp(std::move(parseProviders(xml, animated, handler, stoppable, functions))));
     else if(std::string(xml->Name())=="step")
-        return std::unique_ptr<Step>(new Step(std::move(parseProviders(xml, animated, handler, stoppable, functions))));
+    {
+        float threshold = 1;
+        xml->QueryFloatAttribute("threshold", &threshold);
+        return std::unique_ptr<Step>(new Step(std::move(parseProviders(xml, animated, handler, stoppable, functions)), threshold));
+    }
     else if(std::string(xml->Name())=="sub")
         return std::unique_ptr<Substractor>(new Substractor(std::move(parseProviders(xml, animated, handler, stoppable, functions))));
     else if(std::string(xml->Name())=="neg")
@@ -374,6 +381,24 @@ std::unique_ptr<ValueProvider> LevelFileLoader::findController(
         if(iterator->FirstChildElement() == nullptr)
             throw std::runtime_error(utility::translateKey("SubTag"));
         return parseProvider(iterator->FirstChildElement(), animated, handler, stoppable, functions);
+    }
+    return nullptr;
+}
+
+std::unique_ptr<ParticleTrail> LevelFileLoader::parseTrail(
+    AnimatedGraphics* animated,
+    tinyxml2::XMLElement* xml,
+    ResourceManager& resourceManager,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
+{
+    if(auto xmltrail = xml->FirstChildElement("trailing"))
+    {
+        float distance = 100;
+        xmltrail->QueryFloatAttribute("spawnDist", &distance);
+        float minSpeed = xmltrail->FloatAttribute("speedMin");
+        if(auto xmlani = xmltrail->FirstChildElement("animation"))
+            if(auto animation = std::unique_ptr<Animation>(parseAnimation(xmlani, animated, animated, resourceManager, functions)))
+                return std::unique_ptr<ParticleTrail>(new ParticleTrail(std::move(animation), distance, minSpeed));
     }
     return nullptr;
 }

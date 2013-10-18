@@ -21,6 +21,11 @@ public:
     {
         return m_value;
     }
+
+    virtual StaticProvider* clone() const override
+    {
+        return new StaticProvider(m_value);
+    }
 };
 
 #endif //STATIC_PROVIDER_HPP

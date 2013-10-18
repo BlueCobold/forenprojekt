@@ -25,6 +25,11 @@ public:
         m_owner->stop();
         return 0;
     }
+
+    virtual Stop* clone() const override
+    {
+        return new Stop(m_owner);
+    }
 };
 
 #endif //STOP_HPP

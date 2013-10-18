@@ -8,6 +8,16 @@
 /// If the given value is less than min, it returns 0
 /// If the given value is above max, it returns 1
 /// If the given value is inbetween, it returns (val-min)/(max-min)
+/// visually it returns:
+///   ^
+/// 1_|          ______
+///   |         /
+///   |        / 
+///   |       /  
+///   |      /   
+///  0|_____/_________
+///         |    |
+///        min  max
 class Ramp : public SingleProvider
 {
 private:
@@ -32,8 +42,18 @@ public:
             return 1;
         float diff = m_max - m_min;
         if(diff < FLT_EPSILON)
-            return 0;
-        return (value - m_min) / (diff);
+        {
+            if(value < m_min)
+                return 0;
+            else
+                return 1;
+        }
+        return (value - m_min) / diff;
+    }
+
+    virtual Ramp* clone() const override
+    {
+        return new Ramp(m_min, m_max, std::unique_ptr<ValueProvider>(getProvider()->clone()));
     }
 };
 

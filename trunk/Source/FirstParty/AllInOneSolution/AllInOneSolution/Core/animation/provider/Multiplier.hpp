@@ -26,6 +26,12 @@ public:
             v *= (*it)->getValue();
         return v;
     }
+
+    virtual Multiplier* clone() const override
+    {
+        auto list = std::move(cloneProviders());
+        return new Multiplier(list);
+    }
 };
 
 #endif //MULTIPLIER_HPP

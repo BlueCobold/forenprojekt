@@ -22,6 +22,11 @@ public:
         float value = getProvider()->getValue();
         return -1 * value;
     }
+
+    virtual Negate* clone() const override
+    {
+        return new Negate(std::unique_ptr<ValueProvider>(getProvider()->clone()));
+    }
 };
 
 #endif //NEGATE_HPP

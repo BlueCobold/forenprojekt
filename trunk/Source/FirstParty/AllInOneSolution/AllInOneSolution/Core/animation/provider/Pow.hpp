@@ -27,6 +27,12 @@ public:
         float exponent = getProvider()[1]->getValue();
         return powf(base, exponent);
     }
+
+    virtual Pow* clone() const override
+    {
+        auto list = std::move(cloneProviders());
+        return new Pow(list);
+    }
 };
 
 #endif //POW_HPP
