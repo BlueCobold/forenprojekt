@@ -35,6 +35,12 @@ public:
                 v = std::max(v, (*it)->getValue());
         return v;
     }
+
+    virtual Maximum* clone() const override
+    {
+        auto list = std::move(cloneProviders());
+        return new Maximum(list);
+    }
 };
 
 #endif //MAXIMUM_HPP

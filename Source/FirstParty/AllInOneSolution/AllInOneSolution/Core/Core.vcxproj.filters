@@ -286,6 +286,9 @@
     <ClCompile Include="gui\Cursor.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="animation\ParticleTrail.cpp">
+      <Filter>Sources\animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -761,6 +764,15 @@
     </ClInclude>
     <ClInclude Include="State\CoinShopState.hpp">
       <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\Cloneable.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\ParticleTrail.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="animation\provider\IfPositive.hpp">
+      <Filter>Headers\animation\provider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

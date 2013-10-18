@@ -4,7 +4,6 @@
 #define ADDER_HPP
 
 #include "MultiProvider.hpp"
-#include "ValueProvider.hpp"
 
 #include <exception>
 #include <memory>
@@ -27,6 +26,12 @@ public:
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
             v += (*it)->getValue();
         return v;
+    }
+
+    virtual Adder* clone() const override
+    {
+        auto list = std::move(cloneProviders());
+        return new Adder(list);
     }
 };
 

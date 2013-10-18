@@ -27,6 +27,11 @@ public:
             return angle + 360;
         return angle;
     }
+
+    virtual AngleProvider* clone() const override
+    {
+        return new AngleProvider(m_owner);
+    }
 };
 
 #endif //ANGLE_PROVIDER_HPP

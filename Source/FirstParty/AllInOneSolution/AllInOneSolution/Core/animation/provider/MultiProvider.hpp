@@ -39,6 +39,14 @@ protected:
     {
         return m_provider;
     }
+
+    std::vector<std::unique_ptr<ValueProvider>> cloneProviders() const
+    {
+        std::vector<std::unique_ptr<ValueProvider>> list;
+        for(auto it = begin(m_provider); it != end(m_provider); ++it)
+            list.push_back(std::unique_ptr<ValueProvider>((*it)->clone()));
+        return std::move(list);
+    }
 };
 
 #endif //MULTI_PROVIDER_HPP

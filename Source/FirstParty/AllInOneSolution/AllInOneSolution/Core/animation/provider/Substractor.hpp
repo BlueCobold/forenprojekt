@@ -35,6 +35,12 @@ public:
         }
         return v;
     }
+
+    virtual Substractor* clone() const override
+    {
+        auto list = std::move(cloneProviders());
+        return new Substractor(list);
+    }
 };
 
 #endif //SUBSTRACTOR_HPP

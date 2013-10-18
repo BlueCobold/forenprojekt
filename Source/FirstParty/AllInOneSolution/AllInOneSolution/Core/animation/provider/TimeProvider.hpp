@@ -22,6 +22,11 @@ public:
     {
         return m_owner->getPassedTime();
     }
+
+    virtual TimeProvider* clone() const override
+    {
+        return new TimeProvider(m_owner);
+    }
 };
 
 #endif //TIME_PROVIDER_HPP

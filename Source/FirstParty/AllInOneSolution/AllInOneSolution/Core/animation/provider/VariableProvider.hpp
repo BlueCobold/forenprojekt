@@ -27,6 +27,11 @@ public:
     {
         return m_owner->getValueOf(m_varName);
     }
+
+    virtual VariableProvider* clone() const override
+    {
+        return new VariableProvider(m_owner, m_varName);
+    }
 };
 
 #endif //VARIABLE_PROVIDER_HPP

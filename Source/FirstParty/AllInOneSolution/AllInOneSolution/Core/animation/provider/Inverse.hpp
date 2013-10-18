@@ -26,6 +26,11 @@ public:
         else
             return 0;
     }
+
+    virtual Inverse* clone() const override
+    {
+        return new Inverse(std::unique_ptr<ValueProvider>(getProvider()->clone()));
+    }
 };
 
 #endif //INVERSE_HPP

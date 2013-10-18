@@ -36,6 +36,11 @@ public:
             m_inited = false;
     }
 
+    virtual CachedProvider* clone() const override
+    {
+        return new CachedProvider(std::unique_ptr<ValueProvider>(getProvider()->clone()), m_persistent);
+    }
+
 private:
 
     bool m_inited;

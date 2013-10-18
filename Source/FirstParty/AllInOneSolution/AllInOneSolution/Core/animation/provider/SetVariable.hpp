@@ -43,6 +43,11 @@ public:
             std::cout << m_varName << "=" << value << std::endl;
         return value;
     }
+
+    virtual SetVariable* clone() const override
+    {
+        return new SetVariable(m_owner, m_varName, std::unique_ptr<ValueProvider>(getProvider()->clone()), m_print);
+    }
 };
 
 #endif //SET_VARIABLE_HPP

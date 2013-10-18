@@ -35,6 +35,12 @@ public:
                 v = std::min(v, (*it)->getValue());
         return v;
     }
+
+    virtual Minimum* clone() const override
+    {
+        auto list = std::move(cloneProviders());
+        return new Minimum(list);
+    }
 };
 
 #endif //MINIMUM_HPP

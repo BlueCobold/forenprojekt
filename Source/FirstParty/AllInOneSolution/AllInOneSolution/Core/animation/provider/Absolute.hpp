@@ -4,7 +4,6 @@
 #define ABSOLUTE_HPP
 
 #include "SingleProvider.hpp"
-#include "ValueProvider.hpp"
 
 #include <memory>
 #include <cmath>
@@ -20,6 +19,11 @@ public:
     virtual float getValue() override
     {
         return fabsf(getProvider()->getValue());
+    }
+
+    virtual Absolute* clone() const override
+    {
+        return new Absolute(std::unique_ptr<ValueProvider>(getProvider()->clone()));
     }
 };
 

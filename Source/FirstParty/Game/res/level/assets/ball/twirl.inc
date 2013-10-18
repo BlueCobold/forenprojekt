@@ -265,6 +265,117 @@
 						</frameindex>
 					</animation>
 				</animations>
+				<trailing speedMin="100" spawnDist="20">
+					<animation texture="sparkles" width="32" height="32" midx="16" midy="16" rotate="true">
+						<constants start="0" />
+						<frameindex frames="8">
+							<cache>
+								<nop>
+									<random min="0" max="8" />
+									<setVar name="start">
+										<time />
+									</setVar>
+								</nop>
+							</cache>
+						</frameindex>
+						<color channel="alpha">
+							<sub>
+								<!-- fade in -->
+								<ramp min="0" max="0.2">
+									<sub>
+										<time />
+										<var name="start" />
+									</sub>
+								</ramp>
+								<!-- fade out -->
+								<ramp min="0.2" max="1.2">
+									<sub>
+										<time />
+										<var name="start" />
+									</sub>
+								</ramp>
+								<!-- kill it -->
+								<ramp min="1.2" max="1.3">
+									<sub>
+										<time />
+										<var name="start" />
+									</sub>
+								</ramp>
+							</sub>
+						</color>
+						<color channel="blue">
+							<mul>
+								<cache>
+									<random min="0.0" max="1" />
+								</cache>
+								<ramp min="0.0" max="0.7">
+									<sub>
+										<time />
+										<var name="start" />
+									</sub>
+								</ramp>
+							</mul>
+						</color>
+						<color channel="green">
+							<ramp min="0.0" max="0.7">
+								<sub>
+									<time />
+									<var name="start" />
+								</sub>
+							</ramp>
+						</color>
+						<position axis="x">
+							<mul>
+								<sub>
+									<time />
+									<var name="start" />
+								</sub>
+								<cache>
+									<random min="-40" max="40" />
+								</cache>
+							</mul>
+						</position>
+						<position axis="y">
+							<mul>
+								<sub>
+									<time />
+									<var name="start" />
+								</sub>
+								<cache>
+									<random min="-40" max="40" />
+								</cache>
+							</mul>
+						</position>
+						<scale axis="x">
+							<add>
+								<static value="0.5" />
+								<mul>
+									<static value="1.5" />
+									<ramp min="0.0" max="1.2">
+										<sub>
+											<time />
+											<var name="start" />
+										</sub>
+									</ramp>
+								</mul>
+							</add>
+						</scale>
+						<scale axis="y">
+							<add>
+								<static value="0.5" />
+								<mul>
+									<static value="1.5" />
+									<ramp min="0.0" max="1.2">
+										<sub>
+											<time />
+											<var name="start" />
+										</sub>
+									</ramp>
+								</mul>
+							</add>
+						</scale>
+					</animation>
+				</trailing>
 			</entity>
 		</entities>
 	</templates>

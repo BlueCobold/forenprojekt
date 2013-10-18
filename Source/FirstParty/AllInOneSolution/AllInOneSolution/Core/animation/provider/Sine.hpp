@@ -22,6 +22,11 @@ public:
     {
         return sinf(utility::toRadian<float, float>(getProvider()->getValue()));
     }
+
+    virtual Sine* clone() const override
+    {
+        return new Sine(std::unique_ptr<ValueProvider>(getProvider()->clone()));
+    }
 };
 
 #endif //SINE_HPP

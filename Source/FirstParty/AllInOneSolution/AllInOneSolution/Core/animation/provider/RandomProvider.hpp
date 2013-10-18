@@ -26,6 +26,11 @@ public:
     {
 	    return m_distribution(m_random_engine);
     }
+
+    virtual RandomProvider* clone() const override
+    {
+        return new RandomProvider(m_distribution.min(), m_distribution.max());
+    }
 };
 
 #endif //RANDOM_PROVIDER_HPP

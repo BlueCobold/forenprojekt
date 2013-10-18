@@ -95,6 +95,7 @@
   <ItemGroup>
     <ClCompile Include="animation\Animation.cpp" />
     <ClCompile Include="animation\Interpolation.cpp" />
+    <ClCompile Include="animation\ParticleTrail.cpp" />
     <ClCompile Include="animation\provider\KeyProvider.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Core.cpp" />
@@ -192,8 +193,10 @@
   <ItemGroup>
     <ClInclude Include="animation\AnimatedObject.hpp" />
     <ClInclude Include="animation\Animation.hpp" />
+    <ClInclude Include="animation\Cloneable.hpp" />
     <ClInclude Include="animation\Interpolation.hpp" />
     <ClInclude Include="animation\OrientedObject.hpp" />
+    <ClInclude Include="animation\ParticleTrail.hpp" />
     <ClInclude Include="animation\provider\Absolute.hpp" />
     <ClInclude Include="animation\provider\Adder.hpp" />
     <ClInclude Include="animation\provider\AngleProvider.hpp" />
@@ -201,6 +204,7 @@
     <ClInclude Include="animation\provider\Clamp.hpp" />
     <ClInclude Include="animation\provider\Count.hpp" />
     <ClInclude Include="animation\provider\FloatToInt.hpp" />
+    <ClInclude Include="animation\provider\IfPositive.hpp" />
     <ClInclude Include="animation\provider\Inverse.hpp" />
     <ClInclude Include="animation\provider\KeyProvider.hpp" />
     <ClInclude Include="animation\provider\Maximum.hpp" />

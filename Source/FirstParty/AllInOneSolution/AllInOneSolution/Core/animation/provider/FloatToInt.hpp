@@ -21,6 +21,11 @@ public:
     {
         return static_cast<float>(static_cast<int>(getProvider()->getValue()));
     }
+
+    virtual FloatToInt* clone() const override
+    {
+        return new FloatToInt(std::unique_ptr<ValueProvider>(getProvider()->clone()));
+    }
 };
 
 #endif //FLOAT_TO_INT_HPP

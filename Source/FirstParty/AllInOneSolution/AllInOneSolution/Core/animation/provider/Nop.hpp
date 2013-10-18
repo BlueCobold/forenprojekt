@@ -31,6 +31,12 @@ public:
 
         return ret;
     }
+
+    virtual Nop* clone() const override
+    {
+        auto list = std::move(cloneProviders());
+        return new Nop(list);
+    }
 };
 
 #endif //NOP_HPP
