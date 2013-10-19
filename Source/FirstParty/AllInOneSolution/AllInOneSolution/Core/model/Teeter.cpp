@@ -11,12 +11,15 @@
 
 #include <algorithm>
 #include <cmath>
+#include <iostream>
 
 Teeter::Teeter(const float mouseScale) :
     Entity(Entity::Teeter),
-    m_lastMouseX(utility::Mouse.getPosition().x),
+    m_lastMousePos(utility::Mouse.getPosition()),
     m_lastTime(-1),
-    m_mouseScale(mouseScale)
+    m_mouseScale(mouseScale),
+    m_invertAxis(false),
+    m_useVerticalAxis(false)
 { }
 
 Teeter::~Teeter()
@@ -25,7 +28,7 @@ Teeter::~Teeter()
 
 void Teeter::adaptToMouse()
 {
-    m_lastMouseX = utility::Mouse.getPosition().x;
+    m_lastMousePos = utility::Mouse.getPosition();
 }
 
 void Teeter::update(const float value)
@@ -34,18 +37,30 @@ void Teeter::update(const float value)
     float angle = utility::toDegree<float,float>(getAngle());
     float timeDiff = value - m_lastTime;
 
-    float mouseX = utility::Mouse.getPosition().x;
-    float mouseDiff = (m_lastMouseX - mouseX) * m_mouseScale / (timeDiff * 60);
+    sf::Vector2f mousePos = utility::Mouse.getPosition();
+    sf::Vector2f mouseDiff = (m_lastMousePos - mousePos) * m_mouseScale / (timeDiff * 60);
 
     float minVelocity = ((-45.f) - angle) / timeDiff;   
     float maxVelocity = ((45.f) - angle) / timeDiff;
-    
-    maxVelocity = std::min(maxVelocity, std::max(minVelocity, mouseDiff));
+
+    if(m_invertAxis)
+        mouseDiff = -mouseDiff;
+
+    if(m_useVerticalAxis)
+        maxVelocity = std::min(maxVelocity, std::max(minVelocity, mouseDiff.y));
+    else
+        maxVelocity = std::min(maxVelocity, std::max(minVelocity, mouseDiff.x));
+
     velocity = utility::toRadian<float, float>(maxVelocity);
 
     getBody()->SetAngularVelocity(velocity);
 
     m_lastTime = value;
-    m_lastMouseX = mouseX;
+    m_lastMousePos = mousePos;
     Entity::update(value);
+}
+void Teeter::setControll(const bool invertAxis, const bool useVerticalAxis)
+{
+    m_invertAxis = invertAxis;
+    m_useVerticalAxis = useVerticalAxis;
 }

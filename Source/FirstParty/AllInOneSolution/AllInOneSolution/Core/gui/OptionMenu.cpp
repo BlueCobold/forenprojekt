@@ -19,6 +19,10 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
     m_muteSoundWhenInactive = m_config.get<bool>("MuteSoundWhenInactiv");
 
     m_masterVolume = m_config.get<float>("MasterVolume");
+
+    m_useVerticalAxis = m_config.get<bool>("UseVerticalAxis");
+
+    m_invertAxis = m_config.get<bool>("InvertAxis");
     sf::Listener::setGlobalVolume(m_masterVolume);
 
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
@@ -26,6 +30,10 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
     Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
 
     Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
+
+    Menu::getCheckbox(CHECKBOX_INVERT_AXIS).setChecked(m_invertAxis);
+
+    Menu::getCheckbox(CHECKBOX_USE_VERTICALAXIS).setChecked(m_useVerticalAxis);
 
     for(auto it = begin(sf::VideoMode::getFullscreenModes()); it != end(sf::VideoMode::getFullscreenModes()); ++ it)
     {
@@ -80,6 +88,18 @@ void OptionMenu::applyChanges()
         m_muteSoundWhenInactive = !m_muteSoundWhenInactive;
         m_config.set("MuteSoundWhenInactiv", m_muteSoundWhenInactive);
     }
+
+    if(Menu::getCheckbox(CHECKBOX_USE_VERTICALAXIS).getChecked() != m_useVerticalAxis)
+    {
+        m_useVerticalAxis = !m_useVerticalAxis;
+        m_config.set("UseVerticalAxis", m_useVerticalAxis);
+    }
+
+    if(Menu::getCheckbox(CHECKBOX_INVERT_AXIS).getChecked() != m_invertAxis)
+    {
+        m_invertAxis = !m_invertAxis;
+        m_config.set("InvertAxis", m_invertAxis);
+    }
 }
 
 void OptionMenu::adjustVideoMode(sf::VideoMode& mode, bool fullScreen)
@@ -129,11 +149,18 @@ void OptionMenu::onEnter()
     m_masterVolume = m_config.get<float>("MasterVolume");
     sf::Listener::setGlobalVolume(m_masterVolume);
 
+    m_invertAxis = m_config.get<bool>("InvertAxis");
+    m_useVerticalAxis = m_config.get<bool>("UseVerticalAxis");
+
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
     Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
 
     Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
+
+    Menu::getCheckbox(CHECKBOX_USE_VERTICALAXIS).setChecked(m_useVerticalAxis);
+
+    Menu::getCheckbox(CHECKBOX_INVERT_AXIS).setChecked(m_invertAxis);
 }
 
 void OptionMenu::prevVideoMode()

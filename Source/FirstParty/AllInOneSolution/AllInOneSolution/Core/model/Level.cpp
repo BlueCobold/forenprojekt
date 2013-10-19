@@ -73,6 +73,12 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConf
 #endif
     m_contactListener = ContactListener(this, this);
     load();
+
+    for(auto it = begin(m_entities); it != end(m_entities); ++it)
+    {
+        if((*it)->getType() == Entity::Teeter)
+            static_cast<Teeter*>(it->get())->setControll(m_config.get<bool>("InvertAxis"), m_config.get<bool>("UseVerticalAxis"));
+    }
 }
 
 Level::~Level()
@@ -641,4 +647,10 @@ void Level::onEnter()
     m_invulnerableGoody.setCharges(m_config.get<int>("goodyinvulnerable"));
     m_extraBallGoody.setCharges(m_config.get<int>("goodyextraball"));
     m_extraTimeGoody.setCharges(m_config.get<int>("goodyextratime"));
+
+    for(auto it = begin(m_entities); it != end(m_entities); ++it)
+    {
+        if((*it)->getType() == Entity::Teeter)
+            static_cast<Teeter*>(it->get())->setControll(m_config.get<bool>("InvertAxis"), m_config.get<bool>("UseVerticalAxis"));
+    }
 }

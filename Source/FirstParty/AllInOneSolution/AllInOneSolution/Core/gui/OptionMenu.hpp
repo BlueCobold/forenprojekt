@@ -19,6 +19,8 @@ public:
     static const int BUTTON_ARROW_RIGHT = 9;
     static const int BUTTON_ARROW_LEFT = 10;
     static const int LABEL_RESOLUTION = 11;
+    static const int CHECKBOX_USE_VERTICALAXIS = 12;
+    static const int CHECKBOX_INVERT_AXIS = 15;
 
     OptionMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     
@@ -32,6 +34,8 @@ private:
     bool m_fullScreen;
     float m_masterVolume;
     bool m_muteSoundWhenInactive;
+    bool m_invertAxis;
+    bool m_useVerticalAxis;
     std::vector<sf::VideoMode> m_availableVideoMode;
     sf::VideoMode m_currentVideoMode;
     sf::Image m_icon;
