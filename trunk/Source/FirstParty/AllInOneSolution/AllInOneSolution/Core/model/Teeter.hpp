@@ -9,9 +9,12 @@
 class Teeter : public Entity
 {
 private:
-    float m_lastMouseX;
+    sf::Vector2f m_lastMousePos;
     float m_lastTime;
     float m_mouseScale;
+
+    bool m_invertAxis;
+    bool m_useVerticalAxis;
 
 public:
 
@@ -21,6 +24,7 @@ public:
     virtual void update(const float value) override;
 
     void adaptToMouse();
+    void setControll(const bool invertAxis, const bool useVerticalAxis);
 };
 
 #endif //TEETER_HPP
