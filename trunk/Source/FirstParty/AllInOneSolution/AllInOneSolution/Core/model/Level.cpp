@@ -77,7 +77,7 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConf
     for(auto it = begin(m_entities); it != end(m_entities); ++it)
     {
         if((*it)->getType() == Entity::Teeter)
-            static_cast<Teeter*>(it->get())->setControll(m_config.get<bool>("InvertAxis"), m_config.get<bool>("UseVerticalAxis"));
+            static_cast<Teeter*>(it->get())->setControl(m_config.get<bool>("InvertAxis"), m_config.get<bool>("UseVerticalAxis"));
     }
 }
 
@@ -651,6 +651,6 @@ void Level::onEnter()
     for(auto it = begin(m_entities); it != end(m_entities); ++it)
     {
         if((*it)->getType() == Entity::Teeter)
-            static_cast<Teeter*>(it->get())->setControll(m_config.get<bool>("InvertAxis"), m_config.get<bool>("UseVerticalAxis"));
+            static_cast<Teeter*>(it->get())->setControl(m_config.get<bool>("InvertAxis"), m_config.get<bool>("UseVerticalAxis"));
     }
 }
