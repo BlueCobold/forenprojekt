@@ -24,7 +24,7 @@ public:
     virtual void update(const float value) override;
 
     void adaptToMouse();
-    void setControll(const bool invertAxis, const bool useVerticalAxis);
+    void setControl(const bool invertAxis, const bool useVerticalAxis);
 };
 
 #endif //TEETER_HPP

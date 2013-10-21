@@ -11,7 +11,6 @@
 
 #include <algorithm>
 #include <cmath>
-#include <iostream>
 
 Teeter::Teeter(const float mouseScale) :
     Entity(Entity::Teeter),
@@ -59,7 +58,7 @@ void Teeter::update(const float value)
     m_lastMousePos = mousePos;
     Entity::update(value);
 }
-void Teeter::setControll(const bool invertAxis, const bool useVerticalAxis)
+void Teeter::setControl(const bool invertAxis, const bool useVerticalAxis)
 {
     m_invertAxis = invertAxis;
     m_useVerticalAxis = useVerticalAxis;

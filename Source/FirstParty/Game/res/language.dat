@@ -104,8 +104,9 @@ gui_label_mutesound = Mute Sound
 gui_label_wheninactive = when inactive
 gui_label_resolution = 800 x 600
 gui_label_use_vertical = Use vertical
-gui_label_mouseaxis = mouseaxis
+gui_label_mouseaxis = mouse axis
 gui_label_invert_used = Invert used
+gui_highscore = The Highscore
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
