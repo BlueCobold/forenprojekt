@@ -48,7 +48,7 @@ namespace utility
     {
         unsigned int pos = string.find("%");
         if (pos != std::string::npos)
-            string.replace(pos,1,replacement);
+            string.replace(pos, 1, replacement);
 
         return string;
     }
