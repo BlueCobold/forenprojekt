@@ -88,13 +88,13 @@ void SubWindow::draw(const DrawParameter& params)
     params.getTarget().draw(m_windowRect);
     params.getTarget().draw(m_sliderRect);
 
-    params.getTarget().draw(m_style.scrollbarTop);
-    params.getTarget().draw(m_style.scrollbarMiddle);
-    params.getTarget().draw(m_style.scrollbarBottom);
-
     on(params);
     m_panel.draw(params);
     off(params);
+
+    params.getTarget().draw(m_style.scrollbarTop);
+    params.getTarget().draw(m_style.scrollbarMiddle);
+    params.getTarget().draw(m_style.scrollbarBottom);
 }
 
 void SubWindow::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
