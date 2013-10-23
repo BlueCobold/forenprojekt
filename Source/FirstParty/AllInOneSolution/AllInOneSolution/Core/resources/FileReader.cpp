@@ -42,9 +42,9 @@ void FileReader::readFile()
     if(configFile.is_open())
     {
         // Reset variables
-        std::string line = "";
-        std::string key = "";
-        std::string value = "";
+        std::string line;
+        std::string key;
+        std::string value;
         unsigned int pos = 0;
 
         while(!configFile.eof())
@@ -59,7 +59,7 @@ void FileReader::readFile()
 
             key = line.substr(0, pos);
             eraseOverhang(key);
-            value = line.substr(pos+1);
+            value = line.substr(pos + 1) ;
             eraseOverhang(value);
 
             if(!key.empty() && !value.empty())
@@ -73,11 +73,13 @@ void FileReader::readFile()
 
 std::string FileReader::get(const std::string& key)
 {
+    if(key.find("@@") == 0)
+        return key.substr(2);
+
     // Default return value
     std::string output = std::string("Key not found: ") + key;
 
     auto it = m_content.find(key);
-
     if(it != end(m_content))
         output = it->second;
 
