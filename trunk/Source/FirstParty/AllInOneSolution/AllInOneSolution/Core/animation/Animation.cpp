@@ -21,7 +21,8 @@ Animation::Animation(std::unique_ptr<ValueProvider> provider,
     m_applyRotation(applyRotation),
     m_drawOffset(drawOffset),
     m_externalRotation(0.f),
-    m_horizontal(horizontal)
+    m_horizontal(horizontal),
+    m_stopOnAlphaZero(false)
 {
     m_sprite.setOrigin(origin);
 }
@@ -68,7 +69,7 @@ void Animation::update()
     if(m_colorProviders[Alpha] != nullptr)
     {
         float alpha = m_colorProviders[Alpha]->getValue();
-        if(alpha < 0)
+        if(m_stopOnAlphaZero && alpha < 0)
         {
             stop();
             return;
@@ -215,6 +216,7 @@ Animation* Animation::clone() const
         m_frames, m_frameWidth, m_frameHeight,
         m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal);
     
+    ani->m_stopOnAlphaZero = m_stopOnAlphaZero;
     ani->m_sourceOffset = m_sourceOffset;
     ani->m_sprite = m_sprite;
 
@@ -237,4 +239,9 @@ Animation* Animation::clone() const
         ani->m_yPositionProvider = std::unique_ptr<ValueProvider>(m_yPositionProvider->clone());
 
     return ani;
+}
+
+void Animation::setStopOnAlphaZero(bool stop)
+{
+    m_stopOnAlphaZero = stop;
 }

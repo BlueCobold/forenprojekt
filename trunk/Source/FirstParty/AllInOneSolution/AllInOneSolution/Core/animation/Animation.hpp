@@ -52,6 +52,7 @@ public:
         const std::vector<sf::Vector2i>& srcOffsets,
         const std::vector<sf::Vector2i>& sizes,
         const std::vector<sf::Vector2i>& origins);
+    void setStopOnAlphaZero(bool stop);
     
     virtual void draw(const DrawParameter& param) override;
 
@@ -78,6 +79,7 @@ private:
     std::vector<sf::Vector2i> m_sizes;
     std::vector<sf::Vector2i> m_origins;
     bool m_applyRotation;
+    bool m_stopOnAlphaZero;
     unsigned int m_frames;
     unsigned int m_frame;
     unsigned int m_frameWidth;
