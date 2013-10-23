@@ -102,6 +102,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         horizontal = std::string("vertical") != xml->Attribute("alignment");
     
     std::unique_ptr<Animation> anim(new Animation(nullptr, frames, width, height, rotate, origin, offset, horizontal));
+    anim->setStopOnAlphaZero(xml->BoolAttribute("stopOnAlphaZero"));
     
     std::unique_ptr<ValueProvider> provider;
     if(frameIndex == nullptr)

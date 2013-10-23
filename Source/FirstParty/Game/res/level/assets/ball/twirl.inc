@@ -266,7 +266,7 @@
 					</animation>
 				</animations>
 				<trailing speedMin="100" spawnDist="20">
-					<animation texture="sparkles" width="32" height="32" midx="16" midy="16" rotate="true">
+					<animation texture="sparkles" width="32" height="32" midx="16" midy="16" rotate="true" stopOnAlphaZero="true">
 						<constants start="0" />
 						<frameindex frames="8">
 							<cache>
