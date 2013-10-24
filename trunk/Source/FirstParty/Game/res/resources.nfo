@@ -50,6 +50,7 @@
 	<menu name="LevelPreviewMenu" path="LevelPreviewMenu.xml" />
 	<menu name="LevelSelectMenu" path="LevelSelectMenu.xml" />
 	<menu name="CoinShopMenu" path="CoinMenu.xml" />
+	<menu name="HighScoreMenu" path="HighScoreMenu.xml" />
 </menus>
 <bitmapfonts>
 	<bitmapfont name="gold" path="bitmapfontGold.xml" />

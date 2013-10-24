@@ -11,5 +11,6 @@
 		<label id="5" text="gui_time" font="buttonHoverFont" alignment="2" x="440" y="140" />
 		<!--<image id="6" tooltip="default" tooltiptext="tooltip_coins" texture="GuiElements" x="59" y="-21" scrx="230" scry="484" width="116" height="61"/> -->
 		<button id="8" text="" style="coins" x="118" y="-21" tooltip="default" tooltiptext="tooltip_coins"/>
+		<button id="9" text="" style="small" x="561" y="210" />
 	</elements>
 </menu>

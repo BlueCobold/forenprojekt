@@ -56,7 +56,7 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
-    if(clicked == LevelPreviewMenu::BUTTON_MAIN_MENU)
+    else if(clicked == LevelPreviewMenu::BUTTON_MAIN_MENU)
     {
         m_playStateInfo.m_prepareOnly = false;
         m_playStateInfo.m_returnFromPause = false;
@@ -65,12 +65,20 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
-    if(clicked == LevelPreviewMenu::BUTTON_COINS)
+    else if(clicked == LevelPreviewMenu::BUTTON_COINS)
     {
         m_playStateInfo.m_level = m_level;
         m_playStateInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_followingState = CoinShopStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+    }
+    else if(clicked == LevelPreviewMenu::BUTTON_HIGHSCORE)
+    {
+        m_highScoreInfo.m_level = m_level;
+        m_highScoreInfo.m_comeFromState = LevelPreviewStateId;
+        m_transitionStateInfo.m_followingState = HighScoreStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_highScoreInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 

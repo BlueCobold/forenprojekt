@@ -5,5 +5,6 @@
 	<elements>
 		<button id="0" text="gui_play_again" style="default" x="261" y="110" />
 		<button id="1" text="gui_mainmenu" style="default" x="261" y="165" />
+		<button id="2" text="" style="small" x="561" y="210" />
 	</elements>
 </menu>

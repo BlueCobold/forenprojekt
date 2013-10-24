@@ -28,6 +28,7 @@ private:
     HUD m_HUD;
 
     EnterPlayStateInformation m_playStateInfo;
+    EnterHighScoreStateInformation m_highScoreInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
 };
 

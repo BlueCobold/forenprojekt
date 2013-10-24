@@ -51,4 +51,9 @@ public:
     StateId m_comeFromState;
 };
 
+class EnterHighScoreStateInformation : public EnterStateInformation
+{
+public:
+    StateId m_comeFromState;
+};
 #endif // ENTERSTATEINFORMATION_HPP
