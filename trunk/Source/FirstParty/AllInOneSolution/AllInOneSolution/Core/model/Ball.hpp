@@ -34,6 +34,7 @@ public:
 
     void blowUp();
     bool blownUp() const;
+    bool isSpeeding() const;
 
     void bindTrail(std::unique_ptr<ParticleTrail> trail);
 

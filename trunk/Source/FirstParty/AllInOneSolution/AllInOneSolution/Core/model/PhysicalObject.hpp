@@ -92,7 +92,7 @@ public:
         }
     }
 
-    b2Body* getBody()
+    b2Body* getBody() const
     {
         return m_body;
     }
