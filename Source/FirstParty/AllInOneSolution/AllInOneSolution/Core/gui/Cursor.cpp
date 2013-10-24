@@ -1,11 +1,11 @@
 #include "Cursor.hpp"
 #include "../Input.hpp"
 
-const std::string Cursor::TEXTURE_NAME = "cursor";
-const int Cursor::SPRITE_POSITION_X = 0;
-const int Cursor::SPRITE_POSITION_Y = 0;
-const int Cursor::SPRITE_WIDTH = 39;
-const int Cursor::SPRITE_HEIGHT = 42;
+const std::string Cursor::TEXTURE_NAME = "GuiElements";
+const int Cursor::SPRITE_POSITION_X = 910;
+const int Cursor::SPRITE_POSITION_Y = 311;
+const int Cursor::SPRITE_WIDTH = 38;
+const int Cursor::SPRITE_HEIGHT = 48;
 
 Cursor::Cursor(ResourceManager& resourceManager, const sf::RenderWindow& screen)
     : m_screen(screen)
@@ -16,7 +16,7 @@ Cursor::Cursor(ResourceManager& resourceManager, const sf::RenderWindow& screen)
 
 void Cursor::update()
 {
-    sf::Vector2i pos = sf::Mouse::getPosition(m_screen);
+    sf::Vector2i pos = sf::Mouse::getPosition(m_screen) - sf::Vector2i(6, 5);
     m_sprite.setPosition(static_cast<float>(pos.x), static_cast<float>(pos.y));
 }
 
