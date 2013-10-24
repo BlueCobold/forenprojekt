@@ -15,7 +15,8 @@ HighScoreState::HighScoreState(sf::RenderWindow& screen,
                                ResourceManager& resourceManager, 
                                AppConfig& config) :
     State(screen, resourceManager, config),
-    m_menu(sf::Vector2f(0, 0), screen, resourceManager)
+    m_menu(sf::Vector2f(0, 0), screen, resourceManager),
+    m_HUD(resourceManager, config)
 {
 }
 
@@ -68,11 +69,21 @@ void HighScoreState::draw(const DrawParameter& params)
 
     sf::RectangleShape whiteRect;
     whiteRect.setSize(m_screen.getView().getSize());
-    whiteRect.setFillColor(sf::Color(255, 255, 255, 255));
+    if(m_highScoreStateInfo.m_level != nullptr)
+    {
+        m_highScoreStateInfo.m_level->adjustView(params.getTarget());
+        m_HUD.update(m_highScoreStateInfo.m_level, getCurrentTime());
+        m_highScoreStateInfo.m_level->draw(params);
+        m_HUD.draw(params);
+        whiteRect.setFillColor(sf::Color(255, 255, 255, 128));
+    }
+    else
+        whiteRect.setFillColor(sf::Color(255, 255, 255, 255));
     params.getTarget().draw(whiteRect);
 
     m_menu.draw(params);
 }
+
 void HighScoreState::loadHighScore(Level& level)
 {
     std::string number = utility::toString(level.number());
