@@ -39,6 +39,7 @@ private:
     bool m_replay;
 
     EnterPlayStateInformation m_playStateInfo;
+    EnterHighScoreStateInformation m_highScoreInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
     float m_timeDiff;
 };

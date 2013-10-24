@@ -6,6 +6,7 @@
 		<button id="0" text="gui_play_again" style="small" x="179" y="215" />
 		<button id="1" text="gui_play_next" style="small" x="343" y="215" />
 		<button id="2" text="gui_mainmenu" style="default" x="261" y="270" />
+		<button id="3" text="" style="small" x="561" y="210" />
 		<label id="10" text="gui_score" font="buttonHoverFont" alignment="2" x="440" y="100" />
 		<label id="11" text="gui_score" font="buttonHoverFont" alignment="0" x="70" y="100" />
 		<label id="12" text="gui_ball_lost" font="buttonHoverFont" alignment="2" x="440" y="140" />

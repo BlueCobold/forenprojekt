@@ -93,7 +93,15 @@ StateChangeInformation LevelPassState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
-    
+    else if(clicked == ReplayMenu::BUTTON_HIGHSCORE)
+    {
+        m_highScoreInfo.m_level = m_level;
+        m_highScoreInfo.m_comeFromState = LevelPassStateId;
+        m_transitionStateInfo.m_followingState = HighScoreStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_highScoreInfo;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+    }
+
     return StateChangeInformation::Empty();
 }
 

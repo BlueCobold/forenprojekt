@@ -40,6 +40,7 @@ private:
     EnterStateInformation m_stateInfo;
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
+    EnterHighScoreStateInformation m_highScoreInfo;
     float m_timeDiff;
 
     void setMedal(int medal);

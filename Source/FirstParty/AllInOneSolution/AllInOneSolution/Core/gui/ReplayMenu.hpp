@@ -12,6 +12,7 @@ public:
     static const int BUTTON_PLAY_AGAIN = 0;
     static const int BUTTON_PLAY_NEXT = 1;
     static const int BUTTON_MAIN_MENU = 2;
+    static const int BUTTON_HIGHSCORE = 3;
     static const int SPRITE_SYMBOL_NONE = 14;
     static const int SPRITE_SYMBOL_BRONCE = 15;
     static const int SPRITE_SYMBOL_SILVER = 16;
