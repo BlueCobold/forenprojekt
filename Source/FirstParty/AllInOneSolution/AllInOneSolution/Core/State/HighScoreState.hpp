@@ -7,6 +7,7 @@
 #include "EnterStateInformation.hpp"
 #include "../gui/Button.hpp"
 #include "../gui/HighScoreMenu.hpp"
+#include "../gui/hud/HUD.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 
@@ -28,6 +29,7 @@ private:
     void render(sf::RenderTarget& m_renderTexture);
     void loadHighScore(Level& level);
     HighScoreMenu m_menu;
+    HUD m_HUD;
 
     EnterPauseStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
