@@ -69,7 +69,7 @@ void Animation::update()
     if(m_colorProviders[Alpha] != nullptr)
     {
         float alpha = m_colorProviders[Alpha]->getValue();
-        if(m_stopOnAlphaZero && alpha < 0)
+        if(m_stopOnAlphaZero && alpha <= 0)
         {
             stop();
             return;
