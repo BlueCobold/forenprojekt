@@ -11,6 +11,18 @@
 			offsetx="-6" offsety="-6" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
 	</buttonStyle>
+	<buttonStyle name="square">
+		<mouseRect left="2" top="2" width="36" height="36" />
+		<idle texture="GuiElements" srcx="230" srcy="313" width="48" height="46"
+			offsetx="0" offsety="0"
+			font="buttonIdleFont" fontoffsetx="-2" fontoffsety="1" />
+		<hover texture="GuiElements" srcx="948" srcy="311" width="48" height="46"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="-2" fontoffsety="1" />
+		<pressed texture="GuiElements" srcx="390" srcy="342" width="54" height="52"
+			offsetx="-4" offsety="-4" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="2" />
+	</buttonStyle>
 	<buttonStyle name="coins">
 		<mouseRect left="2" top="2" width="112" height="57" />
 		<idle texture="GuiElements" srcx="230" srcy="484" width="116" height="61"
@@ -20,30 +32,6 @@
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
 		<pressed texture="GuiElements" srcx="230" srcy="484" width="116" height="61"
-			offsetx="0" offsety="0" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
-	</buttonStyle>
-	<buttonStyle name="plus">
-		<mouseRect left="2" top="2" width="28" height="28" />
-		<idle texture="GuiElements" srcx="910" srcy="346" width="32" height="32"
-			offsetx="0" offsety="0"
-			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
-		<hover texture="GuiElements" srcx="910" srcy="346" width="32" height="32"
-			offsetx="0" offsety="0" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
-		<pressed texture="GuiElements" srcx="910" srcy="346" width="32" height="32"
-			offsetx="0" offsety="0" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
-	</buttonStyle>
-	<buttonStyle name="minus">
-		<mouseRect left="2" top="2" width="28" height="28" />
-		<idle texture="GuiElements" srcx="910" srcy="378" width="32" height="32"
-			offsetx="0" offsety="0"
-			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
-		<hover texture="GuiElements" srcx="910" srcy="378" width="32" height="32"
-			offsetx="0" offsety="0" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
-		<pressed texture="GuiElements" srcx="910" srcy="378" width="32" height="32"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
 	</buttonStyle>
@@ -72,27 +60,27 @@
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 	</buttonStyle>
 	<buttonStyle name="arrowleft">
-		<mouseRect left="0" top="0" width="58" height="43" />
-		<idle texture="arrowHUD" srcx="195" srcy="11" width="58" height="43"
+		<mouseRect left="2" top="2" width="54" height="38" />
+		<idle texture="GuiElements" srcx="948" srcy="357" width="65" height="49"
 			offsetx="0" offsety="0"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="0" />
-		<hover texture="arrowHUD" srcx="195" srcy="11" width="58" height="43"
+		<hover texture="GuiElements" srcx="444" srcy="342" width="65" height="49"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
-		<pressed texture="arrowHUD" srcx="195" srcy="11" width="58" height="43"
-			offsetx="0" offsety="0" sound="bounce" 
+		<pressed texture="GuiElements" srcx="230" srcy="359" width="72" height="57"
+			offsetx="-5" offsety="-5" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 	</buttonStyle>
 	<buttonStyle name="arrowright">
-		<mouseRect left="0" top="0" width="58" height="43" />
-		<idle texture="arrowHUD" srcx="258" srcy="11" width="58" height="43"
+		<mouseRect left="2" top="2" width="54" height="38" />
+		<idle texture="GuiElements" srcx="498" srcy="503" width="65" height="49"
 			offsetx="0" offsety="0"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="0" />
-		<hover texture="arrowHUD" srcx="258" srcy="11" width="58" height="43"
+		<hover texture="GuiElements" srcx="230" srcy="416" width="65" height="49"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
-		<pressed texture="arrowHUD" srcx="258" srcy="11" width="58" height="43"
-			offsetx="0" offsety="0" sound="bounce" 
+		<pressed texture="GuiElements" srcx="563" srcy="546" width="72" height="57"
+			offsetx="-5" offsety="-5" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 	</buttonStyle>
 	<checkboxStyle name="default">

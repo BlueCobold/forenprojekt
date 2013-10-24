@@ -54,7 +54,7 @@ App::App(AppConfig& config) :
 
     sf::Image icon; icon.create(16, 16);
     sf::Image texture = m_resourceManager.getTexture("GuiElements")->copyToImage();
-    icon.copy(texture, 0, 0, sf::IntRect(910, 330, 926, 346));
+    icon.copy(texture, 0, 0, sf::IntRect(1000, 20, 16, 16));
     m_screen.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
