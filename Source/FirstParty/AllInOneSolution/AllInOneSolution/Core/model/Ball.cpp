@@ -65,12 +65,10 @@ void Ball::update(const float value)
 
     if(m_trail != nullptr && !frozen() && !hidden())
     {
-        if(value <= 0)
+        if(value <= 0 || !isSpeeding())
             m_trail->setTo(getPosition().x, getPosition().y);
-        if(getBody() != nullptr && getBody()->GetLinearVelocity().Length() >= m_trail->getSpeedMin())
-            m_trail->moveTo(getPosition().x, getPosition().y);
         else
-            m_trail->setTo(getPosition().x, getPosition().y);
+            m_trail->moveTo(getPosition().x, getPosition().y);
     }
 
     autoResetBall(value);
@@ -172,4 +170,9 @@ void Ball::setInvulnerable(const bool value)
 void Ball::bindTrail(std::unique_ptr<ParticleTrail> trail)
 {
     m_trail = std::move(trail);
+}
+
+bool Ball::isSpeeding() const
+{
+    return m_trail != nullptr && getBody() != nullptr && getBody()->GetLinearVelocity().Length() >= m_trail->getSpeedMin();
 }

@@ -370,18 +370,24 @@ void Level::killTarget(Entity* target)
         m_levelPass = true;
 
     int earned = m_normalTargetPoints + m_multiHit * 50 + m_gravityGoody.getBonusPoints();
+    if(m_ball->isSpeeding())
+        earned = static_cast<int>(earned * 1.5);
     m_points += earned;
     m_multiHit++;
     createLabelAt(target, "green", earned);
 }
+
 void Level::killBonusTarget(Entity* target)
 {
     target->kill();
     int earned = m_bonusTargetPoints + m_multiHit * 50 + m_gravityGoody.getBonusPoints();
+    if(m_ball->isSpeeding())
+        earned = static_cast<int>(earned * 1.5);
     m_points += earned;
     m_multiHit++;
     createLabelAt(target, "green", earned);
 }
+
 void Level::createLabelAt(const Entity* target, const std::string& fontName, const int number)
 {
     std::string prefix;
