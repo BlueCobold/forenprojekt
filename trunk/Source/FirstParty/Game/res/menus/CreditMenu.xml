@@ -8,7 +8,7 @@
 			<style>
 				<scrollTop texture="GuiElements" srcx="1000" srcy="0" width="20" height="10" />
 				<scrollMiddle texture="GuiElements" srcx="1000" srcy="10" width="20" height="1" />
-				<scrollBottom texture="GuiElements" srcx="1000" srcy="10" width="20" height="11" />
+				<scrollBottom texture="GuiElements" srcx="1000" srcy="10" width="20" height="10" />
 			</style>
 			<elements>
 				<label text="gui_team_lead" font="buttonIdleFont" alignment="1" x="170" y="10" />
