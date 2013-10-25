@@ -68,7 +68,7 @@ StateChangeInformation LevelPreviewState::update(const float time)
         else
             m_menu.getCheckbox(11).setChecked(true);
     }
-    m_menu.setLevelInfo(m_level->getLevelName(), m_level->getTotalTime(), m_level->getRemainingBall());
+    m_menu.setLevelInfo(m_level->getLevelName(), m_level->getRemainigTime(), m_level->getRemainingBall());
     if(clicked == LevelPreviewMenu::BUTTON_START)
     {
         m_level->setTimeAttackMode(m_menu.getCheckbox(10).getChecked());
