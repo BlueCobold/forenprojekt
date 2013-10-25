@@ -12,21 +12,27 @@
 			</style>
 			<elements>
 				<checkbox id="2" style="default" x="86" y="10" />
+				<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" alignment="0" x="130" y="12" />
+				
+				<button id="9" text="" style="arrowright" x="300" y="49" />
+				<button id="10" text="" style="arrowleft" x="50" y="49" />
+				<label id="11" text="gui_label_resolution" font="buttonHoverFont" alignment="1" x="177" y="55" />
+				
 				<slider id="3" style="default" x="0" y="100" />
-				<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" alignment="0" x="130" y="10" />
 				<label id="5" text="gui_label_mastervolumen" font="buttonHoverFont" alignment="0" x="130" y="100" />
+				
 				<checkbox id="6" style="default" x="86" y="165" />
 				<label id="7" text="gui_label_mutesound" font="buttonHoverFont" alignment="0" x="130" y="150" />
 				<label id="8" text="gui_label_wheninactive" font="buttonHoverFont" alignment="0" x="130" y="180" />
-				<button id="9" text="" style="arrowright" x="300" y="49" />
-				<button id="10" text="" style="arrowleft" x="50" y="49" />
-				<label id="11" text="gui_label_resolution" font="buttonHoverFont" alignment="1" x="177" y="55" />				
-				<checkbox id="12" style="default" x="86" y="230" />
+				
+				<checkbox id="12" style="default" x="86" y="235" />
 				<label id="13" text="gui_label_use_vertical" font="buttonHoverFont" alignment="0" x="130" y="220" />
-				<label id="14" text="gui_label_mouseaxis" font="buttonHoverFont" alignment="0" x="130" y="250" />
-				<checkbox id="15" style="default" x="86" y="300" />
+				<label id="14" text="gui_label_mouseaxis" font="buttonHoverFont" alignment="0" x="130" y="245" />
+				
+				<checkbox id="15" style="default" x="86" y="305" />
 				<label id="16" text="gui_label_invert_used" font="buttonHoverFont" alignment="0" x="130" y="290" />
-				<label id="17" text="gui_label_mouseaxis" font="buttonHoverFont" alignment="0" x="130" y="320" />
+				<label id="17" text="gui_label_mouseaxis" font="buttonHoverFont" alignment="0" x="130" y="315" />
+				
 			</elements>
 		</subwindow>
 		<image id="20" texture="GuiElements" x="66" y="105" scrx="962" scry="104" width="20" height="100"/>
