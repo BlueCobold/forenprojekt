@@ -575,9 +575,15 @@ void Level::setTimeAttackMode(bool timeAttackMode)
 {
     m_timeAttackMode = timeAttackMode;
     if(m_timeAttackMode)
+    {
         m_remainingTime = 120.f;
+        m_totalTime = 120.f;
+    }
     else
-        m_remainingTime = m_totalTime;
+    {
+        m_remainingTime = m_initialTime;
+        m_totalTime = m_initialTime;
+    }
 }
 
 void Level::handleAutoRespawn()
