@@ -11,20 +11,20 @@
 	</templates>
 
 	<grid size="60" width="2460" height="1410">
-                                                                                    
-                  W1 1w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2W5
-                  w2s4w2                        W2 2d3
-                  w1s3w2  t1                t1  w1s3d2
-                  W6 6w1                        W4 4d3
-                  w2s3w1                        w6s6s5
-                  w6s6w5            BB          w2s3s1                  
-                  W1 1d3\1                    /2W1 1d5                  
-                  w5s2d1s2\1                /2w4w1s3d2                  
-                  W3 3d6W2 2\1            /2W2 2W2 2d3                  
-                  w2s4d2s4w3s2\1        /2w2s4d2w4s5d2                  
-                  W4 4d3W1 1w4w4    TT  W6 6d1w4W6 6d1                 
-                 
-                                  
+                                                                                  
+                  W1 1w4w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2W5 5                        
+                  w2s4W3 3                        W2 2s3w1                        
+                  w1d3s6w5  t1                t1  w1s3d2w4                        
+                  w6d4w2w1                        W4 4d3w6                        
+                  w2d3s4w3                        w6s6d5w2                        
+                  w6d6d1w5            BB          w2d3d1w3                        
+                  W1 1d6s3\2                    /5s1d1W5 5                        
+                  w5s2d3d1s2\1                /6s4d1d3s2w6                        
+                  W3 3d4d6W2 2\5            /1W5 5d2d2W1 1                        
+                  w2s4d1d2s4w3s2\3        /4s2w4s2d4d5s2w5                        
+                  W4 4d5d3W1 1w4w4    TT  W6 6W1 1d6d6W3 3                        
+                                                                                  
+                                                                                  
 	</grid>
 	<objects>
 		<include file="pastureland/background.inc" />
