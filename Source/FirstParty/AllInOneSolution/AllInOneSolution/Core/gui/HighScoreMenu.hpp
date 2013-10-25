@@ -10,8 +10,8 @@ class HighScoreMenu : public CaptionMenu
 public:
 
     static const int BUTTON_CLOSE = 0;
-    static const int LABEL_PLACE_ONE = 11;
-    static const int LABEL_POINTS_ONE = 21;
+    static const int LABEL_PLACES = 11;
+    static const int LABEL_POINTS = 21;
 
     HighScoreMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
 };
