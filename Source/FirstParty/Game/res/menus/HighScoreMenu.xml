@@ -1,0 +1,36 @@
+<menu>
+	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
+	<caption font="gui_large" text="gui_highscore" offsetx="0" offsety="50" />
+	<styles source="Styles.inc"/>
+	<elements>
+		<button id="0" text="gui_close" style="default" x="261" y="270" />
+		<subwindow id="1" x="80" y="108" sizex="352" sizey="150" innerheight="220">
+			<style>
+				<scrollTop texture="GuiElements" srcx="1000" srcy="0" width="20" height="10" />
+				<scrollMiddle texture="GuiElements" srcx="1000" srcy="10" width="20" height="1" />
+				<scrollBottom texture="GuiElements" srcx="1000" srcy="10" width="20" height="10" />
+			</style>
+			<elements>
+				<label id="11" text="" font="buttonHoverFont" alignment="0" x="20" y="10" />
+				<label id="12" text="" font="buttonHoverFont" alignment="0" x="20" y="50" />
+				<label id="13" text="" font="buttonHoverFont" alignment="0" x="20" y="90" />
+				<label id="14" text="" font="buttonHoverFont" alignment="0" x="20" y="130" />
+				<label id="15" text="" font="buttonHoverFont" alignment="0" x="20" y="170" />
+
+				<label id="21" text="" font="buttonHoverFont" alignment="2" x="325" y="10" />
+				<label id="22" text="" font="buttonHoverFont" alignment="2" x="325" y="50" />
+				<label id="23" text="" font="buttonHoverFont" alignment="2" x="325" y="90" />
+				<label id="24" text="" font="buttonHoverFont" alignment="2" x="325" y="130" />
+				<label id="25" text="" font="buttonHoverFont" alignment="2" x="325" y="170" />
+			</elements>
+		</subwindow>
+		<image id="2" texture="GuiElements" x="76" y="105" scrx="962" scry="104" width="20" height="100"/>
+		<image id="3" texture="GuiElements" x="76" y="205" scrx="962" scry="163" width="20" height="60"/>
+		<image id="4" texture="GuiElements" x="96" y="105" scrx="718" scry="311" width="163" height="19"/>
+		<image id="5" texture="GuiElements" x="259" y="105" scrx="718" scry="311" width="163" height="19"/>
+		<image id="6" texture="GuiElements" x="422" y="105" scrx="982" scry="136" width="20" height="100"/>
+		<image id="7" texture="GuiElements" x="422" y="205" scrx="982" scry="195" width="20" height="60"/>
+		<image id="8" texture="GuiElements" x="96" y="254" scrx="704" scry="257" width="163" height="19"/>
+		<image id="9" texture="GuiElements" x="259" y="254" scrx="704" scry="257" width="163" height="19"/>
+	</elements>
+</menu>
