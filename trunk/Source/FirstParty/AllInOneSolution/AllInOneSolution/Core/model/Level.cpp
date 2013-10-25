@@ -244,6 +244,8 @@ void Level::spawnPendingEntities(float currentTime)
         auto e = std::move(*it);
         e->restartAt(currentTime);
         e->bindBody();
+        if(e->getType() == Entity::Target)
+            m_remainingTarget++;
         m_entities.push_back(std::move(e));
     }
     m_entitiesToSpawn.clear();
