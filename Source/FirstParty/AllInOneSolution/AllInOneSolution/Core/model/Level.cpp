@@ -519,12 +519,17 @@ const bool Level::isLevelPassed() const
     if(m_levelEndingTime < m_lastTime)
         return m_levelPass;
     else
-        return false;
+        return (m_timeAttackMode && m_remainingTime < 0);
 }
 
 const float Level::getRemainigTime() const
 {
     return m_remainingTime;
+}
+
+const float Level::getTotalTime() const
+{
+    return m_totalTime;
 }
 
 const Goody Level::getGoody (const Goody::Type& type) const
@@ -555,19 +560,25 @@ const bool Level::isLevelFailed() const
     bool value = m_remainingBall < 1 && m_remainingBall > -1;
     // don't use the same variable to check - it can cause negative times
     // I had that quite often when debugging or lagging (dragging the window)
-    value |= m_remainingTime < 0 && m_totalTime > -1.f;
+    value |= !m_timeAttackMode && m_remainingTime < 0 && m_totalTime > -1.f;
     return value;
+}
+
+bool Level::isTimeAttackMode() const
+{
+    return m_timeAttackMode;
 }
 
 void Level::setTimeAttackMode(bool timeAttackMode)
 {
     m_timeAttackMode = timeAttackMode;
-
     if(m_timeAttackMode)
     {
         m_remainingTime = 120.f;
         m_totalTime = 120.f;
     }
+    else
+        m_totalTime = -1.f;
 }
 
 void Level::handleAutoRespawn()

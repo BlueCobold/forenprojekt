@@ -31,6 +31,7 @@ struct CheckBoxInfo
     CheckBoxStyle style;
     sf::Vector2f position;
     int id;
+    ToolTip toolTip;
 };
 
 struct SliderInfo

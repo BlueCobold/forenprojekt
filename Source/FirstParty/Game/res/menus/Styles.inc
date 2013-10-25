@@ -90,6 +90,20 @@
 		<checked texture="GuiElements" srcx="962" srcy="41" width="38" height="41"
 			offsetx="0" offsety="0" />
 	</checkboxStyle>
+	<checkboxStyle name="timemode">
+		<mouseRect left="1" top="1" width="34" height="34" />
+		<unchecked texture="GuiElements" srcx="635" srcy="546" width="40" height="40"
+			offsetx="0" offsety="0" />
+		<checked texture="GuiElements" srcx="622" srcy="395" width="40" height="40"
+			offsetx="0" offsety="0" />
+	</checkboxStyle>
+	<checkboxStyle name="targetmode">
+		<mouseRect left="1" top="1" width="34" height="34" />
+		<unchecked texture="GuiElements" srcx="582" srcy="395" width="40" height="40"
+			offsetx="0" offsety="0" />
+		<checked texture="GuiElements" srcx="922" srcy="104" width="40" height="40"
+			offsetx="0" offsety="0" />
+	</checkboxStyle>
 	<sliderStyle name="default">
 		<mouseRect left="8" top="-3" width="26" height="36" />
 		<value min="0" max="100" width="83"/>
@@ -106,7 +120,7 @@
 			sliderwidth="38" sliderheight="54" 
 			slideroffsetx="-6" slideroffsety="-9" />
 	</sliderStyle>
-	<tooltipStyle name="default" offsetx="0" offsety="23">
+	<tooltipStyle name="default" offsetx="0" offsety="45">
 		<text font="gold" offsetx="0" offsety="0"/>
 		<backround id="1" texture="GuiElements" srcx="892" srcy="104" width="10" height="10" />
 		<backround id="2" texture="GuiElements" srcx="902" srcy="104" width="10" height="10" />

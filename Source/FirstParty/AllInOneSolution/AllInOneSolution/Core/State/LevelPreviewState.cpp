@@ -1,6 +1,7 @@
  #include "LevelPreviewState.hpp"
 
 #include "../gui/Button.hpp"
+#include "../gui/CheckBox.hpp"
 #include "../model/Level.hpp"
 #include "../resources/AppConfig.hpp"
 
@@ -27,11 +28,11 @@ void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, c
     State::onEnter(enterInformation,time);
     m_level = enterInformation->m_level;
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
-    m_menu.setLevelInfo(m_level->getLevelName(),
-                        m_level->getRemainigTime(),
-                        m_level->getRemainingBall());
+    m_menu.setLevelInfo(m_level->getLevelName(), m_level->getTotalTime(), m_level->getRemainingBall());
     m_menu.setCoinToolTipText(utility::replace(utility::translateKey("tooltip_coins"), 
                                            utility::toString(m_config.get<int>("coins"))));
+    m_menu.getCheckbox(10).setChecked(false);
+    m_menu.getCheckbox(11).setChecked(true);
 
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 }
@@ -47,8 +48,30 @@ StateChangeInformation LevelPreviewState::update(const float time)
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
     m_menu.update(m_screen);
 
+    if(m_level->isTimeAttackMode())
+    {
+        if(m_menu.getCheckbox(11).getChecked())
+        {
+            m_level->setTimeAttackMode(false);
+            m_menu.getCheckbox(10).setChecked(false);
+        }
+        else
+            m_menu.getCheckbox(10).setChecked(true);
+    }
+    else
+    {
+        if(m_menu.getCheckbox(10).getChecked())
+        {
+            m_level->setTimeAttackMode(true);
+            m_menu.getCheckbox(11).setChecked(false);
+        }
+        else
+            m_menu.getCheckbox(11).setChecked(true);
+    }
+    m_menu.setLevelInfo(m_level->getLevelName(), m_level->getTotalTime(), m_level->getRemainingBall());
     if(clicked == LevelPreviewMenu::BUTTON_START)
     {
+        m_level->setTimeAttackMode(m_menu.getCheckbox(10).getChecked());
         m_playStateInfo.m_prepareOnly = false;
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = m_level;

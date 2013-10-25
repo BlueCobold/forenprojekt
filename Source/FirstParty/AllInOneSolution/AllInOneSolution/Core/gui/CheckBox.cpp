@@ -18,21 +18,24 @@ void CheckBox::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseO
                              static_cast<int>(position.y + offset.y + m_style.mouseRect.top),
                              m_style.mouseRect.width,
                              m_style.mouseRect.height);
-    if(utility::Mouse.leftButtonReleased())
+    
+    sf::Vector2i mouseposition = sf::Mouse::getPosition(screen);
+    if(checkboxRect.contains(sf::Mouse::getPosition(screen) + mouseOffset))
     {
-        if(checkboxRect.contains(sf::Mouse::getPosition(screen) + mouseOffset) && !m_checked)
-        {
-            m_checked = true;
-            m_sprite = &m_style.checkedStyle.sprite;
-            onPositionChanged();
-        }
-        else if(checkboxRect.contains(sf::Mouse::getPosition(screen) + mouseOffset) && m_checked)
-        {
-            m_checked = false;
+        m_showToolTip = true;
+        m_toolTip.setPosition(static_cast<const sf::Vector2f>(mouseposition));
+        if(!utility::Mouse.leftButtonReleased())
+            return;
+        
+        m_checked = !m_checked;
+        if(!m_checked )
             m_sprite = &m_style.uncheckedStyle.sprite;
-            onPositionChanged();
-        }
+        else
+            m_sprite = &m_style.checkedStyle.sprite;
+        onPositionChanged();
     }
+    else
+        m_showToolTip = false;
 }
 
 void CheckBox::draw(const DrawParameter& params)
@@ -41,6 +44,12 @@ void CheckBox::draw(const DrawParameter& params)
         return;
 
     params.getTarget().draw(*m_sprite);
+}
+
+void CheckBox::drawAdditionalForeground(const DrawParameter& params)
+{
+    if(m_showToolTip && isVisible())
+        m_toolTip.draw(params);
 }
 
 void CheckBox::onPositionChanged()
@@ -70,4 +79,14 @@ void CheckBox::setChecked(bool checked)
         m_sprite = &m_style.uncheckedStyle.sprite;
         onPositionChanged();
     }
+}
+
+void CheckBox::setToolTip(const ToolTip& toolTip)
+{
+    m_toolTip = toolTip;
+}
+
+void CheckBox::setToolTipText(const std::string& text)
+{
+    m_toolTip.setText(text);
 }

@@ -211,7 +211,7 @@
 				</animations>
 			</entity>
 
-			<entity name="target_1" rep="t1" type="target" points="100" collideWithBall="false">
+			<entity name="target_1" rep="t1" type="target" respawnable="true" points="100" collideWithBall="false">
 				<physics name="target">
 					<shape type="circle" radius="30" />
 				</physics>
