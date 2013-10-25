@@ -111,6 +111,8 @@ gui_highscore = The Highscore
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
 tooltip_coins = you currently have % coins.
+tooltip_preview_timeattack = select time attack mode.\r\ncollect as many points as\r\npossible in 2 minutes time.
+tooltip_preview_targetmode = select target mode.\r\nhit all major targets\r\nto win this level.
 tooltip_goody_speed = gives the double speed.
 tooltip_goody_gravity = this goody increases the gravity\r\n and you will gain more points\r\n from targets the longer\r\nit is active.
 tooltip_goody_invulnerable = this goody makes the ball\r\n invulnerable for 2 seconds.

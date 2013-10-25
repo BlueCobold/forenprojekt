@@ -37,7 +37,8 @@ private:
     static void parseCheckBoxes(
         MenuElements& elements, 
         tinyxml2::XMLElement* menuXml, 
-        std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles, 
+        std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles,
+        std::unordered_map<std::string, ToolTip>& toolTip,
         ResourceManager& resourceManager);
 
     static void parseSliders(

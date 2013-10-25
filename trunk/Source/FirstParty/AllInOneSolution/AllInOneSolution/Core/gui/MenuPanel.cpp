@@ -101,6 +101,7 @@ void MenuPanel::createButton(const ButtonInfo& info)
 void MenuPanel::createCheckBox(const CheckBoxInfo& info)
 {
     std::unique_ptr<CheckBox> checkbox(new CheckBox(info.id, info.style, m_position, info.position));
+    checkbox->setToolTip(info.toolTip);
     m_elements.push_back(std::move(checkbox));
 }
 

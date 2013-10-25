@@ -74,6 +74,7 @@ public:
     const bool isLevelFailed() const;
 
     const float getRemainigTime() const;
+    const float getTotalTime() const;
 
     const Goody getGoody(const Goody::Type& type) const;
     void onGoodyActivated(Goody& goody);
@@ -85,6 +86,7 @@ public:
     const int getLostBalls() const;
 
     void setTimeAttackMode(bool timeAttackMode);
+    bool isTimeAttackMode() const;
 
     enum Medals {Gold, Silver, Bronze, none};
     const Level::Medals getMedal() const;

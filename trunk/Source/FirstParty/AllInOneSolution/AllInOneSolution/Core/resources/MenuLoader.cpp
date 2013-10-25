@@ -38,7 +38,7 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     std::unordered_map<std::string, ToolTip> toolTip = parseToolTipStyle(menuXml, resourceManager);
 
     parseButtons(elements, menuXml, buttonStyles, toolTip, resourceManager);
-    parseCheckBoxes(elements, menuXml, checkboxStyles, resourceManager);
+    parseCheckBoxes(elements, menuXml, checkboxStyles, toolTip, resourceManager);
     parseSliders(elements, menuXml, sliderStyles, resourceManager);
     parseLabels(elements, menuXml, resourceManager);
     parseImages(elements, menuXml, toolTip, resourceManager);
@@ -105,7 +105,8 @@ void MenuLoader::parseButtons(
 void MenuLoader::parseCheckBoxes(
     MenuElements& elements, 
     tinyxml2::XMLElement* menuXml, 
-    std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles, 
+    std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles,
+    std::unordered_map<std::string, ToolTip>& toolTip,
     ResourceManager& resourceManager)
 {
     if(auto styles = menuXml->FirstChildElement("elements"))
@@ -121,6 +122,15 @@ void MenuLoader::parseCheckBoxes(
             
             checkBox.position = sf::Vector2f(checkboxXml->FloatAttribute("x"), checkboxXml->FloatAttribute("y"));
             checkBox.id = checkboxXml->IntAttribute("id");
+
+            if(auto toolTipName = checkboxXml->Attribute("tooltip"))
+            {
+                auto tooltip = toolTip.find(toolTipName);
+                if(tooltip == end(toolTip))
+                    throw std::runtime_error(utility::replace(utility::translateKey("UnknownToolTip"), checkboxXml->Attribute("tooltip")));
+                checkBox.toolTip = tooltip->second;
+                checkBox.toolTip.setText(utility::translateKey(checkboxXml->Attribute("tooltiptext")));
+            }
 
             elements.checkboxes.push_back(checkBox);
         }
@@ -251,7 +261,7 @@ void MenuLoader::parseSubWindow(MenuTemplate& menu,
             subWindowInfo.size = sf::Vector2f(subXml->FloatAttribute("sizex"), subXml->FloatAttribute("sizey"));
             subWindowInfo.innerHeight = subXml->IntAttribute("innerheight");
             parseButtons(ownElements, subXml, buttonStyles, toolTip, resourceManager);
-            parseCheckBoxes(ownElements, subXml, checkBoxStyles, resourceManager);
+            parseCheckBoxes(ownElements, subXml, checkBoxStyles, toolTip, resourceManager);
             parseSliders(ownElements, subXml, sliderStyles, resourceManager);
             parseLabels(ownElements, subXml, resourceManager);
             parseImages(ownElements, subXml, toolTip, resourceManager);

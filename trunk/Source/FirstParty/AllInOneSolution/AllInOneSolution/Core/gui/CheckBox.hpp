@@ -3,8 +3,9 @@
 #ifndef CHECKBOX_HPP
 #define CHECKBOX_HPP
 
-#include "MenuElement.hpp"
 #include "CheckboxStyle.hpp"
+#include "MenuElement.hpp"
+#include "ToolTip.hpp"
 
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -17,15 +18,22 @@ public:
 
     virtual void update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     virtual void draw(const DrawParameter& params) override;
+    virtual void drawAdditionalForeground(const DrawParameter& params) override;
     
     bool getChecked();
     void setChecked(bool checked);
+    
+    void setToolTip(const ToolTip& toolTip);
+    void setToolTipText(const std::string& text);
 
 protected:
     
     virtual void onPositionChanged() override;
 
 private:
+    
+    ToolTip m_toolTip;
+    bool m_showToolTip;
 
     bool m_checked;
     sf::Sprite* m_sprite;
