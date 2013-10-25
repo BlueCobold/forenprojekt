@@ -742,10 +742,12 @@ void Level::parseGameplayAttributes(tinyxml2::XMLElement* xml)
     {
         m_remainingTime = remainingTime;
         m_totalTime = m_remainingTime;
+        m_initialTime = m_totalTime;
     }
     else
     {
         m_remainingTime = -1.f;
         m_totalTime = -1.f;
+        m_initialTime = -1.f;
     }
 }

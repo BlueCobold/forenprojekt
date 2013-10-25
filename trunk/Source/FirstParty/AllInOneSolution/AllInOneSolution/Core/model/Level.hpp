@@ -277,6 +277,7 @@ private:
 
     float m_remainingTime;
     float m_totalTime;
+    float m_initialTime;
 
     struct TimedLabel
     {
