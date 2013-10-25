@@ -45,7 +45,7 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
 
     m_icon.create(16, 16);
     sf::Image texture = resourceManager.getTexture("GuiElements")->copyToImage();
-    m_icon.copy(texture, 0, 0, sf::IntRect(910, 330, 926, 346));
+    m_icon.copy(texture, 0, 0, sf::IntRect(1000, 20, 16, 16));
 }
 
 void OptionMenu::applyChanges()
