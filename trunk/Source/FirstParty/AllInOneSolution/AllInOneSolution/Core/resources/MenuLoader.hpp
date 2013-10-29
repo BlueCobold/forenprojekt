@@ -58,6 +58,12 @@ private:
         std::unordered_map<std::string, ToolTip>& toolTip,
         ResourceManager& resourceManager);
 
+    static void parseInputBox(
+        MenuElements& elements,
+        tinyxml2::XMLElement* menuXml,
+        std::unordered_map<std::string, InputBoxStyle>& inputBoxStyle,
+        ResourceManager& resourceManager);
+
     static void parseSubWindow(
         MenuTemplate& menu,
         tinyxml2::XMLElement* menuXml,
@@ -72,6 +78,7 @@ private:
     static std::unordered_map<std::string, CheckBoxStyle> parseCheckBoxStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
     static std::unordered_map<std::string, SliderStyle> parseSliderStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
     static std::unordered_map<std::string, ToolTip> parseToolTipStyle(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, InputBoxStyle> parseInputBoxStyle(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
 
     static ButtonStateStyle loadButtonStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
     static CheckBoxStateStyle loadCheckBoxStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager);

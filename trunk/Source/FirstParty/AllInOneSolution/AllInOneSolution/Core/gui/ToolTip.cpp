@@ -6,8 +6,8 @@ ToolTip::ToolTip(const std::string& text,
                  BitmapFont* font,
                  const sf::Vector2f& textOffset,
                  const sf::Vector2f& offset,
-                 const std::unordered_map<int, sf::Sprite>& backround) :
-    m_backround(backround),
+                 const std::unordered_map<int, sf::Sprite>& background) :
+    m_background(background),
     m_offset(offset),
     m_textOffset(textOffset),
     m_position(sf::Vector2f(0, 0)),
@@ -25,9 +25,9 @@ ToolTip::ToolTip(const std::string& text,
         m_longestLine = findLongestLine();
         m_width = m_label.find(m_longestLine)->second.getWidth();
         m_height = static_cast<float>(m_label.find(m_longestLine)->second.getFontSize() * m_lines);
-        m_scalefactorHorizontal = m_width / m_backround.find(ToolTip::BottomCenter)->second.getTextureRect().width;
-        m_scalefactorVertical = m_height * m_lines / m_backround.find(ToolTip::MiddleLeft)->second.getTextureRect().height;;
-        strechBackround();
+        m_scalefactorHorizontal = m_width / m_background.find(ToolTip::BottomCenter)->second.getTextureRect().width;
+        m_scalefactorVertical = m_height * m_lines / m_background.find(ToolTip::MiddleLeft)->second.getTextureRect().height;;
+        stretchBackground();
     }
 }
 
@@ -52,7 +52,7 @@ void ToolTip::draw(const DrawParameter& params)
 
     if(m_lines != -1)
     {
-        for(auto it = begin(m_backround); it != end(m_backround); ++it)
+        for(auto it = begin(m_background); it != end(m_background); ++it)
             params.getTarget().draw(it->second);
         for(auto it = begin(m_label); it != end(m_label); ++it)
             it->second.draw(params);
@@ -67,34 +67,34 @@ void ToolTip::setPosition(const sf::Vector2f& position)
             it->second.setPosition(position.x + m_offset.x + m_textOffset.x,
                                    position.y + m_textOffset.y + m_offset.y + it->first * m_height / m_lines);
 
-        auto height = m_backround[TopLeft].getTextureRect().height;
-        auto width = m_backround[TopLeft].getTextureRect().width;
+        auto height = m_background[TopLeft].getTextureRect().height;
+        auto width = m_background[TopLeft].getTextureRect().width;
 
-        m_backround[TopLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x,
+        m_background[TopLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x,
                                          position.y - height + m_offset.y);
 
-        m_backround[TopCenter].setPosition(position.x - m_width / 2.f + m_offset.x,
+        m_background[TopCenter].setPosition(position.x - m_width / 2.f + m_offset.x,
                                            position.y - height + m_offset.y);
 
-        m_backround[TopRight].setPosition(position.x + m_width / 2.f + m_offset.x,
+        m_background[TopRight].setPosition(position.x + m_width / 2.f + m_offset.x,
                                           position.y - height + m_offset.y);
 
-        m_backround[MiddleLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x,
+        m_background[MiddleLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x,
                                             position.y + m_offset.y);
 
-        m_backround[MiddleCenter].setPosition(position.x - m_width / 2.f + m_offset.x,
+        m_background[MiddleCenter].setPosition(position.x - m_width / 2.f + m_offset.x,
                                               position.y + m_offset.y);
 
-        m_backround[MiddleRight].setPosition(position.x + m_width / 2.f + m_offset.x,
+        m_background[MiddleRight].setPosition(position.x + m_width / 2.f + m_offset.x,
                                              position.y + m_offset.y);
 
-        m_backround[BottomLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x,
+        m_background[BottomLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x,
                                             position.y + m_height + m_offset.y);
 
-        m_backround[BottomCenter].setPosition(position.x - m_width / 2.f + m_offset.x,
+        m_background[BottomCenter].setPosition(position.x - m_width / 2.f + m_offset.x,
                                               position.y + m_height + m_offset.y);
 
-        m_backround[BottomRight].setPosition(position.x + m_width / 2.f + m_offset.x,
+        m_background[BottomRight].setPosition(position.x + m_width / 2.f + m_offset.x,
                                              position.y + m_height + m_offset.y);
     }
 }
@@ -107,9 +107,9 @@ void ToolTip::setText(const std::string& text)
         m_longestLine = findLongestLine();
         m_width = m_label.find(m_longestLine)->second.getWidth();
         m_height = static_cast<float>(m_label.find(m_longestLine)->second.getFontSize() * m_lines);
-        m_scalefactorHorizontal = m_width / m_backround.find(ToolTip::BottomCenter)->second.getTextureRect().width;
-        m_scalefactorVertical = m_height / m_backround.find(ToolTip::MiddleLeft)->second.getTextureRect().height;;
-        strechBackround();
+        m_scalefactorHorizontal = m_width / m_background.find(ToolTip::BottomCenter)->second.getTextureRect().width;
+        m_scalefactorVertical = m_height / m_background.find(ToolTip::MiddleLeft)->second.getTextureRect().height;;
+        stretchBackground();
     }
     else
         m_lines = -1;
@@ -156,11 +156,11 @@ const int ToolTip::findLongestLine() const
     return longestLine;
 }
 
-void ToolTip::strechBackround()
+void ToolTip::stretchBackground()
 {
-    m_backround[BottomCenter].setScale(m_scalefactorHorizontal, 1.f);
-    m_backround[MiddleCenter].setScale(m_scalefactorHorizontal, m_scalefactorVertical);
-    m_backround[TopCenter].setScale(m_scalefactorHorizontal, 1.f);
-    m_backround[MiddleLeft].setScale(1.f, m_scalefactorVertical);
-    m_backround[MiddleRight].setScale(1.f, m_scalefactorVertical);
+    m_background[BottomCenter].setScale(m_scalefactorHorizontal, 1.f);
+    m_background[MiddleCenter].setScale(m_scalefactorHorizontal, m_scalefactorVertical);
+    m_background[TopCenter].setScale(m_scalefactorHorizontal, 1.f);
+    m_background[MiddleLeft].setScale(1.f, m_scalefactorVertical);
+    m_background[MiddleRight].setScale(1.f, m_scalefactorVertical);
 }

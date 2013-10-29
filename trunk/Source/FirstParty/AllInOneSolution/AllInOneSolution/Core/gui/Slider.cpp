@@ -9,7 +9,7 @@ Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& positi
     m_pick(0)
 {
     m_spriteSlider = &m_style.idle.spriteSlider;
-    m_spriteBackround = &m_style.idle.spriteBackround;
+    m_spriteBackground = &m_style.idle.spriteBackground;
 
     m_sliderPosition.y = position.y + offset.y + m_style.mouseRect.top;
 
@@ -48,7 +48,7 @@ void Slider::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOff
     if(!m_active)
     {
         m_spriteSlider = &m_style.idle.spriteSlider;
-        m_spriteBackround = &m_style.idle.spriteBackround;
+        m_spriteBackground = &m_style.idle.spriteBackground;
         offset = m_style.idle.sliderOffset;
     }
     else
@@ -56,7 +56,7 @@ void Slider::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOff
         sf::Vector2i mousePos = sf::Mouse::getPosition(screen) + mouseOffset;
         calculateValue(x, mousePos.x - m_pick);
         m_spriteSlider = &m_style.active.spriteSlider;
-        m_spriteBackround = &m_style.active.spriteBackround;
+        m_spriteBackground = &m_style.active.spriteBackground;
         offset = m_style.active.sliderOffset;
     }
     m_sliderPosition.x = (m_value - m_min) * m_style.width / m_max;
@@ -69,7 +69,7 @@ void Slider::draw(const DrawParameter& params)
     if(!isVisible())
         return;
 
-    params.getTarget().draw(*m_spriteBackround);
+    params.getTarget().draw(*m_spriteBackground);
     params.getTarget().draw(*m_spriteSlider);
 }
 
@@ -82,8 +82,8 @@ void Slider::onPositionChanged()
 {
     auto position = getPosition();
     auto offset = getOffset();
-    m_style.active.spriteBackround.setPosition(position + offset + m_style.active.backgroundOffset);
-    m_style.idle.spriteBackround.setPosition(position + offset + m_style.idle.backgroundOffset);
+    m_style.active.spriteBackground.setPosition(position + offset + m_style.active.backgroundOffset);
+    m_style.idle.spriteBackground.setPosition(position + offset + m_style.idle.backgroundOffset);
 
     m_sliderPosition.y = position.y + offset.y + m_style.mouseRect.top;
 }

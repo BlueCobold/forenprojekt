@@ -90,7 +90,7 @@ void HighScoreState::loadHighScore(Level& level)
     for(int i = 0; i < 5; ++i)
     {
         // read the place data from stash.dat
-        m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Place" + utility::toString(i + 1)));
+        m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Name" + utility::toString(i + 1)));
         // reade the point data from stash.dat
         m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Points" + utility::toString(i + 1)));
     }

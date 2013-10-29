@@ -58,7 +58,7 @@ SubWindowId = The subwindow with id % doesn't exist.
 UnknownToolTip = ToolTip isn't registered: %.
 IncludeFileInvalid = Include File '%' is corrupt.
 InvalidLayout = The layout-part '%' has a bad number of elements.
-InvalidToolTipBackround = The backround layout of a tooltip is corrupt.
+InvalidBackground = The background layout of a % is corrupt.
 UnknownButtonToolTip = ButtonToolTip isn't registered: %.
 InvalidGoody = Failed to find goody for the given type.
 
@@ -107,6 +107,9 @@ gui_label_use_vertical = Use vertical
 gui_label_mouseaxis = mouse axis
 gui_label_invert_used = Invert used
 gui_highscore = The Highscore
+gui_newHighScore1 = You have reached 
+gui_newHighScore2 = a new highscore entry,
+gui_newHighScore3 = please enter your name.
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %

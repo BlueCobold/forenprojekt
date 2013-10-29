@@ -36,12 +36,14 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     std::unordered_map<std::string, CheckBoxStyle> checkboxStyles = parseCheckBoxStyles(menuXml, resourceManager);
     std::unordered_map<std::string, SliderStyle> sliderStyles = parseSliderStyles(menuXml, resourceManager);
     std::unordered_map<std::string, ToolTip> toolTip = parseToolTipStyle(menuXml, resourceManager);
+    std::unordered_map<std::string, InputBoxStyle> inputBoxStyle = parseInputBoxStyle(menuXml, resourceManager);
 
     parseButtons(elements, menuXml, buttonStyles, toolTip, resourceManager);
     parseCheckBoxes(elements, menuXml, checkboxStyles, toolTip, resourceManager);
     parseSliders(elements, menuXml, sliderStyles, resourceManager);
     parseLabels(elements, menuXml, resourceManager);
     parseImages(elements, menuXml, toolTip, resourceManager);
+    parseInputBox(elements, menuXml, inputBoxStyle, resourceManager);
     parseSubWindow(menu, menuXml, resourceManager, toolTip, sliderStyles, checkboxStyles, buttonStyles);
     
     menu.menuElements = elements;
@@ -404,11 +406,11 @@ std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(tinyx
 SliderStateStyle MenuLoader::loadSliderStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
 {
     SliderStateStyle style;
-    style.backgroundOffset = sf::Vector2f(xml->FloatAttribute("backroundoffsetx"), xml->FloatAttribute("backroundoffsety"));
-    style.spriteBackround = sf::Sprite(*resourceManager.getTexture(xml->Attribute("backroundtexture")));
-    style.spriteBackround.setTextureRect(sf::IntRect(
-            xml->IntAttribute("backroundsrcx"), xml->IntAttribute("backroundsrcy"),
-            xml->IntAttribute("backroundwidth"), xml->IntAttribute("backroundheight")));
+    style.backgroundOffset = sf::Vector2f(xml->FloatAttribute("backgroundoffsetx"), xml->FloatAttribute("backgroundoffsety"));
+    style.spriteBackground = sf::Sprite(*resourceManager.getTexture(xml->Attribute("backgroundtexture")));
+    style.spriteBackground.setTextureRect(sf::IntRect(
+            xml->IntAttribute("backgroundsrcx"), xml->IntAttribute("backgroundsrcy"),
+            xml->IntAttribute("backgroundwidth"), xml->IntAttribute("backgroundheight")));
 
     style.sliderOffset = sf::Vector2f(xml->FloatAttribute("slideroffsetx"), xml->FloatAttribute("slideroffsety"));
     style.spriteSlider = sf::Sprite(*resourceManager.getTexture(xml->Attribute("slidertexture")));
@@ -437,23 +439,23 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(tinyxml2:
             tooltipXml != nullptr; tooltipXml = tooltipXml->NextSiblingElement("tooltipStyle"))
         {
             sf::Sprite texture;
-            std::unordered_map<int, sf::Sprite> backroundMap;
+            std::unordered_map<int, sf::Sprite> backgroundMap;
             int id = 0;
             int counter = 0;
-            for(auto backround = tooltipXml->FirstChildElement("backround");
-            backround != nullptr; backround = backround->NextSiblingElement("backround"))
+            for(auto background = tooltipXml->FirstChildElement("background");
+            background != nullptr; background = background->NextSiblingElement("background"))
             {
-                id = backround->IntAttribute("id");
-                texture.setTexture(*resourceManager.getTexture(backround->Attribute("texture")));
-                texture.setTextureRect(sf::IntRect(backround->IntAttribute("srcx"),
-                                                   backround->IntAttribute("srcy"),
-                                                   backround->IntAttribute("width"),
-                                                   backround->IntAttribute("height")));
-                backroundMap[id] = texture;
+                id = background->IntAttribute("id");
+                texture.setTexture(*resourceManager.getTexture(background->Attribute("texture")));
+                texture.setTextureRect(sf::IntRect(background->IntAttribute("srcx"),
+                                                   background->IntAttribute("srcy"),
+                                                   background->IntAttribute("width"),
+                                                   background->IntAttribute("height")));
+                backgroundMap[id] = texture;
                 ++counter;
             }
             if(counter < 9)
-                throw std::runtime_error(utility::translateKey("InvalidToolTipBackround")); 
+                throw std::runtime_error(utility::replace(utility::translateKey("InvalidBackground"), "ToolTip"));
 
             ToolTip tempToolTip("",
                                 resourceManager.getBitmapFont(tooltipXml->FirstChildElement("text")->Attribute("font")),
@@ -461,10 +463,72 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(tinyxml2:
                                              tooltipXml->FirstChildElement("text")->FloatAttribute("offsety")),
                                 sf::Vector2f(tooltipXml->FloatAttribute("offsetx"), 
                                              tooltipXml->FloatAttribute("offsety")),
-                                backroundMap);
+                                backgroundMap);
             
             toolTip[tooltipXml->Attribute("name")] = tempToolTip;
         }
     }
     return toolTip;
+}
+
+std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+{
+    std::unordered_map<std::string, InputBoxStyle> inputBoxStyle;
+    if(auto styles = menuXml->FirstChildElement("styles"))
+    {
+        std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
+        std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
+        doc->LoadFile(filename.c_str());     
+
+        if(doc->Error())
+        {
+            doc->PrintError();
+            throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
+        }
+
+        for(auto inputBoxStyleXml = doc->FirstChildElement("styles")->FirstChildElement("inputboxStyle");
+            inputBoxStyleXml != nullptr; inputBoxStyleXml = inputBoxStyleXml->NextSiblingElement("inputboxStyle"))
+        {
+            auto styleName = inputBoxStyleXml->Attribute("name");
+            inputBoxStyle[styleName].font = resourceManager.getBitmapFont(inputBoxStyleXml->FirstChildElement("text")->Attribute("font"));
+            inputBoxStyle[styleName].textOffset = sf::Vector2f(static_cast<float>(inputBoxStyleXml->FirstChildElement("text")->IntAttribute("offsetx")),
+                                                               static_cast<float>(inputBoxStyleXml->FirstChildElement("text")->IntAttribute("offsety")));
+            int id = 0;
+            int counter = 0;
+            for(auto background = inputBoxStyleXml->FirstChildElement("background");
+            background != nullptr; background = background->NextSiblingElement("background"))
+            {
+                id = background->IntAttribute("id");
+                inputBoxStyle[styleName].background[id].setTexture(*resourceManager.getTexture(background->Attribute("texture")));
+                inputBoxStyle[styleName].background[id].setTextureRect(sf::IntRect(background->IntAttribute("srcx"),
+                                                                      background->IntAttribute("srcy"),
+                                                                      background->IntAttribute("width"),
+                                                                      background->IntAttribute("height")));
+                ++counter;
+            }
+
+            if(counter < 9)
+                throw std::runtime_error(utility::replace(utility::translateKey("InvalidBackground"), "InputBox"));
+        }
+    }
+
+    return inputBoxStyle;
+}
+
+void MenuLoader::parseInputBox(MenuElements& elements, tinyxml2::XMLElement* menuXml, std::unordered_map<std::string, InputBoxStyle>& inputBoxStyle, ResourceManager& resourceManager)
+{
+    if(auto styles = menuXml->FirstChildElement("elements"))
+    {
+        for(auto inputBoxXml = styles->FirstChildElement("inputbox");
+            inputBoxXml != nullptr; inputBoxXml = inputBoxXml->NextSiblingElement("inputbox"))
+        {
+            InputBoxInfo inputBox;
+            inputBox.style = inputBoxStyle[inputBoxXml->Attribute("style")];
+            inputBox.id = inputBoxXml->IntAttribute("id");
+            inputBox.inputLimit = inputBoxXml->IntAttribute("inputlimit");
+            inputBox.position = sf::Vector2f(inputBoxXml->FloatAttribute("x"), inputBoxXml->FloatAttribute("y"));
+            inputBox.size = sf::Vector2f(inputBoxXml->FloatAttribute("width"), inputBoxXml->FloatAttribute("height"));
+            elements.infobox.push_back(inputBox);
+        }
+    }
 }

@@ -5,6 +5,7 @@
 #include "LineLabel.hpp"
 #include "MenuSprite.hpp"
 #include "Slider.hpp"
+#include "InputBox.hpp"
 
 MenuPanel::MenuPanel(const MenuElements& elements,
                      const sf::Vector2f& position) :
@@ -24,6 +25,9 @@ MenuPanel::MenuPanel(const MenuElements& elements,
 
     for(auto sprite = begin(elements.sprites); sprite != end(elements.sprites); ++sprite)
         createSprite(*sprite);
+    
+    for(auto inputbox = begin(elements.infobox); inputbox != end(elements.infobox); ++inputbox)
+        createInputBox(*inputbox);
 
     setCorrelation();
     std::sort(m_elements.begin(), m_elements.end(), 
@@ -132,4 +136,16 @@ void MenuPanel::drawAdditionalForeground(const DrawParameter& params)
 {
     for(auto it = begin(m_elements); it != end(m_elements); ++it)
         it->get()->drawAdditionalForeground(params);
+}
+
+void MenuPanel::createInputBox(const InputBoxInfo& info)
+{
+    std::unique_ptr<InputBox> inputBox(new InputBox(info.id,
+                                                    m_position,
+                                                    info.position,
+                                                    info.size,
+                                                    info.inputLimit,
+                                                    info.style));
+
+    m_elements.push_back(std::move(inputBox));
 }

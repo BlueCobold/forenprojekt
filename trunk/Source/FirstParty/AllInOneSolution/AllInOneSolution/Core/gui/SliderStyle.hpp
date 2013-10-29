@@ -13,7 +13,7 @@ struct SliderStateStyle
 {
     sf::Vector2f backgroundOffset;
     sf::Vector2f sliderOffset;
-    sf::Sprite spriteBackround;
+    sf::Sprite spriteBackground;
     sf::Sprite spriteSlider;
 };
 

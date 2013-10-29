@@ -17,7 +17,8 @@ namespace MenuElementType
         Label,
         Image,
         Slider,
-        SubWindow
+        SubWindow,
+        InputBox
     };
 }
 

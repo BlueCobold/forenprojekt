@@ -142,12 +142,6 @@
     <ClCompile Include="gui\Button.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
-    <ClCompile Include="gui\Menu.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\CaptionMenu.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
     <ClCompile Include="gui\hud\ArrowHUD.cpp">
       <Filter>Sources\gui\hud</Filter>
     </ClCompile>
@@ -172,23 +166,11 @@
     <ClCompile Include="gui\hud\TargetHUD.cpp">
       <Filter>Sources\gui\hud</Filter>
     </ClCompile>
-    <ClCompile Include="gui\PauseMenu.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\ReplayMenu.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
     <ClCompile Include="resources\MenuLoader.cpp">
       <Filter>Sources\resources</Filter>
     </ClCompile>
     <ClCompile Include="gui\hud\TimeHUD.cpp">
       <Filter>Sources\gui\hud</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\FailMenu.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\MainMenu.cpp">
-      <Filter>Sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="State\LevelFailState.cpp">
       <Filter>Sources\State</Filter>
@@ -220,9 +202,6 @@
     <ClCompile Include="State\OptionMenuState.cpp">
       <Filter>Sources\State</Filter>
     </ClCompile>
-    <ClCompile Include="gui\OptionMenu.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
     <ClCompile Include="gui\CheckBox.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
@@ -232,13 +211,7 @@
     <ClCompile Include="State\CreditMenuState.cpp">
       <Filter>Sources\State</Filter>
     </ClCompile>
-    <ClCompile Include="gui\CreditMenu.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
     <ClCompile Include="gui\MenuSprite.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\LevelPreviewMenu.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="State\LevelPreviewState.cpp">
@@ -268,15 +241,6 @@
     <ClCompile Include="State\LevelSelectState.cpp">
       <Filter>Sources\State</Filter>
     </ClCompile>
-    <ClCompile Include="gui\LevelSelectMenu.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\MenuPanel.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\CoinShopMenu.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
     <ClCompile Include="State\CoinShopState.cpp">
       <Filter>Sources\State</Filter>
     </ClCompile>
@@ -292,8 +256,50 @@
     <ClCompile Include="State\HighScoreState.cpp">
       <Filter>Sources\State</Filter>
     </ClCompile>
-    <ClCompile Include="gui\HighScoreMenue.cpp">
+    <ClCompile Include="gui\InputBox.cpp">
       <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CaptionMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CoinShopMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CreditMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\FailMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\HighScoreMenue.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\LevelPreviewMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\LevelSelectMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\MenuPanel.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\MainMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\OptionMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\PauseMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ReplayMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\NewHighScoreMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\Menu.cpp">
+      <Filter>Sources\gui\menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -576,12 +582,6 @@
     <ClInclude Include="gui\Button.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
-    <ClInclude Include="gui\Menu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\CaptionMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="gui\FPSCounter.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
@@ -612,20 +612,8 @@
     <ClInclude Include="animation\Stoppable.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
-    <ClInclude Include="gui\PauseMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\ReplayMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="model\collision\handler\SpawnEntityCollisionHandler.hpp">
       <Filter>Headers\model\collision\handler</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\ButtonStyle.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\MenuTemplate.hpp">
-      <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="resources\MenuLoader.hpp">
       <Filter>Headers\resources</Filter>
@@ -635,9 +623,6 @@
     </ClInclude>
     <ClInclude Include="model\AnimatedGraphics.hpp">
       <Filter>Headers\model\collision</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\FailMenu.hpp">
-      <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="model\collision\handler\GenericCollisionHandler.hpp">
       <Filter>Headers\model\collision\handler</Filter>
@@ -684,38 +669,20 @@
     <ClInclude Include="State\OptionMenuState.hpp">
       <Filter>Headers\State</Filter>
     </ClInclude>
-    <ClInclude Include="gui\MainMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\OptionMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="gui\CheckBox.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\CheckboxStyle.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\Slider.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
-    <ClInclude Include="gui\SliderStyle.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="State\CreditMenuState.hpp">
       <Filter>Headers\State</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\CreditMenu.hpp">
-      <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\MenuSprite.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="resources\SoundBufferManager.hpp">
       <Filter>Headers\resources</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\LevelPreviewMenu.hpp">
-      <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="State\LevelPreviewState.hpp">
       <Filter>Headers\State</Filter>
@@ -753,20 +720,8 @@
     <ClInclude Include="State\LevelSelectState.hpp">
       <Filter>Headers\State</Filter>
     </ClInclude>
-    <ClInclude Include="gui\LevelSelectMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\MenuElement.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\MenuPanel.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="Resources.h">
       <Filter>Resouces</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\CoinShopMenu.hpp">
-      <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="State\CoinShopState.hpp">
       <Filter>Headers\State</Filter>
@@ -783,8 +738,68 @@
     <ClInclude Include="State\HighScoreState.hpp">
       <Filter>Headers\State</Filter>
     </ClInclude>
-    <ClInclude Include="gui\HighScoreMenu.hpp">
+    <ClInclude Include="gui\InputBox.hpp">
       <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ButtonStyle.hpp">
+      <Filter>Headers\gui\style</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CheckboxStyle.hpp">
+      <Filter>Headers\gui\style</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\SliderStyle.hpp">
+      <Filter>Headers\gui\style</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CaptionMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CoinShopMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CreditMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\FailMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\HighScoreMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\LevelPreviewMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MainMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\Menu.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MenuTemplate.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\OptionMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MenuPanel.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\PauseMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ReplayMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\InputBoxStyle.hpp">
+      <Filter>Headers\gui\style</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\LevelSelectMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\MenuElement.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\NewHighScoreMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -871,6 +886,15 @@
     </Filter>
     <Filter Include="Sources\rendering\transitions">
       <UniqueIdentifier>{dafee3bd-2f74-4c28-84de-e0c4d161420c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\gui\style">
+      <UniqueIdentifier>{f2e0a537-c86a-4b70-a4b3-2b77167104aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\gui\menu">
+      <UniqueIdentifier>{0e940c33-8394-4ecd-8bba-285513791b70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\gui\menu">
+      <UniqueIdentifier>{e4370246-9364-41d9-90b7-121a6ffb06c8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

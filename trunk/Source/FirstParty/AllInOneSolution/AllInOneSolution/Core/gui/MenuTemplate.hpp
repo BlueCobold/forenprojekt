@@ -13,6 +13,7 @@
 #include "LineLabel.hpp"
 #include "MenuSprite.hpp"
 #include "ToolTip.hpp"
+#include "InputBoxStyle.hpp"
 #include "../model/SoundObject.hpp"
 
 struct ButtonInfo
@@ -41,6 +42,15 @@ struct SliderInfo
     int id;
 };
 
+struct InputBoxInfo
+{
+    InputBoxStyle style;
+    sf::Vector2f position;
+    sf::Vector2f size;
+    unsigned int inputLimit;
+    int id;
+};
+
 struct MenuElements
 {
     std::vector<ButtonInfo> buttons;
@@ -48,6 +58,7 @@ struct MenuElements
     std::vector<SliderInfo> slider;
     std::vector<LineLabel> labels;
     std::vector<MenuSprite> sprites;
+    std::vector<InputBoxInfo> infobox;
 };
 
 struct SubWindowStyle

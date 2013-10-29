@@ -8,6 +8,7 @@
 #include "../gui/Button.hpp"
 #include "../gui/hud/HUD.hpp"
 #include "../gui/ReplayMenu.hpp"
+#include "../gui/NewHighScoreMenu.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 
@@ -28,6 +29,8 @@ public:
 private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
+    bool checkForNewHighscore();
+    void addNewHighScore(int points, std::string name);
 
     std::unique_ptr<sf::Texture> m_background;
     sf::RenderTexture m_renderTexture;
@@ -36,6 +39,10 @@ private:
     HUD m_HUD;
     ReplayMenu m_menu;
     bool m_replay;
+
+    NewHighScoreMenu m_newHighScoreMenu;
+    bool m_newHighScore;
+    bool m_addedHighScore;
 
     EnterStateInformation m_stateInfo;
     EnterPlayStateInformation m_playStateInfo;
