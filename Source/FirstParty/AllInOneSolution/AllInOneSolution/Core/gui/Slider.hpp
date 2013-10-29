@@ -38,7 +38,7 @@ private:
     sf::Vector2f m_sliderPosition;
 
     sf::Sprite* m_spriteSlider;
-    sf::Sprite* m_spriteBackround;
+    sf::Sprite* m_spriteBackground;
 
     SliderStyle m_style;
 

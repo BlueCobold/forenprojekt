@@ -15,6 +15,7 @@ class CheckBox;
 class LineLabel;
 class MenuSprite;
 class Slider;
+class InfoBox;
 
 class MenuPanel : public Drawable
 {
@@ -52,6 +53,7 @@ private:
     void createSlider(const SliderInfo& info);
     void createLabel(const LineLabel& info);
     void createSprite(const MenuSprite& info);
+    void createInputBox(const InputBoxInfo& info);
 
     sf::Vector2f m_position;
     std::vector<std::unique_ptr<MenuElement>> m_elements;

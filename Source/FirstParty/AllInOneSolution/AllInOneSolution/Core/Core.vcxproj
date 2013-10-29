@@ -116,6 +116,7 @@
     <ClCompile Include="gui\hud\HUDElement.cpp" />
     <ClCompile Include="gui\hud\LabelHUD.cpp" />
     <ClCompile Include="gui\hud\TimeHUD.cpp" />
+    <ClCompile Include="gui\InputBox.cpp" />
     <ClCompile Include="gui\LevelPreviewMenu.cpp" />
     <ClCompile Include="gui\LineLabel.cpp" />
     <ClCompile Include="gui\hud\PointsHUD.cpp" />
@@ -123,6 +124,7 @@
     <ClCompile Include="gui\MainMenu.cpp" />
     <ClCompile Include="gui\MenuPanel.cpp" />
     <ClCompile Include="gui\MenuSprite.cpp" />
+    <ClCompile Include="gui\NewHighScoreMenu.cpp" />
     <ClCompile Include="gui\OptionMenu.cpp" />
     <ClCompile Include="gui\PauseMenu.cpp" />
     <ClCompile Include="gui\ReplayMenu.cpp" />
@@ -252,6 +254,8 @@
     <ClInclude Include="gui\hud\HUDElement.hpp" />
     <ClInclude Include="gui\hud\LabelHUD.hpp" />
     <ClInclude Include="gui\hud\TimeHUD.hpp" />
+    <ClInclude Include="gui\InputBox.hpp" />
+    <ClInclude Include="gui\InputBoxStyle.hpp" />
     <ClInclude Include="gui\LevelPreviewMenu.hpp" />
     <ClInclude Include="gui\LineLabel.hpp" />
     <ClInclude Include="gui\hud\PointsHUD.hpp" />
@@ -261,6 +265,7 @@
     <ClInclude Include="gui\MenuPanel.hpp" />
     <ClInclude Include="gui\MenuSprite.hpp" />
     <ClInclude Include="gui\MenuTemplate.hpp" />
+    <ClInclude Include="gui\NewHighScoreMenu.hpp" />
     <ClInclude Include="gui\OptionMenu.hpp" />
     <ClInclude Include="gui\PauseMenu.hpp" />
     <ClInclude Include="gui\ReplayMenu.hpp" />

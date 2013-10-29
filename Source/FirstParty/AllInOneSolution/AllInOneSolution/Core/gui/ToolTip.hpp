@@ -19,7 +19,7 @@ private:
     sf::Vector2f m_offset;
     sf::Vector2f m_position;
     sf::Vector2f m_textOffset;
-    std::unordered_map<int, sf::Sprite> m_backround;
+    std::unordered_map<int, sf::Sprite> m_background;
     float m_scalefactorHorizontal;
     float m_scalefactorVertical;
     int m_lines;
@@ -29,10 +29,10 @@ private:
 
     void setLines(const std::string& text);
     const int findLongestLine() const;
-    void strechBackround();
+    void stretchBackground();
 
 public:
-    enum BackroundId {TopLeft = 1,
+    enum BackgroundId {TopLeft = 1,
                       TopCenter = 2,
                       TopRight = 3,
                       MiddleLeft = 4,
@@ -46,7 +46,7 @@ public:
             BitmapFont* font, 
             const sf::Vector2f& textOffset, 
             const sf::Vector2f& offset,
-            const std::unordered_map<int, sf::Sprite>& backround);
+            const std::unordered_map<int, sf::Sprite>& background);
     ToolTip();
 
     virtual void draw(const DrawParameter& params) override;

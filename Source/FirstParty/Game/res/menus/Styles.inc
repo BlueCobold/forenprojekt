@@ -107,29 +107,41 @@
 	<sliderStyle name="default">
 		<mouseRect left="8" top="-3" width="26" height="36" />
 		<value min="0" max="100" width="83"/>
-		<idle backroundtexture="GuiElements" backroundsrcx="742" backroundsrcy="96" 
-			backroundwidth="118" backroundheight="22" 
-			backroundoffsetx="8" backroundoffsety="8" 
+		<idle backgroundtexture="GuiElements" backgroundsrcx="742" backgroundsrcy="96" 
+			backgroundwidth="118" backgroundheight="22" 
+			backgroundoffsetx="8" backgroundoffsety="8" 
 			slidertexture="GuiElements" slidersrcx="860" slidersrcy="104" 
 			sliderwidth="32" sliderheight="46" 
 			slideroffsetx="0" slideroffsety="-1" />
-		<active backroundtexture="GuiElements" backroundsrcx="742" backroundsrcy="66" 
-			backroundwidth="124" backroundheight="30" 
-			backroundoffsetx="0" backroundoffsety="0" 
+		<active backgroundtexture="GuiElements" backgroundsrcx="742" backgroundsrcy="66" 
+			backgroundwidth="124" backgroundheight="30" 
+			backgroundoffsetx="0" backgroundoffsety="0" 
 			slidertexture="GuiElements" slidersrcx="984" slidersrcy="82" 
 			sliderwidth="38" sliderheight="54" 
 			slideroffsetx="-6" slideroffsety="-9" />
 	</sliderStyle>
 	<tooltipStyle name="default" offsetx="0" offsety="45">
 		<text font="gold" offsetx="0" offsety="0"/>
-		<backround id="1" texture="GuiElements" srcx="892" srcy="104" width="10" height="10" />
-		<backround id="2" texture="GuiElements" srcx="902" srcy="104" width="10" height="10" />
-		<backround id="3" texture="GuiElements" srcx="912" srcy="104" width="10" height="10" />
-		<backround id="4" texture="GuiElements" srcx="892" srcy="114" width="10" height="10" />
-		<backround id="5" texture="GuiElements" srcx="902" srcy="114" width="10" height="10" />
-		<backround id="6" texture="GuiElements" srcx="912" srcy="114" width="10" height="10" />
-		<backround id="7" texture="GuiElements" srcx="892" srcy="124" width="10" height="10" />
-		<backround id="8" texture="GuiElements" srcx="902" srcy="124" width="10" height="10" />
-		<backround id="9" texture="GuiElements" srcx="912" srcy="124" width="10" height="10" />
+		<background id="1" texture="GuiElements" srcx="892" srcy="104" width="10" height="10" />
+		<background id="2" texture="GuiElements" srcx="902" srcy="104" width="10" height="10" />
+		<background id="3" texture="GuiElements" srcx="912" srcy="104" width="10" height="10" />
+		<background id="4" texture="GuiElements" srcx="892" srcy="114" width="10" height="10" />
+		<background id="5" texture="GuiElements" srcx="902" srcy="114" width="10" height="10" />
+		<background id="6" texture="GuiElements" srcx="912" srcy="114" width="10" height="10" />
+		<background id="7" texture="GuiElements" srcx="892" srcy="124" width="10" height="10" />
+		<background id="8" texture="GuiElements" srcx="902" srcy="124" width="10" height="10" />
+		<background id="9" texture="GuiElements" srcx="912" srcy="124" width="10" height="10" />
 	</tooltipStyle>
+	<inputboxStyle name="default">
+		<text font="buttonHoverFont" offsetx="5" offsety="0" />
+		<background id="1" texture="GuiElements" srcx="892" srcy="104" width="10" height="10" />
+		<background id="2" texture="GuiElements" srcx="902" srcy="104" width="10" height="10" />
+		<background id="3" texture="GuiElements" srcx="912" srcy="104" width="10" height="10" />
+		<background id="4" texture="GuiElements" srcx="892" srcy="114" width="10" height="10" />
+		<background id="5" texture="GuiElements" srcx="902" srcy="114" width="10" height="10" />
+		<background id="6" texture="GuiElements" srcx="912" srcy="114" width="10" height="10" />
+		<background id="7" texture="GuiElements" srcx="892" srcy="124" width="10" height="10" />
+		<background id="8" texture="GuiElements" srcx="902" srcy="124" width="10" height="10" />
+		<background id="9" texture="GuiElements" srcx="912" srcy="124" width="10" height="10" />
+	</inputboxStyle>
 </styles>
