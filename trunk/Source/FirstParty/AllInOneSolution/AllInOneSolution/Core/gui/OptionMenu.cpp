@@ -74,6 +74,9 @@ void OptionMenu::applyChanges()
         m_config.set("IsFullScreen", m_fullScreen);
         m_config.set("ResolutionX", m_currentVideoMode.width);
         m_config.set("ResolutionY", m_currentVideoMode.height);
+
+        Menu::getRenderWindow().setFramerateLimit(m_config.get<int>("FrameRateLimit"));
+        Menu::getRenderWindow().setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
     }
 
     if(Menu::getSlider(SLIDER_MASTERVOLUMEN).getValue() != m_masterVolume)
