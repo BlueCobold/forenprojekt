@@ -13,7 +13,8 @@ LevelSelectState::LevelSelectState(sf::RenderWindow& screen,
                                  AppConfig& config) :
     State(screen, resourceManager, config),
     m_menu(sf::Vector2f(0, 0), screen, resourceManager),
-    m_currentLevelNumber(1)
+    m_currentLevelNumber(1),
+    m_unlockedLevel(1)
 {
     loadLevelInfos();
     auto captionName = m_levelNames.find(1);
@@ -30,6 +31,8 @@ void LevelSelectState::onEnter(const EnterStateInformation* enterInformation, co
     State::onEnter(enterInformation,time);
 
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
+
+    m_unlockedLevel = m_config.get<int>("UnlockedLevel");
 }
 
 StateChangeInformation LevelSelectState::update(const float time)
@@ -51,7 +54,7 @@ StateChangeInformation LevelSelectState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
-    if(clicked == LevelSelectMenu::BUTTON_SHOW_DETAILS)
+    if(clicked == LevelSelectMenu::BUTTON_SHOW_DETAILS && !(m_currentLevelNumber > m_unlockedLevel))
     {
         m_stateInfo.m_level = nullptr;
         m_stateInfo.m_prepareOnly = false;

@@ -123,6 +123,7 @@ tooltip_goody_extraball = this goody gives\r\nyou an extra ball.
 tooltip_goody_extratime = this goody gives\r\nyou 30 seconds extra time.
 tooltip_goody_cost = cost: %
 tooltip_goody_refund = refund: %
+tooltip_preview_notimeattack = no time attack\r\nmode available
 
 [Levels]
 levelBlocked1 = blocked

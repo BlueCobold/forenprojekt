@@ -20,6 +20,8 @@ public:
     //static const int SPRITE_COINS = 6;
     static const int BUTTON_COINS = 8;
     static const int BUTTON_MAIN_MENU = 7;
+    static const int CHECKBOX_TIMEATTACKMODE = 10;
+    static const int CHECKBOX_TARGETMODE = 11;
 
     LevelPreviewMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
     
