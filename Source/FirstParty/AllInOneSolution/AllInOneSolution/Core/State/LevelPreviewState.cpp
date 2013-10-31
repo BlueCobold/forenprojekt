@@ -31,8 +31,13 @@ void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, c
     m_menu.setLevelInfo(m_level->getLevelName(), m_level->getTotalTime(), m_level->getRemainingBall());
     m_menu.setCoinToolTipText(utility::replace(utility::translateKey("tooltip_coins"), 
                                            utility::toString(m_config.get<int>("coins"))));
-    m_menu.getCheckbox(10).setChecked(false);
-    m_menu.getCheckbox(11).setChecked(true);
+    m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
+    m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(true);
+
+    if(m_config.get<unsigned int>("UnlockedLevel") == m_level->number())
+        m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setToolTipText(utility::translateKey("tooltip_preview_notimeattack"));
+    else
+        m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setToolTipText(utility::translateKey("tooltip_preview_timeattack"));
 
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 }
@@ -50,23 +55,27 @@ StateChangeInformation LevelPreviewState::update(const float time)
 
     if(m_level->isTimeAttackMode())
     {
-        if(m_menu.getCheckbox(11).getChecked())
+        if(m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).getChecked())
         {
             m_level->setTimeAttackMode(false);
-            m_menu.getCheckbox(10).setChecked(false);
+            m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
         }
         else
-            m_menu.getCheckbox(10).setChecked(true);
+            m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(true);
     }
     else
     {
-        if(m_menu.getCheckbox(10).getChecked())
+        if(m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).getChecked() &&
+           m_config.get<unsigned int>("UnlockedLevel") > m_level->number())
         {
             m_level->setTimeAttackMode(true);
-            m_menu.getCheckbox(11).setChecked(false);
+            m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(false);
         }
         else
-            m_menu.getCheckbox(11).setChecked(true);
+        {
+            m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(true);
+            m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
+        }
     }
     m_menu.setLevelInfo(m_level->getLevelName(), m_level->getRemainigTime(), m_level->getRemainingBall());
     if(clicked == LevelPreviewMenu::BUTTON_START)

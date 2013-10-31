@@ -1,0 +1,11 @@
+<menu>
+	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
+	
+	<styles source="Styles.inc"/>
+	<elements>
+		<inputbox id="1" style="default" inputlimit="10" x="115" y="170" width="286" />
+		<label id="2" text="gui_newHighScore1" font="buttonHoverFont" alignment="1" x="255" y="55" />
+		<label id="3" text="gui_newHighScore2" font="buttonHoverFont" alignment="1" x="255" y="85" />
+		<label id="4" text="gui_newHighScore3" font="buttonHoverFont" alignment="1" x="255" y="115" />
+	</elements>
+</menu>
