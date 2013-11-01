@@ -93,7 +93,7 @@ StateChangeInformation LevelSelectState::update(const float time)
         m_menu.hideLeftButton(false);
     }
     if(m_levelNames.find(m_currentLevelNumber + 1) == end(m_levelNames) ||
-       (m_unlockedLevel > m_currentLevelNumber + 1))
+       (m_unlockedLevel < (m_currentLevelNumber + 1)))
         m_menu.hideRightButton(true);
     else
     {
