@@ -165,6 +165,12 @@ bool LevelPassState::checkForNewHighscore()
 }
 void LevelPassState::addNewHighScore(int points, std::string name)
 {
+    if(name == "")
+    {
+        m_newHighScoreMenu.getInputBox(NewHighScoreMenu::INPUTBOX).onEnter();
+        return;
+    }
+
     int newPlace = 0;
     int number = m_level->number();
     for(int i = 5; i > 0; --i)
