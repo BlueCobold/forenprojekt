@@ -38,6 +38,7 @@ private:
     bool m_useVerticalAxis;
     std::vector<sf::VideoMode> m_availableVideoMode;
     sf::VideoMode m_currentVideoMode;
+    sf::VideoMode m_appointedVideoMode;
     sf::Image m_icon;
 
     AppConfig& m_config;

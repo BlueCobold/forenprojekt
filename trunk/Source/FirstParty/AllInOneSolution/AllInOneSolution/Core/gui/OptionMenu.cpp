@@ -42,6 +42,7 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
     }
 
     m_currentVideoMode = sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+    m_appointedVideoMode = m_currentVideoMode;
 
     m_icon.create(16, 16);
     sf::Image texture = resourceManager.getTexture("GuiElements")->copyToImage();
@@ -70,7 +71,6 @@ void OptionMenu::applyChanges()
 
         Menu::getRenderWindow().setMouseCursorVisible(false);
 
-        //m_fullScreen = !m_fullScreen;
         m_config.set("IsFullScreen", m_fullScreen);
         m_config.set("ResolutionX", m_currentVideoMode.width);
         m_config.set("ResolutionY", m_currentVideoMode.height);
@@ -173,9 +173,12 @@ void OptionMenu::prevVideoMode()
         if(m_currentVideoMode == m_availableVideoMode[i])
         {
             m_currentVideoMode = m_availableVideoMode[(i + 1) % m_availableVideoMode.size()];
-            this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
-                                                     utility::toString(" x ") + 
-                                                     utility::toString(m_currentVideoMode.height));
+            if(m_appointedVideoMode == m_currentVideoMode)
+                this->getLabel(LABEL_RESOLUTION).setText("Current");
+            else
+                this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
+                                                         utility::toString(" x ") + 
+                                                         utility::toString(m_currentVideoMode.height));
             return;
         }
     }
@@ -188,9 +191,12 @@ void OptionMenu::nextVideoMode()
         if(m_currentVideoMode == m_availableVideoMode[i])
         {
             m_currentVideoMode = m_availableVideoMode[(i - 1 + m_availableVideoMode.size()) % m_availableVideoMode.size()];
-            this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
-                                                     utility::toString(" x ") + 
-                                                     utility::toString(m_currentVideoMode.height));
+            if(m_appointedVideoMode == m_currentVideoMode)
+                this->getLabel(LABEL_RESOLUTION).setText("Current");
+            else
+                this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
+                                                         utility::toString(" x ") + 
+                                                         utility::toString(m_currentVideoMode.height));
             return;
         }
     }
