@@ -38,7 +38,7 @@ void OptionMenuState::onEnter(const EnterStateInformation* enterInformation, con
 
     m_pauseStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
-    m_menu.getLabel(OptionMenu::LABEL_RESOLUTION).setText(utility::toString(m_config.get<unsigned int>("ResolutionX")) + utility::toString(" x ") + utility::toString(m_config.get<unsigned int>("ResolutionY")));
+    m_menu.getLabel(OptionMenu::LABEL_RESOLUTION).setText(utility::translateKey("gui_label_resolution"));
 }
 
 StateChangeInformation OptionMenuState::update(const float time)
