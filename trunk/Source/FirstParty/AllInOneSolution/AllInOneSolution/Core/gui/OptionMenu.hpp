@@ -45,6 +45,7 @@ private:
 
     void adjustVideoMode(sf::VideoMode& mode, bool fullScreen);
     bool acceptableVideoMode(const sf::VideoMode videoMode);
+    void sortVideoModeList();
 };
 
 #endif // OPTIONMENU_HPP

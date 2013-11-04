@@ -164,9 +164,14 @@ void OptionMenu::onEnter()
     Menu::getCheckbox(CHECKBOX_USE_VERTICALAXIS).setChecked(m_useVerticalAxis);
 
     Menu::getCheckbox(CHECKBOX_INVERT_AXIS).setChecked(m_invertAxis);
+
+    m_currentVideoMode = sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+    m_appointedVideoMode = m_currentVideoMode;
+
+    sortVideoModeList();
 }
 
-void OptionMenu::prevVideoMode()
+void OptionMenu::nextVideoMode()
 {
     for(unsigned int i = 0; i < m_availableVideoMode.size(); ++i)
     {
@@ -184,13 +189,13 @@ void OptionMenu::prevVideoMode()
     }
 }
 
-void OptionMenu::nextVideoMode()
+void OptionMenu::prevVideoMode()
 {
     for(unsigned int i = 0; i < m_availableVideoMode.size(); ++i)
     {
         if(m_currentVideoMode == m_availableVideoMode[i])
         {
-            m_currentVideoMode = m_availableVideoMode[(i - 1 + m_availableVideoMode.size()) % m_availableVideoMode.size()];
+            m_currentVideoMode = m_availableVideoMode[(i - 1) % m_availableVideoMode.size()];
             if(m_appointedVideoMode == m_currentVideoMode)
                 this->getLabel(LABEL_RESOLUTION).setText("Current");
             else
@@ -208,4 +213,18 @@ bool OptionMenu::acceptableVideoMode(const sf::VideoMode videoMode)
         return false;
 
     return true;
+}
+
+void OptionMenu::sortVideoModeList()
+{
+    for(unsigned int i = 0; i < m_availableVideoMode.size(); ++i)
+    {
+        if(m_appointedVideoMode == m_availableVideoMode[i])
+        {
+            sf::VideoMode temp = m_availableVideoMode.at(0);
+            m_availableVideoMode.at(0) = m_appointedVideoMode;
+            m_availableVideoMode.at(i) = temp;
+        }
+    }
+    std::sort(m_availableVideoMode.begin() + 1, m_availableVideoMode.end());
 }
