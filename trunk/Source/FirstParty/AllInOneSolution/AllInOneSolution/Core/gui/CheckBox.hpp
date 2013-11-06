@@ -36,6 +36,7 @@ private:
     bool m_showToolTip;
 
     bool m_checked;
+    bool m_hover;
     sf::Sprite* m_sprite;
     CheckBoxStyle m_style;
 };
