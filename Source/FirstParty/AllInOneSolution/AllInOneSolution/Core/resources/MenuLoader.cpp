@@ -341,8 +341,9 @@ std::unordered_map<std::string, CheckBoxStyle> MenuLoader::parseCheckBoxStyles(t
             CheckBoxStyle style;
             
             style.uncheckedStyle = loadCheckBoxStateStyle(styleXml->FirstChildElement("unchecked"), resourceManager);
- 
             style.checkedStyle = loadCheckBoxStateStyle(styleXml->FirstChildElement("checked"), resourceManager);
+            style.hoverStyle = loadCheckBoxStateStyle(styleXml->FirstChildElement("hover"), resourceManager);
+
             if(auto rect = styleXml->FirstChildElement("mouseRect"))
                 style.mouseRect = sf::IntRect(
                     rect->IntAttribute("left"), rect->IntAttribute("top"),
