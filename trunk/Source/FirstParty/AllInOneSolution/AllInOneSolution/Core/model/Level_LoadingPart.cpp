@@ -58,6 +58,7 @@ void Level::load()
         m_remainingBall = -1;
         m_remainingTime = -1.f;
         m_totalTime = -1.f;
+        m_initialTime = -1.f;
     }
     // get Medal values
     m_bronzeMedal = doc.FirstChildElement("level")->FirstChildElement("medal")->IntAttribute("bronze");
