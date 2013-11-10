@@ -1,0 +1,160 @@
+<level>
+	<levelinfo name="Shooting Range">
+		<infoimage scrx="0" scry="0" width="192" height="108" />
+	</levelinfo>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+
+		<shapes>
+			<shape name="up" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="0" y="60" />
+				<vertex x="60" y="60" />
+				<vertex x="60" y="0" />
+			</shape>
+			<shape name="do" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="0" y="60" />
+				<vertex x="60" y="60" />
+				<vertex x="60" y="0" />
+			</shape>
+			<shape name="le" type="polygon">
+				<vertex x="-1560" y="0" />
+				<vertex x="-1560" y="60" />
+				<vertex x="60" y="60" />
+				<vertex x="60" y="0" />
+			</shape>
+			<shape name="ri" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="0" y="60" />
+				<vertex x="120" y="60" />
+				<vertex x="120" y="0" />
+			</shape>
+
+		</shapes>
+
+		<entities>
+
+			<entity name="change_gravity_down" rep="Up" collideWithBall="false">
+				<physics name="wall" shape="up" />
+				<collides>
+					<changeGravity x="0" y="-40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_down" rep="No" collideWithBall="false">
+				<physics name="wall" shape="do" />
+				<collides>
+					<changeGravity x="0" y="40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_down" rep="Le" collideWithBall="false">
+				<physics name="wall" shape="le" />
+				<collides>
+					<changeGravity x="-20" y="80">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_down" rep="Ri" collideWithBall="false">
+				<physics name="wall" shape="ri" />
+				<collides>
+					<changeGravity x="20" y="10">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_down" rep="Dr" collideWithBall="false">
+				<physics name="wall" shape="up" />
+				<collides>
+					<changeGravity x="-20" y="-1">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			
+
+		</entities>
+
+	</templates>
+
+	<grid size="60" width="2810" height="2220">
+                                                        
+                                                        
+                                                                                          
+                                                                                          
+                                                                                          
+                                                                                          
+                                    W1 1)1                                                
+                                    w1)1                                                  
+                                    )1  t1d3d3d3                                          
+                                            d3d3d3                                         
+                                                d3d3                                      
+                                                  d3d3d3                                  
+                                                      d3d3                                
+                                                        d3d3                              
+                                                          d3d3                            
+                                                            d3d3                          
+                                                              d3d3                    /1w3
+                                                                d3d3                /1w5w2
+                                              W1 1)1              d3d3            /1w1)6w1
+                                              w1)1                  d3          /1w1)6  w4
+              w3                              )1  t1d2d2            d3d3        w1)6  Drw2
+              w2                                      d2d2            d3        w1No/1  w4
+              w4                                        d2d2          d3d3          w6  w6
+              w1                                          d2d2          d3          w6  w3
+              w1                                            d2d2        d3d3        w6  w3
+              w1                                              d2d2        d3        w6  w3
+              w2                                                d2d2      d3d3      w6  w2
+              w2                                                  d2d2      d3d3    w6  w1
+              w6                                                    d2d2      d3  BBw6  w4
+              w3                                            t1d1d1d1  d2d2          w6  w2
+              w2                                                  d1d1d1          /1w6  w4
+              w4                                                      d1d1          w6  w6
+              w1                                                              TT    w6  w3
+              w1                                                        Le          w6  w3
+              w1  /1w1w1W3 3W6 6W3 3W6 6w1W1 1W1 1w1W3 3W6 6W3 3W6 6w1W1Ri  Ri  Ri  w6  w3
+              w1Ri                                                                    Upw3
+              W1 1W1 1w1W3 3W6 6W3 3W6 6w1W1 1W1 1w1W3 3W6 6W3 3W6 6w1W1 1W1 1w1W3 3W6 6w3
+                                  
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="200" silver="250" gold="300" />
+</level>
