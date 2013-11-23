@@ -41,6 +41,7 @@ StateChangeInformation CreditMenuState::update(const float time)
         m_stateInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
+        m_transitionStateInfo.m_comeFromeState = CreditMenuStateId;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 

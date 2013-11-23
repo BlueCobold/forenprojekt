@@ -28,7 +28,8 @@ int RandomTransition::m_lastTransition = static_cast<RandomTransition::Transitio
 RandomTransition::RandomTransition(const sf::Texture* sourceTexture,
                                    const sf::Texture* targetTexture,
                                    const float duration,
-                                   const sf::Vector2u& size) :
+                                   const sf::Vector2u& size,
+                                   const TransitionType type) :
     Transition(sourceTexture, targetTexture, duration, size),
     m_maxHorizontalLines(21),
     m_maxVerticalLines(21),
@@ -36,7 +37,10 @@ RandomTransition::RandomTransition(const sf::Texture* sourceTexture,
 {
     bool sourceExist = sourceTexture != nullptr;
     bool targetExist = targetTexture != nullptr;
-    m_transition = std::move(createTransition(randomNumber(sourceExist, targetExist)));
+    if(type == TypeCount)
+        m_transition = std::move(createTransition(randomNumber(sourceExist, targetExist)));
+    else
+        m_transition = std::move(createTransition(type));
 }
 
 int RandomTransition::randomNumber(bool sourceExist, bool targetExist)

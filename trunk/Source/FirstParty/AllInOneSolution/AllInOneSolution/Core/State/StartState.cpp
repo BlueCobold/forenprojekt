@@ -26,6 +26,7 @@ StateChangeInformation StartState::update(const float time)
     m_stateInfo.m_level = nullptr;
     m_transitionStateInfo.m_followingState = MainMenuStateId;
     m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
+    m_transitionStateInfo.m_comeFromeState = StartStateId;
     return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 }
 

@@ -1,25 +1,26 @@
 #pragma once
 
-#ifndef LEVELPASSSTATE_HPP
-#define LEVELPASSSTATE_HPP
+#ifndef NEWHIGHSCORESTATE_HPP
+#define NEWHIGHSCORESTATE_HPP
 
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
 #include "../gui/Button.hpp"
 #include "../gui/hud/HUD.hpp"
 #include "../gui/ReplayMenu.hpp"
+#include "../gui/NewHighScoreMenu.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 
 #include <memory>
 
 /// This is the active game state when the level is done.
-class LevelPassState : public State
+class NewHighScoreState : public State
 {
 public:
 
-    LevelPassState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
-    ~LevelPassState();
+    NewHighScoreState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
+    ~NewHighScoreState();
 
     virtual StateChangeInformation update(const float time);
     virtual void draw(const DrawParameter& params);
@@ -28,6 +29,7 @@ public:
 private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
+    bool checkForNewHighscore();
     void addNewHighScore(int points, std::string name);
 
     std::unique_ptr<sf::Texture> m_background;
@@ -35,16 +37,14 @@ private:
     Level* m_level;
 
     HUD m_HUD;
-    ReplayMenu m_menu;
     bool m_replay;
 
-    EnterStateInformation m_stateInfo;
-    EnterPlayStateInformation m_playStateInfo;
-    EnterTransitionStateInformation m_transitionStateInfo;
-    EnterHighScoreStateInformation m_highScoreInfo;
-    float m_timeDiff;
+    NewHighScoreMenu m_menu;
+    bool m_addedHighScore;
 
-    void setMedal(int medal);
+    EnterPauseStateInformation m_stateInfo;
+    EnterTransitionStateInformation m_transitionStateInfo;
+    float m_timeDiff;
 };
 
-#endif // LEVELPASSSTATE_HPP
+#endif // NEWHIGHSCORESTATE_HPP
