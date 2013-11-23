@@ -80,10 +80,21 @@ StateChangeInformation PlayState::update(const float time)
 
         if(m_level->isLevelPassed())
         {
-            m_pauseStateInfo.m_levelTime = getCurrentTime();
-            m_pauseStateInfo.m_level = m_level;
-            m_transitionStateInfo.m_followingState = LevelPassStateId;
-            m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+            if(!checkForNewHighscore())
+            {
+                m_pauseStateInfo.m_levelTime = getCurrentTime();
+                m_pauseStateInfo.m_level = m_level;
+                m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+                m_transitionStateInfo.m_followingState = LevelPassStateId;
+            }
+            else
+            {
+                m_pauseStateInfo.m_levelTime = getCurrentTime();
+                m_pauseStateInfo.m_level = m_level;
+                m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+                m_transitionStateInfo.m_followingState = NewHighScoreStateId;
+            }
+
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
 
@@ -120,4 +131,17 @@ void PlayState::onEvent(utility::Event::EventType type)
 {
     if(type == utility::Event::LostFocus)
         m_shouldPause = true;
+}
+
+bool PlayState::checkForNewHighscore()
+{
+    int points = m_level->getPoints();
+    unsigned int number = m_level->number();
+    for(int i = 1; i < 6; ++i)
+    {
+        std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i);
+        if(points > State::m_config.get<int>(term))
+            return true;
+    }
+    return false;
 }

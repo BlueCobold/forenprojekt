@@ -52,6 +52,7 @@ StateChangeInformation LevelSelectState::update(const float time)
         m_stateInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
+        m_transitionStateInfo.m_comeFromeState = LevelSelectStateId;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     if(clicked == LevelSelectMenu::BUTTON_SHOW_DETAILS && !(m_currentLevelNumber > m_unlockedLevel))
@@ -61,6 +62,7 @@ StateChangeInformation LevelSelectState::update(const float time)
         m_stateInfo.m_levelNumber = m_currentLevelNumber;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
+        m_transitionStateInfo.m_comeFromeState = LevelSelectStateId;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     if(clicked == LevelSelectMenu::BUTTON_LEFT)

@@ -57,6 +57,7 @@ StateChangeInformation OptionMenuState::update(const float time)
         m_pauseStateInfo.m_level = m_level;
         m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
         m_menu.applyChanges();
+        m_transitionStateInfo.m_comeFromeState = OptionMenuStateId;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(m_clicked == OptionMenu::BUTTON_ARROW_LEFT)

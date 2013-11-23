@@ -14,6 +14,7 @@
 #include "../Core/State/LevelSelectState.hpp"
 #include "../Core/State/CoinShopState.hpp"
 #include "../Core/State/HighScoreState.hpp"
+#include "../Core/State/NewHighScoreState.hpp"
 
 #include "resources/AppConfig.hpp"
 
@@ -76,6 +77,7 @@ App::App(AppConfig& config) :
     m_stateManager.registerState(LevelSelectStateId, std::unique_ptr<LevelSelectState>(new LevelSelectState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(CoinShopStateId, std::unique_ptr<CoinShopState>(new CoinShopState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(HighScoreStateId, std::unique_ptr<HighScoreState>(new HighScoreState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.registerState(NewHighScoreStateId, std::unique_ptr<NewHighScoreState>(new NewHighScoreState(m_screen, m_resourceManager, m_config)));
     m_stateManager.setState(StartStateId);
 }
 

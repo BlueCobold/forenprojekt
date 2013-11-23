@@ -33,6 +33,7 @@ class EnterTransitionStateInformation : public EnterStateInformation
 {
 public:
     StateId m_followingState;
+    StateId m_comeFromeState;
     EnterStateInformation* m_onEnterInformation;
 
     State* m_source;

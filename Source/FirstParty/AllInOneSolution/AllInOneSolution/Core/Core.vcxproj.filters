@@ -301,6 +301,9 @@
     <ClCompile Include="gui\Menu.cpp">
       <Filter>Sources\gui\menu</Filter>
     </ClCompile>
+    <ClCompile Include="State\NewHighScoreState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -800,6 +803,9 @@
     </ClInclude>
     <ClInclude Include="gui\NewHighScoreMenu.hpp">
       <Filter>Headers\gui\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="State\NewHighScoreState.hpp">
+      <Filter>Headers\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

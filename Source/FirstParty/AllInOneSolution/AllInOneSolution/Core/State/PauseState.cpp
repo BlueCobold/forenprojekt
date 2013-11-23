@@ -63,6 +63,7 @@ StateChangeInformation PauseState::update(const float time)
         m_transitionStateInfo.m_level = m_level;
         m_transitionStateInfo.m_followingState = PlayStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        m_transitionStateInfo.m_comeFromeState = PauseStateId;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == PauseMenu::BUTTON_OPTIONS)
@@ -73,6 +74,7 @@ StateChangeInformation PauseState::update(const float time)
         m_transitionStateInfo.m_level = m_level;
         m_transitionStateInfo.m_followingState = OptionMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_optionStateInfo;
+        m_transitionStateInfo.m_comeFromeState = PauseStateId;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == PauseMenu::BUTTON_RESTART_LEVEL)
@@ -83,6 +85,7 @@ StateChangeInformation PauseState::update(const float time)
         m_transitionStateInfo.m_level = m_level;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        m_transitionStateInfo.m_comeFromeState = PauseStateId;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     return StateChangeInformation::Empty();

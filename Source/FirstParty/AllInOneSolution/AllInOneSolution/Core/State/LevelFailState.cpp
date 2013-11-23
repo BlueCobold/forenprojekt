@@ -62,6 +62,7 @@ StateChangeInformation LevelFailState::update(const float time)
         m_playStateInfo.m_level = m_level;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        m_transitionStateInfo.m_comeFromeState = LevelFailStateId;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == FailMenu::BUTTON_MAIN_MENU)
@@ -70,6 +71,7 @@ StateChangeInformation LevelFailState::update(const float time)
         m_playStateInfo.m_level = nullptr;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        m_transitionStateInfo.m_comeFromeState = LevelFailStateId;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == FailMenu::BUTTON_HIGHSCORE)
@@ -78,6 +80,7 @@ StateChangeInformation LevelFailState::update(const float time)
         m_highScoreInfo.m_comeFromState = LevelFailStateId;
         m_transitionStateInfo.m_followingState = HighScoreStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_highScoreInfo;
+        m_transitionStateInfo.m_comeFromeState = LevelFailStateId;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 

@@ -36,6 +36,8 @@ private:
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPauseStateInformation m_pauseStateInfo;
     float m_timeShift;
+
+    bool PlayState::checkForNewHighscore();
 };
 
 #endif // PLAYSTATE_HPP
