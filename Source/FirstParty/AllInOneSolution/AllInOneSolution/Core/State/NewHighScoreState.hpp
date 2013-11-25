@@ -29,7 +29,6 @@ public:
 private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
-    bool checkForNewHighscore();
     void addNewHighScore(int points, std::string name);
 
     std::unique_ptr<sf::Texture> m_background;
@@ -40,7 +39,6 @@ private:
     bool m_replay;
 
     NewHighScoreMenu m_menu;
-    bool m_addedHighScore;
 
     EnterPauseStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;

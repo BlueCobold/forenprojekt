@@ -19,8 +19,7 @@ NewHighScoreState::NewHighScoreState(sf::RenderWindow& screen,
     m_background(nullptr),
     m_menu(sf::Vector2f(0, 0), screen, resourceManager),
     m_HUD(resourceManager, config),
-    m_replay(false),
-    m_addedHighScore(false)
+    m_replay(false)
 {
 }
 
@@ -43,8 +42,6 @@ void NewHighScoreState::onEnter(const EnterStateInformation* enterInformation, c
     m_stateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
     m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).onEnter();
-
-    m_addedHighScore = false;
 }
 
 StateChangeInformation NewHighScoreState::update(const float time)
@@ -67,9 +64,9 @@ StateChangeInformation NewHighScoreState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         m_transitionStateInfo.m_followingState = LevelPassStateId;
         m_transitionStateInfo.m_comeFromeState = NewHighScoreStateId;
-
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
+
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
     m_menu.update(m_screen);
@@ -94,19 +91,6 @@ void NewHighScoreState::draw(const DrawParameter& params)
     m_menu.draw(params);
 }
 
-bool NewHighScoreState::checkForNewHighscore()
-{
-    int points = m_level->getPoints();
-    unsigned int number = m_level->number();
-    for(int i = 1; i < 6; ++i)
-    {
-        std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i);
-        if(points > State::m_config.get<int>(term))
-            return true;
-    }
-    return false;
-}
-
 void NewHighScoreState::addNewHighScore(int points, std::string name)
 {
     if(name == "")
@@ -117,30 +101,58 @@ void NewHighScoreState::addNewHighScore(int points, std::string name)
 
     int newPlace = 0;
     int number = m_level->number();
-    for(int i = 5; i > 0; --i)
+    if(m_level->isTimeAttackMode())
     {
-        std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i);
-        if(points > State::m_config.get<int>(term))
-            newPlace = i;
+        for(int i = 5; i > 0; --i)
+        {
+            std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + "TAM";
+            if(points > State::m_config.get<int>(term))
+                newPlace = i;
+        }
+
+        for(int i = 5; i > newPlace; --i)
+        {
+            std::string termPoints1 = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i - 1) + "TAM";
+            std::string termName1 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i - 1) + "TAM";
+
+            std::string termPoints2 = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + "TAM";
+            std::string termName2 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i) + "TAM";
+
+            State::m_config.set<int>(termPoints2, State::m_config.get<int>(termPoints1));
+            State::m_config.set<std::string>(termName2, State::m_config.get<std::string>(termName1));
+
+            std::string termPoints = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(newPlace) + "TAM";
+            std::string termName = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(newPlace) + "TAM";
+
+            State::m_config.set<int>(termPoints, points);
+            State::m_config.set<std::string>(termName, name);
+        }
     }
 
-    for(int i = 5; i > newPlace; --i)
+    else
     {
-        std::string termPoints1 = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i - 1);
-        std::string termName1 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i - 1);
+        for(int i = 5; i > 0; --i)
+        {
+            std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + "NAM";
+            if(points > State::m_config.get<int>(term))
+                newPlace = i;
+        }
 
-        std::string termPoints2 = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i);
-        std::string termName2 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i);
+        for(int i = 5; i > newPlace; --i)
+        {
+            std::string termPoints1 = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i - 1) + "NAM";
+            std::string termName1 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i - 1) + "NAM";
 
-        State::m_config.set<int>(termPoints2, State::m_config.get<int>(termPoints1));
-        State::m_config.set<std::string>(termName2, State::m_config.get<std::string>(termName1));
+            std::string termPoints2 = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + "NAM";
+            std::string termName2 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i) + "NAM";
+
+            State::m_config.set<int>(termPoints2, State::m_config.get<int>(termPoints1));
+            State::m_config.set<std::string>(termName2, State::m_config.get<std::string>(termName1));
+        }
+        std::string termPoints = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(newPlace) + "NAM";
+        std::string termName = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(newPlace) + "NAM";;
+
+        State::m_config.set<int>(termPoints, points);
+        State::m_config.set<std::string>(termName, name);
     }
-
-    std::string termPoints = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(newPlace);
-    std::string termName = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(newPlace);
-
-    State::m_config.set<int>(termPoints, points);
-    State::m_config.set<std::string>(termName, name);
-
-    m_addedHighScore = true;
 }
