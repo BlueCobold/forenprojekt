@@ -87,11 +87,25 @@ void HighScoreState::draw(const DrawParameter& params)
 void HighScoreState::loadHighScore(Level& level)
 {
     std::string number = utility::toString(level.number());
-    for(int i = 0; i < 5; ++i)
+
+    if(level.isTimeAttackMode())
     {
-        // read the place data from stash.dat
-        m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + "NAM"));
-        // reade the point data from stash.dat
-        m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + "NAM"));
+        for(int i = 0; i < 5; ++i)
+        {
+            // read the place data from stash.dat
+            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + "TAM"));
+            // reade the point data from stash.dat
+            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + "TAM"));
+        }
+    }
+    else
+    {
+        for(int i = 0; i < 5; ++i)
+        {
+            // read the place data from stash.dat
+            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + "NAM"));
+            // reade the point data from stash.dat
+            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + "NAM"));
+        }
     }
 }

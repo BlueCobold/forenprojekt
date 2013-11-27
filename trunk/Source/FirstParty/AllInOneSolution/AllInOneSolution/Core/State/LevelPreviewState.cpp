@@ -16,6 +16,8 @@ LevelPreviewState::LevelPreviewState(sf::RenderWindow& screen,
     m_level(nullptr),
     m_levelUpdated(false)
 {
+    m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
+    m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(true);
 }
 
 LevelPreviewState::~LevelPreviewState()
@@ -31,11 +33,13 @@ void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, c
     m_menu.setLevelInfo(m_level->getLevelName(), m_level->getTotalTime(), m_level->getRemainingBall());
     m_menu.setCoinToolTipText(utility::replace(utility::translateKey("tooltip_coins"), 
                                            utility::toString(m_config.get<int>("coins"))));
-    m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
-    m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(true);
 
     if(m_config.get<unsigned int>("UnlockedLevel") == m_level->number())
+    {
         m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setToolTipText(utility::translateKey("tooltip_preview_notimeattack"));
+        m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
+        m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(true);
+    }
     else
         m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setToolTipText(utility::translateKey("tooltip_preview_timeattack"));
 

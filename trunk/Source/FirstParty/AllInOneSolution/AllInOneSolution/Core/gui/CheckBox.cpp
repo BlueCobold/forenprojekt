@@ -78,9 +78,15 @@ void CheckBox::setChecked(bool checked)
 {
     m_checked = checked;
 
+    if(m_hover && !m_checked)
+    {
+        m_sprite = &m_style.hoverStyle.sprite;
+        onPositionChanged();
+    }
     if(m_checked)
     {
         m_sprite = &m_style.checkedStyle.sprite;
+        m_hover = false;
         onPositionChanged();
     }
     else
