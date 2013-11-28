@@ -36,7 +36,7 @@ void Button::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOff
         }
 
         m_showToolTip = true;
-        m_toolTip.setPosition(static_cast<const sf::Vector2f>(mouseposition));
+        m_toolTip.setPosition(static_cast<const sf::Vector2f>(mouseposition), screen);
         
         if(utility::Mouse.leftButtonPressed())
         {
