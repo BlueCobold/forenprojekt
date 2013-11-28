@@ -30,6 +30,7 @@ private:
     void setLines(const std::string& text);
     const int findLongestLine() const;
     void stretchBackground();
+    sf::Vector2f calculateNeededOffset(const sf::Vector2f& position, const sf::RenderWindow& screen);
 
 public:
     enum BackgroundId {TopLeft = 1,
@@ -51,7 +52,7 @@ public:
 
     virtual void draw(const DrawParameter& params) override;
 
-    void setPosition(const sf::Vector2f& position);
+    void setPosition(const sf::Vector2f& position, const sf::RenderWindow& screen);
 
     void setText(const std::string& text);
 };

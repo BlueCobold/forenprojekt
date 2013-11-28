@@ -1,6 +1,7 @@
 #include "ToolTip.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include "../Utility.hpp"
 
 ToolTip::ToolTip(const std::string& text,
                  BitmapFont* font,
@@ -59,43 +60,45 @@ void ToolTip::draw(const DrawParameter& params)
     }
 }
 
-void ToolTip::setPosition(const sf::Vector2f& position)
+void ToolTip::setPosition(const sf::Vector2f& position, const sf::RenderWindow& screen)
 {
     if(m_lines != -1)
     {
+        sf::Vector2f offset = calculateNeededOffset(position, screen);
+
         for(auto it = begin(m_label); it != end(m_label); ++it)
-            it->second.setPosition(position.x + m_offset.x + m_textOffset.x,
-                                   position.y + m_textOffset.y + m_offset.y + it->first * m_height / m_lines);
+            it->second.setPosition(position.x + m_offset.x + m_textOffset.x + offset.x,
+                                   position.y + m_textOffset.y + m_offset.y + offset.y + it->first * m_height / m_lines);
 
         auto height = m_background[TopLeft].getTextureRect().height;
         auto width = m_background[TopLeft].getTextureRect().width;
 
-        m_background[TopLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x,
-                                         position.y - height + m_offset.y);
+        m_background[TopLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x + offset.x,
+                                         position.y - height + m_offset.y + offset.y);
 
-        m_background[TopCenter].setPosition(position.x - m_width / 2.f + m_offset.x,
-                                           position.y - height + m_offset.y);
+        m_background[TopCenter].setPosition(position.x - m_width / 2.f + m_offset.x + offset.x,
+                                           position.y - height + m_offset.y + offset.y);
 
-        m_background[TopRight].setPosition(position.x + m_width / 2.f + m_offset.x,
-                                          position.y - height + m_offset.y);
+        m_background[TopRight].setPosition(position.x + m_width / 2.f + m_offset.x + offset.x,
+                                          position.y - height + m_offset.y + offset.y);
 
-        m_background[MiddleLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x,
-                                            position.y + m_offset.y);
+        m_background[MiddleLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x + offset.x,
+                                            position.y + m_offset.y + offset.y);
 
-        m_background[MiddleCenter].setPosition(position.x - m_width / 2.f + m_offset.x,
-                                              position.y + m_offset.y);
+        m_background[MiddleCenter].setPosition(position.x - m_width / 2.f + m_offset.x + offset.x,
+                                              position.y + m_offset.y + offset.y);
 
-        m_background[MiddleRight].setPosition(position.x + m_width / 2.f + m_offset.x,
-                                             position.y + m_offset.y);
+        m_background[MiddleRight].setPosition(position.x + m_width / 2.f + m_offset.x + offset.x,
+                                             position.y + m_offset.y + offset.y);
 
-        m_background[BottomLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x,
-                                            position.y + m_height + m_offset.y);
+        m_background[BottomLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x + offset.x,
+                                            position.y + m_height + m_offset.y + offset.y);
 
-        m_background[BottomCenter].setPosition(position.x - m_width / 2.f + m_offset.x,
-                                              position.y + m_height + m_offset.y);
+        m_background[BottomCenter].setPosition(position.x - m_width / 2.f + m_offset.x + offset.x,
+                                              position.y + m_height + m_offset.y + offset.y);
 
-        m_background[BottomRight].setPosition(position.x + m_width / 2.f + m_offset.x,
-                                             position.y + m_height + m_offset.y);
+        m_background[BottomRight].setPosition(position.x + m_width / 2.f + m_offset.x + offset.x,
+                                             position.y + m_height + m_offset.y + offset.y);
     }
 }
 
@@ -163,4 +166,41 @@ void ToolTip::stretchBackground()
     m_background[TopCenter].setScale(m_scalefactorHorizontal, 1.f);
     m_background[MiddleLeft].setScale(1.f, m_scalefactorVertical);
     m_background[MiddleRight].setScale(1.f, m_scalefactorVertical);
+}
+
+sf::Vector2f ToolTip::calculateNeededOffset(const sf::Vector2f& position, const sf::RenderWindow& screen)
+{
+    auto height = m_background[TopLeft].getTextureRect().height;
+    auto width = m_background[TopLeft].getTextureRect().width;
+
+    float verticalOffset = 0;
+    float horizontalOffset = 0;
+
+    // check left screen Boarder
+    if(position.x - m_width / 2.f - width + m_offset.x < 0)
+        verticalOffset = (position.x - m_width / 2.f - width + m_offset.x) * -1.f;
+
+    // check right screen Boarder
+    if(static_cast<unsigned int>(position.x + m_width / 2.f + m_offset.x) > screen.getSize().x)
+    {
+        if(verticalOffset == 0)
+            verticalOffset = screen.getSize().x - (position.x - m_width / 2.f - width + m_offset.x);
+        else
+            throw std::runtime_error(utility::translateKey("ToLong"));
+    }
+
+    // check upper screen Boarder
+    if(position.y - height + m_offset.y < 0)
+        horizontalOffset = (position.y - height + m_offset.y) * -1.f;
+
+    // check bottom screen Boarder
+    if(static_cast<unsigned int>(position.y + m_height + m_offset.y) > screen.getSize().y)
+    {
+        if(horizontalOffset == 0)
+            horizontalOffset = screen.getSize().y - (position.y + m_height + m_offset.y);
+        else
+            throw std::runtime_error(utility::translateKey("ToLong"));
+    }
+
+    return sf::Vector2f(verticalOffset, horizontalOffset);
 }
