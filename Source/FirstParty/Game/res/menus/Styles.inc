@@ -98,7 +98,7 @@
 			offsetx="0" offsety="0" />
 		<checked texture="GuiElements" srcx="622" srcy="395" width="40" height="40"
 			offsetx="0" offsety="0" />
-		<hover texture="GuiElements" srcx="635" srcy="546" width="40" height="40"
+		<hover texture="GuiElements" srcx="662" srcy="395" width="40" height="40"
 			offsetx="0" offsety="0" />
 	</checkboxStyle>
 	<checkboxStyle name="targetmode">
@@ -107,7 +107,7 @@
 			offsetx="0" offsety="0" />
 		<checked texture="GuiElements" srcx="922" srcy="104" width="40" height="40"
 			offsetx="0" offsety="0" />
-		<hover texture="GuiElements" srcx="582" srcy="395" width="40" height="40"
+		<hover texture="GuiElements" srcx="278" srcy="313" width="40" height="40"
 			offsetx="0" offsety="0" />
 	</checkboxStyle>
 	<sliderStyle name="default">
