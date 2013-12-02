@@ -1,0 +1,147 @@
+<level>
+	<levelinfo name="High and Higher">
+		<infoimage scrx="0" scry="0" width="192" height="108" />
+	</levelinfo>
+	<constants gate="0" gatetime="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/movement.inc" />
+		<include file="assets/target/phase_out.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+
+		<shapes>
+			<shape name="checkpointArea" type="polygon">
+				<vertex x="-120" y="0" />
+				<vertex x="600" y="0" />
+				<vertex x="600" y="90" />
+				<vertex x="-120" y="90" />
+			</shape>
+
+			<shape name="checkpointArea2" type="polygon">
+				<vertex x="-360" y="0" />
+				<vertex x="420" y="0" />
+				<vertex x="420" y="90" />
+				<vertex x="-360" y="90" />
+			</shape>
+		</shapes>
+		
+		<entities>
+
+			<entity name="respawnLoc1" rep="R1" collideWithBall="false">
+				<physics name="wall" shape="checkpointArea" />
+				<collides>
+					<copySpawnLocation>
+						<always />
+					</copySpawnLocation>
+				</collides>
+			</entity>
+			<entity name="respawnLoc2" rep="R2" collideWithBall="false">
+				<physics name="wall" shape="checkpointArea2" />
+				<collides>
+					<copySpawnLocation>
+						<always />
+					</copySpawnLocation>
+				</collides>
+			</entity>
+		</entities>
+	</templates>
+	
+
+	<grid size="60" width="2460" height="5610">
+                                                               
+                                                               
+
+                                                                    
+                                                                  
+                                                              
+                                                                
+                              W1 1W2 2W3 3W4 4W5 5W6 6W5 5w1
+                              w2                          w3
+                              w2                          w2
+                              w1                          w2
+                              w1    t1              t1    w6                           
+                              w2                          w5                           
+                              w3                          w4                           
+                              w4                          w3                           
+                              w5              TT          w2                           
+                              w6    R1                    w1                             
+                              w5                          w2
+                              w1    TT              /2^O^Xw2                                   
+                              w6                  /3W2 2w4w1                           
+                              w5      w6\1      /1w1      w2
+                              w5      w1w3    >ow1w2  bt  w1
+                              w2      w4w4    >xw1w1      w2
+                              w1      w2w5o>    w1w4  bt  w6
+                              w5\2    w1w6x>    w1w4d2d4d4w3                           
+                              w3w2    w1)1      (1w1d1d3d6w4                             
+                              w1w1^O^Xw2          w2d3d5d6w5
+                              w1W1 1w2w1          (1d1d2d3w2                                   
+                              w6  o^x^w1                  w1                           
+                              w5      w2    R2            w2
+                              w5  t1  w3                  w1
+                              w2      w1    TT            w2
+                              w1      w2                  w6
+                              w5                          w3                           
+                              w3                          w4                             
+                              w1                          w5                             
+                              w1    TT              TT    w6                           
+                              w2                          w5                           
+                              w3                          w4                           
+                              w4                          w3                           
+                              w5                          w2                           
+                              w6            TT            w1                             
+                              w5                          w2
+                              w1                          w2                                   
+                              w6    t1              t1    w1                           
+                              w5                          w2
+                              w5                          w1
+                              w2            TT            w2
+                              w1                          w6
+                              w5                          d3                           
+                              w3                          d4                             
+                              w1                          d5                             
+                              w1    TT              TT    w6                           
+                              w2                          w5                           
+                              w3                          w4                           
+                              w4                          w3                           
+                              w5                          w2                           
+                              w6            TT            w1                             
+                              w5                          w2                           
+                              w4    R1                  /5w3                           
+                              w3                      /4w2w4                           
+                              w2                    /3W1 1w1                         
+                              w1    TT            /2W6 6W6 6
+                              w1                  W6 6W1 1w2                                   
+                              w6    t1            w6o^x^  w1                           
+                              w5                  w5      w2
+                              w5                  w2    btw1
+                              w2            TT    w3      w2
+                              w1                  w5    btw6
+                              d5                  w4      w3                           
+                              d3                  w3  bt  w4                             
+                              d1                  w2      w5                             
+                              w1    TT            w1  bt  w6                           
+                              w2                          w5                           
+                              w3                          w4                           
+                              w4                          w3                           
+                              w5                          w2                           
+                              w6            TT            w1                             
+                              w5                          w2                           
+                              w4    BB                    w3                           
+                              w3                          w4                           
+                              w2                        /1w1                         
+                              w1    TT              TT  W6 6                          
+                                                                                    
+                                                                      
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="600" silver="800" gold="1000" />
+</level>
