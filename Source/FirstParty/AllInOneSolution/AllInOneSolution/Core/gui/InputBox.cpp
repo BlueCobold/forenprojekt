@@ -154,4 +154,5 @@ void InputBox::onEnter()
 {
     m_finished = false;
     m_inputText.setText("");
+    m_charCounter = 0;
 }
