@@ -242,6 +242,85 @@
 					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true" />
 				</animations>
 			</entity>
+
+			<entity name="targetcircuit_1" rep="c1" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="targetcircuit1">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
+			
+			<entity name="targetcircuit_2" rep="c2" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="targetcircuit2">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
+
+			<entity name="targetcircuit_3" rep="c3" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="targetcircuit3">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
+
+			<entity name="targetcircuit_4" rep="c4" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="targetcircuit4">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="bonustarget_2" rep="b1" type="bonustarget" points="10" collideWithBall="false">
+				<physics name="targetcircuit1">
+					<shape type="circle" radius="21" />
+				</physics>
+				<collides>
+					<spawnEntity name="bonustarget_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true" />
+				</animations>
+			</entity>
 		</entities>
 	</templates>
 </include>
