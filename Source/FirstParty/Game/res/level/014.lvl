@@ -1,0 +1,233 @@
+<level>
+	<levelinfo name="Sphere">
+		<infoimage scrx="0" scry="0" width="192" height="108" />
+	</levelinfo>
+	<constants gate="0" gatetime="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/movement.inc" />
+		<include file="assets/target/phase_out.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		
+		<shapes>
+			<shape name="triangel1" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="300" y="-1200" />
+				<vertex x="1200" y="-300" />
+			</shape>
+			<shape name="triangel2" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="1200" y="300" />
+				<vertex x="300" y="1200" />
+			</shape>
+			<shape name="triangel3" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="-300" y="-1200" />
+				<vertex x="-1200" y="-300" />
+			</shape>
+			<shape name="triangel4" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="-300" y="1200" />
+				<vertex x="-1200" y="300" />
+			</shape>
+			<shape name="block1" type="polygon">
+				<vertex x="-290" y="0" />
+				<vertex x="770" y="0" />
+				<vertex x="470" y="1200" />
+				<vertex x="10" y="1200" />
+			</shape>
+			<shape name="block2" type="polygon">
+				<vertex x="60" y="-350" />
+				<vertex x="60" y="710" />
+				<vertex x="-1140" y="410" />
+				<vertex x="-1140" y="-50" />
+			</shape>
+			<shape name="block3" type="polygon">
+				<vertex x="0" y="-350" />
+				<vertex x="0" y="710" />
+				<vertex x="1200" y="410" />
+				<vertex x="1200" y="-50" />
+			</shape>
+			<shape name="block4" type="polygon">
+				<vertex x="-350" y="60" />
+				<vertex x="710" y="60" />
+				<vertex x="410" y="-1140" />
+				<vertex x="-50" y="-1140" />
+			</shape>
+		</shapes>
+		<entities>
+
+			<entity name="change_gravity_down" rep="G1" collideWithBall="false">
+				<physics name="wall" shape="block1" />
+				<collides>
+					<changeGravity x="0" y="40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_down" rep="G2" collideWithBall="false">
+				<physics name="wall" shape="triangel1" />
+				<collides>
+					<changeGravity x="-1" y="1">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_down" rep="G3" collideWithBall="false">
+				<physics name="wall" shape="block2" />
+				<collides>
+					<changeGravity x="-40" y="0">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_down" rep="G4" collideWithBall="false">
+				<physics name="wall" shape="triangel2" />
+				<collides>
+					<changeGravity x="-1" y="-1">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_down" rep="G5" collideWithBall="false">
+				<physics name="wall" shape="triangel3" />
+				<collides>
+					<changeGravity x="1" y="1">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_down" rep="G6" collideWithBall="false">
+				<physics name="wall" shape="block3" />
+				<collides>
+					<changeGravity x="40" y="0">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_down" rep="G7" collideWithBall="false">
+				<physics name="wall" shape="block4" />
+				<collides>
+					<changeGravity x="0" y="-40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_down" rep="G8" collideWithBall="false">
+				<physics name="wall" shape="triangel4" />
+				<collides>
+					<changeGravity x="1" y="-1">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+			</entity>
+			
+		</entities>
+	</templates>
+	
+
+	<grid size="60" width="4000" height="5610">
+                                              /1w1w1w1w1w1w1w1w1w1w1\1
+                                        /1w1w1w1)1G1              (1w1w1w1\1
+                                  /1w1w1w1)1                            (1w1w1w1\1
+                                /1w1)1                                        (1w1\1
+                            /1w1w1)1                                            (1w1w1\1
+                          /1w1)1                                                    (1w1\1
+                      /1w1w1)1                                                        (1w1w1\1
+                    /1w1)1                                                                (1w1
+                    w1)1                                                                    w1\1
+                  /1w1                                                                      (1w1\1
+                /1w1)1                                                                        (1w1\1
+                w1)1                                      b1                                    (1w1
+              /1w1                                                                                w1\1
+            /1w1)1                                                                                (1w1
+            w1)1                                                                                    w1\1
+            w1                                                                                      (1w1
+          /1w1                                                                                        w1\1
+          w1)1                                                                                        (1w1
+          w1                                                                                            w1
+        /1w1                                                                                            w1
+        w1)1                                            BB                                              w1\1
+        w1                                        G5  TT      TT  G2                                    (1w1
+        w1G6                                          ^O^X^O^X                                          G3w1
+        w1                                        T2>ow1w1w1w1o>  T2                                      w1
+        w1                                          >xw1c1c2w1x>                      b1                  w1
+        w1                  b1                      >ow1c3c4w1o>                                          w1
+        w1                                          >xw1w1w1w1x>                                          w1
+        w1                                        T2  o^x^o^x^    T2                                      w1
+        w1                                                                                              /1w1
+        w1\1                                      G8  TT      TT  G4                                    w1)1
+        (1w1                                                                                            w1
+          w1                                                                                            w1
+          w1\1                                                                                        /1w1
+          (1w1                                                                                        w1)1
+            w1                                                                                        w1
+            w1\1                                                                                    /1w1
+            (1w1\1                                                                                /1w1)1
+              (1w1                                                                                w1)1
+                w1\1                                                                            /1w1
+                (1w1\1                                    b1                                  /1w1)1
+                  (1w1                                                                      /1w1)1
+                    w1\1                                                                    w1)1
+                    (1w1w1\1                                                            /1w1w1
+                        (1w1\1                                                        /1w1)1
+                          (1w1\1                                                    /1w1)1
+                            (1w1w1\1                                            /1w1w1)1
+                                (1w1w1\1                                      /1w1)1
+                                    (1w1w1\1                            /1w1w1w1)1
+                                        (1w1w1w1w1\1G7          /1w1w1w1w1)1
+                                                (1w1w1w1w1w1w1w1w1)1
+
+
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="10" />
+	</world>
+	<medal bronze="440" silver="470" gold="500" />
+</level>
