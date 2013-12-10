@@ -150,7 +150,7 @@ void NewHighScoreState::addNewHighScore(int points, std::string name)
             State::m_config.set<std::string>(termName2, State::m_config.get<std::string>(termName1));
         }
         std::string termPoints = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(newPlace) + "NAM";
-        std::string termName = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(newPlace) + "NAM";;
+        std::string termName = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(newPlace) + "NAM";
 
         State::m_config.set<int>(termPoints, points);
         State::m_config.set<std::string>(termName, name);
