@@ -137,11 +137,23 @@ bool PlayState::checkForNewHighscore()
 {
     int points = m_level->getPoints();
     unsigned int number = m_level->number();
-    for(int i = 1; i < 6; ++i)
+    if(m_level->isTimeAttackMode())
     {
-        std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i);
-        if(points > State::m_config.get<int>(term))
-            return true;
+        for(int i = 1; i < 6; ++i)
+        {
+            std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i + "TAM");
+            if(points > State::m_config.get<int>(term))
+                return true;
+        }
+    }
+    else
+    {
+        for(int i = 1; i < 6; ++i)
+        {
+            std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i + "NAM");
+            if(points > State::m_config.get<int>(term))
+                return true;
+        }
     }
     return false;
 }
