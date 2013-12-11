@@ -61,7 +61,7 @@ InvalidLayout = The layout-part '%' has a bad number of elements.
 InvalidBackground = The background layout of a % is corrupt.
 UnknownButtonToolTip = ButtonToolTip isn't registered: %.
 InvalidGoody = Failed to find goody for the given type.
-ToLong = ToolTip is to large.
+ToolTipTooLong = ToolTip is too large.
 
 [GUI]
 gui_game_paused = Game Paused
