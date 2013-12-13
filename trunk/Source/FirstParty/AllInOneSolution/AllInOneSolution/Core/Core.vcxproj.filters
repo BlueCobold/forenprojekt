@@ -304,6 +304,9 @@
     <ClCompile Include="State\NewHighScoreState.cpp">
       <Filter>Sources\State</Filter>
     </ClCompile>
+    <ClCompile Include="resources\GameEventRecorder.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -806,6 +809,12 @@
     </ClInclude>
     <ClInclude Include="State\NewHighScoreState.hpp">
       <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\GameEvent.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\GameEventRecorder.hpp">
+      <Filter>Headers\resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

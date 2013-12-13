@@ -339,7 +339,10 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
         if(entityA->getType() == Entity::Target)
             killTarget(entityA);
         else if(entityA->getType() == Entity::Teeter)
+        {
             m_multiHit = 0;
+            m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTeeter);
+        }
         else if(entityA->getType() == Entity::BonusTarget)
             killBonusTarget(entityA);
 
@@ -353,7 +356,10 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
         if(entityB->getType() == Entity::Target)
             killTarget(entityB);
         else if(entityB->getType() == Entity::Teeter)
+        {
             m_multiHit = 0;
+            m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTeeter);
+        }
         else if(entityB->getType() == Entity::BonusTarget)
             killBonusTarget(entityB);
 
@@ -377,6 +383,8 @@ void Level::killTarget(Entity* target)
     m_points += earned;
     m_multiHit++;
     createLabelAt(target, "green", earned);
+
+    m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTarget);
 }
 
 void Level::killBonusTarget(Entity* target)
@@ -388,6 +396,8 @@ void Level::killBonusTarget(Entity* target)
     m_points += earned;
     m_multiHit++;
     createLabelAt(target, "green", earned);
+
+    m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitBonusTarget);
 }
 
 void Level::createLabelAt(const Entity* target, const std::string& fontName, const int number)

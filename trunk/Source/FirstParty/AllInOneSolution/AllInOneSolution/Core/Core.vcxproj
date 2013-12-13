@@ -173,6 +173,7 @@
     <ClCompile Include="resources\AppConfig.cpp" />
     <ClCompile Include="resources\Config.cpp" />
     <ClCompile Include="resources\FileReader.cpp" />
+    <ClCompile Include="resources\GameEventRecorder.cpp" />
     <ClCompile Include="resources\LevelFileLoader.cpp" />
     <ClCompile Include="resources\MenuLoader.cpp" />
     <ClCompile Include="resources\ResourceManager.cpp" />
@@ -337,6 +338,8 @@
     <ClInclude Include="resources\AppConfig.hpp" />
     <ClInclude Include="resources\Config.hpp" />
     <ClInclude Include="resources\FileReader.hpp" />
+    <ClInclude Include="resources\GameEvent.hpp" />
+    <ClInclude Include="resources\GameEventRecorder.hpp" />
     <ClInclude Include="resources\LevelFileLoader.hpp" />
     <ClInclude Include="resources\MenuLoader.hpp" />
     <ClInclude Include="resources\ResourceCache.hpp" />
