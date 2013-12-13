@@ -16,6 +16,7 @@
 #include "../gui/LineLabel.hpp"
 #include "GravityGoody.hpp"
 #include "InvulnerableGoody.hpp"
+#include "../resources/GameEventRecorder.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -312,6 +313,8 @@ private:
     Goody m_extraTimeGoody;
     int m_currentSeletedGoody;
     bool m_playing;
+
+    GameEventRecorder m_eventRecorder;
 };
 
 #endif // LEVEL_HPP
