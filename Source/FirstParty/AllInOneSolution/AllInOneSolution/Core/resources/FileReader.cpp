@@ -1,9 +1,13 @@
 #include "FileReader.hpp"
 
-FileReader::FileReader(const std::string& fileName) :
-    m_fileName(fileName)
+FileReader::FileReader(const std::string& fileName, const bool fromFile) :
+    m_fileName(fileName),
+    m_fromFile(fromFile)
 {
-    readFile();
+    if(m_fromFile)
+        readFile();
+    else
+        readString();
 }
 
 std::string FileReader::eraseOverhang(std::string& data)
@@ -22,11 +26,15 @@ std::string FileReader::eraseOverhang(std::string& data)
     return data;
 }
 
-void FileReader::reload(const std::string& fileName)
+void FileReader::reload(const std::string& fileName, const bool fromFile)
 {
     m_fileName = fileName;
-    
-    readFile();
+    m_fromFile = fromFile;
+
+    if(m_fromFile)
+        readFile();
+    else
+        readString();
 }
 
 void FileReader::set(const std::string& key, const std::string& value)
@@ -69,6 +77,38 @@ void FileReader::readFile()
     else
         // cannot use translate here, because translate may need this file which cannot be loaded!
         throw std::runtime_error(std::string("File missing: ") + m_fileName);
+}
+
+void FileReader::readString()
+{
+    if(!m_fileName.empty())
+    {
+        std::stringstream content(m_fileName);
+        // Reset variables
+        std::string line;
+        std::string key;
+        std::string value;
+        unsigned int pos = 0;
+
+        while(!content.eof())
+        {
+            std::getline(content, line);
+
+            pos = line.find('=');
+
+            // Does not contain a =
+            if(pos == std::string::npos)
+                continue;
+
+            key = line.substr(0, pos);
+            eraseOverhang(key);
+            value = line.substr(pos + 1) ;
+            eraseOverhang(value);
+
+            if(!key.empty() && !value.empty())
+                m_content.insert(std::make_pair<std::string&, std::string&>(key, value));
+        } 
+    } 
 }
 
 std::string FileReader::get(const std::string& key)

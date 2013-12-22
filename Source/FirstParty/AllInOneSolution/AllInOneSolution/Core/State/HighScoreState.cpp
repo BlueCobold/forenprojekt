@@ -4,11 +4,13 @@
 #include "../resources/ResourceManager.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
 #include "../model/Level.hpp"
+#include "../gui/CheckBox.hpp"
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Network/Http.hpp>
 #include <string>
 
 HighScoreState::HighScoreState(sf::RenderWindow& screen, 
@@ -16,8 +18,12 @@ HighScoreState::HighScoreState(sf::RenderWindow& screen,
                                AppConfig& config) :
     State(screen, resourceManager, config),
     m_menu(sf::Vector2f(0, 0), screen, resourceManager),
-    m_HUD(resourceManager, config)
+    m_HUD(resourceManager, config),
+    m_onlineHighscore(false),
+    m_loaded(false),
+    loadingOnlineHighScoreThread(nullptr)
 {
+        loadingOnlineHighScoreThread = std::unique_ptr<sf::Thread>(new sf::Thread(&HighScoreState::loadOnlineHighscore, this));
 }
 
 HighScoreState::~HighScoreState()
@@ -33,14 +39,22 @@ void HighScoreState::onEnter(const EnterStateInformation* enterInformation, cons
     m_highScoreStateInfo.m_levelNumber = info->m_level->number();
 
     State::onEnter(info,time);
-    loadHighScore(*info->m_level);
+    loadHighScore();
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
+
+    m_onlineHighscore = false;
+    m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).setChecked(false);
 }
 
 StateChangeInformation HighScoreState::update(const float time)
 {
     if(State::isPaused())
         return StateChangeInformation::Empty();
+
+    std::string text(utility::translateKey("gui_loading_screen"));
+
+    updateTime(time);
+    int step = static_cast<int>(getPassedTime() * 2) % 4;
 
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
@@ -57,8 +71,38 @@ StateChangeInformation HighScoreState::update(const float time)
         m_stateInfo.m_levelNumber = m_highScoreStateInfo.m_levelNumber;
         m_transitionStateInfo.m_followingState = m_highScoreStateInfo.m_comeFromState;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
+
+        m_onlineHighscore = false;
+        m_loadInProgress = false;
+        m_loaded = false;
+        loadingOnlineHighScoreThread->terminate();
+
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
+
+    if(m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).getChecked() && !m_onlineHighscore)
+    {
+        m_onlineHighscore = true;
+        m_loadInProgress = true;
+        claerHighScore();
+        loadingOnlineHighScoreThread->launch();
+    }
+    else if(!m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).getChecked() && m_onlineHighscore)
+    {
+        m_onlineHighscore = false;
+        m_loadInProgress = false;
+        m_loaded = false;
+        loadingOnlineHighScoreThread->terminate();
+        loadHighScore();
+    }
+    else if(m_onlineHighscore && m_loadInProgress && !m_loaded)
+    {
+        for (int i = 0;i < step;++i)
+            text.append(".");
+        m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText(text);
+    }
+    if(m_loaded && !m_loadInProgress)
+        m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText("");
 
     return StateChangeInformation::Empty();
 }
@@ -84,11 +128,13 @@ void HighScoreState::draw(const DrawParameter& params)
     m_menu.draw(params);
 }
 
-void HighScoreState::loadHighScore(Level& level)
+void HighScoreState::loadHighScore()
 {
-    std::string number = utility::toString(level.number());
+    std::string number = utility::toString(m_highScoreStateInfo.m_level->number());
 
-    if(level.isTimeAttackMode())
+    m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText("");
+
+    if(m_highScoreStateInfo.m_level->isTimeAttackMode())
     {
         for(int i = 0; i < 5; ++i)
         {
@@ -107,5 +153,57 @@ void HighScoreState::loadHighScore(Level& level)
             // reade the point data from stash.dat
             m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + "NAM"));
         }
+    }
+}
+void HighScoreState::loadOnlineHighscore()
+{
+    std::string number = utility::toString(m_highScoreStateInfo.m_level->number());
+
+    sf::Http http;
+    http.setHost("http://www.game-coding.de");
+    
+    sf::Http::Request request("/projects/ricketyracquet/highscore.php?lvl=" + number);
+    sf::Http::Response response = http.sendRequest(request);
+
+    if(response.getStatus() != sf::Http::Response::Ok)
+    {
+        m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText(utility::translateKey("gui_not_available"));
+        m_loaded = true;
+        return;
+    }
+
+    FileReader onlineString(response.getBody(), false);
+
+    if(m_highScoreStateInfo.m_level->isTimeAttackMode())
+    {
+        for(int i = 0; i < 5; ++i)
+        {
+            // read the place data from stash.dat
+            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(onlineString.get("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + "TAM"));
+            // reade the point data from stash.dat
+            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(onlineString.get("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + "TAM"));
+        }
+    }
+    else
+    {
+        for(int i = 0; i < 5; ++i)
+        {
+            // read the place data from stash.dat
+            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(onlineString.get("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + "NAM"));
+            // reade the point data from stash.dat
+            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(onlineString.get("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + "NAM"));
+        }
+    }
+
+    m_loaded = true;
+    m_loadInProgress = false;
+}
+
+void HighScoreState::claerHighScore()
+{
+    for(int i = 0; i < 5; ++i)
+    {
+        m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText("");
+        m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText("");
     }
 }

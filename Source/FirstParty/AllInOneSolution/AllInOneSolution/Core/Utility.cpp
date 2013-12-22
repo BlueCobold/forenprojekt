@@ -40,7 +40,7 @@ namespace utility
 
     std::string translateKey(std::string key)
     {
-        static FileReader File("./res/language.dat");
+        static FileReader File("./res/language.dat", true);
         return File.get(key);
     }
 

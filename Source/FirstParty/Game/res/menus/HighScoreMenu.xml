@@ -4,6 +4,7 @@
 	<styles source="Styles.inc"/>
 	<elements>
 		<button id="0" text="gui_close" style="default" x="261" y="270" />
+		<checkbox id="26" style="targetmode" x="14" y="76" tooltip="default" tooltiptext="tooltip_Online_Highscore" />
 		<subwindow id="1" x="80" y="108" sizex="352" sizey="150" innerheight="220">
 			<style>
 				<scrollTop texture="GuiElements" srcx="1000" srcy="0" width="20" height="10" />
@@ -22,6 +23,8 @@
 				<label id="23" text="" font="buttonHoverFont" alignment="2" x="325" y="90" />
 				<label id="24" text="" font="buttonHoverFont" alignment="2" x="325" y="130" />
 				<label id="25" text="" font="buttonHoverFont" alignment="2" x="325" y="170" />
+
+				<label id="27" text="" font="buttonHoverFont" alignment="0" x="80" y="60" />
 			</elements>
 		</subwindow>
 		<image id="2" texture="GuiElements" x="76" y="105" scrx="962" scry="104" width="20" height="100"/>
