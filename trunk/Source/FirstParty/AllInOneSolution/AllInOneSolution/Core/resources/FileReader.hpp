@@ -13,7 +13,7 @@ class FileReader
 {
 public:
 
-    FileReader(const std::string& fileName);
+    FileReader(const std::string& fileName, const bool fromFile);
 
     virtual ~FileReader() {};
 
@@ -22,7 +22,7 @@ public:
     std::unordered_map<std::string, std::string>::const_iterator beginIterator();
     std::unordered_map<std::string, std::string>::const_iterator endIterator();
 
-    void reload(const std::string& fileName);
+    void reload(const std::string& fileName, const bool fromFile);
     const bool keyExists(const std::string& key) const;
 
 protected:
@@ -33,8 +33,10 @@ private:
 
     std::string eraseOverhang(std::string& data);
     void readFile();
+    void readString();
 
     std::string m_fileName;
+    bool m_fromFile;
     std::unordered_map<std::string, std::string> m_content;
 };
 

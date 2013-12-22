@@ -10,6 +10,7 @@
 #include "../gui/hud/HUD.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
+#include <SFML/System/Thread.hpp>
 
 #include <memory>
 
@@ -27,7 +28,7 @@ public:
 private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
-    void loadHighScore(Level& level);
+    void loadHighScore();
     HighScoreMenu m_menu;
     HUD m_HUD;
 
@@ -35,6 +36,14 @@ private:
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterHighScoreStateInformation m_highScoreStateInfo;
     float m_timeDiff;
+
+    bool m_onlineHighscore;
+    bool m_loaded;
+    bool m_loadInProgress;
+
+    std::unique_ptr<sf::Thread> loadingOnlineHighScoreThread;
+    void claerHighScore();
+    void loadOnlineHighscore();
 };
 
 #endif // HIGHSCORESTATE_HPP

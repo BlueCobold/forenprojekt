@@ -111,6 +111,7 @@ gui_highscore = The Highscore
 gui_newHighScore1 = You have reached 
 gui_newHighScore2 = a new highscore entry,
 gui_newHighScore3 = please enter your name.
+gui_not_available = not available.
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
@@ -125,6 +126,7 @@ tooltip_goody_extratime = this goody gives\r\nyou 30 seconds extra time.
 tooltip_goody_cost = cost: %
 tooltip_goody_refund = refund: %
 tooltip_preview_notimeattack = no time attack\r\nmode available
+tooltip_Online_Highscore = switch between online highscore\r\nand local highscore.
 
 [Levels]
 levelBlocked1 = blocked
