@@ -160,9 +160,9 @@ void HighScoreState::loadOnlineHighscore()
     std::string number = utility::toString(m_highScoreStateInfo.m_level->number());
 
     sf::Http http;
-    http.setHost("http://www.game-coding.de");
+    http.setHost(m_config.get<std::string>("HighscoreServer"));
     
-    sf::Http::Request request("/projects/ricketyracquet/highscore.php?lvl=" + number);
+    sf::Http::Request request(m_config.get<std::string>("HighscorePath") + number);
     sf::Http::Response response = http.sendRequest(request);
 
     if(response.getStatus() != sf::Http::Response::Ok)
