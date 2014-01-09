@@ -70,6 +70,7 @@ StateChangeInformation HighScoreState::update(const float time)
         m_stateInfo.m_level = m_highScoreStateInfo.m_level;
         m_stateInfo.m_levelNumber = m_highScoreStateInfo.m_levelNumber;
         m_transitionStateInfo.m_followingState = m_highScoreStateInfo.m_comeFromState;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
 
         m_onlineHighscore = false;

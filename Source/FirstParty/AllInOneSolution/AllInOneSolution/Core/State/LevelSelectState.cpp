@@ -2,7 +2,7 @@
 
 #include "../gui/Button.hpp"
 #include "../resources/Config.hpp"
-
+#include "../rendering/transitions/RandomTransition.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 
 #include <fstream> 
@@ -53,6 +53,7 @@ StateChangeInformation LevelSelectState::update(const float time)
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelSelectStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     if(clicked == LevelSelectMenu::BUTTON_SHOW_DETAILS && !(m_currentLevelNumber > m_unlockedLevel))
@@ -63,6 +64,7 @@ StateChangeInformation LevelSelectState::update(const float time)
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelSelectStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     if(clicked == LevelSelectMenu::BUTTON_LEFT)

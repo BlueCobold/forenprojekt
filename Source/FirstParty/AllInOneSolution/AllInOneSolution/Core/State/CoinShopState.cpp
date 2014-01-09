@@ -103,6 +103,7 @@ StateChangeInformation CoinShopState::update(const float time)
         m_transitionStateInfo.m_followingState = LevelPreviewStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_levelPreviewInfo;
         m_transitionStateInfo.m_comeFromeState = CoinShopStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     case CoinShopMenu::BUTTON_GRAVITY_PLUS:
         {

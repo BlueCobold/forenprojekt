@@ -38,6 +38,8 @@ public:
 
     State* m_source;
     State* m_target;
+
+    int m_transitionType;
 };
 
 class EnterPlayStateInformation : public EnterStateInformation

@@ -2,7 +2,7 @@
 
 #include "../gui/Button.hpp"
 #include "../resources/Config.hpp"
-
+#include "../rendering/transitions/RandomTransition.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 
 CreditMenuState::CreditMenuState(sf::RenderWindow& screen, 
@@ -42,6 +42,7 @@ StateChangeInformation CreditMenuState::update(const float time)
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         m_transitionStateInfo.m_comeFromeState = CreditMenuStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 

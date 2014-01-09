@@ -2,6 +2,7 @@
 #include "../Input.hpp"
 #include "../resources/Config.hpp"
 #include "../resources/ResourceManager.hpp"
+#include "../rendering/transitions/RandomTransition.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -75,6 +76,7 @@ StateChangeInformation PlayState::update(const float time)
             m_transitionStateInfo.m_level = m_level;
             m_transitionStateInfo.m_followingState = PauseStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+            m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
 
@@ -85,6 +87,7 @@ StateChangeInformation PlayState::update(const float time)
                 m_pauseStateInfo.m_levelTime = getCurrentTime();
                 m_pauseStateInfo.m_level = m_level;
                 m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+                m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
                 m_transitionStateInfo.m_followingState = LevelPassStateId;
             }
             else
@@ -93,6 +96,7 @@ StateChangeInformation PlayState::update(const float time)
                 m_pauseStateInfo.m_level = m_level;
                 m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
                 m_transitionStateInfo.m_followingState = NewHighScoreStateId;
+                m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
             }
 
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
@@ -104,6 +108,7 @@ StateChangeInformation PlayState::update(const float time)
             m_pauseStateInfo.m_level = m_level;
             m_transitionStateInfo.m_followingState = LevelFailStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+            m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
     }
@@ -114,6 +119,7 @@ StateChangeInformation PlayState::update(const float time)
         m_transitionStateInfo.m_level = m_level;
         m_transitionStateInfo.m_followingState = PauseStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 
@@ -139,18 +145,18 @@ bool PlayState::checkForNewHighscore()
     unsigned int number = m_level->number();
     if(m_level->isTimeAttackMode())
     {
-        for(int i = 1; i < 6; ++i)
+        for(int i = 5; i > 0; --i)
         {
-            std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i + "TAM");
+            std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + "TAM";
             if(points > State::m_config.get<int>(term))
                 return true;
         }
     }
     else
     {
-        for(int i = 1; i < 6; ++i)
+        for(int i = 5; i > 0; --i)
         {
-            std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i + "NAM");
+            std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + "NAM";
             if(points > State::m_config.get<int>(term))
                 return true;
         }
