@@ -3,6 +3,7 @@
 #include "../resources/ResourceManager.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "../rendering/transitions/RandomTransition.hpp"
 
 StartState::StartState(sf::RenderWindow& screen, 
                        ResourceManager& resourceManager, 
@@ -27,6 +28,7 @@ StateChangeInformation StartState::update(const float time)
     m_transitionStateInfo.m_followingState = MainMenuStateId;
     m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
     m_transitionStateInfo.m_comeFromeState = StartStateId;
+    m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
     return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 }
 

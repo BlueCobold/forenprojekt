@@ -3,6 +3,7 @@
 #include "../gui/Button.hpp"
 #include "../model/Level.hpp"
 #include "../resources/Config.hpp"
+#include "../rendering/transitions/RandomTransition.hpp"
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
@@ -58,6 +59,7 @@ StateChangeInformation OptionMenuState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
         m_menu.applyChanges();
         m_transitionStateInfo.m_comeFromeState = OptionMenuStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(m_clicked == OptionMenu::BUTTON_ARROW_LEFT)

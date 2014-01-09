@@ -4,7 +4,7 @@
 #include "../gui/CheckBox.hpp"
 #include "../model/Level.hpp"
 #include "../resources/AppConfig.hpp"
-
+#include "../rendering/transitions/RandomTransition.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 
 LevelPreviewState::LevelPreviewState(sf::RenderWindow& screen, 
@@ -91,6 +91,7 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_transitionStateInfo.m_followingState = PlayStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelPreviewStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == LevelPreviewMenu::BUTTON_MAIN_MENU)
@@ -101,6 +102,7 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelPreviewStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == LevelPreviewMenu::BUTTON_COINS)
@@ -110,6 +112,7 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_transitionStateInfo.m_followingState = CoinShopStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelPreviewStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == LevelPreviewMenu::BUTTON_HIGHSCORE)
@@ -119,6 +122,7 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_transitionStateInfo.m_followingState = HighScoreStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_highScoreInfo;
         m_transitionStateInfo.m_comeFromeState = LevelPreviewStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 

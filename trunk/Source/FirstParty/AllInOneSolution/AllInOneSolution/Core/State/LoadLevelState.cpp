@@ -74,6 +74,7 @@ StateChangeInformation LoadLevelState::update(const float time)
         m_transitionStateInfo.m_followingState = LevelPreviewStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_transitionStateInfo.m_comeFromeState = LoadLevelStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 

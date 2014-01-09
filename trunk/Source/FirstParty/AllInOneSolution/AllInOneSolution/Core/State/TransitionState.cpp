@@ -42,10 +42,7 @@ void TransitionState::onEnter(const EnterStateInformation* enterInformation, con
     info->m_target->draw(m_targetImage);
     m_targetImage.display();
 
-    if(info->m_followingState == LevelPassStateId && info->m_comeFromeState == NewHighScoreStateId)
-        m_transition.reset(new RandomTransition(&m_sourceImage.getTexture(), &m_targetImage.getTexture(), 0.5f, m_screen.getSize(), RandomTransition::Alpha));
-    else
-        m_transition.reset(new RandomTransition(&m_sourceImage.getTexture(), &m_targetImage.getTexture(), 0.5f, m_screen.getSize()));
+    m_transition.reset(new RandomTransition(&m_sourceImage.getTexture(), &m_targetImage.getTexture(), 0.5f, m_screen.getSize(), static_cast<RandomTransition::TransitionType>(info->m_transitionType)));
 }
 
 StateChangeInformation TransitionState::update(const float time)
