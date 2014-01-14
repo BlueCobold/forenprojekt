@@ -42,7 +42,7 @@ private:
     bool m_loadInProgress;
 
     std::unique_ptr<sf::Thread> loadingOnlineHighScoreThread;
-    void claerHighScore();
+    void clearHighScore();
     void loadOnlineHighscore();
 };
 

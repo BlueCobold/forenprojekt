@@ -85,7 +85,7 @@ StateChangeInformation HighScoreState::update(const float time)
     {
         m_onlineHighscore = true;
         m_loadInProgress = true;
-        claerHighScore();
+        clearHighScore();
         loadingOnlineHighScoreThread->launch();
     }
     else if(!m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).getChecked() && m_onlineHighscore)
@@ -135,25 +135,17 @@ void HighScoreState::loadHighScore()
 
     m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText("");
 
+    std::string mode = "NAM";
+
     if(m_highScoreStateInfo.m_level->isTimeAttackMode())
+        mode = "TAM";
+
+    for(int i = 0; i < 5; ++i)
     {
-        for(int i = 0; i < 5; ++i)
-        {
-            // read the place data from stash.dat
-            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + "TAM"));
-            // reade the point data from stash.dat
-            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + "TAM"));
-        }
-    }
-    else
-    {
-        for(int i = 0; i < 5; ++i)
-        {
-            // read the place data from stash.dat
-            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + "NAM"));
-            // reade the point data from stash.dat
-            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + "NAM"));
-        }
+        // read the place data from stash.dat
+        m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + mode));
+        // reade the point data from stash.dat
+        m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + mode));
     }
 }
 void HighScoreState::loadOnlineHighscore()
@@ -175,32 +167,24 @@ void HighScoreState::loadOnlineHighscore()
 
     FileReader onlineString(response.getBody(), false);
 
+    std::string mode = "NAM";
+
     if(m_highScoreStateInfo.m_level->isTimeAttackMode())
+        mode = "TAM";
+
+    for(int i = 0; i < 5; ++i)
     {
-        for(int i = 0; i < 5; ++i)
-        {
-            // read the place data from stash.dat
-            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(onlineString.get("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + "TAM"));
-            // reade the point data from stash.dat
-            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(onlineString.get("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + "TAM"));
-        }
-    }
-    else
-    {
-        for(int i = 0; i < 5; ++i)
-        {
-            // read the place data from stash.dat
-            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(onlineString.get("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + "NAM"));
-            // reade the point data from stash.dat
-            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(onlineString.get("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + "NAM"));
-        }
+        // read the place data from online server
+        m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(onlineString.get("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + mode));
+        // read the point data from online server
+        m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(onlineString.get("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + mode));
     }
 
     m_loaded = true;
     m_loadInProgress = false;
 }
 
-void HighScoreState::claerHighScore()
+void HighScoreState::clearHighScore()
 {
     for(int i = 0; i < 5; ++i)
     {
