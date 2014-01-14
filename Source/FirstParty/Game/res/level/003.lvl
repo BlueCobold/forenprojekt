@@ -9,27 +9,28 @@
 		<include file="assets/target/phase_out.inc" />
 		<include file="assets/target/static.inc" />
 		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
 	</templates>
 
 	<grid size="60" width="2460" height="1410">
                                                                                     
                                                                                     
-                                    t1                                              
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                    
-                                    TT                                              
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                    
-                                          TT                                        
-                                    BB                                              
-                                                                                    
-                                                                                    
-                                                                                    
-                                    TT                                              
+                              w4    t1                                              
+                              w4                                                    
+                              w4                                                    
+                              w4                                                    
+                              w3                                                    
+                              w3    TT                                              
+                              w3                                                    
+                              w3                                                    
+                              w2                                                    
+                              w2                                                    
+                              w2          TT                                        
+                              w2    BB                                              
+                              w1                                                    
+                              w1                                                    
+                              w1                                                    
+                              w1    TT                                              
                                                                                     
                                                                                     
                                                                                     
