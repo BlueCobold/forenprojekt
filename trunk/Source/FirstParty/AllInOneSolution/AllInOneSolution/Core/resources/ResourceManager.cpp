@@ -202,3 +202,35 @@ SoundManager& ResourceManager::getSoundManager()
 {
     return *m_soundManager;
 }
+
+void ResourceManager::parseSpriteSheet(tinyxml2::XMLDocument& doc)
+{
+    if(auto spriteSheet = doc.FirstChildElement("spritesheets"))
+    {
+        for(auto it = spriteSheet->FirstChildElement("spritesheet");
+            it != nullptr; it = it->NextSiblingElement("spritesheet"))
+        {
+            m_spriteSheetKeys.insert(std::make_pair<std::string, std::string>(
+                std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
+        }
+    }
+}
+
+SpriteSheet* ResourceManager::getSpriteSheet(const std::string& key)
+{
+    auto spriteSheet = m_spriteSheetKeys.find(key);
+    if(spriteSheet != end(m_spriteSheetKeys) && spriteSheet->first == key)
+    {
+        std::string name = spriteSheet->first;
+        std::string path = spriteSheet->second;
+        if(m_spriteSheets.exists(name))
+            return m_spriteSheets.get(name);
+        else
+        {
+            if(m_spriteSheets.load(name, [path, this](){ return loadSpriteSheet(path); }))
+                return m_spriteSheets.get(name);
+        }
+    }
+
+    throw std::runtime_error(utility::replace(utility::translateKey("UnknownSpriteSheet"), key));
+}

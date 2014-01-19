@@ -63,3 +63,6 @@
 	<bitmapfont name="goodyFont" path="goodyfont.xml" />
 	<bitmapfont name="labelSmallFont" path="labelSmallFont.xml" />
 </bitmapfonts>
+<spritesheets>
+
+</spritesheets>
