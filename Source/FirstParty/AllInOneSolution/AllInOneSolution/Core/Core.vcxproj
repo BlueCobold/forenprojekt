@@ -177,6 +177,7 @@
     <ClCompile Include="resources\LevelFileLoader.cpp" />
     <ClCompile Include="resources\MenuLoader.cpp" />
     <ClCompile Include="resources\ResourceManager.cpp" />
+    <ClCompile Include="resources\SpriteSheet.cpp" />
     <ClCompile Include="ScrollView.cpp" />
     <ClCompile Include="State\CoinShopState.cpp" />
     <ClCompile Include="State\CreditMenuState.cpp" />
@@ -345,6 +346,7 @@
     <ClInclude Include="resources\ResourceCache.hpp" />
     <ClInclude Include="resources\ResourceManager.hpp" />
     <ClInclude Include="resources\SoundBufferManager.hpp" />
+    <ClInclude Include="resources\SpriteSheet.hpp" />
     <ClInclude Include="ScrollView.hpp" />
     <ClInclude Include="State\CreditMenuState.hpp" />
     <ClInclude Include="State\EnterStateInformation.hpp" />

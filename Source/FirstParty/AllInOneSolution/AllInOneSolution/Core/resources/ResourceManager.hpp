@@ -7,6 +7,7 @@
 #include "../gui/BitmapFont.hpp"
 #include "../gui/MenuTemplate.hpp"
 #include "SoundBufferManager.hpp"
+#include "SpriteSheet.hpp"
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -36,6 +37,7 @@ public:
     BitmapFont* getBitmapFont(const std::string& key);
     const MenuTemplate* getMenuTemplate(const std::string& name);
     SoundManager& getSoundManager();
+    SpriteSheet* getSpriteSheet(const std::string& name);
 
 private:
 
@@ -44,6 +46,7 @@ private:
     void parseSounds(tinyxml2::XMLDocument& doc);
     void parseBitmapFonts(tinyxml2::XMLDocument& doc);
     void parseMenus(tinyxml2::XMLDocument& doc);
+    void parseSpriteSheet(tinyxml2::XMLDocument& doc);
 
     static sf::Texture* loadTexture(const std::string& path, bool smooth)
     {
@@ -97,6 +100,18 @@ private:
             return font;
     }
 
+    static SpriteSheet* loadSpriteSheet(const std::string& path)
+    {
+        SpriteSheet* sheet = new SpriteSheet;
+        if(!sheet->loadFromFile("res/spritesheet/" + path))
+        {
+            delete sheet;
+            return nullptr;
+        }
+        else
+            return sheet;
+    }
+
 private:
 
     std::unordered_map<std::string, std::pair<std::string, bool>> m_textureKeys;
@@ -104,6 +119,7 @@ private:
     std::unordered_map<std::string, std::string> m_soundBufferKeys;
     std::unordered_map<std::string, std::string> m_bitmapFontKeys;
     std::unordered_map<std::string, std::string> m_menuKeys;
+    std::unordered_map<std::string, std::string> m_spriteSheetKeys;
 
     std::unique_ptr<SoundManager> m_soundManager;
     ResourceCache<sf::Texture> m_textures;
@@ -111,6 +127,7 @@ private:
     ResourceCache<sf::SoundBuffer> m_soundBuffers;
     ResourceCache<BitmapFont> m_bitmapFonts;
     ResourceCache<MenuTemplate> m_menus;
+    ResourceCache<SpriteSheet> m_spriteSheets;
 };
 
 #endif // RESOURCE_MANAGER_HPP

@@ -62,6 +62,8 @@ InvalidBackground = The background layout of a % is corrupt.
 UnknownButtonToolTip = ButtonToolTip isn't registered: %.
 InvalidGoody = Failed to find goody for the given type.
 ToolTipTooLong = ToolTip is too large.
+DoubleListing = % is the second entry in List.
+UnknownSpriteSheet = SpriteSheet isn't registered: %.
 
 [GUI]
 gui_game_paused = Game Paused
