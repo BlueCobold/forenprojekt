@@ -825,6 +825,9 @@
     <ClInclude Include="animation\provider\Switch.hpp">
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
+    <ClInclude Include="model\collision\handler\BallTeleportCollisionHandler.hpp">
+      <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

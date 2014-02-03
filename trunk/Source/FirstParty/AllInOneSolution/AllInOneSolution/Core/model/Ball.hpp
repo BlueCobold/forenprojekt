@@ -35,6 +35,7 @@ public:
     void blowUp();
     bool blownUp() const;
     bool isSpeeding() const;
+    void teleportTo(const float x, const float y, const bool resetSpeed);
 
     void bindTrail(std::unique_ptr<ParticleTrail> trail);
 
@@ -50,6 +51,9 @@ private:
 
     bool m_lostBall;
     bool m_blownUp;
+    bool m_isTeleporting;
+    bool m_resetSpeedOnTeleport;
+    b2Vec2 m_teleportPosition;
     const Entity* m_spawnAnimationEntity;
     const Entity* m_killAnimationEntity;
     std::function<void()> m_checkpointHandler;
