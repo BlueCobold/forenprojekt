@@ -23,6 +23,7 @@
 #include "../animation/provider/StaticProvider.hpp"
 #include "../animation/provider/Step.hpp"
 #include "../animation/provider/Stop.hpp"
+#include "../animation/provider/Switch.hpp"
 #include "../animation/provider/Substractor.hpp"
 #include "../animation/provider/TimeProvider.hpp"
 #include "../animation/provider/KeyProvider.hpp"
@@ -219,6 +220,16 @@ std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(tiny
     return providers;
 }
 
+std::vector<float> parseFloatList(const std::string& valueString)
+{
+    std::vector<float> results;
+    std::stringstream ss(valueString);
+    std::string item;
+    while (std::getline(ss, item, ','))
+        results.push_back(utility::stringTo<float>(item));
+    return results;
+}
+
 std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLElement* xml, 
     AnimatedObject* animated,
     VariableHandler* handler,
@@ -281,6 +292,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
     }
     else if(std::string(xml->Name())=="sub")
         return std::unique_ptr<Substractor>(new Substractor(std::move(parseProviders(xml, animated, handler, stoppable, functions))));
+    else if(std::string(xml->Name())=="switch")
+        return std::unique_ptr<Switch>(new Switch(std::move(parseProviders(xml, animated, handler, stoppable, functions)), parseFloatList(xml->Attribute("cases"))));
     else if(std::string(xml->Name())=="neg")
         return std::unique_ptr<Negate>(new Negate(std::move(parseProviders(xml, animated, handler, stoppable, functions)[0])));
     else if(std::string(xml->Name())=="ramp")
