@@ -138,6 +138,13 @@ void LevelSelectState::loadLevelInfos()
             break;
 
         doc.LoadFile(file.c_str());
+        if(doc.Error()) // Error while loading file
+        {
+            auto error = utility::replace(utility::translateKey("InvalidXml"), file + " [" + doc.GetErrorStr1() +"]");
+            if(doc.GetErrorStr2())
+                error += std::string(" / ") + doc.GetErrorStr2();
+            throw std::runtime_error(error);
+        }
         auto levelinfo = doc.FirstChildElement("level")->FirstChildElement("levelinfo");
 
         std::string name = levelinfo->Attribute("name");
