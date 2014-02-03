@@ -18,7 +18,8 @@ namespace MenuElementType
         Image,
         Slider,
         SubWindow,
-        InputBox
+        InputBox,
+        Animation
     };
 }
 

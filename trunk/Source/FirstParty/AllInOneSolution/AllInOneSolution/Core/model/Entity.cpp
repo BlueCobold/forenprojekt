@@ -25,8 +25,6 @@ void Entity::update(const float value)
 {
     if(!m_killed)
     {
-        removeStoppedAnimations();
-
         updateCurrentTime(value);
         updateKinematics(getPassedTime(), value - m_lastTime);
         bool running = false;

@@ -240,6 +240,7 @@
     <ClInclude Include="animation\VariableHandler.hpp" />
     <ClInclude Include="animation\VariableHolder.hpp" />
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="gui\AnimationContainer.hpp" />
     <ClInclude Include="gui\ButtonStyle.hpp" />
     <ClInclude Include="gui\CaptionMenu.hpp" />
     <ClInclude Include="gui\CheckBox.hpp" />
