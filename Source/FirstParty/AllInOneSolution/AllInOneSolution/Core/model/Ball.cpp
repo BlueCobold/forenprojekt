@@ -11,13 +11,24 @@ Ball::Ball(float resetTime, const Entity* spawnAnimationEntity, const Entity* ki
     m_killAnimationEntity(killAnimationEntity),
     m_lostBall(false),
     m_ballResetTime(0.0f),
-    m_blownUp(false)
+    m_blownUp(false),
+    m_isTeleporting(false)
 { }
 
 void Ball::autoResetBall(const float elapsedTime)
 {
+    if(m_isTeleporting)
+    {
+        if(m_resetSpeedOnTeleport)
+        {
+            getBody()->SetLinearVelocity(b2Vec2(0, 0));
+            getBody()->SetAngularVelocity(0.0f);
+        } 
+        getBody()->SetTransform(m_teleportPosition, 0.0f);
+        m_isTeleporting = false;
+    }
     // If Ball outside of field
-    if(isOutside() && (m_ballResetTime == 0.0f))
+    else if(isOutside() && (m_ballResetTime == 0.0f))
         m_ballResetTime = elapsedTime + m_resetTime;
     else if(blownUp() && m_ballResetTime == 0.0f)
         m_ballResetTime = elapsedTime + m_blowUpTime;
@@ -38,12 +49,19 @@ void Ball::autoResetBall(const float elapsedTime)
         {
             m_blownUp = false;
             getBody()->SetTransform(m_spawnPosition, 0.0f);
-            getBody()->SetLinearVelocity(b2Vec2(0,0));
+            getBody()->SetLinearVelocity(b2Vec2(0, 0));
             getBody()->SetAngularVelocity(0.0f);
             m_lostBall = true;
             freeze();
             hide();
         }
+}
+
+void Ball::teleportTo(const float x, const float y, const bool resetSpeed)
+{
+    m_teleportPosition = b2Vec2(x, y);
+    m_isTeleporting = true;
+    m_resetSpeedOnTeleport = resetSpeed;
 }
 
 void Ball::restartAt(const float value)

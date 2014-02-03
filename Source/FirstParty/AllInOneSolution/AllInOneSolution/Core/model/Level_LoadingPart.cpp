@@ -6,6 +6,7 @@
 #include "../Utility.hpp"
 
 #include "collision/handler/ApplyImpulseCollisionHandler.hpp"
+#include "collision/handler/BallTeleportCollisionHandler.hpp"
 #include "collision/handler/ChangePropertyCollisionHandler.hpp"
 #include "collision/handler/SpawnEntityCollisionHandler.hpp"
 #include "collision/handler/GenericCollisionHandler.hpp"
@@ -503,6 +504,11 @@ void Level::parseCollider(
         else if(std::string(child->Name()) == "applyImpulse")
         {
             std::unique_ptr<ApplyImpulseCollisionHandler> collider(new ApplyImpulseCollisionHandler(child->FloatAttribute("x"), child->FloatAttribute("y")));
+            entity->bindCollisionHandler(std::move(collider));
+        }
+        else if(std::string(child->Name()) == "ballTeleport")
+        {
+            std::unique_ptr<BallTeleportCollisionHandler> collider(new BallTeleportCollisionHandler(child->FloatAttribute("x"), child->FloatAttribute("y"), !child->BoolAttribute("keepSpeed")));
             entity->bindCollisionHandler(std::move(collider));
         }
         else if(std::string(child->Name()) == "bonusTime")
