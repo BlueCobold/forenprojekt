@@ -231,6 +231,7 @@
     <ClInclude Include="animation\provider\Step.hpp" />
     <ClInclude Include="animation\provider\Stop.hpp" />
     <ClInclude Include="animation\provider\Substractor.hpp" />
+    <ClInclude Include="animation\provider\Switch.hpp" />
     <ClInclude Include="animation\provider\TimeProvider.hpp" />
     <ClInclude Include="animation\provider\ValueProvider.hpp" />
     <ClInclude Include="animation\provider\VariableProvider.hpp" />
