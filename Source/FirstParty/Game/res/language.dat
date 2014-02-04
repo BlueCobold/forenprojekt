@@ -6,6 +6,7 @@ OneChildsMin = % needs at least one child to function.
 ProviderNull = One of the providers has been passed incorrectly and is null.
 OwnerNull = The passed owner of a % may not be null.
 TheProviderNull = The provider has been passed incorrectly and is null.
+SwitchInvalidSize = The switch-provider needs x+1 providers and x cases defined to be valid.
 GetVariable = Can't get a %-variable at this time.
 SetVariable = Can't set a %-variable at this time.
 ReceiveTimestamp = Can't receive an %-timestamp at this time.
