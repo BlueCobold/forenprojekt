@@ -1,6 +1,4 @@
-<spriteSheet>
-	<texture>pastureland_flowery</texture>
-	<name>pastureland_flowery</name>
+<spriteSheet texture="pastureland_flowery">
 	<sprites>
 		<sprite name="front_large" x="0" y="0" width="252" height="342" originx="126" originy="336" />
 		<sprite name="front_medium_large" x="252" y="0" width="195" height="268" originx="97.5" originy="261" />

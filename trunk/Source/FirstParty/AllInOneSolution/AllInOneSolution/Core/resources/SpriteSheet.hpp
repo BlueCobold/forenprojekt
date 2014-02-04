@@ -17,8 +17,8 @@ class SpriteSheet
                        int y;
                        int width;
                        int height;
-                       float centerX;
-                       float centerY;};
+                       float originX;
+                       float originY;};
 private:
     std::unordered_map<std::string, SpriteData> m_spriteKeys;
     std::string m_textureName;

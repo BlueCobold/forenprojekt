@@ -65,5 +65,5 @@
 	<bitmapfont name="labelSmallFont" path="labelSmallFont.xml" />
 </bitmapfonts>
 <spritesheets>
-	<spritesheet name="pastureland_flowery" path="img/backgrounds/pastureland/flowery.xml" />
+	<spritesheet name="pastureland_flowery" path="flowery.xml" />
 </spritesheets>

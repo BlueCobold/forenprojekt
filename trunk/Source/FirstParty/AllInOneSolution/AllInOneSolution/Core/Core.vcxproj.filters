@@ -44,7 +44,7 @@
       <Filter>Sources\model</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\AlphaTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="model\SoundManager.cpp">
       <Filter>Sources\model</Filter>
@@ -59,7 +59,7 @@
       <Filter>Sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\VerticalStripesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="model\Level_LoadingPart.cpp">
       <Filter>Sources\model</Filter>
@@ -77,67 +77,67 @@
       <Filter>Sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="rendering\DebugDraw.cpp">
-      <Filter>Sources\rendering</Filter>
+      <Filter>Sources\resources\rendering</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\HorizontalStripesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\GrowingRectangleTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\GrowingCircleTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\VerticalMaskingStripesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\HorizontalMaskingStripesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="animation\Interpolation.cpp">
       <Filter>Sources\animation</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\VerticalSlidingStripesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\HorizontalHalvesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\HorizontalSlidingStripesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\VerticalHalvesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\HorizontalSlicesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\VerticalSlicesTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\RotatingSquaresTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\RandomTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\HorizontalCompressTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\VerticalCompressTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\HorizontalExpandTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\VerticalExpandTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\HorizontalSpringTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="rendering\transitions\VerticalSpringTransition.cpp">
-      <Filter>Sources\rendering\transitions</Filter>
+      <Filter>Sources\resources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="gui\Button.cpp">
       <Filter>Sources\gui</Filter>
@@ -828,6 +828,9 @@
     <ClInclude Include="model\collision\handler\BallTeleportCollisionHandler.hpp">
       <Filter>Headers\model\collision\handler</Filter>
     </ClInclude>
+    <ClInclude Include="gui\AnimationContainer.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -908,12 +911,6 @@
     <Filter Include="Sources\animation\providers">
       <UniqueIdentifier>{1f0bc342-a831-4fb5-ac98-bc0015501aad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\rendering">
-      <UniqueIdentifier>{e0f806b4-001a-4391-af88-bc2fc06dd47b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\rendering\transitions">
-      <UniqueIdentifier>{dafee3bd-2f74-4c28-84de-e0c4d161420c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers\gui\style">
       <UniqueIdentifier>{f2e0a537-c86a-4b70-a4b3-2b77167104aa}</UniqueIdentifier>
     </Filter>
@@ -922,6 +919,12 @@
     </Filter>
     <Filter Include="Sources\gui\menu">
       <UniqueIdentifier>{e4370246-9364-41d9-90b7-121a6ffb06c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\resources\rendering">
+      <UniqueIdentifier>{e0f806b4-001a-4391-af88-bc2fc06dd47b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\resources\rendering\transitions">
+      <UniqueIdentifier>{dafee3bd-2f74-4c28-84de-e0c4d161420c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

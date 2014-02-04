@@ -24,6 +24,7 @@ ResourceManager::ResourceManager()
     parseFonts(doc);
     parseBitmapFonts(doc);
     parseMenus(doc);
+    parseSpriteSheet(doc);
 }
 
 BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
