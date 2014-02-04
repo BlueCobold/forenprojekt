@@ -29,9 +29,13 @@ bool SpriteSheet::loadFromFile(const std::string& filename)
 
     m_spriteKeys.clear();
 
-    if(auto spritesheet = doc.FirstChildElement("spritesheet"))
+    if(auto spritesheet = doc.FirstChildElement("spriteSheet"))
     {
-        m_textureName = spritesheet->Attribute("TextureName");
+        if(auto name = spritesheet->Attribute("texture"))
+            m_textureName = name;
+        else
+            throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
+
         if(auto sprites = spritesheet->FirstChildElement("sprites"))
         {
             for(auto sprite = sprites->FirstChildElement("sprite");
@@ -43,11 +47,13 @@ bool SpriteSheet::loadFromFile(const std::string& filename)
                 spriteData.y = sprite->IntAttribute("y");
                 spriteData.width = sprite->IntAttribute("width");
                 spriteData.height = sprite->IntAttribute("height");
-                spriteData.centerX = sprite->FloatAttribute("centerx");
-                spriteData.centerY = sprite->FloatAttribute("centery");
+                spriteData.originX = sprite->FloatAttribute("originx");
+                spriteData.originY = sprite->FloatAttribute("originy");
                 insert(key, spriteData);
             }
         }
+        else
+            throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
     }
 
     return true;
