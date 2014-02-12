@@ -13,6 +13,7 @@ namespace tinyxml2
 
 class SpriteSheet
 {
+public:
     struct SpriteData {int x;
                        int y;
                        int width;
@@ -25,6 +26,7 @@ private:
     std::string m_fileName;
 
     void insert(const std::string& key, const SpriteData& data);
+
 public:
     SpriteSheet(const std::string& fileName);
     SpriteSheet();

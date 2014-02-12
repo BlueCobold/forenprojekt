@@ -64,7 +64,15 @@ void SpriteSheet::insert(const std::string& key, const SpriteData& data)
     if(m_spriteKeys.find(key) == std::end(m_spriteKeys))
         m_spriteKeys[key] = data;
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("doublelisting"), key));
+        throw std::runtime_error(utility::replace(utility::translateKey("DoubleListing"), key));
+}
+
+SpriteSheet::SpriteData SpriteSheet::get(const std::string& key) const
+{
+    auto result = m_spriteKeys.find(key);
+    if(result == end(m_spriteKeys))
+        throw std::runtime_error(utility::replace(utility::translateKey("SpriteKeyNotFound"), key));
+    return result->second;
 }
 
 std::string SpriteSheet::getTextureName() const

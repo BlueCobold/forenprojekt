@@ -1,17 +1,17 @@
 <spriteSheet texture="pastureland_flowery">
 	<sprites>
 		<sprite name="front_large" x="0" y="0" width="252" height="342" originx="126" originy="336" />
-		<sprite name="front_medium_large" x="252" y="0" width="195" height="268" originx="97.5" originy="261" />
+		<sprite name="front_medium_large" x="252" y="0" width="195" height="268" originx="97" originy="261" />
 		<sprite name="front_medium_small" x="627" y="0" width="152" height="206" originx="76" originy="200" />
-		<sprite name="front_small" x="919" y="0" width="101" height="130" originx="50.5" originy="126" />
-		<sprite name="middle_large" x="447" y="0" width="180" height="226" originx="90" originy="113" />
-		<sprite name="middle_medium" x="919" y="130" width="94" height="118" originx="47" originy="59" />
-		<sprite name="middle_medium_large" x="779" y="0" width="140" height="168" originx="70" originy="84" />
-		<sprite name="middle_medium_small" x="627" y="206" width="88" height="102" originx="44" originy="51" />
-		<sprite name="middle_small" x="715" y="206" width="64" height="79" originx="32" originy="39.5" />
-		<sprite name="back_medium" x="779" y="168" width="85" height="108" originx="42.5" originy="54" />
-		<sprite name="back_medium_small" x="447" y="226" width="77" height="92" originx="38.5" originy="46" />
-		<sprite name="back_small" x="524" y="226" width="62" height="75" originx="31" originy="37.5" />
-		<sprite name="back_tiny" x="864" y="168" width="50" height="58" originx="25" originy="29" />
+		<sprite name="front_small" x="919" y="0" width="101" height="130" originx="50" originy="126" />
+		<sprite name="middle_large" x="447" y="0" width="180" height="226" originx="90" originy="220" />
+		<sprite name="middle_medium" x="919" y="130" width="94" height="118" originx="47" originy="115" />
+		<sprite name="middle_medium_large" x="779" y="0" width="140" height="168" originx="70" originy="164" />
+		<sprite name="middle_medium_small" x="627" y="206" width="88" height="102" originx="44" originy="100" />
+		<sprite name="middle_small" x="715" y="206" width="64" height="79" originx="32" originy="76" />
+		<sprite name="back_medium" x="779" y="168" width="87" height="108" originx="43" originy="104" />
+		<sprite name="back_medium_small" x="447" y="226" width="77" height="92" originx="38" originy="88" />
+		<sprite name="back_small" x="524" y="226" width="62" height="75" originx="31" originy="72" />
+		<sprite name="back_tiny" x="866" y="168" width="50" height="58" originx="25" originy="56" />
 	</sprites>
 </spriteSheet>

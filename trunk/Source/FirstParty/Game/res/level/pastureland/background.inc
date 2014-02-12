@@ -2,6 +2,7 @@
 	<templates>
 		<functions>
 			<function name="plantWobble">
+				<!-- minAngle + ampBig*sin(time*perBig) + ampSmall*sin(time*perSmall) -->
 				<add>
 					<var name="minAngle" />
 					<mul>
@@ -80,6 +81,44 @@
 						<function name="cloudMovement" />
 					</position>
 				</animation>
+				
+				<animation spritesheet="pastureland_flowery" sprite="back_medium" x="370" y="625" >
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.5" perSmall="120" />
+					<rotation>
+						<function name="plantWobble" />
+					</rotation>
+				</animation>
+				<animation spritesheet="pastureland_flowery" sprite="back_medium_small" x="380" y="628" >
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.3" perSmall="130" />
+					<rotation>
+						<function name="plantWobble" />
+					</rotation>
+				</animation>
+				<animation spritesheet="pastureland_flowery" sprite="back_small" x="380" y="628" >
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.3" perSmall="130" />
+					<rotation>
+						<function name="plantWobble" />
+					</rotation>
+				</animation>
+				
+				<animation spritesheet="pastureland_flowery" sprite="back_medium_small" x="1845" y="555" >
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.6" perSmall="110" />
+					<rotation>
+						<function name="plantWobble" />
+					</rotation>
+				</animation>
+				<animation spritesheet="pastureland_flowery" sprite="back_small" x="1855" y="558" >
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.4" perSmall="120" />
+					<rotation>
+						<function name="plantWobble" />
+					</rotation>
+				</animation>
+				<animation spritesheet="pastureland_flowery" sprite="back_tiny" x="1850" y="561" >
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.2" perSmall="100" />
+					<rotation>
+						<function name="plantWobble" />
+					</rotation>
+				</animation>
 			</parallax>
 
 			<parallax width="2125" height="1196">
@@ -100,6 +139,31 @@
 						<function name="cloudMovement" />
 					</position>
 				</animation>
+				
+				<animation spritesheet="pastureland_flowery" sprite="middle_large" x="1400" y="725" >
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.5" perSmall="120" />
+					<rotation>
+						<function name="plantWobble" />
+					</rotation>
+				</animation>
+				<animation spritesheet="pastureland_flowery" sprite="middle_medium_large" x="1420" y="732" >
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.3" perSmall="90" />
+					<rotation>
+						<function name="plantWobble" />
+					</rotation>
+				</animation>
+				<animation spritesheet="pastureland_flowery" sprite="middle_medium_small" x="1420" y="735" >
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.6" perSmall="110" />
+					<rotation>
+						<function name="plantWobble" />
+					</rotation>
+				</animation>
+				<animation spritesheet="pastureland_flowery" sprite="middle_small" x="1425" y="745" >
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.4" perSmall="100" />
+					<rotation>
+						<function name="plantWobble" />
+					</rotation>
+				</animation>
 			</parallax>
 
 			<parallax width="2310" height="1300">
@@ -113,13 +177,26 @@
 					</position>
 				</animation>
 
-				<animation texture="pastureland_flowers_front2" width="149" height="187" x="958" y="905" midx="68" midy="180"><!-- 02 mid flower -->
+				<animation spritesheet="pastureland_flowery" sprite="front_large" x="907" y="880" >
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.8" perSmall="130" />
+					<rotation>
+						<function name="plantWobble" />
+					</rotation>
+				</animation>
+				<animation spritesheet="pastureland_flowery" sprite="front_medium_large" x="935" y="895" >
+					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.4" perSmall="110" />
+					<rotation>
+						<function name="plantWobble" />
+					</rotation>
+				</animation>
+				<animation spritesheet="pastureland_flowery" sprite="front_medium_small" x="958" y="905" >
+				<!-- 02 mid flower   texture="pastureland_flowers_front2" width="149" height="187" midx="68" midy="180" -->
 					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.6" perSmall="100" />
 					<rotation>
 						<function name="plantWobble" />
 					</rotation>
 				</animation>
-				<animation texture="pastureland_flowers_front" width="96" height="129" x="920" y="910" midx="48" midy="125"><!-- 01 front flower -->
+				<animation spritesheet="pastureland_flowery" sprite="front_small" x="920" y="910"><!-- 01 front flower -->
 					<constants minAngle="3" ampBig="6" perBig="50" ampSmall="1.2" perSmall="120" />
 					<rotation>
 						<function name="plantWobble" />
