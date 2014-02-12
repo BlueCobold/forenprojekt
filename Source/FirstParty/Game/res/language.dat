@@ -65,6 +65,8 @@ InvalidGoody = Failed to find goody for the given type.
 ToolTipTooLong = ToolTip is too large.
 DoubleListing = % is the second entry in List.
 UnknownSpriteSheet = SpriteSheet isn't registered: %.
+NoTextureFound = No valid texture or spritesheet for an animation was found.
+SpriteKeyNotFound = The sprite with name % doesn't exist.
 
 [GUI]
 gui_game_paused = Game Paused

@@ -28,6 +28,7 @@
 #include "../animation/provider/TimeProvider.hpp"
 #include "../animation/provider/KeyProvider.hpp"
 #include "../animation/provider/VariableProvider.hpp"
+#include "../resources/SpriteSheet.hpp"
 
 #include <map>
 #include <vector>
@@ -80,15 +81,36 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     if(frameIndex != nullptr)
         frames = frameIndex->IntAttribute("frames");
     
-    sf::Texture* texture = resourceManager.getTexture(xml->Attribute("texture"));
-    int width, height;
+    sf::Texture* texture = nullptr;
+    SpriteSheet* sheet = nullptr;
+    SpriteSheet::SpriteData sprite;
+    if(auto texname = xml->Attribute("texture"))
+        texture = resourceManager.getTexture(texname);
+    else
+    {   auto sheetname = xml->Attribute("spritesheet");
+        auto spritename = xml->Attribute("sprite");
+        if(sheetname && spritename && (sheet = resourceManager.getSpriteSheet(sheetname)) != nullptr)
+        {
+            texture = resourceManager.getTexture(sheet->getTextureName());
+            sprite = sheet->get(spritename);
+        }
+    }
+    if(texture == nullptr)
+        throw std::runtime_error(utility::translateKey("NoTextureFound"));
+
+    int width = -1, height = -1;
+    if(sheet != nullptr)
+    {
+        width = sprite.width;
+        height = sprite.height;
+    }
     if(xml->Attribute("width") != nullptr)
         width = xml->IntAttribute("width");
-    else
-        width = texture->getSize().x;
     if(xml->Attribute("height") != nullptr)
         height = xml->IntAttribute("height");
-    else
+    if(width < 0)
+        width = texture->getSize().x;
+    if(height < 0)
         height = texture->getSize().y;
 
     bool rotate = xml->BoolAttribute("rotate");
@@ -96,8 +118,16 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     offset.x = xml->FloatAttribute("x");
     offset.y = xml->FloatAttribute("y");
     sf::Vector2f origin;
-    origin.x = xml->FloatAttribute("midx");
-    origin.y = xml->FloatAttribute("midy");
+    if(sheet != nullptr)
+    {
+        origin.x = sprite.originX;
+        origin.y = sprite.originY;
+    }
+    if(xml->Attribute("midx"))
+        origin.x = xml->FloatAttribute("midx");
+    if(xml->Attribute("midy"))
+        origin.y = xml->FloatAttribute("midy");
+
     bool horizontal = true;
     if(xml->Attribute("alignment") != nullptr)
         horizontal = std::string("vertical") != xml->Attribute("alignment");
@@ -118,8 +148,15 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     anim->bindFrameProvider(std::move(provider));
 
     sf::Vector2f sourceOffset;
-    sourceOffset.x = xml->FloatAttribute("srcx");
-    sourceOffset.y = xml->FloatAttribute("srcy");
+    if(sheet != nullptr)
+    {
+        sourceOffset.x = static_cast<float>(sprite.x);
+        sourceOffset.y = static_cast<float>(sprite.y);
+    }
+    if(xml->Attribute("srcx"))
+        sourceOffset.x = xml->FloatAttribute("srcx");
+    if(xml->Attribute("srcy"))
+        sourceOffset.y = xml->FloatAttribute("srcy");
 
     anim->bindTexture(*texture, sourceOffset);
 

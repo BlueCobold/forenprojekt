@@ -4,9 +4,7 @@
 	<texture name="pastureland_middle_mountain" path="backgrounds/pastureland/middle/mountain.png" smooth="true" />
 	<texture name="pastureland_back_mountain" path="backgrounds/pastureland/back/mountain.png" smooth="true" />
 	<texture name="pastureland_clouds" path="backgrounds/pastureland/clouds.png" smooth="false" />
-	<texture name="pastureland_flowers_front" path="backgrounds/pastureland/flowery/front/01_tiny.png" smooth="true" />
-	<texture name="pastureland_flowers_front2" path="backgrounds/pastureland/flowery/front/02_mid.png" smooth="true" />
-	<texture name="pastureland_flowerery" path="backgrounds/pastureland/flowery.png" smooth="true" />
+	<texture name="pastureland_flowery" path="backgrounds/pastureland/flowery.png" smooth="true" />
 	<texture name="small_quads" path="walls/sand/small_quad/main/small_quads.png" smooth="false" />
 	<texture name="high_quads" path="walls/sand/high_quad/high_quads.png" smooth="false" />
 	<texture name="wide_quads" path="walls/sand/wide_quad/wide_quads.png" smooth="false" />
