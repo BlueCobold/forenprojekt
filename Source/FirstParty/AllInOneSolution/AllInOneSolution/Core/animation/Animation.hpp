@@ -75,8 +75,7 @@ private:
     std::unique_ptr<ValueProvider> m_rotationProvider;
     std::unique_ptr<ValueProvider> m_frameProvider;
     std::array<std::unique_ptr<ValueProvider>, 4> m_colorProviders;
-    std::vector<sf::Vector2i> m_srcOffsets;
-    std::vector<sf::Vector2i> m_sizes;
+    std::vector<sf::IntRect> m_sizes;
     std::vector<sf::Vector2i> m_origins;
     bool m_applyRotation;
     bool m_stopOnAlphaZero;
