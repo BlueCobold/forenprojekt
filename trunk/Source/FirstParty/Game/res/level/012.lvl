@@ -23,8 +23,8 @@
 				<vertex x="60" y="0" />
 			</shape>
 			<shape name="le" type="polygon">
-				<vertex x="-1560" y="0" />
-				<vertex x="-1560" y="60" />
+				<vertex x="-1800" y="0" />
+				<vertex x="-1800" y="60" />
 				<vertex x="60" y="60" />
 				<vertex x="60" y="0" />
 			</shape>
@@ -47,9 +47,6 @@
 		<entities>
 			<entity name="ballteleport" rep="TP" collideWithBall="true">
 				<physics name="wall" shape="tp" />
-				<onCollision>
-					<ballTeleport keepSpeed="false" x="2480" y="1800"/>
-				</onCollision>
 				<collides>
 					<changeGravity x="0" y="40">
 						<nop>
@@ -60,6 +57,10 @@
 						</nop>
 					</changeGravity>
 				</collides>
+				<onCollision>
+					<ballTeleport keepSpeed="false" x="2480" y="1800"/>
+				</onCollision>
+				
 			</entity>
 
 			<entity name="change_gravity_down" rep="Up" collideWithBall="false">
@@ -167,8 +168,8 @@
               w2                                                  d1d1d1          /1w6  w4
               w4                                                      d1d1          w6  w6
               w1                                                              TT    w6  w3
-              w1TP                                                      Le          w6  w3
-              w1  /1w1w1W3 3W6 6W3 3W6 6w1W1 1W1 1w1W3 3W6 6W3 3W6 6w1W1 1w1 1W2 2w1w1  w6
+              w1TP                                                                Lew6  w3
+              w1  /1w1w1W3 3W6 6W3 3W6 6w1W1 1W1 1w1W3 3W6 6W3 3W6 6w1W1 1W1 1W2 2w1w1  w6
                 
 	</grid>
 	<objects>

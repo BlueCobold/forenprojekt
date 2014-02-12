@@ -630,9 +630,6 @@
     <ClInclude Include="gui\hud\TimeHUD.hpp">
       <Filter>Headers\gui\hud</Filter>
     </ClInclude>
-    <ClInclude Include="model\AnimatedGraphics.hpp">
-      <Filter>Headers\model\collision</Filter>
-    </ClInclude>
     <ClInclude Include="model\collision\handler\GenericCollisionHandler.hpp">
       <Filter>Headers\model\collision\handler</Filter>
     </ClInclude>
@@ -830,6 +827,9 @@
     </ClInclude>
     <ClInclude Include="gui\AnimationContainer.hpp">
       <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="model\AnimatedGraphics.hpp">
+      <Filter>Headers\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
