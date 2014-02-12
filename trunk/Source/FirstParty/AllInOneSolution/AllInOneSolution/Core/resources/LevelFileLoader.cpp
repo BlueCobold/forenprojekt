@@ -172,7 +172,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 
     if(auto layout = xml->FirstChildElement("layout"))
     {
-        std::vector<sf::Vector2i> srcoffsets = parseValueList(layout, "srcxoffset", "srcyoffset");
+        std::vector<sf::Vector2i> srcoffsets = parseValueList(layout, "srcx", "srcy");
         std::vector<sf::Vector2i> sizes = parseValueList(layout, "width", "height");
         std::vector<sf::Vector2i> origins = parseValueList(layout, "midx", "midy");
         anim->setLayout(srcoffsets, sizes, origins);
@@ -215,6 +215,8 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
             mode = sf::BlendAdd;
         else if(std::string("mul") == blend)
             mode = sf::BlendMultiply;
+        else if(std::string("premul") == blend)
+            mode = sf::BlendPremultiplied;
         anim->setBlending(mode);
     }
 

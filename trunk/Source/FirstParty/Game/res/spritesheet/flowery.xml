@@ -9,9 +9,9 @@
 		<sprite name="middle_medium_large" x="779" y="0" width="140" height="168" originx="70" originy="164" />
 		<sprite name="middle_medium_small" x="627" y="206" width="88" height="102" originx="44" originy="100" />
 		<sprite name="middle_small" x="715" y="206" width="64" height="79" originx="32" originy="76" />
-		<sprite name="back_medium" x="779" y="168" width="87" height="108" originx="43" originy="104" />
+		<sprite name="back_medium" x="779" y="168" width="87" height="111" originx="43" originy="107" />
 		<sprite name="back_medium_small" x="447" y="226" width="77" height="92" originx="38" originy="88" />
 		<sprite name="back_small" x="524" y="226" width="62" height="75" originx="31" originy="72" />
-		<sprite name="back_tiny" x="866" y="168" width="50" height="58" originx="25" originy="56" />
+		<sprite name="back_tiny" x="866" y="168" width="50" height="59" originx="25" originy="57" />
 	</sprites>
 </spriteSheet>

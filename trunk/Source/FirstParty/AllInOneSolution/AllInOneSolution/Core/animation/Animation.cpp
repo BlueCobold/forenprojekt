@@ -144,9 +144,8 @@ void Animation::bindTexture(const sf::Texture& texture, const sf::Vector2f& sour
 
 const sf::IntRect Animation::getTextureRect() const
 {
-    if(m_sizes.size() != 0 && m_srcOffsets.size() != 0)
-        return sf::IntRect(static_cast<int>(m_srcOffsets[m_frame].x), static_cast<int>(m_srcOffsets[m_frame].y),
-            static_cast<int>(m_sizes[m_frame].x), static_cast<int>(m_sizes[m_frame].y));
+    if(m_sizes.size() != 0)
+        return m_sizes[m_frame];
     else
         if(m_horizontal)
             return sf::IntRect(static_cast<int>(m_frame * m_frameWidth + m_sourceOffset.x),
@@ -199,14 +198,15 @@ void Animation::setLayout(
 {
     if(m_frames > srcOffsets.size())
         throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "srcOffsets"));
-    m_srcOffsets = srcOffsets;
 
     if(m_frames > sizes.size())
         throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "sizes"));
-    m_sizes = sizes;
 
     if(m_frames > origins.size())
         throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "origins"));
+
+    for(unsigned i = 0; i < m_frames; i++)
+        m_sizes.push_back(sf::IntRect(srcOffsets[i].x, srcOffsets[i].y, sizes[i].y, sizes[i].y));
     m_origins = origins;
 }
 
