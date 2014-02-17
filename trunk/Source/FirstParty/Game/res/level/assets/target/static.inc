@@ -321,6 +321,98 @@
 					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true" />
 				</animations>
 			</entity>
+			<entity name="target_1" rep="1t" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="target">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<changeGravity x="0" y="-40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="target_1" rep="2t" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="target">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<changeGravity x="40" y="0">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="target_1" rep="3t" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="target">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<changeGravity x="-40" y="0">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="target_1" rep="4t" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="target">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<changeGravity x="0" y="40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
 		</entities>
 	</templates>
 </include>
