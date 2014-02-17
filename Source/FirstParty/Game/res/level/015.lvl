@@ -1,0 +1,45 @@
+<level>
+	<levelinfo name="Gravity Change">
+		<infoimage scrx="0" scry="0" width="192" height="108" />
+	</levelinfo>
+	<constants gate="0" gatetime="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+	</templates>
+
+	<grid size="60" width="2460" height="1410">
+
+                  W4 4d5d3W1 1w4w4    TT  W6 6W1 1d6d6W3 3
+                  w2s4d1d2s4w3s2)3        (4s2w4s2d4d5s2w5 
+                  W3 3d4d6W2 2)5            (1W5 5d2d2W1 1
+                  w5s2d3d1s2)1                (6s4d1d3s2w6
+                  W1 1d6s3)2  4t                (5s1d1W5 5
+                  w6d6d1)5                        (2d3d1w3
+                  w2d3)4                            (6d5w2
+                  w6)4                1t              (3w6
+                                    /2  \1                
+                                      BB                
+                  T2                (3  )1              T2                                                
+                                                                              
+                  w6\4                                /3w6                        
+                  w2s4\3                        2t  /2s3w1                        
+                  w6d6d1\5  3t                    /2d3d1w3                        
+                  W1 1d6s3\2                    /5s1d1W5 5                        
+                  w5s2d3d1s2\1                /6s4d1d3s2w6                        
+                  W3 3d4d6W2 2\5            /1W5 5d2d2W1 1                        
+                  w2s4d1d2s4w3s2\3        /4s2w4s2d4d5s2w5                        
+                  W4 4d5d3W1 1w4w4    TT  W6 6W1 1d6d6W3 3                        
+                                                                                  
+                                                                                  
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="350" silver="380" gold="400" />
+</level>
