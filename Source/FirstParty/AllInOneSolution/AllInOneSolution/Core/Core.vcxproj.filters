@@ -310,6 +310,9 @@
     <ClCompile Include="resources\SpriteSheet.cpp">
       <Filter>Sources\resources</Filter>
     </ClCompile>
+    <ClCompile Include="gui\AnimationContainer.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
