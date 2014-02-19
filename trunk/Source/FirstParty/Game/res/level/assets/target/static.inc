@@ -326,17 +326,16 @@
 					<shape type="circle" radius="30" />
 				</physics>
 				<collides>
-					<changeGravity x="0" y="-40">
-						<nop>
-							<static value="1" />
-							<setVar name="global:direction">
-								<static value="1" />
-							</setVar>
-						</nop>
-					</changeGravity>
 					<spawnEntity name="target_2">
 						<spawnEntity name="target_particles">
-							<always />
+							<changeGravity x="0" y="-40">
+								<nop>
+									<static value="1" />
+										<setVar name="global:direction">
+										<static value="1" />
+										</setVar>
+								</nop>
+							</changeGravity>
 						</spawnEntity>
 					</spawnEntity>
 				</collides>
@@ -349,17 +348,16 @@
 					<shape type="circle" radius="30" />
 				</physics>
 				<collides>
-					<changeGravity x="40" y="0">
-						<nop>
-							<static value="1" />
-							<setVar name="global:direction">
-								<static value="1" />
-							</setVar>
-						</nop>
-					</changeGravity>
 					<spawnEntity name="target_2">
 						<spawnEntity name="target_particles">
-							<always />
+							<changeGravity x="0" y="40">
+								<nop>
+									<static value="1" />
+										<setVar name="global:direction">
+										<static value="1" />
+										</setVar>
+								</nop>
+							</changeGravity>
 						</spawnEntity>
 					</spawnEntity>
 				</collides>
@@ -372,17 +370,16 @@
 					<shape type="circle" radius="30" />
 				</physics>
 				<collides>
-					<changeGravity x="-40" y="0">
-						<nop>
-							<static value="1" />
-							<setVar name="global:direction">
-								<static value="1" />
-							</setVar>
-						</nop>
-					</changeGravity>
 					<spawnEntity name="target_2">
 						<spawnEntity name="target_particles">
-							<always />
+							<changeGravity x="40" y="0">
+								<nop>
+									<static value="1" />
+										<setVar name="global:direction">
+										<static value="1" />
+										</setVar>
+								</nop>
+							</changeGravity>
 						</spawnEntity>
 					</spawnEntity>
 				</collides>
@@ -395,17 +392,16 @@
 					<shape type="circle" radius="30" />
 				</physics>
 				<collides>
-					<changeGravity x="0" y="40">
-						<nop>
-							<static value="1" />
-							<setVar name="global:direction">
-								<static value="1" />
-							</setVar>
-						</nop>
-					</changeGravity>
 					<spawnEntity name="target_2">
 						<spawnEntity name="target_particles">
-							<always />
+							<changeGravity x="-40" y="0">
+								<nop>
+									<static value="1" />
+										<setVar name="global:direction">
+										<static value="1" />
+										</setVar>
+								</nop>
+							</changeGravity>
 						</spawnEntity>
 					</spawnEntity>
 				</collides>

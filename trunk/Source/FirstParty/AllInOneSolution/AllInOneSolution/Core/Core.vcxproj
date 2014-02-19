@@ -99,6 +99,7 @@
     <ClCompile Include="animation\provider\KeyProvider.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="Core.cpp" />
+    <ClCompile Include="gui\AnimationContainer.cpp" />
     <ClCompile Include="gui\CaptionMenu.cpp" />
     <ClCompile Include="gui\CheckBox.cpp" />
     <ClCompile Include="gui\CoinShopMenu.cpp" />
