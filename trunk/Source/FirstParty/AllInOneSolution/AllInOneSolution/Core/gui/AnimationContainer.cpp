@@ -39,11 +39,7 @@ void AnimationContainer::update(const sf::RenderWindow& screen, const sf::Vector
         if(ani->isStopped())
             continue;
         m_updatingAni = ani;
-        ani->setPosition(getPosition().x + mouseOffset.x, getPosition().y + mouseOffset.y);
+        ani->setPosition(getPosition().x, getPosition().y);
         ani->update();
     }
-}
-
-void AnimationContainer::draw(const DrawParameter& param)
-{
 }
