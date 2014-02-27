@@ -2,7 +2,6 @@
 #include "resources/AppConfig.hpp"
 
 #include <iostream>
-#include "gui\AnimationContainer.hpp"
 
 #ifdef _DEBUG
     int main(int argc, char* argv[])
@@ -13,7 +12,6 @@
 {
     try
     {
-        AnimationContainer test;
         AppConfig configFile("Config.ini", "stash.dat");
         App app(configFile);
         app.run();
