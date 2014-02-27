@@ -43,3 +43,8 @@ void AnimationContainer::update(const sf::RenderWindow& screen, const sf::Vector
         ani->update();
     }
 }
+
+void AnimationContainer::draw(const DrawParameter& param)
+{
+    GraphicalObject::draw(param);
+}
