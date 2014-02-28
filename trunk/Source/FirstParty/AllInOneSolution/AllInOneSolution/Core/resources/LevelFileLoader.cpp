@@ -70,6 +70,23 @@ std::vector<sf::Vector2i> parseValueList(tinyxml2::XMLElement* xml, const std::s
     return result;
 }
 
+void parseSpriteValueList(const tinyxml2::XMLElement* xml,
+    const SpriteSheet* sheet,
+    std::vector<sf::Vector2i>& src,
+    std::vector<sf::Vector2i>& sizes,
+    std::vector<sf::Vector2i>& origins)
+{
+    std::istringstream tokens(xml->GetText());
+    std::string token;
+    while (std::getline(tokens, token, ','))
+    {
+        auto sprite = sheet->get(token);
+        src.push_back(sf::Vector2i(sprite.x, sprite.y));
+        sizes.push_back(sf::Vector2i(sprite.width, sprite.height));
+        origins.push_back(sf::Vector2i(static_cast<int>(sprite.originX), static_cast<int>(sprite.originY)));
+    }
+}
+
 std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml,
     AnimatedGraphics* animated,
     VariableHandler* handler,
@@ -172,10 +189,21 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 
     if(auto layout = xml->FirstChildElement("layout"))
     {
-        std::vector<sf::Vector2i> srcoffsets = parseValueList(layout, "srcx", "srcy");
-        std::vector<sf::Vector2i> sizes = parseValueList(layout, "width", "height");
-        std::vector<sf::Vector2i> origins = parseValueList(layout, "midx", "midy");
-        anim->setLayout(srcoffsets, sizes, origins);
+        if(auto sprites = layout->FirstChildElement("sprites"))
+        {
+            if(sheet == nullptr)
+                throw std::runtime_error(utility::translateKey("CannotUseSpriteLayout"));
+            std::vector<sf::Vector2i> srcoffsets, sizes, origins;
+            parseSpriteValueList(sprites, sheet, srcoffsets, sizes, origins);
+            anim->setLayout(srcoffsets, sizes, origins);
+        }
+        else
+        {
+            std::vector<sf::Vector2i> srcoffsets = parseValueList(layout, "srcx", "srcy");
+            std::vector<sf::Vector2i> sizes = parseValueList(layout, "width", "height");
+            std::vector<sf::Vector2i> origins = parseValueList(layout, "midx", "midy");
+            anim->setLayout(srcoffsets, sizes, origins);
+        }
     }
 
     std::unique_ptr<ValueProvider> red, green, blue, alpha, tmp;
