@@ -13,12 +13,15 @@ class Ball : public Entity
 {
 public:
 
-    Ball(float resetTime, const Entity* spawnAnimationEntity = nullptr, const Entity* killAnimationEntity = nullptr);
+    Ball(float resetTime,
+         float stuckBallSpeed,
+         const Entity* spawnAnimationEntity = nullptr,
+         const Entity* killAnimationEntity = nullptr);
 
     virtual void restartAt(const float value) override;
     virtual void update(const float value) override;
     virtual void draw(const DrawParameter& params) override;
-    
+
     virtual float getValueOf(const std::string& name) const override;
     virtual void setValueOf(const std::string& name, const float value) override;
 
@@ -58,6 +61,10 @@ private:
     const Entity* m_killAnimationEntity;
     std::function<void()> m_checkpointHandler;
     std::unique_ptr<ParticleTrail> m_trail;
+
+    float m_stuckBallSpeed;
+    float m_stuckBallTime;
+    bool m_isStucking;
 
 private:
 

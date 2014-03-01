@@ -2,7 +2,7 @@
 #include "../Utility.hpp"
 #include <iostream>
 
-Ball::Ball(float resetTime, const Entity* spawnAnimationEntity, const Entity* killAnimationEntity) :
+Ball::Ball(float resetTime, float stuckBallSpeed, const Entity* spawnAnimationEntity, const Entity* killAnimationEntity) :
     m_resetTime(resetTime),
     m_hideTime(1.0f),
     m_blowUpTime(1.0f),
@@ -12,8 +12,13 @@ Ball::Ball(float resetTime, const Entity* spawnAnimationEntity, const Entity* ki
     m_lostBall(false),
     m_ballResetTime(0.0f),
     m_blownUp(false),
-    m_isTeleporting(false)
-{ }
+    m_isTeleporting(false),
+    m_stuckBallSpeed(stuckBallSpeed),
+    m_isStucking(false),
+    m_stuckBallTime(5.f)
+{ 
+    Entity::setValueOf("hitTeeterTime", 0.f);
+}
 
 void Ball::autoResetBall(const float elapsedTime)
 {
@@ -37,6 +42,7 @@ void Ball::autoResetBall(const float elapsedTime)
         m_ballResetTime = 0.0f;
     // if timer up, reset the ball
     else if(m_ballResetTime > 0.0f)
+    {
         if(elapsedTime > m_ballResetTime + m_hideTime && frozen())
         {
             unfreeze();
@@ -55,6 +61,16 @@ void Ball::autoResetBall(const float elapsedTime)
             freeze();
             hide();
         }
+    }
+    // if the ball stuck
+    else if(m_isStucking)
+    {
+        getBody()->SetTransform(m_spawnPosition, 0.0f);
+        getBody()->SetLinearVelocity(b2Vec2(0, 0));
+        getBody()->SetAngularVelocity(0.0f);
+        m_isStucking = false;
+        Entity::setValueOf("hitTeeterTime", elapsedTime);
+    }
 }
 
 void Ball::teleportTo(const float x, const float y, const bool resetSpeed)
@@ -88,6 +104,9 @@ void Ball::update(const float value)
         else
             m_trail->moveTo(getPosition().x, getPosition().y);
     }
+
+    if(m_stuckBallSpeed > 0 && value > Entity::getValueOf("hitTeeterTime") + m_stuckBallTime)
+        m_isStucking = true;
 
     autoResetBall(value);
 
