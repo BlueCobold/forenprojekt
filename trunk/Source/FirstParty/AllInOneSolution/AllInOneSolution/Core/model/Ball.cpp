@@ -105,7 +105,7 @@ void Ball::update(const float value)
             m_trail->moveTo(getPosition().x, getPosition().y);
     }
 
-    if(m_stuckBallSpeed > 0 && value > Entity::getValueOf("hitTeeterTime") + m_stuckBallTime)
+    if(m_stuckBallSpeed > 0 && getPassedTime() > Entity::getValueOf("hitTeeterTime") + m_stuckBallTime)
         m_isStucking = true;
 
     autoResetBall(value);
