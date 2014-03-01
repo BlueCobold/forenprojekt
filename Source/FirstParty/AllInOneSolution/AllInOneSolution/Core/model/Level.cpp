@@ -341,6 +341,7 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
         else if(entityA->getType() == Entity::Teeter)
         {
             m_multiHit = 0;
+            entityB->setValueOf("hitTeeterTime", m_timeStep + m_lastTime);
             m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTeeter);
         }
         else if(entityA->getType() == Entity::BonusTarget)
@@ -358,6 +359,7 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
         else if(entityB->getType() == Entity::Teeter)
         {
             m_multiHit = 0;
+            entityA->setValueOf("hitTeeterTime", m_timeStep + m_lastTime);
             m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTeeter);
         }
         else if(entityB->getType() == Entity::BonusTarget)

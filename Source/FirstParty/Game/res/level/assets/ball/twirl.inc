@@ -242,7 +242,7 @@
 			</entity>
 
 			<!-- Ball -->
-			<entity name="Ball" rep="BB" type="ball">
+			<entity name="Ball" rep="BB" type="ball" autokillspeed="2">
 				<physics name="ball">
 					<shape type="circle" radius="15" />
 				</physics>
