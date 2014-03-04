@@ -328,8 +328,8 @@ std::unique_ptr<Entity> Level::createEntity(
             {
                 std::unique_ptr<Entity> spawn = parseBallAnimation("onRespawn", xml, templates);
                 std::unique_ptr<Entity> kill = parseBallAnimation("onKill", xml, templates);
-                float autokillspeed = xml->FloatAttribute("autokillspeed");
-                auto ball = new Ball(m_config.get<float>("BallResetTime"), autokillspeed, spawn.get(), kill.get());
+                float autoKillSpeed = xml->FloatAttribute("autokillspeed");
+                auto ball = new Ball(m_config.get<float>("BallResetTime"), autoKillSpeed, spawn.get(), kill.get());
                 ball->bindTrail(LevelFileLoader::parseTrail(ball, xml, m_resourceManager, &templates.functions));
                 entity = std::unique_ptr<Ball>(ball);
                 m_unspawnedEntities.push_back(EntitySpawn(std::move(spawn)));
