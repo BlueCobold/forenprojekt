@@ -9,7 +9,7 @@
 
 		<entities>
 			<!-- Ball -->
-			<entity name="Ball" rep="BB" type="ball">
+			<entity name="Ball" rep="BB" type="ball" autoKillSpeed="0.2">
 				<physics name="ball">
 					<shape type="circle" radius="14" />
 				</physics>

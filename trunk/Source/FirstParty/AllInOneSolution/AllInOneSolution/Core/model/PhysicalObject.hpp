@@ -47,6 +47,10 @@ public:
         std::vector<std::unique_ptr<b2Shape>>& shapes,
         const b2BodyDef& bodyDef, b2World* world)
     {
+        bool wasBound = m_world != nullptr && m_body != nullptr;
+        if(wasBound)
+            unbindBody();
+        m_fixtureDefs.clear();
         m_shapes = std::move(shapes);
         for(auto shape = begin(m_shapes); shape != end(m_shapes); ++shape)
         {
@@ -59,6 +63,8 @@ public:
         }
         m_bodyDef = bodyDef;
         m_world = world;
+        if(wasBound)
+            bindBody();
     }
 
     bool hasPhysics()

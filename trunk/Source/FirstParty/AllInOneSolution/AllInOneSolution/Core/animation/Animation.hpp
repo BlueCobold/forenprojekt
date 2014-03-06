@@ -53,6 +53,7 @@ public:
         const std::vector<sf::Vector2i>& sizes,
         const std::vector<sf::Vector2i>& origins);
     void setStopOnAlphaZero(bool stop);
+    void applyRotation(bool apply);
     
     virtual void draw(const DrawParameter& param) override;
 

@@ -38,9 +38,7 @@ void LevelFileLoader::parseConstants(tinyxml2::XMLElement* xml,
 {
     std::map<std::string, std::unique_ptr<ValueProvider>> map;
     for(auto var = xml->FirstAttribute(); var != nullptr; var = var->Next())
-    {
         holder->setValueOf(var->Name(), var->FloatValue());
-    }
 }
 
 std::vector<sf::Vector2i> parseValueList(tinyxml2::XMLElement* xml, const std::string& x, const std::string& y)
@@ -84,6 +82,83 @@ void parseSpriteValueList(const tinyxml2::XMLElement* xml,
         src.push_back(sf::Vector2i(sprite.x, sprite.y));
         sizes.push_back(sf::Vector2i(sprite.width, sprite.height));
         origins.push_back(sf::Vector2i(static_cast<int>(sprite.originX), static_cast<int>(sprite.originY)));
+    }
+}
+
+void LevelFileLoader::parseColorController(
+    Animation* animation,
+    tinyxml2::XMLElement* xml,
+    AnimatedGraphics* animated,
+    VariableHandler* handler,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
+{
+    std::unique_ptr<ValueProvider> red, green, blue, alpha, tmp;
+    tinyxml2::XMLElement* static_color_element = xml->FirstChildElement("color");
+    const char* value;
+    while(static_color_element && !(value = static_color_element->Attribute("value")))
+        static_color_element = static_color_element->NextSiblingElement("color");
+
+    if(static_color_element && value)
+    {
+        sf::Color col = utility::hexToColor(value);
+        red = std::unique_ptr<ValueProvider>(new StaticProvider(col.r / 255.f));
+        green = std::unique_ptr<ValueProvider>(new StaticProvider(col.g / 255.f));
+        blue = std::unique_ptr<ValueProvider>(new StaticProvider(col.b / 255.f));
+        alpha = std::unique_ptr<ValueProvider>(new StaticProvider(col.a / 255.f));
+    }
+
+    tmp = findController(xml, animated, handler, animation, "color", "channel", "red", functions);
+    if(tmp != nullptr)
+        red = std::move(tmp);
+    tmp = findController(xml, animated, handler, animation, "color", "channel", "green", functions);
+    if(tmp != nullptr)
+        green = std::move(tmp);
+    tmp = findController(xml, animated, handler, animation, "color", "channel", "blue", functions);
+    if(tmp != nullptr)
+        blue = std::move(tmp);
+    tmp = findController(xml, animated, handler, animation, "color", "channel", "alpha", functions);
+    if(tmp != nullptr)
+        alpha = std::move(tmp);
+
+    animation->bindColorController(std::move(red), std::move(green), std::move(blue), std::move(alpha));
+}
+
+void LevelFileLoader::parsePositionController(
+    Animation* animation,
+    tinyxml2::XMLElement* xml,
+    AnimatedGraphics* animated,
+    VariableHandler* handler,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
+{
+    std::unique_ptr<ValueProvider> xProvider = findController(xml, animated, handler, animation, "position", "axis", "x", functions);
+    std::unique_ptr<ValueProvider> yProvider = findController(xml, animated, handler, animation, "position", "axis", "y", functions);
+    animation->bindPositionController(std::move(xProvider), std::move(yProvider));
+}
+
+void LevelFileLoader::parseScaleController(
+    Animation* animation,
+    tinyxml2::XMLElement* xml,
+    AnimatedGraphics* animated,
+    VariableHandler* handler,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
+{
+    std::unique_ptr<ValueProvider> xScaleProvider = findController(xml, animated, handler, animation, "scale", "axis", "x", functions);
+    std::unique_ptr<ValueProvider> yScaleProvider = findController(xml, animated, handler, animation, "scale", "axis", "y", functions);
+    animation->bindScaleController(std::move(xScaleProvider), std::move(yScaleProvider));
+}
+
+void LevelFileLoader::parseRotationController(
+    Animation* animation,
+    tinyxml2::XMLElement* xml,
+    AnimatedGraphics* animated,
+    VariableHandler* handler,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions)
+{
+    tinyxml2::XMLElement* rotation = xml->FirstChildElement("rotation");
+    if(rotation != nullptr && rotation->FirstChildElement() != nullptr)
+    {
+        std::unique_ptr<ValueProvider> rotProvider = parseProvider(rotation->FirstChildElement(), animated, handler, animation, functions);
+        animation->bindRotationController(std::move(rotProvider));
     }
 }
 
@@ -179,13 +254,13 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 
     std::vector<std::unique_ptr<Animation>> subAnimations;
 
-    std::unique_ptr<ValueProvider> xProvider = findController(xml, animated, handler, anim.get(), "position", "axis", "x", functions);
-    std::unique_ptr<ValueProvider> yProvider = findController(xml, animated, handler, anim.get(), "position", "axis", "y", functions);
-    anim->bindPositionController(std::move(xProvider), std::move(yProvider));
-
-    std::unique_ptr<ValueProvider> xScaleProvider = findController(xml, animated, handler, anim.get(), "scale", "axis", "x", functions);
-    std::unique_ptr<ValueProvider> yScaleProvider = findController(xml, animated, handler, anim.get(), "scale", "axis", "y", functions);
-    anim->bindScaleController(std::move(xScaleProvider), std::move(yScaleProvider));
+    parsePositionController(anim.get(), xml, animated, handler, functions);
+    parseScaleController(anim.get(), xml, animated, handler, functions);
+    parseColorController(anim.get(), xml, animated, handler, functions);
+    parseRotationController(anim.get(), xml, animated, handler, functions);
+    
+    if(auto constants = xml->FirstChildElement("constants"))
+        parseConstants(constants, anim.get());
 
     if(auto layout = xml->FirstChildElement("layout"))
     {
@@ -206,36 +281,6 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         }
     }
 
-    std::unique_ptr<ValueProvider> red, green, blue, alpha, tmp;
-    tinyxml2::XMLElement* static_color_element = xml->FirstChildElement("color");
-    const char* value;
-    while(static_color_element && !(value = static_color_element->Attribute("value")))
-        static_color_element = static_color_element->NextSiblingElement("color");
-
-    if(static_color_element && value)
-    {
-        sf::Color col = utility::hexToColor(value);
-        red = std::unique_ptr<ValueProvider>(new StaticProvider(col.r / 255.f));
-        green = std::unique_ptr<ValueProvider>(new StaticProvider(col.g / 255.f));
-        blue = std::unique_ptr<ValueProvider>(new StaticProvider(col.b / 255.f));
-        alpha = std::unique_ptr<ValueProvider>(new StaticProvider(col.a / 255.f));
-    }
-
-    tmp = findController(xml, animated, handler, anim.get(), "color", "channel", "red", functions);
-    if(tmp != nullptr)
-        red = std::move(tmp);
-    tmp = findController(xml, animated, handler, anim.get(), "color", "channel", "green", functions);
-    if(tmp != nullptr)
-        green = std::move(tmp);
-    tmp = findController(xml, animated, handler, anim.get(), "color", "channel", "blue", functions);
-    if(tmp != nullptr)
-        blue = std::move(tmp);
-    tmp = findController(xml, animated, handler, anim.get(), "color", "channel", "alpha", functions);
-    if(tmp != nullptr)
-        alpha = std::move(tmp);
-
-    anim->bindColorController(std::move(red), std::move(green), std::move(blue), std::move(alpha));
-
     if(auto blend = xml->Attribute("blending"))
     {
         sf::BlendMode mode = sf::BlendAlpha;
@@ -247,17 +292,6 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
             mode = sf::BlendPremultiplied;
         anim->setBlending(mode);
     }
-
-    tinyxml2::XMLElement* rotation = xml->FirstChildElement("rotation");
-    if(rotation != nullptr && rotation->FirstChildElement() != nullptr)
-    {
-        std::unique_ptr<ValueProvider> rotProvider = parseProvider(rotation->FirstChildElement(), animated, handler, anim.get(), functions);
-        anim->bindRotationController(std::move(rotProvider));
-    }
-
-    tinyxml2::XMLElement* constants = xml->FirstChildElement("constants");
-    if(constants != nullptr)
-        parseConstants(constants, anim.get());
 
     return anim;
 }
@@ -420,6 +454,27 @@ std::vector<std::string> LevelFileLoader::parseGrid(tinyxml2::XMLElement* xml)
         lines.push_back(data.substr(i, data.find('\n', i)-i));
 
     return std::move(lines);
+}
+
+void LevelFileLoader::parseBodyDef(tinyxml2::XMLElement* physicXml,
+    Entity* entity,
+    VariableHandler* handler,
+    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+    b2BodyDef& bodyDef,
+    const sf::Vector2u& position)
+{
+    auto bodyXml = physicXml->FirstChildElement("body");
+    if(std::string(bodyXml->Attribute("type")) == "static")
+        bodyDef.type = b2_staticBody;
+    else if(std::string(bodyXml->Attribute("type")) == "kinematic")
+        bodyDef.type = b2_kinematicBody;
+    else if(std::string(bodyXml->Attribute("type")) == "dynamic")
+        bodyDef.type = b2_dynamicBody;
+    bodyDef.position = b2Vec2(static_cast<float>(utility::toMeter(position.x)), static_cast<float>(utility::toMeter(position.y)));
+    bodyDef.angle = utility::toRadian<float, float>(bodyXml->FloatAttribute("angle"));
+    bodyDef.fixedRotation = bodyXml->BoolAttribute("fixedRotation");
+    bodyDef.angularDamping = bodyXml->BoolAttribute("angularDamping");
+    parseKinematics(bodyXml, entity, handler, functions);
 }
 
 void LevelFileLoader::parseKinematics(tinyxml2::XMLElement* element,
