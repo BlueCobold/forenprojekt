@@ -245,3 +245,8 @@ void Animation::setStopOnAlphaZero(bool stop)
 {
     m_stopOnAlphaZero = stop;
 }
+
+void Animation::applyRotation(bool apply)
+{
+    m_applyRotation = apply;
+}

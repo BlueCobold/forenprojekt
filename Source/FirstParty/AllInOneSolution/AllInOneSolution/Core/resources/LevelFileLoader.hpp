@@ -29,10 +29,45 @@ public:
         ResourceManager& resourceManager,
         std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
 
+    static void parseColorController(
+        Animation* animation,
+        tinyxml2::XMLElement* xml,
+        AnimatedGraphics* animated,
+        VariableHandler* handler,
+        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
+    
+    static void parsePositionController(
+        Animation* animation,
+        tinyxml2::XMLElement* xml,
+        AnimatedGraphics* animated,
+        VariableHandler* handler,
+        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
+    
+    static void parseScaleController(
+        Animation* animation,
+        tinyxml2::XMLElement* xml,
+        AnimatedGraphics* animated,
+        VariableHandler* handler,
+        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
+    
+    static void parseRotationController(
+        Animation* animation,
+        tinyxml2::XMLElement* xml,
+        AnimatedGraphics* animated,
+        VariableHandler* handler,
+        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions);
+
     static std::unordered_map<std::string, tinyxml2::XMLElement*> parseList(
         tinyxml2::XMLElement* xml, const std::string& name, const std::string& key);
 
     static std::vector<std::string> parseGrid(tinyxml2::XMLElement* xml);
+
+    static void parseBodyDef(tinyxml2::XMLElement* element,
+        Entity* entity,
+        VariableHandler* handler,
+        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+        b2BodyDef& bodyDef,
+        const sf::Vector2u& position);
 
     static void parseKinematics(tinyxml2::XMLElement* element,
         Entity* entity,

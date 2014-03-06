@@ -156,3 +156,9 @@ bool Entity::shouldCollide(Entity* partner)
         return true;
     return m_collisionFilter->shouldCollide(this, partner);
 }
+
+void Entity::applyOverrides(const std::function<void(Animation*)> function)
+{
+    for(auto it = begin(getAnimations()); it != end(getAnimations()); ++it)
+        function(it->get());
+}

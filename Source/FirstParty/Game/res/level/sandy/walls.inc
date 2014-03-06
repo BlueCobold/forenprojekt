@@ -2,10 +2,10 @@
 	<templates>
 		<shapes>
 			<shape name="wall" type="polygon">
-				<vertex x="1" y="1" />
-				<vertex x="59" y="1" />
-				<vertex x="59" y="59" />
-				<vertex x="1" y="59" />
+				<vertex x="0" y="0" />
+				<vertex x="60" y="0" />
+				<vertex x="60" y="60" />
+				<vertex x="0" y="60" />
 			</shape>
 			<shape name="high_wall" type="polygon">
 				<vertex x="1" y="1" />
@@ -14,36 +14,36 @@
 				<vertex x="1" y="119" />
 			</shape>
 			<shape name="wide_wall" type="polygon">
-				<vertex x="1" y="1" />
-				<vertex x="119" y="1" />
-				<vertex x="119" y="59" />
-				<vertex x="1" y="59" />
+				<vertex x="0" y="0" />
+				<vertex x="120" y="0" />
+				<vertex x="120" y="60" />
+				<vertex x="0" y="60" />
 			</shape>
 			<shape name="left_lower" type="polygon">
-				<vertex x="1" y="6" />
+				<vertex x="0" y="6" />
 				<vertex x="6" y="6" />
 				<vertex x="54" y="54" />
-				<vertex x="54" y="59" />
-				<vertex x="1" y="59" />
+				<vertex x="54" y="60" />
+				<vertex x="0" y="60" />
 			</shape>
 			<shape name="left_upper" type="polygon">
-				<vertex x="1" y="1" />
-				<vertex x="54" y="1" />
+				<vertex x="0" y="0" />
+				<vertex x="54" y="0" />
 				<vertex x="54" y="6" />
 				<vertex x="6" y="54" />
-				<vertex x="1" y="54" />
+				<vertex x="0" y="54" />
 			</shape>
 			<shape name="right_lower" type="polygon">
 				<vertex x="54" y="6" />
-				<vertex x="59" y="6" />
-				<vertex x="59" y="59" />
+				<vertex x="60" y="6" />
+				<vertex x="60" y="60" />
 				<vertex x="6" y="54" />
-				<vertex x="6" y="59" />
+				<vertex x="6" y="60" />
 			</shape>
 			<shape name="right_upper" type="polygon">
-				<vertex x="6" y="1" />
-				<vertex x="59" y="1" />
-				<vertex x="59" y="54" />
+				<vertex x="6" y="0" />
+				<vertex x="60" y="0" />
+				<vertex x="60" y="54" />
 				<vertex x="54" y="54" />
 				<vertex x="6" y="6" />
 			</shape>

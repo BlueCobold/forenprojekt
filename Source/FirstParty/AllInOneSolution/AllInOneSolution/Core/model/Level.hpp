@@ -127,6 +127,7 @@ private:
         std::unordered_map<std::string, tinyxml2::XMLElement*> shapes;
         std::unordered_map<std::string, tinyxml2::XMLElement*> entities;
         std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
+        std::unordered_map<std::string, tinyxml2::XMLElement*> overrides;
     };
     
     void createLabelAt(const Entity* target, const std::string& fontName, const int points);
@@ -182,6 +183,19 @@ private:
         const sf::Vector2u& position,
         Templates& templates,
         bool bindInstantly = true);
+    
+    static void findPhysicAndShapeTag(
+        tinyxml2::XMLElement*& physic,
+        tinyxml2::XMLElement*& shape, 
+        tinyxml2::XMLElement* entity,
+        Templates& templates);
+    
+    void parsePhysics(
+        tinyxml2::XMLElement* physic,
+        tinyxml2::XMLElement* shape,
+        Entity* entity,
+        const sf::Vector2u& position,
+        Templates& templates);
 
     void parseCollider(
         Entity* entity,

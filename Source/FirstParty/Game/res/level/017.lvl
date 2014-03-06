@@ -1,0 +1,142 @@
+<level>
+	<levelinfo name="Rocket Science">
+		<infoimage scrx="38" scry="313" width="192" height="108" />
+	</levelinfo>
+	<constants gate="0" gatetime="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/movement.inc" />
+		<include file="assets/target/phase_out.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		
+		<include file="sandy/walls.inc" />
+		
+		<physics>
+			<physic name="dynamicWall">
+				<body type="dynamic" angle="0" />
+				<fixture density="0.1" friction="0.8" restitution="0.5" />
+			</physic>
+		</physics>
+		
+		<functions>
+			<function name="blockAlpha">
+				<step>
+					<var name="collides" />
+					<step threshold="0">
+						<setVar name="delta">
+							<sub>
+								<var name="killTime" />
+								<time />
+							</sub>
+						</setVar>
+						<stop />
+						<var name="delta" />
+					</step>
+					<static value="1" />
+				</step>
+			</function>
+			<function name="blockCollides">
+				<nop>
+					<static value="0" />
+					<setVar name="killTime">
+						<add>
+							<time />
+							<static value="1"/>
+						</add>
+					</setVar>
+				</nop>
+			</function>
+		</functions>
+		
+		<overrides>
+			<override rep="w*" newRep="k*">
+				<physics shape="wall" name="dynamicWall"/>
+				<animations>
+					<set rotate="true" />
+				</animations>
+			</override>
+			
+			<override rep="W*" newRep="K*">
+				<physics shape="wide_wall" name="dynamicWall"/>
+				<animations>
+					<set rotate="true" />
+				</animations>
+			</override>
+			
+			<override rep="k*" newRep="a*">
+				<constants collides="1" killTime="0" delta="0" />
+				<animations>
+					<color channel="alpha">
+						<function name="blockAlpha"/>
+					</color>
+				</animations>
+				<collides>
+					<propertyFilter target="entity">
+						<var name="collides" />
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<changeProperty name="collides">
+						<function name="blockCollides"/>
+					</changeProperty>
+				</onCollision>
+			</override>
+
+			<override rep="K*" newRep="A*">
+				<constants collides="1" killTime="0" delta="0" />
+				<animations>
+					<color channel="alpha">
+						<function name="blockAlpha"/>
+					</color>
+				</animations>
+				<collides>
+					<propertyFilter target="entity">
+						<var name="collides" />
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<changeProperty name="collides">
+						<function name="blockCollides"/>
+					</changeProperty>
+				</onCollision>
+			</override>
+		</overrides>
+	</templates>
+	
+	
+	<grid size="60" width="2460" height="1440">
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                      /1\5                                          
+                                    /4)6(2\3                                        
+                                    a2    a5                                        
+                                    a1  bta3                                        
+                                  /5A2  A4  \6                                      
+                                  w4)3    (2w3                                      
+                                  w1    bt  w2                                      
+                                  w6A1  A1  w4                                      
+                                  w4a3    a1w6                                      
+                                  w1a2  bta5w2                                      
+                                /2w5A3  A2  w3\4                                    
+                              /3w5w2)1    (2w5w1\3                                  
+                              w4)6            (6w4                                  
+                              w1    t1  BB  t1  w5                                  
+                              (2\3            /2)6                                  
+                                        TT                                          
+                                                                                    
+                                                                                    
+	</grid>
+	
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="190" silver="200" gold="220" />
+</level>

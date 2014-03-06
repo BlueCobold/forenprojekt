@@ -212,6 +212,12 @@ void Level::parseTemplates(
         templates.entities.insert(begin(temp), end(temp));
     }
 
+    if(tinyxml2::XMLElement* functions = xmlTemplates->FirstChildElement("overrides"))
+    {
+        auto values = std::move(LevelFileLoader::parseList(functions, "override", "newRep"));
+        templates.overrides.insert(begin(values), end(values));
+    }
+
     for(auto child = xmlTemplates->FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
@@ -225,6 +231,17 @@ void Level::parseTemplates(
     }
 }
 
+std::string buildOriginal(const std::string& targetName, const std::string& sourceName, const std::string& needle)
+{
+    if(targetName.length() != 2 || sourceName.length() != 2 || needle.length() != 2 ||(targetName[0] != '*' && targetName[1] != '*'))
+        return needle;
+    else if(targetName[0] == '*' && (targetName[1] == needle[1] || targetName[1] == '*'))
+        return std::string(1, needle[0]) + sourceName[1];
+    else if(targetName[1] == '*' && (targetName[0] == needle[0] || targetName[0] == '*'))
+        return std::string(1, sourceName[0]) + needle[1];
+    return "";
+}
+
 std::unique_ptr<Entity> Level::parseEntityFromTemplate(
     std::string name,
     Templates& templates,
@@ -233,9 +250,88 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
 {
     auto match = templates.entities.find(name);
     if(match == end(templates.entities))
+    {
+        for(auto it = begin(templates.overrides); it != end(templates.overrides); ++it)
+        {
+            auto originalName = buildOriginal(it->first, it->second->Attribute("rep"), name);
+            if(originalName.empty())
+                continue;
+            match = templates.entities.find(originalName);
+            std::unique_ptr<Entity> original;
+            // found some origin?
+            if(match != end(templates.entities))
+                original = parseEntity(match->second, position, templates, bindInstantly);
+            else
+                // maybe the parent is also an override? Re-test.
+                original = parseEntityFromTemplate(originalName, templates, position, bindInstantly);
+            if(original == nullptr)
+                return nullptr;
+            auto xml = it->second;
+            auto entity = original.get();
+            if(auto constantsXml = xml->FirstChildElement("constants"))
+                LevelFileLoader::parseConstants(constantsXml, entity);
+            if(original->hasPhysics())
+            {
+                if(auto collider = xml->FirstChildElement("onCollision"))
+                    parseCollider(entity, collider, templates);
+                if(auto filter = xml->FirstChildElement("collides"))
+                    parseCollisionFilter(entity, filter, templates);
+            }
+            if(auto aniXml = xml->FirstChildElement("animations"))
+            {
+                entity->applyOverrides([&](Animation* animation)
+                {
+                    LevelFileLoader::parseColorController(animation, aniXml, entity, this, &templates.functions);
+                    LevelFileLoader::parsePositionController(animation, aniXml, entity, this, &templates.functions);
+                    LevelFileLoader::parseScaleController(animation, aniXml, entity, this, &templates.functions);
+                    LevelFileLoader::parseRotationController(animation, aniXml, entity, this, &templates.functions);
+                    if(auto setXml = aniXml->FirstChildElement("set"))
+                    {
+                        if(setXml->Attribute("rotate"))
+                            animation->applyRotation(setXml->BoolAttribute("rotate"));
+                    }
+                    if(auto constants = aniXml->FirstChildElement("constants"))
+                        LevelFileLoader::parseConstants(constants, animation);
+                });
+            }
+            tinyxml2::XMLElement* physic = nullptr;
+            tinyxml2::XMLElement* shape = nullptr;
+            findPhysicAndShapeTag(physic, shape, xml, templates);
+            if(physic != nullptr)
+                parsePhysics(physic, shape, entity, position, templates);
+            return std::move(original);
+        }
         return nullptr;
+    }
 
     return parseEntity(match->second, position, templates, bindInstantly);
+}
+
+void Level::findPhysicAndShapeTag(tinyxml2::XMLElement*& physic, tinyxml2::XMLElement*& shape, 
+    tinyxml2::XMLElement* entity,
+    Templates& templates)
+{
+    auto physics = entity->FirstChildElement("physics");
+    if(physics != nullptr)
+    {
+        // Shape template exists
+        if(physics->Attribute("shape") != nullptr)
+        {
+            std::string name(physics->Attribute("shape"));
+            if(templates.shapes.find(name) != end(templates.shapes))
+                shape = templates.shapes.find(std::string(physics->Attribute("shape")))->second;
+        }
+        // Physics doesn't use a template
+        else
+            shape = physics->FirstChildElement("shape");
+
+        auto name = std::string(physics->Attribute("name"));
+        // Physics template exists other wise no template is used
+        if(templates.physics.find(std::string(physics->Attribute("name"))) != end(templates.physics))
+            physic = templates.physics.find(name)->second;
+        if(physic == nullptr)
+            throw std::runtime_error(utility::replace(utility::translateKey("UnknownPhysicReference"), name));
+    }
 }
 
 std::unique_ptr<Entity> Level::parseEntity(
@@ -244,9 +340,6 @@ std::unique_ptr<Entity> Level::parseEntity(
     Templates& templates,
     bool bindInstantly)
 {
-    // Identify the needed parts of an entity
-    tinyxml2::XMLElement* physic = nullptr;
-    tinyxml2::XMLElement* shape = nullptr;
 
     sf::Vector2u pos(position);
     if(entity->Attribute("x") != nullptr)
@@ -258,25 +351,10 @@ std::unique_ptr<Entity> Level::parseEntity(
     if(entity->Attribute("offsety") != nullptr)
         pos.y += entity->IntAttribute("offsety");
 
-    // Physics tag exists?
-    physic = entity->FirstChildElement("physics");
-    if(physic != nullptr)
-    {
-        // Shape template exists
-        if(physic->Attribute("shape") != nullptr)
-        {
-            std::string name(physic->Attribute("shape"));
-            if(templates.shapes.find(name) != end(templates.shapes))
-                shape = templates.shapes.find(std::string(physic->Attribute("shape")))->second;
-        }
-        // Physics doesn't use a template
-        else
-            shape = physic->FirstChildElement("shape");
-
-        // Physics template exists other wise no template is used
-        if(templates.physics.find(std::string(physic->Attribute("name"))) != end(templates.physics))
-            physic = templates.physics.find(std::string(physic->Attribute("name")))->second;
-    }
+    // Identify the needed parts of an entity
+    tinyxml2::XMLElement* physic = nullptr;
+    tinyxml2::XMLElement* shape = nullptr;
+    findPhysicAndShapeTag(physic, shape, entity, templates);
 
     return createEntity(entity, pos, shape, physic, templates, bindInstantly);
 }
@@ -303,6 +381,69 @@ bool Level::validate(const tinyxml2::XMLDocument& document)
     return tagCheck;
 }
 
+void Level::parsePhysics(tinyxml2::XMLElement* physic,
+    tinyxml2::XMLElement* shape,
+    Entity* entity,
+    const sf::Vector2u& position,
+    Templates& templates)
+{
+    b2BodyDef bodyDef;
+    LevelFileLoader::parseBodyDef(physic, entity, this, &templates.functions, bodyDef, position);
+
+    std::vector<std::unique_ptr<b2Shape>> shapes;
+    // Load shape
+    if(std::string(shape->Attribute("type")) == "polygon") // Load polygon
+    {
+        std::vector<b2Vec2> vertices;
+        // Iterate over the vertices
+        for(tinyxml2::XMLElement* vertexIterator = shape->FirstChildElement("vertex");
+            vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
+        {
+            vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
+                utility::toMeter(vertexIterator->FloatAttribute("y"))));
+        }
+        // Construct the b2Shape
+        std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
+        ps->Set(vertices.data(), vertices.size());
+        shapes.push_back(std::move(ps));
+    }
+    else if(std::string(shape->Attribute("type")) == "complex_polygon") // Load polygon
+    {
+        for(auto polyIterator = shape->FirstChildElement("polygon");
+            polyIterator != nullptr; polyIterator = polyIterator->NextSiblingElement("polygon"))
+        {
+            std::vector<b2Vec2> vertices;
+            // Iterate over the vertices
+            for(auto vertexIterator = polyIterator->FirstChildElement("vertex");
+                vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
+            {
+                vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
+                    utility::toMeter(vertexIterator->FloatAttribute("y"))));
+            }
+            // Construct the b2Shape
+            std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
+            ps->Set(vertices.data(), vertices.size());
+            shapes.push_back(std::move(ps));
+        }
+    }
+    else if(std::string(shape->Attribute("type")) == "circle") // Load circle
+    {
+        std::unique_ptr<b2CircleShape> cs(new b2CircleShape);
+        cs->m_radius = utility::toMeter(shape->FloatAttribute("radius"));
+        shapes.push_back(std::move(cs));
+    }
+
+    // Load fixtures
+    auto fixtureXml = physic->FirstChildElement("fixture");
+    b2FixtureDef fixtureDef;
+    //fixtureDef.shape = &shapes.g m_shapes.back().get();
+    fixtureDef.density = fixtureXml->FloatAttribute("density");
+    fixtureDef.friction = fixtureXml->FloatAttribute("friction");
+    fixtureDef.restitution = fixtureXml->FloatAttribute("restitution");
+
+    entity->bindDefs(fixtureDef, shapes, bodyDef, &m_world);
+}
+
 std::unique_ptr<Entity> Level::createEntity(
     tinyxml2::XMLElement* xml,
     const sf::Vector2u& position,
@@ -312,7 +453,6 @@ std::unique_ptr<Entity> Level::createEntity(
     bool bindInstantly)
 {
     std::unique_ptr<Entity> entity;
-    tinyxml2::XMLElement* element = nullptr;
     
     bool respawnable = xml->BoolAttribute("respawnable");
     bool autoStop = xml->BoolAttribute("stopWithLastAnimation");
@@ -320,6 +460,7 @@ std::unique_ptr<Entity> Level::createEntity(
     if(auto name = xml->Attribute("base"))
         entity = parseEntityFromTemplate(name, templates, position, false);
     else
+    {
         if(xml->Attribute("type") != nullptr)
         {
             if(std::string(xml->Attribute("type")) == "teeter")
@@ -355,6 +496,7 @@ std::unique_ptr<Entity> Level::createEntity(
         }
         else // No type specified == normal Entity
             entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable, autoStop));
+    }
 
     entity->setName(std::string(xml->Attribute("name")));
     if(auto animations = xml->FirstChildElement("animations"))
@@ -390,75 +532,7 @@ std::unique_ptr<Entity> Level::createEntity(
     }
 
     if(physic != nullptr)
-    {
-        // Load body
-        element = physic->FirstChildElement("body");
-        b2BodyDef bodyDef;
-        if(std::string(element->Attribute("type")) == "static")
-            bodyDef.type = b2_staticBody;
-        else if(std::string(element->Attribute("type")) == "kinematic")
-            bodyDef.type = b2_kinematicBody;
-        else if(std::string(element->Attribute("type")) == "dynamic")
-            bodyDef.type = b2_dynamicBody;
-        bodyDef.position = b2Vec2(static_cast<float>(utility::toMeter(position.x)), static_cast<float>(utility::toMeter(position.y)));
-        bodyDef.angle = utility::toRadian<float, float>(element->FloatAttribute("angle"));
-        bodyDef.fixedRotation = element->BoolAttribute("fixedRotation");
-        bodyDef.angularDamping = element->BoolAttribute("angularDamping");
-        LevelFileLoader::parseKinematics(element, entity.get(), this, &templates.functions);
-
-        std::vector<std::unique_ptr<b2Shape>> shapes;
-        // Load shape
-        if(std::string(shape->Attribute("type")) == "polygon") // Load polygon
-        {
-            std::vector<b2Vec2> vertices;
-            // Iterate over the vertices
-            for(tinyxml2::XMLElement* vertexIterator = shape->FirstChildElement("vertex");
-                vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
-            {
-                vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
-                    utility::toMeter(vertexIterator->FloatAttribute("y"))));
-            }
-            // Construct the b2Shape
-            std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
-            ps->Set(vertices.data(), vertices.size());
-            shapes.push_back(std::move(ps));
-        }
-        else if(std::string(shape->Attribute("type")) == "complex_polygon") // Load polygon
-        {
-            for(auto polyIterator = shape->FirstChildElement("polygon");
-                polyIterator != nullptr; polyIterator = polyIterator->NextSiblingElement("polygon"))
-            {
-                std::vector<b2Vec2> vertices;
-                // Iterate over the vertices
-                for(auto vertexIterator = polyIterator->FirstChildElement("vertex");
-                    vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
-                {
-                    vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
-                        utility::toMeter(vertexIterator->FloatAttribute("y"))));
-                }
-                // Construct the b2Shape
-                std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
-                ps->Set(vertices.data(), vertices.size());
-                shapes.push_back(std::move(ps));
-            }
-        }
-        else if(std::string(shape->Attribute("type")) == "circle") // Load circle
-        {
-            std::unique_ptr<b2CircleShape> cs(new b2CircleShape);
-            cs->m_radius = utility::toMeter(shape->FloatAttribute("radius"));
-            shapes.push_back(std::move(cs));
-        }
-
-        // Load fixtures
-        element = physic->FirstChildElement("fixture");
-        b2FixtureDef fixtureDef;
-        //fixtureDef.shape = &shapes.g m_shapes.back().get();
-        fixtureDef.density = element->FloatAttribute("density");
-        fixtureDef.friction = element->FloatAttribute("friction");
-        fixtureDef.restitution = element->FloatAttribute("restitution");
-
-        entity->bindDefs(fixtureDef, shapes, bodyDef, &m_world);
-    }
+        parsePhysics(physic, shape, entity.get(), position, templates);
     
     if(auto collider = xml->FirstChildElement("onCollision"))
         parseCollider(entity.get(), collider, templates);
