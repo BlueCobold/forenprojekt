@@ -16,6 +16,7 @@ class LineLabel;
 class MenuSprite;
 class Slider;
 class InfoBox;
+class AnimationContainer;
 
 class MenuPanel : public Drawable
 {
@@ -54,6 +55,7 @@ private:
     void createLabel(const LineLabel& info);
     void createSprite(const MenuSprite& info);
     void createInputBox(const InputBoxInfo& info);
+    void createAnimationContainer(const AnimationContainer& info);
 
     sf::Vector2f m_position;
     std::vector<std::unique_ptr<MenuElement>> m_elements;

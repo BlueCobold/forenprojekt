@@ -5,6 +5,12 @@ AnimationContainer::AnimationContainer() :
 {
 }
 
+AnimationContainer::AnimationContainer(AnimationContainer&& toMove) :
+    MenuElement(-1, MenuElementType::Animation, sf::Vector2f(0, 0), sf::Vector2f(0, 0))
+{
+
+}
+
 float AnimationContainer::getValueOf(const std::string& name) const
 {
     auto match = m_variables.find(name);
@@ -47,4 +53,8 @@ void AnimationContainer::update(const sf::RenderWindow& screen, const sf::Vector
 void AnimationContainer::draw(const DrawParameter& param)
 {
     GraphicalObject::draw(param);
+}
+
+AnimationContainer& AnimationContainer::operator= (AnimationContainer&& toMove)
+{
 }
