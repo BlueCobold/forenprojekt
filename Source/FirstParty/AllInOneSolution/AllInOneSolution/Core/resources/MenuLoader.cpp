@@ -1,6 +1,7 @@
 #include "MenuLoader.hpp"
 #include "ResourceManager.hpp"
 #include "../gui/LineLabel.hpp"
+#include "LevelFileLoader.hpp"
  
 MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager)
 {
@@ -44,11 +45,12 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     parseLabels(elements, menuXml, resourceManager);
     parseImages(elements, menuXml, toolTip, resourceManager);
     parseInputBox(elements, menuXml, inputBoxStyle, resourceManager);
-    parseSubWindow(menu, menuXml, resourceManager, toolTip, sliderStyles, checkboxStyles, buttonStyles);
+    parseAnimationContainer(elements, menuXml, resourceManager);
+    parseSubWindow(std::move(menu), menuXml, resourceManager, toolTip, sliderStyles, checkboxStyles, buttonStyles);
     
-    menu.menuElements = elements;
+    menu.menuElements = std::move(elements);
 
-    return new MenuTemplate(menu);
+    return new MenuTemplate(std::move(menu));
 }
 
 void MenuLoader::parseButtons(
@@ -530,6 +532,29 @@ void MenuLoader::parseInputBox(MenuElements& elements, tinyxml2::XMLElement* men
             inputBox.position = sf::Vector2f(inputBoxXml->FloatAttribute("x"), inputBoxXml->FloatAttribute("y"));
             inputBox.size = sf::Vector2f(inputBoxXml->FloatAttribute("width"), inputBoxXml->FloatAttribute("height"));
             elements.infobox.push_back(inputBox);
+        }
+    }
+}
+
+void MenuLoader::parseAnimationContainer(
+    MenuElements& elements,
+    tinyxml2::XMLElement* menuXml,
+    ResourceManager& resourceManager)
+{
+    if(auto element = menuXml->FirstChildElement("elements"))
+    {
+        if(auto animationContainer = element->FirstChildElement("animationContainer"))
+        {
+            std::unique_ptr<AnimationContainer> animContainer;
+            std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
+            if(auto animations = animationContainer->FirstChildElement("animations"))
+            {
+                for(auto animation = animations->FirstChildElement("animation");
+                    animation != nullptr; 
+                    animation = animation->NextSiblingElement("animation"))
+                    animContainer->bindAnimation(std::move(LevelFileLoader::parseAnimation(animation, animContainer.get(), animContainer.get(), resourceManager, &functions)));
+            }
+            elements.animationContainer.push_back(std::move(animContainer));
         }
     }
 }

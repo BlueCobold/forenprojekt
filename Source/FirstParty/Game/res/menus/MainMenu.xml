@@ -9,5 +9,68 @@
 		<button id="2" text="gui_option" style="default" x="261" y="160" />
 		<button id="3" text="gui_credit" style="default" x="261" y="215" />
 		<button id="4" text="gui_close" style="default" x="261" y="270" />
+		<animationContainer id="5" x="0" y="0">
+				<animations>
+					<animation copies="7" texture="ball_twirl" srcy="32" width="32" height="32" midx="16" midy="16" rotate="true">
+						<rotation>
+							<mul>
+								<time />
+								<static value="60" />
+							</mul>
+						</rotation>
+						<position axis="x">
+							<mul>
+								<time />
+								<cache>
+									<random min="-200" max="200" />
+								</cache>
+							</mul>
+						</position>
+						<position axis="y">
+							<add>
+								<mul>
+									<cache>
+										<random min="-300" max="100" />
+									</cache>
+									<time />
+								</mul>
+								<mul>
+									<static value="200" />
+									<time />
+									<time />
+								</mul>
+							</add>
+						</position>
+
+						<color channel="alpha">
+							<step>
+								<sub>
+									<static value="2" />
+									<time />
+								</sub>
+								<stop />
+								<sub>
+									<static value="1" />
+									<ramp min="0.5" max="1">
+										<time />
+									</ramp>
+								</sub>
+							</step>
+						</color>
+
+						<frameindex frames="7">
+							<cache>
+								<setVar name="frame">
+									<add>
+										<var name="frame" />
+										<static value="1" />
+									</add>
+								</setVar>
+							</cache>
+						</frameindex>
+					</animation>
+				</animations>
+		</animationContainer>
+
 	</elements>
 </menu>

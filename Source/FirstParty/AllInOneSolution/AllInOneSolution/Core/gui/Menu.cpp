@@ -18,8 +18,8 @@ Menu::Menu(const MenuTemplate& menuTemplate,
            sf::RenderWindow& screen) :
         m_position(position),
         m_screen(screen),
-        m_template(menuTemplate),
-        m_panel(menuTemplate.menuElements, position)
+        m_template(std::move(menuTemplate)),
+        m_panel(std::move(menuTemplate.menuElements), position)
 {
     m_template.background.setPosition(m_position);
 

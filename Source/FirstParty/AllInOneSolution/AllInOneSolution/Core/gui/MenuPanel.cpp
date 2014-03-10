@@ -6,6 +6,7 @@
 #include "MenuSprite.hpp"
 #include "Slider.hpp"
 #include "InputBox.hpp"
+#include "AnimationContainer.hpp"
 
 MenuPanel::MenuPanel(const MenuElements& elements,
                      const sf::Vector2f& position) :
@@ -28,6 +29,9 @@ MenuPanel::MenuPanel(const MenuElements& elements,
     
     for(auto inputbox = begin(elements.infobox); inputbox != end(elements.infobox); ++inputbox)
         createInputBox(*inputbox);
+
+    for(auto animContainer = begin(elements.animationContainer); animContainer != end(elements.animationContainer); ++animContainer)
+        createAnimationContainer(*animContainer);
 
     setCorrelation();
     std::sort(m_elements.begin(), m_elements.end(), 
@@ -148,4 +152,10 @@ void MenuPanel::createInputBox(const InputBoxInfo& info)
                                                     info.style));
 
     m_elements.push_back(std::move(inputBox));
+}
+
+void MenuPanel::createAnimationContainer(const AnimationContainer& info)
+{
+    std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(info));
+    m_elements.push_back(std::move(animContainer));
 }

@@ -15,6 +15,7 @@
 #include "ToolTip.hpp"
 #include "InputBoxStyle.hpp"
 #include "../model/SoundObject.hpp"
+#include "AnimationContainer.hpp"
 
 struct ButtonInfo
 {
@@ -59,6 +60,7 @@ struct MenuElements
     std::vector<LineLabel> labels;
     std::vector<MenuSprite> sprites;
     std::vector<InputBoxInfo> infobox;
+    std::vector<std::unique_ptr<AnimationContainer*>> animationContainer;
 };
 
 struct SubWindowStyle

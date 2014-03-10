@@ -24,6 +24,22 @@ public:
     {
     }
 
+    GraphicalObject(const GraphicalObject& rhs)
+    {
+        m_hide = rhs.m_hide;
+        for(auto it = std::begin(rhs.m_animations); it != std::end(rhs.m_animations); ++it)
+            m_animations.push_back(std::unique_ptr<Animation>(it->get()->clone()));
+    }
+
+    GraphicalObject& operator=(const GraphicalObject& rhs)
+    {
+        m_hide = rhs.m_hide;
+        for(auto it = std::begin(rhs.m_animations); it != std::end(rhs.m_animations); ++it)
+            m_animations.push_back(std::unique_ptr<Animation>(it->get()->clone()));
+
+        return *this;
+    }
+
     void hide()
     {
         m_hide = true;

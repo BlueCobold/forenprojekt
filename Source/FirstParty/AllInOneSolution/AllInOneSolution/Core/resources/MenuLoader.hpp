@@ -73,6 +73,11 @@ private:
         std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles,
         std::unordered_map<std::string, ButtonStyle>& buttonStyles);
 
+    static void parseAnimationContainer(
+        MenuElements& elements,
+        tinyxml2::XMLElement* menuXml,
+        ResourceManager& resourceManager);
+
     static std::unordered_map<std::string, ButtonStyle> parseButtonStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
     static std::unordered_map<std::string, SoundObject> parseSounds(tinyxml2::XMLElement* menuXml, SoundManager& soundManager);
     static std::unordered_map<std::string, CheckBoxStyle> parseCheckBoxStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
