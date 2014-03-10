@@ -145,7 +145,7 @@ private:
     virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse);
     void killTarget(Entity* target);
     void killBonusTarget(Entity* target);
-    void prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn);
+    void prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn, float angle = 0);
 
     void handleAutoRespawn();
 
@@ -166,7 +166,7 @@ private:
 
     std::unique_ptr<Entity> createEntity(
         tinyxml2::XMLElement* xml,
-        const sf::Vector2u& position,
+        sf::Vector2u& position,
         tinyxml2::XMLElement* shape,
         tinyxml2::XMLElement* physic,
         Templates& templates,
@@ -175,12 +175,12 @@ private:
     std::unique_ptr<Entity> parseEntityFromTemplate(
         std::string name,
         Templates& templates,
-        const sf::Vector2u& position,
+        sf::Vector2u& position,
         bool bindInstantly = true);
 
     std::unique_ptr<Entity> parseEntity(
         tinyxml2::XMLElement* xml,
-        const sf::Vector2u& position,
+        sf::Vector2u& position,
         Templates& templates,
         bool bindInstantly = true);
     
@@ -212,7 +212,7 @@ private:
         tinyxml2::XMLElement* xml,
         Templates& templates);
 
-    std::unique_ptr<Entity> parseBallAnimation(
+    std::unique_ptr<Entity> parseEntityReference(
         const std::string& key,
         tinyxml2::XMLElement* xml,
         Templates& templates);

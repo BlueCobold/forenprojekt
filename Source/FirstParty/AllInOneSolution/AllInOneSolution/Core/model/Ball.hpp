@@ -33,7 +33,6 @@ public:
     bool getBallLost() const;
 
     const Entity* getSpawnAnimationEntity() const;
-    const Entity* getKillAnimationEntity() const;
 
     void blowUp();
     bool blownUp() const;
@@ -58,7 +57,6 @@ private:
     bool m_resetSpeedOnTeleport;
     b2Vec2 m_teleportPosition;
     const Entity* m_spawnAnimationEntity;
-    const Entity* m_killAnimationEntity;
     std::function<void()> m_checkpointHandler;
     std::unique_ptr<ParticleTrail> m_trail;
 

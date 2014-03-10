@@ -8,7 +8,6 @@ Ball::Ball(float resetTime, float stuckBallSpeed, const Entity* spawnAnimationEn
     m_blowUpTime(1.0f),
     Entity(Entity::Ball),
     m_spawnAnimationEntity(spawnAnimationEntity),
-    m_killAnimationEntity(killAnimationEntity),
     m_lostBall(false),
     m_ballResetTime(0.0f),
     m_blownUp(false),
@@ -18,6 +17,7 @@ Ball::Ball(float resetTime, float stuckBallSpeed, const Entity* spawnAnimationEn
     m_stuckBallTime(5.f)
 { 
     Entity::setValueOf("hitTeeterTime", 0.f);
+    bindKillAnimationEntity(killAnimationEntity);
 }
 
 void Ball::autoResetBall(const float elapsedTime)
@@ -145,11 +145,6 @@ void Ball::draw(const DrawParameter& params)
 const Entity* Ball::getSpawnAnimationEntity() const
 {
     return m_spawnAnimationEntity;
-}
-
-const Entity* Ball::getKillAnimationEntity() const
-{
-    return m_killAnimationEntity;
 }
 
 void Ball::blowUp()

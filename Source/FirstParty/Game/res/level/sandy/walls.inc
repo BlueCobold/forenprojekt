@@ -2,10 +2,10 @@
 	<templates>
 		<shapes>
 			<shape name="wall" type="polygon">
-				<vertex x="0" y="0" />
-				<vertex x="60" y="0" />
-				<vertex x="60" y="60" />
-				<vertex x="0" y="60" />
+				<vertex x="-30" y="-30" />
+				<vertex x="30" y="-30" />
+				<vertex x="30" y="30" />
+				<vertex x="-30" y="30" />
 			</shape>
 			<shape name="high_wall" type="polygon">
 				<vertex x="1" y="1" />
@@ -58,6 +58,7 @@
 
 		<entities>
 			<entity respawnable="true" stopWithLastAnimation="true" name="wall_hit_particles" rep="--" collideWithBall="false">
+				<constants scale="1" xoffset="0" yoffset="0" />
 				<animations>
 					<animation copies="7" texture="sparkles" srcx="256" width="32" height="32" midx="16" midy="16" rotate="true">
 						<constants size="1" time="0"/>
@@ -102,7 +103,10 @@
 						<scale axis="x">
 							<cache>
 								<setVar name="size">
-									<random min="0.2" max="0.7" />
+									<mul>
+										<random min="0.2" max="0.7" />
+										<var name="scale"/>
+									</mul>
 								</setVar>
 							</cache>
 						</scale>
@@ -146,7 +150,7 @@
 					<spawnEntity name="wall_hit_particles" location="contact" />
 				</onCollision>
 			</entity>
-			<entity base="base_wall" name="small_quad" rep="sq">
+			<entity base="base_wall" name="small_quad" rep="sq" offsetx="30" offsety="30">
 				<physics name="wall" shape="wall" />
 			</entity>
 			<entity base="base_wall" name="high_quad" rep="hq">
@@ -170,7 +174,7 @@
 
 			<entity base="small_quad" name="wall_1" rep="w1">
 				<animations>
-					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
+					<animation texture="small_quads" midx="30" midy="30" srcy="0" width="60" height="60" rotate="false">
 						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
@@ -179,7 +183,7 @@
 			</entity>
 			<entity base="small_quad" name="wall_2" rep="w2">
 				<animations>
-					<animation texture="small_quads" srcy="60" width="60" height="60" rotate="false">
+					<animation texture="small_quads" midx="30" midy="30" srcy="60" width="60" height="60" rotate="false">
 						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
@@ -188,7 +192,7 @@
 			</entity>
 			<entity base="small_quad" name="wall_3" rep="w3">
 				<animations>
-					<animation texture="small_quads" srcy="120" width="60" height="60" rotate="false">
+					<animation texture="small_quads" midx="30" midy="30" srcy="120" width="60" height="60" rotate="false">
 						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
@@ -197,7 +201,7 @@
 			</entity>
 			<entity base="small_quad" name="wall_4" rep="w4">
 				<animations>
-					<animation texture="small_quads" srcy="180" width="60" height="60" rotate="false">
+					<animation texture="small_quads" midx="30" midy="30" srcy="180" width="60" height="60" rotate="false">
 						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
@@ -206,7 +210,7 @@
 			</entity>
 			<entity base="small_quad" name="wall_5" rep="w5">
 				<animations>
-					<animation texture="small_quads" srcy="240" width="60" height="60" rotate="false">
+					<animation texture="small_quads" midx="30" midy="30" srcy="240" width="60" height="60" rotate="false">
 						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
@@ -215,7 +219,7 @@
 			</entity>
 			<entity base="small_quad" name="wall_6" rep="w6">
 				<animations>
-					<animation texture="small_quads" srcy="300" width="60" height="60" rotate="false">
+					<animation texture="small_quads" midx="30" midy="30" srcy="300" width="60" height="60" rotate="false">
 						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>

@@ -259,6 +259,9 @@ void Level::cleanupKilledEntities()
         auto entity = it->get();
         if(entity->killed())
         {
+            if(entity->getKillAnimationEntity() != nullptr)
+                prepareEntityForSpawn(entity->getPosition(), entity->getKillAnimationEntity(), entity->getAngle());
+
             entity->unbindBody();
             if(entity->isRespawnable())
             {

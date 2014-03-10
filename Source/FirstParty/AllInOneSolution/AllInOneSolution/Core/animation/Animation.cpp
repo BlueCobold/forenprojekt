@@ -165,19 +165,24 @@ void Animation::draw(const DrawParameter& param)
 
 void Animation::bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y)
 {
-    m_xPositionProvider = std::move(x);
-    m_yPositionProvider = std::move(y);
+    if(x)
+        m_xPositionProvider = std::move(x);
+    if(y)
+        m_yPositionProvider = std::move(y);
 }
 
 void Animation::bindRotationController(std::unique_ptr<ValueProvider> provider)
 {
-    m_rotationProvider = std::move(provider);
+    if(provider)
+        m_rotationProvider = std::move(provider);
 }
 
 void Animation::bindScaleController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y)
 {
-    m_xScaleProvider = std::move(x);
-    m_yScaleProvider = std::move(y);
+    if(x)
+        m_xScaleProvider = std::move(x);
+    if(y)
+        m_yScaleProvider = std::move(y);
 }
 
 void Animation::bindColorController(std::unique_ptr<ValueProvider> red,
@@ -185,10 +190,14 @@ void Animation::bindColorController(std::unique_ptr<ValueProvider> red,
     std::unique_ptr<ValueProvider> blue,
     std::unique_ptr<ValueProvider> alpha)
 {
-    m_colorProviders[Red] = std::move(red);
-    m_colorProviders[Green] = std::move(green);
-    m_colorProviders[Blue] = std::move(blue);
-    m_colorProviders[Alpha] = std::move(alpha);
+    if(red)
+        m_colorProviders[Red] = std::move(red);
+    if(green)
+        m_colorProviders[Green] = std::move(green);
+    if(blue)
+        m_colorProviders[Blue] = std::move(blue);
+    if(alpha)
+        m_colorProviders[Alpha] = std::move(alpha);
 }
 
 void Animation::setLayout(
