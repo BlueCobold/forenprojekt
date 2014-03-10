@@ -216,6 +216,8 @@ void Level::parseTemplates(
     {
         auto values = std::move(LevelFileLoader::parseList(functions, "override", "newRep"));
         templates.overrides.insert(begin(values), end(values));
+        values = std::move(LevelFileLoader::parseList(functions, "override", "newName"));
+        templates.overrides.insert(begin(values), end(values));
     }
 
     for(auto child = xmlTemplates->FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
@@ -245,7 +247,7 @@ std::string buildOriginal(const std::string& targetName, const std::string& sour
 std::unique_ptr<Entity> Level::parseEntityFromTemplate(
     std::string name,
     Templates& templates,
-    const sf::Vector2u& position,
+    sf::Vector2u& position,
     bool bindInstantly)
 {
     auto match = templates.entities.find(name);
@@ -253,9 +255,18 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
     {
         for(auto it = begin(templates.overrides); it != end(templates.overrides); ++it)
         {
-            auto originalName = buildOriginal(it->first, it->second->Attribute("rep"), name);
-            if(originalName.empty())
+            std::string originalName;
+            if(auto xmlName = it->second->Attribute("rep"))
+                originalName = buildOriginal(it->first, xmlName, name);
+            if(originalName.empty() || originalName == name)
+            {
+                if(auto oldName = it->second->Attribute("name"))
+                    if(it->first == name)
+                        originalName = oldName;
+            }
+            if(originalName.empty() || originalName == name)
                 continue;
+
             match = templates.entities.find(originalName);
             std::unique_ptr<Entity> original;
             // found some origin?
@@ -294,6 +305,14 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
                         LevelFileLoader::parseConstants(constants, animation);
                 });
             }
+            if(auto kill = parseEntityReference("onKill", xml, templates))
+            {
+                entity->bindKillAnimationEntity(kill.get());
+                m_unspawnedEntities.push_back(EntitySpawn(std::move(kill)));
+            }
+            if(auto name = xml->Attribute("newName"))
+                entity->setName(name);
+
             tinyxml2::XMLElement* physic = nullptr;
             tinyxml2::XMLElement* shape = nullptr;
             findPhysicAndShapeTag(physic, shape, xml, templates);
@@ -336,27 +355,26 @@ void Level::findPhysicAndShapeTag(tinyxml2::XMLElement*& physic, tinyxml2::XMLEl
 
 std::unique_ptr<Entity> Level::parseEntity(
     tinyxml2::XMLElement* entity,
-    const sf::Vector2u& position,
+    sf::Vector2u& position,
     Templates& templates,
     bool bindInstantly)
 {
 
-    sf::Vector2u pos(position);
     if(entity->Attribute("x") != nullptr)
-        pos.x = entity->IntAttribute("x");
+        position.x = entity->IntAttribute("x");
     if(entity->Attribute("y") != nullptr)
-        pos.y = entity->IntAttribute("y");
+        position.y = entity->IntAttribute("y");
     if(entity->Attribute("offsetx") != nullptr)
-        pos.x += entity->IntAttribute("offsetx");
+        position.x += entity->IntAttribute("offsetx");
     if(entity->Attribute("offsety") != nullptr)
-        pos.y += entity->IntAttribute("offsety");
+        position.y += entity->IntAttribute("offsety");
 
     // Identify the needed parts of an entity
     tinyxml2::XMLElement* physic = nullptr;
     tinyxml2::XMLElement* shape = nullptr;
     findPhysicAndShapeTag(physic, shape, entity, templates);
 
-    return createEntity(entity, pos, shape, physic, templates, bindInstantly);
+    return createEntity(entity, position, shape, physic, templates, bindInstantly);
 }
 
 bool Level::validate(const tinyxml2::XMLDocument& document)
@@ -446,7 +464,7 @@ void Level::parsePhysics(tinyxml2::XMLElement* physic,
 
 std::unique_ptr<Entity> Level::createEntity(
     tinyxml2::XMLElement* xml,
-    const sf::Vector2u& position,
+    sf::Vector2u& position,
     tinyxml2::XMLElement* shape,
     tinyxml2::XMLElement* physic,
     Templates& templates,
@@ -461,41 +479,49 @@ std::unique_ptr<Entity> Level::createEntity(
         entity = parseEntityFromTemplate(name, templates, position, false);
     else
     {
+        std::string typeName;
         if(xml->Attribute("type") != nullptr)
+            typeName = xml->Attribute("type");
+
+        if(typeName == "teeter")
+            entity = std::unique_ptr<Teeter>(new Teeter(m_config.get<float>("MouseScale")));
+        else if(typeName == "ball")
         {
-            if(std::string(xml->Attribute("type")) == "teeter")
-                entity = std::unique_ptr<Teeter>(new Teeter(m_config.get<float>("MouseScale")));
-            else if(std::string(xml->Attribute("type")) == "ball")
-            {
-                std::unique_ptr<Entity> spawn = parseBallAnimation("onRespawn", xml, templates);
-                std::unique_ptr<Entity> kill = parseBallAnimation("onKill", xml, templates);
-                float autoKillSpeed = xml->FloatAttribute("autokillspeed");
-                auto ball = new Ball(m_config.get<float>("BallResetTime"), autoKillSpeed, spawn.get(), kill.get());
-                ball->bindTrail(LevelFileLoader::parseTrail(ball, xml, m_resourceManager, &templates.functions));
-                entity = std::unique_ptr<Ball>(ball);
+            std::unique_ptr<Entity> spawn = parseEntityReference("onRespawn", xml, templates);
+            std::unique_ptr<Entity> kill = parseEntityReference("onKill", xml, templates);
+            float autoKillSpeed = xml->FloatAttribute("autokillspeed");
+            auto ball = new Ball(m_config.get<float>("BallResetTime"), autoKillSpeed, spawn.get(), kill.get());
+            ball->bindTrail(LevelFileLoader::parseTrail(ball, xml, m_resourceManager, &templates.functions));
+            entity = std::unique_ptr<Ball>(ball);
+            if(spawn != nullptr)
                 m_unspawnedEntities.push_back(EntitySpawn(std::move(spawn)));
+            if(kill != nullptr)
+                m_unspawnedEntities.push_back(EntitySpawn(std::move(kill)));
+        }
+        else if(typeName == "target")
+        {
+            entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable, autoStop));
+            m_normalTargetPoints = xml->IntAttribute("points");
+            if(m_normalTargetPoints == 0)
+                m_normalTargetPoints = 100;
+            m_totalTarget++;
+        }
+        else if(typeName == "bonustarget")
+        {
+            entity = std::unique_ptr<Entity>(new Entity(Entity::BonusTarget, respawnable, autoStop));
+            m_bonusTargetPoints = xml->IntAttribute("points");
+            if(m_bonusTargetPoints == 0)
+                m_bonusTargetPoints = 10;
+        }
+        else // No type or unknown type specified => normal Entity
+        {
+            entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable, autoStop));
+            if(auto kill = parseEntityReference("onKill", xml, templates))
+            {
+                entity->bindKillAnimationEntity(kill.get());
                 m_unspawnedEntities.push_back(EntitySpawn(std::move(kill)));
             }
-            else if(std::string(xml->Attribute("type")) == "target")
-            {
-                entity = std::unique_ptr<Entity>(new Entity(Entity::Target, respawnable, autoStop));
-                m_normalTargetPoints = xml->IntAttribute("points");
-                if(m_normalTargetPoints == 0)
-                    m_normalTargetPoints = 100;
-                m_totalTarget++;
-            }
-            else if(std::string(xml->Attribute("type")) == "bonustarget")
-            {
-                entity = std::unique_ptr<Entity>(new Entity(Entity::BonusTarget, respawnable, autoStop));
-                m_bonusTargetPoints = xml->IntAttribute("points");
-                if(m_bonusTargetPoints == 0)
-                    m_bonusTargetPoints = 10;
-            }
-            else
-                entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable, autoStop));
         }
-        else // No type specified == normal Entity
-            entity = std::unique_ptr<Entity>(new Entity(Entity::None, respawnable, autoStop));
     }
 
     entity->setName(std::string(xml->Attribute("name")));
@@ -775,7 +801,7 @@ void Level::parseCollisionFilter(
     entity->bindCollisionFilter(getCollisionFilter(entity, xml->FirstChildElement(), templates));
 }
 
-std::unique_ptr<Entity> Level::parseBallAnimation(
+std::unique_ptr<Entity> Level::parseEntityReference(
     const std::string& key,
     tinyxml2::XMLElement* xml,
     Templates& templates)
@@ -796,13 +822,14 @@ std::unique_ptr<Entity> Level::parseBallAnimation(
     return spawned;
 }
 
-void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn)
+void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn, float angle)
 {
     for(auto it = std::begin(m_unspawnedEntities); it != std::end(m_unspawnedEntities); ++it)
     {
         if(it->target.get() == spawn)
         {
             it->target->setPosition(position);
+            it->target->setAnimationAngle(angle);
             m_entitiesToSpawn.push_back(std::move(it->target));
             m_unspawnedEntities.erase(it);
             //it->target.reset();

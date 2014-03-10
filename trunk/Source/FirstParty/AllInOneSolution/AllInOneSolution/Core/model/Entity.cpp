@@ -13,7 +13,9 @@ Entity::Entity(Type type, bool respawnable, bool autoKill) :
     m_updatingAni(nullptr),
     m_collideWithBall(true),
     m_respawnable(respawnable),
-    m_autoKill(autoKill)
+    m_autoKill(autoKill),
+    m_killAnimationEntity(nullptr),
+    m_animationAngle(0)
 {
 }
 
@@ -27,6 +29,13 @@ void Entity::update(const float value)
     {
         updateCurrentTime(value);
         updateKinematics(getPassedTime(), value - m_lastTime);
+
+        auto pos = getPosition();
+        auto x = utility::toPixel(pos.x);
+        auto y = utility::toPixel(pos.y);
+        setValueOf("position.x", x);
+        setValueOf("position.y", y);
+
         bool running = false;
         for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
         {
@@ -34,9 +43,11 @@ void Entity::update(const float value)
             if(ani->isStopped())
                 continue;
             m_updatingAni = ani;
-            ani->setPosition(utility::toPixel(getPosition().x), utility::toPixel(getPosition().y));
+            ani->setPosition(x, y);
             if(getBody() != nullptr)
                 ani->setRotation(getBody()->GetAngle());
+            else if(m_animationAngle != 0)
+                ani->setRotation(m_animationAngle);
             ani->update();
             running |= !ani->isStopped();
         }
@@ -46,7 +57,7 @@ void Entity::update(const float value)
         if(!running && m_autoKill)
             kill();
     }
-    
+
     if(isStopped())
         kill();
 }
@@ -161,4 +172,19 @@ void Entity::applyOverrides(const std::function<void(Animation*)> function)
 {
     for(auto it = begin(getAnimations()); it != end(getAnimations()); ++it)
         function(it->get());
+}
+
+const Entity* Entity::getKillAnimationEntity() const
+{
+    return m_killAnimationEntity;
+}
+
+void Entity::bindKillAnimationEntity(const Entity* entity)
+{
+    m_killAnimationEntity = entity;
+}
+
+void Entity::setAnimationAngle(const float angle)
+{
+    m_animationAngle = angle;
 }

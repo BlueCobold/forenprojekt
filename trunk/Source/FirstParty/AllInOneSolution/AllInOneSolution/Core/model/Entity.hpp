@@ -34,7 +34,9 @@ private:
     std::map<std::string, float> m_variables;
     bool m_respawnable;
     bool m_autoKill;
+    float m_animationAngle;
     std::unique_ptr<SoundObject> m_collisionSound;
+    const Entity* m_killAnimationEntity;
 
 public:
 
@@ -64,6 +66,10 @@ public:
     bool shouldCollide(Entity* partner);
 
     void applyOverrides(const std::function<void(Animation*)> function);
+    void setAnimationAngle(const float angle);
+
+    void bindKillAnimationEntity(const Entity* entity);
+    const Entity* getKillAnimationEntity() const;
 };
 
 #endif // ENTITY_HPP

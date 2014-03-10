@@ -312,11 +312,16 @@ std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(tiny
             auto function = functions->find(child->Attribute("name"));
             if(function == end(*functions))
                 throw std::runtime_error(utility::replace(utility::translateKey("NoTemplate"), child->Attribute("name")));
-            return parseProviders(function->second, animated, handler, stoppable, functions);
+            auto subs = parseProviders(function->second, animated, handler, stoppable, functions);
+            for(auto sub = begin(subs); sub != end(subs); ++sub)
+                providers.push_back(std::move(*sub));
         }
-        std::unique_ptr<ValueProvider> provider = parseProvider(child, animated, handler, stoppable, functions);
-        if(provider != nullptr)
-            providers.push_back(std::move(provider));
+        else
+        {
+            std::unique_ptr<ValueProvider> provider = parseProvider(child, animated, handler, stoppable, functions);
+            if(provider != nullptr)
+                providers.push_back(std::move(provider));
+        }
     }
     return providers;
 }
@@ -433,8 +438,11 @@ std::unordered_map<std::string, tinyxml2::XMLElement*> LevelFileLoader::parseLis
     for(auto iterator = xml->FirstChildElement(name.c_str());
         iterator != nullptr; iterator = iterator->NextSiblingElement(name.c_str()))
     {
-        tempList.insert(std::make_pair<std::string, tinyxml2::XMLElement*>(
-            std::string(iterator->Attribute(key.c_str())), iterator));
+        if(auto name = iterator->Attribute(key.c_str()))
+        {
+            tempList.insert(std::make_pair<std::string, tinyxml2::XMLElement*>(
+                std::string(name), iterator));
+        }
     }
 
     return std::move(tempList);
