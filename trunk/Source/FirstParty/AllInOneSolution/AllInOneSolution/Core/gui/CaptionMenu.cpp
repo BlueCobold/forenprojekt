@@ -3,7 +3,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-CaptionMenu::CaptionMenu(const MenuTemplate& menuTemplate,
+CaptionMenu::CaptionMenu(MenuTemplate& menuTemplate,
                          const sf::Vector2f& position,
                          sf::RenderWindow& screen) :
     Menu(menuTemplate, position, screen),

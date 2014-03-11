@@ -35,7 +35,7 @@ public:
     sf::Font* getFont(const std::string& key);
     sf::SoundBuffer* getSoundBuffer(const std::string& key) override;
     BitmapFont* getBitmapFont(const std::string& key);
-    const MenuTemplate* getMenuTemplate(const std::string& name);
+    MenuTemplate* getMenuTemplate(const std::string& name);
     SoundManager& getSoundManager();
     SpriteSheet* getSpriteSheet(const std::string& name);
 

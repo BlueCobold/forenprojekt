@@ -16,7 +16,7 @@ SubWindow::SubWindow(const int id,
                      const sf::Vector2f& size,
                      const sf::Vector2f& offset,
                      const int innerHeight,
-                     const MenuElements& elements,
+                     MenuElements& elements,
                      const SubWindowStyle& style) :
     MenuElement(id, MenuElementType::SubWindow, position, offset),
     m_panel(elements, position),
@@ -151,7 +151,7 @@ void SubWindow::update(const sf::RenderWindow& screen, const sf::Vector2i& mouse
     if(mouseRect.contains(sf::Mouse::getPosition(screen)))
         m_panel.update(screen, getMouseOffset(screen));
     else
-        m_panel.update(screen,static_cast<sf::Vector2i>(screen.getSize()));
+        m_panel.update(screen, static_cast<sf::Vector2i>(screen.getSize()));
 }
 
 void SubWindow::onPositionChanged()

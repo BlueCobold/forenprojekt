@@ -46,7 +46,7 @@ BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
     throw std::runtime_error(utility::replace(utility::translateKey("UnknownBitmapFont"), key));
 }
 
-const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& name)
+MenuTemplate* ResourceManager::getMenuTemplate(const std::string& name)
 {
     auto menuEntry = m_menuKeys.find(name);
     if(menuEntry != end(m_menuKeys) && menuEntry->first == name)

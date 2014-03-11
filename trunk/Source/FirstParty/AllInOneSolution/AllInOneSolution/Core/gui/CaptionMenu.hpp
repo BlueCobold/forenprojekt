@@ -9,7 +9,7 @@ class CaptionMenu : public Menu
 {
 public:
 
-    CaptionMenu(const MenuTemplate& menuTemplate,
+    CaptionMenu(MenuTemplate& menuTemplate,
                 const sf::Vector2f& position,
                 sf::RenderWindow& screen);
 

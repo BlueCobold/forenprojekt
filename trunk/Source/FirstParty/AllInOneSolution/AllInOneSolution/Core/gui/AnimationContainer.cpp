@@ -54,7 +54,3 @@ void AnimationContainer::draw(const DrawParameter& param)
 {
     GraphicalObject::draw(param);
 }
-
-AnimationContainer& AnimationContainer::operator= (AnimationContainer&& toMove)
-{
-}
