@@ -46,7 +46,7 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     parseImages(elements, menuXml, toolTip, resourceManager);
     parseInputBox(elements, menuXml, inputBoxStyle, resourceManager);
     parseAnimationContainer(elements, menuXml, resourceManager);
-    parseSubWindow(std::move(menu), menuXml, resourceManager, toolTip, sliderStyles, checkboxStyles, buttonStyles);
+    parseSubWindow(menu, menuXml, resourceManager, toolTip, sliderStyles, checkboxStyles, buttonStyles);
     
     menu.menuElements = std::move(elements);
 
@@ -269,8 +269,8 @@ void MenuLoader::parseSubWindow(MenuTemplate& menu,
             parseSliders(ownElements, subXml, sliderStyles, resourceManager);
             parseLabels(ownElements, subXml, resourceManager);
             parseImages(ownElements, subXml, toolTip, resourceManager);
-            subWindowInfo.menuElements = ownElements;
-            menu.subWindow.push_back(subWindowInfo);
+            subWindowInfo.menuElements = std::move(ownElements);
+            menu.subWindow.push_back(std::move(subWindowInfo));
         }
     }
 }
@@ -545,7 +545,7 @@ void MenuLoader::parseAnimationContainer(
     {
         if(auto animationContainer = element->FirstChildElement("animationContainer"))
         {
-            std::unique_ptr<AnimationContainer> animContainer;
+            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer());
             std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
             if(auto animations = animationContainer->FirstChildElement("animations"))
             {

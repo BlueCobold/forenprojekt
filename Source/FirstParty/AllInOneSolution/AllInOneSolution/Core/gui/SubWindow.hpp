@@ -29,7 +29,7 @@ public:
               const sf::Vector2f& size,
               const sf::Vector2f& offset,
               const int innerHeight,
-              const MenuElements& elements,
+              MenuElements& elements,
               const SubWindowStyle& style);
 
     virtual void draw(const DrawParameter& params) override;

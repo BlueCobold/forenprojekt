@@ -13,7 +13,7 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-Menu::Menu(const MenuTemplate& menuTemplate,
+Menu::Menu(MenuTemplate& menuTemplate,
            const sf::Vector2f& position,
            sf::RenderWindow& screen) :
         m_position(position),
@@ -25,7 +25,7 @@ Menu::Menu(const MenuTemplate& menuTemplate,
 
     m_size = sf::Vector2i(m_template.background.getTextureRect().width, m_template.background.getTextureRect().height);
 
-    for(auto info = begin(menuTemplate.subWindow); info != end(menuTemplate.subWindow); ++info)
+    for(auto info = begin(m_template.subWindow); info != end(m_template.subWindow); ++info)
     {
         std::unique_ptr<SubWindow> subWindow(new SubWindow(info->id, m_position, info->size, info->position, info->innerHeight, info->menuElements, info->style));
         m_panel.add(std::move(subWindow));
@@ -43,9 +43,7 @@ const sf::Vector2i& Menu::getSize() const
 void Menu::setPosition(const sf::Vector2f& position)
 {
     m_position = position;
-
     m_template.background.setPosition(m_position);
-
     m_panel.setPosition(position);
 }
 
@@ -142,6 +140,7 @@ void Menu::changePressedSprite(const int id, const sf::Sprite& sprite)
 {
     getButton(id).changePressedSprite(sprite);
 }
+
 InputBox& Menu::getInputBox(int id) const
 {
     return *find<InputBox>(id, MenuElementType::InputBox);

@@ -12,52 +12,13 @@
 		<animationContainer id="5" x="0" y="0">
 				<animations>
 					<animation copies="7" texture="ball_twirl" srcy="32" width="32" height="32" midx="16" midy="16" rotate="true">
+					<constants frame="0" />
 						<rotation>
 							<mul>
 								<time />
 								<static value="60" />
 							</mul>
 						</rotation>
-						<position axis="x">
-							<mul>
-								<time />
-								<cache>
-									<random min="-200" max="200" />
-								</cache>
-							</mul>
-						</position>
-						<position axis="y">
-							<add>
-								<mul>
-									<cache>
-										<random min="-300" max="100" />
-									</cache>
-									<time />
-								</mul>
-								<mul>
-									<static value="200" />
-									<time />
-									<time />
-								</mul>
-							</add>
-						</position>
-
-						<color channel="alpha">
-							<step>
-								<sub>
-									<static value="2" />
-									<time />
-								</sub>
-								<stop />
-								<sub>
-									<static value="1" />
-									<ramp min="0.5" max="1">
-										<time />
-									</ramp>
-								</sub>
-							</step>
-						</color>
-
 						<frameindex frames="7">
 							<cache>
 								<setVar name="frame">

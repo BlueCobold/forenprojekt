@@ -5,6 +5,7 @@
 
 #include "MenuTemplate.hpp"
 #include "../rendering/Drawable.hpp"
+#include "../animation/TimedObject.hpp"
 
 #include <functional>
 #include <string>
@@ -22,7 +23,7 @@ class MenuPanel : public Drawable
 {
 public:
 
-    MenuPanel(const MenuElements& elements, const sf::Vector2f& position);
+    MenuPanel(MenuElements& elements, const sf::Vector2f& position);
 
     virtual void setPosition(const sf::Vector2f& position);
     const sf::Vector2f& getPosition() const;
@@ -55,7 +56,7 @@ private:
     void createLabel(const LineLabel& info);
     void createSprite(const MenuSprite& info);
     void createInputBox(const InputBoxInfo& info);
-    void createAnimationContainer(const AnimationContainer& info);
+    void createAnimationContainer(std::unique_ptr<AnimationContainer>& info);
 
     sf::Vector2f m_position;
     std::vector<std::unique_ptr<MenuElement>> m_elements;

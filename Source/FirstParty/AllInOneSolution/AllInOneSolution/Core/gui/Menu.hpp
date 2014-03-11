@@ -6,6 +6,7 @@
 #include "MenuPanel.hpp"
 #include "MenuTemplate.hpp"
 #include "../rendering/Drawable.hpp"
+#include "../animation/TimedObject.hpp"
 #include <SFML/System/Vector2.hpp>
 
 #include <functional>
@@ -26,20 +27,17 @@ class Menu : public Drawable
 {
 public:
 
-    Menu(const MenuTemplate& menuTemplate,
+    Menu(MenuTemplate& menuTemplate,
          const sf::Vector2f& position,
          sf::RenderWindow& screen);
 
     virtual ~Menu();
 
     virtual void draw(const DrawParameter& params) override;
-
     virtual void update(const sf::RenderWindow& screen);
 
     virtual void setPosition(const sf::Vector2f& position);
-
     const sf::Vector2f& getPosition() const;
-
     const sf::Vector2i& getSize() const;
 
     void registerOnClick(std::function<void(const Button& sender)> callback);

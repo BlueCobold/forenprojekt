@@ -19,8 +19,6 @@
 
 struct ButtonInfo
 {
-public:
-
     ButtonStyle style;
     sf::Vector2f position;
     std::string textResourceKey;
@@ -60,7 +58,32 @@ struct MenuElements
     std::vector<LineLabel> labels;
     std::vector<MenuSprite> sprites;
     std::vector<InputBoxInfo> infobox;
-    std::vector<std::unique_ptr<AnimationContainer*>> animationContainer;
+    std::vector<std::unique_ptr<AnimationContainer>> animationContainer;
+
+    MenuElements(){};
+
+    MenuElements& operator= (MenuElements&& other)
+    {
+        move(other);
+        return *this;
+    }
+
+    MenuElements(MenuElements&& other)
+    {
+        move(other);
+    }
+
+private:
+    void move(MenuElements& other)
+    {
+        buttons = std::move(other.buttons);
+        checkboxes = std::move(other.checkboxes);
+        slider = std::move(other.slider);
+        labels = std::move(other.labels);
+        sprites = std::move(other.sprites);
+        infobox = std::move(other.infobox);
+        animationContainer = std::move(other.animationContainer);
+    }
 };
 
 struct SubWindowStyle
@@ -78,6 +101,30 @@ struct SubWindowInfo
     int innerHeight;
     int id;
     SubWindowStyle style;
+
+    SubWindowInfo(){};
+
+    SubWindowInfo(SubWindowInfo&& other)
+    {
+        move(other);
+    }
+
+    SubWindowInfo& operator= (SubWindowInfo&& other)
+    {
+        move(other);
+        return *this;
+    }
+
+private:
+    void move(SubWindowInfo& other)
+    {
+        menuElements = std::move(other.menuElements);
+        position = other.position;
+        size = other.size;
+        innerHeight = other.innerHeight;
+        id = other.id;
+        style = other.style;
+    }
 };
 
 struct MenuTemplate
@@ -88,6 +135,30 @@ struct MenuTemplate
     BitmapFont* captionFont;
     sf::Vector2f captionOffset;
     sf::Sprite background;
+
+    MenuTemplate(){}
+    
+    MenuTemplate(MenuTemplate&& other)
+    {
+        move(other);
+    }
+
+    MenuTemplate& operator= (MenuTemplate&& other)
+    {
+        move(other);
+        return *this;
+    }
+
+private:
+    void move(MenuTemplate& other)
+    {
+        menuElements = std::move(other.menuElements);
+        subWindow = std::move(other.subWindow);
+        captionResourceKey = other.captionResourceKey;
+        captionFont = other.captionFont;
+        captionOffset = other.captionOffset;
+        background = other.background;
+    }
 };
 
 #endif //MENU_TEMPLATE_HPP
