@@ -4,7 +4,6 @@
 #define MENU_ELEMENT_HPP
 
 #include "../rendering/Drawable.hpp"
-#include "../animation/TimedObject.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>

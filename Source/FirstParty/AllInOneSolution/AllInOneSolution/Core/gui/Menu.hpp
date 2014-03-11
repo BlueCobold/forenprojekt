@@ -6,7 +6,6 @@
 #include "MenuPanel.hpp"
 #include "MenuTemplate.hpp"
 #include "../rendering/Drawable.hpp"
-#include "../animation/TimedObject.hpp"
 #include <SFML/System/Vector2.hpp>
 
 #include <functional>
