@@ -11,7 +11,7 @@ CheckBox::CheckBox(int id, CheckBoxStyle style, const sf::Vector2f& position, co
     onPositionChanged();
 }
 
-void CheckBox::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
+void CheckBox::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     auto position = getPosition();
     auto offset = getOffset();

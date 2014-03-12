@@ -69,10 +69,19 @@ void MenuPanel::draw(const DrawParameter& params)
         (*it)->draw(params);
 }
 
-void MenuPanel::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
+void MenuPanel::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     for(auto it = begin(m_elements); it != end(m_elements); ++it)
-        (*it)->update(screen, mouseOffset);
+        (*it)->update(screen, time, mouseOffset);
+}
+
+void MenuPanel::update(const sf::RenderWindow& screen, const float time, const MenuElementType::Type type, const sf::Vector2i& mouseOffset)
+{
+    for(auto it = begin(m_elements); it != end(m_elements); ++it)
+    {
+        if(it->get()->getType() == type)
+            (*it)->update(screen, time, mouseOffset);
+    }
 }
 
 void MenuPanel::setCorrelation()

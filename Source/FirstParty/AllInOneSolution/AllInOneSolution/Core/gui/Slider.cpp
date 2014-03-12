@@ -19,7 +19,7 @@ Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& positi
     onPositionChanged();
 }
 
-void Slider::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
+void Slider::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     auto position = getPosition();
     auto eoffset = getOffset();

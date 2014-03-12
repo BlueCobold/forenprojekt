@@ -33,7 +33,6 @@ private:
     EnterStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterOptionStateInformation m_optionStateInfo;
-    float m_timeDiff;
 };
 
 #endif // MAINMENUSTATE_HPP

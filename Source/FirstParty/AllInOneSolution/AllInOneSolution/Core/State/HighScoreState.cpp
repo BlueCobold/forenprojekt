@@ -38,7 +38,7 @@ void HighScoreState::onEnter(const EnterStateInformation* enterInformation, cons
     m_highScoreStateInfo.m_level = info->m_level;
     m_highScoreStateInfo.m_levelNumber = info->m_level->number();
 
-    State::onEnter(info,time);
+    State::onEnter(info, time);
     loadHighScore();
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
@@ -52,17 +52,13 @@ StateChangeInformation HighScoreState::update(const float time)
         return StateChangeInformation::Empty();
 
     std::string text(utility::translateKey("gui_loading_screen"));
-
-    updateTime(time);
-    int step = static_cast<int>(getPassedTime() * 2) % 4;
-
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
     updateTime(time - m_timeDiff);
 
     int clicked = -1;
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
-    m_menu.update(m_screen);
+    m_menu.update(m_screen, getPassedTime());
 
     if(clicked == HighScoreMenu::BUTTON_CLOSE)
     { 
@@ -98,7 +94,8 @@ StateChangeInformation HighScoreState::update(const float time)
     }
     else if(m_onlineHighscore && m_loadInProgress && !m_loaded)
     {
-        for (int i = 0;i < step;++i)
+        int step = static_cast<int>(getPassedTime() * 2) % 4;
+        for (int i = 0; i < step; ++i)
             text.append(".");
         m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText(text);
     }
@@ -117,7 +114,7 @@ void HighScoreState::draw(const DrawParameter& params)
     if(m_highScoreStateInfo.m_level != nullptr)
     {
         m_highScoreStateInfo.m_level->adjustView(params.getTarget());
-        m_HUD.update(m_highScoreStateInfo.m_level, getCurrentTime());
+        m_HUD.update(m_highScoreStateInfo.m_level, getPassedTime());
         m_highScoreStateInfo.m_level->draw(params);
         m_HUD.draw(params);
         whiteRect.setFillColor(sf::Color(255, 255, 255, 128));

@@ -17,7 +17,7 @@ Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf
     m_size.y = m_style.idleStyle.sprite.getTextureRect().height;
 }
 
-void Button::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
+void Button::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     auto position = getPosition();
     auto offset = getOffset();

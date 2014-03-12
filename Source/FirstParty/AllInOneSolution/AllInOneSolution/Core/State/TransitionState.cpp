@@ -30,15 +30,15 @@ void TransitionState::onEnter(const EnterStateInformation* enterInformation, con
     auto r = m_screen.getSize();
     m_sourceImage.setView(utility::getDefaultView(m_sourceImage, r));
     m_sourceImage.clear();
-    info->m_source->pause(getCurrentTime());
+    info->m_source->pause(time);
     info->m_source->draw(m_sourceImage);
     m_sourceImage.display();
 
     m_targetImage.setView(utility::getDefaultView(m_targetImage, r));
     m_targetImage.clear();
     info->m_onEnterInformation->m_prepareOnly = true;
-    info->m_target->onEnter(info->m_onEnterInformation, getCurrentTime());
-    info->m_target->update(getCurrentTime());
+    info->m_target->onEnter(info->m_onEnterInformation, time);
+    info->m_target->update(time);
     info->m_target->draw(m_targetImage);
     m_targetImage.display();
 
@@ -48,9 +48,12 @@ void TransitionState::onEnter(const EnterStateInformation* enterInformation, con
 StateChangeInformation TransitionState::update(const float time)
 {
     updateTime(time);
-    m_transition->update();
-    if(m_transition->isFinished())
-        return StateChangeInformation(m_followingState, m_followingEnterInformation);
+    if(m_transition)
+    {
+        m_transition->update();
+        if(m_transition->isFinished())
+            return StateChangeInformation(m_followingState, m_followingEnterInformation);
+    }
 
     return StateChangeInformation::Empty();
 }

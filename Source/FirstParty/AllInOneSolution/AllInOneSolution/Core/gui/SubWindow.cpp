@@ -97,7 +97,7 @@ void SubWindow::draw(const DrawParameter& params)
     params.getTarget().draw(m_style.scrollbarBottom);
 }
 
-void SubWindow::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
+void SubWindow::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     sf::IntRect mouseRect(static_cast<sf::Vector2i>(m_windowRect.getPosition()) + mouseOffset, static_cast<sf::Vector2i>(m_windowRect.getSize()));
     sf::IntRect sliderRect(static_cast<sf::Vector2i>(m_positionRect.getPosition()), static_cast<sf::Vector2i>(m_positionRect.getSize()));
@@ -149,9 +149,9 @@ void SubWindow::update(const sf::RenderWindow& screen, const sf::Vector2i& mouse
     m_style.scrollbarBottom.setPosition(pos.x, pos.y + height + m_style.scrollbarTop.getTextureRect().height);
 
     if(mouseRect.contains(sf::Mouse::getPosition(screen)))
-        m_panel.update(screen, getMouseOffset(screen));
+        m_panel.update(screen, time, getMouseOffset(screen));
     else
-        m_panel.update(screen, static_cast<sf::Vector2i>(screen.getSize()));
+        m_panel.update(screen, time, static_cast<sf::Vector2i>(screen.getSize()));
 }
 
 void SubWindow::onPositionChanged()

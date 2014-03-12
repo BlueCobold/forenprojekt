@@ -87,7 +87,7 @@ void StateManager::passEvent(utility::Event::EventType type)
         else if(type == utility::Event::GainFocus)
             m_pause = false;
 
-        m_currentState->onEvent(type);
+        m_currentState->onEvent(type, m_frametime.getElapsedTime().asSeconds());
     }
 }
 

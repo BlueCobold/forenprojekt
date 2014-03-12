@@ -39,7 +39,6 @@ private:
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPauseStateInformation m_pauseStateInfo;
     EnterOptionStateInformation m_optionStateInfo;
-    float m_timeDiff;
 };
 
 #endif // PAUSESTATE_HPP

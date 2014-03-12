@@ -36,10 +36,9 @@ void PlayState::onEnter(const EnterStateInformation* enterInformation, const flo
 
     if(!info->m_returnFromPause)
     {
-        m_level->restartAt(getCurrentTime());
-        m_level->update(getCurrentTime(), m_screen);
-        m_hud.update(m_level, getCurrentTime());
-        m_timeShift = 0.0f;
+        m_level->restartAt(getPassedTime());
+        m_level->update(getPassedTime(), m_screen);
+        m_hud.update(m_level, getPassedTime());
         m_hud.skipInterpolation();
     }
 
@@ -54,8 +53,8 @@ StateChangeInformation PlayState::update(const float time)
     if(!isPaused())
     {
         utility::Mouse.startInterpolation(dynamic_cast<sf::Window&>(m_screen));
-        m_level->update(getCurrentTime(), m_screen);
-        m_hud.update(m_level, getCurrentTime());
+        m_level->update(getPassedTime(), m_screen);
+        m_hud.update(m_level, getPassedTime());
         //if(utility::Keyboard.isKeyDown(sf::Keyboard::R))
         //{
         //    // BUG! Memory leak!
@@ -71,7 +70,6 @@ StateChangeInformation PlayState::update(const float time)
         if(m_shouldPause || utility::Keyboard.isKeyDown(sf::Keyboard::P) || 
            utility::Keyboard.isKeyDown(sf::Keyboard::Pause) || utility::Keyboard.isKeyDown(sf::Keyboard::Escape))
         {
-            m_pauseStateInfo.m_levelTime = getCurrentTime();
             m_pauseStateInfo.m_level = m_level;
             m_transitionStateInfo.m_level = m_level;
             m_transitionStateInfo.m_followingState = PauseStateId;
@@ -84,7 +82,6 @@ StateChangeInformation PlayState::update(const float time)
         {
             if(!checkForNewHighscore())
             {
-                m_pauseStateInfo.m_levelTime = getCurrentTime();
                 m_pauseStateInfo.m_level = m_level;
                 m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
                 m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
@@ -92,7 +89,6 @@ StateChangeInformation PlayState::update(const float time)
             }
             else
             {
-                m_pauseStateInfo.m_levelTime = getCurrentTime();
                 m_pauseStateInfo.m_level = m_level;
                 m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
                 m_transitionStateInfo.m_followingState = NewHighScoreStateId;
@@ -104,7 +100,6 @@ StateChangeInformation PlayState::update(const float time)
 
         if(m_level->isLevelFailed())
         {
-            m_pauseStateInfo.m_levelTime = getCurrentTime();
             m_pauseStateInfo.m_level = m_level;
             m_transitionStateInfo.m_followingState = LevelFailStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
@@ -114,7 +109,6 @@ StateChangeInformation PlayState::update(const float time)
     }
     else
     {
-        m_pauseStateInfo.m_levelTime = getCurrentTime();
         m_pauseStateInfo.m_level = m_level;
         m_transitionStateInfo.m_level = m_level;
         m_transitionStateInfo.m_followingState = PauseStateId;

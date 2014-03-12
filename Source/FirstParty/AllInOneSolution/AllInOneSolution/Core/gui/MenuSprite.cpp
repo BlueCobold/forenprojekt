@@ -28,7 +28,7 @@ void MenuSprite::onPositionChanged()
     m_sprite.setPosition(getPosition() + getOffset());
 }
 
-void MenuSprite::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
+void MenuSprite::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     if(MenuElement::getId() == 1)
         int c = 0;

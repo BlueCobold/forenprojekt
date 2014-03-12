@@ -28,7 +28,7 @@ OptionMenuState::~OptionMenuState()
 
 void OptionMenuState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
-    State::onEnter(enterInformation,time);
+    State::onEnter(enterInformation, time);
 
     const EnterOptionStateInformation* info = dynamic_cast<const EnterOptionStateInformation*>(enterInformation);
     m_transitionStateInfo.m_followingState = info->m_comeFromState;
@@ -51,7 +51,8 @@ StateChangeInformation OptionMenuState::update(const float time)
 
     m_clicked = -1;
 
-    m_menu.update(m_screen);
+    updateTime(time);
+    m_menu.update(m_screen, getPassedTime());
 
     if(m_clicked == OptionMenu::BUTTON_CLOSE)
     {
@@ -79,7 +80,7 @@ void OptionMenuState::draw(const DrawParameter& params)
     if(m_level != nullptr)
     {
         m_level->adjustView(params.getTarget());
-        m_HUD.update(m_level, getCurrentTime());
+        m_HUD.update(m_level, getPassedTime());
         m_level->draw(params);
         m_HUD.draw(params);
         whiteRect.setFillColor(sf::Color(255, 255, 255, 128));

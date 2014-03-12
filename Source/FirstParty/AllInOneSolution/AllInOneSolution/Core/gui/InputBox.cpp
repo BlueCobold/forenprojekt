@@ -29,9 +29,9 @@ InputBox::InputBox(const int id,
     setBackGroundPosition(position + offset);
 }
 
-void InputBox::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
+void InputBox::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
-    MenuElement::update(screen, mouseOffset);
+    MenuElement::update(screen, time, mouseOffset);
     handleInput();
 }
 

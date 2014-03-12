@@ -42,7 +42,6 @@ private:
 
     EnterPauseStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
-    float m_timeDiff;
 };
 
 #endif // NEWHIGHSCORESTATE_HPP
