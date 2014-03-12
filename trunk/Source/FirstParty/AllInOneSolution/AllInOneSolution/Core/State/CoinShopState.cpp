@@ -42,6 +42,8 @@ CoinShopState::~CoinShopState()
 
 void CoinShopState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
+    State::onEnter(enterInformation, time);
+
     m_level = enterInformation->m_level;
     m_levelNumber = enterInformation->m_levelNumber;
 
@@ -89,7 +91,7 @@ StateChangeInformation CoinShopState::update(const float time)
     updateTime(time);
 
     m_clicked = -1;
-    m_coinShopMenu.update(m_screen);
+    m_coinShopMenu.update(m_screen, getPassedTime());
     updateButtons();
 
     switch(m_clicked)
@@ -163,7 +165,7 @@ void CoinShopState::draw(const DrawParameter& params)
     if(m_level != nullptr)
     {
         m_level->adjustView(params.getTarget());
-        m_HUD.update(m_level, getCurrentTime());
+        m_HUD.update(m_level, getPassedTime());
         m_level->draw(params);
         m_HUD.draw(params);
         whiteRect.setFillColor(sf::Color(255, 255, 255, 128));

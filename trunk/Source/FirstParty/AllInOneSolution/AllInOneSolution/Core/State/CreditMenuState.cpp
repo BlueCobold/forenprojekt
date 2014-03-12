@@ -19,7 +19,7 @@ CreditMenuState::~CreditMenuState()
 
 void CreditMenuState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
-    State::onEnter(enterInformation,time);
+    State::onEnter(enterInformation, time);
 
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 }
@@ -31,9 +31,11 @@ StateChangeInformation CreditMenuState::update(const float time)
 
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
+    updateTime(time);
+
     int clicked = -1;
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
-    m_menu.update(m_screen);
+    m_menu.update(m_screen, getPassedTime());
 
     if(clicked == CreditMenu::BUTTON_CLOSE)
     {

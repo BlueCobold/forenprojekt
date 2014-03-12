@@ -266,7 +266,7 @@ void Level::cleanupKilledEntities()
             if(entity->isRespawnable())
             {
                 if(entity->getType() == Entity::Target || entity->getType() == Entity::BonusTarget)
-                    m_unspawnedEntities.push_back(EntitySpawn(std::move(*it), getCurrentTime() + 5.f));
+                    m_unspawnedEntities.push_back(EntitySpawn(std::move(*it), getPassedTime() + 5.f));
                 else
                     m_unspawnedEntities.push_back(EntitySpawn(std::move(*it)));
             }
@@ -606,7 +606,7 @@ void Level::handleAutoRespawn()
     auto it = begin(m_unspawnedEntities);
     while(it != end(m_unspawnedEntities))
     {
-        if(it->respawnAt > 0 && it->respawnAt < getCurrentTime())
+        if(it->respawnAt > 0 && it->respawnAt < getPassedTime())
         {
             m_entitiesToSpawn.push_back(std::move(it->target));
             it = m_unspawnedEntities.erase(it);

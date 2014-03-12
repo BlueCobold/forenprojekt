@@ -33,7 +33,8 @@ public:
     virtual ~Menu();
 
     virtual void draw(const DrawParameter& params) override;
-    virtual void update(const sf::RenderWindow& screen);
+    virtual void update(const sf::RenderWindow& screen, const float time);
+    void update(const sf::RenderWindow& screen, const float time, const MenuElementType::Type type);
 
     virtual void setPosition(const sf::Vector2f& position);
     const sf::Vector2f& getPosition() const;

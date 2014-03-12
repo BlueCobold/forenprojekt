@@ -48,8 +48,11 @@ public:
         m_resourceManager(resourceManager),
         m_pause(false),
         m_pauseDelay(0),
-        m_config(config)
-    { }
+        m_config(config),
+        m_currentTime(0)
+    {
+        pause(m_currentTime);
+    }
 
     virtual ~State()
     { }
@@ -60,7 +63,6 @@ public:
         utility::Mouse.capture();
         utility::Mouse.showSystemCursor(m_screen);
         updateTime(time);
-        m_enterTime = time;
     }
 
     virtual StateChangeInformation update(const float time) = 0;
@@ -87,12 +89,12 @@ public:
         return m_pause;
     }
 
-    virtual void onEvent(utility::Event::EventType type)
+    virtual void onEvent(utility::Event::EventType type, const float time)
     {
         if(type == utility::Event::LostFocus)
-            pause(m_currentTime);
+            pause(time);
         else if(type == utility::Event::GainFocus)
-            resume(m_currentTime);
+            resume(time);
     }
 
 protected:
@@ -106,12 +108,12 @@ protected:
 
     float getCurrentTime() const
     {
-        return m_currentTime - m_pauseDelay;
+        return m_currentTime;
     }
 
     float getPassedTime() const
     {
-        return m_currentTime - m_enterTime;
+        return m_currentTime - m_pauseDelay;
     }
 
     ResourceManager& getResourceManager() const
@@ -125,7 +127,6 @@ protected:
 private:
     ResourceManager& m_resourceManager;
     bool m_pause;
-    float m_enterTime;
     float m_pauseStart;
     float m_currentTime;
     float m_pauseDelay;

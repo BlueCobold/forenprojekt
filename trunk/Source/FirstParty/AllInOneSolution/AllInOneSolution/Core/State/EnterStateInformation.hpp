@@ -25,8 +25,6 @@ public:
 
 class EnterPauseStateInformation : public EnterStateInformation
 {
-public:
-    float m_levelTime;
 };
 
 class EnterTransitionStateInformation : public EnterStateInformation

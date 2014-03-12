@@ -27,7 +27,7 @@ LevelPreviewState::~LevelPreviewState()
 void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
     m_levelUpdated = false;
-    State::onEnter(enterInformation,time);
+    State::onEnter(enterInformation, time);
     m_level = enterInformation->m_level;
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
     m_menu.setLevelInfo(m_level->getLevelName(), m_level->getTotalTime(), m_level->getRemainingBall());
@@ -54,8 +54,9 @@ StateChangeInformation LevelPreviewState::update(const float time)
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
     int clicked = -1;
+    updateTime(time);
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
-    m_menu.update(m_screen);
+    m_menu.update(m_screen, getPassedTime());
 
     if(m_level->isTimeAttackMode())
     {
@@ -138,7 +139,7 @@ void LevelPreviewState::draw(const DrawParameter& params)
         {
             m_level->update(0, params.getTarget());
             m_levelUpdated = true;
-            m_HUD.update(m_level, getCurrentTime());
+            m_HUD.update(m_level, getPassedTime());
         }
         m_level->draw(params);
         m_HUD.draw(params);

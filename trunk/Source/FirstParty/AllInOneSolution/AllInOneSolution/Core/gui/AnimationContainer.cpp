@@ -1,14 +1,15 @@
 #include "AnimationContainer.hpp"
 
 AnimationContainer::AnimationContainer() :
-    MenuElement(-1, MenuElementType::Animation, sf::Vector2f(0, 0), sf::Vector2f(0, 0))
+    MenuElement(-1, MenuElementType::Animation, sf::Vector2f(0, 0), sf::Vector2f(0, 0)),
+    m_updatingAni(nullptr)
 {
 }
 
 AnimationContainer::AnimationContainer(AnimationContainer&& toMove) :
-    MenuElement(-1, MenuElementType::Animation, sf::Vector2f(0, 0), sf::Vector2f(0, 0))
+    MenuElement(-1, MenuElementType::Animation, sf::Vector2f(0, 0), sf::Vector2f(0, 0)),
+    m_updatingAni(nullptr)
 {
-
 }
 
 float AnimationContainer::getValueOf(const std::string& name) const
@@ -26,7 +27,7 @@ float AnimationContainer::getValueOf(const std::string& name) const
 void AnimationContainer::setValueOf(const std::string& name, const float value)
 {
     if(m_updatingAni == nullptr)
-    m_variables[name] = value;
+        m_variables[name] = value;
     else
     {
         auto match = m_variables.find(name);
@@ -37,8 +38,9 @@ void AnimationContainer::setValueOf(const std::string& name, const float value)
     }
 }
 
-void AnimationContainer::update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset)
+void AnimationContainer::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
+    updateCurrentTime(time);
     for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
     {
         auto ani = (*animation).get();
@@ -48,6 +50,7 @@ void AnimationContainer::update(const sf::RenderWindow& screen, const sf::Vector
         ani->setPosition(getPosition().x, getPosition().y);
         ani->update();
     }
+    m_updatingAni = nullptr;
 }
 
 void AnimationContainer::draw(const DrawParameter& param)

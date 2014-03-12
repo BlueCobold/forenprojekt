@@ -41,7 +41,6 @@ private:
     EnterPlayStateInformation m_playStateInfo;
     EnterHighScoreStateInformation m_highScoreInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
-    float m_timeDiff;
 };
 
 #endif // LEVELFAILSTATE_HPP

@@ -24,23 +24,24 @@ MainMenuState::~MainMenuState()
 
 void MainMenuState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
-    State::onEnter(enterInformation,time);
-
+    State::onEnter(enterInformation, time);
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 }
 
 StateChangeInformation MainMenuState::update(const float time)
 {
-    if(State::isPaused())
-        return StateChangeInformation::Empty();
-
+    updateTime(time);
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
-    updateTime(time - m_timeDiff);
+    if(State::isPaused())
+    {
+        m_menu.update(m_screen, getPassedTime(), MenuElementType::Animation);
+        return StateChangeInformation::Empty();
+    }
 
     int clicked = -1;
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
-    m_menu.update(m_screen);
+    m_menu.update(m_screen, getPassedTime());
 
     if(clicked == MainMenu::BUTTON_START_NEW_GAME)
     {

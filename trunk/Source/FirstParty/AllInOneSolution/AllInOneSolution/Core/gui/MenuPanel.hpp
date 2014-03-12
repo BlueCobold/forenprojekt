@@ -30,7 +30,15 @@ public:
 
     virtual void draw(const DrawParameter& params) override;
     void drawAdditionalForeground(const DrawParameter& params);
-    virtual void update(const sf::RenderWindow& screen, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0));
+
+    virtual void update(const sf::RenderWindow& screen,
+        const float time,
+        const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0));
+
+    void update(const sf::RenderWindow& screen,
+        const float time,
+        const MenuElementType::Type type,
+        const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0));
 
     void registerOnClick(std::function<void(const Button& sender)> callback);
 

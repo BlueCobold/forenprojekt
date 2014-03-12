@@ -69,9 +69,14 @@ void Menu::drawAdditionalForeground(const DrawParameter& params)
     m_panel.drawAdditionalForeground(params);
 }
 
-void Menu::update(const sf::RenderWindow& screen)
+void Menu::update(const sf::RenderWindow& screen, const float time)
 {
-    m_panel.update(screen);
+    m_panel.update(screen, time);
+}
+
+void Menu::update(const sf::RenderWindow& screen, const float time, const MenuElementType::Type type)
+{
+    m_panel.update(screen, time, type);
 }
 
 void Menu::registerOnClick(std::function<void(const Button& sender)> callback)
