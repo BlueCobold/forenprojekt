@@ -1,0 +1,87 @@
+<level>
+	<levelinfo name="Crossroads">
+		<infoimage scrx="38" scry="313" width="192" height="108" />
+	</levelinfo>
+	<constants gate="0" gatetime="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/movement.inc" />
+		<include file="assets/target/phase_out.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		
+		<include file="sandy/walls.inc" />
+		
+		<entities>
+			<entity name="change_gravity_right" rep="Ri" collideWithBall="false">
+				<physics name="wall" shape="wall" />
+				<collides>
+					<changeGravity x="40" y="0">
+						<static value="1" />
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_left" rep="Le" collideWithBall="false">
+				<physics name="wall" shape="wall" />
+				<collides>
+					<changeGravity x="-40" y="0">
+						<static value="1" />
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_up" rep="Up" collideWithBall="false">
+				<physics name="wall" shape="wall" />
+				<collides>
+					<changeGravity x="0" y="-40">
+						<static value="1" />
+					</changeGravity>
+				</collides>
+			</entity>
+			<entity name="change_gravity_down" rep="Do" collideWithBall="false">
+				<physics name="wall" shape="wall" />
+				<collides>
+					<changeGravity x="0" y="40">
+						<static value="1" />
+					</changeGravity>
+				</collides>
+			</entity>
+		</entities>
+	</templates>
+	
+	
+	<grid size="60" width="2460" height="1440">
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                        TT          TT          TT                                  
+                  w1UpUpUpUpw1            w1UpUpUpUpw1                              
+                  w1        w1            w1        w1                              
+                  w1    t1  w1  bt      btw1    t1  w1                              
+                  w1DoDoDoDo(1\1  btbtbt/1)1DoDoDoDow1                              
+                              (1w1w1w1w1)1                                        
+                        TT    Le        Ri      TT                                  
+                              Le        Ri                                          
+                            T2Le    t1  Ri  T2                                      
+                              Le        Ri                                          
+                        TT    /1w1w1w1w1\1      TT                                  
+                  w1UpUpUpUp/1)1        (1\1UpUpUpUpw1                              
+                  w1        w1    btbtbt  w1        w1                              
+                  w1  BBt1  w1  bt      btw1    t1  w1                              
+                  w1DoDoDoDow1            w1DoDoDoDow1                              
+                                                                                    
+                        TT          TT          TT                                  
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+	</grid>
+	
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="500" silver="650" gold="800" />
+</level>
