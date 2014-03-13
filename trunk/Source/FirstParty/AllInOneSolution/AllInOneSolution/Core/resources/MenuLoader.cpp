@@ -269,6 +269,7 @@ void MenuLoader::parseSubWindow(MenuTemplate& menu,
             parseSliders(ownElements, subXml, sliderStyles, resourceManager);
             parseLabels(ownElements, subXml, resourceManager);
             parseImages(ownElements, subXml, toolTip, resourceManager);
+            parseAnimationContainer(ownElements, subXml, resourceManager);
             subWindowInfo.menuElements = std::move(ownElements);
             menu.subWindow.push_back(std::move(subWindowInfo));
         }
