@@ -117,10 +117,10 @@ void Level::load()
         }
     if(m_ball == nullptr)
         throw std::runtime_error("No ball located in the level!");
-    auto ball = std::move(*ballIt);
-    // always make the ball go last in everything
-    m_entities.erase(ballIt);
-    m_entities.push_back(std::move(ball));
+
+    // sort entity by her drawOrder
+    std::sort(m_entities.begin(), m_entities.end(), sortByDrawOrder);
+
     m_ball->registerForCheckpointChanges([this](){
         createLabelAt(m_ball, "green", "checkpoint");
     });
@@ -316,6 +316,8 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
             tinyxml2::XMLElement* physic = nullptr;
             tinyxml2::XMLElement* shape = nullptr;
             findPhysicAndShapeTag(physic, shape, xml, templates);
+            if(auto draworder = it->second->FloatAttribute("draworder"))
+                entity->setDrawOrder(draworder);
             if(physic != nullptr)
                 parsePhysics(physic, shape, entity, position, templates);
             return std::move(original);
@@ -373,6 +375,14 @@ std::unique_ptr<Entity> Level::parseEntity(
     tinyxml2::XMLElement* physic = nullptr;
     tinyxml2::XMLElement* shape = nullptr;
     findPhysicAndShapeTag(physic, shape, entity, templates);
+
+    if(entity->Attribute("z") != nullptr)
+    {
+        std::unique_ptr<Entity> graphicalObject = createEntity(entity, position, shape, physic, templates, bindInstantly);
+        graphicalObject.get()->setDrawOrder(entity->FloatAttribute("z"));
+
+        return graphicalObject;
+    }
 
     return createEntity(entity, position, shape, physic, templates, bindInstantly);
 }
@@ -525,6 +535,10 @@ std::unique_ptr<Entity> Level::createEntity(
     }
 
     entity->setName(std::string(xml->Attribute("name")));
+    // time to set new draworder
+    if(xml->Attribute("draworder") != nullptr)
+        entity->setDrawOrder(xml->FloatAttribute("draworder"));
+
     if(auto animations = xml->FirstChildElement("animations"))
     {
         // Load animation

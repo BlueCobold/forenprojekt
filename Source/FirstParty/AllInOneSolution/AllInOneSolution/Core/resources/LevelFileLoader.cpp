@@ -431,18 +431,15 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
 }
 
 std::unordered_map<std::string, tinyxml2::XMLElement*> LevelFileLoader::parseList(
-     tinyxml2::XMLElement* xml, const std::string& name, const std::string& key)
+     tinyxml2::XMLElement* xml, const std::string& attributeName, const std::string& key)
 {
     std::unordered_map<std::string, tinyxml2::XMLElement*> tempList;
 
-    for(auto iterator = xml->FirstChildElement(name.c_str());
-        iterator != nullptr; iterator = iterator->NextSiblingElement(name.c_str()))
+    for(auto iterator = xml->FirstChildElement(attributeName.c_str());
+        iterator != nullptr; iterator = iterator->NextSiblingElement(attributeName.c_str()))
     {
-        if(auto name = iterator->Attribute(key.c_str()))
-        {
-            tempList.insert(std::make_pair<std::string, tinyxml2::XMLElement*>(
-                std::string(name), iterator));
-        }
+        if(auto nodeName = iterator->Attribute(key.c_str()))
+            tempList.insert(std::make_pair<std::string, tinyxml2::XMLElement*>(std::string(nodeName), iterator));
     }
 
     return std::move(tempList);

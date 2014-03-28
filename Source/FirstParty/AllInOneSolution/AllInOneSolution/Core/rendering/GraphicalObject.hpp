@@ -17,10 +17,13 @@ private:
 
     std::vector<std::unique_ptr<Animation>> m_animations;
     bool m_hide;
+    float m_z;
 
 public:
 
-    GraphicalObject() : m_hide(false)
+    GraphicalObject() : 
+        m_hide(false),
+        m_z(0)
     {
     }
 
@@ -68,6 +71,16 @@ public:
     void bindAnimation(std::unique_ptr<Animation> animation)
     {
         m_animations.push_back(std::move(animation));
+    }
+
+    void setDrawOrder(const float drawOrder)
+    {
+        m_z = drawOrder;
+    }
+
+    float getDrawOrder() const
+    {
+        return m_z;
     }
 
 protected:
