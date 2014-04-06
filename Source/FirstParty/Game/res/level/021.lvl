@@ -1,0 +1,116 @@
+<level>
+	<levelinfo name="Fragile">
+		<infoimage scrx="0" scry="0" width="192" height="108" />
+	</levelinfo>
+	<constants gate="0" gatetime="0"/>
+	<gameplay time="60"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/movement.inc" />
+		<include file="assets/target/phase_out.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		
+		<include file="sandy/walls.inc" />
+		
+		<physics>
+			<physic name="dynamicWall">
+				<body type="dynamic" angle="0" />
+				<fixture density="0.1" friction="0.8" restitution="0.5" />
+			</physic>
+		</physics>
+		
+		<functions>
+			<function name="blockAlpha">
+				<step>
+					<var name="collides" />
+					<step threshold="0">
+						<setVar name="delta">
+							<sub>
+								<var name="killTime" />
+								<mul>
+									<time />
+									<static value="2"/>
+								</mul>
+							</sub>
+						</setVar>
+						<stop />
+						<var name="delta" />
+					</step>
+					<static value="1" />
+				</step>
+			</function>
+			<function name="blockCollides">
+				<nop>
+					<static value="0" />
+					<setVar name="killTime">
+						<add>
+							<mul>
+								<time />
+								<static value="2"/>
+							</mul>
+							<static value="1"/>
+						</add>
+					</setVar>
+				</nop>
+			</function>
+		</functions>
+		
+		<overrides>
+			<override rep="w*" newRep="k*">
+				<constants collides="1" killTime="0" delta="0" />
+				<animations>
+					<color channel="alpha">
+						<function name="blockAlpha"/>
+					</color>
+				</animations>
+				<collides>
+					<propertyFilter target="entity">
+						<var name="collides" />
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<changeProperty name="collides">
+						<function name="blockCollides"/>
+					</changeProperty>
+				</onCollision>
+			</override>
+		</overrides>
+	</templates>
+	
+	
+	<grid size="60" width="2460" height="1440">
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                          k1k2k5k4k6k1k2k3k1k6k2k5k4k3                                
+                          w3)2                    (1k2                              
+                          k5      bt  bt  bt  bt    k4                              
+                          k1    t1  t1  t1  t1  t1  k1                              
+                          k6  k2k5k1k6k2k3k4k5k5k2  k6                              
+                          k3                        k5                              
+                          k4                        k2                              
+                          (6\2                    /1)4                              
+                            (4\1        BB      /5)3                                
+                              (2\3            /2)6                                  
+                                (2\5        /1)5                                    
+                                        TT                                          
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+	</grid>
+	
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="500" silver="800" gold="1000" />
+</level>
