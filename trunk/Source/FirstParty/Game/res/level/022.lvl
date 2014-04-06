@@ -1,0 +1,56 @@
+<level>
+	<levelinfo name="RR Pong">
+		<infoimage scrx="0" scry="0" width ="192" height="108" />
+	</levelinfo>
+	<constants solid="0" />
+	<gameplay maxBalls="5" />
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+	
+		<shapes>
+			<shape name="rect1" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="60" y="0" />
+				<vertex x="60" y="1200" />
+				<vertex x="0" y="1200" />
+			</shape>
+		</shapes>
+	
+	</templates>
+		
+
+	<grid size="60" width="2460" height="2000">
+                                               
+        w2w2w4w1w3w1w5w6w2w5w3w2w1w4w1w5w6w1w2w5w3w2w3w6w6        
+        w3s6s4s4s1s2s3s5s1s3s5s3s6s2s3s4s1s3s5s6s2s1s4s2w6        
+        w2d1d3d6d4d3d2d1d3d2d4d1d5d3d6d1d2d6d4d1d3d5d6d1w2        
+        w3w2w5w1w4w5w2w3w2w6w1w2w3w5w2w3w1w2w5w6w5w2w6w5w1 
+                                                                            
+                                  t1                                      
+        T4                                              T3
+
+
+                              t1
+        T4                                              T3
+                                      BB
+
+
+        T4                          t1                  T3
+                                                                           
+        w2w2w4w1w3w1w5w6w2w5w3w2w1w4w2w1w6w4w1w5w6w1w2w5w1        
+        w3s6s4s4s1s2s3s5s1s3s5s3s6s1s3s5s1s2s3s4s1s3s5s6w2        
+        w2d1d3d6d4d3d2d1d3d2d4d1d5d5d2d4d5d3d6d1d2d6d4d1w3        
+        w3w2w5w1w4w5w2w3w2w6w1w2w3w1w4w6w1w5w2w3w1w2w5w6w5        
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="20" y="0" />
+	</world>
+	<medal bronze="300" silver="350" gold="400" />
+</level>

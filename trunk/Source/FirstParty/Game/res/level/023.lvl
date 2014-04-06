@@ -1,0 +1,87 @@
+<level>
+	<levelinfo name="RR Pong extrem">
+		<infoimage scrx="0" scry="0" width ="192" height="108" />
+	</levelinfo>
+	<constants solid="0" />
+	<gameplay maxBalls="3" time="180"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+	
+		<physics>
+			<physic name="dynamicWall">
+				<body type="dynamic" angle="0" />
+				<fixture density="0.1" friction="0.8" restitution="0.5" />
+			</physic>
+
+			<physic name="targetcircuit1"> 
+				<body type="kinematic" angle="0"> 
+					<kinematics> 
+						<position axis="x"> 
+							<mul> 
+								<sine>
+									<mul>
+										<time />
+										<static value="24" />
+									</mul>
+								</sine> 
+								<static value="250" /> 
+							</mul> 
+						</position>
+						<position axis="y"> 
+							<mul> 
+								<sine> 
+									<add> 
+										<static value="90" /> 
+											<mul> 
+												<time /> 
+											<static value="24" /> 
+											</mul> 
+									</add> 
+								</sine> 
+								<static value="250" /> 
+							</mul> 
+						</position> 
+					</kinematics> 
+				</body> 
+				<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+			</physic>
+		</physics>
+	</templates>
+		
+
+	<grid size="60" width="2460" height="2000">
+                                               
+        w2w2w4w1w3w1w5w6w2w5w3w2w1w4w1w5w6w1w2w5w3w2w3w6w6        
+        w3W1 1)1  o^x^                            (1W1 1w6        
+        w2w1)1                    t1                (1w1w2        
+        w3)2                                          (5w1 
+                                                                            
+                                  t1                                      
+        T4                                              T3
+
+
+                              c1
+        T4                                              T3
+                                            BB
+
+
+        T4                          t1                  T3
+                                                                           
+        w2\4                                          /5w1        
+        w3w1\1                                      /1w1w2  
+        w2W1 1\1    t1                      ^O^X  /1W1 1w3        
+        w3w2w5w1w4w5w2w3w2w6w1w2w3w1w4w6w1w5w2w3w1w2w5w6w5   
+     
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="20" y="0" />
+	</world>
+	<medal bronze="300" silver="350" gold="400" />
+</level>
