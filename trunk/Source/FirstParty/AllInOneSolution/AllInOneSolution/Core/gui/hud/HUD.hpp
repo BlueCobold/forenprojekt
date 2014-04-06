@@ -45,8 +45,6 @@ private:
     GoodyHUD m_extraBallGoody;
     GoodyHUD m_extraTimeGoody;
 
-    
-
 public:
     HUD(ResourceManager& resourceManager, AppConfig& config);
 
@@ -56,6 +54,8 @@ public:
     void restartAt(const float time);
 
     void draw(const DrawParameter& params);
+
+    void onEnter();
 
 private:
     void setBallShow(bool ballShow);

@@ -118,3 +118,9 @@ void HUD::setTimeShow(bool timeShow)
     else if(m_timeShow)
         m_time.setPosition(sf::Vector2f(0.f,10.f), 0.5f);
 }
+
+void HUD::onEnter()
+{
+    m_timeShow = false;
+    m_ballShow = false;
+}
