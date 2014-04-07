@@ -1,0 +1,229 @@
+<level>
+	<levelinfo name="Moving Spikes">
+		<infoimage scrx="0" scry="0" width ="192" height="108" />
+	</levelinfo>
+	<constants solid="0" />
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		<shapes>
+			<shape name="wallmove" type="polygon">
+				<vertex x="-30" y="-30" />
+				<vertex x="30" y="-30" />
+				<vertex x="30" y="30" />
+				<vertex x="-30" y="30" />
+			</shape>
+			<shape name="wide_wallmove" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="120" y="0" />
+				<vertex x="120" y="60" />
+				<vertex x="0" y="60" />
+			</shape>
+		</shapes>
+
+		<physics>
+		<physic name="horizontalmoving1"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+					<position axis="x"> 
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="250" />
+								</mul>
+							</sine> 
+							<static value="60" /> 
+						</mul> 
+					</position>
+					 
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="horizontalmoving2"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+					<position axis="x"> 
+						<mul> 
+							<sine> 
+								<add> 
+									<static value="180" /> 
+										<mul> 
+											<time /> 
+											<static value="250" /> 
+										</mul> 
+								</add> 
+							</sine> 
+							<static value="60" /> 
+						</mul> 
+					</position>
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="verticalmoving1"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+					<position axis="y"> 
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="250" />
+								</mul>
+							</sine> 
+							<static value="180" /> 
+						</mul> 
+					</position>
+					 
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="verticalmoving2"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+					<position axis="y"> 
+						<mul> 
+							<sine> 
+								<add> 
+									<static value="180" /> 
+										<mul> 
+											<time /> 
+											<static value="250" /> 
+										</mul> 
+								</add> 
+							</sine> 
+							<static value="120" /> 
+						</mul>  
+					</position>
+					 
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		</physics>
+		
+		<entities>
+			<entity name="movingwall_1" rep="m1">
+				<physics name="horizontalmoving1" shape="wallmove" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation texture="small_quads" midx="30" midy="30" srcy="0" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="movingwall_2" rep="m2">
+				<physics name="horizontalmoving2" shape="wallmove" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation texture="small_quads" midx="30" midy="30" srcy="0" width="60" height="60" rotate="false">
+						<frameindex frames="4">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="movingwide_wall_1" rep="M1">
+				<physics name="verticalmoving1" shape="wide_wallmove" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="movingwide_wall_2" rep="M2">
+				<physics name="verticalmoving2" shape="wide_wallmove" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="spike_okpart_move" rep="MO" type="entity" collideWithBall="true">
+				<physics name="verticalmoving1" shape="spike_okpart" />
+				<animations>
+					<animation texture="gravity_arrow" y="20" srcx="224" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="24" y="20" srcx="224" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="48" y="20" srcx="224" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="72" y="20" srcx="224" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="96" y="20" srcx="224" srcy="128" width="24" height="40" />
+				</animations>
+			</entity>
+			<entity name="spike_okpart_move" rep="MX" type="entity" collideWithBall="true">
+				<physics name="verticalmoving1" shape="spike_killer" />
+				<onCollision>
+					<killBall />
+				</onCollision>
+			</entity>
+			<entity name="spike_okpart2_move" rep="oM" type="entity" collideWithBall="true">
+				<physics name="verticalmoving2" shape="spike_okpart2" />
+				<animations>
+					<animation texture="gravity_arrow" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="24" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="48" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="72" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="96" y="0" srcx="248" srcy="128" width="24" height="40" />
+				</animations>
+			</entity>
+			<entity name="spike_okpart2_move" rep="xM" type="entity" collideWithBall="true">
+				<physics name="verticalmoving2" shape="spike_killer2" />
+				<onCollision>
+					<killBall />
+				</onCollision>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="2600" height="1250">
+                                                                            
+                                                                            
+                                                                                    
+        w2w6w2w5w3w2w1w4w2w1w6w5w6w1w2w5w3w6    w2w5w3w2w1w3w5w4w2w1w6w5w6w1w2w5w3w6
+        w3s5s1s3s5s3s6s1s3s5s1s4s1s3s5s6s2w6    w1s3s5s3s1s4s6s1s3s5s1s4s1s3s5s6s2w6
+        w6d1d3d2d4d1d5d5d2d4d5d1d2d6d4d1d3w2M2  w3d2d4d1d5d1d2d5d2d4d5d1d2d6d4d1d3w2
+        w3w3w2w6w1w2w3w1w4w6w1w3w1w2w5w6w5w1M2  w2w6w1w2w4w2w3w1w4w6w1w3w1w2w5w6w5w1
+        w1                                  oMxM                                  w5
+        w5          t1    t1    t1                          t1    t1    t1        w3
+        w3                                                                        w6
+        w4      m2    m1    m2    m1                    m2    m1    m2    m1      w2
+        w2      m2    m1    m2    m1                    m2    m1    m2    m1      w1
+        w6                                                                        w4
+        w4\6                            /1w5MOMXw4\6                            /1w5
+        w1d1\5            BB          /2d4w1M1  w1d1\5                        /2d4w1
+        w4d2d3\4                    /3d1d6w2M1  w4d2d3\4                    /3d1d6w2
+        w2d4d6d1\3                /4d4d3d2w5    w2d4d6d1\3                /4d4d3d2w5
+        w1d2d3d4d5\2            /5d2d1d6d5w1    w1d2d3d4d5\2            /5d2d1d6d5w1
+        w2d6d1d2d3d4\1        /6d5d6d1d2d3w4    w3d6d1d2d3d4\1        /6d5d6d1d2d3w4
+                          TT                                      TT
+       
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="700" silver="800" gold="900" />
+</level>
