@@ -119,7 +119,7 @@ void Level::load()
         throw std::runtime_error("No ball located in the level!");
 
     // sort entity by her drawOrder
-    std::sort(m_entities.begin(), m_entities.end(), sortByDrawOrder);
+    std::sort(m_entities.begin(), m_entities.end(), compareDrawOrder);
 
     m_ball->registerForCheckpointChanges([this](){
         createLabelAt(m_ball, "green", "checkpoint");
