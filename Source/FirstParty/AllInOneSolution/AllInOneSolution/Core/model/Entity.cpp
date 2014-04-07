@@ -189,7 +189,7 @@ void Entity::setAnimationAngle(const float angle)
     m_animationAngle = angle;
 }
 
-bool sortByDrawOrder(const std::unique_ptr<Entity>& lhs, const std::unique_ptr<Entity>& rhs)
+bool compareDrawOrder(const std::unique_ptr<Entity>& lhs, const std::unique_ptr<Entity>& rhs)
 {
     return lhs->getDrawOrder() < rhs->getDrawOrder();
 }

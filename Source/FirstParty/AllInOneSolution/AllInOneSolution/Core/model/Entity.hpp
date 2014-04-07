@@ -72,6 +72,6 @@ public:
     const Entity* getKillAnimationEntity() const;
 };
 
-bool sortByDrawOrder(const std::unique_ptr<Entity>& lhs, const std::unique_ptr<Entity>& rhs);
+bool compareDrawOrder(const std::unique_ptr<Entity>& lhs, const std::unique_ptr<Entity>& rhs);
 
 #endif // ENTITY_HPP
