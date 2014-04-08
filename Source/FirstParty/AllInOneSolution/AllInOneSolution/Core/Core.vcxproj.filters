@@ -834,6 +834,9 @@
     <ClInclude Include="model\AnimatedGraphics.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
+    <ClInclude Include="animation\provider\MouseProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

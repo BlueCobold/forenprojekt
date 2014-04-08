@@ -1,0 +1,11 @@
+<spriteSheet texture="gravity_arrow">
+	<sprites>
+		<sprite name="gravity_arrow" x="0" y="0" width="512" height="128" originx="256" originy="64" />
+		<sprite name="force_arrow" x="0" y="128" width="144" height="36" originx="72" originy="18" />
+		<sprite name="spike_left" x="144" y="128" width="40" height="24" originx="20" originy="12" />
+		<sprite name="spike_right" x="184" y="128" width="40" height="24" originx="20" originy="12" />
+		<sprite name="spike_vertical" x="224" y="128" width="24" height="40" originx="12" originy="20" />
+		<sprite name="coil" x="248" y="128" width="74" height="54" originx="37" originy="27" />
+		<sprite name="plate" x="322" y="128" width="82" height="20" originx="41" originy="10" />
+	</sprites>
+</spriteSheet>
