@@ -12,6 +12,7 @@
 #include "../animation/provider/Maximum.hpp"
 #include "../animation/provider/Minimum.hpp"
 #include "../animation/provider/Modulo.hpp"
+#include "../animation/provider/MouseProvider.hpp"
 #include "../animation/provider/Multiplier.hpp"
 #include "../animation/provider/Negate.hpp"
 #include "../animation/provider/Nop.hpp"
@@ -384,6 +385,8 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
         return std::unique_ptr<Maximum>(new Maximum(std::move(parseProviders(xml, animated, handler, stoppable, functions))));
     else if(std::string(xml->Name())=="mod")
         return std::unique_ptr<Modulo>(new Modulo(std::move(parseProviders(xml, animated, handler, stoppable, functions))));
+    else if(std::string(xml->Name())=="mouse")
+        return std::unique_ptr<MouseProvider>(new MouseProvider(xml->Attribute("axis") ? std::string(xml->Attribute("axis")) == "x" : true));
     else if(std::string(xml->Name())=="pow")
         return std::unique_ptr<Pow>(new Pow(std::move(parseProviders(xml, animated, handler, stoppable, functions))));
     else if(std::string(xml->Name())=="nop")

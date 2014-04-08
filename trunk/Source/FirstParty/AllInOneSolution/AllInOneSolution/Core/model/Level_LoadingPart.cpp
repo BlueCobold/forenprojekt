@@ -235,6 +235,8 @@ void Level::parseTemplates(
 
 std::string buildOriginal(const std::string& targetName, const std::string& sourceName, const std::string& needle)
 {
+    if(targetName == needle)
+        return sourceName;
     if(targetName.length() != 2 || sourceName.length() != 2 || needle.length() != 2 ||(targetName[0] != '*' && targetName[1] != '*'))
         return needle;
     else if(targetName[0] == '*' && (targetName[1] == needle[1] || targetName[1] == '*'))
@@ -269,7 +271,12 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
 
             match = templates.entities.find(originalName);
             std::unique_ptr<Entity> original;
-            // found some origin?
+
+            if(it->second->Attribute("offsetx") != nullptr)
+                position.x += it->second->IntAttribute("offsetx");
+            if(it->second->Attribute("offsety") != nullptr)
+                position.y += it->second->IntAttribute("offsety");
+            // found some original?
             if(match != end(templates.entities))
                 original = parseEntity(match->second, position, templates, bindInstantly);
             else

@@ -14,7 +14,9 @@ public:
         const float xSpeed,
         const float ySpeed,
         std::unique_ptr<CollisionFilter> child) :
-            ActionFilter(std::move(child))
+            ActionFilter(std::move(child)),
+            m_xSpeed(xSpeed),
+            m_ySpeed(ySpeed)
     { }
 
     virtual ~ChangeBallVelocityFilter()
