@@ -174,110 +174,122 @@
 
 			<entity base="small_quad" name="wall_1" rep="w1">
 				<animations>
-					<animation texture="small_quads" midx="30" midy="30" srcy="0" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false"/>
 				</animations>
 			</entity>
 			<entity base="small_quad" name="wall_2" rep="w2">
 				<animations>
-					<animation texture="small_quads" midx="30" midy="30" srcy="60" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_02" rotate="false"/>
 				</animations>
 			</entity>
 			<entity base="small_quad" name="wall_3" rep="w3">
 				<animations>
-					<animation texture="small_quads" midx="30" midy="30" srcy="120" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_03" rotate="false"/>
 				</animations>
 			</entity>
 			<entity base="small_quad" name="wall_4" rep="w4">
 				<animations>
-					<animation texture="small_quads" midx="30" midy="30" srcy="180" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_04" rotate="false"/>
 				</animations>
 			</entity>
 			<entity base="small_quad" name="wall_5" rep="w5">
 				<animations>
-					<animation texture="small_quads" midx="30" midy="30" srcy="240" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_05" rotate="false"/>
 				</animations>
 			</entity>
 			<entity base="small_quad" name="wall_6" rep="w6">
 				<animations>
-					<animation texture="small_quads" midx="30" midy="30" srcy="300" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_06" rotate="false"/>
 				</animations>
 			</entity>
 
-			<entity name="darkwall_1" rep="d1">
+			<entity base="small_quad" name="darkwall_1" rep="d1">
 				<animations>
-					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_2" rep="d2">
+			<entity base="small_quad" name="darkwall_2" rep="d2">
 				<animations>
-					<animation texture="small_quads" srcy="60" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_02" rotate="false">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_3" rep="d3">
+			<entity base="small_quad" name="darkwall_3" rep="d3">
 				<animations>
-					<animation texture="small_quads" srcy="120" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_03" rotate="false">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_4" rep="d4">
+			<entity base="small_quad" name="darkwall_4" rep="d4">
 				<animations>
-					<animation texture="small_quads" srcy="180" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_04" rotate="false">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_5" rep="d5">
+			<entity base="small_quad" name="darkwall_5" rep="d5">
 				<animations>
-					<animation texture="small_quads" srcy="240" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_05" rotate="false">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_6" rep="d6">
+			<entity base="small_quad" name="darkwall_6" rep="d6">
 				<animations>
-					<animation texture="small_quads" srcy="300" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_06" rotate="false">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
 				</animations>
 			</entity>
@@ -508,208 +520,127 @@
 
 			<entity base="lu_base" name="left_upper" rep=")1">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="120" rotate="false" />
+					<animation spritesheet="walls" sprite="sand_left_upper" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="lu_base" name="left_upper" rep=")2">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="120" rotate="false">
-						<frameindex frames="6">
-							<static value="1" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_left_upper" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="lu_base" name="left_upper" rep=")3">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="120" rotate="false">
-						<frameindex frames="6">
-							<static value="2" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_left_upper" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="lu_base" name="left_upper" rep=")4">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="120" rotate="false">
-						<frameindex frames="6">
-							<static value="3" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_left_upper" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="lu_base" name="left_upper" rep=")5">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="120" rotate="false">
-						<frameindex frames="6">
-							<static value="4" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_left_upper" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="lu_base" name="left_upper" rep=")6">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="120" rotate="false">
-						<frameindex frames="6">
-							<static value="5" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_left_upper" rotate="false" />
 				</animations>
 			</entity>
 
 
 			<entity base="ll_base" name="left_lower" rep="\1">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="60" rotate="false" />
+					<animation spritesheet="walls" sprite="sand_left_lower" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="ll_base" name="left_lower" rep="\2">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="60" rotate="false">
-						<frameindex frames="6">
-							<static value="1" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_left_lower" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="ll_base" name="left_lower" rep="\3">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="60" rotate="false">
-						<frameindex frames="6">
-							<static value="2" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_left_lower" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="ll_base" name="left_lower" rep="\4">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="60" rotate="false">
-						<frameindex frames="6">
-							<static value="3" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_left_lower" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="ll_base" name="left_lower" rep="\5">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="60" rotate="false">
-						<frameindex frames="6">
-							<static value="4" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_left_lower" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="ll_base" name="left_lower" rep="\6">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="60" rotate="false">
-						<frameindex frames="6">
-							<static value="5" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_left_lower" rotate="false" />
 				</animations>
 			</entity>
 
 
 			<entity base="ru_base" name="right_upper" rep="(1">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="180" rotate="false" />
+					<animation spritesheet="walls" sprite="sand_right_upper" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="ru_base" name="right_upper" rep="(2">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="180" rotate="false">
-						<frameindex frames="6">
-							<static value="1" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_right_upper" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="ru_base" name="right_upper" rep="(3">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="180" rotate="false">
-						<frameindex frames="6">
-							<static value="2" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_right_upper" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="ru_base" name="right_upper" rep="(4">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="180" rotate="false">
-						<frameindex frames="6">
-							<static value="3" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_right_upper" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="ru_base" name="right_upper" rep="(5">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="180" rotate="false">
-						<frameindex frames="6">
-							<static value="4" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_right_upper" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="ru_base" name="right_upper" rep="(6">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" srcy="180" rotate="false">
-						<frameindex frames="6">
-							<static value="5" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_right_upper" rotate="false" />
 				</animations>
 			</entity>
 
-
 			<entity base="rl_base" name="right_lower" rep="/1">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" rotate="false" />
+					<animation spritesheet="walls" sprite="sand_right_lower" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="rl_base" name="right_lower" rep="/2">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="1" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_right_lower" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="rl_base" name="right_lower" rep="/3">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="2" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_right_lower" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="rl_base" name="right_lower" rep="/4">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="3" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_right_lower" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="rl_base" name="right_lower" rep="/5">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="4" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_right_lower" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="rl_base" name="right_lower" rep="/6">
 				<animations>
-					<animation texture="small_triangles" width="60" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="5" />
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_right_lower" rotate="false" />
 				</animations>
 			</entity>
 		</entities>

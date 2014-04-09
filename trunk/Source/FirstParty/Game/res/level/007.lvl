@@ -230,7 +230,7 @@
 			</entity>
 
 			<entity name="timer" rep="ti" collideWithBall="false">
-				<physics name="timer" shape="teeter">
+				<physics shape="teeter">
 					<body type="kinematic" angle="0">
 						<kinematics>
 							<position axis="x">
@@ -417,20 +417,20 @@
                                                                                     
                                                                                     
                                                                                     
-                                                                                    
+        ti                                                                          
         w2w1w4w2w2w4w1w3w1w5w6w2w5w3w2w1w4w2w1w6w4w1w5w6w1w2w5w3w2w3w6w2w4w6        
         w3s2s5s3s6s4s4s1s2s3s5s1s3s5s3s6s1s3s5s1s2s3s4s1s3s5s6s2s1s4s2s3s5w6        
         w6d4d3d2d1d3d6d4d3d2d1d3d2d4d1d5d5d2d4d5d3d6d1d2d6d4d1d3d5d6d1d5d3w2        
         w3d3d1w3w2w5w1w4w5w2w3w2w6w1w2w3w1w4w6w1w5w2w3w1w2w5w6w5w2w6w5d6d4w1        
         w1d2d2w1        w6                    h1                    w1d2d5w5        
-        w5d3d5w3    t1  w3        BB           1                t1  w2d4d6w3        
+        w5d3d5w3    t1  w3                     1                t1  w2d4d6w3        
         w3d5d2w4        w4                    w2                    w5d3d1w6        
-        w4d2d6w5     B  w1    R1              w4    R1              w4d6d4w2        
+        w4d2d6w5    BB  w1    R1              w4    R1              w4d6d4w2        
         w2d6d4w1    GT        GT  ^O^X    GT        GT  ^O^X    GT  w6d2d2w1        
         w6d1d3w6la        ra      w6w2la        ra      w6w2la      w2d5d1w4        
         w4d3d5brla        ra      blbrla        ra      blbrla      w3d2d4w5        
         w1d5d4brla  TT    ra  TT  blbrla  TT    ra  TT  blbrla  TT  w4d3d5w1        
-        w4d1d3w6la  ti    ra      w2w1la        ra      w1w4la      w5d1d6w2        
+        w4d1d3w6la        ra      w2w1la        ra      w1w4la      w5d1d6w2        
         w3d2d6w2                  w6w5                  w5w6        w2d5d3w1        
         w1d5d2w5                  w5h1                  h2w1        w4d2d6w2        
         w4d2d1w3                  w1 1                   2w2        w3d4d1w4        
