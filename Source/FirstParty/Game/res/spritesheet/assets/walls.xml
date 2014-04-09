@@ -1,0 +1,14 @@
+<spriteSheet texture="walls">
+	<sprites>
+		<sprite name="sand_01" x="0" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_02" x="60" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_03" x="120" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_04" x="180" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_05" x="240" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_06" x="300" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_left_lower" x="360" y="0" width="54" height="54" originx="0" originy="-6" />
+		<sprite name="sand_left_upper" x="414" y="0" width="54" height="54" originx="0" originy="0" />
+		<sprite name="sand_right_lower" x="468" y="0" width="54" height="54" originx="-6" originy="-6" />
+		<sprite name="sand_right_upper" x="522" y="0" width="54" height="54" originx="-6" originy="0" />
+	</sprites>
+</spriteSheet>

@@ -30,6 +30,7 @@
 	<texture name="GuiElements" path="gui/gui_elements.png" smooth="false" />
 	<texture name="Window" path="gui/window.png" smooth="false" />
 	<texture name="goodie" path="gui/Goodies.png" smooth="true" />
+	<texture name="walls" path="assets/walls.png" smooth="true" />
 </textures>
 <sounds>
 	<sound name="bounce" path="bounce.wav" />
@@ -65,4 +66,5 @@
 <spritesheets>
 	<spritesheet name="pastureland_flowery" path="backgrounds/flowery.xml" />
 	<spritesheet name="assets_misc" path="assets/misc.xml" />
+	<spritesheet name="walls" path="assets/walls.xml" />
 </spritesheets>

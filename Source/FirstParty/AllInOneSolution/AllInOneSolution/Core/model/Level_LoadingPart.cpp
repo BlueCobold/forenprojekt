@@ -353,12 +353,17 @@ void Level::findPhysicAndShapeTag(tinyxml2::XMLElement*& physic, tinyxml2::XMLEl
         else
             shape = physics->FirstChildElement("shape");
 
-        auto name = std::string(physics->Attribute("name"));
-        // Physics template exists other wise no template is used
-        if(templates.physics.find(std::string(physics->Attribute("name"))) != end(templates.physics))
-            physic = templates.physics.find(name)->second;
-        if(physic == nullptr)
-            throw std::runtime_error(utility::replace(utility::translateKey("UnknownPhysicReference"), name));
+        if(physics->Attribute("name"))
+        {
+            auto name = std::string(physics->Attribute("name"));
+            // Physics template exists other wise no template is used
+            if(templates.physics.find(std::string(physics->Attribute("name"))) != end(templates.physics))
+                physic = templates.physics.find(name)->second;
+            if(physic == nullptr)
+                throw std::runtime_error(utility::replace(utility::translateKey("UnknownPhysicReference"), name));
+        }
+        else
+            physic = physics;
     }
 }
 
