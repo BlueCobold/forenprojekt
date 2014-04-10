@@ -2,7 +2,7 @@
 	<levelinfo name="Moving Spikes">
 		<infoimage scrx="0" scry="0" width ="192" height="108" />
 	</levelinfo>
-	<constants solid="0" />
+	<constants solid="0"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />
 		<include file="assets/target/static.inc" />
@@ -25,6 +25,26 @@
 		</shapes>
 
 		<physics>
+		<physic name="horizontalmoving3"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+					<position axis="x">
+						<setVar name="posX">
+							<clamp>
+								<add>
+									<var name="posX"/>
+									<mouse axis="x" />
+								</add>
+								<static value="100" />
+								<static value="500" />
+							</clamp>
+							
+						</setVar>
+					</position>
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
 		<physic name="horizontalmoving1"> 
 			<body type="kinematic" angle="0"> 
 				<kinematics>
@@ -65,7 +85,7 @@
 			</body>  
 			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
 		</physic>
-		<physic name="verticalmoving1"> 
+		<physic name="verticalmoving3"> 
 			<body type="kinematic" angle="0"> 
 				<kinematics>
 					<position axis="y"> 
@@ -136,7 +156,7 @@
 				</animations>
 			</entity>
 			<entity name="movingwide_wall_1" rep="M1">
-				<physics name="verticalmoving1" shape="wide_wallmove" />
+				<physics name="verticalmoving3" shape="wide_wallmove" />
 				<onCollision>
 					<spawnEntity name="wall_hit_particles" location="contact" />
 				</onCollision>
@@ -162,7 +182,7 @@
 				</animations>
 			</entity>
 			<entity name="spike_okpart_move" rep="MO" type="entity" collideWithBall="true">
-				<physics name="verticalmoving1" shape="spike_okpart" />
+				<physics name="verticalmoving3" shape="spike_okpart" />
 				<animations>
 					<animation texture="gravity_arrow" y="20" srcx="224" srcy="128" width="24" height="40" />
 					<animation texture="gravity_arrow" x="24" y="20" srcx="224" srcy="128" width="24" height="40" />
@@ -172,7 +192,7 @@
 				</animations>
 			</entity>
 			<entity name="spike_okpart_move" rep="MX" type="entity" collideWithBall="true">
-				<physics name="verticalmoving1" shape="spike_killer" />
+				<physics name="verticalmoving3" shape="spike_killer" />
 				<onCollision>
 					<killBall />
 				</onCollision>

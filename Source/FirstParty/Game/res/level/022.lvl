@@ -2,7 +2,7 @@
 	<levelinfo name="RR Pong">
 		<infoimage scrx="0" scry="0" width ="192" height="108" />
 	</levelinfo>
-	<constants solid="0" />
+	<constants solid="0" posy="0"/>
 	<gameplay maxBalls="5" />
 	<templates>
 		<include file="assets/ball/twirl.inc" />
@@ -31,15 +31,15 @@
         w3w2w5w1w4w5w2w3w2w6w1w2w3w5w2w3w1w2w5w6w5w2w6w5w1 
                                                                             
                                   t1                                      
-        T4                                              T3
+                                                          
 
 
                               t1
-        T4                                              T3
+        P2                                              P1
                                       BB
 
 
-        T4                          t1                  T3
+                                    t1                    
                                                                            
         w2w2w4w1w3w1w5w6w2w5w3w2w1w4w2w1w6w4w1w5w6w1w2w5w1        
         w3s6s4s4s1s2s3s5s1s3s5s3s6s1s3s5s1s2s3s4s1s3s5s6w2        
