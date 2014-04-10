@@ -1,0 +1,7 @@
+#Here are all defined entities listed.
+
+
+|| *Rep* || *used in Level* || *.inc file* || *description* ||
+|| BB    || -               || default.inc || old Ball in game ||
+|| BB    || every Level     || twirl.inc   || new Ball in game ||
+|| O + X || 24;26           || spike.inc  ||  this spikes kill the ball||
