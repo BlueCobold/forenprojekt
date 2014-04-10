@@ -2,7 +2,7 @@
 	<levelinfo name="RR Flipper">
 		<infoimage scrx="0" scry="0" width ="192" height="108" />
 	</levelinfo>
-	<constants solid="0" />
+	<constants solid="0" posy="0"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />
 		<include file="assets/target/static.inc" />
@@ -16,23 +16,12 @@
 				<vertex x="30" y="30" />
 				<vertex x="-30" y="30" />
 			</shape>
-			<shape name="wide_wallmove" type="polygon">
-				<vertex x="0" y="0" />
-				<vertex x="120" y="0" />
-				<vertex x="120" y="60" />
-				<vertex x="0" y="60" />
-			</shape>
+		
 			<shape name="red_plate" type="polygon">
-				<vertex x="-39.5" y="0" />
-				<vertex x="39.5" y="0" />
-				<vertex x="39.5" y="17" />
-				<vertex x="-39.5" y="17" />
-			</shape>
-			<shape name="spring" type="polygon">
 				<vertex x="0" y="0" />
-				<vertex x="71" y="0" />
-				<vertex x="71" y="51" />
-				<vertex x="0" y="51" />
+				<vertex x="79" y="0" />
+				<vertex x="79" y="17" />
+				<vertex x="0" y="17" />
 			</shape>
 		</shapes>
 
@@ -550,12 +539,13 @@
 				</onCollision>
 				<animations>
 					<animation texture="gravity_arrow" srcx="347" srcy="129" width="79" height="17" rotate="false" />
-					<animation texture="gravity_arrow" x="4" y="18" srcx="273" srcy="129" width="71" height="51" rotate="false" />
-					<animation texture="gravity_arrow" x="4" y="69" srcx="273" srcy="129" width="71" height="51" rotate="false" />
-					<animation texture="gravity_arrow" x="4" y="120" srcx="273" srcy="129" width="71" height="51" rotate="false" />
-					<animation texture="gravity_arrow" x="4" y="171" srcx="273" srcy="129" width="71" height="51" rotate="false" />
-					<animation texture="gravity_arrow" x="4" y="222" srcx="273" srcy="129" width="71" height="51" rotate="false" />
-					<animation texture="gravity_arrow" x="4" y="273" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="17" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="68" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="119" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="170" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="221" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="272" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="323" srcx="273" srcy="129" width="71" height="51" rotate="false" />
 				</animations>
 			</entity>
 			<entity name="bonustarget_3" rep="b3" type="bonustarget" points="10" offsetx="30" offsety="30" collideWithBall="false">
