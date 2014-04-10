@@ -2,7 +2,7 @@
 	<levelinfo name="RR Pong extrem">
 		<infoimage scrx="0" scry="0" width ="192" height="108" />
 	</levelinfo>
-	<constants solid="0" />
+	<constants solid="0" posy="0"/>
 	<gameplay maxBalls="3" time="180"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />
@@ -16,7 +16,6 @@
 				<body type="dynamic" angle="0" />
 				<fixture density="0.1" friction="0.8" restitution="0.5" />
 			</physic>
-
 			<physic name="targetcircuit1"> 
 				<body type="kinematic" angle="0"> 
 					<kinematics> 
@@ -50,6 +49,7 @@
 				<fixture density="0.5" friction="0.8" restitution="0.1" /> 
 			</physic>
 		</physics>
+
 	</templates>
 		
 
@@ -61,15 +61,15 @@
         w3)2                                          (5w1 
                                                                             
                                   t1                                      
-        T4                                              T3
+                                                          
 
 
                               c1
-        T4                                              T3
+        P2                                              P1
                                             BB
 
 
-        T4                          t1                  T3
+                                    t1                    
                                                                            
         w2\4                                          /5w1        
         w3w1\1                                      /1w1w2  
