@@ -13,8 +13,8 @@
 || c2 ||                || static.inc  || this Targets give 100 points and it circulate around in a distance of *720 px* ||
 || c3 ||                || static.inc  || this Targets give 100 points and it circulate around in a distance of *820 px* ||
 || c4 ||                || static.inc  || this Targets give 100 points and it circulate around in a distance of *1020 px* ||
-|| bt ||                || static.inc  || this BonusTargets give 10 points ||
-|| b1 ||                || static.inc  || this BonusTargets give 10 points and it circulate around in a distance of *500 px* ||
+|| bt ||                || static.inc  || this bonustarget give 10 points ||
+|| b1 ||                || static.inc  || this bonustarget  give 10 points and it circulate around in a distance of *500 px* ||
 || 1t ||                || static.inc  || this Targets give 100 Points and change gravity ||
 || 2t ||                || static.inc  || this Targets give 100 Points and change gravity ||
 || 3t ||                || static.inc  || this Targets give 100 Points and change gravity||
