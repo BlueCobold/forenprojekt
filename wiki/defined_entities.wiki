@@ -4,4 +4,18 @@
 || *Rep* || *used in Level* || *.inc file* || *description* ||
 || BB    || -               || default.inc || old Ball in game ||
 || BB    || every Level     || twirl.inc   || new Ball in game ||
-|| O + X || 24;26           || spike.inc  ||  this spikes kill the ball||
+|| O + X ||                 || spike.inc  || spikes kill the ball, this spikes direction is *up* ||
+|| o^ + x ||                || spike.inc  || spikes kill the ball, this spikes direction is *down* ||
+|| o> + x> ||                || spike.inc  || spikes kill the ball, this spikes direction is *right* ||
+|| >o + >x ||                || spike.inc  || spikes kill the ball, this spikes direction is *left* ||
+|| t1 ||every Level     || static.inc  || this Targets give 100 points ||
+|| c1 ||                || static.inc  || this Targets give 100 points and it circulate around in a distance of *500 px* ||
+|| c2 ||                || static.inc  || this Targets give 100 points and it circulate around in a distance of *720 px* ||
+|| c3 ||                || static.inc  || this Targets give 100 points and it circulate around in a distance of *820 px* ||
+|| c4 ||                || static.inc  || this Targets give 100 points and it circulate around in a distance of *1020 px* ||
+|| bt ||                || static.inc  || this BonusTargets give 10 points ||
+|| b1 ||                || static.inc  || this BonusTargets give 10 points and it circulate around in a distance of *500 px* ||
+|| 1t ||                || static.inc  || this Targets give 100 Points and change gravity ||
+|| 2t ||                || static.inc  || this Targets give 100 Points and change gravity ||
+|| 3t ||                || static.inc  || this Targets give 100 Points and change gravity||
+|| 4t ||                || static.inc  || this Targets give 100 Points and change gravity||
