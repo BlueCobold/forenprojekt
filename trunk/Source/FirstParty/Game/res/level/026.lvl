@@ -1,0 +1,618 @@
+<level>
+	<levelinfo name="RR Flipper">
+		<infoimage scrx="0" scry="0" width ="192" height="108" />
+	</levelinfo>
+	<constants solid="0" />
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		<shapes>
+			<shape name="wallmove" type="polygon">
+				<vertex x="-30" y="-30" />
+				<vertex x="30" y="-30" />
+				<vertex x="30" y="30" />
+				<vertex x="-30" y="30" />
+			</shape>
+			<shape name="wide_wallmove" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="120" y="0" />
+				<vertex x="120" y="60" />
+				<vertex x="0" y="60" />
+			</shape>
+			<shape name="red_plate" type="polygon">
+				<vertex x="-39.5" y="0" />
+				<vertex x="39.5" y="0" />
+				<vertex x="39.5" y="17" />
+				<vertex x="-39.5" y="17" />
+			</shape>
+			<shape name="spring" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="71" y="0" />
+				<vertex x="71" y="51" />
+				<vertex x="0" y="51" />
+			</shape>
+		</shapes>
+
+		<physics>
+			<physic name="pump1">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="-29" />
+							</mul>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="pump2">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="x">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="-29" />
+							</mul>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="pump3">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="29" />
+							</mul>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="pump4">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="x">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="29" />
+							</mul>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="pump5">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="29" />
+							</mul>
+						</position>
+						<position axis="x">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="29" />
+							</mul>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="pump6">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="29" />
+							</mul>
+						</position>
+						<position axis="x">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="-29" />
+							</mul>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="pump7">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="-29" />
+							</mul>
+						</position>
+						<position axis="x">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="-29" />
+							</mul>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="pump8">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="-29" />
+							</mul>
+						</position>
+						<position axis="x">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="29" />
+							</mul>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+		<physic name="horizontalmoving3"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+					<position axis="x"> 
+						<add>
+							<mouse axis="x" />
+						</add> 
+					</position>
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="horizontalmoving1"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+					<position axis="x"> 
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="250" />
+								</mul>
+							</sine> 
+							<static value="60" /> 
+						</mul> 
+					</position>
+					 
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="horizontalmoving2"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+					<position axis="x"> 
+						<mul> 
+							<sine> 
+								<add> 
+									<static value="180" /> 
+										<mul> 
+											<time /> 
+											<static value="250" /> 
+										</mul> 
+								</add> 
+							</sine> 
+							<static value="60" /> 
+						</mul> 
+					</position>
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="verticalmoving1"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+					<position axis="y"> 
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="250" />
+								</mul>
+							</sine> 
+							<static value="180" /> 
+						</mul> 
+					</position>
+					 
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="verticalmoving2"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+					<position axis="y"> 
+						<mul> 
+							<sine> 
+								<add> 
+									<static value="180" /> 
+										<mul> 
+											<time /> 
+											<static value="250" /> 
+										</mul> 
+								</add> 
+							</sine> 
+							<static value="120" /> 
+						</mul>  
+					</position>
+					 
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		</physics>
+		
+		<entities>
+			<entity name="pump_1" rep="P1" offsetx="30" offsety="30">
+				<constants offset="0" />
+				<physics name="pump1" shape="wall" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false"/>
+				</animations>
+				<onCollision>
+					<changeProperty name="offset">
+						<time />
+					</changeProperty>
+				</onCollision>
+			</entity>
+			<entity name="pump_2" rep="P2" offsetx="30" offsety="30">
+				<constants offset="0" />
+				<physics name="pump2" shape="wall" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false"/>
+				</animations>
+				<onCollision>
+					<changeProperty name="offset">
+						<time />
+					</changeProperty>
+				</onCollision>
+			</entity>
+			<entity name="pump_3" rep="P3" offsetx="30" offsety="30">
+				<constants offset="0" />
+				<physics name="pump3" shape="wall" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false"/>
+				</animations>
+				<onCollision>
+					<changeProperty name="offset">
+						<time />
+					</changeProperty>
+				</onCollision>
+			</entity>
+			<entity name="pump_4" rep="P4" offsetx="30" offsety="30">
+				<constants offset="0" />
+				<physics name="pump4" shape="wall" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false"/>
+				</animations>
+				<onCollision>
+					<changeProperty name="offset">
+						<time />
+					</changeProperty>
+				</onCollision>
+			</entity>
+			<entity name="pump_5" rep="P5">
+				<constants offset="0" />
+				<physics name="pump5" shape="left_upper" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_left_upper" rotate="false" />
+						
+				</animations>
+				<onCollision>
+					<changeProperty name="offset">
+						<time />
+					</changeProperty>
+				</onCollision>
+			</entity>
+			<entity name="pump_6" rep="P6">
+				<constants offset="0" />
+				<physics name="pump6" shape="right_upper" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_right_upper" rotate="false" />
+						
+				</animations>
+				<onCollision>
+					<changeProperty name="offset">
+						<time />
+					</changeProperty>
+				</onCollision>
+			</entity>
+			<entity name="pump_7" rep="P7">
+				<constants offset="0" />
+				<physics name="pump7" shape="right_lower" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_right_lower" rotate="false" />
+						
+				</animations>
+				<onCollision>
+					<changeProperty name="offset">
+						<time />
+					</changeProperty>
+				</onCollision>
+			</entity>
+			<entity name="pump_8" rep="P8">
+				<constants offset="0" />
+				<physics name="pump8" shape="left_lower" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_left_lower" rotate="false" />
+						
+				</animations>
+				<onCollision>
+					<changeProperty name="offset">
+						<time />
+					</changeProperty>
+				</onCollision>
+			</entity>
+			
+			<entity name="movingwide_wall_1" rep="M1">
+				<physics name="verticalmoving1" shape="wide_wallmove" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
+						<frameindex frames="3">
+							<static value="0"/>
+						</frameindex>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="movingwide_wall_2" rep="M2" offsetx="-5" draworder="10" >
+				<physics name="verticalmoving1" shape="red_plate" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation texture="gravity_arrow" srcx="347" srcy="129" width="79" height="17" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="18" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="69" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="120" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="171" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="222" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+					<animation texture="gravity_arrow" x="4" y="273" srcx="273" srcy="129" width="71" height="51" rotate="false" />
+				</animations>
+			</entity>
+			<entity name="bonustarget_3" rep="b3" type="bonustarget" points="10" offsetx="30" offsety="30" collideWithBall="false">
+				<physics name="target">
+					<shape type="circle" radius="21" />
+				</physics>
+				<collides>
+					<spawnEntity name="bonustarget_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true" />
+				</animations>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="2600" height="1800">
+                                                                            
+                                                                            
+                                                                                    
+        w2w6w2w5w3w2w1w4w2w1w1w1w6w5w6w1w2w5w3w6
+        w3w3w2w6w1w2w3w1w4w2w1w6w1w3w1w2w1w2w5w1
+        w1  w1                              (1w5
+        w5b3w4            t1        t1        w3
+        w3  w1                                w6
+        w3b3w3                                w6
+        w3  w2                                w6
+        w3b3w1                P7P1P8b3P7P1P8  w6
+        w3  (1                P2w2P4  P2w2P4  w6
+        w4\1                  P6P3P5  P6P3P5  w2
+        w2(2\2                    b3  b3      w1
+        w6                        P7P1P8      w4
+        w6                        P2w2P4      w4
+        w6                        P6P3P5      w4
+        w6  t1                  t1            w4
+        w6                                    w4
+        w6                                    w4
+        w6                                    w4
+        w6                                    w4
+        w4\6  P8                        P7    w5
+        w1d1\5(1P8                    P7)1/2  w1
+        w4d2d3\4(2P8                P7)2/3w1  w2
+        w2d4d6d1\3(3                )3/4d4w1BBw5
+        w1d2d3d4d5\2                /5d2d1w6  w1
+        w2w1w1w1w1w1                w1w1w1w1  w4
+                    F1              F2    w1M2w2
+                          P7P8            w2  w1
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="700" silver="800" gold="900" />
+</level>
