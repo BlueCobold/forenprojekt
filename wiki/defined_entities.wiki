@@ -53,3 +53,11 @@
 || ti || "Up and Down" / 007.lvl|| timer to control the GhostTeeter||
 || br || "Up and Down" / 007.lvl|| Wall that apply an impulse to the ball when the ball hit the Wall *(x=50; y=0)* ||
 || bl || "Up and Down" / 007.lvl|| Wall that apply an impulse to the ball when the ball hit the Wall *(x=-50; y=0)* ||
+|| TP || "Shooting Range" / 012.lvl|| Teleport the ball to "BB" position||
+|| RR || "Level 2" / 016.lvl|| Rotating Teeter (no control)||
+|| P1 || "Level 2" / 016.lvl|| Wall - when ball hit this wall on the top the wall push the ball back||
+|| GL & GR || "Level 2" / 016.lvl|| Gate (like a gull-wing door) when the ball hit one of them the gate opens||
+|| k1 - k6 || "Rocket Science" / 017.lvl|| wall sandy-texture 60x60 fall down (physic-rules) ||
+|| a1 - a6 || "Rocket Science" / 017.lvl|| wall sandy-texture 60x60 destroyable and fall down (physic-rules)||
+|| K1 - K6 || "Rocket Science" / 017.lvl|| wall sandy-texture 120x60 destroyable and fall down (physic-rules)||
+|| A1 - A6 || "Rocket Science" / 017.lvl|| wall sandy-texture 120x60 fall down (physic-rules)||
