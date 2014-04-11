@@ -203,7 +203,7 @@
 				</animations>
 			</entity>
 
-			<entity base="small_quad" name="darkwall_1" rep="d1">
+			<entity name="darkwall_1" rep="d1">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_01" rotate="false">
 						<color channel="red">
@@ -218,7 +218,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity base="small_quad" name="darkwall_2" rep="d2">
+			<entity name="darkwall_2" rep="d2">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_02" rotate="false">
 						<color channel="red">
@@ -233,7 +233,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity base="small_quad" name="darkwall_3" rep="d3">
+			<entity name="darkwall_3" rep="d3">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_03" rotate="false">
 						<color channel="red">
@@ -248,7 +248,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity base="small_quad" name="darkwall_4" rep="d4">
+			<entity name="darkwall_4" rep="d4">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_04" rotate="false">
 						<color channel="red">
@@ -263,7 +263,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity base="small_quad" name="darkwall_5" rep="d5">
+			<entity name="darkwall_5" rep="d5">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_05" rotate="false">
 						<color channel="red">
@@ -278,7 +278,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity base="small_quad" name="darkwall_6" rep="d6">
+			<entity name="darkwall_6" rep="d6">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_06" rotate="false">
 						<color channel="red">
@@ -352,167 +352,155 @@
 
 			<entity base="high_quad" name="high_wall_1" rep="h1">
 				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_high_01" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="high_quad" name="high_wall_2" rep="h2">
 				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="1"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_high_02" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="high_quad" name="high_wall_3" rep="h3">
 				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="2"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_high_03" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="high_quad" name="high_wall_4" rep="h4">
 				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="3"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_high_04" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="high_quad" name="high_wall_5" rep="h5">
 				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="4"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_high_05" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="high_quad" name="high_wall_6" rep="h6">
 				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="5"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_high_06" rotate="false" />
 				</animations>
 			</entity>
 
 
 			<entity base="wide_quad" name="wide_wall_1" rep="W1">
 				<animations>
-					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_wide_01" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="wide_quad" name="wide_wall_2" rep="W2">
 				<animations>
-					<animation texture="wide_quads" srcy="60" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_wide_02" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="wide_quad" name="wide_wall_3" rep="W3">
 				<animations>
-					<animation texture="wide_quads" srcy="120" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_wide_03" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="wide_quad" name="wide_wall_4" rep="W4">
 				<animations>
-					<animation texture="wide_quads" srcy="180" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_wide_04" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="wide_quad" name="wide_wall_5" rep="W5">
 				<animations>
-					<animation texture="wide_quads" srcy="240" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_wide_05" rotate="false" />
 				</animations>
 			</entity>
 			<entity base="wide_quad" name="wide_wall_6" rep="W6">
 				<animations>
-					<animation texture="wide_quads" srcy="300" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_wide_06" rotate="false" />
 				</animations>
 			</entity>
 
 
 			<entity name="wide_darkwall_1" rep="D1">
 				<animations>
-					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_wide_01" rotate="false">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
 				</animations>
 			</entity>
 			<entity name="wide_darkwall_2" rep="D2">
 				<animations>
-					<animation texture="wide_quads" srcy="60" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_wide_02" rotate="false">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
 				</animations>
 			</entity>
 			<entity name="wide_darkwall_3" rep="D3">
 				<animations>
-					<animation texture="wide_quads" srcy="120" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_wide_03" rotate="false">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
 				</animations>
 			</entity>
 			<entity name="wide_darkwall_4" rep="D4">
 				<animations>
-					<animation texture="wide_quads" srcy="180" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_wide_04" rotate="false">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
 				</animations>
 			</entity>
 			<entity name="wide_darkwall_5" rep="D5">
 				<animations>
-					<animation texture="wide_quads" srcy="240" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_wide_05" rotate="false">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
 				</animations>
 			</entity>
 			<entity name="wide_darkwall_6" rep="D6">
 				<animations>
-					<animation texture="wide_quads" srcy="300" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_wide_06" rotate="false">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
 				</animations>
 			</entity>
@@ -641,6 +629,50 @@
 			<entity base="rl_base" name="right_lower" rep="/6">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_right_lower" rotate="false" />
+				</animations>
+			</entity>
+			
+			
+			<entity base="small_quad" name="wood_wall_1" rep="q1">
+				<animations>
+					<animation spritesheet="walls" sprite="wood_01" rotate="false"/>
+				</animations>
+			</entity>
+			<entity base="small_quad" name="wood_wall_2" rep="q2">
+				<animations>
+					<animation spritesheet="walls" sprite="wood_02" rotate="false"/>
+				</animations>
+			</entity>
+			<entity base="small_quad" name="wood_wall_3" rep="q3">
+				<animations>
+					<animation spritesheet="walls" sprite="wood_03" rotate="false"/>
+				</animations>
+			</entity>
+			<entity base="small_quad" name="wood_wall_4" rep="q4">
+				<animations>
+					<animation spritesheet="walls" sprite="wood_04" rotate="false"/>
+				</animations>
+			</entity>
+			
+			
+			<entity name="window_wall_1" rep="g1">
+				<animations>
+					<animation spritesheet="walls" sprite="window_01" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="window_wall_2" rep="g2">
+				<animations>
+					<animation spritesheet="walls" sprite="window_02" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="window_wall_3" rep="g3">
+				<animations>
+					<animation spritesheet="walls" sprite="window_03" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="window_wall_4" rep="g4">
+				<animations>
+					<animation spritesheet="walls" sprite="window_04" rotate="false"/>
 				</animations>
 			</entity>
 		</entities>

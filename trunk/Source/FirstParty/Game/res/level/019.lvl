@@ -102,7 +102,7 @@
 				<constants scale="5" />
 			</override>
 
-			<override rep="w*" newRep="k*">
+			<override rep="q*" newRep="k*">
 				<constants collides="1" killTime="0" delta="0" scale="1" />
 				<physics shape="wall" name="dynamicWall"/>
 				<animations>
@@ -141,10 +141,10 @@
                   w2    w5w1w2w4w3w1w5w6w2w4w6w2w3\2                                
                   w4    (4)3  (2)5  (1)2  (3w1w2w4w5                                
                   w2        k4    k1    k2  (6w2w3w3                                
-                  w6        k5    k2    k5    (1w2w6                                
-                  w1        k2    k6    k1      (3w1                                
+                  w6        k1    k2    k4    (1w2w6                                
+                  w1        k2    k3    k1      (3w1                                
                   w5        k3    k4    k3    BB  w2                                
-                  w1        k2    k6    k1        w1                                
+                  w1        k2    k2    k1        w1                                
                   w3        w1    w3    w2        w4                                
                                                                                     
                         TT                    TT                                    

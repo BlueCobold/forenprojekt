@@ -1,14 +1,40 @@
 <spriteSheet texture="walls">
 	<sprites>
-		<sprite name="sand_01" x="0" y="0" width="60" height="60" originx="30" originy="30" />
-		<sprite name="sand_02" x="60" y="0" width="60" height="60" originx="30" originy="30" />
-		<sprite name="sand_03" x="120" y="0" width="60" height="60" originx="30" originy="30" />
-		<sprite name="sand_04" x="180" y="0" width="60" height="60" originx="30" originy="30" />
-		<sprite name="sand_05" x="240" y="0" width="60" height="60" originx="30" originy="30" />
-		<sprite name="sand_06" x="300" y="0" width="60" height="60" originx="30" originy="30" />
-		<sprite name="sand_left_lower" x="360" y="0" width="54" height="54" originx="0" originy="-6" />
-		<sprite name="sand_left_upper" x="414" y="0" width="54" height="54" originx="0" originy="0" />
-		<sprite name="sand_right_lower" x="468" y="0" width="54" height="54" originx="-6" originy="-6" />
-		<sprite name="sand_right_upper" x="522" y="0" width="54" height="54" originx="-6" originy="0" />
+		<sprite name="sand_high_01" x="0" y="0" width="60" height="120" originx="0" originy="0" />
+		<sprite name="sand_high_02" x="60" y="0" width="60" height="120" originx="0" originy="0" />
+		<sprite name="sand_high_03" x="120" y="0" width="60" height="120" originx="0" originy="0" />
+		<sprite name="sand_high_04" x="180" y="0" width="60" height="120" originx="0" originy="0" />
+		<sprite name="sand_high_05" x="240" y="0" width="60" height="120" originx="0" originy="0" />
+		<sprite name="sand_high_06" x="300" y="0" width="60" height="120" originx="0" originy="0" />
+		<sprite name="sand_01" x="360" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_02" x="420" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_03" x="480" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_04" x="540" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_05" x="600" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_06" x="660" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_wide_01" x="720" y="0" width="120" height="60" originx="0" originy="0" />
+		<sprite name="sand_wide_02" x="840" y="0" width="120" height="60" originx="0" originy="0" />
+		<sprite name="sand_wide_03" x="360" y="60" width="120" height="60" originx="0" originy="0" />
+		<sprite name="sand_wide_04" x="480" y="60" width="120" height="60" originx="0" originy="0" />
+		<sprite name="sand_wide_05" x="600" y="60" width="120" height="60" originx="0" originy="0" />
+		<sprite name="sand_wide_06" x="720" y="60" width="120" height="60" originx="0" originy="0" />
+		<sprite name="wood_01" x="960" y="0" width="60" height="60" originx="30" originy="30" />
+		<sprite name="wood_02" x="840" y="60" width="60" height="60" originx="30" originy="30" />
+		<sprite name="wood_03" x="900" y="60" width="60" height="60" originx="30" originy="30" />
+		<sprite name="wood_04" x="960" y="60" width="60" height="60" originx="30" originy="30" />
+		<sprite name="sand_left_lower" x="0" y="120" width="54" height="54" originx="0" originy="-6" />
+		<sprite name="sand_left_upper" x="54" y="120" width="54" height="54" originx="0" originy="0" />
+		<sprite name="sand_right_lower" x="108" y="120" width="54" height="54" originx="-6" originy="-6" />
+		<sprite name="sand_right_upper" x="162" y="120" width="54" height="54" originx="-6" originy="0" />
+		<sprite name="soapstone_01" x="216" y="120" width="60" height="60" originx="30" originy="30" />
+		<sprite name="soapstone_02" x="276" y="120" width="60" height="60" originx="30" originy="30" />
+		<sprite name="soapstone_03" x="336" y="120" width="60" height="60" originx="30" originy="30" />
+		<sprite name="soapstone_04" x="396" y="120" width="60" height="60" originx="30" originy="30" />
+		<sprite name="soapstone_05" x="456" y="120" width="60" height="60" originx="30" originy="30" />
+		<sprite name="soapstone_06" x="516" y="120" width="60" height="60" originx="30" originy="30" />
+		<sprite name="window_01" x="576" y="120" width="60" height="60" originx="0" originy="0" />
+		<sprite name="window_02" x="636" y="120" width="60" height="60" originx="0" originy="0" />
+		<sprite name="window_03" x="696" y="120" width="60" height="60" originx="0" originy="0" />
+		<sprite name="window_04" x="756" y="120" width="60" height="60" originx="0" originy="0" />
 	</sprites>
 </spriteSheet>
