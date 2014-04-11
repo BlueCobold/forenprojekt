@@ -1,51 +1,51 @@
 #Here are all defined entities listed.
 
 
-|| *Rep* || *used in Level* || *.inc file* || *description* ||
-|| BB    || -               || default.inc || old Ball      ||
-|| BB    || -               || twirl.inc   || new Ball      ||
-|| O + X ||                 || spike.inc  || spikes kill the ball, this spikes direction is *up* ||
-|| o^ + x || -              || spike.inc  || spikes kill the ball, this spikes direction is *down* ||
-|| o> + x> ||-               || spike.inc  || spikes kill the ball, this spikes direction is *right* ||
-|| >o + >x ||-               || spike.inc  || spikes kill the ball, this spikes direction is *left* ||
-|| t1 || -              || Phase_out.inc  || this Targets give 100 Points and it is temporaly not hitable||
-|| t1 ||-               || static.inc  || this Targets give 100 points ||
-|| c1 ||-                || static.inc  || this Targets give 100 points and it circulate around in a distance of *500 px* ||
-|| c2 ||-                || static.inc  || this Targets give 100 points and it circulate around in a distance of *720 px* ||
-|| c3 ||-                || static.inc  || this Targets give 100 points and it circulate around in a distance of *820 px* ||
-|| c4 ||-                || static.inc  || this Targets give 100 points and it circulate around in a distance of *1020 px* ||
-|| bt ||-               || static.inc  || this bonustarget give 10 points ||
-|| b1 ||-               || static.inc  || this bonustarget  give 10 points and it circulate around in a distance of *500 px* ||
-|| 1t ||-               || static.inc  || this Targets give 100 Points and change gravity *(x=0; y=-40)* ||
-|| 2t ||-               || static.inc  || this Targets give 100 Points and change gravity *(x=0; y=40)* ||
-|| 3t ||-               || static.inc  || this Targets give 100 Points and change gravity *(x=40; y=0)* ||
-|| 4t ||-               || static.inc  || this Targets give 100 Points and change gravity *(x=-40; y=0)* ||
-|| TT ||-               || wood.inc  || Standard Teeter horizontal||
-|| T2 ||-               || wood.inc  || Standard Teeter vertical||
-|| T3 ||-               || wood.inc  || Teeter vertical after hit Change gravity *(x=-10; y=0)* ||
-|| T4 ||-               || wood.inc  || Teeter vertical after hit Change gravity *(x=10; y=0)* ||
-|| F1 ||-               || wood.inc  || flipperteeter horizontal pivot Point is right ||
-|| F2 ||-               || wood.inc  || flipperteeter horizontal pivot Point is left ||
-|| P1 ||-               || wood.inc  || Paddel vertical  no pivot Point moves up and down after hit change gravity *(x=-10; y=0)* ||
-|| P2 ||-               || wood.inc  || Paddel vertical  no pivot Point moves up and down after hit change gravity *(x=10; y=0)* ||
-|| w1 - w6 ||-               || walls.inc  || wall sandy-texture 60x60||
-|| d1 - d6 ||-               || walls.inc  || wall sandy-texture 60x60||
-|| s1 - s6 ||-               || walls.inc  || wall sandy-texture 60x60||
-|| h1 - h6 ||-               || walls.inc  || wall sandy-texture 60x120||
-|| W1 - W6 ||-               || walls.inc  || wall sandy-texture 120x60||
-|| D1 - D6 ||-               || walls.inc  || wall sandy-texture 120x60||
-|| )1 - )6||-               || walls.inc  || Triangel wall sandy-texture 90° left upper corner||
-|| (1 - (6||-               || walls.inc  || Triangel wall sandy-texture 90° right upper corner||
-|| /1 - /6||-               || walls.inc  || Triangel wall sandy-texture 90° right lower corner||
-|| \1 - \6||-               || walls.inc  || Triangel wall sandy-texture 90° left lower corner||
-|| Do || "Level 4" / 004.lvl|| -|| Area Change gravity *(x=0; y=40)* ||
-|| Ri || "Level 4" / 004.lvl|| -|| Area Change gravity *(x=40; y=0)* ||
-|| Le || "Level 4" / 004.lvl|| -|| Area Change gravity *(x=-40; y=0)* ||
-|| Up || "Level 4" / 004.lvl|| -|| Area Change gravity *(x=0; y=-40)* ||
-|| AR || "Level 4" / 004.lvl|| -|| Arrow that shows gravity direction||
-|| R1 || "Level 6" / 006.lvl|| -|| Area for checkpoint||
-|| R2 || "Level 6" / 006.lvl|| -|| Area for checkpoint||
-|| x1 || "Level 6" / 006.lvl|| -|| Wall Change Ball color||
-|| X1 || "Level 6" / 006.lvl|| -|| Wall Ball with correct Color can through this wall||
-|| ra || "Up and Down" / 007.lvl|| -|| Wall that apply a force to the ball when the ball hit the wall *(x=20; y=0)* ||
-|| la || "Up and Down" / 007.lvl|| -|| Wall that apply a force to the ball when the ball hit the wall *(x=-20; y=0)* ||
+|| *Rep* || *used in Level* / *.inc file* || *description* ||
+|| BB    || default.inc || old Ball      ||
+|| BB    || twirl.inc   || new Ball      ||
+|| O + X || spike.inc  || spikes kill the ball, this spikes direction is *up* ||
+|| o^ + x || spike.inc  || spikes kill the ball, this spikes direction is *down* ||
+|| o> + x> ||spike.inc  || spikes kill the ball, this spikes direction is *right* ||
+|| >o + >x ||spike.inc  || spikes kill the ball, this spikes direction is *left* ||
+|| t1 || Phase_out.inc  || this Targets give 100 Points and it is temporaly not hitable||
+|| t1 || static.inc  || this Targets give 100 points ||
+|| c1 || static.inc  || this Targets give 100 points and it circulate around in a distance of *500 px* ||
+|| c2 || static.inc  || this Targets give 100 points and it circulate around in a distance of *720 px* ||
+|| c3 || static.inc  || this Targets give 100 points and it circulate around in a distance of *820 px* ||
+|| c4 || static.inc  || this Targets give 100 points and it circulate around in a distance of *1020 px* ||
+|| bt || static.inc  || this bonustarget give 10 points ||
+|| b1 || static.inc  || this bonustarget  give 10 points and it circulate around in a distance of *500 px* ||
+|| 1t || static.inc  || this Targets give 100 Points and change gravity *(x=0; y=-40)* ||
+|| 2t || static.inc  || this Targets give 100 Points and change gravity *(x=0; y=40)* ||
+|| 3t || static.inc  || this Targets give 100 Points and change gravity *(x=40; y=0)* ||
+|| 4t || static.inc  || this Targets give 100 Points and change gravity *(x=-40; y=0)* ||
+|| TT || wood.inc  || Standard Teeter horizontal||
+|| T2 || wood.inc  || Standard Teeter vertical||
+|| T3 || wood.inc  || Teeter vertical after hit Change gravity *(x=-10; y=0)* ||
+|| T4 || wood.inc  || Teeter vertical after hit Change gravity *(x=10; y=0)* ||
+|| F1 || wood.inc  || flipperteeter horizontal pivot Point is right ||
+|| F2 || wood.inc  || flipperteeter horizontal pivot Point is left ||
+|| P1 || wood.inc  || Paddel vertical  no pivot Point moves up and down after hit change gravity *(x=-10; y=0)* ||
+|| P2 || wood.inc  || Paddel vertical  no pivot Point moves up and down after hit change gravity *(x=10; y=0)* ||
+|| w1 - w6 || walls.inc  || wall sandy-texture 60x60||
+|| d1 - d6 || walls.inc  || wall sandy-texture 60x60||
+|| s1 - s6 || walls.inc  || wall sandy-texture 60x60||
+|| h1 - h6 || walls.inc  || wall sandy-texture 60x120||
+|| W1 - W6 || walls.inc  || wall sandy-texture 120x60||
+|| D1 - D6 || walls.inc  || wall sandy-texture 120x60||
+|| )1 - )6|| walls.inc  || Triangel wall sandy-texture 90° left upper corner||
+|| (1 - (6|| walls.inc  || Triangel wall sandy-texture 90° right upper corner||
+|| /1 - /6|| walls.inc  || Triangel wall sandy-texture 90° right lower corner||
+|| \1 - \6|| walls.inc  || Triangel wall sandy-texture 90° left lower corner||
+|| Do || "Level 4" / 004.lvl|| Area Change gravity *(x=0; y=40)* ||
+|| Ri || "Level 4" / 004.lvl|| Area Change gravity *(x=40; y=0)* ||
+|| Le || "Level 4" / 004.lvl|| Area Change gravity *(x=-40; y=0)* ||
+|| Up || "Level 4" / 004.lvl|| Area Change gravity *(x=0; y=-40)* ||
+|| AR || "Level 4" / 004.lvl|| Arrow that shows gravity direction||
+|| R1 || "Level 6" / 006.lvl|| Area for checkpoint||
+|| R2 || "Level 6" / 006.lvl|| Area for checkpoint||
+|| x1 || "Level 6" / 006.lvl|| Wall Change Ball color||
+|| X1 || "Level 6" / 006.lvl|| Wall Ball with correct Color can through this wall||
+|| ra || "Up and Down" / 007.lvl|| Wall that apply a force to the ball when the ball hit the wall *(x=20; y=0)* ||
+|| la || "Up and Down" / 007.lvl|| Wall that apply a force to the ball when the ball hit the wall *(x=-20; y=0)* ||
