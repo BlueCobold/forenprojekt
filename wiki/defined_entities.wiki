@@ -45,7 +45,7 @@
 || AR || "Level 4" / 004.lvl|| Arrow that shows gravity direction||
 || R1 || "Level 6" / 006.lvl|| Area for checkpoint||
 || R2 || "Level 6" / 006.lvl|| Area for checkpoint||
-|| x1 || "Level 6" / 006.lvl|| Wall Change Ball color||
-|| X1 || "Level 6" / 006.lvl|| Wall Ball with correct Color can through this wall||
+|| x1 || "Level 6" / 006.lvl|| Wall - when the ball hit the wall he Change his color||
+|| X1 || "Level 6" / 006.lvl|| Wall - Ball with correct Color can through this wall||
 || ra || "Up and Down" / 007.lvl|| Wall that apply a force to the ball when the ball hit the wall *(x=20; y=0)* ||
 || la || "Up and Down" / 007.lvl|| Wall that apply a force to the ball when the ball hit the wall *(x=-20; y=0)* ||
