@@ -61,3 +61,11 @@
 || a1 - a6 || "Rocket Science" / 017.lvl|| wall sandy-texture 60x60 destroyable and fall down (physic-rules)||
 || K1 - K6 || "Rocket Science" / 017.lvl|| wall sandy-texture 120x60 destroyable and fall down (physic-rules)||
 || A1 - A6 || "Rocket Science" / 017.lvl|| wall sandy-texture 120x60 fall down (physic-rules)||
+|| m1 || "Moving Walls" / 024.lvl|| wall 60x60 moving horizontal in sinus rhythm||
+|| m2 || "Moving Walls" / 024.lvl|| wall 60x60 moving horizontal in cosinus rhythm||
+|| M1 || "Moving Spikes" / 025.lvl|| wall 120x60 moving vertical in sinus rhythm||
+|| M2 || "Moving Spikes" / 025.lvl|| wall 120x60 moving vertical in cosinus rhythm||
+|| MO & MX || "Moving Spikes" / 025.lvl|| Spikes moving vertical in sinus rhythm, spikes direction is *down*||
+|| oM & xM || "Moving Spikes" / 025.lvl|| Spikes moving vertical in cosinus rhythm, spikes direction is *up*||
+|| M2|| "RR Fliper" / 026.lvl|| device to shoot in the ball (flipperlike)||
+|| P1 - P8|| "RR Fliper" / 026.lvl|| Wall - when the ball hit this wall from a specific direction the ball will push back||
