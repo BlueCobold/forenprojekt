@@ -47,5 +47,9 @@
 || R2 || "Level 6" / 006.lvl|| Area for checkpoint||
 || x1 || "Level 6" / 006.lvl|| Wall - when the ball hit the wall he Change his color||
 || X1 || "Level 6" / 006.lvl|| Wall - Ball with correct Color can through this wall||
-|| ra || "Up and Down" / 007.lvl|| Wall that apply a force to the ball when the ball hit the wall *(x=20; y=0)* ||
-|| la || "Up and Down" / 007.lvl|| Wall that apply a force to the ball when the ball hit the wall *(x=-20; y=0)* ||
+|| ra || "Up and Down" / 007.lvl|| Area that apply a force to the ball *(x=20; y=0)* ||
+|| la || "Up and Down" / 007.lvl|| Area that apply a force to the ball *(x=-20; y=0)* ||
+|| GT || "Up and Down" / 007.lvl|| GhostTeeter sometimes he can not hit the ball (semi transparent then) ||
+|| ti || "Up and Down" / 007.lvl|| timer to control the GhostTeeter||
+|| br || "Up and Down" / 007.lvl|| Wall that apply an impulse to the ball when the ball hit the Wall *(x=50; y=0)* ||
+|| bl || "Up and Down" / 007.lvl|| Wall that apply an impulse to the ball when the ball hit the Wall *(x=-50; y=0)* ||
