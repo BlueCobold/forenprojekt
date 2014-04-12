@@ -116,7 +116,7 @@
 					<propertyFilter target="ball">
 						<abs>
 							<sub>
-								<static value="1" />
+								<static value="0" />
 								<var name="ball:color" />
 							</sub>
 						</abs>
@@ -139,7 +139,7 @@
 				</animations>
 			</entity>
 
-			<entity name="door_wall" rep="X2">
+			<entity name="door_wall2" rep="X2">
 				<physics name="wall" shape="wide_wall" />
 				<sound name="refuse" />
 				<collides>
@@ -169,14 +169,14 @@
 				</animations>
 			</entity>
 
-			<entity name="door_wall" rep="X3">
+			<entity name="door_wall3" rep="X3">
 				<physics name="wall" shape="wide_wall" />
 				<sound name="refuse" />
 				<collides>
 					<propertyFilter target="ball">
 						<abs>
 							<sub>
-								<static value="1" />
+								<static value="2" />
 								<var name="ball:color" />
 							</sub>
 						</abs>
@@ -194,7 +194,7 @@
 						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
-						<color value="8080FFFF" />
+						<color value="0000FFFF" />
 					</animation>
 				</animations>
 			</entity>

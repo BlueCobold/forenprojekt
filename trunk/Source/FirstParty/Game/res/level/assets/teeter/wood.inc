@@ -42,10 +42,10 @@
 						<position axis="y">
 							<setVar name="posy">
 								<clamp>
-									<add>
+									<sub>
 										<var name="posy"/>
 										<mouse axis="y" />
-									</add>
+									</sub>
 									<static value="-250" />
 									<static value="250" />
 								</clamp>
