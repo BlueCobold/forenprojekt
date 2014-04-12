@@ -51,8 +51,8 @@
 || X1-X3 || "Level 6" / 006.lvl|| Wall - Ball with correct Color can through this wall||
 || ra || "Up and Down" / 007.lvl|| Area that apply a force to the ball *(x=20; y=0)* ||
 || la || "Up and Down" / 007.lvl|| Area that apply a force to the ball *(x=-20; y=0)* ||
-|| GT || "Up and Down" / 007.lvl|| GhostTeeter sometimes he can not hit the ball (semi transparent then) ||
-|| ti || "Up and Down" / 007.lvl|| timer to control the GhostTeeter||
+|| GT || "Up and Down" / 007.lvl|| `GhostTeeter` sometimes he can not hit the ball (semi transparent then) ||
+|| ti || "Up and Down" / 007.lvl|| timer to control the `GhostTeeter`||
 || br || "Up and Down" / 007.lvl|| Wall that apply an impulse to the ball when the ball hit the Wall *(x=50; y=0)* ||
 || bl || "Up and Down" / 007.lvl|| Wall that apply an impulse to the ball when the ball hit the Wall *(x=-50; y=0)* ||
 || TP || "Shooting Range" / 012.lvl|| Teleport the ball to "BB" position||
