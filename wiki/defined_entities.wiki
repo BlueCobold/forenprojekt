@@ -1,4 +1,5 @@
-#summary This page shall give an overview all defined entities
+#summary This page shall give an overview to all defined entities
+
 =List of all used entities=
 
 
