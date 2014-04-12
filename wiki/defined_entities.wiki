@@ -1,4 +1,4 @@
-#summary This page shall give an overview to all defined entities
+#summary Overview of all defined entities (date 2014/04/12)
 
 =List of all used entities=
 
