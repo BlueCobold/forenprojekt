@@ -35,7 +35,7 @@
 || W1 - W6 || walls.inc  || wall sandy-texture 120x60||
 || D1 - D6 || walls.inc  || wall sandy-texture 120x60||
 || q1 - q4 || walls.inc  || wall wood-texture 60x60||
-|| g1 - g4 || walls.inc  || window-texture 60x60 just a texture||
+|| g1 - g4 || walls.inc  || window-texture 60x60 no physics||
 || )1 - )6|| walls.inc  || Triangel wall sandy-texture 90° left upper corner||
 || (1 - (6|| walls.inc  || Triangel wall sandy-texture 90° right upper corner||
 || /1 - /6|| walls.inc  || Triangel wall sandy-texture 90° right lower corner||
