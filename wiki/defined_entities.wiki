@@ -4,8 +4,8 @@
 || *Rep* || *used in Level* / *.inc file* || *description* ||
 || BB    || default.inc || old Ball      ||
 || BB    || twirl.inc   || new Ball      ||
-|| O + X || spike.inc  || spikes kill the ball, this spikes direction is *up* ||
-|| o^ + x || spike.inc  || spikes kill the ball, this spikes direction is *down* ||
+|| `^`O + `^`X || spike.inc  || spikes kill the ball, this spikes direction is *up* ||
+|| o`^` + x`^` || spike.inc  || spikes kill the ball, this spikes direction is *down* ||
 || o> + x> ||spike.inc  || spikes kill the ball, this spikes direction is *right* ||
 || >o + >x ||spike.inc  || spikes kill the ball, this spikes direction is *left* ||
 || t1 || Phase_out.inc  || this Targets give 100 Points and it is temporaly not hitable||
@@ -45,8 +45,8 @@
 || Le || "Level 4" / 004.lvl|| Area Change gravity *(x=-40; y=0)* ||
 || Up || "Level 4" / 004.lvl|| Area Change gravity *(x=0; y=-40)* ||
 || AR || "Level 4" / 004.lvl|| Arrow that shows gravity direction ||
-|| R1 || "Level 6" / 006.lvl|| Area for checkpoint ||
-|| R2 || "Level 6" / 006.lvl|| Area for checkpoint ||
+|| `R1` || "Level 6" / 006.lvl|| Area for checkpoint ||
+|| `R2` || "Level 6" / 006.lvl|| Area for checkpoint ||
 || x1 || "Level 6" / 006.lvl|| Wall - when the ball hit the wall he Change his color||
 || X1-X3 || "Level 6" / 006.lvl|| Wall - Ball with correct Color can through this wall||
 || ra || "Up and Down" / 007.lvl|| Area that apply a force to the ball *(x=20; y=0)* ||
