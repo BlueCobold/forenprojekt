@@ -1,4 +1,4 @@
-#Here are all defined entities listed.
+=List of all used entities=
 
 
 || *Rep* || *used in Level* / *.inc file* || *description* ||
