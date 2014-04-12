@@ -1,4 +1,5 @@
 #summary Overview of all defined entities (date 2014/04/12)
+#labels xml,entity,level
 
 =List of all used entities=
 
