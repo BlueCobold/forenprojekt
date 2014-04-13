@@ -10,7 +10,7 @@
 #include <memory>
 #include <vector>
 
-/// Returns the smallest of the values of the passed providers
+/// Returns the largest of the values of the passed providers
 class Maximum : public MultiProvider
 {
 public:
