@@ -9,7 +9,7 @@
 #include <memory>
 #include <vector>
 
-/// Returns the sum of the values of the passed providers
+/// Returns the value of the providers that is equal to a case
 class Switch : public MultiProvider
 {
 public:

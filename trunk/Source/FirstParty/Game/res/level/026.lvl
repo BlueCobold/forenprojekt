@@ -563,6 +563,33 @@
 					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true" />
 				</animations>
 			</entity>
+			<entity name="window_wall_1" rep="RO" draworder="1001">
+				<animations>
+					<animation spritesheet="walls" sprite="window_01" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_02" y="60" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_03" y="120" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_04" y="180" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_01" y="240" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_02" y="300" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_03" y="360" rotate="false"/>
+
+					<animation spritesheet="walls" sprite="window_01" x="-60" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_02" x="-60" y="60" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_03" x="-60" y="120" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_04" x="-60" y="180" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_01" x="-60" y="240" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_02" x="-60" y="300" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_03" x="-60" y="360" rotate="false"/>
+					
+					<animation spritesheet="walls" sprite="window_01" x="60" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_02" x="60" y="60" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_03" x="60" y="120" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_04" x="60" y="180" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_01" x="60" y="240" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_02" x="60" y="300" rotate="false"/>
+					<animation spritesheet="walls" sprite="window_03" x="60" y="360" rotate="false"/>
+				</animations>
+			</entity>
 		</entities>
 	</templates>
 
@@ -570,33 +597,33 @@
                                                                             
                                                                             
                                                                                     
-        w2w6w2w5w3w2w1w4w2w1w1w1w6w5w6w1w2w5w3w6
-        w3w3w2w6w1w2w3w1w4w2w1w6w1w3w1w2w1w2w5w1
-        w1  w1                              (1w5
-        w5b3w4            t1        t1        w3
-        w3  w1                                w6
-        w3b3w3                                w6
-        w3  w2                                w6
-        w3b3w1                P7P1P8b3P7P1P8  w6
-        w3  (1                P2w2P4  P2w2P4  w6
-        w4\1                  P6P3P5  P6P3P5  w2
-        w2(2\2                    b3  b3      w1
-        w6                        P7P1P8      w4
-        w6                        P2w2P4      w4
-        w6                        P6P3P5      w4
-        w6  t1                  t1            w4
-        w6                                    w4
-        w6                                    w4
-        w6                                    w4
-        w6                                    w4
-        w4\6  P8                        P7    w5
-        w1d1\5(1P8                    P7)1/2  w1
-        w4d2d3\4(2P8                P7)2/3w1  w2
-        w2d4d6d1\3(3                )3/4d4w1BBw5
-        w1d2d3d4d5\2                /5d2d1w6  w1
-        w2w1w1w1w1w1                w1w1w1w1  w4
-                    F1              F2    w1M2w2
-                          P7P8            w2  w1
+        w2w6w2w5w3w2w1w4w2w1w1w1w6w5w6w1w2w5w3w2w6
+        w3w3w2w6w1w2w3w1w4w2w1w6w1w3w1w2w1w2w5w3w1
+        w1  w1                                (1w5
+        w5b3w4            t1                    w3
+        w3  w1                                  w6
+        w3b3w3                      t1          w6
+        w3  w2                                  w6
+        w3b3w1                P7P1P8b3P7P1P8    w6
+        w3  (1                P2w2P4  P2w2P4    w6
+        w4\1                  P6P3P5  P6P3P5    w2
+        w2(2\2                    b3  b3        w1
+        w6                        P7P1P8        w4
+        w6                        P2w2P4        w4
+        w6                        P6P3P5        w4
+        w6  t1                  t1              w4
+        w6                                      w4
+        w6                                      w4
+        w6                                      w4
+        w6                                      w4
+        w4\6  P8                        P7  /5  w5
+        w1d1\5(1P8                    P7)1/2w1ROw1
+        w4d2d3\4(2P8                P7)2/3w1w1  w2
+        w2d4d6d1\3(3                )3/4d4w1w1BBw5
+        w1d2d3d4d5\2                /5d2d1w6w1  w1
+        w2w1w1w1w1w1                w1w1w1w1w1  w4
+                    F1              F2    w1w1M2w2
+                          P7P8            w2w2  w1
 	</grid>
 	<objects>
 		<include file="pastureland/background.inc" />

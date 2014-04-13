@@ -5,11 +5,10 @@
 
 #include "SingleProvider.hpp"
 #include "ValueProvider.hpp"
-#include "../Utility.hpp"
 
 #include <memory>
 
-/// Returns the inverse (1/x) of the value of the passed provider
+/// Returns the negated value of the passed provider (-1 * provider)
 class Negate : public SingleProvider
 {
 public:

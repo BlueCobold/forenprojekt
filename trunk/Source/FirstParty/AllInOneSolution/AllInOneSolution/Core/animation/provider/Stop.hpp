@@ -4,7 +4,6 @@
 #define STOP_HPP
 
 #include "../TimedObject.hpp"
-#include "../Utility.hpp"
 
 #include <cmath>
 
