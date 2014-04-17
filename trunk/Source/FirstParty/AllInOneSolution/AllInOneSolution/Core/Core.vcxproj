@@ -148,6 +148,7 @@
     <ClCompile Include="model\PhysicalObject.cpp" />
     <ClCompile Include="model\SoundManager.cpp" />
     <ClCompile Include="model\SoundObject.cpp" />
+    <ClCompile Include="model\SoundTrigger.cpp" />
     <ClCompile Include="model\Teeter.cpp" />
     <ClCompile Include="rendering\DebugDraw.cpp" />
     <ClCompile Include="rendering\transitions\AlphaTransition.cpp" />
@@ -310,6 +311,7 @@
     <ClInclude Include="model\InvulnerableGoody.hpp" />
     <ClInclude Include="model\SoundManager.hpp" />
     <ClInclude Include="model\SoundObject.hpp" />
+    <ClInclude Include="model\SoundTrigger.hpp" />
     <ClInclude Include="rendering\GraphicalObject.hpp" />
     <ClInclude Include="model\Level.hpp" />
     <ClInclude Include="model\ParallaxLayer.hpp" />

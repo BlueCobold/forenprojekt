@@ -56,6 +56,26 @@
 				</body>  
 				<fixture density="0.5" friction="0.8" restitution="0.1" /> 
 			</physic>
+			<physic name="horizontalmoving1"> 
+				<body type="kinematic" angle="0"> 
+					<kinematics>
+						<position axis="x">
+							<setVar name="posx">
+								<clamp>
+									<sub>
+										<var name="posx"/>
+										<mouse axis="x" />
+									</sub>
+									<static value="-355" />
+									<static value="150" />
+								</clamp>
+							
+							</setVar>
+						</position>
+					</kinematics> 
+				</body>  
+				<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+			</physic>
 		</physics>
 
 		<entities>
@@ -91,6 +111,18 @@
 				</collides>
 				<animations>
 					<animation texture="teeter_wooden_vertical" width="32" height="208" midx="16" midy="104" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="PadellTeeter3" rep="P3" type="paddel">
+				<physics name="horizontalmoving1" shape="flipperteeter1" />
+				<sound name="bounce" />
+				<collides>
+					<setBallVelocity x="0" y="-40">
+						<always />
+					</setBallVelocity>
+				</collides>
+				<animations>
+					<animation texture="teeter_wooden" width="208" height="32" midy="16" rotate="true" alignment="vertical"/>
 				</animations>
 			</entity>
 			<entity name="FlipperTeeter1" rep="F1" type="teeter">

@@ -11,6 +11,7 @@ class SoundObject
 public:
     SoundObject(const std::string& key, SoundManager& soundManager);
     SoundObject(const SoundObject& other);
+    SoundObject(const SoundObject&& other);
 
     void fixVolume(const float volume);
     void unfixVolume();
