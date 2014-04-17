@@ -203,7 +203,7 @@
 				</animations>
 			</entity>
 
-			<entity name="darkwall_1" rep="d1">
+			<entity name="darkwall_1" rep="d1" offsetx="30" offsety="30">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_01" rotate="false">
 						<color channel="red">
@@ -218,7 +218,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_2" rep="d2">
+			<entity name="darkwall_2" rep="d2" offsetx="30" offsety="30">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_02" rotate="false">
 						<color channel="red">
@@ -233,7 +233,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_3" rep="d3">
+			<entity name="darkwall_3" rep="d3" offsetx="30" offsety="30">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_03" rotate="false">
 						<color channel="red">
@@ -248,7 +248,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_4" rep="d4">
+			<entity name="darkwall_4" rep="d4" offsetx="30" offsety="30">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_04" rotate="false">
 						<color channel="red">
@@ -263,7 +263,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_5" rep="d5">
+			<entity name="darkwall_5" rep="d5" offsetx="30" offsety="30">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_05" rotate="false">
 						<color channel="red">
@@ -278,7 +278,7 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_6" rep="d6">
+			<entity name="darkwall_6" rep="d6" offsetx="30" offsety="30">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_06" rotate="false">
 						<color channel="red">

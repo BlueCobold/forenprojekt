@@ -14,6 +14,14 @@ SoundObject::SoundObject(const std::string& name, SoundManager& soundManager) :
         throw std::runtime_error(utility::translateKey("NoSoundName"));
 }
 
+SoundObject::SoundObject(const SoundObject&& other) :
+    m_soundManager(other.m_soundManager),
+    m_soundName(other.m_soundName),
+    m_volumeFixed(other.m_volumeFixed),
+    m_volume(other.m_volume)
+{
+}
+
 SoundObject::SoundObject(const SoundObject& other) :
     m_soundManager(other.m_soundManager),
     m_soundName(other.m_soundName),

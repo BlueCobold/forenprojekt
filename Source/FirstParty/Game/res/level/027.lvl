@@ -1,0 +1,129 @@
+<level>
+	<levelinfo name="Classic Arcade">
+		<infoimage scrx="38" scry="313" width="192" height="108" />
+	</levelinfo>
+	<constants posx="0" />
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/movement.inc" />
+		<include file="assets/target/phase_out.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		
+		<include file="sandy/walls.inc" />
+		
+		<physics>
+			<physic name="dynamicWall">
+				<body type="dynamic" angle="0" />
+				<fixture density="0.1" friction="0.8" restitution="0.5" />
+			</physic>
+		</physics>
+		
+		<functions>
+			<function name="blockAlpha">
+				<step>
+					<var name="collides" />
+					<step threshold="0">
+						<setVar name="delta">
+							<sub>
+								<var name="killTime" />
+								<mul>
+									<time />
+									<static value="2"/>
+								</mul>
+							</sub>
+						</setVar>
+						<stop />
+						<var name="delta" />
+					</step>
+					<static value="1" />
+				</step>
+			</function>
+			<function name="blockCollides">
+				<nop>
+					<static value="0" />
+					<setVar name="killTime">
+						<add>
+							<mul>
+								<time />
+								<static value="2"/>
+							</mul>
+							<static value="1"/>
+						</add>
+					</setVar>
+				</nop>
+			</function>
+		</functions>
+		
+		<overrides>
+			<override rep="w*" newRep="k*">
+				<constants collides="1" killTime="0" delta="0" />
+				<animations>
+					<color channel="alpha">
+						<function name="blockAlpha"/>
+					</color>
+				</animations>
+				<collides>
+					<propertyFilter target="entity">
+						<var name="collides" />
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<changeProperty name="collides">
+						<function name="blockCollides"/>
+					</changeProperty>
+				</onCollision>
+			</override>
+		</overrides>
+		<entities>
+			<entity name="targetwall" rep="kt" type="target" offsetx="30" offsety="30">
+				<physics name="wall" shape="wall" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_06" rotate="false"/>
+					<animation texture="targetmini" midx="11" midy="11"/>
+				</animations>
+				<sounds>
+					<sound name="refuse">
+					<static value="1"/>
+					</sound>
+				</sounds>
+			</entity>
+		</entities>
+	</templates>
+	
+	
+	<grid size="60" width="2460" height="1440">
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                          W1  W5  W6  W3  W1  W2  W4                                
+                          w3k2k1k2k5k3k1k4k6k2k1ktk2w2                              
+                          w6k3k2k5ktk6k2k3k4k5ktk2k1w6                              
+                          w3ktk1k2k5k3k1k4k6k2k1k3k2w5                              
+                          w6k3k2k5ktk6k2k3k4k5ktk2k1w6                              
+                          w3k5k1k2k5k3k5k4k6k2k1k3k2w5                              
+                          w4                        w2                              
+                          w4                        w2                              
+                          w4            BB          w2                              
+                          w4                        w2                              
+                          w4                        w2                              
+                                        P3                                          
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+	</grid>
+	
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="500" silver="800" gold="1000" />
+</level>

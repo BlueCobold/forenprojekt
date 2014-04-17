@@ -49,9 +49,6 @@
     <ClCompile Include="model\SoundManager.cpp">
       <Filter>Sources\model</Filter>
     </ClCompile>
-    <ClCompile Include="model\SoundObject.cpp">
-      <Filter>Sources\model</Filter>
-    </ClCompile>
     <ClCompile Include="model\collision\ContactListener.cpp">
       <Filter>Sources\model\collision</Filter>
     </ClCompile>
@@ -312,6 +309,12 @@
     </ClCompile>
     <ClCompile Include="gui\AnimationContainer.cpp">
       <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="model\SoundObject.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="model\SoundTrigger.cpp">
+      <Filter>Sources\model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -836,6 +839,9 @@
     </ClInclude>
     <ClInclude Include="animation\provider\MouseProvider.hpp">
       <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="model\SoundTrigger.hpp">
+      <Filter>Headers\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
