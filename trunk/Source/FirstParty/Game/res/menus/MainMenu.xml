@@ -9,29 +9,5 @@
 		<button id="2" text="gui_option" style="default" x="261" y="160" />
 		<button id="3" text="gui_credit" style="default" x="261" y="215" />
 		<button id="4" text="gui_close" style="default" x="261" y="270" />
-		<animationContainer id="5" x="0" y="0">
-				<animations>
-					<animation copies="7" texture="ball_twirl" srcy="32" width="32" height="32" midx="16" midy="16" rotate="true">
-					<constants frame="0" />
-						<rotation>
-							<mul>
-								<time />
-								<static value="60" />
-							</mul>
-						</rotation>
-						<frameindex frames="7">
-							<cache>
-								<setVar name="frame">
-									<add>
-										<var name="frame" />
-										<static value="1" />
-									</add>
-								</setVar>
-							</cache>
-						</frameindex>
-					</animation>
-				</animations>
-		</animationContainer>
-
 	</elements>
 </menu>

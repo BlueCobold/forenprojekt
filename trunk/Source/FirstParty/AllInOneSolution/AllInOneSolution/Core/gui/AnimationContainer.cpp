@@ -1,14 +1,14 @@
 #include "AnimationContainer.hpp"
 
-AnimationContainer::AnimationContainer() :
-    MenuElement(-1, MenuElementType::Animation, sf::Vector2f(0, 0), sf::Vector2f(0, 0)),
+AnimationContainer::AnimationContainer(const sf::Vector2f& position, int id) :
+    MenuElement(id, MenuElementType::Animation, position, sf::Vector2f(0, 0)),
     m_updatingAni(nullptr)
 {
 }
 
 AnimationContainer::AnimationContainer(AnimationContainer&& toMove) :
-    MenuElement(-1, MenuElementType::Animation, sf::Vector2f(0, 0), sf::Vector2f(0, 0)),
-    m_updatingAni(nullptr)
+    MenuElement(toMove.getId(), MenuElementType::Animation, toMove.getPosition(), toMove.getOffset()),
+    m_updatingAni(toMove.m_updatingAni)
 {
 }
 
