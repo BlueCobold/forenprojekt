@@ -546,7 +546,9 @@ void MenuLoader::parseAnimationContainer(
     {
         if(auto animationContainer = element->FirstChildElement("animationContainer"))
         {
-            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer());
+            int id = animationContainer->IntAttribute("id");
+            sf::Vector2f position = sf::Vector2f(animationContainer->FloatAttribute("x"), animationContainer->FloatAttribute("y"));
+            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(position, id));
             std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
             if(auto animations = animationContainer->FirstChildElement("animations"))
             {

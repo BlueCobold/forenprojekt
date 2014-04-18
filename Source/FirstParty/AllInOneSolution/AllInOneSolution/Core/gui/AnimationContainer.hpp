@@ -12,7 +12,7 @@ private:
     std::map<std::string, float> m_variables;
     Animation* m_updatingAni;
 public:
-    AnimationContainer();
+    AnimationContainer(const sf::Vector2f& position, int id);
     AnimationContainer(AnimationContainer&& toMove);
 
     virtual float getValueOf(const std::string& name) const override;
