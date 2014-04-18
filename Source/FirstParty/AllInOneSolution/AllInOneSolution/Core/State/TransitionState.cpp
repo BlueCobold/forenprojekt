@@ -38,7 +38,9 @@ void TransitionState::onEnter(const EnterStateInformation* enterInformation, con
     m_targetImage.clear();
     info->m_onEnterInformation->m_prepareOnly = true;
     info->m_target->onEnter(info->m_onEnterInformation, time);
+    info->m_target->resume(time);
     info->m_target->update(time);
+    info->m_target->pause(time);
     info->m_target->draw(m_targetImage);
     m_targetImage.display();
 

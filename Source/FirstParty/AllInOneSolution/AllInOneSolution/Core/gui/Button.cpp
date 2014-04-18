@@ -6,7 +6,8 @@
 Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset) :
     MenuElement(id, MenuElementType::Button, position, offset),
     m_style(style),
-    m_playHoverSound(false)
+    m_playHoverSound(false),
+    m_showToolTip(false)
 {
     m_sprite = &m_style.idleStyle.sprite;
     m_label = &m_style.idleStyle.label;

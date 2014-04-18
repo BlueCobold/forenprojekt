@@ -5,7 +5,8 @@ CheckBox::CheckBox(int id, CheckBoxStyle style, const sf::Vector2f& position, co
     MenuElement(id, MenuElementType::CheckBox, position, offset),
     m_style(style),
     m_checked(false),
-    m_hover(false)
+    m_hover(false),
+    m_showToolTip(false)
 {
     m_sprite = &m_style.uncheckedStyle.sprite;
     onPositionChanged();
