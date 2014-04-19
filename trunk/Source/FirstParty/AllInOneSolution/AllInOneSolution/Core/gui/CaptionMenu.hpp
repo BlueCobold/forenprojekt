@@ -15,7 +15,8 @@ public:
 
     virtual void setPosition(const sf::Vector2f& position) override;
     virtual void setCaption(const std::string& caption);
-    
+    virtual void updateLayout() override;
+
 protected:
     
     virtual void drawAdditionalBackground(const DrawParameter& params) override;

@@ -35,7 +35,7 @@ void LevelFailState::onEnter(const EnterStateInformation* enterInformation, cons
     State::onEnter(enterInformation, time);
     m_HUD.restartAt(getPassedTime());
 
-    m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
+    m_menu.updateLayout();
     
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 }
@@ -44,8 +44,6 @@ StateChangeInformation LevelFailState::update(const float time)
 {
     if(State::isPaused())
         return StateChangeInformation::Empty();
-
-    m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
     updateTime(time);
 

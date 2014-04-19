@@ -167,3 +167,8 @@ void MenuPanel::createAnimationContainer(std::unique_ptr<AnimationContainer>& in
 {
     m_elements.push_back(std::move(info));
 }
+
+void MenuPanel::updateLayout(const sf::Vector2f& position)
+{
+    setPosition(position);
+}

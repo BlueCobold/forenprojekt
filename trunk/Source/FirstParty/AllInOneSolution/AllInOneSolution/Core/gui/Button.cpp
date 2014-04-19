@@ -121,6 +121,8 @@ void Button::drawAdditionalForeground(const DrawParameter& params)
 {
     if(m_showToolTip && isVisible())
         m_toolTip.draw(params);
+
+    m_showToolTip = false;
 }
 
 void Button::changeIdleSprite(const sf::Sprite& sprite)
@@ -142,4 +144,10 @@ void Button::changePressedSprite(const sf::Sprite& sprite)
     sf::Sprite s(sprite);
     s.setPosition(m_style.pressedStyle.sprite.getPosition());
     m_style.pressedStyle.sprite = s;
+}
+
+void Button::setPosition(const sf::Vector2f& position)
+{
+    MenuElement::setPosition(position);
+    onPositionChanged();
 }

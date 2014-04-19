@@ -82,10 +82,14 @@ void Slider::onPositionChanged()
 {
     auto position = getPosition();
     auto offset = getOffset();
+    auto size = m_spriteSlider->getTextureRect().width / 2.f;
+    float x = position.x + offset.x + m_style.mouseRect.left;
+    m_sliderPosition.x = (m_value - m_min) * m_style.width / m_max;
+    m_sliderPosition.y = position.y + offset.y + m_style.mouseRect.top;
+
     m_style.active.spriteBackground.setPosition(position + offset + m_style.active.backgroundOffset);
     m_style.idle.spriteBackground.setPosition(position + offset + m_style.idle.backgroundOffset);
-
-    m_sliderPosition.y = position.y + offset.y + m_style.mouseRect.top;
+    m_spriteSlider->setPosition(m_sliderPosition + m_style.idle.sliderOffset + sf::Vector2f(x, 0));
 }
 
 void Slider::setValue(const float value)
@@ -103,4 +107,10 @@ void Slider::calculateValue(const int left, const int mousex)
 {
     float value = m_min + static_cast<float>(mousex - left) / m_style.width * (m_max - m_min);
     m_value = std::max(std::min(value, m_max), m_min);
+}
+
+void Slider::setPosition(const sf::Vector2f& position)
+{
+    MenuElement::setPosition(position);
+    onPositionChanged();
 }

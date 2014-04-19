@@ -28,13 +28,10 @@ SubWindow::SubWindow(const int id,
     m_style(style)
 {
     float scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
-    m_windowRect.setPosition(position.x + offset.x,
-                             position.y + offset.y);
+
     m_windowRect.setSize(sf::Vector2f(size.x - scrollWidth, size.y));
     m_windowRect.setFillColor(sf::Color(100, 100, 100, 70));
 
-    m_sliderRect.setPosition(position.x + offset.x + m_size.x - scrollWidth,
-                             position.y + offset.y);
     m_sliderRect.setSize(sf::Vector2f(scrollWidth, m_size.y));
     m_sliderRect.setFillColor(sf::Color(40, 40, 40, 70));
 
@@ -50,6 +47,8 @@ SubWindow::SubWindow(const int id,
 
     m_center.x = m_size.x / 2.f;
     m_center.y = m_size.y / 2.f;
+
+    onPositionChanged();
 }
 
 MenuPanel* SubWindow::getPanel()
@@ -165,6 +164,15 @@ void SubWindow::onPositionChanged()
                              position.y + offset.y);
     m_positionRect.setPosition(position.x + offset.x + m_size.x - scrollWidth,
                                position.y + offset.y);
+
+    position = m_positionRect.getPosition();
+    m_style.scrollbarTop.setPosition(position);
+    m_style.scrollbarMiddle.setPosition(position.x, position.y + m_style.scrollbarTop.getTextureRect().height);
+    float height = m_positionRect.getSize().y
+                    - m_style.scrollbarTop.getTextureRect().height
+                    - m_style.scrollbarBottom.getTextureRect().height;
+    m_style.scrollbarMiddle.setScale(1, height/m_style.scrollbarMiddle.getTextureRect().height);
+    m_style.scrollbarBottom.setPosition(position.x, position.y + height + m_style.scrollbarTop.getTextureRect().height);
 }
 
 float SubWindow::sliderPixelToWindowPixel(float pixel)
@@ -190,3 +198,8 @@ void SubWindow::drawAdditionalForeground(const DrawParameter& params)
     m_panel.drawAdditionalForeground(params);
 }
 
+void SubWindow::setPosition(const sf::Vector2f& position)
+{
+    MenuElement::setPosition(position);
+    m_panel.updateLayout(sf::Vector2f(0, 0));
+}

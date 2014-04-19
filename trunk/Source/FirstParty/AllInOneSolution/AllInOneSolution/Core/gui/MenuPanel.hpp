@@ -39,6 +39,8 @@ public:
         const float time,
         const MenuElementType::Type type,
         const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0));
+    
+    void updateLayout(const sf::Vector2f& position);
 
     void registerOnClick(std::function<void(const Button& sender)> callback);
 

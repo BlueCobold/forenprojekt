@@ -20,6 +20,10 @@ LevelSelectState::LevelSelectState(sf::RenderWindow& screen,
     auto captionName = m_levelNames.find(1);
     if(captionName != end(m_levelNames))
         m_menu.setCaption(captionName->second);
+
+    updateRightButton();
+
+    m_menu.hideLeftButton(true);
 }
 
 LevelSelectState::~LevelSelectState()
@@ -30,7 +34,7 @@ void LevelSelectState::onEnter(const EnterStateInformation* enterInformation, co
 {
     State::onEnter(enterInformation, time);
 
-    m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
+    m_menu.updateLayout();
 
     m_unlockedLevel = m_config.get<int>("UnlockedLevel");
 }
@@ -39,8 +43,6 @@ StateChangeInformation LevelSelectState::update(const float time)
 { 
     if(State::isPaused())
         return StateChangeInformation::Empty();
-
-    m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
     int clicked = -1;
     updateTime(time);
@@ -90,24 +92,13 @@ StateChangeInformation LevelSelectState::update(const float time)
     if(m_levelNames.find(m_currentLevelNumber - 1) == end(m_levelNames))
         m_menu.hideLeftButton(true);
     else
-    {
-        sf::Sprite sprite(*getResourceManager().getTexture("GuiElements"), m_textureCoordinates.find(m_currentLevelNumber-1)->second);
-        m_menu.changeIdleSprite(LevelSelectMenu::BUTTON_LEFT, sprite);
-        m_menu.changeHoverSprite(LevelSelectMenu::BUTTON_LEFT, sprite);
-        m_menu.changePressedSprite(LevelSelectMenu::BUTTON_LEFT, sprite);
-        m_menu.hideLeftButton(false);
-    }
+        updateLeftButton();
+
     if(m_levelNames.find(m_currentLevelNumber + 1) == end(m_levelNames) ||
        (m_unlockedLevel < (m_currentLevelNumber + 1)))
         m_menu.hideRightButton(true);
     else
-    {
-        sf::Sprite sprite(*getResourceManager().getTexture("GuiElements"), m_textureCoordinates.find(m_currentLevelNumber+1)->second);
-        m_menu.changeIdleSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
-        m_menu.changeHoverSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
-        m_menu.changePressedSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
-        m_menu.hideRightButton(false);
-    }
+        updateRightButton();
 
     return StateChangeInformation::Empty();
 }
@@ -157,4 +148,22 @@ void LevelSelectState::loadLevelInfos()
         m_levelNames[i] = name;
         m_textureCoordinates[i] = textureRect;
     }
+}
+
+void LevelSelectState::updateLeftButton()
+{
+    sf::Sprite sprite(*getResourceManager().getTexture("GuiElements"), m_textureCoordinates.find(m_currentLevelNumber - 1)->second);
+    m_menu.changeIdleSprite(LevelSelectMenu::BUTTON_LEFT, sprite);
+    m_menu.changeHoverSprite(LevelSelectMenu::BUTTON_LEFT, sprite);
+    m_menu.changePressedSprite(LevelSelectMenu::BUTTON_LEFT, sprite);
+    m_menu.hideLeftButton(false);
+}
+
+void LevelSelectState::updateRightButton()
+{
+    sf::Sprite sprite(*getResourceManager().getTexture("GuiElements"), m_textureCoordinates.find(m_currentLevelNumber + 1)->second);
+    m_menu.changeIdleSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
+    m_menu.changeHoverSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
+    m_menu.changePressedSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
+    m_menu.hideRightButton(false);
 }

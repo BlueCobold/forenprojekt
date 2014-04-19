@@ -32,3 +32,9 @@ void CaptionMenu::setCaption(const std::string& caption)
 {
     m_caption.setText(caption);
 }
+
+void CaptionMenu::updateLayout()
+{
+    m_caption.setPosition(sf::Vector2f(getRenderWindow().getSize().x / 2.f, getRenderWindow().getSize().y / 2.f - getSize().y / 2.f));
+    Menu::updateLayout();
+}

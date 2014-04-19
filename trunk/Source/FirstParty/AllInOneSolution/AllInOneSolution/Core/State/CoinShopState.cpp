@@ -20,20 +20,20 @@ CoinShopState::CoinShopState(sf::RenderWindow& screen,
                              ResourceManager& resourceManager,
                              AppConfig& config) :
     State(screen, resourceManager, config),
-    m_coinShopMenu(sf::Vector2f(0.0f, 0.0f), screen, resourceManager),
+    m_menu(sf::Vector2f(0.0f, 0.0f), screen, resourceManager),
     m_HUD(resourceManager, config),
     m_clicked(-1)
 {
     auto buttonFunc = [&](const Button& sender){ m_clicked = sender.getId(); };
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_GRAVITY_PLUS).registerOnPressed(buttonFunc);
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_PLUS).registerOnPressed(buttonFunc);
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_PLUS).registerOnPressed(buttonFunc);
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_PLUS).registerOnPressed(buttonFunc);
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_GRAVITY_MINUS).registerOnPressed(buttonFunc);
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_MINUS).registerOnPressed(buttonFunc);
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_MINUS).registerOnPressed(buttonFunc);
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_MINUS).registerOnPressed(buttonFunc);
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_CLOSE).registerOnPressed(buttonFunc);
+    m_menu.getButton(CoinShopMenu::BUTTON_GRAVITY_PLUS).registerOnPressed(buttonFunc);
+    m_menu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_PLUS).registerOnPressed(buttonFunc);
+    m_menu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_PLUS).registerOnPressed(buttonFunc);
+    m_menu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_PLUS).registerOnPressed(buttonFunc);
+    m_menu.getButton(CoinShopMenu::BUTTON_GRAVITY_MINUS).registerOnPressed(buttonFunc);
+    m_menu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_MINUS).registerOnPressed(buttonFunc);
+    m_menu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_MINUS).registerOnPressed(buttonFunc);
+    m_menu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_MINUS).registerOnPressed(buttonFunc);
+    m_menu.getButton(CoinShopMenu::BUTTON_CLOSE).registerOnPressed(buttonFunc);
 }
 
 CoinShopState::~CoinShopState()
@@ -47,21 +47,24 @@ void CoinShopState::onEnter(const EnterStateInformation* enterInformation, const
     m_level = enterInformation->m_level;
     m_levelNumber = enterInformation->m_levelNumber;
 
-    m_coinShopMenu.setGoodyCharges(Goody::GravityGoody, m_config.get<int>("goodygravity"));
-    m_coinShopMenu.setGoodyCharges(Goody::InvulnerableGoody, m_config.get<int>("goodyinvulnerable"));
-    m_coinShopMenu.setGoodyCharges(Goody::ExtraBallGoody, m_config.get<int>("goodyextraball"));
-    m_coinShopMenu.setGoodyCharges(Goody::ExtraTimeGoody, m_config.get<int>("goodyextratime"));
+    m_menu.setGoodyCharges(Goody::GravityGoody, m_config.get<int>("goodygravity"));
+    m_menu.setGoodyCharges(Goody::InvulnerableGoody, m_config.get<int>("goodyinvulnerable"));
+    m_menu.setGoodyCharges(Goody::ExtraBallGoody, m_config.get<int>("goodyextraball"));
+    m_menu.setGoodyCharges(Goody::ExtraTimeGoody, m_config.get<int>("goodyextratime"));
+
+    m_menu.updateLayout();
+    updateButtons();
 }
 
 void CoinShopState::buy(const Goody::Type type, const std::string& propertyKey)
 {
-    int cost = m_coinShopMenu.getBuyCost(type);
+    int cost = m_menu.getBuyCost(type);
     int coins = m_config.get<int>("coins");
     int charge = m_config.get<int>(propertyKey);
     if(coins >= cost)
     {
         charge++;
-        m_coinShopMenu.setGoodyCharges(type, charge);
+        m_menu.setGoodyCharges(type, charge);
         m_config.set<int>(propertyKey, charge);
         m_config.set<int>("coins", coins - cost);
     }
@@ -69,13 +72,13 @@ void CoinShopState::buy(const Goody::Type type, const std::string& propertyKey)
 
 void CoinShopState::sell(const Goody::Type type, const std::string& propertyKey)
 {
-    int refund = m_coinShopMenu.getSellRefund(type);
+    int refund = m_menu.getSellRefund(type);
     int coins = m_config.get<int>("coins");
     int charge = m_config.get<int>(propertyKey);
     if(charge != 0)
     {
         charge--;
-        m_coinShopMenu.setGoodyCharges(type, charge);
+        m_menu.setGoodyCharges(type, charge);
         m_config.set<int>(propertyKey, charge);
         m_config.set<int>("coins", coins + refund);
     }
@@ -86,12 +89,10 @@ StateChangeInformation CoinShopState::update(const float time)
     if(State::isPaused())
         return StateChangeInformation::Empty();
 
-    m_coinShopMenu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_coinShopMenu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_coinShopMenu.getSize().y / 2.f));
-
     updateTime(time);
 
     m_clicked = -1;
-    m_coinShopMenu.update(m_screen, getPassedTime());
+    m_menu.update(m_screen, getPassedTime());
     updateButtons();
 
     switch(m_clicked)
@@ -109,13 +110,13 @@ StateChangeInformation CoinShopState::update(const float time)
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     case CoinShopMenu::BUTTON_GRAVITY_PLUS:
         {
-            int cost = m_coinShopMenu.getBuyCost(Goody::GravityGoody);
+            int cost = m_menu.getBuyCost(Goody::GravityGoody);
             int coins = m_config.get<int>("coins");
             int charge = m_config.get<int>("goodygravity");
             if(coins >= cost && charge == 0)
             {
                 charge = -1;
-                m_coinShopMenu.setGoodyCharges(Goody::GravityGoody, charge);
+                m_menu.setGoodyCharges(Goody::GravityGoody, charge);
                 m_config.set<int>("goodygravity", charge);
                 m_config.set<int>("coins", coins - cost);
             }
@@ -132,13 +133,13 @@ StateChangeInformation CoinShopState::update(const float time)
         break;
     case CoinShopMenu::BUTTON_GRAVITY_MINUS:
        {
-            int refund = m_coinShopMenu.getSellRefund(Goody::GravityGoody);
+            int refund = m_menu.getSellRefund(Goody::GravityGoody);
             int coins = m_config.get<int>("coins");
             int charge = m_config.get<int>("goodygravity");
             if(charge == -1)
             {
                 charge = 0;
-                m_coinShopMenu.setGoodyCharges(Goody::GravityGoody, charge);
+                m_menu.setGoodyCharges(Goody::GravityGoody, charge);
                 m_config.set<int>("goodygravity", charge);
                 m_config.set<int>("coins", coins + refund);
             }
@@ -174,27 +175,19 @@ void CoinShopState::draw(const DrawParameter& params)
         whiteRect.setFillColor(sf::Color(255, 255, 255, 255));
     params.getTarget().draw(whiteRect);
 
-    m_coinShopMenu.draw(params);
-    /*params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
-
-    sf::RectangleShape whiteRect;
-    whiteRect.setSize(m_screen.getView().getSize());
-    whiteRect.setFillColor(sf::Color(255, 255, 255, 255));
-    params.getTarget().draw(whiteRect);
-
-    m_coinShopMenu.draw(params);*/
+    m_menu.draw(params);
 }
 
 void CoinShopState::updateButtons()
 {
     int coins = m_config.get<int>("coins");
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_GRAVITY_PLUS).setVisible(coins >= m_coinShopMenu.getBuyCost(Goody::GravityGoody) && m_config.get<int>("goodygravity") >= 0);
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_PLUS).setVisible(coins >= m_coinShopMenu.getBuyCost(Goody::InvulnerableGoody));
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_PLUS).setVisible(coins >= m_coinShopMenu.getBuyCost(Goody::ExtraBallGoody));
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_PLUS).setVisible(coins >= m_coinShopMenu.getBuyCost(Goody::ExtraTimeGoody));
+    m_menu.getButton(CoinShopMenu::BUTTON_GRAVITY_PLUS).setVisible(coins >= m_menu.getBuyCost(Goody::GravityGoody) && m_config.get<int>("goodygravity") >= 0);
+    m_menu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_PLUS).setVisible(coins >= m_menu.getBuyCost(Goody::InvulnerableGoody));
+    m_menu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_PLUS).setVisible(coins >= m_menu.getBuyCost(Goody::ExtraBallGoody));
+    m_menu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_PLUS).setVisible(coins >= m_menu.getBuyCost(Goody::ExtraTimeGoody));
 
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_GRAVITY_MINUS).setVisible(m_config.get<int>("goodygravity") != 0);
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_MINUS).setVisible(m_config.get<int>("goodyinvulnerable") != 0);
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_MINUS).setVisible(m_config.get<int>("goodyextraball") != 0);
-    m_coinShopMenu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_MINUS).setVisible(m_config.get<int>("goodyextratime") != 0);
+    m_menu.getButton(CoinShopMenu::BUTTON_GRAVITY_MINUS).setVisible(m_config.get<int>("goodygravity") != 0);
+    m_menu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_MINUS).setVisible(m_config.get<int>("goodyinvulnerable") != 0);
+    m_menu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_MINUS).setVisible(m_config.get<int>("goodyextraball") != 0);
+    m_menu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_MINUS).setVisible(m_config.get<int>("goodyextratime") != 0);
 }
