@@ -30,8 +30,6 @@ void MenuSprite::onPositionChanged()
 
 void MenuSprite::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
-    if(MenuElement::getId() == 1)
-        int c = 0;
     sf::IntRect rect = sf::IntRect(static_cast<int>(m_sprite.getPosition().x),
                                    static_cast<int>(m_sprite.getPosition().y),
                                    m_sprite.getTextureRect().width,

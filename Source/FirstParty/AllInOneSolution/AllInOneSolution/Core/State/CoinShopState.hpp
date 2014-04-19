@@ -24,7 +24,7 @@ public:
     virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
 
 private:
-    CoinShopMenu m_coinShopMenu;
+    CoinShopMenu m_menu;
     Level* m_level;
     HUD m_HUD;
     int m_levelNumber;

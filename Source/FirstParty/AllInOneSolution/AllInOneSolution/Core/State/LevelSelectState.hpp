@@ -27,6 +27,9 @@ private:
     void loadLevelInfos();
     EnterStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
+
+    void updateLeftButton();
+    void updateRightButton();
 };
 
 #endif // LEVELSELECTSTATE_HPP

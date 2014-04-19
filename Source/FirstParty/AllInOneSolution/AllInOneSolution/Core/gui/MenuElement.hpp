@@ -51,7 +51,7 @@ public:
     virtual void drawAdditionalForeground(const DrawParameter& params)
     { }
 
-    void setPosition(const sf::Vector2f& position)
+    virtual void setPosition(const sf::Vector2f& position)
     {
         if(position != m_position)
         {
@@ -65,7 +65,7 @@ public:
         m_visible = visible;
     }
 
-    void setPosition(const float x, const float y)
+    virtual void setPosition(const float x, const float y)
     {
         setPosition(sf::Vector2f(x, y));
     }

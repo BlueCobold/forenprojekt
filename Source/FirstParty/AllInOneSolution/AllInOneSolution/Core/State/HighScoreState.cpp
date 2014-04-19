@@ -40,7 +40,7 @@ void HighScoreState::onEnter(const EnterStateInformation* enterInformation, cons
 
     State::onEnter(info, time);
     loadHighScore();
-    m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
+    m_menu.updateLayout();
 
     m_onlineHighscore = false;
     m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).setChecked(false);
@@ -52,7 +52,6 @@ StateChangeInformation HighScoreState::update(const float time)
         return StateChangeInformation::Empty();
 
     std::string text(utility::translateKey("gui_loading_screen"));
-    m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
     updateTime(time - m_timeDiff);
 

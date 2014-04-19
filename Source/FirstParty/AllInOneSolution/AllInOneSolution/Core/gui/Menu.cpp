@@ -150,3 +150,11 @@ InputBox& Menu::getInputBox(int id) const
 {
     return *find<InputBox>(id, MenuElementType::InputBox);
 }
+
+void Menu::updateLayout()
+{
+    auto position = sf::Vector2f(m_screen.getSize().x / 2.f - m_size.x / 2.f, m_screen.getSize().y / 2.f - m_size.y / 2.f);
+    m_position = position;
+    m_template.background.setPosition(position);
+    m_panel.updateLayout(position);
+}
