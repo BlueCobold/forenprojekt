@@ -36,7 +36,7 @@ private:
     bool m_autoKill;
     float m_animationAngle;
     std::unique_ptr<SoundObject> m_collisionSound;
-    std::unique_ptr<std::vector<SoundTrigger>> m_otherSounds;
+    std::vector<std::unique_ptr<SoundTrigger>> m_otherSounds;
     const Entity* m_killAnimationEntity;
 
 public:
@@ -57,7 +57,7 @@ public:
     void setCollideWithBall(bool value);
     bool doesCollideWithBall();
     void bindCollisionSound(std::unique_ptr<SoundObject> sound);
-    void bindOtherSounds(std::unique_ptr<std::vector<SoundTrigger>> otherSounds);
+    void bindOtherSounds(std::vector<std::unique_ptr<SoundTrigger>> otherSounds);
 
     virtual float getValueOf(const std::string& name) const override;
     virtual void setValueOf(const std::string& name, const float value) override;
