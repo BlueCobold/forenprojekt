@@ -22,7 +22,6 @@ public:
 
     void Slider::setValue(const float value);
 
-    void setPosition(const sf::Vector2f& position) override;
 protected:
 
     virtual void onPositionChanged() override;

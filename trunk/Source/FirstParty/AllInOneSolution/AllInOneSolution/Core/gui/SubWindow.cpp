@@ -173,6 +173,8 @@ void SubWindow::onPositionChanged()
                     - m_style.scrollbarBottom.getTextureRect().height;
     m_style.scrollbarMiddle.setScale(1, height/m_style.scrollbarMiddle.getTextureRect().height);
     m_style.scrollbarBottom.setPosition(position.x, position.y + height + m_style.scrollbarTop.getTextureRect().height);
+
+    m_panel.updateLayout(sf::Vector2f(0, 0));
 }
 
 float SubWindow::sliderPixelToWindowPixel(float pixel)
@@ -196,10 +198,4 @@ sf::Vector2i SubWindow::getMouseOffset(const sf::RenderWindow& screen)
 void SubWindow::drawAdditionalForeground(const DrawParameter& params)
 {
     m_panel.drawAdditionalForeground(params);
-}
-
-void SubWindow::setPosition(const sf::Vector2f& position)
-{
-    MenuElement::setPosition(position);
-    m_panel.updateLayout(sf::Vector2f(0, 0));
 }

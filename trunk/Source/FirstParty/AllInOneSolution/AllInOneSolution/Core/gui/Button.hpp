@@ -59,8 +59,6 @@ public:
     void changeHoverSprite(const sf::Sprite& sprite);
     void changePressedSprite(const sf::Sprite& sprite);
 
-    void setPosition(const sf::Vector2f& position) override;
-
 protected:
 
     virtual void onPositionChanged() override;
