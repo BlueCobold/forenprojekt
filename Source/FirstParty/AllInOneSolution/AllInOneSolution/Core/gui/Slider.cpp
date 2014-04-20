@@ -95,6 +95,7 @@ void Slider::onPositionChanged()
 void Slider::setValue(const float value)
 {
     m_value = value;
+    onPositionChanged();
 }
 
 void Slider::calculateSliderPosition(const sf::IntRect& rect)
@@ -107,10 +108,4 @@ void Slider::calculateValue(const int left, const int mousex)
 {
     float value = m_min + static_cast<float>(mousex - left) / m_style.width * (m_max - m_min);
     m_value = std::max(std::min(value, m_max), m_min);
-}
-
-void Slider::setPosition(const sf::Vector2f& position)
-{
-    MenuElement::setPosition(position);
-    onPositionChanged();
 }

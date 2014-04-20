@@ -12,10 +12,10 @@ Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf
     m_sprite = &m_style.idleStyle.sprite;
     m_label = &m_style.idleStyle.label;
 
-    onPositionChanged();
-
     m_size.x = m_style.idleStyle.sprite.getTextureRect().width;
     m_size.y = m_style.idleStyle.sprite.getTextureRect().height;
+
+    onPositionChanged();
 }
 
 void Button::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
@@ -144,10 +144,4 @@ void Button::changePressedSprite(const sf::Sprite& sprite)
     sf::Sprite s(sprite);
     s.setPosition(m_style.pressedStyle.sprite.getPosition());
     m_style.pressedStyle.sprite = s;
-}
-
-void Button::setPosition(const sf::Vector2f& position)
-{
-    MenuElement::setPosition(position);
-    onPositionChanged();
 }
