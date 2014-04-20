@@ -15,8 +15,7 @@ Entity::Entity(Type type, bool respawnable, bool autoKill) :
     m_respawnable(respawnable),
     m_autoKill(autoKill),
     m_killAnimationEntity(nullptr),
-    m_animationAngle(0),
-    m_otherSounds(nullptr)
+    m_animationAngle(0)
 {
 }
 
@@ -52,8 +51,8 @@ void Entity::update(const float value)
             ani->update();
             running |= !ani->isStopped();
         }
-        for(auto otherSounds = begin(*m_otherSounds.get()); otherSounds != end(*m_otherSounds.get()); ++otherSounds)
-            otherSounds->update();
+        for(auto sound = begin(m_otherSounds); sound != end(m_otherSounds); ++sound)
+            (*sound)->update();
 
         m_updatingAni = nullptr;
         m_lastTime = value;
@@ -142,7 +141,7 @@ void Entity::bindCollisionSound(std::unique_ptr<SoundObject> sound)
     m_collisionSound = std::move(sound);
 }
 
-void Entity::bindOtherSounds(std::unique_ptr<std::vector<SoundTrigger>> otherSounds)
+void Entity::bindOtherSounds(std::vector<std::unique_ptr<SoundTrigger>> otherSounds)
 {
     m_otherSounds = std::move(otherSounds);
 }

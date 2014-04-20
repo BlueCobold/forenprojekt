@@ -584,13 +584,12 @@ std::unique_ptr<Entity> Level::createEntity(
     }
     if(xml->FirstChildElement("sounds") != nullptr)
     {
-        std::unique_ptr<std::vector<SoundTrigger>> otherSounds;
+        std::vector<std::unique_ptr<SoundTrigger>> otherSounds;
         for(auto sound = xml->FirstChildElement("sounds")->FirstChildElement("sound"); sound != nullptr; sound = sound->NextSiblingElement())
         {
             std::string soundName = sound->Attribute("name");
             std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(sound->FirstChildElement(), nullptr, nullptr, nullptr, &templates.functions));
-            auto test = SoundTrigger(soundName, m_resourceManager.getSoundManager(), std::move(provider));
-            otherSounds->push_back(std::move(test));
+            otherSounds.push_back(std::unique_ptr<SoundTrigger>(new SoundTrigger(soundName, m_resourceManager.getSoundManager(), std::move(provider))));
         }
         entity->bindOtherSounds(std::move(otherSounds));
     }

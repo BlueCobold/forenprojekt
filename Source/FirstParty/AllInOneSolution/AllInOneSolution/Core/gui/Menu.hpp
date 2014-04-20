@@ -33,8 +33,8 @@ public:
     virtual ~Menu();
 
     virtual void draw(const DrawParameter& params) override;
-    virtual void update(const sf::RenderWindow& screen, const float time);
-    void update(const sf::RenderWindow& screen, const float time, const MenuElementType::Type type);
+    virtual void update(sf::RenderWindow& screen, const float time);
+    void update(sf::RenderWindow& screen, const float time, const MenuElementType::Type type);
     virtual void updateLayout();
 
     virtual void setPosition(const sf::Vector2f& position);
@@ -69,7 +69,7 @@ private:
     MenuTemplate m_template;
     sf::Vector2i m_size;
     sf::Vector2f m_position;
-    sf::RenderWindow& m_screen;
+    sf::RenderWindow* m_screen;
 };
 
 #endif // MENU_HPP

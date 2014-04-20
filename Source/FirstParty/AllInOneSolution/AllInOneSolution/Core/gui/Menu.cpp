@@ -17,7 +17,7 @@ Menu::Menu(MenuTemplate& menuTemplate,
            const sf::Vector2f& position,
            sf::RenderWindow& screen) :
         m_position(position),
-        m_screen(screen),
+        m_screen(&screen),
         m_template(std::move(menuTemplate)),
         m_panel(std::move(menuTemplate.menuElements), position)
 {
@@ -69,13 +69,17 @@ void Menu::drawAdditionalForeground(const DrawParameter& params)
     m_panel.drawAdditionalForeground(params);
 }
 
-void Menu::update(const sf::RenderWindow& screen, const float time)
+void Menu::update(sf::RenderWindow& screen, const float time)
 {
+    m_screen = &screen;
+    updateLayout();
     m_panel.update(screen, time);
 }
 
-void Menu::update(const sf::RenderWindow& screen, const float time, const MenuElementType::Type type)
+void Menu::update(sf::RenderWindow& screen, const float time, const MenuElementType::Type type)
 {
+    m_screen = &screen;
+    updateLayout();
     m_panel.update(screen, time, type);
 }
 
@@ -86,7 +90,7 @@ void Menu::registerOnClick(std::function<void(const Button& sender)> callback)
 
 sf::RenderWindow& Menu::getRenderWindow() const
 {
-    return m_screen;
+    return *m_screen;
 }
 
 template<class T>
@@ -153,7 +157,7 @@ InputBox& Menu::getInputBox(int id) const
 
 void Menu::updateLayout()
 {
-    auto position = sf::Vector2f(m_screen.getSize().x / 2.f - m_size.x / 2.f, m_screen.getSize().y / 2.f - m_size.y / 2.f);
+    auto position = sf::Vector2f(m_screen->getSize().x / 2.f - m_size.x / 2.f, m_screen->getSize().y / 2.f - m_size.y / 2.f);
     m_position = position;
     m_template.background.setPosition(position);
     m_panel.updateLayout(position);
