@@ -34,6 +34,8 @@ void OptionMenuState::onEnter(const EnterStateInformation* enterInformation, con
     m_transitionStateInfo.m_followingState = info->m_comeFromState;
     m_level = info->m_level;
 
+    m_HUD.onEnter(m_level);
+
     m_menu.onEnter();
     m_menu.updateLayout();
 

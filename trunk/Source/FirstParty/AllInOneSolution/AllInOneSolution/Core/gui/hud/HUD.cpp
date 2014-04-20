@@ -119,8 +119,10 @@ void HUD::setTimeShow(bool timeShow)
         m_time.setPosition(sf::Vector2f(0.f,10.f), 0.5f);
 }
 
-void HUD::onEnter()
+void HUD::onEnter(Level* level)
 {
     m_timeShow = false;
     m_ballShow = false;
+    m_points.setPoints(level->getPoints());
+    m_points.skipInterpolation();
 }

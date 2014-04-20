@@ -55,7 +55,7 @@ public:
 
     void draw(const DrawParameter& params);
 
-    void onEnter();
+    void onEnter(Level* level);
 
 private:
     void setBallShow(bool ballShow);

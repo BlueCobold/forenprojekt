@@ -29,9 +29,9 @@ void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, c
     m_levelUpdated = false;
     State::onEnter(enterInformation, time);
 
-    m_HUD.onEnter();
-
     m_level = enterInformation->m_level;
+
+    m_HUD.onEnter(m_level);
 
     m_menu.setLevelInfo(m_level->getLevelName(), m_level->getTotalTime(), m_level->getRemainingBall());
     m_menu.setCoinToolTipText(utility::replace(utility::translateKey("tooltip_coins"), 
