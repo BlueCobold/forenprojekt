@@ -35,6 +35,7 @@ void NewHighScoreState::onEnter(const EnterStateInformation* enterInformation, c
 
     State::onEnter(enterInformation, time);
     m_HUD.restartAt(getPassedTime());
+    m_HUD.onEnter(m_level);
 
     m_menu.updateLayout();
 

@@ -34,6 +34,7 @@ void LevelFailState::onEnter(const EnterStateInformation* enterInformation, cons
 
     State::onEnter(enterInformation, time);
     m_HUD.restartAt(getPassedTime());
+    m_HUD.onEnter(m_level);
 
     m_menu.updateLayout();
     

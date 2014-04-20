@@ -41,6 +41,7 @@ void HighScoreState::onEnter(const EnterStateInformation* enterInformation, cons
     State::onEnter(info, time);
     loadHighScore();
     m_menu.updateLayout();
+    m_HUD.onEnter(m_highScoreStateInfo.m_level);
 
     m_onlineHighscore = false;
     m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).setChecked(false);

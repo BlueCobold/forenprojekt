@@ -34,7 +34,7 @@ void PauseState::onEnter(const EnterStateInformation* enterInformation, const fl
     m_level = info->m_level;
     
     State::onEnter(enterInformation, time);
-    m_HUD.onEnter();
+    m_HUD.onEnter(m_level);
     m_HUD.restartAt(getPassedTime());
 
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
