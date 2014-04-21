@@ -6,13 +6,17 @@
 
 #include <SFML/Audio/Listener.hpp>
 
+template<class T>
+bool compareVector2 (const sf::Vector2<T> lhs, const sf::Vector2<T> rhs);
+
 OptionMenu::OptionMenu(const sf::Vector2f& position,
                        sf::RenderWindow& screen,
                        ResourceManager& resourceManager,
                        AppConfig& config) :
     CaptionMenu(*resourceManager.getMenuTemplate("OptionMenu"), position, screen),
     m_config(config),
-    m_fullScreen(false)
+    m_fullScreen(false),
+    m_currentVideoModeIndex(0)
 {
     m_fullScreen = m_config.get<bool>("IsFullScreen");
 
@@ -35,14 +39,11 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
 
     Menu::getCheckbox(CHECKBOX_USE_VERTICALAXIS).setChecked(m_useVerticalAxis);
 
-    for(auto it = begin(sf::VideoMode::getFullscreenModes()); it != end(sf::VideoMode::getFullscreenModes()); ++ it)
+    for(auto it = begin(sf::VideoMode::getFullscreenModes()); it != end(sf::VideoMode::getFullscreenModes()); ++it)
     {
         if(acceptableVideoMode(*it) && it->bitsPerPixel == 32)
-            m_availableVideoMode.push_back(std::move(*it));
+            m_availableVideoMode.push_back(sf::Vector2u(it->width, it->height));
     }
-
-    m_currentVideoMode = sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
-    m_appointedVideoMode = m_currentVideoMode;
 
     m_icon.create(16, 16);
     sf::Image texture = resourceManager.getTexture("GuiElements")->copyToImage();
@@ -52,13 +53,13 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
 void OptionMenu::applyChanges()
 {
     if(Menu::getCheckbox(CHECKBOX_FULLSCREEN).getChecked() != m_fullScreen ||
-       m_currentVideoMode.width != m_config.get<unsigned int>("ResolutionX") ||
-       m_currentVideoMode.height != m_config.get<unsigned int>("ResolutionY"))
+       m_currentVideoMode.x != m_config.get<unsigned int>("ResolutionX") ||
+       m_currentVideoMode.y != m_config.get<unsigned int>("ResolutionY"))
     {
         if( Menu::getCheckbox(CHECKBOX_FULLSCREEN).getChecked() != m_fullScreen)
             m_fullScreen = !m_fullScreen;
 
-        sf::VideoMode videoMode(m_currentVideoMode.width, m_currentVideoMode.height);
+        sf::VideoMode videoMode(m_currentVideoMode.x, m_currentVideoMode.y);
         adjustVideoMode(videoMode, m_fullScreen);
 
         if(m_fullScreen)
@@ -68,12 +69,19 @@ void OptionMenu::applyChanges()
             Menu::getRenderWindow().create(sf::VideoMode(videoMode), utility::translateKey("gui_rickety_racquet")); 
             Menu::getRenderWindow().setIcon(m_icon.getSize().x, m_icon.getSize().y, m_icon.getPixelsPtr());
         }
+        
+        if(!sf::VideoMode(m_appointedVideoMode.x, m_appointedVideoMode.y).isValid())
+        {
+            auto index = std::find(begin(m_availableVideoMode), end(m_availableVideoMode), m_appointedVideoMode);
+            if(index != end(m_availableVideoMode))
+                m_availableVideoMode.erase(index);
+        }
 
         Menu::getRenderWindow().setMouseCursorVisible(false);
 
         m_config.set("IsFullScreen", m_fullScreen);
-        m_config.set("ResolutionX", m_currentVideoMode.width);
-        m_config.set("ResolutionY", m_currentVideoMode.height);
+        m_config.set("ResolutionX", m_currentVideoMode.x);
+        m_config.set("ResolutionY", m_currentVideoMode.y);
 
         Menu::getRenderWindow().setFramerateLimit(m_config.get<int>("FrameRateLimit"));
         Menu::getRenderWindow().setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
@@ -165,7 +173,13 @@ void OptionMenu::onEnter()
 
     Menu::getCheckbox(CHECKBOX_INVERT_AXIS).setChecked(m_invertAxis);
 
-    m_currentVideoMode = sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+    // necessary becaus onEnter() is called twice
+    auto screenSize = getRenderWindow().getSize();
+    if(!sf::VideoMode(screenSize.x, screenSize.y).isValid() &&
+       std::find(begin(m_availableVideoMode), end(m_availableVideoMode), screenSize) == end(m_availableVideoMode))
+        m_availableVideoMode.push_back(screenSize);
+
+    m_currentVideoMode = screenSize;
     m_appointedVideoMode = m_currentVideoMode;
 
     sortVideoModeList();
@@ -173,38 +187,34 @@ void OptionMenu::onEnter()
 
 void OptionMenu::nextVideoMode()
 {
-    for(unsigned int i = 0; i < m_availableVideoMode.size(); ++i)
-    {
-        if(m_currentVideoMode == m_availableVideoMode[i])
-        {
-            m_currentVideoMode = m_availableVideoMode[(i + 1) % m_availableVideoMode.size()];
-            if(m_appointedVideoMode == m_currentVideoMode)
-                this->getLabel(LABEL_RESOLUTION).setText("Current");
-            else
-                this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
-                                                         utility::toString(" x ") + 
-                                                         utility::toString(m_currentVideoMode.height));
-            return;
-        }
-    }
+    m_currentVideoModeIndex++;
+    if(m_currentVideoModeIndex > m_availableVideoMode.size() - 1)
+        m_currentVideoModeIndex = 0;
+
+    m_currentVideoMode = m_availableVideoMode[m_currentVideoModeIndex];
+
+    if(m_appointedVideoMode == m_currentVideoMode)
+        getLabel(LABEL_RESOLUTION).setText("Current");
+    else
+        getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.x) + 
+                                           utility::toString(" x ") + 
+                                           utility::toString(m_currentVideoMode.y));
 }
 
 void OptionMenu::prevVideoMode()
 {
-    for(unsigned int i = 0; i < m_availableVideoMode.size(); ++i)
-    {
-        if(m_currentVideoMode == m_availableVideoMode[i])
-        {
-            m_currentVideoMode = m_availableVideoMode[(i - 1) % m_availableVideoMode.size()];
-            if(m_appointedVideoMode == m_currentVideoMode)
-                this->getLabel(LABEL_RESOLUTION).setText("Current");
-            else
-                this->getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.width) + 
-                                                         utility::toString(" x ") + 
-                                                         utility::toString(m_currentVideoMode.height));
-            return;
-        }
-    }
+    m_currentVideoModeIndex--;
+    if(m_currentVideoModeIndex < 0)
+        m_currentVideoModeIndex = m_availableVideoMode.size() - 1;
+
+    m_currentVideoMode = m_availableVideoMode[m_currentVideoModeIndex];
+
+    if(m_appointedVideoMode == m_currentVideoMode)
+        getLabel(LABEL_RESOLUTION).setText("Current");
+    else
+        getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.x) + 
+                                           utility::toString(" x ") + 
+                                           utility::toString(m_currentVideoMode.y));
 }
 
 bool OptionMenu::acceptableVideoMode(const sf::VideoMode videoMode)
@@ -217,14 +227,28 @@ bool OptionMenu::acceptableVideoMode(const sf::VideoMode videoMode)
 
 void OptionMenu::sortVideoModeList()
 {
+    std::sort(begin(m_availableVideoMode), end(m_availableVideoMode), compareVector2<unsigned int>);
+
     for(unsigned int i = 0; i < m_availableVideoMode.size(); ++i)
-    {
-        if(m_appointedVideoMode == m_availableVideoMode[i])
+        if(m_currentVideoMode == m_availableVideoMode[i])
         {
-            sf::VideoMode temp = m_availableVideoMode.at(0);
-            m_availableVideoMode.at(0) = m_appointedVideoMode;
-            m_availableVideoMode.at(i) = temp;
+            m_currentVideoModeIndex = i;
+            break;
         }
+}
+
+template<class T>
+bool compareVector2 (const sf::Vector2<T> lhs, const sf::Vector2<T> rhs)
+{
+    if(lhs.x < rhs.x)
+        return true;
+    else if(lhs.x == rhs.x)
+    {
+        if(lhs.y < rhs.y)
+            return true;
+        else
+            return false;
     }
-    std::sort(m_availableVideoMode.begin() + 1, m_availableVideoMode.end());
+    else
+        return false;
 }
