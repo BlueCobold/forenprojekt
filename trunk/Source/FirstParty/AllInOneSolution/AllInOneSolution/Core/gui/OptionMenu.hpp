@@ -36,9 +36,10 @@ private:
     bool m_muteSoundWhenInactive;
     bool m_invertAxis;
     bool m_useVerticalAxis;
-    std::vector<sf::VideoMode> m_availableVideoMode;
-    sf::VideoMode m_currentVideoMode;
-    sf::VideoMode m_appointedVideoMode;
+    std::vector<sf::Vector2u> m_availableVideoMode;
+    sf::Vector2u m_currentVideoMode;
+    sf::Vector2u m_appointedVideoMode;
+    int m_currentVideoModeIndex;
     sf::Image m_icon;
 
     AppConfig& m_config;
@@ -47,5 +48,4 @@ private:
     bool acceptableVideoMode(const sf::VideoMode videoMode);
     void sortVideoModeList();
 };
-
 #endif // OPTIONMENU_HPP
