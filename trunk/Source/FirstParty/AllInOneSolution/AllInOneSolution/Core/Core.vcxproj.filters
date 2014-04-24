@@ -843,6 +843,9 @@
     <ClInclude Include="model\SoundTrigger.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
+    <ClInclude Include="gui\ErrorMessageBox.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
