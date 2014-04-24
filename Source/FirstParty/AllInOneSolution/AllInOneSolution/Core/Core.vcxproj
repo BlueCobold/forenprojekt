@@ -273,6 +273,7 @@
     <ClInclude Include="gui\MenuPanel.hpp" />
     <ClInclude Include="gui\MenuSprite.hpp" />
     <ClInclude Include="gui\MenuTemplate.hpp" />
+    <ClInclude Include="gui\ErrorMessageBox.hpp" />
     <ClInclude Include="gui\NewHighScoreMenu.hpp" />
     <ClInclude Include="gui\OptionMenu.hpp" />
     <ClInclude Include="gui\PauseMenu.hpp" />

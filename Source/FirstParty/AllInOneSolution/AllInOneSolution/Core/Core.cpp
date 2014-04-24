@@ -1,6 +1,6 @@
 #include "App.hpp"
 #include "resources/AppConfig.hpp"
-
+#include "gui/ErrorMessageBox.hpp"
 #include <iostream>
 
 #ifdef _DEBUG
@@ -18,7 +18,11 @@
     }
     catch (std::exception& error)
     {
-        std::cout << "An error occurred: " << error.what();
+        #ifdef _DEBUG
+            std::cout << "An error occurred: " << error.what();
+        #else
+            ErrorMessageBox(error.what());
+        #endif
         getchar();
         return 1;
     }

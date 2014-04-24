@@ -20,6 +20,6 @@ SoundTrigger::SoundTrigger(SoundTrigger&& other) :
 }
 void SoundTrigger::update()
 {
-    if(m_trigger.get()->getValue() >= 1)
+    if(m_trigger->getValue() >= 1)
         m_sound.play(100.f);
 }
