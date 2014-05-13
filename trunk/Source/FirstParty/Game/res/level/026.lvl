@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="RR Flipper">
-		<infoimage scrx="0" scry="0" width ="192" height="108" />
+		<infoimage scrx="312" scry="561" width="192" height="108" />
 	</levelinfo>
 	<constants solid="0" posy="0"/>
 	<templates>

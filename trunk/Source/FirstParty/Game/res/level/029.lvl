@@ -1,0 +1,202 @@
+<level>
+	<levelinfo name="Ant Farm">
+		<infoimage scrx="312" scry="561" width="192" height="108" />
+	</levelinfo>
+	<constants gate="0" gatetime="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/movement.inc" />
+		<include file="assets/target/phase_out.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		
+		<include file="sandy/walls.inc" />
+		
+		<entities>
+			<entity name="Bounce_to_right" rep="Br" collideWithBall="true" offsetx="40" offsety="30" z="10">
+				<physics name="wall" shape="wall" />
+				<animations>
+					<animation spritesheet="assets_misc" sprite="coil" x="-2" y="1" >
+						<rotation>
+							<static value="270" />
+						</rotation>
+					</animation>
+					<animation spritesheet="assets_misc" sprite="plate" x="30" y="1">
+						<rotation>
+							<static value="270" />
+						</rotation>
+					</animation>
+				</animations>
+				<collides>
+					<setBallVelocity x="1000" y="-50">
+						<always />
+					</setBallVelocity>
+				</collides>
+			</entity>
+			<entity name="Bounce_to_left" rep="Bl" collideWithBall="true" offsetx="70" offsety="30" z="10">
+				<physics name="wall" shape="wall" />
+				<animations>
+					<animation spritesheet="assets_misc" sprite="coil" x="14" y="1" >
+						<rotation>
+							<static value="270" />
+						</rotation>
+					</animation>
+					<animation spritesheet="assets_misc" sprite="plate" x="-21" y="1">
+						<rotation>
+							<static value="270" />
+						</rotation>
+					</animation>
+				</animations>
+				<collides>
+					<setBallVelocity x="-1000" y="-50">
+						<always />
+					</setBallVelocity>
+				</collides>
+			</entity>
+			<entity name="Bounce_up" rep="Bu" collideWithBall="true" offsetx="30" offsety="90" z="10">
+				<physics name="wall" shape="wall" />
+				<animations>
+					<animation spritesheet="assets_misc" sprite="coil" x="1" y="-5" />
+					<animation spritesheet="assets_misc" sprite="plate" x="1" y="-40"/>
+				</animations>
+				<collides>
+					<setBallVelocity x="0" y="-1000">
+						<always />
+					</setBallVelocity>
+				</collides>
+			</entity>
+		</entities>
+		<overrides>
+			<override rep="w1" newRep="x1" offsety="-180" z="11" />
+			<override rep="w1" newRep="p1">
+				<collides>
+					<setBallVelocity x="-60" y="-20">
+						<always />
+					</setBallVelocity>
+				</collides>
+			</override>
+			<override rep="w2" newRep="p2">
+				<onCollision>
+					<applyImpulse x="-150" y="-50">
+						<always />
+					</applyImpulse>
+				</onCollision>
+			</override>
+			<override rep="w3" newRep="p3">
+				<collides>
+					<setBallVelocity x="30" y="-10">
+						<always />
+					</setBallVelocity>
+				</collides>
+			</override>
+			<override rep="w1" newRep="G1">
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="1" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<animations>
+					<color channel="red">
+						<static value="0.5" />
+					</color>
+					<color channel="blue">
+						<static value="0.5" />
+					</color>
+				</animations>
+			</override>
+			<override rep="w1" newRep="##">
+				<onCollision>
+					<changeProperty name="ball:color">
+						<mod>
+							<add>
+								<var name="ball:color" />
+								<static value="1" />
+							</add>
+							<static value="2" />
+						</mod>
+					</changeProperty>
+				</onCollision>
+				<animations>
+					<color channel="blue">
+						<static value="0.5" />
+					</color>
+					<color channel="red">
+						<add>
+							<static value="0.75" />
+							<mul>
+								<static value="0.25" />
+								<sine>
+									<mul>
+										<time />
+										<static value="100.0" />
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</color>
+					<color channel="green">
+						<add>
+							<static value="0.75" />
+							<mul>
+								<static value="0.25" />
+								<sine>
+									<add>
+										<mul>
+											<time />
+											<static value="100.0" />
+										</mul>
+										<static value="180.0" />
+									</add>
+								</sine>
+							</mul>
+						</add>
+					</color>
+				</animations>
+			</override>
+		</overrides>
+	</templates>
+	
+	
+	<grid size="60" width="2460" height="1500">
+                                                                                    
+                                                                                    
+                                                                                    
+                                            /1w1w1\1                                
+                                          /1w1)1(1w1\1                              
+                      /1w1w1w1w1w1w1w1w1w1w1w1  t1w1w1w1w1w1\1                      
+                    /1w1)1      (1w1w1w1w1w1w1    w1w1w1w1w1w1w1w1w1w1w1\1          
+                  /1w1)1      t1  (1w1w1w1w1w1G1G1G1w1w1w1w1w1w1)1  (1w1w1\1        
+                /1w1)1  /1          (1w1w1w1w1        (1w1w1w1w1  /1\1(1w1w1        
+                w1w1  /1w1    TT  \1            t1                BB      Blw1      
+                w1w1  w1w1        w1p2p2p3p3)1    TT  /1w1w1w1w1  w1w1p3p3w1)1      
+                w1w1  w1w1^O^X^O^Xw1####w1)1/1        w1w1w1w1w1  w1w1w1w1)1x1      
+                w1w1  w1w1w1w1w1w1w1    w1  w1^O^X^O^Xw1w1w1w1w1  w1w1w1)1  x1      
+                w1w1  )1    (1w1w1w1    )1/1w1w1w1w1w1w1w1w1w1w1  w1w1w1    x1      
+                w1w1\1  /1\1  (1w1w1    /1w1w1w1w1w1w1w1w1w1w1w1  w1w1w1            
+              /1w1w1)1/1w1w1\1  (1w1    w1w1w1w1w1w1w1)1  (1w1w1  w1w1w1            
+          /1w1w1w1)1/1w1w1w1w1\1  (1    w1w1w1w1w1w1)1    \1(1w1  w1w1w1            
+          w1w5w1)1/1w1w1w1w1w1w1\1      (1w1w1w1w1)1      (1\1(1  w1w1w1            
+          w1Br                       B                      w1\1  w1w1w1            
+          (1  p1p1w1w1w1w1w1w1\1        /1w1w1p3p3\1    t1  w1w1  w1w1w1            
+            x1                w1        w1w1w1w1w1w1        w1w1  w1w1w1            
+            x1                w1    TT  (1w1w1w1w1)1    TT  w1w1Buw1w1)1            
+            x1                                              (1  w1  )1              
+                                                                                    
+                                                                                    
+                                                              x1x1x1                
+	</grid>
+	
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="500" silver="650" gold="800" />
+</level>

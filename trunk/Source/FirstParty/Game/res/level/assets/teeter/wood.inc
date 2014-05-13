@@ -201,7 +201,7 @@
 				<physics name="teeter" shape="teeter" />
 				<sound name="bounce" />
 				<animations>
-					<animation texture="teeter_wooden" width="208" height="32" midx="104" midy="16" rotate="true" alignment="vertical">
+					<animation texture="teeter_wooden" blending="premul" width="208" height="32" midx="104" midy="16" rotate="true" alignment="vertical">
 						<frameindex frames="7">
 							<min>
 								<mul>

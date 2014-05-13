@@ -10,10 +10,12 @@
 		<label id="4" text="gui_time" font="buttonHoverFont" alignment="0" x="70" y="140" />
 		<label id="5" text="gui_time" font="buttonHoverFont" alignment="2" x="440" y="140" />
 		<!--<image id="6" tooltip="default" tooltiptext="tooltip_coins" texture="GuiElements" x="59" y="-21" scrx="230" scry="484" width="116" height="61"/> -->
-		<button id="8" text="" style="coins" x="118" y="-21" tooltip="default" tooltiptext="tooltip_coins"/>
-		<button id="9" text="" style="small" x="561" y="210" />
+		<image id="-1" texture="GuiElements" x="60" y="-21" scrx="230" scry="484" width="116" height="61"/>
+		<button id="8" text="" style="coins" x="115" y="-7" tooltip="default" tooltiptext="tooltip_coins"/>
 		<image id="-1" texture="GuiElements" x="4" y="45" scrx="966" scry="406" width="52" height="152"/>
 		<checkbox id="11" style="targetmode" x="14" y="76" tooltip="default" tooltiptext="tooltip_preview_targetmode" />
 		<checkbox id="10" style="timemode" x="14" y="128" tooltip="default" tooltiptext="tooltip_preview_timeattack"/>
+		<image id="-1" texture="GuiElements" x="356" y="-18" scrx="759" scry="546" width="100" height="58"/>
+		<button id="9" text="" style="goblet" x="403" y="-3" tooltip="default" tooltiptext="tooltip_highscore"/>
 	</elements>
 </menu>

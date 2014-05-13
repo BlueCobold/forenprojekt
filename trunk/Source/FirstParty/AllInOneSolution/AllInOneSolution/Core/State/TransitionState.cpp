@@ -12,8 +12,8 @@ TransitionState::TransitionState(sf::RenderWindow& screen,
 {
     // BUG: the PC might not be able to handle this size!
     // we still need a texture as big as possible to handle screen-size-changes during the gameplay
-    bool s = m_sourceImage.create(1920, 1080);
-    s = m_targetImage.create(1920, 1080);
+    bool s = m_sourceImage.create(1920, 1080, true);
+    s = m_targetImage.create(1920, 1080, true);
 }
 
 TransitionState::~TransitionState()

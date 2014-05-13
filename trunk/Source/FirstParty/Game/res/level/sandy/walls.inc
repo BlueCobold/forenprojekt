@@ -203,9 +203,9 @@
 				</animations>
 			</entity>
 
-			<entity name="darkwall_1" rep="d1" offsetx="30" offsety="30">
+			<entity name="darkwall_1" rep="d1">
 				<animations>
-					<animation spritesheet="walls" sprite="sand_01" rotate="false">
+					<animation spritesheet="walls" sprite="sand_01" rotate="false" x="30" y="30">
 						<color channel="red">
 							<static value="0.8"/>
 						</color>
@@ -218,9 +218,9 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_2" rep="d2" offsetx="30" offsety="30">
+			<entity name="darkwall_2" rep="d2">
 				<animations>
-					<animation spritesheet="walls" sprite="sand_02" rotate="false">
+					<animation spritesheet="walls" sprite="sand_02" rotate="false" x="30" y="30">
 						<color channel="red">
 							<static value="0.8"/>
 						</color>
@@ -233,9 +233,9 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_3" rep="d3" offsetx="30" offsety="30">
+			<entity name="darkwall_3" rep="d3">
 				<animations>
-					<animation spritesheet="walls" sprite="sand_03" rotate="false">
+					<animation spritesheet="walls" sprite="sand_03" rotate="false" x="30" y="30">
 						<color channel="red">
 							<static value="0.8"/>
 						</color>
@@ -248,9 +248,9 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_4" rep="d4" offsetx="30" offsety="30">
+			<entity name="darkwall_4" rep="d4">
 				<animations>
-					<animation spritesheet="walls" sprite="sand_04" rotate="false">
+					<animation spritesheet="walls" sprite="sand_04" rotate="false" x="30" y="30">
 						<color channel="red">
 							<static value="0.8"/>
 						</color>
@@ -263,9 +263,9 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_5" rep="d5" offsetx="30" offsety="30">
+			<entity name="darkwall_5" rep="d5">
 				<animations>
-					<animation spritesheet="walls" sprite="sand_05" rotate="false">
+					<animation spritesheet="walls" sprite="sand_05" rotate="false" x="30" y="30">
 						<color channel="red">
 							<static value="0.8"/>
 						</color>
@@ -278,9 +278,9 @@
 					</animation>
 				</animations>
 			</entity>
-			<entity name="darkwall_6" rep="d6" offsetx="30" offsety="30">
+			<entity name="darkwall_6" rep="d6">
 				<animations>
-					<animation spritesheet="walls" sprite="sand_06" rotate="false">
+					<animation spritesheet="walls" sprite="sand_06" rotate="false" x="30" y="30">
 						<color channel="red">
 							<static value="0.8"/>
 						</color>
@@ -296,56 +296,98 @@
 
 			<entity name="darkshadowwall_1" rep="s1">
 				<animations>
-					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="2"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false" x="30" y="30">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
+					<animation spritesheet="walls" sprite="shadow" rotate="false"/>
 				</animations>
 			</entity>
 			<entity name="darkshadowwall_2" rep="s2">
 				<animations>
-					<animation texture="small_quads" srcy="60" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="2"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_02" rotate="false" x="30" y="30">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
+					<animation spritesheet="walls" sprite="shadow" rotate="false"/>
 				</animations>
 			</entity>
 			<entity name="darkshadowwall_3" rep="s3">
 				<animations>
-					<animation texture="small_quads" srcy="120" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="2"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_03" rotate="false" x="30" y="30">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
+					<animation spritesheet="walls" sprite="shadow" rotate="false"/>
 				</animations>
 			</entity>
 			<entity name="darkshadowwall_4" rep="s4">
 				<animations>
-					<animation texture="small_quads" srcy="180" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="2"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_04" rotate="false" x="30" y="30">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
+					<animation spritesheet="walls" sprite="shadow" rotate="false"/>
 				</animations>
 			</entity>
 			<entity name="darkshadowwall_5" rep="s5">
 				<animations>
-					<animation texture="small_quads" srcy="240" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="2"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_05" rotate="false" x="30" y="30">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
+					<animation spritesheet="walls" sprite="shadow" rotate="false"/>
 				</animations>
 			</entity>
 			<entity name="darkshadowwall_6" rep="s6">
 				<animations>
-					<animation texture="small_quads" srcy="300" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="2"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_06" rotate="false" x="30" y="30">
+						<color channel="red">
+							<static value="0.8"/>
+						</color>
+						<color channel="green">
+							<static value="0.7"/>
+						</color>
+						<color channel="blue">
+							<static value="0.7"/>
+						</color>
 					</animation>
+					<animation spritesheet="walls" sprite="shadow" rotate="false"/>
 				</animations>
 			</entity>
 
@@ -673,6 +715,27 @@
 			<entity name="window_wall_4" rep="g4">
 				<animations>
 					<animation spritesheet="walls" sprite="window_04" rotate="false"/>
+				</animations>
+			</entity>
+			
+			<entity base="small_quad" name="metalwall_1" rep="M1">
+				<animations>
+					<animation spritesheet="walls" sprite="metal_01" rotate="false"/>
+				</animations>
+			</entity>
+			<entity base="small_quad" name="metalwall_2" rep="M2">
+				<animations>
+					<animation spritesheet="walls" sprite="metal_02" rotate="false"/>
+				</animations>
+			</entity>
+			<entity base="small_quad" name="metalwall_3" rep="M3">
+				<animations>
+					<animation spritesheet="walls" sprite="metal_03" rotate="false"/>
+				</animations>
+			</entity>
+			<entity base="small_quad" name="metalwall_4" rep="M4">
+				<animations>
+					<animation spritesheet="walls" sprite="metal_04" rotate="false"/>
 				</animations>
 			</entity>
 		</entities>

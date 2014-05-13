@@ -310,7 +310,7 @@
 				</animations>
 			</entity>
 
-			<entity base="base_wall" name="bounce_right" rep="br">
+			<entity base="base_wall" name="bounce_right" rep="br" offsetx="30" offsety="30">
 				<physics name="wall" shape="wall" />
 				<constants start="-2" />
 				<onCollision>
@@ -320,14 +320,11 @@
 					<applyImpulse x="50" y="0" />
 				</onCollision>
 				<animations>
-					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false">
 						<color value="60FFFFFF" />
 					</animation>
 
-					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+					<animation texture="gravity_arrow" x="-30" y="-29" width="36" height="36" srcy="128" srcx="0">
 						<frameindex frames="4">
 							<static value="3" />
 						</frameindex>
@@ -358,7 +355,7 @@
 				</animations>
 			</entity>
 			
-			<entity base="base_wall" name="bounce_left" rep="bl">
+			<entity base="base_wall" name="bounce_left" rep="bl" offsetx="30" offsety="30">
 				<physics name="wall" shape="wall" />
 				<constants start="-2" />
 				<onCollision>
@@ -368,14 +365,11 @@
 					<applyImpulse x="-50" y="0" />
 				</onCollision>
 				<animations>
-					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_01">
 						<color value="60FFFFFF" />
 					</animation>
 
-					<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0">
+					<animation texture="gravity_arrow" x="-30" y="-29" width="36" height="36" srcy="128" srcx="0">
 						<frameindex frames="4">
 							<static value="2" />
 						</frameindex>

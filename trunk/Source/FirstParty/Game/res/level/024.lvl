@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Moving Walls">
-		<infoimage scrx="0" scry="0" width ="192" height="108" />
+		<infoimage scrx="312" scry="561" width="192" height="108" />
 	</levelinfo>
 	<constants solid="0" />
 	<templates>
@@ -68,11 +68,7 @@
 					<spawnEntity name="wall_hit_particles" location="contact" />
 				</onCollision>
 				<animations>
-					<animation texture="small_quads" midx="30" midy="30" srcy="0" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="metal_01" rotate="true"/>
 				</animations>
 			</entity>
 			<entity name="movingwall_2" rep="m2">
@@ -81,11 +77,7 @@
 					<spawnEntity name="wall_hit_particles" location="contact" />
 				</onCollision>
 				<animations>
-					<animation texture="small_quads" midx="30" midy="30" srcy="0" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="metal_01" rotate="true"/>
 				</animations>
 			</entity>
 		</entities>

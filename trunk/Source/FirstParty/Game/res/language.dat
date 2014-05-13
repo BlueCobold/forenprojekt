@@ -123,6 +123,7 @@ gui_not_available = not available.
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
 tooltip_coins = you currently have % coins.
+tooltip_highscore = go to the highscore
 tooltip_preview_timeattack = select time attack mode.\r\ncollect as many points as\r\npossible in 2 minutes time.
 tooltip_preview_targetmode = select target mode.\r\nhit all major targets\r\nto win this level.
 tooltip_goody_speed = gives the double speed.

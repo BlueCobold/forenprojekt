@@ -18,12 +18,13 @@
 
 #include "resources/AppConfig.hpp"
 
-#include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Window/WindowStyle.hpp>
 #include <SFML/Audio/Listener.hpp>
+#include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/RenderOptions.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
 #include <sstream>
@@ -36,6 +37,7 @@ App::App(AppConfig& config) :
     m_focus(true),
     m_stateManager(m_screen)
 {
+    sfExt::StencilBufferEnabled = true;
     // Cache often used settings
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
@@ -43,15 +45,9 @@ App::App(AppConfig& config) :
 
     adjustVideoMode(videoMode);
 
-    if(m_fullscreen)
-    {
-        m_screen.create(videoMode, m_windowTitle, sf::Style::Fullscreen);
-        // Disable the cursor
-        //m_screen.setMouseCursorVisible(false);
-    }
-    else
-        m_screen.create(videoMode, m_windowTitle);
-
+    sf::ContextSettings settings = sf::ContextSettings(24, 8, 0);
+    m_screen.create(videoMode, m_windowTitle, m_fullscreen ? sf::Style::Fullscreen : sf::Style::Default, settings);
+    
     m_screen.setMouseCursorVisible(false);
     m_cursor = std::unique_ptr<Cursor>(new Cursor(m_resourceManager, m_screen));
 
@@ -114,6 +110,9 @@ void App::draw()
     if(utility::Keyboard.isKeyPressed(sf::Keyboard::Z))
         m_screen.clear();
 #endif
+    glStencilMask(0xFF); // Write to entire stencil buffer
+    glClearStencil(0);
+    glClear(GL_STENCIL_BUFFER_BIT);
 
     m_stateManager.draw();
     m_cursor->draw(m_screen);
@@ -173,10 +172,11 @@ void App::switchDisplayMode()
 
     adjustVideoMode(videoMode);
 
+    sf::ContextSettings settings = sf::ContextSettings(24, 8, 0);
     if(m_fullscreen)
     {
         // Switch to fullscreen
-        m_screen.create(sf::VideoMode(videoMode), m_windowTitle, sf::Style::Fullscreen);
+        m_screen.create(sf::VideoMode(videoMode), m_windowTitle, sf::Style::Fullscreen, settings);
         // Disable the cursor
         //m_screen.setMouseCursorVisible(false);
         m_event.m_eventType = utility::Event::Resized;
@@ -184,7 +184,7 @@ void App::switchDisplayMode()
     else
     {
         // Switch to window mode
-        m_screen.create(sf::VideoMode(videoMode), m_windowTitle);
+        m_screen.create(sf::VideoMode(videoMode), m_windowTitle, sf::Style::Default, settings);
         // Enable the cursor
         m_screen.setMouseCursorVisible(true);
         m_event.m_eventType = utility::Event::Resized;

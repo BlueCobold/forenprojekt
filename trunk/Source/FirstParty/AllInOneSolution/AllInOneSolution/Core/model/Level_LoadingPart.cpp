@@ -276,6 +276,7 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
                 position.x += it->second->IntAttribute("offsetx");
             if(it->second->Attribute("offsety") != nullptr)
                 position.y += it->second->IntAttribute("offsety");
+
             // found some original?
             if(match != end(templates.entities))
                 original = parseEntity(match->second, position, templates, bindInstantly);
@@ -286,6 +287,8 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
                 return nullptr;
             auto xml = it->second;
             auto entity = original.get();
+            if(it->second->Attribute("z") != nullptr)
+                entity->setDrawOrder(it->second->FloatAttribute("z"));
             if(auto constantsXml = xml->FirstChildElement("constants"))
                 LevelFileLoader::parseConstants(constantsXml, entity);
             if(original->hasPhysics())
@@ -425,10 +428,12 @@ void Level::parsePhysics(tinyxml2::XMLElement* physic,
     tinyxml2::XMLElement* shape,
     Entity* entity,
     const sf::Vector2u& position,
-    Templates& templates)
+    Templates& templates,
+    bool isBullet)
 {
     b2BodyDef bodyDef;
     LevelFileLoader::parseBodyDef(physic, entity, this, &templates.functions, bodyDef, position);
+    bodyDef.bullet = isBullet;
 
     std::vector<std::unique_ptr<b2Shape>> shapes;
     // Load shape
@@ -497,6 +502,7 @@ std::unique_ptr<Entity> Level::createEntity(
     bool respawnable = xml->BoolAttribute("respawnable");
     bool autoStop = xml->BoolAttribute("stopWithLastAnimation");
 
+    bool isBullet = false;
     if(auto name = xml->Attribute("base"))
         entity = parseEntityFromTemplate(name, templates, position, false);
     else
@@ -509,6 +515,7 @@ std::unique_ptr<Entity> Level::createEntity(
             entity = std::unique_ptr<Teeter>(new Teeter(m_config.get<float>("MouseScale")));
         else if(typeName == "ball")
         {
+            isBullet = true;
             std::unique_ptr<Entity> spawn = parseEntityReference("onRespawn", xml, templates);
             std::unique_ptr<Entity> kill = parseEntityReference("onKill", xml, templates);
             float autoKillSpeed = xml->FloatAttribute("autokillspeed");
@@ -594,7 +601,7 @@ std::unique_ptr<Entity> Level::createEntity(
         entity->bindOtherSounds(std::move(otherSounds));
     }
     if(physic != nullptr)
-        parsePhysics(physic, shape, entity.get(), position, templates);
+        parsePhysics(physic, shape, entity.get(), position, templates, isBullet);
     
     if(auto collider = xml->FirstChildElement("onCollision"))
         parseCollider(entity.get(), collider, templates);

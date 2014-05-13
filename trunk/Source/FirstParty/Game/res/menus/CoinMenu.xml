@@ -36,5 +36,13 @@
 			</elements>
 		</subwindow>
 		<button id="17" text="gui_close" style="default" x="261" y="270" />
+		<image id="22" texture="GuiElements" x="76" y="105" scrx="962" scry="104" width="20" height="100"/>
+		<image id="23" texture="GuiElements" x="76" y="205" scrx="962" scry="163" width="20" height="60"/>
+		<image id="24" texture="GuiElements" x="96" y="105" scrx="718" scry="311" width="163" height="19"/>
+		<image id="25" texture="GuiElements" x="259" y="105" scrx="718" scry="311" width="163" height="19"/>
+		<image id="26" texture="GuiElements" x="422" y="105" scrx="982" scry="136" width="20" height="100"/>
+		<image id="27" texture="GuiElements" x="422" y="205" scrx="982" scry="195" width="20" height="60"/>
+		<image id="28" texture="GuiElements" x="96" y="254" scrx="704" scry="257" width="163" height="19"/>
+		<image id="29" texture="GuiElements" x="259" y="254" scrx="704" scry="257" width="163" height="19"/>
 	</elements>
 </menu>

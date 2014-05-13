@@ -195,7 +195,8 @@ private:
         tinyxml2::XMLElement* shape,
         Entity* entity,
         const sf::Vector2u& position,
-        Templates& templates);
+        Templates& templates,
+        bool isBullet = false);
 
     void parseCollider(
         Entity* entity,
