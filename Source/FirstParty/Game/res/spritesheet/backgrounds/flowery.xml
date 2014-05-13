@@ -1,17 +1,39 @@
 <spriteSheet texture="pastureland_flowery">
 	<sprites>
-		<sprite name="front_large" x="0" y="0" width="252" height="342" originx="126" originy="336" />
-		<sprite name="front_medium_large" x="252" y="0" width="195" height="268" originx="97" originy="261" />
-		<sprite name="front_medium_small" x="627" y="0" width="152" height="206" originx="76" originy="200" />
-		<sprite name="front_small" x="919" y="0" width="101" height="130" originx="50" originy="126" />
-		<sprite name="middle_large" x="447" y="0" width="180" height="226" originx="90" originy="220" />
-		<sprite name="middle_medium" x="919" y="130" width="94" height="118" originx="47" originy="115" />
-		<sprite name="middle_medium_large" x="779" y="0" width="140" height="168" originx="70" originy="164" />
-		<sprite name="middle_medium_small" x="627" y="206" width="88" height="102" originx="44" originy="100" />
-		<sprite name="middle_small" x="715" y="206" width="64" height="79" originx="32" originy="76" />
-		<sprite name="back_medium" x="779" y="168" width="87" height="111" originx="43" originy="107" />
-		<sprite name="back_medium_small" x="447" y="226" width="77" height="92" originx="38" originy="88" />
-		<sprite name="back_small" x="524" y="226" width="62" height="75" originx="31" originy="72" />
-		<sprite name="back_tiny" x="866" y="168" width="50" height="59" originx="25" originy="57" />
+		<sprite name="front_large" x="1" y="1" width="250" height="340" originx="125" originy="335" />
+
+		<sprite name="front_medium_large_shadow" x="253" y="1" width="251" height="322" originx="125.5" originy="288" />
+		<sprite name="front_medium_large" x="506" y="1" width="193" height="266" originx="96.5" originy="260" />
+
+		<sprite name="front_medium_small_shadow" x="701" y="1" width="196" height="250" originx="98" originy="222" />
+		<sprite name="front_medium_small" x="506" y="269" width="150" height="204" originx="75" originy="199" />
+
+		<sprite name="front_small_shadow" x="1" y="343" width="133" height="162" originx="67.5" originy="142" />
+		<sprite name="front_small" x="136" y="343" width="99" height="128" originx="49.5" originy="125" />
+
+		<sprite name="middle_large" x="701" y="253" width="178" height="224" originx="89" originy="220" />
+
+		<sprite name="middle_medium_shadow" x="899" y="1" width="121" height="145" originx="61.5" originy="128" />
+		<sprite name="middle_medium" x="136" y="473" width="92" height="116" originx="46" originy="114" />
+
+		<sprite name="middle_medium_large_shadow" x="253" y="324" width="175" height="204" originx="88.5" originy="182" />
+		<sprite name="middle_medium_large" x="881" y="253" width="138" height="166" originx="69" originy="163" />
+
+		<sprite name="middle_medium_small_shadow" x="881" y="421" width="105" height="121" originx="53.5" originy="109" />
+		<sprite name="middle_medium_small" x="899" y="148" width="86" height="100" originx="43" originy="99" />
+
+		<sprite name="middle_small_shadow" x="610" y="475" width="78" height="94" originx="40" originy="83" />
+		<sprite name="middle_small" x="430" y="325" width="62" height="77" originx="31" originy="75" />
+
+		<sprite name="back_medium" x="430" y="475" width="85" height="109" originx="42.5" originy="106" />
+
+		<sprite name="back_medium_small_shadow" x="517" y="475" width="91" height="107" originx="46.5" originy="95" />
+		<sprite name="back_medium_small" x="690" y="479" width="75" height="91" originx="37.5" originy="87" />
+
+		<sprite name="back_small_shadow" x="767" y="479" width="76" height="89" originx="39" originy="79" />
+		<sprite name="back_small" x="1" y="507" width="60" height="73" originx="30" originy="71" />
+
+		<sprite name="back_tiny_shadow" x="63" y="507" width="60" height="69" originx="31" originy="62" />
+		<sprite name="back_tiny" x="430" y="404" width="48" height="57" originx="24" originy="56" />
 	</sprites>
 </spriteSheet>

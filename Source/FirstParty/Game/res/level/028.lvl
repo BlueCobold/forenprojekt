@@ -1,0 +1,160 @@
+<level>
+	<levelinfo name="norT">
+		<infoimage scrx="312" scry="561" width="192" height="108" />
+	</levelinfo>
+	<constants color="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/movement.inc" />
+		<include file="assets/target/phase_out.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/nort.inc" />
+		
+		<functions>
+			<function name="globalRed">
+				<switch cases="0.5,1.5">
+					<var name="color"/>
+					<static value="0.7"/>
+					<static value="1.0"/>
+				</switch>
+			</function>
+			<function name="globalRed2">
+				<switch cases="0.5,1.5">
+					<var name="color"/>
+					<static value="1.0"/>
+					<static value="0.7"/>
+				</switch>
+			</function>
+			<function name="globalGreen">
+				<switch cases="0.5,1.5">
+					<var name="color"/>
+					<static value="1.0"/>
+					<static value="0.7"/>
+				</switch>
+			</function>
+			<function name="globalGreen2">
+				<switch cases="0.5,1.5">
+					<var name="color"/>
+					<static value="0.7"/>
+					<static value="1.0"/>
+				</switch>
+			</function>
+			<function name="globalBlue">
+				<switch cases="0.5,1.5">
+					<var name="color"/>
+					<static value="1.0"/>
+					<static value="0.0"/>
+				</switch>
+			</function>
+			<function name="globalBlue2">
+				<switch cases="0.5,1.5">
+					<var name="color"/>
+					<static value="0.0"/>
+					<static value="1.0"/>
+				</switch>
+			</function>
+		</functions>
+
+		<overrides>
+			<override rep="n*" newRep="P*">
+				<animations>
+					<color channel="red">
+						<function name="globalRed"/>
+					</color>
+					<color channel="green">
+						<function name="globalGreen"/>
+					</color>
+					<color channel="blue">
+						<function name="globalBlue"/>
+					</color>
+				</animations>
+			</override>
+			<override rep="n*" newRep="o*">
+				<animations>
+					<color channel="red">
+						<function name="globalRed2"/>
+					</color>
+					<color channel="green">
+						<function name="globalGreen2"/>
+					</color>
+					<color channel="blue">
+						<function name="globalBlue2"/>
+					</color>
+				</animations>
+			</override>
+			<override rep="n*" newRep="r*">
+				<animations>
+					<color channel="red">
+						<static value="1"/>
+					</color>
+					<color channel="green">
+						<static value="0.35"/>
+					</color>
+					<color channel="blue">
+						<static value="0"/>
+					</color>
+				</animations>
+				<onCollision>
+					<changeProperty name="global:color">
+						<mod>
+							<add>
+								<var name="global:color"/>
+								<static value="1"/>
+							</add>
+							<static value="2"/>
+						</mod>
+					</changeProperty>
+				</onCollision>
+			</override>
+		</overrides>
+	</templates>
+	
+	<grid size="40" width="2460" height="1440">
+                                                                                    
+    nZnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnwnJ      
+  nKni              r4ryrcrxrxrxrxrxrxrxrxrxrxrxrxrxrxrxryrcrb              nonH    
+  na  t1            rornrg                              rjr2ri                nd    
+  nT                    ror9                          r7ri                    nU    
+  nknInxnu                ror9                      r7ri                nfnxnGnl    
+        nkn1                rorhrwrwrwrwrwrwrwrwrwrtri                n3nl          
+          nkn1        nfnxnxnu                      ofoxoxou        n3nl              
+            nkn1    n3nl    nkn1          t1      o3ol    oko1    n3nl                
+              nknrnznl  nfnu  PkPr              ozol  nfnu  okornznl                
+                nand  nznlnknr  Pa              od  nznlnknr  oand                
+                nand  ng    nj  Pa              od  ng    nj  oand                    
+                njng  nonhntni  Pj              og  nonhntni  ojng                    
+              n7ninon9        P7Pi              ooo9        o7oinon9                  
+            n7nit1  noPhPwPwPtPi                  ooohowowotoi    non9                
+          n7ni        ncnxnxnu                      nfnxnxny        non9              
+    nZnwntni          ng    nkn1                  n3nl    nj          nonhnwnJ        
+  nKni                non9    nknr              nznl    n7ni                nonH      
+  na                    non9    na      TT      nd    n7ni                    nd      
+  na            TT        non9  na              nd  n7ni        TT            nd      
+  na                        nonhnq              nentni                        nd      
+  na          rfrxru          n4ny              ncnb          rfrxru          nd      
+  na        rzrl  rkrr        nonn              n2ni        rzrl  rkrr        nd      
+  na        rdrZrwrJra                                      rdrZrwrJra        nd      
+  na        r2ribtrorn                                      r2ribtrorn        nd      
+  na                                                                          nd      
+  na                                                                          nd      
+  na                                                                          nd      
+  na    BB                                                                    nd      
+  na                                                                          nd      
+  na    TT              TT                              TT              TT    nd      
+  na                                                                          nd      
+  nT                                    nQ                                    nd      
+  nkn1                                n3nln1                                  nd      
+    nkn1                            n3nl  nkn1                                nd      
+      nkn1                        n3nl      nkn1                              nd      
+        nkn1                    n3nl          nkn1                            nd      
+	</grid>
+	
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="600" silver="1000" gold="1400" />
+</level>

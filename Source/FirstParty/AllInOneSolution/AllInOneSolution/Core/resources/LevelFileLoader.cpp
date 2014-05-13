@@ -226,6 +226,16 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         horizontal = std::string("vertical") != xml->Attribute("alignment");
     
     std::unique_ptr<Animation> anim(new Animation(nullptr, frames, width, height, rotate, origin, offset, horizontal));
+    if(auto stencil = xml->FirstChildElement("stencil"))
+    {
+        if(auto op = stencil->Attribute("op"))
+        {
+            if(std::string(op) == "write")
+                anim->setStencilInfo(Animation::StencilInfo(Animation::StencilInfo::Write, stencil->IntAttribute("ref"), stencil->IntAttribute("mask")));
+            if(std::string(op) == "test")
+                anim->setStencilInfo(Animation::StencilInfo(Animation::StencilInfo::Test, stencil->IntAttribute("ref"), stencil->IntAttribute("mask")));
+        }
+    }
     anim->setStopOnAlphaZero(xml->BoolAttribute("stopOnAlphaZero"));
     
     std::unique_ptr<ValueProvider> provider;

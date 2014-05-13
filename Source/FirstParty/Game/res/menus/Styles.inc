@@ -24,16 +24,28 @@
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="2" />
 	</buttonStyle>
 	<buttonStyle name="coins">
-		<mouseRect left="2" top="2" width="112" height="57" />
-		<idle texture="GuiElements" srcx="230" srcy="484" width="116" height="61"
-			offsetx="0" offsety="0"
+		<mouseRect left="2" top="2" width="40" height="42" />
+		<idle texture="GuiElements" srcx="903" srcy="546" width="42" height="43"
+			offsetx="3" offsety="3"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
-		<hover texture="GuiElements" srcx="230" srcy="484" width="116" height="61"
+		<hover texture="GuiElements" srcx="859" srcy="546" width="44" height="44"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
-		<pressed texture="GuiElements" srcx="230" srcy="484" width="116" height="61"
+		<pressed texture="GuiElements" srcx="859" srcy="546" width="44" height="44"
 			offsetx="0" offsety="0" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
+	</buttonStyle>
+	<buttonStyle name="goblet">
+		<mouseRect left="3" top="3" width="36" height="30" />
+		<idle texture="GuiElements" srcx="717" srcy="546" width="42" height="36"
+			offsetx="2" offsety="3"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
+		<hover texture="GuiElements" srcx="675" srcy="546" width="42" height="36"
+			offsetx="0" offsety="0"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
+		<pressed texture="GuiElements" srcx="675" srcy="546" width="42" height="36"
+			offsetx="0" offsety="0"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
 	</buttonStyle>
 	<buttonStyle name="small">
 		<mouseRect left="2" top="2" width="141" height="46" />

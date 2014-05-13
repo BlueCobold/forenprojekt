@@ -2,8 +2,11 @@
 #include "../Utility.hpp" // toDegree, toPixel
 
 #include <SFML/Graphics/Rect.hpp>
+#include <SFML/OpenGL.hpp>
 
 #include <cmath>
+
+bool Animation::_renderStencilEffects = true;
 
 Animation::Animation(std::unique_ptr<ValueProvider> provider,
     const unsigned int frames,
@@ -33,6 +36,9 @@ Animation::~Animation()
 void Animation::update()
 {
     if(isStopped())
+        return;
+
+    if(!_renderStencilEffects && m_stencil.mode == StencilInfo::Test)
         return;
 
     if(m_frameProvider == nullptr)
@@ -157,10 +163,17 @@ const sf::IntRect Animation::getTextureRect() const
 
 void Animation::draw(const DrawParameter& param)
 {
+    if(!_renderStencilEffects && m_stencil.mode == StencilInfo::Test)
+        return;
+
     if(isStopped())
         return;
     if(param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
+    {
+        m_stencil.enable();
         param.getTarget().draw(m_sprite, sf::RenderStates(m_blending));
+        m_stencil.disable();
+    }
 }
 
 void Animation::bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y)
@@ -228,6 +241,8 @@ Animation* Animation::clone() const
     ani->m_stopOnAlphaZero = m_stopOnAlphaZero;
     ani->m_sourceOffset = m_sourceOffset;
     ani->m_sprite = m_sprite;
+    ani->m_blending = m_blending;
+    ani->m_stencil = m_stencil;
 
     std::array<std::unique_ptr<ValueProvider>, 4> colors;
     for(int i = 0; i < 4; i++)
@@ -258,4 +273,41 @@ void Animation::setStopOnAlphaZero(bool stop)
 void Animation::applyRotation(bool apply)
 {
     m_applyRotation = apply;
+}
+
+void Animation::StencilInfo::enable()
+{
+    if(!Animation::_renderStencilEffects)
+        return;
+
+    if(mode == StencilInfo::Write)
+    {
+        glEnable(GL_STENCIL_TEST);
+        glStencilFunc(GL_ALWAYS, ref, mask);//0xFF);
+        glStencilOp(GL_KEEP, GL_REPLACE, GL_REPLACE);
+        glStencilMask(ref);
+        //glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+        glEnable(GL_ALPHA_TEST);
+        glAlphaFunc(GL_GREATER, 0.0f);
+    }
+    if(mode == StencilInfo::Test)
+    {
+        glEnable(GL_STENCIL_TEST);
+        glStencilFunc(GL_LESS, ref, mask);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+        glStencilMask(0x00);
+    }
+}
+
+void Animation::StencilInfo::disable()
+{
+    if(!Animation::_renderStencilEffects)
+        return;
+    if(mode != StencilInfo::None)
+    {
+        glDisable(GL_STENCIL_TEST);
+        glDisable(GL_ALPHA_TEST);
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glStencilMask(0x00);
+    }
 }

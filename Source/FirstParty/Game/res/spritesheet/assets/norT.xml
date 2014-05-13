@@ -1,0 +1,17 @@
+<spriteSheet texture="norT">
+	<sprites>
+		<sprite name="nort_corner_left" x="0" y="0" width="40" height="40" originx="20" originy="20" />
+		<sprite name="nort_corner_right" x="40" y="0" width="40" height="40" originx="20" originy="20" />
+		<sprite name="nort_diagonal" x="80" y="0" width="40" height="40" originx="20" originy="20" />
+		<sprite name="nort_diagonal_corner" x="120" y="0" width="40" height="40" originx="20" originy="20" />
+		<sprite name="nort_edge" x="160" y="0" width="40" height="40" originx="20" originy="20" />
+		<sprite name="nort_spike_left" x="200" y="0" width="40" height="40" originx="20" originy="20" />
+		<sprite name="nort_spike_right" x="0" y="40" width="40" height="40" originx="20" originy="20" />
+		<sprite name="nort_vertex" x="40" y="40" width="40" height="40" originx="20" originy="20" />
+		<sprite name="norT_diagonal_glow" x="80" y="40" width="40" height="40" originx="20" originy="20" />
+		<sprite name="nort_inverse_corner_left" x="120" y="40" width="40" height="40" originx="20" originy="20" />
+		<sprite name="nort_inverse_corner_right" x="160" y="40" width="40" height="40" originx="20" originy="20" />
+		<sprite name="nort_inverse_roof" x="200" y="40" width="40" height="40" originx="20" originy="20" />
+		<sprite name="nort_roof" x="0" y="80" width="40" height="40" originx="20" originy="20" />
+	</sprites>
+</spriteSheet>

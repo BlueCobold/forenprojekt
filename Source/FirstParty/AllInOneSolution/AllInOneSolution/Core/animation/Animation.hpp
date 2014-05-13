@@ -22,6 +22,30 @@ class Animation : public Drawable, public VariableHolder, public Stoppable, publ
 {
 public:
 
+    struct StencilInfo
+    {
+        enum StencilMode
+        {
+            None,
+            Write,
+            Test
+        };
+
+        StencilInfo(StencilMode mode = None, int ref = 0, int mask = 0)
+          : mode(mode),
+            ref(ref),
+            mask(mask)
+        { }
+
+        void enable();
+        void disable();
+
+        StencilMode mode;
+        int ref;
+        int mask;
+    };
+
+
     Animation(std::unique_ptr<ValueProvider> provider,
         const unsigned int frames,
         const unsigned int frameWidth,
@@ -34,6 +58,8 @@ public:
 
     void update();
     void reset();
+
+    void setStencilInfo(StencilInfo info){ m_stencil = info; };
 
     void setPosition(const float x, const float y);
     void setRotation(const float radians);
@@ -59,12 +85,17 @@ public:
 
     virtual Animation* clone() const override;
 
+    static void enableStencilEffects(bool enable) { _renderStencilEffects = enable; }
+    static bool usesStencilEffects() { return _renderStencilEffects; }
+
 private:
 
     enum ColorChannels
     {
         Red, Green, Blue, Alpha
     };
+
+    static bool _renderStencilEffects;
 
     void updatePosition();
     const sf::IntRect Animation::getTextureRect() const;
@@ -80,6 +111,7 @@ private:
     std::vector<sf::Vector2i> m_origins;
     bool m_applyRotation;
     bool m_stopOnAlphaZero;
+    StencilInfo m_stencil;
     unsigned int m_frames;
     unsigned int m_frame;
     unsigned int m_frameWidth;

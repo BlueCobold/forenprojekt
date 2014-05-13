@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Race Way">
-		<infoimage scrx="0" scry="0" width="192" height="108" />
+		<infoimage scrx="312" scry="561" width="192" height="108" />
 	</levelinfo>
 	<constants gate="0" gatetime="0"/>
 	<templates>

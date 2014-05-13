@@ -2,7 +2,8 @@
 	<texture name="pastureland_sky" path="backgrounds/pastureland/sky.jpg" smooth="false" />
 	<texture name="pastureland_front_mountain" path="backgrounds/pastureland/front/mountain.png" smooth="true" />
 	<texture name="pastureland_middle_mountain" path="backgrounds/pastureland/middle/mountain.png" smooth="true" />
-	<texture name="pastureland_back_mountain" path="backgrounds/pastureland/back/mountain.png" smooth="true" />
+	<texture name="pastureland_back_mountain" path="backgrounds/pastureland/back/mountain.png" smooth="true" />>
+	<texture name="pastureland_shadows" path="backgrounds/pastureland/TerrainShadows.png" smooth="true" />
 	<texture name="pastureland_clouds" path="backgrounds/pastureland/clouds.png" smooth="false" />
 	<texture name="pastureland_flowery" path="backgrounds/pastureland/flowery.png" smooth="true" />
 	<texture name="small_quads" path="walls/sand/small_quad/main/small_quads.png" smooth="false" />
@@ -31,6 +32,7 @@
 	<texture name="Window" path="gui/window.png" smooth="false" />
 	<texture name="goodie" path="gui/Goodies.png" smooth="true" />
 	<texture name="walls" path="assets/walls.png" smooth="true" />
+	<texture name="norT" path="assets/norT.png" smooth="true" />
 </textures>
 <sounds>
 	<sound name="bounce" path="bounce.wav" />
@@ -65,6 +67,9 @@
 </bitmapfonts>
 <spritesheets>
 	<spritesheet name="pastureland_flowery" path="backgrounds/flowery.xml" />
+	<spritesheet name="pastureland_shadows" path="backgrounds/TerrainShadows.xml" />
 	<spritesheet name="assets_misc" path="assets/misc.xml" />
 	<spritesheet name="walls" path="assets/walls.xml" />
+	<spritesheet name="walls_nort" path="assets/norT.xml" />
+	<spritesheet name="gui_elements" path="gui/gui_elements.xml" />
 </spritesheets>

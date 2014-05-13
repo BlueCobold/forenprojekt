@@ -1,0 +1,6 @@
+<spriteSheet texture="pastureland_shadows">
+	<sprites>
+		<sprite name="front_shadow" x="1" y="1" width="1817" height="699" originx="1" originy="1" />
+		<sprite name="middle_shadow" x="1" y="702" width="2030" height="759" originx="1" originy="1" />
+	</sprites>
+</spriteSheet>

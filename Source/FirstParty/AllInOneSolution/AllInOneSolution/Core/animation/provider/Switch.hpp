@@ -28,6 +28,7 @@ public:
     {
         auto it = begin(getProvider());
         auto current = (*it)->getValue();
+        ++it;
         for(auto cit = begin(m_constants); it != end(getProvider()); ++it, ++cit)
         {
             if(current <= (*cit))

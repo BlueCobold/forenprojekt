@@ -36,5 +36,10 @@
 		<sprite name="window_02" x="636" y="120" width="60" height="60" originx="0" originy="0" />
 		<sprite name="window_03" x="696" y="120" width="60" height="60" originx="0" originy="0" />
 		<sprite name="window_04" x="756" y="120" width="60" height="60" originx="0" originy="0" />
+		<sprite name="shadow" x="816" y="120" width="60" height="39" originx="0" originy="0" />
+		<sprite name="metal_01" x="876" y="120" width="60" height="60" originx="30" originy="30" />
+		<sprite name="metal_02" x="936" y="120" width="60" height="60" originx="30" originy="30" />
+		<sprite name="metal_03" x="816" y="159" width="60" height="60" originx="30" originy="30" />
+		<sprite name="metal_04" x="0" y="174" width="60" height="60" originx="30" originy="30" />
 	</sprites>
 </spriteSheet>

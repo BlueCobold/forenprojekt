@@ -1,0 +1,10 @@
+<spriteSheet texture=GuiElements>
+	<sprites>
+		<sprite name="goblet_hover" x="675" y="546" width="42" height="36" originx="0" originy="0" />
+		<sprite name="goblet_idle" x="717" y="546" width="42" height="36" originx="0" originy="0" />
+		<sprite name="highscoreBackground" x="759" y="546" width="100" height="58" originx="0" originy="0" />
+		<sprite name="coins_hover" x="859" y="546" width="44" height="44" originx="0" originy="0" />
+		<sprite name="coins_idle" x="903" y="546" width="42" height="43" originx="0" originy="0" />
+		<sprite name="highscoreBackground2" x="0" y="587" width="106" height="60" originx="0" originy="0" />
+	</sprites>
+</spriteSheet>

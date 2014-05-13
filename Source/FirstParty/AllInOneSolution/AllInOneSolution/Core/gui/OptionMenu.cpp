@@ -62,11 +62,12 @@ void OptionMenu::applyChanges()
         sf::VideoMode videoMode(m_currentVideoMode.x, m_currentVideoMode.y);
         adjustVideoMode(videoMode, m_fullScreen);
 
+        sf::ContextSettings settings = sf::ContextSettings(24, 8, 0);
         if(m_fullScreen)
-            Menu::getRenderWindow().create(videoMode, utility::translateKey("gui_rickety_racquet"), sf::Style::Fullscreen);
+            Menu::getRenderWindow().create(videoMode, utility::translateKey("gui_rickety_racquet"), sf::Style::Fullscreen, settings);
         if(!m_fullScreen)
         {
-            Menu::getRenderWindow().create(sf::VideoMode(videoMode), utility::translateKey("gui_rickety_racquet")); 
+            Menu::getRenderWindow().create(sf::VideoMode(videoMode), utility::translateKey("gui_rickety_racquet"), sf::Style::Default, settings); 
             Menu::getRenderWindow().setIcon(m_icon.getSize().x, m_icon.getSize().y, m_icon.getPixelsPtr());
         }
         
@@ -187,10 +188,7 @@ void OptionMenu::onEnter()
 
 void OptionMenu::nextVideoMode()
 {
-    m_currentVideoModeIndex++;
-    if(m_currentVideoModeIndex > m_availableVideoMode.size() - 1)
-        m_currentVideoModeIndex = 0;
-
+    m_currentVideoModeIndex = (m_currentVideoModeIndex++) % m_availableVideoMode.size();
     m_currentVideoMode = m_availableVideoMode[m_currentVideoModeIndex];
 
     if(m_appointedVideoMode == m_currentVideoMode)
