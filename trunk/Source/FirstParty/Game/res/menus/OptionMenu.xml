@@ -4,35 +4,44 @@
 	<styles source="Styles.inc"/>
 	<elements>
 		<button id="0" text="gui_close" style="default" x="261" y="270" />
-		<subwindow id="1" x="70" y="108" sizex="372" sizey="150" innerheight="380">
+		<subwindow id="1" x="70" y="108" sizex="372" sizey="150" innerheight="600">
 			<style>
 				<scrollTop texture="GuiElements" srcx="1000" srcy="0" width="20" height="10" />
 				<scrollMiddle texture="GuiElements" srcx="1000" srcy="10" width="20" height="1" />
 				<scrollBottom texture="GuiElements" srcx="1000" srcy="10" width="20" height="10" />
 			</style>
 			<elements>
-				<checkbox id="2" style="default" x="86" y="10" />
-				<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" alignment="0" x="130" y="12" />
+				<label text="gui_graphicsetup" font="buttonIdleFont" alignment="1" x="180" y="10" />
+
+				<button id="9" text="" style="arrowright" x="300" y="50" />
+				<button id="10" text="" style="arrowleft" x="50" y="50" />
+				<label id="11" text="gui_label_resolution" font="buttonHoverFont" alignment="1" x="177" y="56" />
+
+				<checkbox id="2" style="default" x="86" y="100" />
+				<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" alignment="0" x="130" y="102" />
+
+				<checkbox id="30" style="default" x="86" y="160" />
+				<label id="31" text="gui_label_draw" font="buttonHoverFont" alignment="0" x="130" y="145" />
+				<label id="32" text="gui_label_shadows" font="buttonHoverFont" alignment="0" x="130" y="175" />
+
+				<label text="gui_soundsetup" font="buttonIdleFont" alignment="1" x="180" y="220" />
 				
-				<button id="9" text="" style="arrowright" x="300" y="49" />
-				<button id="10" text="" style="arrowleft" x="50" y="49" />
-				<label id="11" text="gui_label_resolution" font="buttonHoverFont" alignment="1" x="177" y="55" />
+				<slider id="3" style="default" x="0" y="270" />
+				<label id="5" text="gui_label_mastervolumen" font="buttonHoverFont" alignment="0" x="130" y="270" />
 				
-				<slider id="3" style="default" x="0" y="100" />
-				<label id="5" text="gui_label_mastervolumen" font="buttonHoverFont" alignment="0" x="130" y="100" />
+				<checkbox id="6" style="default" x="86" y="330" />
+				<label id="7" text="gui_label_mutesound" font="buttonHoverFont" alignment="0" x="130" y="315" />
+				<label id="8" text="gui_label_wheninactive" font="buttonHoverFont" alignment="0" x="130" y="345" />
 				
-				<checkbox id="6" style="default" x="86" y="165" />
-				<label id="7" text="gui_label_mutesound" font="buttonHoverFont" alignment="0" x="130" y="150" />
-				<label id="8" text="gui_label_wheninactive" font="buttonHoverFont" alignment="0" x="130" y="180" />
+				<label text="gui_gameplaysetup" font="buttonIdleFont" alignment="1" x="180" y="390" />
+
+				<checkbox id="12" style="default" x="86" y="450" />
+				<label id="13" text="gui_label_use_vertical" font="buttonHoverFont" alignment="0" x="130" y="435" />
+				<label id="14" text="gui_label_mouseaxis" font="buttonHoverFont" alignment="0" x="130" y="465" />
 				
-				<checkbox id="12" style="default" x="86" y="235" />
-				<label id="13" text="gui_label_use_vertical" font="buttonHoverFont" alignment="0" x="130" y="220" />
-				<label id="14" text="gui_label_mouseaxis" font="buttonHoverFont" alignment="0" x="130" y="245" />
-				
-				<checkbox id="15" style="default" x="86" y="305" />
-				<label id="16" text="gui_label_invert_used" font="buttonHoverFont" alignment="0" x="130" y="290" />
-				<label id="17" text="gui_label_mouseaxis" font="buttonHoverFont" alignment="0" x="130" y="315" />
-				
+				<checkbox id="15" style="default" x="86" y="530" />
+				<label id="16" text="gui_label_invert_used" font="buttonHoverFont" alignment="0" x="130" y="515" />
+				<label id="17" text="gui_label_mouseaxis" font="buttonHoverFont" alignment="0" x="130" y="545" />
 			</elements>
 		</subwindow>
 		<image id="20" texture="GuiElements" x="66" y="105" scrx="962" scry="104" width="20" height="100"/>
