@@ -3,7 +3,7 @@
 #include "Slider.hpp"
 #include "../resources/AppConfig.hpp"
 #include "../resources/ResourceManager.hpp"
-
+#include "../animation/Animation.hpp"
 #include <SFML/Audio/Listener.hpp>
 
 template<class T>
@@ -27,6 +27,9 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
     m_useVerticalAxis = m_config.get<bool>("UseVerticalAxis");
 
     m_invertAxis = m_config.get<bool>("InvertAxis");
+
+    m_useStencilEffects = m_config.get<bool>("UseStencilEffects");
+
     sf::Listener::setGlobalVolume(m_masterVolume);
 
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
@@ -38,6 +41,9 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
     Menu::getCheckbox(CHECKBOX_INVERT_AXIS).setChecked(m_invertAxis);
 
     Menu::getCheckbox(CHECKBOX_USE_VERTICALAXIS).setChecked(m_useVerticalAxis);
+
+    Menu::getCheckbox(CHECKBOX_USE_STENCIL_EFFECTS).setChecked(m_useStencilEffects);
+    Animation::enableStencilEffects(m_useStencilEffects);
 
     for(auto it = begin(sf::VideoMode::getFullscreenModes()); it != end(sf::VideoMode::getFullscreenModes()); ++it)
     {
@@ -56,7 +62,7 @@ void OptionMenu::applyChanges()
        m_currentVideoMode.x != m_config.get<unsigned int>("ResolutionX") ||
        m_currentVideoMode.y != m_config.get<unsigned int>("ResolutionY"))
     {
-        if( Menu::getCheckbox(CHECKBOX_FULLSCREEN).getChecked() != m_fullScreen)
+        if(Menu::getCheckbox(CHECKBOX_FULLSCREEN).getChecked() != m_fullScreen)
             m_fullScreen = !m_fullScreen;
 
         sf::VideoMode videoMode(m_currentVideoMode.x, m_currentVideoMode.y);
@@ -111,6 +117,13 @@ void OptionMenu::applyChanges()
     {
         m_invertAxis = !m_invertAxis;
         m_config.set("InvertAxis", m_invertAxis);
+    }
+
+    if(Menu::getCheckbox(CHECKBOX_USE_STENCIL_EFFECTS).getChecked() != m_useStencilEffects)
+    {
+        m_useStencilEffects = !m_useStencilEffects;
+        m_config.set("UseStencilEffects", m_useStencilEffects);
+        Animation::enableStencilEffects(m_useStencilEffects);
     }
 }
 

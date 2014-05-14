@@ -884,9 +884,6 @@
     <Filter Include="Sources\model">
       <UniqueIdentifier>{82c559a9-cddc-4c24-b5c5-e0031f2b65a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\animation">
-      <UniqueIdentifier>{78c81f4f-30be-49c1-8df7-ec1ba111d3a1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers\rendering">
       <UniqueIdentifier>{8f910ab8-7b56-458a-85ab-f377ac98f07c}</UniqueIdentifier>
     </Filter>
@@ -923,9 +920,6 @@
     <Filter Include="Sources\State">
       <UniqueIdentifier>{f34a6103-1abb-48f9-952b-68f10e8af582}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\animation\providers">
-      <UniqueIdentifier>{1f0bc342-a831-4fb5-ac98-bc0015501aad}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headers\gui\style">
       <UniqueIdentifier>{f2e0a537-c86a-4b70-a4b3-2b77167104aa}</UniqueIdentifier>
     </Filter>
@@ -940,6 +934,12 @@
     </Filter>
     <Filter Include="Sources\resources\rendering\transitions">
       <UniqueIdentifier>{dafee3bd-2f74-4c28-84de-e0c4d161420c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\animation">
+      <UniqueIdentifier>{78c81f4f-30be-49c1-8df7-ec1ba111d3a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\animation\providers">
+      <UniqueIdentifier>{1f0bc342-a831-4fb5-ac98-bc0015501aad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

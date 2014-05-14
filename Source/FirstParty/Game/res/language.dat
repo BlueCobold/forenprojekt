@@ -119,6 +119,11 @@ gui_newHighScore1 = You have reached
 gui_newHighScore2 = a new highscore entry,
 gui_newHighScore3 = please enter your name.
 gui_not_available = not available.
+gui_label_draw = Draw
+gui_label_shadows = shadows
+gui_graphicsetup = Graphic Option
+gui_soundsetup = Sound Option
+gui_gameplaysetup = Gameplay Option
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %

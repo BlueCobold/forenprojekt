@@ -21,6 +21,7 @@ public:
     static const int LABEL_RESOLUTION = 11;
     static const int CHECKBOX_USE_VERTICALAXIS = 12;
     static const int CHECKBOX_INVERT_AXIS = 15;
+    static const int CHECKBOX_USE_STENCIL_EFFECTS = 30;
 
     OptionMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     
@@ -36,6 +37,7 @@ private:
     bool m_muteSoundWhenInactive;
     bool m_invertAxis;
     bool m_useVerticalAxis;
+    bool m_useStencilEffects;
     std::vector<sf::Vector2u> m_availableVideoMode;
     sf::Vector2u m_currentVideoMode;
     sf::Vector2u m_appointedVideoMode;
