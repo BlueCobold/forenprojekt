@@ -91,6 +91,18 @@ StateChangeInformation PauseState::update(const float time)
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
+    else if(clicked == PauseMenu::BUTTON_MAIN_MENU)
+    {
+        m_playStateInfo.m_prepareOnly = true;
+        m_playStateInfo.m_returnFromPause = true;
+        m_playStateInfo.m_level = m_level;
+        m_transitionStateInfo.m_level = m_level;
+        m_transitionStateInfo.m_followingState = MainMenuStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        m_transitionStateInfo.m_comeFromeState = PauseStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+    }
     return StateChangeInformation::Empty();
 }
 
