@@ -35,10 +35,11 @@ App::App(AppConfig& config) :
     m_windowTitle("Rickety Racquet"),
     m_fullscreen(false),
     m_focus(true),
+    m_isMinimized(false),
     m_stateManager(m_screen)
 {
-    sfExt::StencilBufferEnabled = true;
     // Cache often used settings
+    sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
     sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
@@ -129,6 +130,17 @@ void App::handleKeyboard()
         m_config.set("IsFullScreen", m_fullscreen);
         switchDisplayMode();
     }
+    // Strg + S = will enable or disable stencil shadows at any time
+    if((utility::Keyboard.isKeyDown(sf::Keyboard::LControl) && utility::Keyboard.isKeyPressed(sf::Keyboard::S)) ||
+       (utility::Keyboard.isKeyPressed(sf::Keyboard::LControl) && utility::Keyboard.isKeyDown(sf::Keyboard::S)))
+    {
+        Animation::enableStencilEffects(!Animation::usesStencilEffects());
+        bool stencilEffects = m_config.get<bool>("UseStencilEffects");
+        m_config.set<bool>("UseStencilEffects", !stencilEffects);
+    }
+    // Q = will minimize the game to the task bar and pause an eventually running level.
+    if(utility::Keyboard.isKeyReleased(sf::Keyboard::Q))
+        minimize();
 }
 
 void App::handleEvents()
@@ -151,6 +163,13 @@ void App::handleEvents()
         {
             m_event.m_eventType = utility::Event::GainFocus;
             m_focus = true;
+            if(m_isMinimized)
+                restore();
+            // BUG: The event will not forward in Update-Methode
+            // so no Gain Focus will arrive StateManager
+            // just in case you minimize and restore the the window
+            // restore can happen with Alt+Tap or click on taskbar icon
+            // the result is the same.
         }
         else if(event.type == sf::Event::Resized)
         {
@@ -240,4 +259,29 @@ void App::adjustVideoMode(sf::VideoMode& mode)
         if(mode.height > sf::VideoMode::getDesktopMode().height)
             mode.height = sf::VideoMode::getDesktopMode().height;
     }
+}
+void App::minimize()
+{
+    // This line is required because m_fullscreen will not 
+    // changed when setup to fullscreen in optionmenu.
+    m_fullscreen = m_config.get<bool>("IsFullScreen");
+
+    if(m_fullscreen)
+    {
+        m_fullscreen = !m_fullscreen;
+        switchDisplayMode();
+    }
+    m_isMinimized = true;
+    ShowWindow(m_screen.getSystemHandle(), SW_MINIMIZE);
+}
+
+void App::restore()
+{
+    if(m_config.get<bool>("IsFullScreen"))
+    {
+        m_fullscreen = !m_fullscreen;
+        switchDisplayMode();
+    }
+    m_isMinimized = false;
+    ShowWindow(m_screen.getSystemHandle(), SW_RESTORE);
 }

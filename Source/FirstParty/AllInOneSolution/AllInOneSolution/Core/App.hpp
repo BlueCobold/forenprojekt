@@ -16,7 +16,7 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Graphics/Image.hpp>
-
+#include "gui\ErrorMessageBox.hpp"
 #include <string>
 
 class AppConfig;
@@ -45,6 +45,9 @@ private:
 
     void adjustVideoMode(sf::VideoMode& mode);
 
+    void minimize();
+    void restore();
+
 private:
     sf::RenderWindow m_screen;
     std::unique_ptr<Cursor> m_cursor;
@@ -53,6 +56,7 @@ private:
     std::string m_windowTitle;
     bool m_fullscreen;
     bool m_focus;
+    bool m_isMinimized;
 
     utility::Event m_event;
 

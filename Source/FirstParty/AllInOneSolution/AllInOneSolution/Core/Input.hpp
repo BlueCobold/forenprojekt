@@ -30,6 +30,8 @@ namespace utility
 
         bool isKeyPressed(const sf::Keyboard::Key key);
 
+        bool isKeyReleased(const sf::Keyboard::Key key);
+
     private:
         std::vector<sf::Keyboard::Key> m_newlyPressed;
         std::vector<sf::Keyboard::Key> m_stillPressed;

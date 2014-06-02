@@ -10,6 +10,7 @@ namespace utility
     {
         m_released.clear();
         m_newlyPressed.clear();
+        m_stillPressed;
     }
 
     void KeyboardWrapper::notifyKeyPressed(const sf::Keyboard::Key key)
@@ -39,6 +40,10 @@ namespace utility
         return std::find(begin(m_stillPressed), end(m_stillPressed), key) != end(m_stillPressed);
     }
 
+    bool KeyboardWrapper::isKeyReleased(const sf::Keyboard::Key key)
+    {
+        return std::find(begin(m_released), end(m_released), key) != end(m_released);
+    }
     //===========================================================================================
 
     const sf::Vector2f& MouseWrapper::getPosition() const

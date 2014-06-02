@@ -201,7 +201,10 @@ void OptionMenu::onEnter()
 
 void OptionMenu::nextVideoMode()
 {
-    m_currentVideoModeIndex = (m_currentVideoModeIndex++) % m_availableVideoMode.size();
+    m_currentVideoModeIndex++;
+    if(static_cast<unsigned int>(m_currentVideoModeIndex) >= m_availableVideoMode.size())
+        m_currentVideoModeIndex = 0;
+
     m_currentVideoMode = m_availableVideoMode[m_currentVideoModeIndex];
 
     if(m_appointedVideoMode == m_currentVideoMode)
