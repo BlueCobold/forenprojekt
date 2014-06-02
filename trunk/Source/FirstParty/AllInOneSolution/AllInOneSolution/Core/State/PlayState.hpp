@@ -35,6 +35,7 @@ private:
 
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPauseStateInformation m_pauseStateInfo;
+    EnterStateInformation m_loadLevelStateInfo;
 
     bool PlayState::checkForNewHighscore();
 };

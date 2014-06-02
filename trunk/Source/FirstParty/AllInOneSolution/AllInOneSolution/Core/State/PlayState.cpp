@@ -58,12 +58,18 @@ StateChangeInformation PlayState::update(const float time)
         utility::Mouse.startInterpolation(dynamic_cast<sf::Window&>(m_screen));
         m_level->update(getPassedTime(), m_screen);
         m_hud.update(m_level, getPassedTime());
-        //if(utility::Keyboard.isKeyDown(sf::Keyboard::R))
-        //{
-        //    // BUG! Memory leak!
-        //    m_level = new Level(2, m_resourceManager, m_config);
-        //    m_level->restartAt(getCurrentTime());
-        //}
+        if((utility::Keyboard.isKeyDown(sf::Keyboard::LControl) && utility::Keyboard.isKeyPressed(sf::Keyboard::R)) ||
+           (utility::Keyboard.isKeyPressed(sf::Keyboard::LControl) && utility::Keyboard.isKeyDown(sf::Keyboard::R)))
+        {
+            m_loadLevelStateInfo.m_prepareOnly = false;
+            m_loadLevelStateInfo.m_level = nullptr;
+            m_loadLevelStateInfo.m_levelNumber = m_pauseStateInfo.m_levelNumber;
+            m_transitionStateInfo.m_followingState = LoadLevelStateId;
+            m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
+            m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
+            m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+            return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+        }
 
         if(utility::Keyboard.isKeyDown(sf::Keyboard::T))
         {
@@ -80,7 +86,7 @@ StateChangeInformation PlayState::update(const float time)
             m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
-
+        
         if(m_level->isLevelPassed())
         {
             if(!checkForNewHighscore())
