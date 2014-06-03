@@ -20,7 +20,8 @@ PauseState::PauseState(sf::RenderWindow& screen,
     State(screen, resourceManager, config),
     m_background(nullptr),
     m_menu(sf::Vector2f(0, 0), screen, resourceManager),
-    m_HUD(resourceManager, config)
+    m_HUD(resourceManager, config),
+    m_levelNumber(0)
 {
 }
 
@@ -32,7 +33,8 @@ void PauseState::onEnter(const EnterStateInformation* enterInformation, const fl
 {
     const EnterPauseStateInformation* info = dynamic_cast<const EnterPauseStateInformation*>(enterInformation);
     m_level = info->m_level;
-    
+    m_levelNumber = info->m_levelNumber;
+
     State::onEnter(enterInformation, time);
     m_HUD.onEnter(m_level);
     m_HUD.restartAt(getPassedTime());
@@ -41,6 +43,9 @@ void PauseState::onEnter(const EnterStateInformation* enterInformation, const fl
     m_optionStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
     m_menu.updateLayout();
+
+    m_menu.setCoinToolTipText(utility::replace(utility::translateKey("tooltip_coins"), 
+                                           utility::toString(m_config.get<int>("coins"))));
 }
 
 StateChangeInformation PauseState::update(const float time)
@@ -99,6 +104,18 @@ StateChangeInformation PauseState::update(const float time)
         m_transitionStateInfo.m_level = m_level;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        m_transitionStateInfo.m_comeFromeState = PauseStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+    }
+    else if(clicked == PauseMenu::BUTTON_COINS)
+    {
+        m_coinShopStateInfo.m_level = m_level;
+        m_coinShopStateInfo.m_prepareOnly = false;
+        m_coinShopStateInfo.m_comeFromState = PauseStateId;
+        m_coinShopStateInfo.m_levelNumber = m_levelNumber;
+        m_transitionStateInfo.m_followingState = CoinShopStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_coinShopStateInfo;
         m_transitionStateInfo.m_comeFromeState = PauseStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);

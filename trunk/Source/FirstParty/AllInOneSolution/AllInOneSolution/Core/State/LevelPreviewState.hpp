@@ -26,10 +26,12 @@ private:
     Level* m_level;
     bool m_levelUpdated;
     HUD m_HUD;
+    int m_levelNumber;
 
     EnterPlayStateInformation m_playStateInfo;
     EnterHighScoreStateInformation m_highScoreInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
+    EnterCoinShopStateInformation m_coinShopStateInfo;
 };
 
 #endif // LEVEL_PREVIEW_STATE_HPP

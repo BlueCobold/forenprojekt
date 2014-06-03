@@ -31,6 +31,7 @@ private:
     std::unique_ptr<sf::Texture> m_background;
     sf::RenderTexture m_renderTexture;
     Level* m_level;
+    int m_levelNumber;
 
     HUD m_HUD;
     PauseMenu m_menu;
@@ -39,6 +40,7 @@ private:
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPauseStateInformation m_pauseStateInfo;
     EnterOptionStateInformation m_optionStateInfo;
+    EnterCoinShopStateInformation m_coinShopStateInfo;
 };
 
 #endif // PAUSESTATE_HPP

@@ -42,10 +42,12 @@ CoinShopState::~CoinShopState()
 
 void CoinShopState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
-    State::onEnter(enterInformation, time);
+    const EnterCoinShopStateInformation* info = dynamic_cast<const EnterCoinShopStateInformation*>(enterInformation);
+    State::onEnter(info, time);
 
-    m_level = enterInformation->m_level;
-    m_levelNumber = enterInformation->m_levelNumber;
+    m_level = info->m_level;
+    m_levelNumber = info->m_levelNumber;
+    m_transitionStateInfo.m_followingState = info->m_comeFromState;
 
     m_menu.setGoodyCharges(Goody::GravityGoody, m_config.get<int>("goodygravity"));
     m_menu.setGoodyCharges(Goody::InvulnerableGoody, m_config.get<int>("goodyinvulnerable"));
@@ -98,13 +100,22 @@ StateChangeInformation CoinShopState::update(const float time)
     switch(m_clicked)
     {
     case CoinShopMenu::BUTTON_CLOSE:
-        m_levelPreviewInfo.m_level = m_level;
-        m_levelPreviewInfo.m_levelNumber = m_levelNumber;
-        m_levelPreviewInfo.m_prepareOnly = false;
-        m_levelPreviewInfo.m_returnFromPause = false;
+        if(m_transitionStateInfo.m_followingState == LevelPreviewStateId)
+        {
+            m_levelPreviewInfo.m_level = m_level;
+            m_levelPreviewInfo.m_levelNumber = m_levelNumber;
+            m_levelPreviewInfo.m_prepareOnly = false;
+            m_levelPreviewInfo.m_returnFromPause = false;
+            m_transitionStateInfo.m_onEnterInformation = &m_levelPreviewInfo;
+        }
+        else if(m_transitionStateInfo.m_followingState == PauseStateId)
+        {
+            m_pauseStateInfo.m_level = m_level;
+            m_pauseStateInfo.m_levelNumber = m_levelNumber;
+            m_pauseStateInfo.m_prepareOnly = false;
+            m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
+        }
         m_transitionStateInfo.m_level = m_level;
-        m_transitionStateInfo.m_followingState = LevelPreviewStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_levelPreviewInfo;
         m_transitionStateInfo.m_comeFromeState = CoinShopStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
