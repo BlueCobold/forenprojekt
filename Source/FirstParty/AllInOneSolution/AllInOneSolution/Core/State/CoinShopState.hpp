@@ -32,6 +32,7 @@ private:
 
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPlayStateInformation m_levelPreviewInfo;
+    EnterPauseStateInformation m_pauseStateInfo;
 
     void updateButtons();
     void buy(const Goody::Type type, const std::string& propertyName);

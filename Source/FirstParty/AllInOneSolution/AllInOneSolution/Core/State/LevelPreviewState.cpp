@@ -14,7 +14,8 @@ LevelPreviewState::LevelPreviewState(sf::RenderWindow& screen,
     m_menu(sf::Vector2f(0, 0), screen, resourceManager),
     m_HUD(resourceManager, config),
     m_level(nullptr),
-    m_levelUpdated(false)
+    m_levelUpdated(false),
+    m_levelNumber(0)
 {
     m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
     m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(true);
@@ -46,7 +47,7 @@ void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, c
     else
         m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setToolTipText(utility::translateKey("tooltip_preview_timeattack"));
 
-    m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
+    m_levelNumber = enterInformation->m_levelNumber;
 
     m_menu.updateLayout();
 }
@@ -92,6 +93,7 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_playStateInfo.m_prepareOnly = false;
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = m_level;
+        m_playStateInfo.m_levelNumber = m_levelNumber;
         m_transitionStateInfo.m_followingState = PlayStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelPreviewStateId;
@@ -103,6 +105,7 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_playStateInfo.m_prepareOnly = false;
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = m_level;
+        m_playStateInfo.m_levelNumber = m_levelNumber;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelPreviewStateId;
@@ -111,10 +114,12 @@ StateChangeInformation LevelPreviewState::update(const float time)
     }
     else if(clicked == LevelPreviewMenu::BUTTON_COINS)
     {
-        m_playStateInfo.m_level = m_level;
-        m_playStateInfo.m_prepareOnly = false;
+        m_coinShopStateInfo.m_level = m_level;
+        m_coinShopStateInfo.m_prepareOnly = false;
+        m_coinShopStateInfo.m_comeFromState = LevelPreviewStateId;
+        m_coinShopStateInfo.m_levelNumber = m_levelNumber;
         m_transitionStateInfo.m_followingState = CoinShopStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        m_transitionStateInfo.m_onEnterInformation = &m_coinShopStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelPreviewStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
@@ -123,6 +128,7 @@ StateChangeInformation LevelPreviewState::update(const float time)
     {
         m_highScoreInfo.m_level = m_level;
         m_highScoreInfo.m_comeFromState = LevelPreviewStateId;
+        m_highScoreInfo.m_levelNumber = m_levelNumber;
         m_transitionStateInfo.m_followingState = HighScoreStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_highScoreInfo;
         m_transitionStateInfo.m_comeFromeState = LevelPreviewStateId;
