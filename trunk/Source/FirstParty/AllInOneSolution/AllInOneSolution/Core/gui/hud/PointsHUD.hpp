@@ -5,11 +5,13 @@
 
 #include "LabelHUD.hpp"
 #include "../../animation/Interpolation.hpp"
+#include "../../resources/ResourceManager.hpp"
 
 class PointsHUD : public LabelHUD
 {
 public:
-    PointsHUD(const sf::Vector2f& position,
+    PointsHUD(ResourceManager& resourceManager,
+              const sf::Vector2f& position,
               const float rotation,
               BitmapFont* bitmapFont,
               const float horizontalPercentage = HUDElement::Left,
@@ -24,10 +26,15 @@ public:
 
     void setTime(float time);
 
+    void draw(const DrawParameter& params) override;
+
 private:
     Interpolation m_pointCounter;
 
     float m_elapsedTime;
+
+    ResourceManager& m_resourceManager;
+    sf::Sprite m_coinTexture;
 };
 
 #endif
