@@ -6,7 +6,7 @@
 HUD::HUD(ResourceManager& resourceManager, AppConfig& config) :
     m_fpsCounter(sf::Vector2f(30.f,-30.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Left, HUDElement::Bottom),
     m_target(resourceManager, sf::Vector2f(-30.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Right),
-    m_points(sf::Vector2f(30.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Left),
+    m_points(resourceManager, sf::Vector2f(40.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Left),
     m_arrow(resourceManager),
     m_ball(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.66f),
     m_time(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.33f),
