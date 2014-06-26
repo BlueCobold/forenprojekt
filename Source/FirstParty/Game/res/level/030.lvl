@@ -1,0 +1,85 @@
+<level>
+	<levelinfo name="Goalgetter">
+		<infoimage scrx="312" scry="561" width="192" height="108" />
+	</levelinfo>
+	<constants solid="0" />
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+	
+		<shapes>
+			<shape name="oli" type="polygon">
+				<vertex x="5" y="0" />
+				<vertex x="-55" y="60" />
+				<vertex x="65" y="60" />
+				
+			</shape>
+		</shapes>
+		<physics>
+			<physic name="goalkeeper">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="x">
+							<mul>
+								<sine>
+									<mul>
+										<time />
+										<static value="100" />
+									</mul>
+								</sine>
+								<static value="220" />
+							</mul>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.5" friction="0.8" restitution="0.1" />
+			</physic>
+		</physics>
+		<entities>
+			<entity name="movingwall" rep="gk">
+				<physics name="goalkeeper" shape="oli" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_right_lower" x="-55" rotate="false" />
+					<animation spritesheet="walls" sprite="sand_left_lower" x="5" rotate="false" />
+				</animations>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="2460" height="1250">
+                                                                            
+                                                                            
+                                                                                    
+        w2w1w4w2w6w2w5w3w2w1w4w2w1w6w5w6w1w2w5w3w6w2w4w1
+        w3s2s5s3s5s1s3w5                w3s5s6s2s2s3s5w2
+        w6d4d3d2d1d3d2w4  t1    t1    t1w6d4d1d3d1d5d3w3
+        (2d3d1d3d3d2d6w1                w2d5d6d5d5d6d4)4
+          (1d2d1d2d2d1)1        gk      (2d1d2d5d5d1)2
+            w5d3d5d3)2                    (1d2d4d6w3
+            w3d5d2w4                        w5d3d1w6
+            w4d2d6w5                        w4d6d4w2
+            w2d6d4w1                        w6d2d2w1
+            w6d1d3w6                        w2d5d1w4
+            w4d3d5w1                        w3d2d4w5
+          /1d1d5d4w3            BB          W2d4d4d3\5
+        /2d1d3d6d2d3\4                    /3d1d6d5d1d6\2
+        w2d6d5d2d4d6d1\3                /4d4d3d2d3d1d4w5
+        w1d1d1d4d2d3d4d5\2            /5d2d1d6d5d6d3d6w1
+        w2d3d4d6d6d1d2d3d4\1        /6d5d6d1d2d3d1d2d1w4
+                                TT                      
+       
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="350" silver="400" gold="450" />
+</level>
