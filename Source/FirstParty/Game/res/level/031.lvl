@@ -1,0 +1,236 @@
+<level>
+	<levelinfo name="Cross Moving">
+		<infoimage scrx="312" scry="561" width="192" height="108" />
+	</levelinfo>
+	<constants solid="0" posx="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		<shapes>
+			<shape name="wallmove" type="polygon">
+				<vertex x="-30" y="-30" />
+				<vertex x="30" y="-30" />
+				<vertex x="30" y="30" />
+				<vertex x="-30" y="30" />
+			</shape>
+		</shapes>
+
+		<physics>
+		<physic name="bothmoving1"> 
+			<body type="kinematic" angle="45"> 
+				<kinematics>
+					<position axis="x"> 
+						<mul> 
+							<sine> 
+								<add> 
+									<static value="180" /> 
+										<mul> 
+											<time /> 
+											<static value="120" /> 
+										</mul> 
+								</add> 
+							</sine> 
+							<static value="70" /> 
+						</mul> 
+					</position>
+					<position axis="y">
+						<mul>
+							<sine>
+								<add>
+									<static value="180" />
+										<mul>
+											<time />
+											<static value="120" />
+										</mul>
+								</add>
+							</sine>
+							<static value="70" /> 
+						</mul>
+					</position>
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="bothmoving2"> 
+			<body type="kinematic" angle="45"> 
+				<kinematics>
+					<position axis="x"> 
+						<mul> 
+							<sine> 
+								<add> 
+									<static value="0" /> 
+										<mul> 
+											<time /> 
+											<static value="120" /> 
+										</mul> 
+								</add> 
+							</sine> 
+							<static value="70" /> 
+						</mul> 
+					</position>
+					<position axis="y">
+						<mul>
+							<sine>
+								<add>
+									<static value="0" />
+										<mul>
+											<time />
+											<static value="120" />
+										</mul>
+								</add>
+							</sine>
+							<static value="70" /> 
+						</mul>
+					</position>
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="bothmoving3"> 
+			<body type="kinematic" angle="45"> 
+				<kinematics>
+					<position axis="x"> 
+						<mul> 
+							<sine> 
+								<add> 
+									<static value="180" /> 
+										<mul> 
+											<time /> 
+											<static value="120" /> 
+										</mul> 
+								</add> 
+							</sine> 
+							<static value="70" /> 
+						</mul> 
+					</position>
+					<position axis="y">
+						<mul>
+							<sine>
+								<add>
+									<static value="0" />
+										<mul>
+											<time />
+											<static value="120" />
+										</mul>
+								</add>
+							</sine>
+							<static value="70" /> 
+						</mul>
+					</position>
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="bothmoving4"> 
+			<body type="kinematic" angle="45"> 
+				<kinematics>
+					<position axis="x"> 
+						<mul> 
+							<sine> 
+								<add> 
+									<static value="0" /> 
+										<mul> 
+											<time /> 
+											<static value="120" /> 
+										</mul> 
+								</add> 
+							</sine> 
+							<static value="70" /> 
+						</mul> 
+					</position>
+					<position axis="y">
+						<mul>
+							<sine>
+								<add>
+									<static value="180" />
+										<mul>
+											<time />
+											<static value="120" />
+										</mul>
+								</add>
+							</sine>
+							<static value="70" /> 
+						</mul>
+					</position>
+				</kinematics> 
+			</body>  
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		</physics>
+		
+		<entities>
+			<entity name="movingwall_2" rep="B1">
+				<physics name="bothmoving1" shape="wallmove" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="metal_01" rotate="true"/>
+				</animations>
+			</entity>
+			<entity name="movingwall_2" rep="B2">
+				<physics name="bothmoving2" shape="wallmove" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="metal_01" rotate="true"/>
+				</animations>
+			</entity>
+			<entity name="movingwall_2" rep="B3">
+				<physics name="bothmoving3" shape="wallmove" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="metal_01" rotate="true"/>
+				</animations>
+			</entity>
+			<entity name="movingwall_2" rep="B4">
+				<physics name="bothmoving4" shape="wallmove" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="metal_01" rotate="true"/>
+				</animations>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="2460" height="1850">
+
+                              /1\2
+                            /1d2d1\1
+                          /4d2)6(6d1\3
+                        /1w3)2    (3d4\1
+                      /2d4)4        (2d6\4                
+                    /3d1)6      t1    (1d3\6                         
+                  /4d4)3                (5d1\6                                        
+                /5d3w1                    (3d1\5
+              /6d5)1(1\1                  /1w1d3\4
+            /5d3)1    (1\1              /1)1  (6d1\3
+          /5d2)4        (1\1  B1    B3/1)1      (4d5\2
+        /4d2)6            (1\1      /1)1          (3d4\1
+        (2d6\4                                    /6d2)2
+          (1d3\6              B4    B2          /2d5)1
+            (5d1\6                            /1w3)2
+              (3d1\5            BB          /2d4)4
+                (2d3\4                    /3d1)6
+                  (6d1\3                /4d4)3
+                    (4d5\2            /5d3)1
+                      (3d4\1        /6d5)1
+                                TT                      
+       
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="100" silver="130" gold="150" />
+</level>
