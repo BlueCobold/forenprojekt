@@ -16,9 +16,19 @@
 				<vertex x="30" y="30" />
 				<vertex x="-30" y="30" />
 			</shape>
+			<shape name="killer" type="polygon">
+				<vertex x="27" y="-15" />
+				<vertex x="57" y="-15" />
+				<vertex x="57" y="15" />
+				<vertex x="27" y="15" />
+			</shape>
 		</shapes>
 
 		<physics>
+		<physic name="walldiagonal1">
+				<body type="static" angle="45" />
+				<fixture density="0.1" friction="0.8" restitution="0.5" />
+			</physic>
 		<physic name="bothmoving1"> 
 			<body type="kinematic" angle="45"> 
 				<kinematics>
@@ -198,6 +208,26 @@
 					<animation spritesheet="walls" sprite="metal_01" rotate="true"/>
 				</animations>
 			</entity>
+			<entity name="killer_on" rep="!1" collides="true">
+				<physics name="walldiagonal1" shape="killer" />
+				<collides>
+					<propertyFilter target="entity">
+						<sub>
+							<mod>
+								<add>
+									<time />
+									<static value="0.75"/>
+								</add>
+								<static value="1.5" />
+							</mod>
+							<static value="0.3" />
+						</sub>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<killBall />
+				</onCollision>
+			</entity>
 		</entities>
 	</templates>
 
@@ -214,7 +244,7 @@
               /6d5)1(1\1                  /1w1d3\4
             /5d3)1    (1\1              /1)1  (6d1\3
           /5d2)4        (1\1  B1    B3/1)1      (4d5\2
-        /4d2)6            (1\1      /1)1          (3d4\1
+        /4d2)6            (1\1  !1  /1)1          (3d4\1
         (2d6\4                                    /6d2)2
           (1d3\6              B4    B2          /2d5)1
             (5d1\6                            /1w3)2
