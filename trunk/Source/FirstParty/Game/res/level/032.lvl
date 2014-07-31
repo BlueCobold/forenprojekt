@@ -1,0 +1,197 @@
+<level>
+	<levelinfo name="Locked">
+		<infoimage scrx="312" scry="561" width="192" height="108" />
+	</levelinfo>
+	<gameplay time="180"/>
+	<constants solid="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		
+		<entities>
+			<entity name="change_wall" rep="x1">
+				<physics name="wall" shape="high_wall" />
+				<sound name="switch" />
+				<onCollision>
+					<changeProperty name="ball:color">
+						<mod>
+							<add>
+								<var name="ball:color" />
+								<static value="1" />
+							</add>
+							<static value="3" />
+						</mod>
+					</changeProperty>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_high_01" rotate="false">
+						<frameindex frames="3">
+							<static value="0"/>
+						</frameindex>
+						<color channel="red">
+							<mul>
+								<add>
+									<static value="1" />
+									<sine>
+										<mul>
+											<static value="150" />
+											<time />
+										</mul>
+									</sine>
+								</add>
+								<static value="0.5" />
+							</mul>
+						</color>
+						<color channel="blue">
+							<mul>
+								<add>
+									<static value="1" />
+									<sine>
+										<mul>
+											<static value="130" />
+											<add>
+												<time />
+												<static value="180" />
+											</add>
+										</mul>
+									</sine>
+								</add>
+								<static value="0.5" />
+							</mul>
+						</color>
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="door_wall" rep="X1" offsetx="30" offsety="30">
+				<physics name="wall" shape="wall" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="1" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false">
+						<frameindex frames="6">
+							<static value="0"/>
+						</frameindex>
+						<color value="80FF80FF" />
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="door_wall2" rep="X2" offsetx="30" offsety="30">
+				<physics name="wall" shape="wall" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="0" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false">
+						<frameindex frames="6">
+							<static value="0"/>
+						</frameindex>
+						<color value="FF8080FF" />
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="door_wall3" rep="X3" offsetx="30" offsety="30">
+				<physics name="wall" shape="wall" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="2" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false">
+						<frameindex frames="4">
+							<static value="0"/>
+						</frameindex>
+						<color value="0000FFFF" />
+					</animation>
+				</animations>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="2460" height="1650">
+                                                                            
+                            /1w1w1w1w1w1w1\1
+                      /1w1w1w1)1        (1w1w1w1\1
+                    /1w1)1                    (1w1\1
+                  /1w1)1                        (1w1\1
+                /1w1)1/1\1                    /1\1(1w1\1
+              /1w1)1/1w1w1\1                /1w1w1\1(1w1\1
+              w1)1  w1    w1                w1    w1  (1w1
+              w1    w1  t1w1                w1  t1w1    w1
+            /1w1    w1X1X1w1                w1X2X2w1    w1\1
+            w1)1    )1    (1      /1\1      )1    (1    (1w1
+            x1                  /1w1w1\1                  x1
+             1                  w1    w1                   1
+            x1                  w1  t1w1                  x1
+             1                  w1X3X3w1                   1
+            w1\1                )1    (1                /1w1
+            (1w1                                        w1)1
+              w1                                        w1
+              w1\1                                    /1w1
+              (1w1\1                                /1w1)1
+                (1w1\1              BB            /1w1)1
+                  (1w1\1                        /1w1)1
+                    (1w1\1                    /1w1)1
+                      (1w1\1                /1w1)1
+                          (1\1            /1)1                    
+                            (1\1        /1)1
+                                    TT
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="350" silver="400" gold="450" />
+</level>
