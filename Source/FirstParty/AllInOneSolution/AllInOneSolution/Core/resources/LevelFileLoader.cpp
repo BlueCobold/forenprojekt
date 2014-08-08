@@ -226,6 +226,9 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         horizontal = std::string("vertical") != xml->Attribute("alignment");
     
     std::unique_ptr<Animation> anim(new Animation(nullptr, frames, width, height, rotate, origin, offset, horizontal));
+    if(handler == nullptr)
+        handler = anim.get();
+
     if(auto stencil = xml->FirstChildElement("stencil"))
     {
         if(auto op = stencil->Attribute("op"))

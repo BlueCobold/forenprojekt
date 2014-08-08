@@ -7,6 +7,7 @@
 #include <cmath>
 
 bool Animation::_renderStencilEffects = true;
+std::list<Animation*> Animation::_stencilAnimations;
 
 Animation::Animation(std::unique_ptr<ValueProvider> provider,
     const unsigned int frames,
@@ -31,7 +32,9 @@ Animation::Animation(std::unique_ptr<ValueProvider> provider,
 }
 
 Animation::~Animation()
-{ }
+{
+    _stencilAnimations.remove(this);
+}
 
 void Animation::update()
 {
@@ -274,6 +277,28 @@ void Animation::applyRotation(bool apply)
 {
     m_applyRotation = apply;
 }
+
+void Animation::enableStencilEffects(bool enable)
+{
+    _renderStencilEffects = enable;
+    if(enable)
+    {
+        for(auto it = begin(_stencilAnimations); it != end(_stencilAnimations); ++it)
+            (*it)->update();
+    }
+}
+
+bool Animation::usesStencilEffects()
+{
+    return _renderStencilEffects;
+}
+
+void Animation::setStencilInfo(StencilInfo info)
+{
+    m_stencil = info;
+    _stencilAnimations.remove(this);
+    _stencilAnimations.push_back(this);
+};
 
 void Animation::StencilInfo::enable()
 {

@@ -9,7 +9,9 @@
 #include "../rendering/Drawable.hpp"
 
 #include <array>
+#include <list>
 #include <memory> // unique_ptr
+#include <vector>
 
 #include "VariableHolder.hpp"
 
@@ -59,7 +61,7 @@ public:
     void update();
     void reset();
 
-    void setStencilInfo(StencilInfo info){ m_stencil = info; };
+    void setStencilInfo(StencilInfo info);
 
     void setPosition(const float x, const float y);
     void setRotation(const float radians);
@@ -85,8 +87,8 @@ public:
 
     virtual Animation* clone() const override;
 
-    static void enableStencilEffects(bool enable) { _renderStencilEffects = enable; }
-    static bool usesStencilEffects() { return _renderStencilEffects; }
+    static void enableStencilEffects(bool enable);
+    static bool usesStencilEffects();
 
 private:
 
@@ -96,6 +98,7 @@ private:
     };
 
     static bool _renderStencilEffects;
+    static std::list<Animation*> _stencilAnimations;
 
     void updatePosition();
     const sf::IntRect Animation::getTextureRect() const;
