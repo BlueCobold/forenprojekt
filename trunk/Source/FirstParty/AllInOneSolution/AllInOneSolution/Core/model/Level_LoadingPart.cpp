@@ -151,7 +151,7 @@ void Level::parseObjects(
                 parallax->FloatAttribute("height"))));
             for(auto anim = parallax->FirstChildElement("animation"); anim != nullptr;
                 anim = anim->NextSiblingElement("animation"))
-                layer->bindAnimation(std::move(LevelFileLoader::parseAnimation(anim, layer.get(), layer.get(), m_resourceManager, &templates.functions)));
+                layer->bindAnimation(std::move(LevelFileLoader::parseAnimation(anim, layer.get(), nullptr, m_resourceManager, &templates.functions)));
             background->bindLayer(std::move(layer));
         }
         m_background = std::move(background);
