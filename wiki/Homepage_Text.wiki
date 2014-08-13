@@ -1,5 +1,5 @@
+#summary HP Text in german
 #labels HPText
-#HP Text in german
 
 Spiel:
 
