@@ -2,7 +2,7 @@
 
 Spiel:
 
-Rickety Racquet ist ein 2D Geschiklichkeitsspiel. In diesem Spiel Kontrollierst du mit der Maus
+Rickety Racquet ist ein 2D Geschiklichkeitsspiel. In diesem Spiel kontrollierst du mit der Maus
 eine oder mehrer Wippen. Mit den Wippen kann ein Ball geschlagen werden, um damit ein Ziele
 zu treffen. Ist ein Level erfolgreich abgschlossen, kann der nächste Level gespielt werden. Das
 Geld, welches pro Level erwirtschafftet wird, kann dazu genutzt werden sich Hilfsmittel zu kaufen
