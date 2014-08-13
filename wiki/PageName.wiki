@@ -17,7 +17,7 @@ Level:
 Modes:
 
 In Rickety Racquet hast du die Möglichkeit einen Level in zwei Verschiedenen Modies zu spielen.
-Der Normale Modus kann immer gespielt werden, der Timeattackmode kann nur gespielt werden wenn
+Der normale Modus kann immer gespielt werden, der Timeattackmode kann nur gespielt werden, wenn
 der Level im Normalmodus durchgespielt wurde. Im Timeattackmode erscheinen die Ziele nach einpaar
 sekunden wieder und du hast nur 2 Minuten Zeit soviele Ziele wie möglich zutreffen.
 
