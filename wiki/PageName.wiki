@@ -1,0 +1,34 @@
+#Text for HP in german
+
+Spiel:
+
+Rickety Racquet ist ein 2D Geschiklichkeitsspiel. In diesem Spiel Kontrollierst du mit der Maus
+eine oder mehrer Wippen. Mit den Wippen kann ein Ball geschlagen werden, um damit ein Ziele
+zu treffen. Ist ein Level erfolgreich abgschlossen, kann der nächste Level gespielt werden. Das
+Geld, welches pro Level erwirtschafftet wird, kann dazu genutzt werden sich Hilfsmittel zu kaufen
+und so einfacher ein Level erfolgreich zu beenden. 
+
+
+Feature:
+Level:
+
+
+
+Modes:
+
+In Rickety Racquet hast du die Möglichkeit einen Level in zwei Verschiedenen Modies zu spielen.
+Der Normale Modus kann immer gespielt werden, der Timeattackmode kann nur gespielt werden wenn
+der Level im Normalmodus durchgespielt wurde. Im Timeattackmode erscheinen die Ziele nach einpaar
+sekunden wieder und du hast nur 2 Minuten Zeit soviele Ziele wie möglich zutreffen.
+
+Projekt RR:
+
+Das Projekt Rickety Racquet wurde im Oktober 2012 ins Lebengerufen, von Forenmitglieder des Forums
+www.spieleprogrammierer.de. Insgesammt waren XX Personen beteiligt. Leider sind schon sehr
+früh viele Teammitglieder inaktiv geworden, wodurch ein sehr großer Teil der Arbeit von 2 Leuten
+gestämmt wurde. Das hat dem Projket aber nicht geschadet, es ging nur etwas langsamer voran.
+
+Programmiert wurde das Spiel in C++ und um nicht komplett bei Null zu beginnen wurde auf die SFML
+und Box2D Bibliotheken zurückgegriffen. Als IDE wurde VC 2010 genutz, um den Vielen Code auch im
+griff zu haben wird dieser mit SVN Verwaltet. Damit die Programmierer oder Grafiker auch wissen 
+was an arbeit ansteht wurden die Aufgaben mit Pivotal Tracker Verwaltet.
