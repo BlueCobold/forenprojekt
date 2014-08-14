@@ -30,6 +30,6 @@ früh viele Teammitglieder inaktiv geworden, wodurch ein sehr großer Teil der A
 gestämmt wurde. Das hat dem Projket aber nicht geschadet, es ging nur etwas langsamer voran.
 
 Programmiert wurde das Spiel in C++ und um nicht komplett bei Null zu beginnen wurde auf die SFML, TinyXML
-und Box2D Bibliotheken zurückgegriffen. Als IDE wurde VC 2010 genutz, um den Vielen Code auch im
+und Box2D Bibliotheken zurückgegriffen. Als IDE wurde VC 2010 genutz, um den vielen Code auch im
 griff zu haben wird dieser mit SVN Verwaltet. Damit die Programmierer oder Grafiker auch wissen 
 was an arbeit ansteht wurden die Aufgaben mit Pivotal Tracker Verwaltet.
