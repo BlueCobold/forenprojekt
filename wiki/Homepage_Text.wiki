@@ -12,11 +12,22 @@ und so einfacher ein Level erfolgreich zu beenden.
 
 Feature:
 
+-Individuelle Einstellbar Mausteuerung
+-Fenstergröße Einstellbar
+-Lautstäreke Einstellbar
+-Wechseln auf Vollbild
+-Online Highscore
+-Shop System:
 Um das durchspielen eines Level zu erleichtern kannst du dir im Shop kleine Helfer Kaufen. Ein Helfer macht den Ball für 3 sec. unzerstörbar, ein andere Helfer gibt dir ein zusätzlichen Ball oder zusätzliche Zeit.
 
 Level:
 
-
+-In den meist kleinen Leveln wird dein Geschicklichkeit und Treffsicherheit auf die Probe gestellt. 
+-Nutze die doppelte Schwerkraft um mehr Punkte zu erreichen.
+-Schlage den Ball so kräftig wie du kannst und erhöhe damit deine erzielten Punkte.
+-Doch sieh dich vor dabei, dass der Ball nicht Zerstört wird oder er aus dem Level fliegt.
+-Achte auch immer auf ein eventuelles Zeitlimit
+-Erreiche so viele Punkte wie möglich im TimeAttackMode
 
 Modes:
 
