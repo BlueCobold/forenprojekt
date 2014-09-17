@@ -11,6 +11,9 @@ und so einfacher ein Level erfolgreich zu beenden.
 
 
 Feature:
+
+Um das durchspielen eines Level zu erleichtern kannst du dir im Shop kleine Helfer Kaufen. Ein Helfer macht den Ball für 3 sec. unzerstörbar, ein andere Helfer gibt dir ein zusätzlichen Ball oder zusätzliche Zeit.
+
 Level:
 
 
