@@ -39,7 +39,7 @@
 									<static value="180" /> 
 										<mul> 
 											<time /> 
-											<static value="120" /> 
+											<static value="60" /> 
 										</mul> 
 								</add> 
 							</sine> 
@@ -53,7 +53,7 @@
 									<static value="180" />
 										<mul>
 											<time />
-											<static value="120" />
+											<static value="60" />
 										</mul>
 								</add>
 							</sine>
@@ -74,7 +74,7 @@
 									<static value="0" /> 
 										<mul> 
 											<time /> 
-											<static value="120" /> 
+											<static value="60" /> 
 										</mul> 
 								</add> 
 							</sine> 
@@ -88,7 +88,7 @@
 									<static value="0" />
 										<mul>
 											<time />
-											<static value="120" />
+											<static value="60" />
 										</mul>
 								</add>
 							</sine>
@@ -109,7 +109,7 @@
 									<static value="180" /> 
 										<mul> 
 											<time /> 
-											<static value="120" /> 
+											<static value="60" /> 
 										</mul> 
 								</add> 
 							</sine> 
@@ -123,7 +123,7 @@
 									<static value="0" />
 										<mul>
 											<time />
-											<static value="120" />
+											<static value="60" />
 										</mul>
 								</add>
 							</sine>
@@ -144,7 +144,7 @@
 									<static value="0" /> 
 										<mul> 
 											<time /> 
-											<static value="120" /> 
+											<static value="60" /> 
 										</mul> 
 								</add> 
 							</sine> 
@@ -158,7 +158,7 @@
 									<static value="180" />
 										<mul>
 											<time />
-											<static value="120" />
+											<static value="60" />
 										</mul>
 								</add>
 							</sine>
@@ -216,7 +216,7 @@
 							<mod>
 								<add>
 									<time />
-									<static value="0.75"/>
+									<static value="0.375"/>
 								</add>
 								<static value="1.5" />
 							</mod>
