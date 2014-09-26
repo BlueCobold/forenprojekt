@@ -98,7 +98,6 @@ void App::update()
     handleKeyboard();
 
     m_resourceManager.getSoundManager().update();
-    m_stateManager.passEvent(m_event.m_eventType);
     m_stateManager.update();
 
     utility::Mouse.capture();
@@ -140,7 +139,12 @@ void App::handleKeyboard()
     }
     // Q = will minimize the game to the task bar and pause an eventually running level.
     if(utility::Keyboard.isKeyReleased(sf::Keyboard::Q))
+    {
         minimize();
+        // notify the state manager to pause all states and prevent messing arround with
+        // keyboard or mouse (PlayState for example) - waiting for FocusLost would be too late
+        m_stateManager.passEvent(utility::Event::LostFocus);
+    }
 }
 
 void App::handleEvents()
@@ -165,11 +169,6 @@ void App::handleEvents()
             m_focus = true;
             if(m_isMinimized)
                 restore();
-            // BUG: The event will not forward in Update-Methode
-            // so no Gain Focus will arrive StateManager
-            // just in case you minimize and restore the the window
-            // restore can happen with Alt+Tap or click on taskbar icon
-            // the result is the same.
         }
         else if(event.type == sf::Event::Resized)
         {
@@ -182,6 +181,8 @@ void App::handleEvents()
             utility::Keyboard.notifyKeyReleased(event.key.code);
         else if(event.type == sf::Event::MouseWheelMoved)
             utility::Mouse.notifyWheelMoved(event.mouseWheel.delta);
+
+        m_stateManager.passEvent(m_event.m_eventType);
     }
 }
 
@@ -262,26 +263,12 @@ void App::adjustVideoMode(sf::VideoMode& mode)
 }
 void App::minimize()
 {
-    // This line is required because m_fullscreen will not 
-    // changed when setup to fullscreen in optionmenu.
-    m_fullscreen = m_config.get<bool>("IsFullScreen");
-
-    if(m_fullscreen)
-    {
-        m_fullscreen = !m_fullscreen;
-        switchDisplayMode();
-    }
     m_isMinimized = true;
     ShowWindow(m_screen.getSystemHandle(), SW_MINIMIZE);
 }
 
 void App::restore()
 {
-    if(m_config.get<bool>("IsFullScreen"))
-    {
-        m_fullscreen = !m_fullscreen;
-        switchDisplayMode();
-    }
     m_isMinimized = false;
     ShowWindow(m_screen.getSystemHandle(), SW_RESTORE);
 }
