@@ -100,7 +100,8 @@ void App::update()
     m_resourceManager.getSoundManager().update();
     m_stateManager.update();
 
-    utility::Mouse.capture();
+    if(!m_isMinimized)
+        utility::Mouse.capture();
     m_cursor->update();
 }
 
@@ -264,11 +265,21 @@ void App::adjustVideoMode(sf::VideoMode& mode)
 void App::minimize()
 {
     m_isMinimized = true;
+    if(m_config.get<int>("IsFullScreen"))
+        m_screen.create(sf::VideoMode::getDesktopMode(), m_windowTitle, sf::Style::Default);
     ShowWindow(m_screen.getSystemHandle(), SW_MINIMIZE);
+    
 }
 
 void App::restore()
 {
     m_isMinimized = false;
+    if(m_config.get<int>("IsFullScreen"))
+    {
+        m_screen.create(sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY")), m_windowTitle, sf::Style::Fullscreen);
+        m_screen.setMouseCursorVisible(false);
+        m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
+        m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
+    }
     ShowWindow(m_screen.getSystemHandle(), SW_RESTORE);
 }
