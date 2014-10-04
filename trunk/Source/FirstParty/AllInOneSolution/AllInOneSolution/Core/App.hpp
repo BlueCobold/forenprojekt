@@ -16,7 +16,7 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/Graphics/Image.hpp>
-#include "gui\ErrorMessageBox.hpp"
+#include "gui/ErrorMessageBox.hpp"
 #include <string>
 
 class AppConfig;
