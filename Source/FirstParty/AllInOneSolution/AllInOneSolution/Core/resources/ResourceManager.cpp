@@ -25,6 +25,7 @@ ResourceManager::ResourceManager()
     parseBitmapFonts(doc);
     parseMenus(doc);
     parseSpriteSheet(doc);
+    parseLevelFileName(doc);
 }
 
 BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
@@ -234,4 +235,22 @@ SpriteSheet* ResourceManager::getSpriteSheet(const std::string& key)
     }
 
     throw std::runtime_error(utility::replace(utility::translateKey("UnknownSpriteSheet"), key));
+}
+
+void ResourceManager::parseLevelFileName(tinyxml2::XMLDocument& doc)
+{
+    if(auto lefelfile = doc.FirstChildElement("Levels"))
+    {
+        for(auto it = lefelfile->FirstChildElement("Level");
+            it != nullptr; it = it->NextSiblingElement("Level"))
+        {
+            m_levelFileNames.insert(std::make_pair<int, std::string>(it->IntAttribute("number"),
+                                                                    std::string(it->Attribute("filename"))));
+        }
+    }
+}
+
+const std::unordered_map<int, std::string>& ResourceManager::getFileNames()
+{
+    return m_levelFileNames;
 }

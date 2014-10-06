@@ -21,6 +21,10 @@ LevelSelectState::LevelSelectState(sf::RenderWindow& screen,
     if(captionName != end(m_levelNames))
         m_menu.setCaption(captionName->second);
 
+    auto texturRect = m_textureCoordinates.find(1);
+    if(texturRect != end(m_textureCoordinates))
+        m_menu.setLevelTextureRect(m_textureCoordinates.find(m_currentLevelNumber)->second);
+
     updateRightButton();
 
     m_menu.hideLeftButton(true);
@@ -118,16 +122,11 @@ void LevelSelectState::loadLevelInfos()
 {
     tinyxml2::XMLDocument doc;
     std::string file = "";
-    for(int i = 1; i < 100; ++i)
-    {
-        if(i < 10)
-            file = "res/level/00" + utility::toString(i) + ".lvl";
-        else if (i > 9 && i < 100)
-            file = "res/level/0" + utility::toString(i) + ".lvl";
+    std::unordered_map<int, std::string> fileNames = State::getResourceManager().getFileNames();
 
-        std::ifstream fileTest(file); 
-        if(!fileTest)
-            break;
+    for(auto it = std::begin(fileNames); it != std::end(fileNames); ++it)
+    {
+        file = "res/level/" + it->second;
 
         doc.LoadFile(file.c_str());
         if(doc.Error()) // Error while loading file
@@ -145,8 +144,8 @@ void LevelSelectState::loadLevelInfos()
                                 levelinfo->FirstChildElement("infoimage")->IntAttribute("scry"),
                                 levelinfo->FirstChildElement("infoimage")->IntAttribute("width"),
                                 levelinfo->FirstChildElement("infoimage")->IntAttribute("height"));
-        m_levelNames[i] = name;
-        m_textureCoordinates[i] = textureRect;
+        m_levelNames[it->first] = name;
+        m_textureCoordinates[it->first] = textureRect;
     }
 }
 
