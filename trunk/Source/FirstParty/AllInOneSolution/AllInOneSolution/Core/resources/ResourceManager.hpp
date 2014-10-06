@@ -38,6 +38,7 @@ public:
     MenuTemplate* getMenuTemplate(const std::string& name);
     SoundManager& getSoundManager();
     SpriteSheet* getSpriteSheet(const std::string& name);
+    const std::unordered_map<int, std::string>& getFileNames();
 
 private:
 
@@ -47,6 +48,7 @@ private:
     void parseBitmapFonts(tinyxml2::XMLDocument& doc);
     void parseMenus(tinyxml2::XMLDocument& doc);
     void parseSpriteSheet(tinyxml2::XMLDocument& doc);
+    void parseLevelFileName(tinyxml2::XMLDocument& doc);
 
     static sf::Texture* loadTexture(const std::string& path, bool smooth)
     {
@@ -120,6 +122,7 @@ private:
     std::unordered_map<std::string, std::string> m_bitmapFontKeys;
     std::unordered_map<std::string, std::string> m_menuKeys;
     std::unordered_map<std::string, std::string> m_spriteSheetKeys;
+    std::unordered_map<int, std::string> m_levelFileNames;
 
     std::unique_ptr<SoundManager> m_soundManager;
     ResourceCache<sf::Texture> m_textures;

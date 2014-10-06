@@ -485,12 +485,8 @@ const std::string Level::pathname() const
 const std::string Level::filename()
 {
     std::string filename = pathname();
-    if(m_number < 10)
-        filename.append("00" + utility::toString(m_number) + ".lvl");
-    else if(m_number < 100)
-        filename.append("0" + utility::toString(m_number) + ".lvl");
-    else
-        filename.append(utility::toString(m_number) + ".lvl");
+
+    filename.append(m_resourceManager.getFileNames().find(m_number)->second);
 
     return filename;
 }
