@@ -172,6 +172,121 @@
 				<physics name="wall" shape="right_lower" />
 			</entity>
 
+			<entity name="gras_half_left" rep="ga" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_half_left" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="gras_half_right" rep="gb" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_half_right" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="gras_left" rep="gc" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_left" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="gras_middle_left" rep="gd" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_middle_left" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="gras_middle_right" rep="ge" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_middle_right" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="gras_right" rep="gf" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_right" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="gras_half_left_45" rep="gg" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_half_left_45" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="gras_half_right_45" rep="gh" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_half_right_45" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="gras_left_45" rep="gi" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_left_45" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="gras_middle_left_45" rep="gj" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_middle_left_45" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="gras_middle_right_45" rep="gk" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_middle_right_45" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="gras_right_45" rep="gl" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_right_45" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="gras_half_left_45_mirror" rep="gm" z="-1" offsetx="60">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_half_left_45" rotate="false">
+						<scale axis="x">
+							<static value="-1" />
+						</scale>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="gras_half_right_45_mirror" rep="gn" z="-1" offsetx="60">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_half_right_45" rotate="false">
+						<scale axis="x">
+							<static value="-1" />
+						</scale>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="gras_left_45_mirror" rep="go" z="-1" offsetx="60">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_left_45" rotate="false">
+						<scale axis="x">
+							<static value="-1" />
+						</scale>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="gras_middle_left_45_mirror" rep="gp" z="-1" offsetx="60">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_middle_left_45" rotate="false">
+						<scale axis="x">
+							<static value="-1" />
+						</scale>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="gras_middle_right_45_mirror" rep="gq" z="-1" offsetx="60">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_middle_right_45" rotate="false">
+						<scale axis="x">
+							<static value="-1" />
+						</scale>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="gras_right_45_mirror" rep="gr" z="-1" offsetx="60">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_right_45" rotate="false">
+						<scale axis="x">
+							<static value="-1" />
+						</scale>
+					</animation>
+				</animations>
+			</entity>
+			
 			<entity base="small_quad" name="wall_1" rep="w1">
 				<animations>
 					<animation spritesheet="walls" sprite="sand_01" rotate="false"/>
