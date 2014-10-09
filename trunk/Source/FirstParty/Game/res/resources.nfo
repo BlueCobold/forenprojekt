@@ -54,6 +54,7 @@
 	<menu name="CoinShopMenu" path="CoinMenu.xml" />
 	<menu name="HighScoreMenu" path="HighScoreMenu.xml" />
 	<menu name="NewHighScoreMenu" path="NewHighScoreMenu.xml" />
+	<menu name="GameFinishedMenu" path="GameFinishedMenu.xml" />
 </menus>
 <bitmapfonts>
 	<bitmapfont name="gold" path="bitmapfontGold.xml" />
@@ -74,36 +75,16 @@
 	<spritesheet name="gui_elements" path="gui/gui_elements.xml" />
 </spritesheets>
 <Levels>
-	<Level number="7" filename="001.lvl" />
+	<Level number="1" filename="001.lvl" />
 	<Level number="2" filename="002.lvl" />
-	<Level number="3" filename="003.lvl" />
-	<Level number="4" filename="004.lvl" />
-	<Level number="5" filename="005.lvl" />
-	<Level number="6" filename="006.lvl" />
-	<Level number="1" filename="007.lvl" />
-	<Level number="8" filename="008.lvl" />
-	<Level number="9" filename="009.lvl" />
-	<Level number="10" filename="010.lvl" />
-	<Level number="11" filename="011.lvl" />
-	<Level number="12" filename="012.lvl" />
-	<Level number="13" filename="013.lvl" />
-	<Level number="14" filename="014.lvl" />
-	<Level number="15" filename="015.lvl" />
-	<Level number="16" filename="016.lvl" />
-	<Level number="17" filename="017.lvl" />
-	<Level number="18" filename="018.lvl" />
-	<Level number="19" filename="019.lvl" />
-	<Level number="20" filename="020.lvl" />
-	<Level number="21" filename="021.lvl" />
-	<Level number="22" filename="022.lvl" />
-	<Level number="23" filename="023.lvl" />
-	<Level number="24" filename="024.lvl" />
-	<Level number="25" filename="025.lvl" />
-	<Level number="26" filename="026.lvl" />
-	<Level number="27" filename="027.lvl" />
-	<Level number="28" filename="028.lvl" />
-	<Level number="29" filename="029.lvl" />
-	<Level number="30" filename="030.lvl" />
-	<Level number="31" filename="031.lvl" />
-	<Level number="32" filename="032.lvl" />
+	<Level number="3" filename="004.lvl" />
+	<Level number="4" filename="007.lvl" />
+	<Level number="5" filename="008.lvl" />
+	<Level number="6" filename="011.lvl" />
+	<Level number="7" filename="017.lvl" />
+	<Level number="8" filename="019.lvl" />
+	<Level number="9" filename="020.lvl" />
+	<Level number="10" filename="021.lvl" />
+	<Level number="11" filename="024.lvl" />
+	<Level number="12" filename="025.lvl" />
 </Levels>

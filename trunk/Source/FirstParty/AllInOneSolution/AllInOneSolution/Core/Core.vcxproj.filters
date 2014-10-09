@@ -316,6 +316,12 @@
     <ClCompile Include="model\SoundTrigger.cpp">
       <Filter>Sources\model</Filter>
     </ClCompile>
+    <ClCompile Include="State\GameFinishedState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\GameFinishedMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -845,6 +851,12 @@
     </ClInclude>
     <ClInclude Include="gui\ErrorMessageBox.hpp">
       <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="State\GameFinishedState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\GameFinishedMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -68,7 +68,7 @@ StateChangeInformation LevelPassState::update(const float time)
     m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
     m_menu.getButton(ReplayMenu::BUTTON_PLAY_NEXT).setVisible(m_playStateInfo.m_levelNumber < m_config.get<int>("UnlockedLevel") &&
-                                                              static_cast<unsigned int>(m_playStateInfo.m_levelNumber) < State::getResourceManager().getFileNames().size());
+                                                              static_cast<unsigned int>(m_playStateInfo.m_levelNumber) <= State::getResourceManager().getFileNames().size());
 
     int clicked = -1;
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
@@ -88,11 +88,17 @@ StateChangeInformation LevelPassState::update(const float time)
     {
         m_stateInfo.m_level = nullptr;
         m_stateInfo.m_prepareOnly = false;
-        m_stateInfo.m_levelNumber = m_playStateInfo.m_levelNumber + 1;
-        m_transitionStateInfo.m_followingState = LoadLevelStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelPassStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
+        if(static_cast<unsigned int>(m_playStateInfo.m_levelNumber) < State::getResourceManager().getFileNames().size())
+        {
+            m_stateInfo.m_levelNumber = m_playStateInfo.m_levelNumber + 1;
+            m_transitionStateInfo.m_followingState = LoadLevelStateId;
+        }
+        else
+            m_transitionStateInfo.m_followingState = GameFinishedStateId;
+ 
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == ReplayMenu::BUTTON_MAIN_MENU)
