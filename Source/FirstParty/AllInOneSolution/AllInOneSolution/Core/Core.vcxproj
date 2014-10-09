@@ -105,6 +105,7 @@
     <ClCompile Include="gui\CoinShopMenu.cpp" />
     <ClCompile Include="gui\CreditMenu.cpp" />
     <ClCompile Include="gui\Cursor.cpp" />
+    <ClCompile Include="gui\GameFinishedMenu.cpp" />
     <ClCompile Include="gui\HighScoreMenue.cpp" />
     <ClCompile Include="gui\hud\ArrowHUD.cpp" />
     <ClCompile Include="gui\hud\BallHUD.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="ScrollView.cpp" />
     <ClCompile Include="State\CoinShopState.cpp" />
     <ClCompile Include="State\CreditMenuState.cpp" />
+    <ClCompile Include="State\GameFinishedState.cpp" />
     <ClCompile Include="State\HighScoreState.cpp" />
     <ClCompile Include="State\LevelFailState.cpp" />
     <ClCompile Include="State\LevelPassState.cpp" />
@@ -250,6 +252,7 @@
     <ClInclude Include="gui\CheckboxStyle.hpp" />
     <ClInclude Include="gui\CoinShopMenu.hpp" />
     <ClInclude Include="gui\CreditMenu.hpp" />
+    <ClInclude Include="gui\GameFinishedMenu.hpp" />
     <ClInclude Include="gui\HighScoreMenu.hpp" />
     <ClInclude Include="gui\hud\ArrowHUD.hpp" />
     <ClInclude Include="gui\hud\BallHUD.hpp" />
@@ -358,6 +361,7 @@
     <ClInclude Include="ScrollView.hpp" />
     <ClInclude Include="State\CreditMenuState.hpp" />
     <ClInclude Include="State\EnterStateInformation.hpp" />
+    <ClInclude Include="State\GameFinishedState.hpp" />
     <ClInclude Include="State\HighScoreState.hpp" />
     <ClInclude Include="State\LevelFailState.hpp" />
     <ClInclude Include="State\LevelPassState.hpp" />
