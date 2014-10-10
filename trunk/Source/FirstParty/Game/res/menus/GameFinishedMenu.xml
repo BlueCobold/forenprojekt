@@ -1,0 +1,14 @@
+<menu>
+	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
+	<caption font="gui_large" text="gui_credit" offsetx="0" offsety="50" />
+	<styles source="Styles.inc"/>
+	<elements>
+		<button id="0" text="gui_close" style="default" x="261" y="270" />
+		<image id="1" texture="GuiElements" x="124" y="-67" scrx="704" scry="150" width="258" height="107"/>
+		<label text="betafinished1" font="buttonHoverFont" alignment="1" x="255" y="70" />
+		<label text="betafinished2" font="buttonHoverFont" alignment="1" x="255" y="100" />
+		<label text="betafinished3" font="buttonHoverFont" alignment="1" x="255" y="130" />
+		<label text="betafinished4" font="buttonHoverFont" alignment="1" x="255" y="160" />
+		<label text="betafinished5" font="buttonHoverFont" alignment="1" x="255" y="190" />
+	</elements>
+</menu>
