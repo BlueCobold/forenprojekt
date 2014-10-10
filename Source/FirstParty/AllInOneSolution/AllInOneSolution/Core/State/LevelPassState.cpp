@@ -19,7 +19,8 @@ LevelPassState::LevelPassState(sf::RenderWindow& screen,
     m_background(nullptr),
     m_menu(sf::Vector2f(0, 0), screen, resourceManager),
     m_HUD(resourceManager, config),
-    m_replay(false)
+    m_replay(false),
+    m_gotCoins(false)
 {
 }
 
@@ -46,11 +47,13 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
                                         utility::toString(m_level->getMedal(Level::Silver))), // second replace 
                                         utility::toString(m_level->getMedal(Level::Bronze))); // third replace
     m_menu.setMedalToolTipText(text);
-    if(!enterInformation->m_prepareOnly && m_level->getPoints() > 0)
+    if(!enterInformation->m_prepareOnly && m_level->getPoints() > 0 && !m_gotCoins)
     {
         m_config.set<int>("coins", m_config.get<int>("coins") + m_level->getPoints());
         if(m_level->number() == m_config.get<int>("UnlockedLevel"))
             m_config.set<int>("UnlockedLevel", m_level->number() + 1);
+
+        m_gotCoins = true;
     }
 
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
@@ -76,6 +79,7 @@ StateChangeInformation LevelPassState::update(const float time)
 
     if(clicked == ReplayMenu::BUTTON_PLAY_AGAIN)
     {
+        m_gotCoins = false;
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = m_level;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
@@ -86,6 +90,7 @@ StateChangeInformation LevelPassState::update(const float time)
     }
     else if(clicked == ReplayMenu::BUTTON_PLAY_NEXT)
     {
+        m_gotCoins = false;
         m_stateInfo.m_level = nullptr;
         m_stateInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_comeFromeState = LevelPassStateId;
@@ -103,6 +108,7 @@ StateChangeInformation LevelPassState::update(const float time)
     }
     else if(clicked == ReplayMenu::BUTTON_MAIN_MENU)
     {
+        m_gotCoins = false;
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = nullptr;
         m_transitionStateInfo.m_followingState = MainMenuStateId;

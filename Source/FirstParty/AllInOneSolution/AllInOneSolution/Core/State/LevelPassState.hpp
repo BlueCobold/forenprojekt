@@ -37,6 +37,7 @@ private:
     HUD m_HUD;
     ReplayMenu m_menu;
     bool m_replay;
+    bool m_gotCoins;
 
     EnterStateInformation m_stateInfo;
     EnterPlayStateInformation m_playStateInfo;
