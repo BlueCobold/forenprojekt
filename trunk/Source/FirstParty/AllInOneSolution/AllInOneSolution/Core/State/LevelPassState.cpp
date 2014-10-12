@@ -38,7 +38,6 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
     m_HUD.restartAt(getPassedTime());
     m_HUD.onEnter(m_level);
 
-    m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
     m_menu.setPoints(m_level->getPoints());
     m_menu.setGrade(m_level->getMedal());
     m_menu.setLostBalls(m_level->getLostBalls());
@@ -57,6 +56,8 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
     }
 
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
+
+    m_menu.updateLayout();
 }
 
 StateChangeInformation LevelPassState::update(const float time)
@@ -67,8 +68,6 @@ StateChangeInformation LevelPassState::update(const float time)
     updateTime(time);
 
     m_HUD.update(m_level, getPassedTime());
-
-    m_menu.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_menu.getSize().x / 2.f, m_screen.getSize().y / 2.f - m_menu.getSize().y / 2.f));
 
     m_menu.getButton(ReplayMenu::BUTTON_PLAY_NEXT).setVisible(m_playStateInfo.m_levelNumber < m_config.get<int>("UnlockedLevel") &&
                                                               static_cast<unsigned int>(m_playStateInfo.m_levelNumber) <= State::getResourceManager().getFileNames().size());
