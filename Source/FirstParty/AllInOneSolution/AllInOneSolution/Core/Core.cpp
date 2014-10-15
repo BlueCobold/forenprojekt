@@ -3,12 +3,7 @@
 #include "gui/ErrorMessageBox.hpp"
 #include <iostream>
 
-#ifdef _DEBUG
-    int main(int argc, char* argv[])
-#else
-    #include <Windows.h>
-    int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine, int iCmdShow)
-#endif
+int main(int argc, char* argv[])
 {
     try
     {
