@@ -286,6 +286,12 @@
 					</animation>
 				</animations>
 			</entity>
+			<entity name="gras_one_tile" rep="gs" z="-1">
+				<animations>
+					<animation spritesheet="walls" sprite="gras_left"  x="-30" rotate="false"/>
+					<animation spritesheet="walls" sprite="gras_right" x="30"rotate="false"/>
+				</animations>
+			</entity>
 			
 			<entity base="small_quad" name="wall_1" rep="w1">
 				<animations>
