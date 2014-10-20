@@ -8,7 +8,6 @@
 		<button id="1" text="gui_option" style="default" x="261" y="220" />
 		<button id="3" text="gui_mainmenu" style="default" x="261" y="275" />
 		<button id="4" text="" style="coins" x="115" y="-7" tooltip="default" tooltiptext="tooltip_coins"/>
-		<image id="-1" texture="GuiElements" x="60" y="-21" scrx="230" scry="484" width="116" height="61"/>
-		
+		<image id="-1" x="60" y="-21"  spriteSheet="gui_elements" sprite="coins"/>
 	</elements>
 </menu>

@@ -18,9 +18,16 @@ public:
     virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
 
 private:
+
+    struct PreviewInfo
+    {
+        sf::Texture* texture;
+        sf::IntRect rect;
+    };
+
     LevelSelectMenu m_menu;
     std::map<int, std::string> m_levelNames;
-    std::map<int, sf::IntRect> m_textureCoordinates;
+    std::map<int, PreviewInfo> m_textureCoordinates;
     int m_currentLevelNumber;
     int m_unlockedLevel;
 

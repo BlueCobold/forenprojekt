@@ -14,12 +14,19 @@ namespace tinyxml2
 class SpriteSheet
 {
 public:
-    struct SpriteData {int x;
-                       int y;
-                       int width;
-                       int height;
-                       float originX;
-                       float originY;};
+    struct SpriteData
+    {
+        int x;
+        int y;
+        int width;
+        int height;
+        float originX;
+        float originY;
+
+        SpriteData() : x(0), y(0), width(0), height(0), originX(0), originY(0)
+        { }
+    };
+
 private:
     std::unordered_map<std::string, SpriteData> m_spriteKeys;
     std::string m_textureName;

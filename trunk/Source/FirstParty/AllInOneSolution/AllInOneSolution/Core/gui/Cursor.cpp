@@ -1,17 +1,16 @@
 #include "Cursor.hpp"
 #include "../Input.hpp"
 
-const std::string Cursor::TEXTURE_NAME = "GuiElements";
-const int Cursor::SPRITE_POSITION_X = 910;
-const int Cursor::SPRITE_POSITION_Y = 311;
-const int Cursor::SPRITE_WIDTH = 38;
-const int Cursor::SPRITE_HEIGHT = 48;
+const std::string SHEET_NAME = "gui_elements";
+const std::string SPRITE_NAME = "Mouse";
 
 Cursor::Cursor(ResourceManager& resourceManager, const sf::RenderWindow& screen)
     : m_screen(screen)
 {
-    m_sprite.setTexture(*resourceManager.getTexture(TEXTURE_NAME));
-    m_sprite.setTextureRect(sf::IntRect(SPRITE_POSITION_X, SPRITE_POSITION_Y, SPRITE_WIDTH, SPRITE_HEIGHT));
+    auto sheet = resourceManager.getSpriteSheet(SHEET_NAME);
+    auto iconSprite = sheet->get(SPRITE_NAME);
+    m_sprite.setTexture(*resourceManager.getTexture(sheet->getTextureName()));
+    m_sprite.setTextureRect(sf::IntRect(iconSprite.x, iconSprite.y, iconSprite.width, iconSprite.height));
 }
 
 void Cursor::update()

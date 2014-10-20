@@ -53,9 +53,12 @@ App::App(AppConfig& config) :
     m_screen.setMouseCursorVisible(false);
     m_cursor = std::unique_ptr<Cursor>(new Cursor(m_resourceManager, m_screen));
 
-    sf::Image icon; icon.create(16, 16);
-    sf::Image texture = m_resourceManager.getTexture("GuiElements")->copyToImage();
-    icon.copy(texture, 0, 0, sf::IntRect(1000, 20, 16, 16));
+    auto sheet = m_resourceManager.getSpriteSheet("gui_elements");
+    auto iconSprite = sheet->get("Icon_16");
+    sf::Image icon;
+    icon.create(iconSprite.width, iconSprite.height);
+    sf::Image texture = m_resourceManager.getTexture(sheet->getTextureName())->copyToImage();
+    icon.copy(texture, 0, 0, sf::IntRect(iconSprite.x, iconSprite.y, iconSprite.width, iconSprite.height));
     m_screen.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));

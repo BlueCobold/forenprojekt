@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Level 6">
-		<infoimage scrx="582" scry="438" width ="192" height="108" />
+		<infoimage srcx="582" srcy="438" width ="192" height="108" />
 	</levelinfo>
 	<templates>
 		<include file="assets/ball/twirl.inc" />

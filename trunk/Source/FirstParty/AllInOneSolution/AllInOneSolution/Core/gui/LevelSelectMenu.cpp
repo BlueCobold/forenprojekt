@@ -8,9 +8,12 @@ LevelSelectMenu::LevelSelectMenu(const sf::Vector2f& position,
     CaptionMenu(*resourceManager.getMenuTemplate("LevelSelectMenu"), position, screen)
 {
 }
-void LevelSelectMenu::setLevelTextureRect(const sf::IntRect& textureRect)
+
+void LevelSelectMenu::setLevelPreview(const sf::Texture& texture, const sf::IntRect& textureRect)
 {
-    Menu::getSprite(SPRITE_LEVELINFO).setTextureRect(textureRect);
+    MenuSprite& sprite = Menu::getSprite(SPRITE_LEVELINFO);
+    sprite.setTextureRect(textureRect);
+    sprite.setTexture(texture);
 }
 
 void LevelSelectMenu::hideLeftButton(const bool value)

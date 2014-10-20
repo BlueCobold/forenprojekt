@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Level 5">
-		<infoimage scrx="38" scry="421" width ="192" height="108" />
+		<infoimage srcx="38" srcy="421" width ="192" height="108" />
 	</levelinfo>
 	<constants direction="1" arrowtime="0"/>
 	<templates>

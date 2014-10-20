@@ -12,12 +12,6 @@
 class Cursor : public Drawable
 {
 public:
-    static const std::string TEXTURE_NAME;
-    static const int SPRITE_POSITION_X;
-    static const int SPRITE_POSITION_Y;
-    static const int SPRITE_WIDTH;
-    static const int SPRITE_HEIGHT;
-
     Cursor(ResourceManager& resourceManager, const sf::RenderWindow& screen);
 
     void update();

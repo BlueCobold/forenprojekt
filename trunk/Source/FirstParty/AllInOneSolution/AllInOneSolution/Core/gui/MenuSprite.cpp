@@ -55,6 +55,11 @@ void MenuSprite::setTextureRect(const sf::IntRect& textureRect)
     m_sprite.setTextureRect(textureRect);
 }
 
+void MenuSprite::setTexture(const sf::Texture& texture)
+{
+    m_sprite.setTexture(texture);
+}
+
 void MenuSprite::drawAdditionalForeground(const DrawParameter& params)
 {
     if(m_showToolTip && isVisible())

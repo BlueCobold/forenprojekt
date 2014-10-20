@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Locked">
-		<infoimage scrx="312" scry="561" width="192" height="108" />
+		<infoimage srcx="312" srcy="561" width="192" height="108" />
 	</levelinfo>
 	<gameplay time="180"/>
 	<constants solid="0"/>

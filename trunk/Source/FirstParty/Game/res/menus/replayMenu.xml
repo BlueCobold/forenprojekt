@@ -11,12 +11,16 @@
 		<label id="11" text="gui_score" font="buttonHoverFont" alignment="0" x="70" y="100" />
 		<label id="12" text="gui_ball_lost" font="buttonHoverFont" alignment="2" x="440" y="140" />
 		<label id="13" text="gui_ball_lost" font="buttonHoverFont" alignment="0" x="70" y="140" />
-		<image id="14" tooltip="default" tooltiptext="tooltip_medals" texture="GuiElements" x="82" y="-69" scrx="0" scry="58" width="352" height="109"/>
-		<image id="15" tooltip="default" tooltiptext="tooltip_medals" texture="GuiElements" x="82" y="-69" scrx="352" scry="66" width="352" height="109"/>
-		<image id="16" tooltip="default" tooltiptext="tooltip_medals" texture="GuiElements" x="82" y="-69" scrx="" scry="167" width="352" height="109"/>
-		<image id="17" tooltip="default" tooltiptext="tooltip_medals" texture="GuiElements" x="82" y="-69" scrx="352" scry="175" width="352" height="109"/>
+		<image id="14" x="82" y="-69" spriteSheet="gui_elements" sprite="stars_0"/>
 		
-		<image id="20" texture="GuiElements" x="381" y="-20" scrx="0" scry="587" width="74" height="60"/>
+		<image id="25" tooltip="default" tooltiptext="tooltip_medals" x="172" y="-12" spriteSheet="gui_elements" sprite="empty_small"/>
+		<image id="26" tooltip="default" tooltiptext="tooltip_medals" x="294" y="-12" spriteSheet="gui_elements" sprite="empty_small"/>
+		<image id="27" tooltip="default" tooltiptext="tooltip_medals" x="220" y="-39" spriteSheet="gui_elements" sprite="empty_large"/>
+		<image id="35" tooltip="default" tooltiptext="tooltip_medals" x="161" y="-23" spriteSheet="gui_elements" sprite="filled_small"/>
+		<image id="36" tooltip="default" tooltiptext="tooltip_medals" x="283" y="-23" spriteSheet="gui_elements" sprite="filled_small"/>
+		<image id="37" tooltip="default" tooltiptext="tooltip_medals" x="209" y="-46" spriteSheet="gui_elements" sprite="filled_large"/>
+		
+		<image id="20" x="381" y="-20" spriteSheet="gui_elements" sprite="highscoreBackground2"/>
 		<button id="30" text="" style="goblet" x="403" y="-3" tooltip="default" tooltiptext="tooltip_highscore"/>
 	</elements>
 </menu>

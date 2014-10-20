@@ -51,9 +51,11 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
             m_availableVideoMode.push_back(sf::Vector2u(it->width, it->height));
     }
 
-    m_icon.create(16, 16);
-    sf::Image texture = resourceManager.getTexture("GuiElements")->copyToImage();
-    m_icon.copy(texture, 0, 0, sf::IntRect(1000, 20, 16, 16));
+    auto sheet = resourceManager.getSpriteSheet("gui_elements");
+    auto icon = sheet->get("Icon_16");
+    m_icon.create(icon.width, icon.height);
+    sf::Image texture = resourceManager.getTexture(sheet->getTextureName())->copyToImage();
+    m_icon.copy(texture, 0, 0, sf::IntRect(icon.x, icon.y, icon.width, icon.height));
 }
 
 void OptionMenu::applyChanges()
