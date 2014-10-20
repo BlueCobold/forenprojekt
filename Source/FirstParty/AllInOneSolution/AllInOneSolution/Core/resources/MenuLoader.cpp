@@ -2,7 +2,44 @@
 #include "ResourceManager.hpp"
 #include "../gui/LineLabel.hpp"
 #include "LevelFileLoader.hpp"
- 
+
+#include <string>
+
+sf::Sprite getSprite(const std::string& prefix,
+                     tinyxml2::XMLElement* element,
+                     ResourceManager& resourceManager)
+{
+    auto spriteSheetName = element->Attribute((prefix+"spriteSheet").c_str());
+    auto spriteSheeet = spriteSheetName ? resourceManager.getSpriteSheet(spriteSheetName) : nullptr;
+    if(auto spriteName = spriteSheeet ? element->Attribute((prefix+"sprite").c_str()) : nullptr)
+    {
+        auto sprite = spriteSheeet->get(spriteName);
+        sprite.x += element->IntAttribute((prefix+"srcxoffset").c_str());
+        sprite.y += element->IntAttribute((prefix+"srcyoffset").c_str());
+        if(element->Attribute((prefix+"width").c_str()))
+            sprite.width = element->IntAttribute((prefix+"width").c_str());
+        if(element->Attribute((prefix+"height").c_str()))
+            sprite.height = element->IntAttribute((prefix+"height").c_str());
+        sf::Sprite baseSprite = sf::Sprite(*resourceManager.getTexture(spriteSheeet->getTextureName()),
+                                           sf::IntRect(sprite.x, sprite.y, sprite.width, sprite.height));
+        return baseSprite;
+    }
+    else
+    {
+        return sf::Sprite(*resourceManager.getTexture(element->Attribute((prefix+"texture").c_str())),
+                          sf::IntRect(element->IntAttribute((prefix+"srcx").c_str()),
+                                      element->IntAttribute((prefix+"srcy").c_str()),
+                                      element->IntAttribute((prefix+"width").c_str()),
+                                      element->IntAttribute((prefix+"height").c_str())));
+    }
+}
+
+sf::Sprite getSprite(tinyxml2::XMLElement* element,
+                     ResourceManager& resourceManager)
+{
+    return getSprite("", element, resourceManager);
+}
+
 MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager)
 {
     tinyxml2::XMLDocument doc;
@@ -21,10 +58,7 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     MenuElements elements;
     if(auto background = menuXml->FirstChildElement("background"))
     {
-        menu.background = sf::Sprite(*resourceManager.getTexture(background->Attribute("texture")));
-        menu.background.setTextureRect(sf::IntRect(
-            background->IntAttribute("srcx"), background->IntAttribute("srcy"),
-            background->IntAttribute("width"), background->IntAttribute("height")));
+        menu.background = getSprite(background, resourceManager);
     }
     if(auto caption = menuXml->FirstChildElement("caption"))
     {
@@ -106,6 +140,7 @@ void MenuLoader::parseButtons(
         }
     }
 }
+
 void MenuLoader::parseCheckBoxes(
     MenuElements& elements, 
     tinyxml2::XMLElement* menuXml, 
@@ -140,6 +175,7 @@ void MenuLoader::parseCheckBoxes(
         }
     }
 }
+
 void MenuLoader::parseSliders(
     MenuElements& elements, 
     tinyxml2::XMLElement* menuXml, 
@@ -197,24 +233,19 @@ void MenuLoader::parseImages(MenuElements& elements,
         for(auto imageXml = styles->FirstChildElement("image");
             imageXml != nullptr; imageXml = imageXml->NextSiblingElement("image"))
         {
-            sf::Sprite baseSprite;
-            baseSprite.setTexture(*resourceManager.getTexture(imageXml->Attribute("texture")));
-            baseSprite.setTextureRect(sf::IntRect(imageXml->IntAttribute("scrx"),
-                                                  imageXml->IntAttribute("scry"),
-                                                  imageXml->IntAttribute("width"),
-                                                  imageXml->IntAttribute("height")));
-
+            sf::Sprite baseSprite = getSprite(imageXml, resourceManager);
             MenuSprite sprite(baseSprite,
                               sf::Vector2f(0, 0),
                               sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")),
                               imageXml->IntAttribute("id"));
 
-            if(auto toolTipName = imageXml->Attribute("tooltip"))
+            auto toolTipText = imageXml->Attribute("tooltiptext");
+            if(auto toolTipName = toolTipText ? imageXml->Attribute("tooltip") : nullptr)
             {
                 auto tooltip = toolTip.find(toolTipName);
                 if(tooltip == end(toolTip))
                     throw std::runtime_error(utility::replace(utility::translateKey("UnknownToolTip"), imageXml->Attribute("tooltip")));
-                tooltip->second.setText(utility::translateKey(imageXml->Attribute("tooltiptext")));
+                tooltip->second.setText(utility::translateKey(toolTipText));
                 sprite.setToolTip(tooltip->second);
             }
             if(auto visibleWhenId = imageXml->IntAttribute("visibleWhen"))
@@ -244,21 +275,15 @@ void MenuLoader::parseSubWindow(MenuTemplate& menu,
             {
                 if(auto sprite = style->FirstChildElement("scrollTop"))
                 {
-                    subWindowInfo.style.scrollbarTop = sf::Sprite(*resourceManager.getTexture(sprite->Attribute("texture")),
-                        sf::IntRect(sprite->IntAttribute("srcx"), sprite->IntAttribute("srcy"),
-                                    sprite->IntAttribute("width"), sprite->IntAttribute("height")));
+                    subWindowInfo.style.scrollbarTop = getSprite(sprite, resourceManager);
                 }
                 if(auto sprite = style->FirstChildElement("scrollMiddle"))
                 {
-                    subWindowInfo.style.scrollbarMiddle = sf::Sprite(*resourceManager.getTexture(sprite->Attribute("texture")),
-                        sf::IntRect(sprite->IntAttribute("srcx"), sprite->IntAttribute("srcy"),
-                                    sprite->IntAttribute("width"), sprite->IntAttribute("height")));
+                    subWindowInfo.style.scrollbarMiddle = getSprite(sprite, resourceManager);
                 }
                 if(auto sprite = style->FirstChildElement("scrollBottom"))
                 {
-                    subWindowInfo.style.scrollbarBottom = sf::Sprite(*resourceManager.getTexture(sprite->Attribute("texture")),
-                        sf::IntRect(sprite->IntAttribute("srcx"), sprite->IntAttribute("srcy"),
-                                    sprite->IntAttribute("width"), sprite->IntAttribute("height")));
+                    subWindowInfo.style.scrollbarBottom = getSprite(sprite, resourceManager);
                 }
             }
             subWindowInfo.position = sf::Vector2f(subXml->FloatAttribute("x"), subXml->FloatAttribute("y"));
@@ -314,10 +339,7 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(tinyxml2::XMLElement* xml, Res
     style.font = resourceManager.getBitmapFont(xml->Attribute("font"));
     style.textOffset = sf::Vector2f(xml->FloatAttribute("fontoffsetx"), xml->FloatAttribute("fontoffsety"));
     style.spriteOffset = sf::Vector2f(xml->FloatAttribute("offsetx"), xml->FloatAttribute("offsety"));
-    style.sprite = sf::Sprite(*resourceManager.getTexture(xml->Attribute("texture")));
-    style.sprite.setTextureRect(sf::IntRect(
-            xml->IntAttribute("srcx"), xml->IntAttribute("srcy"),
-            xml->IntAttribute("width"), xml->IntAttribute("height")));
+    style.sprite = getSprite(xml, resourceManager);
     if(auto soundName = xml->Attribute("sound"))
         style.sound = std::shared_ptr<SoundObject>(new SoundObject(soundName, resourceManager.getSoundManager()));
     return style;
@@ -361,10 +383,7 @@ CheckBoxStateStyle MenuLoader::loadCheckBoxStateStyle(tinyxml2::XMLElement* xml,
 {
     CheckBoxStateStyle style;
     style.spriteOffset = sf::Vector2f(xml->FloatAttribute("offsetx"), xml->FloatAttribute("offsety"));
-    style.sprite = sf::Sprite(*resourceManager.getTexture(xml->Attribute("texture")));
-    style.sprite.setTextureRect(sf::IntRect(
-            xml->IntAttribute("srcx"), xml->IntAttribute("srcy"),
-            xml->IntAttribute("width"), xml->IntAttribute("height")));
+    style.sprite = getSprite(xml, resourceManager);
     return style;
 }
 
@@ -411,16 +430,10 @@ SliderStateStyle MenuLoader::loadSliderStateStyle(tinyxml2::XMLElement* xml, Res
 {
     SliderStateStyle style;
     style.backgroundOffset = sf::Vector2f(xml->FloatAttribute("backgroundoffsetx"), xml->FloatAttribute("backgroundoffsety"));
-    style.spriteBackground = sf::Sprite(*resourceManager.getTexture(xml->Attribute("backgroundtexture")));
-    style.spriteBackground.setTextureRect(sf::IntRect(
-            xml->IntAttribute("backgroundsrcx"), xml->IntAttribute("backgroundsrcy"),
-            xml->IntAttribute("backgroundwidth"), xml->IntAttribute("backgroundheight")));
+    style.spriteBackground = getSprite("background", xml, resourceManager);
 
     style.sliderOffset = sf::Vector2f(xml->FloatAttribute("slideroffsetx"), xml->FloatAttribute("slideroffsety"));
-    style.spriteSlider = sf::Sprite(*resourceManager.getTexture(xml->Attribute("slidertexture")));
-    style.spriteSlider.setTextureRect(sf::IntRect(
-            xml->IntAttribute("slidersrcx"), xml->IntAttribute("slidersrcy"),
-            xml->IntAttribute("sliderwidth"), xml->IntAttribute("sliderheight")));
+    style.spriteSlider = getSprite("slider", xml, resourceManager);
     return style;
 }
 
@@ -447,14 +460,10 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(tinyxml2:
             int id = 0;
             int counter = 0;
             for(auto background = tooltipXml->FirstChildElement("background");
-            background != nullptr; background = background->NextSiblingElement("background"))
+                background != nullptr; background = background->NextSiblingElement("background"))
             {
                 id = background->IntAttribute("id");
-                texture.setTexture(*resourceManager.getTexture(background->Attribute("texture")));
-                texture.setTextureRect(sf::IntRect(background->IntAttribute("srcx"),
-                                                   background->IntAttribute("srcy"),
-                                                   background->IntAttribute("width"),
-                                                   background->IntAttribute("height")));
+                texture = getSprite(background, resourceManager);
                 backgroundMap[id] = texture;
                 ++counter;
             }
@@ -500,14 +509,10 @@ std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(ti
             int id = 0;
             int counter = 0;
             for(auto background = inputBoxStyleXml->FirstChildElement("background");
-            background != nullptr; background = background->NextSiblingElement("background"))
+                background != nullptr; background = background->NextSiblingElement("background"))
             {
                 id = background->IntAttribute("id");
-                inputBoxStyle[styleName].background[id].setTexture(*resourceManager.getTexture(background->Attribute("texture")));
-                inputBoxStyle[styleName].background[id].setTextureRect(sf::IntRect(background->IntAttribute("srcx"),
-                                                                      background->IntAttribute("srcy"),
-                                                                      background->IntAttribute("width"),
-                                                                      background->IntAttribute("height")));
+                inputBoxStyle[styleName].background[id] = getSprite(background, resourceManager);
                 ++counter;
             }
 

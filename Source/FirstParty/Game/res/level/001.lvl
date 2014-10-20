@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Beginner Level">
-		<infoimage scrx="526" scry="287" width="192" height="108" />
+		<infoimage spriteSheet="gui_elements" sprite="preview: Beginner Level" />
 	</levelinfo>
 	<medal bronze="180" silver="190" gold="200" />
 	<templates>

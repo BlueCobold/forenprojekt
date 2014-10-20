@@ -1,10 +1,70 @@
-<spriteSheet texture=GuiElements>
+<spriteSheet texture="GuiElements">
 	<sprites>
-		<sprite name="goblet_hover" x="675" y="546" width="42" height="36" originx="0" originy="0" />
-		<sprite name="goblet_idle" x="717" y="546" width="42" height="36" originx="0" originy="0" />
-		<sprite name="highscoreBackground" x="759" y="546" width="100" height="58" originx="0" originy="0" />
-		<sprite name="coins_hover" x="859" y="546" width="44" height="44" originx="0" originy="0" />
-		<sprite name="coins_idle" x="903" y="546" width="42" height="43" originx="0" originy="0" />
-		<sprite name="highscoreBackground2" x="0" y="587" width="106" height="60" originx="0" originy="0" />
+		<sprite name="Button_idle" x="137" y="325" width="318" height="58" originx="159" originy="29" />
+		<sprite name="Button_hover" x="455" y="366" width="318" height="58" originx="159" originy="29" />
+		<sprite name="Button_pressed" x="642" y="300" width="326" height="66" originx="163" originy="33" />
+		<sprite name="stars_0" x="198" y="0" width="352" height="109" originx="176" originy="54.5" />
+		<sprite name="checked_hover" x="68" y="158" width="38" height="41" originx="19" originy="20.5" />
+		<sprite name="checked_idle" x="455" y="324" width="38" height="41" originx="19" originy="20.5" />
+		<sprite name="unchecked_idle" x="121" y="441" width="38" height="37" originx="19" originy="18.5" />
+		<sprite name="bar_active" x="598" y="473" width="124" height="30" originx="62" originy="15" />
+		<sprite name="bar_hover" x="722" y="473" width="118" height="22" originx="59" originy="11" />
+		<sprite name="bar_idle" x="121" y="478" width="118" height="22" originx="59" originy="11" />
+		<sprite name="button_active" x="966" y="66" width="38" height="54" originx="19" originy="27" />
+		<sprite name="button_hover" x="106" y="152" width="32" height="46" originx="16" originy="23" />
+		<sprite name="button_idle" x="968" y="277" width="32" height="46" originx="16" originy="23" />
+		<sprite name="Logo" x="384" y="217" width="258" height="107" originx="129" originy="53.5" />
+		<sprite name="frame_left" x="158" y="0" width="20" height="119" originx="10" originy="59.5" />
+		<sprite name="frame_right" x="178" y="0" width="20" height="119" originx="10" originy="59.5" />
+		<sprite name="left_bottom" x="448" y="424" width="150" height="54" originx="75" originy="27" />
+		<sprite name="left_left" x="68" y="0" width="38" height="158" originx="19" originy="79" />
+		<sprite name="left_top" x="295" y="441" width="148" height="36" originx="74" originy="18" />
+		<sprite name="right_bottom" x="159" y="441" width="136" height="37" originx="68" originy="18.5" />
+		<sprite name="right_side" x="0" y="0" width="68" height="200" originx="34" originy="100" />
+		<sprite name="right_top" x="773" y="366" width="136" height="58" originx="68" originy="29" />
+		<sprite name="preview: Beginner Level" x="550" y="0" width="192" height="108" originx="96" originy="54" />
+		<sprite name="frame_top" x="239" y="478" width="164" height="19" originx="82" originy="9.5" />
+		<sprite name="frame_bottom" x="403" y="478" width="164" height="19" originx="82" originy="9.5" />
+		<sprite name="lvl2" x="742" y="0" width="192" height="108" originx="96" originy="54" />
+		<sprite name="lvl3" x="198" y="109" width="192" height="108" originx="96" originy="54" />
+		<sprite name="lvl4" x="390" y="109" width="192" height="108" originx="96" originy="54" />
+		<sprite name="lvl5" x="582" y="108" width="192" height="108" originx="96" originy="54" />
+		<sprite name="lvl6" x="774" y="108" width="192" height="108" originx="96" originy="54" />
+		<sprite name="lvl7" x="0" y="200" width="192" height="108" originx="96" originy="54" />
+		<sprite name="toolTip" x="934" y="66" width="30" height="30" originx="15" originy="15" />
+		<sprite name="coins" x="893" y="216" width="116" height="61" originx="58" originy="30.5" />
+		<sprite name="Button_small_hover" x="0" y="383" width="152" height="58" originx="76" originy="29" />
+		<sprite name="Button_small_idle" x="152" y="383" width="152" height="58" originx="76" originy="29" />
+		<sprite name="Button_small_pressed" x="733" y="216" width="160" height="66" originx="80" originy="33" />
+		<sprite name="scrollbar" x="1003" y="0" width="20" height="20" originx="10" originy="10" />
+		<sprite name="Mouse" x="158" y="119" width="38" height="48" originx="19" originy="24" />
+		<sprite name="hover" x="858" y="424" width="47" height="46" originx="23.5" originy="23" />
+		<sprite name="normal" x="905" y="424" width="48" height="46" originx="24" originy="23" />
+		<sprite name="pressed" x="966" y="120" width="54" height="52" originx="27" originy="26" />
+		<sprite name="Icon_16" x="1003" y="20" width="16" height="16" originx="8" originy="8" />
+		<sprite name="left_hover" x="598" y="424" width="65" height="49" originx="32.5" originy="24.5" />
+		<sprite name="left_idle" x="663" y="424" width="65" height="49" originx="32.5" originy="24.5" />
+		<sprite name="left_pressed" x="304" y="383" width="72" height="57" originx="36" originy="28.5" />
+		<sprite name="right_hover" x="728" y="424" width="65" height="49" originx="32.5" originy="24.5" />
+		<sprite name="right_idle" x="793" y="424" width="65" height="49" originx="32.5" originy="24.5" />
+		<sprite name="right_pressed" x="376" y="383" width="72" height="57" originx="36" originy="28.5" />
+		<sprite name="mode_background" x="106" y="0" width="52" height="152" originx="26" originy="76" />
+		<sprite name="target_checked" x="493" y="324" width="40" height="40" originx="20" originy="20" />
+		<sprite name="target_hover" x="533" y="324" width="40" height="40" originx="20" originy="20" />
+		<sprite name="target_unchecked" x="573" y="324" width="40" height="40" originx="20" originy="20" />
+		<sprite name="time_checked" x="968" y="323" width="40" height="40" originx="20" originy="20" />
+		<sprite name="time_hover" x="0" y="441" width="40" height="40" originx="20" originy="20" />
+		<sprite name="time_unchecked" x="40" y="441" width="40" height="40" originx="20" originy="20" />
+		<sprite name="goblet_hover" x="953" y="468" width="42" height="36" originx="21" originy="18" />
+		<sprite name="goblet_idle" x="858" y="470" width="42" height="36" originx="21" originy="18" />
+		<sprite name="highscoreBackground" x="909" y="366" width="100" height="58" originx="50" originy="29" />
+		<sprite name="coins_hover" x="953" y="424" width="44" height="44" originx="22" originy="22" />
+		<sprite name="coins_idle" x="966" y="172" width="42" height="43" originx="21" originy="21.5" />
+		<sprite name="missing" x="192" y="217" width="192" height="108" originx="96" originy="54" />
+		<sprite name="highscoreBackground2" x="0" y="308" width="74" height="60" originx="37" originy="30" />
+		<sprite name="empty_large" x="934" y="0" width="69" height="66" originx="34.5" originy="33" />
+		<sprite name="empty_small" x="80" y="441" width="41" height="39" originx="20.5" originy="19.5" />
+		<sprite name="filled_large" x="642" y="216" width="91" height="84" originx="45.5" originy="42" />
+		<sprite name="filled_small" x="74" y="308" width="63" height="60" originx="31.5" originy="30" />
 	</sprites>
 </spriteSheet>

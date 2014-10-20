@@ -5,30 +5,30 @@
 	<elements>
 		<subwindow id="0" x="80" y="108" sizex="352" sizey="150" innerheight="227">
 			<style>
-				<scrollTop texture="GuiElements" srcx="1000" srcy="0" width="20" height="10" />
-				<scrollMiddle texture="GuiElements" srcx="1000" srcy="10" width="20" height="1" />
-				<scrollBottom texture="GuiElements" srcx="1000" srcy="10" width="20" height="10" />
+				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
+				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
+				<scrollBottom spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="10" />
 			</style>
 			<elements>
-				<image id="1" tooltip="default" tooltiptext="tooltip_goody_gravity" texture="goodie" x="10" y="10" scrx="0" scry="8" width="48" height="48" />
+				<image id="1" tooltip="default" tooltiptext="tooltip_goody_gravity" texture="goodie" x="10" y="10" srcx="0" srcy="8" width="48" height="48" />
 				<label text="gui_goody_gravity" font="labelSmallFont" alignment="0" x="59" y="18" />
 				<label id="2" text="" font="labelSmallFont" alignment="2" x="240" y="18" />
 				<button id="3" tooltip="default" tooltiptext="tooltip_goody_cost" text="@@+" style="square" x="267" y="12" />
 				<button id="4" tooltip="default" tooltiptext="tooltip_goody_refund" text="@@-" style="square" x="307" y="12" />
 				
-				<image id="5" tooltip="default" tooltiptext="tooltip_goody_invulnerable" texture="goodie" x="10" y="63" scrx="56" scry="8" width="48" height="48" />
+				<image id="5" tooltip="default" tooltiptext="tooltip_goody_invulnerable" texture="goodie" x="10" y="63" srcx="56" srcy="8" width="48" height="48" />
 				<label text="gui_goody_invulnerable" font="labelSmallFont" alignment="0" x="59" y="75" />
 				<label id="6" text="" font="labelSmallFont" alignment="2" x="240" y="75" />
 				<button id="7" tooltip="default" tooltiptext="tooltip_goody_cost" text="@@+" style="square" x="267" y="69" />
 				<button id="8" tooltip="default" tooltiptext="tooltip_goody_refund" text="@@-" style="square" x="307" y="69" />
 				
-				<image id="9" tooltip="default" tooltiptext="tooltip_goody_extraball" texture="goodie" x="10" y="116" scrx="112" scry="8" width="48" height="48" />
+				<image id="9" tooltip="default" tooltiptext="tooltip_goody_extraball" texture="goodie" x="10" y="116" srcx="112" srcy="8" width="48" height="48" />
 				<label text="gui_goody_extra_ball" font="labelSmallFont" alignment="0" x="59" y="128" />
 				<label id="10" text="" font="labelSmallFont" alignment="2" x="240" y="128" />
 				<button id="11" tooltip="default" tooltiptext="tooltip_goody_cost" text="@@+" style="square" x="267" y="122" />
 				<button id="12" tooltip="default" tooltiptext="tooltip_goody_refund" text="@@-" style="square" x="307" y="122" />
 				
-				<image id="13" tooltip="default" tooltiptext="tooltip_goody_extratime" texture="goodie" x="10" y="169" scrx="168" scry="8" width="48" height="48" />
+				<image id="13" tooltip="default" tooltiptext="tooltip_goody_extratime" texture="goodie" x="10" y="169" srcx="168" srcy="8" width="48" height="48" />
 				<label text="gui_goody_extra_time" font="labelSmallFont" alignment="0" x="59" y="181" />
 				<label id="14" text="" font="labelSmallFont" alignment="2" x="240" y="181" />
 				<button id="15" tooltip="default" tooltiptext="tooltip_goody_cost" text="@@+" style="square" x="267" y="175" />
@@ -36,13 +36,13 @@
 			</elements>
 		</subwindow>
 		<button id="17" text="gui_close" style="default" x="261" y="270" />
-		<image id="22" texture="GuiElements" x="76" y="105" scrx="962" scry="104" width="20" height="100"/>
-		<image id="23" texture="GuiElements" x="76" y="205" scrx="962" scry="163" width="20" height="60"/>
-		<image id="24" texture="GuiElements" x="96" y="105" scrx="718" scry="311" width="163" height="19"/>
-		<image id="25" texture="GuiElements" x="259" y="105" scrx="718" scry="311" width="163" height="19"/>
-		<image id="26" texture="GuiElements" x="422" y="105" scrx="982" scry="136" width="20" height="100"/>
-		<image id="27" texture="GuiElements" x="422" y="205" scrx="982" scry="195" width="20" height="60"/>
-		<image id="28" texture="GuiElements" x="96" y="254" scrx="704" scry="257" width="163" height="19"/>
-		<image id="29" texture="GuiElements" x="259" y="254" scrx="704" scry="257" width="163" height="19"/>
+		<image id="22" x="76" y="105" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
+		<image id="23" x="76" y="205" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="59" height="60"/>
+		<image id="24" x="96" y="105" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
+		<image id="25" x="259" y="105" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
+		<image id="26" x="422" y="105" spriteSheet="gui_elements" sprite="frame_right" height="100"/>
+		<image id="27" x="422" y="205" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
+		<image id="28" x="96" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		<image id="29" x="259" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
 	</elements>
 </menu>

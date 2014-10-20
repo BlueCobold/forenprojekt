@@ -17,6 +17,7 @@ public:
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text);
     void setTextureRect(const sf::IntRect& textureRect);
+    void setTexture(const sf::Texture& texture);
 
     virtual void draw(const DrawParameter& params) override;
     virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& offset = sf::Vector2i(0, 0)) override;

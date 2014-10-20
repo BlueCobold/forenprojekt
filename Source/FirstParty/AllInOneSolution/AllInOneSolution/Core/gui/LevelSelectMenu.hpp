@@ -18,7 +18,7 @@ public:
 
     LevelSelectMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
 
-    void setLevelTextureRect(const sf::IntRect& textureRect);
+    void setLevelPreview(const sf::Texture& texture, const sf::IntRect& textureRect);
     void hideLeftButton(const bool value);
     void hideRightButton(const bool value);
 };

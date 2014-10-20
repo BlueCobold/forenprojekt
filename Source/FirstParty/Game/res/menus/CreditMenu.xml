@@ -6,9 +6,9 @@
 		<button id="0" text="gui_close" style="default" x="261" y="270" />
 		<subwindow id="1" x="80" y="108" sizex="352" sizey="150" innerheight="700">
 			<style>
-				<scrollTop texture="GuiElements" srcx="1000" srcy="0" width="20" height="10" />
-				<scrollMiddle texture="GuiElements" srcx="1000" srcy="10" width="20" height="1" />
-				<scrollBottom texture="GuiElements" srcx="1000" srcy="10" width="20" height="10" />
+				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
+				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
+				<scrollBottom spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="10" />
 			</style>
 			<elements>
 				<label text="gui_team_lead" font="buttonIdleFont" alignment="1" x="170" y="10" />
@@ -31,13 +31,13 @@
 				<label text="ya" font="buttonHoverFont" alignment="1" x="170" y="650" />
 			</elements>
 		</subwindow>
-		<image id="2" texture="GuiElements" x="76" y="105" scrx="962" scry="104" width="20" height="100"/>
-		<image id="3" texture="GuiElements" x="76" y="205" scrx="962" scry="163" width="20" height="60"/>
-		<image id="4" texture="GuiElements" x="96" y="105" scrx="718" scry="311" width="163" height="19"/>
-		<image id="5" texture="GuiElements" x="259" y="105" scrx="718" scry="311" width="163" height="19"/>
-		<image id="6" texture="GuiElements" x="422" y="105" scrx="982" scry="136" width="20" height="100"/>
-		<image id="7" texture="GuiElements" x="422" y="205" scrx="982" scry="195" width="20" height="60"/>
-		<image id="8" texture="GuiElements" x="96" y="254" scrx="704" scry="257" width="163" height="19"/>
-		<image id="9" texture="GuiElements" x="259" y="254" scrx="704" scry="257" width="163" height="19"/>
+		<image id="22" x="76" y="105" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
+		<image id="23" x="76" y="205" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="59" height="60"/>
+		<image id="24" x="96" y="105" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
+		<image id="25" x="259" y="105" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
+		<image id="26" x="422" y="105" spriteSheet="gui_elements" sprite="frame_right" height="100"/>
+		<image id="27" x="422" y="205" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
+		<image id="28" x="96" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		<image id="29" x="259" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
 	</elements>
 </menu>

@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Classic Arcade">
-		<infoimage scrx="312" scry="561" width="192" height="108" />
+		<infoimage srcx="312" srcy="561" width="192" height="108" />
 	</levelinfo>
 	<constants posx="0" />
 	<templates>

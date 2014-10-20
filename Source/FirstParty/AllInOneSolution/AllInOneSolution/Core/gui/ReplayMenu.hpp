@@ -13,10 +13,12 @@ public:
     static const int BUTTON_PLAY_NEXT = 1;
     static const int BUTTON_MAIN_MENU = 2;
     static const int BUTTON_HIGHSCORE = 30;
-    static const int SPRITE_SYMBOL_NONE = 14;
-    static const int SPRITE_SYMBOL_BRONCE = 15;
-    static const int SPRITE_SYMBOL_SILVER = 16;
-    static const int SPRITE_SYMBOL_GOLD = 17;
+    static const int SPRITE_SYMBOL_STAR_BRONCE_DARK = 25;
+    static const int SPRITE_SYMBOL_STAR_SILVER_DARK = 26;
+    static const int SPRITE_SYMBOL_STAR_GOLD_DARK = 27;
+    static const int SPRITE_SYMBOL_STAR_BRONCE_FILLED = 35;
+    static const int SPRITE_SYMBOL_STAR_SILVER_FILLED = 36;
+    static const int SPRITE_SYMBOL_STAR_GOLD_FILLED = 37;
     static const int LABEL_POINTS = 10;
     static const int LABEL_LOSTBALLS = 12;
 
