@@ -16,10 +16,13 @@ sf::Sprite getSprite(const std::string& prefix,
         auto sprite = spriteSheeet->get(spriteName);
         sprite.x += element->IntAttribute((prefix+"srcxoffset").c_str());
         sprite.y += element->IntAttribute((prefix+"srcyoffset").c_str());
+
         if(element->Attribute((prefix+"width").c_str()))
             sprite.width = element->IntAttribute((prefix+"width").c_str());
+
         if(element->Attribute((prefix+"height").c_str()))
             sprite.height = element->IntAttribute((prefix+"height").c_str());
+
         sf::Sprite baseSprite = sf::Sprite(*resourceManager.getTexture(spriteSheeet->getTextureName()),
                                            sf::IntRect(sprite.x, sprite.y, sprite.width, sprite.height));
         return baseSprite;
@@ -57,9 +60,8 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     MenuTemplate menu;
     MenuElements elements;
     if(auto background = menuXml->FirstChildElement("background"))
-    {
         menu.background = getSprite(background, resourceManager);
-    }
+
     if(auto caption = menuXml->FirstChildElement("caption"))
     {
         menu.captionFont = resourceManager.getBitmapFont(caption->Attribute("font"));
@@ -274,17 +276,14 @@ void MenuLoader::parseSubWindow(MenuTemplate& menu,
             if(auto style = subXml->FirstChildElement("style"))
             {
                 if(auto sprite = style->FirstChildElement("scrollTop"))
-                {
                     subWindowInfo.style.scrollbarTop = getSprite(sprite, resourceManager);
-                }
+
                 if(auto sprite = style->FirstChildElement("scrollMiddle"))
-                {
                     subWindowInfo.style.scrollbarMiddle = getSprite(sprite, resourceManager);
-                }
+
                 if(auto sprite = style->FirstChildElement("scrollBottom"))
-                {
                     subWindowInfo.style.scrollbarBottom = getSprite(sprite, resourceManager);
-                }
+
             }
             subWindowInfo.position = sf::Vector2f(subXml->FloatAttribute("x"), subXml->FloatAttribute("y"));
             subWindowInfo.size = sf::Vector2f(subXml->FloatAttribute("sizex"), subXml->FloatAttribute("sizey"));
