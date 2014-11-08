@@ -8,7 +8,7 @@
 #include "../gui/Button.hpp"
 #include "../gui/HighScoreMenu.hpp"
 #include "../gui/hud/HUD.hpp"
-
+#include "../resources/BackgroundLoader.hpp"
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/System/Thread.hpp>
 
@@ -38,10 +38,8 @@ private:
     float m_timeDiff;
 
     bool m_onlineHighscore;
-    bool m_loaded;
-    bool m_loadInProgress;
 
-    std::unique_ptr<sf::Thread> loadingOnlineHighScoreThread;
+    std::unique_ptr<BackgroundLoader<HighScoreState>> m_loadingOnlineHighscore;
     void clearHighScore();
     void loadOnlineHighscore();
 };

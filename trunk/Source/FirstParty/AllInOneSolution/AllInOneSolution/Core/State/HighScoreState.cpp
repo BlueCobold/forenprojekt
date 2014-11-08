@@ -20,10 +20,9 @@ HighScoreState::HighScoreState(sf::RenderWindow& screen,
     m_menu(sf::Vector2f(0, 0), screen, resourceManager),
     m_HUD(resourceManager, config),
     m_onlineHighscore(false),
-    m_loaded(false),
-    loadingOnlineHighScoreThread(nullptr)
-{
-        loadingOnlineHighScoreThread = std::unique_ptr<sf::Thread>(new sf::Thread(&HighScoreState::loadOnlineHighscore, this));
+    m_loadingOnlineHighscore(nullptr)
+{ 
+        m_loadingOnlineHighscore = std::unique_ptr<BackgroundLoader<HighScoreState>>(new BackgroundLoader<HighScoreState>(&HighScoreState::loadOnlineHighscore, *this));
 }
 
 HighScoreState::~HighScoreState()
@@ -70,9 +69,7 @@ StateChangeInformation HighScoreState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
 
         m_onlineHighscore = false;
-        m_loadInProgress = false;
-        m_loaded = false;
-        loadingOnlineHighScoreThread->terminate();
+        m_loadingOnlineHighscore->stop();
 
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
@@ -80,26 +77,23 @@ StateChangeInformation HighScoreState::update(const float time)
     if(m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).getChecked() && !m_onlineHighscore)
     {
         m_onlineHighscore = true;
-        m_loadInProgress = true;
         clearHighScore();
-        loadingOnlineHighScoreThread->launch();
+        m_loadingOnlineHighscore->run();
     }
     else if(!m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).getChecked() && m_onlineHighscore)
     {
         m_onlineHighscore = false;
-        m_loadInProgress = false;
-        m_loaded = false;
-        loadingOnlineHighScoreThread->terminate();
+        m_loadingOnlineHighscore->stop();
         loadHighScore();
     }
-    else if(m_onlineHighscore && m_loadInProgress && !m_loaded)
+    else if(m_onlineHighscore && m_loadingOnlineHighscore->isLoading() && !m_loadingOnlineHighscore->isLoaded())
     {
         int step = static_cast<int>(getPassedTime() * 2) % 4;
         for (int i = 0; i < step; ++i)
             text.append(".");
         m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText(text);
     }
-    if(m_loaded && !m_loadInProgress)
+    if(m_loadingOnlineHighscore->isLoaded() && !m_loadingOnlineHighscore->isLoading())
         m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText("");
 
     return StateChangeInformation::Empty();
@@ -152,13 +146,12 @@ void HighScoreState::loadOnlineHighscore()
     sf::Http http;
     http.setHost(m_config.get<std::string>("HighscoreServer"));
     
-    sf::Http::Request request(m_config.get<std::string>("HighscorePath") + number);
+    sf::Http::Request request(m_config.get<std::string>("HighscorePath") + "highscore.php?lvl="+ number);
     sf::Http::Response response = http.sendRequest(request);
 
     if(response.getStatus() != sf::Http::Response::Ok)
     {
         m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText(utility::translateKey("gui_not_available"));
-        m_loaded = true;
         return;
     }
 
@@ -176,9 +169,6 @@ void HighScoreState::loadOnlineHighscore()
         // read the point data from online server
         m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(onlineString.get("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + mode));
     }
-
-    m_loaded = true;
-    m_loadInProgress = false;
 }
 
 void HighScoreState::clearHighScore()

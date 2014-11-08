@@ -8,8 +8,12 @@ class GameEvent
 public:
     enum GameEventType {Unknown,
                         HitTarget,
+                        HitTargetSpeeding,
                         HitBonusTarget,
-                        HitTeeter};
+                        HitBonusTargetSpeeding,
+                        HitTeeter,
+                        LostBall,
+                        GravityGoody};
 private:
     float m_passedTime;
     float m_ballSpeed;

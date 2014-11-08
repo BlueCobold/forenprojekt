@@ -10,7 +10,7 @@
 #include "../rendering/transitions/Transition.hpp"
 #include "../resources/ResourceManager.hpp"
 #include "../Utility.hpp"
-
+#include "../resources/BackgroundLoader.hpp"
 #include <SFML/System/Clock.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/System/Thread.hpp>
@@ -42,11 +42,7 @@ private:
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
 
-    bool m_loaded;
-    bool m_loadInProgress;
-
-    std::unique_ptr<sf::Thread> loadingLevelThread;
-
+    std::unique_ptr<BackgroundLoader<LoadLevelState>> m_loadingLevel;
     void loadLevel();
     void onEvent(utility::Event::EventType type);
 };

@@ -31,6 +31,8 @@ private:
     void render(sf::RenderTarget& m_renderTexture);
     void addNewHighScore(int points, std::string name);
 
+    void sendDataToHighScoreServer(const std::string& name);
+
     std::unique_ptr<sf::Texture> m_background;
     sf::RenderTexture m_renderTexture;
     Level* m_level;

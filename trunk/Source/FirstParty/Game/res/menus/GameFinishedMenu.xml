@@ -3,8 +3,8 @@
 	<caption font="gui_large" text="gui_credit" offsetx="0" offsety="50" />
 	<styles source="Styles.inc"/>
 	<elements>
+		<image id="5" x="124" y="-67" spriteSheet="gui_elements" sprite="Logo" />
 		<button id="0" text="gui_close" style="default" x="261" y="270" />
-		<image id="1" texture="GuiElements" x="124" y="-67" scrx="704" scry="150" width="258" height="107"/>
 		<label text="betafinished1" font="buttonHoverFont" alignment="1" x="255" y="70" />
 		<label text="betafinished2" font="buttonHoverFont" alignment="1" x="255" y="100" />
 		<label text="betafinished3" font="buttonHoverFont" alignment="1" x="255" y="130" />

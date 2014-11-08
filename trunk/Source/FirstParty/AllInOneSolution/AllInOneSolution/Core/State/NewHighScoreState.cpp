@@ -11,6 +11,7 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Network/Http.hpp>
 
 NewHighScoreState::NewHighScoreState(sf::RenderWindow& screen, 
                                ResourceManager& resourceManager, 
@@ -105,6 +106,8 @@ void NewHighScoreState::addNewHighScore(int points, std::string name)
     if(m_level->isTimeAttackMode())
         mode = "TAM";
 
+    sendDataToHighScoreServer(name);
+
     for(int i = 5; i > 0; --i)
     {
         std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + mode;
@@ -132,4 +135,17 @@ void NewHighScoreState::addNewHighScore(int points, std::string name)
 
     State::m_config.set<int>(termPoints, points);
     State::m_config.set<std::string>(termName, name);
+}
+
+void NewHighScoreState::sendDataToHighScoreServer(const std::string& name)
+{
+    std::string dataString = "v=" + utility::VERSION + "&name=" + name;
+    dataString.append(m_level->getStringForOnlineHighscore());
+
+    sf::Http http;
+    http.setHost(m_config.get<std::string>("HighscoreServer"));
+    
+    sf::Http::Request request(m_config.get<std::string>("HighscorePath") + "add_highscore.php?" + dataString);
+
+    sf::Http::Response response = http.sendRequest(request);
 }

@@ -7,9 +7,9 @@
 #include "EnterStateInformation.hpp"
 #include "../model/Level.hpp"
 #include "../gui/hud/HUD.hpp"
-
+#include <SFML/System/Thread.hpp>
 #include <SFML/System/Clock.hpp>
-
+#include "../resources/BackgroundLoader.hpp"
 #include <memory> // unique_ptr
 
 class ResourceManager;
@@ -33,11 +33,16 @@ private:
     HUD m_hud;
     bool m_shouldPause;
 
+    int m_minPoints;
+
+    std::unique_ptr<BackgroundLoader<PlayState>> m_loadingOnlineHighScore;
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPauseStateInformation m_pauseStateInfo;
     EnterStateInformation m_loadLevelStateInfo;
 
-    bool PlayState::checkForNewHighscore();
+    bool checkForNewHighscore();
+
+    void loadOnlineHighscore();
 };
 
 #endif // PLAYSTATE_HPP

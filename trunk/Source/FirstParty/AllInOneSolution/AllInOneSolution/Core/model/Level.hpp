@@ -95,6 +95,8 @@ public:
     const std::string getLevelName() const;
 
     void onEnter();
+
+    const std::string getStringForOnlineHighscore() const;
 private:
 
     struct EntitySpawn
