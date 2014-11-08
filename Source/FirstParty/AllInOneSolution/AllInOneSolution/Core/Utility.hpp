@@ -21,6 +21,8 @@ namespace utility
 {
     static const float PIXEL_PER_METER = 10.f;
 
+    static const std::string VERSION = "0.8";
+
     template<typename T>
     std::string toString(const T& value)
     {

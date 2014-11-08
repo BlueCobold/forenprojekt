@@ -98,6 +98,8 @@ void Level::restartAt(const float time)
 
 void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 {
+    bool gravityEvent = m_gravityGoody.isActive();
+
     m_timeStep = elapsedTime - m_lastTime;
 
     if(m_totalTime > 0)
@@ -186,6 +188,9 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         m_scrollView.adjustView(ballpos, screen);
     }
 #endif
+
+    if(gravityEvent != m_gravityGoody.isActive())
+        m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::GravityGoody);
 }
 
 void Level::adjustView(sf::RenderTarget& screen)
@@ -213,6 +218,8 @@ void Level::respawnDeadBalls()
             m_lostBallCounter++;
             if(!(m_remainingBall < 1 && m_remainingBall > -1))
                 createLabelAt(m_ball, "red", -10);
+
+            m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::LostBall);
         }
 
         const Ball* ball = dynamic_cast<const Ball*>((*it).get());
@@ -384,12 +391,16 @@ void Level::killTarget(Entity* target)
 
     int earned = m_normalTargetPoints + m_multiHit * 50 + m_gravityGoody.getBonusPoints();
     if(m_ball->isSpeeding())
+    {
         earned = static_cast<int>(earned * 1.5);
+        m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTargetSpeeding);
+    }
+    else
+        m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTarget);
+
     m_points += earned;
     m_multiHit++;
     createLabelAt(target, "green", earned);
-
-    m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTarget);
 }
 
 void Level::killBonusTarget(Entity* target)
@@ -397,12 +408,16 @@ void Level::killBonusTarget(Entity* target)
     target->kill();
     int earned = m_bonusTargetPoints + m_multiHit * 50 + m_gravityGoody.getBonusPoints();
     if(m_ball->isSpeeding())
+    {
         earned = static_cast<int>(earned * 1.5);
+        m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitBonusTargetSpeeding);
+    }
+    else
+        m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitBonusTarget);
+
     m_points += earned;
     m_multiHit++;
     createLabelAt(target, "green", earned);
-
-    m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitBonusTarget);
 }
 
 void Level::createLabelAt(const Entity* target, const std::string& fontName, const int number)
@@ -665,6 +680,7 @@ void Level::updateGoodyChoice()
     m_extraBallGoody.setSelected(m_extraBallGoody.getType() == m_currentSeletedGoody);
     m_extraTimeGoody.setSelected(m_extraTimeGoody.getType() == m_currentSeletedGoody);
 }
+
 void Level::updateGoodyCharges()
 {
     m_config.set<int>("goodygravity", m_gravityGoody.getCharges());
@@ -672,6 +688,7 @@ void Level::updateGoodyCharges()
     m_config.set<int>("goodyextraball", m_extraBallGoody.getCharges());
     m_config.set<int>("goodyextratime", m_extraTimeGoody.getCharges());
 }
+
 void Level::onEnter()
 {
     m_playing = true;
@@ -686,4 +703,16 @@ void Level::onEnter()
         if((*it)->getType() == Entity::Teeter)
             static_cast<Teeter*>(it->get())->setControl(m_config.get<bool>("InvertAxis"), m_config.get<bool>("UseVerticalAxis"));
     }
+}
+
+const std::string Level::getStringForOnlineHighscore() const
+{
+    std::string levelPart = "&lvl=" + utility::toString(m_number) + "&points=" + utility::toString(m_points);
+
+    if(m_timeAttackMode)
+        levelPart.append("&mode=TAM");
+    else
+        levelPart.append("&mode=NAM");
+    
+    return levelPart.append(m_eventRecorder.getEventsForOnlineHighscore());
 }

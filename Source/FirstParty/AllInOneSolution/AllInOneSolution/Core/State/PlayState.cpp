@@ -7,6 +7,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Network/Http.hpp>
 
 PlayState::PlayState(sf::RenderWindow& screen, 
                      ResourceManager& resourceManager, 
@@ -14,8 +15,11 @@ PlayState::PlayState(sf::RenderWindow& screen,
     State(screen, resourceManager, config),
     m_level(nullptr),
     m_hud(resourceManager, config),
-    m_shouldPause(false)
+    m_shouldPause(false),
+    m_minPoints(0),
+    m_loadingOnlineHighScore(nullptr)
 {
+    m_loadingOnlineHighScore = std::unique_ptr<BackgroundLoader<PlayState>>(new BackgroundLoader<PlayState>(&PlayState::loadOnlineHighscore, *this));
 }
 
 PlayState::~PlayState()
@@ -47,6 +51,9 @@ void PlayState::onEnter(const EnterStateInformation* enterInformation, const flo
 
     m_level->onEnter();
     m_pauseStateInfo.m_levelNumber = enterInformation->m_levelNumber;
+
+    if(!m_loadingOnlineHighScore->isLoaded())
+        m_loadingOnlineHighScore->run();
 }
 
 StateChangeInformation PlayState::update(const float time)
@@ -68,13 +75,14 @@ StateChangeInformation PlayState::update(const float time)
             m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
             m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
             m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+            m_loadingOnlineHighScore->reset();
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
-
+        /* not needed anymore, since we got a button for it
         if(utility::Keyboard.isKeyDown(sf::Keyboard::T))
         {
             m_level->setTimeAttackMode(true);
-        }
+        }*/
 
         if(m_shouldPause || utility::Keyboard.isKeyDown(sf::Keyboard::P) || 
            utility::Keyboard.isKeyDown(sf::Keyboard::Pause) || utility::Keyboard.isKeyDown(sf::Keyboard::Escape))
@@ -84,12 +92,13 @@ StateChangeInformation PlayState::update(const float time)
             m_transitionStateInfo.m_followingState = PauseStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
             m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+            m_loadingOnlineHighScore->reset();
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
         
         if(m_level->isLevelPassed())
         {
-            if(!checkForNewHighscore())
+            if(!checkForNewHighscore() && m_minPoints > m_level->getPoints())
             {
                 m_pauseStateInfo.m_level = m_level;
                 m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
@@ -104,6 +113,7 @@ StateChangeInformation PlayState::update(const float time)
                 m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
             }
 
+            m_loadingOnlineHighScore->reset();
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
 
@@ -113,6 +123,7 @@ StateChangeInformation PlayState::update(const float time)
             m_transitionStateInfo.m_followingState = LevelFailStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
             m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+            m_loadingOnlineHighScore->reset();
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
     }
@@ -123,6 +134,7 @@ StateChangeInformation PlayState::update(const float time)
         m_transitionStateInfo.m_followingState = PauseStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        m_loadingOnlineHighScore->reset();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 
@@ -165,4 +177,27 @@ bool PlayState::checkForNewHighscore()
         }
     }
     return false;
+}
+
+void PlayState::loadOnlineHighscore()
+{
+    std::string number = utility::toString(m_level->number());
+
+    sf::Http http;
+    http.setHost(m_config.get<std::string>("HighscoreServer"));
+    
+    sf::Http::Request request(m_config.get<std::string>("HighscorePath") + number);
+    sf::Http::Response response = http.sendRequest(request);
+
+    if(response.getStatus() != sf::Http::Response::Ok)
+        return;
+
+    FileReader onlineString(response.getBody(), false);
+
+    std::string mode = "NAM";
+
+    if(m_level->isTimeAttackMode())
+        mode = "TAM";
+
+    m_minPoints = utility::stringTo<int>(onlineString.get("HighScoreLevel" + number + "_Points" + utility::toString(5) + mode));
 }

@@ -348,6 +348,7 @@
     <ClInclude Include="rendering\transitions\VerticalStripesTransition.hpp" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="resources\AppConfig.hpp" />
+    <ClInclude Include="resources\BackgroundLoader.hpp" />
     <ClInclude Include="resources\Config.hpp" />
     <ClInclude Include="resources\FileReader.hpp" />
     <ClInclude Include="resources\GameEvent.hpp" />
