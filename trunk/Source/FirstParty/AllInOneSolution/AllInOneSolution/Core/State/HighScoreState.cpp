@@ -32,7 +32,7 @@ HighScoreState::~HighScoreState()
 void HighScoreState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
     const EnterHighScoreStateInformation* info = dynamic_cast<const EnterHighScoreStateInformation*>(enterInformation);
-    
+
     m_highScoreStateInfo.m_comeFromState = info->m_comeFromState;
     m_highScoreStateInfo.m_level = info->m_level;
     m_highScoreStateInfo.m_levelNumber = info->m_level->number();
@@ -66,6 +66,7 @@ StateChangeInformation HighScoreState::update(const float time)
         m_stateInfo.m_levelNumber = m_highScoreStateInfo.m_levelNumber;
         m_transitionStateInfo.m_followingState = m_highScoreStateInfo.m_comeFromState;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        m_loadingOnlineHighscore->reset();
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
 
         m_onlineHighscore = false;
@@ -83,7 +84,7 @@ StateChangeInformation HighScoreState::update(const float time)
     else if(!m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).getChecked() && m_onlineHighscore)
     {
         m_onlineHighscore = false;
-        m_loadingOnlineHighscore->stop();
+        m_loadingOnlineHighscore->reset();
         loadHighScore();
     }
     else if(m_onlineHighscore && m_loadingOnlineHighscore->isLoading() && !m_loadingOnlineHighscore->isLoaded())
@@ -100,7 +101,7 @@ StateChangeInformation HighScoreState::update(const float time)
 }
 
 void HighScoreState::draw(const DrawParameter& params)
-{    
+{
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 
     sf::RectangleShape whiteRect;
@@ -145,8 +146,8 @@ void HighScoreState::loadOnlineHighscore()
 
     sf::Http http;
     http.setHost(m_config.get<std::string>("HighscoreServer"));
-    
-    sf::Http::Request request(m_config.get<std::string>("HighscorePath") + "highscore.php?lvl="+ number);
+
+    sf::Http::Request request(m_config.get<std::string>("HighscorePath") + "highscore.php?lvl=" + number);
     sf::Http::Response response = http.sendRequest(request);
 
     if(response.getStatus() != sf::Http::Response::Ok)

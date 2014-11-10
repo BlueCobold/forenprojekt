@@ -52,7 +52,7 @@ void PlayState::onEnter(const EnterStateInformation* enterInformation, const flo
     m_level->onEnter();
     m_pauseStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
-    if(!m_loadingOnlineHighScore->isLoaded())
+    if(!m_loadingOnlineHighScore->isLoaded() && !m_loadingOnlineHighScore->isLoading())
         m_loadingOnlineHighScore->run();
 }
 
@@ -92,7 +92,6 @@ StateChangeInformation PlayState::update(const float time)
             m_transitionStateInfo.m_followingState = PauseStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
             m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
-            m_loadingOnlineHighScore->reset();
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
         
@@ -113,7 +112,6 @@ StateChangeInformation PlayState::update(const float time)
                 m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
             }
 
-            m_loadingOnlineHighScore->reset();
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
 
@@ -134,7 +132,6 @@ StateChangeInformation PlayState::update(const float time)
         m_transitionStateInfo.m_followingState = PauseStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
-        m_loadingOnlineHighScore->reset();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 
@@ -186,7 +183,7 @@ void PlayState::loadOnlineHighscore()
     sf::Http http;
     http.setHost(m_config.get<std::string>("HighscoreServer"));
     
-    sf::Http::Request request(m_config.get<std::string>("HighscorePath") + number);
+    sf::Http::Request request(m_config.get<std::string>("HighscorePath") + "highscore.php?lvl=" + number);
     sf::Http::Response response = http.sendRequest(request);
 
     if(response.getStatus() != sf::Http::Response::Ok)
