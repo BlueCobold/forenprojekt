@@ -40,8 +40,8 @@ public:
 
     void run()
     {
-        m_loadInProgress = true;
-        m_backgroundProcess->launch();
+        if(!m_loaded && !m_loadInProgress)
+            m_backgroundProcess->launch();
     }
 
     void stop()
