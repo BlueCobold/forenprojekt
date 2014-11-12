@@ -25,12 +25,12 @@
 		<sprite name="preview: Beginner Level" x="550" y="0" width="192" height="108" originx="96" originy="54" />
 		<sprite name="frame_top" x="239" y="478" width="164" height="19" originx="82" originy="9.5" />
 		<sprite name="frame_bottom" x="403" y="478" width="164" height="19" originx="82" originy="9.5" />
-		<sprite name="lvl2" x="742" y="0" width="192" height="108" originx="96" originy="54" />
-		<sprite name="lvl3" x="198" y="109" width="192" height="108" originx="96" originy="54" />
-		<sprite name="lvl4" x="390" y="109" width="192" height="108" originx="96" originy="54" />
-		<sprite name="lvl5" x="582" y="108" width="192" height="108" originx="96" originy="54" />
-		<sprite name="lvl6" x="774" y="108" width="192" height="108" originx="96" originy="54" />
-		<sprite name="lvl7" x="0" y="200" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Clockwork" x="742" y="0" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Things Change" x="198" y="109" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Up and Down" x="390" y="109" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Four Chambers" x="582" y="108" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Bank Job" x="774" y="108" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Moving Spikes" x="0" y="200" width="192" height="108" originx="96" originy="54" />
 		<sprite name="toolTip" x="934" y="66" width="30" height="30" originx="15" originy="15" />
 		<sprite name="coins" x="893" y="216" width="116" height="61" originx="58" originy="30.5" />
 		<sprite name="Button_small_hover" x="0" y="383" width="152" height="58" originx="76" originy="29" />
@@ -66,5 +66,10 @@
 		<sprite name="empty_small" x="80" y="441" width="41" height="39" originx="20.5" originy="19.5" />
 		<sprite name="filled_large" x="642" y="216" width="91" height="84" originx="45.5" originy="42" />
 		<sprite name="filled_small" x="74" y="308" width="63" height="60" originx="31.5" originy="30" />
+		<sprite name="preview: Rocket Science" x="239" y="497" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Pisa Studies" x="0" y="500" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Crossroads" x="431" y="503" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Fragile" x="623" y="503" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Moving Walls" x="815" y="506" width="192" height="108" originx="96" originy="54" />
 	</sprites>
 </spriteSheet>

@@ -266,12 +266,23 @@ void App::adjustVideoMode(sf::VideoMode& mode)
         if(mode.height > sf::VideoMode::getDesktopMode().height)
             mode.height = sf::VideoMode::getDesktopMode().height;
     }
+    m_config.set("ResolutionX", mode.width);
+    m_config.set("ResolutionY", mode.height);
 }
+
 void App::minimize()
 {
     m_isMinimized = true;
     if(m_config.get<int>("IsFullScreen"))
-        m_screen.create(sf::VideoMode::getDesktopMode(), m_windowTitle, sf::Style::Default);
+    {
+        auto desktop = sf::VideoMode::getDesktopMode();
+        if(desktop.width != m_config.get<unsigned int>("ResolutionX") && desktop.height != m_config.get<unsigned int>("ResolutionY"))
+        {
+            auto mode = sf::VideoMode::getDesktopMode();
+            adjustVideoMode(mode);
+            m_screen.create(mode, m_windowTitle, sf::Style::Default, sf::ContextSettings(24, 8, 0));
+        }
+    }
     ShowWindow(m_screen.getSystemHandle(), SW_MINIMIZE);
     
 }
@@ -281,7 +292,10 @@ void App::restore()
     m_isMinimized = false;
     if(m_config.get<int>("IsFullScreen"))
     {
-        m_screen.create(sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY")), m_windowTitle, sf::Style::Fullscreen);
+        auto mode = sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+        adjustVideoMode(mode);
+        if(mode.width != m_config.get<unsigned int>("ResolutionX") && mode.height != m_config.get<unsigned int>("ResolutionY"))
+            m_screen.create(mode, m_windowTitle, sf::Style::Fullscreen, sf::ContextSettings(24, 8, 0));
         m_screen.setMouseCursorVisible(false);
         m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
         m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));

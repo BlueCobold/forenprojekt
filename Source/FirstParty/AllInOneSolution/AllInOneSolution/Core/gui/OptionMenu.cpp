@@ -89,8 +89,8 @@ void OptionMenu::applyChanges()
         Menu::getRenderWindow().setMouseCursorVisible(false);
 
         m_config.set("IsFullScreen", m_fullScreen);
-        m_config.set("ResolutionX", m_currentVideoMode.x);
-        m_config.set("ResolutionY", m_currentVideoMode.y);
+        m_config.set("ResolutionX", videoMode.width);
+        m_config.set("ResolutionY", videoMode.height);
 
         Menu::getRenderWindow().setFramerateLimit(m_config.get<int>("FrameRateLimit"));
         Menu::getRenderWindow().setVerticalSyncEnabled(m_config.get<bool>("Vsync"));

@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Moving Spikes">
-		<infoimage srcx="312" srcy="561" width="192" height="108" />
+		<infoimage spriteSheet="gui_elements" sprite="preview: Moving Spikes" />
 	</levelinfo>
 	<constants solid="0" posx="0"/>
 	<templates>

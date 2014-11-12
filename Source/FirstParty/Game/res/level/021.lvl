@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Fragile">
-		<infoimage srcx="312" srcy="561" width="192" height="108" />
+		<infoimage spriteSheet="gui_elements" sprite="preview: Fragile" />
 	</levelinfo>
 	<constants gate="0" gatetime="0"/>
 	<gameplay time="60"/>

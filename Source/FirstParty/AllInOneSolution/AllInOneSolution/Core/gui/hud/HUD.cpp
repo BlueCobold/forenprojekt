@@ -123,6 +123,6 @@ void HUD::onEnter(Level* level)
 {
     m_timeShow = false;
     m_ballShow = false;
-    m_points.setPoints(level->getPoints());
+    m_points.setPoints(level != nullptr ? level->getPoints() : 0);
     m_points.skipInterpolation();
 }

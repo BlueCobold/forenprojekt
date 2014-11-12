@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Bank Job">
-		<infoimage srcx="312" srcy="561" width="192" height="108" />
+		<infoimage spriteSheet="gui_elements" sprite="preview: Bank Job" />
 	</levelinfo>
 	<gameplay time="90"/>
 	<templates>
