@@ -25,7 +25,7 @@ std::string FileReader::eraseOverhang(std::string& data)
     while(pos != std::string::npos && pos == data.length() - 1)    /// Find and erase spaces after data
     {
         data.erase(pos,pos);
-        rpos = data.find_last_of("r");
+        rpos = data.find_last_of("\r");
         pos = data.find_last_of(" ");
         if(rpos != std::string::npos && (rpos > pos || pos == std::string::npos))
             pos = rpos;
