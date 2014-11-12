@@ -312,13 +312,13 @@ void App::restore()
         if(mode.width != m_config.get<unsigned int>("ResolutionX") && mode.height != m_config.get<unsigned int>("ResolutionY"))
             m_screen.create(mode, m_windowTitle, sf::Style::Fullscreen, sf::ContextSettings(24, 8, 0));
         m_screen.setMouseCursorVisible(false);
-       m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
-       m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
-   }
+        m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
+        m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
+    }
 #ifdef WINDOWS
     ShowWindow(m_screen.getSystemHandle(), SW_RESTORE);
 #else
-   ::maximize(m_screen.getSystemHandle());
+    ::maximize(m_screen.getSystemHandle());
 #endif
 }
 
