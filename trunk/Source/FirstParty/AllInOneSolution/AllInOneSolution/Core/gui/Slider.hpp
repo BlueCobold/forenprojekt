@@ -18,7 +18,7 @@ public:
 
     virtual void draw(const DrawParameter& params) override;
 
-   float getValue() const;
+    float getValue() const;
 
     void setValue(const float value);
 

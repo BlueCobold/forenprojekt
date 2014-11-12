@@ -24,13 +24,13 @@ public:
     ~Background();
 
     virtual void restartAt(const float time) override;
-   void update(const float time);
-   void updateParallax(const sf::View& view);
+    void update(const float time);
+    void updateParallax(const sf::View& view);
 
     void bindLayer(std::unique_ptr<ParallaxLayer>&& layer);
 
-   virtual float getValueOf(const std::string& name) const override;
-   virtual void setValueOf(const std::string& name, const float value) override;
+    virtual float getValueOf(const std::string& name) const override;
+    virtual void setValueOf(const std::string& name, const float value) override;
 
     virtual void draw(const DrawParameter& param) override;
 };

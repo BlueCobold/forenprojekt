@@ -14,11 +14,11 @@
 class Step : public MultiProvider
 {
 public:
-  
+
     Step(std::vector<std::unique_ptr<ValueProvider>>&& provider, float threshold = 1) :
        MultiProvider(std::move(provider)),
        m_threshold(threshold)
-   {
+    {
         if(getProvider().size() != 3)
             throw std::runtime_error(utility::replace(utility::translateKey("ThreeChilds"), "Step"));
     }
@@ -31,11 +31,11 @@ public:
             return getProvider()[2]->getValue();
     }
 
-   virtual Step* clone() const override
-   {
+    virtual Step* clone() const override
+    {
         auto list = cloneProviders();
         return new Step(std::move(list));
-   }
+    }
 
 private:
     float m_threshold;

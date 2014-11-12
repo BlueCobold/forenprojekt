@@ -160,12 +160,12 @@ void MenuPanel::createInputBox(const InputBoxInfo& info)
                                                     info.inputLimit,
                                                     info.style));
 
-   m_elements.push_back(std::move(inputBox));
+    m_elements.push_back(std::move(inputBox));
 }
 
 void MenuPanel::createAnimationContainer(std::unique_ptr<AnimationContainer> info)
 {
-   m_elements.push_back(std::move(info));
+    m_elements.push_back(std::move(info));
 }
 
 void MenuPanel::updateLayout(const sf::Vector2f& position)

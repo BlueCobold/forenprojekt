@@ -63,13 +63,13 @@ private:
     void createButton(const ButtonInfo& info);
     void createCheckBox(const CheckBoxInfo& info);
     void createSlider(const SliderInfo& info);
-   void createLabel(const LineLabel& info);
-   void createSprite(const MenuSprite& info);
-   void createInputBox(const InputBoxInfo& info);
+    void createLabel(const LineLabel& info);
+    void createSprite(const MenuSprite& info);
+    void createInputBox(const InputBoxInfo& info);
     void createAnimationContainer(std::unique_ptr<AnimationContainer> info);
 
-   sf::Vector2f m_position;
-   std::vector<std::unique_ptr<MenuElement>> m_elements;
+    sf::Vector2f m_position;
+    std::vector<std::unique_ptr<MenuElement>> m_elements;
     std::function<void(const Button& sender)> m_clickCallback;
 
     void setCorrelation();

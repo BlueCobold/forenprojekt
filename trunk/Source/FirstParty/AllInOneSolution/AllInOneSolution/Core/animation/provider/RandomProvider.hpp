@@ -13,7 +13,7 @@ class RandomProvider : public ValueProvider
 private:
 
     std::uniform_real_distribution<float> m_distribution;
-   std::default_random_engine m_random_engine;
+    std::default_random_engine m_random_engine;
 
 public:
 

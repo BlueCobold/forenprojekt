@@ -23,8 +23,7 @@ public:
     int show()
     {
          return MessageBox(0, m_message.c_str(), "Error:", MB_OK | MB_ICONSTOP);
-   }
-
+    }
 };
 
 #endif  // WINDOWS

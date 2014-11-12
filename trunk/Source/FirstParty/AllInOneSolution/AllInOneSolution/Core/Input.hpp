@@ -52,14 +52,14 @@ namespace utility
         void startInterpolation(const sf::Window& relativeTo);
         void interpolate(int steps, int current);
 
-       void capture();
+        void capture();
 
         void notifyButtonPressed(sf::Mouse::Button button);
         void notifyButtonReleased(sf::Mouse::Button button);
-       
-       bool leftButtonPressed() const;
 
-       bool leftButtonReleased() const;
+        bool leftButtonPressed() const;
+
+        bool leftButtonReleased() const;
 
         bool leftButtonDown() const;
 

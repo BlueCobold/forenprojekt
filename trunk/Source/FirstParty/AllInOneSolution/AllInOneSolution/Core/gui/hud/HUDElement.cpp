@@ -29,8 +29,8 @@ void HUDElement::update(const DrawParameter& params)
     sf::Vector2f bottomRightViewEnd = screenCenter + screenSize * 0.5f;
     sf::Vector2f delta = bottomRightViewEnd - topLeftViewStart;
 
-    m_currentPosition.x =  topLeftViewStart.x + delta.x * m_horizontalPercentage + m_position.x;
-    m_currentPosition.y =  topLeftViewStart.y + delta.y * m_verticalPercentage + m_position.y;
+    m_currentPosition.x = topLeftViewStart.x + delta.x * m_horizontalPercentage + m_position.x;
+    m_currentPosition.y = topLeftViewStart.y + delta.y * m_verticalPercentage + m_position.y;
 }
 
 const sf::Vector2f HUDElement::getPosition() const

@@ -98,13 +98,13 @@ private:
     };
 
     static bool _renderStencilEffects;
-   static std::list<Animation*> _stencilAnimations;
+    static std::list<Animation*> _stencilAnimations;
 
-   void updatePosition();
+    void updatePosition();
     const sf::IntRect getTextureRect() const;
 
-   std::unique_ptr<ValueProvider> m_xPositionProvider;
-   std::unique_ptr<ValueProvider> m_yPositionProvider;
+    std::unique_ptr<ValueProvider> m_xPositionProvider;
+    std::unique_ptr<ValueProvider> m_yPositionProvider;
     std::unique_ptr<ValueProvider> m_xScaleProvider;
     std::unique_ptr<ValueProvider> m_yScaleProvider;
     std::unique_ptr<ValueProvider> m_rotationProvider;
