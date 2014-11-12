@@ -89,7 +89,8 @@ void Level::load()
             if(name == "  ")
                 continue;
 
-            std::unique_ptr<Entity> entity = parseEntityFromTemplate(name, templates, sf::Vector2u((column/2)*size, row*size));
+            auto pos = sf::Vector2u((column/2)*size, row*size);
+            std::unique_ptr<Entity> entity = parseEntityFromTemplate(name, templates, pos);
             if(entity != nullptr)
                 m_entities.push_back(std::move(entity));
         }
@@ -252,6 +253,7 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
     sf::Vector2u& position,
     bool bindInstantly)
 {
+     auto pos = position;
     auto match = templates.entities.find(name);
     if(match == end(templates.entities))
     {
@@ -338,7 +340,7 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
     return parseEntity(match->second, position, templates, bindInstantly);
 }
 
-void Level::findPhysicAndShapeTag(tinyxml2::XMLElement*& physic, tinyxml2::XMLElement*& shape, 
+void Level::findPhysicAndShapeTag(tinyxml2::XMLElement*& physic, tinyxml2::XMLElement*& shape,
     tinyxml2::XMLElement* entity,
     Templates& templates)
 {
@@ -691,7 +693,8 @@ void Level::parseCollider(
             if(!name)
                 throw std::runtime_error(utility::translateKey("SpawnWithoutName"));
 
-            std::unique_ptr<Entity> spawned(parseEntityFromTemplate(name, templates, sf::Vector2u(0, 0), false));
+            auto pos = sf::Vector2u(0, 0);
+            std::unique_ptr<Entity> spawned(parseEntityFromTemplate(name, templates, pos, false));
             if(spawned == nullptr)
                 throw std::runtime_error(utility::replace(utility::translateKey("UnknownEntityName"), name));
 
@@ -780,7 +783,8 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
         if(!name)
             throw std::runtime_error(utility::translateKey("SpawnWithoutName"));
 
-        std::unique_ptr<Entity> spawned(parseEntityFromTemplate(name, templates, sf::Vector2u(0, 0), false));
+        auto pos = sf::Vector2u(0, 0);
+        std::unique_ptr<Entity> spawned(parseEntityFromTemplate(name, templates, pos, false));
         if(spawned == nullptr)
             throw std::runtime_error(utility::replace(utility::translateKey("UnknownEntityName"), name));
 
@@ -859,7 +863,8 @@ std::unique_ptr<Entity> Level::parseEntityReference(
     if(!name)
         throw std::runtime_error(utility::translateKey("SpawnWithoutName"));
 
-    std::unique_ptr<Entity> spawned(parseEntityFromTemplate(name, templates, sf::Vector2u(0, 0), false));
+    auto pos = sf::Vector2u(0, 0);
+    std::unique_ptr<Entity> spawned(parseEntityFromTemplate(name, templates, pos, false));
     if(spawned == nullptr)
         throw std::runtime_error(utility::replace(utility::translateKey("UnknownEntityName"), name));
     return spawned;

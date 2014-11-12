@@ -14,11 +14,11 @@
 class Pow : public MultiProvider
 {
 public:
-    
-    Pow(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
-    {
-        if(getProvider().size() != 2)
-            throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Pow"));
+  
+    Pow(std::vector<std::unique_ptr<ValueProvider>>&& provider) : MultiProvider(std::move(provider))
+   {
+       if(getProvider().size() != 2)
+           throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Pow"));
     }
 
     virtual float getValue() override
@@ -28,11 +28,11 @@ public:
         return powf(base, exponent);
     }
 
-    virtual Pow* clone() const override
-    {
-        auto list = std::move(cloneProviders());
-        return new Pow(list);
-    }
+   virtual Pow* clone() const override
+   {
+        auto list = cloneProviders();
+        return new Pow(std::move(list));
+   }
 };
 
 #endif //POW_HPP

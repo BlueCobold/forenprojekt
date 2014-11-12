@@ -24,7 +24,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
     m_loadingLevel(nullptr),    
     m_currentLevel(1)
 {
-    m_loadingErrorMessage[0] = '\0';
+    m_loadingErrorMessage = "";
     m_loadingLevel = std::unique_ptr<BackgroundLoader<LoadLevelState>>(new BackgroundLoader<LoadLevelState>(&LoadLevelState::loadLevel, *this));
     m_label.setPosition(m_screen.getSize().x / 2.f - m_label.getWidth() / 2.f, m_screen.getSize().y / 2.f);
 }
@@ -57,7 +57,7 @@ StateChangeInformation LoadLevelState::update(const float time)
 
     if(m_loadingLevel->isLoaded())
     {
-        if(m_loadingErrorMessage[0] != '\0')
+        if(m_loadingErrorMessage.length() != 0)
             throw std::runtime_error(m_loadingErrorMessage);
 
         m_playStateInfo.m_returnFromPause = false;
@@ -86,7 +86,7 @@ StateChangeInformation LoadLevelState::update(const float time)
 
 void LoadLevelState::loadLevel()
 {
-    m_loadingErrorMessage[0] = '\0';
+    m_loadingErrorMessage = "";
     try
     {
         m_level = std::unique_ptr<Level>(new Level(m_currentLevel, getResourceManager(), m_config));
@@ -94,7 +94,7 @@ void LoadLevelState::loadLevel()
     }
     catch(std::runtime_error e)
     {
-        strcpy_s(m_loadingErrorMessage, sizeof(m_loadingErrorMessage), e.what());
+        m_loadingErrorMessage = e.what();
     }
 }
 

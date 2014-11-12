@@ -4,7 +4,7 @@
 #define ANGLE_PROVIDER_HPP
 
 #include "../OrientedObject.hpp"
-#include "../Utility.hpp"
+#include "../../Utility.hpp"
 
 #include <cmath>
 

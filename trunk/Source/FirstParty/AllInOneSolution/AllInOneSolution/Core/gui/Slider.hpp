@@ -18,9 +18,9 @@ public:
 
     virtual void draw(const DrawParameter& params) override;
 
-    float getValue() const;
+   float getValue() const;
 
-    void Slider::setValue(const float value);
+    void setValue(const float value);
 
 protected:
 

@@ -12,11 +12,11 @@
 class Multiplier : public MultiProvider
 {
 public:
-    
-    Multiplier(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
-    {
-        if(getProvider().size() < 1)
-            throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Multiply"));
+  
+    Multiplier(std::vector<std::unique_ptr<ValueProvider>>&& provider) : MultiProvider(std::move(provider))
+   {
+       if(getProvider().size() < 1)
+           throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Multiply"));
     }
 
     virtual float getValue() override
@@ -27,11 +27,11 @@ public:
         return v;
     }
 
-    virtual Multiplier* clone() const override
-    {
-        auto list = std::move(cloneProviders());
-        return new Multiplier(list);
-    }
+   virtual Multiplier* clone() const override
+   {
+        auto list = cloneProviders();
+        return new Multiplier(std::move(list));
+   }
 };
 
 #endif //MULTIPLIER_HPP

@@ -13,11 +13,11 @@
 class Switch : public MultiProvider
 {
 public:
-    
-    Switch(std::vector<std::unique_ptr<ValueProvider>>& provider, const std::vector<float>& constants)
-        : MultiProvider(std::move(provider)),
-          m_constants(constants)
-    {
+  
+    Switch(std::vector<std::unique_ptr<ValueProvider>>&& provider, const std::vector<float>& constants)
+       : MultiProvider(std::move(provider)),
+         m_constants(constants)
+   {
         if(getProvider().size() < 1)
             throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Switch"));
         if(getProvider().size() + 1 < constants.size())
@@ -37,11 +37,11 @@ public:
         return 0;
     }
 
-    virtual Switch* clone() const override
-    {
-        auto list = std::move(cloneProviders());
-        return new Switch(list, m_constants);
-    }
+   virtual Switch* clone() const override
+   {
+        auto list = cloneProviders();
+        return new Switch(std::move(list), m_constants);
+   }
 
 private:
     std::vector<float> m_constants;

@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     {
         #ifdef _DEBUG
             std::cout << "An error occurred: " << error.what();
-        #else
+        #elif WINDOWS
             ErrorMessageBox(error.what());
         #endif
         getchar();

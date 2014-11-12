@@ -11,9 +11,9 @@ Background::~Background()
 {
 }
 
-void Background::bindLayer(std::unique_ptr<ParallaxLayer>& layer)
+void Background::bindLayer(std::unique_ptr<ParallaxLayer>&& layer)
 {
-    m_layers.push_back(std::move(layer));
+   m_layers.push_back(std::move(layer));
 }
 
 void Background::restartAt(const float time)

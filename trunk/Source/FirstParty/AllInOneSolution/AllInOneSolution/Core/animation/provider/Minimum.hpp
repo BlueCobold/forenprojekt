@@ -14,11 +14,11 @@
 class Minimum : public MultiProvider
 {
 public:
-    
-    Minimum(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
-    {
-        if(getProvider().size() < 1)
-            throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Minimum"));
+  
+    Minimum(std::vector<std::unique_ptr<ValueProvider>>&& provider) : MultiProvider(std::move(provider))
+   {
+       if(getProvider().size() < 1)
+           throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Minimum"));
     }
 
     virtual float getValue() override
@@ -36,11 +36,11 @@ public:
         return v;
     }
 
-    virtual Minimum* clone() const override
-    {
-        auto list = std::move(cloneProviders());
-        return new Minimum(list);
-    }
+   virtual Minimum* clone() const override
+   {
+        auto list = cloneProviders();
+        return new Minimum(std::move(list));
+   }
 };
 
 #endif //MINIMUM_HPP

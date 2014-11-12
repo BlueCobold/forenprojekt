@@ -16,6 +16,7 @@
 #include <SFML/System/Thread.hpp>
 
 #include <memory> // unique_ptr
+#include <string>
 
 /// The State where the level will be loaded and faded in.
 class LoadLevelState : public State
@@ -35,7 +36,7 @@ private:
 
     std::unique_ptr<Level> m_level;
     Level* m_lastLevel;
-    char m_loadingErrorMessage[200];
+    std::string m_loadingErrorMessage;
 
     LineLabel m_label;
     int m_currentLevel;

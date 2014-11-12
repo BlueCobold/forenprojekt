@@ -6,6 +6,8 @@
 
 #include <tinyxml2.h>
 
+#include <utility>
+
 BitmapFont::Glyph::Glyph(const sf::Texture& texture, int xOffset) : Sprite(texture), m_spacing(texture.getSize().x), m_xOffset(xOffset)
 {
 }
@@ -52,16 +54,14 @@ bool BitmapFont::loadFromFile(const std::string& path, ResourceManager& resource
     height = bitmapfont->FirstChildElement("height")->IntAttribute("value"); 
     for(auto it = bitmapfont->FirstChildElement("glyphs")->FirstChildElement("glyph"); it != nullptr; it = it->NextSiblingElement("glyph"))
     {
-        int width = it->IntAttribute("width");
-        int spacing = width;
-        it->QueryIntAttribute("spacing", &spacing);
-        m_glyphs.insert
-        ( 
-            std::make_pair<char, BitmapFont::Glyph>(it->Attribute("name")[0], 
-            BitmapFont::Glyph(*m_texture, sf::IntRect(it->IntAttribute("x"), it->IntAttribute("y"), width, height), spacing, it->IntAttribute("xoffset")))
-        );
-    }
-    m_fontSize = height;
+       int width = it->IntAttribute("width");
+       int spacing = width;
+       it->QueryIntAttribute("spacing", &spacing);
+       
+        BitmapFont::Glyph glyph = BitmapFont::Glyph(*m_texture, sf::IntRect(it->IntAttribute("x"), it->IntAttribute("y"), width, height), spacing, it->IntAttribute("xoffset"));
+        m_glyphs.insert(std::make_pair(it->Attribute("name")[0], glyph));
+   }
+   m_fontSize = height;
 
     return true;
 }

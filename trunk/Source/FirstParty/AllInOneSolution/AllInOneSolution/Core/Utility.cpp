@@ -44,11 +44,11 @@ namespace utility
         return File.get(key);
     }
 
-    std::string replace(std::string string, std::string replacement)
-    {
-        unsigned int pos = string.find("%");
-        if (pos != std::string::npos)
-            string.replace(pos, 1, replacement);
+   std::string replace(std::string string, std::string replacement)
+   {
+        auto pos = string.find("%");
+       if (pos != std::string::npos)
+           string.replace(pos, 1, replacement);
 
         return string;
     }

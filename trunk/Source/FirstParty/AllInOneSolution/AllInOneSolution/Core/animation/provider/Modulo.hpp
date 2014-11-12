@@ -14,11 +14,11 @@
 class Modulo : public MultiProvider
 {
 public:
-    
-    Modulo(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
-    {
-        if(getProvider().size() != 2)
-            throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Modulo"));
+  
+    Modulo(std::vector<std::unique_ptr<ValueProvider>>&& provider) : MultiProvider(std::move(provider))
+   {
+       if(getProvider().size() != 2)
+           throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Modulo"));
     }
 
     virtual float getValue() override
@@ -28,11 +28,11 @@ public:
         return fmodf(dividend, divisor);
     }
 
-    virtual Modulo* clone() const override
-    {
-        auto list = std::move(cloneProviders());
-        return new Modulo(list);
-    }
+   virtual Modulo* clone() const override
+   {
+        auto list = cloneProviders();
+        return new Modulo(std::move(list));
+   }
 };
 
 #endif //MODULO_HPP

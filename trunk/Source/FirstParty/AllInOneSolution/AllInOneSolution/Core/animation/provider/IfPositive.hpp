@@ -14,11 +14,11 @@
 class IfPositive : public MultiProvider
 {
 public:
-    
-    IfPositive(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
-    {
-        if(getProvider().size() != 2)
-            throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "IfPositive"));
+  
+    IfPositive(std::vector<std::unique_ptr<ValueProvider>>&& provider) : MultiProvider(std::move(provider))
+   {
+       if(getProvider().size() != 2)
+           throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "IfPositive"));
     }
 
     virtual float getValue() override
@@ -30,11 +30,11 @@ public:
             return getProvider()[1]->getValue();
     }
 
-    virtual IfPositive* clone() const override
-    {
-        auto list = std::move(cloneProviders());
-        return new IfPositive(list);
-    }
+   virtual IfPositive* clone() const override
+   {
+        auto list = cloneProviders();
+        return new IfPositive(std::move(list));
+   }
 };
 
 #endif //IF_POSITIVE_HPP
