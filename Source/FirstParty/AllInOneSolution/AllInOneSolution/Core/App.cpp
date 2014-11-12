@@ -31,9 +31,13 @@
 #include <sstream>
 #include <utility> // move
 
+#ifndef WINDOWS
+#import "MacHelper.hpp"
+#endif
+
 App::App(AppConfig& config) :
-    m_config(config),
-    m_windowTitle("Rickety Racquet"),
+   m_config(config),
+   m_windowTitle("Rickety Racquet"),
     m_fullscreen(false),
     m_focus(true),
     m_isMinimized(false),
@@ -184,12 +188,20 @@ void App::handleEvents()
         else if(event.type == sf::Event::KeyPressed)
             utility::Keyboard.notifyKeyPressed(event.key.code);
         else if(event.type == sf::Event::KeyReleased)
-            utility::Keyboard.notifyKeyReleased(event.key.code);
-        else if(event.type == sf::Event::MouseWheelMoved)
-            utility::Mouse.notifyWheelMoved(event.mouseWheel.delta);
+           utility::Keyboard.notifyKeyReleased(event.key.code);
+       else if(event.type == sf::Event::MouseWheelMoved)
+           utility::Mouse.notifyWheelMoved(event.mouseWheel.delta);
+        else if(event.type == sf::Event::MouseButtonPressed)
+        {
+            utility::Mouse.notifyButtonPressed(event.mouseButton.button);
+        }
+        else if(event.type == sf::Event::MouseButtonReleased)
+        {
+            utility::Mouse.notifyButtonReleased(event.mouseButton.button);
+        }
 
-        m_stateManager.passEvent(m_event.m_eventType);
-    }
+       m_stateManager.passEvent(m_event.m_eventType);
+   }
 }
 
 void App::switchDisplayMode()
@@ -283,8 +295,11 @@ void App::minimize()
             m_screen.create(mode, m_windowTitle, sf::Style::Default, sf::ContextSettings(24, 8, 0));
         }
     }
+#ifdef WINDOWS
     ShowWindow(m_screen.getSystemHandle(), SW_MINIMIZE);
-    
+#else
+    ::minimize(m_screen.getSystemHandle());
+#endif
 }
 
 void App::restore()
@@ -297,8 +312,13 @@ void App::restore()
         if(mode.width != m_config.get<unsigned int>("ResolutionX") && mode.height != m_config.get<unsigned int>("ResolutionY"))
             m_screen.create(mode, m_windowTitle, sf::Style::Fullscreen, sf::ContextSettings(24, 8, 0));
         m_screen.setMouseCursorVisible(false);
-        m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
-        m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
-    }
+       m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
+       m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
+   }
+#ifdef WINDOWS
     ShowWindow(m_screen.getSystemHandle(), SW_RESTORE);
+#else
+   ::maximize(m_screen.getSystemHandle());
+#endif
 }
+

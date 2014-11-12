@@ -15,10 +15,10 @@ class Maximum : public MultiProvider
 {
 public:
 
-    Maximum(std::vector<std::unique_ptr<ValueProvider>>& provider) : MultiProvider(std::move(provider))
-    {
-        if(getProvider().size() < 1)
-            throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Maximum"));
+    Maximum(std::vector<std::unique_ptr<ValueProvider>>&& provider) : MultiProvider(std::move(provider))
+   {
+       if(getProvider().size() < 1)
+           throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Maximum"));
     }
 
     virtual float getValue() override
@@ -36,11 +36,11 @@ public:
         return v;
     }
 
-    virtual Maximum* clone() const override
-    {
-        auto list = std::move(cloneProviders());
-        return new Maximum(list);
-    }
+   virtual Maximum* clone() const override
+   {
+        auto list = cloneProviders();
+        return new Maximum(std::move(list));
+   }
 };
 
 #endif //MAXIMUM_HPP

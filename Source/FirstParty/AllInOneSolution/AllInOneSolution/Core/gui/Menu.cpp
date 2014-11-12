@@ -16,14 +16,14 @@
 Menu::Menu(MenuTemplate& menuTemplate,
            const sf::Vector2f& position,
            sf::RenderWindow& screen) :
-        m_position(position),
-        m_screen(&screen),
-        m_template(std::move(menuTemplate)),
-        m_panel(std::move(menuTemplate.menuElements), position)
+       m_position(position),
+       m_screen(&screen),
+        m_panel(menuTemplate.menuElements, position)
 {
-    m_template.background.setPosition(m_position);
+    m_template = (std::move(menuTemplate));
+   m_template.background.setPosition(m_position);
 
-    m_size = sf::Vector2i(m_template.background.getTextureRect().width, m_template.background.getTextureRect().height);
+   m_size = sf::Vector2i(m_template.background.getTextureRect().width, m_template.background.getTextureRect().height);
 
     for(auto info = begin(m_template.subWindow); info != end(m_template.subWindow); ++info)
     {

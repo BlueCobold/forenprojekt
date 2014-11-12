@@ -1,8 +1,10 @@
 #include "FileReader.hpp"
 
+#include <algorithm>
+
 FileReader::FileReader(const std::string& fileName, const bool fromFile) :
-    m_fileName(fileName),
-    m_fromFile(fromFile)
+   m_fileName(fileName),
+   m_fromFile(fromFile)
 {
     if(m_fromFile)
         readFile();
@@ -12,18 +14,24 @@ FileReader::FileReader(const std::string& fileName, const bool fromFile) :
 
 std::string FileReader::eraseOverhang(std::string& data)
 {
-    while(!data.find(" "))             /// Find and erase leading spaces
-        data.erase(0, 1);
+   while(!data.find(" "))            /// Find and erase leading spaces
+       data.erase(0, 1);
 
-    unsigned int pos = data.find_last_of(" "); 
-    
-    while(pos == data.length() - 1)    /// Find and erase spaces after data
-    {
-        data.erase(pos,pos);
-        pos = data.find_last_of(" ");
-    }
+    auto rpos = data.find_last_of("r");
+    auto pos = data.find_last_of(" ");
+    if(rpos != std::string::npos && (rpos > pos || pos == std::string::npos))
+        pos = rpos;
   
-    return data;
+    while(pos != std::string::npos && pos == data.length() - 1)    /// Find and erase spaces after data
+   {
+       data.erase(pos,pos);
+        rpos = data.find_last_of("r");
+       pos = data.find_last_of(" ");
+        if(rpos != std::string::npos && (rpos > pos || pos == std::string::npos))
+            pos = rpos;
+   }
+
+   return data;
 }
 
 void FileReader::reload(const std::string& fileName, const bool fromFile)
@@ -50,13 +58,13 @@ void FileReader::readFile()
     if(configFile.is_open())
     {
         // Reset variables
-        std::string line;
-        std::string key;
-        std::string value;
-        unsigned int pos = 0;
+       std::string line;
+       std::string key;
+       std::string value;
+        auto pos = std::string::npos;
 
-        while(!configFile.eof())
-        {
+       while(!configFile.eof())
+       {
             std::getline(configFile, line);
 
             pos = line.find('=');
@@ -68,13 +76,13 @@ void FileReader::readFile()
             key = line.substr(0, pos);
             eraseOverhang(key);
             value = line.substr(pos + 1) ;
-            eraseOverhang(value);
+           eraseOverhang(value);
 
-            if(!key.empty() && !value.empty())
-                m_content.insert(std::make_pair<std::string&, std::string&>(key, value));
-        } 
-    } 
-    else
+           if(!key.empty() && !value.empty())
+                m_content.insert(std::make_pair(key, value));
+       }
+   }
+   else
         // cannot use translate here, because translate may need this file which cannot be loaded!
         throw std::runtime_error(std::string("File missing: ") + m_fileName);
 }
@@ -85,13 +93,13 @@ void FileReader::readString()
     {
         std::stringstream content(m_fileName);
         // Reset variables
-        std::string line;
-        std::string key;
-        std::string value;
-        unsigned int pos = 0;
+       std::string line;
+       std::string key;
+       std::string value;
+        auto pos = std::string::npos;
 
-        while(!content.eof())
-        {
+       while(!content.eof())
+       {
             std::getline(content, line);
 
             pos = line.find('=');
@@ -106,7 +114,7 @@ void FileReader::readString()
             eraseOverhang(value);
 
             if(!key.empty() && !value.empty())
-                m_content.insert(std::make_pair<std::string&, std::string&>(key, value));
+                m_content.insert(std::make_pair(key, value));
         } 
     } 
 }
@@ -119,11 +127,11 @@ std::string FileReader::get(const std::string& key)
     // Default return value
     std::string output = std::string("Key not found: ") + key;
 
-    auto it = m_content.find(key);
-    if(it != end(m_content))
-        output = it->second;
-
-    return output;
+   auto it = m_content.find(key);
+   if(it != end(m_content))
+        return it->second;
+    else
+        return output;
 }
 
 std::string FileReader::getFileName()

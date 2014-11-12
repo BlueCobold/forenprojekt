@@ -52,11 +52,14 @@ namespace utility
         void startInterpolation(const sf::Window& relativeTo);
         void interpolate(int steps, int current);
 
-        void capture();
+       void capture();
 
-        bool leftButtonPressed() const;
+        void notifyButtonPressed(sf::Mouse::Button button);
+        void notifyButtonReleased(sf::Mouse::Button button);
+       
+       bool leftButtonPressed() const;
 
-        bool leftButtonReleased() const;
+       bool leftButtonReleased() const;
 
         bool leftButtonDown() const;
 
@@ -74,12 +77,14 @@ namespace utility
     private:
 
         bool m_cursorVisible;
-        bool m_leftDown;
-        bool m_leftPressed;
-        bool m_leftReleased;
-        bool m_mouseWheelUp;
-        bool m_mouseWheelDown;
-        sf::Vector2f m_position;
+       bool m_leftDown;
+       bool m_leftPressed;
+       bool m_leftReleased;
+        bool m_isLeftDown; // tracks the physical state of the left mouse button
+        bool m_isRightDown; // tracks the physical state of the right mouse button
+       bool m_mouseWheelUp;
+       bool m_mouseWheelDown;
+       sf::Vector2f m_position;
         sf::Vector2i m_lastPosition;
         sf::Vector2i m_totalPosition;
     };

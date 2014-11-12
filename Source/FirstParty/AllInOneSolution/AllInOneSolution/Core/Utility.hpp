@@ -4,13 +4,13 @@
 #define UTILITY_HPP
 
 #include <SFML/Graphics/Color.hpp>
-#include "SFML/Graphics/RenderTarget.hpp"
-#include "SFML/Graphics/View.hpp"
+#include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/View.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
-#include <Box2D\Common\b2Math.h>
+#include <Box2D/Common/b2Math.h>
 
 #include <algorithm>
 #include <vector>

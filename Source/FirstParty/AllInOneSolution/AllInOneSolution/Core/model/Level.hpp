@@ -8,7 +8,7 @@
 #include "Background.hpp"
 #include "../animation/TimedObject.hpp"
 #include "../animation/provider/RandomProvider.hpp"
-#include "./collision./ContactListener.hpp"
+#include "collision/ContactListener.hpp"
 #include "../rendering/Drawable.hpp"
 #include "../ScrollView.hpp"
 #include "SoundManager.hpp"

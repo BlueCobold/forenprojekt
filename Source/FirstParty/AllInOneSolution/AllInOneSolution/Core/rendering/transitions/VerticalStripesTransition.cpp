@@ -35,12 +35,12 @@ VerticalStripesTransition::VerticalStripesTransition(
 
 void VerticalStripesTransition::update()
 {
-    Transition::update();
+   Transition::update();
 
-    float scale = getProgress();
+    //float scale = getProgress();
 
-    for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)
-    {
+   for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)
+   {
         auto currentRect = (*it)->getTextureRect();
         currentRect.width = static_cast<int>(m_stripeWidth * getProgress());
         (*it)->setTextureRect(currentRect);

@@ -1,7 +1,8 @@
 #include "LineLabel.hpp"
+#include <cmath>
 
 LineLabel::LineLabel() :
-    MenuElement(-1, MenuElementType::Label, sf::Vector2f(0,0), sf::Vector2f(0,0)),
+   MenuElement(-1, MenuElementType::Label, sf::Vector2f(0,0), sf::Vector2f(0,0)),
     m_text(""),
     m_progressPosition(0, 0),
     m_rotation(0),
