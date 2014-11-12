@@ -14,24 +14,24 @@ FileReader::FileReader(const std::string& fileName, const bool fromFile) :
 
 std::string FileReader::eraseOverhang(std::string& data)
 {
-   while(!data.find(" "))            /// Find and erase leading spaces
-       data.erase(0, 1);
+    while(!data.find(" "))            /// Find and erase leading spaces
+        data.erase(0, 1);
 
-    auto rpos = data.find_last_of("r");
+    auto rpos = data.find_last_of("\r");
     auto pos = data.find_last_of(" ");
     if(rpos != std::string::npos && (rpos > pos || pos == std::string::npos))
         pos = rpos;
   
     while(pos != std::string::npos && pos == data.length() - 1)    /// Find and erase spaces after data
-   {
-       data.erase(pos,pos);
+    {
+        data.erase(pos,pos);
         rpos = data.find_last_of("r");
-       pos = data.find_last_of(" ");
+        pos = data.find_last_of(" ");
         if(rpos != std::string::npos && (rpos > pos || pos == std::string::npos))
             pos = rpos;
-   }
+    }
 
-   return data;
+    return data;
 }
 
 void FileReader::reload(const std::string& fileName, const bool fromFile)
