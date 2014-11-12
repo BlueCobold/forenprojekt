@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Clockwork">
-		<infoimage srcx="38" srcy="313" width="192" height="108" />
+		<infoimage spriteSheet="gui_elements" sprite="preview: Clockwork" />
 	</levelinfo>
 	<constants gate="0" gatetime="0"/>
 	<templates>
@@ -14,6 +14,8 @@
 	
 	
 	<grid size="60" width="2460" height="1440">
+                                                                                    
+                                                                                    
                                                                                     
                                                                                     
                                                                                     
@@ -33,8 +35,6 @@
                             (3d2\6      BB    /2d5)2                                
                               (1w4            w1)3                                  
                                         TT                                          
-                                                                                    
-                                                                                    
                                                                                     
                                                                                     
                                                                                     
