@@ -19,7 +19,7 @@ private:
 public:
 
     MultiProvider(std::vector<std::unique_ptr<ValueProvider>>&& provider) : m_provider(std::move(provider))
-   {
+    {
        for(auto it = begin(m_provider); it != end(m_provider); ++it)
            if((*it) == nullptr)
                 throw std::runtime_error(utility::translateKey("ProviderNull"));

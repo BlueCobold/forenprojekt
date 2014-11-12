@@ -69,17 +69,17 @@ namespace utility
     void MouseWrapper::capture()
     {
         m_lastPosition = m_totalPosition;
-       m_position = sf::Vector2f(
-           static_cast<float>(m_lastPosition.x),
-           static_cast<float>(m_lastPosition.y));
+        m_position = sf::Vector2f(
+            static_cast<float>(m_lastPosition.x),
+            static_cast<float>(m_lastPosition.y));
         m_leftDown = /*sf::Mouse::isButtonPressed(sf::Mouse::Left)*/ m_isLeftDown && !m_leftPressed;
-       bool last = m_leftPressed;
+        bool last = m_leftPressed;
         m_leftPressed = m_isLeftDown;//sf::Mouse::isButtonPressed(sf::Mouse::Left);
-       m_leftReleased = last && !m_leftPressed;
+        m_leftReleased = last && !m_leftPressed;
 
-       m_mouseWheelDown = false;
-       m_mouseWheelUp = false;
-   }
+        m_mouseWheelDown = false;
+        m_mouseWheelUp = false;
+    }
 
     void MouseWrapper::notifyButtonPressed(sf::Mouse::Button button)
     {
@@ -88,7 +88,7 @@ namespace utility
         else if(button == sf::Mouse::Right)
             m_isRightDown = true;
     }
-   
+
     void MouseWrapper::notifyButtonReleased(sf::Mouse::Button button)
     {
         if(button == sf::Mouse::Left)
@@ -96,9 +96,9 @@ namespace utility
         else if(button == sf::Mouse::Right)
             m_isRightDown = false;
     }
-   
-   bool MouseWrapper::leftButtonPressed() const
-   {
+
+    bool MouseWrapper::leftButtonPressed() const
+    {
        return m_leftPressed;
     }
 

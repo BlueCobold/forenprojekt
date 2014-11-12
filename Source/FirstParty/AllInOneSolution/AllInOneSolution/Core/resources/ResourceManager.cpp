@@ -139,26 +139,26 @@ void ResourceManager::parseTextures(tinyxml2::XMLDocument& doc)
             textureIterator != nullptr; textureIterator = textureIterator->NextSiblingElement("texture"))
         {
             auto properties = std::make_pair<std::string, bool>(
-               std::string(textureIterator->Attribute("path")),
-               textureIterator->BoolAttribute("smooth"));
+                std::string(textureIterator->Attribute("path")),
+                textureIterator->BoolAttribute("smooth"));
 
             m_textureKeys.insert(std::make_pair(
-               std::string(textureIterator->Attribute("name")), properties));
-       }
-   }
+                std::string(textureIterator->Attribute("name")), properties));
+        }
+    }
 }
 
 void ResourceManager::parseFonts(tinyxml2::XMLDocument& doc)
 {
     if(auto fonts = doc.FirstChildElement("fonts"))
     {
-       for(auto fontIterator = fonts->FirstChildElement("font");
-           fontIterator != nullptr; fontIterator = fontIterator->NextSiblingElement("font"))
-       {
+        for(auto fontIterator = fonts->FirstChildElement("font");
+            fontIterator != nullptr; fontIterator = fontIterator->NextSiblingElement("font"))
+        {
             m_fontKeys.insert(std::make_pair(
-               std::string(fontIterator->Attribute("name")), std::string(fontIterator->Attribute("path"))));
-       }
-   } 
+                std::string(fontIterator->Attribute("name")), std::string(fontIterator->Attribute("path"))));
+        }
+    } 
 }
 
 void ResourceManager::parseSounds(tinyxml2::XMLDocument& doc)

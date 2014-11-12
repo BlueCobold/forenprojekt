@@ -253,7 +253,6 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
     sf::Vector2u& position,
     bool bindInstantly)
 {
-     auto pos = position;
     auto match = templates.entities.find(name);
     if(match == end(templates.entities))
     {

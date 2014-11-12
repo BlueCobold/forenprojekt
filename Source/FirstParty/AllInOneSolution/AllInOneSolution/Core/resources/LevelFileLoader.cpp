@@ -453,12 +453,12 @@ std::unordered_map<std::string, tinyxml2::XMLElement*> LevelFileLoader::parseLis
 
     for(auto iterator = xml->FirstChildElement(attributeName.c_str());
        iterator != nullptr; iterator = iterator->NextSiblingElement(attributeName.c_str()))
-   {
-       if(auto nodeName = iterator->Attribute(key.c_str()))
+    {
+        if(auto nodeName = iterator->Attribute(key.c_str()))
             tempList.insert(std::make_pair(std::string(nodeName), iterator));
-   }
+    }
 
-   return std::move(tempList);
+    return std::move(tempList);
 }
 
 std::vector<std::string> LevelFileLoader::parseGrid(tinyxml2::XMLElement* xml)

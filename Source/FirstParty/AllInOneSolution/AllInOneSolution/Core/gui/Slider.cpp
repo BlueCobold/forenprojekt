@@ -80,12 +80,12 @@ float Slider::getValue() const
 
 void Slider::onPositionChanged()
 {
-   auto position = getPosition();
-   auto offset = getOffset();
+    auto position = getPosition();
+    auto offset = getOffset();
     //auto size = m_spriteSlider->getTextureRect().width / 2.f;
-   float x = position.x + offset.x + m_style.mouseRect.left;
-   m_sliderPosition.x = (m_value - m_min) * m_style.width / m_max;
-   m_sliderPosition.y = position.y + offset.y + m_style.mouseRect.top;
+    float x = position.x + offset.x + m_style.mouseRect.left;
+    m_sliderPosition.x = (m_value - m_min) * m_style.width / m_max;
+    m_sliderPosition.y = position.y + offset.y + m_style.mouseRect.top;
 
     m_style.active.spriteBackground.setPosition(position + offset + m_style.active.backgroundOffset);
     m_style.idle.spriteBackground.setPosition(position + offset + m_style.idle.backgroundOffset);

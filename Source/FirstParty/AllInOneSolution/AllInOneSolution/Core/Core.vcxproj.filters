@@ -241,9 +241,6 @@
     <ClCompile Include="State\CoinShopState.cpp">
       <Filter>Sources\State</Filter>
     </ClCompile>
-    <ClCompile Include="gui\BitmapFont.cpp">
-      <Filter>Sources\gui\hud</Filter>
-    </ClCompile>
     <ClCompile Include="gui\Cursor.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
@@ -321,6 +318,9 @@
     </ClCompile>
     <ClCompile Include="gui\GameFinishedMenu.cpp">
       <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\BitmapFont.cpp">
+      <Filter>Sources\gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

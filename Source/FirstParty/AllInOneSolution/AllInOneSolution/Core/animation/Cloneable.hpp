@@ -6,7 +6,7 @@
 class Cloneable
 {
 public:
-   virtual Cloneable* clone() const = 0;
+    virtual Cloneable* clone() const = 0;
 };
 
 #endif // CLONEABLE_HPP
