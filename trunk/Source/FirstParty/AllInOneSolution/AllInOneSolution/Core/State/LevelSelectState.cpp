@@ -41,6 +41,8 @@ void LevelSelectState::onEnter(const EnterStateInformation* enterInformation, co
     m_menu.updateLayout();
 
     m_unlockedLevel = m_config.get<int>("UnlockedLevel");
+
+    updateButtons();
 }
 
 StateChangeInformation LevelSelectState::update(const float time)
@@ -97,16 +99,7 @@ StateChangeInformation LevelSelectState::update(const float time)
         }
     }
 
-    if(m_levelNames.find(m_currentLevelNumber - 1) == end(m_levelNames))
-        m_menu.hideLeftButton(true);
-    else
-        updateLeftButton();
-
-    if(m_levelNames.find(m_currentLevelNumber + 1) == end(m_levelNames) ||
-       (m_unlockedLevel < (m_currentLevelNumber + 1)))
-        m_menu.hideRightButton(true);
-    else
-        updateRightButton();
+    updateButtons();
 
     return StateChangeInformation::Empty();
 }
@@ -194,4 +187,18 @@ void LevelSelectState::updateRightButton()
         m_menu.changePressedSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
     }
     m_menu.hideRightButton(false);
+}
+
+void LevelSelectState::updateButtons()
+{
+    if(m_levelNames.find(m_currentLevelNumber - 1) == end(m_levelNames))
+        m_menu.hideLeftButton(true);
+    else
+        updateLeftButton();
+
+    if(m_levelNames.find(m_currentLevelNumber + 1) == end(m_levelNames) ||
+       (m_unlockedLevel < (m_currentLevelNumber + 1)))
+        m_menu.hideRightButton(true);
+    else
+        updateRightButton();
 }

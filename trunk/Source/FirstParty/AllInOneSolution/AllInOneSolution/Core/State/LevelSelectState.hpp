@@ -37,6 +37,8 @@ private:
 
     void updateLeftButton();
     void updateRightButton();
+
+    void updateButtons();
 };
 
 #endif // LEVELSELECTSTATE_HPP
