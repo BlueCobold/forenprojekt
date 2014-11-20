@@ -19,12 +19,12 @@ public:
 
     RandomProvider(const float min, const float max) : m_distribution(min, max)
     {
-	    m_random_engine.seed(std::random_device()());
+        m_random_engine.seed(std::random_device()());
     }
 
     virtual float getValue() override
     {
-	    return m_distribution(m_random_engine);
+        return m_distribution(m_random_engine);
     }
 
     virtual RandomProvider* clone() const override
