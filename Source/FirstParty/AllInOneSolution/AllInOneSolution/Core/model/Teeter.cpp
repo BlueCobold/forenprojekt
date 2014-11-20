@@ -39,7 +39,7 @@ void Teeter::update(const float value)
     sf::Vector2f mousePos = utility::Mouse.getPosition();
     sf::Vector2f mouseDiff = (m_lastMousePos - mousePos) * m_mouseScale / (timeDiff * 60);
 
-    float minVelocity = ((-45.f) - angle) / timeDiff;   
+    float minVelocity = ((-45.f) - angle) / timeDiff;
     float maxVelocity = ((45.f) - angle) / timeDiff;
 
     if(m_invertAxis)

@@ -4,6 +4,7 @@
 #include "../resources/AppConfig.hpp"
 #include "../resources/LevelFileLoader.hpp"
 #include "../Utility.hpp"
+#include "../MacHelper.hpp"
 
 #include "collision/handler/ApplyImpulseCollisionHandler.hpp"
 #include "collision/handler/BallTeleportCollisionHandler.hpp"
@@ -36,7 +37,7 @@ void Level::load()
         throw std::runtime_error(utility::replace(utility::translateKey("InvalidLevelNumber"), filename()));
 
     tinyxml2::XMLDocument doc;
-    doc.LoadFile(filename().c_str());
+    doc.LoadFile((resourcePath() + filename()).c_str());
 
     if(!validate(doc)) // Validate the XML file
         throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename()));
@@ -161,14 +162,15 @@ void Level::parseObjects(
     for(tinyxml2::XMLElement* entitiesIterator = objects->FirstChildElement("entity");
         entitiesIterator != nullptr; entitiesIterator = entitiesIterator->NextSiblingElement("entity"))
     {
-        m_entities.push_back(std::move(parseEntity(entitiesIterator, sf::Vector2u(0, 0), templates)));
+        auto pos = sf::Vector2u(0, 0);
+        m_entities.push_back(std::move(parseEntity(entitiesIterator, pos, templates)));
     }
    
     for(auto child = objects->FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-        std::string filename = pathname() + child->Attribute("file");
-        doc->LoadFile(filename.c_str());            
+        std::string filename = resourcePath() + pathname() + child->Attribute("file");
+        doc->LoadFile(filename.c_str());
         if(!validate(*(doc.get())))
             throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
         parseTemplates(templates, doc->RootElement(), docs);
@@ -224,8 +226,8 @@ void Level::parseTemplates(
     for(auto child = xmlTemplates->FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-        std::string filename = pathname() + child->Attribute("file");
-        doc->LoadFile(filename.c_str());            
+        std::string filename = resourcePath() + pathname() + child->Attribute("file");
+        doc->LoadFile(filename.c_str());
         if(!validate(*(doc.get())))
             throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
         parseTemplates(templates, doc->RootElement(), docs);
@@ -411,6 +413,7 @@ bool Level::validate(const tinyxml2::XMLDocument& document)
         return false;
     }
 
+    // TODO: really?
     return true;
 
     // Check for required tags

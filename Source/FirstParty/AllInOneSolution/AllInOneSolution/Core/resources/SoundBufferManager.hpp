@@ -10,7 +10,9 @@ class SoundBufferManager
 {
 public:
 
+#ifndef NO_SOUND
     virtual sf::SoundBuffer* getSoundBuffer(const std::string& key) = 0;
+#endif
 };
 
 #endif // SOUND_BUFFER_MANAGER

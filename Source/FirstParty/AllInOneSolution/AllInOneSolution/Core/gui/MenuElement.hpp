@@ -4,6 +4,7 @@
 #define MENU_ELEMENT_HPP
 
 #include "../rendering/Drawable.hpp"
+#include "../Input.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -115,6 +116,15 @@ protected:
         return m_offset;
     }
 
+    const sf::Vector2i& getCursorPosition(const sf::RenderWindow& screen) const
+    {
+#ifdef IOS
+        return utility::Mouse.getTouchPosition();
+#else
+        return sf::Mouse::getPosition(screen);
+#endif
+    }
+    
 private:
 
     int m_id;

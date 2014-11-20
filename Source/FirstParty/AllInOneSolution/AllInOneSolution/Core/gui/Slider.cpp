@@ -37,7 +37,7 @@ void Slider::update(const sf::RenderWindow& screen, const float time, const sf::
     else if(!m_active)
     {
         sliderRect.left += static_cast<int>(m_sliderPosition.x);
-        sf::Vector2i mousePos = sf::Mouse::getPosition(screen);
+        auto mousePos = getCursorPosition(screen);
         if(sliderRect.contains(mousePos + mouseOffset))
         {
             m_active = true;
@@ -53,7 +53,7 @@ void Slider::update(const sf::RenderWindow& screen, const float time, const sf::
     }
     else
     {
-        sf::Vector2i mousePos = sf::Mouse::getPosition(screen) + mouseOffset;
+        auto mousePos = getCursorPosition(screen) + mouseOffset;
         calculateValue(x, mousePos.x - m_pick);
         m_spriteSlider = &m_style.active.spriteSlider;
         m_spriteBackground = &m_style.active.spriteBackground;

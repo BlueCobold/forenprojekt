@@ -32,7 +32,6 @@ void HorizontalStripesTransition::update()
 {
     Transition::update();
 
-    float scale = getProgress();
     for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)
     {
         auto currentRect = (*it)->getTextureRect();

@@ -30,7 +30,9 @@ OptionMenu::OptionMenu(const sf::Vector2f& position,
 
     m_useStencilEffects = m_config.get<bool>("UseStencilEffects");
 
+#ifndef NO_SOUND
     sf::Listener::setGlobalVolume(m_masterVolume);
+#endif
 
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
@@ -99,7 +101,9 @@ void OptionMenu::applyChanges()
     if(Menu::getSlider(SLIDER_MASTERVOLUMEN).getValue() != m_masterVolume)
     {
         m_masterVolume = Menu::getSlider(SLIDER_MASTERVOLUMEN).getValue();
+#ifndef NO_SOUND
         sf::Listener::setGlobalVolume(m_masterVolume);
+#endif
         m_config.set("MasterVolume", m_masterVolume);
     }
 
@@ -174,8 +178,9 @@ void OptionMenu::onEnter()
     m_muteSoundWhenInactive = m_config.get<bool>("MuteSoundWhenInactiv");
 
     m_masterVolume = m_config.get<float>("MasterVolume");
+#ifndef NO_SOUND
     sf::Listener::setGlobalVolume(m_masterVolume);
-
+#endif
     m_invertAxis = m_config.get<bool>("InvertAxis");
     m_useVerticalAxis = m_config.get<bool>("UseVerticalAxis");
 

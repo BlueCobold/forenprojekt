@@ -24,7 +24,9 @@ public:
 
 private:
     SoundBufferManager& m_resourceManager;
+#ifndef NO_SOUND
     std::queue<std::pair<std::string, std::unique_ptr<sf::Sound>>> m_sounds;
+#endif
     std::map<std::string, std::string> m_soundKeys;
 };
 

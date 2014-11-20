@@ -4,7 +4,7 @@
 #define GRAPHICAL_OBJECT_HPP
 
 #include "../animation/Animation.hpp"
-#include "AnimatedGraphics.hpp"
+#include "../model/AnimatedGraphics.hpp"
 #include "Drawable.hpp"
 
 #include <memory>

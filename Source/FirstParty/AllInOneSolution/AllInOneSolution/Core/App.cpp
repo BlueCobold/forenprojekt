@@ -25,7 +25,7 @@
 #include <SFML/Window/WindowStyle.hpp>
 #include <SFML/Audio/Listener.hpp>
 #include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/RenderOptions.hpp>
+//#include <SFML/Graphics/RenderOptions.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
 #include <sstream>
@@ -36,15 +36,15 @@
 #endif
 
 App::App(AppConfig& config) :
-   m_config(config),
-   m_windowTitle("Rickety Racquet"),
+    m_config(config),
+    m_windowTitle("Rickety Racquet"),
     m_fullscreen(false),
     m_focus(true),
     m_isMinimized(false),
     m_stateManager(m_screen)
 {
     // Cache often used settings
-    sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
+    //sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
     sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
@@ -54,7 +54,6 @@ App::App(AppConfig& config) :
     sf::ContextSettings settings = sf::ContextSettings(24, 8, 0);
     m_screen.create(videoMode, m_windowTitle, m_fullscreen ? sf::Style::Fullscreen : sf::Style::Default, settings);
     
-    m_screen.setMouseCursorVisible(false);
     m_cursor = std::unique_ptr<Cursor>(new Cursor(m_resourceManager, m_screen));
 
     auto sheet = m_resourceManager.getSpriteSheet("gui_elements");
@@ -85,6 +84,8 @@ App::App(AppConfig& config) :
     m_stateManager.registerState(NewHighScoreStateId, std::unique_ptr<NewHighScoreState>(new NewHighScoreState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(GameFinishedStateId, std::unique_ptr<GameFinishedState>(new GameFinishedState(m_screen, m_resourceManager, m_config)));
     m_stateManager.setState(StartStateId);
+    
+    m_screen.setMouseCursorVisible(false);
 }
 
 void App::run()
@@ -188,20 +189,30 @@ void App::handleEvents()
         else if(event.type == sf::Event::KeyPressed)
             utility::Keyboard.notifyKeyPressed(event.key.code);
         else if(event.type == sf::Event::KeyReleased)
-           utility::Keyboard.notifyKeyReleased(event.key.code);
-       else if(event.type == sf::Event::MouseWheelMoved)
-           utility::Mouse.notifyWheelMoved(event.mouseWheel.delta);
+            utility::Keyboard.notifyKeyReleased(event.key.code);
+        else if(event.type == sf::Event::MouseWheelMoved)
+            utility::Mouse.notifyWheelMoved(event.mouseWheel.delta);
         else if(event.type == sf::Event::MouseButtonPressed)
+            utility::Mouse.notifyButtonPressed(event.mouseButton.button);
+        else if(event.type == sf::Event::MouseButtonReleased)
+            utility::Mouse.notifyButtonReleased(event.mouseButton.button);
+#ifdef IOS
+        else if(event.type == sf::Event::TouchBegan)
         {
             utility::Mouse.notifyButtonPressed(event.mouseButton.button);
+            utility::Mouse.notifyTouch(sf::Vector2i(event.touch.x, event.touch.y));
         }
-        else if(event.type == sf::Event::MouseButtonReleased)
+        else if(event.type == sf::Event::TouchEnded)
         {
             utility::Mouse.notifyButtonReleased(event.mouseButton.button);
+            utility::Mouse.notifyTouch(sf::Vector2i(event.touch.x, event.touch.y));
         }
-
-       m_stateManager.passEvent(m_event.m_eventType);
-   }
+        else if(event.type == sf::Event::TouchMoved)
+            utility::Mouse.notifyTouch(sf::Vector2i(event.touch.x, event.touch.y));
+#endif
+        
+        m_stateManager.passEvent(m_event.m_eventType);
+    }
 }
 
 void App::switchDisplayMode()

@@ -1,4 +1,5 @@
 #include "FileReader.hpp"
+#include "PathHelper.hpp"
 
 #include <algorithm>
 
@@ -21,7 +22,7 @@ std::string FileReader::eraseOverhang(std::string& data)
     auto pos = data.find_last_of(" ");
     if(rpos != std::string::npos && (rpos > pos || pos == std::string::npos))
         pos = rpos;
-  
+
     while(pos != std::string::npos && pos == data.length() - 1)    /// Find and erase spaces after data
     {
         data.erase(pos,pos);
@@ -53,14 +54,14 @@ void FileReader::set(const std::string& key, const std::string& value)
 void FileReader::readFile()
 {
     // Open file
-    std::ifstream configFile(m_fileName, std::ios_base::in);
+    std::ifstream configFile(resourcePath() + m_fileName, std::ios_base::in);
 
     if(configFile.is_open())
     {
         // Reset variables
-       std::string line;
-       std::string key;
-       std::string value;
+        std::string line;
+        std::string key;
+        std::string value;
         auto pos = std::string::npos;
 
        while(!configFile.eof())
@@ -78,11 +79,11 @@ void FileReader::readFile()
             value = line.substr(pos + 1) ;
            eraseOverhang(value);
 
-           if(!key.empty() && !value.empty())
+            if(!key.empty() && !value.empty())
                 m_content.insert(std::make_pair(key, value));
-       }
-   }
-   else
+        } 
+    } 
+    else
         // cannot use translate here, because translate may need this file which cannot be loaded!
         throw std::runtime_error(std::string("File missing: ") + m_fileName);
 }
@@ -93,9 +94,9 @@ void FileReader::readString()
     {
         std::stringstream content(m_fileName);
         // Reset variables
-       std::string line;
-       std::string key;
-       std::string value;
+        std::string line;
+        std::string key;
+        std::string value;
         auto pos = std::string::npos;
 
        while(!content.eof())
@@ -127,8 +128,8 @@ std::string FileReader::get(const std::string& key)
     // Default return value
     std::string output = std::string("Key not found: ") + key;
 
-   auto it = m_content.find(key);
-   if(it != end(m_content))
+    auto it = m_content.find(key);
+    if(it != end(m_content))
         return it->second;
     else
         return output;

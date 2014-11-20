@@ -131,7 +131,7 @@ void ToolTip::setLines(const std::string& text)
     std::string token;
 
     // multilines
-    for(int pos = tokens.find("\\r\\n"); pos != std::string::npos; pos = tokens.find("\\r\\n"))
+    for(auto pos = tokens.find("\\r\\n"); pos != std::string::npos; pos = tokens.find("\\r\\n"))
     {
         token = tokens.substr(0, pos);
         tokens.erase(0, pos + 4);

@@ -15,7 +15,11 @@ Cursor::Cursor(ResourceManager& resourceManager, const sf::RenderWindow& screen)
 
 void Cursor::update()
 {
-    sf::Vector2i pos = sf::Mouse::getPosition(m_screen) - sf::Vector2i(6, 5);
+#ifdef IOS
+    auto pos = utility::Mouse.getTouchPosition() - sf::Vector2i(6, 5);
+#else
+    auto pos = sf::Mouse::getPosition(m_screen) - sf::Vector2i(6, 5);
+#endif
     m_sprite.setPosition(static_cast<float>(pos.x), static_cast<float>(pos.y));
 }
 

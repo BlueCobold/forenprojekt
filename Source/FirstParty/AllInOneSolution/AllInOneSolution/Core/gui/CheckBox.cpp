@@ -21,12 +21,12 @@ void CheckBox::update(const sf::RenderWindow& screen, const float time, const sf
                              m_style.mouseRect.width,
                              m_style.mouseRect.height);
     
-    sf::Vector2i mouseposition = sf::Mouse::getPosition(screen);
-    if(checkboxRect.contains(sf::Mouse::getPosition(screen) + mouseOffset))
+    auto mousePosition = getCursorPosition(screen);
+    if(checkboxRect.contains(getCursorPosition(screen) + mouseOffset))
     {
         m_showToolTip = true;
         m_hover = true;
-        m_toolTip.setPosition(static_cast<const sf::Vector2f>(mouseposition), screen);
+        m_toolTip.setPosition(static_cast<const sf::Vector2f>(mousePosition), screen);
 
         if(utility::Mouse.leftButtonReleased())
             m_checked = !m_checked;

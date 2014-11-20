@@ -5,3 +5,4 @@ namespace sfExt
 {
     bool StencilBufferEnabled = false;
 }
+

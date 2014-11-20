@@ -73,8 +73,10 @@ public:
         if(!isPaused())
             m_pauseStart = time;
         m_pause = true;
+#ifndef NO_SOUND
         if(m_config.get<bool>("MuteSoundWhenInactiv"))
            sf::Listener::setGlobalVolume(0.0f);
+#endif
     }
 
     void resume(const float time)
@@ -82,7 +84,9 @@ public:
         if(isPaused())
             m_pauseDelay += time - m_pauseStart;
         m_pause = false;
+#ifndef NO_SOUND
         sf::Listener::setGlobalVolume(m_config.get<float>("MasterVolume"));
+#endif
     }
 
     const bool isPaused()
