@@ -82,6 +82,7 @@ void Slider::onPositionChanged()
 {
     auto position = getPosition();
     auto offset = getOffset();
+    // TODO: Remove not needed code
     //auto size = m_spriteSlider->getTextureRect().width / 2.f;
     float x = position.x + offset.x + m_style.mouseRect.left;
     m_sliderPosition.x = (m_value - m_min) * m_style.width / m_max;
