@@ -7,10 +7,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-
 #include <algorithm>
 #include <vector>
-
 
 namespace utility
 {
@@ -51,7 +49,10 @@ namespace utility
 
         void startInterpolation(const sf::Window& relativeTo);
         void interpolate(int steps, int current);
-
+#ifdef IOS
+        void notifyTouch(const sf::Vector2i& pos);
+        const sf::Vector2i& getTouchPosition() const;
+#endif
         void capture();
 
         void notifyButtonPressed(sf::Mouse::Button button);
@@ -75,7 +76,9 @@ namespace utility
         bool isCursorVisible() const;
 
     private:
-
+#ifdef IOS
+        sf::Vector2i m_touchPosition;
+#endif
         bool m_cursorVisible;
         bool m_leftDown;
         bool m_leftPressed;

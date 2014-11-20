@@ -10,7 +10,6 @@ namespace utility
     {
         m_released.clear();
         m_newlyPressed.clear();
-        m_stillPressed;
     }
 
     void KeyboardWrapper::notifyKeyPressed(const sf::Keyboard::Key key)
@@ -50,6 +49,18 @@ namespace utility
     {
         return m_position;
     }
+
+#ifdef IOS
+    void MouseWrapper::notifyTouch(const sf::Vector2i& pos)
+    {
+        m_touchPosition = pos;
+    }
+    
+    const sf::Vector2i& MouseWrapper::getTouchPosition() const
+    {
+        return m_touchPosition;
+    }
+#endif
 
     void MouseWrapper::startInterpolation(const sf::Window& relativeTo)
     {

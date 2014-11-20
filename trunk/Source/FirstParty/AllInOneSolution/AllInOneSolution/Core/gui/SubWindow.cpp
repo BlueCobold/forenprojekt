@@ -102,9 +102,10 @@ void SubWindow::update(const sf::RenderWindow& screen, const float time, const s
     sf::IntRect sliderRect(static_cast<sf::Vector2i>(m_positionRect.getPosition()), static_cast<sf::Vector2i>(m_positionRect.getSize()));
 
     float scroll = 0;
-    if(mouseRect.contains(sf::Mouse::getPosition(screen)) && utility::Mouse.isWheelMovedDown())
+    auto cursorPosition = getCursorPosition(screen);
+    if(mouseRect.contains(cursorPosition) && utility::Mouse.isWheelMovedDown())
         scroll = 15;
-    else if(mouseRect.contains(sf::Mouse::getPosition(screen)) && utility::Mouse.isWheelMovedUp())
+    else if(mouseRect.contains(cursorPosition) && utility::Mouse.isWheelMovedUp())
         scroll = -15;
     if (scroll != 0)
     {
@@ -117,14 +118,14 @@ void SubWindow::update(const sf::RenderWindow& screen, const float time, const s
         m_center.y = floorf(m_size.y / 2.f + sliderPixelToWindowPixel(m_positionRect.getPosition().y - getPosition().y - getOffset().y));
     }
 
-    if(sliderRect.contains(sf::Mouse::getPosition(screen)) && utility::Mouse.leftButtonDown())
+    if(sliderRect.contains(cursorPosition) && utility::Mouse.leftButtonDown())
     {
-        m_startValue = sf::Mouse::getPosition().y;
+        m_startValue = cursorPosition.y;
         m_active = true;
     }
     else if(utility::Mouse.leftButtonPressed() && m_active)
     {
-        m_endValue = sf::Mouse::getPosition().y;
+        m_endValue = cursorPosition.y;
         float y = m_positionRect.getPosition().y + m_endValue - m_startValue;
         if(y < getPosition().y + getOffset().y)
             y = getPosition().y + getOffset().y;
@@ -147,7 +148,7 @@ void SubWindow::update(const sf::RenderWindow& screen, const float time, const s
     m_style.scrollbarMiddle.setScale(1, height/m_style.scrollbarMiddle.getTextureRect().height);
     m_style.scrollbarBottom.setPosition(pos.x, pos.y + height + m_style.scrollbarTop.getTextureRect().height);
 
-    if(mouseRect.contains(sf::Mouse::getPosition(screen)))
+    if(mouseRect.contains(cursorPosition))
         m_panel.update(screen, time, getMouseOffset(screen));
     else
         m_panel.update(screen, time, static_cast<sf::Vector2i>(screen.getSize()));

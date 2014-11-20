@@ -12,6 +12,7 @@ SoundManager::SoundManager(SoundBufferManager& resourceManager)
 
 void SoundManager::update()
 {
+#ifndef NO_SOUND
     if(!m_sounds.empty())
     {
         if(m_sounds.front().second->getStatus() == sf::Sound::Stopped)
@@ -20,10 +21,12 @@ void SoundManager::update()
             m_sounds.pop();
         }
     }
+#endif
 }
 
 void SoundManager::play(const std::string& key, const float volume)
 {
+#ifndef NO_SOUND
     if(m_soundKeys.count(key) <= 0)
     {
         auto sound = std::unique_ptr<sf::Sound>(new sf::Sound(*m_resourceManager.getSoundBuffer(key)));
@@ -33,4 +36,5 @@ void SoundManager::play(const std::string& key, const float volume)
         m_soundKeys.insert(std::pair<std::string, std::string>(key,key));
         m_sounds.push(std::make_pair(key, std::move(sound)));
     }
+#endif
 }

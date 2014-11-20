@@ -3,6 +3,7 @@
 #include "../gui/Button.hpp"
 #include "../resources/Config.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
+#include "../MacHelper.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 
 #include <fstream> 
@@ -124,12 +125,13 @@ void LevelSelectState::loadLevelInfos()
 
     for(auto it = std::begin(fileNames); it != std::end(fileNames); ++it)
     {
-        file = "res/level/" + it->second;
+        file = resourcePath() + "res/level/" + it->second;
 
         doc.LoadFile(file.c_str());
         if(doc.Error()) // Error while loading file
         {
-            auto error = utility::replace(utility::translateKey("InvalidXml"), file + " [" + doc.GetErrorStr1() +"]");
+            auto msg = std::string(doc.GetErrorStr1() ? doc.GetErrorStr1() : "");
+            auto error = utility::replace(utility::translateKey("InvalidXml"), file + " [" + msg +"]");
             if(doc.GetErrorStr2())
                 error += std::string(" / ") + doc.GetErrorStr2();
             throw std::runtime_error(error);

@@ -8,6 +8,7 @@
 #include "../gui/MenuTemplate.hpp"
 #include "SoundBufferManager.hpp"
 #include "SpriteSheet.hpp"
+#include "PathHelper.hpp"
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -33,7 +34,9 @@ public:
 
     sf::Texture* getTexture(const std::string& key);
     sf::Font* getFont(const std::string& key);
+#ifndef NO_SOUND
     sf::SoundBuffer* getSoundBuffer(const std::string& key) override;
+#endif
     BitmapFont* getBitmapFont(const std::string& key);
     MenuTemplate* getMenuTemplate(const std::string& name);
     SoundManager& getSoundManager();
@@ -53,7 +56,7 @@ private:
     static sf::Texture* loadTexture(const std::string& path, bool smooth)
     {
         sf::Texture* texture = new sf::Texture;
-        if(!texture->loadFromFile("res/img/" + path))
+        if(!texture->loadFromFile(resourcePath() + "res/img/" + path))
         {
             delete texture; // No memory leak
             return nullptr;
@@ -69,7 +72,7 @@ private:
     static sf::Font* loadFont(const std::string& path)
     {
         sf::Font* font = new sf::Font;
-        if(!font->loadFromFile("res/font/" + path))
+        if(!font->loadFromFile(resourcePath() + "res/font/" + path))
         {
             delete font;
             return nullptr;
@@ -77,11 +80,12 @@ private:
         else
             return font;
     }
-
+    
+#ifndef NO_SOUND
     static sf::SoundBuffer* loadSoundBuffer(const std::string& path)
     {
         sf::SoundBuffer* soundBuffer = new sf::SoundBuffer;
-        if(!soundBuffer->loadFromFile("res/audio/" + path))
+        if(!soundBuffer->loadFromFile(resourcePath() + "res/audio/" + path))
         {
             delete soundBuffer;
             return nullptr;
@@ -89,11 +93,12 @@ private:
         else
             return soundBuffer;
     }
-
+#endif
+    
     BitmapFont* loadBitmapFont(const std::string& path)
     {
         BitmapFont* font = new BitmapFont;
-        if(!font->loadFromFile("res/bitmapfont/" + path, *this))
+        if(!font->loadFromFile(resourcePath() + "res/bitmapfont/" + path, *this))
         {
             delete font;
             return nullptr;
@@ -105,7 +110,7 @@ private:
     static SpriteSheet* loadSpriteSheet(const std::string& path)
     {
         SpriteSheet* sheet = new SpriteSheet;
-        if(!sheet->loadFromFile("res/spritesheet/" + path))
+        if(!sheet->loadFromFile(resourcePath() + "res/spritesheet/" + path))
         {
             delete sheet;
             return nullptr;
@@ -127,7 +132,9 @@ private:
     std::unique_ptr<SoundManager> m_soundManager;
     ResourceCache<sf::Texture> m_textures;
     ResourceCache<sf::Font> m_fonts;
+#ifndef NO_SOUND
     ResourceCache<sf::SoundBuffer> m_soundBuffers;
+#endif
     ResourceCache<BitmapFont> m_bitmapFonts;
     ResourceCache<MenuTemplate> m_menus;
     ResourceCache<SpriteSheet> m_spriteSheets;

@@ -2,6 +2,7 @@
 #include "ResourceManager.hpp"
 #include "../gui/LineLabel.hpp"
 #include "LevelFileLoader.hpp"
+#include "../MacHelper.hpp"
 
 #include <string>
 
@@ -46,7 +47,7 @@ sf::Sprite getSprite(tinyxml2::XMLElement* element,
 MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager)
 {
     tinyxml2::XMLDocument doc;
-    doc.LoadFile(path.c_str());
+    doc.LoadFile((resourcePath() + path).c_str());
 
     if(doc.Error())
     {
@@ -306,8 +307,8 @@ std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(tinyx
     if(auto styles = menuXml->FirstChildElement("styles"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-        std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
-        doc->LoadFile(filename.c_str());     
+        std::string filename = resourcePath() + utility::toString("res/menus/") + styles->Attribute("source");
+        doc->LoadFile(filename.c_str());
 
         if(doc->Error())
         {
@@ -350,8 +351,8 @@ std::unordered_map<std::string, CheckBoxStyle> MenuLoader::parseCheckBoxStyles(t
     if(auto styles = menuXml->FirstChildElement("styles"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-        std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
-        doc->LoadFile(filename.c_str());     
+        std::string filename = resourcePath() + utility::toString("res/menus/") + styles->Attribute("source");
+        doc->LoadFile(filename.c_str());
 
         if(doc->Error())
         {
@@ -392,8 +393,8 @@ std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(tinyx
     if(auto styles = menuXml->FirstChildElement("styles"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-        std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
-        doc->LoadFile(filename.c_str());     
+        std::string filename = resourcePath() + utility::toString("res/menus/") + styles->Attribute("source");
+        doc->LoadFile(filename.c_str());
 
         if(doc->Error())
         {
@@ -442,8 +443,8 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(tinyxml2:
     if(auto styles = menuXml->FirstChildElement("styles"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-        std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
-        doc->LoadFile(filename.c_str());     
+        std::string filename = resourcePath() + utility::toString("res/menus/") + styles->Attribute("source");
+        doc->LoadFile(filename.c_str());
 
         if(doc->Error())
         {
@@ -489,8 +490,8 @@ std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(ti
     if(auto styles = menuXml->FirstChildElement("styles"))
     {
         std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-        std::string filename = utility::toString("res/menus/") + styles->Attribute("source");
-        doc->LoadFile(filename.c_str());     
+        std::string filename = resourcePath() + utility::toString("res/menus/") + styles->Attribute("source");
+        doc->LoadFile(filename.c_str());
 
         if(doc->Error())
         {

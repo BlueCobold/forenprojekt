@@ -37,8 +37,8 @@
 				<vertex x="54" y="6" />
 				<vertex x="60" y="6" />
 				<vertex x="60" y="60" />
-				<vertex x="6" y="54" />
 				<vertex x="6" y="60" />
+				<vertex x="6" y="54" />
 			</shape>
 			<shape name="right_upper" type="polygon">
 				<vertex x="6" y="0" />

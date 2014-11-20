@@ -1,5 +1,6 @@
 #include "ResourceManager.hpp"
 #include "MenuLoader.hpp"
+#include "../MacHelper.hpp"
 
 #include <tinyxml2.h>
 
@@ -11,7 +12,7 @@ ResourceManager::ResourceManager()
     m_soundManager = std::unique_ptr<SoundManager>(new SoundManager(*this));
     // Parse resource information
     tinyxml2::XMLDocument doc;
-    doc.LoadFile("res/resources.nfo");
+    doc.LoadFile((resourcePath() + "res/resources.nfo").c_str());
 
     if(doc.Error()) // Error while loading file
     {
@@ -65,6 +66,7 @@ MenuTemplate* ResourceManager::getMenuTemplate(const std::string& name)
     throw std::runtime_error(utility::replace(utility::translateKey("UnknownMenuTemplate"), name));
 }
 
+#ifndef NO_SOUND
 sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
 {
     // Does the key even exist?
@@ -87,6 +89,7 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
     // If the key doesn't exist
     throw std::runtime_error(utility::replace(utility::translateKey("UnknownSound"), key));
 }
+#endif
 
 sf::Texture* ResourceManager::getTexture(const std::string& key)
 {

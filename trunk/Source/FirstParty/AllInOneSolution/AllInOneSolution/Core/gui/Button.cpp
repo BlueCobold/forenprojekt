@@ -26,9 +26,8 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
                            static_cast<int>(position.y + offset.y + m_style.mouseRect.top),
                            m_style.mouseRect.width,
                            m_style.mouseRect.height);
-
-    sf::Vector2i mouseposition = sf::Mouse::getPosition(screen);
-    if(buttonRect.contains(mouseposition + mouseOffset) && isVisible())
+    auto mousePosition = getCursorPosition(screen);
+    if(buttonRect.contains(mousePosition + mouseOffset) && isVisible())
     {
         if(!m_playHoverSound && m_style.hoverStyle.sound)
         {
@@ -37,7 +36,7 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
         }
 
         m_showToolTip = true;
-        m_toolTip.setPosition(static_cast<const sf::Vector2f>(mouseposition), screen);
+        m_toolTip.setPosition(static_cast<const sf::Vector2f>(mousePosition), screen);
         
         if(utility::Mouse.leftButtonPressed())
         {

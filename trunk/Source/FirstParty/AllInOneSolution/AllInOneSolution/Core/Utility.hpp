@@ -32,21 +32,24 @@ namespace utility
 
         return out.str();
     }
-
+    
     template<typename T>
     T stringTo(const std::string& str)
     {
-        T value;
-
         std::stringstream stringstream(str);
-
+        
+        T value;
         stringstream >> value;
-
+        if(stringstream.fail())
+        {
+            auto str2 = str;
+            // clang/MacOS doesn't like a trailing "f" in floats...
+            stringstream = std::stringstream(str2.replace(str.find("f"), 1, ""));
+            stringstream >> value;
+        }
+        
         return value;
     }
-
-    template<>
-    std::string stringTo(const std::string& str);
 
     template<typename T, typename Z>
     Z toDegree(T value)

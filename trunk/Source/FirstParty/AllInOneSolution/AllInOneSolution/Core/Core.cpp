@@ -3,7 +3,21 @@
 #include "gui/ErrorMessageBox.hpp"
 #include <iostream>
 
+#ifndef WINDOWS
+#include "MacHelper.hpp"
+#endif
+
+#ifdef IOS
+int main2(int argc, char* argv[]);
+
 int main(int argc, char* argv[])
+{
+    main2(argc, argv);
+}
+int sfmlMain(int argc, char* argv[])
+#else
+int main(int argc, char* argv[])
+#endif
 {
     try
     {
@@ -13,12 +27,14 @@ int main(int argc, char* argv[])
     }
     catch (std::exception& error)
     {
-        #ifdef _DEBUG
-            std::cout << "An error occurred: " << error.what();
-        #elif WINDOWS
-            ErrorMessageBox(error.what());
-        #endif
+#ifdef _DEBUG
+        std::cout << "An error occurred: " << error.what();
         getchar();
+#elif WINDOWS
+        ErrorMessageBox(error.what());
+#else
+        showErrorMac(error.what());
+#endif
         return 1;
     }
     return 0;
