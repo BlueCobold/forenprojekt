@@ -177,15 +177,15 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     sf::Texture* texture = nullptr;
     SpriteSheet* sheet = nullptr;
     SpriteSheet::SpriteData sprite;
-    if(auto texname = xml->Attribute("texture"))
-        texture = resourceManager.getTexture(texname);
+    if(auto textureName = xml->Attribute("texture"))
+        texture = resourceManager.getTexture(textureName);
     else
-    {   auto sheetname = xml->Attribute("spritesheet");
-        auto spritename = xml->Attribute("sprite");
-        if(sheetname && spritename && (sheet = resourceManager.getSpriteSheet(sheetname)) != nullptr)
+    {   auto sheetName = xml->Attribute("spritesheet");
+        auto spriteName = xml->Attribute("sprite");
+        if(sheetName && spriteName && (sheet = resourceManager.getSpriteSheet(sheetName)) != nullptr)
         {
             texture = resourceManager.getTexture(sheet->getTextureName());
-            sprite = sheet->get(spritename);
+            sprite = sheet->get(spriteName);
         }
     }
     if(texture == nullptr)
@@ -302,7 +302,10 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
             mode = sf::BlendAdd;
         else if(std::string("mul") == blend)
             mode = sf::BlendMultiply;
-#ifndef IOS
+#ifdef IOS
+        else if(std::string("premul") == blend)
+            mode = sf::BlendMode(sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha);
+#else
         else if(std::string("premul") == blend)
             mode = sf::BlendPremultiplied;
 #endif
