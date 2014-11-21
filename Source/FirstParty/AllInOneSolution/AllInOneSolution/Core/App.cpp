@@ -25,7 +25,7 @@
 #include <SFML/Window/WindowStyle.hpp>
 #include <SFML/Audio/Listener.hpp>
 #include <SFML/Graphics/Color.hpp>
-//#include <SFML/Graphics/RenderOptions.hpp>
+#include <SFML/Graphics/RenderOptions.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
 #include <sstream>
@@ -44,7 +44,7 @@ App::App(AppConfig& config) :
     m_stateManager(m_screen)
 {
     // Cache often used settings
-    //sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
+    sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
     sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
