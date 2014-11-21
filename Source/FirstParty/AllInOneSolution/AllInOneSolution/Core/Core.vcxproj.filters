@@ -322,6 +322,9 @@
     <ClCompile Include="gui\BitmapFont.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="resources\PathHelper.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -859,6 +862,9 @@
       <Filter>Headers\gui\menu</Filter>
     </ClInclude>
     <ClInclude Include="resources\BackgroundLoader.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="resources\PathHelper.hpp">
       <Filter>Headers\resources</Filter>
     </ClInclude>
   </ItemGroup>
