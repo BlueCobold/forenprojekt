@@ -116,7 +116,7 @@ protected:
         return m_offset;
     }
 
-    const sf::Vector2i& getCursorPosition(const sf::RenderWindow& screen) const
+    const sf::Vector2i getCursorPosition(const sf::RenderWindow& screen) const
     {
 #ifdef IOS
         return utility::Mouse.getTouchPosition();

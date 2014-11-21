@@ -51,6 +51,9 @@ namespace utility
         return value;
     }
 
+    template<>
+    std::string stringTo(const std::string& str);
+
     template<typename T, typename Z>
     Z toDegree(T value)
     {

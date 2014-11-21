@@ -26,8 +26,6 @@ public:
     }
 };
 
-};
-
 #endif  // WINDOWS
 
 #endif
