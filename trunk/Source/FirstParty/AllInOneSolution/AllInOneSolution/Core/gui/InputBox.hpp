@@ -49,7 +49,7 @@ public:
 
     bool isFinished();
 
-    void onEnter();
+    void onEnter(const std::string& lastString);
 
     std::string getText() const;
 

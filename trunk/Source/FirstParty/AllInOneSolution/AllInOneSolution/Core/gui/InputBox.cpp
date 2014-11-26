@@ -48,7 +48,7 @@ void InputBox::handleInput()
 {
     bool shiftKey = utility::Keyboard.isKeyPressed(sf::Keyboard::LShift) || utility::Keyboard.isKeyPressed(sf::Keyboard::RShift);
 
-    if(utility::Keyboard.isKeyDown(sf::Keyboard::Return))
+    if(utility::Keyboard.isKeyDown(sf::Keyboard::Return) && m_charCounter > 0)
         m_finished = true;
 
     if(utility::Keyboard.isKeyDown(sf::Keyboard::BackSpace) && m_charCounter > 0)
@@ -150,9 +150,9 @@ void InputBox::onPositionChanged()
     m_inputText.setPosition(position);
 }
 
-void InputBox::onEnter()
+void InputBox::onEnter(const std::string& lastString)
 {
     m_finished = false;
-    m_inputText.setText("");
-    m_charCounter = 0;
+    m_inputText.setText(lastString);
+    m_charCounter = lastString.size();
 }

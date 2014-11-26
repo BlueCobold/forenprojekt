@@ -20,7 +20,8 @@ NewHighScoreState::NewHighScoreState(sf::RenderWindow& screen,
     m_background(nullptr),
     m_menu(sf::Vector2f(0, 0), screen, resourceManager),
     m_HUD(resourceManager, config),
-    m_replay(false)
+    m_replay(false),
+    m_lastName("")
 {
 }
 
@@ -42,7 +43,7 @@ void NewHighScoreState::onEnter(const EnterStateInformation* enterInformation, c
 
     m_stateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
-    m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).onEnter();
+    m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).onEnter(m_lastName);
 }
 
 StateChangeInformation NewHighScoreState::update(const float time)
@@ -54,9 +55,16 @@ StateChangeInformation NewHighScoreState::update(const float time)
 
     m_HUD.update(m_level, getPassedTime());
 
-    if(m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).isFinished())
+    int clicked = -1;
+    m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
+
+    m_menu.update(m_screen, getPassedTime());
+
+    if(m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).isFinished() || 
+      (clicked == NewHighScoreMenu::BUTTON_OK && m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).getText().size() > 0))
     {
-        addNewHighScore(m_level->getPoints(), m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).getText());
+        m_lastName = m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).getText();
+        addNewHighScore(m_level->getPoints(), m_lastName);
 
         m_stateInfo.m_levelNumber = m_level->number();
         m_stateInfo.m_level = m_level;
@@ -68,7 +76,17 @@ StateChangeInformation NewHighScoreState::update(const float time)
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 
-    m_menu.update(m_screen, getPassedTime());
+    if(clicked == NewHighScoreMenu::BUTTON_SKIP)
+    {
+        m_stateInfo.m_levelNumber = m_level->number();
+        m_stateInfo.m_level = m_level;
+        m_stateInfo.m_prepareOnly = false;
+        m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
+        m_transitionStateInfo.m_followingState = LevelPassStateId;
+        m_transitionStateInfo.m_comeFromeState = NewHighScoreStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::Alpha;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+    }
 
     return StateChangeInformation::Empty();
 }
@@ -94,7 +112,7 @@ void NewHighScoreState::addNewHighScore(int points, std::string name)
 {
     if(name == "")
     {
-        m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).onEnter();
+        m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).onEnter(m_lastName);
         return;
     }
 
