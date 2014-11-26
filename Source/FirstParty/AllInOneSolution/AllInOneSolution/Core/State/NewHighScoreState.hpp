@@ -42,6 +42,8 @@ private:
 
     NewHighScoreMenu m_menu;
 
+    std::string m_lastName;
+
     EnterPauseStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
 };

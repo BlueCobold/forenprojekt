@@ -7,5 +7,7 @@
 		<label id="2" text="gui_newHighScore1" font="buttonHoverFont" alignment="1" x="255" y="55" />
 		<label id="3" text="gui_newHighScore2" font="buttonHoverFont" alignment="1" x="255" y="85" />
 		<label id="4" text="gui_newHighScore3" font="buttonHoverFont" alignment="1" x="255" y="115" />
+		<button id="5" text="gui_highscore_skip" style="small" x="179" y="255" />
+		<button id="6" text="gui_highscore_ok" style="small" x="343" y="255" />
 	</elements>
 </menu>

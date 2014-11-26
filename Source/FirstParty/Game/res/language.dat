@@ -125,6 +125,8 @@ gui_label_shadows = shadows
 gui_graphicsetup = Graphics Options
 gui_soundsetup = Sound Options
 gui_gameplaysetup = Gameplay Options
+gui_highscore_skip = Skip
+gui_highscore_ok = Ok
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
