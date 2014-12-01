@@ -60,8 +60,7 @@ StateChangeInformation NewHighScoreState::update(const float time)
 
     m_menu.update(m_screen, getPassedTime());
 
-    if(m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).isFinished() || 
-      (clicked == NewHighScoreMenu::BUTTON_OK && m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).getText().size() > 0))
+    if(m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).isFinished() || clicked == NewHighScoreMenu::BUTTON_OK)
     {
         m_lastName = m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).getText();
         addNewHighScore(m_level->getPoints(), m_lastName);

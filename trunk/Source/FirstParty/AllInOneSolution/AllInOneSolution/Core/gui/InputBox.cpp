@@ -48,7 +48,7 @@ void InputBox::handleInput()
 {
     bool shiftKey = utility::Keyboard.isKeyPressed(sf::Keyboard::LShift) || utility::Keyboard.isKeyPressed(sf::Keyboard::RShift);
 
-    if(utility::Keyboard.isKeyDown(sf::Keyboard::Return) && m_charCounter > 0)
+    if(utility::Keyboard.isKeyDown(sf::Keyboard::Return))
         m_finished = true;
 
     if(utility::Keyboard.isKeyDown(sf::Keyboard::BackSpace) && m_charCounter > 0)
