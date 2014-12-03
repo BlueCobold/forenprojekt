@@ -2,7 +2,7 @@
 	<levelinfo name="Beginner Level">
 		<infoimage spriteSheet="gui_elements" sprite="preview: Beginner Level" />
 	</levelinfo>
-	<medal bronze="180" silver="190" gold="200" />
+	<medal bronze="200" silver="250" gold="300" />
 	<templates>
 		<include file="assets/ball/twirl.inc" />
 		<include file="assets/target/static.inc" />

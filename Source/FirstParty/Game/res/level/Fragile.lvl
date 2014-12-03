@@ -1,8 +1,9 @@
 <level>
-	<levelinfo name="Rocket Science">
-		<infoimage spriteSheet="gui_elements" sprite="preview: Rocket Science" />
+	<levelinfo name="Fragile">
+		<infoimage spriteSheet="gui_elements" sprite="preview: Fragile" />
 	</levelinfo>
 	<constants gate="0" gatetime="0"/>
+	<gameplay time="60"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />
 		<include file="assets/target/movement.inc" />
@@ -27,7 +28,10 @@
 						<setVar name="delta">
 							<sub>
 								<var name="killTime" />
-								<time />
+								<mul>
+									<time />
+									<static value="2"/>
+								</mul>
 							</sub>
 						</setVar>
 						<stop />
@@ -41,7 +45,10 @@
 					<static value="0" />
 					<setVar name="killTime">
 						<add>
-							<time />
+							<mul>
+								<time />
+								<static value="2"/>
+							</mul>
 							<static value="1"/>
 						</add>
 					</setVar>
@@ -51,39 +58,6 @@
 		
 		<overrides>
 			<override rep="w*" newRep="k*">
-				<physics shape="wall" name="dynamicWall"/>
-				<animations>
-					<set rotate="true" />
-				</animations>
-			</override>
-			
-			<override rep="W*" newRep="K*">
-				<physics shape="wide_wall" name="dynamicWall"/>
-				<animations>
-					<set rotate="true" />
-				</animations>
-			</override>
-			
-			<override rep="k*" newRep="a*">
-				<constants collides="1" killTime="0" delta="0" />
-				<animations>
-					<color channel="alpha">
-						<function name="blockAlpha"/>
-					</color>
-				</animations>
-				<collides>
-					<propertyFilter target="entity">
-						<var name="collides" />
-					</propertyFilter>
-				</collides>
-				<onCollision>
-					<changeProperty name="collides">
-						<function name="blockCollides"/>
-					</changeProperty>
-				</onCollision>
-			</override>
-
-			<override rep="K*" newRep="A*">
 				<constants collides="1" killTime="0" delta="0" />
 				<animations>
 					<color channel="alpha">
@@ -111,23 +85,23 @@
                                                                                     
                                                                                     
                                                                                     
-                                        gg                                          
-                                      /1\5gh                                        
-                                    /4)6(2\3                                        
-                                    a2    a5                                        
-                                    a1  bta3                                        
-                                  /5A2  A4  \6                                      
-                                  w4)3    (2w3                                      
-                                  w1    bt  w2                                      
-                                  w6A1  A1  w4                                      
-                                  w4a3    a1w6                                      
-                                gow1a2  bta5w2gg                                    
-                              gr/2w5A3  A2  w3\4gh                                  
-                              /3w5w2)1    (2w5w1\3                                  
-                              w4)6            (6w4                                  
-                              w1    t1  BB  t1  w5                                  
+                                                                                    
+                                                                                    
+                          k1k2k5k4k6k1k2k3k1k6k2k5k4k3                                
+                          k3)2                    (1k2                              
+                          k5      bt  bt  bt  bt    k4                              
+                          k1    t1  t1  t1  t1  t1  k1                              
+                          k6  k2k5k1k6k2k3k4k5k5k2  k6                              
+                          k3                        k5                              
+                          k4gg                      k2                              
+                          (6\2gj                go/1)4                              
+                            (4\1gh      BB    gr/5)3                                
                               (2\3            /2)6                                  
+                                (2\5        /1)5                                    
                                         TT                                          
+                                                                                    
+                                                                                    
+                                                                                    
                                                                                     
                                                                                     
 	</grid>
@@ -138,5 +112,5 @@
 	<world>
 		<gravity x="0" y="40" />
 	</world>
-	<medal bronze="190" silver="200" gold="220" />
+	<medal bronze="400" silver="550" gold="800" />
 </level>

@@ -1,5 +1,4 @@
 <level>
-	<medal bronze="800" silver="1000" gold="1400" />
 	<levelinfo name="Up and Down">
 		<infoimage spriteSheet="gui_elements" sprite="preview: Up and Down" />
 	</levelinfo>
@@ -440,5 +439,5 @@
 	<world>
 		<gravity x="0" y="40" />
 	</world>
-	<medal bronze="150" silver="180" gold="200" />
+	<medal bronze="150" silver="200" gold="300" />
 </level>
