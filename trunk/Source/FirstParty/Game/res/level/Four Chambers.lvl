@@ -102,5 +102,5 @@
 	<world>
 		<gravity x="0" y="40" />
 	</world>
-	<medal bronze="780" silver="790" gold="800" />
+	<medal bronze="800" silver="1000" gold="1200" />
 </level>

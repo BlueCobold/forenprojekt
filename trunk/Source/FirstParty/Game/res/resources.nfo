@@ -75,16 +75,16 @@
 	<spritesheet name="gui_elements" path="gui/gui_elements.xml" />
 </spritesheets>
 <Levels>
-	<Level number="1" filename="001.lvl" />
-	<Level number="2" filename="002.lvl" />
-	<Level number="3" filename="004.lvl" />
-	<Level number="4" filename="007.lvl" />
-	<Level number="5" filename="008.lvl" />
-	<Level number="6" filename="011.lvl" />
-	<Level number="7" filename="017.lvl" />
-	<Level number="8" filename="019.lvl" />
-	<Level number="9" filename="020.lvl" />
-	<Level number="10" filename="021.lvl" />
-	<Level number="11" filename="024.lvl" />
-	<Level number="12" filename="025.lvl" />
+	<Level number="1" filename="Beginner Level.lvl" />
+	<Level number="2" filename="Clockwork.lvl" />
+	<Level number="3" filename="Rocket Science.lvl" />
+	<Level number="4" filename="Moving Walls.lvl" />
+	<Level number="5" filename="Pisa Studies.lvl" />
+	<Level number="6" filename="Fragile.lvl" />
+	<Level number="7" filename="Four Chambers.lvl" />
+	<Level number="8" filename="Up and Down.lvl" />
+	<Level number="9" filename="Crossroads.lvl" />
+	<Level number="10" filename="Bank Job.lvl" />
+	<Level number="11" filename="Things Change.lvl" />
+	<Level number="12" filename="Moving Spikes.lvl" />
 </Levels>
