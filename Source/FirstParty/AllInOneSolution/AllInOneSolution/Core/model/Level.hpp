@@ -17,6 +17,7 @@
 #include "GravityGoody.hpp"
 #include "InvulnerableGoody.hpp"
 #include "../resources/GameEventRecorder.hpp"
+#include "joint/JointObject.hpp"
 
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -222,6 +223,9 @@ private:
 
     void parseGameplayAttributes(tinyxml2::XMLElement* xml);
 
+    void parseJoints(tinyxml2::XMLElement* joints,
+        Entity* entity);
+
     std::unique_ptr<CollisionHandler> parseShowLabelHandler(tinyxml2::XMLElement* xml);
 
     /// Construct the full level filename from the level number
@@ -242,6 +246,7 @@ private:
     std::map<std::string, float> m_variables;
     Entity* m_updatingEntity;
     std::vector<std::unique_ptr<Entity>> m_entities;
+    std::vector<std::unique_ptr<JointObject>> m_joints;
     std::vector<std::unique_ptr<Entity>> m_entitiesToSpawn;
     std::vector<EntitySpawn> m_unspawnedEntities;
 
