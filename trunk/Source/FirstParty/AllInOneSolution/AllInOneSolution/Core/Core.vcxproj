@@ -146,6 +146,7 @@
     <ClCompile Include="model\Entity.cpp" />
     <ClCompile Include="model\Goody.cpp" />
     <ClCompile Include="model\GravityGoody.cpp" />
+    <ClCompile Include="model\joint\SingleRevoluteJoint.cpp" />
     <ClCompile Include="model\Level.cpp" />
     <ClCompile Include="model\Level_LoadingPart.cpp" />
     <ClCompile Include="model\ParallaxLayer.cpp" />
@@ -317,6 +318,8 @@
     <ClInclude Include="model\Goody.hpp" />
     <ClInclude Include="model\GravityGoody.hpp" />
     <ClInclude Include="model\InvulnerableGoody.hpp" />
+    <ClInclude Include="model\joint\JointObject.hpp" />
+    <ClInclude Include="model\joint\SingleRevoluteJoint.hpp" />
     <ClInclude Include="model\SoundManager.hpp" />
     <ClInclude Include="model\SoundObject.hpp" />
     <ClInclude Include="model\SoundTrigger.hpp" />

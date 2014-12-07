@@ -21,6 +21,8 @@
 #include "collision/filter/SpawnEntity.hpp"
 #include "../animation/provider/RandomProvider.hpp"
 
+#include "joint/SingleRevoluteJoint.hpp"
+
 #include <cmath>
 
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
@@ -624,6 +626,9 @@ std::unique_ptr<Entity> Level::createEntity(
             entity->bindBody();
     }
 
+    if(xml->FirstChildElement("joints") != nullptr)
+        parseJoints(xml->FirstChildElement("joints"), entity.get());
+
     return std::move(entity);
 }
 
@@ -908,5 +913,43 @@ void Level::parseGameplayAttributes(tinyxml2::XMLElement* xml)
         m_remainingTime = -1.f;
         m_totalTime = -1.f;
         m_initialTime = -1.f;
+    }
+}
+
+void Level::parseJoints(tinyxml2::XMLElement* joints, Entity* entity)
+{
+    for(auto jointXml = joints->FirstChildElement("joint");
+        jointXml != nullptr; jointXml = jointXml->NextSiblingElement("joint"))
+    {
+        std::string type = jointXml->Attribute("type");
+        if(type == "singleRevolute")
+        {
+            b2RevoluteJointDef jointDef;
+
+            jointDef.localAnchorA = b2Vec2(static_cast<float>(jointXml->IntAttribute("x") / utility::PIXEL_PER_METER),
+                                           static_cast<float>(jointXml->IntAttribute("y") / utility::PIXEL_PER_METER));
+
+            //clockwise
+            if(auto value = jointXml->FloatAttribute("cwlimit"))
+            {
+                jointDef.lowerAngle = value / 360.f * b2_pi;
+                jointDef.enableLimit = true;
+            }
+            // counter-clockwise
+            if(auto value = jointXml->FloatAttribute("ccwlimit"))
+            {
+                jointDef.upperAngle = value / 360.f * b2_pi;
+                jointDef.enableLimit = true;
+            }
+            // load motor data
+            if(auto motor = jointXml->FirstChildElement("motor"))
+            {
+                jointDef.maxMotorTorque = motor->FloatAttribute("maxTorque");
+                jointDef.motorSpeed = motor->FloatAttribute("speed");
+                jointDef.enableMotor = true;
+            }
+
+            m_joints.push_back(std::unique_ptr<SingleRevoluteJoint>(new SingleRevoluteJoint(&m_world, jointDef, entity->getBody())));
+        }
     }
 }

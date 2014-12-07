@@ -325,6 +325,9 @@
     <ClCompile Include="resources\PathHelper.cpp">
       <Filter>Sources\resources</Filter>
     </ClCompile>
+    <ClCompile Include="model\joint\SingleRevoluteJoint.cpp">
+      <Filter>Sources\model\joint</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -867,6 +870,12 @@
     <ClInclude Include="resources\PathHelper.hpp">
       <Filter>Headers\resources</Filter>
     </ClInclude>
+    <ClInclude Include="model\joint\JointObject.hpp">
+      <Filter>Headers\model\joint</Filter>
+    </ClInclude>
+    <ClInclude Include="model\joint\SingleRevoluteJoint.hpp">
+      <Filter>Headers\model\joint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -961,6 +970,12 @@
     </Filter>
     <Filter Include="Sources\animation\providers">
       <UniqueIdentifier>{1f0bc342-a831-4fb5-ac98-bc0015501aad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\model\joint">
+      <UniqueIdentifier>{caa033b2-a925-4de5-b96c-178d4e89d5d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\model\joint">
+      <UniqueIdentifier>{f719d0dd-8004-46ad-9eaf-e55c611c88cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

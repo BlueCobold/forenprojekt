@@ -70,6 +70,7 @@ SpriteKeyNotFound = The sprite with name % doesn't exist.
 CannotUseSpriteLayout = The sprites-tag in the animation-layout cannot be used because no spritesheet is defined for the animation.
 UnknownPhysicReference = The physic reference '%' doesn't exist.
 UnknownGameEvent = The gameevent '%' is unknown.
+WrongBodyType = No static or kinematic body allowed in %.
 
 [GUI]
 gui_game_paused = Game Paused
