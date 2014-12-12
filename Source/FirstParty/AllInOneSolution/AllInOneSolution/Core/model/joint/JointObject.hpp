@@ -37,6 +37,8 @@ public:
         return m_type;
     }
 
+    virtual void update() = 0;
+
 protected:
     virtual void bindBodys(b2Body* bodyA, b2Body* bodyB) = 0;
 

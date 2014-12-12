@@ -1,7 +1,7 @@
 #include "SingleRevoluteJoint.hpp"
 #include "../../Utility.hpp"
 
-SingleRevoluteJoint::SingleRevoluteJoint(b2World* world, const b2RevoluteJointDef jointDef, b2Body* body) :
+SingleRevoluteJoint::SingleRevoluteJoint(b2World* world, const b2RevoluteJointDef& jointDef, b2Body* body) :
     JointObject(world, JointObject::SingleRevolute),
     m_jointDef(jointDef)
 {
@@ -21,12 +21,6 @@ SingleRevoluteJoint::SingleRevoluteJoint(b2World* world, const b2RevoluteJointDe
 
 SingleRevoluteJoint::~SingleRevoluteJoint()
 {
-    if(getJoint() != nullptr)
-        getWorld()->DestroyJoint(getJoint());
-
-    if(m_anchorBody != nullptr)
-        JointObject::getWorld()->DestroyBody(m_anchorBody);
-
     m_anchorBody = nullptr;
 }
 
@@ -34,4 +28,8 @@ void SingleRevoluteJoint::bindBodys(b2Body* bodyA, b2Body* bodyB)
 {
     m_jointDef.bodyA = bodyA;
     m_jointDef.bodyB = bodyB;
+}
+
+void SingleRevoluteJoint::update()
+{
 }

@@ -22,8 +22,7 @@
 #include "../animation/provider/RandomProvider.hpp"
 
 #include "joint/SingleRevoluteJoint.hpp"
-
-#include <cmath>
+#include "joint/SinglePrismaticJoint.hpp"
 
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
 #include <Box2D/Collision/Shapes/b2CircleShape.h>
@@ -926,21 +925,18 @@ void Level::parseJoints(tinyxml2::XMLElement* joints, Entity* entity)
         {
             b2RevoluteJointDef jointDef;
 
-            jointDef.localAnchorA = b2Vec2(static_cast<float>(jointXml->IntAttribute("x") / utility::PIXEL_PER_METER),
-                                           static_cast<float>(jointXml->IntAttribute("y") / utility::PIXEL_PER_METER));
+            jointDef.localAnchorA = b2Vec2(jointXml->FloatAttribute("x") / utility::PIXEL_PER_METER,
+                                           jointXml->FloatAttribute("y") / utility::PIXEL_PER_METER);
 
             //clockwise
             if(auto value = jointXml->FloatAttribute("cwlimit"))
-            {
                 jointDef.lowerAngle = value / 360.f * b2_pi;
-                jointDef.enableLimit = true;
-            }
             // counter-clockwise
             if(auto value = jointXml->FloatAttribute("ccwlimit"))
-            {
                 jointDef.upperAngle = value / 360.f * b2_pi;
+
+            if(jointDef.upperAngle =! 0 || jointDef.lowerAngle != 0)
                 jointDef.enableLimit = true;
-            }
             // load motor data
             if(auto motor = jointXml->FirstChildElement("motor"))
             {
@@ -950,6 +946,37 @@ void Level::parseJoints(tinyxml2::XMLElement* joints, Entity* entity)
             }
 
             m_joints.push_back(std::unique_ptr<SingleRevoluteJoint>(new SingleRevoluteJoint(&m_world, jointDef, entity->getBody())));
+        }
+
+        if(type == "singlePrismatic")
+        {
+            b2PrismaticJointDef jointDef;
+            float towards = 0.f;
+
+            jointDef.localAnchorA = b2Vec2(jointXml->FloatAttribute("x") / utility::PIXEL_PER_METER,
+                                           jointXml->FloatAttribute("y") / utility::PIXEL_PER_METER);
+
+            towards = jointXml->FloatAttribute("towards") * b2_pi / 180.f;
+
+            // end point backward
+            if(auto value = jointXml->FloatAttribute("endPointBackward"))
+                jointDef.lowerTranslation = value / utility::PIXEL_PER_METER;
+
+            // end point forward
+            if(auto value = jointXml->FloatAttribute("endPointForward"))
+                jointDef.upperTranslation = value / utility::PIXEL_PER_METER;
+
+            if(jointDef.lowerTranslation != 0 || jointDef.upperTranslation != 0)
+                jointDef.enableLimit = true;
+
+            // load motor data
+            if(auto motor = jointXml->FirstChildElement("motor"))
+            {
+                jointDef.maxMotorForce = motor->FloatAttribute("maxForce");
+                jointDef.motorSpeed = motor->FloatAttribute("speed");
+                jointDef.enableMotor = true;
+            }
+            m_joints.push_back(std::unique_ptr<SinglePrismaticJoint>(new SinglePrismaticJoint(&m_world, jointDef, entity->getBody(), towards)));
         }
     }
 }

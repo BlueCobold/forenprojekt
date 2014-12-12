@@ -147,8 +147,14 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         m_updatingEntity = nullptr;
 
         updatePointLabels();
-    }
 
+        for(auto it = begin(m_joints); it != end(m_joints); ++it)
+        {
+            (*it)->update();
+        }
+        
+    }
+    
     if(m_extraBallGoody.isActive() && m_remainingBall > 0)
         m_remainingBall++;
     if(m_extraTimeGoody.isActive() && m_totalTime > 0)
