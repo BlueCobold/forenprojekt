@@ -1,0 +1,142 @@
+<level>
+	<levelinfo name="Lever Rule">
+		<infoimage srcx="718" srcy="330" width ="192" height="108" />
+	</levelinfo>
+	<gameplay time="30"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+
+	<shapes>		
+		<shape name="lever1" type="complex_polygon">
+			<polygon>
+				<vertex x="0" y="0" />
+				<vertex x="360" y="0" />
+				<vertex x="360" y="2" />
+				<vertex x="0" y="2" />
+			</polygon>
+			<polygon>
+				<vertex x="358" y="0" />
+				<vertex x="360" y="0" />
+				<vertex x="360" y="60" />
+				<vertex x="358" y="60" />
+			</polygon>
+			<polygon>
+				<vertex x="0" y="58" />
+				<vertex x="360" y="45" />
+				<vertex x="360" y="60" />
+				<vertex x="0" y="60" />
+			</polygon>
+			<polygon>
+				<vertex x="0" y="0" />
+				<vertex x="2" y="0" />
+				<vertex x="2" y="60" />
+				<vertex x="0" y="60" />
+			</polygon>
+		</shape>
+	</shapes>
+
+	<physics>
+		<physic name="phy_lever">
+			<body type="dynamic" angle="0" />
+			<fixture density="0.5" friction="0.8" restitution="0.0" />
+		</physic>
+
+		<physic name="specialtarget">
+			<body type="dynamic" angle="0" />
+			<fixture density="0.1" friction="0.8" restitution="0.5" />
+		</physic>
+		<physic name="heavywight">
+			<body type="dynamic" angle="0" />
+			<fixture density="9.00" friction="0.8" restitution="0.5" />
+		</physic>
+	</physics>
+
+	<entities>
+		<entity name="special_lever1" rep="1L">
+			<physics name="phy_lever" shape="lever1" />
+			<joints>
+				<joint type="singleRevolute" x="0" y="0" cwlimit="-175" ccwlimit="0">
+					<motor maxTorque="40000" speed="5" />
+				</joint>
+			</joints>
+			<animations>
+				<animation spritesheet="walls" sprite="sand_wide_01" rotate="true" />
+				<animation spritesheet="walls" sprite="sand_wide_01" midx="-120" midy="0" rotate="true" />
+				<animation spritesheet="walls" sprite="sand_wide_01" midx="-240" midy="0" rotate="true" />
+			</animations>
+		</entity>
+		
+		<entity name="target_special" rep="ts" type="target" respawnable="true" points="100" collideWithBall="false">
+			<physics name="specialtarget">
+				<shape type="circle" radius="31" />
+			</physics>
+			<collides>
+				<spawnEntity name="target_2">
+					<spawnEntity name="target_particles">
+						<always />
+					</spawnEntity>
+				</spawnEntity>
+			</collides>
+			<animations>
+				<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+			</animations>
+			<joints>
+				<joint type="singlePrismatic" x="33.5" y="33.5" towards="270" endPointBackward="0" endPointForward="300">
+					<motor maxForce="0" speed="0" />
+				</joint>
+			</joints>
+		</entity>
+
+		<entity name="wigth" rep="hw" >
+			<physics name="heavywight">
+				<shape type="polygon">
+					<vertex x="5" y="10" />
+					<vertex x="5" y="30" />
+					<vertex x="25" y="30" />
+					<vertex x="25" y="10" />
+				</shape>
+			</physics>
+		</entity>
+		</entities>
+	</templates>
+	<grid size="60" width="2460" height="1600">
+
+                  
+          w1w2w2w3\1                        /1w1w2w3w5
+          w1      (1\1                    /1)1      w4
+          w1        (1\1                /1)1        w2
+          w1          (1\1            /1)1          w1
+          w1            (1\1        /1)1            w3       
+          w1              w2\1    /1w5              w6                             
+          w1              w3w1    w1w4              w1                   
+          w1              w4w1    w1w3              w1              
+          w1              w6w1  tsw1w1              w1           
+          w1              1Lhwxxxxxxxx              w1 
+          w1                                        w1         
+          w6\1                                    /1w2        
+          w5d1\1                                /1d1w1
+          w5d2d4\1                            /1d2d4w3            
+          w4d3d5d3\1            BB          /1d3d5d3w4          
+          w4d6d2d4d6\1                    /1d6d2d4d6w4    
+          w3d1d2d3d4d5\1                /1d1d2d3d4d5w5          
+          w2d2d3d4d5d5d6\1            /1d2d3d4d5d5d6w6         
+          w1d6d1d3d4d5d4d2\1        /1d6d1d3d4d5d4d2w1        
+          w2w3w4w1w6w2w4w2w1    TT  w1w1w2w3w4w4w5w5w4
+                                                                                  
+                                                                                    
+                                                                                    
+                               
+                                                                                    
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="100" silver="150" gold="165" />
+</level>
