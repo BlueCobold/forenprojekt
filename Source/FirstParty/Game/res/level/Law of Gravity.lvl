@@ -85,8 +85,8 @@
 				<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
 			</animations>
 			<joints>
-				<joint type="singlePrismatic" x="33.5" y="33.5" towards="270" endPointBackward="0" endPointForward="300">
-					<motor maxForce="0" speed="0" />
+				<joint type="singleDistance" x="33.5" y="33.5" anchorX="180" anchorY="0">
+					
 				</joint>
 			</joints>
 		</entity>
@@ -120,10 +120,10 @@
           w6\1                                    /1w2        
           w5d1\1                                /1d1w1
           w5d2d4\1                            /1d2d4w3            
-          w4d3d5d3\1            BB          /1d3d5d3w4          
+          w4d3d5d3\1                        /1d3d5d3w4          
           w4d6d2d4d6\1                    /1d6d2d4d6w4    
           w3d1d2d3d4d5\1                /1d1d2d3d4d5w5          
-          w2d2d3d4d5d5d6\1            /1d2d3d4d5d5d6w6         
+          w2d2d3d4d5d5d6\1      BB    /1d2d3d4d5d5d6w6         
           w1d6d1d3d4d5d4d2\1        /1d6d1d3d4d5d4d2w1        
           w2w3w4w1w6w2w4w2w1    TT  w1w1w2w3w4w4w5w5w4
                                                                                   

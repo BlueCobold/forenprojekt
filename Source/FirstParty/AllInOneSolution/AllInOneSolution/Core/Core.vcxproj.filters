@@ -331,6 +331,9 @@
     <ClCompile Include="model\joint\SinglePrismaticJoint.cpp">
       <Filter>Sources\model\joint</Filter>
     </ClCompile>
+    <ClCompile Include="model\joint\SingleDistanceJoint.cpp">
+      <Filter>Sources\model\joint</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -880,6 +883,9 @@
       <Filter>Headers\model\joint</Filter>
     </ClInclude>
     <ClInclude Include="model\joint\SinglePrismaticJoint.hpp">
+      <Filter>Headers\model\joint</Filter>
+    </ClInclude>
+    <ClInclude Include="model\joint\SingleDistanceJoint.hpp">
       <Filter>Headers\model\joint</Filter>
     </ClInclude>
   </ItemGroup>
