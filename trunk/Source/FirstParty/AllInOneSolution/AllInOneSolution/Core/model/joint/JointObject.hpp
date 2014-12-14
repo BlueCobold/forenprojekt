@@ -12,7 +12,9 @@ class JointObject
 {
 public:
     enum JointType {Unknown,
-                    SingleRevolute};
+                    SingleRevolute,
+                    SinglePrismatic,
+                    SingleDistance};
 
 private:
     b2World* m_world;

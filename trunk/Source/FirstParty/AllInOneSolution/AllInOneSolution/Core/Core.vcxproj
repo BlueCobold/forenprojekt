@@ -146,6 +146,7 @@
     <ClCompile Include="model\Entity.cpp" />
     <ClCompile Include="model\Goody.cpp" />
     <ClCompile Include="model\GravityGoody.cpp" />
+    <ClCompile Include="model\joint\SingleDistanceJoint.cpp" />
     <ClCompile Include="model\joint\SinglePrismaticJoint.cpp" />
     <ClCompile Include="model\joint\SingleRevoluteJoint.cpp" />
     <ClCompile Include="model\Level.cpp" />
@@ -320,6 +321,7 @@
     <ClInclude Include="model\GravityGoody.hpp" />
     <ClInclude Include="model\InvulnerableGoody.hpp" />
     <ClInclude Include="model\joint\JointObject.hpp" />
+    <ClInclude Include="model\joint\SingleDistanceJoint.hpp" />
     <ClInclude Include="model\joint\SinglePrismaticJoint.hpp" />
     <ClInclude Include="model\joint\SingleRevoluteJoint.hpp" />
     <ClInclude Include="model\SoundManager.hpp" />

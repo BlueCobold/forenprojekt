@@ -3,7 +3,7 @@
 #include <cmath>
 
 SinglePrismaticJoint::SinglePrismaticJoint(b2World* world, const b2PrismaticJointDef& jointDef,b2Body* body, float towards) :
-    JointObject(world, JointObject::SingleRevolute),
+    JointObject(world, JointObject::SinglePrismatic),
     m_jointDef(jointDef)
 {
     m_anchorBodyDef.type = b2_staticBody;

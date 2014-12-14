@@ -23,6 +23,7 @@
 
 #include "joint/SingleRevoluteJoint.hpp"
 #include "joint/SinglePrismaticJoint.hpp"
+#include "joint/SingleDistanceJoint.hpp"
 
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
 #include <Box2D/Collision/Shapes/b2CircleShape.h>
@@ -977,6 +978,24 @@ void Level::parseJoints(tinyxml2::XMLElement* joints, Entity* entity)
                 jointDef.enableMotor = true;
             }
             m_joints.push_back(std::unique_ptr<SinglePrismaticJoint>(new SinglePrismaticJoint(&m_world, jointDef, entity->getBody(), towards)));
+        }
+
+        if(type == "singleDistance")
+        {
+            b2DistanceJointDef jointDef;
+            jointDef.localAnchorA = b2Vec2(jointXml->FloatAttribute("x") / utility::PIXEL_PER_METER,
+                                           jointXml->FloatAttribute("y") / utility::PIXEL_PER_METER);
+
+            jointDef.localAnchorB = b2Vec2(jointXml->FloatAttribute("anchorX") / utility::PIXEL_PER_METER,
+                                           jointXml->FloatAttribute("anchorY") / utility::PIXEL_PER_METER);
+
+            if(auto value = jointXml->FloatAttribute("dampingRatio"))
+                jointDef.dampingRatio = value;
+
+            if(auto value = jointXml->FloatAttribute("frequencyHz"))
+                jointDef.frequencyHz = value;
+
+            m_joints.push_back(std::unique_ptr<SingleDistanceJoint>(new SingleDistanceJoint(&m_world, jointDef, entity->getBody())));
         }
     }
 }
