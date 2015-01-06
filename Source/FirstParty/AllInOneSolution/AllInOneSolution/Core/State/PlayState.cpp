@@ -17,9 +17,9 @@ PlayState::PlayState(sf::RenderWindow& screen,
     m_hud(resourceManager, config),
     m_shouldPause(false),
     m_minPoints(0),
-    m_loadingOnlineHighScore(nullptr)
+    m_onlineHighScoreLoaderJob(nullptr)
 {
-    m_loadingOnlineHighScore = std::unique_ptr<BackgroundLoader<PlayState>>(new BackgroundLoader<PlayState>(&PlayState::loadOnlineHighscore, *this));
+    m_onlineHighScoreLoaderJob = std::unique_ptr<BackgroundLoader<PlayState>>(new BackgroundLoader<PlayState>(&PlayState::loadOnlineHighscore, *this));
 }
 
 PlayState::~PlayState()
@@ -52,8 +52,8 @@ void PlayState::onEnter(const EnterStateInformation* enterInformation, const flo
     m_level->onEnter();
     m_pauseStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
-    if(!m_loadingOnlineHighScore->isLoaded() && !m_loadingOnlineHighScore->isLoading())
-        m_loadingOnlineHighScore->run();
+    if(!m_onlineHighScoreLoaderJob->isLoaded() && !m_onlineHighScoreLoaderJob->isLoading())
+        m_onlineHighScoreLoaderJob->run();
 }
 
 StateChangeInformation PlayState::update(const float time)
@@ -75,7 +75,7 @@ StateChangeInformation PlayState::update(const float time)
             m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
             m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
             m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
-            m_loadingOnlineHighScore->reset();
+            m_onlineHighScoreLoaderJob->reset();
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
         /* not needed anymore, since we got a button for it
@@ -121,7 +121,7 @@ StateChangeInformation PlayState::update(const float time)
             m_transitionStateInfo.m_followingState = LevelFailStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
             m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
-            m_loadingOnlineHighScore->reset();
+            m_onlineHighScoreLoaderJob->reset();
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
     }

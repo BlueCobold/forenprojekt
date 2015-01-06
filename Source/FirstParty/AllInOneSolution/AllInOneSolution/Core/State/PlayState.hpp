@@ -35,7 +35,7 @@ private:
 
     int m_minPoints;
 
-    std::unique_ptr<BackgroundLoader<PlayState>> m_loadingOnlineHighScore;
+    std::unique_ptr<BackgroundLoader<PlayState>> m_onlineHighScoreLoaderJob;
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPauseStateInformation m_pauseStateInfo;
     EnterStateInformation m_loadLevelStateInfo;

@@ -20,9 +20,9 @@ HighScoreState::HighScoreState(sf::RenderWindow& screen,
     m_menu(sf::Vector2f(0, 0), screen, resourceManager),
     m_HUD(resourceManager, config),
     m_onlineHighscore(false),
-    m_loadingOnlineHighscore(nullptr)
+    m_onlineHighscoreLoaderJob(nullptr)
 { 
-        m_loadingOnlineHighscore = std::unique_ptr<BackgroundLoader<HighScoreState>>(new BackgroundLoader<HighScoreState>(&HighScoreState::loadOnlineHighscore, *this));
+        m_onlineHighscoreLoaderJob = std::unique_ptr<BackgroundLoader<HighScoreState>>(new BackgroundLoader<HighScoreState>(&HighScoreState::loadOnlineHighscore, *this));
 }
 
 HighScoreState::~HighScoreState()
@@ -66,11 +66,11 @@ StateChangeInformation HighScoreState::update(const float time)
         m_stateInfo.m_levelNumber = m_highScoreStateInfo.m_levelNumber;
         m_transitionStateInfo.m_followingState = m_highScoreStateInfo.m_comeFromState;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
-        m_loadingOnlineHighscore->reset();
+        m_onlineHighscoreLoaderJob->reset();
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
 
         m_onlineHighscore = false;
-        m_loadingOnlineHighscore->stop();
+        m_onlineHighscoreLoaderJob->stop();
 
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
@@ -79,22 +79,22 @@ StateChangeInformation HighScoreState::update(const float time)
     {
         m_onlineHighscore = true;
         clearHighScore();
-        m_loadingOnlineHighscore->run();
+        m_onlineHighscoreLoaderJob->run();
     }
     else if(!m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).getChecked() && m_onlineHighscore)
     {
         m_onlineHighscore = false;
-        m_loadingOnlineHighscore->reset();
+        m_onlineHighscoreLoaderJob->reset();
         loadHighScore();
     }
-    else if(m_onlineHighscore && m_loadingOnlineHighscore->isLoading() && !m_loadingOnlineHighscore->isLoaded())
+    else if(m_onlineHighscore && m_onlineHighscoreLoaderJob->isLoading() && !m_onlineHighscoreLoaderJob->isLoaded())
     {
         int step = static_cast<int>(getPassedTime() * 2) % 4;
         for (int i = 0; i < step; ++i)
             text.append(".");
         m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText(text);
     }
-    if(m_loadingOnlineHighscore->isLoaded() && !m_loadingOnlineHighscore->isLoading())
+    if(m_onlineHighscoreLoaderJob->isLoaded() && !m_onlineHighscoreLoaderJob->isLoading())
         m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText("");
 
     return StateChangeInformation::Empty();

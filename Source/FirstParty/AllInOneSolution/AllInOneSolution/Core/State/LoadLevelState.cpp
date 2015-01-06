@@ -21,11 +21,11 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
             LineLabel::Left),
     m_level(nullptr),
     m_lastLevel(nullptr),
-    m_loadingLevel(nullptr),    
+    m_levelLoaderJob(nullptr),    
     m_currentLevel(1)
 {
     m_loadingErrorMessage = "";
-    m_loadingLevel = std::unique_ptr<BackgroundLoader<LoadLevelState>>(new BackgroundLoader<LoadLevelState>(&LoadLevelState::loadLevel, *this));
+    m_levelLoaderJob = std::unique_ptr<BackgroundLoader<LoadLevelState>>(new BackgroundLoader<LoadLevelState>(&LoadLevelState::loadLevel, *this));
     m_label.setPosition(m_screen.getSize().x / 2.f - m_label.getWidth() / 2.f, m_screen.getSize().y / 2.f);
 }
 
@@ -38,7 +38,7 @@ void LoadLevelState::onEnter(const EnterStateInformation* enterInformation, cons
     State::onEnter(enterInformation, time);
     m_label.setPosition(m_screen.getSize().x / 2.f - m_label.getWidth() / 2.f, m_screen.getSize().y / 2.f);
     if(enterInformation->m_prepareOnly)
-        m_loadingLevel->reset();
+        m_levelLoaderJob->reset();
 
     m_currentLevel = enterInformation->m_levelNumber;
 }
@@ -55,7 +55,7 @@ StateChangeInformation LoadLevelState::update(const float time)
     updateTime(time);
     int step = static_cast<int>(getPassedTime() * 2) % 4;
 
-    if(m_loadingLevel->isLoaded())
+    if(m_levelLoaderJob->isLoaded())
     {
         if(m_loadingErrorMessage.length() != 0)
             throw std::runtime_error(m_loadingErrorMessage);
@@ -68,12 +68,12 @@ StateChangeInformation LoadLevelState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_transitionStateInfo.m_comeFromeState = LoadLevelStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
-        m_loadingLevel->reset();
+        m_levelLoaderJob->reset();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 
-    if(!m_loadingLevel->isLoading() && !m_loadingLevel->isLoaded())
-        m_loadingLevel->run();
+    if(!m_levelLoaderJob->isLoading() && !m_levelLoaderJob->isLoaded())
+        m_levelLoaderJob->run();
 
     
     for (int i = 0;i < step;++i)
