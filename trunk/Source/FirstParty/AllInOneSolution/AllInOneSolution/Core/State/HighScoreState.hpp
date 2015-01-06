@@ -39,7 +39,7 @@ private:
 
     bool m_onlineHighscore;
 
-    std::unique_ptr<BackgroundLoader<HighScoreState>> m_loadingOnlineHighscore;
+    std::unique_ptr<BackgroundLoader<HighScoreState>> m_onlineHighscoreLoaderJob;
     void clearHighScore();
     void loadOnlineHighscore();
 };

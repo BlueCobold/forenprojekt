@@ -43,7 +43,7 @@ private:
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
 
-    std::unique_ptr<BackgroundLoader<LoadLevelState>> m_loadingLevel;
+    std::unique_ptr<BackgroundLoader<LoadLevelState>> m_levelLoaderJob;
     void loadLevel();
     void onEvent(utility::Event::EventType type);
 };
