@@ -43,7 +43,7 @@ void NewHighScoreState::onEnter(const EnterStateInformation* enterInformation, c
 
     m_stateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
-    m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).onEnter(m_lastName);
+    m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).setText(m_lastName);
 }
 
 StateChangeInformation NewHighScoreState::update(const float time)
@@ -111,7 +111,7 @@ void NewHighScoreState::addNewHighScore(int points, std::string name)
 {
     if(name == "")
     {
-        m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).onEnter(m_lastName);
+        m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).setText(m_lastName);
         return;
     }
 
@@ -154,10 +154,9 @@ void NewHighScoreState::addNewHighScore(int points, std::string name)
     State::m_config.set<std::string>(termName, name);
 }
 
-void NewHighScoreState::sendDataToHighScoreServer(const std::string& name)
+void NewHighScoreState::sendDataToHighScoreServer(const std::string& name) const
 {
-    std::string dataString = "v=" + utility::VERSION + "&name=" + name;
-    dataString.append(m_level->getStringForOnlineHighscore());
+    std::string dataString = createHighscoreString(name);
 
     sf::Http http;
     http.setHost(m_config.get<std::string>("HighscoreServer"));
@@ -165,4 +164,53 @@ void NewHighScoreState::sendDataToHighScoreServer(const std::string& name)
     sf::Http::Request request(m_config.get<std::string>("HighscorePath") + "add_highscore.php?" + dataString);
 
     sf::Http::Response response = http.sendRequest(request);
+}
+
+const std::string NewHighScoreState::createHighscoreString(const std::string& name) const
+{
+    std::string result;
+    std::string value;
+
+    unsigned int counterTeeter = 0;
+    unsigned int counterTarget = 0;
+    unsigned int counterBonusTarget = 0;
+    unsigned int counterLostBall = 0;
+    unsigned int counterGravity = 0;
+    unsigned int counterTargetSpeeding = 0;
+    unsigned int counterBonusTargetSpeeding = 0;
+
+    auto list = m_level->getEventsForOnlineHighscore();
+
+    result = "v=" + utility::VERSION + "&name=" + name;
+    result.append("&lvl=" + utility::toString(m_level->number()) + "&points=" + utility::toString(m_level->getPoints()));
+
+    if(m_level->isTimeAttackMode())
+        result.append("&mode=TAM");
+    else
+        result.append("&mode=NAM");
+
+    for(auto it = std::begin(list); it != std::end(list); ++it)
+    {
+        // get time as millisecond
+        value = utility::toString(static_cast<unsigned int>(it->getPassedTime() * 1000));
+
+        if(it->getEventType() == GameEvent::HitTeeter)
+            result.append("&t[" + utility::toString(counterTeeter++) + "]=" + value);
+        else if(it->getEventType() == GameEvent::HitTarget)
+            result.append("&m[" + utility::toString(counterTarget++) + "]=" + value);
+        else if(it->getEventType() == GameEvent::HitBonusTarget)
+            result.append("&b[" + utility::toString(counterBonusTarget++) + "]=" + value);
+        else if(it->getEventType() == GameEvent::LostBall)
+            result.append("&l[" + utility::toString(counterLostBall++) + "]=" + value);
+        else if(it->getEventType() == GameEvent::GravityGoody)
+            result.append("&g[" + utility::toString(counterGravity++) + "]=" + value);
+        else if(it->getEventType() == GameEvent::HitTargetSpeeding)
+            result.append("&ms[" + utility::toString(counterTargetSpeeding++) + "]=" + value);
+        else if(it->getEventType() == GameEvent::HitBonusTargetSpeeding)
+            result.append("&bs[" + utility::toString(counterBonusTargetSpeeding++) + "]=" + value);
+        else
+            throw std::runtime_error(utility::replace(utility::translateKey("UnknownGameEvent"), utility::toString(it->getEventType())));
+    }
+
+    return result;
 }

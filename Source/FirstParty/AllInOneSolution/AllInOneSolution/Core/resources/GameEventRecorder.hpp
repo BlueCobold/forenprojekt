@@ -18,7 +18,7 @@ public:
     void addEvent(const float passedTime, const float ballSpeed, const GameEvent::GameEventType type);
     void clearList();
 
-    const std::string getEventsForOnlineHighscore() const;
+    const std::list<GameEvent>& getEventsForOnlineHighscore() const;
 };
 
 #endif

@@ -12,7 +12,6 @@ InputBox::InputBox(const int id,
     m_inputLimit(inputLimit),
     m_size(size),
     m_finished(false),
-    m_charCounter(0),
     m_background(style.background)
 {
     if(m_size.y == 0)
@@ -51,54 +50,41 @@ void InputBox::handleInput()
     if(utility::Keyboard.isKeyDown(sf::Keyboard::Return))
         m_finished = true;
 
-    if(utility::Keyboard.isKeyDown(sf::Keyboard::BackSpace) && m_charCounter > 0)
+    if(utility::Keyboard.isKeyDown(sf::Keyboard::BackSpace) && m_inputText.getText().length() > 0)
     {
         std::string text = m_inputText.getText().substr(0, m_inputText.getText().length() - 1);
         m_inputText.setText(text);
-        m_charCounter--;
     }
 
-    if(m_charCounter == m_inputLimit)
+    if(m_inputText.getText().length() == m_inputLimit)
         return;
 
     // handle letters from A to Z
     for(int i = 0; i < 26; ++i)
     {
         if(utility::Keyboard.isKeyDown(static_cast<const sf::Keyboard::Key>(i)) && !shiftKey)
-        {
             m_inputText.setText(m_inputText.getText() + char(97 + i));
-            m_charCounter++;
-        }
     }
 
     // handle letters from A to Z
     for(int i = 0; i < 26; ++i)
     {
         if(utility::Keyboard.isKeyDown(static_cast<const sf::Keyboard::Key>(i)) && shiftKey)
-        {
             m_inputText.setText(m_inputText.getText() + char(65 + i));
-            m_charCounter++;
-        }
     }
 
     // handle numbers from 0 to 9
     for(int i = 0; i < 10; ++i)
     {
         if(utility::Keyboard.isKeyDown(static_cast<const sf::Keyboard::Key>(26 + i)))
-        {
             m_inputText.setText(m_inputText.getText() + char(48 + i));
-            m_charCounter++;
-        }
     }
 
     // handle numpadnumbers from 0 to 9
     for(int i = 0; i < 10; ++i)
     {
         if(utility::Keyboard.isKeyDown(static_cast<const sf::Keyboard::Key>(75 + i)))
-        {
             m_inputText.setText(m_inputText.getText() + char(48 + i));
-            m_charCounter++;
-        }
     }
 }
 
@@ -150,9 +136,8 @@ void InputBox::onPositionChanged()
     m_inputText.setPosition(position);
 }
 
-void InputBox::onEnter(const std::string& lastString)
+void InputBox::setText(const std::string& text)
 {
     m_finished = false;
-    m_inputText.setText(lastString);
-    m_charCounter = lastString.size();
+    m_inputText.setText(text);
 }
