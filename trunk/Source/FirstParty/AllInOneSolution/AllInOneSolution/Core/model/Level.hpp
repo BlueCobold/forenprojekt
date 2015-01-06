@@ -97,7 +97,7 @@ public:
 
     void onEnter();
 
-    const std::string getStringForOnlineHighscore() const;
+    const std::list<GameEvent>& getEventsForOnlineHighscore() const;
 private:
 
     struct EntitySpawn

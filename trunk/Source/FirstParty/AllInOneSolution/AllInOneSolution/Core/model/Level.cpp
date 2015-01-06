@@ -711,14 +711,7 @@ void Level::onEnter()
     }
 }
 
-const std::string Level::getStringForOnlineHighscore() const
+const std::list<GameEvent>& Level::getEventsForOnlineHighscore() const
 {
-    std::string levelPart = "&lvl=" + utility::toString(m_number) + "&points=" + utility::toString(m_points);
-
-    if(m_timeAttackMode)
-        levelPart.append("&mode=TAM");
-    else
-        levelPart.append("&mode=NAM");
-    
-    return levelPart.append(m_eventRecorder.getEventsForOnlineHighscore());
+    return m_eventRecorder.getEventsForOnlineHighscore();
 }

@@ -14,7 +14,6 @@ class InputBox : public MenuElement
 private:
     sf::RectangleShape m_backgroundShade;
     unsigned int m_inputLimit;
-    unsigned int m_charCounter;
     sf::Vector2f m_size;
     LineLabel m_inputText;
     bool m_finished;
@@ -49,7 +48,7 @@ public:
 
     bool isFinished();
 
-    void onEnter(const std::string& lastString);
+    void setText(const std::string& text);
 
     std::string getText() const;
 
