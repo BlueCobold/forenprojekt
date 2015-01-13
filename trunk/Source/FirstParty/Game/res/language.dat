@@ -143,7 +143,8 @@ tooltip_goody_extratime = this goody gives\r\nyou 30 seconds extra time.
 tooltip_goody_cost = cost: %
 tooltip_goody_refund = refund: %
 tooltip_preview_notimeattack = no time attack\r\nmode available
-tooltip_Online_Highscore = switch between online highscore\r\nand local highscore.
+tooltip_online_highscore = view the global\r\nonline highscore.
+tooltip_offline_highscore = view the local\r\noffline highscore.
 
 [Levels]
 levelBlocked1 = blocked

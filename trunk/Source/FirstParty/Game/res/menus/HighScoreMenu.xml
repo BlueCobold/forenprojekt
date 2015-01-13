@@ -4,7 +4,6 @@
 	<styles source="Styles.inc"/>
 	<elements>
 		<button id="0" text="gui_close" style="default" x="261" y="270" />
-		<checkbox id="26" style="targetmode" x="14" y="76" tooltip="default" tooltiptext="tooltip_Online_Highscore" />
 		<subwindow id="1" x="80" y="108" sizex="352" sizey="150" innerheight="220">
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
@@ -35,5 +34,9 @@
 		<image id="27" x="422" y="205" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
 		<image id="28" x="96" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
 		<image id="29" x="259" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		
+		<image id="-1" x="4" y="45" spriteSheet="gui_elements" sprite="mode_background"/>
+		<checkbox id="30" style="offlineHighscore" x="14" y="76" tooltip="default" tooltiptext="tooltip_offline_highscore" />
+		<checkbox id="31" style="onlineHighscore" x="14" y="128" tooltip="default" tooltiptext="tooltip_online_highscore" />
 	</elements>
 </menu>
