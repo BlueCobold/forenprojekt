@@ -43,7 +43,8 @@ void HighScoreState::onEnter(const EnterStateInformation* enterInformation, cons
     m_HUD.onEnter(m_highScoreStateInfo.m_level);
 
     m_onlineHighscore = false;
-    m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).setChecked(false);
+    m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).setChecked(m_onlineHighscore);
+    m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).setChecked(!m_onlineHighscore);
 }
 
 StateChangeInformation HighScoreState::update(const float time)
@@ -77,12 +78,14 @@ StateChangeInformation HighScoreState::update(const float time)
 
     if(m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).getChecked() && !m_onlineHighscore)
     {
+        m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).setChecked(false);
         m_onlineHighscore = true;
         clearHighScore();
         m_onlineHighscoreLoaderJob->run();
     }
-    else if(!m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).getChecked() && m_onlineHighscore)
+    else if(m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).getChecked() && m_onlineHighscore)
     {
+        m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).setChecked(false);
         m_onlineHighscore = false;
         m_onlineHighscoreLoaderJob->reset();
         loadHighScore();

@@ -71,5 +71,11 @@
 		<sprite name="preview: Crossroads" x="431" y="503" width="192" height="108" originx="96" originy="54" />
 		<sprite name="preview: Fragile" x="623" y="503" width="192" height="108" originx="96" originy="54" />
 		<sprite name="preview: Moving Walls" x="815" y="506" width="192" height="108" originx="96" originy="54" />
+		<sprite name="offline_checked" x="192" y="500" width="40" height="40" originx="20" originy="20" />
+		<sprite name="offline_hover" x="192" y="540" width="40" height="40" originx="20" originy="20" />
+		<sprite name="offline_unchecked" x="192" y="580" width="40" height="40" originx="20" originy="20" />
+		<sprite name="online_checked" x="232" y="605" width="40" height="40" originx="20" originy="20" />
+		<sprite name="online_hover" x="272" y="605" width="40" height="40" originx="20" originy="20" />
+		<sprite name="online_unchecked" x="312" y="605" width="40" height="40" originx="20" originy="20" />
 	</sprites>
 </spriteSheet>

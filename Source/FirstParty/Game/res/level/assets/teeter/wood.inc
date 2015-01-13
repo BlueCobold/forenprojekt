@@ -93,7 +93,7 @@
 					</changeGravity>
 				</collides>
 				<animations>
-					<animation texture="teeter_wooden_vertical" width="32" height="208" midx="16" midy="104" rotate="true" />
+					<animation texture="teeter_wooden" blending="premul" width="32" height="208" srcx="208" midx="16" midy="104" rotate="true" />
 				</animations>
 			</entity>
 			<entity name="PadellTeeter2" rep="P2" type="paddel">
@@ -110,7 +110,7 @@
 					</changeGravity>
 				</collides>
 				<animations>
-					<animation texture="teeter_wooden_vertical" width="32" height="208" midx="16" midy="104" rotate="true" />
+					<animation texture="teeter_wooden" blending="premul" width="32" height="208" srcx="208" midx="16" midy="104" rotate="true" />
 				</animations>
 			</entity>
 			<entity name="PadellTeeter3" rep="P3" type="paddel">
@@ -122,14 +122,14 @@
 					</setBallVelocity>
 				</collides>
 				<animations>
-					<animation texture="teeter_wooden" width="208" height="32" midy="16" rotate="true" alignment="vertical"/>
+					<animation texture="teeter_wooden" blending="premul" width="208" height="32" midy="16" rotate="true" alignment="vertical"/>
 				</animations>
 			</entity>
 			<entity name="FlipperTeeter1" rep="F1" type="teeter">
 				<physics name="teeter" shape="flipperteeter1" />
 				<sound name="bounce" />
 				<animations>
-					<animation texture="teeter_wooden" width="208" height="32" midx="0" midy="16" rotate="true" alignment="vertical">
+					<animation texture="teeter_wooden" blending="premul" width="208" height="32" midx="0" midy="16" rotate="true" alignment="vertical">
 						<frameindex frames="7">
 							<min>
 								<mul>
@@ -165,7 +165,7 @@
 				<physics name="teeter" shape="flipperteeter2" />
 				<sound name="bounce" />
 				<animations>
-					<animation texture="teeter_wooden" width="208" height="32" midx="208" midy="16" rotate="true" alignment="vertical">
+					<animation texture="teeter_wooden" blending="premul" width="208" height="32" midx="208" midy="16" rotate="true" alignment="vertical">
 						<frameindex frames="7">
 							<min>
 								<mul>
@@ -237,7 +237,7 @@
 				<physics name="teeter" shape="teeter2" />
 				<sound name="bounce" />
 				<animations>
-					<animation texture="teeter_wooden_vertical" width="32" height="208" midx="16" midy="104" rotate="true">
+					<animation texture="teeter_wooden" blending="premul" width="32" height="208" srcx="208" midx="16" midy="104" rotate="true">
 						<frameindex frames="7">
 							<min>
 								<mul>
@@ -284,7 +284,7 @@
 				</collides>
 				<sound name="bounce" />
 				<animations>
-					<animation texture="teeter_wooden_vertical" width="32" height="208" midx="16" midy="104" rotate="true">
+					<animation texture="teeter_wooden" blending="premul" width="32" height="208" srcx="208" midx="16" midy="104" rotate="true">
 						<frameindex frames="7">
 							<min>
 								<mul>
@@ -292,7 +292,7 @@
 										<step>
 											<sub>
 												<angle />
-													<static value="180" />
+												<static value="180" />
 											</sub>
 											<angle />
 											<sub>
@@ -330,7 +330,7 @@
 				</collides>
 				<sound name="bounce" />
 				<animations>
-					<animation texture="teeter_wooden_vertical" width="32" height="208" midx="16" midy="104" rotate="true">
+					<animation texture="teeter_wooden" blending="premul" width="32" height="208" srcx="208" midx="16" midy="104" rotate="true">
 						<frameindex frames="7">
 							<min>
 								<mul>
