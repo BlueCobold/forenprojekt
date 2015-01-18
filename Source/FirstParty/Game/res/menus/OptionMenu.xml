@@ -36,12 +36,12 @@
 				<label text="gui_gameplaysetup" font="buttonIdleFont" alignment="1" x="170" y="390" />
 
 				<checkbox id="12" style="default" x="76" y="450" />
-				<label id="13" text="gui_label_use_vertical" font="buttonHoverFont" alignment="0" x="120" y="435" />
-				<label id="14" text="gui_label_mouseaxis" font="buttonHoverFont" alignment="0" x="120" y="465" />
+				<label id="13" text="gui_label_use_vertical1" font="buttonHoverFont" alignment="0" x="120" y="435" />
+				<label id="14" text="gui_label_use_vertical2" font="buttonHoverFont" alignment="0" x="120" y="465" />
 				
 				<checkbox id="15" style="default" x="76" y="530" />
-				<label id="16" text="gui_label_invert_used" font="buttonHoverFont" alignment="0" x="120" y="515" />
-				<label id="17" text="gui_label_mouseaxis" font="buttonHoverFont" alignment="0" x="120" y="545" />
+				<label id="16" text="gui_label_invert_used1" font="buttonHoverFont" alignment="0" x="120" y="515" />
+				<label id="17" text="gui_label_invert_used2" font="buttonHoverFont" alignment="0" x="120" y="545" />
 			</elements>
 		</subwindow>
 		
