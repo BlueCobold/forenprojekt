@@ -57,6 +57,10 @@
 		<glyph name="%" x="238" y="44" width="18" />
 		<glyph name="&" x="0" y="66" width="16" />
 		<glyph name="'" x="16" y="66" width="9" />
-		<glyph name=" " x="25" y="66" width="10" />
+		<glyph name="#-28" x="25" y="66" yoffset="-1" width="17" />
+		<glyph name="#-4" x="42" y="66" yoffset="-1" width="17" />
+		<glyph name="#-10" x="59" y="66" yoffset="-1" width="17" />
+		<glyph name="#-33" x="76" y="66" width="22" />
+		<glyph name=" " x="98" y="66" width="10" />
 	</glyphs>
 </bitmapfont>

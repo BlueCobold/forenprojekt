@@ -86,11 +86,12 @@ void LineLabel::rebuild()
     auto offset = getOffset();
     for(auto it = begin(m_text); it != end(m_text); it++)
     {
-        m_glyphs.push_back(m_font->getGlyph(*it));
-        m_glyphs.back().setPosition(shift + position.x + xOffset + offset.x, position.y + offset.y);
-        m_glyphs.back().setRotation(m_rotation);
+        auto glyph = m_font->getGlyph(*it);
+        glyph.setPosition(shift + position.x + xOffset + offset.x, position.y + glyph.getVerticalOffset() + offset.y);
+        glyph.setRotation(m_rotation);
+        m_glyphs.push_back(glyph);
 
-        xOffset += m_font->getGlyph(*it).getSpacing();
+        xOffset += glyph.getSpacing();
     }
     m_width = xOffset;
 }
