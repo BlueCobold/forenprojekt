@@ -83,10 +83,18 @@
 		<glyph name="%" x="175" y="108" width="29" xoffset="-2" spacing="24"/>
 		<glyph name="&" x="204" y="108" width="24" xoffset="-2" spacing="19"/>
 		<glyph name="'" x="228" y="108" width="12" xoffset="-1" spacing="9"/>
-		<glyph name=":" x="240" y="108" width="13" spacing="10"/>
+		<glyph name=":" x="240" y="108" width="13" spacing="10"/>	
 		<glyph name=";" x="253" y="108" width="13" xoffset="-2" spacing="8"/>
 		<glyph name="*" x="266" y="108" width="18" xoffset="-1" spacing="14"/>
-		<glyph name="~" x="398" y="195" width="24" xoffset="-1" spacing="21"/>
-		<glyph name=" " x="422" y="195" width="10"/>
+		<glyph name="~" x="298" y="202" width="24" xoffset="-1" spacing="20"/>
+		<glyph name="#-60" x="284" y="108" width="25" yoffset="-2" spacing="22"/>	
+		<glyph name="#-36" x="309" y="108" width="27" xoffset="-2" yoffset="-2" spacing="22"/>
+		<glyph name="#-42" x="336" y="108" width="26" xoffset="-2" yoffset="-2" spacing="22"/>
+		<glyph name="\" x="362" y="108" width="36" xoffset="-2" yoffset="-2" spacing="31"/>
+		<glyph name="#-28" x="398" y="108" width="21" xoffset="-1" spacing="18"/>
+		<glyph name="#-4" x="419" y="108" width="23" xoffset="-2" spacing="18"/>
+		<glyph name="#-10" x="442" y="108" width="22" xoffset="-2" spacing="17"/>
+		<glyph name="#-33" x="464" y="108" width="30" xoffset="-2" spacing="25"/>
+		<glyph name=" " x="482" y="224" width="10" />
 	</glyphs>
 </bitmapfont>

@@ -86,6 +86,13 @@
 		<glyph name=":" x="145" y="208" width="14" spacing="12" />
 		<glyph name=";" x="159" y="208" width="14" spacing="12" />
 		<glyph name="*" x="173" y="208" width="22" spacing="20" />
-		<glyph name=" " x="195" y="208" width="16" spacing="16" />
+		<glyph name="#-28" x="195" y="208" width="26" spacing="24" /><!-- ä -->
+		<glyph name="#-4" x="221" y="208" width="27" spacing="25" /><!-- ü -->
+		<glyph name="#-10" x="248" y="208" width="27" spacing="25" /><!-- ö -->
+		<glyph name="#-33" x="275" y="208" width="38" spacing="36" /><!-- ß -->
+		<glyph name="#-60" x="313" y="208" width="33" yoffset="-4" spacing="31" /><!-- Ä -->
+		<glyph name="#-36" x="346" y="208" width="35" yoffset="-4" spacing="33" /><!-- Ü -->
+		<glyph name="#-42" x="381" y="208" width="35" yoffset="-4" spacing="33" /><!-- Ö -->
+		<glyph name=" " x="416" y="208" width="16" spacing="16" />
 	</glyphs>
 </bitmapfont>

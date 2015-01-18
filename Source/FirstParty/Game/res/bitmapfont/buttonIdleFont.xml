@@ -86,6 +86,14 @@
 		<glyph name=":" x="381" y="72" width="10" />
 		<glyph name=";" x="391" y="72" width="8" />
 		<glyph name="*" x="399" y="72" width="14" />
-		<glyph name=" " x="413" y="204" width="10" />
+		<glyph name="#-60" x="413" y="72" yoffset="-2" width="22" />
+		<glyph name="#-36" x="435" y="72" yoffset="-2" width="22" />
+		<glyph name="#-42" x="457" y="72" yoffset="-2" width="22" />
+		<glyph name="\" x="479" y="72" yoffset="-2" width="31" />
+		<glyph name="#-28" x="0" y="108" width="18" />
+		<glyph name="#-4" x="18" y="108" width="18" />
+		<glyph name="#-10" x="36" y="108" width="17" />
+		<glyph name="#-33" x="53" y="108" width="25" />
+		<glyph name=" " x="78" y="108" width="10" />
 	</glyphs>
 </bitmapfont>

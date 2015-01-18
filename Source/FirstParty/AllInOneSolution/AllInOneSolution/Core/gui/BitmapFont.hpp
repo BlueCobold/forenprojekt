@@ -24,13 +24,14 @@ public:
     class Glyph : public sf::Sprite
     {
     public:
-
-        Glyph(const sf::Texture& texture, int xOffset);
-        Glyph(const sf::Texture& texture, int spacing, int xOffset);
-        Glyph(const sf::Texture& texture, const sf::IntRect& rectangle, int xOffset);
-        Glyph(const sf::Texture& texture, const sf::IntRect& rectangle, int spacing, int xOffset);
+        Glyph(const sf::Texture& texture,
+            const sf::IntRect& rectangle = sf::IntRect(0, 0, 0, 0),
+            int spacing = 0,
+            int xOffset = 0,
+            int yOffset = 0);
 
         int getSpacing() const;
+        int getVerticalOffset() const;
 
     private:
 
@@ -38,6 +39,7 @@ public:
 
         int m_spacing;
         int m_xOffset;
+        int m_yOffset;
     };
 
     bool loadFromFile(const std::string& path, ResourceManager& resourceManager);
@@ -49,6 +51,7 @@ private:
     bool validate(const tinyxml2::XMLDocument& document);
 
 private:
+    std::string m_fileName;
     std::map<char, Glyph> m_glyphs;
     sf::Texture* m_texture;
     unsigned int m_fontSize;

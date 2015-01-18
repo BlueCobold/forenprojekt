@@ -60,6 +60,10 @@
 		<glyph name=":" x="25" y="66" width="9" />
 		<glyph name=";" x="34" y="66" width="9" />
 		<glyph name="#" x="43" y="66" width="14" />
-		<glyph name=" " x="57" y="66" width="10" />
+		<glyph name="#-4" x="57" y="66" yoffset="-1" width="17" />
+		<glyph name="#-28" x="74" y="66" yoffset="-1" width="17" />
+		<glyph name="#-10" x="91" y="66" yoffset="-1" width="17" />
+		<glyph name="#-33" x="108" y="66" width="22" />
+		<glyph name=" " x="130" y="66" width="10" />
 	</glyphs>
 </bitmapfont>
