@@ -22,7 +22,8 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
     m_level(nullptr),
     m_lastLevel(nullptr),
     m_levelLoaderJob(nullptr),    
-    m_currentLevel(1)
+    m_currentLevel(1),
+    m_directPlay(false)
 {
     m_loadingErrorMessage = "";
     m_levelLoaderJob = std::unique_ptr<BackgroundLoader<LoadLevelState>>(new BackgroundLoader<LoadLevelState>(&LoadLevelState::loadLevel, *this));
@@ -36,6 +37,10 @@ LoadLevelState::~LoadLevelState()
 void LoadLevelState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
     State::onEnter(enterInformation, time);
+
+    const EnterLoadLevelStateInformation* info = dynamic_cast<const EnterLoadLevelStateInformation*>(enterInformation);
+    m_directPlay = info->m_directPlay;
+
     m_label.setPosition(m_screen.getSize().x / 2.f - m_label.getWidth() / 2.f, m_screen.getSize().y / 2.f);
     if(enterInformation->m_prepareOnly)
         m_levelLoaderJob->reset();
@@ -64,7 +69,12 @@ StateChangeInformation LoadLevelState::update(const float time)
         m_playStateInfo.m_level = m_lastLevel;
         m_playStateInfo.m_levelNumber = m_currentLevel;
         m_transitionStateInfo.m_level = m_lastLevel;
-        m_transitionStateInfo.m_followingState = LevelPreviewStateId;
+        
+        if(m_directPlay)
+            m_transitionStateInfo.m_followingState = PlayStateId;
+        else
+            m_transitionStateInfo.m_followingState = LevelPreviewStateId;
+
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_transitionStateInfo.m_comeFromeState = LoadLevelStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;

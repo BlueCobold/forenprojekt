@@ -68,11 +68,12 @@ StateChangeInformation LevelSelectState::update(const float time)
     }
     if(clicked == LevelSelectMenu::BUTTON_SHOW_DETAILS && !(m_currentLevelNumber > m_unlockedLevel))
     {
-        m_stateInfo.m_level = nullptr;
-        m_stateInfo.m_prepareOnly = false;
-        m_stateInfo.m_levelNumber = m_currentLevelNumber;
+        m_loadLevelStateInfo.m_level = nullptr;
+        m_loadLevelStateInfo.m_prepareOnly = false;
+        m_loadLevelStateInfo.m_levelNumber = m_currentLevelNumber;
+        m_loadLevelStateInfo.m_directPlay = false;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
+        m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelSelectStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);

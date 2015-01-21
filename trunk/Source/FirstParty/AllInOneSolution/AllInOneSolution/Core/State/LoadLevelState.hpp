@@ -37,6 +37,7 @@ private:
     std::unique_ptr<Level> m_level;
     Level* m_lastLevel;
     std::string m_loadingErrorMessage;
+    bool m_directPlay;
 
     LineLabel m_label;
     int m_currentLevel;

@@ -38,9 +38,9 @@ private:
 
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
-    EnterPauseStateInformation m_pauseStateInfo;
     EnterOptionStateInformation m_optionStateInfo;
     EnterCoinShopStateInformation m_coinShopStateInfo;
+    EnterLoadLevelStateInformation m_loadLevelStateInfo;
 };
 
 #endif // PAUSESTATE_HPP

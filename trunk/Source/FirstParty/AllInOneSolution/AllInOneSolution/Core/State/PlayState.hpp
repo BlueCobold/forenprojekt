@@ -38,7 +38,7 @@ private:
     std::unique_ptr<BackgroundLoader<PlayState>> m_onlineHighScoreLoaderJob;
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPauseStateInformation m_pauseStateInfo;
-    EnterStateInformation m_loadLevelStateInfo;
+    EnterLoadLevelStateInformation m_loadLevelStateInfo;
 
     bool checkForNewHighscore();
 
