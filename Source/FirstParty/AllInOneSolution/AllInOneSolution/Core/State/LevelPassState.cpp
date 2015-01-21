@@ -79,10 +79,12 @@ StateChangeInformation LevelPassState::update(const float time)
     if(clicked == ReplayMenu::BUTTON_PLAY_AGAIN)
     {
         m_gotCoins = false;
-        m_playStateInfo.m_returnFromPause = false;
-        m_playStateInfo.m_level = m_level;
+        m_loadLevelStateInfo.m_prepareOnly = false;
+        m_loadLevelStateInfo.m_level = nullptr;
+        m_loadLevelStateInfo.m_directPlay = false;
+        m_loadLevelStateInfo.m_levelNumber = m_playStateInfo.m_levelNumber;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
+        m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelPassStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
@@ -90,14 +92,15 @@ StateChangeInformation LevelPassState::update(const float time)
     else if(clicked == ReplayMenu::BUTTON_PLAY_NEXT)
     {
         m_gotCoins = false;
-        m_stateInfo.m_level = nullptr;
-        m_stateInfo.m_prepareOnly = false;
+        m_loadLevelStateInfo.m_level = nullptr;
+        m_loadLevelStateInfo.m_prepareOnly = false;
+        m_loadLevelStateInfo.m_directPlay = false;
         m_transitionStateInfo.m_comeFromeState = LevelPassStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
-        m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
+        m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
         if(static_cast<unsigned int>(m_playStateInfo.m_levelNumber) < State::getResourceManager().getFileNames().size())
         {
-            m_stateInfo.m_levelNumber = m_playStateInfo.m_levelNumber + 1;
+            m_loadLevelStateInfo.m_levelNumber = m_playStateInfo.m_levelNumber + 1;
             m_transitionStateInfo.m_followingState = LoadLevelStateId;
         }
         else

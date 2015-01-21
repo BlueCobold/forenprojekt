@@ -43,6 +43,7 @@ private:
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterHighScoreStateInformation m_highScoreInfo;
+    EnterLoadLevelStateInformation m_loadLevelStateInfo;
 
     void setMedal(int medal);
 };

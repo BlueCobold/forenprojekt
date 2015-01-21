@@ -34,6 +34,7 @@ private:
     void loadLevelInfos();
     EnterStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
+    EnterLoadLevelStateInformation m_loadLevelStateInfo;
 
     void updateLeftButton();
     void updateRightButton();

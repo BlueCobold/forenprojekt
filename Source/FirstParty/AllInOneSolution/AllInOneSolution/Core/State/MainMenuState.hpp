@@ -33,6 +33,7 @@ private:
     EnterStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterOptionStateInformation m_optionStateInfo;
+    EnterLoadLevelStateInformation m_loadLevelStateInfo;
 };
 
 #endif // MAINMENUSTATE_HPP

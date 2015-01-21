@@ -63,4 +63,10 @@ class EnterCoinShopStateInformation : public EnterStateInformation
 public:
     StateId m_comeFromState;
 };
+
+class EnterLoadLevelStateInformation : public EnterStateInformation
+{
+public:
+    bool m_directPlay;
+};
 #endif // ENTERSTATEINFORMATION_HPP
