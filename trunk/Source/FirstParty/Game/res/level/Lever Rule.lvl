@@ -50,7 +50,7 @@
 	<physics>
 		<physic name="phy_lever">
 			<body type="dynamic" angle="0" />
-			<fixture density="0.5" friction="0.8" restitution="0.5" />
+			<fixture density="0.2" friction="0.8" restitution="0.5" />
 		</physic>
 
 		<physic name="specialtarget">
@@ -299,12 +299,12 @@
 
 
 
-
-                                              /1
-                                    /1\1    /1)1            (1
-                                  /1w2w4\1  )1                                      
-          w1                      w1w1w1w1    i2        2Lxxxxw1    w1                   
-          w1                      w1    w1              xx    w1    w1              
+                                                /1)1    (1\1
+                                              /1)1        (1\1
+                                    /1\1    /1)1            (1\1
+                                  /1w2w4  /1)1                (1\1                     
+          w1                      w1w1w1  )1  i2        2Lxxxxw1    w1                   
+          w1                      w1    \1              xx    w1    w1              
           w1                      w1  tsw1              xx  t1w1    w1           
           w1                1Lxxxxxxxxxxxx              xx          w1 
           w1                i2                          xx          w1         

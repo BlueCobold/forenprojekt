@@ -26,7 +26,7 @@
 			</polygon>
 			<polygon>
 				<vertex x="0" y="58" />
-				<vertex x="360" y="45" />
+				<vertex x="360" y="55" />
 				<vertex x="360" y="60" />
 				<vertex x="0" y="60" />
 			</polygon>
@@ -93,12 +93,7 @@
 
 		<entity name="wigth" rep="hw" >
 			<physics name="heavywight">
-				<shape type="polygon">
-					<vertex x="5" y="10" />
-					<vertex x="5" y="30" />
-					<vertex x="25" y="30" />
-					<vertex x="25" y="10" />
-				</shape>
+				<shape type="circle" radius="10" />
 			</physics>
 		</entity>
 		</entities>

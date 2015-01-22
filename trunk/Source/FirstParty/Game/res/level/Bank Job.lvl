@@ -134,7 +134,7 @@
 						<frameindex frames="6">
 							<static value="0"/>
 						</frameindex>
-						<color value="FF8080FF" />
+						<color value="FF6060FF" />
 					</animation>
 				</animations>
 			</entity>
@@ -164,7 +164,7 @@
 						<frameindex frames="5">
 							<static value="0"/>
 						</frameindex>
-						<color value="80FF80FF" />
+						<color value="60FF60FF" />
 					</animation>
 				</animations>
 			</entity>
@@ -194,7 +194,7 @@
 						<frameindex frames="4">
 							<static value="0"/>
 						</frameindex>
-						<color value="0000FFFF" />
+						<color value="6060FFFF" />
 					</animation>
 				</animations>
 			</entity>

@@ -6,7 +6,6 @@
 	<gameplay time="60"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />
-		<include file="assets/target/movement.inc" />
 		<include file="assets/target/phase_out.inc" />
 		<include file="assets/target/static.inc" />
 		<include file="assets/teeter/wood.inc" />
