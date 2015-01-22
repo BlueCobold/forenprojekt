@@ -88,22 +88,19 @@ void MenuPanel::setCorrelation()
 {
     for(auto s = begin(m_elements); s != end(m_elements); ++s)
     {
-        if ((*s)->getType() != MenuElementType::Image)
-            continue;
-        auto sprite = dynamic_cast<MenuSprite*>(s->get());
-        auto id = sprite->getVisibleWhenId();
-        if(id == -1 || sprite->getId() == id)
+        auto id = s->get()->getVisibleWhenId();
+        if(id == -1 || s->get()->getId() == id)
             continue;
 
         for(auto it = begin(m_elements); it != end(m_elements); ++it)
             if((*it)->getId() == id)
-                sprite->setVisibleWhenSubject(it->get());
+                s->get()->setVisibleWhenSubject(it->get());
     }
 }
 
 void MenuPanel::createButton(const ButtonInfo& info)
 {
-    std::unique_ptr<Button> button(new Button(info.id, info.style, m_position, info.position));
+    std::unique_ptr<Button> button(new Button(info.id, info.style, m_position, info.position, info.triggers));
 
     button->registerOnPressed([this](const Button& sender)
     {
@@ -112,6 +109,7 @@ void MenuPanel::createButton(const ButtonInfo& info)
     });
 
     button->setToolTip(info.toolTip);
+    button->setVisibleWhenId(info.visibleWhenId);
     m_elements.push_back(std::move(button));
 }
 
@@ -119,12 +117,14 @@ void MenuPanel::createCheckBox(const CheckBoxInfo& info)
 {
     std::unique_ptr<CheckBox> checkbox(new CheckBox(info.id, info.style, m_position, info.position));
     checkbox->setToolTip(info.toolTip);
+    checkbox->setVisibleWhenId(info.visibleWhenId);
     m_elements.push_back(std::move(checkbox));
 }
 
 void MenuPanel::createSlider(const SliderInfo& info)
 {
     std::unique_ptr<Slider> slider(new Slider(info.id, info.style, m_position, info.position));
+    slider->setVisibleWhenId(info.visibleWhenId);
     m_elements.push_back(std::move(slider));
 }
 
@@ -159,6 +159,7 @@ void MenuPanel::createInputBox(const InputBoxInfo& info)
                                                     info.size,
                                                     info.inputLimit,
                                                     info.style));
+    inputBox->setVisibleWhenId(info.visibleWhenId);
 
     m_elements.push_back(std::move(inputBox));
 }

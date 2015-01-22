@@ -7,26 +7,30 @@
 		<button id="1" text="gui_mainmenu" style="default" x="261" y="270" />
 		<image id="2" x="159" y="102" spriteSheet="gui_elements" sprite="missing"/>
 		<button id="3" style="selectLevel" x="-9" y="101" />
+		<button id="100" visibleWhen="3" style="selectPreviousLevel" x="-9" y="101" triggering="false"/>
 		<button id="4" style="selectLevel" x="519" y="101" />
+		<button id="100" visibleWhen="4" style="selectNextLevel" x="519" y="101" triggering="false"/>
 		<image id="5" x="155" y="99" spriteSheet="gui_elements" sprite="frame_left"/>
 		<image id="6" x="175" y="99" spriteSheet="gui_elements" sprite="frame_top"/>
 		<image id="7" x="338" y="99" spriteSheet="gui_elements" sprite="frame_right"/>
 		<image id="8" x="175" y="207" spriteSheet="gui_elements" sprite="frame_bottom"/>
 		
-		<image id="9" visibleWhen="3" spriteSheet="gui_elements" sprite="left_top" x="-93" y="67"/>
-		<image id="10" visibleWhen="3" spriteSheet="gui_elements" sprite="left_bottom" x="-93" y="209"/>
-		<image id="11" visibleWhen="3" spriteSheet="gui_elements" sprite="left_left" x="-131" y="80"/>
-		<image id="12" visibleWhen="3" spriteSheet="gui_elements" sprite="frame_left" x="-109" y="99"/>
-		<image id="13" visibleWhen="3" spriteSheet="gui_elements" sprite="frame_top" x="-89" y="99"/>
-		<image id="14" visibleWhen="3" spriteSheet="gui_elements" sprite="frame_right" x="74" y="99"/>
-		<image id="15" visibleWhen="3" spriteSheet="gui_elements" sprite="frame_bottom" x="-89" y="207"/>
+		<image id="20" visibleWhen="3" spriteSheet="gui_elements" sprite="frame_blend" x="-105" y="101"/>
+		<image id="21" visibleWhen="3" spriteSheet="gui_elements" sprite="left_top" x="-93" y="67"/>
+		<image id="22" visibleWhen="3" spriteSheet="gui_elements" sprite="left_bottom" x="-93" y="209"/>
+		<image id="23" visibleWhen="3" spriteSheet="gui_elements" sprite="left_left" x="-131" y="80"/>
+		<image id="24" visibleWhen="3" spriteSheet="gui_elements" sprite="frame_left" x="-109" y="99"/>
+		<image id="25" visibleWhen="3" spriteSheet="gui_elements" sprite="frame_top" x="-89" y="99"/>
+		<image id="26" visibleWhen="3" spriteSheet="gui_elements" sprite="frame_right" x="74" y="99"/>
+		<image id="27" visibleWhen="3" spriteSheet="gui_elements" sprite="frame_bottom" x="-89" y="207"/>
 		
-		<image id="16" visibleWhen="4" spriteSheet="gui_elements" sprite="right_top" x="455" y="45"/>
-		<image id="17" visibleWhen="4" spriteSheet="gui_elements" sprite="right_side" x="591" y="45"/>
-		<image id="18" visibleWhen="4" spriteSheet="gui_elements" sprite="right_bottom" x="456" y="209"/>
-		<image id="19" visibleWhen="4" spriteSheet="gui_elements" sprite="frame_left" x="419" y="99"/>
-		<image id="20" visibleWhen="4" spriteSheet="gui_elements" sprite="frame_top" x="439" y="99"/>
-		<image id="21" visibleWhen="4" spriteSheet="gui_elements" sprite="frame_right" x="602" y="99"/>
-		<image id="22" visibleWhen="4" spriteSheet="gui_elements" sprite="frame_bottom" x="439" y="207"/>
+		<image id="20" visibleWhen="4" spriteSheet="gui_elements" sprite="frame_blend" x="425" y="101"/>
+		<image id="31" visibleWhen="4" spriteSheet="gui_elements" sprite="right_top" x="455" y="45"/>
+		<image id="32" visibleWhen="4" spriteSheet="gui_elements" sprite="right_side" x="591" y="45"/>
+		<image id="33" visibleWhen="4" spriteSheet="gui_elements" sprite="right_bottom" x="456" y="209"/>
+		<image id="34" visibleWhen="4" spriteSheet="gui_elements" sprite="frame_left" x="419" y="99"/>
+		<image id="35" visibleWhen="4" spriteSheet="gui_elements" sprite="frame_top" x="439" y="99"/>
+		<image id="36" visibleWhen="4" spriteSheet="gui_elements" sprite="frame_right" x="602" y="99"/>
+		<image id="37" visibleWhen="4" spriteSheet="gui_elements" sprite="frame_bottom" x="439" y="207"/>
 	</elements>
 </menu>

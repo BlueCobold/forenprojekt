@@ -71,6 +71,30 @@
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 	</buttonStyle>
+	<buttonStyle name="selectNextLevel">
+		<mouseRect left="-63" top="0" width="192" height="108" />
+		<idle spriteSheet="gui_elements" sprite="right_idle"
+			offsetx="4" offsety="35"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="0" />
+		<hover spriteSheet="gui_elements" sprite="right_hover"
+			offsetx="4" offsety="35"
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
+		<pressed spriteSheet="gui_elements" sprite="right_pressed"
+			offsetx="-1" offsety="30"
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
+	</buttonStyle>
+	<buttonStyle name="selectPreviousLevel">
+		<mouseRect left="-63" top="0" width="192" height="108" />
+		<idle spriteSheet="gui_elements" sprite="left_idle"
+			offsetx="4" offsety="35"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="0" />
+		<hover spriteSheet="gui_elements" sprite="left_hover"
+			offsetx="4" offsety="35"
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
+		<pressed spriteSheet="gui_elements" sprite="left_pressed"
+			offsetx="-1" offsety="30"
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
+	</buttonStyle>
 	<buttonStyle name="arrowleft">
 		<mouseRect left="2" top="2" width="54" height="38" />
 		<idle spriteSheet="gui_elements" sprite="left_idle"

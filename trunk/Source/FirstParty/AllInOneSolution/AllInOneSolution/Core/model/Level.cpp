@@ -68,7 +68,7 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConf
     m_extraTimeGoody.registerForActivation(func);
 
     m_world.SetAllowSleeping(false);
-#ifdef _DEBUG
+#ifdef _DEBUG_BOX2D
     m_debugDraw = false;
 #endif
     m_contactListener = ContactListener(this, this);
@@ -163,7 +163,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     if(m_timeAttackMode)
         handleAutoRespawn();
 
-#ifdef _DEBUG
+#ifdef _DEBUG_BOX2D
     if(utility::Keyboard.isKeyDown(sf::Keyboard::D))
         m_debugDraw = !m_debugDraw;
 #endif
@@ -475,7 +475,7 @@ void Level::draw(const DrawParameter& param)
     for(auto it = begin(m_pointLabels); it != end(m_pointLabels); ++it)
         (*it)->label->draw(param);
 
-#ifdef _DEBUG
+#ifdef _DEBUG_BOX2D
     if(m_debugDraw)
     {
         DebugDraw d(param.getTarget());

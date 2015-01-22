@@ -109,6 +109,10 @@ void MenuLoader::parseButtons(
             button.style = style->second;
             button.position = sf::Vector2f(buttonXml->FloatAttribute("x"), buttonXml->FloatAttribute("y"));
             button.id = buttonXml->IntAttribute("id");
+            if(buttonXml->Attribute("triggering"))
+                button.triggers = buttonXml->BoolAttribute("triggering");
+            else
+                button.triggers = true;
             auto text = buttonXml->Attribute("text");
             if(text != nullptr && std::string(text) != "")
                 button.textResourceKey = utility::translateKey(text);
@@ -124,6 +128,8 @@ void MenuLoader::parseButtons(
                 button.toolTip = tooltip->second;
                 button.toolTip.setText(utility::translateKey(buttonXml->Attribute("tooltiptext")));
             }
+            if(auto visibleWhenId = buttonXml->IntAttribute("visibleWhen"))
+                button.visibleWhenId = visibleWhenId;
 
             button.style.idleStyle.label = LineLabel(
                 button.textResourceKey, 
@@ -173,6 +179,8 @@ void MenuLoader::parseCheckBoxes(
                 checkBox.toolTip = tooltip->second;
                 checkBox.toolTip.setText(utility::translateKey(checkboxXml->Attribute("tooltiptext")));
             }
+            if(auto visibleWhenId = checkboxXml->IntAttribute("visibleWhen"))
+                checkBox.visibleWhenId = visibleWhenId;
 
             elements.checkboxes.push_back(checkBox);
         }
@@ -197,6 +205,9 @@ void MenuLoader::parseSliders(
             slider.style = style->second;
             slider.position = sf::Vector2f(sliderXml->FloatAttribute("x"), sliderXml->FloatAttribute("y"));
             slider.id = sliderXml->IntAttribute("id");
+            
+            if(auto visibleWhenId = sliderXml->IntAttribute("visibleWhen"))
+                slider.visibleWhenId = visibleWhenId;
 
             elements.slider.push_back(slider);
         }
@@ -220,6 +231,9 @@ void MenuLoader::parseLabels(
                             resourceManager.getBitmapFont(labelXml->Attribute("font")),
                             static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
                             labelXml->IntAttribute("id"));
+            
+            if(auto visibleWhenId = labelXml->IntAttribute("visibleWhen"))
+                label.setVisibleWhenId(visibleWhenId);
 
             elements.labels.push_back(label);
         }
@@ -251,8 +265,10 @@ void MenuLoader::parseImages(MenuElements& elements,
                 tooltip->second.setText(utility::translateKey(toolTipText));
                 sprite.setToolTip(tooltip->second);
             }
+
             if(auto visibleWhenId = imageXml->IntAttribute("visibleWhen"))
                 sprite.setVisibleWhenId(visibleWhenId);
+
             elements.sprites.push_back(sprite);
         }
     }
@@ -537,6 +553,10 @@ void MenuLoader::parseInputBox(MenuElements& elements, tinyxml2::XMLElement* men
             inputBox.inputLimit = inputBoxXml->IntAttribute("inputlimit");
             inputBox.position = sf::Vector2f(inputBoxXml->FloatAttribute("x"), inputBoxXml->FloatAttribute("y"));
             inputBox.size = sf::Vector2f(inputBoxXml->FloatAttribute("width"), inputBoxXml->FloatAttribute("height"));
+            
+            if(auto visibleWhenId = inputBoxXml->IntAttribute("visibleWhen"))
+                inputBox.visibleWhenId = visibleWhenId;
+
             elements.infobox.push_back(inputBox);
         }
     }
@@ -562,6 +582,10 @@ void MenuLoader::parseAnimationContainer(
                     animation = animation->NextSiblingElement("animation"))
                     animContainer->bindAnimation(std::move(LevelFileLoader::parseAnimation(animation, animContainer.get(), animContainer.get(), resourceManager, &functions)));
             }
+
+            if(auto visibleWhenId = animationContainer->IntAttribute("visibleWhen"))
+                animContainer->setVisibleWhenId(visibleWhenId);
+
             elements.animationContainer.push_back(std::move(animContainer));
         }
     }

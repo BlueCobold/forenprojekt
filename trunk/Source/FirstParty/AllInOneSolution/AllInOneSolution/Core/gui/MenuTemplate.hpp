@@ -17,16 +17,23 @@
 #include "../model/SoundObject.hpp"
 #include "AnimationContainer.hpp"
 
-struct ButtonInfo
+struct BaseUiInfo {
+    BaseUiInfo() : visibleWhenId(-1) { }
+
+    int visibleWhenId;
+};
+
+struct ButtonInfo : public BaseUiInfo
 {
     ButtonStyle style;
     sf::Vector2f position;
     std::string textResourceKey;
     int id;
+    bool triggers;
     ToolTip toolTip;
 };
 
-struct CheckBoxInfo
+struct CheckBoxInfo : public BaseUiInfo
 {
     CheckBoxStyle style;
     sf::Vector2f position;
@@ -34,14 +41,14 @@ struct CheckBoxInfo
     ToolTip toolTip;
 };
 
-struct SliderInfo
+struct SliderInfo : public BaseUiInfo
 {
     SliderStyle style;
     sf::Vector2f position;
     int id;
 };
 
-struct InputBoxInfo
+struct InputBoxInfo : public BaseUiInfo
 {
     InputBoxStyle style;
     sf::Vector2f position;

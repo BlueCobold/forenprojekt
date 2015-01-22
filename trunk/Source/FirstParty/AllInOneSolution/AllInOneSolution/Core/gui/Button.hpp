@@ -25,6 +25,7 @@ private:
     sf::Vector2i m_size;
     ToolTip m_toolTip;
     bool m_showToolTip;
+    bool m_isTriggering;
 
     LineLabel* m_label;
     sf::Sprite* m_sprite;
@@ -36,7 +37,7 @@ private:
 
 public:
 
-    Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset);
+    Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers = true);
 
     virtual ~Button()
     { }

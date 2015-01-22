@@ -3,11 +3,12 @@
 
 #include <SFML/Window/Event.hpp>
 
-Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset) :
+Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers) :
     MenuElement(id, MenuElementType::Button, position, offset),
     m_style(style),
     m_playHoverSound(false),
-    m_showToolTip(false)
+    m_showToolTip(false),
+    m_isTriggering(triggers)
 {
     m_sprite = &m_style.idleStyle.sprite;
     m_label = &m_style.idleStyle.label;
@@ -57,7 +58,7 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
             m_label = &m_style.hoverStyle.label;
             onPositionChanged();
 
-            if(utility::Mouse.leftButtonReleased() && m_callback != nullptr)
+            if(m_isTriggering && utility::Mouse.leftButtonReleased() && m_callback != nullptr)
                 m_callback(*this);
         }
     }

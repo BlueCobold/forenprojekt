@@ -266,7 +266,7 @@ private:
 
     AppConfig& m_config;
 
-#ifdef _DEBUG
+#ifdef _DEBUG_BOX2D
     bool m_debugDraw;
 #endif
 

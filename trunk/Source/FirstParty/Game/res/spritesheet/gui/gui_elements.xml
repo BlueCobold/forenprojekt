@@ -77,5 +77,6 @@
 		<sprite name="online_checked" x="232" y="605" width="40" height="40" originx="20" originy="20" />
 		<sprite name="online_hover" x="272" y="605" width="40" height="40" originx="20" originy="20" />
 		<sprite name="online_unchecked" x="312" y="605" width="40" height="40" originx="20" originy="20" />
+		<sprite name="frame_blend" x="0" y="608" width="192" height="168" originx="0" originy="0" />
 	</sprites>
 </spriteSheet>
