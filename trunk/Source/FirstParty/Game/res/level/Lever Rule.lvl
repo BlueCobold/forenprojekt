@@ -63,9 +63,9 @@
 		<entity name="special_lever1" rep="1L">
 			<physics name="phy_lever" shape="lever1" />
 			<joints>
-				<joint type="singleRevolute" x="180" y="0" cwlimit="-175" ccwlimit="180">
+				<singleRevolute x="180" y="0" cwlimit="-175" ccwlimit="180">
 					<motor maxTorque="0" speed="0" />
-				</joint>
+				</singleRevolute>
 			</joints>
 			<animations>
 				<animation spritesheet="walls" sprite="sand_wide_01" rotate="true" />
@@ -77,9 +77,9 @@
 		<entity name="special_lever2" rep="2L">
 			<physics name="phy_lever" shape="lever2" />
 			<joints>
-				<joint type="singleRevolute" x="30" y="210">
+				<singleRevolute x="30" y="210">
 					<motor maxTorque="0" speed="0" />
-				</joint>
+				</singleRevolute>
 			</joints>
 			<animations>
 				<animation spritesheet="walls" sprite="sand_wide_01" midx="-60" midy="0" rotate="true" />
@@ -287,9 +287,9 @@
 				<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
 			</animations>
 			<joints>
-				<joint type="singlePrismatic" x="33.5" y="33.5" towards="270" endPointBackward="0" endPointForward="300">
+				<singlePrismatic x="33.5" y="33.5" towards="270" endPointBackward="0" endPointForward="300">
 					<motor maxForce="0" speed="0" />
-				</joint>
+				</singlePrismatic>
 			</joints>
 		</entity>
 		</entities>

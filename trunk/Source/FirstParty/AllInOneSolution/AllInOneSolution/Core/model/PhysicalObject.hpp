@@ -5,6 +5,7 @@
 
 #include "../animation/OrientedObject.hpp"
 #include "../animation/provider/ValueProvider.hpp"
+#include "joint/JointObject.hpp"
 
 #include <Box2D/Dynamics/b2Body.h>
 #include <Box2D/Dynamics/b2Fixture.h>
@@ -32,6 +33,8 @@ private:
     std::vector<std::unique_ptr<b2Shape>> m_shapes;
 
     bool m_basePosChanged;
+
+    std::vector<std::unique_ptr<JointObject>> m_joints;
 
 public:
 
@@ -157,6 +160,11 @@ public:
         if(m_body != nullptr)
             return !m_body->IsActive();
         return false;
+    }
+
+    void addJoint(std::unique_ptr<JointObject> joint)
+    {
+        m_joints.push_back(std::move(joint));
     }
 
 protected:

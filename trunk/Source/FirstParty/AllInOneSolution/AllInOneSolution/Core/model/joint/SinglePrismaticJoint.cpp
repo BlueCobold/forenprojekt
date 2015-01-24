@@ -1,8 +1,7 @@
 #include "SinglePrismaticJoint.hpp"
 #include "../../Utility.hpp"
-#include <cmath>
 
-SinglePrismaticJoint::SinglePrismaticJoint(b2World* world, const b2PrismaticJointDef& jointDef,b2Body* body, float towards) :
+SinglePrismaticJoint::SinglePrismaticJoint(b2World* world, const b2PrismaticJointDef& jointDef,b2Body* body, const b2Vec2& direction) :
     JointObject(world, JointObject::SinglePrismatic),
     m_jointDef(jointDef)
 {
@@ -12,7 +11,7 @@ SinglePrismaticJoint::SinglePrismaticJoint(b2World* world, const b2PrismaticJoin
     if(body->GetType() == b2_dynamicBody)
     {
         bindBodys(body, m_anchorBody);
-        m_jointDef.Initialize(body, m_anchorBody, body->GetWorldCenter(), b2Vec2(std::cos(towards), std::sin(towards)));
+        m_jointDef.Initialize(body, m_anchorBody, body->GetWorldCenter(), direction);
     }
     else
         throw std::runtime_error(utility::replace(utility::translateKey("WrongBodyType"), "SinglePrismaticJoint"));
