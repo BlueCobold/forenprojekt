@@ -918,84 +918,99 @@ void Level::parseGameplayAttributes(tinyxml2::XMLElement* xml)
 
 void Level::parseJoints(tinyxml2::XMLElement* joints, Entity* entity)
 {
-    for(auto jointXml = joints->FirstChildElement("joint");
-        jointXml != nullptr; jointXml = jointXml->NextSiblingElement("joint"))
+    for(auto jointXml = joints->FirstChildElement("singleRevolute");
+        jointXml != nullptr; jointXml = jointXml->NextSiblingElement("singleRevolute"))
     {
-        std::string type = jointXml->Attribute("type");
-        if(type == "singleRevolute")
-        {
-            b2RevoluteJointDef jointDef;
-
-            jointDef.localAnchorA = b2Vec2(jointXml->FloatAttribute("x") / utility::PIXEL_PER_METER,
-                                           jointXml->FloatAttribute("y") / utility::PIXEL_PER_METER);
-
-            //clockwise
-            if(auto value = jointXml->FloatAttribute("cwlimit"))
-                jointDef.lowerAngle = value / 360.f * b2_pi;
-            // counter-clockwise
-            if(auto value = jointXml->FloatAttribute("ccwlimit"))
-                jointDef.upperAngle = value / 360.f * b2_pi;
-
-            if(jointDef.upperAngle =! 0 || jointDef.lowerAngle != 0)
-                jointDef.enableLimit = true;
-            // load motor data
-            if(auto motor = jointXml->FirstChildElement("motor"))
-            {
-                jointDef.maxMotorTorque = motor->FloatAttribute("maxTorque");
-                jointDef.motorSpeed = motor->FloatAttribute("speed");
-                jointDef.enableMotor = true;
-            }
-
-            m_joints.push_back(std::unique_ptr<SingleRevoluteJoint>(new SingleRevoluteJoint(&m_world, jointDef, entity->getBody())));
-        }
-
-        if(type == "singlePrismatic")
-        {
-            b2PrismaticJointDef jointDef;
-            float towards = 0.f;
-
-            jointDef.localAnchorA = b2Vec2(jointXml->FloatAttribute("x") / utility::PIXEL_PER_METER,
-                                           jointXml->FloatAttribute("y") / utility::PIXEL_PER_METER);
-
-            towards = jointXml->FloatAttribute("towards") * b2_pi / 180.f;
-
-            // end point backward
-            if(auto value = jointXml->FloatAttribute("endPointBackward"))
-                jointDef.lowerTranslation = value / utility::PIXEL_PER_METER;
-
-            // end point forward
-            if(auto value = jointXml->FloatAttribute("endPointForward"))
-                jointDef.upperTranslation = value / utility::PIXEL_PER_METER;
-
-            if(jointDef.lowerTranslation != 0 || jointDef.upperTranslation != 0)
-                jointDef.enableLimit = true;
-
-            // load motor data
-            if(auto motor = jointXml->FirstChildElement("motor"))
-            {
-                jointDef.maxMotorForce = motor->FloatAttribute("maxForce");
-                jointDef.motorSpeed = motor->FloatAttribute("speed");
-                jointDef.enableMotor = true;
-            }
-            m_joints.push_back(std::unique_ptr<SinglePrismaticJoint>(new SinglePrismaticJoint(&m_world, jointDef, entity->getBody(), towards)));
-        }
-
-        if(type == "singleDistance")
-        {
-            b2DistanceJointDef jointDef;
-            jointDef.localAnchorA = b2Vec2(jointXml->FloatAttribute("x") / utility::PIXEL_PER_METER,
-                                           jointXml->FloatAttribute("y") / utility::PIXEL_PER_METER);
-
-            jointDef.localAnchorB = b2Vec2(jointXml->FloatAttribute("anchorX") / utility::PIXEL_PER_METER,
-                                           jointXml->FloatAttribute("anchorY") / utility::PIXEL_PER_METER);
-
-            if(auto value = jointXml->FloatAttribute("dampingRatio"))
-                jointDef.dampingRatio = value;
-
-            if(auto value = jointXml->FloatAttribute("frequencyHz"))
-                jointDef.frequencyHz = value;
-
-            m_joints.push_back(std::unique_ptr<SingleDistanceJoint>(new SingleDistanceJoint(&m_world, jointDef, entity->getBody())));
-        }
+        praseSingleRevoluteJoint(jointXml, entity);
     }
+
+    for(auto jointXml = joints->FirstChildElement("singlePrismatic");
+        jointXml != nullptr; jointXml = jointXml->NextSiblingElement("singlePrismatic"))
+    {
+        praseSinglePrismaticJoint(jointXml, entity);
+    }
+
+    for(auto jointXml = joints->FirstChildElement("singleDistance");
+        jointXml != nullptr; jointXml = jointXml->NextSiblingElement("singleDistance"))
+    {
+        praseSingleDistanceJoint(jointXml, entity);
+    }
+}
+
+void Level::praseSingleRevoluteJoint(tinyxml2::XMLElement* jointXml, Entity* entity)
+{
+    b2RevoluteJointDef jointDef;
+
+    jointDef.localAnchorA = b2Vec2(utility::toMeter(jointXml->FloatAttribute("x")),
+                                   utility::toMeter(jointXml->FloatAttribute("y")));
+
+    //clockwise
+    if(auto value = jointXml->FloatAttribute("cwlimit"))
+        jointDef.lowerAngle = value / 360.f * b2_pi;
+    // counter-clockwise
+    if(auto value = jointXml->FloatAttribute("ccwlimit"))
+        jointDef.upperAngle = value / 360.f * b2_pi;
+
+    if(jointDef.upperAngle =! 0 || jointDef.lowerAngle != 0)
+        jointDef.enableLimit = true;
+    // load motor data
+    if(auto motor = jointXml->FirstChildElement("motor"))
+    {
+        jointDef.maxMotorTorque = motor->FloatAttribute("maxTorque");
+        jointDef.motorSpeed = motor->FloatAttribute("speed");
+        jointDef.enableMotor = true;
+    }
+
+    entity->addJoint(std::unique_ptr<SingleRevoluteJoint>(new SingleRevoluteJoint(&m_world, jointDef, entity->getBody())));
+}
+
+void Level::praseSinglePrismaticJoint(tinyxml2::XMLElement* jointXml, Entity* entity)
+{
+    b2PrismaticJointDef jointDef;
+
+    jointDef.localAnchorA = b2Vec2(utility::toMeter(jointXml->FloatAttribute("x")),
+                                   utility::toMeter(jointXml->FloatAttribute("y")));
+
+    // end point backward
+    if(auto value = jointXml->FloatAttribute("endPointBackward"))
+        jointDef.lowerTranslation = utility::toMeter(value);
+
+    // end point forward
+    if(auto value = jointXml->FloatAttribute("endPointForward"))
+        jointDef.upperTranslation = utility::toMeter(value);
+
+    if(jointDef.lowerTranslation != 0 || jointDef.upperTranslation != 0)
+        jointDef.enableLimit = true;
+
+    b2Vec2 direction(utility::toMeter(jointXml->FloatAttribute("directionX")),
+                     utility::toMeter(jointXml->FloatAttribute("directionY")));
+
+    // load motor data
+    if(auto motor = jointXml->FirstChildElement("motor"))
+    {
+        jointDef.maxMotorForce = motor->FloatAttribute("maxForce");
+        jointDef.motorSpeed = motor->FloatAttribute("speed");
+        jointDef.enableMotor = true;
+    }
+
+    entity->addJoint(std::unique_ptr<SinglePrismaticJoint>(new SinglePrismaticJoint(&m_world, jointDef, entity->getBody(), direction)));
+}
+
+void Level::praseSingleDistanceJoint(tinyxml2::XMLElement* jointXml, Entity* entity)
+{
+    b2DistanceJointDef jointDef;
+
+    jointDef.localAnchorA = b2Vec2(utility::toMeter(jointXml->FloatAttribute("x")),
+                                   utility::toMeter(jointXml->FloatAttribute("y")));
+
+    jointDef.localAnchorB = b2Vec2(utility::toMeter(jointXml->FloatAttribute("anchorX")),
+                                   utility::toMeter(jointXml->FloatAttribute("anchorY")));
+
+    if(auto value = jointXml->FloatAttribute("dampingRatio"))
+        jointDef.dampingRatio = value;
+
+    if(auto value = jointXml->FloatAttribute("frequencyHz"))
+        jointDef.frequencyHz = value;
+
+    entity->addJoint(std::unique_ptr<SingleDistanceJoint>(new SingleDistanceJoint(&m_world, jointDef, entity->getBody())));
 }

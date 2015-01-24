@@ -59,9 +59,9 @@
 		<entity name="special_lever1" rep="1L">
 			<physics name="phy_lever" shape="lever1" />
 			<joints>
-				<joint type="singleRevolute" x="0" y="0" cwlimit="-175" ccwlimit="0">
+				<singleRevolute x="0" y="0" cwlimit="-175" ccwlimit="0">
 					<motor maxTorque="40000" speed="5" />
-				</joint>
+				</singleRevolute>
 			</joints>
 			<animations>
 				<animation spritesheet="walls" sprite="sand_wide_01" rotate="true" />

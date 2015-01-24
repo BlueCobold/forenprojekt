@@ -16,7 +16,7 @@ private:
     b2BodyDef m_anchorBodyDef;
 
 public:
-    SinglePrismaticJoint(b2World* world, const b2PrismaticJointDef& jointDef, b2Body* body, float towards);
+    SinglePrismaticJoint(b2World* world, const b2PrismaticJointDef& jointDef, b2Body* body, const b2Vec2& direction);
 
     ~SinglePrismaticJoint();
 
