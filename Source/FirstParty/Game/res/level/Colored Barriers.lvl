@@ -1,0 +1,583 @@
+#<level>
+	<levelinfo name="Colored Barriers">
+		<infoimage srcx="718" srcy="330" width ="192" height="108" />
+	</levelinfo>
+	<gameplay maxBalls="5" time="180"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+
+	<shapes>		
+		<shape name="lever1" type="polygon">
+			<vertex x="1" y="0" />
+			<vertex x="239" y="0" />
+			<vertex x="239" y="60" />
+			<vertex x="1" y="60" />
+		</shape>
+
+		<shape name="wide_wallmove" type="polygon">
+			<vertex x="0" y="0" />
+			<vertex x="120" y="0" />
+			<vertex x="120" y="60" />
+			<vertex x="0" y="60" />
+		</shape>
+		
+		<shape name="wallmove" type="polygon">
+			<vertex x="0" y="0" />
+			<vertex x="120" y="0" />
+			<vertex x="120" y="60" />
+			<vertex x="0" y="60" />
+		</shape>
+	</shapes>
+
+	<physics>
+		<physic name="verticalmoving2">
+			<body type="kinematic" angle="0">
+				<kinematics>
+					<position axis="y">
+						<mul>
+							<sine>
+								<add>
+									<static value="30" />
+										<mul>
+											<time />
+											<static value="60" />
+										</mul>
+								</add>
+							</sine>
+							<static value="240" /> 
+						</mul>
+					</position>
+				</kinematics>
+			</body>
+			<fixture density="0.5" friction="0.8" restitution="0.1" />
+		</physic>
+
+		<physic name="horizontalmoving2">
+			<body type="kinematic" angle="0">
+				<kinematics>
+					<position axis="x">
+						<max>
+							<min>
+								<mul>
+									<sine>
+										<add>
+											<static value="0" />
+												<mul>
+													<time />
+													<static value="-120" />
+												</mul>
+										</add>
+									</sine>
+									<static value="180" /> 
+								</mul>
+								<static value="60" />
+							</min>
+							<static value="-60" />
+						</max>
+					</position>
+				</kinematics>
+			</body>
+			<fixture density="0.5" friction="0.8" restitution="0.1" />
+		</physic>
+
+		<physic name="horizontalmoving">
+			<body type="kinematic" angle="0">
+				<kinematics>
+					<position axis="x">
+						<max>
+							<min>
+								<mul>
+									<sine>
+										<add>
+											<static value="0" />
+												<mul>
+													<time />
+													<static value="120" />
+												</mul>
+										</add>
+									</sine>
+									<static value="180" /> 
+								</mul>
+								<static value="60" />
+							</min>
+							<static value="-60" />
+						</max>
+					</position>
+				</kinematics>
+			</body>
+			<fixture density="0.5" friction="0.8" restitution="0.1" />
+		</physic>
+	</physics>
+
+	<entities>
+			<entity name="change_wall" rep="x1">
+				<physics name="wall" shape="high_wall" />
+				<sound name="switch" />
+				<onCollision>
+					<changeProperty name="ball:color">
+						<mod>
+							<add>
+								<var name="ball:color" />
+								<static value="1" />
+							</add>
+							<static value="3" />
+						</mod>
+					</changeProperty>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_high_01" rotate="false" >
+						<frameindex frames="3">
+							<static value="0"/>
+						</frameindex>
+						<color channel="red">
+							<mul>
+								<add>
+									<static value="1" />
+									<sine>
+										<mul>
+											<static value="150" />
+											<time />
+										</mul>
+									</sine>
+								</add>
+								<static value="0.5" />
+							</mul>
+						</color>
+						<color channel="blue">
+							<mul>
+								<add>
+									<static value="1" />
+									<sine>
+										<mul>
+											<static value="130" />
+											<add>
+												<time />
+												<static value="180" />
+											</add>
+										</mul>
+									</sine>
+								</add>
+								<static value="0.5" />
+							</mul>
+						</color>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="door_wall" rep="X1" offsetx="30" offsety="30">
+				<physics name="wall" shape="wall" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="0" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_04" rotate="false">
+						<frameindex frames="6">
+							<static value="0"/>
+						</frameindex>
+						<color value="FF6060FF" />
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="door_wall" rep="/r">
+				<physics name="wall" shape="right_lower" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="0" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_right_lower" rotate="false">
+						<frameindex frames="6">
+							<static value="0"/>
+						</frameindex>
+						<color value="FF6060FF" />
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="door_wall" rep="\r">
+				<physics name="wall" shape="left_lower" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="0" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_left_lower" rotate="false">
+						<frameindex frames="6">
+							<static value="0"/>
+						</frameindex>
+						<color value="FF6060FF" />
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="door_wall" rep="(r">
+				<physics name="wall" shape="right_upper" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="0" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_right_upper" rotate="false">
+						<frameindex frames="6">
+							<static value="0"/>
+						</frameindex>
+						<color value="FF6060FF" />
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="door_wall" rep=")r">
+				<physics name="wall" shape="left_upper" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="0" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_left_upper" rotate="false">
+						<frameindex frames="6">
+							<static value="0"/>
+						</frameindex>
+						<color value="FF6060FF" />
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="door_wall2" rep="X2" offsetx="30" offsety="30">
+				<physics name="wall" shape="wall" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="1" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_03" rotate="false">
+						<frameindex frames="5">
+							<static value="0"/>
+						</frameindex>
+						<color value="60FF60FF" />
+					</animation>
+				</animations>
+			</entity>
+
+			
+			<entity name="door_wall2" rep="\g">
+				<physics name="wall" shape="left_lower" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="1" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_left_lower" rotate="false">
+						<frameindex frames="5">
+							<static value="0"/>
+						</frameindex>
+						<color value="60FF60FF" />
+					</animation>
+				</animations>
+			</entity>
+			
+			<entity name="door_wall" rep="(g">
+				<physics name="wall" shape="right_upper" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="1" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_right_upper" rotate="false">
+						<frameindex frames="5">
+							<static value="0"/>
+						</frameindex>
+						<color value="60FF60FF" />
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="door_wall3" rep="X3" offsetx="30" offsety="30">
+				<physics name="wall" shape="wall" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="2" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_02" rotate="false" >
+						<frameindex frames="4">
+							<static value="0"/>
+						</frameindex>
+						<color value="6060FFFF" />
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="door_wall3" rep="/b">
+				<physics name="wall" shape="right_lower" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="2" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_right_lower" rotate="false" >
+						<frameindex frames="4">
+							<static value="0"/>
+						</frameindex>
+						<color value="6060FFFF" />
+					</animation>
+				</animations>
+			</entity>
+
+			<entity name="door_wall3" rep=")b">
+				<physics name="wall" shape="left_upper" />
+				<sound name="refuse" />
+				<collides>
+					<propertyFilter target="ball">
+						<abs>
+							<sub>
+								<static value="2" />
+								<var name="ball:color" />
+							</sub>
+						</abs>
+					</propertyFilter>
+				</collides>
+				<onCollision>
+					<showLabel font="red" offset="50">
+						<label>levelBlocked1</label>
+						<label>levelBlocked2</label>
+						<label>levelBlocked3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_left_upper" rotate="false" >
+						<frameindex frames="4">
+							<static value="0"/>
+						</frameindex>
+						<color value="6060FFFF" />
+					</animation>
+				</animations>
+			</entity>
+
+
+
+			<entity name="spike_okpart2_move" rep="oM" type="entity" collideWithBall="true">
+				<physics name="verticalmoving2" shape="spike_okpart2" />
+				<animations>
+					<animation texture="gravity_arrow" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="24" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="48" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="72" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="96" y="0" srcx="248" srcy="128" width="24" height="40" />
+				</animations>
+			</entity>
+			<entity name="spike_okpart2_move" rep="xM" type="entity" collideWithBall="true">
+				<physics name="verticalmoving2" shape="spike_killer2" />
+				<onCollision>
+					<killBall />
+				</onCollision>
+			</entity>
+			<entity name="movingwide_wall_2" rep="m4">
+				<physics name="verticalmoving2" shape="wide_wallmove" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_wide_01" rotate="false"/>
+				</animations>
+			</entity>
+			<entity name="movingwall_1" rep="ml">
+				<physics name="horizontalmoving2" shape="wallmove" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="metal_01" x="30" y="30" rotate="true"/>
+					<animation spritesheet="walls" sprite="metal_01" x="90" y="30" rotate="true"/>
+				</animations>
+			</entity>
+
+			<entity name="movingwall_1" rep="mr">
+				<physics name="horizontalmoving" shape="wallmove" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="metal_01" x="30" y="30" rotate="true"/>
+					<animation spritesheet="walls" sprite="metal_01" x="90" y="30" rotate="true"/>
+				</animations>
+			</entity>
+		</entities>
+	</templates>
+	<grid size="60" width="2460" height="1900">
+
+	gagb    gcgdgegdgegf    gcgdgegfgagb
+      w1w2w3w4w5w6w1w2w3w1w2w3w4w1w4w1w4w5w6
+      w4          /bX3)b              /rX1w1
+      w2  t1    /bX3)b        t1    /rX1)rw3
+      w6      /bX3)b              /rX1)r  w1
+      w5    /bX3)b              /rX1)r    w6
+      w4  /bX3)b              /rX1)r      w3
+      w3/bX3)b              /rX1)r        w3
+      w2X3)b              /rX1)r      t1  w2
+      w1)b  t1            (gX2\g          w1                     
+      w1                    (gX2\g        w1 
+      w6    /r\r              (gX2\g      w1
+      w1  /rX1X1\r              (gX2\g    w1
+      )1/rX1)r(rX1\r              (gX2\g  w1
+      /3X1)r    (rX1\r              (gX2\g(1
+      w2)r        (rX1\r              (gX2\1
+      x1      t1    (rX1\r                x1
+       1gg            (rX1      BB      go 1
+      w1\3gh        gr/5w1\1          gr/1w1         
+      w2d6\2        /4d5d4d2\1        /1d6w1        
+      w1w3w4    TT  w6w2w4w2w1    TT  w1w1w2
+                                                                                                                                      
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="400" silver="500" gold="650" />
+</level>
