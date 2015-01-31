@@ -215,7 +215,7 @@ void OptionMenu::nextVideoMode()
     m_currentVideoMode = m_availableVideoMode[m_currentVideoModeIndex];
 
     if(m_appointedVideoMode == m_currentVideoMode)
-        getLabel(LABEL_RESOLUTION).setText("Current");
+        getLabel(LABEL_RESOLUTION).setText(utility::translateKey("gui_label_resolution"));
     else
         getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.x) + 
                                            utility::toString(" x ") + 
@@ -231,7 +231,7 @@ void OptionMenu::prevVideoMode()
     m_currentVideoMode = m_availableVideoMode[m_currentVideoModeIndex];
 
     if(m_appointedVideoMode == m_currentVideoMode)
-        getLabel(LABEL_RESOLUTION).setText("Current");
+        getLabel(LABEL_RESOLUTION).setText(utility::translateKey("gui_label_resolution"));
     else
         getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.x) + 
                                            utility::toString(" x ") + 
