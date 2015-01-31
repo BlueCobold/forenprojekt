@@ -46,9 +46,11 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
                                         utility::toString(m_level->getMedal(Level::Silver))), // second replace 
                                         utility::toString(m_level->getMedal(Level::Bronze))); // third replace
     m_menu.setMedalToolTipText(text);
-    if(!enterInformation->m_prepareOnly && m_level->getPoints() > 0 && !m_gotCoins)
+    if(!enterInformation->m_prepareOnly && !m_gotCoins)
     {
-        m_config.set<int>("coins", m_config.get<int>("coins") + m_level->getPoints());
+        if(m_level->getPoints() > 0)
+            m_config.set<int>("coins", m_config.get<int>("coins") + m_level->getPoints());
+
         if(m_level->number() == m_config.get<int>("UnlockedLevel"))
             m_config.set<int>("UnlockedLevel", m_level->number() + 1);
 
