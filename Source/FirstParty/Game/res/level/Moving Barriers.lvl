@@ -179,60 +179,6 @@
 					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
 				</animations>
 			</entity>
-
-			<entity name="change_wall" rep="x1">
-				<physics name="wall" shape="high_wall" />
-				<sound name="switch" />
-				<onCollision>
-					<changeProperty name="ball:color">
-						<mod>
-							<add>
-								<var name="ball:color" />
-								<static value="1" />
-							</add>
-							<static value="3" />
-						</mod>
-					</changeProperty>
-				</onCollision>
-				<animations>
-					<animation spritesheet="walls" sprite="sand_high_01" rotate="false" >
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-						<color channel="red">
-							<mul>
-								<add>
-									<static value="1" />
-									<sine>
-										<mul>
-											<static value="150" />
-											<time />
-										</mul>
-									</sine>
-								</add>
-								<static value="0.5" />
-							</mul>
-						</color>
-						<color channel="blue">
-							<mul>
-								<add>
-									<static value="1" />
-									<sine>
-										<mul>
-											<static value="130" />
-											<add>
-												<time />
-												<static value="180" />
-											</add>
-										</mul>
-									</sine>
-								</add>
-								<static value="0.5" />
-							</mul>
-						</color>
-					</animation>
-				</animations>
-			</entity>
 			
 			<entity name="movingwall_2" rep="ml">
 				<physics name="horizontalmoving2" shape="wallmove" />

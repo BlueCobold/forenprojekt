@@ -54,151 +54,6 @@
 					</changeGravity>
 				</collides>
 			</entity>
-
-			<entity name="change_wall" rep="x1">
-				<physics name="wall" shape="wide_wall" />
-				<sound name="switch" />
-				<onCollision>
-					<changeProperty name="ball:color">
-						<mod>
-							<add>
-								<var name="ball:color" />
-								<static value="1" />
-							</add>
-							<static value="3" />
-						</mod>
-					</changeProperty>
-				</onCollision>
-				<animations>
-					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-						<color channel="red">
-							<mul>
-								<add>
-									<static value="1" />
-									<sine>
-										<mul>
-											<static value="150" />
-											<time />
-										</mul>
-									</sine>
-								</add>
-								<static value="0.5" />
-							</mul>
-						</color>
-						<color channel="blue">
-							<mul>
-								<add>
-									<static value="1" />
-									<sine>
-										<mul>
-											<static value="130" />
-											<add>
-												<time />
-												<static value="180" />
-											</add>
-										</mul>
-									</sine>
-								</add>
-								<static value="0.5" />
-							</mul>
-						</color>
-					</animation>
-				</animations>
-			</entity>
-
-			<entity name="door_wall" rep="X1">
-				<physics name="wall" shape="wide_wall" />
-				<sound name="refuse" />
-				<collides>
-					<propertyFilter target="ball">
-						<abs>
-							<sub>
-								<static value="0" />
-								<var name="ball:color" />
-							</sub>
-						</abs>
-					</propertyFilter>
-				</collides>
-				<onCollision>
-					<showLabel font="red" offset="50">
-						<label>levelBlocked1</label>
-						<label>levelBlocked2</label>
-						<label>levelBlocked3</label>
-					</showLabel>
-				</onCollision>
-				<animations>
-					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
-						<frameindex frames="6">
-							<static value="0"/>
-						</frameindex>
-						<color value="FF6060FF" />
-					</animation>
-				</animations>
-			</entity>
-
-			<entity name="door_wall2" rep="X2">
-				<physics name="wall" shape="wide_wall" />
-				<sound name="refuse" />
-				<collides>
-					<propertyFilter target="ball">
-						<abs>
-							<sub>
-								<static value="1" />
-								<var name="ball:color" />
-							</sub>
-						</abs>
-					</propertyFilter>
-				</collides>
-				<onCollision>
-					<showLabel font="red" offset="50">
-						<label>levelBlocked1</label>
-						<label>levelBlocked2</label>
-						<label>levelBlocked3</label>
-					</showLabel>
-				</onCollision>
-				<animations>
-					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
-						<frameindex frames="5">
-							<static value="0"/>
-						</frameindex>
-						<color value="60FF60FF" />
-					</animation>
-				</animations>
-			</entity>
-
-			<entity name="door_wall3" rep="X3">
-				<physics name="wall" shape="wide_wall" />
-				<sound name="refuse" />
-				<collides>
-					<propertyFilter target="ball">
-						<abs>
-							<sub>
-								<static value="2" />
-								<var name="ball:color" />
-							</sub>
-						</abs>
-					</propertyFilter>
-				</collides>
-				<onCollision>
-					<showLabel font="red" offset="50">
-						<label>levelBlocked1</label>
-						<label>levelBlocked2</label>
-						<label>levelBlocked3</label>
-					</showLabel>
-				</onCollision>
-				<animations>
-					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
-						<color value="6060FFFF" />
-					</animation>
-				</animations>
-			</entity>
-
 		</entities>
 
 	</templates>
@@ -219,7 +74,7 @@
                   w2                                      w4      w1      d2d1d2d1d2        w4
                   w4  bt          bt                bt    w3      w3    d2  d1  d1  d2      w6
                   w1Up        Up              Up          w2      w1        d1  d1  d2      w3
-                  w1X3  X3    X2  X2  X2      X1  X1  X1  w1      w2        d1  d1  d2      w3
+                  w1X3X3X3X3X2X2X2X2X2X2X2  X1X1X1X1X1X1X1w1      w2        d1  d1  d2      w3
                   w1o>  >ow3w5o>      >ow1W2 2o>        >ow1      w1      d2d1d2d1d2        w3
                   w2x>bt>xw5w6x>  bt  >xw2W2 2x>        >xw2      w1    d2  d1  d1          w2
                   w2o>bt>ow6w5o>      >ow2W1 1o>    bt  >ow6      w1    d2  d1  d1          w1
@@ -229,8 +84,8 @@
                   w4o>bt>ow2w3o>  bt  >ow2W6 6o>        >ow3w1\3gh                          w6
                   w1x>  >xw3w2x>      >xw4W1 1x>        >xw4W2 2\2                          w3
                   w1o>bt>ow2w1o>  bt  >ow6W2 2o>    bt  >ow1w1w2w3\1                        w3
-                  w1x>  >xw1w3x>      >xw1W3 3x>        >xw2x1  w1w1                        w3
-                  w2X3  X3    X2  X2  X2      X1  X1  X1          w1                        w2
+                  w1x>  >xw1w3x>      >xw1W3 3x>        >xw2xw12  w1                        w3
+                  w2X3X3X3X3X2X2X2X2X2X2X2  X1X1X1X1X1X1X1X1      w1                        w2
                   w2                                              w1                        w1
                   w6                                              w1                        w4
                   w3                                              w1                      gow2
