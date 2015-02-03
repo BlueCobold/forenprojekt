@@ -169,3 +169,9 @@ betafinished2 = all levels of the
 betafinished3 = beta. For more, 
 betafinished4 = please wait for 
 betafinished5 = the final release.
+
+[info]
+tutorial_info1 = gravity-goody increase the gravity.
+tutorial_info2 = invulnerably-goody the ball can not destroyed.
+tutorial_info3 = extra-time-goody you get 30 second extra time.
+tutorial_info4 = extra-ball-goody you get 1 ball extra.

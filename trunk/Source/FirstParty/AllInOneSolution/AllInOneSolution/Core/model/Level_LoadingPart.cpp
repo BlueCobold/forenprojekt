@@ -524,7 +524,7 @@ std::unique_ptr<Entity> Level::createEntity(
             isBullet = true;
             std::unique_ptr<Entity> spawn = parseEntityReference("onRespawn", xml, templates);
             std::unique_ptr<Entity> kill = parseEntityReference("onKill", xml, templates);
-            float autoKillSpeed = xml->FloatAttribute("autokillspeed");
+            float autoKillSpeed = xml->FloatAttribute("autoKillSpeed");
             auto ball = new Ball(m_config.get<float>("BallResetTime"), autoKillSpeed, spawn.get(), kill.get());
             ball->bindTrail(LevelFileLoader::parseTrail(ball, xml, m_resourceManager, &templates.functions));
             entity = std::unique_ptr<Ball>(ball);
