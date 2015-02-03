@@ -1,0 +1,108 @@
+<level>
+	<levelinfo name="Goody Tutorial">
+		<infoimage spriteSheet="gui_elements" sprite="preview: Beginner Level" />
+	</levelinfo>
+	<medal bronze="0" silver="0" gold="0" />
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+
+		<shapes>
+			<shape name="tuttarget" type="polygon">
+				<vertex x="-59" y="0" />
+				<vertex x="119" y="0" />
+				<vertex x="119" y="60" />
+				<vertex x="-59" y="60" />
+			</shape>
+		</shapes>
+		<physics>
+			<physic name="phy_target">
+				<body type="dynamic" angle="0" />
+				<fixture density="15" friction="0.8" restitution="0.1" />
+			</physic>
+		</physics>
+		<entities>
+			<entity name="gravity_goody1" type="target" rep="ia" respawnable="true" points="0" collideWithBall="true">
+				<physics name="phy_target" shape="tuttarget" />
+				<onCollision>
+					<showLabel font="gold" offset="50">
+						<label>tutorial_info1</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="metal_01" midx="60" midy="0" rotate="true" />
+					<animation spritesheet="walls" sprite="metal_01" midx="0" midy="0" rotate="true" />
+					<animation spritesheet="walls" sprite="metal_01" midx="-60" midy="0" rotate="true" />
+					<animation texture="goodie" width="48" height="56" midx="-6" midy="2" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="gravity_goody2" type="target" rep="ib" respawnable="true" points="0" collideWithBall="true">
+				<physics name="phy_target" shape="tuttarget" />
+				<onCollision>
+					<showLabel font="gold" offset="50">
+						<label>tutorial_info2</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="metal_02" midx="60" midy="0" rotate="true" />
+					<animation spritesheet="walls" sprite="metal_02" midx="0" midy="0" rotate="true" />
+					<animation spritesheet="walls" sprite="metal_02" midx="-60" midy="0" rotate="true" />
+					<animation texture="goodie" srcx="56" srcy="0" width="48" height="56" midx="-6" midy="2" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="gravity_goody3" type="target" rep="ic" respawnable="true" points="0" collideWithBall="true">
+				<physics name="phy_target" shape="tuttarget" />
+				<onCollision>
+					<showLabel font="gold" offset="50">
+						<label>tutorial_info4</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="metal_02" midx="60" midy="0" rotate="true" />
+					<animation spritesheet="walls" sprite="metal_02" midx="0" midy="0" rotate="true" />
+					<animation spritesheet="walls" sprite="metal_02" midx="-60" midy="0" rotate="true" />
+					<animation texture="goodie" srcx="112" srcy="0" width="48" height="56" midx="-6" midy="2" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="gravity_goody4" type="target" rep="id" respawnable="true" points="0" collideWithBall="true">
+				<physics name="phy_target" shape="tuttarget" />
+				<onCollision>
+					<showLabel font="gold" offset="50">
+						<label>tutorial_info3</label>
+					</showLabel>
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="metal_02" midx="60" midy="0" rotate="true" />
+					<animation spritesheet="walls" sprite="metal_02" midx="0" midy="0" rotate="true" />
+					<animation spritesheet="walls" sprite="metal_02" midx="-60" midy="0" rotate="true" />
+					<animation texture="goodie" srcx="168" srcy="0" width="48" height="56" midx="-6" midy="2" rotate="true" />
+				</animations>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="2460" height="1410">
+                                                                                  
+                  gagb  gcgdgegf      gcgf    gcgdgegdgegf                        
+                  W1 1w4w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2W5 5                        
+                  w2d4W3 3        w1      w1      W2 2d3w1                        
+                  w1d3d6w5        w1  id  w1      w1d3d2w4                        
+                  w6d4w2w1        w1  ic  w1      W4 4d3w6                        
+                  w2d3d4w3      /1w1  ib  w1\1    w6d6d5w2                        
+                  w6d6d1w5      (1w1  ia  w1)1  gow2d3d1w3                        
+                  W1 1d6d3\2gg    (1)1  (1)1  gp/5d1d1W5 5                        
+                  w5d2d3d1d2\1gh            gq/6d4d1d3d2w6                        
+                  W3 3d4d6W2 2\5      BB  gr/1W5 5d2d2W1 1                        
+                  w2d4d1d2d4w3d2\3        /4d2w4d2d4d5d2w5                        
+                  W4 4d5d3W1 1w4w4    TT  W6 6W1 1d6d6W3 3                        
+                                                                                  
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+</level>
