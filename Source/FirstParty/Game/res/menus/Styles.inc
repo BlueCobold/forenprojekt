@@ -171,8 +171,7 @@
 			backgroundoffsetx="8" backgroundoffsety="8" 
 			sliderspriteSheet="gui_elements" slidersprite="button_idle"
 			slideroffsetx="0" slideroffsety="-1" />
-		<active
- backgroundspriteSheet="gui_elements" backgroundsprite="bar_active"
+		<active backgroundspriteSheet="gui_elements" backgroundsprite="bar_active"
 			backgroundoffsetx="0" backgroundoffsety="0" 
 			sliderspriteSheet="gui_elements" slidersprite="button_active"
 			slideroffsetx="-6" slideroffsety="-9" />

@@ -17,6 +17,7 @@ private:
     sf::Vector2f m_size;
     LineLabel m_inputText;
     bool m_finished;
+    bool m_activated;
     std::unordered_map<int, sf::Sprite> m_background;
     float m_scalefactorHorizontal;
     float m_scalefactorVertical;
@@ -24,6 +25,8 @@ private:
     void handleInput();
     void stretchBackground();
     void setBackGroundPosition(const sf::Vector2f& position);
+
+    void setActivatedByMouse(const sf::RenderWindow& screen);
 
 public:
     enum BackgroundId {TopLeft = 1,
@@ -52,6 +55,7 @@ public:
 
     std::string getText() const;
 
+    bool isActivatedByMouse() const;
 protected:
     virtual void onPositionChanged() override;
 };

@@ -1,5 +1,6 @@
 #include "InputBox.hpp"
 #include "../Input.hpp"
+#include "../Utility.hpp"
 
 InputBox::InputBox(const int id,
                    const sf::Vector2f& position,
@@ -12,7 +13,8 @@ InputBox::InputBox(const int id,
     m_inputLimit(inputLimit),
     m_size(size),
     m_finished(false),
-    m_background(style.background)
+    m_background(style.background),
+    m_activated(false)
 {
     if(m_size.y == 0)
         m_size.y = static_cast<float>(m_inputText.getFontSize());
@@ -31,6 +33,7 @@ InputBox::InputBox(const int id,
 void InputBox::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     MenuElement::update(screen, time, mouseOffset);
+    setActivatedByMouse(screen);
     handleInput();
 }
 
@@ -140,4 +143,19 @@ void InputBox::setText(const std::string& text)
 {
     m_finished = false;
     m_inputText.setText(text);
+}
+
+void InputBox::setActivatedByMouse(const sf::RenderWindow& screen)
+{
+    sf::Rect<float> hitBox(m_backgroundShade.getPosition(), m_backgroundShade.getSize());
+    
+    if(utility::Mouse.leftButtonDown())
+        m_activated = hitBox.contains(static_cast<sf::Vector2f>(getCursorPosition(screen)));
+    else
+        m_activated = false;
+}
+
+bool InputBox::isActivatedByMouse() const
+{
+    return m_activated;
 }

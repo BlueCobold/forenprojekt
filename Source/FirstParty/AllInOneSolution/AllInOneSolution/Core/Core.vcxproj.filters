@@ -334,6 +334,9 @@
     <ClCompile Include="model\joint\SingleDistanceJoint.cpp">
       <Filter>Sources\model\joint</Filter>
     </ClCompile>
+    <ClCompile Include="gui\KeyboardMenu.cpp">
+      <Filter>Sources\gui\menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -887,6 +890,9 @@
     </ClInclude>
     <ClInclude Include="model\joint\SingleDistanceJoint.hpp">
       <Filter>Headers\model\joint</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\KeyboardMenu.hpp">
+      <Filter>Headers\gui\menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
