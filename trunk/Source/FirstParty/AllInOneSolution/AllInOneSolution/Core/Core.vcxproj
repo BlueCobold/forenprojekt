@@ -122,6 +122,7 @@
     <ClCompile Include="gui\hud\LabelHUD.cpp" />
     <ClCompile Include="gui\hud\TimeHUD.cpp" />
     <ClCompile Include="gui\InputBox.cpp" />
+    <ClCompile Include="gui\KeyboardMenu.cpp" />
     <ClCompile Include="gui\LevelPreviewMenu.cpp" />
     <ClCompile Include="gui\LineLabel.cpp" />
     <ClCompile Include="gui\hud\PointsHUD.cpp" />
@@ -274,6 +275,7 @@
     <ClInclude Include="gui\hud\TimeHUD.hpp" />
     <ClInclude Include="gui\InputBox.hpp" />
     <ClInclude Include="gui\InputBoxStyle.hpp" />
+    <ClInclude Include="gui\KeyboardMenu.hpp" />
     <ClInclude Include="gui\LevelPreviewMenu.hpp" />
     <ClInclude Include="gui\LineLabel.hpp" />
     <ClInclude Include="gui\hud\PointsHUD.hpp" />

@@ -74,6 +74,8 @@ StateChangeInformation NewHighScoreState::update(const float time)
         m_transitionStateInfo.m_transitionType = RandomTransition::Alpha;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
+    if(m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).isActivatedByMouse())
+        m_menu.showKeyboard();
 
     if(clicked == NewHighScoreMenu::BUTTON_SKIP)
     {

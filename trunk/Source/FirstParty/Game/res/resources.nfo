@@ -53,6 +53,7 @@
 	<menu name="CoinShopMenu" path="CoinMenu.xml" />
 	<menu name="HighScoreMenu" path="HighScoreMenu.xml" />
 	<menu name="NewHighScoreMenu" path="NewHighScoreMenu.xml" />
+	<menu name="KeyboardMenu" path="KeyboardMenu.xml" />
 	<menu name="GameFinishedMenu" path="GameFinishedMenu.xml" />
 </menus>
 <bitmapfonts>
