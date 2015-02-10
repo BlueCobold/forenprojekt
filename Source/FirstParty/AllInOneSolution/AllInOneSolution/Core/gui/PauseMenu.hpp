@@ -15,7 +15,7 @@ public:
     static const int BUTTON_MAIN_MENU = 3;
     static const int BUTTON_COINS = 4;
 
-    PauseMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
+    PauseMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 
     void setCoinToolTipText(const std::string& text);
 };

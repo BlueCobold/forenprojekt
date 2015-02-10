@@ -1,51 +1,52 @@
 <menu>
+	<position horizontalpercentage="0.5" verticalpercentage="1" offsetx="-225" offsety="-190" />
 	<styles source="Styles.inc"/>
 	<elements>
-		<button id="27" text="@@1" style="square" x="-250" y="110" />
-		<button id="28" text="@@2" style="square" x="-209" y="110" />
-		<button id="29" text="@@3" style="square" x="-168" y="110" />
-		<button id="30" text="@@4" style="square" x="-127" y="110" />
-		<button id="31" text="@@5" style="square" x="-86" y="110" />
-		<button id="32" text="@@6" style="square" x="-45" y="110" />
-		<button id="33" text="@@7" style="square" x="-4" y="110" />
-		<button id="34" text="@@8" style="square" x="37" y="110" />
-		<button id="35" text="@@9" style="square" x="78" y="110" />
-		<button id="26" text="@@0" style="square" x="119" y="110" />
-		<button id="59" text="@@-" style="square" x="160" y="110" />
+		<button id="27" text="@@1" style="square" x="1" y="0" />
+		<button id="28" text="@@2" style="square" x="42" y="0" />
+		<button id="29" text="@@3" style="square" x="83" y="0" />
+		<button id="30" text="@@4" style="square" x="124" y="0" />
+		<button id="31" text="@@5" style="square" x="165" y="0" />
+		<button id="32" text="@@6" style="square" x="206" y="0" />
+		<button id="33" text="@@7" style="square" x="247" y="0" />
+		<button id="34" text="@@8" style="square" x="288" y="0" />
+		<button id="35" text="@@9" style="square" x="329" y="0" />
+		<button id="26" text="@@0" style="square" x="370" y="0" />
+		<button id="59" text="@@-" style="square" x="411" y="0" />
 
-		<button id="16" text="@@q" style="square" x="-230" y="155" />
-		<button id="22" text="@@w" style="square" x="-189" y="155" />
-		<button id="4" text="@@e" style="square" x="-148" y="155" />
-		<button id="17" text="@@r" style="square" x="-107" y="155" />
-		<button id="19" text="@@t" style="square" x="-66" y="155" />
-		<button id="25" text="@@z" style="square" x="-25" y="155" />
-		<button id="20" text="@@u" style="square" x="16" y="155" />
-		<button id="8" text="@@i" style="square" x="57" y="155" />
-		<button id="14" text="@@o" style="square" x="98" y="155" />
-		<button id="15" text="@@p" style="square" x="139" y="155" />
+		<button id="16" text="@@q" style="square" x="21" y="45" />
+		<button id="22" text="@@w" style="square" x="62" y="45" />
+		<button id="4" text="@@e" style="square" x="103" y="45" />
+		<button id="17" text="@@r" style="square" x="144" y="45" />
+		<button id="19" text="@@t" style="square" x="185" y="45" />
+		<button id="25" text="@@z" style="square" x="226" y="45" />
+		<button id="20" text="@@u" style="square" x="267" y="45" />
+		<button id="8" text="@@i" style="square" x="308" y="45" />
+		<button id="14" text="@@o" style="square" x="349" y="45" />
+		<button id="15" text="@@p" style="square" x="391" y="45" />
 
-		<button id="38" text="@@-" style="square" x="-250" y="200" />
-		<button id="0" text="@@a" style="square" x="-209" y="200" />
-		<button id="18" text="@@s" style="square" x="-168" y="200" />
-		<button id="3" text="@@d" style="square" x="-127" y="200" />
-		<button id="5" text="@@f" style="square" x="-86" y="200" />
-		<button id="6" text="@@g" style="square" x="-45" y="200" />
-		<button id="7" text="@@h" style="square" x="-4" y="200" />
-		<button id="9" text="@@j" style="square" x="37" y="200" />
-		<button id="10" text="@@k" style="square" x="78" y="200" />
-		<button id="11" text="@@l" style="square" x="119" y="200" />
-		<button id="42" text="@@-" style="square" x="160" y="200" />
+		<button id="38" text="@@-" style="square" x="1" y="90" />
+		<button id="0" text="@@a" style="square" x="42" y="90" />
+		<button id="18" text="@@s" style="square" x="83" y="90" />
+		<button id="3" text="@@d" style="square" x="124" y="90" />
+		<button id="5" text="@@f" style="square" x="165" y="90" />
+		<button id="6" text="@@g" style="square" x="206" y="90" />
+		<button id="7" text="@@h" style="square" x="247" y="90" />
+		<button id="9" text="@@j" style="square" x="288" y="90" />
+		<button id="10" text="@@k" style="square" x="329" y="90" />
+		<button id="11" text="@@l" style="square" x="370" y="90" />
+		<button id="42" text="@@-" style="square" x="411" y="90" />
 
-		<button id="57" text="@@ " style="square" x="-230" y="245" />
-		<button id="24" text="@@y" style="square" x="-189" y="245" />
-		<button id="23" text="@@x" style="square" x="-148" y="245" />
-		<button id="2" text="@@c" style="square" x="-107" y="245" />
-		<button id="21" text="@@v" style="square" x="-66" y="245" />
-		<button id="1" text="@@b" style="square" x="-25" y="245" />
-		<button id="13" text="@@n" style="square" x="16" y="245" />
-		<button id="12" text="@@m" style="square" x="57" y="245" />
-		<button id="58" text="@@-" style="square" x="98" y="245" />
-		<button id="99" text="@@-" style="square" x="139" y="245" />
+		<button id="57" text="@@ " style="square" x="1" y="135" />
+		<button id="24" text="@@y" style="square" x="62" y="135" />
+		<button id="23" text="@@x" style="square" x="103" y="135" />
+		<button id="2" text="@@c" style="square" x="144" y="135" />
+		<button id="21" text="@@v" style="square" x="185" y="135" />
+		<button id="1" text="@@b" style="square" x="226" y="135" />
+		<button id="13" text="@@n" style="square" x="267" y="135" />
+		<button id="12" text="@@m" style="square" x="308" y="135" />
+		<button id="58" text="@@-" style="square" x="349" y="135" />
+		<button id="99" text="@@-" style="square" x="391" y="135" />
 
 
 	</elements>

@@ -11,7 +11,7 @@ public:
 
     static const int BUTTON_CLOSE = 0;
 
-    CreditMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
+    CreditMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 };
 
 #endif // CREDITNMENU_HPP

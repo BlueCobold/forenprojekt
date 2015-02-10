@@ -10,10 +10,12 @@ class CaptionMenu : public Menu
 public:
 
     CaptionMenu(MenuTemplate& menuTemplate,
-                const sf::Vector2f& position,
                 sf::RenderWindow& screen);
 
-    virtual void setPosition(const sf::Vector2f& position) override;
+    virtual void setPosition(const sf::Vector2f& offset,
+                             float horizontalPercentage = Menu::Center,
+                             float verticalPercentage = Menu::Middle) override;
+
     virtual void setCaption(const std::string& caption);
     virtual void updateLayout() override;
 

@@ -5,10 +5,9 @@
 
 const float CoinShopMenu::SellModifier = 0.8f;
 
-CoinShopMenu::CoinShopMenu(const sf::Vector2f& position,
-                           sf::RenderWindow& screen,
+CoinShopMenu::CoinShopMenu(sf::RenderWindow& screen,
                            ResourceManager& resourceManager) :
-    CaptionMenu(*resourceManager.getMenuTemplate("CoinShopMenu"), position, screen)
+    CaptionMenu(*resourceManager.getMenuTemplate("CoinShopMenu"), screen)
 {
     setToolTip(BUTTON_GRAVITY_PLUS, "tooltip_goody_cost", Price_Gravity);
     setToolTip(BUTTON_GRAVITY_MINUS, "tooltip_goody_refund", static_cast<int>(Price_Gravity * SellModifier));

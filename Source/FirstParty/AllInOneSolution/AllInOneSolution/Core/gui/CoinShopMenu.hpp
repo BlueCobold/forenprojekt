@@ -27,7 +27,7 @@ public:
     static const int BUTTON_EXTRA_TIME_PLUS = 15;
     static const int BUTTON_EXTRA_TIME_MINUS = 16;
     
-    CoinShopMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
+    CoinShopMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 
     void setGoodyCharges(const Goody::Type& goody, const int charges);
     int getBuyCost(const Goody::Type& goody) const;

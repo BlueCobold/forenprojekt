@@ -15,7 +15,7 @@ public:
     static const int BUTTON_CREDITS = 3;
     static const int BUTTON_CLOSE = 4;
 
-    MainMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
+    MainMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 };
 
 #endif // MAIN_MENU_HPP

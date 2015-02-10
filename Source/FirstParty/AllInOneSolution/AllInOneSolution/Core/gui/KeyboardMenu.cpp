@@ -3,10 +3,9 @@
 #include "../resources/ResourceManager.hpp"
 #include "Button.hpp"
 
-KeyboardMenu::KeyboardMenu(const sf::Vector2f& position,
-                           sf::RenderWindow& screen,
+KeyboardMenu::KeyboardMenu(sf::RenderWindow& screen,
                            ResourceManager& resourceManager) :
-    Menu(*resourceManager.getMenuTemplate("KeyboardMenu"), position, screen),
+    Menu(*resourceManager.getMenuTemplate("KeyboardMenu"), screen),
     m_showKeyboard(false),
     m_shiftKeyPressed(false),
     m_lastKey(-1)

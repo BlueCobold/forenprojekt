@@ -20,7 +20,7 @@ CoinShopState::CoinShopState(sf::RenderWindow& screen,
                              ResourceManager& resourceManager,
                              AppConfig& config) :
     State(screen, resourceManager, config),
-    m_menu(sf::Vector2f(0.0f, 0.0f), screen, resourceManager),
+    m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_clicked(-1)
 {

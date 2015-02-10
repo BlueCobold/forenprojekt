@@ -13,21 +13,32 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
+const float Menu::Left = 0.0f;
+const float Menu::Right = 1.0f;
+const float Menu::Center= 0.5f;
+const float Menu::Top = 0.0f;
+const float Menu::Middle = 0.5f;
+const float Menu::Bottom = 1.0f;
+
 Menu::Menu(MenuTemplate& menuTemplate,
-           const sf::Vector2f& position,
            sf::RenderWindow& screen) :
-           m_position(position),
+           m_offset(menuTemplate.menuOffset),
            m_screen(&screen),
-           m_panel(menuTemplate.menuElements, position)
+           m_horizontalPercentage(menuTemplate.horizontalPercentage),
+           m_verticalPercentage(menuTemplate.verticalPercentage),
+           m_currentPosition(sf::Vector2f(screen.getSize().x * menuTemplate.horizontalPercentage, 
+                                          screen.getSize().y * menuTemplate.verticalPercentage) + menuTemplate.menuOffset),
+           m_panel(menuTemplate.menuElements, m_currentPosition)
+           
 {
     m_template = (std::move(menuTemplate));
-    m_template.background.setPosition(m_position);
+    m_template.background.setPosition(m_currentPosition);
 
     m_size = sf::Vector2i(m_template.background.getTextureRect().width, m_template.background.getTextureRect().height);
 
     for(auto info = begin(m_template.subWindow); info != end(m_template.subWindow); ++info)
     {
-        std::unique_ptr<SubWindow> subWindow(new SubWindow(info->id, m_position, info->size, info->position, info->innerHeight, info->menuElements, info->style));
+        std::unique_ptr<SubWindow> subWindow(new SubWindow(info->id, m_currentPosition, info->size, info->position, info->innerHeight, info->menuElements, info->style));
         m_panel.add(std::move(subWindow));
     }
 }
@@ -40,16 +51,23 @@ const sf::Vector2i& Menu::getSize() const
     return m_size;
 }
 
-void Menu::setPosition(const sf::Vector2f& position)
+void Menu::setPosition(const sf::Vector2f& offset,
+                       float horizontalPercentage,
+                       float verticalPercentage)
 {
-    m_position = position;
-    m_template.background.setPosition(m_position);
-    m_panel.setPosition(position);
+    m_offset = offset;
+    m_verticalPercentage = verticalPercentage;
+    m_horizontalPercentage = horizontalPercentage;
+    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_horizontalPercentage, 
+                                     m_screen->getSize().y * m_verticalPercentage) + m_offset;
+
+    m_template.background.setPosition(m_currentPosition);
+    m_panel.setPosition(m_currentPosition);
 }
 
 const sf::Vector2f& Menu::getPosition() const
 {
-    return m_position;
+    return m_currentPosition;
 }
 
 void Menu::draw(const DrawParameter& params)
@@ -72,6 +90,10 @@ void Menu::drawAdditionalForeground(const DrawParameter& params)
 void Menu::update(sf::RenderWindow& screen, const float time)
 {
     m_screen = &screen;
+
+    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_horizontalPercentage, 
+                                     m_screen->getSize().y * m_verticalPercentage) + m_offset;
+
     updateLayout();
     m_panel.update(screen, time);
 }
@@ -79,6 +101,10 @@ void Menu::update(sf::RenderWindow& screen, const float time)
 void Menu::update(sf::RenderWindow& screen, const float time, const MenuElementType::Type type)
 {
     m_screen = &screen;
+
+    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_horizontalPercentage, 
+                                     m_screen->getSize().y * m_verticalPercentage) + m_offset;
+
     updateLayout();
     m_panel.update(screen, time, type);
 }
@@ -157,8 +183,8 @@ InputBox& Menu::getInputBox(int id) const
 
 void Menu::updateLayout()
 {
-    auto position = sf::Vector2f(m_screen->getSize().x / 2.f - m_size.x / 2.f, m_screen->getSize().y / 2.f - m_size.y / 2.f);
-    m_position = position;
-    m_template.background.setPosition(position);
-    m_panel.updateLayout(position);
+    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_horizontalPercentage, 
+                                     m_screen->getSize().y * m_verticalPercentage) + m_offset;
+    m_template.background.setPosition(m_currentPosition);
+    m_panel.updateLayout(m_currentPosition);
 }

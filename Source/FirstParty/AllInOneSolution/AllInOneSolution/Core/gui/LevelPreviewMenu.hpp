@@ -23,7 +23,7 @@ public:
     static const int CHECKBOX_TIMEATTACKMODE = 10;
     static const int CHECKBOX_TARGETMODE = 11;
 
-    LevelPreviewMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
+    LevelPreviewMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
     
     void setLevelInfo(const std::string& levelName,
                       const float time,

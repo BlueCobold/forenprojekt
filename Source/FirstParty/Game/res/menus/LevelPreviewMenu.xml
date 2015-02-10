@@ -1,4 +1,5 @@
 <menu>
+	<position horizontalpercentage="0.5" verticalpercentage="0.5" offsetx="-255" offsety="-200.5" />
 	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
 	<styles source="Styles.inc"/>
 	<elements>

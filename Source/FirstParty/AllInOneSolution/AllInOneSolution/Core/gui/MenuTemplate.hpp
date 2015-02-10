@@ -142,6 +142,9 @@ struct MenuTemplate
     BitmapFont* captionFont;
     sf::Vector2f captionOffset;
     sf::Sprite background;
+    sf::Vector2f menuOffset;
+    float verticalPercentage;
+    float horizontalPercentage;
 
     MenuTemplate(){}
     
@@ -165,6 +168,9 @@ private:
         captionFont = other.captionFont;
         captionOffset = other.captionOffset;
         background = other.background;
+        menuOffset = other.menuOffset;
+        verticalPercentage = other.verticalPercentage;
+        horizontalPercentage = other.horizontalPercentage;
     }
 };
 

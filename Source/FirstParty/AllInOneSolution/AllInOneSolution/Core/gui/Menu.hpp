@@ -25,9 +25,14 @@ namespace sf
 class Menu : public Drawable
 {
 public:
+    static const float Left;
+    static const float Right;
+    static const float Center;
+    static const float Top;
+    static const float Middle;
+    static const float Bottom;
 
     Menu(MenuTemplate& menuTemplate,
-         const sf::Vector2f& position,
          sf::RenderWindow& screen);
 
     virtual ~Menu();
@@ -37,7 +42,9 @@ public:
     void update(sf::RenderWindow& screen, const float time, const MenuElementType::Type type);
     virtual void updateLayout();
 
-    virtual void setPosition(const sf::Vector2f& position);
+    virtual void setPosition(const sf::Vector2f& offset,
+                             float horizontalPercentage = Menu::Center,
+                             float verticalPercentage = Menu::Middle);
     const sf::Vector2f& getPosition() const;
     const sf::Vector2i& getSize() const;
 
@@ -68,8 +75,12 @@ private:
     MenuPanel m_panel;
     MenuTemplate m_template;
     sf::Vector2i m_size;
-    sf::Vector2f m_position;
+    sf::Vector2f m_offset;
+    sf::Vector2f m_currentPosition;
     sf::RenderWindow* m_screen;
+
+    float m_horizontalPercentage;
+    float m_verticalPercentage;
 };
 
 #endif // MENU_HPP
