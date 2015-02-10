@@ -9,11 +9,10 @@
 template<class T>
 bool compareVector2 (const sf::Vector2<T> lhs, const sf::Vector2<T> rhs);
 
-OptionMenu::OptionMenu(const sf::Vector2f& position,
-                       sf::RenderWindow& screen,
+OptionMenu::OptionMenu(sf::RenderWindow& screen,
                        ResourceManager& resourceManager,
                        AppConfig& config) :
-    CaptionMenu(*resourceManager.getMenuTemplate("OptionMenu"), position, screen),
+    CaptionMenu(*resourceManager.getMenuTemplate("OptionMenu"), screen),
     m_config(config),
     m_fullScreen(false),
     m_currentVideoModeIndex(0)

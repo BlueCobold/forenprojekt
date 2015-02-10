@@ -23,7 +23,7 @@ public:
     static const int CHECKBOX_INVERT_AXIS = 15;
     static const int CHECKBOX_USE_STENCIL_EFFECTS = 30;
 
-    OptionMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
+    OptionMenu(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     
     void applyChanges();
     void onEnter();

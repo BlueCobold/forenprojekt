@@ -5,10 +5,9 @@
 
 #include "Button.hpp"
 
-LevelPreviewMenu::LevelPreviewMenu(const sf::Vector2f& position,
-                                   sf::RenderWindow& screen,
+LevelPreviewMenu::LevelPreviewMenu(sf::RenderWindow& screen,
                                    ResourceManager& resourceManager) :
-    Menu(*resourceManager.getMenuTemplate("LevelPreviewMenu"), position, screen)
+    Menu(*resourceManager.getMenuTemplate("LevelPreviewMenu"), screen)
 {
 }
 

@@ -16,7 +16,7 @@ public:
     static const int BUTTON_LEFT = 3;
     static const int BUTTON_RIGHT = 4;
 
-    LevelSelectMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
+    LevelSelectMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 
     void setLevelPreview(const sf::Texture& texture, const sf::IntRect& textureRect);
     void hideLeftButton(const bool value);

@@ -1,6 +1,7 @@
 <menu>
+	<position horizontalpercentage="0.5" verticalpercentage="0.5" offsetx="-255" offsety="-200.5" />
 	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
-	<caption font="gui_large" text="gui_coin_shop_title" offsetx="0" offsety="50" />
+	<caption font="gui_large" text="gui_coin_shop_title" offsetx="255" offsety="50" />
 	<styles source="Styles.inc"/>
 	<elements>
 		<subwindow id="0" x="80" y="108" sizex="352" sizey="150" innerheight="227">

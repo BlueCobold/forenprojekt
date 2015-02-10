@@ -4,11 +4,10 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 CaptionMenu::CaptionMenu(MenuTemplate& menuTemplate,
-                         const sf::Vector2f& position,
                          sf::RenderWindow& screen) :
-    Menu(menuTemplate, position, screen),
+    Menu(menuTemplate, screen),
     m_caption(utility::translateKey(menuTemplate.captionResourceKey),
-              sf::Vector2f(position.x + getSize().x / 2.f, position.y),
+              Menu::getPosition(),
               menuTemplate.captionOffset,
               0,
               menuTemplate.captionFont,
@@ -21,11 +20,13 @@ void CaptionMenu::drawAdditionalBackground(const DrawParameter& params)
     m_caption.draw(params);
 }
 
-void CaptionMenu::setPosition(const sf::Vector2f& position)
+void CaptionMenu::setPosition(const sf::Vector2f& offset,
+                              float horizontalPercentage,
+                              float verticalPercentage)
 {
-    Menu::setPosition(position);
+    Menu::setPosition(offset, horizontalPercentage, verticalPercentage);
 
-    m_caption.setPosition(position.x + getSize().x / 2.f, position.y);
+    m_caption.setPosition(sf::Vector2f(getSize().x * horizontalPercentage, getSize().y * verticalPercentage) + offset);
 }
 
 void CaptionMenu::setCaption(const std::string& caption)
@@ -35,6 +36,6 @@ void CaptionMenu::setCaption(const std::string& caption)
 
 void CaptionMenu::updateLayout()
 {
-    m_caption.setPosition(sf::Vector2f(getRenderWindow().getSize().x / 2.f, getRenderWindow().getSize().y / 2.f - getSize().y / 2.f));
     Menu::updateLayout();
+    m_caption.setPosition(Menu::getPosition());
 }

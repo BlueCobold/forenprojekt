@@ -15,7 +15,7 @@ private:
 public:
     static const int BUTTON_KEYBOARD_OFF = 99;
 
-    KeyboardMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
+    KeyboardMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 
     virtual void draw(const DrawParameter& params) override;
     virtual void update(sf::RenderWindow& screen, const float time) override;

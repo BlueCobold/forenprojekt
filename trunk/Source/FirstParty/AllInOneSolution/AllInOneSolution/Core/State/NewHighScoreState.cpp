@@ -18,7 +18,7 @@ NewHighScoreState::NewHighScoreState(sf::RenderWindow& screen,
                                AppConfig& config) :
     State(screen, resourceManager, config),
     m_background(nullptr),
-    m_menu(sf::Vector2f(0, 0), screen, resourceManager),
+    m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_replay(false),
     m_lastName("")

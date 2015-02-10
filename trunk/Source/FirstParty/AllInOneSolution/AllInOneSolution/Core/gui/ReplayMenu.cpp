@@ -2,10 +2,9 @@
 
 #include "../resources/ResourceManager.hpp"
 
-ReplayMenu::ReplayMenu(const sf::Vector2f& position,
-                       sf::RenderWindow& screen,
+ReplayMenu::ReplayMenu(sf::RenderWindow& screen,
                        ResourceManager& resourceManager) :
-    CaptionMenu(*resourceManager.getMenuTemplate("replayMenu"), position, screen)
+    CaptionMenu(*resourceManager.getMenuTemplate("replayMenu"), screen)
 {
 }
 

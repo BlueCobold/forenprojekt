@@ -22,8 +22,7 @@ public:
     static const int LABEL_POINTS = 10;
     static const int LABEL_LOSTBALLS = 12;
 
-    ReplayMenu(const sf::Vector2f& position,
-               sf::RenderWindow& screen,
+    ReplayMenu(sf::RenderWindow& screen,
                ResourceManager& resourceManager);
 
     void setPoints(int points);

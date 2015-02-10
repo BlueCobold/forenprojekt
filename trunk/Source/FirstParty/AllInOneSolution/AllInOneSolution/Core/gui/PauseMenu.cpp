@@ -3,10 +3,9 @@
 #include "../resources/ResourceManager.hpp"
 #include "Button.hpp"
 
-PauseMenu::PauseMenu(const sf::Vector2f& position,
-                     sf::RenderWindow& screen,
+PauseMenu::PauseMenu(sf::RenderWindow& screen,
                      ResourceManager& resourceManager) :
-    CaptionMenu(*resourceManager.getMenuTemplate("pauseMenu"), position, screen)
+    CaptionMenu(*resourceManager.getMenuTemplate("pauseMenu"), screen)
 {
 }
 

@@ -13,7 +13,7 @@ LevelSelectState::LevelSelectState(sf::RenderWindow& screen,
                                  ResourceManager& resourceManager, 
                                  AppConfig& config) :
     State(screen, resourceManager, config),
-    m_menu(sf::Vector2f(0, 0), screen, resourceManager),
+    m_menu(screen, resourceManager),
     m_currentLevelNumber(1),
     m_unlockedLevel(1)
 {

@@ -1,6 +1,7 @@
 <menu>
+	<position horizontalpercentage="0.5" verticalpercentage="0.5" offsetx="-255" offsety="-200.5" />
 	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
-	<caption font="gui_large" text="gui_credit" offsetx="0" offsety="50" />
+	<caption font="gui_large" text="gui_credit" offsetx="255" offsety="50" />
 	<styles source="Styles.inc"/>
 	<elements>
 		<image id="5" x="124" y="-67" spriteSheet="gui_elements" sprite="Logo" />

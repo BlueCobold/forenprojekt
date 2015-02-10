@@ -2,9 +2,8 @@
 
 #include "../resources/ResourceManager.hpp"
 
-HighScoreMenu::HighScoreMenu(const sf::Vector2f& position,
-                             sf::RenderWindow& screen,
+HighScoreMenu::HighScoreMenu(sf::RenderWindow& screen,
                              ResourceManager& resourceManager) :
-    CaptionMenu(*resourceManager.getMenuTemplate("HighScoreMenu"), position, screen)
+    CaptionMenu(*resourceManager.getMenuTemplate("HighScoreMenu"), screen)
 {
 }

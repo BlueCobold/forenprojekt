@@ -16,7 +16,7 @@ public:
     static const int CHECKBOX_GLOBAL_HIGHSCORE = 31;
     static const int LABEL_LOADING = 27;
 
-    HighScoreMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
+    HighScoreMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 };
 
 #endif // HIGHSCOREMENU_HPP

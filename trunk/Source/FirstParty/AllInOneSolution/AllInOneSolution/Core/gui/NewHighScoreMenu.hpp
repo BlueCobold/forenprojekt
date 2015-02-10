@@ -15,7 +15,7 @@ public:
     static const int BUTTON_SKIP = 5;
     static const int BUTTON_OK = 6;
 
-    NewHighScoreMenu(const sf::Vector2f& position, sf::RenderWindow& screen, ResourceManager& resourceManager);
+    NewHighScoreMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 
     virtual void draw(const DrawParameter& params) override;
     virtual void update(sf::RenderWindow& screen, const float time) override;

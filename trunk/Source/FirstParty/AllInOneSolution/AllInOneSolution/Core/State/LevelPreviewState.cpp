@@ -11,7 +11,7 @@ LevelPreviewState::LevelPreviewState(sf::RenderWindow& screen,
                                  ResourceManager& resourceManager, 
                                  AppConfig& config) :
     State(screen, resourceManager, config),
-    m_menu(sf::Vector2f(0, 0), screen, resourceManager),
+    m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_level(nullptr),
     m_levelUpdated(false),
