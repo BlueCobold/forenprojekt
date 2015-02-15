@@ -1,0 +1,35 @@
+<level>
+	<levelinfo name="Trainee Level">
+		<infoimage srcx="192" srcy="217" width="192" height="108" />
+	</levelinfo>
+	<medal bronze="200" silver="330" gold="780" />
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+	</templates>
+
+	<grid size="60" width="2460" height="1410">
+                                                                                  
+                  gagb  gcgdgegf      gcgf    gcgdgegdgegf      gagb              
+                  W1 1w4w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2W5 5w2w1W2 2w3                    
+                  w2d4W3 3w1)4                          (1w1w2w1d3w5  
+                  w1d3d6w5)1  t1    bt    bt    bt    t1  (1w1d6d4w2  
+                  w6d4w2w1                                  w5d5d1w1  
+                  w2d3d4w3                                  w3d4w1w1  
+                  w6d6d1w5          BB  go                  w1d4d2w2  
+                  W1 1d6w3            gp/5w1\1              w6d3d5w3
+                  w5d2d3w1          gq/6w4h1w2\2gg          w1d1w1w5  
+                  W3 3d4w6        gr/1w5w5  w1w2\3gh        w4d2d6w4  
+                  w2d4d1w2        /4d2w4d2h1w2W3 3\4        w2d1d1w1  
+                  W4 4d5w3    TT  w6w6w1w1  w4W1 1w5    TT  w1d1W1 1            
+                                                                                  
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+</level>

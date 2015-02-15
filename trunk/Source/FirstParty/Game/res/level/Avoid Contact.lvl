@@ -1,0 +1,166 @@
+<level>
+	<levelinfo name="Avoid Contact">
+		<infoimage srcx="192" srcy="217" width="192" height="108" />
+	</levelinfo>
+	<constants gate="0" gatetime="0"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		
+		<include file="sandy/walls.inc" />
+		
+		<physics>
+			<physic name="dynamicWall">
+				<body type="dynamic" angle="0" />
+				<fixture density="0.1" friction="0.8" restitution="0.5" />
+			</physic>
+		</physics>
+		
+		<functions>
+			<function name="scaledTime">
+				<mul>
+					<time />
+					<static value="10"/>
+				</mul>
+			</function>
+			<function name="startKill">
+				<nop>
+					<setVar name="killTime">
+						<add>
+							<function name="scaledTime"/>
+							<static value="1"/>
+						</add>
+					</setVar>
+					<setVar name="collides">
+						<static value="0"/>
+					</setVar>
+				</nop>
+			</function>
+			<function name="blockAlpha">
+				<step>
+					<var name="collides" />
+					<!-- kill started -->
+					<step threshold="0">
+						<setVar name="delta">
+							<sub>
+								<var name="killTime" />
+								<function name="scaledTime"/>
+							</sub>
+						</setVar>
+						<stop />
+						<var name="delta" />
+					</step>
+					<!-- not killed yet -->
+					<nop>
+						<static value="1" />
+						<cache>
+							<setVar name="startx">
+								<var name="position.x"/>
+							</setVar>
+						</cache>
+						<cache>
+							<setVar name="starty">
+								<var name="position.y"/>
+							</setVar>
+						</cache>
+						<!-- check if it moved and if so, kill it -->
+						<step>
+							<sub>
+								<static value="150"/>
+								<abs>
+									<sub>
+										<var name="startx"/>
+										<var name="position.x"/>
+									</sub>
+								</abs>
+								<abs>
+									<sub>
+										<var name="starty"/>
+										<var name="position.y"/>
+									</sub>
+								</abs>
+							</sub>
+							<function name="startKill"/>
+							<static value="1" />
+						</step>
+					</nop>
+				</step>
+			</function>
+			<function name="blockCollides">
+				<nop>
+					<static value="0" />
+					<function name="startKill"/>
+				</nop>
+			</function>
+		</functions>
+		
+		<overrides>
+			<override name="wall_hit_particles" newName="wall_explode_particles">
+				<constants scale="5" />
+			</override>
+
+			<override rep="q*" newRep="k*">
+				<constants collides="1" killTime="0" delta="0" scale="1" />
+				<physics shape="wall" name="dynamicWall"/>
+				<animations>
+					<set rotate="true"/>
+					<scale axis="x">
+						<setVar name="scale">
+							<function name="blockAlpha"/>
+						</setVar>
+					</scale>
+					<scale axis="y">
+						<var name="scale" />
+					</scale>
+				</animations>
+				<collides>
+					<propertyFilter target="entity">
+						<var name="collides" />
+					</propertyFilter>
+				</collides>
+				<onKill>
+					<spawnEntity name="wall_explode_particles"/>
+				</onKill>
+			</override>
+		</overrides>
+	</templates>
+	
+	
+	<grid size="60" width="2460" height="1440">
+                                                                                    
+                                                                                    
+                                                                 
+                                                                     
+                      gs      gs      gcgdgegdgegf                
+                  /4w5w2w1w1w3w1w1w2w3w4w5w1w2w3w4w1\1                              
+                  w3                                w1                           
+            /1)1      t1                        t1      (1\1
+            )1    k2                                k2    (1                            
+              bt  k4                                k1    bt                            
+                  k2                                k3  
+              bt  k1                                k1    bt                           
+                  k1                                k1                                
+              bt  k1                                k1    bt                              
+            \1    k5                                k2    /1                           
+            (1\1  k1                        BB      k1  /1)1                           
+                  w2\1            /1\1            /1w4                                
+                  W2 2\1        /2W1 1\1        /1W1 1                              
+                  w1W1 1    TT  W1 1W2 2    TT  W1 1w1                              
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+	</grid>
+	
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="150" silver="200" gold="300" />
+</level>

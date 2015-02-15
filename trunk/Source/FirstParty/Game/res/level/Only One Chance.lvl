@@ -1,6 +1,6 @@
 <level>
 	<levelinfo name="Only One Chance">
-		<infoimage srcx="718" srcy="330" width ="192" height="108" />
+		<infoimage srcx="192" srcy="217" width="192" height="108" />
 	</levelinfo>
 	<gameplay maxBalls="1" time="85" />
 	<templates>

@@ -1,0 +1,98 @@
+<level>
+	<levelinfo name="Spin Around">
+		<infoimage srcx="192" srcy="217" width="192" height="108" />
+	</levelinfo>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+	<physics>
+	<physic name="targetcircuit"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics> 
+					<position axis="x"> 
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="120" />
+								</mul>
+							</sine> 
+							<static value="20" /> 
+						</mul> 
+					</position>
+					<position axis="y"> 
+						<mul> 
+							<sine> 
+								<add>
+									<static value="90" />
+									<mul> 
+										<time /> 
+										<static value="120" /> 
+									</mul> 
+								</add>
+							</sine> 
+							<static value="20" /> 
+						</mul> 
+					</position> 
+				</kinematics> 
+			</body> 
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+	</physics>
+		<entities>
+			<entity name="target_special" rep="ts" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="targetcircuit">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
+	</entities>
+	</templates>
+	
+	
+	<grid size="60" width="2460" height="1440">
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                  gagb  gcgdgf                                  
+                              go/1w3w2w6w1w4w6\2gi                                
+                            gp/3d5w2w1w4w6w5w3d1\4gj                                
+                          gr/6d4)1            (4d3\6gh                              
+                          /1d3)6    ts      bt  (2d5\1                            
+                        /6d2)4                    (1d6\3                            
+                        w2w1  bt                ts  w4w2                            
+                        w5w4                        w1w5                            
+                        w6w3                        w6w4                            
+                        w1w2  ts                  btw5w6                            
+                        (2d4\3gg                  /1d6)3                            
+                          (6d5\1gh              /3d4)1                              
+                            (3d2\6      BB    /2d5)2                                
+                              (1w4\1        /1w1)3                                  
+                                        TT                                          
+                                                                                    
+                                                                                    
+                                                                                    
+	</grid>
+	
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="300" silver="450" gold="650" />
+</level>
