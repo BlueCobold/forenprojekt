@@ -1,0 +1,57 @@
+<level>
+	<levelinfo name="Power Shoot">
+		<infoimage srcx="192" srcy="217" width="192" height="108" />
+	</levelinfo>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+	</templates>
+
+	<grid size="60" width="2810" height="2220">
+
+                    gagb    gcgdgegdgegf    
+                  W1 1w3W2 2w5w2w2w2w4w1W2 2w2
+                  w2                        w2
+                  w1  t1                t1  w1
+                  w6                        w4
+                  w2                        w6
+                  w6    bt            bt    w2
+                  w1                        w1
+                  w3                        w2
+                  w2      bt        bt      w4
+                  w4                        w6
+                  )2/1                    \1(4
+                  /4)1                    (1\6
+                  w1                        w3
+                  w1                        w3
+                  w1        bt    bt        w3
+                  w2                        w2
+                  w2                        w1
+                  w6                        w4
+                  w3                        w2
+                  )1/1                    \3(4
+                  /1)1                    (1\6
+                  w2          btbt          w3
+                  w3                        w3
+                  w1                        w3
+                  w1                        w2
+                  w1                        w1
+                  w1                        w4
+                  w1                      gow2
+                  w1\5gg                gp/6w4
+                  w1w2\3gj            gr/4w5w6
+                  w1W2 2\2gh    BB    /2W5 5w3
+                  w1w1w3w6\1        /1w3w1w5w3
+                  W1 1W1 1w1    TT  W3 3W6 6w1
+                                  
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="280" silver="540" gold="1100" />
+</level>

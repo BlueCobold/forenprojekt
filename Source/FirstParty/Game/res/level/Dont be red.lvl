@@ -1,6 +1,6 @@
-#<level>
+<level>
 	<levelinfo name="Dont be red">
-		<infoimage srcx="718" srcy="330" width ="192" height="108" />
+		<infoimage srcx="192" srcy="217" width="192" height="108" />
 	</levelinfo>
 	<gameplay maxBalls="5" time="180"/>
 	<templates>
