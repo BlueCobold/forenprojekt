@@ -1,0 +1,256 @@
+<level>
+	<levelinfo name="Lissajous">
+		<infoimage srcx="192" srcy="217" width="192" height="108" />
+	</levelinfo>
+	<medal bronze="240" silver="360" gold="720" />
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<physics>
+			<physic name="Lissajous1"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics> 
+					<position axis="x"> 
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="30" />
+								</mul>
+							</sine> 
+							<static value="85" /> 
+						</mul> 
+					</position>
+					<position axis="y"> 
+						<mul> 
+							<sine> 
+								<add>
+									<static value="180" /> 
+									<mul> 
+										<time /> 
+										<static value="90" /> 
+									</mul>
+								</add>
+							</sine> 
+							<static value="85" /> 
+						</mul> 
+					</position> 
+				</kinematics> 
+			</body> 
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		
+		<physic name="Lissajous2"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+				<position axis="x"> 
+					<add>
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="30" />
+								</mul>
+							</sine> 
+							<static value="85" /> 
+						</mul> 
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="180" />
+								</mul>
+							</sine>
+							<static value="60" />
+						</mul> 
+					</add>
+				</position>
+				<position axis="y">
+					<add>
+					<add>
+						<mul> 
+							<sine> 
+								<add>
+									<static value="180" /> 
+									<mul> 
+										<time /> 
+										<static value="90" /> 
+									</mul>
+								</add>
+							</sine> 
+							<static value="85" /> 
+						</mul> 
+						<mul> 
+							<sine> 
+								<add>
+									<static value="90" /> 
+									<mul> 
+										<time /> 
+										<static value="180" /> 
+									</mul>
+								</add>
+							</sine> 
+							<static value="60" /> 
+						</mul>
+					</add>
+						<static value ="60" />
+					</add>
+				</position> 
+				</kinematics> 
+			</body> 
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="Lissajous3"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+				<position axis="x"> 
+					<add>
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="30" />
+								</mul>
+							</sine> 
+							<static value="85" /> 
+						</mul> 
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="-90" />
+								</mul>
+							</sine>
+							<static value="120" />
+						</mul> 
+					</add>
+				</position>
+				<position axis="y">
+					<add>
+					<add>
+						<mul> 
+							<sine> 
+								<add>
+									<static value="180" /> 
+									<mul> 
+										<time /> 
+										<static value="90" /> 
+									</mul>
+								</add>
+							</sine> 
+							<static value="85" /> 
+						</mul> 
+						<mul> 
+							<sine> 
+								<add>
+									<static value="90" /> 
+									<mul> 
+										<time /> 
+										<static value="90" /> 
+									</mul>
+								</add>
+							</sine> 
+							<static value="120" /> 
+						</mul>
+					</add>
+						<static value ="120" />
+					</add>
+				</position> 
+				</kinematics> 
+			</body> 
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		</physics>
+		<entities>
+			<entity name="target_special" rep="l1" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="Lissajous1">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="target_special" rep="l2" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="Lissajous1">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="bonustarget_3" rep="l3" type="bonustarget" points="10" collideWithBall="false">
+				<physics name="Lissajous2">
+					<shape type="circle" radius="21" />
+				</physics>
+				<collides>
+					<spawnEntity name="bonustarget_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="bonustarget_4" rep="l4" type="bonustarget" points="10" collideWithBall="false">
+				<physics name="Lissajous3">
+					<shape type="circle" radius="21" />
+				</physics>
+				<collides>
+					<spawnEntity name="bonustarget_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true" />
+				</animations>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="2460" height="1410">
+                                                                                  
+                  gcgdgegf      gcgdgegdgegf                        
+                  w5w1w5w6w2w5w6w1w1w2w2w1w1w1w2w3w4w1
+                  w2w2w1w4w3w5)1        (4w1w2w3w4w2w2                        
+                  w1w2w2w3w4)1            (3w3w4w2w2w3                        
+                  w6w1w1w2)1                (2w2w1w2w5                        
+                  w5w1w1)1                    (1W1w6w2
+                  w5w1)1                        (1w5w1  
+                  w1)1        l4        l4        (1w1          
+                  w1          l3        l3          w3
+                  w2\1        l1        l1        /1w2
+                  w3w1\2                        /1w1w1
+                  w1w2w2\1                    /5w1w1w1                    
+                  w2w5w1w1\1                /6w2w1w1w2                    
+                  w3w6w2w2w5\1      BB    /1w2w3w5w2w1                    
+                  w4w5w2w2w4w3\1        /4w1w2w3w4w1w2                        
+                  w3w5w2w1w3w4w1    TT  w2w3w4w5w6w1w2                    
+                                                                                  
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+</level>

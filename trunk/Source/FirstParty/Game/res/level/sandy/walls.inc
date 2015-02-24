@@ -838,7 +838,26 @@
 					<animation spritesheet="walls" sprite="window_04" rotate="false"/>
 				</animations>
 			</entity>
-			
+			<entity base="small_quad" name="window_wall_1" rep="g5">
+				<animations>
+					<animation spritesheet="walls" sprite="window_01" rotate="false"x="-30" y="-30"/>
+				</animations>
+			</entity>
+			<entity base="small_quad" name="window_wall_2" rep="g6">
+				<animations>
+					<animation spritesheet="walls" sprite="window_02" rotate="false"x="-30" y="-30"/>
+				</animations>
+			</entity>
+			<entity base="small_quad" name="window_wall_3" rep="g7">
+				<animations>
+					<animation spritesheet="walls" sprite="window_03" rotate="false"x="-30" y="-30"/>
+				</animations>
+			</entity>
+			<entity base="small_quad" name="window_wall_4" rep="g8">
+				<animations>
+					<animation spritesheet="walls" sprite="window_04" rotate="false" x="-30" y="-30"/>
+				</animations>
+			</entity>
 			<entity base="small_quad" name="metalwall_1" rep="M1">
 				<animations>
 					<animation spritesheet="walls" sprite="metal_01" rotate="false"/>
