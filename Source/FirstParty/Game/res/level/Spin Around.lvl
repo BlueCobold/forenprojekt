@@ -8,7 +8,7 @@
 		<include file="assets/teeter/wood.inc" />
 		<include file="sandy/walls.inc" />
 	<physics>
-	<physic name="targetcircuit"> 
+		<physic name="targetcircuit"> 
 			<body type="kinematic" angle="0"> 
 				<kinematics> 
 					<position axis="x"> 
