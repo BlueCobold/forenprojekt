@@ -1,0 +1,121 @@
+<level>
+	<levelinfo name="Organ Pipe">
+		<infoimage srcx="192" srcy="217" width="192" height="108" />
+	</levelinfo>
+	<medal bronze="200" silver="330" gold="780" />
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+
+		<physics>
+			<physic name="verticalmoving1">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<min>
+								<max>
+									<mul>
+										<sine>
+											<add>
+												<static value="0" />
+												<mul>
+													<time />
+													<static value="-30" />
+												</mul>
+											</add>
+										</sine>
+										<static value="240" /> 
+									</mul>
+									<static value="0" /> 
+								</max>
+							<static value="60" /> 
+							</min>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.5" friction="0.8" restitution="0.1" />
+			</physic>
+			<physic name="verticalmoving2">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<min>
+								<max>
+									<mul>
+										<sine>	
+											<mul>
+												<time />
+												<static value="-30" />
+											</mul>
+										</sine>
+										<static value="240" /> 
+									</mul>
+									<static value="0" /> 
+								</max>
+							<static value="120" /> 
+							</min>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.5" friction="0.8" restitution="0.1" />
+			</physic>
+		</physics>
+		<entities>
+			<entity name="bonustarget_5" rep="l2" type="bonustarget" points="10" collideWithBall="false">
+				<physics name="verticalmoving1">
+					<shape type="circle" radius="21" />
+				</physics>
+				<collides>
+					<spawnEntity name="bonustarget_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="bonustarget_5" rep="l3" type="bonustarget" points="10" collideWithBall="false">
+				<physics name="verticalmoving2">
+					<shape type="circle" radius="21" />
+				</physics>
+				<collides>
+					<spawnEntity name="bonustarget_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true" />
+				</animations>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="2460" height="1410">
+                                                                                  
+                  gagb  gcgdgegf      gcgf    gcgdgegdgegf      gagb              
+                  W1 1w4w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2W5 5w2w1W2 2w3                    
+                  w2d4W3 3w1)4                          (1w1w2w1d3w5  
+                  w1d3d6w5)1  t1    l2    l3    l2    t1  (1w1d6d4w2  
+                  w6d4w1)1                                  (5d5d1w1  
+                  w2d3)1                                      (4w1w1  
+                  w6)1              BB                          (2w2  
+                  w1                          gg                gow3
+                  w5\2gg            go/6\4  /2\2gh            gp/1w5  
+                  W3 3\4gh        gr/1w5w5  w1w2\3          gr/2d6w4  
+                  w2d4d1\2        /4d2w4d2  w2W3 3\4        /2d1d1w1  
+                  W4 4d5w3    TT  w6w6w1w1  w4W1 1w5    TT  w1d1W1 1            
+                                                                                  
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+</level>
