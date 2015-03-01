@@ -1,0 +1,346 @@
+<level>
+	<levelinfo name="Watch Out">
+		<infoimage srcx="192" srcy="217" width="192" height="108" />
+	</levelinfo>
+	<constants solid="0" />
+	<medal bronze="240" silver="360" gold="720" />
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<physics>
+			<physic name="Lissajous1"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics> 
+					<position axis="x"> 
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="30" />
+								</mul>
+							</sine> 
+							<static value="85" /> 
+						</mul> 
+					</position>
+					<position axis="y"> 
+						<mul> 
+							<sine> 
+								<add>
+									<static value="180" /> 
+									<mul> 
+										<time /> 
+										<static value="90" /> 
+									</mul>
+								</add>
+							</sine> 
+							<static value="85" /> 
+						</mul> 
+					</position> 
+				</kinematics> 
+			</body> 
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		
+		<physic name="Lissajous2"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+				<position axis="x"> 
+					<add>
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="30" />
+								</mul>
+							</sine> 
+							<static value="85" /> 
+						</mul> 
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="180" />
+								</mul>
+							</sine>
+							<static value="60" />
+						</mul> 
+					</add>
+				</position>
+				<position axis="y">
+					<add>
+					<add>
+						<mul> 
+							<sine> 
+								<add>
+									<static value="180" /> 
+									<mul> 
+										<time /> 
+										<static value="90" /> 
+									</mul>
+								</add>
+							</sine> 
+							<static value="85" /> 
+						</mul> 
+						<mul> 
+							<sine> 
+								<add>
+									<static value="90" /> 
+									<mul> 
+										<time /> 
+										<static value="180" /> 
+									</mul>
+								</add>
+							</sine> 
+							<static value="60" /> 
+						</mul>
+					</add>
+						<static value ="60" />
+					</add>
+				</position> 
+				</kinematics> 
+			</body> 
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="Lissajous3"> 
+			<body type="kinematic" angle="0"> 
+				<kinematics>
+				<position axis="x"> 
+					<add>
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="30" />
+								</mul>
+							</sine> 
+							<static value="85" /> 
+						</mul> 
+						<mul> 
+							<sine>
+								<mul>
+									<time />
+									<static value="-90" />
+								</mul>
+							</sine>
+							<static value="120" />
+						</mul> 
+					</add>
+				</position>
+				<position axis="y">
+					<add>
+					<add>
+						<mul> 
+							<sine> 
+								<add>
+									<static value="180" /> 
+									<mul> 
+										<time /> 
+										<static value="90" /> 
+									</mul>
+								</add>
+							</sine> 
+							<static value="85" /> 
+						</mul> 
+						<mul> 
+							<sine> 
+								<add>
+									<static value="90" /> 
+									<mul> 
+										<time /> 
+										<static value="90" /> 
+									</mul>
+								</add>
+							</sine> 
+							<static value="120" /> 
+						</mul>
+					</add>
+						<static value ="120" />
+					</add>
+				</position> 
+				</kinematics> 
+			</body> 
+			<fixture density="0.5" friction="0.8" restitution="0.1" /> 
+		</physic>
+		<physic name="horizontalmoving3">
+			<body type="kinematic" angle="0">
+				<kinematics>
+					<position axis="x">
+						<min>
+							<max>
+								<mul>
+									<sine>
+										<add>
+											<static value="0" />
+												<mul>
+													<time />
+													<static value="-30" />
+												</mul>
+										</add>
+									</sine>
+									<static value="350" /> 
+								</mul>
+								<static value="0" /> 
+							</max>
+						<static value="60" /> 
+						</min>
+					</position>
+				</kinematics>
+			</body>
+			<fixture density="0.5" friction="0.8" restitution="0.1" />
+		</physic>
+		<physic name="horizontalmoving4">
+			<body type="kinematic" angle="0">
+				<kinematics>
+					<position axis="x">
+						<max>
+							<min>
+								<mul>
+									<sine>
+										<add>
+											<static value="0" />
+												<mul>
+													<time />
+													<static value="30" />
+												</mul>
+										</add>
+									</sine>
+									<static value="350" /> 
+								</mul>
+								<static value="0" />
+							</min>
+							<static value="-60" />
+						</max>
+					</position>
+				</kinematics>
+			</body>
+			<fixture density="0.5" friction="0.8" restitution="0.1" />
+		</physic>
+		</physics>
+		<entities>
+			<entity name="target_special" rep="l1" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="Lissajous1">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="target_special" rep="l2" type="target" respawnable="true" points="100" collideWithBall="false">
+				<physics name="Lissajous1">
+					<shape type="circle" radius="30" />
+				</physics>
+				<collides>
+					<spawnEntity name="target_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="bonustarget_3" rep="l3" type="bonustarget" points="10" collideWithBall="false">
+				<physics name="Lissajous2">
+					<shape type="circle" radius="21" />
+				</physics>
+				<collides>
+					<spawnEntity name="bonustarget_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="bonustarget_4" rep="l4" type="bonustarget" points="10" collideWithBall="false">
+				<physics name="Lissajous3">
+					<shape type="circle" radius="21" />
+				</physics>
+				<collides>
+					<spawnEntity name="bonustarget_2">
+						<spawnEntity name="target_particles">
+							<always />
+						</spawnEntity>
+					</spawnEntity>
+				</collides>
+				<animations>
+					<animation texture="target" srcx="135" width="44" height="40" midx="22" midy="20" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="spike_okpart4" rep=">o" type="entity" collideWithBall="true" draworder="-1">
+
+				<physics name="horizontalmoving3" shape="spike_okpart4" />
+				<animations>
+					<animation texture="gravity_arrow" x="20" y="0" srcx="143" srcy="128" width="40" height="24" />
+					<animation texture="gravity_arrow" x="20" y="24" srcx="143" srcy="128" width="40" height="24" />
+					<animation texture="gravity_arrow" x="20" y="48" srcx="143" srcy="128" width="40" height="24" />
+					<animation texture="gravity_arrow" x="20" y="72" srcx="143" srcy="128" width="40" height="24" />
+					<animation texture="gravity_arrow" x="20" y="96" srcx="143" srcy="128" width="40" height="24" />
+				</animations>
+			</entity>
+			<entity name="spike_okpart4" rep=">x" type="entity" collideWithBall="true" >
+				<physics name="horizontalmoving3" shape="spike_killer4" />
+				<physics name="spike_okpart" shape="spike_killer4" />
+				<onCollision>
+					<killBall />
+				</onCollision>
+			</entity>
+			<entity name="spike_okpart3" rep="x>" type="entity" collideWithBall="true">
+				<physics name="horizontalmoving4" shape="spike_killer3" />
+				<onCollision>
+					<killBall />
+				</onCollision>
+			</entity>
+			<entity name="spike_okpart3" rep="o>" type="entity" collideWithBall="true" draworder="-1">
+				<physics name="horizontalmoving4" shape="spike_okpart3" />
+				<animations>
+					<animation texture="gravity_arrow" x="0" y="0" srcx="183" srcy="128" width="40" height="24" />
+					<animation texture="gravity_arrow" x="0" y="24" srcx="183" srcy="128" width="40" height="24" />
+					<animation texture="gravity_arrow" x="0" y="48" srcx="183" srcy="128" width="40" height="24" />
+					<animation texture="gravity_arrow" x="0" y="72" srcx="183" srcy="128" width="40" height="24" />
+					<animation texture="gravity_arrow" x="0" y="96" srcx="183" srcy="128" width="40" height="24" />
+				</animations>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="2460" height="1410">
+                                                                                  
+                  gcgdgegf      gcgdgegdgegf  gcgdgegf              
+                  w5w1w5w6w2w5w6w1w1w2w2w1w1w1w2w3w4w1
+                  w2w2)1                        (4w1w2
+                  w1)1                            (3w3                        
+                  w6                                w5                        
+                  w5          l4                    w2
+                  w5          l3        l4          w1  
+                  w1          l1        l3          w1          
+                  w1                    l1          w3
+                  w2\1                            /1w2
+                  w3w1\2                        /1w1w1
+                  w1w2w2o>                    >ow1w1w1                    
+                  w2w5w1x>                    >xw1w1w2                    
+                  w3w6w2o>        BB          >ow5w2w1                    
+                  w4w5w2x>                    >xw4w1w2                        
+                  w3w5w1    TT      TT      TT  w1w1w2
+                      
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+</level>
