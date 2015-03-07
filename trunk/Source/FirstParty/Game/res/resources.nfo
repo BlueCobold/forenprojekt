@@ -32,6 +32,7 @@
 	<texture name="goodie" path="gui/Goodies.png" smooth="true" />
 	<texture name="walls" path="assets/walls.png" smooth="true" />
 	<texture name="norT" path="assets/norT.png" smooth="true" />
+	<texture name="teleport" path="assets/misc/Teleport.png" smooth="true" />
 </textures>
 <sounds>
 	<sound name="bounce" path="bounce.wav" />
@@ -75,7 +76,7 @@
 	<spritesheet name="gui_elements" path="gui/gui_elements.xml" />
 </spritesheets>
 <Levels>
-	<Level number="1" filename="Beginner Level.lvl" />
+	<Level number="1" filename="test.lvl" />
 	<Level number="2" filename="Clockwork.lvl" />
 	<Level number="3" filename="Rocket Science.lvl" />
 	<Level number="4" filename="Moving Walls.lvl" />
