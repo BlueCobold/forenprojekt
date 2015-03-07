@@ -38,8 +38,8 @@
 			<shape name="tp" type="polygon">
 				<vertex x="0" y="0" />
 				<vertex x="0" y="60" />
-				<vertex x="120" y="60" />
-				<vertex x="120" y="0" />
+				<vertex x="60" y="60" />
+				<vertex x="60" y="0" />
 			</shape>
 
 		</shapes>
@@ -47,6 +47,16 @@
 		<entities>
 			<entity name="ballteleport" rep="TP" collideWithBall="true">
 				<physics name="wall" shape="tp" />
+				<animations>
+					<animation texture="teleport" srcx="0" width="60" height="60" rotate="false">
+						<frameindex frames="5" >
+							<mul>
+								<time />
+								<static value="6" />
+							</mul>
+						</frameindex>
+					</animation>
+				</animations>
 				<collides>
 					<changeGravity x="0" y="40">
 						<nop>
@@ -168,9 +178,9 @@
               w2                                                  d1d1d1          /1w6  w4
               w4                                                      d1d1          w6  w6
               w1                                                              TT    w6  w3
-              w1TP                                                                Lew6  w3
+              w1                                                              TP  Lew6  w3
               w1  /1w1w1W3 3W6 6W3 3W6 6w1W1 1W1 1w1W3 3W6 6W3 3W6 6w1W1 1W1 1W2 2w1w1  w6
-                
+                TP
 	</grid>
 	<objects>
 		<include file="pastureland/background.inc" />

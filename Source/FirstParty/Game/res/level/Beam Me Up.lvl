@@ -1,0 +1,129 @@
+<level>
+	<levelinfo name="Beam Me Up">
+		<infoimage srcx="192" srcy="217" width="192" height="108" />
+	</levelinfo>
+	<medal bronze="200" silver="360" gold="700" />
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<shapes>
+			<shape name="tp" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="0" y="30" />
+				<vertex x="60" y="30" />
+				<vertex x="60" y="0" />
+			</shape>
+
+		</shapes>
+		<physics>
+
+		</physics>
+		<entities>
+			<entity name="ballteleport" rep="T1" collideWithBall="true">
+				<physics name="wall" shape="tp" />
+				<animations>
+					<animation texture="teleport" srcx="0" width="60" height="60" rotate="false">
+						<frameindex frames="5" >
+							<mul>
+								<time />
+								<static value="6" />
+							</mul>
+						</frameindex>
+					</animation>
+				</animations>
+				<collides>
+					<changeGravity x="0" y="40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+				<onCollision>
+					<ballTeleport keepSpeed="false" x="360" y="600"/>
+				</onCollision>
+			</entity>
+			<entity name="ballteleport" rep="T2" collideWithBall="true">
+				<physics name="wall" shape="tp" />
+				<animations>
+					<animation texture="teleport" srcx="0" width="60" height="60" rotate="false">
+						<frameindex frames="5" >
+							<mul>
+								<time />
+								<static value="6" />
+							</mul>
+						</frameindex>
+					</animation>
+				</animations>
+				<collides>
+					<changeGravity x="0" y="40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+				<onCollision>
+					<ballTeleport keepSpeed="false" x="2280" y="600"/>
+				</onCollision>
+			</entity>
+			<entity name="ballteleport" rep="T3" collideWithBall="true">
+				<physics name="wall" shape="tp" />
+				<animations>
+					<animation texture="teleport" srcx="0" width="60" height="60" rotate="false">
+						<frameindex frames="5" >
+							<mul>
+								<time />
+								<static value="6" />
+							</mul>
+						</frameindex>
+					</animation>
+				</animations>
+				<collides>
+					<changeGravity x="0" y="40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+				<onCollision>
+					<ballTeleport keepSpeed="false" x="1320" y="600"/>
+				</onCollision>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="5000" height="1410">
+                                                                                  
+      gagb                          gagb  gcgdgf                            gcgdgf  
+  w1w1W2 2W3 3  bt            bt  W1 1w1w4w3W2 2W1 1w1bt              bt  w1w1W2 2W3 3                   
+  w1T3      w1    bt        bt    w2T1T1w1o^x^w1T2T2w5    bt        bt    w1      T3w1
+  w6      t1w6      bt    bt      w1    (1    )1    w2      bt    bt      w6  t1    w6
+  w5        w5        btbt        w6                w1        btbt        w5        w5
+  w4    bt  w4                    w2                w1                    w4    bt  w4
+  w3        w3        btbt        w6                w2        btbt        w3        w3
+  w2  bt    w2      bt    bt      w1                w3      bt    bt      w2      btw2
+  w1        w1    bt        bt    w5                w5    bt        bt    w1        w1
+  w3        w4  bt            bt  w3        BB      w4  bt            bt  w3        w4
+  w1        w1                    w1                w1                    w1        w1  
+  w1    TT  w1                    w1\1            /1w1                    w1    TT  w1
+                                  W1 1\1        /1W1 1    
+                                            TT                                                        
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+</level>
