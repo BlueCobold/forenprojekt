@@ -1,0 +1,208 @@
+<level>
+	<levelinfo name="Cardinal Points">
+		<infoimage srcx="192" srcy="217" width="192" height="108" />
+	</levelinfo>
+	<medal bronze="300" silver="500" gold="1000" />
+	<gameplay maxBalls="5" time="180"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<shapes>
+			<shape name="tp" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="0" y="30" />
+				<vertex x="60" y="30" />
+				<vertex x="60" y="0" />
+			</shape>
+
+		</shapes>
+		<physics>
+
+		</physics>
+		<entities>
+			<entity name="ballteleport" rep="p1" collideWithBall="true">
+				<physics name="wall" shape="tp" />
+				<animations>
+					<animation texture="teleport" srcx="0" width="60" height="60" rotate="false">
+						<frameindex frames="5" >
+							<mul>
+								<time />
+								<static value="6" />
+							</mul>
+						</frameindex>
+					</animation>
+				</animations>
+				<collides>
+					<changeGravity x="0" y="40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+				<onCollision>
+					<ballTeleport keepSpeed="false" x="1320" y="1380"/>
+				</onCollision>
+			</entity>
+			<entity name="ballteleport" rep="p2" collideWithBall="true">
+				<physics name="wall" shape="tp" />
+				<animations>
+					<animation texture="teleport" srcx="0" width="60" height="60" rotate="false">
+						<frameindex frames="5" >
+							<mul>
+								<time />
+								<static value="6" />
+							</mul>
+						</frameindex>
+					</animation>
+				</animations>
+				<collides>
+					<changeGravity x="40" y="0">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+				<onCollision>
+					<ballTeleport keepSpeed="false" x="540" y="420"/>
+				</onCollision>
+			</entity>
+			<entity name="ballteleport" rep="p3" collideWithBall="true">
+				<physics name="wall" shape="tp" />
+				<animations>
+					<animation texture="teleport" srcx="0" width="60" height="60" rotate="false">
+						<frameindex frames="5" >
+							<mul>
+								<time />
+								<static value="6" />
+							</mul>
+						</frameindex>
+					</animation>
+				</animations>
+				<collides>
+					<changeGravity x="0" y="40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+				<onCollision>
+					<ballTeleport keepSpeed="false" x="240" y="1380"/>
+				</onCollision>
+			</entity>
+			<entity name="ballteleport" rep="p4" collideWithBall="true">
+				<physics name="wall" shape="tp" />
+				<animations>
+					<animation texture="teleport" srcx="0" width="60" height="60" rotate="false">
+						<frameindex frames="5" >
+							<mul>
+								<time />
+								<static value="6" />
+							</mul>
+						</frameindex>
+					</animation>
+				</animations>
+				<collides>
+					<changeGravity x="-40" y="0">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+				<onCollision>
+					<ballTeleport keepSpeed="false" x="2160" y="2160"/>
+				</onCollision>
+			</entity>
+			<entity name="ballteleport" rep="p5" collideWithBall="true">
+				<physics name="wall" shape="tp" />
+				<animations>
+					<animation texture="teleport" srcx="0" width="60" height="60" rotate="false">
+						<frameindex frames="5" >
+							<mul>
+								<time />
+								<static value="6" />
+							</mul>
+						</frameindex>
+					</animation>
+				</animations>
+				<collides>
+					<changeGravity x="0" y="-40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+				<onCollision>
+					<ballTeleport keepSpeed="false" x="2520" y="1140"/>
+				</onCollision>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="3000" height="3000">
+
+                                  >ow1
+                                  >xw1
+  gagb  gcgdgegf    gcgf          >ow1
+  w1w1w1w1w1w1w1w1w1w1w1          >xw1
+  w1p1                            >ow1
+  w1          bt                  >xw1
+  w1      bt            T2        >ow1
+  w1  t1                          >xw1                                gagb      gcgf
+  w1w1w1w1w1w1w1w1w1w1w1          >ow1    gcgdgegf                    w1w1w1w1w1w1w1w1w1w1w1w1
+                                  >xw1w1w1w1w1w1w1w1w1                o^x^o^x^o^x^o^x^o^x^o^x^
+                                    o^x^o^x^o^x^o^x^o^x^
+                                      
+                                      
+      gagb                          go                                                         
+  w1w1W2 2W3 3                    gp/1)1    TT  (1\1gg              >ow1    w3    TT  w3                   
+  p1        p1                  gq/2)1            (1\5gh            >xw1    w3        w3
+  p1      t1p1                gr/1)1                (1\2            >ow1    w3        w3
+  p1        p1                /1)1                    (1\1          >xw1    p1        p1
+  p1    bt  p1                                                      >ow1    p1  bt    p1
+  p1        p1                          p5    p4                    >xw1    p1        p1
+  p1  bt    p1                T2                          T2        >ow1    p1    bt  p1
+  p1        p1                          p2    p3                    >xw1    p1        p1
+  w3        w4                (1\1                    /1)4          >ow1    p1      t1p1
+  w1        w1                  (1\1gg      BB    go/1)1            >xw1    p1  gcgf  p1  
+  w1    TT  w1                    (1\1gh        gr/1)1              >ow1    w1w1W2 2W3 3
+                                    (1\1        /1)1                >xw1
+                                            TT                                         
+
+^O^X^O^X^O^X^O^X^O^X^O^X                                w1o>
+w1w1w1w1w1w1w1w1w1w1w1w1                                w5x>
+                                ^O^X^O^X^O^X^O^X^O^X^O^Xw4o>        gcgf    gcgdgegdgegf
+                                w1w1w1w1w1w1w1w1w1w1w1w1w3x>      w1w1w1w1w1w1w1w1w1w1w1            
+                                                        w3o>                          w1
+                                                        w2x>                      t1  w1
+                                                        w2o>      T2          bt      w1
+                                                        w1x>              bt        p1w1
+                                                        w1o>      w1w1w1w1w1w1w1w1w1w1w1
+                                                        w2x>
+                                                        w1o>
+                                                        w1
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+</level>
