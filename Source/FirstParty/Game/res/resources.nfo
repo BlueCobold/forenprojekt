@@ -76,7 +76,7 @@
 	<spritesheet name="gui_elements" path="gui/gui_elements.xml" />
 </spritesheets>
 <Levels>
-	<Level number="1" filename="test.lvl" />
+	<Level number="1" filename="Beginner Level.lvl" />
 	<Level number="2" filename="Clockwork.lvl" />
 	<Level number="3" filename="Rocket Science.lvl" />
 	<Level number="4" filename="Moving Walls.lvl" />
