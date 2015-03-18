@@ -25,17 +25,10 @@ public:
 
     sf::Vector2f toGlobalCoords(const sf::Vector2f& v);
 
-    float getGlobalRightCorner();
-    float getGlobalTopCorner();
-    float getGloablLeftCorner();
-    float getGlobalBottomCorner();
-
 private:
     float m_zoomFactor;
-    sf::Vector2f m_viewSize;  // view dimension
-    sf::Vector2f m_levelSize; // level dimension
-
-    sf::Vector2f m_viewCenter;
+    sf::Vector2f m_viewSize;
+    sf::Vector2f m_levelSize;
 };
 
 #endif

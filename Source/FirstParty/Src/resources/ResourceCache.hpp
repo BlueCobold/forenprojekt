@@ -36,26 +36,24 @@ public:
     bool load(const Key& key, const Functor& func)
     {
         auto it = m_resources.find(key);
+        if(it != end(m_resources))
+            return true;
 
-        if(it == end(m_resources))
-        {
-            T* resource = func();
-            if(resource == nullptr)
-                throw std::runtime_error(utility::replace(utility::translateKey("LoadFail"), key));
-            m_resources.insert(std::make_pair(key, std::unique_ptr<T>(resource)));
-        }
+        auto resource = func();
+        if(resource == nullptr)
+            throw std::runtime_error(utility::replace(utility::translateKey("LoadFail"), key));
+
+        m_resources.insert(std::make_pair(key, std::unique_ptr<T>(resource)));
         return true;
     }
 
-    // Overloding doesn't work... reasonable name?
+    // Overloading doesn't work... reasonable name?
     bool loadFromKey(const Key& key, const Functor2& func)
     {
         auto it = m_resources.find(key);
-
         if(it == end(m_resources))
-        {
             m_resources.insert(std::make_pair(key, std::unique_ptr<T>(func(key))));
-        }
+
         return true;
     }
 
@@ -64,15 +62,12 @@ public:
         return (m_resources.find(key) != end(m_resources));
     }
 
-    // return the resource
     T* get(const Key& key)
     {
         auto it = m_resources.find(key);
-
         if(it != end(m_resources))
-        {
             return (it->second).get();
-        }
+
         return nullptr;
     }
 
