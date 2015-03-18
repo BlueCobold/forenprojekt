@@ -1,0 +1,1018 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\..\Src\App.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Input.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\MacHelper.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\ScrollView.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Utility.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\Resources.h">
+      <Filter>Resouces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\AnimatedObject.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\Animation.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\Cloneable.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\Interpolation.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\OrientedObject.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\ParticleTrail.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\Stoppable.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\TimedObject.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\VariableHandler.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\VariableHolder.hpp">
+      <Filter>Headers\animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Absolute.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Adder.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\AngleProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\CachedProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Clamp.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Count.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\FloatToInt.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\IfPositive.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Inverse.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\KeyProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Maximum.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Minimum.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Modulo.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\MouseProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Multiplier.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\MultiProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Negate.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Nop.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Pow.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Ramp.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\RandomProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\SetVariable.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Sine.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\SingleProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\StaticProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Step.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Stop.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Substractor.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Switch.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\TimeProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\ValueProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\VariableProvider.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\AnimationContainer.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\BitmapFont.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\Button.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\ButtonStyle.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\CaptionMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\CheckBox.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\CheckboxStyle.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\CoinShopMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\CreditMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\Cursor.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\ErrorMessageBox.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\FailMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\FPSCounter.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\GameFinishedMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\HighScoreMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\InputBox.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\InputBoxStyle.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\KeyboardMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\LevelPreviewMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\LevelSelectMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\LineLabel.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\MainMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\Menu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\MenuElement.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\MenuPanel.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\MenuSprite.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\MenuTemplate.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\NewHighScoreMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\OptionMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\PauseMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\ReplayMenu.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\Slider.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\SliderStyle.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\SubWindow.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\ToolTip.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\hud\ArrowHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\hud\BallHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\hud\FPSCounter.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\hud\FPSCounterHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\hud\GoodyHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\hud\HUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\hud\HUDElement.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\hud\LabelHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\hud\PointsHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\hud\TargetHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\hud\TimeHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\AnimatedGraphics.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\Background.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\Ball.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\Entity.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\Goody.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\GravityGoody.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\InvulnerableGoody.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\Level.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\ParallaxLayer.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\PhysicalObject.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\SoundManager.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\SoundObject.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\SoundTrigger.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\Teeter.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\ContactListener.hpp">
+      <Filter>Headers\model\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\filter\ActionFilter.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\filter\Always.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\filter\ApplyForceFilter.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\filter\ChangeBallSpawnFilter.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\filter\ChangeBallVelocityFilter.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\filter\ChangeGravityFilter.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\filter\CollisionFilter.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\filter\Never.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\filter\PropertyFilter.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\filter\SpawnEntity.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\handler\ApplyImpulseCollisionHandler.hpp">
+      <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\handler\BallTeleportCollisionHandler.hpp">
+      <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\handler\ChangePropertyCollisionHandler.hpp">
+      <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\handler\CollisionHandler.hpp">
+      <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\handler\GenericCollisionHandler.hpp">
+      <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\handler\SpawnEntityCollisionHandler.hpp">
+      <Filter>Headers\model\collision\handler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\DebugDraw.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\Drawable.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\DrawParameter.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\GraphicalObject.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\AlphaTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\GrowingCircleTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\GrowingRectangleTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalCompressTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalExpandTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalHalvesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalMaskingStripesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalSlicesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalSlidingStripesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalSpringTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalStripesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\RandomTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\RotatingSquaresTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\Transition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalCompressTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalExpandTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalHalvesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalMaskingStripesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalSlicesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalSlidingStripesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalSpringTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalStripesTransition.hpp">
+      <Filter>Headers\rendering\transitions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\AppConfig.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\Config.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\FileReader.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\GameEvent.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\GameEventRecorder.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\LevelFileLoader.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\MenuLoader.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\PathHelper.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\ResourceCache.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\ResourceManager.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\SoundBufferManager.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\SpriteSheet.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\CoinShopState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\CreditMenuState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\EnterStateInformation.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\GameFinishedState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\HighScoreState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\LevelFailState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\LevelPassState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\LevelPreviewState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\LevelSelectState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\LoadLevelState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\MainMenuState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\NewHighScoreState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\OptionMenuState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\PauseState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\PlayState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\StartState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\State.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\StateChangeInformation.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\StateManager.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\State\TransitionState.hpp">
+      <Filter>Headers\State</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\joint\JointObject.hpp">
+      <Filter>Headers\model\joint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\joint\SingleDistanceJoint.hpp">
+      <Filter>Headers\model\joint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\joint\SinglePrismaticJoint.hpp">
+      <Filter>Headers\model\joint</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\joint\SingleRevoluteJoint.hpp">
+      <Filter>Headers\model\joint</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resouces">
+      <UniqueIdentifier>{7273a69a-eff2-4e02-adaf-342e2be673e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources">
+      <UniqueIdentifier>{7bf9fef6-15c1-4b0c-896f-d0d2c24b5a74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{fd86505c-1ee9-4960-b8e0-4540743f0492}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\resources">
+      <UniqueIdentifier>{e2e0953d-9905-43eb-a6c1-1bd23951d8a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\model">
+      <UniqueIdentifier>{82c559a9-cddc-4c24-b5c5-e0031f2b65a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\model\collision">
+      <UniqueIdentifier>{c05e86fd-1e76-45ef-be24-abf5d5f4f2cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\gui">
+      <UniqueIdentifier>{78186138-e2d2-4135-912f-60bb79b4c452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\gui\hud">
+      <UniqueIdentifier>{86d846fa-6ac3-433e-8fa5-648986be7160}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\State">
+      <UniqueIdentifier>{f34a6103-1abb-48f9-952b-68f10e8af582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\animation">
+      <UniqueIdentifier>{78c81f4f-30be-49c1-8df7-ec1ba111d3a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\animation\providers">
+      <UniqueIdentifier>{1f0bc342-a831-4fb5-ac98-bc0015501aad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\model\joint">
+      <UniqueIdentifier>{f719d0dd-8004-46ad-9eaf-e55c611c88cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\animation">
+      <UniqueIdentifier>{525cc819-757b-40f6-8cb9-423623464160}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\animation\provider">
+      <UniqueIdentifier>{15a167dc-1381-4741-b04e-964f40d611dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\gui">
+      <UniqueIdentifier>{f5554ef3-5450-48ba-af2d-e2e5643c09d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\gui\hud">
+      <UniqueIdentifier>{fc7ff799-753a-4cf2-ac31-36c572739296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\model">
+      <UniqueIdentifier>{2119cfeb-b3ff-4ccd-88ae-73cb85ea94bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\model\collision">
+      <UniqueIdentifier>{eef34536-562e-48b1-9d0e-a209cd51d1f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\model\joint">
+      <UniqueIdentifier>{cdffd0c6-329a-478e-be2d-8a3de4f6aa55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\model\collision\filter">
+      <UniqueIdentifier>{22e7ed83-459c-4ebd-8842-98274101f494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\model\collision\handler">
+      <UniqueIdentifier>{f8fb6698-71b8-49f6-a761-f8267483dd36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\rendering">
+      <UniqueIdentifier>{2d2c0e7e-34f0-429c-9c5c-f774953044b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\rendering\transitions">
+      <UniqueIdentifier>{0de34862-318a-4614-ac9a-429b9c12cedd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\resources">
+      <UniqueIdentifier>{4791be80-cb45-4d2c-b86f-652901bb73d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\State">
+      <UniqueIdentifier>{e89db21f-a3fd-4024-8fdd-62bf62b11ab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resouces\res">
+      <UniqueIdentifier>{65a8bc6a-1a95-45c5-b40a-1c65b7680ae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\gui\menus">
+      <UniqueIdentifier>{e4370246-9364-41d9-90b7-121a6ffb06c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\rendering">
+      <UniqueIdentifier>{e0f806b4-001a-4391-af88-bc2fc06dd47b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\rendering\transitions">
+      <UniqueIdentifier>{dafee3bd-2f74-4c28-84de-e0c4d161420c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\Src\app.rc">
+      <Filter>Resouces</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Game\res\language.dat">
+      <Filter>Resouces\res</Filter>
+    </None>
+    <None Include="..\..\Game\res\language_de.dat">
+      <Filter>Resouces\res</Filter>
+    </None>
+    <None Include="..\..\Game\res\resources.nfo">
+      <Filter>Resouces\res</Filter>
+    </None>
+    <None Include="..\..\Game\Config.ini">
+      <Filter>Resouces</Filter>
+    </None>
+    <None Include="..\..\Game\stash.dat">
+      <Filter>Resouces</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Src\animation\provider\KeyProvider.cpp">
+      <Filter>Sources\animation\providers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\animation\Animation.cpp">
+      <Filter>Sources\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\animation\Interpolation.cpp">
+      <Filter>Sources\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\animation\ParticleTrail.cpp">
+      <Filter>Sources\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\ToolTip.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\SubWindow.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\Slider.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\MenuSprite.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\MenuPanel.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\LineLabel.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\InputBox.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\FPSCounter.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\Cursor.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\CheckBox.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\Button.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\BitmapFont.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\AnimationContainer.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\hud\TimeHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\hud\TargetHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\hud\PointsHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\hud\LabelHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\hud\HUDElement.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\hud\HUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\hud\GoodyHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\hud\FPSCounterHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\hud\BallHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\hud\ArrowHUD.cpp">
+      <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\CaptionMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\CoinShopMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\CreditMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\FailMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\GameFinishedMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\HighScoreMenue.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\KeyboardMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\LevelPreviewMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\LevelSelectMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\MainMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\Menu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\NewHighScoreMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\OptionMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\PauseMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\ReplayMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\Teeter.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\SoundTrigger.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\SoundObject.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\SoundManager.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\PhysicalObject.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\ParallaxLayer.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\Level_LoadingPart.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\Level.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\GravityGoody.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\Goody.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\Entity.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\Ball.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\Background.cpp">
+      <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\collision\ContactListener.cpp">
+      <Filter>Sources\model\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\joint\SingleDistanceJoint.cpp">
+      <Filter>Sources\model\joint</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\joint\SinglePrismaticJoint.cpp">
+      <Filter>Sources\model\joint</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\joint\SingleRevoluteJoint.cpp">
+      <Filter>Sources\model\joint</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\AppConfig.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\Config.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\FileReader.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\GameEventRecorder.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\LevelFileLoader.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\MenuLoader.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\PathHelper.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\ResourceManager.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\SpriteSheet.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\DebugDraw.cpp">
+      <Filter>Sources\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\AlphaTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\GrowingCircleTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\GrowingRectangleTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalCompressTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalExpandTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalHalvesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalMaskingStripesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalSlicesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalSlidingStripesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalSpringTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalStripesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\RandomTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\RotatingSquaresTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalCompressTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalExpandTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalHalvesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalMaskingStripesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalSlicesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalSlidingStripesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalSpringTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalStripesTransition.cpp">
+      <Filter>Sources\rendering\transitions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\CoinShopState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\CreditMenuState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\GameFinishedState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\HighScoreState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\LevelFailState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\LevelPassState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\LevelPreviewState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\LevelSelectState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\LoadLevelState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\MainMenuState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\NewHighScoreState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\OptionMenuState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\PauseState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\PlayState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\StartState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\StateManager.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\State\TransitionState.cpp">
+      <Filter>Sources\State</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\App.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Core.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Input.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\ScrollView.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\Utility.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

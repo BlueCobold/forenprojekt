@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9F7B3F68-94C7-4A76-BA08-5C8FAFB5C006}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Core</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <ExecutablePath>$(ExecutablePath);..\..\Game</ExecutablePath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <TargetName>RicketyRacquet</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG_BOX2D;WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>../../../ThirdParty/CryptoPP/include/;../../../ThirdParty/SFML/include/;../../../ThirdParty/Box2D/include/;../../../ThirdParty/tinyxml2/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4250</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MinimalRebuild>true</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../../ThirdParty/CryptoPP/lib/;../../../ThirdParty/SFML/lib/;../../../ThirdParty/Box2D/lib/Debug/;../../../ThirdParty/tinyxml2/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib; msvcrt.lib; msvcrtd.lib; msvcmrt.lib; msvcurt.lib</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>cryptlib-d.lib;sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;sfml-audio-s-d.lib;sfml-network-s-d.lib;sfml-main-d.lib;Box2D.lib;tinyxml2-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>../../../ThirdParty/CryptoPP/include/;../../../ThirdParty/SFML/include/;../../../ThirdParty/Box2D/include/;../../../ThirdParty/tinyxml2/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4250</DisableSpecificWarnings>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../../../ThirdParty/CryptoPP/lib/;../../../ThirdParty/SFML/lib/;../../../ThirdParty/Box2D/lib/Release/;../../../ThirdParty/tinyxml2/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>msvcrt.lib; libcmtd.lib; msvcrtd.lib; msvcmrt.lib; msvcurt.lib</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>cryptlib.lib;sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;sfml-audio-s.lib;sfml-network-s.lib;sfml-main.lib;Box2D.lib;tinyxml2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Src\animation\AnimatedObject.hpp" />
+    <ClInclude Include="..\..\Src\animation\Animation.hpp" />
+    <ClInclude Include="..\..\Src\animation\Cloneable.hpp" />
+    <ClInclude Include="..\..\Src\animation\Interpolation.hpp" />
+    <ClInclude Include="..\..\Src\animation\OrientedObject.hpp" />
+    <ClInclude Include="..\..\Src\animation\ParticleTrail.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Absolute.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Adder.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\AngleProvider.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\CachedProvider.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Clamp.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Count.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\FloatToInt.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\IfPositive.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Inverse.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\KeyProvider.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Maximum.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Minimum.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Modulo.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\MouseProvider.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Multiplier.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\MultiProvider.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Negate.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Nop.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Pow.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Ramp.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\RandomProvider.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\SetVariable.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Sine.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\SingleProvider.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\StaticProvider.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Step.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Stop.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Substractor.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Switch.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\TimeProvider.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\ValueProvider.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\VariableProvider.hpp" />
+    <ClInclude Include="..\..\Src\animation\Stoppable.hpp" />
+    <ClInclude Include="..\..\Src\animation\TimedObject.hpp" />
+    <ClInclude Include="..\..\Src\animation\VariableHandler.hpp" />
+    <ClInclude Include="..\..\Src\animation\VariableHolder.hpp" />
+    <ClInclude Include="..\..\Src\App.hpp" />
+    <ClInclude Include="..\..\Src\gui\AnimationContainer.hpp" />
+    <ClInclude Include="..\..\Src\gui\BitmapFont.hpp" />
+    <ClInclude Include="..\..\Src\gui\Button.hpp" />
+    <ClInclude Include="..\..\Src\gui\ButtonStyle.hpp" />
+    <ClInclude Include="..\..\Src\gui\CaptionMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\CheckBox.hpp" />
+    <ClInclude Include="..\..\Src\gui\CheckboxStyle.hpp" />
+    <ClInclude Include="..\..\Src\gui\CoinShopMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\CreditMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\Cursor.hpp" />
+    <ClInclude Include="..\..\Src\gui\ErrorMessageBox.hpp" />
+    <ClInclude Include="..\..\Src\gui\FailMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\FPSCounter.hpp" />
+    <ClInclude Include="..\..\Src\gui\GameFinishedMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\HighScoreMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\hud\ArrowHUD.hpp" />
+    <ClInclude Include="..\..\Src\gui\hud\BallHUD.hpp" />
+    <ClInclude Include="..\..\Src\gui\hud\FPSCounter.hpp" />
+    <ClInclude Include="..\..\Src\gui\hud\FPSCounterHUD.hpp" />
+    <ClInclude Include="..\..\Src\gui\hud\GoodyHUD.hpp" />
+    <ClInclude Include="..\..\Src\gui\hud\HUD.hpp" />
+    <ClInclude Include="..\..\Src\gui\hud\HUDElement.hpp" />
+    <ClInclude Include="..\..\Src\gui\hud\LabelHUD.hpp" />
+    <ClInclude Include="..\..\Src\gui\hud\PointsHUD.hpp" />
+    <ClInclude Include="..\..\Src\gui\hud\TargetHUD.hpp" />
+    <ClInclude Include="..\..\Src\gui\hud\TimeHUD.hpp" />
+    <ClInclude Include="..\..\Src\gui\InputBox.hpp" />
+    <ClInclude Include="..\..\Src\gui\InputBoxStyle.hpp" />
+    <ClInclude Include="..\..\Src\gui\KeyboardMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\LevelPreviewMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\LevelSelectMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\LineLabel.hpp" />
+    <ClInclude Include="..\..\Src\gui\MainMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\Menu.hpp" />
+    <ClInclude Include="..\..\Src\gui\MenuElement.hpp" />
+    <ClInclude Include="..\..\Src\gui\MenuPanel.hpp" />
+    <ClInclude Include="..\..\Src\gui\MenuSprite.hpp" />
+    <ClInclude Include="..\..\Src\gui\MenuTemplate.hpp" />
+    <ClInclude Include="..\..\Src\gui\NewHighScoreMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\OptionMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\PauseMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\ReplayMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\Slider.hpp" />
+    <ClInclude Include="..\..\Src\gui\SliderStyle.hpp" />
+    <ClInclude Include="..\..\Src\gui\SubWindow.hpp" />
+    <ClInclude Include="..\..\Src\gui\ToolTip.hpp" />
+    <ClInclude Include="..\..\Src\Input.hpp" />
+    <ClInclude Include="..\..\Src\MacHelper.hpp" />
+    <ClInclude Include="..\..\Src\model\AnimatedGraphics.hpp" />
+    <ClInclude Include="..\..\Src\model\Background.hpp" />
+    <ClInclude Include="..\..\Src\model\Ball.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\ContactListener.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\filter\ActionFilter.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\filter\Always.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\filter\ApplyForceFilter.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\filter\ChangeBallSpawnFilter.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\filter\ChangeBallVelocityFilter.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\filter\ChangeGravityFilter.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\filter\CollisionFilter.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\filter\Never.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\filter\PropertyFilter.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\filter\SpawnEntity.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\handler\ApplyImpulseCollisionHandler.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\handler\BallTeleportCollisionHandler.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\handler\ChangePropertyCollisionHandler.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\handler\CollisionHandler.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\handler\GenericCollisionHandler.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\handler\SpawnEntityCollisionHandler.hpp" />
+    <ClInclude Include="..\..\Src\model\Entity.hpp" />
+    <ClInclude Include="..\..\Src\model\Goody.hpp" />
+    <ClInclude Include="..\..\Src\model\GravityGoody.hpp" />
+    <ClInclude Include="..\..\Src\model\InvulnerableGoody.hpp" />
+    <ClInclude Include="..\..\Src\model\joint\JointObject.hpp" />
+    <ClInclude Include="..\..\Src\model\joint\SingleDistanceJoint.hpp" />
+    <ClInclude Include="..\..\Src\model\joint\SinglePrismaticJoint.hpp" />
+    <ClInclude Include="..\..\Src\model\joint\SingleRevoluteJoint.hpp" />
+    <ClInclude Include="..\..\Src\model\Level.hpp" />
+    <ClInclude Include="..\..\Src\model\ParallaxLayer.hpp" />
+    <ClInclude Include="..\..\Src\model\PhysicalObject.hpp" />
+    <ClInclude Include="..\..\Src\model\SoundManager.hpp" />
+    <ClInclude Include="..\..\Src\model\SoundObject.hpp" />
+    <ClInclude Include="..\..\Src\model\SoundTrigger.hpp" />
+    <ClInclude Include="..\..\Src\model\Teeter.hpp" />
+    <ClInclude Include="..\..\Src\rendering\DebugDraw.hpp" />
+    <ClInclude Include="..\..\Src\rendering\Drawable.hpp" />
+    <ClInclude Include="..\..\Src\rendering\DrawParameter.hpp" />
+    <ClInclude Include="..\..\Src\rendering\GraphicalObject.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\AlphaTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\GrowingCircleTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\GrowingRectangleTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalCompressTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalExpandTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalHalvesTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalMaskingStripesTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalSlicesTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalSlidingStripesTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalSpringTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\HorizontalStripesTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\RandomTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\RotatingSquaresTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\Transition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalCompressTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalExpandTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalHalvesTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalMaskingStripesTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalSlicesTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalSlidingStripesTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalSpringTransition.hpp" />
+    <ClInclude Include="..\..\Src\rendering\transitions\VerticalStripesTransition.hpp" />
+    <ClInclude Include="..\..\Src\Resources.h" />
+    <ClInclude Include="..\..\Src\resources\AppConfig.hpp" />
+    <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp" />
+    <ClInclude Include="..\..\Src\resources\Config.hpp" />
+    <ClInclude Include="..\..\Src\resources\FileReader.hpp" />
+    <ClInclude Include="..\..\Src\resources\GameEvent.hpp" />
+    <ClInclude Include="..\..\Src\resources\GameEventRecorder.hpp" />
+    <ClInclude Include="..\..\Src\resources\LevelFileLoader.hpp" />
+    <ClInclude Include="..\..\Src\resources\MenuLoader.hpp" />
+    <ClInclude Include="..\..\Src\resources\PathHelper.hpp" />
+    <ClInclude Include="..\..\Src\resources\ResourceCache.hpp" />
+    <ClInclude Include="..\..\Src\resources\ResourceManager.hpp" />
+    <ClInclude Include="..\..\Src\resources\SoundBufferManager.hpp" />
+    <ClInclude Include="..\..\Src\resources\SpriteSheet.hpp" />
+    <ClInclude Include="..\..\Src\ScrollView.hpp" />
+    <ClInclude Include="..\..\Src\State\CoinShopState.hpp" />
+    <ClInclude Include="..\..\Src\State\CreditMenuState.hpp" />
+    <ClInclude Include="..\..\Src\State\EnterStateInformation.hpp" />
+    <ClInclude Include="..\..\Src\State\GameFinishedState.hpp" />
+    <ClInclude Include="..\..\Src\State\HighScoreState.hpp" />
+    <ClInclude Include="..\..\Src\State\LevelFailState.hpp" />
+    <ClInclude Include="..\..\Src\State\LevelPassState.hpp" />
+    <ClInclude Include="..\..\Src\State\LevelPreviewState.hpp" />
+    <ClInclude Include="..\..\Src\State\LevelSelectState.hpp" />
+    <ClInclude Include="..\..\Src\State\LoadLevelState.hpp" />
+    <ClInclude Include="..\..\Src\State\MainMenuState.hpp" />
+    <ClInclude Include="..\..\Src\State\NewHighScoreState.hpp" />
+    <ClInclude Include="..\..\Src\State\OptionMenuState.hpp" />
+    <ClInclude Include="..\..\Src\State\PauseState.hpp" />
+    <ClInclude Include="..\..\Src\State\PlayState.hpp" />
+    <ClInclude Include="..\..\Src\State\StartState.hpp" />
+    <ClInclude Include="..\..\Src\State\State.hpp" />
+    <ClInclude Include="..\..\Src\State\StateChangeInformation.hpp" />
+    <ClInclude Include="..\..\Src\State\StateManager.hpp" />
+    <ClInclude Include="..\..\Src\State\TransitionState.hpp" />
+    <ClInclude Include="..\..\Src\Utility.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\Src\app.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Game\Config.ini" />
+    <None Include="..\..\Game\res\language.dat" />
+    <None Include="..\..\Game\res\language_de.dat" />
+    <None Include="..\..\Game\res\resources.nfo" />
+    <None Include="..\..\Game\stash.dat" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Src\animation\Animation.cpp" />
+    <ClCompile Include="..\..\Src\animation\Interpolation.cpp" />
+    <ClCompile Include="..\..\Src\animation\ParticleTrail.cpp" />
+    <ClCompile Include="..\..\Src\animation\provider\KeyProvider.cpp" />
+    <ClCompile Include="..\..\Src\App.cpp" />
+    <ClCompile Include="..\..\Src\Core.cpp" />
+    <ClCompile Include="..\..\Src\gui\AnimationContainer.cpp" />
+    <ClCompile Include="..\..\Src\gui\BitmapFont.cpp" />
+    <ClCompile Include="..\..\Src\gui\Button.cpp" />
+    <ClCompile Include="..\..\Src\gui\CaptionMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\CheckBox.cpp" />
+    <ClCompile Include="..\..\Src\gui\CoinShopMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\CreditMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\Cursor.cpp" />
+    <ClCompile Include="..\..\Src\gui\FailMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\FPSCounter.cpp" />
+    <ClCompile Include="..\..\Src\gui\GameFinishedMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\HighScoreMenue.cpp" />
+    <ClCompile Include="..\..\Src\gui\hud\ArrowHUD.cpp" />
+    <ClCompile Include="..\..\Src\gui\hud\BallHUD.cpp" />
+    <ClCompile Include="..\..\Src\gui\hud\FPSCounterHUD.cpp" />
+    <ClCompile Include="..\..\Src\gui\hud\GoodyHUD.cpp" />
+    <ClCompile Include="..\..\Src\gui\hud\HUD.cpp" />
+    <ClCompile Include="..\..\Src\gui\hud\HUDElement.cpp" />
+    <ClCompile Include="..\..\Src\gui\hud\LabelHUD.cpp" />
+    <ClCompile Include="..\..\Src\gui\hud\PointsHUD.cpp" />
+    <ClCompile Include="..\..\Src\gui\hud\TargetHUD.cpp" />
+    <ClCompile Include="..\..\Src\gui\hud\TimeHUD.cpp" />
+    <ClCompile Include="..\..\Src\gui\InputBox.cpp" />
+    <ClCompile Include="..\..\Src\gui\KeyboardMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\LevelPreviewMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\LevelSelectMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\LineLabel.cpp" />
+    <ClCompile Include="..\..\Src\gui\MainMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\Menu.cpp" />
+    <ClCompile Include="..\..\Src\gui\MenuPanel.cpp" />
+    <ClCompile Include="..\..\Src\gui\MenuSprite.cpp" />
+    <ClCompile Include="..\..\Src\gui\NewHighScoreMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\OptionMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\PauseMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\ReplayMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\Slider.cpp" />
+    <ClCompile Include="..\..\Src\gui\SubWindow.cpp" />
+    <ClCompile Include="..\..\Src\gui\ToolTip.cpp" />
+    <ClCompile Include="..\..\Src\Input.cpp" />
+    <ClCompile Include="..\..\Src\model\Background.cpp" />
+    <ClCompile Include="..\..\Src\model\Ball.cpp" />
+    <ClCompile Include="..\..\Src\model\collision\ContactListener.cpp" />
+    <ClCompile Include="..\..\Src\model\Entity.cpp" />
+    <ClCompile Include="..\..\Src\model\Goody.cpp" />
+    <ClCompile Include="..\..\Src\model\GravityGoody.cpp" />
+    <ClCompile Include="..\..\Src\model\joint\SingleDistanceJoint.cpp" />
+    <ClCompile Include="..\..\Src\model\joint\SinglePrismaticJoint.cpp" />
+    <ClCompile Include="..\..\Src\model\joint\SingleRevoluteJoint.cpp" />
+    <ClCompile Include="..\..\Src\model\Level.cpp" />
+    <ClCompile Include="..\..\Src\model\Level_LoadingPart.cpp" />
+    <ClCompile Include="..\..\Src\model\ParallaxLayer.cpp" />
+    <ClCompile Include="..\..\Src\model\PhysicalObject.cpp" />
+    <ClCompile Include="..\..\Src\model\SoundManager.cpp" />
+    <ClCompile Include="..\..\Src\model\SoundObject.cpp" />
+    <ClCompile Include="..\..\Src\model\SoundTrigger.cpp" />
+    <ClCompile Include="..\..\Src\model\Teeter.cpp" />
+    <ClCompile Include="..\..\Src\rendering\DebugDraw.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\AlphaTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\GrowingCircleTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\GrowingRectangleTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalCompressTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalExpandTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalHalvesTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalMaskingStripesTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalSlicesTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalSlidingStripesTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalSpringTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\HorizontalStripesTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\RandomTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\RotatingSquaresTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalCompressTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalExpandTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalHalvesTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalMaskingStripesTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalSlicesTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalSlidingStripesTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalSpringTransition.cpp" />
+    <ClCompile Include="..\..\Src\rendering\transitions\VerticalStripesTransition.cpp" />
+    <ClCompile Include="..\..\Src\resources\AppConfig.cpp" />
+    <ClCompile Include="..\..\Src\resources\Config.cpp" />
+    <ClCompile Include="..\..\Src\resources\FileReader.cpp" />
+    <ClCompile Include="..\..\Src\resources\GameEventRecorder.cpp" />
+    <ClCompile Include="..\..\Src\resources\LevelFileLoader.cpp" />
+    <ClCompile Include="..\..\Src\resources\MenuLoader.cpp" />
+    <ClCompile Include="..\..\Src\resources\PathHelper.cpp" />
+    <ClCompile Include="..\..\Src\resources\ResourceManager.cpp" />
+    <ClCompile Include="..\..\Src\resources\SpriteSheet.cpp" />
+    <ClCompile Include="..\..\Src\ScrollView.cpp" />
+    <ClCompile Include="..\..\Src\State\CoinShopState.cpp" />
+    <ClCompile Include="..\..\Src\State\CreditMenuState.cpp" />
+    <ClCompile Include="..\..\Src\State\GameFinishedState.cpp" />
+    <ClCompile Include="..\..\Src\State\HighScoreState.cpp" />
+    <ClCompile Include="..\..\Src\State\LevelFailState.cpp" />
+    <ClCompile Include="..\..\Src\State\LevelPassState.cpp" />
+    <ClCompile Include="..\..\Src\State\LevelPreviewState.cpp" />
+    <ClCompile Include="..\..\Src\State\LevelSelectState.cpp" />
+    <ClCompile Include="..\..\Src\State\LoadLevelState.cpp" />
+    <ClCompile Include="..\..\Src\State\MainMenuState.cpp" />
+    <ClCompile Include="..\..\Src\State\NewHighScoreState.cpp" />
+    <ClCompile Include="..\..\Src\State\OptionMenuState.cpp" />
+    <ClCompile Include="..\..\Src\State\PauseState.cpp" />
+    <ClCompile Include="..\..\Src\State\PlayState.cpp" />
+    <ClCompile Include="..\..\Src\State\StartState.cpp" />
+    <ClCompile Include="..\..\Src\State\StateManager.cpp" />
+    <ClCompile Include="..\..\Src\State\TransitionState.cpp" />
+    <ClCompile Include="..\..\Src\Utility.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
