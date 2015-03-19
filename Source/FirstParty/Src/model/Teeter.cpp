@@ -32,15 +32,23 @@ void Teeter::adaptToMouse()
 
 void Teeter::update(const float value)
 {
-    float velocity  = 0;
-    float angle = utility::toDegree<float,float>(getAngle());
-    float timeDiff = value - m_lastTime;
+    auto velocity  = 0;
+    auto angle = utility::toDegree<float,float>(getAngle());
+    auto timeDiff = value - m_lastTime;
 
+#ifdef IOS
+    auto gravToAngle = 90 / 9.81f;
+    sf::Vector2f mousePos = 0.5f * sf::Vector2f(utility::Mouse.getAcceleration().y, utility::Mouse.getAcceleration().x)
+                           +0.5f * m_lastMousePos;
+    auto mouseDiff = sf::Vector2f(mousePos.x * gravToAngle - angle,
+                                  mousePos.y * gravToAngle - angle) / timeDiff;
+#else
     sf::Vector2f mousePos = utility::Mouse.getPosition();
     sf::Vector2f mouseDiff = (m_lastMousePos - mousePos) * m_mouseScale / (timeDiff * 60);
+#endif
 
-    float minVelocity = ((-45.f) - angle) / timeDiff;
-    float maxVelocity = ((45.f) - angle) / timeDiff;
+    auto minVelocity = ((-45.f) - angle) / timeDiff;
+    auto maxVelocity = ((45.f) - angle) / timeDiff;
 
     if(m_invertAxis)
         mouseDiff = -mouseDiff;

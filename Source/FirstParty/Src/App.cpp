@@ -47,7 +47,14 @@ App::App(AppConfig& config) :
     sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
+#ifdef IOS
+    auto videoMode = sf::VideoMode::getDesktopMode();
+    if(videoMode.width < videoMode.height) {
+        std::swap(videoMode.width, videoMode.height);
+    }
+#else
     sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+#endif
 
     adjustVideoMode(videoMode);
 
@@ -86,6 +93,9 @@ App::App(AppConfig& config) :
     m_stateManager.setState(StartStateId);
     
     m_screen.setMouseCursorVisible(false);
+#ifdef IOS
+    utility::Mouse.enableSensors(true);
+#endif
 }
 
 void App::run()
@@ -255,6 +265,7 @@ void App::onResize()
 
 void App::adjustVideoMode(sf::VideoMode& mode)
 {
+#ifndef IOS
     // Ensure minimas and maximas
     if(mode.width > 1920)
         mode.width = 1920;
@@ -291,6 +302,7 @@ void App::adjustVideoMode(sf::VideoMode& mode)
     }
     m_config.set("ResolutionX", mode.width);
     m_config.set("ResolutionY", mode.height);
+#endif
 }
 
 void App::minimize()

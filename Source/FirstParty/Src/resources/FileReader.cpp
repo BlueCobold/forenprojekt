@@ -64,8 +64,8 @@ void FileReader::readFile()
         std::string value;
         auto pos = std::string::npos;
 
-       while(!configFile.eof())
-       {
+        while(!configFile.eof())
+        {
             std::getline(configFile, line);
 
             pos = line.find('=');
@@ -77,7 +77,7 @@ void FileReader::readFile()
             key = line.substr(0, pos);
             eraseOverhang(key);
             value = line.substr(pos + 1) ;
-           eraseOverhang(value);
+            eraseOverhang(value);
 
             if(!key.empty() && !value.empty())
                 m_content.insert(std::make_pair(key, value));
@@ -99,8 +99,8 @@ void FileReader::readString()
         std::string value;
         auto pos = std::string::npos;
 
-       while(!content.eof())
-       {
+        while(!content.eof())
+        {
             std::getline(content, line);
 
             pos = line.find('=');

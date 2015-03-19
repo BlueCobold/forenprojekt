@@ -6,6 +6,9 @@
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#ifdef IOS
+#include <SFML/System/Vector3.hpp>
+#endif
 
 #include <algorithm>
 #include <vector>
@@ -40,7 +43,11 @@ namespace utility
     class MouseWrapper
     {
     public:
-        MouseWrapper() : m_leftPressed(false)
+        MouseWrapper() : m_leftPressed(false),
+#ifdef IOS
+            m_sensorsEnabled(false),
+#endif
+            m_leftDown(false)
         {
             capture();
         }
@@ -52,6 +59,7 @@ namespace utility
 #ifdef IOS
         void notifyTouch(const sf::Vector2i& pos);
         const sf::Vector2i& getTouchPosition() const;
+        const sf::Vector3f& getAcceleration() const;
 #endif
         void capture();
 
@@ -75,9 +83,17 @@ namespace utility
 
         bool isCursorVisible() const;
 
+#ifdef IOS
+        void enableSensors(bool enabled);
+#endif
+
     private:
 #ifdef IOS
         sf::Vector2i m_touchPosition;
+        sf::Vector3f m_lastAcceleration;
+        sf::Vector3f m_currentAcceleration;
+        sf::Vector3f m_acceleration;
+        bool m_sensorsEnabled;
 #endif
         bool m_cursorVisible;
         bool m_leftDown;

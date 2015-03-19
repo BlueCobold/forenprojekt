@@ -23,7 +23,7 @@ public:
 
     virtual float getValue() override
     {
-        float v;
+        float v = 0.0f;
         bool set = false;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
             if(!set)

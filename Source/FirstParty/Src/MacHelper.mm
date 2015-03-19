@@ -48,6 +48,22 @@ std::string resourcePathMac()
     return path;
 }
 
+#ifdef IOS
+float iosContentScaleFactor()
+{
+    static bool inited = false;
+    static float scaleFactor = 1;
+    if(!inited)
+    {
+        id data = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSHighResolutionCapable"];
+        if(data && [data boolValue])
+            scaleFactor = [[UIScreen mainScreen] scale];
+        inited = true;
+    }
+    return scaleFactor;
+}
+#endif
+
 void showErrorMac(const std::string& msg)
 {
 #ifdef IOS

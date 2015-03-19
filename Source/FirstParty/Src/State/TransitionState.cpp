@@ -4,16 +4,22 @@
 #include "../rendering/transitions/RandomTransition.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <cmath>
 
 TransitionState::TransitionState(sf::RenderWindow& screen,
                                  ResourceManager& resourceManager, 
                                  AppConfig& config) :
     State(screen, resourceManager, config)
 {
+    auto desktopMode = sf::VideoMode::getDesktopMode();
+    auto size = desktopMode.width > desktopMode.height ? desktopMode.width : desktopMode.height;
+    auto powerOfTwo = static_cast<int>(pow(2, static_cast<int>(log2(size))));
+    if(powerOfTwo < size)
+        powerOfTwo = static_cast<int>(pow(2, 1 + static_cast<int>(log2(size))));
     // BUG: the PC might not be able to handle this size!
     // we still need a texture as big as possible to handle screen-size-changes during the gameplay
-    bool s = m_sourceImage.create(1920, 1080, true);
-    s = m_targetImage.create(1920, 1080, true);
+    bool s = m_sourceImage.create(powerOfTwo, powerOfTwo, true);
+    s = m_targetImage.create(powerOfTwo, powerOfTwo, true);
 }
 
 TransitionState::~TransitionState()

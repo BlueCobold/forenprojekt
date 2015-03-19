@@ -20,7 +20,7 @@ bool SpriteSheet::loadFromFile(const std::string& filename)
     m_fileName = filename;
 
     tinyxml2::XMLDocument doc;
-    doc.LoadFile(filename.c_str());
+    doc.LoadFile(m_fileName.c_str());
     if(doc.Error())
     {
         doc.PrintError();

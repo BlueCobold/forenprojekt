@@ -83,7 +83,7 @@ void Level::load()
     // Separate the lines for easier processing
     std::vector<std::string> lines = LevelFileLoader::parseGrid(grid);
 
-    for(unsigned int row = 0; row < lines.size(); ++row)
+    for(auto row = 0; row < lines.size(); ++row)
         for(std::size_t column = 0; column < lines[row].length(); column += 2)
         {
             std::string name = lines[row].substr(column, 2);
@@ -951,7 +951,7 @@ void Level::praseSingleRevoluteJoint(tinyxml2::XMLElement* jointXml, Entity* ent
     if(auto value = jointXml->FloatAttribute("ccwlimit"))
         jointDef.upperAngle = value / 360.f * b2_pi;
 
-    if(jointDef.upperAngle =! 0 || jointDef.lowerAngle != 0)
+    if(jointDef.upperAngle != 0 || jointDef.lowerAngle != 0)
         jointDef.enableLimit = true;
     // load motor data
     if(auto motor = jointXml->FirstChildElement("motor"))

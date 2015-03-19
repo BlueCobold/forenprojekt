@@ -1,6 +1,13 @@
 
 #include "Input.hpp"
 
+//#include "Utility.hpp"
+
+#ifdef IOS
+#include "MacHelper.hpp"
+#include <SFML/Window/Sensor.hpp>
+#endif
+
 namespace utility
 {
     MouseWrapper Mouse;
@@ -60,6 +67,11 @@ namespace utility
     {
         return m_touchPosition;
     }
+    
+    const sf::Vector3f& MouseWrapper::getAcceleration() const
+    {
+        return m_currentAcceleration;
+    }
 #endif
 
     void MouseWrapper::startInterpolation(const sf::Window& relativeTo)
@@ -72,9 +84,13 @@ namespace utility
 
     void MouseWrapper::interpolate(int steps, int current)
     {
+        auto percent = static_cast<float>(current) / steps;
         m_position = sf::Vector2f(
-            m_lastPosition.x + (m_totalPosition.x - m_lastPosition.x) * static_cast<float>(current) / steps,
-            m_lastPosition.y + (m_totalPosition.y - m_lastPosition.y) * static_cast<float>(current) / steps);
+            m_lastPosition.x + (m_totalPosition.x - m_lastPosition.x) * percent,
+            m_lastPosition.y + (m_totalPosition.y - m_lastPosition.y) * percent);
+#ifdef IOS
+        m_currentAcceleration = m_lastAcceleration + (m_acceleration - m_lastAcceleration) * percent;
+#endif
     }
 
     void MouseWrapper::capture()
@@ -91,6 +107,15 @@ namespace utility
 
         m_mouseWheelDown = false;
         m_mouseWheelUp = false;
+        
+#ifdef IOS
+        if(m_sensorsEnabled && sf::Sensor::isAvailable(sf::Sensor::Accelerometer))
+        {
+            sf::Sensor::setEnabled(sf::Sensor::Accelerometer, true);
+            m_lastAcceleration = m_acceleration;
+            m_acceleration = sf::Sensor::getValue(sf::Sensor::Accelerometer);
+        }
+#endif
     }
 
     void MouseWrapper::notifyButtonPressed(sf::Mouse::Button button)
@@ -162,4 +187,11 @@ namespace utility
     {
         return m_cursorVisible;
     }
+
+#ifdef IOS
+    void MouseWrapper::enableSensors(bool enabled)
+    {
+        m_sensorsEnabled = enabled;
+    }
+#endif
 }

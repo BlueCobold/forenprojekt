@@ -17,6 +17,10 @@
 #include <sstream>
 #include <string>
 
+#ifdef IOS
+#include "MacHelper.hpp"
+#endif
+
 namespace utility
 {
     static const float PIXEL_PER_METER = 10.f;

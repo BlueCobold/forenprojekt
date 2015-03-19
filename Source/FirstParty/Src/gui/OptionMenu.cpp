@@ -134,6 +134,7 @@ void OptionMenu::applyChanges()
 
 void OptionMenu::adjustVideoMode(sf::VideoMode& mode, bool fullScreen)
 {
+#ifndef RETINA
     // Ensure minimas and maximas
     if(mode.width > 1920)
         mode.width = 1920;
@@ -144,6 +145,7 @@ void OptionMenu::adjustVideoMode(sf::VideoMode& mode, bool fullScreen)
         mode.height = 1080;
     else if(mode.height < 600)
         mode.height = 600;
+#endif
 
     // Validity of resolution is only important in fullscreen mode
     if(fullScreen && !mode.isValid())
@@ -153,8 +155,11 @@ void OptionMenu::adjustVideoMode(sf::VideoMode& mode, bool fullScreen)
 
         for(std::size_t i = 1; i < modes.size(); ++i)
         {
-            if(modes[i].width < mode.width && modes[i].height < mode.height &&
-                modes[i-1].width <= 1920 && modes[i-1].height <= 1080)
+            if(modes[i].width < mode.width && modes[i].height < mode.height
+#ifndef RETINA
+               && modes[i-1].width <= 1920 && modes[i-1].height <= 1080
+#endif
+               )
             {
                 mode = modes[i-1];
                 break;
@@ -163,10 +168,10 @@ void OptionMenu::adjustVideoMode(sf::VideoMode& mode, bool fullScreen)
     }
     else if(!fullScreen)
     {
-        if(mode.width > sf::VideoMode::getDesktopMode().width)
-            mode.width = sf::VideoMode::getDesktopMode().width;
-        if(mode.height > sf::VideoMode::getDesktopMode().height)
-            mode.height = sf::VideoMode::getDesktopMode().height;
+//        if(mode.width > sf::VideoMode::getDesktopMode().width)
+//            mode.width = sf::VideoMode::getDesktopMode().width;
+//        if(mode.height > sf::VideoMode::getDesktopMode().height)
+//            mode.height = sf::VideoMode::getDesktopMode().height;
     }
 }
 
@@ -239,8 +244,10 @@ void OptionMenu::prevVideoMode()
 
 bool OptionMenu::acceptableVideoMode(const sf::VideoMode videoMode)
 {
+#ifndef RETINA
     if(videoMode.width > 1920 || videoMode.width < 800 || videoMode.height > 1080 || videoMode.height < 600)
         return false;
+#endif
 
     return true;
 }

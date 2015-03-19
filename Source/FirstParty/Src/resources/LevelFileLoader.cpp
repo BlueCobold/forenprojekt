@@ -95,7 +95,7 @@ void LevelFileLoader::parseColorController(
 {
     std::unique_ptr<ValueProvider> red, green, blue, alpha, tmp;
     tinyxml2::XMLElement* static_color_element = xml->FirstChildElement("color");
-    const char* value;
+    const char* value = nullptr;
     while(static_color_element && !(value = static_color_element->Attribute("value")))
         static_color_element = static_color_element->NextSiblingElement("color");
 
@@ -303,6 +303,9 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         else if(std::string("mul") == blend)
             mode = sf::BlendMultiply;
 #ifdef IOS
+        else if(std::string("premul") == blend)
+            mode = sf::BlendMode(sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha);
+#elif OSX
         else if(std::string("premul") == blend)
             mode = sf::BlendMode(sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha);
 #else
