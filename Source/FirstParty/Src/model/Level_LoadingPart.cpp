@@ -83,7 +83,7 @@ void Level::load()
     // Separate the lines for easier processing
     std::vector<std::string> lines = LevelFileLoader::parseGrid(grid);
 
-    for(auto row = 0; row < lines.size(); ++row)
+    for(size_t row = 0; row < lines.size(); ++row)
         for(std::size_t column = 0; column < lines[row].length(); column += 2)
         {
             std::string name = lines[row].substr(column, 2);
