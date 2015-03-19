@@ -12,10 +12,12 @@ TransitionState::TransitionState(sf::RenderWindow& screen,
     State(screen, resourceManager, config)
 {
     auto desktopMode = sf::VideoMode::getDesktopMode();
-    auto size = desktopMode.width > desktopMode.height ? desktopMode.width : desktopMode.height;
-    auto powerOfTwo = static_cast<int>(pow(2, static_cast<int>(log2(size))));
+    auto size = static_cast<int>(desktopMode.width > desktopMode.height ?
+        desktopMode.width : desktopMode.height);
+    auto powerOfTwo = static_cast<int>(powf(2.f,
+        floorf(logf(static_cast<float>(size))/logf(2.f))));
     if(powerOfTwo < size)
-        powerOfTwo = static_cast<int>(pow(2, 1 + static_cast<int>(log2(size))));
+        powerOfTwo *= 2;
     // BUG: the PC might not be able to handle this size!
     // we still need a texture as big as possible to handle screen-size-changes during the gameplay
     bool s = m_sourceImage.create(powerOfTwo, powerOfTwo, true);

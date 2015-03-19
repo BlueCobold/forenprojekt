@@ -32,8 +32,8 @@ void Teeter::adaptToMouse()
 
 void Teeter::update(const float value)
 {
-    auto velocity  = 0;
-    auto angle = utility::toDegree<float,float>(getAngle());
+    auto velocity = 0.f;
+    auto angle = utility::toDegree<float, float>(getAngle());
     auto timeDiff = value - m_lastTime;
 
 #ifdef IOS
