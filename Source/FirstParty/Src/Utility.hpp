@@ -93,6 +93,7 @@ namespace utility
 
     std::string translateKey(std::string key);
 
+    std::string replace(std::string string, std::string needle, std::string replacement);
     std::string replace(std::string string, std::string replacement);
 
     sf::View getDefaultView(const sf::RenderTarget& target, const sf::Vector2f viewSize);

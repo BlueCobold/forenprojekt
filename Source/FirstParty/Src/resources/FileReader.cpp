@@ -1,5 +1,6 @@
 #include "FileReader.hpp"
 #include "PathHelper.hpp"
+#include "Utility.hpp"
 
 #include <algorithm>
 
@@ -53,8 +54,22 @@ void FileReader::set(const std::string& key, const std::string& value)
 
 void FileReader::readFile()
 {
+#if IOS
+    std::ifstream configFile(documentPath() + utility::replace(m_fileName, "/", "_"), std::ios_base::in);
+    if(!configFile.good())
+    {
+        configFile.close();
+        configFile.open(resourcePath() + m_fileName, std::ios::binary);
+        std::ofstream copy(documentPath() + utility::replace(m_fileName, "/", "_"), std::ios::binary);
+        copy << configFile.rdbuf();
+        copy.close();
+        configFile.close();
+        configFile.open(documentPath() + utility::replace(m_fileName, "/", "_"), std::ios_base::in);
+    }
+#else
     // Open file
     std::ifstream configFile(resourcePath() + m_fileName, std::ios_base::in);
+#endif
 
     if(configFile.is_open())
     {

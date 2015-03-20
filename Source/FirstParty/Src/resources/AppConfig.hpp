@@ -20,6 +20,7 @@ public:
     template<typename T>
     void set(const std::string& key, const T& value);
 
+    void save();
 };
 
 template<typename T>

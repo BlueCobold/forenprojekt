@@ -9,3 +9,9 @@ m_stash(stash)
 AppConfig::~AppConfig()
 {
 }
+
+void AppConfig::save()
+{
+    m_config.save();
+    m_stash.save();
+}

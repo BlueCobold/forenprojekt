@@ -191,6 +191,12 @@ void App::handleEvents()
         {
             m_event.m_eventType = utility::Event::LostFocus;
             m_focus = false;
+#if IOS
+            // The app might never return due to the user closing the app which causes
+            // a sigkill and thus destructors will not be called.
+            // So better save now than losing everything in the process.
+            m_config.save();
+#endif
         }
         else if(event.type == sf::Event::GainedFocus)
         {
