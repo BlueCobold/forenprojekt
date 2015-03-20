@@ -27,6 +27,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderOptions.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/System.hpp>
 
 #include <sstream>
 #include <utility> // move
@@ -127,6 +128,13 @@ void App::update()
 
 void App::draw()
 {
+#if IOS
+    if(!m_focus) {
+        sf::sleep(sf::milliseconds(10));
+        return;
+    }
+#endif
+
 #ifdef _DEBUG
     if(utility::Keyboard.isKeyPressed(sf::Keyboard::Z))
         m_screen.clear();
@@ -174,7 +182,7 @@ void App::handleEvents()
     m_event.m_eventType = utility::Event::NoEvent;
 
     utility::Keyboard.progress();
-    while(m_screen.pollEvent(event))
+    while(m_screen.isOpen() && m_screen.pollEvent(event))
     {
         // Close the window
         if(event.type == sf::Event::Closed)
