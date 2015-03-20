@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
     sf::err() << "=== Rickety Racquet closing ===" << std::endl;
     if(previous)
         sf::err().rdbuf(previous);
-    if (file.is_open())
+    if(file.is_open())
         file.close();
 
     return 0;

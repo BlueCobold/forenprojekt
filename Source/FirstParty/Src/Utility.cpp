@@ -43,16 +43,16 @@ namespace utility
         static FileReader File("res/language.dat", true);
         return File.get(key);
     }
-    
+
     std::string replace(std::string string, std::string needle, std::string replacement)
     {
         auto pos = string.find(needle);
         if(pos != std::string::npos)
             string.replace(pos, needle.length(), replacement);
-        
+
         return string;
     }
-    
+
     std::string replace(std::string string, std::string replacement)
     {
         auto pos = string.find("%");

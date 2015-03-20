@@ -129,7 +129,8 @@ void App::update()
 void App::draw()
 {
 #if IOS
-    if(!m_focus) {
+    if(!m_focus)
+    {
         sf::sleep(sf::milliseconds(10));
         return;
     }
