@@ -62,6 +62,19 @@ float iosContentScaleFactor()
     }
     return scaleFactor;
 }
+
+std::string documentPathIos()
+{
+    std::string path;
+    @autoreleasepool
+    {
+        if(NSString* dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0])
+            path = [dir UTF8String] + std::string("/");
+        else
+            return "";
+    }
+    return path;
+}
 #endif
 
 void showErrorMac(const std::string& msg)

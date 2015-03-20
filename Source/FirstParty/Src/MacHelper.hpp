@@ -20,6 +20,8 @@ void showErrorMac(const std::string& msg);
 
 #ifdef IOS
 float iosContentScaleFactor();
+
+std::string documentPathIos();
 #endif
 
 #endif // RicketyRacquet_MacHelper_hpp

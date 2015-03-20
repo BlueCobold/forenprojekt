@@ -1,6 +1,9 @@
 #include "App.hpp"
 #include "resources/AppConfig.hpp"
 #include "gui/ErrorMessageBox.hpp"
+
+#include <SFML/System.hpp>
+
 #include <iostream>
 
 #ifndef WINDOWS
@@ -19,8 +22,18 @@ int sfmlMain(int argc, char* argv[])
 int main(int argc, char* argv[])
 #endif
 {
+    std::ofstream file;
+    std::streambuf* previous = nullptr;
     try
     {
+#if IOS
+        file.open("error-log.txt");
+#else
+        file.open(documentPath() + "error-log.txt");
+#endif
+        previous = sf::err().rdbuf(file.rdbuf());
+        sf::err() << "=== Rickety Racquet starting ===" << std::endl;
+
         AppConfig configFile("Config.ini", "stash.dat");
         App app(configFile);
         app.run();
@@ -37,5 +50,11 @@ int main(int argc, char* argv[])
 #endif
         return 1;
     }
+    sf::err() << "=== Rickety Racquet closing ===" << std::endl;
+    if(previous)
+        sf::err().rdbuf(previous);
+    if (file.is_open())
+        file.close();
+
     return 0;
 }

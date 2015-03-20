@@ -20,3 +20,12 @@ std::string resourcePath()
     return resourcePathMac();
 #endif
 }
+
+std::string documentPath()
+{
+#ifdef IOS
+    return documentPathIos();
+#else
+    return resourcePath();
+#endif
+}

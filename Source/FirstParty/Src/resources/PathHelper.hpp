@@ -13,4 +13,6 @@
 
 std::string resourcePath();
 
+std::string documentPath();
+
 #endif
