@@ -28,7 +28,7 @@
 	<texture name="guiMisc" path="gui/misc.png" smooth="false" />
 	<texture name="sparkles" path="assets/misc/sparkles.png" smooth="false" />
 	<texture name="GuiElements" path="gui/gui_elements.png" smooth="false" />
-	<texture name="Window" path="gui/window.png" smooth="false" />
+	<texture name="Window" path="gui/Window.png" smooth="false" />
 	<texture name="goodie" path="gui/Goodies.png" smooth="true" />
 	<texture name="walls" path="assets/walls.png" smooth="true" />
 	<texture name="norT" path="assets/norT.png" smooth="true" />
@@ -53,7 +53,7 @@
 	<menu name="LevelSelectMenu" path="LevelSelectMenu.xml" />
 	<menu name="CoinShopMenu" path="CoinMenu.xml" />
 	<menu name="HighScoreMenu" path="HighScoreMenu.xml" />
-	<menu name="NewHighScoreMenu" path="NewHighScoreMenu.xml" />
+	<menu name="NewHighScoreMenu" path="newHighScoreMenu.xml" />
 	<menu name="KeyboardMenu" path="KeyboardMenu.xml" />
 	<menu name="GameFinishedMenu" path="GameFinishedMenu.xml" />
 </menus>
