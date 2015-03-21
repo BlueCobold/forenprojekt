@@ -166,28 +166,13 @@
     <ClInclude Include="..\..\Src\gui\CheckboxStyle.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\gui\CoinShopMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\gui\CreditMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\gui\Cursor.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\gui\ErrorMessageBox.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\gui\FailMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\gui\FPSCounter.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\gui\GameFinishedMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\gui\HighScoreMenu.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\gui\InputBox.hpp">
@@ -196,19 +181,7 @@
     <ClInclude Include="..\..\Src\gui\InputBoxStyle.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\gui\KeyboardMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\gui\LevelPreviewMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\gui\LevelSelectMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\gui\LineLabel.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\gui\MainMenu.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\gui\Menu.hpp">
@@ -224,18 +197,6 @@
       <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\gui\MenuTemplate.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\gui\NewHighScoreMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\gui\OptionMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\gui\PauseMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Src\gui\ReplayMenu.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\gui\Slider.hpp">
@@ -565,6 +526,45 @@
     <ClInclude Include="..\..\Src\model\joint\SingleRevoluteJoint.hpp">
       <Filter>Headers\model\joint</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\gui\CoinShopMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\CreditMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\FailMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\GameFinishedMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\HighScoreMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\KeyboardMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\LevelPreviewMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\LevelSelectMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\MainMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\NewHighScoreMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\OptionMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\PauseMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\ReplayMenu.hpp">
+      <Filter>Headers\gui\menus</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -653,6 +653,9 @@
     </Filter>
     <Filter Include="Sources\rendering\transitions">
       <UniqueIdentifier>{dafee3bd-2f74-4c28-84de-e0c4d161420c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\gui\menus">
+      <UniqueIdentifier>{d8cd90ab-3fca-433a-938a-73c1f4169880}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -759,9 +762,6 @@
     <ClCompile Include="..\..\Src\gui\hud\ArrowHUD.cpp">
       <Filter>Sources\gui\hud</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\gui\CaptionMenu.cpp">
-      <Filter>Sources\gui\menus</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\gui\CoinShopMenu.cpp">
       <Filter>Sources\gui\menus</Filter>
     </ClCompile>
@@ -787,9 +787,6 @@
       <Filter>Sources\gui\menus</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\MainMenu.cpp">
-      <Filter>Sources\gui\menus</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\gui\Menu.cpp">
       <Filter>Sources\gui\menus</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\NewHighScoreMenu.cpp">
@@ -1013,6 +1010,12 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\Utility.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\Menu.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\CaptionMenu.cpp">
+      <Filter>Sources\gui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

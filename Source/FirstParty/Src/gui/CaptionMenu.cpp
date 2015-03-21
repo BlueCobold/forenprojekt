@@ -20,13 +20,13 @@ void CaptionMenu::drawAdditionalBackground(const DrawParameter& params)
     m_caption.draw(params);
 }
 
-void CaptionMenu::setPosition(const sf::Vector2f& offset,
-                              float horizontalPercentage,
-                              float verticalPercentage)
+void CaptionMenu::setPosition(const sf::Vector2f& relativePosition,
+                              const sf::Vector2f& offset)
 {
-    Menu::setPosition(offset, horizontalPercentage, verticalPercentage);
+    Menu::setPosition(relativePosition, offset);
 
-    m_caption.setPosition(sf::Vector2f(getSize().x * horizontalPercentage, getSize().y * verticalPercentage) + offset);
+    m_caption.setPosition(sf::Vector2f(getSize().x * relativePosition.x,
+                                       getSize().y * relativePosition.y) + offset);
 }
 
 void CaptionMenu::setCaption(const std::string& caption)

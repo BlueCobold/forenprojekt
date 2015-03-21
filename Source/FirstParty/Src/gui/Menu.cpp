@@ -17,17 +17,15 @@ const float Menu::Left = 0.0f;
 const float Menu::Right = 1.0f;
 const float Menu::Center= 0.5f;
 const float Menu::Top = 0.0f;
-const float Menu::Middle = 0.5f;
 const float Menu::Bottom = 1.0f;
 
 Menu::Menu(MenuTemplate& menuTemplate,
            sf::RenderWindow& screen) :
+           m_position(menuTemplate.relativePosition),
            m_offset(menuTemplate.menuOffset),
            m_screen(&screen),
-           m_horizontalPercentage(menuTemplate.horizontalPercentage),
-           m_verticalPercentage(menuTemplate.verticalPercentage),
-           m_currentPosition(sf::Vector2f(screen.getSize().x * menuTemplate.horizontalPercentage, 
-                                          screen.getSize().y * menuTemplate.verticalPercentage) + menuTemplate.menuOffset),
+           m_currentPosition(sf::Vector2f(screen.getSize().x * menuTemplate.relativePosition.x, 
+                                          screen.getSize().y * menuTemplate.relativePosition.y) + menuTemplate.menuOffset),
            m_panel(menuTemplate.menuElements, m_currentPosition)
            
 {
@@ -51,15 +49,13 @@ const sf::Vector2i& Menu::getSize() const
     return m_size;
 }
 
-void Menu::setPosition(const sf::Vector2f& offset,
-                       float horizontalPercentage,
-                       float verticalPercentage)
+void Menu::setPosition(const sf::Vector2f& relativePosition,
+                       const sf::Vector2f& offset)
 {
     m_offset = offset;
-    m_verticalPercentage = verticalPercentage;
-    m_horizontalPercentage = horizontalPercentage;
-    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_horizontalPercentage, 
-                                     m_screen->getSize().y * m_verticalPercentage) + m_offset;
+    m_position = relativePosition;
+    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_position.x, 
+                                     m_screen->getSize().y * m_position.y) + m_offset;
 
     m_template.background.setPosition(m_currentPosition);
     m_panel.setPosition(m_currentPosition);
@@ -91,8 +87,8 @@ void Menu::update(sf::RenderWindow& screen, const float time)
 {
     m_screen = &screen;
 
-    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_horizontalPercentage, 
-                                     m_screen->getSize().y * m_verticalPercentage) + m_offset;
+    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_position.x, 
+                                     m_screen->getSize().y * m_position.y) + m_offset;
 
     updateLayout();
     m_panel.update(screen, time);
@@ -102,8 +98,8 @@ void Menu::update(sf::RenderWindow& screen, const float time, const MenuElementT
 {
     m_screen = &screen;
 
-    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_horizontalPercentage, 
-                                     m_screen->getSize().y * m_verticalPercentage) + m_offset;
+    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_position.x, 
+                                     m_screen->getSize().y * m_position.y) + m_offset;
 
     updateLayout();
     m_panel.update(screen, time, type);
@@ -183,8 +179,8 @@ InputBox& Menu::getInputBox(int id) const
 
 void Menu::updateLayout()
 {
-    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_horizontalPercentage, 
-                                     m_screen->getSize().y * m_verticalPercentage) + m_offset;
+    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_position.x, 
+                                     m_screen->getSize().y * m_position.y) + m_offset;
     m_template.background.setPosition(m_currentPosition);
     m_panel.updateLayout(m_currentPosition);
 }

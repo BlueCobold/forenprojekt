@@ -63,14 +63,14 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
 
     if(auto position = menuXml->FirstChildElement("position"))
     {
-        menu.horizontalPercentage = position->FloatAttribute("horizontalpercentage");
-        menu.verticalPercentage = position->FloatAttribute("verticalpercentage");
-        menu.menuOffset = sf::Vector2f(position->FloatAttribute("offsetx"), position->FloatAttribute("offsety"));
+        menu.relativePosition = sf::Vector2f(position->FloatAttribute("horizontalpercentage"),
+                                             position->FloatAttribute("verticalpercentage"));
+        menu.menuOffset = sf::Vector2f(position->FloatAttribute("offsetx"),
+                                       position->FloatAttribute("offsety"));
     }
     else
     {
-        menu.horizontalPercentage = 0;
-        menu.verticalPercentage = 0;
+        menu.relativePosition = sf::Vector2f(0, 0);
         menu.menuOffset = sf::Vector2f(0, 0);
     }
 
