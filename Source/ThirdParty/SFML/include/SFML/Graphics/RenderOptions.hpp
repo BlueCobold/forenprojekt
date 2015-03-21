@@ -7,4 +7,4 @@ namespace sfExt
     extern bool StencilBufferEnabled;
 }
 
-#endif SFML_EXTENSION_HPP
+#endif //SFML_EXTENSION_HPP

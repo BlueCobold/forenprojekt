@@ -302,16 +302,8 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
             mode = sf::BlendAdd;
         else if(std::string("mul") == blend)
             mode = sf::BlendMultiply;
-#ifdef IOS
         else if(std::string("premul") == blend)
             mode = sf::BlendMode(sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha);
-#elif OSX
-        else if(std::string("premul") == blend)
-            mode = sf::BlendMode(sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha);
-#else
-        else if(std::string("premul") == blend)
-            mode = sf::BlendPremultiplied;
-#endif
         anim->setBlending(mode);
     }
 
