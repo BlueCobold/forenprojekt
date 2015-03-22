@@ -1232,8 +1232,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "4763ce1b-2129-471a-9988-86adb6be6482";
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "74602901-4215-4e06-a1e2-c622c31b9216";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "$(ARCHS)";
@@ -1283,7 +1283,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "4763ce1b-2129-471a-9988-86adb6be6482";
+				PROVISIONING_PROFILE = "74602901-4215-4e06-a1e2-c622c31b9216";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -1321,7 +1321,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../../../../SFML-ios/extlibs/libs-ios",
-					"$(SRCROOT)/../../../../libjpeg-turbo-codelibjpeg-turbo-code/build",
+					"$(SRCROOT)/../../../../libjpeg-turbo-code/build",
 					"$(SRCROOT)/../../ThirdParty/lib-ios",
 				);
 				ONLY_ACTIVE_ARCH = NO;
