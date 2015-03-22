@@ -33,6 +33,8 @@
 
 #include <tinyxml2.h>
 
+#include <algorithm>
+
 void Level::load()
 {
     if(m_number == 0) // Level start from 1
@@ -430,6 +432,21 @@ bool Level::validate(const tinyxml2::XMLDocument& document)
     return tagCheck;
 }
 
+// Helper function to compute the area of a given polygon
+float computeArea(const std::vector<b2Vec2>& vertices)
+{
+    auto area = 0.0f;
+    b2Vec2 origin(0.0f, 0.0f);
+    for(int32 i = 0; i < vertices.size(); ++i)
+    {
+        b2Vec2 d1 = vertices[i] - origin;
+        b2Vec2 d2 = vertices[(i + 1) % vertices.size()] - origin;
+
+        area += 0.5f * b2Cross(d1, d2);
+    }
+    return area;
+}
+
 void Level::parsePhysics(tinyxml2::XMLElement* physic,
     tinyxml2::XMLElement* shape,
     Entity* entity,
@@ -473,6 +490,11 @@ void Level::parsePhysics(tinyxml2::XMLElement* physic,
             }
             // Construct the b2Shape
             std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
+            float area = computeArea(vertices);
+            // If the area is negative, the polygon is either messed up or defined in wrong order.
+            // A wrong order can be fixed by simply reversing all given vertices.
+            if (area < 0)
+                std::reverse(begin(vertices), end(vertices));
             ps->Set(vertices.data(), vertices.size());
             shapes.push_back(std::move(ps));
         }
