@@ -17,6 +17,7 @@ Ball::Ball(float resetTime, float stuckBallSpeed, const Entity* spawnAnimationEn
     m_stuckBallTime(5.f)
 { 
     Entity::setValueOf("hitTeeterTime", 0.f);
+    Entity::setValueOf("stuckBallTimer", 0.f);
     bindKillAnimationEntity(killAnimationEntity);
 }
 
@@ -70,6 +71,7 @@ void Ball::autoResetBall(const float elapsedTime)
         getBody()->SetAngularVelocity(0.0f);
         m_isStucking = false;
         Entity::setValueOf("hitTeeterTime", elapsedTime);
+        Entity::setValueOf("stuckBallTimer", elapsedTime);
     }
 }
 
@@ -105,16 +107,19 @@ void Ball::update(const float value)
             m_trail->moveTo(getPosition().x, getPosition().y);
     }
 
-    if(m_stuckBallSpeed > 0 && getPassedTime() > Entity::getValueOf("hitTeeterTime") + m_stuckBallTime)
+    if(m_stuckBallSpeed < getBody()->GetLinearVelocity().Length())
+        Entity::setValueOf("stuckBallTimer", getPassedTime());
+
+    if(getPassedTime() > Entity::getValueOf("hitTeeterTime") + m_stuckBallTime &&
+       getPassedTime() > Entity::getValueOf("stuckBallTimer") + m_stuckBallTime)
         m_isStucking = true;
 
     autoResetBall(value);
 
     Entity::update(value);
+
     if(m_trail != nullptr)
-    {
         m_trail->update();
-    }
 }
 
 float Ball::getValueOf(const std::string& name) const
