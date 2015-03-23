@@ -113,7 +113,7 @@ public:
     {
         if(m_useValuesFromA)
         {
-            if (m_entityA == nullptr)
+            if(m_entityA == nullptr)
                 throw std::runtime_error(utility::replace(utility::translateKey("ReceiveAngle"), "entity"));
             return m_entityA->getAngle();
         }

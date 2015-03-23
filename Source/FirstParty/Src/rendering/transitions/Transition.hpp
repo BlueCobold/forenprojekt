@@ -34,7 +34,7 @@ public:
     virtual void update()
     {
         TimedObject::updateCurrentTime(m_frameTime.getElapsedTime().asSeconds());
-        if (getPassedTime() > m_duration)
+        if(getPassedTime() > m_duration)
             m_isFinished = true;
     }
 
@@ -45,7 +45,7 @@ protected:
     const float getProgress() const
     {
         float elapsed = getPassedTime();
-        if (elapsed > m_duration)
+        if(elapsed > m_duration)
             return 1.f;
         return elapsed / m_duration;
     }

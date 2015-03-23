@@ -93,7 +93,7 @@ StateChangeInformation HighScoreState::update(const float time)
     else if(m_onlineHighscore && m_onlineHighscoreLoaderJob->isLoading() && !m_onlineHighscoreLoaderJob->isLoaded())
     {
         int step = static_cast<int>(getPassedTime() * 2) % 4;
-        for (int i = 0; i < step; ++i)
+        for(int i = 0; i < step; ++i)
             text.append(".");
         m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText(text);
     }

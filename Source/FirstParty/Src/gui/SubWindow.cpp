@@ -107,7 +107,7 @@ void SubWindow::update(const sf::RenderWindow& screen, const float time, const s
         scroll = 15;
     else if(mouseRect.contains(cursorPosition) && utility::Mouse.isWheelMovedUp())
         scroll = -15;
-    if (scroll != 0)
+    if(scroll != 0)
     {
         float y = m_positionRect.getPosition().y + ceilf(windowPixelToSliderPixel(scroll));
         if(y < getPosition().y + getOffset().y)

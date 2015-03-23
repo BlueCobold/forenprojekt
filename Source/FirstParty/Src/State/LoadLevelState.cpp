@@ -86,7 +86,7 @@ StateChangeInformation LoadLevelState::update(const float time)
         m_levelLoaderJob->run();
 
     
-    for (int i = 0;i < step;++i)
+    for(int i = 0; i < step; ++i)
         text.append(".");
 
     m_label.setText(text);

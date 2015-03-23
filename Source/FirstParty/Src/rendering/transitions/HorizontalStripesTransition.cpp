@@ -9,7 +9,7 @@ HorizontalStripesTransition::HorizontalStripesTransition(
     const sf::Vector2u& size) :
     Transition(sourceTexture, targetTexture, duration, size)
 {
-    if (targetTexture != nullptr)
+    if(targetTexture != nullptr)
     {
         m_stripeHeight = size.y / stripeCount;
         for(int i = 0; i < stripeCount; ++i)
@@ -21,7 +21,7 @@ HorizontalStripesTransition::HorizontalStripesTransition(
     }
     else
         throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "HorizontalStripesTransition"));
-    if (sourceTexture != nullptr)
+    if(sourceTexture != nullptr)
     {
         m_sourceSprite.setTexture(*sourceTexture, true);
         m_sourceSprite.setPosition(0, 0);
@@ -42,9 +42,9 @@ void HorizontalStripesTransition::update()
 
 void HorizontalStripesTransition::draw(const DrawParameter& param)
 {
-    if (getSourceTexture() != nullptr)
+    if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);
-    if (getTargetTexture() != nullptr)
+    if(getTargetTexture() != nullptr)
     {
         for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)
         {

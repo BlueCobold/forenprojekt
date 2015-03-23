@@ -52,12 +52,12 @@ std::vector<sf::Vector2i> parseValueList(tinyxml2::XMLElement* xml, const std::s
 
     std::istringstream tokens(xxml->GetText());
     std::string token;
-    while (std::getline(tokens, token, ','))
+    while(std::getline(tokens, token, ','))
         result.push_back(sf::Vector2i(utility::stringTo<int>(token), 0));
 
     tokens = std::istringstream(yxml->GetText());
     size_t i = 0;
-    while (std::getline(tokens, token, ','))
+    while(std::getline(tokens, token, ','))
     {
         if(i > result.size())
             throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), y));
@@ -77,7 +77,7 @@ void parseSpriteValueList(const tinyxml2::XMLElement* xml,
 {
     std::istringstream tokens(xml->GetText());
     std::string token;
-    while (std::getline(tokens, token, ','))
+    while(std::getline(tokens, token, ','))
     {
         auto sprite = sheet->get(token);
         src.push_back(sf::Vector2i(sprite.x, sprite.y));
@@ -345,7 +345,7 @@ std::vector<float> parseFloatList(const std::string& valueString)
     std::vector<float> results;
     std::stringstream ss(valueString);
     std::string item;
-    while (std::getline(ss, item, ','))
+    while(std::getline(ss, item, ','))
         results.push_back(utility::stringTo<float>(item));
     return results;
 }
