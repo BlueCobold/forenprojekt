@@ -943,23 +943,23 @@ void Level::parseJoints(tinyxml2::XMLElement* joints, Entity* entity)
     for(auto jointXml = joints->FirstChildElement("singleRevolute");
         jointXml != nullptr; jointXml = jointXml->NextSiblingElement("singleRevolute"))
     {
-        praseSingleRevoluteJoint(jointXml, entity);
+        parseSingleRevoluteJoint(jointXml, entity);
     }
 
     for(auto jointXml = joints->FirstChildElement("singlePrismatic");
         jointXml != nullptr; jointXml = jointXml->NextSiblingElement("singlePrismatic"))
     {
-        praseSinglePrismaticJoint(jointXml, entity);
+        parseSinglePrismaticJoint(jointXml, entity);
     }
 
     for(auto jointXml = joints->FirstChildElement("singleDistance");
         jointXml != nullptr; jointXml = jointXml->NextSiblingElement("singleDistance"))
     {
-        praseSingleDistanceJoint(jointXml, entity);
+        parseSingleDistanceJoint(jointXml, entity);
     }
 }
 
-void Level::praseSingleRevoluteJoint(tinyxml2::XMLElement* jointXml, Entity* entity)
+void Level::parseSingleRevoluteJoint(tinyxml2::XMLElement* jointXml, Entity* entity)
 {
     b2RevoluteJointDef jointDef;
 
@@ -986,7 +986,7 @@ void Level::praseSingleRevoluteJoint(tinyxml2::XMLElement* jointXml, Entity* ent
     entity->addJoint(std::unique_ptr<SingleRevoluteJoint>(new SingleRevoluteJoint(&m_world, jointDef, entity->getBody())));
 }
 
-void Level::praseSinglePrismaticJoint(tinyxml2::XMLElement* jointXml, Entity* entity)
+void Level::parseSinglePrismaticJoint(tinyxml2::XMLElement* jointXml, Entity* entity)
 {
     b2PrismaticJointDef jointDef;
 
@@ -1018,7 +1018,7 @@ void Level::praseSinglePrismaticJoint(tinyxml2::XMLElement* jointXml, Entity* en
     entity->addJoint(std::unique_ptr<SinglePrismaticJoint>(new SinglePrismaticJoint(&m_world, jointDef, entity->getBody(), direction)));
 }
 
-void Level::praseSingleDistanceJoint(tinyxml2::XMLElement* jointXml, Entity* entity)
+void Level::parseSingleDistanceJoint(tinyxml2::XMLElement* jointXml, Entity* entity)
 {
     b2DistanceJointDef jointDef;
 

@@ -10,7 +10,7 @@ SingleRevoluteJoint::SingleRevoluteJoint(b2World* world, const b2RevoluteJointDe
 
     if(body->GetType() == b2_dynamicBody)
     {
-        bindBodys(body, m_anchorBody);
+        bindBodies(body, m_anchorBody);
         m_jointDef.Initialize(body, m_anchorBody, body->GetPosition() + m_jointDef.localAnchorA);
     }
     else
@@ -24,7 +24,7 @@ SingleRevoluteJoint::~SingleRevoluteJoint()
     m_anchorBody = nullptr;
 }
 
-void SingleRevoluteJoint::bindBodys(b2Body* bodyA, b2Body* bodyB)
+void SingleRevoluteJoint::bindBodies(b2Body* bodyA, b2Body* bodyB)
 {
     m_jointDef.bodyA = bodyA;
     m_jointDef.bodyB = bodyB;

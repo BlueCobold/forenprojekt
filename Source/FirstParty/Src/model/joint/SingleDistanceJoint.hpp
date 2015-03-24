@@ -23,7 +23,7 @@ public:
     void update() override;
 
 protected:
-    void bindBodys(b2Body* bodyA, b2Body* bodyB) override;
+    void bindBodies(b2Body* bodyA, b2Body* bodyB) override;
 };
 
 #endif

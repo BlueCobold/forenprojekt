@@ -224,11 +224,11 @@ private:
 
     void parseJoints(tinyxml2::XMLElement* joints, Entity* entity);
 
-    void praseSingleRevoluteJoint(tinyxml2::XMLElement* jointXml, Entity* entity);
+    void parseSingleRevoluteJoint(tinyxml2::XMLElement* jointXml, Entity* entity);
 
-    void praseSinglePrismaticJoint(tinyxml2::XMLElement* jointXml, Entity* entity);
+    void parseSinglePrismaticJoint(tinyxml2::XMLElement* jointXml, Entity* entity);
 
-    void praseSingleDistanceJoint(tinyxml2::XMLElement* jointXml, Entity* entity);
+    void parseSingleDistanceJoint(tinyxml2::XMLElement* jointXml, Entity* entity);
 
     std::unique_ptr<CollisionHandler> parseShowLabelHandler(tinyxml2::XMLElement* xml);
 

@@ -10,7 +10,7 @@ SinglePrismaticJoint::SinglePrismaticJoint(b2World* world, const b2PrismaticJoin
 
     if(body->GetType() == b2_dynamicBody)
     {
-        bindBodys(body, m_anchorBody);
+        bindBodies(body, m_anchorBody);
         m_jointDef.Initialize(body, m_anchorBody, body->GetWorldCenter(), direction);
     }
     else
@@ -24,7 +24,7 @@ SinglePrismaticJoint::~SinglePrismaticJoint()
     m_anchorBody = nullptr;
 }
 
-void SinglePrismaticJoint::bindBodys(b2Body* bodyA, b2Body* bodyB)
+void SinglePrismaticJoint::bindBodies(b2Body* bodyA, b2Body* bodyB)
 {
     m_jointDef.bodyA = bodyA;
     m_jointDef.bodyB = bodyB;

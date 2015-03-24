@@ -10,7 +10,7 @@ SingleDistanceJoint::SingleDistanceJoint(b2World* world, const b2DistanceJointDe
 
     if(body->GetType() == b2_dynamicBody)
     {
-        bindBodys(body, m_anchorBody);
+        bindBodies(body, m_anchorBody);
         m_jointDef.Initialize(body, m_anchorBody, body->GetPosition() + m_jointDef.localAnchorA, body->GetPosition() + m_jointDef.localAnchorB);
     }
     else
@@ -24,7 +24,7 @@ SingleDistanceJoint::~SingleDistanceJoint()
     m_anchorBody = nullptr;
 }
 
-void SingleDistanceJoint::bindBodys(b2Body* bodyA, b2Body* bodyB)
+void SingleDistanceJoint::bindBodies(b2Body* bodyA, b2Body* bodyB)
 {
     m_jointDef.bodyA = bodyA;
     m_jointDef.bodyB = bodyB;
