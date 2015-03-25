@@ -1,0 +1,49 @@
+<level>
+	<levelinfo name="Balancing Act">
+		<infoimage srcx="718" srcy="330" width ="192" height="108" />
+	</levelinfo>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+	</templates>
+
+	<grid size="60" width="2460" height="1410">
+
+
+
+                              btbt        btbt                                      
+                              btbt        btbt                                      
+                              w4    t1      w1                                        
+                              w4            w1                                        
+                              w4            w1                                        
+                              w4            w1                                        
+                              w3            w1\1                                      
+                              w3    TT      (1w1\1
+                              w3              (1w1
+                              w3                w1
+                              w2                w1
+                              w2                w1
+                              w2          TT    w1
+                              w2    BB          w1
+                              w1              /1w1
+                              w1            /1w1)1
+                              w1          /1w1)1
+                              w1        /1w1)1
+                                    TT                                              
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="100" silver="150" gold="250" />
+</level>
