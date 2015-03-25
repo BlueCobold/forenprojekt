@@ -26,6 +26,7 @@
 #include <SFML/Audio/Listener.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderOptions.hpp>
+#include <SFML/Graphics/Shader.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System.hpp>
 
@@ -61,7 +62,11 @@ App::App(AppConfig& config) :
 
     sf::ContextSettings settings = sf::ContextSettings(24, 8, 0);
     m_screen.create(videoMode, m_windowTitle, m_fullscreen ? sf::Style::Fullscreen : sf::Style::Default, settings);
-    
+
+    // This kind of redundant line prevents a thread-based crash when closing the app.
+    // It is based on a known SFML bug: https://github.com/LaurentGomila/SFML/issues/790
+    sf::Shader::isAvailable();
+
     m_cursor = std::unique_ptr<Cursor>(new Cursor(m_resourceManager, m_screen));
 
     auto sheet = m_resourceManager.getSpriteSheet("gui_elements");
