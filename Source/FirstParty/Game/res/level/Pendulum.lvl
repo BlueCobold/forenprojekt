@@ -1,0 +1,71 @@
+<level>
+	<levelinfo name="Pendulum">
+		<infoimage srcx="718" srcy="330" width ="192" height="108" />
+	</levelinfo>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<shapes>
+			<shape name="pendelumwall" type="polygon">
+				<vertex x="-30" y="-30" />
+				<vertex x="30" y="-30" />
+				<vertex x="30" y="30" />
+				<vertex x="-30" y="30" />
+			</shape>
+		</shapes>
+
+		<physics>
+			<physic name="pendelumwall">
+				<body type="dynamic" angle="0" />
+				<fixture density="0.1" friction="0.8" restitution="0.5" />
+			</physic>
+		</physics>
+		<entities>
+			<entity name="wallpendelum" rep="WP">
+				<physics name="pendelumwall" shape="pendelumwall" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_01" rotate="true"/>
+				</animations>
+				<joints>
+					<singleDistance x="0" y="0" anchorX="60" anchorY="0"/>
+				</joints>
+			</entity> 
+		</entities>
+	</templates>
+
+	<grid size="60" width="2460" height="1410">
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                        gagb  gcgdgegf      gcgf                                                                
+                    w2w1w1w1w1w1w1w1w1w1w1w1w1w1w1w2
+                    w1                            w1
+                    w1                            w1
+                    w1      t1      t1      t1    w1
+                    w1                            w1
+                    w1                            w1
+                    w1      WP  WP  WP  WP  WP    w1
+                    w2\1                      go/1w2
+                    w2w1\1gg                gp/1w1w2
+                    w2w1w4\1gh            gq/1w3w1w2
+                    w2w1w3w4\1          gr/1w4w3w1w2
+                    w2w1w3w4w5\1    BB  /1w5w4w3w1w2
+                    w2w1w1w1w1w1    TT  w1w1w1w1w1w2
+                                                                                    
+                                                                                                                                          
+                                                                                    
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="200" silver="300" gold="450" />
+</level>
