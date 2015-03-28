@@ -1,0 +1,98 @@
+<level>
+	<levelinfo name="Shooting Range">
+		<infoimage srcx="312" srcy="561" width="192" height="108" />
+	</levelinfo>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+
+		<shapes>
+			<shape name="tp" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="0" y="60" />
+				<vertex x="60" y="60" />
+				<vertex x="60" y="0" />
+			</shape>
+
+		</shapes>
+
+		<entities>
+			<entity name="ballteleport" rep="TP" collideWithBall="true">
+				<physics name="wall" shape="tp" />
+				<animations>
+					<animation texture="teleport" srcx="0" width="60" height="60" rotate="false">
+						<frameindex frames="5" >
+							<mul>
+								<time />
+								<static value="6" />
+							</mul>
+						</frameindex>
+					</animation>
+				</animations>
+				<collides>
+					<changeGravity x="0" y="40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+				<onCollision>
+					<ballTeleport keepSpeed="false" x="1620" y="1800"/>
+				</onCollision>
+				
+			</entity>		
+		</entities>
+
+	</templates>
+
+	<grid size="60" width="2810" height="2220">
+                                                        
+                                                        
+                                                                                          
+                                                                                          
+                                                                                          
+        gcgf                                                                              
+    TPW1 1)1                                                
+    TPw1)1                                                  
+    TP)1  t1d3d3d3                                          
+    TP        d3d3d3                                         
+    TP            d3d3                                      
+    TP              d3d3d3                                  
+    TP                  d3d3                                
+    TP                    d3d3                              
+    TPTP                    d3d3                            
+      TPTP                    d3d3                          
+        TPTP                    d3d3                    
+          TPTP  gagb              d3d3                
+            TPTPW1 1)1              d3d3            
+              TPw1)1                  d3          
+              TP)1  t1d2d2            d3d3        
+              TP        d2d2            d3        
+              TP          d2d2          d3d3          w6
+              TP            d2d2          d3          w6
+              TP              d2d2        d3d3        w6
+              TP                d2d2        d3        w6
+              TP                  d2d2      d3d3      w6
+              TP                    d2d2      d3d3    w6
+              TP                      d2d2      d3  BBw6
+              TP              t1d1d1d1  d2d2          w6
+              TP                    d1d1d1          /1w6
+              TP                        d1d1          w6
+              TP                                TT    w6
+              TP                                      w6
+              TPTPTPTPTPTPTPTPTPTPTPTPTPTPTPTPTPTPTPTPTP
+              
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="200" silver="250" gold="300" />
+</level>
