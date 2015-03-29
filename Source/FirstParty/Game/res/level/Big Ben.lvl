@@ -1,0 +1,112 @@
+<level>
+	<levelinfo name="Big Ben">
+		<infoimage srcx="718" srcy="330" width ="192" height="108" />
+	</levelinfo>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		<shapes>
+			<shape name="pendelumwall" type="complex_polygon">
+				<polygon>
+					<vertex x="0" y="0" />
+					<vertex x="60" y="0" />
+					<vertex x="60" y="360" />
+					<vertex x="0" y="360" />
+				</polygon>
+				<polygon>
+					<vertex x="-60" y="360" />
+					<vertex x="120" y="360" />
+					<vertex x="120" y="540" />
+					<vertex x="-60" y="540" />
+				</polygon>
+			</shape>
+		</shapes>
+
+		<physics>
+			<physic name="pendelumwall">
+				<body type="dynamic" angle="0" />
+				<fixture density="0.01" friction="0.8" restitution="0.5" />
+			</physic>
+		</physics>
+		<entities>
+			<entity name="wallpendelum" rep="WP">
+				<physics name="pendelumwall" shape="pendelumwall" />
+				<onCollision>
+					<spawnEntity name="wall_hit_particles" location="contact" />
+				</onCollision>
+				<animations>
+					<animation spritesheet="walls" sprite="sand_01" midx="0" midy="0" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="0" midy="-60" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="0" midy="-120" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="0" midy="-180" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="0" midy="-240" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="0" midy="-300" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="0" midy="-360" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="60" midy="-360" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="-60" midy="-360" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="0" midy="-420" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="60" midy="-420" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="-60" midy="-420" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="0" midy="-480" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="60" midy="-480" rotate="true"/>
+					<animation spritesheet="walls" sprite="sand_01" midx="-60" midy="-480" rotate="true"/>
+				</animations>
+				<joints>
+					<singleDistance x="30" y="30" anchorX="30" anchorY="30"/>
+				</joints>
+			</entity> 
+		</entities>
+	</templates>
+
+	<grid size="60" width="2460" height="2400">
+
+                      gagb  gcgdgegf    gcgdgegdgegf
+                    /1w1w1w1w1w1w1w1w1w1w1w1w1w1w1w1\1
+                  /1)1                              (1\1
+                /1)1              d1d1d1              (1\1
+              /1)1            d1d1  w1  d1d1            (1\1
+            /1)1            d1              d1            (1\1
+            w1            d1                  d1            w1
+            w1    bt    d1          bt          d1    bt    w1
+                        d1                      d1            
+                      d1          /1w1\1          d1          
+            T2        d1w1    d2d2w1w1w1        w1d1        T2
+                      d1          (1w1)1          d1          
+            w1    bt    d1          d1          d1    bt    w1                      
+            w1          d1          d1          d1          w1                        
+            w1            d1        d1        d1            w1
+            (1\1            d1              d1            /1)1
+              (1\1            d1d1  w1  d1d1            /1)1
+                (1\1              d1d1d1              /1)1
+                  w1                                /1)1
+                  w6              t1    t1          w6
+                  w6                WP              w6                                  
+                  w5                xx              w5
+                  w5                xx              w5
+                  w5\1              xx            /1w5
+                  w4)1              xx            (1w4
+                  w4                xx              w4
+                  w4              xxxxxx            w4
+                  w3              xxxxxx            w3
+                  w3              xxxxxx            w3
+                  w3\1                            /1w3
+                  w2w2\1                      go/1w2w2
+                  w2w2w1\1gg                gp/1w1w2w2
+                  w2w2w1w4\1gh            gq/1w3w1w2w2
+                  w1w2w1w3w4\1          gr/1w4w3w1w2w1
+                  w1w2w1w3w4w5\1    BB  /1w5w4w3w1w2w1
+                  w1w2w1w1w1w1w1    TT  w1w1w1w1w1w2w1
+                                                                                    
+                                                                                                                                          
+                                                                                    
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="200" silver="250" gold="350" />
+</level>
