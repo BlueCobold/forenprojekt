@@ -52,7 +52,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG_BOX2D;WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG_BOX2D;WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;_DEBUG;_CONSOLE;LEVELTESTING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalIncludeDirectories>../../../ThirdParty/CryptoPP/include/;../../../ThirdParty/SFML/include/;../../../ThirdParty/Box2D/include/;../../../ThirdParty/tinyxml2/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
@@ -77,7 +77,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;NDEBUG;_CONSOLE;LEVELTESTING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>../../../ThirdParty/CryptoPP/include/;../../../ThirdParty/SFML/include/;../../../ThirdParty/Box2D/include/;../../../ThirdParty/tinyxml2/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
@@ -257,6 +257,7 @@
     <ClInclude Include="..\..\Src\resources\GameEventRecorder.hpp" />
     <ClInclude Include="..\..\Src\resources\LevelFileLoader.hpp" />
     <ClInclude Include="..\..\Src\resources\MenuLoader.hpp" />
+    <ClInclude Include="..\..\Src\resources\OpenFileDialoge.hpp" />
     <ClInclude Include="..\..\Src\resources\PathHelper.hpp" />
     <ClInclude Include="..\..\Src\resources\ResourceCache.hpp" />
     <ClInclude Include="..\..\Src\resources\ResourceManager.hpp" />
@@ -386,6 +387,7 @@
     <ClCompile Include="..\..\Src\resources\GameEventRecorder.cpp" />
     <ClCompile Include="..\..\Src\resources\LevelFileLoader.cpp" />
     <ClCompile Include="..\..\Src\resources\MenuLoader.cpp" />
+    <ClCompile Include="..\..\Src\resources\OpenFileDialoge.cpp" />
     <ClCompile Include="..\..\Src\resources\PathHelper.cpp" />
     <ClCompile Include="..\..\Src\resources\ResourceManager.cpp" />
     <ClCompile Include="..\..\Src\resources\SpriteSheet.cpp" />

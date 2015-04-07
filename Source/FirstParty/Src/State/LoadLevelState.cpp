@@ -40,7 +40,9 @@ void LoadLevelState::onEnter(const EnterStateInformation* enterInformation, cons
 
     const EnterLoadLevelStateInformation* info = dynamic_cast<const EnterLoadLevelStateInformation*>(enterInformation);
     m_directPlay = info->m_directPlay;
-
+#ifdef LEVELTESTING
+    m_file = info->m_file;
+#endif
     m_label.setPosition(m_screen.getSize().x / 2.f - m_label.getWidth() / 2.f, m_screen.getSize().y / 2.f);
     if(enterInformation->m_prepareOnly)
         m_levelLoaderJob->reset();
@@ -99,7 +101,11 @@ void LoadLevelState::loadLevel()
     m_loadingErrorMessage = "";
     try
     {
+#ifdef LEVELTESTING
+        m_level = std::unique_ptr<Level>(new Level(m_file, m_currentLevel, getResourceManager(), m_config));
+#else
         m_level = std::unique_ptr<Level>(new Level(m_currentLevel, getResourceManager(), m_config));
+#endif
         m_lastLevel = m_level.get();
     }
     catch(std::runtime_error e)

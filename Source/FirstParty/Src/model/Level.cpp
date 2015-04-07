@@ -19,7 +19,12 @@
 #include <unordered_map>
 #include <utility> // pair, make_pair, move
 
+#ifndef LEVELTESTING
 Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConfig& config) :
+#else
+Level::Level(const std::string& filename, const unsigned int level, ResourceManager& resourceManager, AppConfig& config) :
+    m_filename(filename),
+#endif
     m_number(level),
     m_resourceManager(resourceManager),
     m_world(b2Vec2(0.f, 9.81f)),
@@ -709,3 +714,10 @@ const std::list<GameEvent>& Level::getEventsForOnlineHighscore() const
 {
     return m_eventRecorder.getEventsForOnlineHighscore();
 }
+
+#ifdef LEVELTESTING
+std::string Level::getFileName()
+{
+    return m_filename;
+}
+#endif

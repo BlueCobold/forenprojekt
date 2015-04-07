@@ -3,6 +3,9 @@
 #include "../resources/Config.hpp"
 #include "../resources/ResourceManager.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
+#ifdef LEVELTESTING
+#include "../resources/OpenFileDialoge.hpp"
+#endif
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -77,6 +80,22 @@ StateChangeInformation MainMenuState::update(const float time)
     }
     else if(clicked == MainMenu::BUTTON_SELECT_LEVEL)
     {
+#ifdef LEVELTESTING
+        OpenFileDialoge ofd("Level\0*.lvl\0");
+        if(ofd.openDialoge())        
+            m_loadLevelStateInfo.m_file = ofd.getFile();
+        else
+            return StateChangeInformation::Empty();
+        m_loadLevelStateInfo.m_level = nullptr;
+        m_loadLevelStateInfo.m_prepareOnly = false;
+        m_loadLevelStateInfo.m_levelNumber = -1;
+        m_loadLevelStateInfo.m_directPlay = true;
+        m_transitionStateInfo.m_followingState = LoadLevelStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
+        m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+#else
         m_stateInfo.m_prepareOnly = false;
         m_stateInfo.m_level = nullptr;
         m_transitionStateInfo.m_followingState = LevelSelectStateId;
@@ -84,6 +103,7 @@ StateChangeInformation MainMenuState::update(const float time)
         m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+#endif
     }
     else if(clicked == MainMenu::BUTTON_CLOSE)
         State::m_screen.close();

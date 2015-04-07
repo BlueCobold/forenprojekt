@@ -41,7 +41,12 @@ void Level::load()
         throw std::runtime_error(utility::replace(utility::translateKey("InvalidLevelNumber"), filename()));
 
     tinyxml2::XMLDocument doc;
+
+#ifdef LEVELTESTING   
+    doc.LoadFile(m_filename.c_str());
+#else
     doc.LoadFile((resourcePath() + filename()).c_str());
+#endif
 
     if(!validate(doc)) // Validate the XML file
         throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename()));

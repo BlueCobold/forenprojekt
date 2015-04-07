@@ -67,6 +67,18 @@ StateChangeInformation PlayState::update(const float time)
         m_hud.update(m_level, getPassedTime());
         if(utility::Keyboard.isKeyDown(sf::Keyboard::F5) || utility::Keyboard.isKeyPressed(sf::Keyboard::F5))
         {
+#ifdef LEVELTESTING
+            m_loadLevelStateInfo.m_file = m_level->getFileName();
+            m_loadLevelStateInfo.m_level = nullptr;
+            m_loadLevelStateInfo.m_prepareOnly = false;
+            m_loadLevelStateInfo.m_levelNumber = -1;
+            m_loadLevelStateInfo.m_directPlay = true;
+            m_transitionStateInfo.m_followingState = LoadLevelStateId;
+            m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
+            m_transitionStateInfo.m_comeFromeState = PlayStateId;
+            m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+            return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+#else
             m_loadLevelStateInfo.m_prepareOnly = false;
             m_loadLevelStateInfo.m_level = nullptr;
             m_loadLevelStateInfo.m_levelNumber = m_pauseStateInfo.m_levelNumber;
@@ -77,6 +89,7 @@ StateChangeInformation PlayState::update(const float time)
             m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
             m_onlineHighScoreLoaderJob->reset();
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+#endif
         }
         /* not needed anymore, since we got a button for it
         if(utility::Keyboard.isKeyDown(sf::Keyboard::T))

@@ -38,7 +38,9 @@ private:
     Level* m_lastLevel;
     std::string m_loadingErrorMessage;
     bool m_directPlay;
-
+#ifdef LEVELTESTING
+    std::string m_file;
+#endif
     LineLabel m_label;
     int m_currentLevel;
     EnterPlayStateInformation m_playStateInfo;

@@ -7,6 +7,9 @@
 #include "State.hpp"
 
 #include <memory>
+#ifdef LEVELTESTING
+#include <iostream>
+#endif
 
 class Level;
 
@@ -68,5 +71,8 @@ class EnterLoadLevelStateInformation : public EnterStateInformation
 {
 public:
     bool m_directPlay;
+#ifdef LEVELTESTING
+    std::string m_file;
+#endif
 };
 #endif // ENTERSTATEINFORMATION_HPP

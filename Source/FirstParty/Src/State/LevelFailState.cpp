@@ -56,6 +56,18 @@ StateChangeInformation LevelFailState::update(const float time)
 
     if(clicked == FailMenu::BUTTON_PLAY_AGAIN)
     {
+#ifdef LEVELTESTING
+        m_loadLevelStateInfo.m_file = m_level->getFileName();
+        m_loadLevelStateInfo.m_level = nullptr;
+        m_loadLevelStateInfo.m_prepareOnly = false;
+        m_loadLevelStateInfo.m_levelNumber = -1;
+        m_loadLevelStateInfo.m_directPlay = true;
+        m_transitionStateInfo.m_followingState = LoadLevelStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
+        m_transitionStateInfo.m_comeFromeState = LevelFailStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+#else
         m_loadLevelStateInfo.m_prepareOnly = false;
         m_loadLevelStateInfo.m_level = m_level;
         m_loadLevelStateInfo.m_directPlay = false;
@@ -65,6 +77,7 @@ StateChangeInformation LevelFailState::update(const float time)
         m_transitionStateInfo.m_comeFromeState = LevelFailStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+#endif
     }
     else if(clicked == FailMenu::BUTTON_MAIN_MENU)
     {

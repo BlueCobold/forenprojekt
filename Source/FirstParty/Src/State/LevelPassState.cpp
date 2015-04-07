@@ -5,7 +5,9 @@
 #include "../resources/ResourceManager.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
 #include "../gui/InputBox.hpp"
-
+#ifdef LEVELTESTING
+#include "../resources/OpenFileDialoge.hpp"
+#endif
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -71,15 +73,30 @@ StateChangeInformation LevelPassState::update(const float time)
 
     m_HUD.update(m_level, getPassedTime());
 
+#ifdef LEVELTESTING
+    m_menu.getButton(ReplayMenu::BUTTON_PLAY_NEXT).setVisible(true);
+#else
     m_menu.getButton(ReplayMenu::BUTTON_PLAY_NEXT).setVisible(m_playStateInfo.m_levelNumber < m_config.get<int>("UnlockedLevel") &&
                                                               static_cast<unsigned int>(m_playStateInfo.m_levelNumber) <= State::getResourceManager().getFileNames().size());
-
+#endif
     int clicked = -1;
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
     m_menu.update(m_screen, getPassedTime());
 
     if(clicked == ReplayMenu::BUTTON_PLAY_AGAIN)
     {
+#ifdef LEVELTESTING
+        m_loadLevelStateInfo.m_file = m_level->getFileName();
+        m_loadLevelStateInfo.m_level = nullptr;
+        m_loadLevelStateInfo.m_prepareOnly = false;
+        m_loadLevelStateInfo.m_levelNumber = -1;
+        m_loadLevelStateInfo.m_directPlay = true;
+        m_transitionStateInfo.m_followingState = LoadLevelStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
+        m_transitionStateInfo.m_comeFromeState = LevelPassStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+#else
         m_gotCoins = false;
         m_loadLevelStateInfo.m_prepareOnly = false;
         m_loadLevelStateInfo.m_level = nullptr;
@@ -90,9 +107,26 @@ StateChangeInformation LevelPassState::update(const float time)
         m_transitionStateInfo.m_comeFromeState = LevelPassStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+#endif
     }
     else if(clicked == ReplayMenu::BUTTON_PLAY_NEXT)
     {
+#ifdef LEVELTESTING
+        OpenFileDialoge ofd("Level\0*.lvl\0");
+        if(ofd.openDialoge())        
+            m_loadLevelStateInfo.m_file = ofd.getFile();
+        else
+            return StateChangeInformation::Empty();
+        m_loadLevelStateInfo.m_level = nullptr;
+        m_loadLevelStateInfo.m_prepareOnly = false;
+        m_loadLevelStateInfo.m_levelNumber = -1;
+        m_loadLevelStateInfo.m_directPlay = true;
+        m_transitionStateInfo.m_followingState = LoadLevelStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
+        m_transitionStateInfo.m_comeFromeState = LevelPassStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+#else
         m_gotCoins = false;
         m_loadLevelStateInfo.m_level = nullptr;
         m_loadLevelStateInfo.m_prepareOnly = false;
@@ -109,6 +143,7 @@ StateChangeInformation LevelPassState::update(const float time)
             m_transitionStateInfo.m_followingState = GameFinishedStateId;
  
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+#endif
     }
     else if(clicked == ReplayMenu::BUTTON_MAIN_MENU)
     {

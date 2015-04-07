@@ -86,6 +86,18 @@ StateChangeInformation PauseState::update(const float time)
     }
     else if(clicked == PauseMenu::BUTTON_RESTART_LEVEL)
     {
+#ifdef LEVELTESTING
+        m_loadLevelStateInfo.m_file = m_level->getFileName();
+        m_loadLevelStateInfo.m_level = nullptr;
+        m_loadLevelStateInfo.m_prepareOnly = false;
+        m_loadLevelStateInfo.m_levelNumber = -1;
+        m_loadLevelStateInfo.m_directPlay = true;
+        m_transitionStateInfo.m_followingState = LoadLevelStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
+        m_transitionStateInfo.m_comeFromeState = PauseStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+#else
         m_loadLevelStateInfo.m_prepareOnly = true;
         m_loadLevelStateInfo.m_directPlay = false;
         m_loadLevelStateInfo.m_level = m_level;
@@ -96,6 +108,7 @@ StateChangeInformation PauseState::update(const float time)
         m_transitionStateInfo.m_comeFromeState = PauseStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+#endif
     }
     else if(clicked == PauseMenu::BUTTON_MAIN_MENU)
     {

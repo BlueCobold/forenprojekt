@@ -565,6 +565,9 @@
     <ClInclude Include="..\..\Src\gui\ReplayMenu.hpp">
       <Filter>Headers\gui\menus</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\resources\OpenFileDialoge.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -1016,6 +1019,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\CaptionMenu.cpp">
       <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\OpenFileDialoge.cpp">
+      <Filter>Sources\resources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

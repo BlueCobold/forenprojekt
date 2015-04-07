@@ -49,7 +49,12 @@ class Level :
 {
 public:
     /// Construct a level from the given level number
+#ifdef LEVELTESTING
+    Level(const std::string& file, const unsigned int level, ResourceManager& resourceManager, AppConfig& config);
+    std::string getFileName();
+#else
     Level(const unsigned int level, ResourceManager& resourceManager, AppConfig& config);
+#endif
     ~Level();
 
     virtual void restartAt(const float time);
@@ -98,7 +103,9 @@ public:
 
     const std::list<GameEvent>& getEventsForOnlineHighscore() const;
 private:
-
+#ifdef LEVELTESTING
+    std::string m_filename;
+#endif
     struct EntitySpawn
     {
     public:
