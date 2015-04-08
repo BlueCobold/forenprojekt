@@ -86,11 +86,21 @@ StateChangeInformation LevelPassState::update(const float time)
     if(clicked == ReplayMenu::BUTTON_PLAY_AGAIN)
     {
 #ifdef LEVELTESTING
-        m_loadLevelStateInfo.m_file = m_level->getFileName();
-        m_loadLevelStateInfo.m_level = nullptr;
+        if(m_level->number() == -1)
+        {
+            m_loadLevelStateInfo.m_file = m_level->getFileName();
+            m_loadLevelStateInfo.m_level = nullptr;
+            m_loadLevelStateInfo.m_directPlay = true;
+            m_loadLevelStateInfo.m_levelNumber = -1;
+        }
+        else
+        {
+            m_loadLevelStateInfo.m_file = "";
+            m_loadLevelStateInfo.m_level = m_level;
+            m_loadLevelStateInfo.m_directPlay = false;
+            m_loadLevelStateInfo.m_levelNumber = m_playStateInfo.m_levelNumber;
+        }
         m_loadLevelStateInfo.m_prepareOnly = false;
-        m_loadLevelStateInfo.m_levelNumber = -1;
-        m_loadLevelStateInfo.m_directPlay = true;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelPassStateId;
@@ -112,20 +122,44 @@ StateChangeInformation LevelPassState::update(const float time)
     else if(clicked == ReplayMenu::BUTTON_PLAY_NEXT)
     {
 #ifdef LEVELTESTING
-        OpenFileDialoge ofd("Level\0*.lvl\0");
-        if(ofd.openDialoge())        
-            m_loadLevelStateInfo.m_file = ofd.getFile();
+        if(m_level->number() == -1)
+        {
+            OpenFileDialoge ofd("Level\0*.lvl\0");
+            if(ofd.openDialoge())        
+                m_loadLevelStateInfo.m_file = ofd.getFile();
+            else
+                return StateChangeInformation::Empty();
+
+            m_loadLevelStateInfo.m_levelNumber = -1;
+            m_loadLevelStateInfo.m_level = nullptr;
+            m_loadLevelStateInfo.m_levelNumber = -1;
+            m_loadLevelStateInfo.m_directPlay = true;
+            m_loadLevelStateInfo.m_prepareOnly = false;
+            m_transitionStateInfo.m_followingState = LoadLevelStateId;
+            m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
+            m_transitionStateInfo.m_comeFromeState = LevelPassStateId;
+            m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+            return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+        }
         else
-            return StateChangeInformation::Empty();
-        m_loadLevelStateInfo.m_level = nullptr;
-        m_loadLevelStateInfo.m_prepareOnly = false;
-        m_loadLevelStateInfo.m_levelNumber = -1;
-        m_loadLevelStateInfo.m_directPlay = true;
-        m_transitionStateInfo.m_followingState = LoadLevelStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
-        m_transitionStateInfo.m_comeFromeState = LevelPassStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
-        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+        {
+            m_gotCoins = false;
+            m_loadLevelStateInfo.m_level = nullptr;
+            m_loadLevelStateInfo.m_prepareOnly = false;
+            m_loadLevelStateInfo.m_directPlay = false;
+            m_transitionStateInfo.m_comeFromeState = LevelPassStateId;
+            m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+            m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
+            if(static_cast<unsigned int>(m_playStateInfo.m_levelNumber) < State::getResourceManager().getFileNames().size())
+            {
+                m_loadLevelStateInfo.m_levelNumber = m_playStateInfo.m_levelNumber + 1;
+                m_transitionStateInfo.m_followingState = LoadLevelStateId;
+            }
+            else
+                m_transitionStateInfo.m_followingState = GameFinishedStateId;
+ 
+            return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+        }
 #else
         m_gotCoins = false;
         m_loadLevelStateInfo.m_level = nullptr;
