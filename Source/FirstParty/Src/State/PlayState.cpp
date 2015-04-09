@@ -3,7 +3,9 @@
 #include "../resources/Config.hpp"
 #include "../resources/ResourceManager.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
-
+#ifdef LEVELTESTING
+#include "../resources/OpenFileDialoge.hpp"
+#endif
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
@@ -68,11 +70,21 @@ StateChangeInformation PlayState::update(const float time)
         if(utility::Keyboard.isKeyDown(sf::Keyboard::F5) || utility::Keyboard.isKeyPressed(sf::Keyboard::F5))
         {
 #ifdef LEVELTESTING
-            m_loadLevelStateInfo.m_file = m_level->getFileName();
-            m_loadLevelStateInfo.m_level = nullptr;
+            if(m_level->number() == -1)
+            {
+                m_loadLevelStateInfo.m_file = m_level->getFileName();
+                m_loadLevelStateInfo.m_level = nullptr;
+                m_loadLevelStateInfo.m_directPlay = true;
+                m_loadLevelStateInfo.m_levelNumber = -1;
+            }
+            else
+            {
+                m_loadLevelStateInfo.m_file = "";
+                m_loadLevelStateInfo.m_level = m_level;
+                m_loadLevelStateInfo.m_directPlay = false;
+                m_loadLevelStateInfo.m_levelNumber = m_pauseStateInfo.m_levelNumber;
+            }
             m_loadLevelStateInfo.m_prepareOnly = false;
-            m_loadLevelStateInfo.m_levelNumber = -1;
-            m_loadLevelStateInfo.m_directPlay = true;
             m_transitionStateInfo.m_followingState = LoadLevelStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
             m_transitionStateInfo.m_comeFromeState = PlayStateId;
@@ -96,7 +108,27 @@ StateChangeInformation PlayState::update(const float time)
         {
             m_level->setTimeAttackMode(true);
         }*/
-
+#ifdef LEVELTESTING
+        if(utility::Keyboard.isKeyDown(sf::Keyboard::L) || utility::Keyboard.isKeyPressed(sf::Keyboard::L))
+        {
+            OpenFileDialoge ofd("Level\0*.lvl\0");
+            bool result = ofd.openDialoge();
+            utility::Keyboard.notifyKeyReleased(sf::Keyboard::L);
+            if(result)        
+                m_loadLevelStateInfo.m_file = ofd.getFile();
+            else
+                return StateChangeInformation::Empty();
+            m_loadLevelStateInfo.m_level = nullptr;
+            m_loadLevelStateInfo.m_prepareOnly = false;
+            m_loadLevelStateInfo.m_levelNumber = -1;
+            m_loadLevelStateInfo.m_directPlay = true;
+            m_transitionStateInfo.m_followingState = LoadLevelStateId;
+            m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
+            m_transitionStateInfo.m_comeFromeState = PlayStateId;
+            m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+            return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+        }
+#endif
         if(m_shouldPause || utility::Keyboard.isKeyDown(sf::Keyboard::P) || 
            utility::Keyboard.isKeyDown(sf::Keyboard::Pause) || utility::Keyboard.isKeyDown(sf::Keyboard::Escape))
         {

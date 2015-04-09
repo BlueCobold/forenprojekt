@@ -122,7 +122,8 @@ StateChangeInformation LevelPassState::update(const float time)
     else if(clicked == ReplayMenu::BUTTON_PLAY_NEXT)
     {
 #ifdef LEVELTESTING
-        if(m_level->number() == -1)
+        bool loadKey = utility::Keyboard.isKeyDown(sf::Keyboard::L) || utility::Keyboard.isKeyPressed(sf::Keyboard::L);
+        if(m_level->number() == -1  || loadKey)
         {
             OpenFileDialoge ofd("Level\0*.lvl\0");
             if(ofd.openDialoge())        

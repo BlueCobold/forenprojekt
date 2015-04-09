@@ -81,20 +81,35 @@ StateChangeInformation MainMenuState::update(const float time)
     else if(clicked == MainMenu::BUTTON_SELECT_LEVEL)
     {
 #ifdef LEVELTESTING
-        OpenFileDialoge ofd("Level\0*.lvl\0");
-        if(ofd.openDialoge())        
-            m_loadLevelStateInfo.m_file = ofd.getFile();
+        if(utility::Keyboard.isKeyDown(sf::Keyboard::L) || utility::Keyboard.isKeyPressed(sf::Keyboard::L))
+        {
+            OpenFileDialoge ofd("Level\0*.lvl\0");
+            bool result = ofd.openDialoge();
+            utility::Keyboard.notifyKeyReleased(sf::Keyboard::L);
+            if(result)        
+                m_loadLevelStateInfo.m_file = ofd.getFile();
+            else
+                return StateChangeInformation::Empty();
+            m_loadLevelStateInfo.m_level = nullptr;
+            m_loadLevelStateInfo.m_prepareOnly = false;
+            m_loadLevelStateInfo.m_levelNumber = -1;
+            m_loadLevelStateInfo.m_directPlay = true;
+            m_transitionStateInfo.m_followingState = LoadLevelStateId;
+            m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
+            m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
+            m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+            return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+        }
         else
-            return StateChangeInformation::Empty();
-        m_loadLevelStateInfo.m_level = nullptr;
-        m_loadLevelStateInfo.m_prepareOnly = false;
-        m_loadLevelStateInfo.m_levelNumber = -1;
-        m_loadLevelStateInfo.m_directPlay = true;
-        m_transitionStateInfo.m_followingState = LoadLevelStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
-        m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
-        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+        {
+            m_stateInfo.m_prepareOnly = false;
+            m_stateInfo.m_level = nullptr;
+            m_transitionStateInfo.m_followingState = LevelSelectStateId;
+            m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
+            m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
+            m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+            return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+        }
 #else
         m_stateInfo.m_prepareOnly = false;
         m_stateInfo.m_level = nullptr;
