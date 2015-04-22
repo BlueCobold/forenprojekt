@@ -30,6 +30,14 @@ void SingleRevoluteJoint::bindBodies(b2Body* bodyA, b2Body* bodyB)
     m_jointDef.bodyB = bodyB;
 }
 
+void SingleRevoluteJoint::reinstall(b2Body* body)
+{
+    bindBodies(body, m_anchorBody);
+    m_jointDef.Initialize(body, m_anchorBody, body->GetPosition() + m_jointDef.localAnchorA);
+
+    getJoint() = static_cast<b2RevoluteJoint*>(JointObject::getWorld()->CreateJoint(&m_jointDef));
+}
+
 void SingleRevoluteJoint::update()
 {
 }

@@ -30,6 +30,14 @@ void SingleDistanceJoint::bindBodies(b2Body* bodyA, b2Body* bodyB)
     m_jointDef.bodyB = bodyB;
 }
 
+void SingleDistanceJoint::reinstall(b2Body* body)
+{
+    bindBodies(body, m_anchorBody);
+    m_jointDef.Initialize(body, m_anchorBody, body->GetPosition() + m_jointDef.localAnchorA, body->GetPosition() + m_jointDef.localAnchorB);
+
+    getJoint() = static_cast<b2DistanceJoint*>(JointObject::getWorld()->CreateJoint(&m_jointDef));
+}
+
 void SingleDistanceJoint::update()
 {
 }

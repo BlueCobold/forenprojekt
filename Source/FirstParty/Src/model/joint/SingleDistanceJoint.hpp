@@ -22,6 +22,8 @@ public:
 
     void update() override;
 
+    void reinstall(b2Body* body) override;
+
 protected:
     void bindBodies(b2Body* bodyA, b2Body* bodyB) override;
 };

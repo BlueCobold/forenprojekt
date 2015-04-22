@@ -15,12 +15,16 @@ private:
     b2Body* m_anchorBody;
     b2BodyDef m_anchorBodyDef;
 
+    b2Vec2 m_direction;
+
 public:
     SinglePrismaticJoint(b2World* world, const b2PrismaticJointDef& jointDef, b2Body* body, const b2Vec2& direction);
 
     ~SinglePrismaticJoint();
 
     void update() override;
+
+    void reinstall(b2Body* body) override;
 
 protected:
     void bindBodies(b2Body* bodyA, b2Body* bodyB) override;

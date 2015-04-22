@@ -167,6 +167,17 @@ public:
         m_joints.push_back(std::move(joint));
     }
 
+    bool hasJoints() const
+    {
+        return m_joints.size() > 0;
+    }
+
+    void reinstallJoints()
+    {
+        for(auto it = begin(m_joints); it != end(m_joints); ++it)
+            (*it).get()->reinstall(m_body);
+    }
+
 protected:
 
     const b2Vec2& getStartPosition() const

@@ -1,9 +1,10 @@
 #include "SinglePrismaticJoint.hpp"
 #include "../../Utility.hpp"
 
-SinglePrismaticJoint::SinglePrismaticJoint(b2World* world, const b2PrismaticJointDef& jointDef,b2Body* body, const b2Vec2& direction) :
+SinglePrismaticJoint::SinglePrismaticJoint(b2World* world, const b2PrismaticJointDef& jointDef, b2Body* body, const b2Vec2& direction) :
     JointObject(world, JointObject::SinglePrismatic),
-    m_jointDef(jointDef)
+    m_jointDef(jointDef),
+    m_direction(direction)
 {
     m_anchorBodyDef.type = b2_staticBody;
     m_anchorBody = world->CreateBody(&m_anchorBodyDef);
@@ -11,7 +12,7 @@ SinglePrismaticJoint::SinglePrismaticJoint(b2World* world, const b2PrismaticJoin
     if(body->GetType() == b2_dynamicBody)
     {
         bindBodies(body, m_anchorBody);
-        m_jointDef.Initialize(body, m_anchorBody, body->GetWorldCenter(), direction);
+        m_jointDef.Initialize(body, m_anchorBody, body->GetWorldCenter(), m_direction);
     }
     else
         throw std::runtime_error(utility::replace(utility::translateKey("WrongBodyType"), "SinglePrismaticJoint"));
@@ -29,7 +30,13 @@ void SinglePrismaticJoint::bindBodies(b2Body* bodyA, b2Body* bodyB)
     m_jointDef.bodyA = bodyA;
     m_jointDef.bodyB = bodyB;
 }
+void SinglePrismaticJoint::reinstall(b2Body* body)
+{
+    bindBodies(body, m_anchorBody);
+    m_jointDef.Initialize(body, m_anchorBody, body->GetWorldCenter(), m_direction);
 
+    getJoint() = static_cast<b2PrismaticJoint*>(JointObject::getWorld()->CreateJoint(&m_jointDef));
+}
 void SinglePrismaticJoint::update()
 {
     

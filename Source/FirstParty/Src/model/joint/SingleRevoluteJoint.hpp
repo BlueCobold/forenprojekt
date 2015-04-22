@@ -17,11 +17,14 @@ private:
     b2BodyDef m_anchorBodyDef;
 
 public:
-    SingleRevoluteJoint(b2World* world, const b2RevoluteJointDef& jointDef,b2Body* body);
+    SingleRevoluteJoint(b2World* world, const b2RevoluteJointDef& jointDef, b2Body* body);
 
     ~SingleRevoluteJoint();
 
     void update() override;
+
+    void reinstall(b2Body* body) override;
+
 protected:
     void bindBodies(b2Body* bodyA, b2Body* bodyB) override;
 };

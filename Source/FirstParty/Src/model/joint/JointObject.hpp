@@ -41,6 +41,8 @@ public:
 
     virtual void update() = 0;
 
+    virtual void reinstall(b2Body* body) = 0;
+
 protected:
     virtual void bindBodies(b2Body* bodyA, b2Body* bodyB) = 0;
 
