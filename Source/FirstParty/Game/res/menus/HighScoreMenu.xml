@@ -12,6 +12,8 @@
 				<scrollBottom spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="10" />
 			</style>
 			<elements>
+				<button id="32" text="gui_highscore_time" style="small" x="240" y="10" />
+				<button id="33" text="gui_highscore_points" style="small" x="80" y="10" />
 				<label id="11" text="" font="buttonHoverFont" alignment="0" x="20" y="10" />
 				<label id="12" text="" font="buttonHoverFont" alignment="0" x="20" y="50" />
 				<label id="13" text="" font="buttonHoverFont" alignment="0" x="20" y="90" />

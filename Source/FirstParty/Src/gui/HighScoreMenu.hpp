@@ -15,6 +15,9 @@ public:
     static const int CHECKBOX_LOCAL_HIGHSCORE = 30;
     static const int CHECKBOX_GLOBAL_HIGHSCORE = 31;
     static const int LABEL_LOADING = 27;
+    static const int BUTTON_TAB_TIME = 32;
+    static const int BUTTON_TAB_POINTS = 33;
+    static const int SUBWINDOW = 1;
 
     HighScoreMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 };

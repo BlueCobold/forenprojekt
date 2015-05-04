@@ -15,6 +15,7 @@
 class ResourceManager;
 class MenuElement;
 class InputBox;
+class SubWindow;
 
 namespace sf
 {
@@ -60,6 +61,7 @@ public:
     Button& getButton(int id) const;
     MenuSprite& getSprite(int id) const;
     InputBox& getInputBox(int id) const;
+    SubWindow& getSubWindow(int id) const;
 
 protected:
 

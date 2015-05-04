@@ -200,3 +200,13 @@ void SubWindow::drawAdditionalForeground(const DrawParameter& params)
 {
     m_panel.drawAdditionalForeground(params);
 }
+
+int SubWindow::getInnerHeight() const
+{
+    return m_innerHeight;
+}
+
+void SubWindow::setInnerHeight(int innerHeight)
+{
+    m_innerHeight = innerHeight;
+}

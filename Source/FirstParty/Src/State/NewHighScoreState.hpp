@@ -29,7 +29,7 @@ public:
 private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
-    void addNewHighScore(int points, std::string name);
+    void addNewHighScore(int points, float time, std::string name);
 
     void sendDataToHighScoreServer(const std::string& name) const;
 

@@ -32,6 +32,11 @@ private:
     HighScoreMenu m_menu;
     HUD m_HUD;
 
+    bool m_showPoints;
+    bool m_offsetAdded;
+    sf::Vector2f m_offset;
+    int m_clicked;
+
     EnterPauseStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterHighScoreStateInformation m_highScoreStateInfo;
@@ -42,6 +47,8 @@ private:
     std::unique_ptr<BackgroundLoader<HighScoreState>> m_onlineHighscoreLoaderJob;
     void clearHighScore();
     void loadOnlineHighscore();
+
+    void buildSubWindowElements();
 };
 
 #endif // HIGHSCORESTATE_HPP

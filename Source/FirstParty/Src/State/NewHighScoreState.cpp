@@ -63,7 +63,7 @@ StateChangeInformation NewHighScoreState::update(const float time)
     if(m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).isFinished() || clicked == NewHighScoreMenu::BUTTON_OK)
     {
         m_lastName = m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).getText();
-        addNewHighScore(m_level->getPoints(), m_lastName);
+        addNewHighScore(m_level->getPoints(), m_level->getLevelEndingTime(), m_lastName);
 
         m_stateInfo.m_levelNumber = m_level->number();
         m_stateInfo.m_level = m_level;
@@ -109,7 +109,7 @@ void NewHighScoreState::draw(const DrawParameter& params)
     m_menu.draw(params);
 }
 
-void NewHighScoreState::addNewHighScore(int points, std::string name)
+void NewHighScoreState::addNewHighScore(int points, float time, std::string name)
 {
     if(name == "")
     {
@@ -117,7 +117,8 @@ void NewHighScoreState::addNewHighScore(int points, std::string name)
         return;
     }
 
-    int newPlace = 0;
+    int newPlacePoints = 0;
+    int newPlaceTime = 0;
     int number = m_level->number();
     
     std::string mode = "NAM";
@@ -127,33 +128,98 @@ void NewHighScoreState::addNewHighScore(int points, std::string name)
 
     sendDataToHighScoreServer(name);
 
-    for(int i = 5; i > 0; --i)
+    if(mode == "NAM")
     {
-        std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + mode;
-        if(points > State::m_config.get<int>(term))
-            newPlace = i;
-    }
+        for(int i = 5; i > 0; --i)
+        {
+            std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + mode + "P";
+            if(points > State::m_config.get<int>(term))
+                newPlacePoints = i;
+        }
 
-    if(newPlace == 0)
+        for(int i = 5; i > 0; --i)
+        {
+            std::string term = "HighScoreLevel" + utility::toString(number) + "_Time" + utility::toString(i) + mode + "T";
+            if(time < State::m_config.get<float>(term))
+                newPlaceTime = i;
+        }
+    }
+    else if(mode == "TAM")
+    {
+        for(int i = 5; i > 0; --i)
+        {
+            std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + mode;
+            if(points > State::m_config.get<int>(term))
+                newPlacePoints = i;
+        }
+    }
+    else
         return;
 
-    for(int i = 5; i > newPlace; --i)
+    if(mode == "NAM" && (newPlacePoints > 0 || newPlaceTime > 0))
     {
-        std::string termPoints1 = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i - 1) + mode;
-        std::string termName1 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i - 1) + mode;
+        if(newPlacePoints > 0)
+        {
+            for(int i = 5; i > newPlacePoints; --i)
+            {
+                std::string termPoints1 = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i - 1) + mode + "P";
+                std::string termName1 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i - 1) + mode + "P";
 
-        std::string termPoints2 = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + mode;
-        std::string termName2 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i) + mode;
+                std::string termPoints2 = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + mode + "P";
+                std::string termName2 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i) + mode + "P";
 
-        State::m_config.set<int>(termPoints2, State::m_config.get<int>(termPoints1));
-        State::m_config.set<std::string>(termName2, State::m_config.get<std::string>(termName1));
+                State::m_config.set<int>(termPoints2, State::m_config.get<int>(termPoints1));
+                State::m_config.set<std::string>(termName2, State::m_config.get<std::string>(termName1));
+            }
+
+            std::string termPoints = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(newPlacePoints) + mode + "P";
+            std::string termName = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(newPlacePoints) + mode + "P";
+
+            State::m_config.set<int>(termPoints, points);
+            State::m_config.set<std::string>(termName, name);
+        }
+
+        if(newPlaceTime > 0)
+        {
+            for(int i = 5; i > newPlaceTime; --i)
+            {
+                std::string termTime1 = "HighScoreLevel" + utility::toString(number) + "_Time" + utility::toString(i - 1) + mode + "T";
+                std::string termName1 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i - 1) + mode + "T";
+
+                std::string termTime2 = "HighScoreLevel" + utility::toString(number) + "_Time" + utility::toString(i) + mode + "T";
+                std::string termName2 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i) + mode + "T";
+
+                State::m_config.set<float>(termTime2, State::m_config.get<float>(termTime1));
+                State::m_config.set<std::string>(termName2, State::m_config.get<std::string>(termName1));
+            }
+
+            std::string termTime = "HighScoreLevel" + utility::toString(number) + "_Time" + utility::toString(newPlaceTime) + mode + "T";
+            std::string termName = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(newPlaceTime) + mode + "T";
+
+            State::m_config.set<float>(termTime, time);
+            State::m_config.set<std::string>(termName, name);
+        }
     }
+    else if(mode == "TAM")
+    {
+        for(int i = 5; i > newPlacePoints; --i)
+        {
+            std::string termPoints1 = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i - 1) + mode;
+            std::string termName1 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i - 1) + mode;
 
-    std::string termPoints = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(newPlace) + mode;
-    std::string termName = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(newPlace) + mode;
+            std::string termPoints2 = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + mode;
+            std::string termName2 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i) + mode;
 
-    State::m_config.set<int>(termPoints, points);
-    State::m_config.set<std::string>(termName, name);
+            State::m_config.set<int>(termPoints2, State::m_config.get<int>(termPoints1));
+            State::m_config.set<std::string>(termName2, State::m_config.get<std::string>(termName1));
+        }
+
+        std::string termPoints = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(newPlacePoints) + mode;
+        std::string termName = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(newPlacePoints) + mode;
+
+        State::m_config.set<int>(termPoints, points);
+        State::m_config.set<std::string>(termName, name);
+    }
 }
 
 void NewHighScoreState::sendDataToHighScoreServer(const std::string& name) const
@@ -162,7 +228,7 @@ void NewHighScoreState::sendDataToHighScoreServer(const std::string& name) const
 
     sf::Http http;
     http.setHost(m_config.get<std::string>("HighscoreServer"));
-    
+
     sf::Http::Request request(m_config.get<std::string>("HighscorePath") + "add_highscore.php?" + dataString);
 
     sf::Http::Response response = http.sendRequest(request);

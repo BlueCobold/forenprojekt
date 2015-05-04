@@ -5,6 +5,7 @@
 #include "../rendering/transitions/RandomTransition.hpp"
 #include "../model/Level.hpp"
 #include "../gui/CheckBox.hpp"
+#include "../gui/SubWindow.hpp"
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -20,9 +21,18 @@ HighScoreState::HighScoreState(sf::RenderWindow& screen,
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_onlineHighscore(false),
-    m_onlineHighscoreLoaderJob(nullptr)
+    m_onlineHighscoreLoaderJob(nullptr),
+    m_showPoints(true),
+    m_clicked(-1),
+    m_offset(0, 60),
+    m_offsetAdded(false)
 { 
-        m_onlineHighscoreLoaderJob = std::unique_ptr<BackgroundLoader<HighScoreState>>(new BackgroundLoader<HighScoreState>(&HighScoreState::loadOnlineHighscore, *this));
+    m_onlineHighscoreLoaderJob = std::unique_ptr<BackgroundLoader<HighScoreState>>(new BackgroundLoader<HighScoreState>(&HighScoreState::loadOnlineHighscore, *this));
+
+    auto buttonFunc = [&](const Button& sender){ m_clicked = sender.getId(); };
+    m_menu.getButton(HighScoreMenu::BUTTON_TAB_TIME).registerOnPressed(buttonFunc);
+    m_menu.getButton(HighScoreMenu::BUTTON_TAB_POINTS).registerOnPressed(buttonFunc);
+    m_menu.getButton(HighScoreMenu::BUTTON_CLOSE).registerOnPressed(buttonFunc);
 }
 
 HighScoreState::~HighScoreState()
@@ -36,6 +46,15 @@ void HighScoreState::onEnter(const EnterStateInformation* enterInformation, cons
     m_highScoreStateInfo.m_comeFromState = info->m_comeFromState;
     m_highScoreStateInfo.m_level = info->m_level;
     m_highScoreStateInfo.m_levelNumber = info->m_level->number();
+
+    if(m_highScoreStateInfo.m_level->isTimeAttackMode())
+        m_showPoints = true;
+
+    bool showButton = !m_highScoreStateInfo.m_level->isTimeAttackMode();
+    m_menu.getButton(HighScoreMenu::BUTTON_TAB_TIME).setVisible(showButton);
+    m_menu.getButton(HighScoreMenu::BUTTON_TAB_POINTS).setVisible(showButton);
+
+    buildSubWindowElements();
 
     State::onEnter(info, time);
     loadHighScore();
@@ -54,13 +73,27 @@ StateChangeInformation HighScoreState::update(const float time)
 
     std::string text(utility::translateKey("gui_loading_screen"));
 
+    m_clicked = -1;
+
     updateTime(time - m_timeDiff);
-
-    int clicked = -1;
-    m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
     m_menu.update(m_screen, getPassedTime());
+    
+    if(m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).getChecked())
+    {
+        if(m_clicked == HighScoreMenu::BUTTON_TAB_TIME)
+        {
+            m_showPoints = false;
+            loadHighScore();
+        }
 
-    if(clicked == HighScoreMenu::BUTTON_CLOSE)
+        if(m_clicked == HighScoreMenu::BUTTON_TAB_POINTS)
+        {
+            m_showPoints = true;
+            loadHighScore();
+        }
+    }
+
+    if(m_clicked == HighScoreMenu::BUTTON_CLOSE)
     { 
         m_stateInfo.m_prepareOnly = true;
         m_stateInfo.m_level = m_highScoreStateInfo.m_level;
@@ -130,17 +163,25 @@ void HighScoreState::loadHighScore()
 
     m_menu.getLabel(HighScoreMenu::LABEL_LOADING).setText("");
 
-    std::string mode = "NAM";
+    std::string mode = "NAMP";
+
+    if(!m_showPoints)
+        mode = "NAMT";
 
     if(m_highScoreStateInfo.m_level->isTimeAttackMode())
         mode = "TAM";
 
     for(int i = 0; i < 5; ++i)
     {
+        std::string text = "";
         // read the place data from stash.dat
         m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + mode));
         // reade the point data from stash.dat
-        m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(State::m_config.get<std::string>("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + mode));
+        if(m_showPoints)
+            text = State::m_config.get<std::string>("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + mode);
+        else
+            text = utility::floatToPlayTimeString(State::m_config.get<float>("HighScoreLevel" + number + "_Time" + utility::toString(i + 1) + mode));
+        m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(text);
     }
 }
 void HighScoreState::loadOnlineHighscore()
@@ -181,5 +222,33 @@ void HighScoreState::clearHighScore()
     {
         m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText("");
         m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText("");
+    }
+}
+
+void HighScoreState::buildSubWindowElements()
+{
+    if(!m_highScoreStateInfo.m_level->isTimeAttackMode() && !m_offsetAdded)
+    {
+        for(int i = 0; i < 5; ++i)
+        {
+            // read the place data from online server
+            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setPosition(m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).getPosition() + m_offset);
+            // read the point data from online server
+            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setPosition(m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).getPosition() + m_offset);
+        }
+        m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).setInnerHeight(m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).getInnerHeight() + static_cast<int>(m_offset.y));
+        m_offsetAdded = true;
+    }
+    else if(m_highScoreStateInfo.m_level->isTimeAttackMode() && m_offsetAdded)
+    {
+        for(int i = 0; i < 5; ++i)
+        {
+            // read the place data from online server
+            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setPosition(m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).getPosition() - m_offset);
+            // read the point data from online server
+            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setPosition(m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).getPosition() - m_offset);
+        }
+        m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).setInnerHeight(m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).getInnerHeight() - static_cast<int>(m_offset.y));
+        m_offsetAdded = false;
     }
 }

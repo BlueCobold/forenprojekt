@@ -199,6 +199,7 @@ void PlayState::onEvent(utility::Event::EventType type)
 bool PlayState::checkForNewHighscore()
 {
     int points = m_level->getPoints();
+    int time = m_level->getLevelEndingTime();
     unsigned int number = m_level->number();
     if(m_level->isTimeAttackMode())
     {
@@ -213,8 +214,9 @@ bool PlayState::checkForNewHighscore()
     {
         for(int i = 5; i > 0; --i)
         {
-            std::string term = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + "NAM";
-            if(points > State::m_config.get<int>(term))
+            std::string termPoints = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + "NAMP";
+            std::string termTime = "HighScoreLevel" + utility::toString(number) + "_Points" + utility::toString(i) + "NAMT";
+            if(points > State::m_config.get<int>(termPoints) || time < State::m_config.get<float>(termTime))
                 return true;
         }
     }

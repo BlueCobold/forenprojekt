@@ -102,6 +102,8 @@ public:
     void onEnter();
 
     const std::list<GameEvent>& getEventsForOnlineHighscore() const;
+
+    const float getLevelEndingTime() const;
 private:
 #ifdef LEVELTESTING
     std::string m_filename;

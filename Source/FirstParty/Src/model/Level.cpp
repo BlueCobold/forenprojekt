@@ -110,6 +110,9 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     if(m_totalTime > 0)
         m_remainingTime -= m_timeStep;
 
+    if(!m_levelPass)
+        m_levelEndingTime += m_timeStep;
+
     m_velocityIterations = std::max(1, 4);
     m_positionIterations = m_velocityIterations;
 
@@ -122,9 +125,6 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         updateGoodyCharges();
 
     m_ball->setInvulnerable(m_invulnerableGoody.isActive());
-
-    if(!m_levelPass)
-        m_levelEndingTime = elapsedTime + 1.0f;
 
     int steps = std::min(20, std::max(1, static_cast<int>(ceilf(m_timeStep / (1 / (60.0f * 2))))));
     float delta = 0;
@@ -725,3 +725,11 @@ std::string Level::getFileName()
     return m_filename;
 }
 #endif
+
+const float Level::getLevelEndingTime() const
+{
+    if(m_levelPass)
+        return m_levelEndingTime - 1.0f;
+    else
+        return -1.f;
+}

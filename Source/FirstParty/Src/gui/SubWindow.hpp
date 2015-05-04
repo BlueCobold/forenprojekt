@@ -37,6 +37,10 @@ public:
     virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 
     MenuPanel* getPanel();
+
+    int getInnerHeight() const;
+    void setInnerHeight(int innerHeight);
+
 protected:
 
     virtual void onPositionChanged() override;

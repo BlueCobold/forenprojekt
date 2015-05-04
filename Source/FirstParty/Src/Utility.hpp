@@ -110,6 +110,8 @@ namespace utility
         };
         EventType m_eventType;
     };
+    // output 00:00:000 -> MIN:SEC:MILLISEC
+    std::string floatToPlayTimeString(float playtime);
 } // namespace utility
 
 #endif // UTILITY_HPP

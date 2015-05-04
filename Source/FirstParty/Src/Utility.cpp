@@ -82,4 +82,41 @@ namespace utility
             view.getSize().y / target.getSize().y));
         return view;
     }
+
+    std::string floatToPlayTimeString(float playtime)
+    {
+        unsigned int minute;
+        unsigned int second;
+        unsigned int milliSecond;
+        std::string result = "";
+
+        milliSecond = static_cast<unsigned int>(playtime * 1000);
+        second = milliSecond / 1000;
+        milliSecond = milliSecond % 1000;
+        minute = second / 60;
+        second = second % 60;
+
+        if(minute < 10)
+            result.append("0");
+
+        result.append(utility::toString(minute));
+
+        if(second < 10)
+            result.append(":0");
+        else
+            result.append(":");
+
+        result.append(utility::toString(second));
+
+        if(milliSecond < 10)
+            result.append(":00");
+        else if(milliSecond < 100)
+            result.append(":0");
+        else
+            result.append(":");
+
+        result.append(utility::toString(milliSecond));
+
+        return result;
+    }
 }

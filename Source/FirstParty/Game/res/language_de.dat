@@ -129,6 +129,8 @@ gui_soundsetup = Sound
 gui_gameplaysetup = Steuerung
 gui_highscore_skip = Abbruch
 gui_highscore_ok = Ok
+gui_highscore_time = Zeit
+gui_highscore_points = Punkte
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilber: %\r\nbronze: %

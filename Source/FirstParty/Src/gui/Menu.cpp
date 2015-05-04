@@ -184,3 +184,8 @@ void Menu::updateLayout()
     m_template.background.setPosition(m_currentPosition);
     m_panel.updateLayout(m_currentPosition);
 }
+
+SubWindow& Menu::getSubWindow(int id) const
+{
+    return *find<SubWindow>(id, MenuElementType::SubWindow);
+}
