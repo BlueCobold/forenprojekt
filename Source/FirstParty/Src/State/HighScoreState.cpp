@@ -92,6 +92,24 @@ StateChangeInformation HighScoreState::update(const float time)
             loadHighScore();
         }
     }
+    else if(m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).getChecked())
+    {
+        if(m_clicked == HighScoreMenu::BUTTON_TAB_TIME)
+        {
+            m_showPoints = false;
+            clearHighScore();
+            m_onlineHighscoreLoaderJob->reset();
+            m_onlineHighscoreLoaderJob->run();
+        }
+
+        if(m_clicked == HighScoreMenu::BUTTON_TAB_POINTS)
+        {
+            m_showPoints = true;
+            clearHighScore();
+            m_onlineHighscoreLoaderJob->reset();
+            m_onlineHighscoreLoaderJob->run();
+        }
+    }
 
     if(m_clicked == HighScoreMenu::BUTTON_CLOSE)
     { 
@@ -202,17 +220,26 @@ void HighScoreState::loadOnlineHighscore()
 
     FileReader onlineString(response.getBody(), false);
 
-    std::string mode = "NAM";
+    std::string mode = "NAMP";
+
+    if(!m_showPoints)
+        mode = "NAMT";
 
     if(m_highScoreStateInfo.m_level->isTimeAttackMode())
         mode = "TAM";
 
     for(int i = 0; i < 5; ++i)
     {
+        std::string text = "";
         // read the place data from online server
         m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setText(onlineString.get("HighScoreLevel" + number + "_Name" + utility::toString(i + 1) + mode));
         // read the point data from online server
-        m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(onlineString.get("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + mode));
+        if(m_showPoints)
+            text = onlineString.get("HighScoreLevel" + number + "_Points" + utility::toString(i + 1) + mode);
+        else
+            text = utility::floatToPlayTimeString(utility::stringTo<float>(onlineString.get("HighScoreLevel" + number + "_Time" + utility::toString(i + 1) + mode)));
+
+        m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setText(text);
     }
 }
 
@@ -231,9 +258,7 @@ void HighScoreState::buildSubWindowElements()
     {
         for(int i = 0; i < 5; ++i)
         {
-            // read the place data from online server
             m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setPosition(m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).getPosition() + m_offset);
-            // read the point data from online server
             m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setPosition(m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).getPosition() + m_offset);
         }
         m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).setInnerHeight(m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).getInnerHeight() + static_cast<int>(m_offset.y));
@@ -243,9 +268,7 @@ void HighScoreState::buildSubWindowElements()
     {
         for(int i = 0; i < 5; ++i)
         {
-            // read the place data from online server
             m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setPosition(m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).getPosition() - m_offset);
-            // read the point data from online server
             m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setPosition(m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).getPosition() - m_offset);
         }
         m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).setInnerHeight(m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).getInnerHeight() - static_cast<int>(m_offset.y));

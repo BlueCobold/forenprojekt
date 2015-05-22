@@ -111,7 +111,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         m_remainingTime -= m_timeStep;
 
     if(!m_levelPass)
-        m_levelEndingTime += m_timeStep;
+        m_levelPlayTime += m_timeStep;
 
     m_velocityIterations = std::max(1, 4);
     m_positionIterations = m_velocityIterations;
@@ -125,6 +125,9 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
         updateGoodyCharges();
 
     m_ball->setInvulnerable(m_invulnerableGoody.isActive());
+
+    if(!m_levelPass)
+        m_levelEndingTime = elapsedTime + 1.0f;
 
     int steps = std::min(20, std::max(1, static_cast<int>(ceilf(m_timeStep / (1 / (60.0f * 2))))));
     float delta = 0;
@@ -195,7 +198,7 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 #endif
 
     if(gravityEvent != m_gravityGoody.isActive())
-        m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::GravityGoody);
+        m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::GravityGoody);
 }
 
 void Level::adjustView(sf::RenderTarget& screen)
@@ -224,7 +227,7 @@ void Level::respawnDeadBalls()
             if(!(m_remainingBall < 1 && m_remainingBall > -1))
                 createLabelAt(m_ball, "red", -10);
 
-            m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::LostBall);
+            m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::LostBall);
         }
 
         const Ball* ball = dynamic_cast<const Ball*>((*it).get());
@@ -361,7 +364,7 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
         {
             m_multiHit = 0;
             entityB->setValueOf("hitTeeterTime", getPassedTime());
-            m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTeeter);
+            m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTeeter);
         }
         else if(entityA->getType() == Entity::BonusTarget)
             killBonusTarget(entityA);
@@ -379,7 +382,7 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
         {
             m_multiHit = 0;
             entityA->setValueOf("hitTeeterTime", getPassedTime());
-            m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTeeter);
+            m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTeeter);
         }
         else if(entityB->getType() == Entity::BonusTarget)
             killBonusTarget(entityB);
@@ -402,10 +405,10 @@ void Level::killTarget(Entity* target)
     if(m_ball->isSpeeding())
     {
         earned = static_cast<int>(earned * 1.5);
-        m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTargetSpeeding);
+        m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTargetSpeeding);
     }
     else
-        m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTarget);
+        m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTarget);
 
     m_points += earned;
     m_multiHit++;
@@ -419,10 +422,10 @@ void Level::killBonusTarget(Entity* target)
     if(m_ball->isSpeeding())
     {
         earned = static_cast<int>(earned * 1.5);
-        m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitBonusTargetSpeeding);
+        m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitBonusTargetSpeeding);
     }
     else
-        m_eventRecorder.addEvent(m_timeStep + m_lastTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitBonusTarget);
+        m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitBonusTarget);
 
     m_points += earned;
     m_multiHit++;
@@ -726,10 +729,10 @@ std::string Level::getFileName()
 }
 #endif
 
-const float Level::getLevelEndingTime() const
+const float Level::getLevelPlayTime() const
 {
     if(m_levelPass)
-        return m_levelEndingTime - 1.0f;
+        return m_levelPlayTime;
     else
         return -1.f;
 }

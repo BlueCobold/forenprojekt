@@ -103,7 +103,7 @@ public:
 
     const std::list<GameEvent>& getEventsForOnlineHighscore() const;
 
-    const float getLevelEndingTime() const;
+    const float getLevelPlayTime() const;
 private:
 #ifdef LEVELTESTING
     std::string m_filename;
@@ -275,6 +275,7 @@ private:
 
     float m_lastTime;
     float m_levelEndingTime;
+    float m_levelPlayTime;
 
     AppConfig& m_config;
 

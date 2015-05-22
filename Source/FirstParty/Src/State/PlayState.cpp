@@ -199,7 +199,7 @@ void PlayState::onEvent(utility::Event::EventType type)
 bool PlayState::checkForNewHighscore()
 {
     int points = m_level->getPoints();
-    int time = m_level->getLevelEndingTime();
+    float time = m_level->getLevelPlayTime();
     unsigned int number = m_level->number();
     if(m_level->isTimeAttackMode())
     {
