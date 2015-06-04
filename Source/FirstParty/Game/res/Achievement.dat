@@ -1,0 +1,53 @@
+<achievements>
+	<config>
+		<points pointstep="500" maxsteps="6" />
+		<stars max="3" />
+		<leveltam timestep="180000" maxsteps="3" />
+		<levelnam timestep="10000" maxsteps="3" />
+	</config>
+	<achievement key="ach_hit_target_insum" condition="Hit" object="Target" specifically="InSum" gold="500" silver="250" bronze="100" />
+	<achievement key="ach_hit_target_atonce_2" condition="Hit" object="Target" specifically="AtOnce = 2" gold="50" silver="25" bronze="10" />
+	<achievement key="ach_hit_target_atonce_3" condition="Hit" object="Target" specifically="AtOnce = 3" gold="50" silver="25" bronze="10" />
+	<achievement key="ach_hit_target_atonce_4" condition="Hit" object="Target" specifically="AtOnce = 4" gold="50" silver="25" bronze="10" />
+	<achievement key="ach_hit_target_atonce_5" condition="Hit" object="Target" specifically="AtOnce = 5" gold="50" silver="25" bronze="10" />
+	<achievement key="ach_hit_target_atonce_6" condition="Hit" object="Target" specifically="AtOnce = 6" gold="50" silver="25" bronze="10" />
+	<achievement key="ach_hit_bonustarget_insum" condition="Hit" object="BonusTarget" specifically="InSum" gold="500" silver="250" bronze="100" />
+	<achievement key="ach_hit_bonustarget_atonce_2" condition="Hit" object="BonusTarget" specifically="AtOnce = 2" gold="50" silver="25" bronze="10" />
+	<achievement key="ach_hit_bonustarget_atonce_3" condition="Hit" object="BonusTarget" specifically="AtOnce = 3" gold="50" silver="25" bronze="10" />
+	<achievement key="ach_hit_bonustarget_atonce_4" condition="Hit" object="BonusTarget" specifically="AtOnce = 4" gold="50" silver="25" bronze="10" />
+	<achievement key="ach_hit_bonustarget_atonce_5" condition="Hit" object="BonusTarget" specifically="AtOnce = 5" gold="50" silver="25" bronze="10" />
+	<achievement key="ach_hit_bonustarget_atonce_6" condition="Hit" object="BonusTarget" specifically="AtOnce = 6" gold="50" silver="25" bronze="10" />
+	<achievement key="ach_collect_coins_insum" condition="Collect" object="Coins" specifically="InSum" gold="1000000" silver="250000" bronze="100000" />
+	<achievement key="ach_collect_coins_atonce_500" condition="Collect" object="Coins" specifically="AtOnce = 500" gold="550" silver="275" bronze="55" />
+	<achievement key="ach_collect_coins_atonce_1000" condition="Collect" object="Coins" specifically="AtOnce = 1000" gold="400" silver="200" bronze="40" />
+	<achievement key="ach_collect_coins_atonce_1500" condition="Collect" object="Coins" specifically="AtOnce = 1500" gold="250" silver="125" bronze="25" />
+	<achievement key="ach_collect_coins_atonce_2000" condition="Collect" object="Coins" specifically="AtOnce = 2500" gold="100" silver="50" bronze="10" />
+	<achievement key="ach_collect_coins_atonce_2500" condition="Collect" object="Coins" specifically="AtOnce = 3000" gold="100" silver="50" bronze="10" />
+	<achievement key="ach_collect_coins_incash" condition="Collect" object="Coins" specifically="InCash" gold="500000" silver="100000" bronze="10000" />
+	<achievement key="ach_collect_stars_insum" condition="Collect" object="Stars" specifically="InSum" gold="100" silver="50" bronze="25" />
+	<achievement key="ach_collect_stars_atonce_3" condition="Collect" object="Stars" specifically="AtOnce = 3" gold="50" silver="25" bronze="10" />
+	<achievement key="ach_collect_stars_atonce_2" condition="Collect" object="Stars" specifically="AtOnce = 2" gold="100" silver="50" bronze="25" />
+	<achievement key="ach_collect_stars_atonce_1" condition="Collect" object="Stars" specifically="AtOnce = 1" gold="250" silver="100" bronze="50" />
+	<achievement key="ach_loose_ball_insum" condition="Loose" object="Ball" specifically="InSum" gold="100" silver="50" bronze="25" />
+	<achievement key="ach_finish_level_insum" condition="Finish" object="Level" specifically="InSum" gold="24" silver="12" bronze="6" />
+	<achievement key="ach_finish_levelnam_insum" condition="Finish" object="LevelNAM" specifically="InSum" gold="12" silver="6" bronze="3" />
+	<achievement key="ach_finish_leveltam_insum" condition="Finish" object="LevelTAM" specifically="InSum" gold="12" silver="6" bronze="3" />
+	<achievement key="ach_finish_leveltam_minoftime_180000" condition="Finish" object="LevelTAM" specifically="MinOfTime = 180000" gold="12" silver="6" bronze="3" />
+	<achievement key="ach_finish_leveltam_minoftime_360000" condition="Finish" object="LevelTAM" specifically="MinOfTime = 360000" gold="9" silver="5" bronze="2" />
+	<achievement key="ach_finish_leveltam_minoftime_540000" condition="Finish" object="LevelTAM" specifically="MinOfTime = 540000" gold="6" silver="4" bronze="1" />
+	<achievement key="ach_finish_levelnam_maxoftime_30000" condition="Finish" object="LevelNAM" specifically="MaxOfTime = 30000" gold="12" silver="6" bronze="3" />
+	<achievement key="ach_finish_levelnam_maxoftime_20000" condition="Finish" object="LevelNAM" specifically="MaxOfTime = 20000" gold="9" silver="5" bronze="2" />
+	<achievement key="ach_finish_levelnam_maxoftime_10000" condition="Finish" object="LevelNAM" specifically="MaxOfTime = 10000" gold="6" silver="4" bronze="1" />
+	<achievement key="ach_loose_levelnam_insum" condition="Loose" object="LevelNAM" specifically="InSum" gold="12" silver="6" bronze="3" />
+	<achievement key="ach_loose_leveltam_insum" condition="Loose" object="LevelTAM" specifically="InSum" gold="12" silver="6" bronze="3" />
+	<achievement key="ach_use_gravetygoody_insum" condition="Use" object="GravityGoody" specifically="InSum" gold="100" silver="50" bronze="25" />
+	<achievement key="ach_use_invulnerablegoody_insum" condition="Use" object="InvulnerableGoody" specifically="InSum" gold="100" silver="50" bronze="25" />
+	<achievement key="ach_use_extraballgoody_insum" condition="Use" object="ExtraBallGoody" specifically="InSum" gold="100" silver="50" bronze="25" />
+	<achievement key="ach_use_extratimegoody_insum" condition="Use" object="ExtraTimeGoody" specifically="InSum" gold="100" silver="50" bronze="25" />
+	<achievement key="ach_use_godygeneral_insum" condition="Use" object="GoodyGenaral" specifically="InSum" gold="500" silver="250" bronze="75" />
+	<achievement key="ach_buy_godygeneral_insum" condition="Buy" object="GoodyGenaral" specifically="InSum" gold="500" silver="250" bronze="75" />
+	<achievement key="ach_buy_godygeneral_incash" condition="Buy" object="GoodyGenaral" specifically="InCash" gold="50000" silver="25000" bronze="10000" />
+	<achievement key="ach_buy_invulnerablegoody_insum" condition="Buy" object="InvulnerableGoody" specifically="InSum" gold="150" silver="75" bronze="37" />
+	<achievement key="ach_buy_extraballgoody_insum" condition="Buy" object="ExtraBallGoody" specifically="InSum" gold="150" silver="75" bronze="37" />
+	<achievement key="ach_buy_extratimegoody_insum" condition="Buy" object="ExtraTimeGoody" specifically="InSum" gold="150" silver="75" bronze="37" />
+</achievements>
