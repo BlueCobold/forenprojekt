@@ -101,7 +101,7 @@ public:
 
     void onEnter();
 
-    const std::list<GameEvent>& getEventsForOnlineHighscore() const;
+    const std::list<GameEvent>& getGameEvents() const;
 
     const float getLevelPlayTime() const;
 private:

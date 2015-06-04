@@ -5,6 +5,7 @@
 #include "../resources/ResourceManager.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
 #include "../gui/InputBox.hpp"
+#include "../resources/AchievementManager.hpp"
 #ifdef LEVELTESTING
 #include "../resources/OpenFileDialoge.hpp"
 #endif
@@ -16,13 +17,15 @@
 
 LevelPassState::LevelPassState(sf::RenderWindow& screen, 
                                ResourceManager& resourceManager, 
-                               AppConfig& config) :
+                               AppConfig& config,
+                               AchievementManager& achievementManager ) :
     State(screen, resourceManager, config),
     m_background(nullptr),
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_replay(false),
-    m_gotCoins(false)
+    m_gotCoins(false),
+    m_achievementManager(achievementManager)
 {
 }
 
@@ -57,6 +60,8 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
             m_config.set<int>("UnlockedLevel", m_level->number() + 1);
 
         m_gotCoins = true;
+
+        setAchievements();
     }
 
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
@@ -158,7 +163,8 @@ StateChangeInformation LevelPassState::update(const float time)
             }
             else
                 m_transitionStateInfo.m_followingState = GameFinishedStateId;
- 
+
+            m_achievementManager.saveValues();
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
 #else
@@ -176,7 +182,8 @@ StateChangeInformation LevelPassState::update(const float time)
         }
         else
             m_transitionStateInfo.m_followingState = GameFinishedStateId;
- 
+
+        m_achievementManager.saveValues();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 #endif
     }
@@ -189,6 +196,7 @@ StateChangeInformation LevelPassState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelPassStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        m_achievementManager.saveValues();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == ReplayMenu::BUTTON_HIGHSCORE)
@@ -220,4 +228,46 @@ void LevelPassState::draw(const DrawParameter& params)
     params.getTarget().draw(whiteRect);
     
     m_menu.draw(params);
+}
+
+void LevelPassState::setAchievements()
+{
+    unsigned int stars = 0;
+    if(m_level->getMedal() == Level::Gold)
+        stars = 3;
+    else if(m_level->getMedal() == Level::Silver)
+        stars = 2;
+    else if(m_level->getMedal() == Level::Bronze)
+        stars = 1;
+
+    m_achievementManager.analyseGameEvents(m_level->getGameEvents());
+
+    if(m_level->isTimeAttackMode())
+        m_achievementManager.addValueTo(Achievement::Finish, Achievement::InSum, Achievement::LevelTAM, 1);
+    else
+        m_achievementManager.addValueTo(Achievement::Finish, Achievement::InSum, Achievement::LevelNAM, 1);
+
+    m_achievementManager.addValueTo(Achievement::Finish, Achievement::InSum, Achievement::Level, 1);
+    m_achievementManager.addValueTo(Achievement::Collect, Achievement::InSum, Achievement::Coins, m_level->getPoints());
+    m_achievementManager.setValueTo(Achievement::Collect, Achievement::InCash, Achievement::Coins, m_config.get<int>("coins"));
+
+    for(unsigned int i = 1; i < AchievementManager::Max_Loop_Counter; ++i)
+    {
+        if(static_cast<int>(i * AchievementManager::Points_At_Once_Step) <= m_level->getPoints())
+            m_achievementManager.addValueTo(Achievement::Collect, Achievement::AtOnce, Achievement::Ball, i * AchievementManager::Points_At_Once_Step, 1);
+
+        if(i <= stars && i <= AchievementManager::Stars_At_Once_Max)
+            m_achievementManager.addValueTo(Achievement::Collect, Achievement::AtOnce, Achievement::Stars, i, 1);
+
+        if(i <= AchievementManager::Level_Tam_Min_Of_Time_MaxSteps && m_level->isTimeAttackMode() &&
+           (i * AchievementManager::Level_Tam_Min_Of_Time_Step) <= static_cast<unsigned int>(m_level->getLevelPlayTime() * 1000))
+            m_achievementManager.addValueTo(Achievement::Finish, Achievement::MinOfTime, Achievement::LevelTAM, i * AchievementManager::Level_Tam_Min_Of_Time_Step, 1);
+
+        if(i <= AchievementManager::Level_Nam_Max_Of_Time_MaxSteps && !m_level->isTimeAttackMode() &&
+           (i * AchievementManager::Level_Nam_Max_Of_Time_Step) >= static_cast<unsigned int>(m_level->getLevelPlayTime() * 1000))
+            m_achievementManager.addValueTo(Achievement::Finish, Achievement::MaxOfTime, Achievement::LevelNAM, i * AchievementManager::Level_Nam_Max_Of_Time_Step, 1);
+    }
+
+    m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::Ball, m_level->getLostBalls());
+    m_achievementManager.addValueTo(Achievement::Collect, Achievement::InSum, Achievement::Stars, stars);
 }

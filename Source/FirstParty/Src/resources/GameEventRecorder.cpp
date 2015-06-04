@@ -20,7 +20,7 @@ void GameEventRecorder::clearList()
     m_gameEventList.clear();
 }
 
-const std::list<GameEvent>& GameEventRecorder::getEventsForOnlineHighscore() const
+const std::list<GameEvent>& GameEventRecorder::getGameEvents() const
 {
     return m_gameEventList;
 }

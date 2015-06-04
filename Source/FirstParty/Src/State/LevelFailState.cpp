@@ -4,6 +4,7 @@
 #include "../resources/ResourceManager.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
 #include "../model/Level.hpp"
+#include "../resources/AchievementManager.hpp"
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -13,12 +14,14 @@
 
 LevelFailState::LevelFailState(sf::RenderWindow& screen, 
                                ResourceManager& resourceManager, 
-                               AppConfig& config) :
+                               AppConfig& config,
+                               AchievementManager& achievementManager) :
     State(screen, resourceManager, config),
     m_background(nullptr),
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
-    m_replay(false)
+    m_replay(false),
+    m_achievementManager(achievementManager)
 {
 }
 
@@ -39,6 +42,9 @@ void LevelFailState::onEnter(const EnterStateInformation* enterInformation, cons
     m_menu.updateLayout();
     
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
+
+    if(!enterInformation->m_prepareOnly)
+        setAchievements();
 }
 
 StateChangeInformation LevelFailState::update(const float time)
@@ -76,6 +82,7 @@ StateChangeInformation LevelFailState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelFailStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        m_achievementManager.saveValues();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 #else
         m_loadLevelStateInfo.m_prepareOnly = false;
@@ -86,6 +93,7 @@ StateChangeInformation LevelFailState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelFailStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        m_achievementManager.saveValues();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 #endif
     }
@@ -97,6 +105,7 @@ StateChangeInformation LevelFailState::update(const float time)
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_transitionStateInfo.m_comeFromeState = LevelFailStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        m_achievementManager.saveValues();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == FailMenu::BUTTON_HIGHSCORE)
@@ -128,4 +137,17 @@ void LevelFailState::draw(const DrawParameter& params)
     params.getTarget().draw(whiteRect);
 
     m_menu.draw(params);
+}
+
+void LevelFailState::setAchievements()
+{
+    m_achievementManager.analyseGameEvents(m_level->getGameEvents());
+    m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::Ball, m_level->getLostBalls());
+    
+    if(m_level->isTimeAttackMode())
+        m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::LevelTAM, 1);
+    else
+        m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::LevelNAM, 1);
+
+    m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::Level, 1);
 }

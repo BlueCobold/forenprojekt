@@ -28,7 +28,8 @@ enum StateId
     CoinShopStateId,
     HighScoreStateId,
     NewHighScoreStateId,
-    GameFinishedStateId
+    GameFinishedStateId,
+    AchievementStateId
 };
 
 #include "StateChangeInformation.hpp"

@@ -16,6 +16,7 @@
 #include "State/HighScoreState.hpp"
 #include "State/NewHighScoreState.hpp"
 #include "State/GameFinishedState.hpp"
+#include "State/AchievementState.hpp"
 
 #include "resources/AppConfig.hpp"
 
@@ -43,7 +44,8 @@ App::App(AppConfig& config) :
     m_fullscreen(false),
     m_focus(true),
     m_isMinimized(false),
-    m_stateManager(m_screen)
+    m_stateManager(m_screen),
+    m_achievementManager("Achievement.dat", m_config)
 {
     // Cache often used settings
     sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
@@ -84,18 +86,19 @@ App::App(AppConfig& config) :
     m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
     m_stateManager.registerState(PauseStateId, std::unique_ptr<PauseState>(new PauseState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(TransitionStateId, std::unique_ptr<TransitionState>(new TransitionState(m_screen, m_resourceManager, m_config)));
-    m_stateManager.registerState(LevelPassStateId, std::unique_ptr<LevelPassState>(new LevelPassState(m_screen, m_resourceManager, m_config)));
-    m_stateManager.registerState(LevelFailStateId, std::unique_ptr<LevelFailState>(new LevelFailState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.registerState(LevelPassStateId, std::unique_ptr<LevelPassState>(new LevelPassState(m_screen, m_resourceManager, m_config, m_achievementManager)));
+    m_stateManager.registerState(LevelFailStateId, std::unique_ptr<LevelFailState>(new LevelFailState(m_screen, m_resourceManager, m_config, m_achievementManager)));
     m_stateManager.registerState(MainMenuStateId, std::unique_ptr<MainMenuState>(new MainMenuState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(StartStateId, std::unique_ptr<StartState>(new StartState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(OptionMenuStateId, std::unique_ptr<OptionMenuState>(new OptionMenuState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(CreditMenuStateId, std::unique_ptr<CreditMenuState>(new CreditMenuState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(LevelPreviewStateId, std::unique_ptr<LevelPreviewState>(new LevelPreviewState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(LevelSelectStateId, std::unique_ptr<LevelSelectState>(new LevelSelectState(m_screen, m_resourceManager, m_config)));
-    m_stateManager.registerState(CoinShopStateId, std::unique_ptr<CoinShopState>(new CoinShopState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.registerState(CoinShopStateId, std::unique_ptr<CoinShopState>(new CoinShopState(m_screen, m_resourceManager, m_config, m_achievementManager)));
     m_stateManager.registerState(HighScoreStateId, std::unique_ptr<HighScoreState>(new HighScoreState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(NewHighScoreStateId, std::unique_ptr<NewHighScoreState>(new NewHighScoreState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(GameFinishedStateId, std::unique_ptr<GameFinishedState>(new GameFinishedState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.registerState(AchievementStateId, std::unique_ptr<AchievementState>(new AchievementState(m_screen, m_resourceManager, m_config, m_achievementManager)));
     m_stateManager.setState(StartStateId);
     
     m_screen.setMouseCursorVisible(false);

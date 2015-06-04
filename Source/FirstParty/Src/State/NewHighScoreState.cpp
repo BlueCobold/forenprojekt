@@ -247,7 +247,7 @@ const std::string NewHighScoreState::createHighscoreString(const std::string& na
     unsigned int counterTargetSpeeding = 0;
     unsigned int counterBonusTargetSpeeding = 0;
 
-    auto list = m_level->getEventsForOnlineHighscore();
+    auto list = m_level->getGameEvents();
 
     result = "v=" + utility::VERSION + "&name=" + name;
     result.append("&lvl=" + utility::toString(m_level->number()) + "&points=" + utility::toString(m_level->getPoints()));

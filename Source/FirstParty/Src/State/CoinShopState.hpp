@@ -12,11 +12,13 @@
 
 #include <memory>
 
+class AchievementManager;
+
 class CoinShopState : public State
 {
 public:
 
-    CoinShopState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
+    CoinShopState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config, AchievementManager& achievementManager);
     ~CoinShopState();
 
     virtual StateChangeInformation update(const float time);
@@ -33,6 +35,8 @@ private:
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterPlayStateInformation m_levelPreviewInfo;
     EnterPauseStateInformation m_pauseStateInfo;
+
+    AchievementManager& m_achievementManager;
 
     void updateButtons();
     void buy(const Goody::Type type, const std::string& propertyName);

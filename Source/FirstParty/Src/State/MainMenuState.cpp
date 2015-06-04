@@ -122,6 +122,17 @@ StateChangeInformation MainMenuState::update(const float time)
     }
     else if(clicked == MainMenu::BUTTON_CLOSE)
         State::m_screen.close();
+    else if(utility::Keyboard.isKeyDown(sf::Keyboard::A) || utility::Keyboard.isKeyPressed(sf::Keyboard::A))
+    {
+        m_optionStateInfo.m_comeFromState = MainMenuStateId;
+        m_optionStateInfo.m_level = nullptr;
+        m_optionStateInfo.m_prepareOnly = false;
+        m_transitionStateInfo.m_followingState = AchievementStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_optionStateInfo;
+        m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
+        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+    }
 
     return StateChangeInformation::Empty();
 }

@@ -104,6 +104,7 @@ void Level::restartAt(const float time)
 void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 {
     bool gravityEvent = m_gravityGoody.isActive();
+    bool ballInvulnerableEvent = m_invulnerableGoody.isActive();
 
     m_timeStep = elapsedTime - m_lastTime;
 
@@ -158,9 +159,15 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     }
     
     if(m_extraBallGoody.isActive() && m_remainingBall > 0)
+    {
         m_remainingBall++;
+        m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::ExtraBallGoody);
+    }
     if(m_extraTimeGoody.isActive() && m_totalTime > 0)
+    {
+        m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::ExtraTimeGoody);
         m_remainingTime += 30.f;
+    }
 
     if(m_timeAttackMode)
         handleAutoRespawn();
@@ -199,6 +206,10 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
     if(gravityEvent != m_gravityGoody.isActive())
         m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::GravityGoody);
+
+    if(ballInvulnerableEvent != m_invulnerableGoody.isActive())
+        m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::InvulnerableGoody);
+
 }
 
 void Level::adjustView(sf::RenderTarget& screen)
@@ -717,9 +728,9 @@ void Level::onEnter()
     }
 }
 
-const std::list<GameEvent>& Level::getEventsForOnlineHighscore() const
+const std::list<GameEvent>& Level::getGameEvents() const
 {
-    return m_eventRecorder.getEventsForOnlineHighscore();
+    return m_eventRecorder.getGameEvents();
 }
 
 #ifdef LEVELTESTING

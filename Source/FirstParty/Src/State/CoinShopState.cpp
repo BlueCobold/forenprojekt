@@ -8,6 +8,7 @@
 #include "../model/Level.hpp"
 #include "EnterStateInformation.hpp"
 #include "../resources/AppConfig.hpp"
+#include "../resources/AchievementManager.hpp"
 
 #include <memory>
 
@@ -18,11 +19,13 @@
 
 CoinShopState::CoinShopState(sf::RenderWindow& screen,
                              ResourceManager& resourceManager,
-                             AppConfig& config) :
+                             AppConfig& config,
+                             AchievementManager& achievementManager) :
     State(screen, resourceManager, config),
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
-    m_clicked(-1)
+    m_clicked(-1),
+    m_achievementManager(achievementManager)
 {
     auto buttonFunc = [&](const Button& sender){ m_clicked = sender.getId(); };
     m_menu.getButton(CoinShopMenu::BUTTON_GRAVITY_PLUS).registerOnPressed(buttonFunc);
@@ -69,6 +72,20 @@ void CoinShopState::buy(const Goody::Type type, const std::string& propertyKey)
         m_menu.setGoodyCharges(type, charge);
         m_config.set<int>(propertyKey, charge);
         m_config.set<int>("coins", coins - cost);
+        if(Goody::InvulnerableGoody == type)
+            m_achievementManager.addValueTo(Achievement::Buy, Achievement::InSum, Achievement::InvulnerableGoody, 1);
+        else if(Goody::ExtraBallGoody == type)
+            m_achievementManager.addValueTo(Achievement::Buy, Achievement::InSum, Achievement::ExtraBallGoody, 1);
+        else if(Goody::ExtraTimeGoody == type)
+            m_achievementManager.addValueTo(Achievement::Buy, Achievement::InSum, Achievement::ExtraTimeGoody, 1);
+        else if(Goody::GravityGoody == type)
+            m_achievementManager.addValueTo(Achievement::Buy, Achievement::InSum, Achievement::GravityGoody, 1);
+        else
+            throw std::runtime_error(utility::translateKey("InvalidGoody"));
+
+        m_achievementManager.addValueTo(Achievement::Buy, Achievement::InSum, Achievement::GoodyGenaral, 1);
+        m_achievementManager.addValueTo(Achievement::Buy, Achievement::InCash, Achievement::GoodyGenaral, cost);
+        m_achievementManager.saveValues();
     }
 }
 
@@ -83,6 +100,21 @@ void CoinShopState::sell(const Goody::Type type, const std::string& propertyKey)
         m_menu.setGoodyCharges(type, charge);
         m_config.set<int>(propertyKey, charge);
         m_config.set<int>("coins", coins + refund);
+
+        if(Goody::InvulnerableGoody == type)
+            m_achievementManager.addValueTo(Achievement::Sell, Achievement::InSum, Achievement::InvulnerableGoody, 1);
+        else if(Goody::ExtraBallGoody == type)
+            m_achievementManager.addValueTo(Achievement::Sell, Achievement::InSum, Achievement::ExtraBallGoody, 1);
+        else if(Goody::ExtraTimeGoody == type)
+            m_achievementManager.addValueTo(Achievement::Sell, Achievement::InSum, Achievement::ExtraTimeGoody, 1);
+        else if(Goody::GravityGoody == type)
+            m_achievementManager.addValueTo(Achievement::Sell, Achievement::InSum, Achievement::GravityGoody, 1);
+        else
+            throw std::runtime_error(utility::translateKey("InvalidGoody"));
+
+        m_achievementManager.addValueTo(Achievement::Sell, Achievement::InSum, Achievement::GoodyGenaral, 1);
+        m_achievementManager.addValueTo(Achievement::Sell, Achievement::InCash, Achievement::GoodyGenaral, refund);
+        m_achievementManager.saveValues();
     }
 }
 

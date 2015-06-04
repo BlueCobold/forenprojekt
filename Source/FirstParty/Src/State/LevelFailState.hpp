@@ -14,12 +14,17 @@
 
 #include <memory>
 
+class AchievementManager;
+
 /// This is the active game state when the level is done.
 class LevelFailState : public State
 {
 public:
 
-    LevelFailState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
+    LevelFailState(sf::RenderWindow& screen,
+        ResourceManager& resourceManager,
+        AppConfig& config,
+        AchievementManager& achievementManager);
     ~LevelFailState();
 
     virtual StateChangeInformation update(const float time);
@@ -29,6 +34,7 @@ public:
 private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
+    void setAchievements();
 
     std::unique_ptr<sf::Texture> m_background;
     sf::RenderTexture m_renderTexture;
@@ -42,6 +48,8 @@ private:
     EnterHighScoreStateInformation m_highScoreInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterLoadLevelStateInformation m_loadLevelStateInfo;
+
+    AchievementManager& m_achievementManager;
 };
 
 #endif // LEVELFAILSTATE_HPP

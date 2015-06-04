@@ -4,6 +4,7 @@
 #define APP_HPP
 
 #include "resources/ResourceManager.hpp"
+#include "resources/AchievementManager.hpp"
 #include "Utility.hpp" // toString
 #include "State/StateManager.hpp"
 #include "gui/Cursor.hpp"
@@ -62,6 +63,7 @@ private:
 
     ResourceManager m_resourceManager;
     StateManager m_stateManager;
+    AchievementManager m_achievementManager;
 };
 
 #endif // APP_HPP

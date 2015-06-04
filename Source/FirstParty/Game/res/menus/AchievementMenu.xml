@@ -1,0 +1,12 @@
+<menu>
+	<position horizontalpercentage="0.5" verticalpercentage="0.5" offsetx="-255" offsety="-200.5" />
+	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
+	<styles source="Styles.inc"/>
+	<elements>
+		<button id="1" text="gui_mainmenu" style="default" x="261" y="270" />
+		<button id="2" text="" style="arrowright" x="410" y="220" />
+		<button id="3" text="" style="arrowleft" x="110" y="220" />
+		<label id="4" text="gui_label_achievement_name" font="buttonHoverFont" alignment="1" x="255" y="46" />
+		<label id="5" text="gui_label_achievement_counter" font="buttonHoverFont" tooltip="default" tooltiptext="tooltip_coins" alignment="1" x="255" y="227" />
+	</elements>
+</menu>

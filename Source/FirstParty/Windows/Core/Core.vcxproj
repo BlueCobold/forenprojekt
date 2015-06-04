@@ -139,6 +139,7 @@
     <ClInclude Include="..\..\Src\animation\VariableHandler.hpp" />
     <ClInclude Include="..\..\Src\animation\VariableHolder.hpp" />
     <ClInclude Include="..\..\Src\App.hpp" />
+    <ClInclude Include="..\..\Src\gui\AchievementMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\AnimationContainer.hpp" />
     <ClInclude Include="..\..\Src\gui\BitmapFont.hpp" />
     <ClInclude Include="..\..\Src\gui\Button.hpp" />
@@ -249,6 +250,8 @@
     <ClInclude Include="..\..\Src\rendering\transitions\VerticalSpringTransition.hpp" />
     <ClInclude Include="..\..\Src\rendering\transitions\VerticalStripesTransition.hpp" />
     <ClInclude Include="..\..\Src\Resources.h" />
+    <ClInclude Include="..\..\Src\resources\Achievement.hpp" />
+    <ClInclude Include="..\..\Src\resources\AchievementManager.hpp" />
     <ClInclude Include="..\..\Src\resources\AppConfig.hpp" />
     <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp" />
     <ClInclude Include="..\..\Src\resources\Config.hpp" />
@@ -264,6 +267,7 @@
     <ClInclude Include="..\..\Src\resources\SoundBufferManager.hpp" />
     <ClInclude Include="..\..\Src\resources\SpriteSheet.hpp" />
     <ClInclude Include="..\..\Src\ScrollView.hpp" />
+    <ClInclude Include="..\..\Src\State\AchievementState.hpp" />
     <ClInclude Include="..\..\Src\State\CoinShopState.hpp" />
     <ClInclude Include="..\..\Src\State\CreditMenuState.hpp" />
     <ClInclude Include="..\..\Src\State\EnterStateInformation.hpp" />
@@ -303,6 +307,7 @@
     <ClCompile Include="..\..\Src\animation\provider\KeyProvider.cpp" />
     <ClCompile Include="..\..\Src\App.cpp" />
     <ClCompile Include="..\..\Src\Core.cpp" />
+    <ClCompile Include="..\..\Src\gui\AchievementMenu.cpp" />
     <ClCompile Include="..\..\Src\gui\AnimationContainer.cpp" />
     <ClCompile Include="..\..\Src\gui\BitmapFont.cpp" />
     <ClCompile Include="..\..\Src\gui\Button.cpp" />
@@ -381,6 +386,8 @@
     <ClCompile Include="..\..\Src\rendering\transitions\VerticalSlidingStripesTransition.cpp" />
     <ClCompile Include="..\..\Src\rendering\transitions\VerticalSpringTransition.cpp" />
     <ClCompile Include="..\..\Src\rendering\transitions\VerticalStripesTransition.cpp" />
+    <ClCompile Include="..\..\Src\resources\Achievement.cpp" />
+    <ClCompile Include="..\..\Src\resources\AchievementManager.cpp" />
     <ClCompile Include="..\..\Src\resources\AppConfig.cpp" />
     <ClCompile Include="..\..\Src\resources\Config.cpp" />
     <ClCompile Include="..\..\Src\resources\FileReader.cpp" />
@@ -392,6 +399,7 @@
     <ClCompile Include="..\..\Src\resources\ResourceManager.cpp" />
     <ClCompile Include="..\..\Src\resources\SpriteSheet.cpp" />
     <ClCompile Include="..\..\Src\ScrollView.cpp" />
+    <ClCompile Include="..\..\Src\State\AchievementState.cpp" />
     <ClCompile Include="..\..\Src\State\CoinShopState.cpp" />
     <ClCompile Include="..\..\Src\State\CreditMenuState.cpp" />
     <ClCompile Include="..\..\Src\State\GameFinishedState.cpp" />

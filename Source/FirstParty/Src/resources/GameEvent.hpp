@@ -13,7 +13,10 @@ public:
                         HitBonusTargetSpeeding,
                         HitTeeter,
                         LostBall,
-                        GravityGoody};
+                        GravityGoody,
+                        ExtraBallGoody,
+                        ExtraTimeGoody,
+                        InvulnerableGoody};
 private:
     float m_passedTime;
     float m_ballSpeed;

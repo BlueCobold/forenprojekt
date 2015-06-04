@@ -13,12 +13,14 @@
 
 #include <memory>
 
+class AchievementManager;
+
 /// This is the active game state when the level is done.
 class LevelPassState : public State
 {
 public:
 
-    LevelPassState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
+    LevelPassState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config, AchievementManager& achievementManager);
     ~LevelPassState();
 
     virtual StateChangeInformation update(const float time);
@@ -29,6 +31,7 @@ private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
     void addNewHighScore(int points, std::string name);
+    void setAchievements();
 
     std::unique_ptr<sf::Texture> m_background;
     sf::RenderTexture m_renderTexture;
@@ -44,6 +47,8 @@ private:
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterHighScoreStateInformation m_highScoreInfo;
     EnterLoadLevelStateInformation m_loadLevelStateInfo;
+
+    AchievementManager& m_achievementManager;
 
     void setMedal(int medal);
 };

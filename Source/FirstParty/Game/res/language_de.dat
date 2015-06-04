@@ -71,6 +71,11 @@ CannotUseSpriteLayout = Das Sprite-Tag im Animationslayout kann nicht benutzt we
 UnknownPhysicReference = Die Physik-Referenze '%' existiert nicht.
 UnknownGameEvent = Das Spielevent '%' ist nicht bekannt.
 WrongBodyType = Kein statischer oder kinematischer Körper erlaubt in %.
+UnknownAchievementObject = Unbekanntes Errungrnschaftsobjekt: %.
+UnknownAchievementCondition = Unbekannte Errungrnschaftsbedingung: %.
+UnknownAchievementCondition = Unbekannte spezikation für Errungrnschaft: %.
+DoubleAchievement = Es existiert bereits eine Errungenschaft mit der Id: %.
+AchievementLoadError = Ein Fehler trat auf waehrend dem Laden der Datei: %.
 
 [GUI]
 gui_game_paused = Spiel pausiert
@@ -131,6 +136,8 @@ gui_highscore_skip = Abbruch
 gui_highscore_ok = Ok
 gui_highscore_time = Zeit
 gui_highscore_points = Punkte
+gui_label_achievement_name = name
+gui_label_achievement_counter = counter
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilber: %\r\nbronze: %
@@ -171,3 +178,56 @@ betafinished2 = der Beta Version
 betafinished3 = geschafft. Für mehr, 
 betafinished4 = warte bitte auf  
 betafinished5 = den finalen Release.
+
+[info]
+tutorial_info1 = gravity-goody erhoeht die Gravitaion.
+tutorial_info2 = invulnerably-goody der Ball kann nicht zerstört werden.
+tutorial_info3 = extra-time-goody du bekommst 30 Sekunden extra Zeit.
+tutorial_info4 = extra-ball-goody du bekommst 1 Ball extra.
+
+[achievement]
+ach_hit_target_insum = achievement 1
+ach_hit_target_atonce_2 = achievement 2
+ach_hit_target_atonce_3 = achievement 3
+ach_hit_target_atonce_4 = achievement 4
+ach_hit_target_atonce_5 = achievement 5
+ach_hit_target_atonce_6 = achievement 6
+ach_hit_bonustarget_insum = achievement 7
+ach_hit_bonustarget_atonce_2 = achievement 8
+ach_hit_bonustarget_atonce_3 = achievement 9
+ach_hit_bonustarget_atonce_4 = achievement 10
+ach_hit_bonustarget_atonce_5 = achievement 11
+ach_hit_bonustarget_atonce_6 = achievement 12
+ach_collect_coins_insum = achievement 13
+ach_collect_coins_atonce_500 = achievement 15
+ach_collect_coins_atonce_1000 = achievement 16
+ach_collect_coins_atonce_1500 = achievement 17
+ach_collect_coins_atonce_2000 = achievement 18
+ach_collect_coins_atonce_2500 = achievement 19
+ach_collect_coins_incash = achievement 20
+ach_collect_stars_insum = achievement 21
+ach_collect_stars_atonce_3 = achievement 22
+ach_collect_stars_atonce_2 = achievement 23
+ach_collect_stars_atonce_1 = achievement 24
+ach_loose_ball_insum = achievement 25
+ach_finish_level_insum = achievement 26
+ach_finish_levelnam_insum = achievement 27
+ach_finish_leveltam_insum = achievement 28
+ach_finish_leveltam_minoftime_180000 = achievement 29
+ach_finish_leveltam_minoftime_360000 = achievement 30
+ach_finish_leveltam_minoftime_540000 = achievement 31
+ach_finish_levelnam_maxoftime_30000 = achievement 32
+ach_finish_levelnam_maxoftime_20000 = achievement 33
+ach_finish_levelnam_maxoftime_10000 = achievement 34
+ach_loose_levelnam_insum = achievement 35
+ach_loose_leveltam_insum = achievement 36
+ach_use_gravetygoody_insum = achievement 37
+ach_use_invulnerablegoody_insum = achievement 38
+ach_use_extraballgoody_insum = achievement 39
+ach_use_extratimegoody_insum = achievement 40
+ach_use_godygeneral_insum = achievement 41
+ach_buy_godygeneral_insum = achievement 42
+ach_buy_godygeneral_incash = achievement 43
+ach_buy_invulnerablegoody_insum = achievement 44
+ach_buy_extraballgoody_insum = achievement 45
+ach_buy_extratimegoody_insum = achievement 46
