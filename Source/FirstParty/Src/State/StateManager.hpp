@@ -24,14 +24,13 @@ public:
     void registerState(StateId id, std::unique_ptr<State> state);
     void setState(StateId id, EnterStateInformation* enterInformation = nullptr);
 
-    void draw();
+    void draw(const DrawParameter& parameter);
     void update();
     void passEvent(utility::Event::EventType type);
 
 private:
     State* getState(StateId id) const;
 
-    sf::RenderWindow& m_screen;
     sf::Clock m_frametime;
     float m_currentTime;
     std::map<StateId, std::unique_ptr<State>> m_statesById;

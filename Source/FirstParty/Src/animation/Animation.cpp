@@ -26,7 +26,8 @@ Animation::Animation(std::unique_ptr<ValueProvider> provider,
     m_drawOffset(drawOffset),
     m_externalRotation(0.f),
     m_horizontal(horizontal),
-    m_stopOnAlphaZero(false)
+    m_stopOnAlphaZero(false),
+    m_targetBuffer(0)
 {
     m_sprite.setOrigin(origin);
 }
@@ -174,7 +175,7 @@ void Animation::draw(const DrawParameter& param)
     if(param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
     {
         m_stencil.enable();
-        param.getTarget().draw(m_sprite, sf::RenderStates(m_blending));
+        param.getTarget(m_targetBuffer).draw(m_sprite, sf::RenderStates(m_blending));
         m_stencil.disable();
     }
 }
@@ -271,6 +272,11 @@ Animation* Animation::clone() const
 void Animation::setStopOnAlphaZero(bool stop)
 {
     m_stopOnAlphaZero = stop;
+}
+
+void Animation::setBufferId(unsigned int id)
+{
+    m_targetBuffer = id;
 }
 
 void Animation::applyRotation(bool apply)

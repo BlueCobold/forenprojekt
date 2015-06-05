@@ -7,7 +7,6 @@
 #include <sstream>
 
 StateManager::StateManager(sf::RenderWindow& screen) :
-    m_screen(screen),
     m_currentState(nullptr),
     m_currentStateId(None),
     m_currentLevel(nullptr),
@@ -91,10 +90,10 @@ void StateManager::passEvent(utility::Event::EventType type)
     }
 }
 
-void StateManager::draw()
+void StateManager::draw(const DrawParameter& parameter)
 {
-    if(m_currentState !=nullptr )
+    if(m_currentState != nullptr)
     {
-        m_currentState->draw(m_screen);
+        m_currentState->draw(parameter);
     }
 }

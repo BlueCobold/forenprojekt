@@ -68,6 +68,16 @@ App::App(AppConfig& config) :
     // This kind of redundant line prevents a thread-based crash when closing the app.
     // It is based on a known SFML bug: https://github.com/LaurentGomila/SFML/issues/790
     sf::Shader::isAvailable();
+    
+    auto desktopMode = sf::VideoMode::getDesktopMode();
+    auto size = static_cast<int>(desktopMode.width > desktopMode.height ?
+        desktopMode.width : desktopMode.height);
+    auto powerOfTwo = static_cast<int>(powf(2.f,
+        floorf(logf(static_cast<float>(size))/logf(2.f))));
+    if(powerOfTwo < size)
+        powerOfTwo *= 2;
+    m_offscreen1.create(powerOfTwo, powerOfTwo, true);
+    m_offscreen2.create(powerOfTwo, powerOfTwo, true);
 
     m_cursor = std::unique_ptr<Cursor>(new Cursor(m_resourceManager, m_screen));
 
@@ -152,7 +162,11 @@ void App::draw()
     glClearStencil(0);
     glClear(GL_STENCIL_BUFFER_BIT);
 
-    m_stateManager.draw();
+    auto params = DrawParameter(m_screen);
+    params.addTargetBuffer(m_offscreen1);
+    params.addTargetBuffer(m_offscreen2);
+
+    m_stateManager.draw(params);
     m_cursor->draw(m_screen);
 
     m_screen.display();

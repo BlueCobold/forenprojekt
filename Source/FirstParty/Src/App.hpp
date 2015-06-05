@@ -51,6 +51,8 @@ private:
 
 private:
     sf::RenderWindow m_screen;
+    sf::RenderTexture m_offscreen1;
+    sf::RenderTexture m_offscreen2;
     std::unique_ptr<Cursor> m_cursor;
 
     AppConfig& m_config;
