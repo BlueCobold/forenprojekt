@@ -27,6 +27,8 @@ ResourceManager::ResourceManager()
     parseMenus(doc);
     parseSpriteSheet(doc);
     parseLevelFileName(doc);
+    parsePublicKeys(doc);
+    parseHashValues(doc);
 }
 
 BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
@@ -256,4 +258,58 @@ void ResourceManager::parseLevelFileName(tinyxml2::XMLDocument& doc)
 const std::unordered_map<int, std::string>& ResourceManager::getFileNames()
 {
     return m_levelFileNames;
+}
+
+void ResourceManager::parsePublicKeys(tinyxml2::XMLDocument& doc)
+{
+    if(auto keys = doc.FirstChildElement("Keys"))
+    {
+        for(auto it = keys->FirstChildElement("Key");
+            it != nullptr; it = it->NextSiblingElement("Key"))
+        {
+            m_publicKeyKeys.insert(std::make_pair<std::string, std::string>(
+                std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
+        }
+    }
+}
+
+CryptoPP::RSA::PublicKey* ResourceManager::getPublicKey(const std::string& key)
+{
+    auto publicKey = m_publicKeyKeys.find(key);
+    if(publicKey != end(m_publicKeyKeys) && publicKey->first == key)
+    {
+        std::string name = publicKey->first;
+        std::string path = publicKey->second;
+        if(m_publicKeys.exists(name))
+            return m_publicKeys.get(name);
+        else
+        {
+            if(m_publicKeys.load(name, [path, this](){ return loadPublicKey(path); }))
+                return m_publicKeys.get(name);
+        }
+    }
+
+    throw std::runtime_error(utility::replace(utility::translateKey("UnknownPublicKey"), key));
+}
+
+void ResourceManager::parseHashValues(tinyxml2::XMLDocument& doc)
+{
+    if(auto hashValues = doc.FirstChildElement("HashValues"))
+    {
+        for(auto it = hashValues->FirstChildElement("HashValue");
+            it != nullptr; it = it->NextSiblingElement("HashValue"))
+        {
+            m_hashValues.insert(std::make_pair<std::string, std::string>(
+                std::string(it->Attribute("filename")), std::string(it->Attribute("value"))));
+        }
+    }
+}
+
+std::string ResourceManager::getHashValue(const std::string& key)
+{
+    auto result = m_hashValues.find(key);
+    if(result != end(m_hashValues))
+        return result->second;
+
+    throw std::runtime_error(utility::replace(utility::translateKey("UnknownHashValue"), key));
 }

@@ -119,4 +119,22 @@ namespace utility
 
         return result;
     }
+
+    std::string fileToString(const std::string& file)
+    {
+        std::string message = "";
+        std::string line = "";
+        std::ifstream levelFile(file, std::ios_base::in);
+
+        if(levelFile.is_open())
+        {
+            while(!levelFile.eof())
+            {
+                std::getline(levelFile, line);
+                message.append(line);
+            }
+        }
+
+        return message;
+    }
 }

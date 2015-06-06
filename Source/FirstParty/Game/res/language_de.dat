@@ -76,6 +76,8 @@ UnknownAchievementCondition = Unbekannte Errungrnschaftsbedingung: %.
 UnknownAchievementCondition = Unbekannte spezikation für Errungrnschaft: %.
 DoubleAchievement = Es existiert bereits eine Errungenschaft mit der Id: %.
 AchievementLoadError = Ein Fehler trat auf waehrend dem Laden der Datei: %.
+UnknownPublicKey = Der PublicKey ist nicht registriert: %.
+NoOriginalFile = Diese Datei '%' ist kein Original.
 
 [GUI]
 gui_game_paused = Spiel pausiert

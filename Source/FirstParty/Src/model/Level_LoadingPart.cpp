@@ -40,6 +40,9 @@ void Level::load()
     if(m_number == 0) // Level start from 1
         throw std::runtime_error(utility::replace(utility::translateKey("InvalidLevelNumber"), filename()));
 
+    if(!isOriginal())
+        throw std::runtime_error(utility::replace(utility::translateKey("NoOriginalFile"), filename()));
+
     tinyxml2::XMLDocument doc;
 
 #ifdef LEVELTESTING

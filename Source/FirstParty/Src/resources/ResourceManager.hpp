@@ -16,6 +16,10 @@
 #include <SFML/Audio/SoundBuffer.hpp>
 #include <SFML/OpenGL.hpp>
 
+#include <rsa.h>
+#include <osrng.h>
+#include <files.h>
+
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -42,6 +46,8 @@ public:
     SoundManager& getSoundManager();
     SpriteSheet* getSpriteSheet(const std::string& name);
     const std::unordered_map<int, std::string>& getFileNames();
+    CryptoPP::RSA::PublicKey* ResourceManager::getPublicKey(const std::string& key);
+    std::string getHashValue(const std::string& key);
 
 private:
 
@@ -52,6 +58,8 @@ private:
     void parseMenus(tinyxml2::XMLDocument& doc);
     void parseSpriteSheet(tinyxml2::XMLDocument& doc);
     void parseLevelFileName(tinyxml2::XMLDocument& doc);
+    void parsePublicKeys(tinyxml2::XMLDocument& doc);
+    void parseHashValues(tinyxml2::XMLDocument& doc);
 
     static sf::Texture* loadTexture(const std::string& path, bool smooth)
     {
@@ -119,6 +127,18 @@ private:
             return sheet;
     }
 
+    static CryptoPP::RSA::PublicKey* loadPublicKey(const std::string& path)
+    {
+        CryptoPP::RSA::PublicKey* publicKey = new CryptoPP::RSA::PublicKey;
+        CryptoPP::ByteQueue queue;
+        CryptoPP::FileSource file((resourcePath() + "res/key/" + path).c_str(), true);
+
+        file.TransferTo(queue);
+        queue.MessageEnd();
+        publicKey->Load(queue);
+        return publicKey;
+    }
+
 private:
 
     std::unordered_map<std::string, std::pair<std::string, bool>> m_textureKeys;
@@ -128,6 +148,8 @@ private:
     std::unordered_map<std::string, std::string> m_menuKeys;
     std::unordered_map<std::string, std::string> m_spriteSheetKeys;
     std::unordered_map<int, std::string> m_levelFileNames;
+    std::unordered_map<std::string, std::string> m_publicKeyKeys;
+    std::unordered_map<std::string, std::string> m_hashValues;
 
     std::unique_ptr<SoundManager> m_soundManager;
     ResourceCache<sf::Texture> m_textures;
@@ -138,6 +160,7 @@ private:
     ResourceCache<BitmapFont> m_bitmapFonts;
     ResourceCache<MenuTemplate> m_menus;
     ResourceCache<SpriteSheet> m_spriteSheets;
+    ResourceCache<CryptoPP::RSA::PublicKey> m_publicKeys;
 };
 
 #endif // RESOURCE_MANAGER_HPP

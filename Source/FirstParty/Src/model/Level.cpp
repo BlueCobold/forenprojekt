@@ -747,3 +747,30 @@ const float Level::getLevelPlayTime() const
     else
         return -1.f;
 }
+
+bool Level::isOriginal()
+{
+    bool result = false;
+    std::string message = utility::toString(number());
+    std::string filename = m_resourceManager.getFileNames().find(m_number)->second;
+    CryptoPP::RSA::PublicKey* publicKey = m_resourceManager.getPublicKey("LevelKey");
+    std::string signaturKey = m_resourceManager.getHashValue(filename);
+
+    message.append(utility::fileToString(Level::filename()));
+    message.append(filename);
+
+    CryptoPP::RSASS<CryptoPP::PKCS1v15, CryptoPP::SHA>::Verifier verifier(*publicKey);
+    unsigned int length = (signaturKey.length() + 1) / 2;
+
+    byte* signature = new byte[verifier.MaxSignatureLength()];
+
+    for(unsigned int i = 0; i < verifier.MaxSignatureLength(); ++i)
+        signature[i] = static_cast<unsigned char>(utility::hexToInt(signaturKey.substr(2 * i, 2)));
+
+    result = verifier.VerifyMessage((const byte*)message.c_str(), message.length(), signature, length);
+
+    if(signature != nullptr)
+        delete[] signature;
+
+    return result;
+}

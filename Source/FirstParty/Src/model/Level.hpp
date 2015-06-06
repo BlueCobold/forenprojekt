@@ -245,6 +245,7 @@ private:
     const std::string filename();
     const std::string pathname() const;
 
+    bool isOriginal();
 private:
 
     b2World m_world;
