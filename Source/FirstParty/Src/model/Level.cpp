@@ -751,7 +751,9 @@ const float Level::getLevelPlayTime() const
 bool Level::isOriginal()
 {
     bool result = false;
-    std::string message = utility::toString(number());
+    if(m_number < 1)
+        return false;
+    std::string message = utility::toString(m_number);
     std::string filename = m_resourceManager.getFileNames().find(m_number)->second;
     CryptoPP::RSA::PublicKey* publicKey = m_resourceManager.getPublicKey("LevelKey");
     std::string signaturKey = m_resourceManager.getHashValue(filename);

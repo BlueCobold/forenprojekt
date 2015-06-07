@@ -91,12 +91,12 @@ StateChangeInformation LevelPassState::update(const float time)
     if(clicked == ReplayMenu::BUTTON_PLAY_AGAIN)
     {
 #ifdef LEVELTESTING
-        if(m_level->number() == -1)
+        if(m_level->number() == 0)
         {
             m_loadLevelStateInfo.m_file = m_level->getFileName();
             m_loadLevelStateInfo.m_level = nullptr;
             m_loadLevelStateInfo.m_directPlay = true;
-            m_loadLevelStateInfo.m_levelNumber = -1;
+            m_loadLevelStateInfo.m_levelNumber = 0;
         }
         else
         {
@@ -128,7 +128,7 @@ StateChangeInformation LevelPassState::update(const float time)
     {
 #ifdef LEVELTESTING
         bool loadKey = utility::Keyboard.isKeyDown(sf::Keyboard::L) || utility::Keyboard.isKeyPressed(sf::Keyboard::L);
-        if(m_level->number() == -1  || loadKey)
+        if(m_level->number() == 0  || loadKey)
         {
             OpenFileDialoge ofd("Level\0*.lvl\0");
             if(ofd.openDialoge())        
@@ -136,9 +136,8 @@ StateChangeInformation LevelPassState::update(const float time)
             else
                 return StateChangeInformation::Empty();
 
-            m_loadLevelStateInfo.m_levelNumber = -1;
+            m_loadLevelStateInfo.m_levelNumber = 0;
             m_loadLevelStateInfo.m_level = nullptr;
-            m_loadLevelStateInfo.m_levelNumber = -1;
             m_loadLevelStateInfo.m_directPlay = true;
             m_loadLevelStateInfo.m_prepareOnly = false;
             m_transitionStateInfo.m_followingState = LoadLevelStateId;
