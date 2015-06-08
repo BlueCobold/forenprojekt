@@ -253,7 +253,7 @@ void LevelPassState::setAchievements()
     for(unsigned int i = 1; i < AchievementManager::Max_Loop_Counter; ++i)
     {
         if(static_cast<int>(i * AchievementManager::Points_At_Once_Step) <= m_level->getPoints())
-            m_achievementManager.addValueTo(Achievement::Collect, Achievement::AtOnce, Achievement::Ball, i * AchievementManager::Points_At_Once_Step, 1);
+            m_achievementManager.addValueTo(Achievement::Collect, Achievement::AtOnce, Achievement::Coins, i * AchievementManager::Points_At_Once_Step, 1);
 
         if(i <= stars && i <= AchievementManager::Stars_At_Once_Max)
             m_achievementManager.addValueTo(Achievement::Collect, Achievement::AtOnce, Achievement::Stars, i, 1);
