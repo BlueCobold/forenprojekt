@@ -53,7 +53,7 @@ private:
 private:
     std::string m_fileName;
     std::map<char, Glyph> m_glyphs;
-    sf::Texture* m_texture;
+    const sf::Texture* m_texture;
     unsigned int m_fontSize;
 };
 

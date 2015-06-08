@@ -32,7 +32,8 @@ public:
 
     ResourceManager();
 
-    sf::Texture* getTexture(const std::string& key);
+    const sf::Texture* getTexture(const std::string& key);
+    void addTexture(const std::string& key, const sf::Texture& texture);
     sf::Font* getFont(const std::string& key);
 #ifndef NO_SOUND
     sf::SoundBuffer* getSoundBuffer(const std::string& key) override;
@@ -130,7 +131,7 @@ private:
     std::unordered_map<int, std::string> m_levelFileNames;
 
     std::unique_ptr<SoundManager> m_soundManager;
-    ResourceCache<sf::Texture> m_textures;
+    ResourceCache<const sf::Texture> m_textures;
     ResourceCache<sf::Font> m_fonts;
 #ifndef NO_SOUND
     ResourceCache<sf::SoundBuffer> m_soundBuffers;

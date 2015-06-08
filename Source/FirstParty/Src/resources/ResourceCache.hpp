@@ -59,14 +59,24 @@ public:
 
     bool exists(const Key& key)
     {
-        return (m_resources.find(key) != end(m_resources));
+        return (m_resources.find(key) != end(m_resources)) && (m_externalResources.find(key) != end(m_externalResources));
+    }
+    
+    /// Add an external resource to the pool. This resource will not be handled by this manager, but
+    /// still will be returned to everyone asking for it by its name.
+    void put(const Key& key, T& resource)
+    {
+        m_externalResources.insert(std::make_pair(key, &resource));
     }
 
     T* get(const Key& key)
     {
         auto it = m_resources.find(key);
         if(it != end(m_resources))
-            return (it->second).get();
+            return it->second.get();
+        auto ext = m_externalResources.find(key);
+        if(ext != end(m_externalResources))
+            return ext->second;
 
         return nullptr;
     }
@@ -74,6 +84,7 @@ public:
 private:
 
     std::map<Key, Value> m_resources;
+    std::map<Key, T*> m_externalResources;
 
 };
 

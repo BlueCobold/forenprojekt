@@ -174,7 +174,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     if(frameIndex != nullptr)
         frames = frameIndex->IntAttribute("frames");
     
-    sf::Texture* texture = nullptr;
+    const sf::Texture* texture = nullptr;
     SpriteSheet* sheet = nullptr;
     SpriteSheet::SpriteData sprite;
     if(auto textureName = xml->Attribute("texture"))

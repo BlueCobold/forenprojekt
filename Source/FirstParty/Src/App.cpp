@@ -78,6 +78,8 @@ App::App(AppConfig& config) :
         powerOfTwo *= 2;
     m_offscreen1.create(powerOfTwo, powerOfTwo, true);
     m_offscreen2.create(powerOfTwo, powerOfTwo, true);
+    m_resourceManager.addTexture("offscreenBuffer1", m_offscreen1.getTexture());
+    m_resourceManager.addTexture("offscreenBuffer2", m_offscreen2.getTexture());
 
     m_cursor = std::unique_ptr<Cursor>(new Cursor(m_resourceManager, m_screen));
 

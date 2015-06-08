@@ -21,7 +21,7 @@ private:
 
     struct PreviewInfo
     {
-        sf::Texture* texture;
+        const sf::Texture* texture;
         sf::IntRect rect;
     };
 

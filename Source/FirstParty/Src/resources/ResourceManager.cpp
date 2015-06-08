@@ -91,7 +91,7 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
 }
 #endif
 
-sf::Texture* ResourceManager::getTexture(const std::string& key)
+const sf::Texture* ResourceManager::getTexture(const std::string& key)
 {
     // Does the key even exist?
     auto texture = m_textureKeys.find(key);
@@ -111,6 +111,11 @@ sf::Texture* ResourceManager::getTexture(const std::string& key)
     
     // If the key doesn't exist
     throw std::runtime_error(utility::replace(utility::translateKey("UnknownTexture"), key));
+}
+
+void ResourceManager::addTexture(const std::string& key, const sf::Texture& texture)
+{
+    m_textures.put(key, texture);
 }
 
 sf::Font* ResourceManager::getFont(const std::string& key)
