@@ -278,7 +278,12 @@ void Level::spawnPendingEntities(float currentTime)
 
         m_entities.push_back(std::move(e));
     }
-    m_entitiesToSpawn.clear();
+    if(m_entitiesToSpawn.size() > 0)
+    {
+        // bring the entities back into draw order
+        std::sort(m_entities.begin(), m_entities.end(), compareDrawOrder);
+        m_entitiesToSpawn.clear();
+    }
 }
 
 void Level::cleanupKilledEntities()
