@@ -59,7 +59,7 @@ public:
 
     bool exists(const Key& key)
     {
-        return (m_resources.find(key) != end(m_resources)) && (m_externalResources.find(key) != end(m_externalResources));
+        return (m_resources.find(key) != end(m_resources)) || (m_externalResources.find(key) != end(m_externalResources));
     }
     
     /// Add an external resource to the pool. This resource will not be handled by this manager, but

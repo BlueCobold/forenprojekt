@@ -93,20 +93,22 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
 
 const sf::Texture* ResourceManager::getTexture(const std::string& key)
 {
+    bool smooth = true;
+    auto path = key;
     // Does the key even exist?
     auto texture = m_textureKeys.find(key);
     if(texture != end(m_textureKeys) && texture->first == key)
     {
-        std::string path = texture->second.first;
-        bool smooth = texture->second.second;
-        // Texture already loaded
-        if(m_textures.exists(path))
+        path = texture->second.first;
+        smooth = texture->second.second;
+    }
+    // Texture already loaded
+    if(m_textures.exists(path))
+        return m_textures.get(path);
+    else
+    {
+        if(m_textures.load(path, [path, smooth](){ return loadTexture(path, smooth); }))
             return m_textures.get(path);
-        else
-        {
-            if(m_textures.load(path, [path, smooth](){ return loadTexture(path, smooth); }))
-                return m_textures.get(path);
-        }
     }
     
     // If the key doesn't exist
