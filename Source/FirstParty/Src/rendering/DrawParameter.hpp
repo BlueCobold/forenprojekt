@@ -27,9 +27,9 @@ public:
     {
         if(bufferLayer == 0)
             return m_target;
-        if(bufferLayer >= m_offscreenBuffers.size())
+        if(bufferLayer - 1 >= m_offscreenBuffers.size())
             throw std::runtime_error(utility::translateKey("UnknownLayer"));
-        return *m_offscreenBuffers[bufferLayer];
+        return *m_offscreenBuffers[bufferLayer - 1];
     }
 
     sf::Rect<float> getScreenRect() const
