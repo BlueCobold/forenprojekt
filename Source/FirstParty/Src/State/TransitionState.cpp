@@ -8,8 +8,10 @@
 
 TransitionState::TransitionState(sf::RenderWindow& screen,
                                  ResourceManager& resourceManager, 
-                                 AppConfig& config) :
-    State(screen, resourceManager, config)
+                                 AppConfig& config,
+                                 std::vector<sf::RenderTexture*>& offscreenBuffers) :
+    State(screen, resourceManager, config),
+    m_offscreenBuffers(std::move(offscreenBuffers))
 {
     auto desktopMode = sf::VideoMode::getDesktopMode();
     auto size = static_cast<int>(desktopMode.width > desktopMode.height ?
@@ -34,23 +36,34 @@ void TransitionState::onEnter(const EnterStateInformation* enterInformation, con
     const EnterTransitionStateInformation* info = dynamic_cast<const EnterTransitionStateInformation*>(enterInformation);
     m_followingState = info->m_followingState;
     m_followingEnterInformation = info->m_onEnterInformation;
-
-    auto r = m_screen.getSize();
-    m_sourceImage.setView(utility::getDefaultView(m_sourceImage, r));
-    m_sourceImage.clear();
+    
     info->m_source->pause(time);
-    info->m_source->draw(m_sourceImage);
-    m_sourceImage.display();
-
-    m_targetImage.setView(utility::getDefaultView(m_targetImage, r));
-    m_targetImage.clear();
+    render(info, m_sourceImage, info->m_source, time);
+    
     info->m_onEnterInformation->m_prepareOnly = true;
     info->m_target->onEnter(info->m_onEnterInformation, time);
     info->m_target->update(time);
-    info->m_target->draw(m_targetImage);
-    m_targetImage.display();
+    render(info, m_targetImage, info->m_target, time);
 
     m_transition.reset(new RandomTransition(&m_sourceImage.getTexture(), &m_targetImage.getTexture(), 0.5f, m_screen.getSize(), static_cast<RandomTransition::TransitionType>(info->m_transitionType)));
+}
+
+void TransitionState::render(const EnterTransitionStateInformation* info,
+            sf::RenderTexture& target,
+            State* state,
+            const float time)
+{
+    auto size = m_screen.getSize();
+    target.setView(utility::getDefaultView(target, size));
+    target.clear();
+    DrawParameter param(target);
+    for(auto it = begin(m_offscreenBuffers); it != end(m_offscreenBuffers); ++it)
+    {
+        param.addTargetBuffer(**it);
+        (*it)->clear(sf::Color(0, 0, 0, 0));
+    }
+    state->draw(param);
+    target.display();
 }
 
 StateChangeInformation TransitionState::update(const float time)

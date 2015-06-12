@@ -97,7 +97,10 @@ App::App(AppConfig& config) :
     m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config))); 
     m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
     m_stateManager.registerState(PauseStateId, std::unique_ptr<PauseState>(new PauseState(m_screen, m_resourceManager, m_config)));
-    m_stateManager.registerState(TransitionStateId, std::unique_ptr<TransitionState>(new TransitionState(m_screen, m_resourceManager, m_config)));
+    std::vector<sf::RenderTexture*> buffers;
+    buffers.push_back(&m_offscreen1);
+    buffers.push_back(&m_offscreen2);
+    m_stateManager.registerState(TransitionStateId, std::unique_ptr<TransitionState>(new TransitionState(m_screen, m_resourceManager, m_config, buffers)));
     m_stateManager.registerState(LevelPassStateId, std::unique_ptr<LevelPassState>(new LevelPassState(m_screen, m_resourceManager, m_config, m_achievementManager)));
     m_stateManager.registerState(LevelFailStateId, std::unique_ptr<LevelFailState>(new LevelFailState(m_screen, m_resourceManager, m_config, m_achievementManager)));
     m_stateManager.registerState(MainMenuStateId, std::unique_ptr<MainMenuState>(new MainMenuState(m_screen, m_resourceManager, m_config)));
@@ -167,6 +170,8 @@ void App::draw()
     auto params = DrawParameter(m_screen);
     params.addTargetBuffer(m_offscreen1);
     params.addTargetBuffer(m_offscreen2);
+    m_offscreen1.clear(sf::Color(0, 0, 0, 0));
+    m_offscreen2.clear(sf::Color(0, 0, 0, 0));
 
     m_stateManager.draw(params);
     m_cursor->draw(m_screen);
