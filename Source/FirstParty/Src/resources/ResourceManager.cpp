@@ -120,6 +120,11 @@ void ResourceManager::addTexture(const std::string& key, const sf::Texture& text
     m_textures.put(key, texture);
 }
 
+void ResourceManager::registerOffscreenRequest(ResourceCache<const sf::Texture>::Callback callback)
+{
+    m_textures.registerExternalResourceRequested(callback);
+}
+
 sf::Font* ResourceManager::getFont(const std::string& key)
 {
     // Does the key even exist?

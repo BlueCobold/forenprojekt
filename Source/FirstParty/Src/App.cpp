@@ -31,8 +31,9 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System.hpp>
 
+#include <map>
 #include <sstream>
-#include <utility> // move
+#include <utility> // move, make_pair
 
 #ifndef WINDOWS
 #import "MacHelper.hpp"
@@ -172,6 +173,19 @@ void App::draw()
     params.addTargetBuffer(m_offscreen2);
     m_offscreen1.clear(sf::Color(0, 0, 0, 0));
     m_offscreen2.clear(sf::Color(0, 0, 0, 0));
+
+    std::unordered_map<const sf::Texture*, sf::RenderTexture*> offscreens;
+    offscreens.insert(std::make_pair(&m_offscreen1.getTexture(), &m_offscreen1));
+    offscreens.insert(std::make_pair(&m_offscreen2.getTexture(), &m_offscreen2));
+    m_resourceManager.registerOffscreenRequest([&](const sf::Texture* texture)
+    {
+        auto pair = offscreens.find(texture);
+        if(pair != end(offscreens))
+        {
+            pair->second->display();
+            offscreens.erase(texture);
+        }
+    });
 
     m_stateManager.draw(params);
     m_cursor->draw(m_screen);

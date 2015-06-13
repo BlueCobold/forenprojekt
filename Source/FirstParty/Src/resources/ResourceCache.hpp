@@ -26,6 +26,7 @@ public:
     typedef std::unique_ptr<T> Value;
     typedef std::function<T*()> Functor;
     typedef std::function<T*(const Key&)> Functor2;
+    typedef std::function<void(T*)> Callback;
 
 private:
 
@@ -33,6 +34,9 @@ private:
 
 public:
     
+    ResourceCache() : m_externalCallback(nullptr)
+    { }
+
     bool load(const Key& key, const Functor& func)
     {
         auto it = m_resources.find(key);
@@ -76,16 +80,25 @@ public:
             return it->second.get();
         auto ext = m_externalResources.find(key);
         if(ext != end(m_externalResources))
+        {
+            if(m_externalCallback)
+                m_externalCallback(ext->second);
             return ext->second;
+        }
 
         return nullptr;
+    }
+
+    void registerExternalResourceRequested(Callback func)
+    {
+        m_externalCallback = func;
     }
 
 private:
 
     std::map<Key, Value> m_resources;
     std::map<Key, T*> m_externalResources;
-
+    Callback m_externalCallback;
 };
 
 #endif // RESOURCE_CACHE_HPP

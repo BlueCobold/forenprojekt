@@ -34,6 +34,8 @@ public:
 
     const sf::Texture* getTexture(const std::string& key);
     void addTexture(const std::string& key, const sf::Texture& texture);
+    void registerOffscreenRequest(ResourceCache<const sf::Texture>::Callback callback);
+
     sf::Font* getFont(const std::string& key);
 #ifndef NO_SOUND
     sf::SoundBuffer* getSoundBuffer(const std::string& key) override;
