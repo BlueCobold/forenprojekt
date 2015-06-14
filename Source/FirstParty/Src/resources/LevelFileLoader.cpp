@@ -231,6 +231,8 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 
     if(xml->Attribute("bufferId"))
         anim->setBufferId(xml->IntAttribute("bufferId"));
+    if(xml->Attribute("alignToView"))
+        anim->alignToView(xml->BoolAttribute("alignToView"));
 
     if(auto stencil = xml->FirstChildElement("stencil"))
     {

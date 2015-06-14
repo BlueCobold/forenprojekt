@@ -83,6 +83,7 @@ public:
     void setStopOnAlphaZero(bool stop);
     void setBufferId(unsigned int id);
     void applyRotation(bool apply);
+    void alignToView(bool align);
     
     virtual void draw(const DrawParameter& param) override;
 
@@ -129,6 +130,7 @@ private:
     sf::Vector2f m_drawOffset;
     sf::BlendMode m_blending;
     unsigned int m_targetBuffer;
+    bool m_isViewAligned;
 };
 
 #endif // ANIMATION_HPP

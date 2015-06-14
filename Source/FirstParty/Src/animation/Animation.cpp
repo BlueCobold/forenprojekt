@@ -27,7 +27,8 @@ Animation::Animation(std::unique_ptr<ValueProvider> provider,
     m_externalRotation(0.f),
     m_horizontal(horizontal),
     m_stopOnAlphaZero(false),
-    m_targetBuffer(0)
+    m_targetBuffer(0),
+    m_isViewAligned(false)
 {
     m_sprite.setOrigin(origin);
 }
@@ -172,10 +173,17 @@ void Animation::draw(const DrawParameter& param)
 
     if(isStopped())
         return;
+
+    auto targetBuffer = &param.getTarget(m_targetBuffer);
+    if(m_isViewAligned)
+    {
+        auto topLeft = targetBuffer->getView().getCenter() - 0.5f * targetBuffer->getView().getSize();
+        setPosition(topLeft.x, topLeft.y);
+    }
     if(param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
     {
         m_stencil.enable();
-        param.getTarget(m_targetBuffer).draw(m_sprite, sf::RenderStates(m_blending));
+        targetBuffer->draw(m_sprite, sf::RenderStates(m_blending));
         m_stencil.disable();
     }
 }
@@ -282,6 +290,11 @@ void Animation::setBufferId(unsigned int id)
 void Animation::applyRotation(bool apply)
 {
     m_applyRotation = apply;
+}
+
+void Animation::alignToView(bool align)
+{
+    m_isViewAligned = align;
 }
 
 void Animation::enableStencilEffects(bool enable)
