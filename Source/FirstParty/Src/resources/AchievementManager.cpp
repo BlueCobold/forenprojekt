@@ -39,12 +39,10 @@ void AchievementManager::addAchievement(const std::string& name,
 {
     std::string id = Achievement::createId(condition, specifically, object, atOnceAmount);
 
-    auto it = m_achievements.find(id);
-
-    if(it == end(m_achievements))
-        m_achievements.insert(std::make_pair(id, Achievement(name, condition, specifically, object, bronze, silver, gold, atOnceAmount)));
-    else
+    for(auto it = m_achievements.begin(); it != m_achievements.begin(); ++it)
         throw std::runtime_error(utility::replace(utility::translateKey("DoubleAchievement"), id));
+    
+    m_achievements.push_back(std::make_pair(id, Achievement(name, condition, specifically, object, bronze, silver, gold, atOnceAmount)));
 }
 
 bool AchievementManager::load()
@@ -277,11 +275,11 @@ void AchievementManager::addValueTo(Achievement::Condition condition,
 {
     std::string id = Achievement::createId(condition, specifically, object, 0);
 
-    auto it = m_achievements.find(id);
-
-    if(it != end(m_achievements))
-        it->second.addToCounter(value);
- 
+    for(auto it = m_achievements.begin(); it != m_achievements.begin(); ++it)
+    {
+        if(it->first == id)
+            it->second.addToCounter(value);
+    } 
 }
 
 void AchievementManager::addValueTo(Achievement::Condition condition,
@@ -292,10 +290,11 @@ void AchievementManager::addValueTo(Achievement::Condition condition,
 {
     std::string id = Achievement::createId(condition, specifically, object, atOnceAmount);
 
-    auto it = m_achievements.find(id);
-
-    if(it != end(m_achievements))
-        it->second.addToCounter(value);
+    for(auto it = m_achievements.begin(); it != m_achievements.begin(); ++it)
+    {
+        if(it->first == id)
+            it->second.addToCounter(value);
+    }
 }
 
 void AchievementManager::setValueTo(Achievement::Condition condition,
@@ -305,20 +304,19 @@ void AchievementManager::setValueTo(Achievement::Condition condition,
 {
     std::string id = Achievement::createId(condition, specifically, object, 0);
 
-    auto it = m_achievements.find(id);
-
-    if(it != end(m_achievements))
-        it->second.setCounter(value);
+    for(auto it = m_achievements.begin(); it != m_achievements.begin(); ++it)
+    {
+        if(it->first == id)
+            it->second.setCounter(value);
+    }
 }
 
-const std::unordered_map<std::string, Achievement>::const_iterator AchievementManager::beginIterator()
+Achievement* AchievementManager::getAchievement(unsigned int number)
 {
-    return m_achievements.cbegin();
-}
+    if(number >= m_achievements.size())
+        return nullptr;
 
-const std::unordered_map<std::string, Achievement>::const_iterator AchievementManager::endIterator()
-{
-    return m_achievements.cend();
+    return &m_achievements[number].second;
 }
 
 void AchievementManager::saveValues()

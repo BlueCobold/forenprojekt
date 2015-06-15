@@ -50,7 +50,7 @@ public:
     SoundManager& getSoundManager();
     const SpriteSheet* getSpriteSheet(const std::string& name);
     const std::unordered_map<int, std::string>& getFileNames();
-    CryptoPP::RSA::PublicKey* ResourceManager::getPublicKey(const std::string& key);
+    CryptoPP::RSA::PublicKey* getPublicKey(const std::string& key);
     std::string getHashValue(const std::string& key);
 
 private:
