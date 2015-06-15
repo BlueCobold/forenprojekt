@@ -6,7 +6,9 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+
 #include "model/Entity.hpp"
+#include "rendering/DrawParameter.hpp"
 
 class ScrollView
 {
@@ -18,12 +20,10 @@ public:
         Adjust the view of the given render window. 
         scrollvec is the ball's position.
     */
-    void adjustView(const sf::Vector2f& scrollvec, sf::RenderTarget& window);
+    void adjustView(const sf::Vector2f& scrollvec, const DrawParameter& window);
 
     void setLevelSize(const sf::Vector2f& v);
     void setZoomFactor(const float factor);
-
-    sf::Vector2f toGlobalCoords(const sf::Vector2f& v);
 
 private:
     float m_zoomFactor;

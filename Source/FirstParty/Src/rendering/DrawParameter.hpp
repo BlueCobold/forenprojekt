@@ -8,6 +8,7 @@
 
 #include "../Utility.hpp"
 
+#include <functional>
 #include <vector>
 
 class DrawParameter
@@ -27,9 +28,24 @@ public:
     {
         if(bufferLayer == 0)
             return m_target;
+
         if(bufferLayer - 1 >= m_offscreenBuffers.size())
             throw std::runtime_error(utility::translateKey("UnknownLayer"));
-        return *m_offscreenBuffers[bufferLayer - 1];
+
+        auto buffer = m_offscreenBuffers[bufferLayer - 1];
+
+        return *buffer;
+    }
+
+    void registerBufferRequest(std::function<void(const sf::Texture*)> callback)
+    {
+        m_textureCallback = callback;
+    }
+
+    void prepareTexture(const sf::Texture* texture) const
+    {
+        if(m_textureCallback)
+            m_textureCallback(texture);
     }
 
     sf::Rect<float> getScreenRect() const
@@ -46,8 +62,14 @@ public:
         m_offscreenBuffers.push_back(&buffer);
     }
 
+    int getOffscreenCount() const
+    {
+        return m_offscreenBuffers.size();
+    }
+
 private:
     sf::RenderTarget& m_target;
+    std::function<void(const sf::Texture*)> m_textureCallback;
     std::vector<sf::RenderTexture*> m_offscreenBuffers;
 };
 

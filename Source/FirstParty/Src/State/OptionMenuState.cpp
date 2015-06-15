@@ -79,7 +79,7 @@ void OptionMenuState::draw(const DrawParameter& params)
     whiteRect.setSize(m_screen.getView().getSize());
     if(m_level != nullptr)
     {
-        m_level->adjustView(params.getTarget());
+        m_level->adjustView(params);
         m_HUD.update(m_level, getPassedTime());
         m_level->draw(params);
         m_HUD.draw(params);

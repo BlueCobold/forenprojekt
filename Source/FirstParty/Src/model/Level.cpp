@@ -193,14 +193,12 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     if(m_background != nullptr)
         m_background->update(elapsedTime);
 
-    adjustView(screen);
-
 #ifdef _DEBUG
     if(utility::Keyboard.isKeyPressed(sf::Keyboard::Z))
     {
         sf::Vector2f ballpos = sf::Vector2f(utility::toPixel(m_ball->getPosition().x), utility::toPixel(m_ball->getPosition().y));
         m_scrollView.setZoomFactor(3.0f);
-        m_scrollView.adjustView(ballpos, screen);
+        //m_scrollView.adjustView(ballpos, screen);
     }
 #endif
 
@@ -212,14 +210,14 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
 }
 
-void Level::adjustView(sf::RenderTarget& screen)
+void Level::adjustView(const DrawParameter& params)
 {
     sf::Vector2f ballpos = sf::Vector2f(utility::toPixel(m_ball->getPosition().x), utility::toPixel(m_ball->getPosition().y));
     m_scrollView.setZoomFactor(1.0f);
-    m_scrollView.adjustView(ballpos, screen);
+    m_scrollView.adjustView(ballpos, params);
 
     if(m_background != nullptr)
-        m_background->updateParallax(screen.getView());
+        m_background->updateParallax(params.getTarget().getView());
 }
 
 void Level::respawnDeadBalls()

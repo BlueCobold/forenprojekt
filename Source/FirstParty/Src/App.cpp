@@ -77,10 +77,12 @@ App::App(AppConfig& config) :
         floorf(logf(static_cast<float>(size))/logf(2.f))));
     if(powerOfTwo < size)
         powerOfTwo *= 2;
-    m_offscreen1.create(powerOfTwo, powerOfTwo, true);
-    m_offscreen2.create(powerOfTwo, powerOfTwo, true);
-    m_resourceManager.addTexture("offscreenBuffer1", m_offscreen1.getTexture());
-    m_resourceManager.addTexture("offscreenBuffer2", m_offscreen2.getTexture());
+
+    for(unsigned int i = 0; i < m_offscreens.size(); i++)
+    {
+        m_offscreens[i].create(powerOfTwo, powerOfTwo, true);
+        m_resourceManager.addTexture("offscreenBuffer" + utility::toString(i + 1), m_offscreens[i].getTexture());
+    }
 
     m_cursor = std::unique_ptr<Cursor>(new Cursor(m_resourceManager, m_screen));
 
@@ -99,8 +101,8 @@ App::App(AppConfig& config) :
     m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
     m_stateManager.registerState(PauseStateId, std::unique_ptr<PauseState>(new PauseState(m_screen, m_resourceManager, m_config)));
     std::vector<sf::RenderTexture*> buffers;
-    buffers.push_back(&m_offscreen1);
-    buffers.push_back(&m_offscreen2);
+    for(unsigned int i = 0; i < m_offscreens.size(); i++)
+        buffers.push_back(&m_offscreens[i]);
     m_stateManager.registerState(TransitionStateId, std::unique_ptr<TransitionState>(new TransitionState(m_screen, m_resourceManager, m_config, buffers)));
     m_stateManager.registerState(LevelPassStateId, std::unique_ptr<LevelPassState>(new LevelPassState(m_screen, m_resourceManager, m_config, m_achievementManager)));
     m_stateManager.registerState(LevelFailStateId, std::unique_ptr<LevelFailState>(new LevelFailState(m_screen, m_resourceManager, m_config, m_achievementManager)));
@@ -169,15 +171,15 @@ void App::draw()
     glClear(GL_STENCIL_BUFFER_BIT);
 
     auto params = DrawParameter(m_screen);
-    params.addTargetBuffer(m_offscreen1);
-    params.addTargetBuffer(m_offscreen2);
-    m_offscreen1.clear(sf::Color(0, 0, 0, 0));
-    m_offscreen2.clear(sf::Color(0, 0, 0, 0));
-
     std::unordered_map<const sf::Texture*, sf::RenderTexture*> offscreens;
-    offscreens.insert(std::make_pair(&m_offscreen1.getTexture(), &m_offscreen1));
-    offscreens.insert(std::make_pair(&m_offscreen2.getTexture(), &m_offscreen2));
-    m_resourceManager.registerOffscreenRequest([&](const sf::Texture* texture)
+    for(unsigned int i = 0; i < m_offscreens.size(); i++)
+    {
+        params.addTargetBuffer(m_offscreens[i]);
+        m_offscreens[i].clear(sf::Color(0));
+        offscreens.insert(std::make_pair(&(m_offscreens[i].getTexture()), &m_offscreens[i]));
+    }
+
+    params.registerBufferRequest([&](const sf::Texture* texture)
     {
         auto pair = offscreens.find(texture);
         if(pair != end(offscreens))

@@ -56,16 +56,17 @@ void TransitionState::render(const EnterTransitionStateInformation* info,
     auto size = m_screen.getSize();
     target.setView(utility::getDefaultView(target, size));
     target.clear();
-    DrawParameter param(target);
-    std::unordered_map<const sf::Texture*, sf::RenderTexture*> offscreens;
-    for(auto it = begin(m_offscreenBuffers); it != end(m_offscreenBuffers); ++it)
-    {
-        param.addTargetBuffer(**it);
-        offscreens.insert(std::make_pair(&(*it)->getTexture(), *it));
-        (*it)->clear(sf::Color(0, 0, 0, 0));
-    }
+    DrawParameter params(target);
     
-    getResourceManager().registerOffscreenRequest([&](const sf::Texture* texture)
+    std::unordered_map<const sf::Texture*, sf::RenderTexture*> offscreens;
+    for(unsigned int i = 0; i < m_offscreenBuffers.size(); i++)
+    {
+        params.addTargetBuffer(*m_offscreenBuffers[i]);
+        m_offscreenBuffers[i]->clear(sf::Color(0));
+        offscreens.insert(std::make_pair(&m_offscreenBuffers[i]->getTexture(), m_offscreenBuffers[i]));
+    }
+
+    params.registerBufferRequest([&](const sf::Texture* texture)
     {
         auto pair = offscreens.find(texture);
         if(pair != end(offscreens))
@@ -75,7 +76,7 @@ void TransitionState::render(const EnterTransitionStateInformation* info,
         }
     });
 
-    state->draw(param);
+    state->draw(params);
     target.display();
 }
 

@@ -66,7 +66,7 @@ public:
     void setPosition(const float x, const float y);
     void setRotation(const float radians);
     void setBlending(const sf::BlendMode mode);
-    void bindTexture(const sf::Texture& texture, const sf::Vector2f& sourceOffset);
+    void bindTexture(const sf::Texture& texture, const sf::Vector2f& sourceOffset, bool prepareOnUsage = false);
     void bindFrameProvider(std::unique_ptr<ValueProvider> frames);
     void bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y);
     void bindRotationController(std::unique_ptr<ValueProvider> provider);
@@ -123,6 +123,7 @@ private:
     unsigned int m_frameHeight;
     bool m_horizontal;
     sf::Sprite m_sprite;
+    bool m_prepareTextureOnUse;
     sf::Vector2f m_sourceOffset;
     sf::Vector2f m_externalPosition;
     sf::Vector2f m_dynamicPosition;

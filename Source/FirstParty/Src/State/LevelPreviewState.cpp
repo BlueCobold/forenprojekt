@@ -143,7 +143,7 @@ void LevelPreviewState::draw(const DrawParameter& params)
 {
     if(m_level != nullptr)
     {
-        m_level->adjustView(params.getTarget());
+        m_level->adjustView(params);
         if(!m_levelUpdated)
         {
             m_level->update(0, params.getTarget());

@@ -149,7 +149,7 @@ StateChangeInformation PauseState::update(const float time)
 
 void PauseState::draw(const DrawParameter& params)
 {
-    m_level->adjustView(params.getTarget());
+    m_level->adjustView(params);
     m_level->draw(params);
     m_HUD.update(m_level, getPassedTime());
     m_HUD.draw(params);

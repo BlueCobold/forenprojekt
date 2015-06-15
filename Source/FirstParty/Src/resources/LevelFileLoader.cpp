@@ -175,10 +175,17 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         frames = frameIndex->IntAttribute("frames");
     
     const sf::Texture* texture = nullptr;
+    bool bindOnUsage = false;
     SpriteSheet* sheet = nullptr;
     SpriteSheet::SpriteData sprite;
     if(auto textureName = xml->Attribute("texture"))
+    {
         texture = resourceManager.getTexture(textureName);
+        std::string prefix("offscreenBuffer");
+        // is this an offscreen texture name?
+        if (!std::string(textureName).compare(0, prefix.size(), prefix))
+            bindOnUsage = true;
+    }
     else
     {   auto sheetName = xml->Attribute("spritesheet");
         auto spriteName = xml->Attribute("sprite");
@@ -269,7 +276,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     if(xml->Attribute("srcy"))
         sourceOffset.y = xml->FloatAttribute("srcy");
 
-    anim->bindTexture(*texture, sourceOffset);
+    anim->bindTexture(*texture, sourceOffset, bindOnUsage);
 
     std::vector<std::unique_ptr<Animation>> subAnimations;
 

@@ -94,7 +94,7 @@ StateChangeInformation NewHighScoreState::update(const float time)
 
 void NewHighScoreState::draw(const DrawParameter& params)
 {
-    m_level->adjustView(params.getTarget());
+    m_level->adjustView(params);
     m_level->draw(params);
 
     m_HUD.draw(params);

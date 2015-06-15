@@ -147,10 +147,11 @@ void Animation::bindFrameProvider(std::unique_ptr<ValueProvider> frames)
     m_frameProvider = std::move(frames);
 }
 
-void Animation::bindTexture(const sf::Texture& texture, const sf::Vector2f& sourceOffset)
+void Animation::bindTexture(const sf::Texture& texture, const sf::Vector2f& sourceOffset, bool prepareOnUsage)
 {
     m_sourceOffset = sourceOffset;
     m_sprite.setTexture(texture);
+    m_prepareTextureOnUse = prepareOnUsage;
 }
 
 const sf::IntRect Animation::getTextureRect() const
@@ -180,9 +181,15 @@ void Animation::draw(const DrawParameter& param)
         auto topLeft = targetBuffer->getView().getCenter() - 0.5f * targetBuffer->getView().getSize();
         setPosition(topLeft.x, topLeft.y);
     }
+
+    if(m_frameWidth < 0 || m_frameHeight < 0)
+        m_sprite.setTextureRect(sf::IntRect(sf::Vector2i(m_sourceOffset), sf::Vector2i(targetBuffer->getView().getSize())));
+
     if(param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
     {
         m_stencil.enable();
+        if(m_prepareTextureOnUse)
+            param.prepareTexture(m_sprite.getTexture());
         targetBuffer->draw(m_sprite, sf::RenderStates(m_blending));
         m_stencil.disable();
     }
