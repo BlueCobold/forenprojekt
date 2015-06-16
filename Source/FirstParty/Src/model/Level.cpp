@@ -101,7 +101,7 @@ void Level::restartAt(const float time)
     m_lastTime = time;
 }
 
-void Level::update(const float elapsedTime, sf::RenderTarget& screen)
+void Level::update(const float elapsedTime)
 {
     bool gravityEvent = m_gravityGoody.isActive();
     bool ballInvulnerableEvent = m_invulnerableGoody.isActive();
@@ -198,7 +198,6 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
     {
         sf::Vector2f ballpos = sf::Vector2f(utility::toPixel(m_ball->getPosition().x), utility::toPixel(m_ball->getPosition().y));
         m_scrollView.setZoomFactor(3.0f);
-        //m_scrollView.adjustView(ballpos, screen);
     }
 #endif
 
@@ -207,7 +206,6 @@ void Level::update(const float elapsedTime, sf::RenderTarget& screen)
 
     if(ballInvulnerableEvent != m_invulnerableGoody.isActive())
         m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::InvulnerableGoody);
-
 }
 
 void Level::adjustView(const DrawParameter& params)

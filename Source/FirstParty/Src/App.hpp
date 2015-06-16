@@ -3,21 +3,15 @@
 #ifndef APP_HPP
 #define APP_HPP
 
+#include "gui/Cursor.hpp"
+#include "resources/AppConfig.hpp"
 #include "resources/ResourceManager.hpp"
 #include "resources/AchievementManager.hpp"
-#include "Utility.hpp" // toString
 #include "State/StateManager.hpp"
-#include "gui/Cursor.hpp"
-#include "gui/LineLabel.hpp"
-#include "resources/AppConfig.hpp"
 
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/Text.hpp>
-#include <SFML/System/Clock.hpp>
-#include <SFML/Audio/SoundBuffer.hpp>
-#include <SFML/Graphics/Image.hpp>
-#include "gui/ErrorMessageBox.hpp"
+#include <SFML/Graphics/RenderTexture.hpp>
+#include <SFML/Window/VideoMode.hpp>
+
 #include <string>
 
 class AppConfig;

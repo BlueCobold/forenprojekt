@@ -6,7 +6,7 @@
 #include <exception>
 #include <sstream>
 
-StateManager::StateManager(sf::RenderWindow& screen) :
+StateManager::StateManager() :
     m_currentState(nullptr),
     m_currentStateId(None),
     m_currentLevel(nullptr),

@@ -4,7 +4,7 @@
 #define DRAW_PARAMETER_HPP
 
 #include <SFML/Graphics/RenderTarget.hpp>
-#include <SFML/Graphics/RenderTexture.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 #include "../Utility.hpp"
 
@@ -14,25 +14,22 @@
 class DrawParameter
 {
 public:
-    DrawParameter(sf::RenderTarget& target) :
-        m_target(target)
+    DrawParameter(sf::RenderTarget& target)
     {
+        m_buffers.push_back(&target);
     }
 
     sf::RenderTarget& getTarget() const
     {
-        return m_target;
+        return *m_buffers[0];
     }
     
     sf::RenderTarget& getTarget(unsigned int bufferLayer) const
     {
-        if(bufferLayer == 0)
-            return m_target;
-
-        if(bufferLayer - 1 >= m_offscreenBuffers.size())
+        if(bufferLayer > m_buffers.size())
             throw std::runtime_error(utility::translateKey("UnknownLayer"));
 
-        auto buffer = m_offscreenBuffers[bufferLayer - 1];
+        auto buffer = m_buffers[bufferLayer];
 
         return *buffer;
     }
@@ -50,27 +47,26 @@ public:
 
     sf::Rect<float> getScreenRect() const
     {
-        auto view = m_target.getView();
+        auto view = m_buffers[0]->getView();
         return sf::Rect<float>(view.getCenter().x - view.getSize().x / 2.f,
                                view.getCenter().y - view.getSize().y / 2.f,
                                static_cast<float>(view.getSize().x),
                                static_cast<float>(view.getSize().y));
     }
 
-    void addTargetBuffer(sf::RenderTexture& buffer)
+    void addTargetBuffer(sf::RenderTarget& buffer)
     {
-        m_offscreenBuffers.push_back(&buffer);
+        m_buffers.push_back(&buffer);
     }
 
     int getOffscreenCount() const
     {
-        return m_offscreenBuffers.size();
+        return m_buffers.size() - 1;
     }
 
 private:
-    sf::RenderTarget& m_target;
     std::function<void(const sf::Texture*)> m_textureCallback;
-    std::vector<sf::RenderTexture*> m_offscreenBuffers;
+    std::vector<sf::RenderTarget*> m_buffers;
 };
 
 #endif // DRAW_PARAMETER_HPP

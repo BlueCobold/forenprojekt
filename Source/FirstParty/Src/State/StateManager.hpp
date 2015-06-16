@@ -19,7 +19,7 @@ class StateManager
 {
 public:
 
-    StateManager(sf::RenderWindow& screen);
+    StateManager();
 
     void registerState(StateId id, std::unique_ptr<State> state);
     void setState(StateId id, EnterStateInformation* enterInformation = nullptr);

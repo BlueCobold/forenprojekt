@@ -143,13 +143,13 @@ void LevelPreviewState::draw(const DrawParameter& params)
 {
     if(m_level != nullptr)
     {
-        m_level->adjustView(params);
         if(!m_levelUpdated)
         {
-            m_level->update(0, params.getTarget());
+            m_level->update(0);
             m_levelUpdated = true;
             m_HUD.update(m_level, getPassedTime());
         }
+        m_level->adjustView(params);
         m_level->draw(params);
         m_HUD.draw(params);
     }

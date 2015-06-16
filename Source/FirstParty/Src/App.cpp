@@ -45,7 +45,6 @@ App::App(AppConfig& config) :
     m_fullscreen(false),
     m_focus(true),
     m_isMinimized(false),
-    m_stateManager(m_screen),
     m_achievementManager("Achievement.dat", m_config)
 {
     // Cache often used settings

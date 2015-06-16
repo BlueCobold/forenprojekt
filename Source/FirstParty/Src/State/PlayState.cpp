@@ -46,7 +46,7 @@ void PlayState::onEnter(const EnterStateInformation* enterInformation, const flo
     if(!info->m_returnFromPause)
     {
         m_level->restartAt(getPassedTime());
-        m_level->update(getPassedTime(), m_screen);
+        m_level->update(getPassedTime());
         m_hud.update(m_level, getPassedTime());
         m_hud.skipInterpolation();
     }
@@ -65,7 +65,7 @@ StateChangeInformation PlayState::update(const float time)
     if(!isPaused())
     {
         utility::Mouse.startInterpolation(dynamic_cast<sf::Window&>(m_screen));
-        m_level->update(getPassedTime(), m_screen);
+        m_level->update(getPassedTime());
         m_hud.update(m_level, getPassedTime());
         if(utility::Keyboard.isKeyDown(sf::Keyboard::F5) || utility::Keyboard.isKeyPressed(sf::Keyboard::F5))
         {

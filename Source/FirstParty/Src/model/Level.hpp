@@ -58,7 +58,7 @@ public:
     ~Level();
 
     virtual void restartAt(const float time);
-    void update(const float dt, sf::RenderTarget& screen);
+    void update(const float dt);
     virtual void draw(const DrawParameter& param) override;
     void adjustView(const DrawParameter& params);
 
