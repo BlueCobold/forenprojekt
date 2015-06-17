@@ -28,10 +28,10 @@ public:
         return powf(base, exponent);
     }
 
-    virtual Pow* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
         auto list = cloneProviders();
-        return new Pow(std::move(list));
+        return std::unique_ptr<Pow>(new Pow(std::move(list)));
     }
 };
 

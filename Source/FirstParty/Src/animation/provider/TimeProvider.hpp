@@ -23,9 +23,9 @@ public:
         return m_owner->getPassedTime();
     }
 
-    virtual TimeProvider* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new TimeProvider(m_owner);
+        return std::unique_ptr<TimeProvider>(new TimeProvider(m_owner));
     }
 };
 

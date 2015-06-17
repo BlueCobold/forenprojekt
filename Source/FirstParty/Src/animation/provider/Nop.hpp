@@ -32,10 +32,10 @@ public:
         return ret;
     }
 
-    virtual Nop* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
         auto list = cloneProviders();
-        return new Nop(std::move(list));
+        return std::unique_ptr<Nop>(new Nop(std::move(list)));
     }
 };
 

@@ -20,7 +20,7 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-class Animation : public Drawable, public VariableHolder, public Stoppable, public Cloneable
+class Animation : public Drawable, public VariableHolder, public Stoppable, public Cloneable<Animation>
 {
 public:
 
@@ -85,7 +85,7 @@ public:
     
     virtual void draw(const DrawParameter& param) override;
 
-    virtual Animation* clone() const override;
+    virtual std::unique_ptr<Animation> clone() const override;
 
     static void enableStencilEffects(bool enable);
     static bool usesStencilEffects();

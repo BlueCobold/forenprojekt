@@ -22,9 +22,9 @@ public:
         return static_cast<float>(static_cast<int>(getProvider()->getValue()));
     }
 
-    virtual FloatToInt* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new FloatToInt(std::unique_ptr<ValueProvider>(getProvider()->clone()));
+        return std::unique_ptr<FloatToInt>(new FloatToInt(getProvider()->clone()));
     }
 };
 

@@ -31,7 +31,7 @@ MenuPanel::MenuPanel(const MenuElements& elements,
         createInputBox(*inputbox);
 
     for(auto it = begin(elements.animationContainer); it != end(elements.animationContainer); ++it)
-        createAnimationContainer(std::move((*it)->clone()));
+        createAnimationContainer((*it)->clone());
 
     setCorrelation();
     std::sort(m_elements.begin(), m_elements.end(), 

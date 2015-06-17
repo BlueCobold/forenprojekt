@@ -44,9 +44,10 @@ public:
         return value;
     }
 
-    virtual SetVariable* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new SetVariable(m_owner, m_varName, std::unique_ptr<ValueProvider>(getProvider()->clone()), m_print);
+        return std::unique_ptr<SetVariable>(new SetVariable(m_owner, m_varName,
+            getProvider()->clone(), m_print));
     }
 };
 

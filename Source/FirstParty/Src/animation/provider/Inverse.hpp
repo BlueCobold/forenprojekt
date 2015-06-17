@@ -26,9 +26,9 @@ public:
             return 0;
     }
 
-    virtual Inverse* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new Inverse(std::unique_ptr<ValueProvider>(getProvider()->clone()));
+        return std::unique_ptr<Inverse>(new Inverse(getProvider()->clone()));
     }
 };
 

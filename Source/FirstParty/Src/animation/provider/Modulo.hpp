@@ -28,10 +28,10 @@ public:
         return fmodf(dividend, divisor);
     }
 
-    virtual Modulo* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
         auto list = cloneProviders();
-        return new Modulo(std::move(list));
+        return std::unique_ptr<Modulo>(new Modulo(std::move(list)));
     }
 };
 

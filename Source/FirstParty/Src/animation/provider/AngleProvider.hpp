@@ -28,9 +28,9 @@ public:
         return angle;
     }
 
-    virtual AngleProvider* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new AngleProvider(m_owner);
+        return std::unique_ptr<AngleProvider>(new AngleProvider(m_owner));
     }
 };
 

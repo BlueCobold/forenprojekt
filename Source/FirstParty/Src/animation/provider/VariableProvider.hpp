@@ -28,9 +28,9 @@ public:
         return m_owner->getValueOf(m_varName);
     }
 
-    virtual VariableProvider* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new VariableProvider(m_owner, m_varName);
+        return std::unique_ptr<VariableProvider>(new VariableProvider(m_owner, m_varName));
     }
 };
 

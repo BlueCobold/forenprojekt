@@ -235,11 +235,11 @@ void Animation::setLayout(
     m_origins = origins;
 }
 
-Animation* Animation::clone() const
+std::unique_ptr<Animation> Animation::clone() const
 {
-    auto ani = new Animation(std::unique_ptr<ValueProvider>(m_frameProvider->clone()),
+    auto ani = std::unique_ptr<Animation>(new Animation(m_frameProvider->clone(),
         m_frames, m_frameWidth, m_frameHeight,
-        m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal);
+        m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal));
     
     ani->m_stopOnAlphaZero = m_stopOnAlphaZero;
     ani->m_sourceOffset = m_sourceOffset;
@@ -250,20 +250,20 @@ Animation* Animation::clone() const
     std::array<std::unique_ptr<ValueProvider>, 4> colors;
     for(int i = 0; i < 4; i++)
         if(m_colorProviders[i])
-            ani->m_colorProviders[i] = std::unique_ptr<ValueProvider>(m_colorProviders[i]->clone());
+            ani->m_colorProviders[i] = m_colorProviders[i]->clone();
 
     if(m_xScaleProvider)
-        ani->m_xScaleProvider = std::unique_ptr<ValueProvider>(m_xScaleProvider->clone());
+        ani->m_xScaleProvider = m_xScaleProvider->clone();
     if(m_yScaleProvider)
-        ani->m_yScaleProvider = std::unique_ptr<ValueProvider>(m_yScaleProvider->clone());
+        ani->m_yScaleProvider = m_yScaleProvider->clone();
     
     if(m_rotationProvider)
-        ani->m_rotationProvider = std::unique_ptr<ValueProvider>(m_rotationProvider->clone());
+        ani->m_rotationProvider = m_rotationProvider->clone();
     
     if(m_xPositionProvider)
-        ani->m_xPositionProvider = std::unique_ptr<ValueProvider>(m_xPositionProvider->clone());
+        ani->m_xPositionProvider = m_xPositionProvider->clone();
     if(m_yPositionProvider)
-        ani->m_yPositionProvider = std::unique_ptr<ValueProvider>(m_yPositionProvider->clone());
+        ani->m_yPositionProvider = m_yPositionProvider->clone();
 
     return ani;
 }

@@ -31,10 +31,10 @@ public:
             return getProvider()[2]->getValue();
     }
 
-    virtual Step* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
         auto list = cloneProviders();
-        return new Step(std::move(list));
+        return std::unique_ptr<Step>(new Step(std::move(list)));
     }
 
 private:

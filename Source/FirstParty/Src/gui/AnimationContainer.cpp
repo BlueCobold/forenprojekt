@@ -12,7 +12,7 @@ AnimationContainer::AnimationContainer(AnimationContainer&& toMove) :
 {
 }
 
-std::unique_ptr<AnimationContainer> AnimationContainer::clone()
+std::unique_ptr<AnimationContainer> AnimationContainer::clone() const
 {
     auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getPosition(), getId()));
 
@@ -20,7 +20,7 @@ std::unique_ptr<AnimationContainer> AnimationContainer::clone()
         other->m_variables[it->first] = it->second;
     
     for(auto it = begin(getAnimations()); it != end(getAnimations()); ++it)
-        other->bindAnimation(std::unique_ptr<Animation>((*it)->clone()));
+        other->bindAnimation((*it)->clone());
 
     return other;
 }

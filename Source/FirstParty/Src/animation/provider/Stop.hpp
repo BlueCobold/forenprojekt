@@ -25,9 +25,9 @@ public:
         return 0;
     }
 
-    virtual Stop* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new Stop(m_owner);
+        return std::unique_ptr<Stop>(new Stop(m_owner));
     }
 };
 

@@ -33,9 +33,9 @@ public:
         return mouseDiff.y;
     }
 
-    virtual MouseProvider* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new MouseProvider(m_xAxis);
+        return std::unique_ptr<MouseProvider>(new MouseProvider(m_xAxis));
     }
 
     virtual void reset() override

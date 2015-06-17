@@ -37,10 +37,10 @@ public:
         return 0;
     }
 
-    virtual Switch* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
         auto list = cloneProviders();
-        return new Switch(std::move(list), m_constants);
+        return std::unique_ptr<Switch>(new Switch(std::move(list), m_constants));
     }
 
 private:

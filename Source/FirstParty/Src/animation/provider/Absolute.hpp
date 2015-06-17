@@ -21,9 +21,9 @@ public:
         return fabsf(getProvider()->getValue());
     }
 
-    virtual Absolute* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new Absolute(std::unique_ptr<ValueProvider>(getProvider()->clone()));
+        return std::unique_ptr<Absolute>(new Absolute(getProvider()->clone()));
     }
 };
 

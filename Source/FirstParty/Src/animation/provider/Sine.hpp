@@ -23,9 +23,9 @@ public:
         return sinf(utility::toRadian<float, float>(getProvider()->getValue()));
     }
 
-    virtual Sine* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new Sine(std::unique_ptr<ValueProvider>(getProvider()->clone()));
+        return std::unique_ptr<Sine>(new Sine(getProvider()->clone()));
     }
 };
 

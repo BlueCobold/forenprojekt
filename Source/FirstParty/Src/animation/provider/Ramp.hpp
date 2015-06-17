@@ -51,9 +51,9 @@ public:
         return (value - m_min) / diff;
     }
 
-    virtual Ramp* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new Ramp(m_min, m_max, std::unique_ptr<ValueProvider>(getProvider()->clone()));
+        return std::unique_ptr<Ramp>(new Ramp(m_min, m_max, getProvider()->clone()));
     }
 };
 
