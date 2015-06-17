@@ -29,7 +29,7 @@ Menu::Menu(MenuTemplate& menuTemplate,
            m_panel(menuTemplate.menuElements, m_currentPosition)
            
 {
-    m_template = (std::move(menuTemplate));
+    m_template = std::move(menuTemplate);
     m_template.background.setPosition(m_currentPosition);
 
     m_size = sf::Vector2i(m_template.background.getTextureRect().width, m_template.background.getTextureRect().height);

@@ -15,6 +15,8 @@ public:
     AnimationContainer(const sf::Vector2f& position, int id);
     AnimationContainer(AnimationContainer&& toMove);
 
+    std::unique_ptr<AnimationContainer> clone();
+
     virtual float getValueOf(const std::string& name) const override;
     virtual void setValueOf(const std::string& name, const float value) override;
     virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;

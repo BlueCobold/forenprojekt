@@ -13,7 +13,7 @@ public:
     PointsHUD(ResourceManager& resourceManager,
               const sf::Vector2f& position,
               const float rotation,
-              BitmapFont* bitmapFont,
+              const BitmapFont* bitmapFont,
               const float horizontalPercentage = HUDElement::Left,
               const float verticalPercentage = HUDElement::Top);
 

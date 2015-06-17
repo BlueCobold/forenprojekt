@@ -8,7 +8,7 @@
 #include "InputBox.hpp"
 #include "AnimationContainer.hpp"
 
-MenuPanel::MenuPanel(MenuElements& elements,
+MenuPanel::MenuPanel(const MenuElements& elements,
                      const sf::Vector2f& position) :
     m_position(position)
 {
@@ -31,7 +31,7 @@ MenuPanel::MenuPanel(MenuElements& elements,
         createInputBox(*inputbox);
 
     for(auto it = begin(elements.animationContainer); it != end(elements.animationContainer); ++it)
-        createAnimationContainer(std::move(*it));
+        createAnimationContainer(std::move((*it)->clone()));
 
     setCorrelation();
     std::sort(m_elements.begin(), m_elements.end(), 

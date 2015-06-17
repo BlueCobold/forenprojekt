@@ -583,7 +583,8 @@ void MenuLoader::parseAnimationContainer(
 {
     if(auto element = menuXml->FirstChildElement("elements"))
     {
-        if(auto animationContainer = element->FirstChildElement("animationContainer"))
+        for(auto animationContainer = element->FirstChildElement("inputbox");
+            animationContainer != nullptr; animationContainer = animationContainer->NextSiblingElement("inputbox"))
         {
             int id = animationContainer->IntAttribute("id");
             sf::Vector2f position = sf::Vector2f(animationContainer->FloatAttribute("x"), animationContainer->FloatAttribute("y"));

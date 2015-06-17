@@ -15,7 +15,7 @@ LineLabel::LineLabel(const std::string& text,
                     const sf::Vector2f& position,
                     const sf::Vector2f& offset,
                     const float rotation,
-                    BitmapFont* font,
+                    const BitmapFont* font,
                     Alignment alignment,
                     int id) :
     MenuElement(id, MenuElementType::Label, position, offset),

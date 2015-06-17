@@ -4,7 +4,7 @@
 #include "../Utility.hpp"
 
 ToolTip::ToolTip(const std::string& text,
-                 BitmapFont* font,
+                 const BitmapFont* font,
                  const sf::Vector2f& textOffset,
                  const sf::Vector2f& offset,
                  const std::unordered_map<int, sf::Sprite>& background) :

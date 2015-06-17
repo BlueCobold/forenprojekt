@@ -4,7 +4,7 @@
 
 LabelHUD::LabelHUD(const sf::Vector2f& position, 
                    const float rotation, 
-                   BitmapFont* bitmapFont,
+                   const BitmapFont* bitmapFont,
                    const float horizontalPercentage, 
                    const float verticalPercentage,
                    const std::string& text,

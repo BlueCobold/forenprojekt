@@ -22,6 +22,7 @@ ResourceManager::ResourceManager()
 
     parseSounds(doc);
     parseTextures(doc);
+    parseShaders(doc);
     parseFonts(doc);
     parseBitmapFonts(doc);
     parseMenus(doc);
@@ -31,228 +32,169 @@ ResourceManager::ResourceManager()
     parseHashValues(doc);
 }
 
-BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
+const BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
 {
-    auto bitmapFont = m_bitmapFontKeys.find(key);
-    if(bitmapFont != end(m_bitmapFontKeys) && bitmapFont->first == key)
-    {
-        std::string name = bitmapFont->first;
-        std::string path = bitmapFont->second;
-        if(m_bitmapFonts.exists(name))
-            return m_bitmapFonts.get(name);
-        else
+    return getOrFail<const BitmapFont, std::string>(m_bitmapFontKeys, m_bitmapFonts, key,
+        [&](const std::string& path)->std::function<BitmapFont*()>
         {
-            if(m_bitmapFonts.load(name, [path, this](){ return loadBitmapFont(path); }))
-                return m_bitmapFonts.get(name);
-        }
-    }
-
-    throw std::runtime_error(utility::replace(utility::translateKey("UnknownBitmapFont"), key));
+            return [=](){ return loadBitmapFont(path); };
+        }, "UnknownBitmapFont");
 }
 
-MenuTemplate* ResourceManager::getMenuTemplate(const std::string& name)
+MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
 {
-    auto menuEntry = m_menuKeys.find(name);
-    if(menuEntry != end(m_menuKeys) && menuEntry->first == name)
-    {
-        std::string path = menuEntry->second;
-        if(m_menus.exists(name))
-            return m_menus.get(name);
-        else
+    auto self = this;
+    return getOrFail<MenuTemplate, std::string>(m_menuKeys, m_menus, key,
+        [&](const std::string& path)->std::function<MenuTemplate*()>
         {
-            if(m_menus.load(name, [path, this](){ return MenuLoader::loadMenuTemplate(std::string("res/menus/") + path, *this); }))
-                return m_menus.get(name);
-        }
-    }
-
-    throw std::runtime_error(utility::replace(utility::translateKey("UnknownMenuTemplate"), name));
+            return [=](){ return MenuLoader::loadMenuTemplate(std::string("res/menus/") + path, *self); };
+        }, "UnknownMenuTemplate");
 }
 
 #ifndef NO_SOUND
 sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
 {
-    // Does the key even exist?
-    auto sound = m_soundBufferKeys.find(key);
-    if(sound != end(m_soundBufferKeys) && sound->first == key)
-    {
-        std::string name = sound->first;
-        std::string path = sound->second;
-        // Sound already loaded
-        if(m_soundBuffers.exists(name)){
-            return m_soundBuffers.get(name);
-        }
-        else
+    return getOrFail<sf::SoundBuffer, std::string>(m_soundBufferKeys, m_soundBuffers, key,
+        [&](const std::string& path)->std::function<sf::SoundBuffer*()>
         {
-            if(m_soundBuffers.load(name, [path](){ return loadSoundBuffer(path); }))
-                return m_soundBuffers.get(name);
-        }
-    }
-    
-    // If the key doesn't exist
-    throw std::runtime_error(utility::replace(utility::translateKey("UnknownSound"), key));
+            return [=](){ return ResourceManager::loadSoundBuffer(path); };
+        }, "UnknownSound");
 }
 #endif
 
-sf::Texture* ResourceManager::getTexture(const std::string& key)
+const sf::Texture* ResourceManager::getTexture(const std::string& key)
 {
-    // Does the key even exist?
-    auto texture = m_textureKeys.find(key);
-    if(texture != end(m_textureKeys) && texture->first == key)
-    {
-        std::string path = texture->second.first;
-        bool smooth = texture->second.second;
-        // Texture already loaded
-        if(m_textures.exists(path))
-            return m_textures.get(path);
-        else
+    return getOrFail<const sf::Texture, TextureParams>(m_textureKeys, m_textures, key,
+        [&](const TextureParams& params)->std::function<const sf::Texture*()>
         {
-            if(m_textures.load(path, [path, smooth](){ return loadTexture(path, smooth); }))
-                return m_textures.get(path);
-        }
-    }
-    
-    // If the key doesn't exist
-    throw std::runtime_error(utility::replace(utility::translateKey("UnknownTexture"), key));
+            return [=](){ return ResourceManager::loadTexture(std::get<0>(params), std::get<1>(params)); };
+        }, "UnknownTexture");
 }
 
-sf::Font* ResourceManager::getFont(const std::string& key)
+sf::Shader* ResourceManager::getShader(const std::string& key)
 {
-    // Does the key even exist?
-    auto font = m_fontKeys.find(key);
-    if(font != end(m_fontKeys) && font->first == key)
-    {
-        std::string path = font->second;
-        // Texture already loaded
-        if(m_fonts.exists(path))
-            return m_fonts.get(path);
-        else
+    if(!sf::Shader::isAvailable())
+        throw std::runtime_error(utility::translateKey("ShadersNotAvailable"));
+
+    return getOrFail<sf::Shader, ShaderParams>(m_shaderKeys, m_shaders, key,
+        [&](const ShaderParams& params)->std::function<sf::Shader*()>
         {
-            if(m_fonts.load(path, [path](){ return loadFont(path); }))
-                return m_fonts.get(path);
+            return [=](){ return ResourceManager::loadShader(std::get<0>(params), std::get<1>(params)); };
+        }, "UnknownShader");
+}
+
+const SpriteSheet* ResourceManager::getSpriteSheet(const std::string& key)
+{
+    return getOrFail<const SpriteSheet, std::string>(m_spriteSheetKeys, m_spriteSheets, key,
+        [&](const std::string& path)->std::function<SpriteSheet*()>
+        {
+            return [=](){ return ResourceManager::loadSpriteSheet(path); };
+        }, "UnknownSpriteSheet");
+}
+
+const sf::Font* ResourceManager::getFont(const std::string& key)
+{
+    return getOrFail<const sf::Font, std::string>(m_fontKeys, m_fonts, key,
+        [&](const std::string& path)->std::function<sf::Font*()>
+        {
+            return [=](){ return ResourceManager::loadFont(path); };
+        }, "UnknownFont");
+}
+
+void ResourceManager::parse(const tinyxml2::XMLDocument& doc,
+                            const std::string& parent,
+                            const std::string& element,
+                            std::function<void(const tinyxml2::XMLElement*)> operation)
+{
+    if(auto group = doc.FirstChildElement(parent.c_str()))
+    {
+        for(auto it = group->FirstChildElement(element.c_str());
+            it != nullptr; it = it->NextSiblingElement(element.c_str()))
+        {
+            operation(it);
         }
     }
-    
-    // If the key doesn't exist
-    throw std::runtime_error(utility::replace(utility::translateKey("UnknownFont"), key));
 }
 
 void ResourceManager::parseTextures(tinyxml2::XMLDocument& doc)
 {
-    if(auto textures = doc.FirstChildElement("textures"))
+    parse(doc, "textures", "texture", [&](const tinyxml2::XMLElement* element)
     {
-        for(auto textureIterator = textures->FirstChildElement("texture");
-            textureIterator != nullptr; textureIterator = textureIterator->NextSiblingElement("texture"))
-        {
-            auto properties = std::make_pair<std::string, bool>(
-                std::string(textureIterator->Attribute("path")),
-                textureIterator->BoolAttribute("smooth"));
+        m_textureKeys.insert(std::make_pair(std::string(element->Attribute("name")), 
+                                            ResourceManager::TextureParams(
+                                                std::string(element->Attribute("path")),
+                                                element->BoolAttribute("smooth"))));
+    });
+}
 
-            m_textureKeys.insert(std::make_pair(
-                std::string(textureIterator->Attribute("name")), properties));
-        }
-    }
+void ResourceManager::parseShaders(tinyxml2::XMLDocument& doc)
+{
+    parse(doc, "shaders", "shader", [&](const tinyxml2::XMLElement* element)
+    {
+        m_shaderKeys.insert(std::make_pair(std::string(element->Attribute("name")),
+                                           ResourceManager::ShaderParams(
+                                               std::string(element->Attribute("vertexPath")),
+                                               std::string(element->Attribute("fragmentPath")))));
+    });
 }
 
 void ResourceManager::parseFonts(tinyxml2::XMLDocument& doc)
 {
-    if(auto fonts = doc.FirstChildElement("fonts"))
+    parse(doc, "fonts", "font", [&](const tinyxml2::XMLElement* element)
     {
-        for(auto fontIterator = fonts->FirstChildElement("font");
-            fontIterator != nullptr; fontIterator = fontIterator->NextSiblingElement("font"))
-        {
-            m_fontKeys.insert(std::make_pair(
-                std::string(fontIterator->Attribute("name")), std::string(fontIterator->Attribute("path"))));
-        }
-    } 
+        m_fontKeys.insert(std::make_pair(std::string(element->Attribute("name")),
+                                         std::string(element->Attribute("path"))));
+    });
 }
 
 void ResourceManager::parseSounds(tinyxml2::XMLDocument& doc)
 {
-    if(auto sounds = doc.FirstChildElement("sounds"))
+    parse(doc, "sounds", "sound", [&](const tinyxml2::XMLElement* element)
     {
-        for(auto soundIterator = sounds->FirstChildElement("sound");
-            soundIterator != nullptr; soundIterator = soundIterator->NextSiblingElement("sound"))
-        {
-            m_soundBufferKeys.insert(std::make_pair<std::string, std::string>(
-                std::string(soundIterator->Attribute("name")), std::string(soundIterator->Attribute("path"))));
-        }
-    }
+        m_soundBufferKeys.insert(std::make_pair(std::string(element->Attribute("name")),
+                                                std::string(element->Attribute("path"))));
+    });
 }
 
 void ResourceManager::parseBitmapFonts(tinyxml2::XMLDocument& doc)
 {
-    if(auto bitmapFonts = doc.FirstChildElement("bitmapfonts"))
+    parse(doc, "bitmapfonts", "bitmapfont", [&](const tinyxml2::XMLElement* element)
     {
-        for(auto it = bitmapFonts->FirstChildElement("bitmapfont");
-            it != nullptr; it = it->NextSiblingElement("bitmapfont"))
-        {
-            m_bitmapFontKeys.insert(std::make_pair<std::string, std::string>(
-                std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
-        }
-    }
+        m_bitmapFontKeys.insert(std::make_pair(std::string(element->Attribute("name")),
+                                               std::string(element->Attribute("path"))));
+    });
 }
 
 void ResourceManager::parseMenus(tinyxml2::XMLDocument& doc)
 {
-    if(auto menus = doc.FirstChildElement("menus"))
+    parse(doc, "menus", "menu", [&](const tinyxml2::XMLElement* element)
     {
-        for(auto it = menus->FirstChildElement("menu");
-            it != nullptr; it = it->NextSiblingElement("menu"))
-        {
-            m_menuKeys.insert(std::make_pair<std::string, std::string>(
-                std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
-        }
-    }
+        m_menuKeys.insert(std::make_pair(std::string(element->Attribute("name")),
+                                         std::string(element->Attribute("path"))));
+    });
+}
+
+void ResourceManager::parseSpriteSheet(tinyxml2::XMLDocument& doc)
+{
+    parse(doc, "spritesheets", "spritesheet", [&](const tinyxml2::XMLElement* element)
+    {
+        m_spriteSheetKeys.insert(std::make_pair(std::string(element->Attribute("name")),
+                                                std::string(element->Attribute("path"))));
+    });
+}
+
+void ResourceManager::parseLevelFileName(tinyxml2::XMLDocument& doc)
+{
+    parse(doc, "levels", "level", [&](const tinyxml2::XMLElement* element)
+    {
+        m_levelFileNames.insert(std::make_pair(element->IntAttribute("number"),
+                                               std::string(element->Attribute("filename"))));
+    });
 }
 
 SoundManager& ResourceManager::getSoundManager()
 {
     return *m_soundManager;
-}
-
-void ResourceManager::parseSpriteSheet(tinyxml2::XMLDocument& doc)
-{
-    if(auto spriteSheet = doc.FirstChildElement("spritesheets"))
-    {
-        for(auto it = spriteSheet->FirstChildElement("spritesheet");
-            it != nullptr; it = it->NextSiblingElement("spritesheet"))
-        {
-            m_spriteSheetKeys.insert(std::make_pair<std::string, std::string>(
-                std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
-        }
-    }
-}
-
-SpriteSheet* ResourceManager::getSpriteSheet(const std::string& key)
-{
-    auto spriteSheet = m_spriteSheetKeys.find(key);
-    if(spriteSheet != end(m_spriteSheetKeys) && spriteSheet->first == key)
-    {
-        std::string name = spriteSheet->first;
-        std::string path = spriteSheet->second;
-        if(m_spriteSheets.exists(name))
-            return m_spriteSheets.get(name);
-        else
-        {
-            if(m_spriteSheets.load(name, [path, this](){ return loadSpriteSheet(path); }))
-                return m_spriteSheets.get(name);
-        }
-    }
-
-    throw std::runtime_error(utility::replace(utility::translateKey("UnknownSpriteSheet"), key));
-}
-
-void ResourceManager::parseLevelFileName(tinyxml2::XMLDocument& doc)
-{
-    if(auto levelfile = doc.FirstChildElement("Levels"))
-    {
-        for(auto it = levelfile->FirstChildElement("Level");
-            it != nullptr; it = it->NextSiblingElement("Level"))
-        {
-            m_levelFileNames.insert(std::make_pair<int, std::string>(it->IntAttribute("number"),
-                                                                    std::string(it->Attribute("filename"))));
-        }
-    }
 }
 
 const std::unordered_map<int, std::string>& ResourceManager::getFileNames()

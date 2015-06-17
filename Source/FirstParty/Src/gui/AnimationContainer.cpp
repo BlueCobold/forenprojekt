@@ -12,6 +12,19 @@ AnimationContainer::AnimationContainer(AnimationContainer&& toMove) :
 {
 }
 
+std::unique_ptr<AnimationContainer> AnimationContainer::clone()
+{
+    auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getPosition(), getId()));
+
+    for(auto it = begin(m_variables); it != end(m_variables); ++it)
+        other->m_variables[it->first] = it->second;
+    
+    for(auto it = begin(getAnimations()); it != end(getAnimations()); ++it)
+        other->bindAnimation(std::unique_ptr<Animation>((*it)->clone()));
+
+    return other;
+}
+
 float AnimationContainer::getValueOf(const std::string& name) const
 {
     auto match = m_variables.find(name);

@@ -94,7 +94,7 @@ BitmapFont::Glyph BitmapFont::getGlyph(const char key) const
         utility::toString(key)));
 }
 
-unsigned int BitmapFont::getFontSize()
+unsigned int BitmapFont::getFontSize() const
 {
     return m_fontSize;
 }

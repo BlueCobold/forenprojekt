@@ -5,7 +5,7 @@
 TimeHUD::TimeHUD(ResourceManager& resourceManager, 
                  const sf::Vector2f& position, 
                  const float rotation, 
-                 BitmapFont* bitmapFont,
+                 const BitmapFont* bitmapFont,
                  const float hReference,
                  const float vReference) :
     LabelHUD(position, rotation, bitmapFont, hReference, vReference),

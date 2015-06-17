@@ -30,7 +30,7 @@ public:
         const sf::Vector2f& position,
         const sf::Vector2f& offset,
         const float rotation,
-        BitmapFont* font,
+        const BitmapFont* font,
         const Alignment alignment = Left,
         int id = -1);
 
@@ -66,7 +66,7 @@ private:
     float m_width;
     std::string m_text;
     float m_rotation;
-    BitmapFont* m_font;
+    const BitmapFont* m_font;
     std::vector<BitmapFont::Glyph> m_glyphs;
     Alignment m_alignment;
 

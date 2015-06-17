@@ -139,7 +139,7 @@ struct MenuTemplate
     MenuElements menuElements;
     std::vector<SubWindowInfo> subWindow;
     std::string captionResourceKey;
-    BitmapFont* captionFont;
+    const BitmapFont* captionFont;
     sf::Vector2f captionOffset;
     sf::Sprite background;
     sf::Vector2f relativePosition;

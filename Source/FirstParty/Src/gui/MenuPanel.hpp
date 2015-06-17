@@ -23,7 +23,7 @@ class MenuPanel : public Drawable
 {
 public:
 
-    MenuPanel(MenuElements& elements, const sf::Vector2f& position);
+    MenuPanel(const MenuElements& elements, const sf::Vector2f& position);
 
     virtual void setPosition(const sf::Vector2f& position);
     const sf::Vector2f& getPosition() const;

@@ -8,7 +8,7 @@
 
 struct InputBoxStyle
 {
-    BitmapFont* font;
+    const BitmapFont* font;
     sf::Vector2f textOffset;
     std::unordered_map<int, sf::Sprite> background;
 };

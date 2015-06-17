@@ -15,7 +15,7 @@ class ToolTip : public Drawable
 {
 private:
     std::unordered_map<int, LineLabel> m_label;
-    BitmapFont* m_font;
+    const BitmapFont* m_font;
     sf::Vector2f m_offset;
     sf::Vector2f m_position;
     sf::Vector2f m_textOffset;
@@ -44,7 +44,7 @@ public:
                       BottomRight = 9};
 
     ToolTip(const std::string& text,
-            BitmapFont* font, 
+            const BitmapFont* font, 
             const sf::Vector2f& textOffset, 
             const sf::Vector2f& offset,
             const std::unordered_map<int, sf::Sprite>& background);

@@ -17,7 +17,7 @@ public:
     TargetHUD(ResourceManager& resourceManager,
         const sf::Vector2f& position,
         const float rotation,
-        BitmapFont* bitmapFont,
+        const BitmapFont* bitmapFont,
         float hReference = HUDElement::Left,
         float vReference = HUDElement::Top);
 

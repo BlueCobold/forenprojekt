@@ -45,7 +45,7 @@ public:
     bool loadFromFile(const std::string& path, ResourceManager& resourceManager);
     Glyph getGlyph(const char key) const;
 
-    unsigned int getFontSize();
+    unsigned int getFontSize() const;
 
 private:
     bool validate(const tinyxml2::XMLDocument& document);
@@ -53,7 +53,7 @@ private:
 private:
     std::string m_fileName;
     std::map<char, Glyph> m_glyphs;
-    sf::Texture* m_texture;
+    const sf::Texture* m_texture;
     unsigned int m_fontSize;
 };
 
