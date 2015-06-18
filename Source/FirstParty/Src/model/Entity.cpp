@@ -201,3 +201,8 @@ bool compareDrawOrder(const std::unique_ptr<Entity>& lhs, const std::unique_ptr<
 {
     return lhs->getDrawOrder() < rhs->getDrawOrder();
 }
+
+std::unique_ptr<Entity> Entity::clone() const
+{
+    return nullptr;
+}

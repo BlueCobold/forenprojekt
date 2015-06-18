@@ -6,6 +6,7 @@
 #include "AnimatedGraphics.hpp"
 #include "PhysicalObject.hpp"
 #include "SoundTrigger.hpp"
+#include "../animation/Cloneable.hpp"
 #include "collision/handler/CollisionHandler.hpp"
 #include "collision/filter/CollisionFilter.hpp"
 
@@ -15,7 +16,7 @@
 
 /// This class will be used to draw objects that have a binding
 /// to Box2D 
-class Entity : public PhysicalObject, public AnimatedGraphics
+class Entity : public PhysicalObject, public AnimatedGraphics, public Cloneable<Entity>
 {
 public:
 
@@ -72,6 +73,8 @@ public:
 
     void bindKillAnimationEntity(const Entity* entity);
     const Entity* getKillAnimationEntity() const;
+
+    virtual std::unique_ptr<Entity> clone() const override;
 };
 
 bool compareDrawOrder(const std::unique_ptr<Entity>& lhs, const std::unique_ptr<Entity>& rhs);

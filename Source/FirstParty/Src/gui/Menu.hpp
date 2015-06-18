@@ -32,7 +32,7 @@ public:
     static const float Top;
     static const float Bottom;
 
-    Menu(MenuTemplate& menuTemplate,
+    Menu(const MenuTemplate& menuTemplate,
          sf::RenderWindow& screen);
 
     virtual ~Menu();

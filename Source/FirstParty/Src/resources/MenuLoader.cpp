@@ -1,7 +1,8 @@
+
 #include "MenuLoader.hpp"
 #include "ResourceManager.hpp"
-#include "../gui/LineLabel.hpp"
 #include "LevelFileLoader.hpp"
+#include "../gui/LineLabel.hpp"
 #include "../MacHelper.hpp"
 
 #include <string>
@@ -43,6 +44,8 @@ sf::Sprite getSprite(tinyxml2::XMLElement* element,
 {
     return getSprite("", element, resourceManager);
 }
+
+CloneHandlerProvider MenuLoader::_cloneHandlerProvider;
 
 MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager)
 {
@@ -583,8 +586,8 @@ void MenuLoader::parseAnimationContainer(
 {
     if(auto element = menuXml->FirstChildElement("elements"))
     {
-        for(auto animationContainer = element->FirstChildElement("inputbox");
-            animationContainer != nullptr; animationContainer = animationContainer->NextSiblingElement("inputbox"))
+        for(auto animationContainer = element->FirstChildElement("animationContainer");
+            animationContainer != nullptr; animationContainer = animationContainer->NextSiblingElement("animationContainer"))
         {
             int id = animationContainer->IntAttribute("id");
             sf::Vector2f position = sf::Vector2f(animationContainer->FloatAttribute("x"), animationContainer->FloatAttribute("y"));
@@ -595,7 +598,12 @@ void MenuLoader::parseAnimationContainer(
                 for(auto animation = animations->FirstChildElement("animation");
                     animation != nullptr; 
                     animation = animation->NextSiblingElement("animation"))
-                    animContainer->bindAnimation(std::move(LevelFileLoader::parseAnimation(animation, animContainer.get(), animContainer.get(), resourceManager, &functions)));
+                {
+                    auto ani = LevelFileLoader::parseAnimation(animation, animContainer.get(), animContainer.get(), resourceManager, &functions,
+                        &_cloneHandlerProvider);
+                    auto c = animContainer.get();
+                    animContainer->bindAnimation(std::move(ani));
+                }
             }
 
             if(auto visibleWhenId = animationContainer->IntAttribute("visibleWhen"))

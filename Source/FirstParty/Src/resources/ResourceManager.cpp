@@ -41,7 +41,7 @@ const BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
         }, "UnknownBitmapFont");
 }
 
-MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
+const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
 {
     auto self = this;
     return getOrFail<MenuTemplate, std::string>(m_menuKeys, m_menus, key,

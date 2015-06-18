@@ -6,12 +6,12 @@
 #include "../gui/MenuTemplate.hpp"
 #include "../gui/ToolTip.hpp"
 #include "../model/SoundObject.hpp"
+#include "CloneHandlerProvider.hpp"
 
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <unordered_map>
 
 class ResourceManager;
 
@@ -26,6 +26,8 @@ private:
     MenuLoader()
     {
     }
+
+    static CloneHandlerProvider _cloneHandlerProvider;
 
     static void parseButtons(
         MenuElements& elements, 

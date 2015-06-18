@@ -1,4 +1,6 @@
+
 #include "AnimationContainer.hpp"
+#include "../resources/CloneHandlerProvider.hpp"
 
 AnimationContainer::AnimationContainer(const sf::Vector2f& position, int id) :
     MenuElement(id, MenuElementType::Animation, position, sf::Vector2f(0, 0)),
@@ -18,9 +20,10 @@ std::unique_ptr<AnimationContainer> AnimationContainer::clone() const
 
     for(auto it = begin(m_variables); it != end(m_variables); ++it)
         other->m_variables[it->first] = it->second;
-    
+
+    auto o = other.get();
     for(auto it = begin(getAnimations()); it != end(getAnimations()); ++it)
-        other->bindAnimation((*it)->clone());
+        other->bindAnimation(CloneHandlerProvider::clone(*it->get(), *o, *o, *o, *o, *o));
 
     return other;
 }

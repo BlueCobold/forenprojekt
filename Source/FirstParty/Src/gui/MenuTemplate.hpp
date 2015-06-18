@@ -69,6 +69,18 @@ struct MenuElements
 
     MenuElements(){};
 
+    MenuElements(const MenuElements& other) :
+        buttons(other.buttons),
+        checkboxes(other.checkboxes),
+        slider(other.slider),
+        labels(other.labels),
+        sprites(other.sprites),
+        infobox(other.infobox)
+    {
+        for(auto it = begin(other.animationContainer); it != end(other.animationContainer); ++it)
+            animationContainer.push_back((*it)->clone());
+    }
+
     MenuElements& operator= (MenuElements&& other)
     {
         move(other);
@@ -146,7 +158,7 @@ struct MenuTemplate
     sf::Vector2f menuOffset;
 
     MenuTemplate(){}
-    
+
     MenuTemplate(MenuTemplate&& other)
     {
         move(other);

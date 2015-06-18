@@ -46,7 +46,7 @@ public:
     sf::SoundBuffer* getSoundBuffer(const std::string& key) override;
 #endif
     const BitmapFont* getBitmapFont(const std::string& key);
-    MenuTemplate* getMenuTemplate(const std::string& name);
+    const MenuTemplate* getMenuTemplate(const std::string& name);
     SoundManager& getSoundManager();
     const SpriteSheet* getSpriteSheet(const std::string& name);
     const std::unordered_map<int, std::string>& getFileNames();
