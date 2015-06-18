@@ -5,6 +5,7 @@
 
 #include "OrientedObject.hpp"
 #include "TimedObject.hpp"
+#include "VariableHandler.hpp"
 
 class AnimatedObject : public virtual OrientedObject, public TimedObject, public VariableHandler
 {

@@ -9,7 +9,7 @@
 bool Animation::_renderStencilEffects = true;
 std::list<Animation*> Animation::_stencilAnimations;
 
-Animation::Animation(std::unique_ptr<ValueProvider> provider,
+Animation::Animation(
     const unsigned int frames,
     const unsigned int frameWidth, const unsigned int frameHeight,
     const bool applyRotation,
@@ -17,7 +17,6 @@ Animation::Animation(std::unique_ptr<ValueProvider> provider,
     const sf::Vector2f& drawOffset,
     const bool horizontal) :
     m_blending(sf::BlendAlpha),
-    m_frameProvider(std::move(provider)),
     m_frames(frames),
     m_frame(0),
     m_frameWidth(frameWidth),
@@ -26,7 +25,8 @@ Animation::Animation(std::unique_ptr<ValueProvider> provider,
     m_drawOffset(drawOffset),
     m_externalRotation(0.f),
     m_horizontal(horizontal),
-    m_stopOnAlphaZero(false)
+    m_stopOnAlphaZero(false),
+    m_cloneListener(nullptr)
 {
     m_sprite.setOrigin(origin);
 }
@@ -237,10 +237,15 @@ void Animation::setLayout(
 
 std::unique_ptr<Animation> Animation::clone() const
 {
-    auto ani = std::unique_ptr<Animation>(new Animation(m_frameProvider->clone(),
-        m_frames, m_frameWidth, m_frameHeight,
+    auto ani = std::unique_ptr<Animation>(new Animation(m_frames, m_frameWidth, m_frameHeight,
         m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal));
     
+    if(m_cloneListener != nullptr)
+        m_cloneListener->onCloneBegin(*this, *ani.get());
+
+    if(m_frameProvider)
+        ani->bindFrameProvider(m_frameProvider->clone());
+
     ani->m_stopOnAlphaZero = m_stopOnAlphaZero;
     ani->m_sourceOffset = m_sourceOffset;
     ani->m_sprite = m_sprite;
@@ -265,6 +270,9 @@ std::unique_ptr<Animation> Animation::clone() const
     if(m_yPositionProvider)
         ani->m_yPositionProvider = m_yPositionProvider->clone();
 
+    if(m_cloneListener != nullptr)
+        m_cloneListener->onCloneBegin(*this, *ani.get());
+
     return ani;
 }
 
@@ -276,6 +284,11 @@ void Animation::setStopOnAlphaZero(bool stop)
 void Animation::applyRotation(bool apply)
 {
     m_applyRotation = apply;
+}
+
+void Animation::bindCloneListener(CloneHandler* cloneListener)
+{
+    m_cloneListener = cloneListener;
 }
 
 void Animation::enableStencilEffects(bool enable)

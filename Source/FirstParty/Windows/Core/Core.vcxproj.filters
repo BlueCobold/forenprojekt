@@ -580,6 +580,15 @@
     <ClInclude Include="..\..\Src\gui\AchievementMenu.hpp">
       <Filter>Headers\gui\menus</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Observer.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\CloneHandlerProvider.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\CloneHandler.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -1046,6 +1055,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\ReplayMenu.cpp">
       <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\CloneHandlerProvider.cpp">
+      <Filter>Sources\resources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

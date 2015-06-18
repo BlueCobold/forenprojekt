@@ -120,6 +120,7 @@
     <ClInclude Include="..\..\Src\animation\provider\MultiProvider.hpp" />
     <ClInclude Include="..\..\Src\animation\provider\Negate.hpp" />
     <ClInclude Include="..\..\Src\animation\provider\Nop.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Observer.hpp" />
     <ClInclude Include="..\..\Src\animation\provider\Pow.hpp" />
     <ClInclude Include="..\..\Src\animation\provider\Ramp.hpp" />
     <ClInclude Include="..\..\Src\animation\provider\RandomProvider.hpp" />
@@ -254,6 +255,8 @@
     <ClInclude Include="..\..\Src\resources\AchievementManager.hpp" />
     <ClInclude Include="..\..\Src\resources\AppConfig.hpp" />
     <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp" />
+    <ClInclude Include="..\..\Src\resources\CloneHandler.hpp" />
+    <ClInclude Include="..\..\Src\resources\CloneHandlerProvider.hpp" />
     <ClInclude Include="..\..\Src\resources\Config.hpp" />
     <ClInclude Include="..\..\Src\resources\FileReader.hpp" />
     <ClInclude Include="..\..\Src\resources\GameEvent.hpp" />
@@ -389,6 +392,7 @@
     <ClCompile Include="..\..\Src\resources\Achievement.cpp" />
     <ClCompile Include="..\..\Src\resources\AchievementManager.cpp" />
     <ClCompile Include="..\..\Src\resources\AppConfig.cpp" />
+    <ClCompile Include="..\..\Src\resources\CloneHandlerProvider.cpp" />
     <ClCompile Include="..\..\Src\resources\Config.cpp" />
     <ClCompile Include="..\..\Src\resources\FileReader.cpp" />
     <ClCompile Include="..\..\Src\resources\GameEventRecorder.cpp" />

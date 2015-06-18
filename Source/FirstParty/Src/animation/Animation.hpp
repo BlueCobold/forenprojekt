@@ -24,6 +24,13 @@ class Animation : public Drawable, public VariableHolder, public Stoppable, publ
 {
 public:
 
+    class CloneHandler
+    {
+    public:
+        virtual void onCloneBegin(const Animation& source, Animation& target) = 0;
+        virtual void onCloneEnd(const Animation& source, Animation& target) = 0;
+    };
+
     struct StencilInfo
     {
         enum StencilMode
@@ -48,7 +55,7 @@ public:
     };
 
 
-    Animation(std::unique_ptr<ValueProvider> provider,
+    Animation(
         const unsigned int frames,
         const unsigned int frameWidth,
         const unsigned int frameHeight,
@@ -82,6 +89,7 @@ public:
         const std::vector<sf::Vector2i>& origins);
     void setStopOnAlphaZero(bool stop);
     void applyRotation(bool apply);
+    void bindCloneListener(CloneHandler* cloneListener);
     
     virtual void draw(const DrawParameter& param) override;
 
@@ -127,6 +135,7 @@ private:
     float m_externalRotation;
     sf::Vector2f m_drawOffset;
     sf::BlendMode m_blending;
+    CloneHandler* m_cloneListener;
 };
 
 #endif // ANIMATION_HPP

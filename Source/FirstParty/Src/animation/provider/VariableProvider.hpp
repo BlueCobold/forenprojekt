@@ -3,34 +3,33 @@
 #ifndef VARIABLE_PROVIDER_HPP
 #define VARIABLE_PROVIDER_HPP
 
+#include "Observer.hpp"
+#include "ValueProvider.hpp"
 #include "../VariableHandler.hpp"
 
 #include <exception>
 #include <string>
 
 /// Returns the value of a variable owned by someone else.
-class VariableProvider : public ValueProvider
+class VariableProvider : public ValueProvider, public Observer<const VariableHandler>
 {
 private:
-
-    const VariableHandler* m_owner;
     std::string m_varName;
 
 public:
-    VariableProvider(const VariableHandler* owner, const std::string& varName) : m_owner(owner), m_varName(varName)
-    {
-        if(owner == nullptr)
-            throw std::runtime_error(utility::replace(utility::translateKey("OwnerNull"), "VariableProvider"));
-    }
+    VariableProvider(const VariableHandler* observed, const std::string& varName, const CloneCallback cloneCallback = nullptr) :
+        Observer(observed, cloneCallback),
+        m_varName(varName)
+    { }
 
     virtual float getValue() override
     {
-        return m_owner->getValueOf(m_varName);
+        return getObserved()->getValueOf(m_varName);
     }
 
     virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return std::unique_ptr<VariableProvider>(new VariableProvider(m_owner, m_varName));
+        return std::unique_ptr<VariableProvider>(new VariableProvider(getCloneObservable(), m_varName, getCallback()));
     }
 };
 
