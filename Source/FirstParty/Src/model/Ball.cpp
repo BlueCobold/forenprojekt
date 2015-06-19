@@ -2,11 +2,15 @@
 #include "../Utility.hpp"
 #include <iostream>
 
-Ball::Ball(float resetTime, float stuckBallSpeed, const Entity* spawnAnimationEntity, const Entity* killAnimationEntity) :
+Ball::Ball(float resetTime,
+           float stuckBallSpeed,
+           CloneHandler& cloneHandler,
+           const Entity* spawnAnimationEntity,
+           const Entity* killAnimationEntity) :
     m_resetTime(resetTime),
     m_hideTime(1.0f),
     m_blowUpTime(1.0f),
-    Entity(Entity::Ball),
+    Entity(Entity::Ball, cloneHandler),
     m_spawnAnimationEntity(spawnAnimationEntity),
     m_lostBall(false),
     m_ballResetTime(0.0f),

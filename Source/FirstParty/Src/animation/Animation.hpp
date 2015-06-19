@@ -20,16 +20,11 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
+class CloneHandler;
+
 class Animation : public Drawable, public VariableHolder, public Stoppable, public Cloneable<Animation>
 {
 public:
-
-    class CloneHandler
-    {
-    public:
-        virtual void onCloneBegin(const Animation& source, Animation& target) = 0;
-        virtual void onCloneEnd(const Animation& source, Animation& target) = 0;
-    };
 
     struct StencilInfo
     {
@@ -89,7 +84,7 @@ public:
         const std::vector<sf::Vector2i>& origins);
     void setStopOnAlphaZero(bool stop);
     void applyRotation(bool apply);
-    void bindCloneListener(CloneHandler* cloneListener);
+    void bindCloneHandler(CloneHandler& handler);
     
     virtual void draw(const DrawParameter& param) override;
 
@@ -135,7 +130,7 @@ private:
     float m_externalRotation;
     sf::Vector2f m_drawOffset;
     sf::BlendMode m_blending;
-    CloneHandler* m_cloneListener;
+    CloneHandler* m_cloneHandler;
 };
 
 #endif // ANIMATION_HPP

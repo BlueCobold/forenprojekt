@@ -1,5 +1,7 @@
+
 #include "Animation.hpp"
 #include "../Utility.hpp" // toDegree, toPixel
+#include "CloneHandler.hpp"
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/OpenGL.hpp>
@@ -26,7 +28,7 @@ Animation::Animation(
     m_externalRotation(0.f),
     m_horizontal(horizontal),
     m_stopOnAlphaZero(false),
-    m_cloneListener(nullptr)
+    m_cloneHandler(nullptr)
 {
     m_sprite.setOrigin(origin);
 }
@@ -240,8 +242,8 @@ std::unique_ptr<Animation> Animation::clone() const
     auto ani = std::unique_ptr<Animation>(new Animation(m_frames, m_frameWidth, m_frameHeight,
         m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal));
     
-    if(m_cloneListener != nullptr)
-        m_cloneListener->onCloneBegin(*this, *ani.get());
+    if(m_cloneHandler != nullptr)
+        m_cloneHandler->registerClone(*this, *ani.get(), *ani.get(), *ani.get());
 
     if(m_frameProvider)
         ani->bindFrameProvider(m_frameProvider->clone());
@@ -269,9 +271,9 @@ std::unique_ptr<Animation> Animation::clone() const
         ani->m_xPositionProvider = m_xPositionProvider->clone();
     if(m_yPositionProvider)
         ani->m_yPositionProvider = m_yPositionProvider->clone();
-
-    if(m_cloneListener != nullptr)
-        m_cloneListener->onCloneBegin(*this, *ani.get());
+    
+    if(m_cloneHandler != nullptr)
+        m_cloneHandler->unregisterClone(*this);
 
     return ani;
 }
@@ -286,9 +288,9 @@ void Animation::applyRotation(bool apply)
     m_applyRotation = apply;
 }
 
-void Animation::bindCloneListener(CloneHandler* cloneListener)
+void Animation::bindCloneHandler(CloneHandler& handler)
 {
-    m_cloneListener = cloneListener;
+    m_cloneHandler = &handler;
 }
 
 void Animation::enableStencilEffects(bool enable)

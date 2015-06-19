@@ -1,29 +1,33 @@
 
 #include "AnimationContainer.hpp"
-#include "../resources/CloneHandlerProvider.hpp"
+#include "../animation/CloneHandler.hpp"
 
-AnimationContainer::AnimationContainer(const sf::Vector2f& position, int id) :
+AnimationContainer::AnimationContainer(const sf::Vector2f& position, int id, CloneHandler& cloneHandler) :
     MenuElement(id, MenuElementType::Animation, position, sf::Vector2f(0, 0)),
-    m_updatingAni(nullptr)
+    m_updatingAni(nullptr),
+    m_cloneHandler(cloneHandler)
 {
 }
 
 AnimationContainer::AnimationContainer(AnimationContainer&& toMove) :
     MenuElement(toMove.getId(), MenuElementType::Animation, toMove.getPosition(), toMove.getOffset()),
-    m_updatingAni(toMove.m_updatingAni)
+    m_updatingAni(toMove.m_updatingAni),
+    m_cloneHandler(toMove.m_cloneHandler)
 {
 }
 
 std::unique_ptr<AnimationContainer> AnimationContainer::clone() const
 {
-    auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getPosition(), getId()));
+    auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getPosition(), getId(), m_cloneHandler));
+    m_cloneHandler.registerCloneAll(*this, *other.get());
 
     for(auto it = begin(m_variables); it != end(m_variables); ++it)
         other->m_variables[it->first] = it->second;
 
-    auto o = other.get();
     for(auto it = begin(getAnimations()); it != end(getAnimations()); ++it)
-        other->bindAnimation(CloneHandlerProvider::clone(*it->get(), *o, *o, *o, *o, *o));
+        other->bindAnimation((*it)->clone());
+
+    m_cloneHandler.unregisterCloneAll(*this);
 
     return other;
 }

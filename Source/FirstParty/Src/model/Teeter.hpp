@@ -18,7 +18,7 @@ private:
 
 public:
 
-    Teeter(const float mouseScale);
+    Teeter(const float mouseScale, CloneHandler& cloneHandler);
     ~Teeter();
 
     virtual void update(const float value) override;

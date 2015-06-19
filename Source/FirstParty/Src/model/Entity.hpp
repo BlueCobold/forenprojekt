@@ -7,6 +7,7 @@
 #include "PhysicalObject.hpp"
 #include "SoundTrigger.hpp"
 #include "../animation/Cloneable.hpp"
+#include "../animation/CloneHandler.hpp"
 #include "collision/handler/CollisionHandler.hpp"
 #include "collision/filter/CollisionFilter.hpp"
 
@@ -39,10 +40,11 @@ private:
     std::unique_ptr<SoundObject> m_collisionSound;
     std::vector<std::unique_ptr<SoundTrigger>> m_otherSounds;
     const Entity* m_killAnimationEntity;
+    CloneHandler& m_cloneHandler;
 
 public:
 
-    Entity(Type type, bool respawnable = false, bool autoKill = false);
+    Entity(Type type, CloneHandler& cloneHandler, bool respawnable = false, bool autoKill = false);
     virtual ~Entity();
 
     virtual void update(const float value);

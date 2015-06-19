@@ -45,7 +45,7 @@ sf::Sprite getSprite(tinyxml2::XMLElement* element,
     return getSprite("", element, resourceManager);
 }
 
-CloneHandlerProvider MenuLoader::_cloneHandlerProvider;
+CloneHandler MenuLoader::_cloneHandler;
 
 MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager)
 {
@@ -591,7 +591,7 @@ void MenuLoader::parseAnimationContainer(
         {
             int id = animationContainer->IntAttribute("id");
             sf::Vector2f position = sf::Vector2f(animationContainer->FloatAttribute("x"), animationContainer->FloatAttribute("y"));
-            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(position, id));
+            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(position, id, _cloneHandler));
             std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
             if(auto animations = animationContainer->FirstChildElement("animations"))
             {
@@ -600,7 +600,7 @@ void MenuLoader::parseAnimationContainer(
                     animation = animation->NextSiblingElement("animation"))
                 {
                     auto ani = LevelFileLoader::parseAnimation(animation, animContainer.get(), animContainer.get(), resourceManager, &functions,
-                        &_cloneHandlerProvider);
+                                                               _cloneHandler);
                     auto c = animContainer.get();
                     animContainer->bindAnimation(std::move(ani));
                 }

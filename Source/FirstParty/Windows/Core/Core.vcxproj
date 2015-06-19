@@ -99,6 +99,7 @@
     <ClInclude Include="..\..\Src\animation\AnimatedObject.hpp" />
     <ClInclude Include="..\..\Src\animation\Animation.hpp" />
     <ClInclude Include="..\..\Src\animation\Cloneable.hpp" />
+    <ClInclude Include="..\..\Src\animation\CloneHandler.hpp" />
     <ClInclude Include="..\..\Src\animation\Interpolation.hpp" />
     <ClInclude Include="..\..\Src\animation\OrientedObject.hpp" />
     <ClInclude Include="..\..\Src\animation\ParticleTrail.hpp" />
@@ -255,8 +256,6 @@
     <ClInclude Include="..\..\Src\resources\AchievementManager.hpp" />
     <ClInclude Include="..\..\Src\resources\AppConfig.hpp" />
     <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp" />
-    <ClInclude Include="..\..\Src\resources\CloneHandler.hpp" />
-    <ClInclude Include="..\..\Src\resources\CloneHandlerProvider.hpp" />
     <ClInclude Include="..\..\Src\resources\Config.hpp" />
     <ClInclude Include="..\..\Src\resources\FileReader.hpp" />
     <ClInclude Include="..\..\Src\resources\GameEvent.hpp" />
@@ -392,7 +391,6 @@
     <ClCompile Include="..\..\Src\resources\Achievement.cpp" />
     <ClCompile Include="..\..\Src\resources\AchievementManager.cpp" />
     <ClCompile Include="..\..\Src\resources\AppConfig.cpp" />
-    <ClCompile Include="..\..\Src\resources\CloneHandlerProvider.cpp" />
     <ClCompile Include="..\..\Src\resources\Config.cpp" />
     <ClCompile Include="..\..\Src\resources\FileReader.cpp" />
     <ClCompile Include="..\..\Src\resources\GameEventRecorder.cpp" />

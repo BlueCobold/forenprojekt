@@ -3,6 +3,7 @@
 #ifndef ANIMATIONCONTAINER_HPP
 #define ANIMATIONCONTAINER_HPP
 
+#include "../animation/CloneHandler.hpp"
 #include "../model/AnimatedGraphics.hpp"
 #include "MenuElement.hpp"
 
@@ -11,8 +12,10 @@ class AnimationContainer : public virtual AnimatedGraphics, public virtual MenuE
 private:
     std::map<std::string, float> m_variables;
     Animation* m_updatingAni;
+    CloneHandler& m_cloneHandler;
+
 public:
-    AnimationContainer(const sf::Vector2f& position, int id);
+    AnimationContainer(const sf::Vector2f& position, int id, CloneHandler& cloneHandler);
     AnimationContainer(AnimationContainer&& toMove);
 
     virtual std::unique_ptr<AnimationContainer> clone() const override;

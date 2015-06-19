@@ -4,22 +4,23 @@
 #define LEVEL_HPP
 
 #include "Ball.hpp"
-#include "../rendering/DebugDraw.hpp"
 #include "Background.hpp"
-#include "../animation/TimedObject.hpp"
-#include "../animation/provider/RandomProvider.hpp"
-#include "collision/ContactListener.hpp"
-#include "../rendering/Drawable.hpp"
-#include "../ScrollView.hpp"
-#include "SoundManager.hpp"
-#include "../gui/FPSCounter.hpp"
-#include "../gui/LineLabel.hpp"
 #include "GravityGoody.hpp"
 #include "InvulnerableGoody.hpp"
+#include "SoundManager.hpp"
+#include "collision/ContactListener.hpp"
+#include "../animation/TimedObject.hpp"
+#include "../animation/CloneHandler.hpp"
+#include "../animation/provider/RandomProvider.hpp"
+#include "../gui/FPSCounter.hpp"
+#include "../gui/LineLabel.hpp"
+#include "../rendering/DebugDraw.hpp"
+#include "../rendering/Drawable.hpp"
 #include "../resources/GameEventRecorder.hpp"
+#include "../ScrollView.hpp"
 
-#include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
+#include <Box2D/Dynamics/b2World.h>
 
 #include <memory> // unique_ptr
 #include <string>
@@ -254,6 +255,7 @@ private:
     float m_gravityFactor;
 
     ResourceManager& m_resourceManager;
+    CloneHandler m_cloneHandler;
 
     unsigned int m_number;
 

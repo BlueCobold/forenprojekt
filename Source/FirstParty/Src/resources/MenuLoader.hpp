@@ -3,10 +3,10 @@
 #ifndef MENU_LOADER_HPP
 #define MENU_LOADER_HPP
 
+#include "../animation/CloneHandler.hpp"
 #include "../gui/MenuTemplate.hpp"
 #include "../gui/ToolTip.hpp"
 #include "../model/SoundObject.hpp"
-#include "CloneHandlerProvider.hpp"
 
 #include <string>
 #include <iostream>
@@ -27,7 +27,7 @@ private:
     {
     }
 
-    static CloneHandlerProvider _cloneHandlerProvider;
+    static CloneHandler _cloneHandler;
 
     static void parseButtons(
         MenuElements& elements, 
