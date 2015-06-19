@@ -367,93 +367,101 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
     CloneHandler* cloneHandler)
 {
     if(std::string(xml->Name())=="time")
-        return std::unique_ptr<TimeProvider>(new TimeProvider(animated));
+        return std::unique_ptr<TimeProvider>(new TimeProvider(animated, cloneHandler ? cloneHandler->createTimeProviderCloneHandler() : nullptr));
     else if(std::string(xml->Name())=="stop")
-        return std::unique_ptr<Stop>(new Stop(animated));
+        return std::unique_ptr<Stop>(new Stop(animated, cloneHandler ? cloneHandler->createStopProviderCloneHandler() : nullptr));
     else if(std::string(xml->Name())=="stopAnimation")
     {
         if(stoppable != nullptr)
-            return std::unique_ptr<Stop>(new Stop(stoppable));
+            return std::unique_ptr<Stop>(new Stop(stoppable, cloneHandler ? cloneHandler->createStopProviderCloneHandler() : nullptr));
         throw std::runtime_error("<stopAnimation> has been used on an invalid element");
     }
     else if(std::string(xml->Name())=="angle")
-        return std::unique_ptr<AngleProvider>(new AngleProvider(animated));
+        return std::unique_ptr<AngleProvider>(new AngleProvider(animated, cloneHandler ? cloneHandler->createAngleProviderCloneHandler() : nullptr));
     else if(std::string(xml->Name())=="static")
         return std::unique_ptr<StaticProvider>(new StaticProvider(xml->FloatAttribute("value")));
     else if(std::string(xml->Name())=="var")
-        return std::unique_ptr<VariableProvider>(new VariableProvider(handler, xml->Attribute("name")));
-    else if(std::string(xml->Name())=="setVar")
-        return std::unique_ptr<SetVariable>(new SetVariable(handler, xml->Attribute("name"),
-        std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler)[0]), xml->BoolAttribute("print")));
-    else if(std::string(xml->Name())=="abs")
-        return std::unique_ptr<Absolute>(new Absolute(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler)[0])));
-    else if(std::string(xml->Name())=="sine")
-        return std::unique_ptr<Sine>(new Sine(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler)[0])));
-    else if(std::string(xml->Name())=="cache")
-        return std::unique_ptr<CachedProvider>(new CachedProvider(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler)[0]),
-            xml->Attribute("reset") ? std::string("true") != xml->Attribute("reset") : false));
+        return std::unique_ptr<VariableProvider>(new VariableProvider(handler, xml->Attribute("name"),
+                                                                      cloneHandler ? cloneHandler->createVariableProviderCloneHandler() : nullptr));
     else if(std::string(xml->Name())=="count")
         return std::unique_ptr<Count>(new Count(xml->FloatAttribute("start"), xml->FloatAttribute("increment")));
-    else if(std::string(xml->Name())=="int")
-        return std::unique_ptr<FloatToInt>(new FloatToInt(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler)[0])));
-    else if(std::string(xml->Name())=="add")
-        return std::unique_ptr<Adder>(new Adder(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler))));
-    else if(std::string(xml->Name())=="ifpositive")
-        return std::unique_ptr<IfPositive>(new IfPositive(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler))));
-    else if(std::string(xml->Name())=="mul")
-        return std::unique_ptr<Multiplier>(new Multiplier(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler))));
-    else if(std::string(xml->Name())=="min")
-        return std::unique_ptr<Minimum>(new Minimum(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler))));
-    else if(std::string(xml->Name())=="max")
-        return std::unique_ptr<Maximum>(new Maximum(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler))));
-    else if(std::string(xml->Name())=="mod")
-        return std::unique_ptr<Modulo>(new Modulo(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler))));
-    else if(std::string(xml->Name())=="mouse")
-        return std::unique_ptr<MouseProvider>(new MouseProvider(xml->Attribute("axis") ? std::string(xml->Attribute("axis")) == "x" : true));
-    else if(std::string(xml->Name())=="pow")
-        return std::unique_ptr<Pow>(new Pow(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler))));
-    else if(std::string(xml->Name())=="nop")
-        return std::unique_ptr<Nop>(new Nop(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler))));
-    else if(std::string(xml->Name())=="clamp")
-        return std::unique_ptr<Clamp>(new Clamp(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler))));
-    else if(std::string(xml->Name())=="step")
-    {
-        float threshold = 1;
-        xml->QueryFloatAttribute("threshold", &threshold);
-        return std::unique_ptr<Step>(new Step(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler)), threshold));
-    }
-    else if(std::string(xml->Name())=="sub")
-        return std::unique_ptr<Substractor>(new Substractor(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler))));
-    else if(std::string(xml->Name())=="switch")
-        return std::unique_ptr<Switch>(new Switch(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler)), parseFloatList(xml->Attribute("cases"))));
-    else if(std::string(xml->Name())=="neg")
-        return std::unique_ptr<Negate>(new Negate(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler)[0])));
-    else if(std::string(xml->Name())=="ramp")
-        return std::unique_ptr<Ramp>(new Ramp(xml->FloatAttribute("min"), xml->FloatAttribute("max"),
-            std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler)[0])));
     else if(std::string(xml->Name())=="random")
         return std::unique_ptr<RandomProvider>(new RandomProvider(xml->FloatAttribute("min"), xml->FloatAttribute("max")));
-    else if(std::string(xml->Name())=="inv")
-        return std::unique_ptr<Inverse>(new Inverse(std::move(parseProviders(xml, animated, handler, stoppable, functions, cloneHandler)[0])));
     else if(std::string(xml->Name())=="keyDown")
-      return std::unique_ptr<KeyProvider>(new KeyProvider((int)(xml->Attribute("key")[0])));
+        return std::unique_ptr<KeyProvider>(new KeyProvider((int)(xml->Attribute("key")[0])));
+    else if(std::string(xml->Name())=="mouse")
+        return std::unique_ptr<MouseProvider>(new MouseProvider(xml->Attribute("axis") ? std::string(xml->Attribute("axis")) == "x" : true));
     else if(std::string(xml->Name())=="function")
     {
         if(functions == nullptr)
             throw std::runtime_error(utility::translateKey("FunctionNull"));
+
         auto funcName = xml->Attribute("name");
         if(funcName == nullptr)
             throw std::runtime_error(utility::translateKey("NoName"));
+
         auto function = functions->find(funcName);
         if(function == end(*functions))
             throw std::runtime_error(utility::replace(utility::translateKey("NoTemplate"), funcName));
+
         auto providers = parseProviders(function->second, animated, handler, stoppable, functions, cloneHandler);
         if(providers.size()>1)
             throw std::runtime_error(utility::replace(utility::translateKey("TemplateChild"), funcName));
+
         return std::move(providers[0]);
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("Unknown"), xml->Name()));
+    {
+        auto providers = parseProviders(xml, animated, handler, stoppable, functions, cloneHandler);
+        if(std::string(xml->Name())=="setVar")
+            return std::unique_ptr<SetVariable>(new SetVariable(handler, xml->Attribute("name"), std::move(providers[0]), xml->BoolAttribute("print"),
+                                                                cloneHandler ? cloneHandler->createSetVariableProviderCloneHandler() : nullptr));
+        else if(std::string(xml->Name())=="abs")
+            return std::unique_ptr<Absolute>(new Absolute(std::move(providers[0])));
+        else if(std::string(xml->Name())=="sine")
+            return std::unique_ptr<Sine>(new Sine(std::move(providers[0])));
+        else if(std::string(xml->Name())=="cache")
+            return std::unique_ptr<CachedProvider>(new CachedProvider(std::move(providers[0]),
+                xml->Attribute("reset") ? std::string("true") != xml->Attribute("reset") : false));
+        else if(std::string(xml->Name())=="int")
+            return std::unique_ptr<FloatToInt>(new FloatToInt(std::move(providers[0])));
+        else if(std::string(xml->Name())=="add")
+            return std::unique_ptr<Adder>(new Adder(std::move(providers)));
+        else if(std::string(xml->Name())=="ifpositive")
+            return std::unique_ptr<IfPositive>(new IfPositive(std::move(providers)));
+        else if(std::string(xml->Name())=="mul")
+            return std::unique_ptr<Multiplier>(new Multiplier(std::move(providers)));
+        else if(std::string(xml->Name())=="min")
+            return std::unique_ptr<Minimum>(new Minimum(std::move(providers)));
+        else if(std::string(xml->Name())=="max")
+            return std::unique_ptr<Maximum>(new Maximum(std::move(providers)));
+        else if(std::string(xml->Name())=="mod")
+            return std::unique_ptr<Modulo>(new Modulo(std::move(providers)));
+        else if(std::string(xml->Name())=="pow")
+            return std::unique_ptr<Pow>(new Pow(std::move(providers)));
+        else if(std::string(xml->Name())=="nop")
+            return std::unique_ptr<Nop>(new Nop(std::move(providers)));
+        else if(std::string(xml->Name())=="clamp")
+            return std::unique_ptr<Clamp>(new Clamp(std::move(providers)));
+        else if(std::string(xml->Name())=="step")
+        {
+            float threshold = 1;
+            xml->QueryFloatAttribute("threshold", &threshold);
+            return std::unique_ptr<Step>(new Step(std::move(providers), threshold));
+        }
+        else if(std::string(xml->Name())=="sub")
+            return std::unique_ptr<Substractor>(new Substractor(std::move(providers)));
+        else if(std::string(xml->Name())=="switch")
+            return std::unique_ptr<Switch>(new Switch(std::move(providers), parseFloatList(xml->Attribute("cases"))));
+        else if(std::string(xml->Name())=="neg")
+            return std::unique_ptr<Negate>(new Negate(std::move(providers[0])));
+        else if(std::string(xml->Name())=="ramp")
+            return std::unique_ptr<Ramp>(new Ramp(xml->FloatAttribute("min"), xml->FloatAttribute("max"),
+                std::move(providers[0])));
+        else if(std::string(xml->Name())=="inv")
+            return std::unique_ptr<Inverse>(new Inverse(std::move(providers[0])));
+    }
+    throw std::runtime_error(utility::replace(utility::translateKey("Unknown"), xml->Name()));
 }
 
 std::unordered_map<std::string, tinyxml2::XMLElement*> LevelFileLoader::parseList(
