@@ -40,13 +40,13 @@
 	<achievement key="ach_finish_levelnam_maxoftime_10000" condition="Finish" object="LevelNAM" specifically="MaxOfTime = 10000" gold="6" silver="4" bronze="1" />
 	<achievement key="ach_loose_levelnam_insum" condition="Loose" object="LevelNAM" specifically="InSum" gold="12" silver="6" bronze="3" />
 	<achievement key="ach_loose_leveltam_insum" condition="Loose" object="LevelTAM" specifically="InSum" gold="12" silver="6" bronze="3" />
-	<achievement key="ach_use_gravetygoody_insum" condition="Use" object="GravityGoody" specifically="InSum" gold="100" silver="50" bronze="25" />
+	<achievement key="ach_use_gravitygoody_insum" condition="Use" object="GravityGoody" specifically="InSum" gold="100" silver="50" bronze="25" />
 	<achievement key="ach_use_invulnerablegoody_insum" condition="Use" object="InvulnerableGoody" specifically="InSum" gold="100" silver="50" bronze="25" />
 	<achievement key="ach_use_extraballgoody_insum" condition="Use" object="ExtraBallGoody" specifically="InSum" gold="100" silver="50" bronze="25" />
 	<achievement key="ach_use_extratimegoody_insum" condition="Use" object="ExtraTimeGoody" specifically="InSum" gold="100" silver="50" bronze="25" />
-	<achievement key="ach_use_godygeneral_insum" condition="Use" object="GoodyGenaral" specifically="InSum" gold="500" silver="250" bronze="75" />
-	<achievement key="ach_buy_godygeneral_insum" condition="Buy" object="GoodyGenaral" specifically="InSum" gold="500" silver="250" bronze="75" />
-	<achievement key="ach_buy_godygeneral_incash" condition="Buy" object="GoodyGenaral" specifically="InCash" gold="50000" silver="25000" bronze="10000" />
+	<achievement key="ach_use_goodygeneral_insum" condition="Use" object="GoodyGenaral" specifically="InSum" gold="500" silver="250" bronze="75" />
+	<achievement key="ach_buy_goodygeneral_insum" condition="Buy" object="GoodyGenaral" specifically="InSum" gold="500" silver="250" bronze="75" />
+	<achievement key="ach_buy_goodygeneral_incash" condition="Buy" object="GoodyGenaral" specifically="InCash" gold="50000" silver="25000" bronze="10000" />
 	<achievement key="ach_buy_invulnerablegoody_insum" condition="Buy" object="InvulnerableGoody" specifically="InSum" gold="150" silver="75" bronze="37" />
 	<achievement key="ach_buy_extraballgoody_insum" condition="Buy" object="ExtraBallGoody" specifically="InSum" gold="150" silver="75" bronze="37" />
 	<achievement key="ach_buy_extratimegoody_insum" condition="Buy" object="ExtraTimeGoody" specifically="InSum" gold="150" silver="75" bronze="37" />

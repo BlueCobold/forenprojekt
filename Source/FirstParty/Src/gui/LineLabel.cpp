@@ -28,6 +28,24 @@ LineLabel::LineLabel(const std::string& text,
     rebuild();
 }
 
+LineLabel::LineLabel(const std::string& text,
+                     const sf::Vector2f& position,
+                     const sf::Vector2f& offset,
+                     const float rotation,
+                     const MenuElementType::Type type,
+                     const BitmapFont* font,
+                     const Alignment alignment,
+                     int id) :
+    MenuElement(id, type, position, offset),
+    m_text(text),
+    m_progressPosition(0, 0),
+    m_rotation(rotation),
+    m_font(font),
+    m_alignment(alignment)
+{
+    rebuild();
+}
+
 void LineLabel::draw(const DrawParameter& params)
 {
     if(!isVisible())
@@ -181,4 +199,9 @@ bool LineLabel::allProgressesFinished()
 unsigned int LineLabel::getFontSize()
 {
     return m_font->getFontSize();
+}
+
+LineLabel::Alignment LineLabel::getAlignment() const
+{
+    return m_alignment;
 }

@@ -14,6 +14,7 @@
 #include "MenuSprite.hpp"
 #include "ToolTip.hpp"
 #include "InputBoxStyle.hpp"
+#include "InteractiveLabel.hpp"
 #include "../model/SoundObject.hpp"
 #include "AnimationContainer.hpp"
 
@@ -63,6 +64,7 @@ struct MenuElements
     std::vector<CheckBoxInfo> checkboxes;
     std::vector<SliderInfo> slider;
     std::vector<LineLabel> labels;
+    std::vector<InteractiveLabel> interactiveLabels;
     std::vector<MenuSprite> sprites;
     std::vector<InputBoxInfo> infobox;
     std::vector<std::unique_ptr<AnimationContainer>> animationContainer;
@@ -75,7 +77,8 @@ struct MenuElements
         slider(other.slider),
         labels(other.labels),
         sprites(other.sprites),
-        infobox(other.infobox)
+        infobox(other.infobox),
+        interactiveLabels(other.interactiveLabels)
     {
         for(auto it = begin(other.animationContainer); it != end(other.animationContainer); ++it)
             animationContainer.push_back((*it)->clone());
@@ -102,6 +105,7 @@ private:
         sprites = std::move(other.sprites);
         infobox = std::move(other.infobox);
         animationContainer = std::move(other.animationContainer);
+        interactiveLabels = std::move(other.interactiveLabels);
     }
 };
 

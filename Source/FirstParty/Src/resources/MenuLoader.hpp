@@ -54,6 +54,12 @@ private:
         tinyxml2::XMLElement* menuXml, 
         ResourceManager& resourceManager);
 
+    static void parseInteractiveLabels(
+        MenuElements& elements,
+        tinyxml2::XMLElement* menuXml,
+        std::unordered_map<std::string, ToolTip>& toolTip,
+        ResourceManager& resourceManager);
+
     static void parseImages(
         MenuElements& elements,
         tinyxml2::XMLElement* menuXml,

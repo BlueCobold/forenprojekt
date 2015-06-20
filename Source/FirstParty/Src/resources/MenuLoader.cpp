@@ -97,6 +97,7 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     parseCheckBoxes(elements, menuXml, checkboxStyles, toolTip, resourceManager);
     parseSliders(elements, menuXml, sliderStyles, resourceManager);
     parseLabels(elements, menuXml, resourceManager);
+    parseInteractiveLabels(elements, menuXml, toolTip, resourceManager);
     parseImages(elements, menuXml, toolTip, resourceManager);
     parseInputBox(elements, menuXml, inputBoxStyle, resourceManager);
     parseAnimationContainer(elements, menuXml, resourceManager);
@@ -253,6 +254,44 @@ void MenuLoader::parseLabels(
                 label.setVisibleWhenId(visibleWhenId);
 
             elements.labels.push_back(label);
+        }
+    }
+}
+
+void MenuLoader::parseInteractiveLabels(
+    MenuElements& elements,
+    tinyxml2::XMLElement* menuXml,
+    std::unordered_map<std::string, ToolTip>& toolTip,
+    ResourceManager& resourceManager)
+{
+    if(auto styles = menuXml->FirstChildElement("elements"))
+    {
+        for(auto labelXml = styles->FirstChildElement("ilabel");
+            labelXml != nullptr; labelXml = labelXml->NextSiblingElement("ilabel"))
+        {
+            InteractiveLabel label(utility::translateKey(labelXml->Attribute("text")),
+                                   sf::Vector2f(0, 0),
+                                   sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
+                                   0,
+                                   resourceManager.getBitmapFont(labelXml->Attribute("font")),
+                                   static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
+                                   labelXml->IntAttribute("id"));
+
+            if(auto visibleWhenId = labelXml->IntAttribute("visibleWhen"))
+                label.setVisibleWhenId(visibleWhenId);
+
+            auto tooltipAvailable = labelXml->Attribute("tooltip");
+            if(tooltipAvailable != nullptr)
+            {
+                auto tooltip = toolTip.find(tooltipAvailable);
+                if(tooltip == end(toolTip))
+                    throw std::runtime_error(utility::replace(utility::translateKey("UnknownButtonToolTip"), labelXml->Attribute("tooltip")));
+
+                label.setToolTip(tooltip->second);
+                label.setToolTipText(utility::translateKey(labelXml->Attribute("tooltiptext")));
+            }
+
+            elements.interactiveLabels.push_back(label);
         }
     }
 }

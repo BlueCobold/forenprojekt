@@ -22,8 +22,7 @@ AchievementState::AchievementState(sf::RenderWindow& screen,
     auto achievement = m_achievementManager.getAchievement(m_currentAchievementIndex);
     if(achievement)
     {
-        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setText(achievement->getId());
-        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_COUNTER).setText("");
+        updateAchievementData();
         updateButtons();
     }
 }
@@ -62,12 +61,14 @@ StateChangeInformation AchievementState::update(const float time)
     {
         ++m_currentAchievementIndex;
         updateRightButton();
+        updateAchievementData();
     }
 
     if(clicked == AchievementMenu::BUTTON_LEFT)
     {
         --m_currentAchievementIndex;
         updateLeftButton();
+        updateAchievementData();
     }
 
     return StateChangeInformation::Empty();
@@ -91,8 +92,6 @@ void AchievementState::updateLeftButton()
 
     if(achievement)
     {
-        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setText(achievement->getName());
-        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_COUNTER).setText(utility::toString(achievement->getCounter()));
         m_menu.hideRightButton(false);
 
         if(m_achievementManager.getAchievement(--m_currentAchievementIndex) == nullptr)
@@ -108,8 +107,7 @@ void AchievementState::updateRightButton()
 
     if(achievement)
     {
-        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setText(achievement->getName());
-        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_COUNTER).setText(utility::toString(achievement->getCounter()));
+
         m_menu.hideLeftButton(false);
 
         if(m_achievementManager.getAchievement(++m_currentAchievementIndex) == nullptr)
@@ -123,4 +121,16 @@ void AchievementState::updateButtons()
 {
     updateRightButton();
     updateLeftButton();
+}
+
+void AchievementState::updateAchievementData()
+{
+    auto achievement = m_achievementManager.getAchievement(m_currentAchievementIndex);
+
+    if(achievement)
+    {
+        m_menu.getInteractiveLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setText(achievement->getName());
+        m_menu.getInteractiveLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setToolTipText(utility::translateKey("tooltip_" + achievement->getKey()));
+        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_COUNTER).setText(utility::toString(achievement->getCounter()));
+    }
 }

@@ -34,6 +34,9 @@ public:
         const Alignment alignment = Left,
         int id = -1);
 
+    virtual ~LineLabel()
+    { }
+
     virtual void draw(const DrawParameter& params) override;
 
     void setText(const std::string& text);
@@ -58,6 +61,17 @@ public:
 protected:
 
     virtual void onPositionChanged() override;
+
+    LineLabel(const std::string& text,
+        const sf::Vector2f& position,
+        const sf::Vector2f& offset,
+        const float rotation,
+        const MenuElementType::Type type,
+        const BitmapFont* font,
+        const Alignment alignment = Left,
+        int id = -1);
+
+    Alignment getAlignment() const;
 
 private:
 

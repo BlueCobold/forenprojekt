@@ -146,6 +146,11 @@ LineLabel& Menu::getLabel(int id) const
     return *find<LineLabel>(id, MenuElementType::Label);
 }
 
+InteractiveLabel& Menu::getInteractiveLabel(int id) const
+{
+    return *find<InteractiveLabel>(id, MenuElementType::InteractiveLabel);
+}
+
 MenuSprite& Menu::getSprite(int id) const
 {
     return *find<MenuSprite>(id, MenuElementType::Image);

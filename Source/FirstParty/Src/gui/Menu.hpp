@@ -58,6 +58,7 @@ public:
     CheckBox& getCheckbox(int id) const;
     Slider& getSlider(int id) const;
     LineLabel& getLabel(int id) const;
+    InteractiveLabel& getInteractiveLabel(int id) const;
     Button& getButton(int id) const;
     MenuSprite& getSprite(int id) const;
     InputBox& getInputBox(int id) const;

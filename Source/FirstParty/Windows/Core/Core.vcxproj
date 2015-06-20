@@ -99,7 +99,6 @@
     <ClInclude Include="..\..\Src\animation\AnimatedObject.hpp" />
     <ClInclude Include="..\..\Src\animation\Animation.hpp" />
     <ClInclude Include="..\..\Src\animation\Cloneable.hpp" />
-    <ClInclude Include="..\..\Src\animation\CloneHandler.hpp" />
     <ClInclude Include="..\..\Src\animation\Interpolation.hpp" />
     <ClInclude Include="..\..\Src\animation\OrientedObject.hpp" />
     <ClInclude Include="..\..\Src\animation\ParticleTrail.hpp" />
@@ -170,6 +169,7 @@
     <ClInclude Include="..\..\Src\gui\hud\TimeHUD.hpp" />
     <ClInclude Include="..\..\Src\gui\InputBox.hpp" />
     <ClInclude Include="..\..\Src\gui\InputBoxStyle.hpp" />
+    <ClInclude Include="..\..\Src\gui\InteractiveLabel.hpp" />
     <ClInclude Include="..\..\Src\gui\KeyboardMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\LevelPreviewMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\LevelSelectMenu.hpp" />
@@ -256,6 +256,7 @@
     <ClInclude Include="..\..\Src\resources\AchievementManager.hpp" />
     <ClInclude Include="..\..\Src\resources\AppConfig.hpp" />
     <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp" />
+    <ClInclude Include="..\..\Src\resources\CloneHandler.hpp" />
     <ClInclude Include="..\..\Src\resources\Config.hpp" />
     <ClInclude Include="..\..\Src\resources\FileReader.hpp" />
     <ClInclude Include="..\..\Src\resources\GameEvent.hpp" />
@@ -333,6 +334,7 @@
     <ClCompile Include="..\..\Src\gui\hud\TargetHUD.cpp" />
     <ClCompile Include="..\..\Src\gui\hud\TimeHUD.cpp" />
     <ClCompile Include="..\..\Src\gui\InputBox.cpp" />
+    <ClCompile Include="..\..\Src\gui\InteractiveLabel.cpp" />
     <ClCompile Include="..\..\Src\gui\KeyboardMenu.cpp" />
     <ClCompile Include="..\..\Src\gui\LevelPreviewMenu.cpp" />
     <ClCompile Include="..\..\Src\gui\LevelSelectMenu.cpp" />

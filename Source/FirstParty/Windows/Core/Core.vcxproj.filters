@@ -583,8 +583,11 @@
     <ClInclude Include="..\..\Src\animation\provider\Observer.hpp">
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\animation\CloneHandler.hpp">
-      <Filter>Headers\animation</Filter>
+    <ClInclude Include="..\..\Src\resources\CloneHandler.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\InteractiveLabel.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1051,6 +1054,9 @@
       <Filter>Sources\gui\menus</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\ReplayMenu.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\InteractiveLabel.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
   </ItemGroup>

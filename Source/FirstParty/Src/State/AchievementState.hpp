@@ -37,6 +37,8 @@ private:
     void updateRightButton();
 
     void updateButtons();
+
+    void updateAchievementData();
 };
 
 #endif // ACHIEVEMENT_STATE_HPP
