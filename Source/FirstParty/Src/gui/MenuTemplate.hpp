@@ -123,6 +123,15 @@ struct SubWindowInfo
 
     SubWindowInfo(){};
 
+    SubWindowInfo(const SubWindowInfo& other) :
+        menuElements(other.menuElements),
+        position(other.position),
+        size(other.size),
+        innerHeight(other.innerHeight),
+        id(other.id),
+        style(other.style)
+    { }
+    
     SubWindowInfo(SubWindowInfo&& other)
     {
         move(other);
@@ -158,6 +167,17 @@ struct MenuTemplate
     sf::Vector2f menuOffset;
 
     MenuTemplate(){}
+
+    MenuTemplate(const MenuTemplate& other) :
+        menuElements(other.menuElements),
+        subWindow(other.subWindow),
+        captionResourceKey(other.captionResourceKey),
+        captionFont(other.captionFont),
+        captionOffset(other.captionOffset),
+        background(other.background),
+        relativePosition(other.relativePosition),
+        menuOffset(other.menuOffset)
+    { }
 
     MenuTemplate(MenuTemplate&& other)
     {

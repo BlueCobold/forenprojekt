@@ -8,35 +8,44 @@
 class Achievement
 {
 public:
-    static enum Condition {Collect,
-                           Hit,
-                           Buy,
-                           Sell,
-                           Loose,
-                           Finish,
-                           Use};
+    enum Condition
+    {
+        Collect,
+        Hit,
+        Buy,
+        Sell,
+        Loose,
+        Finish,
+        Use
+    };
 
-    static enum Specifically {Nothing,
-                              InSum,
-                              InCash,
-                              WhenSpeeding,
-                              AtOnce,
-                              MinOfTime,
-                              MaxOfTime};
+    enum Specifically
+    {
+        Nothing,
+        InSum,
+        InCash,
+        WhenSpeeding,
+        AtOnce,
+        MinOfTime,
+        MaxOfTime
+    };
 
-    static enum Object {Target,
-                        BonusTarget,
-                        GravityGoody,
-                        InvulnerableGoody,
-                        ExtraBallGoody,
-                        ExtraTimeGoody,
-                        Coins,
-                        Level,
-                        LevelNAM,
-                        LevelTAM,
-                        Ball,
-                        GoodyGenaral,
-                        Stars};
+    enum Object
+    {
+        Target,
+        BonusTarget,
+        GravityGoody,
+        InvulnerableGoody,
+        ExtraBallGoody,
+        ExtraTimeGoody,
+        Coins,
+        Level,
+        LevelNAM,
+        LevelTAM,
+        Ball,
+        GoodyGenaral,
+        Stars
+    };
 
     Achievement(const std::string& key,
                 Condition condition,

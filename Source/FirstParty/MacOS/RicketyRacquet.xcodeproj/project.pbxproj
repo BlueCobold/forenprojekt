@@ -130,6 +130,11 @@
 		6EBBABDD1A13A62100F9AD65 /* res in Resources */ = {isa = PBXBuildFile; fileRef = 6EBBABDA1A13A62100F9AD65 /* res */; };
 		6EBBABDE1A13A62100F9AD65 /* stash.dat in Resources */ = {isa = PBXBuildFile; fileRef = 6EBBABDB1A13A62100F9AD65 /* stash.dat */; };
 		6EBBABE81A153D3000F9AD65 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBBABE71A153D3000F9AD65 /* Cocoa.framework */; };
+		6EBF3D851B355C1F00E0CAE8 /* AchievementMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EBF3D831B355C1F00E0CAE8 /* AchievementMenu.cpp */; };
+		6EBF3D8A1B355C6100E0CAE8 /* Achievement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EBF3D861B355C6100E0CAE8 /* Achievement.cpp */; };
+		6EBF3D8B1B355C6100E0CAE8 /* AchievementManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EBF3D881B355C6100E0CAE8 /* AchievementManager.cpp */; };
+		6EBF3D8E1B355C6D00E0CAE8 /* AchievementState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EBF3D8C1B355C6D00E0CAE8 /* AchievementState.cpp */; };
+		6EBF3FBD1B356DC500E0CAE8 /* libCryptoPP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBF3FBC1B356DC500E0CAE8 /* libCryptoPP.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -446,6 +451,17 @@
 		6EBBABDA1A13A62100F9AD65 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../../Game/res; sourceTree = "<group>"; };
 		6EBBABDB1A13A62100F9AD65 /* stash.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = stash.dat; path = ../../Game/stash.dat; sourceTree = "<group>"; };
 		6EBBABE71A153D3000F9AD65 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		6EBF3D821B355C1000E0CAE8 /* CloneHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CloneHandler.hpp; sourceTree = "<group>"; };
+		6EBF3D831B355C1F00E0CAE8 /* AchievementMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AchievementMenu.cpp; sourceTree = "<group>"; };
+		6EBF3D841B355C1F00E0CAE8 /* AchievementMenu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AchievementMenu.hpp; sourceTree = "<group>"; };
+		6EBF3D861B355C6100E0CAE8 /* Achievement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Achievement.cpp; sourceTree = "<group>"; };
+		6EBF3D871B355C6100E0CAE8 /* Achievement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Achievement.hpp; sourceTree = "<group>"; };
+		6EBF3D881B355C6100E0CAE8 /* AchievementManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AchievementManager.cpp; sourceTree = "<group>"; };
+		6EBF3D891B355C6100E0CAE8 /* AchievementManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AchievementManager.hpp; sourceTree = "<group>"; };
+		6EBF3D8C1B355C6D00E0CAE8 /* AchievementState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AchievementState.cpp; sourceTree = "<group>"; };
+		6EBF3D8D1B355C6D00E0CAE8 /* AchievementState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AchievementState.hpp; sourceTree = "<group>"; };
+		6EBF3FBA1B356D5F00E0CAE8 /* libCryptoPP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCryptoPP.a; path = ../../../../cryptopp562/build/CryptoPP/Build/Products/Debug/libCryptoPP.a; sourceTree = "<group>"; };
+		6EBF3FBC1B356DC500E0CAE8 /* libCryptoPP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCryptoPP.a; path = ../../../../cryptopp562/build/CryptoPP/Build/Products/Release/libCryptoPP.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -453,6 +469,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EBF3FBD1B356DC500E0CAE8 /* libCryptoPP.a in Frameworks */,
 				6E33AD4A1AA5A2AA00F9FB58 /* OpenAL.framework in Frameworks */,
 				6E0A82781A2713B200ED9747 /* libtinyxml2-s.a in Frameworks */,
 				6EBBABE81A153D3000F9AD65 /* Cocoa.framework in Frameworks */,
@@ -495,6 +512,7 @@
 		6E4AABFB1ABAC116004DD346 /* animation */ = {
 			isa = PBXGroup;
 			children = (
+				6EBF3D821B355C1000E0CAE8 /* CloneHandler.hpp */,
 				6E4AABFC1ABAC116004DD346 /* AnimatedObject.hpp */,
 				6E4AABFD1ABAC116004DD346 /* Animation.cpp */,
 				6E4AABFE1ABAC116004DD346 /* Animation.hpp */,
@@ -556,6 +574,8 @@
 		6E4AAC2F1ABAC116004DD346 /* gui */ = {
 			isa = PBXGroup;
 			children = (
+				6EBF3D831B355C1F00E0CAE8 /* AchievementMenu.cpp */,
+				6EBF3D841B355C1F00E0CAE8 /* AchievementMenu.hpp */,
 				6E4AAC301ABAC116004DD346 /* AnimationContainer.cpp */,
 				6E4AAC311ABAC116004DD346 /* AnimationContainer.hpp */,
 				6E4AAC321ABAC116004DD346 /* BitmapFont.cpp */,
@@ -809,6 +829,10 @@
 		6E4AACF51ABAC116004DD346 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				6EBF3D861B355C6100E0CAE8 /* Achievement.cpp */,
+				6EBF3D871B355C6100E0CAE8 /* Achievement.hpp */,
+				6EBF3D881B355C6100E0CAE8 /* AchievementManager.cpp */,
+				6EBF3D891B355C6100E0CAE8 /* AchievementManager.hpp */,
 				6E4AACF61ABAC116004DD346 /* AppConfig.cpp */,
 				6E4AACF71ABAC116004DD346 /* AppConfig.hpp */,
 				6E4AACF81ABAC116004DD346 /* BackgroundLoader.hpp */,
@@ -838,6 +862,8 @@
 		6E4AAD0F1ABAC116004DD346 /* State */ = {
 			isa = PBXGroup;
 			children = (
+				6EBF3D8C1B355C6D00E0CAE8 /* AchievementState.cpp */,
+				6EBF3D8D1B355C6D00E0CAE8 /* AchievementState.hpp */,
 				6E4AAD101ABAC116004DD346 /* CoinShopState.cpp */,
 				6E4AAD111ABAC116004DD346 /* CoinShopState.hpp */,
 				6E4AAD121ABAC116004DD346 /* CreditMenuState.cpp */,
@@ -882,6 +908,8 @@
 		6EBBA7541A125CBC00F9AD65 = {
 			isa = PBXGroup;
 			children = (
+				6EBF3FBC1B356DC500E0CAE8 /* libCryptoPP.a */,
+				6EBF3FBA1B356D5F00E0CAE8 /* libCryptoPP.a */,
 				6E33AD491AA5A2AA00F9FB58 /* OpenAL.framework */,
 				6EBBABE71A153D3000F9AD65 /* Cocoa.framework */,
 				6EBBAAD21A139F3D00F9AD65 /* libBox2D.a */,
@@ -1022,6 +1050,7 @@
 				6E4AAD671ABAC116004DD346 /* Background.cpp in Sources */,
 				6E4AAD3D1ABAC116004DD346 /* Core.cpp in Sources */,
 				6E4AAD5E1ABAC116004DD346 /* OptionMenu.cpp in Sources */,
+				6EBF3D851B355C1F00E0CAE8 /* AchievementMenu.cpp in Sources */,
 				6E4AAD831ABAC116004DD346 /* HorizontalStripesTransition.cpp in Sources */,
 				6E4AAD461ABAC116004DD346 /* FailMenu.cpp in Sources */,
 				6E4AAD811ABAC116004DD346 /* HorizontalSlidingStripesTransition.cpp in Sources */,
@@ -1098,6 +1127,7 @@
 				6E4AAD401ABAC116004DD346 /* Button.cpp in Sources */,
 				6E4AAD511ABAC116004DD346 /* PointsHUD.cpp in Sources */,
 				6E4AAD571ABAC116004DD346 /* LevelSelectMenu.cpp in Sources */,
+				6EBF3D8B1B355C6100E0CAE8 /* AchievementManager.cpp in Sources */,
 				6E4AAD471ABAC116004DD346 /* FPSCounter.cpp in Sources */,
 				6E4AAD981ABAC116004DD346 /* CoinShopState.cpp in Sources */,
 				6E4AAD9F1ABAC116004DD346 /* LevelSelectState.cpp in Sources */,
@@ -1108,6 +1138,7 @@
 				6E4AAD4C1ABAC116004DD346 /* FPSCounterHUD.cpp in Sources */,
 				6E4AAD991ABAC116004DD346 /* CreditMenuState.cpp in Sources */,
 				6E4AAD681ABAC116004DD346 /* Ball.cpp in Sources */,
+				6EBF3D8A1B355C6100E0CAE8 /* Achievement.cpp in Sources */,
 				6E4AAD661ABAC116004DD346 /* MacHelper.mm in Sources */,
 				6E4AAD781ABAC116004DD346 /* DebugDraw.cpp in Sources */,
 				6E4AAD8D1ABAC116004DD346 /* VerticalStripesTransition.cpp in Sources */,
@@ -1116,6 +1147,7 @@
 				6E4AAD841ABAC116004DD346 /* RandomTransition.cpp in Sources */,
 				6E4AAD881ABAC116004DD346 /* VerticalHalvesTransition.cpp in Sources */,
 				6E4AAD531ABAC116004DD346 /* TimeHUD.cpp in Sources */,
+				6EBF3D8E1B355C6D00E0CAE8 /* AchievementState.cpp in Sources */,
 				6E4AAD9D1ABAC116004DD346 /* LevelPassState.cpp in Sources */,
 				6E4AAD411ABAC116004DD346 /* CaptionMenu.cpp in Sources */,
 				6E4AAD961ABAC116004DD346 /* SpriteSheet.cpp in Sources */,
@@ -1160,6 +1192,7 @@
 					"$(SRCROOT)/../../../../SFML/include",
 					/usr/local/include/,
 					"$(inherited)",
+					"$(SRCROOT)/../../ThirdParty/CryptoPP/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib/,
@@ -1212,6 +1245,7 @@
 					"$(SRCROOT)/../../../../SFML/include",
 					/usr/local/include/,
 					"$(inherited)",
+					"$(SRCROOT)/../../ThirdParty/CryptoPP/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib/,
@@ -1258,6 +1292,9 @@
 					"$(inherited)",
 					"$(SRCROOT)/../../../../Box2D_v2.2.1/Build/build/Box2D/Release",
 					"$(SRCROOT)/../../../../tinyxml2-master/tinyxml2-s/usr/local/lib",
+					/Users/skohl1/Development/_others/cryptopp562/build/CryptoPP/CryptoPP/usr/local/lib,
+					/Users/skohl1/Development/_others/cryptopp562/build/CryptoPP/Build/Products/Debug,
+					/Users/skohl1/Development/_others/cryptopp562/build/CryptoPP/Build/Products/Release,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = (
@@ -1283,6 +1320,9 @@
 					"$(inherited)",
 					"$(SRCROOT)/../../../../Box2D_v2.2.1/Build/build/Box2D/Release",
 					"$(SRCROOT)/../../../../tinyxml2-master/tinyxml2-s/usr/local/lib",
+					/Users/skohl1/Development/_others/cryptopp562/build/CryptoPP/CryptoPP/usr/local/lib,
+					/Users/skohl1/Development/_others/cryptopp562/build/CryptoPP/Build/Products/Debug,
+					/Users/skohl1/Development/_others/cryptopp562/build/CryptoPP/Build/Products/Release,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_CFLAGS = (

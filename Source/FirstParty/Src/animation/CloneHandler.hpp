@@ -66,27 +66,27 @@ public:
 
     TimeProvider::CloneCallback createTimeProviderCloneHandler()
     {
-        return [=, this](TimeProvider::CallbackParam* original){ return replace(original, timeReplacements); };
+        return [this](TimeProvider::CallbackParam* original){ return replace(original, timeReplacements); };
     }
 
     AngleProvider::CloneCallback createAngleProviderCloneHandler()
     {
-        return [=, this](AngleProvider::CallbackParam* original){ return replace(original, oriReplacements); };
+        return [this](AngleProvider::CallbackParam* original){ return replace(original, oriReplacements); };
     }
 
     Stop::CloneCallback createStopProviderCloneHandler()
     {
-        return [=, this](Stop::CallbackParam* original){ return replace(original, stopReplacements); };
+        return [this](Stop::CallbackParam* original){ return replace(original, stopReplacements); };
     }
 
     VariableProvider::CloneCallback createVariableProviderCloneHandler()
     {
-        return [=, this](VariableProvider::CallbackParam* original){ return replace(original, varReplacements); };
+        return [this](VariableProvider::CallbackParam* original){ return replace(original, varReplacements); };
     }
 
     SetVariable::CloneCallback createSetVariableProviderCloneHandler()
     {
-        return [=, this](SetVariable::CallbackParam* original){ return replace(original, setReplacements); };
+        return [this](SetVariable::CallbackParam* original){ return replace(original, setReplacements); };
     }
 
 private:

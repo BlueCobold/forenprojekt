@@ -601,7 +601,6 @@ void MenuLoader::parseAnimationContainer(
                 {
                     auto ani = LevelFileLoader::parseAnimation(animation, animContainer.get(), animContainer.get(), resourceManager, &functions,
                                                                _cloneHandler);
-                    auto c = animContainer.get();
                     animContainer->bindAnimation(std::move(ani));
                 }
             }
