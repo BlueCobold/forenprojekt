@@ -131,6 +131,8 @@ namespace utility
             while(!levelFile.eof())
             {
                 std::getline(levelFile, line);
+                if(line.length() > 0 && line[line.length() - 1] == '\r')
+                    line = line.substr(0, line.length() - 1);
                 message.append(line);
             }
         }
