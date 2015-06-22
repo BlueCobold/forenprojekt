@@ -19,6 +19,7 @@
 #include "State/AchievementState.hpp"
 
 #include "resources/AppConfig.hpp"
+#include "rendering/GLExt.hpp"
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -47,6 +48,8 @@ App::App(AppConfig& config) :
     m_stateManager(m_screen),
     m_achievementManager("Achievement.dat", m_config)
 {
+    gl::sys::LoadFunctions();
+
     // Cache often used settings
     sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
     m_windowTitle = m_config.get<std::string>("WindowName");
@@ -148,9 +151,9 @@ void App::draw()
     if(utility::Keyboard.isKeyPressed(sf::Keyboard::Z))
         m_screen.clear();
 #endif
-    glStencilMask(0xFF); // Write to entire stencil buffer
-    glClearStencil(0);
-    glClear(GL_STENCIL_BUFFER_BIT);
+    gl::StencilMask(0xFF); // Write to entire stencil buffer
+    gl::ClearStencil(0);
+    gl::Clear(gl::STENCIL_BUFFER_BIT);
 
     m_stateManager.draw();
     m_cursor->draw(m_screen);

@@ -228,7 +228,11 @@
     <ClInclude Include="..\..\Src\rendering\DebugDraw.hpp" />
     <ClInclude Include="..\..\Src\rendering\Drawable.hpp" />
     <ClInclude Include="..\..\Src\rendering\DrawParameter.hpp" />
+    <ClInclude Include="..\..\Src\rendering\GLExt.hpp" />
     <ClInclude Include="..\..\Src\rendering\GraphicalObject.hpp" />
+    <ClInclude Include="..\..\Src\rendering\parameter\ShaderParameter.hpp" />
+    <ClInclude Include="..\..\Src\rendering\parameter\TextureParameter.hpp" />
+    <ClInclude Include="..\..\Src\rendering\Shader.hpp" />
     <ClInclude Include="..\..\Src\rendering\transitions\AlphaTransition.hpp" />
     <ClInclude Include="..\..\Src\rendering\transitions\GrowingCircleTransition.hpp" />
     <ClInclude Include="..\..\Src\rendering\transitions\GrowingRectangleTransition.hpp" />
@@ -267,6 +271,7 @@
     <ClInclude Include="..\..\Src\resources\PathHelper.hpp" />
     <ClInclude Include="..\..\Src\resources\ResourceCache.hpp" />
     <ClInclude Include="..\..\Src\resources\ResourceManager.hpp" />
+    <ClInclude Include="..\..\Src\resources\ShaderLoader.hpp" />
     <ClInclude Include="..\..\Src\resources\SoundBufferManager.hpp" />
     <ClInclude Include="..\..\Src\resources\SpriteSheet.hpp" />
     <ClInclude Include="..\..\Src\ScrollView.hpp" />
@@ -369,6 +374,10 @@
     <ClCompile Include="..\..\Src\model\SoundTrigger.cpp" />
     <ClCompile Include="..\..\Src\model\Teeter.cpp" />
     <ClCompile Include="..\..\Src\rendering\DebugDraw.cpp" />
+    <ClCompile Include="..\..\Src\rendering\GLExt.cpp" />
+    <ClCompile Include="..\..\Src\rendering\parameter\ShaderParameter.cpp" />
+    <ClCompile Include="..\..\Src\rendering\parameter\TextureParameter.cpp" />
+    <ClCompile Include="..\..\Src\rendering\Shader.cpp" />
     <ClCompile Include="..\..\Src\rendering\transitions\AlphaTransition.cpp" />
     <ClCompile Include="..\..\Src\rendering\transitions\GrowingCircleTransition.cpp" />
     <ClCompile Include="..\..\Src\rendering\transitions\GrowingRectangleTransition.cpp" />

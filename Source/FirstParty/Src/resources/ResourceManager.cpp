@@ -1,6 +1,8 @@
 #include "ResourceManager.hpp"
 #include "MenuLoader.hpp"
+#include "ShaderLoader.hpp"
 #include "../MacHelper.hpp"
+#include "../rendering/GLExt.hpp"
 
 #include <tinyxml2.h>
 
@@ -30,6 +32,22 @@ ResourceManager::ResourceManager()
     parseLevelFileName(doc);
     parsePublicKeys(doc);
     parseHashValues(doc);
+}
+
+sf::Texture* ResourceManager::loadTexture(const std::string& path, bool smooth)
+{
+    sf::Texture* texture = new sf::Texture;
+    if(!texture->loadFromFile(resourcePath() + "res/img/" + path))
+    {
+        delete texture; // No memory leak
+        return nullptr;
+    }
+    else
+    {
+        texture->setSmooth(smooth);
+        gl::Flush();
+        return texture;
+    }
 }
 
 const BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
@@ -71,15 +89,16 @@ const sf::Texture* ResourceManager::getTexture(const std::string& key)
         }, "UnknownTexture");
 }
 
-sf::Shader* ResourceManager::getShader(const std::string& key)
+Shader* ResourceManager::getShader(const std::string& key)
 {
     if(!sf::Shader::isAvailable())
         throw std::runtime_error(utility::translateKey("ShadersNotAvailable"));
 
-    return getOrFail<sf::Shader, ShaderParams>(m_shaderKeys, m_shaders, key,
-        [&](const ShaderParams& params)->std::function<sf::Shader*()>
+    auto self = this;
+    return getOrFail<Shader, ShaderParams>(m_shaderKeys, m_shaders, key,
+        [&](const ShaderParams& params)->std::function<Shader*()>
         {
-            return [=](){ return ResourceManager::loadShader(std::get<0>(params), std::get<1>(params)); };
+            return [=](){ return ShaderLoader::loadShader(std::get<0>(params), std::get<1>(params), std::get<2>(params), *self); };
         }, "UnknownShader");
 }
 
@@ -134,7 +153,8 @@ void ResourceManager::parseShaders(tinyxml2::XMLDocument& doc)
         m_shaderKeys.insert(std::make_pair(std::string(element->Attribute("name")),
                                            ResourceManager::ShaderParams(
                                                std::string(element->Attribute("vertexPath")),
-                                               std::string(element->Attribute("fragmentPath")))));
+                                               std::string(element->Attribute("fragmentPath")),
+                                               std::string(element->Attribute("configPath")))));
     });
 }
 

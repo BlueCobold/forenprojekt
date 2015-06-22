@@ -80,6 +80,9 @@ DoubleAchievement = It exist allready a second achievement with id: %.
 AchievementLoadError = An error happens, while loading file: %.
 UnknownPublicKey = PublicKey isn't registered: %.
 NoOriginalFile = This file '%' is not an original.
+ShaderFailed = The shader cannot be loaded (%, %).
+ShaderFileInvalid = The shader config file is invalid: %.
+ShaderEntryMissing = The shader config file is missing the "parameters" section: %.
 
 [GUI]
 gui_game_paused = Game Paused

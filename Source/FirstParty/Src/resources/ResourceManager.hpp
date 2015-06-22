@@ -9,13 +9,12 @@
 #include "SoundBufferManager.hpp"
 #include "SpriteSheet.hpp"
 #include "PathHelper.hpp"
+#include "../rendering/Shader.hpp"
 
 #include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/Shader.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
-#include <SFML/OpenGL.hpp>
 
 #include <rsa.h>
 #include <osrng.h>
@@ -39,7 +38,7 @@ public:
 
     const sf::Texture* getTexture(const std::string& key);
     
-    sf::Shader* getShader(const std::string& key);
+    Shader* getShader(const std::string& key);
 
     const sf::Font* getFont(const std::string& key);
 #ifndef NO_SOUND
@@ -71,39 +70,7 @@ private:
                       const std::string& element,
                       std::function<void(const tinyxml2::XMLElement*)> operation);
 
-    static sf::Texture* loadTexture(const std::string& path, bool smooth)
-    {
-        sf::Texture* texture = new sf::Texture;
-        if(!texture->loadFromFile(resourcePath() + "res/img/" + path))
-        {
-            delete texture; // No memory leak
-            return nullptr;
-        }
-        else
-        {
-            texture->setSmooth(smooth);
-            glFlush();
-            return texture;
-        }
-    }
-
-    static sf::Shader* loadShader(const std::string& vertexPath, const std::string& fragmentPath)
-    {
-        if(!sf::Shader::isAvailable())
-            return nullptr;
-
-        sf::Shader* shader = new sf::Shader;
-        if(!shader->loadFromFile(resourcePath() + "res/shader/" + vertexPath, resourcePath() + "res/shader/" + fragmentPath))
-        {
-            delete shader;
-            return nullptr;
-        }
-        else
-        {
-            glFlush();
-            return shader;
-        }
-    }
+    static sf::Texture* loadTexture(const std::string& path, bool smooth);
 
     static sf::Font* loadFont(const std::string& path)
     {
@@ -169,7 +136,7 @@ private:
 
 private:
 
-    typedef std::tuple<std::string, std::string> ShaderParams;
+    typedef std::tuple<std::string, std::string, std::string> ShaderParams;
     typedef std::tuple<std::string, bool> TextureParams;
 
     std::unordered_map<std::string, TextureParams> m_textureKeys;
@@ -185,7 +152,7 @@ private:
 
     std::unique_ptr<SoundManager> m_soundManager;
     ResourceCache<const sf::Texture> m_textures;
-    ResourceCache<sf::Shader> m_shaders;
+    ResourceCache<Shader> m_shaders;
     ResourceCache<const sf::Font> m_fonts;
 #ifndef NO_SOUND
     ResourceCache<sf::SoundBuffer> m_soundBuffers;

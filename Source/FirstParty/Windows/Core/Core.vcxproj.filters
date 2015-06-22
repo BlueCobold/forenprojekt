@@ -589,6 +589,21 @@
     <ClInclude Include="..\..\Src\gui\InteractiveLabel.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\Shader.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\parameter\ShaderParameter.hpp">
+      <Filter>Headers\rendering\parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\parameter\TextureParameter.hpp">
+      <Filter>Headers\rendering\parameter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\ShaderLoader.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\GLExt.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -680,6 +695,12 @@
     </Filter>
     <Filter Include="Headers\gui\menus">
       <UniqueIdentifier>{d8cd90ab-3fca-433a-938a-73c1f4169880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\rendering\parameter">
+      <UniqueIdentifier>{7d6a7d0c-908d-4aa1-83fb-d51c4fa637c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\rendering\parameter">
+      <UniqueIdentifier>{fc4e6b50-3567-49be-9d93-fab53c7daf71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1058,6 +1079,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\InteractiveLabel.cpp">
       <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\GLExt.cpp">
+      <Filter>Sources\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\Shader.cpp">
+      <Filter>Sources\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\parameter\ShaderParameter.cpp">
+      <Filter>Sources\rendering\parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\parameter\TextureParameter.cpp">
+      <Filter>Sources\rendering\parameter</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

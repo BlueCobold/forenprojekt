@@ -7,6 +7,7 @@
 #include "Stoppable.hpp"
 #include "provider/ValueProvider.hpp"
 #include "../rendering/Drawable.hpp"
+#include "../rendering/Shader.hpp"
 
 #include <array>
 #include <list>
@@ -18,7 +19,6 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
-#include <SFML/Graphics/Shader.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 class CloneHandler;
@@ -86,7 +86,7 @@ public:
     void setStopOnAlphaZero(bool stop);
     void applyRotation(bool apply);
     void bindCloneHandler(CloneHandler& handler);
-    void bindShader(sf::Shader& shader);
+    void bindShader(Shader& shader);
     
     virtual void draw(const DrawParameter& param) override;
 
@@ -132,7 +132,7 @@ private:
     float m_externalRotation;
     sf::Vector2f m_drawOffset;
     sf::BlendMode m_blending;
-    sf::Shader* m_shader;
+    Shader* m_shader;
     CloneHandler* m_cloneHandler;
 };
 

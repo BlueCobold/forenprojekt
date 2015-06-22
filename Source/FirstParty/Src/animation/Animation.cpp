@@ -2,9 +2,9 @@
 #include "Animation.hpp"
 #include "../Utility.hpp" // toDegree, toPixel
 #include "CloneHandler.hpp"
+#include "../rendering/GLExt.hpp"
 
 #include <SFML/Graphics/Rect.hpp>
-#include <SFML/OpenGL.hpp>
 
 #include <cmath>
 
@@ -177,12 +177,12 @@ void Animation::draw(const DrawParameter& param)
     if(param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
     {
         if(m_shader)
-            sf::Shader::bind(m_shader);
+            m_shader->bind();
         m_stencil.enable();
         param.getTarget().draw(m_sprite, sf::RenderStates(m_blending));
         m_stencil.disable();
         if(m_shader)
-            sf::Shader::bind(nullptr);
+            m_shader->unbind();
     }
 }
 
@@ -298,7 +298,7 @@ void Animation::bindCloneHandler(CloneHandler& handler)
     m_cloneHandler = &handler;
 }
 
-void Animation::bindShader(sf::Shader& shader)
+void Animation::bindShader(Shader& shader)
 {
     m_shader = &shader;
 }
@@ -332,20 +332,20 @@ void Animation::StencilInfo::enable()
 
     if(mode == StencilInfo::Write)
     {
-        glEnable(GL_STENCIL_TEST);
-        glStencilFunc(GL_ALWAYS, ref, mask);//0xFF);
-        glStencilOp(GL_KEEP, GL_REPLACE, GL_REPLACE);
-        glStencilMask(ref);
+        gl::Enable(gl::STENCIL_TEST);
+        gl::StencilFunc(gl::ALWAYS, ref, mask);//0xFF);
+        gl::StencilOp(gl::KEEP, gl::REPLACE, gl::REPLACE);
+        gl::StencilMask(ref);
         //glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-        glEnable(GL_ALPHA_TEST);
-        glAlphaFunc(GL_GREATER, 0.0f);
+        gl::Enable(gl::ALPHA_TEST);
+        gl::AlphaFunc(gl::GREATER, 0.0f);
     }
     if(mode == StencilInfo::Test)
     {
-        glEnable(GL_STENCIL_TEST);
-        glStencilFunc(GL_LESS, ref, mask);
-        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-        glStencilMask(0x00);
+        gl::Enable(gl::STENCIL_TEST);
+        gl::StencilFunc(gl::LESS, ref, mask);
+        gl::StencilOp(gl::KEEP, gl::KEEP, gl::KEEP);
+        gl::StencilMask(0x00);
     }
 }
 
@@ -355,9 +355,9 @@ void Animation::StencilInfo::disable()
         return;
     if(mode != StencilInfo::None)
     {
-        glDisable(GL_STENCIL_TEST);
-        glDisable(GL_ALPHA_TEST);
-        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-        glStencilMask(0x00);
+        gl::Disable(gl::STENCIL_TEST);
+        gl::Disable(gl::ALPHA_TEST);
+        gl::ColorMask(gl::TRUE_, gl::TRUE_, gl::TRUE_, gl::TRUE_);
+        gl::StencilMask(0x00);
     }
 }
