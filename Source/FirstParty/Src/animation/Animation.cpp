@@ -28,7 +28,8 @@ Animation::Animation(
     m_externalRotation(0.f),
     m_horizontal(horizontal),
     m_stopOnAlphaZero(false),
-    m_cloneHandler(nullptr)
+    m_cloneHandler(nullptr),
+    m_shader(nullptr)
 {
     m_sprite.setOrigin(origin);
 }
@@ -175,9 +176,13 @@ void Animation::draw(const DrawParameter& param)
         return;
     if(param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
     {
+        if(m_shader)
+            sf::Shader::bind(m_shader);
         m_stencil.enable();
         param.getTarget().draw(m_sprite, sf::RenderStates(m_blending));
         m_stencil.disable();
+        if(m_shader)
+            sf::Shader::bind(nullptr);
     }
 }
 
@@ -291,6 +296,11 @@ void Animation::applyRotation(bool apply)
 void Animation::bindCloneHandler(CloneHandler& handler)
 {
     m_cloneHandler = &handler;
+}
+
+void Animation::bindShader(sf::Shader& shader)
+{
+    m_shader = &shader;
 }
 
 void Animation::enableStencilEffects(bool enable)

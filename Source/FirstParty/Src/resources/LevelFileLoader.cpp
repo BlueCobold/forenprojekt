@@ -236,6 +236,9 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
 
     anim->bindCloneHandler(cloneHandler);
 
+    if(auto shaderName = xml->Attribute("shader"))
+        anim->bindShader(*resourceManager.getShader(shaderName));
+
     if(auto stencil = xml->FirstChildElement("stencil"))
     {
         if(auto op = stencil->Attribute("op"))
