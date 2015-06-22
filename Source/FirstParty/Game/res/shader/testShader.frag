@@ -1,4 +1,6 @@
+uniform sampler2D tex;
 void main()
 {
-    gl_FragColor = vec4(0.5f*mod(100*gl_TexCoord[0].x, 1.0f), 0.5f*mod(100*gl_TexCoord[0].y, 1.0f), mod(gl_FragCoord.x/20.0f, 2.0f), 1.f);
+    vec4 col = texture2D(tex, gl_TexCoord[0].xy);
+    gl_FragColor = vec4(col.r, col.g * mod(gl_FragCoord.x/20.0f, 2.0f), mod(gl_FragCoord.x/20.0f, 2.0f), col.a);
 }

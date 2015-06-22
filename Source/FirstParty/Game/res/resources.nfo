@@ -83,7 +83,7 @@
 	<level number="12" filename="Moving Spikes.lvl" />
 </levels>
 <shaders>
-	<shader name="testShader" vertexPath="testShader.vert" fragmentPath="testShader.frag" />
+	<shader name="testShader" vertexPath="testShader.vert" fragmentPath="testShader.frag" configPath="testShader.conf" />
 </shaders>
 <keys>
 	<key name="LevelKey" path="LevelPublic.key" />
