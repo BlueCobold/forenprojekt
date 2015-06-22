@@ -1,4 +1,6 @@
+
 #include "App.hpp"
+
 #include "Input.hpp"
 #include "State/LoadLevelState.hpp"
 #include "State/PauseState.hpp"
@@ -17,9 +19,9 @@
 #include "State/NewHighScoreState.hpp"
 #include "State/GameFinishedState.hpp"
 #include "State/AchievementState.hpp"
-
-#include "resources/AppConfig.hpp"
 #include "rendering/GLExt.hpp"
+#include "resources/AppConfig.hpp"
+#include "resources/SpriteSheet.hpp"
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>

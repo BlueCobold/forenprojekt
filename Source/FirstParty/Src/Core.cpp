@@ -1,6 +1,9 @@
+
 #include "App.hpp"
 #include "resources/AppConfig.hpp"
+#include "resources/SpriteSheet.hpp"
 #include "gui/ErrorMessageBox.hpp"
+#include "gui/MenuTemplate.hpp"
 
 #include <SFML/System.hpp>
 

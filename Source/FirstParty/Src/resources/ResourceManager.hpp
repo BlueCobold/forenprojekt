@@ -4,12 +4,15 @@
 #define RESOURCE_MANAGER_HPP
 
 #include "ResourceCache.hpp"
-#include "../gui/BitmapFont.hpp"
-#include "../gui/MenuTemplate.hpp"
 #include "SoundBufferManager.hpp"
-#include "SpriteSheet.hpp"
 #include "PathHelper.hpp"
-#include "../rendering/Shader.hpp"
+class SpriteSheet;
+class BitmapFont;
+struct MenuTemplate;
+class Shader;
+class SoundManager;
+
+#include <tinyxml2.h>
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
@@ -72,67 +75,17 @@ private:
 
     static sf::Texture* loadTexture(const std::string& path, bool smooth);
 
-    static sf::Font* loadFont(const std::string& path)
-    {
-        sf::Font* font = new sf::Font;
-        if(!font->loadFromFile(resourcePath() + "res/font/" + path))
-        {
-            delete font;
-            return nullptr;
-        }
-        else
-            return font;
-    }
+    static sf::Font* loadFont(const std::string& path);
     
 #ifndef NO_SOUND
-    static sf::SoundBuffer* loadSoundBuffer(const std::string& path)
-    {
-        sf::SoundBuffer* soundBuffer = new sf::SoundBuffer;
-        if(!soundBuffer->loadFromFile(resourcePath() + "res/audio/" + path))
-        {
-            delete soundBuffer;
-            return nullptr;
-        }
-        else
-            return soundBuffer;
-    }
+    static sf::SoundBuffer* loadSoundBuffer(const std::string& path);
 #endif
-    
-    BitmapFont* loadBitmapFont(const std::string& path)
-    {
-        BitmapFont* font = new BitmapFont;
-        if(!font->loadFromFile(resourcePath() + "res/bitmapfont/" + path, *this))
-        {
-            delete font;
-            return nullptr;
-        }
-        else
-            return font;
-    }
 
-    static SpriteSheet* loadSpriteSheet(const std::string& path)
-    {
-        SpriteSheet* sheet = new SpriteSheet;
-        if(!sheet->loadFromFile(resourcePath() + "res/spritesheet/" + path))
-        {
-            delete sheet;
-            return nullptr;
-        }
-        else
-            return sheet;
-    }
+    BitmapFont* loadBitmapFont(const std::string& path);
 
-    static CryptoPP::RSA::PublicKey* loadPublicKey(const std::string& path)
-    {
-        CryptoPP::RSA::PublicKey* publicKey = new CryptoPP::RSA::PublicKey;
-        CryptoPP::ByteQueue queue;
-        CryptoPP::FileSource file((resourcePath() + "res/key/" + path).c_str(), true);
+    static SpriteSheet* loadSpriteSheet(const std::string& path);
 
-        file.TransferTo(queue);
-        queue.MessageEnd();
-        publicKey->Load(queue);
-        return publicKey;
-    }
+    static CryptoPP::RSA::PublicKey* loadPublicKey(const std::string& path);
 
 private:
 

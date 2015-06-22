@@ -1,13 +1,17 @@
+
 #include "LevelSelectState.hpp"
 
 #include "../gui/Button.hpp"
-#include "../resources/Config.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
+#include "../resources/Config.hpp"
+#include "../resources/SpriteSheet.hpp"
 #include "../MacHelper.hpp"
+
 #include <SFML/Graphics/RectangleShape.hpp>
 
-#include <fstream> 
 #include <tinyxml2.h>
+
+#include <fstream>
 
 LevelSelectState::LevelSelectState(sf::RenderWindow& screen, 
                                  ResourceManager& resourceManager, 

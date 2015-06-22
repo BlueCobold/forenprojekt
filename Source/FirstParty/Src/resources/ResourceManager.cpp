@@ -1,7 +1,9 @@
 #include "ResourceManager.hpp"
 #include "MenuLoader.hpp"
 #include "ShaderLoader.hpp"
+#include "SpriteSheet.hpp"
 #include "../MacHelper.hpp"
+#include "../gui/BitmapFont.hpp"
 #include "../rendering/GLExt.hpp"
 
 #include <tinyxml2.h>
@@ -48,6 +50,68 @@ sf::Texture* ResourceManager::loadTexture(const std::string& path, bool smooth)
         gl::Flush();
         return texture;
     }
+}
+
+sf::Font* ResourceManager::loadFont(const std::string& path)
+{
+    sf::Font* font = new sf::Font;
+    if(!font->loadFromFile(resourcePath() + "res/font/" + path))
+    {
+        delete font;
+        return nullptr;
+    }
+    else
+        return font;
+}
+
+#ifndef NO_SOUND
+sf::SoundBuffer* ResourceManager::loadSoundBuffer(const std::string& path)
+{
+    sf::SoundBuffer* soundBuffer = new sf::SoundBuffer;
+    if(!soundBuffer->loadFromFile(resourcePath() + "res/audio/" + path))
+    {
+        delete soundBuffer;
+        return nullptr;
+    }
+    else
+        return soundBuffer;
+}
+#endif
+
+BitmapFont* ResourceManager::loadBitmapFont(const std::string& path)
+{
+    BitmapFont* font = new BitmapFont;
+    if(!font->loadFromFile(resourcePath() + "res/bitmapfont/" + path, *this))
+    {
+        delete font;
+        return nullptr;
+    }
+    else
+        return font;
+}
+
+SpriteSheet* ResourceManager::loadSpriteSheet(const std::string& path)
+{
+    SpriteSheet* sheet = new SpriteSheet;
+    if(!sheet->loadFromFile(resourcePath() + "res/spritesheet/" + path))
+    {
+        delete sheet;
+        return nullptr;
+    }
+    else
+        return sheet;
+}
+
+CryptoPP::RSA::PublicKey* ResourceManager::loadPublicKey(const std::string& path)
+{
+    CryptoPP::RSA::PublicKey* publicKey = new CryptoPP::RSA::PublicKey;
+    CryptoPP::ByteQueue queue;
+    CryptoPP::FileSource file((resourcePath() + "res/key/" + path).c_str(), true);
+
+    file.TransferTo(queue);
+    queue.MessageEnd();
+    publicKey->Load(queue);
+    return publicKey;
 }
 
 const BitmapFont* ResourceManager::getBitmapFont(const std::string& key)

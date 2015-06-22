@@ -11,8 +11,6 @@
 #include <utility> // make_pair
 #include "../Utility.hpp"
 
-#include <SFML/Audio/SoundBuffer.hpp>
-
 /// This class is a light header-only ResourceManager
 /// and is capabale of handling all sorts of resources,
 /// including the ones from SFML.
@@ -25,10 +23,6 @@ public:
     typedef std::string Key;
     typedef std::unique_ptr<T> Value;
     typedef std::function<T*()> Functor;
-
-private:
-
-    typedef std::map<Key, Value> Map;
 
 public:
     

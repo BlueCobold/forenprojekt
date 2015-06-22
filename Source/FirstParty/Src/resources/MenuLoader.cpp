@@ -1,7 +1,8 @@
 
+#include "LevelFileLoader.hpp"
 #include "MenuLoader.hpp"
 #include "ResourceManager.hpp"
-#include "LevelFileLoader.hpp"
+#include "SpriteSheet.hpp"
 #include "../gui/LineLabel.hpp"
 #include "../MacHelper.hpp"
 
