@@ -3,10 +3,16 @@
 #ifndef CURSOR_HPP
 #define CURSOR_HPP
 
-#include "../resources/ResourceManager.hpp"
-#include "../rendering/DrawParameter.hpp"
+#include "../rendering/Drawable.hpp"
 
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+
+class ResourceManager;
+class DrawParameter;
+namespace sf
+{
+    class RenderWindow;
+};
 
 /// Mouse cursor replacing the system cursor.
 class Cursor : public Drawable

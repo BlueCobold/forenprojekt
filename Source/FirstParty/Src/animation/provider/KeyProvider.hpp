@@ -30,11 +30,11 @@ public:
       return static_cast<float>(utility::Keyboard.isKeyPressed(this->m_KeyAttachedTo));
     }
 
-    virtual KeyProvider* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
         for(int i=0; i<128; i++)
             if(m_KeyAttachedTo == intToKeys[i])
-                return new KeyProvider(i);
+                return std::unique_ptr<KeyProvider>(new KeyProvider(i));
         return nullptr;
     }
 

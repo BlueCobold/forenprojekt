@@ -15,6 +15,7 @@ public:
 
     Ball(float resetTime,
          float stuckBallSpeed,
+         CloneHandler& cloneHandler,
          const Entity* spawnAnimationEntity = nullptr,
          const Entity* killAnimationEntity = nullptr);
 

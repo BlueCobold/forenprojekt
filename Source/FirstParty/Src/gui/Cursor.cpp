@@ -1,6 +1,12 @@
 #include "Cursor.hpp"
 #include "../Input.hpp"
 
+#include "../rendering/DrawParameter.hpp"
+#include "../resources/ResourceManager.hpp"
+#include "../resources/SpriteSheet.hpp"
+
+#include <SFML/Graphics/RenderWindow.hpp>
+
 const std::string SHEET_NAME = "gui_elements";
 const std::string SPRITE_NAME = "Mouse";
 

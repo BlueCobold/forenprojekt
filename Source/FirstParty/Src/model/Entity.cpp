@@ -1,3 +1,4 @@
+
 #include "Entity.hpp"
 #include "../Utility.hpp"
 
@@ -7,7 +8,7 @@
 
 #include <Box2D/Dynamics/b2World.h>
 
-Entity::Entity(Type type, bool respawnable, bool autoKill) :
+Entity::Entity(Type type, CloneHandler& cloneHandler, bool respawnable, bool autoKill) :
     m_killed(false),
     m_type(type),
     m_updatingAni(nullptr),
@@ -15,7 +16,8 @@ Entity::Entity(Type type, bool respawnable, bool autoKill) :
     m_respawnable(respawnable),
     m_autoKill(autoKill),
     m_killAnimationEntity(nullptr),
-    m_animationAngle(0)
+    m_animationAngle(0),
+    m_cloneHandler(cloneHandler)
 {
 }
 
@@ -200,4 +202,17 @@ void Entity::setAnimationAngle(const float angle)
 bool compareDrawOrder(const std::unique_ptr<Entity>& lhs, const std::unique_ptr<Entity>& rhs)
 {
     return lhs->getDrawOrder() < rhs->getDrawOrder();
+}
+
+std::unique_ptr<Entity> Entity::clone() const
+{
+    auto clone = std::unique_ptr<Entity>(new Entity(m_type, m_cloneHandler, m_respawnable, m_autoKill));
+    m_cloneHandler.registerCloneAll(*this, *clone.get());
+
+    for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
+        clone->bindAnimation((*animation)->clone());
+
+    m_cloneHandler.unregisterCloneAll(*this);
+
+    return clone;
 }

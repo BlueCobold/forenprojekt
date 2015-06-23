@@ -3,34 +3,34 @@
 #ifndef ANGLE_PROVIDER_HPP
 #define ANGLE_PROVIDER_HPP
 
+#include "Observer.hpp"
+#include "ValueProvider.hpp"
 #include "../OrientedObject.hpp"
 #include "../../Utility.hpp"
 
 #include <cmath>
 
 /// Returns the angle of the owner
-class AngleProvider : public ValueProvider
+class AngleProvider : public ValueProvider, public Observer<const OrientedObject>
 {
 private:
 
-    const OrientedObject* m_owner;
-
 public:
-    AngleProvider(const OrientedObject* owner) : m_owner(owner)
-    {
-    }
+    AngleProvider(const OrientedObject* observed, const CloneCallback cloneCallback = nullptr) :
+        Observer(observed, cloneCallback)
+    { }
 
     virtual float getValue() override
     {
-        float angle = fmod(utility::toDegree<float, float>(m_owner->getAngle()), 360.f);
+        float angle = fmod(utility::toDegree<float, float>(getObserved()->getAngle()), 360.f);
         if(angle < 0)
             return angle + 360;
         return angle;
     }
 
-    virtual AngleProvider* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new AngleProvider(m_owner);
+        return std::unique_ptr<AngleProvider>(new AngleProvider(getCloneObservable(), getCallback()));
     }
 };
 

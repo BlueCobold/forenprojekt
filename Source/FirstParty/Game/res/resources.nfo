@@ -76,17 +76,34 @@
 	<spritesheet name="walls_nort" path="assets/norT.xml" />
 	<spritesheet name="gui_elements" path="gui/gui_elements.xml" />
 </spritesheets>
-<Levels>
-	<Level number="1" filename="Beginner Level.lvl" />
-	<Level number="2" filename="Clockwork.lvl" />
-	<Level number="3" filename="Rocket Science.lvl" />
-	<Level number="4" filename="Moving Walls.lvl" />
-	<Level number="5" filename="Pisa Studies.lvl" />
-	<Level number="6" filename="Fragile.lvl" />
-	<Level number="7" filename="Four Chambers.lvl" />
-	<Level number="8" filename="Up and Down.lvl" />
-	<Level number="9" filename="Crossroads.lvl" />
-	<Level number="10" filename="Bank Job.lvl" />
-	<Level number="11" filename="Things Change.lvl" />
-	<Level number="12" filename="Moving Spikes.lvl" />
-</Levels>
+<levels>
+	<level number="1" filename="Beginner Level.lvl" />
+	<level number="2" filename="Clockwork.lvl" />
+	<level number="3" filename="Rocket Science.lvl" />
+	<level number="4" filename="Moving Walls.lvl" />
+	<level number="5" filename="Pisa Studies.lvl" />
+	<level number="6" filename="Fragile.lvl" />
+	<level number="7" filename="Four Chambers.lvl" />
+	<level number="8" filename="Up and Down.lvl" />
+	<level number="9" filename="Crossroads.lvl" />
+	<level number="10" filename="Bank Job.lvl" />
+	<level number="11" filename="Things Change.lvl" />
+	<level number="12" filename="Moving Spikes.lvl" />
+</levels>
+<Keys>
+	<Key name="LevelKey" path="LevelPublic.key" />
+</Keys>
+<HashValues>
+	<HashValue filename="Beginner Level.lvl" value="36e48f796369f7a6bcd391a2e19210a9766b0e62b94a1758dd3357a66d4bed9e7d8ec1e58d95083870815970fb7abf0651853677bdc07f457fc783f8ac5c4df6cf97d32da08916ca3fc611a4c112e97fbb8820ac477548a1b66e145d8abd7109fdc04f0652e0b1de1ce7d6a7eba997e98d0553ff318007fb469a63c6931f61ab" />
+	<HashValue filename="Clockwork.lvl" value="8018799fbd5888b28440e76225c3c9e13a9f3baf8dba195fb1a5a0f42f94a9258ffa5e98195027645adf747f932c17d5ce0ba38a258b2f17aa221da9f5f51376cd6678386e7ed7a6d2ca1962d5f670035ed2927f25e07e86be0af8fd1d815663a9aa752cf0b5c7205bf1e77558eda060e7e4f09e97048354660c38375cfdf418" />
+	<HashValue filename="Rocket Science.lvl" value="a9219deae421088b8324c992e70815a2f98c5cff4bb7e4512ad6ccc5d938e11cbacb9bbff4112b29bf1c4998a85cc92e357d458c7ea6d87a9f536a6a7b08460969e3cdb8138a4731bd0ba3d42c7e66740b32226527102f04aa6d80e295717cc7c1e81f0bbc03f83e332e6f93b6a3c485685deb694d9d1a81a6d7a9a33542fded" />
+	<HashValue filename="Moving Walls.lvl" value="708e09946ad82274653f211a378849904551e213b2225ed29d7c7d50a1c295596e1206c066d0ce7be6bdcab6a1de744cc4ebc3c4f94b05b6d57ee2198011c3f90c08f67726b8f68d35a1db70d0f92bb24bc56888ee00ee2ba302f95571c9448905bacca678c0419e1c4a50e9d69e327b7d03e515ef5ec20b462719f2800ce815" />
+	<HashValue filename="Pisa Studies.lvl" value="1d1fd652a01a1fc51c952ab01291375b04a9c875ef455c272fa2adfb683c9ad04981c548e600f9a41a894506c57a2715ff6aa7d398e39b8b01320aad51a90c595c7ac3dc64556aa50eeaec2741588c0a6a2271cf3557febdf6a935f829caf5765570455dae2197ef9d90ee3a6031191c24430a1780212600922e77f2d6803d61" />
+	<HashValue filename="Fragile.lvl" value="8ef5651ce615a7f09d6a522ef2119c74403ada2487ba05958ca50c63e40ea37979827dedec8149c07398f7f9a57241e69f630291e6cead71d39b68b21181941f9db837887965d69cc1aefa43c9e81eee8bdfa535e2800c3adc068c1451f17689cd0ed6534ba4bd9e5959e86986876d94b8a0262db1d88ee62a348e3a7a1189e8" />
+	<HashValue filename="Four Chambers.lvl" value="a13d04819a040464562a272228bb182c2fc9788b8449f9c77731f5068fa0f5afbbf8a5bf4fa07644763a1ca7f1c03fed5e6d74afca056ecbc5036d0fa4b2e18728549904b3e8874ed925c5f4f2d6a957aa5e0ebfe4e39b7e147bddb1ed9d2c2ac1624152496acb0dd9201d92a8c51fed718ed1407024f33feef72d7307031216" />
+	<HashValue filename="Up and Down.lvl" value="5d0f458be94660b6bbf0d9a6aae5707e532626d068647b9635cc43c268372cc8f2ee124a250855c4e4d90f1703c68f591723ae11469069dffa5773f4d1e583cbe165e97a1627fcca0acc3e123a0cd589851c932f6ef2b7005a5a0359c302710f79b4e9326fce1b25d1d48b07ffa0f7fbdd92a81a80ab483ea36d40e3ad449b2d" />
+	<HashValue filename="Crossroads.lvl" value="a2d10e478b05031e8aacb79dd121e610be781c721abb382dffe135ba5a76f23ef3816e6e7090168107c070299010331a58429d22e356af7b36b6246d21d1f20358c339ebcc121c01a5e435b493ab3a755dc554b697eba046ae49045e8cb86cd82f6fb14ff08a74f1c763be49f051c3061f489210f9816fa8dc59648853e4bf40" />
+	<HashValue filename="Bank Job.lvl" value="b5267c85ac58dd6a319be3f894e04f4eba829e329f5504c98ceb5b698698efffe5e57315d812c52f995376dbb419d2d356237533589b987e9cae2dad9d98e2fa853beae5b3b25a49c92979c27c4ccc72e4c222fe67b30a06f89f65f27ff67539c6cf09194905b63194283057365b53c5c53b7e5a8d0a70a5d0e0b544907bdede" />
+	<HashValue filename="Things Change.lvl" value="11728c4be6bd9883e8b371e8b8b5052863aea06e12d1adf7a70bd4f5451485420b32cb300247e2ef25fb9df4d742b47c7b44d282bd38c4a0075f60f0325d0f227896cb3d886826e56187ab747e537160d224341d4e35596277de0e8c3b7a0d159ac020d43b83e9468d0c747171a2611f50ed8347e070c2f45c84055533380de8" />
+	<HashValue filename="Moving Spikes.lvl" value="6367034bf9416a08934f13278baf62256670cc33ab7793ad83dad0e4e28ba84496890c8882b5244e76c346db3fc24462b7a882869057c15933933909817d6bdb16c61434355fc6a67b6a9880791b1a75ab128d9f41f365c38b5d2e519d088181d624e0397355c0e7ddec8a2ea26b462fd86f5dfe5fa4307e1f264ad88c5ced84" />
+</HashValues>

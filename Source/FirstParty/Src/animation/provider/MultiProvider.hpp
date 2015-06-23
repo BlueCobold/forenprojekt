@@ -44,7 +44,7 @@ protected:
     {
         std::vector<std::unique_ptr<ValueProvider>> list;
         for(auto it = begin(m_provider); it != end(m_provider); ++it)
-            list.push_back(std::unique_ptr<ValueProvider>((*it)->clone()));
+            list.push_back((*it)->clone());
         return std::move(list);
     }
 };

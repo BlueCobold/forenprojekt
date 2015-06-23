@@ -18,12 +18,13 @@ class MenuSprite;
 class Slider;
 class InfoBox;
 class AnimationContainer;
+class InteractiveLabel;
 
 class MenuPanel : public Drawable
 {
 public:
 
-    MenuPanel(MenuElements& elements, const sf::Vector2f& position);
+    MenuPanel(const MenuElements& elements, const sf::Vector2f& position);
 
     virtual void setPosition(const sf::Vector2f& position);
     const sf::Vector2f& getPosition() const;
@@ -59,11 +60,12 @@ public:
     void add(std::unique_ptr<MenuElement> element);
 
 private:
-    
+
     void createButton(const ButtonInfo& info);
     void createCheckBox(const CheckBoxInfo& info);
     void createSlider(const SliderInfo& info);
     void createLabel(const LineLabel& info);
+    void createLabel(const InteractiveLabel& info);
     void createSprite(const MenuSprite& info);
     void createInputBox(const InputBoxInfo& info);
     void createAnimationContainer(std::unique_ptr<AnimationContainer> info);

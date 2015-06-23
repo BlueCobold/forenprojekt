@@ -27,9 +27,9 @@ public:
         return m_distribution(m_random_engine);
     }
 
-    virtual RandomProvider* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new RandomProvider(m_distribution.min(), m_distribution.max());
+        return std::unique_ptr<RandomProvider>(new RandomProvider(m_distribution.min(), m_distribution.max()));
     }
 };
 

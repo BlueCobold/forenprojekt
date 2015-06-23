@@ -3,6 +3,7 @@
 #ifndef MENU_LOADER_HPP
 #define MENU_LOADER_HPP
 
+#include "../animation/CloneHandler.hpp"
 #include "../gui/MenuTemplate.hpp"
 #include "../gui/ToolTip.hpp"
 #include "../model/SoundObject.hpp"
@@ -11,7 +12,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <unordered_map>
 
 class ResourceManager;
 
@@ -26,6 +26,8 @@ private:
     MenuLoader()
     {
     }
+
+    static CloneHandler _cloneHandler;
 
     static void parseButtons(
         MenuElements& elements, 
@@ -50,6 +52,12 @@ private:
     static void parseLabels(
         MenuElements& elements, 
         tinyxml2::XMLElement* menuXml, 
+        ResourceManager& resourceManager);
+
+    static void parseInteractiveLabels(
+        MenuElements& elements,
+        tinyxml2::XMLElement* menuXml,
+        std::unordered_map<std::string, ToolTip>& toolTip,
         ResourceManager& resourceManager);
 
     static void parseImages(

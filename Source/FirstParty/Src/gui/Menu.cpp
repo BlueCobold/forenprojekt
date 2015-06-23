@@ -19,17 +19,16 @@ const float Menu::Center= 0.5f;
 const float Menu::Top = 0.0f;
 const float Menu::Bottom = 1.0f;
 
-Menu::Menu(MenuTemplate& menuTemplate,
+Menu::Menu(const MenuTemplate& menuTemplate,
            sf::RenderWindow& screen) :
            m_position(menuTemplate.relativePosition),
            m_offset(menuTemplate.menuOffset),
            m_screen(&screen),
            m_currentPosition(sf::Vector2f(screen.getSize().x * menuTemplate.relativePosition.x, 
                                           screen.getSize().y * menuTemplate.relativePosition.y) + menuTemplate.menuOffset),
-           m_panel(menuTemplate.menuElements, m_currentPosition)
-           
+           m_panel(menuTemplate.menuElements, m_currentPosition),
+           m_template(menuTemplate)
 {
-    m_template = (std::move(menuTemplate));
     m_template.background.setPosition(m_currentPosition);
 
     m_size = sf::Vector2i(m_template.background.getTextureRect().width, m_template.background.getTextureRect().height);
@@ -145,6 +144,11 @@ Slider& Menu::getSlider(int id) const
 LineLabel& Menu::getLabel(int id) const
 {
     return *find<LineLabel>(id, MenuElementType::Label);
+}
+
+InteractiveLabel& Menu::getInteractiveLabel(int id) const
+{
+    return *find<InteractiveLabel>(id, MenuElementType::InteractiveLabel);
 }
 
 MenuSprite& Menu::getSprite(int id) const

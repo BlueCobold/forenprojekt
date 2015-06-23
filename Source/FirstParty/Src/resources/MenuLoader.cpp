@@ -1,7 +1,9 @@
+
+#include "LevelFileLoader.hpp"
 #include "MenuLoader.hpp"
 #include "ResourceManager.hpp"
+#include "SpriteSheet.hpp"
 #include "../gui/LineLabel.hpp"
-#include "LevelFileLoader.hpp"
 #include "../MacHelper.hpp"
 
 #include <string>
@@ -43,6 +45,8 @@ sf::Sprite getSprite(tinyxml2::XMLElement* element,
 {
     return getSprite("", element, resourceManager);
 }
+
+CloneHandler MenuLoader::_cloneHandler;
 
 MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager)
 {
@@ -94,6 +98,7 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     parseCheckBoxes(elements, menuXml, checkboxStyles, toolTip, resourceManager);
     parseSliders(elements, menuXml, sliderStyles, resourceManager);
     parseLabels(elements, menuXml, resourceManager);
+    parseInteractiveLabels(elements, menuXml, toolTip, resourceManager);
     parseImages(elements, menuXml, toolTip, resourceManager);
     parseInputBox(elements, menuXml, inputBoxStyle, resourceManager);
     parseAnimationContainer(elements, menuXml, resourceManager);
@@ -250,6 +255,44 @@ void MenuLoader::parseLabels(
                 label.setVisibleWhenId(visibleWhenId);
 
             elements.labels.push_back(label);
+        }
+    }
+}
+
+void MenuLoader::parseInteractiveLabels(
+    MenuElements& elements,
+    tinyxml2::XMLElement* menuXml,
+    std::unordered_map<std::string, ToolTip>& toolTip,
+    ResourceManager& resourceManager)
+{
+    if(auto styles = menuXml->FirstChildElement("elements"))
+    {
+        for(auto labelXml = styles->FirstChildElement("ilabel");
+            labelXml != nullptr; labelXml = labelXml->NextSiblingElement("ilabel"))
+        {
+            InteractiveLabel label(utility::translateKey(labelXml->Attribute("text")),
+                                   sf::Vector2f(0, 0),
+                                   sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
+                                   0,
+                                   resourceManager.getBitmapFont(labelXml->Attribute("font")),
+                                   static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
+                                   labelXml->IntAttribute("id"));
+
+            if(auto visibleWhenId = labelXml->IntAttribute("visibleWhen"))
+                label.setVisibleWhenId(visibleWhenId);
+
+            auto tooltipAvailable = labelXml->Attribute("tooltip");
+            if(tooltipAvailable != nullptr)
+            {
+                auto tooltip = toolTip.find(tooltipAvailable);
+                if(tooltip == end(toolTip))
+                    throw std::runtime_error(utility::replace(utility::translateKey("UnknownButtonToolTip"), labelXml->Attribute("tooltip")));
+
+                label.setToolTip(tooltip->second);
+                label.setToolTipText(utility::translateKey(labelXml->Attribute("tooltiptext")));
+            }
+
+            elements.interactiveLabels.push_back(label);
         }
     }
 }
@@ -583,18 +626,23 @@ void MenuLoader::parseAnimationContainer(
 {
     if(auto element = menuXml->FirstChildElement("elements"))
     {
-        if(auto animationContainer = element->FirstChildElement("animationContainer"))
+        for(auto animationContainer = element->FirstChildElement("animationContainer");
+            animationContainer != nullptr; animationContainer = animationContainer->NextSiblingElement("animationContainer"))
         {
             int id = animationContainer->IntAttribute("id");
             sf::Vector2f position = sf::Vector2f(animationContainer->FloatAttribute("x"), animationContainer->FloatAttribute("y"));
-            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(position, id));
+            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(position, id, _cloneHandler));
             std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
             if(auto animations = animationContainer->FirstChildElement("animations"))
             {
                 for(auto animation = animations->FirstChildElement("animation");
                     animation != nullptr; 
                     animation = animation->NextSiblingElement("animation"))
-                    animContainer->bindAnimation(std::move(LevelFileLoader::parseAnimation(animation, animContainer.get(), animContainer.get(), resourceManager, &functions)));
+                {
+                    auto ani = LevelFileLoader::parseAnimation(animation, animContainer.get(), animContainer.get(), resourceManager, &functions,
+                                                               _cloneHandler);
+                    animContainer->bindAnimation(std::move(ani));
+                }
             }
 
             if(auto visibleWhenId = animationContainer->IntAttribute("visibleWhen"))

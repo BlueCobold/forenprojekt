@@ -36,10 +36,10 @@ public:
         return v;
     }
 
-    virtual Minimum* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
         auto list = cloneProviders();
-        return new Minimum(std::move(list));
+        return std::unique_ptr<Minimum>(new Minimum(std::move(list)));
     }
 };
 

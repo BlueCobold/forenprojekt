@@ -7,6 +7,7 @@
 #include "Stoppable.hpp"
 #include "provider/ValueProvider.hpp"
 #include "../rendering/Drawable.hpp"
+#include "../rendering/Shader.hpp"
 
 #include <array>
 #include <list>
@@ -20,7 +21,9 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
-class Animation : public Drawable, public VariableHolder, public Stoppable, public Cloneable
+class CloneHandler;
+
+class Animation : public Drawable, public VariableHolder, public Stoppable, public Cloneable<Animation>
 {
 public:
 
@@ -48,7 +51,7 @@ public:
     };
 
 
-    Animation(std::unique_ptr<ValueProvider> provider,
+    Animation(
         const unsigned int frames,
         const unsigned int frameWidth,
         const unsigned int frameHeight,
@@ -83,11 +86,13 @@ public:
     void setStopOnAlphaZero(bool stop);
     void setBufferId(unsigned int id);
     void applyRotation(bool apply);
+    void bindCloneHandler(CloneHandler& handler);
     void alignToView(bool align);
+    void bindShader(Shader& shader);
     
     virtual void draw(const DrawParameter& param) override;
 
-    virtual Animation* clone() const override;
+    virtual std::unique_ptr<Animation> clone() const override;
 
     static void enableStencilEffects(bool enable);
     static bool usesStencilEffects();
@@ -132,6 +137,8 @@ private:
     sf::BlendMode m_blending;
     unsigned int m_targetBuffer;
     bool m_isViewAligned;
+    Shader* m_shader;
+    CloneHandler* m_cloneHandler;
 };
 
 #endif // ANIMATION_HPP

@@ -6,7 +6,7 @@
 #include "../Cloneable.hpp"
 
 /// Generates or provides specific values.
-class ValueProvider : public Cloneable
+class ValueProvider : public Cloneable<ValueProvider>
 {
 public:
 
@@ -18,7 +18,7 @@ public:
     virtual void reset()
     { }
 
-    virtual ValueProvider* clone() const = 0;
+    virtual std::unique_ptr<ValueProvider> clone() const = 0;
 };
 
 #endif //VALUE_PROVIDER_HPP

@@ -6,7 +6,7 @@
 #include "Achievement.hpp"
 #include "GameEvent.hpp"
 #include <list>
-#include <unordered_map>
+#include <vector>
 
 namespace tinyxml2
 {
@@ -47,9 +47,7 @@ public:
                     Achievement::Object object,
                     unsigned int value);
 
-    const std::unordered_map<std::string, Achievement>::const_iterator beginIterator();
-    const std::unordered_map<std::string, Achievement>::const_iterator endIterator();
-
+    Achievement* getAchievement(unsigned int number);
     void saveValues();
 
 private:
@@ -71,7 +69,7 @@ private:
     Achievement::Specifically stringToSpecifically(const std::string& specifically);
 
     std::string m_achievementFile;
-    std::unordered_map<std::string, Achievement> m_achievements;
+    std::vector<std::pair<std::string, Achievement>> m_achievements;
 
     AppConfig& m_config;
 };

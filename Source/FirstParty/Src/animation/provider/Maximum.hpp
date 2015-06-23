@@ -36,10 +36,10 @@ public:
         return v;
     }
 
-    virtual Maximum* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
         auto list = cloneProviders();
-        return new Maximum(std::move(list));
+        return std::unique_ptr<Maximum>(new Maximum(std::move(list)));
     }
 };
 

@@ -14,6 +14,7 @@
 #include "MenuSprite.hpp"
 #include "ToolTip.hpp"
 #include "InputBoxStyle.hpp"
+#include "InteractiveLabel.hpp"
 #include "../model/SoundObject.hpp"
 #include "AnimationContainer.hpp"
 
@@ -63,11 +64,25 @@ struct MenuElements
     std::vector<CheckBoxInfo> checkboxes;
     std::vector<SliderInfo> slider;
     std::vector<LineLabel> labels;
+    std::vector<InteractiveLabel> interactiveLabels;
     std::vector<MenuSprite> sprites;
     std::vector<InputBoxInfo> infobox;
     std::vector<std::unique_ptr<AnimationContainer>> animationContainer;
 
     MenuElements(){};
+
+    MenuElements(const MenuElements& other) :
+        buttons(other.buttons),
+        checkboxes(other.checkboxes),
+        slider(other.slider),
+        labels(other.labels),
+        sprites(other.sprites),
+        infobox(other.infobox),
+        interactiveLabels(other.interactiveLabels)
+    {
+        for(auto it = begin(other.animationContainer); it != end(other.animationContainer); ++it)
+            animationContainer.push_back((*it)->clone());
+    }
 
     MenuElements& operator= (MenuElements&& other)
     {
@@ -90,6 +105,7 @@ private:
         sprites = std::move(other.sprites);
         infobox = std::move(other.infobox);
         animationContainer = std::move(other.animationContainer);
+        interactiveLabels = std::move(other.interactiveLabels);
     }
 };
 
@@ -111,6 +127,15 @@ struct SubWindowInfo
 
     SubWindowInfo(){};
 
+    SubWindowInfo(const SubWindowInfo& other) :
+        menuElements(other.menuElements),
+        position(other.position),
+        size(other.size),
+        innerHeight(other.innerHeight),
+        id(other.id),
+        style(other.style)
+    { }
+    
     SubWindowInfo(SubWindowInfo&& other)
     {
         move(other);
@@ -139,14 +164,25 @@ struct MenuTemplate
     MenuElements menuElements;
     std::vector<SubWindowInfo> subWindow;
     std::string captionResourceKey;
-    BitmapFont* captionFont;
+    const BitmapFont* captionFont;
     sf::Vector2f captionOffset;
     sf::Sprite background;
     sf::Vector2f relativePosition;
     sf::Vector2f menuOffset;
 
     MenuTemplate(){}
-    
+
+    MenuTemplate(const MenuTemplate& other) :
+        menuElements(other.menuElements),
+        subWindow(other.subWindow),
+        captionResourceKey(other.captionResourceKey),
+        captionFont(other.captionFont),
+        captionOffset(other.captionOffset),
+        background(other.background),
+        relativePosition(other.relativePosition),
+        menuOffset(other.menuOffset)
+    { }
+
     MenuTemplate(MenuTemplate&& other)
     {
         move(other);

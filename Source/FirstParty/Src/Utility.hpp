@@ -112,6 +112,8 @@ namespace utility
     };
     // output 00:00:000 -> MIN:SEC:MILLISEC
     std::string floatToPlayTimeString(float playtime);
+
+    std::string fileToString(const std::string& file);
 } // namespace utility
 
 #endif // UTILITY_HPP

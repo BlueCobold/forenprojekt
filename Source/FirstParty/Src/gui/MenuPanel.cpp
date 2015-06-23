@@ -7,8 +7,9 @@
 #include "Slider.hpp"
 #include "InputBox.hpp"
 #include "AnimationContainer.hpp"
+#include "InteractiveLabel.hpp"
 
-MenuPanel::MenuPanel(MenuElements& elements,
+MenuPanel::MenuPanel(const MenuElements& elements,
                      const sf::Vector2f& position) :
     m_position(position)
 {
@@ -24,6 +25,9 @@ MenuPanel::MenuPanel(MenuElements& elements,
     for(auto label = begin(elements.labels); label != end(elements.labels); ++label)
         createLabel(*label);
 
+    for(auto label = begin(elements.interactiveLabels); label != end(elements.interactiveLabels); ++label)
+        createLabel(*label);
+
     for(auto sprite = begin(elements.sprites); sprite != end(elements.sprites); ++sprite)
         createSprite(*sprite);
     
@@ -31,7 +35,7 @@ MenuPanel::MenuPanel(MenuElements& elements,
         createInputBox(*inputbox);
 
     for(auto it = begin(elements.animationContainer); it != end(elements.animationContainer); ++it)
-        createAnimationContainer(std::move(*it));
+        createAnimationContainer((*it)->clone());
 
     setCorrelation();
     std::sort(m_elements.begin(), m_elements.end(), 
@@ -131,6 +135,12 @@ void MenuPanel::createSlider(const SliderInfo& info)
 void MenuPanel::createLabel(const LineLabel& info)
 {
     std::unique_ptr<LineLabel> label(new LineLabel(info));
+    m_elements.push_back(std::move(label));
+}
+
+void MenuPanel::createLabel(const InteractiveLabel& info)
+{
+    std::unique_ptr<InteractiveLabel> label(new InteractiveLabel(info));
     m_elements.push_back(std::move(label));
 }
 

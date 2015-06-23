@@ -30,10 +30,10 @@ public:
             return getProvider()[1]->getValue();
     }
 
-    virtual IfPositive* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
         auto list = cloneProviders();
-        return new IfPositive(std::move(list));
+        return std::unique_ptr<IfPositive>(new IfPositive(std::move(list)));
     }
 };
 

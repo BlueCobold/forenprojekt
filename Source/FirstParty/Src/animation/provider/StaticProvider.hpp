@@ -22,9 +22,9 @@ public:
         return m_value;
     }
 
-    virtual StaticProvider* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new StaticProvider(m_value);
+        return std::unique_ptr<StaticProvider>(new StaticProvider(m_value));
     }
 };
 

@@ -3,10 +3,13 @@
 #ifndef CLONEABLE_HPP
 #define CLONEABLE_HPP
 
+#include <memory>
+
+template<typename T>
 class Cloneable
 {
 public:
-    virtual Cloneable* clone() const = 0;
+    virtual std::unique_ptr<T> clone() const = 0;
 };
 
 #endif // CLONEABLE_HPP

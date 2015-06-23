@@ -16,13 +16,13 @@ AchievementState::AchievementState(sf::RenderWindow& screen,
     State(screen, resourceManager, config),
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
-    m_achievementManager(achievementManager)
+    m_achievementManager(achievementManager),
+    m_currentAchievementIndex(0)
 {
-    m_currentAchievementIterator = m_achievementManager.beginIterator();
-    if(m_currentAchievementIterator != m_achievementManager.endIterator())
+    auto achievement = m_achievementManager.getAchievement(m_currentAchievementIndex);
+    if(achievement)
     {
-        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setText(m_currentAchievementIterator->second.getId());
-        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_COUNTER).setText("");
+        updateAchievementData();
         updateButtons();
     }
 }
@@ -59,14 +59,16 @@ StateChangeInformation AchievementState::update(const float time)
 
     if(clicked == AchievementMenu::BUTTON_RIGHT)
     {
-        ++m_currentAchievementIterator;
+        ++m_currentAchievementIndex;
         updateRightButton();
+        updateAchievementData();
     }
 
     if(clicked == AchievementMenu::BUTTON_LEFT)
     {
-        --m_currentAchievementIterator;
+        --m_currentAchievementIndex;
         updateLeftButton();
+        updateAchievementData();
     }
 
     return StateChangeInformation::Empty();
@@ -86,31 +88,32 @@ void AchievementState::draw(const DrawParameter& params)
 
 void AchievementState::updateLeftButton()
 {
-    if(m_currentAchievementIterator != m_achievementManager.endIterator())
+    auto achievement = m_achievementManager.getAchievement(m_currentAchievementIndex);
+
+    if(achievement)
     {
-        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setText(m_currentAchievementIterator->second.getName());
-        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_COUNTER).setText(utility::toString(m_currentAchievementIterator->second.getCounter()));
         m_menu.hideRightButton(false);
 
-        if(--m_currentAchievementIterator == m_achievementManager.endIterator())
+        if(m_achievementManager.getAchievement(--m_currentAchievementIndex) == nullptr)
             m_menu.hideLeftButton(true);
 
-        ++m_currentAchievementIterator;
+        ++m_currentAchievementIndex;
     }
 }
 
 void AchievementState::updateRightButton()
 {
-    if(m_currentAchievementIterator != m_achievementManager.endIterator())
+    auto achievement = m_achievementManager.getAchievement(m_currentAchievementIndex);
+
+    if(achievement)
     {
-        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setText(m_currentAchievementIterator->second.getName());
-        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_COUNTER).setText(utility::toString(m_currentAchievementIterator->second.getCounter()));
+
         m_menu.hideLeftButton(false);
 
-        if(++m_currentAchievementIterator == m_achievementManager.endIterator())
+        if(m_achievementManager.getAchievement(++m_currentAchievementIndex) == nullptr)
             m_menu.hideRightButton(true);
 
-        --m_currentAchievementIterator;
+        --m_currentAchievementIndex;
     }
 }
 
@@ -118,4 +121,16 @@ void AchievementState::updateButtons()
 {
 //    updateRightButton();
 //    updateLeftButton();
+}
+
+void AchievementState::updateAchievementData()
+{
+    auto achievement = m_achievementManager.getAchievement(m_currentAchievementIndex);
+
+    if(achievement)
+    {
+        m_menu.getInteractiveLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setText(achievement->getName());
+        m_menu.getInteractiveLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setToolTipText(utility::translateKey("tooltip_" + achievement->getKey()));
+        m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_COUNTER).setText(utility::toString(achievement->getCounter()));
+    }
 }

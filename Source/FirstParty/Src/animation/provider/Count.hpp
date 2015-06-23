@@ -32,9 +32,9 @@ public:
         m_calls = 0;
     }
 
-    virtual Count* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new Count(m_start, m_increment);
+        return std::unique_ptr<Count>(new Count(m_start, m_increment));
     }
 };
 

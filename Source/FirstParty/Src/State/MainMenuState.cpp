@@ -92,7 +92,7 @@ StateChangeInformation MainMenuState::update(const float time)
                 return StateChangeInformation::Empty();
             m_loadLevelStateInfo.m_level = nullptr;
             m_loadLevelStateInfo.m_prepareOnly = false;
-            m_loadLevelStateInfo.m_levelNumber = -1;
+            m_loadLevelStateInfo.m_levelNumber = 0;
             m_loadLevelStateInfo.m_directPlay = true;
             m_transitionStateInfo.m_followingState = LoadLevelStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;

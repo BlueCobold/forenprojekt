@@ -3,15 +3,15 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-CaptionMenu::CaptionMenu(MenuTemplate& menuTemplate,
+CaptionMenu::CaptionMenu(const MenuTemplate& menuTemplate,
                          sf::RenderWindow& screen) :
     Menu(menuTemplate, screen),
     m_caption(utility::translateKey(menuTemplate.captionResourceKey),
-              Menu::getPosition(),
-              menuTemplate.captionOffset,
-              0,
-              menuTemplate.captionFont,
-              LineLabel::Centered)
+    Menu::getPosition(),
+    menuTemplate.captionOffset,
+    0,
+    menuTemplate.captionFont,
+    LineLabel::Centered)
 {
 }
 

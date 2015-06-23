@@ -20,7 +20,8 @@ namespace MenuElementType
         Slider,
         SubWindow,
         InputBox,
-        Animation
+        Animation,
+        InteractiveLabel
     };
 }
 
@@ -124,7 +125,7 @@ protected:
         return sf::Mouse::getPosition(screen);
 #endif
     }
-    
+
 private:
 
     int m_id;

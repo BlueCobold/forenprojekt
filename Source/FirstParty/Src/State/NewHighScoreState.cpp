@@ -246,6 +246,7 @@ const std::string NewHighScoreState::createHighscoreString(const std::string& na
     unsigned int counterGravity = 0;
     unsigned int counterTargetSpeeding = 0;
     unsigned int counterBonusTargetSpeeding = 0;
+    unsigned int counterOtherGoody = 0;
 
     auto list = m_level->getGameEvents();
 
@@ -276,6 +277,10 @@ const std::string NewHighScoreState::createHighscoreString(const std::string& na
             result.append("&ms[" + utility::toString(counterTargetSpeeding++) + "]=" + value);
         else if(it->getEventType() == GameEvent::HitBonusTargetSpeeding)
             result.append("&bs[" + utility::toString(counterBonusTargetSpeeding++) + "]=" + value);
+        else if(it->getEventType() == GameEvent::ExtraBallGoody ||
+                it->getEventType() == GameEvent::ExtraTimeGoody ||
+                it->getEventType() == GameEvent::InvulnerableGoody)
+            result.append("&og[" + utility::toString(counterOtherGoody++) + "]=" + value);
         else
             throw std::runtime_error(utility::replace(utility::translateKey("UnknownGameEvent"), utility::toString(it->getEventType())));
     }

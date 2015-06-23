@@ -1,15 +1,17 @@
+
 #include "Animation.hpp"
 #include "../Utility.hpp" // toDegree, toPixel
+#include "CloneHandler.hpp"
+#include "../rendering/GLExt.hpp"
 
 #include <SFML/Graphics/Rect.hpp>
-#include <SFML/OpenGL.hpp>
 
 #include <cmath>
 
 bool Animation::_renderStencilEffects = true;
 std::list<Animation*> Animation::_stencilAnimations;
 
-Animation::Animation(std::unique_ptr<ValueProvider> provider,
+Animation::Animation(
     const unsigned int frames,
     const unsigned int frameWidth, const unsigned int frameHeight,
     const bool applyRotation,
@@ -17,7 +19,6 @@ Animation::Animation(std::unique_ptr<ValueProvider> provider,
     const sf::Vector2f& drawOffset,
     const bool horizontal) :
     m_blending(sf::BlendAlpha),
-    m_frameProvider(std::move(provider)),
     m_frames(frames),
     m_frame(0),
     m_frameWidth(frameWidth),
@@ -27,8 +28,10 @@ Animation::Animation(std::unique_ptr<ValueProvider> provider,
     m_externalRotation(0.f),
     m_horizontal(horizontal),
     m_stopOnAlphaZero(false),
+    m_cloneHandler(nullptr),
     m_targetBuffer(0),
-    m_isViewAligned(false)
+    m_isViewAligned(false),
+    m_shader(nullptr)
 {
     m_sprite.setOrigin(origin);
 }
@@ -187,11 +190,15 @@ void Animation::draw(const DrawParameter& param)
 
     if(param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
     {
+        if(m_shader)
+            m_shader->bind();
         m_stencil.enable();
         if(m_prepareTextureOnUse)
             param.prepareTexture(m_sprite.getTexture());
         targetBuffer->draw(m_sprite, sf::RenderStates(m_blending));
         m_stencil.disable();
+        if(m_shader)
+            m_shader->unbind();
     }
 }
 
@@ -251,12 +258,17 @@ void Animation::setLayout(
     m_origins = origins;
 }
 
-Animation* Animation::clone() const
+std::unique_ptr<Animation> Animation::clone() const
 {
-    auto ani = new Animation(std::unique_ptr<ValueProvider>(m_frameProvider->clone()),
-        m_frames, m_frameWidth, m_frameHeight,
-        m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal);
+    auto ani = std::unique_ptr<Animation>(new Animation(m_frames, m_frameWidth, m_frameHeight,
+        m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal));
     
+    if(m_cloneHandler != nullptr)
+        m_cloneHandler->registerClone(*this, *ani.get(), *ani.get(), *ani.get());
+
+    if(m_frameProvider)
+        ani->bindFrameProvider(m_frameProvider->clone());
+
     ani->m_stopOnAlphaZero = m_stopOnAlphaZero;
     ani->m_sourceOffset = m_sourceOffset;
     ani->m_sprite = m_sprite;
@@ -266,20 +278,23 @@ Animation* Animation::clone() const
     std::array<std::unique_ptr<ValueProvider>, 4> colors;
     for(int i = 0; i < 4; i++)
         if(m_colorProviders[i])
-            ani->m_colorProviders[i] = std::unique_ptr<ValueProvider>(m_colorProviders[i]->clone());
+            ani->m_colorProviders[i] = m_colorProviders[i]->clone();
 
     if(m_xScaleProvider)
-        ani->m_xScaleProvider = std::unique_ptr<ValueProvider>(m_xScaleProvider->clone());
+        ani->m_xScaleProvider = m_xScaleProvider->clone();
     if(m_yScaleProvider)
-        ani->m_yScaleProvider = std::unique_ptr<ValueProvider>(m_yScaleProvider->clone());
+        ani->m_yScaleProvider = m_yScaleProvider->clone();
     
     if(m_rotationProvider)
-        ani->m_rotationProvider = std::unique_ptr<ValueProvider>(m_rotationProvider->clone());
+        ani->m_rotationProvider = m_rotationProvider->clone();
     
     if(m_xPositionProvider)
-        ani->m_xPositionProvider = std::unique_ptr<ValueProvider>(m_xPositionProvider->clone());
+        ani->m_xPositionProvider = m_xPositionProvider->clone();
     if(m_yPositionProvider)
-        ani->m_yPositionProvider = std::unique_ptr<ValueProvider>(m_yPositionProvider->clone());
+        ani->m_yPositionProvider = m_yPositionProvider->clone();
+    
+    if(m_cloneHandler != nullptr)
+        m_cloneHandler->unregisterClone(*this);
 
     return ani;
 }
@@ -297,6 +312,16 @@ void Animation::setBufferId(unsigned int id)
 void Animation::applyRotation(bool apply)
 {
     m_applyRotation = apply;
+}
+
+void Animation::bindCloneHandler(CloneHandler& handler)
+{
+    m_cloneHandler = &handler;
+}
+
+void Animation::bindShader(Shader& shader)
+{
+    m_shader = &shader;
 }
 
 void Animation::alignToView(bool align)
@@ -333,20 +358,20 @@ void Animation::StencilInfo::enable()
 
     if(mode == StencilInfo::Write)
     {
-        glEnable(GL_STENCIL_TEST);
-        glStencilFunc(GL_ALWAYS, ref, mask);//0xFF);
-        glStencilOp(GL_KEEP, GL_REPLACE, GL_REPLACE);
-        glStencilMask(ref);
+        gl::Enable(gl::STENCIL_TEST);
+        gl::StencilFunc(gl::ALWAYS, ref, mask);//0xFF);
+        gl::StencilOp(gl::KEEP, gl::REPLACE, gl::REPLACE);
+        gl::StencilMask(ref);
         //glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-        glEnable(GL_ALPHA_TEST);
-        glAlphaFunc(GL_GREATER, 0.0f);
+        gl::Enable(gl::ALPHA_TEST);
+        gl::AlphaFunc(gl::GREATER, 0.0f);
     }
     if(mode == StencilInfo::Test)
     {
-        glEnable(GL_STENCIL_TEST);
-        glStencilFunc(GL_LESS, ref, mask);
-        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-        glStencilMask(0x00);
+        gl::Enable(gl::STENCIL_TEST);
+        gl::StencilFunc(gl::LESS, ref, mask);
+        gl::StencilOp(gl::KEEP, gl::KEEP, gl::KEEP);
+        gl::StencilMask(0x00);
     }
 }
 
@@ -356,9 +381,9 @@ void Animation::StencilInfo::disable()
         return;
     if(mode != StencilInfo::None)
     {
-        glDisable(GL_STENCIL_TEST);
-        glDisable(GL_ALPHA_TEST);
-        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-        glStencilMask(0x00);
+        gl::Disable(gl::STENCIL_TEST);
+        gl::Disable(gl::ALPHA_TEST);
+        gl::ColorMask(gl::TRUE_, gl::TRUE_, gl::TRUE_, gl::TRUE_);
+        gl::StencilMask(0x00);
     }
 }

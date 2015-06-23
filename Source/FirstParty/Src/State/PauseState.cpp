@@ -87,12 +87,12 @@ StateChangeInformation PauseState::update(const float time)
     else if(clicked == PauseMenu::BUTTON_RESTART_LEVEL)
     {
 #ifdef LEVELTESTING
-        if(m_level->number() == -1)
+        if(m_level->number() == 0)
         {
             m_loadLevelStateInfo.m_file = m_level->getFileName();
             m_loadLevelStateInfo.m_level = nullptr;
             m_loadLevelStateInfo.m_directPlay = true;
-            m_loadLevelStateInfo.m_levelNumber = -1;
+            m_loadLevelStateInfo.m_levelNumber = 0;
         }
         else
         {

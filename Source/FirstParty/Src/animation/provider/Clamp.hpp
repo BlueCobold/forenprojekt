@@ -29,10 +29,10 @@ public:
         return std::min(std::max(actual, minv), maxv);
     }
 
-    virtual Clamp* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
         auto list = cloneProviders();
-        return new Clamp(std::move(list));
+        return std::unique_ptr<Clamp>(new Clamp(std::move(list)));
     }
 };
 

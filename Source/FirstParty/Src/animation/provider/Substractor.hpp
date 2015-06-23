@@ -36,10 +36,10 @@ public:
         return v;
     }
 
-    virtual Substractor* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
         auto list = cloneProviders();
-        return new Substractor(std::move(list));
+        return std::unique_ptr<Substractor>(new Substractor(std::move(list)));
     }
 };
 

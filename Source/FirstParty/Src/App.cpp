@@ -1,4 +1,6 @@
+
 #include "App.hpp"
+
 #include "Input.hpp"
 #include "State/LoadLevelState.hpp"
 #include "State/PauseState.hpp"
@@ -17,8 +19,9 @@
 #include "State/NewHighScoreState.hpp"
 #include "State/GameFinishedState.hpp"
 #include "State/AchievementState.hpp"
-
+#include "rendering/GLExt.hpp"
 #include "resources/AppConfig.hpp"
+#include "resources/SpriteSheet.hpp"
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -47,6 +50,8 @@ App::App(AppConfig& config) :
     m_isMinimized(false),
     m_achievementManager("Achievement.dat", m_config)
 {
+    gl::sys::LoadFunctions();
+
     // Cache often used settings
     sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
     m_windowTitle = m_config.get<std::string>("WindowName");
@@ -165,9 +170,9 @@ void App::draw()
     if(utility::Keyboard.isKeyPressed(sf::Keyboard::Z))
         m_screen.clear();
 #endif
-    glStencilMask(0xFF); // Write to entire stencil buffer
-    glClearStencil(0);
-    glClear(GL_STENCIL_BUFFER_BIT);
+    gl::StencilMask(0xFF); // Write to entire stencil buffer
+    gl::ClearStencil(0);
+    gl::Clear(gl::STENCIL_BUFFER_BIT);
 
     auto params = DrawParameter(m_screen);
     std::unordered_map<const sf::Texture*, sf::RenderTexture*> offscreens;

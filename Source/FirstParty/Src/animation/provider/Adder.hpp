@@ -28,10 +28,10 @@ public:
         return v;
     }
 
-    virtual Adder* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
         auto list = cloneProviders();
-        return new Adder(std::move(list));
+        return std::unique_ptr<Adder>(new Adder(std::move(list)));
     }
 };
 

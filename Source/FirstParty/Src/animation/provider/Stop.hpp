@@ -4,30 +4,28 @@
 #define STOP_HPP
 
 #include "../TimedObject.hpp"
+#include "Observer.hpp"
+#include "ValueProvider.hpp"
 
 #include <cmath>
 
 /// Stops the owner
-class Stop : public ValueProvider
+class Stop : public ValueProvider, public Observer<Stoppable>
 {
-private:
-
-    Stoppable* m_owner;
-
 public:
-    Stop(Stoppable* owner) : m_owner(owner)
-    {
-    }
+
+    Stop(Stoppable* observed, const CloneCallback cloneCallback = nullptr) : Observer(observed, cloneCallback)
+    { }
 
     virtual float getValue() override
     {
-        m_owner->stop();
+        getObserved()->stop();
         return 0;
     }
 
-    virtual Stop* clone() const override
+    virtual std::unique_ptr<ValueProvider> clone() const override
     {
-        return new Stop(m_owner);
+        return std::unique_ptr<Stop>(new Stop(getCloneObservable(), getCallback()));
     }
 };
 

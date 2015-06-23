@@ -29,8 +29,7 @@ private:
     HUD m_HUD;
 
     AchievementManager& m_achievementManager;
-    std::unordered_map<std::string, Achievement>::const_iterator m_currentAchievementIterator;
-
+    unsigned int m_currentAchievementIndex;
     EnterStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
 
@@ -38,6 +37,8 @@ private:
     void updateRightButton();
 
     void updateButtons();
+
+    void updateAchievementData();
 };
 
 #endif // ACHIEVEMENT_STATE_HPP

@@ -12,8 +12,8 @@
 #include <algorithm>
 #include <cmath>
 
-Teeter::Teeter(const float mouseScale) :
-    Entity(Entity::Teeter),
+Teeter::Teeter(const float mouseScale, CloneHandler& cloneHandler) :
+    Entity(Entity::Teeter, cloneHandler),
     m_lastMousePos(utility::Mouse.getPosition()),
     m_lastTime(-1),
     m_mouseScale(mouseScale),

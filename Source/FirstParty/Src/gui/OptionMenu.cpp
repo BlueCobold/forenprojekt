@@ -1,9 +1,12 @@
+
 #include "OptionMenu.hpp"
 
 #include "Slider.hpp"
+#include "../animation/Animation.hpp"
 #include "../resources/AppConfig.hpp"
 #include "../resources/ResourceManager.hpp"
-#include "../animation/Animation.hpp"
+#include "../resources/SpriteSheet.hpp"
+
 #include <SFML/Audio/Listener.hpp>
 
 template<class T>
