@@ -18,7 +18,7 @@ public:
         const sf::Vector2f& position,
         const float rotation,
         const BitmapFont* bitmapFont,
-		const float horizontalPercentage = HUDElement::Left,
+        const float horizontalPercentage = HUDElement::Left,
         const float verticalPercentage = HUDElement::Top,
         const std::string& text = "",
         const LineLabel::Alignment alignment = LineLabel::Left);

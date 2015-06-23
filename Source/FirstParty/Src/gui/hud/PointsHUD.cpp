@@ -5,7 +5,7 @@ PointsHUD::PointsHUD(ResourceManager& resourceManager,
           const sf::Vector2f& position,
           const float rotation,
           const BitmapFont* bitmapFont,
-		  const float horizontalPercentage,
+          const float horizontalPercentage,
           const float verticalPercentage) :
 LabelHUD(position,rotation, bitmapFont, horizontalPercentage, verticalPercentage),
 m_pointCounter(0.f,0.f,0.f),

@@ -35,5 +35,4 @@ public:
     virtual void draw(const DrawParameter& param) override;
 };
 
-#endif	//BACKGROUND_HPP
-
+#endif //BACKGROUND_HPP

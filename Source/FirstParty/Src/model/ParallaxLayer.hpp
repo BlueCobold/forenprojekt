@@ -26,5 +26,4 @@ public:
     virtual void setValueOf(const std::string& name, const float value) override;
 };
 
-#endif	//PARALLAX_LAYER_HPP
-
+#endif //PARALLAX_LAYER_HPP

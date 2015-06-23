@@ -9,7 +9,7 @@ class Interpolation : public TimedObject
 {
 public:
 
-	Interpolation(
+    Interpolation(
         const float startValue,
         const float targetValue,
         const float duration,
@@ -40,7 +40,7 @@ private:
     float m_targetValue;
     float m_currentValue;
 
-	float m_duration;
+    float m_duration;
 };
 
 #endif //INTERPOLATION_HPP
