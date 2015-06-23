@@ -8,13 +8,14 @@
 class ShaderParameter
 {
 public:
-    ShaderParameter(std::string name);
+    ShaderParameter(const std::string& name);
 
-    virtual void bind() = 0;
+    void bind();
 
 protected:
-    unsigned int getParamLocation();
+    virtual void onBind(unsigned int paramLocation) = 0;
 
+    unsigned int getParamLocation();
     const std::string& getName() const;
 
 private:

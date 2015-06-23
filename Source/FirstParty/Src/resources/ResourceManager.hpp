@@ -6,6 +6,7 @@
 #include "ResourceCache.hpp"
 #include "SoundBufferManager.hpp"
 #include "PathHelper.hpp"
+#include "../animation/AnimatedObject.hpp"
 class SpriteSheet;
 class BitmapFont;
 struct MenuTemplate;
@@ -37,12 +38,15 @@ class ResourceManager : public SoundBufferManager
 {
 public:
 
-    ResourceManager();
+    typedef AnimatedObject ShaderContext;
+
+    ResourceManager(ShaderContext& context);
 
     const sf::Texture* getTexture(const std::string& key);
     void addTexture(const std::string& key, const sf::Texture& texture);
 
     Shader* getShader(const std::string& key);
+    ShaderContext& getShaderContext() const;
 
     const sf::Font* getFont(const std::string& key);
 #ifndef NO_SOUND
@@ -75,17 +79,12 @@ private:
                       std::function<void(const tinyxml2::XMLElement*)> operation);
 
     static sf::Texture* loadTexture(const std::string& path, bool smooth);
-
     static sf::Font* loadFont(const std::string& path);
-    
 #ifndef NO_SOUND
     static sf::SoundBuffer* loadSoundBuffer(const std::string& path);
 #endif
-
     BitmapFont* loadBitmapFont(const std::string& path);
-
     static SpriteSheet* loadSpriteSheet(const std::string& path);
-
     static CryptoPP::RSA::PublicKey* loadPublicKey(const std::string& path);
 
 private:
@@ -114,6 +113,7 @@ private:
     ResourceCache<const BitmapFont> m_bitmapFonts;
     ResourceCache<MenuTemplate> m_menus;
     ResourceCache<const SpriteSheet> m_spriteSheets;
+    ShaderContext* m_context;
     
     template<typename C, typename T>
     C* getOrFail(std::unordered_map<std::string, T>& container,

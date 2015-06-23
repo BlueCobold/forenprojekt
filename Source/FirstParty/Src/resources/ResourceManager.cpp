@@ -11,7 +11,8 @@
 #include <exception>
 #include <functional> // bind
 
-ResourceManager::ResourceManager()
+ResourceManager::ResourceManager(ShaderContext& context) : 
+    m_context(&context)
 {
     m_soundManager = std::unique_ptr<SoundManager>(new SoundManager(*this));
     // Parse resource information
@@ -116,10 +117,11 @@ CryptoPP::RSA::PublicKey* ResourceManager::loadPublicKey(const std::string& path
 
 const BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
 {
+    auto self = this;
     return getOrFail<const BitmapFont, std::string>(m_bitmapFontKeys, m_bitmapFonts, key,
-        [&](const std::string& path)->std::function<BitmapFont*()>
+        [=](const std::string& path)->std::function<BitmapFont*()>
         {
-            return [=](){ return loadBitmapFont(path); };
+            return [=](){ return self->loadBitmapFont(path); };
         }, "UnknownBitmapFont");
 }
 
@@ -127,7 +129,7 @@ const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
 {
     auto self = this;
     return getOrFail<MenuTemplate, std::string>(m_menuKeys, m_menus, key,
-        [&](const std::string& path)->std::function<MenuTemplate*()>
+        [=](const std::string& path)->std::function<MenuTemplate*()>
         {
             return [=](){ return MenuLoader::loadMenuTemplate(std::string("res/menus/") + path, *self); };
         }, "UnknownMenuTemplate");
@@ -137,7 +139,7 @@ const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
 sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
 {
     return getOrFail<sf::SoundBuffer, std::string>(m_soundBufferKeys, m_soundBuffers, key,
-        [&](const std::string& path)->std::function<sf::SoundBuffer*()>
+        [=](const std::string& path)->std::function<sf::SoundBuffer*()>
         {
             return [=](){ return ResourceManager::loadSoundBuffer(path); };
         }, "UnknownSound");
@@ -147,7 +149,7 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
 const sf::Texture* ResourceManager::getTexture(const std::string& key)
 {
     return getOrFail<const sf::Texture, TextureParams>(m_textureKeys, m_textures, key,
-        [&](const TextureParams& params)->std::function<const sf::Texture*()>
+        [=](const TextureParams& params)->std::function<const sf::Texture*()>
         {
             return [=](){ return ResourceManager::loadTexture(std::get<0>(params), std::get<1>(params)); };
         }, "UnknownTexture");
@@ -165,16 +167,21 @@ Shader* ResourceManager::getShader(const std::string& key)
 
     auto self = this;
     return getOrFail<Shader, ShaderParams>(m_shaderKeys, m_shaders, key,
-        [&](const ShaderParams& params)->std::function<Shader*()>
+        [=](const ShaderParams& params)->std::function<Shader*()>
         {
             return [=](){ return ShaderLoader::loadShader(std::get<0>(params), std::get<1>(params), std::get<2>(params), *self); };
         }, "UnknownShader");
 }
 
+ResourceManager::ShaderContext& ResourceManager::getShaderContext() const
+{
+    return *m_context;
+}
+
 const SpriteSheet* ResourceManager::getSpriteSheet(const std::string& key)
 {
     return getOrFail<const SpriteSheet, std::string>(m_spriteSheetKeys, m_spriteSheets, key,
-        [&](const std::string& path)->std::function<SpriteSheet*()>
+        [=](const std::string& path)->std::function<SpriteSheet*()>
         {
             return [=](){ return ResourceManager::loadSpriteSheet(path); };
         }, "UnknownSpriteSheet");
@@ -183,7 +190,7 @@ const SpriteSheet* ResourceManager::getSpriteSheet(const std::string& key)
 const sf::Font* ResourceManager::getFont(const std::string& key)
 {
     return getOrFail<const sf::Font, std::string>(m_fontKeys, m_fonts, key,
-        [&](const std::string& path)->std::function<sf::Font*()>
+        [=](const std::string& path)->std::function<sf::Font*()>
         {
             return [=](){ return ResourceManager::loadFont(path); };
         }, "UnknownFont");

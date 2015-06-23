@@ -2,12 +2,20 @@
 #include "ShaderParameter.hpp"
 #include "../GLExt.hpp"
 
-ShaderParameter::ShaderParameter(std::string name) :
+ShaderParameter::ShaderParameter(const std::string& name) :
         m_paramLocation(-1),
         m_shaderProgram(-1),
         m_paramLocationLoaded(false),
         m_name(name)
 { }
+
+void ShaderParameter::bind()
+{
+    auto location = getParamLocation();
+    if(location < 0)
+        return;
+    onBind(location);
+}
 
 unsigned int ShaderParameter::getParamLocation()
 {

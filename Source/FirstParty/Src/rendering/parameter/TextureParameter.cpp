@@ -8,14 +8,10 @@ TextureParameter::TextureParameter(const std::string& name, const sf::Texture& t
     m_textureUnit(textureUnit)
 { }
 
-void TextureParameter::bind()
+void TextureParameter::onBind(unsigned int paramLocation)
 {
 #ifndef NO_SHADER
-    auto location = getParamLocation();
-    if(location < 0)
-        return;
-
-    gl::Uniform1i(location, m_textureUnit);
+    gl::Uniform1i(paramLocation, m_textureUnit);
     if(m_textureUnit > 0)
     {
         gl::ActiveTexture(gl::TEXTURE0 + m_textureUnit);

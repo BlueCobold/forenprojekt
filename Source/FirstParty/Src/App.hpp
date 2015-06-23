@@ -3,22 +3,23 @@
 #ifndef APP_HPP
 #define APP_HPP
 
-#include "gui/Cursor.hpp"
-#include "resources/AppConfig.hpp"
 #include "resources/ResourceManager.hpp"
 #include "resources/AchievementManager.hpp"
 #include "State/StateManager.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/Window/VideoMode.hpp>
+#include <SFML/System/Clock.hpp>
 
 #include <string>
+#include <map>
 
+class Cursor;
 class AppConfig;
 
 /// This class will be used to handle the window or fullscreen
 /// and to handle the rendering
-class App
+class App : public ResourceManager::ShaderContext
 {
 public:
 
@@ -42,6 +43,9 @@ private:
 
     void minimize();
     void restore();
+    
+    virtual float getValueOf(const std::string& name) const override;
+    virtual void setValueOf(const std::string& name, const float value) override;
 
 private:
     sf::RenderWindow m_screen;
@@ -55,6 +59,8 @@ private:
     bool m_isMinimized;
 
     utility::Event m_event;
+    sf::Clock m_clock;
+    std::map<std::string, float> m_variables;
 
     ResourceManager m_resourceManager;
     StateManager m_stateManager;

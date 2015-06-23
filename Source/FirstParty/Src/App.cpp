@@ -2,6 +2,7 @@
 #include "App.hpp"
 
 #include "Input.hpp"
+#include "gui/Cursor.hpp"
 #include "State/LoadLevelState.hpp"
 #include "State/PauseState.hpp"
 #include "State/PlayState.hpp"
@@ -48,9 +49,11 @@ App::App(AppConfig& config) :
     m_fullscreen(false),
     m_focus(true),
     m_isMinimized(false),
-    m_achievementManager("Achievement.dat", m_config)
+    m_achievementManager("Achievement.dat", m_config),
+    m_resourceManager(*this)
 {
     gl::sys::LoadFunctions();
+    m_clock.restart();
 
     // Cache often used settings
     sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
@@ -140,6 +143,10 @@ void App::run()
 
 void App::update()
 {
+    updateCurrentTime(m_clock.getElapsedTime().asSeconds());
+
+    ResourceManager::ShaderContext* context = this;
+
     sf::View view(sf::FloatRect(0.f, 0.f,
         static_cast<float>(m_screen.getSize().x),
         static_cast<float>(m_screen.getSize().y)));
@@ -407,5 +414,20 @@ void App::restore()
 #else
     ::maximize(m_screen.getSystemHandle());
 #endif
+}
+
+float App::getValueOf(const std::string& name) const
+{
+    auto found = m_variables.find(name);
+    if(found != end(m_variables))
+        return found->second;
+    else
+        throw std::runtime_error(utility::replace(utility::translateKey("NoVariable"), name));
+    return 0;
+}
+
+void App::setValueOf(const std::string& name, const float value)
+{
+    m_variables[name] = value;
 }
 

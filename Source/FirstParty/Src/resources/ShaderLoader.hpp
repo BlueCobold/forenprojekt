@@ -3,9 +3,11 @@
 #ifndef SHADER_LOADER_HPP
 #define SHADER_LOADER_HPP
 
+#include "LevelFileLoader.hpp"
 #include "../rendering/Shader.hpp"
 #include "../MacHelper.hpp"
 #include "../rendering/parameter/TextureParameter.hpp"
+#include "../rendering/parameter/FloatParameter.hpp"
 
 #include <SFML/Graphics/Shader.hpp>
 
@@ -65,10 +67,26 @@ public:
                 {
                     if(paramXml->Attribute("uniform") && paramXml->Attribute("texture") && paramXml->Attribute("unit"))
                     {
-                        std::unique_ptr<ShaderParameter> param = std::unique_ptr<TextureParameter>(
+                        auto param = std::unique_ptr<TextureParameter>(
                                         new TextureParameter(paramXml->Attribute("uniform"),
                                                              *resourceManager.getTexture(paramXml->Attribute("texture")),
                                                              paramXml->IntAttribute("unit")));
+                        shader->addParameter(std::move(param));
+                    }
+                }
+                else if (type == "float")
+                {
+                    if(auto child = paramXml->FirstChild() && paramXml->Attribute("uniform"))
+                    {
+                        static CloneHandler handler;
+                        auto provider = LevelFileLoader::parseProvider(paramXml,
+                                                                       &resourceManager.getShaderContext(),
+                                                                       &resourceManager.getShaderContext(),
+                                                                       nullptr,
+                                                                       nullptr,
+                                                                       handler);
+                        auto param = std::unique_ptr<ShaderParameter>(
+                                        new FloatParameter(paramXml->Attribute("uniform"), std::move(provider)));
                         shader->addParameter(std::move(param));
                     }
                 }
