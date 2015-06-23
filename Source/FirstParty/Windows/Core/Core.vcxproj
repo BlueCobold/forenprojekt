@@ -231,6 +231,7 @@
     <ClInclude Include="..\..\Src\rendering\GLExt.hpp" />
     <ClInclude Include="..\..\Src\rendering\GraphicalObject.hpp" />
     <ClInclude Include="..\..\Src\rendering\parameter\FloatParameter.hpp" />
+    <ClInclude Include="..\..\Src\rendering\parameter\IntParameter.hpp" />
     <ClInclude Include="..\..\Src\rendering\parameter\ShaderParameter.hpp" />
     <ClInclude Include="..\..\Src\rendering\parameter\TextureParameter.hpp" />
     <ClInclude Include="..\..\Src\rendering\Shader.hpp" />
@@ -377,6 +378,7 @@
     <ClCompile Include="..\..\Src\rendering\DebugDraw.cpp" />
     <ClCompile Include="..\..\Src\rendering\GLExt.cpp" />
     <ClCompile Include="..\..\Src\rendering\parameter\FloatParameter.cpp" />
+    <ClCompile Include="..\..\Src\rendering\parameter\IntParameter.cpp" />
     <ClCompile Include="..\..\Src\rendering\parameter\ShaderParameter.cpp" />
     <ClCompile Include="..\..\Src\rendering\parameter\TextureParameter.cpp" />
     <ClCompile Include="..\..\Src\rendering\Shader.cpp" />

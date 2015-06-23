@@ -6,8 +6,9 @@
 #include "LevelFileLoader.hpp"
 #include "../rendering/Shader.hpp"
 #include "../MacHelper.hpp"
-#include "../rendering/parameter/TextureParameter.hpp"
 #include "../rendering/parameter/FloatParameter.hpp"
+#include "../rendering/parameter/IntParameter.hpp"
+#include "../rendering/parameter/TextureParameter.hpp"
 
 #include <SFML/Graphics/Shader.hpp>
 
@@ -74,19 +75,22 @@ public:
                         shader->addParameter(std::move(param));
                     }
                 }
-                else if (type == "float")
+                else if ((type == "float" || type == "int") && paramXml->Attribute("uniform"))
                 {
-                    if(auto child = paramXml->FirstChild() && paramXml->Attribute("uniform"))
+                    if(auto child = paramXml->FirstChildElement())
                     {
                         static CloneHandler handler;
-                        auto provider = LevelFileLoader::parseProvider(paramXml,
+                        auto provider = LevelFileLoader::parseProvider(child,
                                                                        &resourceManager.getShaderContext(),
                                                                        &resourceManager.getShaderContext(),
                                                                        nullptr,
                                                                        nullptr,
                                                                        handler);
-                        auto param = std::unique_ptr<ShaderParameter>(
-                                        new FloatParameter(paramXml->Attribute("uniform"), std::move(provider)));
+                        std::unique_ptr<ShaderParameter> param;
+                        if(type == "float")
+                            param = std::unique_ptr<ShaderParameter>(new FloatParameter(paramXml->Attribute("uniform"), std::move(provider)));
+                        else
+                            param = std::unique_ptr<ShaderParameter>(new IntParameter(paramXml->Attribute("uniform"), std::move(provider)));
                         shader->addParameter(std::move(param));
                     }
                 }
