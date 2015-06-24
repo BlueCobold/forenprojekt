@@ -14,7 +14,8 @@ class TextureParameter : public ShaderParameter
 public:
     TextureParameter(const std::string& name, const sf::Texture& texture, int textureUnit);
 
-    virtual void onBind(unsigned int paramLocation) override;
+    virtual void onBind(int paramLocation) override;
+    virtual void prepare(const DrawParameter& param) override;
 
 private:
     const sf::Texture* m_texture;

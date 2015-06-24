@@ -3,6 +3,8 @@
 #ifndef SHADER_PARAMETER_HPP
 #define SHADER_PARAMETER_HPP
 
+class DrawParameter;
+
 #include <string>
 
 class ShaderParameter
@@ -10,17 +12,17 @@ class ShaderParameter
 public:
     ShaderParameter(const std::string& name);
 
-    void bind();
+    void bind(int shaderProgram);
+
+    virtual void prepare(const DrawParameter& param) = 0;
 
 protected:
-    virtual void onBind(unsigned int paramLocation) = 0;
-
-    unsigned int getParamLocation();
+    virtual void onBind(int paramLocation) = 0;
     const std::string& getName() const;
+    int getParamLocation(int shaderProgram);
 
 private:
     std::string m_name;
-    int m_shaderProgram;
     int m_paramLocation;
     bool m_paramLocationLoaded;
 };

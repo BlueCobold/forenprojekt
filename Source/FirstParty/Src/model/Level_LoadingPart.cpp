@@ -68,8 +68,7 @@ void Level::load()
         LevelFileLoader::parseConstants(constants, this);
 
     // get optional Attribute
-    auto gameplay = doc.FirstChildElement("level")->FirstChildElement("gameplay");
-    if(gameplay != nullptr)
+    if(auto gameplay = doc.FirstChildElement("level")->FirstChildElement("gameplay"))
         parseGameplayAttributes(gameplay);
     else
     {
@@ -78,6 +77,9 @@ void Level::load()
         m_totalTime = -1.f;
         m_initialTime = -1.f;
     }
+    if(auto setup = doc.FirstChildElement("level")->FirstChildElement("setup"))
+        setup->QueryUnsignedAttribute("defaultBufferId", &m_defaultTargetBuffer);
+
     // get Medal values
     m_bronzeMedal = doc.FirstChildElement("level")->FirstChildElement("medal")->IntAttribute("bronze");
     m_silverMedal = doc.FirstChildElement("level")->FirstChildElement("medal")->IntAttribute("silver");
@@ -169,8 +171,17 @@ void Level::parseObjects(
                 parallax->FloatAttribute("height"))));
             for(auto anim = parallax->FirstChildElement("animation"); anim != nullptr;
                 anim = anim->NextSiblingElement("animation"))
-                layer->bindAnimation(std::move(LevelFileLoader::parseAnimation(anim, layer.get(), nullptr, m_resourceManager, &templates.functions,
-                m_cloneHandler)));
+            {
+                auto animation = LevelFileLoader::parseAnimation(anim,
+                                                                 layer.get(),
+                                                                 nullptr,
+                                                                 m_resourceManager,
+                                                                 &templates.functions,
+                                                                 m_cloneHandler);
+                if(animation->getBufferId() == UINT_MAX)
+                    animation->setBufferId(m_defaultTargetBuffer);
+                layer->bindAnimation(std::move(animation));
+            }
             background->bindLayer(std::move(layer));
         }
         m_background = std::move(background);
@@ -615,6 +626,8 @@ std::unique_ptr<Entity> Level::createEntity(
                         b2Vec2(
                             static_cast<float>(utility::toMeter(position.x)),
                             static_cast<float>(utility::toMeter(position.y))));
+                if(animation->getBufferId() == UINT_MAX)
+                    animation->setBufferId(m_defaultTargetBuffer);
                 entity->bindAnimation(std::move(animation));
             }
         }

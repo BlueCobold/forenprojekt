@@ -61,7 +61,8 @@ Level::Level(const std::string& filename, const unsigned int level, ResourceMana
     m_extraBallGoody(sf::Keyboard::Num3, Goody::ExtraBallGoody, 0, 0, config.get<int>("goodyextraball")),
     m_extraTimeGoody(sf::Keyboard::Num4, Goody::ExtraTimeGoody, 0, 0, config.get<int>("goodyextratime")),
     m_currentSeletedGoody(0),
-    m_playing(false)
+    m_playing(false),
+    m_defaultTargetBuffer(UINT_MAX)
 {
     auto func = [this](Goody& sender)
     {

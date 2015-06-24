@@ -21,6 +21,7 @@
 #include "State/GameFinishedState.hpp"
 #include "State/AchievementState.hpp"
 #include "rendering/GLExt.hpp"
+#include "rendering/Shader.hpp"
 #include "resources/AppConfig.hpp"
 #include "resources/SpriteSheet.hpp"
 
@@ -72,6 +73,9 @@ App::App(AppConfig& config) :
 
     sf::ContextSettings settings = sf::ContextSettings(24, 8, 0);
     m_screen.create(videoMode, m_windowTitle, m_fullscreen ? sf::Style::Fullscreen : sf::Style::Default, settings);
+
+    // This kind of redundant line prevents shader-renderings to show the first frame incorrectly
+    m_screen.resetGLStates();
 
     // This kind of redundant line prevents a thread-based crash when closing the app.
     // It is based on a known SFML bug: https://github.com/LaurentGomila/SFML/issues/790
@@ -186,7 +190,7 @@ void App::draw()
     for(unsigned int i = 0; i < m_offscreens.size(); i++)
     {
         params.addTargetBuffer(m_offscreens[i]);
-        m_offscreens[i].clear(sf::Color(0));
+        m_offscreens[i].clear(sf::Color(0x7F7F7F00));
         offscreens.insert(std::make_pair(&(m_offscreens[i].getTexture()), &m_offscreens[i]));
     }
 

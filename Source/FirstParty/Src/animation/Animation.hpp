@@ -4,17 +4,16 @@
 #define ANIMATION_HPP
 
 #include "Cloneable.hpp"
+#include "VariableHolder.hpp"
 #include "Stoppable.hpp"
-#include "provider/ValueProvider.hpp"
 #include "../rendering/Drawable.hpp"
-#include "../rendering/Shader.hpp"
+class ValueProvider;
+class Shader;
 
 #include <array>
 #include <list>
 #include <memory> // unique_ptr
 #include <vector>
-
-#include "VariableHolder.hpp"
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
@@ -53,8 +52,8 @@ public:
 
     Animation(
         const unsigned int frames,
-        const unsigned int frameWidth,
-        const unsigned int frameHeight,
+        const int frameWidth,
+        const int frameHeight,
         const bool applyRotation,
         const sf::Vector2f& origin,
         const sf::Vector2f& drawOffset,
@@ -85,6 +84,7 @@ public:
         const std::vector<sf::Vector2i>& origins);
     void setStopOnAlphaZero(bool stop);
     void setBufferId(unsigned int id);
+    unsigned int getBufferId();
     void applyRotation(bool apply);
     void bindCloneHandler(CloneHandler& handler);
     void alignToView(bool align);
@@ -124,8 +124,8 @@ private:
     StencilInfo m_stencil;
     unsigned int m_frames;
     unsigned int m_frame;
-    unsigned int m_frameWidth;
-    unsigned int m_frameHeight;
+    int m_frameWidth;
+    int m_frameHeight;
     bool m_horizontal;
     sf::Sprite m_sprite;
     bool m_prepareTextureOnUse;

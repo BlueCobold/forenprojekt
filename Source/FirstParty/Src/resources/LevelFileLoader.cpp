@@ -213,10 +213,6 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         width = xml->IntAttribute("width");
     if(xml->Attribute("height") != nullptr)
         height = xml->IntAttribute("height");
-    if(width < 0)
-        width = texture->getSize().x;
-    if(height < 0)
-        height = texture->getSize().y;
 
     bool rotate = xml->BoolAttribute("rotate");
     sf::Vector2f offset;

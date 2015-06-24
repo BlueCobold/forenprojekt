@@ -4,6 +4,7 @@
 #define SHADER_HPP
 
 #include "parameter/ShaderParameter.hpp"
+class DrawParameter;
 
 #include <SFML/Graphics/Shader.hpp>
 
@@ -20,12 +21,14 @@ public:
 
     void addParameter(std::unique_ptr<ShaderParameter>&& parameter);
 
+    void prepare(const DrawParameter& param);
     void bind();
     void unbind();
 
 private:
     sf::Shader m_shader;
     std::vector<std::unique_ptr<ShaderParameter>> m_parameters;
+    int m_programId;
 };
 
 #endif // SHADER_HPP

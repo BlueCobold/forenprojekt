@@ -1,19 +1,22 @@
 
 #include "Animation.hpp"
-#include "../Utility.hpp" // toDegree, toPixel
 #include "CloneHandler.hpp"
+#include "provider/ValueProvider.hpp"
+#include "../Utility.hpp" // toDegree, toPixel
 #include "../rendering/GLExt.hpp"
+#include "../rendering/Shader.hpp"
 
 #include <SFML/Graphics/Rect.hpp>
 
 #include <cmath>
+#include <climits>
 
 bool Animation::_renderStencilEffects = true;
 std::list<Animation*> Animation::_stencilAnimations;
 
 Animation::Animation(
     const unsigned int frames,
-    const unsigned int frameWidth, const unsigned int frameHeight,
+    const int frameWidth, const int frameHeight,
     const bool applyRotation,
     const sf::Vector2f& origin,
     const sf::Vector2f& drawOffset,
@@ -29,7 +32,7 @@ Animation::Animation(
     m_horizontal(horizontal),
     m_stopOnAlphaZero(false),
     m_cloneHandler(nullptr),
-    m_targetBuffer(0),
+    m_targetBuffer(UINT_MAX),
     m_isViewAligned(false),
     m_shader(nullptr)
 {
@@ -178,28 +181,29 @@ void Animation::draw(const DrawParameter& param)
     if(isStopped())
         return;
 
-    auto targetBuffer = &param.getTarget(m_targetBuffer);
+    auto targetBuffer = &param.getTarget(m_targetBuffer != UINT_MAX ? m_targetBuffer : 0);
     if(m_isViewAligned)
     {
         auto topLeft = targetBuffer->getView().getCenter() - 0.5f * targetBuffer->getView().getSize();
         setPosition(topLeft.x, topLeft.y);
-    }
 
-    if(m_frameWidth < 0 || m_frameHeight < 0)
-        m_sprite.setTextureRect(sf::IntRect(sf::Vector2i(m_sourceOffset), sf::Vector2i(targetBuffer->getView().getSize())));
-
-    if(param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
-    {
-        if(m_shader)
-            m_shader->bind();
-        m_stencil.enable();
-        if(m_prepareTextureOnUse)
-            param.prepareTexture(m_sprite.getTexture());
-        targetBuffer->draw(m_sprite, sf::RenderStates(m_blending));
-        m_stencil.disable();
-        if(m_shader)
-            m_shader->unbind();
+        if(m_frameWidth < 0 || m_frameHeight < 0)
+            m_sprite.setTextureRect(sf::IntRect(sf::Vector2i(m_sourceOffset), sf::Vector2i(targetBuffer->getView().getSize())));
     }
+    else if(!param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
+        return;
+
+    m_stencil.enable();
+    if(m_prepareTextureOnUse)
+        param.prepareTexture(m_sprite.getTexture());
+
+    if(m_shader)
+        m_shader->prepare(param);
+
+    targetBuffer->draw(m_sprite, m_blending);
+    m_stencil.disable();
+    if(m_shader)
+        m_shader->unbind();
 }
 
 void Animation::bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y)
@@ -307,6 +311,11 @@ void Animation::setStopOnAlphaZero(bool stop)
 void Animation::setBufferId(unsigned int id)
 {
     m_targetBuffer = id;
+}
+
+unsigned int Animation::getBufferId()
+{
+    return m_targetBuffer;
 }
 
 void Animation::applyRotation(bool apply)

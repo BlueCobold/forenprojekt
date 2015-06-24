@@ -3,18 +3,28 @@
 #ifndef DRAW_PARAMETER_HPP
 #define DRAW_PARAMETER_HPP
 
-#include <SFML/Graphics/RenderTarget.hpp>
-#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 #include "../Utility.hpp"
 
 #include <functional>
 #include <vector>
+#include <unordered_map>
 
 class DrawParameter
 {
 public:
-    DrawParameter(sf::RenderTarget& target)
+    DrawParameter(sf::RenderTexture& target) :
+        m_primaryTextureTarget(&target),
+        m_primaryWindowTarget(nullptr)
+    {
+        m_buffers.push_back(&target);
+    }
+
+    DrawParameter(sf::RenderWindow& target) :
+        m_primaryTextureTarget(nullptr),
+        m_primaryWindowTarget(&target)
     {
         m_buffers.push_back(&target);
     }
@@ -24,13 +34,20 @@ public:
         return *m_buffers[0];
     }
     
+    void activatePrimary() const
+    {
+        if(m_primaryTextureTarget)
+            m_primaryTextureTarget->setActive(true);
+        else if(m_primaryWindowTarget)
+            m_primaryWindowTarget->setActive(true);
+    }
+
     sf::RenderTarget& getTarget(unsigned int bufferLayer) const
     {
         if(bufferLayer > m_buffers.size())
             throw std::runtime_error(utility::translateKey("UnknownLayer"));
 
         auto buffer = m_buffers[bufferLayer];
-
         return *buffer;
     }
 
@@ -67,6 +84,8 @@ public:
 private:
     std::function<void(const sf::Texture*)> m_textureCallback;
     std::vector<sf::RenderTarget*> m_buffers;
+    sf::RenderTexture* m_primaryTextureTarget;
+    sf::RenderWindow* m_primaryWindowTarget;
 };
 
 #endif // DRAW_PARAMETER_HPP

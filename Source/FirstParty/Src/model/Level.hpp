@@ -317,6 +317,7 @@ private:
     float m_remainingTime;
     float m_totalTime;
     float m_initialTime;
+    unsigned int m_defaultTargetBuffer;
 
     struct TimedLabel
     {

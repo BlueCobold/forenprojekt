@@ -1,5 +1,6 @@
 
 #include "TextureParameter.hpp"
+#include "../DrawParameter.hpp"
 #include "../GLExt.hpp"
 
 TextureParameter::TextureParameter(const std::string& name, const sf::Texture& texture, int textureUnit) :
@@ -8,7 +9,7 @@ TextureParameter::TextureParameter(const std::string& name, const sf::Texture& t
     m_textureUnit(textureUnit)
 { }
 
-void TextureParameter::onBind(unsigned int paramLocation)
+void TextureParameter::onBind(int paramLocation)
 {
 #ifndef NO_SHADER
     gl::Uniform1i(paramLocation, m_textureUnit);
@@ -19,4 +20,9 @@ void TextureParameter::onBind(unsigned int paramLocation)
         gl::ActiveTexture(gl::TEXTURE0);
     }
 #endif
+}
+
+void TextureParameter::prepare(const DrawParameter& param)
+{
+    param.prepareTexture(m_texture);
 }
