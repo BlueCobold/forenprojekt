@@ -2,6 +2,7 @@
 	<levelinfo name="Beginner Level">
 		<infoimage spriteSheet="gui_elements" sprite="preview: Beginner Level" />
 	</levelinfo>
+	<setup defaultBufferId="1" />
 	<medal bronze="200" silver="250" gold="300" />
 	<templates>
 		<include file="assets/ball/twirl.inc" />
@@ -15,10 +16,97 @@
 				</animations>
 			</entity>
 		</entities>
+		<entities>
+			<!--<entity name="grey" rep="#0" z="1001" >
+				<animations>
+					<animation texture="walls" srcx="2" srcy="217" width="1" height="1" bufferId="2" alignToView="true" >
+						<scale axis="x">
+							<static value="800" />
+						</scale>
+						<scale axis="y">
+							<static value="800" />
+						</scale>
+					</animation>
+				</animations>
+			</entity>-->
+			<entity name="slimeDot" rep="#1" z="1002" >
+				<animations>
+					<animation copies="5" texture="slimeNormal" srcx="0" srcy="0" width="50" height="50" bufferId="2">
+						<position axis="x">
+							<add>
+								<mul>
+									<cache>
+										<random min="10" max="40" />
+									</cache>
+									<sine>
+										<mul>										
+											<cache>
+												<random min="70" max="120" />
+											</cache>
+											<time />
+										</mul>
+									</sine>
+								</mul>
+								<mul>
+									<cache>
+										<random min="20" max="40" />
+									</cache>
+									<sine>
+										<mul>										
+											<cache>
+												<random min="50" max="90" />
+											</cache>
+											<time />
+										</mul>
+									</sine>
+								</mul>
+							</add>
+						</position>
+						<position axis="y">
+							<add>
+								<mul>
+									<cache>
+										<random min="10" max="40" />
+									</cache>
+									<sine>
+										<mul>										
+											<cache>
+												<random min="70" max="120" />
+											</cache>
+											<time />
+										</mul>
+									</sine>
+								</mul>
+								<mul>
+									<cache>
+										<random min="20" max="40" />
+									</cache>
+									<sine>
+										<mul>										
+											<cache>
+												<random min="50" max="90" />
+											</cache>
+											<time />
+										</mul>
+									</sine>
+								</mul>
+							</add>
+						</position>
+					</animation>
+				</animations>
+			</entity>
+			<entity name="merge" rep="#2" z="1003" >
+				<animations>
+					<animation texture="offscreenBuffer1" srcx="0" srcy="0" width="-1" height="-1" alignToView="true" bufferId="0" shader="slime">
+					</animation>
+				</animations>
+			</entity>
+		</entities>
 	</templates>
 
 	<grid size="60" width="2460" height="1410">
                                                                                   
+#0#2                                                                              
                   gagb  gcgdgegf      gcgf    gcgdgegdgegf                        
                   W1 1w4w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2W5 5                        
                   w2d4W3 3)4                    (1W2 2d3w1                        
@@ -27,9 +115,12 @@
                   w2d3d4w3                        w6d6d5w2                        
                   w6d6d1w5            BB        gow2d3d1w3                        
                   W1 1d6d3\2gg      #0        gp/5d1d1W5 5                        
+                  W1 1d6d3\2gg                gp/5d1d1W5 5                        
                   w5d2d3d1d2\1gh            gq/6d4d1d3d2w6                        
                   W3 3d4d6W2 2\5          gr/1W5 5d2d2W1 1                        
                   w2d4d1d2d4w3d2\3        /4d2w4d2d4d5d2w5                        
+                  W3 3d4d6W2 2\5    #1#1#1gr/1W5 5d2d2W1 1                        
+                  w2d4d1d2d4w3d2\3  #1#1#1/4d2w4d2d4d5d2w5                        
                   W4 4d5d3W1 1w4w4    TT  W6 6W1 1d6d6W3 3                        
                                                                                   
 	</grid>

@@ -28,6 +28,7 @@
 	<texture name="walls" path="assets/walls.png" smooth="true" />
 	<texture name="norT" path="assets/norT.png" smooth="true" />
 	<texture name="teleport" path="assets/misc/Teleport.png" smooth="true" />
+	<texture name="slimeNormal" path="assets/misc/result.png" smooth="true" />
 </textures>
 <sounds>
 	<sound name="bounce" path="bounce.ogg" />
@@ -83,7 +84,7 @@
 	<level number="12" filename="Moving Spikes.lvl" />
 </levels>
 <shaders>
-	<shader name="testShader" vertexPath="testShader.vert" fragmentPath="testShader.frag" configPath="testShader.conf" />
+	<shader name="slime" vertexPath="slime.vert" fragmentPath="slime.frag" configPath="slime.conf" />
 </shaders>
 <keys>
 	<key name="LevelKey" path="LevelPublic.key" />
