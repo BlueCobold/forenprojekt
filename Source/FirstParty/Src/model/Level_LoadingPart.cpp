@@ -20,6 +20,7 @@
 #include "collision/filter/PropertyFilter.hpp"
 #include "collision/filter/SpawnEntity.hpp"
 #include "../animation/provider/RandomProvider.hpp"
+#include "../rendering/Shader.hpp"
 
 #include "joint/SingleRevoluteJoint.hpp"
 #include "joint/SinglePrismaticJoint.hpp"
@@ -79,6 +80,11 @@ void Level::load()
     }
     if(auto setup = doc.FirstChildElement("level")->FirstChildElement("setup"))
         setup->QueryUnsignedAttribute("defaultBufferId", &m_defaultTargetBuffer);
+    if(!Shader::isUsable())
+    {
+        if(auto setup = doc.FirstChildElement("level")->FirstChildElement("noShaderSetup"))
+            setup->QueryUnsignedAttribute("defaultBufferId", &m_defaultTargetBuffer);
+    }
 
     // get Medal values
     m_bronzeMedal = doc.FirstChildElement("level")->FirstChildElement("medal")->IntAttribute("bronze");
@@ -172,15 +178,17 @@ void Level::parseObjects(
             for(auto anim = parallax->FirstChildElement("animation"); anim != nullptr;
                 anim = anim->NextSiblingElement("animation"))
             {
-                auto animation = LevelFileLoader::parseAnimation(anim,
-                                                                 layer.get(),
-                                                                 nullptr,
-                                                                 m_resourceManager,
-                                                                 &templates.functions,
-                                                                 m_cloneHandler);
-                if(animation->getBufferId() == UINT_MAX)
-                    animation->setBufferId(m_defaultTargetBuffer);
-                layer->bindAnimation(std::move(animation));
+                if(auto animation = LevelFileLoader::parseAnimation(anim,
+                                                                    layer.get(),
+                                                                    nullptr,
+                                                                    m_resourceManager,
+                                                                    &templates.functions,
+                                                                    m_cloneHandler))
+                {
+                    if(animation->getBufferId() == UINT_MAX)
+                        animation->setBufferId(m_defaultTargetBuffer);
+                    layer->bindAnimation(std::move(animation));
+                }
             }
             background->bindLayer(std::move(layer));
         }
@@ -620,18 +628,19 @@ std::unique_ptr<Entity> Level::createEntity(
             element->QueryIntAttribute("copies", &copies);
             for(int copy = 0; copy < copies; copy++)
             {
-                auto animation = LevelFileLoader::parseAnimation(element, entity.get(), this, m_resourceManager, &templates.functions, m_cloneHandler);
-                if(physic == nullptr)
-                    entity->setPosition(
-                        b2Vec2(
-                            static_cast<float>(utility::toMeter(position.x)),
-                            static_cast<float>(utility::toMeter(position.y))));
-                if(animation->getBufferId() == UINT_MAX)
-                    animation->setBufferId(m_defaultTargetBuffer);
-                entity->bindAnimation(std::move(animation));
+                if(auto animation = LevelFileLoader::parseAnimation(element, entity.get(), this, m_resourceManager, &templates.functions, m_cloneHandler))
+                {
+                    if(animation->getBufferId() == UINT_MAX)
+                        animation->setBufferId(m_defaultTargetBuffer);
+                    entity->bindAnimation(std::move(animation));
+                }
             }
         }
     }
+
+    if(physic == nullptr)
+        entity->setPosition(b2Vec2(static_cast<float>(utility::toMeter(position.x)),
+                                   static_cast<float>(utility::toMeter(position.y))));
 
     if(auto constants = xml->FirstChildElement("constants"))
         LevelFileLoader::parseConstants(constants, entity.get());

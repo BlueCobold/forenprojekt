@@ -6,6 +6,7 @@
 #include "ResourceCache.hpp"
 #include "SoundBufferManager.hpp"
 #include "PathHelper.hpp"
+#include "ShaderContext.hpp"
 #include "../animation/AnimatedObject.hpp"
 class SpriteSheet;
 class BitmapFont;

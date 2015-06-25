@@ -8,15 +8,13 @@
 #include "ValueProvider.hpp"
 #include "../../Input.hpp"
 
-using namespace sf;
-
 class KeyProvider : public ValueProvider
 {
 private:
-    Keyboard::Key m_KeyAttachedTo;
+    sf::Keyboard::Key m_KeyAttachedTo;
 
     // The array uses the US-ASCII encoding.
-    const static Keyboard::Key intToKeys[128];
+    const static sf::Keyboard::Key intToKeys[128];
 
 public:
 
@@ -40,7 +38,7 @@ public:
 
 protected:
 
-    Keyboard::Key getKeyById(int id)
+    sf::Keyboard::Key getKeyById(int id)
     {
       return intToKeys[id];
     }

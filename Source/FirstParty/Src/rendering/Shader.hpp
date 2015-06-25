@@ -25,7 +25,12 @@ public:
     void bind();
     void unbind();
 
+    static bool isAvailable();
+    static bool isUsable();
+    static void allowUsage(bool allow);
+
 private:
+    static bool _shadersAllowed;
     sf::Shader m_shader;
     std::vector<std::unique_ptr<ShaderParameter>> m_parameters;
     int m_programId;

@@ -639,9 +639,10 @@ void MenuLoader::parseAnimationContainer(
                     animation != nullptr; 
                     animation = animation->NextSiblingElement("animation"))
                 {
-                    auto ani = LevelFileLoader::parseAnimation(animation, animContainer.get(), animContainer.get(), resourceManager, &functions,
-                                                               _cloneHandler);
-                    animContainer->bindAnimation(std::move(ani));
+                    if(auto ani = LevelFileLoader::parseAnimation(animation, animContainer.get(),
+                                                                  animContainer.get(), resourceManager,
+                                                                  &functions, _cloneHandler))
+                        animContainer->bindAnimation(std::move(ani));
                 }
             }
 

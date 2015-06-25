@@ -3,9 +3,14 @@
 #include "DrawParameter.hpp"
 #include "GLExt.hpp"
 
+bool Shader::_shadersAllowed = true;
+
 Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath) :
     m_programId(-1)
 {
+    if(!isAvailable())
+        throw std::runtime_error(utility::translateKey("ShadersNotAvailable"));
+
     if(!m_shader.loadFromFile(vertexPath, fragmentPath))
         throw std::runtime_error(utility::replace(utility::replace(utility::translateKey("ShaderFailed"), vertexPath), fragmentPath));
 }
@@ -44,4 +49,19 @@ void Shader::unbind()
 #ifndef NO_SHADER
     sf::Shader::bind(nullptr);
 #endif
+}
+
+bool Shader::isAvailable()
+{
+    return sf::Shader::isAvailable();
+}
+
+bool Shader::isUsable()
+{
+    return isAvailable() && _shadersAllowed;
+}
+
+void Shader::allowUsage(bool allow)
+{
+    _shadersAllowed = allow;
 }

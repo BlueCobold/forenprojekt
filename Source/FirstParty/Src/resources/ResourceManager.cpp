@@ -162,7 +162,7 @@ void ResourceManager::addTexture(const std::string& key, const sf::Texture& text
 
 Shader* ResourceManager::getShader(const std::string& key)
 {
-    if(!sf::Shader::isAvailable())
+    if(!Shader::isAvailable())
         throw std::runtime_error(utility::translateKey("ShadersNotAvailable"));
 
     auto self = this;

@@ -29,6 +29,7 @@
 #include "../animation/provider/TimeProvider.hpp"
 #include "../animation/provider/KeyProvider.hpp"
 #include "../animation/provider/VariableProvider.hpp"
+#include "../rendering/Shader.hpp"
 #include "../resources/SpriteSheet.hpp"
 
 #include <map>
@@ -245,7 +246,14 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     anim->bindCloneHandler(cloneHandler);
 
     if(auto shaderName = xml->Attribute("shader"))
-        anim->bindShader(*resourceManager.getShader(shaderName));
+    {
+        if(Shader::isUsable())
+            anim->bindShader(*resourceManager.getShader(shaderName));
+        else
+            return nullptr; // no shaders available -> skip animation
+    }
+    else if(xml->Attribute("whenShaders") && xml->BoolAttribute("whenShaders") == Shader::isUsable())
+        return nullptr; // this animation requires an explicit shader-availability to decide if to draw or not
 
     if(auto stencil = xml->FirstChildElement("stencil"))
     {
