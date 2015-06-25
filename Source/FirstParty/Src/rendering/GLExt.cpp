@@ -143,6 +143,8 @@ namespace gl
 
         GetString = reinterpret_cast<PFNGETSTRING>(IntGetProcAddress("glGetString"));
         if(!GetString) ++numFailed;
+		GetIntegerv = reinterpret_cast<PFNGETINTEGERV>(IntGetProcAddress("glGetIntegerv"));
+		if(!GetIntegerv) ++numFailed;
 
         Uniform1f = reinterpret_cast<PFNUNIFORM1F>(IntGetProcAddress("glUniform1f"));
         if(!Uniform1f) ++numFailed;

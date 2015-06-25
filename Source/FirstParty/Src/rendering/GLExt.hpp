@@ -184,6 +184,7 @@ namespace gl
         MAJOR_VERSION                    = 0x821B,
         MINOR_VERSION                    = 0x821C,
         NUM_EXTENSIONS                   = 0x821D,
+		MAX_TEXTURE_SIZE                 = 0x0D33,
         TEXTURE0                         = 0x84C0,
 
         STENCIL_TEST                     = 0x0B90,

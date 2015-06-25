@@ -54,6 +54,10 @@ App::App(AppConfig& config) :
     m_resourceManager(*this)
 {
     gl::sys::LoadFunctions();
+    int maxTextureSize = 0;
+    gl::GetIntegerv(gl::MAX_TEXTURE_SIZE, &maxTextureSize);
+    sf::err() << "Max texure size: " << maxTextureSize << std::endl;
+    sf::err() << "GLVersion: " << gl::sys::GetMajorVersion() << "." << gl::sys::GetMinorVersion() << std::endl;
     m_clock.restart();
 
     // Cache often used settings
