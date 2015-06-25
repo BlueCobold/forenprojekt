@@ -173,7 +173,7 @@ Shader* ResourceManager::getShader(const std::string& key)
         }, "UnknownShader");
 }
 
-ResourceManager::ShaderContext& ResourceManager::getShaderContext() const
+ShaderContext& ResourceManager::getShaderContext() const
 {
     return *m_context;
 }

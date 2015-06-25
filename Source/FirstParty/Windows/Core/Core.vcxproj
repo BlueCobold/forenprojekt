@@ -273,6 +273,7 @@
     <ClInclude Include="..\..\Src\resources\PathHelper.hpp" />
     <ClInclude Include="..\..\Src\resources\ResourceCache.hpp" />
     <ClInclude Include="..\..\Src\resources\ResourceManager.hpp" />
+    <ClInclude Include="..\..\Src\resources\ShaderContext.hpp" />
     <ClInclude Include="..\..\Src\resources\ShaderLoader.hpp" />
     <ClInclude Include="..\..\Src\resources\SoundBufferManager.hpp" />
     <ClInclude Include="..\..\Src\resources\SpriteSheet.hpp" />
@@ -414,6 +415,7 @@
     <ClCompile Include="..\..\Src\resources\OpenFileDialoge.cpp" />
     <ClCompile Include="..\..\Src\resources\PathHelper.cpp" />
     <ClCompile Include="..\..\Src\resources\ResourceManager.cpp" />
+    <ClCompile Include="..\..\Src\resources\ShaderContext.cpp" />
     <ClCompile Include="..\..\Src\resources\SpriteSheet.cpp" />
     <ClCompile Include="..\..\Src\ScrollView.cpp" />
     <ClCompile Include="..\..\Src\State\AchievementState.cpp" />

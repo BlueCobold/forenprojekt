@@ -610,6 +610,9 @@
     <ClInclude Include="..\..\Src\rendering\parameter\IntParameter.hpp">
       <Filter>Headers\rendering\parameter</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\resources\ShaderContext.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -1103,6 +1106,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\rendering\parameter\IntParameter.cpp">
       <Filter>Sources\rendering\parameter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\ShaderContext.cpp">
+      <Filter>Sources\resources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

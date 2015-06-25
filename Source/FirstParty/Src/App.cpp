@@ -51,14 +51,14 @@ App::App(AppConfig& config) :
     m_focus(true),
     m_isMinimized(false),
     m_achievementManager("Achievement.dat", m_config),
-    m_resourceManager(*this)
+    m_shaderContext(),
+    m_resourceManager(m_shaderContext)
 {
     gl::sys::LoadFunctions();
     int maxTextureSize = 0;
     gl::GetIntegerv(gl::MAX_TEXTURE_SIZE, &maxTextureSize);
     sf::err() << "Max texure size: " << maxTextureSize << std::endl;
     sf::err() << "GLVersion: " << gl::sys::GetMajorVersion() << "." << gl::sys::GetMinorVersion() << std::endl;
-    m_clock.restart();
 
     // Cache often used settings
     sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
@@ -151,10 +151,6 @@ void App::run()
 
 void App::update()
 {
-    updateCurrentTime(m_clock.getElapsedTime().asSeconds());
-
-    ResourceManager::ShaderContext* context = this;
-
     sf::View view(sf::FloatRect(0.f, 0.f,
         static_cast<float>(m_screen.getSize().x),
         static_cast<float>(m_screen.getSize().y)));
@@ -164,6 +160,7 @@ void App::update()
     handleKeyboard();
 
     m_resourceManager.getSoundManager().update();
+    m_shaderContext.update();
     m_stateManager.update();
 
     if(!m_isMinimized)
@@ -422,20 +419,5 @@ void App::restore()
 #else
     ::maximize(m_screen.getSystemHandle());
 #endif
-}
-
-float App::getValueOf(const std::string& name) const
-{
-    auto found = m_variables.find(name);
-    if(found != end(m_variables))
-        return found->second;
-    else
-        throw std::runtime_error(utility::replace(utility::translateKey("NoVariable"), name));
-    return 0;
-}
-
-void App::setValueOf(const std::string& name, const float value)
-{
-    m_variables[name] = value;
 }
 

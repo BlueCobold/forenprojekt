@@ -37,9 +37,6 @@ namespace tinyxml2
 class ResourceManager : public SoundBufferManager
 {
 public:
-
-    typedef AnimatedObject ShaderContext;
-
     ResourceManager(ShaderContext& context);
 
     const sf::Texture* getTexture(const std::string& key);

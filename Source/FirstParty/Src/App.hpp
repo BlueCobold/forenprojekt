@@ -19,7 +19,7 @@ class AppConfig;
 
 /// This class will be used to handle the window or fullscreen
 /// and to handle the rendering
-class App : public ResourceManager::ShaderContext
+class App
 {
 public:
 
@@ -43,9 +43,6 @@ private:
 
     void minimize();
     void restore();
-    
-    virtual float getValueOf(const std::string& name) const override;
-    virtual void setValueOf(const std::string& name, const float value) override;
 
 private:
     sf::RenderWindow m_screen;
@@ -59,8 +56,7 @@ private:
     bool m_isMinimized;
 
     utility::Event m_event;
-    sf::Clock m_clock;
-    std::map<std::string, float> m_variables;
+    ShaderContext m_shaderContext;
 
     ResourceManager m_resourceManager;
     StateManager m_stateManager;
