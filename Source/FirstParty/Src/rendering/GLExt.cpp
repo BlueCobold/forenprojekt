@@ -6,7 +6,6 @@
 
 #if defined(__APPLE__)
 #include <mach-o/dyld.h>
-
 static void* AppleGLGetProcAddress (const GLubyte *name)
 {
     static const struct mach_header* image = NULL;
@@ -54,6 +53,7 @@ static void* SunGetProcAddress (const GLubyte* name)
 #ifdef _MSC_VER
 #pragma warning(disable: 4055)
 #pragma warning(disable: 4054)
+#pragma warning(disable: 4996) // _CRT_SECURE_NO_WARNINGS
 #endif
 
 static int TestPointer(const PROC pTest)
@@ -97,6 +97,9 @@ namespace gl
     namespace exts
     {
     } //namespace exts
+    typedef const GLubyte * (CODEGEN_FUNCPTR *PFNGETSTRING)(GLenum);
+    PFNGETSTRING GetString = 0;
+
     typedef void (CODEGEN_FUNCPTR *PFNACTIVETEXTURE)(GLenum);
     PFNACTIVETEXTURE ActiveTexture = 0;
     typedef void (CODEGEN_FUNCPTR *PFNFLUSH)();
@@ -137,6 +140,10 @@ namespace gl
     static int LoadCoreFunctions()
     {
         int numFailed = 0;
+
+        GetString = reinterpret_cast<PFNGETSTRING>(IntGetProcAddress("glGetString"));
+        if(!GetString) ++numFailed;
+
         Uniform1f = reinterpret_cast<PFNUNIFORM1F>(IntGetProcAddress("glUniform1f"));
         if(!Uniform1f) ++numFailed;
         Uniform1i = reinterpret_cast<PFNUNIFORM1I>(IntGetProcAddress("glUniform1i"));
@@ -225,24 +232,44 @@ namespace gl
                         (*entry->extVariable) = exts::LoadTest(true, 0);
                 }
             }
-        } //namespace 
-
+        } //namespace
 
         namespace 
         {
-            static void ProcExtsFromExtList(std::vector<MapEntry> &table)
+            static void ProcExtsFromExtString(const char *strExtList, std::vector<MapEntry> &table)
             {
-                GLint iLoop;
-                GLint iNumExtensions = 0;
-                gl::GetIntegerv(gl::NUM_EXTENSIONS, &iNumExtensions);
+                size_t iExtListLen = strlen(strExtList);
+                const char *strExtListEnd = strExtList + iExtListLen;
+                const char *strCurrPos = strExtList;
+                char strWorkBuff[256];
 
-                for(iLoop = 0; iLoop < iNumExtensions; iLoop++)
+                while(*strCurrPos)
                 {
-                    const char *strExtensionName = (const char *)gl::GetStringi(gl::EXTENSIONS, iLoop);
-                    LoadExtByName(table, strExtensionName);
+                    /*Get the extension at our position.*/
+                    int iStrLen = 0;
+                    const char *strEndStr = strchr(strCurrPos, ' ');
+                    int iStop = 0;
+                    if(strEndStr == NULL)
+                    {
+                        strEndStr = strExtListEnd;
+                        iStop = 1;
+                    }
+
+                    iStrLen = (int)((ptrdiff_t)strEndStr - (ptrdiff_t)strCurrPos);
+
+                    if(iStrLen > 255)
+                        return;
+
+                    strncpy(strWorkBuff, strCurrPos, iStrLen);
+                    strWorkBuff[iStrLen] = '\0';
+
+                    LoadExtByName(table, strWorkBuff);
+
+                    strCurrPos = strEndStr + 1;
+                    if(iStop)
+                        break;
                 }
             }
-
         } //namespace 
 
         exts::LoadTest LoadFunctions()
@@ -251,15 +278,49 @@ namespace gl
             std::vector<MapEntry> table;
             InitializeMappingTable(table);
 
-            GetIntegerv = reinterpret_cast<PFNGETINTEGERV>(IntGetProcAddress("glGetIntegerv"));
-            if(!GetIntegerv) return exts::LoadTest();
-            GetStringi = reinterpret_cast<PFNGETSTRINGI>(IntGetProcAddress("glGetStringi"));
-            if(!GetStringi) return exts::LoadTest();
+            GetString = reinterpret_cast<PFNGETSTRING>(IntGetProcAddress("glGetString"));
+            if(!GetString)
+                return exts::LoadTest();
 
-            ProcExtsFromExtList(table);
+            ProcExtsFromExtString((const char *)gl::GetString(gl::EXTENSIONS), table);
 
             int numFailed = LoadCoreFunctions();
             return exts::LoadTest(true, numFailed);
+        }
+
+        static void ParseVersionFromString(int *pOutMajor, int *pOutMinor, const char *strVersion)
+        {
+            const char *strDotPos = NULL;
+            int iLength = 0;
+            char strWorkBuff[10];
+            *pOutMinor = 0;
+            *pOutMajor = 0;
+        
+            strDotPos = strchr(strVersion, '.');
+            if(!strDotPos)
+                return;
+        
+            iLength = (int)((ptrdiff_t)strDotPos - (ptrdiff_t)strVersion);
+            strncpy(strWorkBuff, strVersion, iLength);
+            strWorkBuff[iLength] = '\0';
+        
+            *pOutMajor = atoi(strWorkBuff);
+            strDotPos = strchr(strVersion + iLength + 1, ' ');
+            if(!strDotPos)
+            {
+                /*No extra data. Take the whole rest of the string.*/
+                strcpy(strWorkBuff, strVersion + iLength + 1);
+            }
+            else
+            {
+                /*Copy only up until the space.*/
+                int iLengthMinor = (int)((ptrdiff_t)strDotPos - (ptrdiff_t)strVersion);
+                iLengthMinor = iLengthMinor - (iLength + 1);
+                strncpy(strWorkBuff, strVersion + iLength + 1, iLengthMinor);
+                strWorkBuff[iLengthMinor] = '\0';
+            }
+        
+            *pOutMinor = atoi(strWorkBuff);
         }
 
         static int g_major_version = 0;
@@ -267,8 +328,7 @@ namespace gl
 
         static void GetGLVersion()
         {
-            GetIntegerv(MAJOR_VERSION, &g_major_version);
-            GetIntegerv(MINOR_VERSION, &g_minor_version);
+            ParseVersionFromString(&g_major_version, &g_minor_version, reinterpret_cast<const char*>(GetString(VERSION)));
         }
 
         int GetMajorVersion()

@@ -180,6 +180,7 @@ namespace gl
 
         CURRENT_PROGRAM                  = 0x8B8D,
         EXTENSIONS                       = 0x1F03,
+		VERSION                          = 0x1F02,
         MAJOR_VERSION                    = 0x821B,
         MINOR_VERSION                    = 0x821C,
         NUM_EXTENSIONS                   = 0x821D,
