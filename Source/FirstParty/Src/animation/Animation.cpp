@@ -14,13 +14,12 @@
 bool Animation::_renderStencilEffects = true;
 std::list<Animation*> Animation::_stencilAnimations;
 
-Animation::Animation(
-    const unsigned int frames,
-    const int frameWidth, const int frameHeight,
-    const bool applyRotation,
-    const sf::Vector2f& origin,
-    const sf::Vector2f& drawOffset,
-    const bool horizontal) :
+Animation::Animation(const unsigned int frames,
+                     const int frameWidth, const int frameHeight,
+                     const bool applyRotation,
+                     const sf::Vector2f& origin,
+                     const sf::Vector2f& drawOffset,
+                     const bool horizontal) :
     m_blending(sf::BlendAlpha),
     m_frames(frames),
     m_frame(0),

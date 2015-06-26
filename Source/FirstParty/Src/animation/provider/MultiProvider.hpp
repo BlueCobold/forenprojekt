@@ -42,9 +42,9 @@ protected:
 
     std::vector<std::unique_ptr<ValueProvider>> cloneProviders() const
     {
-        std::vector<std::unique_ptr<ValueProvider>> list;
-        for(auto it = begin(m_provider); it != end(m_provider); ++it)
-            list.push_back((*it)->clone());
+        std::vector<std::unique_ptr<ValueProvider>> list(m_provider.size());
+        for(unsigned int i = 0; i < m_provider.size(); i++)
+            list[i] = m_provider[i]->clone();
         return std::move(list);
     }
 };

@@ -316,6 +316,7 @@
     <ClCompile Include="..\..\Src\animation\Interpolation.cpp" />
     <ClCompile Include="..\..\Src\animation\ParticleTrail.cpp" />
     <ClCompile Include="..\..\Src\animation\provider\KeyProvider.cpp" />
+    <ClCompile Include="..\..\Src\animation\provider\RandomProvider.cpp" />
     <ClCompile Include="..\..\Src\App.cpp" />
     <ClCompile Include="..\..\Src\Core.cpp" />
     <ClCompile Include="..\..\Src\gui\AchievementMenu.cpp" />

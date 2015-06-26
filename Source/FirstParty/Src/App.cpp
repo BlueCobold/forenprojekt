@@ -146,6 +146,7 @@ void App::run()
     {
         update();
         draw();
+        m_screen.display();
     }
 }
 
@@ -207,8 +208,6 @@ void App::draw()
 
     m_stateManager.draw(params);
     m_cursor->draw(m_screen);
-
-    m_screen.display();
 }
 
 void App::handleKeyboard()
