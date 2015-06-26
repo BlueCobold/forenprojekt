@@ -39,6 +39,7 @@ class ResourceManager : public SoundBufferManager
 {
 public:
     ResourceManager(ShaderContext& context);
+    ~ResourceManager();
 
     const sf::Texture* getTexture(const std::string& key);
     void addTexture(const std::string& key, const sf::Texture& texture);

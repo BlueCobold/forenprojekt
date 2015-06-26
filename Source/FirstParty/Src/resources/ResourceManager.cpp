@@ -37,6 +37,11 @@ ResourceManager::ResourceManager(ShaderContext& context) :
     parseHashValues(doc);
 }
 
+ResourceManager::~ResourceManager()
+{
+    m_soundManager->clear();
+}
+
 sf::Texture* ResourceManager::loadTexture(const std::string& path, bool smooth)
 {
     sf::Texture* texture = new sf::Texture;

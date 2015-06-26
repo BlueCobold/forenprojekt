@@ -18,9 +18,11 @@ class SoundManager
 {
 public:
     SoundManager(SoundBufferManager& resourceManager);
+    ~SoundManager();
 
     void update();
     void play(const std::string& key, const float volume);
+    void clear();
 
 private:
     SoundBufferManager& m_resourceManager;

@@ -10,6 +10,17 @@ SoundManager::SoundManager(SoundBufferManager& resourceManager)
 {
 }
 
+SoundManager::~SoundManager()
+{
+}
+
+void SoundManager::clear()
+{
+    while (!m_sounds.empty())
+        m_sounds.pop();
+    m_soundKeys.clear();
+}
+
 void SoundManager::update()
 {
 #ifndef NO_SOUND
@@ -33,7 +44,7 @@ void SoundManager::play(const std::string& key, const float volume)
         if(volume <= sf::Listener::getGlobalVolume())
             sound->setVolume(volume);
         sound->play();
-        m_soundKeys.insert(std::pair<std::string, std::string>(key,key));
+        m_soundKeys.insert(std::pair<std::string, std::string>(key, key));
         m_sounds.push(std::make_pair(key, std::move(sound)));
     }
 #endif
