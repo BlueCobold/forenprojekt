@@ -269,6 +269,7 @@
     <ClInclude Include="..\..\Src\resources\GameEventRecorder.hpp" />
     <ClInclude Include="..\..\Src\resources\LevelFileLoader.hpp" />
     <ClInclude Include="..\..\Src\resources\MenuLoader.hpp" />
+    <ClInclude Include="..\..\Src\resources\MusicManager.hpp" />
     <ClInclude Include="..\..\Src\resources\OpenFileDialoge.hpp" />
     <ClInclude Include="..\..\Src\resources\PathHelper.hpp" />
     <ClInclude Include="..\..\Src\resources\ResourceCache.hpp" />
@@ -413,6 +414,7 @@
     <ClCompile Include="..\..\Src\resources\GameEventRecorder.cpp" />
     <ClCompile Include="..\..\Src\resources\LevelFileLoader.cpp" />
     <ClCompile Include="..\..\Src\resources\MenuLoader.cpp" />
+    <ClCompile Include="..\..\Src\resources\MusicManager.cpp" />
     <ClCompile Include="..\..\Src\resources\OpenFileDialoge.cpp" />
     <ClCompile Include="..\..\Src\resources\PathHelper.cpp" />
     <ClCompile Include="..\..\Src\resources\ResourceManager.cpp" />

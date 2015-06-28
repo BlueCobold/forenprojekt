@@ -37,6 +37,7 @@ UnknownSound = Der Sound ist nicht registriert: %.
 UnknownTexture = Die Texture ist nicht registriert: %.
 UnknownFont = Der Font ist nicht regestriert: %.
 UnknownShader = Der Shader ist nicht regestriert: %.
+UnknownMusic = Musik ist nicht regestriert: %.
 ShadersNotAvailable = Shaders sind nicht verfügbar. Bitte vor Verwendung prüfen.
 UnknownButtonSound = Der ButtonSound ist nicht registriert: %.
 UnknownButtonStyle = Der ButtonStyle ist nicht registriert: %.

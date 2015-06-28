@@ -35,6 +35,9 @@ ResourceManager::ResourceManager(ShaderContext& context) :
     parseLevelFileName(doc);
     parsePublicKeys(doc);
     parseHashValues(doc);
+    parseMusic(doc);
+
+    loadAllMusic();
 }
 
 ResourceManager::~ResourceManager()
@@ -118,6 +121,18 @@ CryptoPP::RSA::PublicKey* ResourceManager::loadPublicKey(const std::string& path
     queue.MessageEnd();
     publicKey->Load(queue);
     return publicKey;
+}
+
+sf::Music* ResourceManager::loadMusic(const std::string& path)
+{
+    sf::Music* music = new sf::Music;
+    if(!music->openFromFile(resourcePath() + "res/music/" + path))
+    {
+        delete music;
+        return nullptr;
+    }
+    else
+        return music;
 }
 
 const BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
@@ -355,4 +370,37 @@ std::string ResourceManager::getHashValue(const std::string& key)
         return result->second;
 
     throw std::runtime_error(utility::replace(utility::translateKey("UnknownHashValue"), key));
+}
+
+void ResourceManager::parseMusic(tinyxml2::XMLDocument& doc)
+{
+    parse(doc, "songs", "song", [&](const tinyxml2::XMLElement* element)
+    {
+        m_musicKeys.insert(std::make_pair(std::string(element->Attribute("name")),
+                                         std::string(element->Attribute("path"))));
+    });
+}
+
+sf::Music* ResourceManager::getMusic(const std::string& key)
+{
+    return getOrFail<sf::Music, std::string>(m_musicKeys, m_music, key,
+        [=](const std::string& path)->std::function<sf::Music*()>
+        {
+            return [=](){ return ResourceManager::loadMusic(path); };
+        }, "UnknownMusic");
+}
+
+void ResourceManager::loadAllMusic()
+{
+    m_musicList.clear();
+
+    for(auto it = std::begin(m_musicKeys); it != std::end(m_musicKeys); ++it)
+    {
+        m_musicList.push_back(getMusic(it->first));
+    }
+}
+
+std::vector<sf::Music*>& ResourceManager::getMusic()
+{
+    return m_musicList;
 }

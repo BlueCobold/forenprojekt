@@ -613,6 +613,9 @@
     <ClInclude Include="..\..\Src\resources\ShaderContext.hpp">
       <Filter>Headers\resources</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\resources\MusicManager.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -1112,6 +1115,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\animation\provider\RandomProvider.cpp">
       <Filter>Sources\animation\providers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\MusicManager.cpp">
+      <Filter>Sources\resources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

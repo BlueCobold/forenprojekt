@@ -5,6 +5,7 @@
 
 #include "resources/ResourceManager.hpp"
 #include "resources/AchievementManager.hpp"
+#include "resources/MusicManager.hpp"
 #include "State/StateManager.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
@@ -61,6 +62,7 @@ private:
     ResourceManager m_resourceManager;
     StateManager m_stateManager;
     AchievementManager m_achievementManager;
+    MusicManager m_musicManager;
 };
 
 #endif // APP_HPP
