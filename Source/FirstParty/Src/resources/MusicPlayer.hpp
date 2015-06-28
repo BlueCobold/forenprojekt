@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef MUSIC_MANAGER_HPP
-#define MUSIC_MANAGER_HPP
+#ifndef MUSIC_PLAYER_HPP
+#define MUSIC_PLAYER_HPP
 
 #include <vector>
 #include "../animation/provider/RandomProvider.hpp"
@@ -11,11 +11,14 @@ namespace sf
     class Music;
 }
 
-class MusicManager
+class MusicPlayer
 {
 public:
-    enum PlayMode {Normal,
-                   Shuffle};
+    enum PlayMode 
+    {
+        Normal,
+        Shuffle
+    };
 private:
     std::vector<sf::Music*>& m_music;
     RandomProvider m_randomGenerator;
@@ -26,7 +29,7 @@ private:
     unsigned int getRandomNumber();
 
 public:
-    MusicManager(std::vector<sf::Music*>& music, MusicManager::PlayMode mode);
+    MusicPlayer(std::vector<sf::Music*>& music, MusicPlayer::PlayMode mode);
 
     void update();
 

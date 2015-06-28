@@ -53,7 +53,7 @@ App::App(AppConfig& config) :
     m_achievementManager("Achievement.dat", m_config),
     m_shaderContext(),
     m_resourceManager(m_shaderContext),
-    m_musicManager(m_resourceManager.getMusic(), MusicManager::Normal)
+    m_musicPlayer(m_resourceManager.getMusic(), MusicPlayer::Normal)
 {
     gl::sys::LoadFunctions();
     int maxTextureSize = 0;
@@ -143,7 +143,7 @@ App::App(AppConfig& config) :
 
 void App::run()
 {
-    m_musicManager.play();
+    m_musicPlayer.play();
 
     while(m_screen.isOpen())
     {
@@ -166,7 +166,7 @@ void App::update()
     m_resourceManager.getSoundManager().update();
     m_shaderContext.update();
     m_stateManager.update();
-    m_musicManager.update();
+    m_musicPlayer.update();
 
     if(!m_isMinimized)
         utility::Mouse.capture();

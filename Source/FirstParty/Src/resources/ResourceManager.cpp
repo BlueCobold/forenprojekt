@@ -320,10 +320,10 @@ const std::unordered_map<int, std::string>& ResourceManager::getFileNames()
 
 void ResourceManager::parsePublicKeys(tinyxml2::XMLDocument& doc)
 {
-    if(auto keys = doc.FirstChildElement("Keys"))
+    if(auto keys = doc.FirstChildElement("keys"))
     {
-        for(auto it = keys->FirstChildElement("Key");
-            it != nullptr; it = it->NextSiblingElement("Key"))
+        for(auto it = keys->FirstChildElement("key");
+            it != nullptr; it = it->NextSiblingElement("key"))
         {
             m_publicKeyKeys.insert(std::make_pair<std::string, std::string>(
                 std::string(it->Attribute("name")), std::string(it->Attribute("path"))));
@@ -352,10 +352,10 @@ CryptoPP::RSA::PublicKey* ResourceManager::getPublicKey(const std::string& key)
 
 void ResourceManager::parseHashValues(tinyxml2::XMLDocument& doc)
 {
-    if(auto hashValues = doc.FirstChildElement("HashValues"))
+    if(auto hashValues = doc.FirstChildElement("hashvalues"))
     {
-        for(auto it = hashValues->FirstChildElement("HashValue");
-            it != nullptr; it = it->NextSiblingElement("HashValue"))
+        for(auto it = hashValues->FirstChildElement("hashvalue");
+            it != nullptr; it = it->NextSiblingElement("hashvalue"))
         {
             m_hashValues.insert(std::make_pair<std::string, std::string>(
                 std::string(it->Attribute("filename")), std::string(it->Attribute("value"))));
@@ -374,10 +374,10 @@ std::string ResourceManager::getHashValue(const std::string& key)
 
 void ResourceManager::parseMusic(tinyxml2::XMLDocument& doc)
 {
-    parse(doc, "songs", "song", [&](const tinyxml2::XMLElement* element)
+    parse(doc, "music", "track", [&](const tinyxml2::XMLElement* element)
     {
         m_musicKeys.insert(std::make_pair(std::string(element->Attribute("name")),
-                                         std::string(element->Attribute("path"))));
+                                         std::string(element->Attribute("filename"))));
     });
 }
 
