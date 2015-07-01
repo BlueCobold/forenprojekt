@@ -18,12 +18,15 @@ private:
 public:
     SingleDistanceJoint(b2World* world, const b2DistanceJointDef& jointDef, b2Body* body);
 
+    SingleDistanceJoint();
+
     ~SingleDistanceJoint();
 
     void update() override;
 
-    void reinstall(b2Body* body) override;
+    bool reinstall(b2Body* body) override;
 
+    void copyFrom(const JointObject* other) override;
 protected:
     void bindBodies(b2Body* bodyA, b2Body* bodyB) override;
 };

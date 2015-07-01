@@ -5,12 +5,16 @@
 
 #include "../animation/OrientedObject.hpp"
 #include "../animation/provider/ValueProvider.hpp"
-#include "joint/JointObject.hpp"
+
+#include "joint/SingleDistanceJoint.hpp"
+#include "joint/SinglePrismaticJoint.hpp"
+#include "joint/SingleRevoluteJoint.hpp"
 
 #include <Box2D/Dynamics/b2Body.h>
 #include <Box2D/Dynamics/b2Fixture.h>
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2Shape.h>
+#include <Box2D/Common/b2BlockAllocator.h>
 
 #include <memory> // unique_ptr
 #include <vector>
@@ -183,6 +187,59 @@ protected:
     const b2Vec2& getStartPosition() const
     {
         return m_basePosition;
+    }
+
+    void copyFrom(const PhysicalObject* other)
+    {
+        m_body = nullptr;
+        m_fixtureDefs.clear();
+
+        m_rotation = std::move(other->m_rotation->clone());
+        m_xPositionProvider = std::move(other->m_xPositionProvider->clone());
+        m_yPositionProvider = std::move(other->m_xPositionProvider->clone());
+        m_basePosition = other->m_basePosition;
+        m_basePosChanged = other->m_basePosChanged;
+        m_bodyDef = other->m_bodyDef;
+        m_world = other->m_world;
+
+        for(auto shape = begin(other->m_shapes); shape != end(other->m_shapes); ++shape)
+        {
+            b2BlockAllocator memory;
+            memory.Allocate(sizeof((*shape->get())));
+            m_shapes.push_back(std::unique_ptr<b2Shape>((*shape->get()).Clone(&memory)));
+        }
+
+        for(auto shape = begin(m_shapes); shape != end(m_shapes); ++shape)
+        {
+            b2FixtureDef def;
+            def.density = other->m_fixtureDefs[0].density;
+            def.friction = other->m_fixtureDefs[0].friction;
+            def.restitution = other->m_fixtureDefs[0].restitution;
+            def.shape = shape->get();
+            m_fixtureDefs.push_back(def);
+        }
+
+        if(m_world != nullptr)
+            void bindBody();
+
+        if(hasJoints())
+        {
+            for(auto joint = begin(other->m_joints); joint != end(other->m_joints); ++joint)
+            {
+                JointObject* newJoint;
+                if((*joint)->getType() == JointObject::SingleDistance)
+                    newJoint = new SingleDistanceJoint;
+                else if((*joint)->getType() == JointObject::SinglePrismatic)
+                    newJoint = new SinglePrismaticJoint;
+                else if((*joint)->getType() == JointObject::SingleRevolute)
+                    newJoint = new SingleRevoluteJoint;
+
+                newJoint->copyFrom(joint->get());
+                newJoint->reinstall(m_body);
+
+                m_joints.push_back(std::unique_ptr<JointObject>(newJoint));
+            }
+        }
     }
 };
 

@@ -207,6 +207,8 @@ bool compareDrawOrder(const std::unique_ptr<Entity>& lhs, const std::unique_ptr<
 std::unique_ptr<Entity> Entity::clone() const
 {
     auto clone = std::unique_ptr<Entity>(new Entity(m_type, m_cloneHandler, m_respawnable, m_autoKill));
+    clone->copyFrom(this);
+
     m_cloneHandler.registerCloneAll(*this, *clone.get());
 
     for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)

@@ -19,12 +19,15 @@ private:
 public:
     SingleRevoluteJoint(b2World* world, const b2RevoluteJointDef& jointDef, b2Body* body);
 
+    SingleRevoluteJoint();
+
     ~SingleRevoluteJoint();
 
     void update() override;
 
-    void reinstall(b2Body* body) override;
+    bool reinstall(b2Body* body) override;
 
+    void copyFrom(const JointObject* other) override;
 protected:
     void bindBodies(b2Body* bodyA, b2Body* bodyB) override;
 };

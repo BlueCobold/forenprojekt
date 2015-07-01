@@ -99,6 +99,7 @@
     <ClInclude Include="..\..\Src\animation\AnimatedObject.hpp" />
     <ClInclude Include="..\..\Src\animation\Animation.hpp" />
     <ClInclude Include="..\..\Src\animation\Cloneable.hpp" />
+    <ClInclude Include="..\..\Src\animation\CloneHandler.hpp" />
     <ClInclude Include="..\..\Src\animation\Interpolation.hpp" />
     <ClInclude Include="..\..\Src\animation\OrientedObject.hpp" />
     <ClInclude Include="..\..\Src\animation\ParticleTrail.hpp" />

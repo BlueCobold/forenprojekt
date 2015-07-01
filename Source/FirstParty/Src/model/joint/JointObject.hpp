@@ -11,10 +11,13 @@
 class JointObject
 {
 public:
-    enum JointType {Unknown,
-                    SingleRevolute,
-                    SinglePrismatic,
-                    SingleDistance};
+    enum JointType 
+    {
+        Unknown,
+        SingleRevolute,
+        SinglePrismatic,
+        SingleDistance
+    };
 
 private:
     b2World* m_world;
@@ -26,6 +29,12 @@ public:
     JointObject(b2World* world, JointType type) :
         m_joint(nullptr),
         m_world(world),
+        m_type(type)
+    { }
+
+    JointObject(JointType type) :
+        m_joint(nullptr),
+        m_world(nullptr),
         m_type(type)
     { }
 
@@ -41,8 +50,12 @@ public:
 
     virtual void update() = 0;
 
-    virtual void reinstall(b2Body* body) = 0;
+    virtual bool reinstall(b2Body* body) = 0;
 
+    virtual void copyFrom(const JointObject* other)
+    {
+        m_world = other->m_world;
+    }
 protected:
     virtual void bindBodies(b2Body* bodyA, b2Body* bodyB) = 0;
 

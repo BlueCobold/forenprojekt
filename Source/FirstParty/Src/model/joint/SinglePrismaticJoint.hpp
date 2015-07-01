@@ -20,12 +20,15 @@ private:
 public:
     SinglePrismaticJoint(b2World* world, const b2PrismaticJointDef& jointDef, b2Body* body, const b2Vec2& direction);
 
+    SinglePrismaticJoint();
+
     ~SinglePrismaticJoint();
 
     void update() override;
 
-    void reinstall(b2Body* body) override;
+    bool reinstall(b2Body* body) override;
 
+    void copyFrom(const JointObject* other) override;
 protected:
     void bindBodies(b2Body* bodyA, b2Body* bodyB) override;
 };
