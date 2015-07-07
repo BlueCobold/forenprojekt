@@ -62,7 +62,7 @@ void TransitionState::render(const EnterTransitionStateInformation* info,
     for(unsigned int i = 0; i < m_offscreenBuffers.size(); i++)
     {
         params.addTargetBuffer(*m_offscreenBuffers[i]);
-        m_offscreenBuffers[i]->clear(sf::Color(0));
+        m_offscreenBuffers[i]->clear(sf::Color(0, 0, 0, 0));
         offscreens.insert(std::make_pair(&m_offscreenBuffers[i]->getTexture(), m_offscreenBuffers[i]));
     }
 

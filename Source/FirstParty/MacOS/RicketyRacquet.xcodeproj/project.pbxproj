@@ -136,6 +136,15 @@
 		6EBF3D8B1B355C6100E0CAE8 /* AchievementManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EBF3D881B355C6100E0CAE8 /* AchievementManager.cpp */; };
 		6EBF3D8E1B355C6D00E0CAE8 /* AchievementState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EBF3D8C1B355C6D00E0CAE8 /* AchievementState.cpp */; };
 		6EBF3FBD1B356DC500E0CAE8 /* libCryptoPP.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBF3FBC1B356DC500E0CAE8 /* libCryptoPP.a */; };
+		6ED3AD211B4BA13800E32567 /* GLExt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AD141B4BA13800E32567 /* GLExt.cpp */; };
+		6ED3AD221B4BA13800E32567 /* FloatParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AD171B4BA13800E32567 /* FloatParameter.cpp */; };
+		6ED3AD231B4BA13800E32567 /* IntParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AD191B4BA13800E32567 /* IntParameter.cpp */; };
+		6ED3AD241B4BA13800E32567 /* ShaderParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AD1B1B4BA13800E32567 /* ShaderParameter.cpp */; };
+		6ED3AD251B4BA13800E32567 /* TextureParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AD1D1B4BA13800E32567 /* TextureParameter.cpp */; };
+		6ED3AD261B4BA13800E32567 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AD1F1B4BA13800E32567 /* Shader.cpp */; };
+		6ED3AD2C1B4BA21C00E32567 /* MusicPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AD271B4BA21C00E32567 /* MusicPlayer.cpp */; };
+		6ED3AD2D1B4BA21C00E32567 /* ShaderContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AD291B4BA21C00E32567 /* ShaderContext.cpp */; };
+		6ED3AD301B4BA23A00E32567 /* RandomProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AD2F1B4BA23A00E32567 /* RandomProvider.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -465,6 +474,25 @@
 		6EBF3D8D1B355C6D00E0CAE8 /* AchievementState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AchievementState.hpp; sourceTree = "<group>"; };
 		6EBF3FBA1B356D5F00E0CAE8 /* libCryptoPP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCryptoPP.a; path = ../../../../cryptopp562/build/CryptoPP/Build/Products/Debug/libCryptoPP.a; sourceTree = "<group>"; };
 		6EBF3FBC1B356DC500E0CAE8 /* libCryptoPP.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCryptoPP.a; path = ../../../../cryptopp562/build/CryptoPP/Build/Products/Release/libCryptoPP.a; sourceTree = "<group>"; };
+		6ED3AD141B4BA13800E32567 /* GLExt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLExt.cpp; sourceTree = "<group>"; };
+		6ED3AD151B4BA13800E32567 /* GLExt.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLExt.hpp; sourceTree = "<group>"; };
+		6ED3AD171B4BA13800E32567 /* FloatParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FloatParameter.cpp; sourceTree = "<group>"; };
+		6ED3AD181B4BA13800E32567 /* FloatParameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FloatParameter.hpp; sourceTree = "<group>"; };
+		6ED3AD191B4BA13800E32567 /* IntParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IntParameter.cpp; sourceTree = "<group>"; };
+		6ED3AD1A1B4BA13800E32567 /* IntParameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IntParameter.hpp; sourceTree = "<group>"; };
+		6ED3AD1B1B4BA13800E32567 /* ShaderParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderParameter.cpp; sourceTree = "<group>"; };
+		6ED3AD1C1B4BA13800E32567 /* ShaderParameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderParameter.hpp; sourceTree = "<group>"; };
+		6ED3AD1D1B4BA13800E32567 /* TextureParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureParameter.cpp; sourceTree = "<group>"; };
+		6ED3AD1E1B4BA13800E32567 /* TextureParameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextureParameter.hpp; sourceTree = "<group>"; };
+		6ED3AD1F1B4BA13800E32567 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
+		6ED3AD201B4BA13800E32567 /* Shader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
+		6ED3AD271B4BA21C00E32567 /* MusicPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MusicPlayer.cpp; sourceTree = "<group>"; };
+		6ED3AD281B4BA21C00E32567 /* MusicPlayer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MusicPlayer.hpp; sourceTree = "<group>"; };
+		6ED3AD291B4BA21C00E32567 /* ShaderContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderContext.cpp; sourceTree = "<group>"; };
+		6ED3AD2A1B4BA21C00E32567 /* ShaderContext.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderContext.hpp; sourceTree = "<group>"; };
+		6ED3AD2B1B4BA21C00E32567 /* ShaderLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderLoader.hpp; sourceTree = "<group>"; };
+		6ED3AD2E1B4BA23A00E32567 /* Observer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Observer.hpp; sourceTree = "<group>"; };
+		6ED3AD2F1B4BA23A00E32567 /* RandomProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RandomProvider.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -537,6 +565,8 @@
 		6E4AAC051ABAC116004DD346 /* provider */ = {
 			isa = PBXGroup;
 			children = (
+				6ED3AD2E1B4BA23A00E32567 /* Observer.hpp */,
+				6ED3AD2F1B4BA23A00E32567 /* RandomProvider.cpp */,
 				6E4AAC061ABAC116004DD346 /* Absolute.hpp */,
 				6E4AAC071ABAC116004DD346 /* Adder.hpp */,
 				6E4AAC081ABAC116004DD346 /* AngleProvider.hpp */,
@@ -771,6 +801,11 @@
 		6E4AACC31ABAC116004DD346 /* rendering */ = {
 			isa = PBXGroup;
 			children = (
+				6ED3AD141B4BA13800E32567 /* GLExt.cpp */,
+				6ED3AD151B4BA13800E32567 /* GLExt.hpp */,
+				6ED3AD161B4BA13800E32567 /* parameter */,
+				6ED3AD1F1B4BA13800E32567 /* Shader.cpp */,
+				6ED3AD201B4BA13800E32567 /* Shader.hpp */,
 				6E4AACC41ABAC116004DD346 /* DebugDraw.cpp */,
 				6E4AACC51ABAC116004DD346 /* DebugDraw.hpp */,
 				6E4AACC61ABAC116004DD346 /* Drawable.hpp */,
@@ -834,6 +869,11 @@
 		6E4AACF51ABAC116004DD346 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				6ED3AD271B4BA21C00E32567 /* MusicPlayer.cpp */,
+				6ED3AD281B4BA21C00E32567 /* MusicPlayer.hpp */,
+				6ED3AD291B4BA21C00E32567 /* ShaderContext.cpp */,
+				6ED3AD2A1B4BA21C00E32567 /* ShaderContext.hpp */,
+				6ED3AD2B1B4BA21C00E32567 /* ShaderLoader.hpp */,
 				6EBF3D861B355C6100E0CAE8 /* Achievement.cpp */,
 				6EBF3D871B355C6100E0CAE8 /* Achievement.hpp */,
 				6EBF3D881B355C6100E0CAE8 /* AchievementManager.cpp */,
@@ -961,6 +1001,21 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		6ED3AD161B4BA13800E32567 /* parameter */ = {
+			isa = PBXGroup;
+			children = (
+				6ED3AD171B4BA13800E32567 /* FloatParameter.cpp */,
+				6ED3AD181B4BA13800E32567 /* FloatParameter.hpp */,
+				6ED3AD191B4BA13800E32567 /* IntParameter.cpp */,
+				6ED3AD1A1B4BA13800E32567 /* IntParameter.hpp */,
+				6ED3AD1B1B4BA13800E32567 /* ShaderParameter.cpp */,
+				6ED3AD1C1B4BA13800E32567 /* ShaderParameter.hpp */,
+				6ED3AD1D1B4BA13800E32567 /* TextureParameter.cpp */,
+				6ED3AD1E1B4BA13800E32567 /* TextureParameter.hpp */,
+			);
+			path = parameter;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1051,6 +1106,7 @@
 			files = (
 				6E4AAD8F1ABAC116004DD346 /* Config.cpp in Sources */,
 				6E4AADA21ABAC116004DD346 /* NewHighScoreState.cpp in Sources */,
+				6ED3AD221B4BA13800E32567 /* FloatParameter.cpp in Sources */,
 				6E4AAD601ABAC116004DD346 /* ReplayMenu.cpp in Sources */,
 				6E4AAD671ABAC116004DD346 /* Background.cpp in Sources */,
 				6E4AAD3D1ABAC116004DD346 /* Core.cpp in Sources */,
@@ -1082,6 +1138,7 @@
 				6E4AAD7C1ABAC116004DD346 /* HorizontalCompressTransition.cpp in Sources */,
 				6E4AAD891ABAC116004DD346 /* VerticalMaskingStripesTransition.cpp in Sources */,
 				6E4AADA71ABAC116004DD346 /* StateManager.cpp in Sources */,
+				6ED3AD261B4BA13800E32567 /* Shader.cpp in Sources */,
 				6E4AADA91ABAC116004DD346 /* Utility.cpp in Sources */,
 				6E4AAD901ABAC116004DD346 /* FileReader.cpp in Sources */,
 				6E4AADA81ABAC116004DD346 /* TransitionState.cpp in Sources */,
@@ -1090,10 +1147,12 @@
 				6E4AAD5F1ABAC116004DD346 /* PauseMenu.cpp in Sources */,
 				6E4AAD551ABAC116004DD346 /* KeyboardMenu.cpp in Sources */,
 				6E4AAD3A1ABAC116004DD346 /* KeyProvider.cpp in Sources */,
+				6ED3AD2C1B4BA21C00E32567 /* MusicPlayer.cpp in Sources */,
 				6E4AAD6E1ABAC116004DD346 /* SinglePrismaticJoint.cpp in Sources */,
 				6E4AAD6F1ABAC116004DD346 /* SingleRevoluteJoint.cpp in Sources */,
 				6E4AAD9E1ABAC116004DD346 /* LevelPreviewState.cpp in Sources */,
 				6E4AADA01ABAC116004DD346 /* LoadLevelState.cpp in Sources */,
+				6ED3AD231B4BA13800E32567 /* IntParameter.cpp in Sources */,
 				6E4AAD851ABAC116004DD346 /* RotatingSquaresTransition.cpp in Sources */,
 				6E4AAD5D1ABAC116004DD346 /* NewHighScoreMenu.cpp in Sources */,
 				6E4AAD4D1ABAC116004DD346 /* GoodyHUD.cpp in Sources */,
@@ -1120,10 +1179,12 @@
 				6E4AAD581ABAC116004DD346 /* LineLabel.cpp in Sources */,
 				6E4AAD6C1ABAC116004DD346 /* GravityGoody.cpp in Sources */,
 				6E4AAD821ABAC116004DD346 /* HorizontalSpringTransition.cpp in Sources */,
+				6ED3AD211B4BA13800E32567 /* GLExt.cpp in Sources */,
 				6E4AAD431ABAC116004DD346 /* CoinShopMenu.cpp in Sources */,
 				6E4AAD751ABAC116004DD346 /* SoundObject.cpp in Sources */,
 				6E4AAD7A1ABAC116004DD346 /* GrowingCircleTransition.cpp in Sources */,
 				6E4AAD4E1ABAC116004DD346 /* HUD.cpp in Sources */,
+				6ED3AD241B4BA13800E32567 /* ShaderParameter.cpp in Sources */,
 				6E4AAD651ABAC116004DD346 /* Input.cpp in Sources */,
 				6E4AAD5C1ABAC116004DD346 /* MenuSprite.cpp in Sources */,
 				6E4AAD621ABAC116004DD346 /* SubWindow.cpp in Sources */,
@@ -1140,6 +1201,7 @@
 				6E4AAD4B1ABAC116004DD346 /* BallHUD.cpp in Sources */,
 				6E4AAD3E1ABAC116004DD346 /* AnimationContainer.cpp in Sources */,
 				6E4AAD561ABAC116004DD346 /* LevelPreviewMenu.cpp in Sources */,
+				6ED3AD301B4BA23A00E32567 /* RandomProvider.cpp in Sources */,
 				6E4AAD6B1ABAC116004DD346 /* Goody.cpp in Sources */,
 				6E4AAD4C1ABAC116004DD346 /* FPSCounterHUD.cpp in Sources */,
 				6E4AAD991ABAC116004DD346 /* CreditMenuState.cpp in Sources */,
@@ -1149,6 +1211,7 @@
 				6E4AAD781ABAC116004DD346 /* DebugDraw.cpp in Sources */,
 				6E4AAD8D1ABAC116004DD346 /* VerticalStripesTransition.cpp in Sources */,
 				6E4AAD771ABAC116004DD346 /* Teeter.cpp in Sources */,
+				6ED3AD2D1B4BA21C00E32567 /* ShaderContext.cpp in Sources */,
 				6E4AAD741ABAC116004DD346 /* SoundManager.cpp in Sources */,
 				6E4AAD841ABAC116004DD346 /* RandomTransition.cpp in Sources */,
 				6E4AAD881ABAC116004DD346 /* VerticalHalvesTransition.cpp in Sources */,
@@ -1156,6 +1219,7 @@
 				6EBF3D8E1B355C6D00E0CAE8 /* AchievementState.cpp in Sources */,
 				6E4AAD9D1ABAC116004DD346 /* LevelPassState.cpp in Sources */,
 				6E4AAD411ABAC116004DD346 /* CaptionMenu.cpp in Sources */,
+				6ED3AD251B4BA13800E32567 /* TextureParameter.cpp in Sources */,
 				6E4AAD961ABAC116004DD346 /* SpriteSheet.cpp in Sources */,
 				6E4AAD4F1ABAC116004DD346 /* HUDElement.cpp in Sources */,
 				6E4AAD451ABAC116004DD346 /* Cursor.cpp in Sources */,

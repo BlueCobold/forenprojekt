@@ -25,10 +25,10 @@ public:
     virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
 
 private:
-    void TransitionState::render(const EnterTransitionStateInformation* info,
-                                 sf::RenderTexture& target,
-                                 State* state,
-                                 const float time);
+    void render(const EnterTransitionStateInformation* info,
+                sf::RenderTexture& target,
+                State* state,
+                const float time);
 
     std::unique_ptr<Transition> m_transition;
     StateId m_followingState;

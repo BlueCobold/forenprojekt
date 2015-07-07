@@ -196,7 +196,7 @@ void App::draw()
     for(unsigned int i = 0; i < m_offscreens.size(); i++)
     {
         params.addTargetBuffer(m_offscreens[i]);
-        m_offscreens[i].clear(sf::Color(0x7F7F7F00));
+        m_offscreens[i].clear(sf::Color(0x7F, 0x7F, 0x7F, 0));
         offscreens.insert(std::make_pair(&(m_offscreens[i].getTexture()), &m_offscreens[i]));
     }
 
