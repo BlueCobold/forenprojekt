@@ -41,7 +41,7 @@ public:
 
     void next();
 
-    void prev();
+    void previous();
 };
 
 #endif

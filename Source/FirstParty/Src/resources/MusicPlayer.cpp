@@ -68,7 +68,7 @@ void MusicPlayer::next()
     }
 }
 
-void MusicPlayer::prev()
+void MusicPlayer::previous()
 {
     if(!m_music.empty())
     {
@@ -78,7 +78,7 @@ void MusicPlayer::prev()
         if(m_mode == MusicPlayer::Shuffle)
             return;
 
-        if(m_currentIndex - 1 >= 0)
+        if(m_currentIndex - 1 < m_music.size())
             m_music[--m_currentIndex]->play();
     }
 }
