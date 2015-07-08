@@ -1,5 +1,5 @@
 #include "Level.hpp"
-#include "Entity.hpp"
+#include "EntityFactory.hpp"
 #include "Teeter.hpp"
 #include "../rendering/DrawParameter.hpp"
 #include "../resources/AppConfig.hpp"
@@ -159,6 +159,8 @@ void Level::update(const float elapsedTime)
         updatePointLabels();
     }
     
+    reciveFactoryProducts();
+
     if(m_extraBallGoody.isActive() && m_remainingBall > 0)
     {
         m_remainingBall++;
@@ -777,4 +779,10 @@ bool Level::isOriginal()
         delete[] signature;
 
     return result;
+}
+
+void Level::reciveFactoryProducts()
+{
+    for(auto it = begin(m_factory); it != end(m_factory); ++it)
+        (*it)->deliver(m_entitiesToSpawn);
 }

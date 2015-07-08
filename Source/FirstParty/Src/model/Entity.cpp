@@ -207,6 +207,15 @@ bool compareDrawOrder(const std::unique_ptr<Entity>& lhs, const std::unique_ptr<
 std::unique_ptr<Entity> Entity::clone() const
 {
     auto clone = std::unique_ptr<Entity>(new Entity(m_type, m_cloneHandler, m_respawnable, m_autoKill));
+
+    clone->m_name = m_name;
+    clone->m_lastTime = m_lastTime;
+    clone->m_killed = m_killed;
+    clone->m_collideWithBall = m_collideWithBall;
+    clone->m_variables = m_variables;
+    clone->m_animationAngle = m_animationAngle;
+
+    // copy physical property
     clone->copyFrom(this);
 
     m_cloneHandler.registerCloneAll(*this, *clone.get());
@@ -217,4 +226,9 @@ std::unique_ptr<Entity> Entity::clone() const
     m_cloneHandler.unregisterCloneAll(*this);
 
     return clone;
+}
+
+const std::string& Entity::getName() const
+{
+    return m_name;
 }

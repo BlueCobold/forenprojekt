@@ -1,5 +1,6 @@
 #include "Level.hpp"
 #include "Teeter.hpp"
+#include "EntityFactory.hpp"
 
 #include "../resources/AppConfig.hpp"
 #include "../resources/LevelFileLoader.hpp"
@@ -134,13 +135,44 @@ void Level::load()
 
     // get the fucking ball
     auto ballIt = end(m_entities);
-    for(auto it = begin(m_entities); it != end(m_entities); ++it)
-        if((*it)->getType() == Entity::Ball)
+    if(m_factory.size() > 0)
+    {
+        for(auto factory = begin(m_factory); factory != end(m_factory); ++factory)
         {
-            ballIt = it;
-            m_ball = dynamic_cast<Ball*>((*it).get());
-            m_ball->setFieldDimension(b2Vec2(m_width,m_height));
+            std::string productName = (*factory)->getProductName();
+            unsigned int counter = 0;
+
+            for(auto it = begin(m_entities); it != end(m_entities); ++it)
+            {
+                if((*it)->getType() == Entity::Ball && ballIt == end(m_entities))
+                {
+                    ballIt = it;
+                    m_ball = dynamic_cast<Ball*>((*it).get());
+                    m_ball->setFieldDimension(b2Vec2(m_width,m_height));
+                }
+                if(productName == (*it)->getName() && counter == 0)
+                {
+                    (*factory)->setProduct((*it).get());
+                    ++counter;
+                }
+                else if(productName == (*it)->getName() && counter > 0)
+                    throw std::runtime_error(utility::translateKey("MultipleProducts"));
+            }
         }
+    }
+    else
+    {
+        for(auto it = begin(m_entities); it != end(m_entities); ++it)
+        {
+            if((*it)->getType() == Entity::Ball && ballIt == end(m_entities))
+            {
+                ballIt = it;
+                m_ball = dynamic_cast<Ball*>((*it).get());
+                m_ball->setFieldDimension(b2Vec2(m_width,m_height));
+            }
+        }
+    }
+
     if(m_ball == nullptr)
         throw std::runtime_error("No ball located in the level!");
 
@@ -601,6 +633,19 @@ std::unique_ptr<Entity> Level::createEntity(
             m_bonusTargetPoints = xml->IntAttribute("points");
             if(m_bonusTargetPoints == 0)
                 m_bonusTargetPoints = 10;
+        }
+        else if(typeName == "entityfactory")
+        {
+            float min = xml->FloatAttribute("mindelaytime");
+            float max = xml->FloatAttribute("maxdelaytime");
+            std::string productName = xml->Attribute("productname");
+            b2Vec2 spawnOffset(xml->FloatAttribute("spawnOffsetX"), xml->FloatAttribute("spawnOffsetY"));
+            EntityFactory* factory = new EntityFactory(m_cloneHandler, respawnable, autoStop, 
+                                                       productName, min, max, spawnOffset);
+
+            m_factory.push_back(factory);
+
+            entity = std::unique_ptr<EntityFactory>(factory);   
         }
         else // No type or unknown type specified => normal Entity
         {

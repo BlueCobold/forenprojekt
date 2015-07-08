@@ -21,7 +21,15 @@ class Entity : public PhysicalObject, public AnimatedGraphics, public Cloneable<
 {
 public:
 
-    enum Type {Teeter, Ball, Target, BonusTarget, None};
+    enum Type 
+    {
+        Teeter,
+        Ball,
+        Target,
+        BonusTarget,
+        EntityFactory,
+        None
+    };
 
 private:
 
@@ -51,6 +59,7 @@ public:
     virtual void restartAt(const float value) override;
 
     void setName(std::string name);
+    const std::string& getName() const;
     const Type& getType() const;
 
     void kill();

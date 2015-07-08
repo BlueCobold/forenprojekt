@@ -13,7 +13,8 @@
 #include <Box2D/Dynamics/b2Body.h>
 #include <Box2D/Dynamics/b2Fixture.h>
 #include <Box2D/Dynamics/b2World.h>
-#include <Box2D/Collision/Shapes/b2Shape.h>
+#include <Box2D/Collision/Shapes/b2CircleShape.h>
+#include <Box2D/Collision/Shapes/b2PolygonShape.h>
 #include <Box2D/Common/b2BlockAllocator.h>
 
 #include <memory> // unique_ptr
@@ -194,9 +195,13 @@ protected:
         m_body = nullptr;
         m_fixtureDefs.clear();
 
-        m_rotation = std::move(other->m_rotation->clone());
-        m_xPositionProvider = std::move(other->m_xPositionProvider->clone());
-        m_yPositionProvider = std::move(other->m_xPositionProvider->clone());
+        if(other->m_rotation)
+            m_rotation = std::move(other->m_rotation->clone());
+        if(other->m_xPositionProvider)
+            m_xPositionProvider = std::move(other->m_xPositionProvider->clone());
+        if(other->m_yPositionProvider)
+            m_yPositionProvider = std::move(other->m_yPositionProvider->clone());
+
         m_basePosition = other->m_basePosition;
         m_basePosChanged = other->m_basePosChanged;
         m_bodyDef = other->m_bodyDef;
@@ -204,9 +209,18 @@ protected:
 
         for(auto shape = begin(other->m_shapes); shape != end(other->m_shapes); ++shape)
         {
-            b2BlockAllocator memory;
-            memory.Allocate(sizeof((*shape->get())));
-            m_shapes.push_back(std::unique_ptr<b2Shape>((*shape->get()).Clone(&memory)));
+            if((*shape)->GetType() == b2Shape::e_circle)
+            {
+                b2CircleShape* newShape = new b2CircleShape;
+                *newShape = *(static_cast<b2CircleShape*>(shape->get()));
+                m_shapes.push_back(std::unique_ptr<b2Shape>(newShape));
+            }
+            else if((*shape)->GetType() == b2Shape::e_polygon)
+            {
+                b2PolygonShape* newShape = new b2PolygonShape;
+                *newShape = *(static_cast<b2PolygonShape*>(shape->get()));
+                m_shapes.push_back(std::unique_ptr<b2Shape>(newShape));
+            }
         }
 
         for(auto shape = begin(m_shapes); shape != end(m_shapes); ++shape)
@@ -218,9 +232,6 @@ protected:
             def.shape = shape->get();
             m_fixtureDefs.push_back(def);
         }
-
-        if(m_world != nullptr)
-            void bindBody();
 
         if(hasJoints())
         {
@@ -235,7 +246,8 @@ protected:
                     newJoint = new SingleRevoluteJoint;
 
                 newJoint->copyFrom(joint->get());
-                newJoint->reinstall(m_body);
+                if(m_body)
+                    newJoint->reinstall(m_body);
 
                 m_joints.push_back(std::unique_ptr<JointObject>(newJoint));
             }

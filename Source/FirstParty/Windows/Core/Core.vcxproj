@@ -212,6 +212,7 @@
     <ClInclude Include="..\..\Src\model\collision\handler\GenericCollisionHandler.hpp" />
     <ClInclude Include="..\..\Src\model\collision\handler\SpawnEntityCollisionHandler.hpp" />
     <ClInclude Include="..\..\Src\model\Entity.hpp" />
+    <ClInclude Include="..\..\Src\model\EntityFactory.hpp" />
     <ClInclude Include="..\..\Src\model\Goody.hpp" />
     <ClInclude Include="..\..\Src\model\GravityGoody.hpp" />
     <ClInclude Include="..\..\Src\model\InvulnerableGoody.hpp" />
@@ -366,6 +367,7 @@
     <ClCompile Include="..\..\Src\model\Ball.cpp" />
     <ClCompile Include="..\..\Src\model\collision\ContactListener.cpp" />
     <ClCompile Include="..\..\Src\model\Entity.cpp" />
+    <ClCompile Include="..\..\Src\model\EntityFactory.cpp" />
     <ClCompile Include="..\..\Src\model\Goody.cpp" />
     <ClCompile Include="..\..\Src\model\GravityGoody.cpp" />
     <ClCompile Include="..\..\Src\model\joint\SingleDistanceJoint.cpp" />

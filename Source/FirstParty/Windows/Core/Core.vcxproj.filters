@@ -619,6 +619,9 @@
     <ClInclude Include="..\..\Src\animation\CloneHandler.hpp">
       <Filter>Headers\animation</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\model\EntityFactory.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -1121,6 +1124,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\resources\MusicPlayer.cpp">
       <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\model\EntityFactory.cpp">
+      <Filter>Sources\model</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

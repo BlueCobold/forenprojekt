@@ -32,6 +32,7 @@
 class AppConfig;
 
 class ResourceManager;
+class EntityFactory;
 
 namespace tinyxml2
 {
@@ -105,6 +106,7 @@ public:
     const std::list<GameEvent>& getGameEvents() const;
 
     const float getLevelPlayTime() const;
+
 private:
 #ifdef LEVELTESTING
     std::string m_filename;
@@ -158,6 +160,8 @@ private:
     void killTarget(Entity* target);
     void killBonusTarget(Entity* target);
     void prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn, float angle = 0);
+
+    void reciveFactoryProducts();
 
     void handleAutoRespawn();
 
@@ -264,6 +268,7 @@ private:
     std::vector<std::unique_ptr<Entity>> m_entities;
     std::vector<std::unique_ptr<Entity>> m_entitiesToSpawn;
     std::vector<EntitySpawn> m_unspawnedEntities;
+    std::vector<EntityFactory*> m_factory;
 
     std::unique_ptr<Background> m_background;
 

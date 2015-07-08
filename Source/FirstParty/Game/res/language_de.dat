@@ -85,6 +85,8 @@ NoOriginalFile = Diese Datei '%' ist kein Original.
 ShaderFailed = Shader konnte nicht geladen werden (%, %).
 ShaderFileInvalid = Die Shader-Konfiguration ist invalid: %.
 ShaderEntryMissing = Der Shader-Konfiguration fehlt die "parameters" Sektion: %.
+JointCopyError = Unterschiedliche Jointtypen können nicht kopiert werden
+MultipleProducts = Mehrere Produkte für eine Fabrik gefunden.
 
 [GUI]
 gui_game_paused = Spiel pausiert
