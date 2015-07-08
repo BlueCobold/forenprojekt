@@ -16,9 +16,11 @@ SoundManager::~SoundManager()
 
 void SoundManager::clear()
 {
+#ifndef NO_SOUND
     while (!m_sounds.empty())
         m_sounds.pop();
     m_soundKeys.clear();
+#endif
 }
 
 void SoundManager::update()

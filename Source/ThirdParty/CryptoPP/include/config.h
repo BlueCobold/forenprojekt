@@ -1,6 +1,21 @@
 #ifndef CRYPTOPP_CONFIG_H
 #define CRYPTOPP_CONFIG_H
 
+// For TARGET_OS_IPHONE and TARGET_IPHONE_SIMULATOR
+#if defined(__APPLE__)
+# include "TargetConditionals.h"
+
+# if defined(TARGET_IPHONE_SIMULATOR) && (TARGET_IPHONE_SIMULATOR != 0)
+#  define CRYPTOPP_IPHONE_SIMULATOR 1
+# elif defined(TARGET_OS_IPHONE) && (TARGET_OS_IPHONE != 0)
+#  define CRYPTOPP_IPHONE 1
+# elif defined(TARGET_OS_MAC) && (TARGET_OS_MAC != 0)
+#  define CRYPTOPP_MAC_OSX 1
+# else
+#  error Unknown Apple platform
+# endif
+#endif
+
 // ***************** Important Settings ********************
 
 // define this if running on a big-endian CPU
@@ -22,6 +37,11 @@
 // Currently the only feature used is random number generation.
 // This macro will be ignored if NO_OS_DEPENDENCE is defined.
 #define USE_MS_CRYPTOAPI
+
+// Define this to 1 to enforce the requirement in FIPS 186-2 Change Notice 1 that only 1024 bit moduli be used
+#ifndef DSA_1024_BIT_MODULUS_ONLY
+#	define DSA_1024_BIT_MODULUS_ONLY 1
+#endif
 
 // ***************** Less Important Settings ***************
 
@@ -251,6 +271,14 @@ NAMESPACE_END
 #define CRYPTOPP_DISABLE_SSE2
 #endif
 
+// For cross-compiles, just ignore host settings that bleed through for Xcode/iOS
+// We will accidentally catch some device builds that use x86 on Android.
+#if defined(__ANDROID__) || defined(CRYPTOPP_IPHONE) || defined(CRYPTOPP_IPHONE_SIMULATOR)
+# define CRYPTOPP_DISABLE_ASM 1
+# define CRYPTOPP_DISABLE_SSE2 1
+# define CRYPTOPP_DISABLE_SSE3 1
+#endif
+
 #if !defined(CRYPTOPP_DISABLE_ASM) && ((defined(_MSC_VER) && defined(_M_IX86)) || (defined(__GNUC__) && (defined(__i386__) || defined(__x86_64__))))
 	// C++Builder 2010 does not allow "call label" where label is defined within inline assembly
 	#define CRYPTOPP_X86_ASM_AVAILABLE
@@ -294,6 +322,11 @@ NAMESPACE_END
 	#define CRYPTOPP_BOOL_ALIGN16_ENABLED 1
 #else
 	#define CRYPTOPP_BOOL_ALIGN16_ENABLED 0
+#endif
+
+#if defined(__APPLE__)
+# undef CRYPTOPP_BOOL_ALIGN16_ENABLED
+# define CRYPTOPP_BOOL_ALIGN16_ENABLED 0
 #endif
 
 // how to allocate 16-byte aligned memory (for SSE2)
@@ -341,6 +374,16 @@ NAMESPACE_END
 
 #if CRYPTOPP_BOOL_X64 || CRYPTOPP_BOOL_X86 || defined(__powerpc__)
 	#define CRYPTOPP_ALLOW_UNALIGNED_DATA_ACCESS
+#endif
+
+// For cross-compiles, just ignore host settings that bleed through for Xcode/iOS
+// We will accidentally catch some device builds that use x86 on Android.
+#if defined(__ANDROID__) || defined(CRYPTOPP_IPHONE) || defined(CRYPTOPP_IPHONE_SIMULATOR)
+# undef CRYPTOPP_ALLOW_UNALIGNED_DATA_ACCESS
+# undef CRYPTOPP_BOOL_X86
+# define CRYPTOPP_BOOL_X86 0
+# undef CRYPTOPP_BOOL_X64
+# define CRYPTOPP_BOOL_X64 0
 #endif
 
 #define CRYPTOPP_VERSION 562

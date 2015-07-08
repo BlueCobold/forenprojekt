@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include "GLExt.hpp"
 
-#if defined(__APPLE__)
+#if defined(__APPLE__) && !defined(IOS)
 #include <mach-o/dyld.h>
 #include <cstdlib>
 static void* AppleGLGetProcAddress (const char *name)
@@ -26,6 +26,13 @@ static void* AppleGLGetProcAddress (const char *name)
     return symbol ? NSAddressOfSymbol(symbol) : NULL;
 }
 #endif /* __APPLE__ */
+
+#if defined(IOS)
+typedef int32_t  GLclampx;
+#include <OpenGLES/ES1/gl.h>
+#include <OpenGLES/ES1/glext.h>
+#include <cstdlib>
+#endif
 
 #if defined(__sgi) || defined (__sun)
 #include <dlfcn.h>
@@ -141,7 +148,7 @@ namespace gl
     static int LoadCoreFunctions()
     {
         int numFailed = 0;
-
+#if !defined(IOS)
         GetString = reinterpret_cast<PFNGETSTRING>(IntGetProcAddress("glGetString"));
         if(!GetString) ++numFailed;
 		GetIntegerv = reinterpret_cast<PFNGETINTEGERV>(IntGetProcAddress("glGetIntegerv"));
@@ -179,7 +186,21 @@ namespace gl
         if(!Enable) ++numFailed;
         Flush = reinterpret_cast<PFNFLUSH>(IntGetProcAddress("glFlush"));
         if(!Flush) ++numFailed;
-
+#else
+        GetString = glGetString;
+        GetIntegerv = glGetIntegerv;
+        ActiveTexture = glActiveTexture;
+        AlphaFunc = glAlphaFunc;
+        StencilFunc = glStencilFunc;
+        StencilMask = glStencilMask;
+        StencilOp = glStencilOp;
+        ColorMask = glColorMask;
+        ClearStencil = glClearStencil;
+        Clear = glClear;
+        Disable = glDisable;
+        Enable = glEnable;
+        Flush = glFlush;
+#endif
         return numFailed;
     }
 
@@ -281,10 +302,13 @@ namespace gl
             std::vector<MapEntry> table;
             InitializeMappingTable(table);
 
+#ifndef IOS
             GetString = reinterpret_cast<PFNGETSTRING>(IntGetProcAddress("glGetString"));
             if(!GetString)
                 return exts::LoadTest();
-
+#else
+            GetString = glGetString;
+#endif
             ProcExtsFromExtString((const char *)gl::GetString(gl::EXTENSIONS), table);
 
             int numFailed = LoadCoreFunctions();
@@ -293,6 +317,7 @@ namespace gl
 
         static void ParseVersionFromString(int *pOutMajor, int *pOutMinor, const char *strVersion)
         {
+#if !defined(IOS)
             const char *strDotPos = NULL;
             int iLength = 0;
             char strWorkBuff[10];
@@ -324,6 +349,10 @@ namespace gl
             }
         
             *pOutMinor = atoi(strWorkBuff);
+#else
+            *pOutMajor = 2;
+            *pOutMinor = 0;
+#endif
         }
 
         static int g_major_version = 0;

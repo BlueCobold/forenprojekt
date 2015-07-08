@@ -12,12 +12,6 @@
 		6E33AD3B1AA594E800F9FB58 /* SinglePrismaticJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E33AD361AA594E800F9FB58 /* SinglePrismaticJoint.cpp */; };
 		6E33AD3C1AA594E800F9FB58 /* SingleRevoluteJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E33AD381AA594E800F9FB58 /* SingleRevoluteJoint.cpp */; };
 		6E33AD3F1AA5955D00F9FB58 /* KeyboardMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E33AD3D1AA5955D00F9FB58 /* KeyboardMenu.cpp */; };
-		6E5409581AB1D81900448306 /* libflac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5409511AB1D81900448306 /* libflac.a */; };
-		6E5409591AB1D81900448306 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5409521AB1D81900448306 /* libfreetype.a */; };
-		6E54095B1AB1D81900448306 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5409541AB1D81900448306 /* libogg.a */; };
-		6E54095C1AB1D81900448306 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5409551AB1D81900448306 /* libvorbis.a */; };
-		6E54095D1AB1D81900448306 /* libvorbisenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5409561AB1D81900448306 /* libvorbisenc.a */; };
-		6E54095E1AB1D81900448306 /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5409571AB1D81900448306 /* libvorbisfile.a */; };
 		6E745C5B1A1B79AE001595DE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E745C5A1A1B79AE001595DE /* OpenGLES.framework */; };
 		6E745C5D1A1B79B3001595DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E745C5C1A1B79B3001595DE /* QuartzCore.framework */; };
 		6E745C5F1A1B79BC001595DE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E745C5E1A1B79BC001595DE /* CoreMotion.framework */; };
@@ -134,6 +128,29 @@
 		6E74608A1A1B87D7001595DE /* res in Resources */ = {isa = PBXBuildFile; fileRef = 6E7460871A1B87D7001595DE /* res */; };
 		6E74608B1A1B87D7001595DE /* Config.ini in Resources */ = {isa = PBXBuildFile; fileRef = 6E7460881A1B87D7001595DE /* Config.ini */; };
 		6E74608C1A1B87D7001595DE /* stash.dat in Resources */ = {isa = PBXBuildFile; fileRef = 6E7460891A1B87D7001595DE /* stash.dat */; };
+		6ED3AE581B4D8CBA00E32567 /* GLExt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE541B4D8CBA00E32567 /* GLExt.cpp */; };
+		6ED3AE591B4D8CBA00E32567 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE561B4D8CBA00E32567 /* Shader.cpp */; };
+		6ED3AE611B4D8CD500E32567 /* Achievement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE5A1B4D8CD500E32567 /* Achievement.cpp */; };
+		6ED3AE621B4D8CD500E32567 /* AchievementManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE5C1B4D8CD500E32567 /* AchievementManager.cpp */; };
+		6ED3AE631B4D8CD500E32567 /* ShaderContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE5E1B4D8CD500E32567 /* ShaderContext.cpp */; };
+		6ED3AE661B4D93BA00E32567 /* MusicPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE641B4D93BA00E32567 /* MusicPlayer.cpp */; };
+		6ED3AE701B4D93E400E32567 /* FloatParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE681B4D93E400E32567 /* FloatParameter.cpp */; };
+		6ED3AE711B4D93E400E32567 /* IntParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE6A1B4D93E400E32567 /* IntParameter.cpp */; };
+		6ED3AE721B4D93E400E32567 /* ShaderParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE6C1B4D93E400E32567 /* ShaderParameter.cpp */; };
+		6ED3AE731B4D93E400E32567 /* TextureParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE6E1B4D93E400E32567 /* TextureParameter.cpp */; };
+		6ED3AE751B4D940E00E32567 /* RandomProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE741B4D940E00E32567 /* RandomProvider.cpp */; };
+		6ED3AE7A1B4D942A00E32567 /* AchievementMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE761B4D942A00E32567 /* AchievementMenu.cpp */; };
+		6ED3AE7B1B4D942A00E32567 /* InteractiveLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE781B4D942A00E32567 /* InteractiveLabel.cpp */; };
+		6ED3AE7E1B4D946000E32567 /* AchievementState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE7C1B4D946000E32567 /* AchievementState.cpp */; };
+		6ED3B0131B4DA2BB00E32567 /* libCryptoPPios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B0121B4DA2BB00E32567 /* libCryptoPPios.a */; };
+		6ED3B0151B4DAB9000E32567 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B0141B4DAB9000E32567 /* libjpeg.a */; };
+		6ED3B01D1B4DAD0F00E32567 /* libflac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B0161B4DAD0F00E32567 /* libflac.a */; };
+		6ED3B01E1B4DAD0F00E32567 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B0171B4DAD0F00E32567 /* libfreetype.a */; };
+		6ED3B01F1B4DAD0F00E32567 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B0181B4DAD0F00E32567 /* libjpeg.a */; };
+		6ED3B0201B4DAD0F00E32567 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B0191B4DAD0F00E32567 /* libogg.a */; };
+		6ED3B0211B4DAD0F00E32567 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B01A1B4DAD0F00E32567 /* libvorbis.a */; };
+		6ED3B0221B4DAD0F00E32567 /* libvorbisenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B01B1B4DAD0F00E32567 /* libvorbisenc.a */; };
+		6ED3B0231B4DAD0F00E32567 /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B01C1B4DAD0F00E32567 /* libvorbisfile.a */; };
 		6ED9D1C11ABAD4DA00541F5C /* libsfml-audio-s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED9D1BB1ABAD4DA00541F5C /* libsfml-audio-s.a */; };
 		6ED9D1C21ABAD4DA00541F5C /* libsfml-graphics-s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED9D1BC1ABAD4DA00541F5C /* libsfml-graphics-s.a */; };
 		6ED9D1C31ABAD4DA00541F5C /* libsfml-main-s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED9D1BD1ABAD4DA00541F5C /* libsfml-main-s.a */; };
@@ -142,7 +159,6 @@
 		6ED9D1C61ABAD4DA00541F5C /* libsfml-window-s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED9D1C01ABAD4DA00541F5C /* libsfml-window-s.a */; };
 		6ED9D1C91ABAD4E700541F5C /* libBox2D-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED9D1C71ABAD4E700541F5C /* libBox2D-ios.a */; };
 		6ED9D1CA1ABAD4E700541F5C /* libtinyxml-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED9D1C81ABAD4E700541F5C /* libtinyxml-ios.a */; };
-		6ED9D1CC1ABAD4FB00541F5C /* libjpeg-turbo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED9D1CB1ABAD4FB00541F5C /* libjpeg-turbo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,12 +172,6 @@
 		6E33AD391AA594E800F9FB58 /* SingleRevoluteJoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SingleRevoluteJoint.hpp; sourceTree = "<group>"; };
 		6E33AD3D1AA5955D00F9FB58 /* KeyboardMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyboardMenu.cpp; sourceTree = "<group>"; };
 		6E33AD3E1AA5955D00F9FB58 /* KeyboardMenu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KeyboardMenu.hpp; sourceTree = "<group>"; };
-		6E5409511AB1D81900448306 /* libflac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libflac.a; path = "../../../../SFML-ios/extlibs/libs-ios/libflac.a"; sourceTree = "<group>"; };
-		6E5409521AB1D81900448306 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = "../../../../SFML-ios/extlibs/libs-ios/libfreetype.a"; sourceTree = "<group>"; };
-		6E5409541AB1D81900448306 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = "../../../../SFML-ios/extlibs/libs-ios/libogg.a"; sourceTree = "<group>"; };
-		6E5409551AB1D81900448306 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = "../../../../SFML-ios/extlibs/libs-ios/libvorbis.a"; sourceTree = "<group>"; };
-		6E5409561AB1D81900448306 /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = "../../../../SFML-ios/extlibs/libs-ios/libvorbisenc.a"; sourceTree = "<group>"; };
-		6E5409571AB1D81900448306 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = "../../../../SFML-ios/extlibs/libs-ios/libvorbisfile.a"; sourceTree = "<group>"; };
 		6E745C051A1B744E001595DE /* RicketyRacquet iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RicketyRacquet iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E745C091A1B744E001595DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E745C5A1A1B79AE001595DE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -463,6 +473,43 @@
 		6E7460871A1B87D7001595DE /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../../Game/res; sourceTree = "<group>"; };
 		6E7460881A1B87D7001595DE /* Config.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Config.ini; path = ../../Game/Config.ini; sourceTree = "<group>"; };
 		6E7460891A1B87D7001595DE /* stash.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = stash.dat; path = ../../Game/stash.dat; sourceTree = "<group>"; };
+		6ED3AE541B4D8CBA00E32567 /* GLExt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLExt.cpp; sourceTree = "<group>"; };
+		6ED3AE551B4D8CBA00E32567 /* GLExt.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLExt.hpp; sourceTree = "<group>"; };
+		6ED3AE561B4D8CBA00E32567 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
+		6ED3AE571B4D8CBA00E32567 /* Shader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
+		6ED3AE5A1B4D8CD500E32567 /* Achievement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Achievement.cpp; sourceTree = "<group>"; };
+		6ED3AE5B1B4D8CD500E32567 /* Achievement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Achievement.hpp; sourceTree = "<group>"; };
+		6ED3AE5C1B4D8CD500E32567 /* AchievementManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AchievementManager.cpp; sourceTree = "<group>"; };
+		6ED3AE5D1B4D8CD500E32567 /* AchievementManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AchievementManager.hpp; sourceTree = "<group>"; };
+		6ED3AE5E1B4D8CD500E32567 /* ShaderContext.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderContext.cpp; sourceTree = "<group>"; };
+		6ED3AE5F1B4D8CD500E32567 /* ShaderContext.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderContext.hpp; sourceTree = "<group>"; };
+		6ED3AE601B4D8CD500E32567 /* ShaderLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderLoader.hpp; sourceTree = "<group>"; };
+		6ED3AE641B4D93BA00E32567 /* MusicPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MusicPlayer.cpp; sourceTree = "<group>"; };
+		6ED3AE651B4D93BA00E32567 /* MusicPlayer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MusicPlayer.hpp; sourceTree = "<group>"; };
+		6ED3AE681B4D93E400E32567 /* FloatParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FloatParameter.cpp; sourceTree = "<group>"; };
+		6ED3AE691B4D93E400E32567 /* FloatParameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FloatParameter.hpp; sourceTree = "<group>"; };
+		6ED3AE6A1B4D93E400E32567 /* IntParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IntParameter.cpp; sourceTree = "<group>"; };
+		6ED3AE6B1B4D93E400E32567 /* IntParameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IntParameter.hpp; sourceTree = "<group>"; };
+		6ED3AE6C1B4D93E400E32567 /* ShaderParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderParameter.cpp; sourceTree = "<group>"; };
+		6ED3AE6D1B4D93E400E32567 /* ShaderParameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderParameter.hpp; sourceTree = "<group>"; };
+		6ED3AE6E1B4D93E400E32567 /* TextureParameter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureParameter.cpp; sourceTree = "<group>"; };
+		6ED3AE6F1B4D93E400E32567 /* TextureParameter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextureParameter.hpp; sourceTree = "<group>"; };
+		6ED3AE741B4D940E00E32567 /* RandomProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RandomProvider.cpp; sourceTree = "<group>"; };
+		6ED3AE761B4D942A00E32567 /* AchievementMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AchievementMenu.cpp; sourceTree = "<group>"; };
+		6ED3AE771B4D942A00E32567 /* AchievementMenu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AchievementMenu.hpp; sourceTree = "<group>"; };
+		6ED3AE781B4D942A00E32567 /* InteractiveLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InteractiveLabel.cpp; sourceTree = "<group>"; };
+		6ED3AE791B4D942A00E32567 /* InteractiveLabel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InteractiveLabel.hpp; sourceTree = "<group>"; };
+		6ED3AE7C1B4D946000E32567 /* AchievementState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AchievementState.cpp; sourceTree = "<group>"; };
+		6ED3AE7D1B4D946000E32567 /* AchievementState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AchievementState.hpp; sourceTree = "<group>"; };
+		6ED3B0121B4DA2BB00E32567 /* libCryptoPPios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCryptoPPios.a; path = ../../../../cryptopp562/build/CryptoPP/Build/Products/libCryptoPPios.a; sourceTree = "<group>"; };
+		6ED3B0141B4DAB9000E32567 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = "../../../../SFML/extlibs/libs-ios/libjpeg.a"; sourceTree = "<group>"; };
+		6ED3B0161B4DAD0F00E32567 /* libflac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libflac.a; path = "../../../../SFML-ios/extlibs/libs-ios/libflac.a"; sourceTree = "<group>"; };
+		6ED3B0171B4DAD0F00E32567 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = "../../../../SFML-ios/extlibs/libs-ios/libfreetype.a"; sourceTree = "<group>"; };
+		6ED3B0181B4DAD0F00E32567 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = "../../../../SFML-ios/extlibs/libs-ios/libjpeg.a"; sourceTree = "<group>"; };
+		6ED3B0191B4DAD0F00E32567 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = "../../../../SFML-ios/extlibs/libs-ios/libogg.a"; sourceTree = "<group>"; };
+		6ED3B01A1B4DAD0F00E32567 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = "../../../../SFML-ios/extlibs/libs-ios/libvorbis.a"; sourceTree = "<group>"; };
+		6ED3B01B1B4DAD0F00E32567 /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = "../../../../SFML-ios/extlibs/libs-ios/libvorbisenc.a"; sourceTree = "<group>"; };
+		6ED3B01C1B4DAD0F00E32567 /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = "../../../../SFML-ios/extlibs/libs-ios/libvorbisfile.a"; sourceTree = "<group>"; };
 		6ED9D1BB1ABAD4DA00541F5C /* libsfml-audio-s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsfml-audio-s.a"; path = "../../ThirdParty/lib-ios/libsfml-audio-s.a"; sourceTree = "<group>"; };
 		6ED9D1BC1ABAD4DA00541F5C /* libsfml-graphics-s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsfml-graphics-s.a"; path = "../../ThirdParty/lib-ios/libsfml-graphics-s.a"; sourceTree = "<group>"; };
 		6ED9D1BD1ABAD4DA00541F5C /* libsfml-main-s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsfml-main-s.a"; path = "../../ThirdParty/lib-ios/libsfml-main-s.a"; sourceTree = "<group>"; };
@@ -471,7 +518,6 @@
 		6ED9D1C01ABAD4DA00541F5C /* libsfml-window-s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libsfml-window-s.a"; path = "../../ThirdParty/lib-ios/libsfml-window-s.a"; sourceTree = "<group>"; };
 		6ED9D1C71ABAD4E700541F5C /* libBox2D-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libBox2D-ios.a"; path = "../../ThirdParty/lib-ios/libBox2D-ios.a"; sourceTree = "<group>"; };
 		6ED9D1C81ABAD4E700541F5C /* libtinyxml-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libtinyxml-ios.a"; path = "../../ThirdParty/lib-ios/libtinyxml-ios.a"; sourceTree = "<group>"; };
-		6ED9D1CB1ABAD4FB00541F5C /* libjpeg-turbo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libjpeg-turbo.a"; path = "../../../../libjpeg-turbo-code/build/libjpeg-turbo.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -480,25 +526,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E33AD1B1AA46BB200F9FB58 /* OpenAL.framework in Frameworks */,
-				6E5409591AB1D81900448306 /* libfreetype.a in Frameworks */,
+				6ED3B0151B4DAB9000E32567 /* libjpeg.a in Frameworks */,
+				6ED3B01E1B4DAD0F00E32567 /* libfreetype.a in Frameworks */,
 				6ED9D1C61ABAD4DA00541F5C /* libsfml-window-s.a in Frameworks */,
 				6ED9D1CA1ABAD4E700541F5C /* libtinyxml-ios.a in Frameworks */,
-				6E54095E1AB1D81900448306 /* libvorbisfile.a in Frameworks */,
-				6E54095C1AB1D81900448306 /* libvorbis.a in Frameworks */,
+				6ED3B0221B4DAD0F00E32567 /* libvorbisenc.a in Frameworks */,
 				6E745C611A1B79C3001595DE /* UIKit.framework in Frameworks */,
-				6E5409581AB1D81900448306 /* libflac.a in Frameworks */,
+				6ED3B0211B4DAD0F00E32567 /* libvorbis.a in Frameworks */,
+				6ED3B0231B4DAD0F00E32567 /* libvorbisfile.a in Frameworks */,
+				6ED3B01D1B4DAD0F00E32567 /* libflac.a in Frameworks */,
 				6ED9D1C21ABAD4DA00541F5C /* libsfml-graphics-s.a in Frameworks */,
 				6ED9D1C41ABAD4DA00541F5C /* libsfml-network-s.a in Frameworks */,
 				6ED9D1C91ABAD4E700541F5C /* libBox2D-ios.a in Frameworks */,
 				6E745C5F1A1B79BC001595DE /* CoreMotion.framework in Frameworks */,
+				6ED3B01F1B4DAD0F00E32567 /* libjpeg.a in Frameworks */,
 				6E745C5B1A1B79AE001595DE /* OpenGLES.framework in Frameworks */,
-				6ED9D1CC1ABAD4FB00541F5C /* libjpeg-turbo.a in Frameworks */,
 				6ED9D1C11ABAD4DA00541F5C /* libsfml-audio-s.a in Frameworks */,
 				6ED9D1C31ABAD4DA00541F5C /* libsfml-main-s.a in Frameworks */,
 				6ED9D1C51ABAD4DA00541F5C /* libsfml-system-s.a in Frameworks */,
 				6E745C5D1A1B79B3001595DE /* QuartzCore.framework in Frameworks */,
-				6E54095D1AB1D81900448306 /* libvorbisenc.a in Frameworks */,
-				6E54095B1AB1D81900448306 /* libogg.a in Frameworks */,
+				6ED3B0131B4DA2BB00E32567 /* libCryptoPPios.a in Frameworks */,
+				6ED3B0201B4DAD0F00E32567 /* libogg.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,12 +570,13 @@
 		6E54095F1AB1DB0900448306 /* sfml-extlibs */ = {
 			isa = PBXGroup;
 			children = (
-				6E5409511AB1D81900448306 /* libflac.a */,
-				6E5409521AB1D81900448306 /* libfreetype.a */,
-				6E5409541AB1D81900448306 /* libogg.a */,
-				6E5409551AB1D81900448306 /* libvorbis.a */,
-				6E5409561AB1D81900448306 /* libvorbisenc.a */,
-				6E5409571AB1D81900448306 /* libvorbisfile.a */,
+				6ED3B0161B4DAD0F00E32567 /* libflac.a */,
+				6ED3B0171B4DAD0F00E32567 /* libfreetype.a */,
+				6ED3B0181B4DAD0F00E32567 /* libjpeg.a */,
+				6ED3B0191B4DAD0F00E32567 /* libogg.a */,
+				6ED3B01A1B4DAD0F00E32567 /* libvorbis.a */,
+				6ED3B01B1B4DAD0F00E32567 /* libvorbisenc.a */,
+				6ED3B01C1B4DAD0F00E32567 /* libvorbisfile.a */,
 			);
 			name = "sfml-extlibs";
 			sourceTree = "<group>";
@@ -622,6 +671,7 @@
 		6E745E171A1B7C11001595DE /* provider */ = {
 			isa = PBXGroup;
 			children = (
+				6ED3AE741B4D940E00E32567 /* RandomProvider.cpp */,
 				6E745E181A1B7C11001595DE /* Absolute.hpp */,
 				6E745E191A1B7C11001595DE /* Adder.hpp */,
 				6E745E1A1A1B7C11001595DE /* AngleProvider.hpp */,
@@ -662,6 +712,10 @@
 		6E745E3D1A1B7C11001595DE /* gui */ = {
 			isa = PBXGroup;
 			children = (
+				6ED3AE761B4D942A00E32567 /* AchievementMenu.cpp */,
+				6ED3AE771B4D942A00E32567 /* AchievementMenu.hpp */,
+				6ED3AE781B4D942A00E32567 /* InteractiveLabel.cpp */,
+				6ED3AE791B4D942A00E32567 /* InteractiveLabel.hpp */,
 				6E745E3E1A1B7C11001595DE /* AnimationContainer.cpp */,
 				6E745E3F1A1B7C11001595DE /* AnimationContainer.hpp */,
 				6E745E401A1B7C11001595DE /* BitmapFont.cpp */,
@@ -840,6 +894,11 @@
 		6E745EC21A1B7C12001595DE /* rendering */ = {
 			isa = PBXGroup;
 			children = (
+				6ED3AE671B4D93E400E32567 /* parameter */,
+				6ED3AE541B4D8CBA00E32567 /* GLExt.cpp */,
+				6ED3AE551B4D8CBA00E32567 /* GLExt.hpp */,
+				6ED3AE561B4D8CBA00E32567 /* Shader.cpp */,
+				6ED3AE571B4D8CBA00E32567 /* Shader.hpp */,
 				6E745EC31A1B7C12001595DE /* DebugDraw.cpp */,
 				6E745EC41A1B7C12001595DE /* DebugDraw.hpp */,
 				6E745EC51A1B7C12001595DE /* Drawable.hpp */,
@@ -904,6 +963,15 @@
 		6E745EF41A1B7C12001595DE /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				6ED3AE641B4D93BA00E32567 /* MusicPlayer.cpp */,
+				6ED3AE651B4D93BA00E32567 /* MusicPlayer.hpp */,
+				6ED3AE5A1B4D8CD500E32567 /* Achievement.cpp */,
+				6ED3AE5B1B4D8CD500E32567 /* Achievement.hpp */,
+				6ED3AE5C1B4D8CD500E32567 /* AchievementManager.cpp */,
+				6ED3AE5D1B4D8CD500E32567 /* AchievementManager.hpp */,
+				6ED3AE5E1B4D8CD500E32567 /* ShaderContext.cpp */,
+				6ED3AE5F1B4D8CD500E32567 /* ShaderContext.hpp */,
+				6ED3AE601B4D8CD500E32567 /* ShaderLoader.hpp */,
 				6E745EF51A1B7C12001595DE /* AppConfig.cpp */,
 				6E745EF61A1B7C12001595DE /* AppConfig.hpp */,
 				6E745EF71A1B7C12001595DE /* BackgroundLoader.hpp */,
@@ -934,6 +1002,8 @@
 		6E745F0B1A1B7C12001595DE /* State */ = {
 			isa = PBXGroup;
 			children = (
+				6ED3AE7C1B4D946000E32567 /* AchievementState.cpp */,
+				6ED3AE7D1B4D946000E32567 /* AchievementState.hpp */,
 				6E745F0C1A1B7C12001595DE /* CoinShopState.cpp */,
 				6E745F0D1A1B7C12001595DE /* CoinShopState.hpp */,
 				6E745F0E1A1B7C12001595DE /* CreditMenuState.cpp */,
@@ -989,7 +1059,8 @@
 		6E74608D1A1DF157001595DE /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				6ED9D1CB1ABAD4FB00541F5C /* libjpeg-turbo.a */,
+				6ED3B0141B4DAB9000E32567 /* libjpeg.a */,
+				6ED3B0121B4DA2BB00E32567 /* libCryptoPPios.a */,
 				6ED9D1C71ABAD4E700541F5C /* libBox2D-ios.a */,
 				6ED9D1C81ABAD4E700541F5C /* libtinyxml-ios.a */,
 				6E33AD1A1AA46BB200F9FB58 /* OpenAL.framework */,
@@ -1001,6 +1072,21 @@
 				6E5409601AB1DB1400448306 /* sfml-libs */,
 			);
 			name = libs;
+			sourceTree = "<group>";
+		};
+		6ED3AE671B4D93E400E32567 /* parameter */ = {
+			isa = PBXGroup;
+			children = (
+				6ED3AE681B4D93E400E32567 /* FloatParameter.cpp */,
+				6ED3AE691B4D93E400E32567 /* FloatParameter.hpp */,
+				6ED3AE6A1B4D93E400E32567 /* IntParameter.cpp */,
+				6ED3AE6B1B4D93E400E32567 /* IntParameter.hpp */,
+				6ED3AE6C1B4D93E400E32567 /* ShaderParameter.cpp */,
+				6ED3AE6D1B4D93E400E32567 /* ShaderParameter.hpp */,
+				6ED3AE6E1B4D93E400E32567 /* TextureParameter.cpp */,
+				6ED3AE6F1B4D93E400E32567 /* TextureParameter.hpp */,
+			);
+			path = parameter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1075,12 +1161,14 @@
 			files = (
 				6E745F641A1B7C12001595DE /* SubWindow.cpp in Sources */,
 				6E745F851A1B7C12001595DE /* VerticalMaskingStripesTransition.cpp in Sources */,
+				6ED3AE701B4D93E400E32567 /* FloatParameter.cpp in Sources */,
 				6E745F501A1B7C12001595DE /* GoodyHUD.cpp in Sources */,
 				6E745F601A1B7C12001595DE /* OptionMenu.cpp in Sources */,
 				6E33AD3C1AA594E800F9FB58 /* SingleRevoluteJoint.cpp in Sources */,
 				6E745F5E1A1B7C12001595DE /* MenuSprite.cpp in Sources */,
 				6E745F591A1B7C12001595DE /* LevelSelectMenu.cpp in Sources */,
 				6E745F4D1A1B7C12001595DE /* ArrowHUD.cpp in Sources */,
+				6ED3AE631B4D8CD500E32567 /* ShaderContext.cpp in Sources */,
 				6E745F681A1B7C12001595DE /* ContactListener.cpp in Sources */,
 				6E745F7C1A1B7C12001595DE /* HorizontalSlicesTransition.cpp in Sources */,
 				6E33AD3B1AA594E800F9FB58 /* SinglePrismaticJoint.cpp in Sources */,
@@ -1097,6 +1185,7 @@
 				6E745F531A1B7C12001595DE /* LabelHUD.cpp in Sources */,
 				6E745F7F1A1B7C12001595DE /* HorizontalStripesTransition.cpp in Sources */,
 				6E745F9F1A1B7C12001595DE /* PauseState.cpp in Sources */,
+				6ED3AE7A1B4D942A00E32567 /* AchievementMenu.cpp in Sources */,
 				6E745F541A1B7C12001595DE /* PointsHUD.cpp in Sources */,
 				6E745F901A1B7C12001595DE /* PathHelper.cpp in Sources */,
 				6E745FA51A1B7C12001595DE /* Core.cpp in Sources */,
@@ -1114,7 +1203,10 @@
 				6E745F4F1A1B7C12001595DE /* FPSCounterHUD.cpp in Sources */,
 				6E745FA81A1B7C12001595DE /* ScrollView.cpp in Sources */,
 				6E745F6C1A1B7C12001595DE /* Level.cpp in Sources */,
+				6ED3AE661B4D93BA00E32567 /* MusicPlayer.cpp in Sources */,
 				6E745F4B1A1B7C12001595DE /* GameFinishedMenu.cpp in Sources */,
+				6ED3AE581B4D8CBA00E32567 /* GLExt.cpp in Sources */,
+				6ED3AE711B4D93E400E32567 /* IntParameter.cpp in Sources */,
 				6E745F5C1A1B7C12001595DE /* Menu.cpp in Sources */,
 				6E745F6A1A1B7C12001595DE /* Goody.cpp in Sources */,
 				6E745F8F1A1B7C12001595DE /* MenuLoader.cpp in Sources */,
@@ -1128,6 +1220,7 @@
 				6E745F921A1B7C12001595DE /* SpriteSheet.cpp in Sources */,
 				6E745F951A1B7C12001595DE /* GameFinishedState.cpp in Sources */,
 				6E745F441A1B7C12001595DE /* CaptionMenu.cpp in Sources */,
+				6ED3AE621B4D8CD500E32567 /* AchievementManager.cpp in Sources */,
 				6E745F871A1B7C12001595DE /* VerticalSlidingStripesTransition.cpp in Sources */,
 				6E745F8D1A1B7C12001595DE /* GameEventRecorder.cpp in Sources */,
 				6E745FA21A1B7C12001595DE /* StateManager.cpp in Sources */,
@@ -1145,6 +1238,7 @@
 				6E745F5D1A1B7C12001595DE /* MenuPanel.cpp in Sources */,
 				6E745F801A1B7C12001595DE /* RandomTransition.cpp in Sources */,
 				6E745F751A1B7C12001595DE /* AlphaTransition.cpp in Sources */,
+				6ED3AE721B4D93E400E32567 /* ShaderParameter.cpp in Sources */,
 				6E745F9C1A1B7C12001595DE /* MainMenuState.cpp in Sources */,
 				6E745F8A1A1B7C12001595DE /* AppConfig.cpp in Sources */,
 				6E745F781A1B7C12001595DE /* HorizontalCompressTransition.cpp in Sources */,
@@ -1153,6 +1247,7 @@
 				6E745FA61A1B7C12001595DE /* Input.cpp in Sources */,
 				6E745F431A1B7C12001595DE /* Button.cpp in Sources */,
 				6E745F7A1A1B7C12001595DE /* HorizontalHalvesTransition.cpp in Sources */,
+				6ED3AE611B4D8CD500E32567 /* Achievement.cpp in Sources */,
 				6E745F6E1A1B7C12001595DE /* ParallaxLayer.cpp in Sources */,
 				6E745F861A1B7C12001595DE /* VerticalSlicesTransition.cpp in Sources */,
 				6E745F661A1B7C12001595DE /* Background.cpp in Sources */,
@@ -1166,6 +1261,7 @@
 				6E745F741A1B7C12001595DE /* DebugDraw.cpp in Sources */,
 				6E745F731A1B7C12001595DE /* Teeter.cpp in Sources */,
 				6E745FA01A1B7C12001595DE /* PlayState.cpp in Sources */,
+				6ED3AE7E1B4D946000E32567 /* AchievementState.cpp in Sources */,
 				6E745F701A1B7C12001595DE /* SoundManager.cpp in Sources */,
 				6E745F3F1A1B7C12001595DE /* ParticleTrail.cpp in Sources */,
 				6E745F811A1B7C12001595DE /* RotatingSquaresTransition.cpp in Sources */,
@@ -1175,7 +1271,11 @@
 				6E745F941A1B7C12001595DE /* CreditMenuState.cpp in Sources */,
 				6E745F581A1B7C12001595DE /* LevelPreviewMenu.cpp in Sources */,
 				6E745F3D1A1B7C12001595DE /* Animation.cpp in Sources */,
+				6ED3AE7B1B4D942A00E32567 /* InteractiveLabel.cpp in Sources */,
 				6E33AD3A1AA594E800F9FB58 /* SingleDistanceJoint.cpp in Sources */,
+				6ED3AE751B4D940E00E32567 /* RandomProvider.cpp in Sources */,
+				6ED3AE731B4D93E400E32567 /* TextureParameter.cpp in Sources */,
+				6ED3AE591B4D8CBA00E32567 /* Shader.cpp in Sources */,
 				6E745F881A1B7C12001595DE /* VerticalSpringTransition.cpp in Sources */,
 				6E745F521A1B7C12001595DE /* HUDElement.cpp in Sources */,
 				6E745F6F1A1B7C12001595DE /* PhysicalObject.cpp in Sources */,
@@ -1252,10 +1352,7 @@
 					"$(ARCHS_STANDARD)",
 					armv7s,
 				);
-				"ARCHS[sdk=iphonesimulator*]" = (
-					x86_64,
-					i386,
-				);
+				"ARCHS[sdk=iphonesimulator*]" = i386;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1305,10 +1402,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 					IOS,
-					NO_SOUND,
 					"_DEBUG=1",
 				);
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../ThirdParty/CryptoPP/include",
 					"$(SRCROOT)/../../ThirdParty/Box2D/include/**",
 					"$(SRCROOT)/../../../../SFML-ios/include/**",
 					"$(inherited)",
@@ -1321,12 +1418,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../../../../SFML-ios/extlibs/libs-ios",
-					"$(SRCROOT)/../../../../libjpeg-turbo-code/build",
 					"$(SRCROOT)/../../ThirdParty/lib-ios",
+					"$(SRCROOT)/../../../../cryptopp562/build/CryptoPP/Build/Products/",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "RicketyRacquet iOS";
-				PROVISIONING_PROFILE = "74602901-4215-4e06-a1e2-c622c31b9216";
+				PROVISIONING_PROFILE = "825d80f7-b072-497a-9ed6-c9e115c0485a";
 				VALID_ARCHS = "$(ARCHS)";
 			};
 			name = Debug;
@@ -1342,13 +1439,11 @@
 					"$(ARCHS_STANDARD)",
 					armv7s,
 				);
-				"ARCHS[sdk=iphonesimulator*]" = (
-					x86_64,
-					i386,
-				);
+				"ARCHS[sdk=iphonesimulator*]" = i386;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREPROCESSOR_DEFINITIONS = IOS;
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../ThirdParty/CryptoPP/include",
 					"$(SRCROOT)/../../ThirdParty/Box2D/include/**",
 					"$(SRCROOT)/../../../../SFML-ios/include/**",
 					"$(inherited)",
@@ -1361,12 +1456,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../../../../SFML-ios/extlibs/libs-ios",
-					"$(SRCROOT)/../../../../libjpeg-turbo-code/build",
 					"$(SRCROOT)/../../ThirdParty/lib-ios",
+					"$(SRCROOT)/../../../../cryptopp562/build/CryptoPP/Build/Products/",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "RicketyRacquet iOS";
-				PROVISIONING_PROFILE = "74602901-4215-4e06-a1e2-c622c31b9216";
+				PROVISIONING_PROFILE = "825d80f7-b072-497a-9ed6-c9e115c0485a";
 				VALID_ARCHS = "$(ARCHS)";
 				"VALID_ARCHS[sdk=iphoneos*]" = "$(ARCHS)";
 				"VALID_ARCHS[sdk=iphonesimulator*]" = "$(ARCHS)";
