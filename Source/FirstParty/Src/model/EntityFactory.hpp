@@ -21,7 +21,7 @@ public:
     EntityFactory(CloneHandler& cloneHandler,
                   bool respawnable, 
                   bool autoKill,
-                  const std::string& productName,
+                  std::unique_ptr<Entity>& product,
                   float minDelayTime,
                   float maxDelayTime,
                   const b2Vec2& spawnOffset);
@@ -29,10 +29,6 @@ public:
     virtual void update(const float value);
 
     void deliver(std::vector<std::unique_ptr<Entity>>& packet);
-
-    void setProduct(Entity* product);
-
-    std::string getProductName() const;
 };
 
 #endif

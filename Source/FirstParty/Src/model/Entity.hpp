@@ -59,7 +59,6 @@ public:
     virtual void restartAt(const float value) override;
 
     void setName(std::string name);
-    const std::string& getName() const;
     const Type& getType() const;
 
     void kill();

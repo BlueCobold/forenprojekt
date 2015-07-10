@@ -227,8 +227,3 @@ std::unique_ptr<Entity> Entity::clone() const
 
     return clone;
 }
-
-const std::string& Entity::getName() const
-{
-    return m_name;
-}

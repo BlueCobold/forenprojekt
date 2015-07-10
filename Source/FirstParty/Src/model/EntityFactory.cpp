@@ -3,17 +3,16 @@
 EntityFactory::EntityFactory(CloneHandler& cloneHandler,
                              bool respawnable, 
                              bool autoKill,
-                             const std::string& productName,
+                             std::unique_ptr<Entity>& product,
                              float minDelayTime,
                              float maxDelayTime,
                              const b2Vec2& spawnOffset) :
     Entity(Entity::EntityFactory, cloneHandler, respawnable, autoKill),
     m_randomGenerator(minDelayTime, maxDelayTime),
-    m_productName(productName),
+    m_product(std::move(product)),
     m_spawnOffset(spawnOffset),
     m_manufactureMoment(0),
-    m_ready(false),
-    m_product(nullptr)
+    m_ready(false)
 { }
 
 void EntityFactory::update(const float value)
@@ -37,17 +36,4 @@ void EntityFactory::deliver(std::vector<std::unique_ptr<Entity>>& packet)
         m_product->setPosition(m_spawnOffset + getPosition());
         packet.push_back(m_product->clone());
     }
-}
-
-void EntityFactory::setProduct(Entity* product)
-{
-    if(product)
-        m_product = product->clone();
-    else
-        m_product = nullptr;
-}
-
-std::string EntityFactory::getProductName() const
-{
-    return m_productName;
 }
