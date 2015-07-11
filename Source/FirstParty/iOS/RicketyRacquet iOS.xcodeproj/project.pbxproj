@@ -12,6 +12,7 @@
 		6E33AD3B1AA594E800F9FB58 /* SinglePrismaticJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E33AD361AA594E800F9FB58 /* SinglePrismaticJoint.cpp */; };
 		6E33AD3C1AA594E800F9FB58 /* SingleRevoluteJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E33AD381AA594E800F9FB58 /* SingleRevoluteJoint.cpp */; };
 		6E33AD3F1AA5955D00F9FB58 /* KeyboardMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E33AD3D1AA5955D00F9FB58 /* KeyboardMenu.cpp */; };
+		6E35B0371B4FCF1A007808F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E35B0361B4FCF1A007808F0 /* Images.xcassets */; };
 		6E745C5B1A1B79AE001595DE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E745C5A1A1B79AE001595DE /* OpenGLES.framework */; };
 		6E745C5D1A1B79B3001595DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E745C5C1A1B79B3001595DE /* QuartzCore.framework */; };
 		6E745C5F1A1B79BC001595DE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E745C5E1A1B79BC001595DE /* CoreMotion.framework */; };
@@ -172,6 +173,7 @@
 		6E33AD391AA594E800F9FB58 /* SingleRevoluteJoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SingleRevoluteJoint.hpp; sourceTree = "<group>"; };
 		6E33AD3D1AA5955D00F9FB58 /* KeyboardMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyboardMenu.cpp; sourceTree = "<group>"; };
 		6E33AD3E1AA5955D00F9FB58 /* KeyboardMenu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KeyboardMenu.hpp; sourceTree = "<group>"; };
+		6E35B0361B4FCF1A007808F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6E745C051A1B744E001595DE /* RicketyRacquet iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RicketyRacquet iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E745C091A1B744E001595DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E745C5A1A1B79AE001595DE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -642,6 +644,7 @@
 			isa = PBXGroup;
 			children = (
 				6E745C091A1B744E001595DE /* Info.plist */,
+				6E35B0361B4FCF1A007808F0 /* Images.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1147,6 +1150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E74608B1A1B87D7001595DE /* Config.ini in Resources */,
+				6E35B0371B4FCF1A007808F0 /* Images.xcassets in Resources */,
 				6E74608C1A1B87D7001595DE /* stash.dat in Resources */,
 				6E74608A1A1B87D7001595DE /* res in Resources */,
 			);
