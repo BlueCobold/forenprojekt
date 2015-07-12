@@ -607,11 +607,11 @@ std::unique_ptr<Entity> Level::createEntity(
             if(m_bonusTargetPoints == 0)
                 m_bonusTargetPoints = 10;
         }
-        else if(typeName == "entityfactory")
+        else if(typeName == "entityFactory")
         {
-            float min = xml->FloatAttribute("mindelaytime");
-            float max = xml->FloatAttribute("maxdelaytime");
-            std::string productName = xml->Attribute("productname");
+            float min = xml->FloatAttribute("minDelayTime");
+            float max = xml->FloatAttribute("maxDelayTime");
+            std::string productName = xml->Attribute("productName");
             b2Vec2 spawnOffset(xml->FloatAttribute("spawnOffsetX"), xml->FloatAttribute("spawnOffsetY"));
 
             std::unique_ptr<Entity> product = parseEntityFromTemplate(productName, templates, position, false);

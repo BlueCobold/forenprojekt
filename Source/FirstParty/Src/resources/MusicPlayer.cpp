@@ -19,17 +19,7 @@ void MusicPlayer::update()
        m_music.empty())
         return;
 
-    if(m_mode == MusicPlayer::Normal)
-    {
-        if(m_currentIndex + 1 < m_music.size())
-            ++m_currentIndex;
-        else
-            m_currentIndex = 0;
-    }
-    else
-        m_currentIndex = getRandomNumber();
-
-    m_music[m_currentIndex]->play();
+    next();
 }
 
 void MusicPlayer::play()
@@ -65,6 +55,18 @@ void MusicPlayer::next()
     {
         m_isPlaying = true;
         m_music[m_currentIndex]->stop();
+
+        if(m_mode == MusicPlayer::Normal)
+        {
+            if(m_currentIndex + 1 < m_music.size())
+                ++m_currentIndex;
+            else
+                m_currentIndex = 0;
+        }
+        else
+            m_currentIndex = getRandomNumber();
+
+        m_music[m_currentIndex]->play();
     }
 }
 
@@ -76,10 +78,12 @@ void MusicPlayer::previous()
         m_music[m_currentIndex]->stop();
     
         if(m_mode == MusicPlayer::Shuffle)
-            return;
+            next();
 
-        if(m_currentIndex - 1 < m_music.size())
+        if(m_currentIndex > 0)
             m_music[--m_currentIndex]->play();
+        else
+            m_music[m_music.size() - 1]->play();
     }
 }
 
