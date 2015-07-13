@@ -129,10 +129,7 @@
 				<constants offset="0" />
 				<physics name="pump" shape="wall" />
 				<animations>
-					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="1"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_02"  rotate="false">
 					</animation>
 				</animations>
 				<onCollision>
@@ -145,11 +142,7 @@
 			<entity name="wide_door_1" rep="GL">
 				<physics name="door" shape="wide_wall" />
 				<animations>
-					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_wide_01" rotate="false"/>
 				</animations>
 				<onCollision>
 					<changeProperty name="global:gate">
@@ -170,11 +163,7 @@
 			<entity name="wide_door_2" rep="GR">
 				<physics name="door2" shape="wide_wall" />
 				<animations>
-					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_wide_01" rotate="false" />
 				</animations>
 				<onCollision>
 					<changeProperty name="global:gate">

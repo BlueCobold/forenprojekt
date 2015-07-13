@@ -6,11 +6,6 @@
 	<texture name="pastureland_shadows" path="backgrounds/pastureland/TerrainShadows.png" smooth="true" />
 	<texture name="pastureland_clouds" path="backgrounds/pastureland/clouds.png" smooth="false" />
 	<texture name="pastureland_flowery" path="backgrounds/pastureland/flowery.png" smooth="true" />
-	<texture name="small_quads" path="walls/sand/small_quad/main/small_quads.png" smooth="false" />
-	<texture name="high_quads" path="walls/sand/high_quad/high_quads.png" smooth="false" />
-	<texture name="wide_quads" path="walls/sand/wide_quad/wide_quads.png" smooth="false" />
-	<texture name="dark_small_quads" path="walls/sand/small_quad/main/dark.png" smooth="false" />
-	<texture name="small_triangles" path="walls/sand/small_quad/triangles.png" smooth="false" />
 	<texture name="ballback" path="assets/ball/ballback.png" smooth="true" />
 	<texture name="ballshade" path="assets/ball/ballshade.png" smooth="true" />
 	<texture name="ball_twirl" path="assets/ball/ball_twirl.png" smooth="true" />

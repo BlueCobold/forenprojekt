@@ -385,10 +385,7 @@
 					<applyImpulse x="50" y="0" />
 				</onCollision>
 				<animations>
-					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false">
 						<color value="60FFFFFF" />
 					</animation>
 
@@ -433,10 +430,7 @@
 					<applyImpulse x="-50" y="0" />
 				</onCollision>
 				<animations>
-					<animation texture="small_quads" srcy="0" width="60" height="60" rotate="false">
-						<frameindex frames="4">
-							<static value="0"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false">
 						<color value="60FFFFFF" />
 					</animation>
 

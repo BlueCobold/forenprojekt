@@ -525,11 +525,7 @@
 					<spawnEntity name="wall_hit_particles" location="contact" />
 				</onCollision>
 				<animations>
-					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
-					</animation>
+					<animation spritesheet="walls" sprite="sand_wide_01" rotate="false" />
 				</animations>
 			</entity>
 			<entity name="movingwide_wall_2" rep="M2" offsetx="-5" draworder="10" >

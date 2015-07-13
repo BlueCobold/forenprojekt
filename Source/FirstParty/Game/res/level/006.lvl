@@ -57,10 +57,7 @@
 					</changeProperty>
 				</onCollision>
 				<animations>
-					<animation texture="wide_quads" srcy="0" width="120" height="60" rotate="false">
-						<frameindex frames="3">
-							<static value="0"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_wide_01" rotate="false">
 						<color channel="red">
 							<mul>
 								<add>
@@ -117,10 +114,7 @@
 					</showLabel>
 				</onCollision>
 				<animations>
-					<animation texture="high_quads" srcy="0" width="60" height="120" rotate="false">
-						<frameindex frames="6">
-							<static value="0"/>
-						</frameindex>
+					<animation spritesheet="walls" sprite="sand_high_01" rotate="false">
 						<color value="80FF80FF" />
 					</animation>
 				</animations>
