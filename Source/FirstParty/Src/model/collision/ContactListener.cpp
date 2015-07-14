@@ -32,6 +32,8 @@ void ContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold
 {
     if(!shouldCollide(contact->GetFixtureA(), contact->GetFixtureB()))
         contact->SetEnabled(false);
+    
+    contact->SetRestitution(std::min(contact->GetFixtureA()->GetRestitution(), contact->GetFixtureB()->GetRestitution()));
 }
 
 void ContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse)
