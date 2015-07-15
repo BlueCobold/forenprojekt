@@ -214,6 +214,7 @@ std::unique_ptr<Entity> Entity::clone() const
     clone->m_collideWithBall = m_collideWithBall;
     clone->m_variables = m_variables;
     clone->m_animationAngle = m_animationAngle;
+    clone->setDrawOrder(getDrawOrder());
 
     // copy physical property
     clone->copyFrom(this);
