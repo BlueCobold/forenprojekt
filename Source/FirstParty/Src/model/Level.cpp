@@ -785,4 +785,6 @@ void Level::reciveFactoryProducts()
 {
     for(auto it = begin(m_factory); it != end(m_factory); ++it)
         (*it)->deliver(m_entitiesToSpawn);
+
+    std::sort(m_entities.begin(), m_entities.end(), compareDrawOrder);
 }
