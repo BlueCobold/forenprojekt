@@ -11,81 +11,33 @@
 		<include file="assets/teeter/wood.inc" />
 		<include file="sandy/walls.inc" />
 		<entities>
-			<!--<entity name="grey" rep="#0" z="1001" >
+			<entity name="slimeDot" rep="#1" z="1002" >
+				<physics>
+					<body type="dynamic" angle="0" />
+					<shape type="circle" radius="7" />
+					<fixture density="75" friction="0.0" restitution="0.0" />
+				</physics>
 				<animations>
-					<animation texture="walls" srcx="2" srcy="217" width="1" height="1" bufferId="2" alignToView="true" >
+					<animation texture="slimeNormal" srcx="0" srcy="0" width="50" height="50" bufferId="2" whenShaders="true"
+						midx="25" midy="25">
 						<scale axis="x">
-							<static value="800" />
+							<static value="0.6" />
 						</scale>
 						<scale axis="y">
-							<static value="800" />
+							<static value="0.6" />
 						</scale>
-					</animation>
-				</animations>
-			</entity>-->
-			<entity name="slimeDot" rep="#1" z="1002" >
-				<animations>
-					<animation copies="5" texture="slimeNormal" srcx="0" srcy="0" width="50" height="50" bufferId="2">
-						<position axis="x">
-							<add>
-								<mul>
-									<cache>
-										<random min="10" max="40" />
-									</cache>
-									<sine>
-										<mul>										
-											<cache>
-												<random min="70" max="120" />
-											</cache>
-											<time />
-										</mul>
-									</sine>
-								</mul>
-								<mul>
-									<cache>
-										<random min="20" max="40" />
-									</cache>
-									<sine>
-										<mul>										
-											<cache>
-												<random min="50" max="90" />
-											</cache>
-											<time />
-										</mul>
-									</sine>
-								</mul>
-							</add>
-						</position>
-						<position axis="y">
-							<add>
-								<mul>
-									<cache>
-										<random min="10" max="40" />
-									</cache>
-									<sine>
-										<mul>										
-											<cache>
-												<random min="70" max="120" />
-											</cache>
-											<time />
-										</mul>
-									</sine>
-								</mul>
-								<mul>
-									<cache>
-										<random min="20" max="40" />
-									</cache>
-									<sine>
-										<mul>										
-											<cache>
-												<random min="50" max="90" />
-											</cache>
-											<time />
-										</mul>
-									</sine>
-								</mul>
-							</add>
-						</position>
+						<frameindex frames="1">
+							<nop>
+								<ifpositive>
+									<sub>
+										<static value="1400" />
+										<var name="position.y" />
+									</sub>
+									<stop />
+								</ifpositive>
+								<static value="0" />
+							</nop>
+						</frameindex>
 					</animation>
 				</animations>
 			</entity>
@@ -95,79 +47,8 @@
 					</animation>
 				</animations>
 			</entity>
-		</entities>
-		<entities>
-			<entity name="slimeDot" rep="#1" z="1002" >
-				<animations>
-					<animation copies="5" texture="slimeNormal" srcx="0" srcy="0" width="50" height="50" bufferId="2" whenShaders="true">
-						<position axis="x">
-							<add>
-								<mul>
-									<cache>
-										<random min="10" max="40" />
-									</cache>
-									<sine>
-										<mul>										
-											<cache>
-												<random min="70" max="120" />
-											</cache>
-											<time />
-										</mul>
-									</sine>
-								</mul>
-								<mul>
-									<cache>
-										<random min="20" max="40" />
-									</cache>
-									<sine>
-										<mul>										
-											<cache>
-												<random min="50" max="90" />
-											</cache>
-											<time />
-										</mul>
-									</sine>
-								</mul>
-							</add>
-						</position>
-						<position axis="y">
-							<add>
-								<mul>
-									<cache>
-										<random min="10" max="40" />
-									</cache>
-									<sine>
-										<mul>										
-											<cache>
-												<random min="70" max="120" />
-											</cache>
-											<time />
-										</mul>
-									</sine>
-								</mul>
-								<mul>
-									<cache>
-										<random min="20" max="40" />
-									</cache>
-									<sine>
-										<mul>										
-											<cache>
-												<random min="50" max="90" />
-											</cache>
-											<time />
-										</mul>
-									</sine>
-								</mul>
-							</add>
-						</position>
-					</animation>
-				</animations>
-			</entity>
-			<entity name="merge" rep="#2" z="1003" >
-				<animations>
-					<animation texture="offscreenBuffer1" srcx="0" srcy="0" width="-1" height="-1" alignToView="true" bufferId="0" shader="slime" />
-				</animations>
-			</entity>
+			<entity name="factory" type="entityFactory" productName="slimeDot"
+				minDelayTime="0.07" maxDelayTime="0.15" spawnOffsetX="0.001" spawnOffsetY="0" rep="#F" />
 		</entities>
 	</templates>
 
@@ -177,13 +58,13 @@
                   W1 1w4w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2W5 5                        
                   w2d4W3 3)4                    (1W2 2d3w1                        
                   w1d3d6w5  t1                t1  w1d3d2w4                        
-                  w6d4w2w1                        W4 4d3w6                        
+                  w6d4w2w1            #F          W4 4d3w6                        
                   w2d3d4w3                        w6d6d5w2                        
                   w6d6d1w5            BB        gow2d3d1w3                        
                   W1 1d6d3\2gg                gp/5d1d1W5 5                        
                   w5d2d3d1d2\1gh            gq/6d4d1d3d2w6                        
-                  W3 3d4d6W2 2\5    #1#1#1gr/1W5 5d2d2W1 1                        
-                  w2d4d1d2d4w3d2\3  #1#1#1/4d2w4d2d4d5d2w5                        
+                  W3 3d4d6W2 2\5          gr/1W5 5d2d2W1 1                        
+                  w2d4d1d2d4w3d2\3        /4d2w4d2d4d5d2w5                        
                   W4 4d5d3W1 1w4w4    TT  W6 6W1 1d6d6W3 3                        
                                                                                   
 	</grid>
