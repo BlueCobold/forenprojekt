@@ -145,6 +145,8 @@
 		6ED3AD2C1B4BA21C00E32567 /* MusicPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AD271B4BA21C00E32567 /* MusicPlayer.cpp */; };
 		6ED3AD2D1B4BA21C00E32567 /* ShaderContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AD291B4BA21C00E32567 /* ShaderContext.cpp */; };
 		6ED3AD301B4BA23A00E32567 /* RandomProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AD2F1B4BA23A00E32567 /* RandomProvider.cpp */; };
+		6ED971661B5CCD1F00A7AC13 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6ED971651B5CCD1F00A7AC13 /* Images.xcassets */; };
+		6ED971691B5CCFBB00A7AC13 /* EntityFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED971671B5CCFBB00A7AC13 /* EntityFactory.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -493,6 +495,9 @@
 		6ED3AD2B1B4BA21C00E32567 /* ShaderLoader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderLoader.hpp; sourceTree = "<group>"; };
 		6ED3AD2E1B4BA23A00E32567 /* Observer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Observer.hpp; sourceTree = "<group>"; };
 		6ED3AD2F1B4BA23A00E32567 /* RandomProvider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RandomProvider.cpp; sourceTree = "<group>"; };
+		6ED971651B5CCD1F00A7AC13 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6ED971671B5CCFBB00A7AC13 /* EntityFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityFactory.cpp; sourceTree = "<group>"; };
+		6ED971681B5CCFBB00A7AC13 /* EntityFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityFactory.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -710,6 +715,8 @@
 		6E4AAC8A1ABAC116004DD346 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				6ED971671B5CCFBB00A7AC13 /* EntityFactory.cpp */,
+				6ED971681B5CCFBB00A7AC13 /* EntityFactory.hpp */,
 				6E4AAC8B1ABAC116004DD346 /* AnimatedGraphics.hpp */,
 				6E4AAC8C1ABAC116004DD346 /* Background.cpp */,
 				6E4AAC8D1ABAC116004DD346 /* Background.hpp */,
@@ -987,6 +994,7 @@
 			isa = PBXGroup;
 			children = (
 				6EBBA7621A125CBC00F9AD65 /* RicketyRacquet-Info.plist */,
+				6ED971651B5CCD1F00A7AC13 /* Images.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1076,6 +1084,7 @@
 				6EBBABDD1A13A62100F9AD65 /* res in Resources */,
 				6EBBABDC1A13A62100F9AD65 /* Config.ini in Resources */,
 				6E4AAD641ABAC116004DD346 /* icon.ico in Resources */,
+				6ED971661B5CCD1F00A7AC13 /* Images.xcassets in Resources */,
 				6E4AAD3C1ABAC116004DD346 /* app.rc in Resources */,
 				6EBBABDE1A13A62100F9AD65 /* stash.dat in Resources */,
 			);
@@ -1191,6 +1200,7 @@
 				6E4AAD6D1ABAC116004DD346 /* SingleDistanceJoint.cpp in Sources */,
 				6E4AAD941ABAC116004DD346 /* PathHelper.cpp in Sources */,
 				6E4AADA11ABAC116004DD346 /* MainMenuState.cpp in Sources */,
+				6ED971691B5CCFBB00A7AC13 /* EntityFactory.cpp in Sources */,
 				6E4AAD401ABAC116004DD346 /* Button.cpp in Sources */,
 				6E4AAD511ABAC116004DD346 /* PointsHUD.cpp in Sources */,
 				6E4AAD571ABAC116004DD346 /* LevelSelectMenu.cpp in Sources */,
