@@ -87,6 +87,7 @@ ShaderFileInvalid = Die Shader-Konfiguration ist invalid: %.
 ShaderEntryMissing = Der Shader-Konfiguration fehlt die "parameters" Sektion: %.
 JointCopyError = Unterschiedliche Jointtypen können nicht kopiert werden
 MultipleProducts = Mehrere Produkte für eine Fabrik gefunden.
+NoCaret = Kein Textcursor in der XML-Datei Definiert.
 
 [GUI]
 gui_game_paused = Spiel pausiert

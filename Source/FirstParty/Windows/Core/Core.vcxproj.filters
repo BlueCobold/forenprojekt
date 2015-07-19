@@ -622,6 +622,9 @@
     <ClInclude Include="..\..\Src\model\EntityFactory.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\gui\Carat.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -1127,6 +1130,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\model\EntityFactory.cpp">
       <Filter>Sources\model</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\Caret.cpp">
+      <Filter>Sources\gui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -12,19 +12,19 @@ sf::Sprite getSprite(const std::string& prefix,
                      tinyxml2::XMLElement* element,
                      ResourceManager& resourceManager)
 {
-    auto spriteSheetName = element->Attribute((prefix+"spriteSheet").c_str());
+    auto spriteSheetName = element->Attribute((prefix + "spriteSheet").c_str());
     auto spriteSheeet = spriteSheetName ? resourceManager.getSpriteSheet(spriteSheetName) : nullptr;
-    if(auto spriteName = spriteSheeet ? element->Attribute((prefix+"sprite").c_str()) : nullptr)
+    if(auto spriteName = spriteSheeet ? element->Attribute((prefix + "sprite").c_str()) : nullptr)
     {
         auto sprite = spriteSheeet->get(spriteName);
-        sprite.x += element->IntAttribute((prefix+"srcxoffset").c_str());
-        sprite.y += element->IntAttribute((prefix+"srcyoffset").c_str());
+        sprite.x += element->IntAttribute((prefix + "srcxoffset").c_str());
+        sprite.y += element->IntAttribute((prefix + "srcyoffset").c_str());
 
-        if(element->Attribute((prefix+"width").c_str()))
-            sprite.width = element->IntAttribute((prefix+"width").c_str());
+        if(element->Attribute((prefix + "width").c_str()))
+            sprite.width = element->IntAttribute((prefix + "width").c_str());
 
-        if(element->Attribute((prefix+"height").c_str()))
-            sprite.height = element->IntAttribute((prefix+"height").c_str());
+        if(element->Attribute((prefix + "height").c_str()))
+            sprite.height = element->IntAttribute((prefix + "height").c_str());
 
         sf::Sprite baseSprite = sf::Sprite(*resourceManager.getTexture(spriteSheeet->getTextureName()),
                                            sf::IntRect(sprite.x, sprite.y, sprite.width, sprite.height));
@@ -32,11 +32,11 @@ sf::Sprite getSprite(const std::string& prefix,
     }
     else
     {
-        return sf::Sprite(*resourceManager.getTexture(element->Attribute((prefix+"texture").c_str())),
-                          sf::IntRect(element->IntAttribute((prefix+"srcx").c_str()),
-                                      element->IntAttribute((prefix+"srcy").c_str()),
-                                      element->IntAttribute((prefix+"width").c_str()),
-                                      element->IntAttribute((prefix+"height").c_str())));
+        return sf::Sprite(*resourceManager.getTexture(element->Attribute((prefix + "texture").c_str())),
+                          sf::IntRect(element->IntAttribute((prefix + "srcx").c_str()),
+                                      element->IntAttribute((prefix + "srcy").c_str()),
+                                      element->IntAttribute((prefix + "width").c_str()),
+                                      element->IntAttribute((prefix + "height").c_str())));
     }
 }
 
@@ -591,6 +591,15 @@ std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(ti
 
             if(counter < 9)
                 throw std::runtime_error(utility::replace(utility::translateKey("InvalidBackground"), "InputBox"));
+
+            if(auto caret = inputBoxStyleXml->FirstChildElement("caret"))
+            {
+                inputBoxStyle[styleName].caret = getSprite(caret, resourceManager);
+                inputBoxStyle[styleName].caretOffset = sf::Vector2f(caret->FloatAttribute("offsetX"), caret->FloatAttribute("offsetY"));
+                inputBoxStyle[styleName].caretBlinkFrequency = caret->FloatAttribute("frequency");
+            }
+            else
+                throw std::runtime_error(utility::translateKey("NoCaret"));
         }
     }
 

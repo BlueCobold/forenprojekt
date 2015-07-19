@@ -11,6 +11,9 @@ struct InputBoxStyle
     const BitmapFont* font;
     sf::Vector2f textOffset;
     std::unordered_map<int, sf::Sprite> background;
+    sf::Sprite caret;
+    sf::Vector2f caretOffset;
+    float caretBlinkFrequency;
 };
 
 #endif // INPUTBOXSTYLE_HPP

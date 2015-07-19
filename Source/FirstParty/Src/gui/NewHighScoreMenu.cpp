@@ -25,3 +25,8 @@ void NewHighScoreMenu::showKeyboard()
 {
     m_virtualKeyboard.showKeyboard();
 }
+
+bool NewHighScoreMenu::isKeyboardShown()
+{
+    return m_virtualKeyboard.isShown();
+}

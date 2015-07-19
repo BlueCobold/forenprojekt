@@ -199,5 +199,6 @@
 		<background id="7" spriteSheet="gui_elements" sprite="toolTip" srcyoffset="20" width="10" height="10" />
 		<background id="8" spriteSheet="gui_elements" sprite="toolTip" srcxoffset="10" srcyoffset="20" width="10" height="10" />
 		<background id="9" spriteSheet="gui_elements" sprite="toolTip" srcxoffset="20" srcyoffset="20" width="10" height="10" />
+		<caret spriteSheet="gui_elements" sprite="caret" srcxoffset="0" srcyoffset="0" width="20" height="40" offsetX="5" offsetY="0" frequency="1"/>
 	</inputboxStyle>
 </styles>

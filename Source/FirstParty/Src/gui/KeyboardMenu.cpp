@@ -67,3 +67,8 @@ void KeyboardMenu::update(sf::RenderWindow& screen, const float time)
     if(m_shiftKeyPressed)
         utility::Keyboard.notifyKeyPressed(sf::Keyboard::LShift);
 }
+
+bool KeyboardMenu::isShown()
+{
+    return m_showKeyboard;
+}

@@ -14,7 +14,8 @@ InputBox::InputBox(const int id,
     m_size(size),
     m_finished(false),
     m_background(style.background),
-    m_activated(false)
+    m_activated(false),
+    m_caret(style.caretBlinkFrequency, style.caretOffset, style.caret)
 {
     if(m_size.y == 0)
         m_size.y = static_cast<float>(m_inputText.getFontSize());
@@ -28,13 +29,27 @@ InputBox::InputBox(const int id,
     stretchBackground();
 
     setBackGroundPosition(position + offset);
+
+#ifdef IOS
+    m_caret.disable();
+#else
+    m_caret.enable();
+#endif
+
 }
 
 void InputBox::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
+#ifdef IOS
+    if(!m_caret.isActive())
+        m_caret.disable();
+#endif
+
     MenuElement::update(screen, time, mouseOffset);
     setActivatedByMouse(screen);
     handleInput();
+    m_caret.update(time);
+    m_caret.setPosition(getPosition() + getOffset() + sf::Vector2f(m_inputText.getWidth(), 0));
 }
 
 void InputBox::draw(const DrawParameter& params)
@@ -44,6 +59,7 @@ void InputBox::draw(const DrawParameter& params)
 
     params.getTarget().draw(m_backgroundShade);
     m_inputText.draw(params);
+    m_caret.draw(params);
 }
 
 void InputBox::handleInput()
@@ -51,7 +67,11 @@ void InputBox::handleInput()
     bool shiftKey = utility::Keyboard.isKeyPressed(sf::Keyboard::LShift) || utility::Keyboard.isKeyPressed(sf::Keyboard::RShift);
 
     if(utility::Keyboard.isKeyDown(sf::Keyboard::Return))
+    {
         m_finished = true;
+        m_activated = false;
+        m_caret.disable();
+    }
 
     if(utility::Keyboard.isKeyDown(sf::Keyboard::BackSpace) && m_inputText.getText().length() > 0)
     {
@@ -150,7 +170,13 @@ void InputBox::setActivatedByMouse(const sf::RenderWindow& screen)
     sf::Rect<float> hitBox(m_backgroundShade.getPosition(), m_backgroundShade.getSize());
     
     if(utility::Mouse.leftButtonDown())
+    {
         m_activated = hitBox.contains(static_cast<sf::Vector2f>(getCursorPosition(screen)));
+#ifdef IOS
+        if(m_activated)
+            m_caret.enable();
+#endif
+    }
     else
         m_activated = false;
 }
@@ -158,4 +184,9 @@ void InputBox::setActivatedByMouse(const sf::RenderWindow& screen)
 bool InputBox::isActivatedByMouse() const
 {
     return m_activated;
+}
+
+void InputBox::disableCaret()
+{
+    m_caret.disable();
 }

@@ -76,7 +76,10 @@ StateChangeInformation NewHighScoreState::update(const float time)
     }
     if(m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).isActivatedByMouse())
         m_menu.showKeyboard();
-
+#ifdef IOS
+    if(!m_menu.isKeyboardShown())
+        m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).disableCaret();
+#endif
     if(clicked == NewHighScoreMenu::BUTTON_SKIP)
     {
         m_stateInfo.m_levelNumber = m_level->number();

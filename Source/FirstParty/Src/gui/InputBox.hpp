@@ -7,7 +7,10 @@
 #include "MenuElement.hpp"
 #include "LineLabel.hpp"
 #include "InputBoxStyle.hpp"
+#include "Carat.hpp"
 #include <unordered_map>
+
+class ResourceManager;
 
 class InputBox : public MenuElement
 {
@@ -21,6 +24,7 @@ private:
     std::unordered_map<int, sf::Sprite> m_background;
     float m_scalefactorHorizontal;
     float m_scalefactorVertical;
+    Caret m_caret;
 
     void handleInput();
     void stretchBackground();
@@ -56,6 +60,9 @@ public:
     std::string getText() const;
 
     bool isActivatedByMouse() const;
+
+    void disableCaret();
+
 protected:
     virtual void onPositionChanged() override;
 };

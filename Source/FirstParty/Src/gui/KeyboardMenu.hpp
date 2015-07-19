@@ -21,6 +21,8 @@ public:
     virtual void update(sf::RenderWindow& screen, const float time) override;
 
     void showKeyboard();
+
+    bool isShown();
 };
 
 #endif
