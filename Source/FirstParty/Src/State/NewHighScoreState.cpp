@@ -43,7 +43,16 @@ void NewHighScoreState::onEnter(const EnterStateInformation* enterInformation, c
 
     m_stateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
-    m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).setText(m_lastName);
+    if(m_lastName == "")
+    {
+        std::string name = utility::getUserName();
+        if(name.size() > m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).getInputLimit())
+            m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).setText(name.substr(0, m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).getInputLimit() - 1));
+        else
+            m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).setText(name);
+    }
+    else
+        m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).setText(m_lastName);
 }
 
 StateChangeInformation NewHighScoreState::update(const float time)

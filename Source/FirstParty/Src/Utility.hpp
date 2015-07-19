@@ -114,6 +114,8 @@ namespace utility
     std::string floatToPlayTimeString(float playtime);
 
     std::string fileToString(const std::string& file);
+
+    std::string getUserName();
 } // namespace utility
 
 #endif // UTILITY_HPP

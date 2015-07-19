@@ -190,3 +190,8 @@ void InputBox::disableCaret()
 {
     m_caret.disable();
 }
+
+unsigned int InputBox::getInputLimit() const
+{
+    return m_inputLimit;
+}

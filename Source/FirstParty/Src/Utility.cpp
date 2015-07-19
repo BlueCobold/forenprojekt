@@ -3,6 +3,10 @@
 
 #include <exception>
 
+#ifdef WINDOWS
+#include <Windows.h>
+#endif
+
 namespace utility
 {
     /// Specialized Function String 2 String
@@ -138,5 +142,20 @@ namespace utility
         }
 
         return message;
+    }
+
+    std::string getUserName()
+    {
+#ifdef WINDOWS
+        char infoBuffer[128];
+        unsigned long bufferCharCount = 128;
+        if(GetUserName(infoBuffer, &bufferCharCount))
+            return std::string(infoBuffer);
+        else
+            return std::string("Player");
+#else
+        return std::string("Player");
+#endif
+        
     }
 }

@@ -63,6 +63,7 @@ public:
 
     void disableCaret();
 
+    unsigned int getInputLimit() const;
 protected:
     virtual void onPositionChanged() override;
 };
