@@ -46,13 +46,18 @@ void NewHighScoreState::onEnter(const EnterStateInformation* enterInformation, c
     if(m_lastName == "")
     {
         std::string name = utility::getUserName();
-        if(name.size() > m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).getInputLimit())
-            m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).setText(name.substr(0, m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).getInputLimit() - 1));
+        unsigned int maxLength = m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).getInputLimit();
+        if(name.size() > maxLength)
+            m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).setText(name.substr(0, maxLength - 1));
         else
             m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).setText(name);
     }
     else
         m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).setText(m_lastName);
+
+#ifdef IOS
+    m_menu.showKeyboard();
+#endif
 }
 
 StateChangeInformation NewHighScoreState::update(const float time)

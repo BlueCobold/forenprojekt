@@ -85,28 +85,21 @@ void InputBox::handleInput()
     // handle letters from A to Z
     for(int i = 0; i < 26; ++i)
     {
-        if(utility::Keyboard.isKeyDown(static_cast<const sf::Keyboard::Key>(i)) && !shiftKey)
-            m_inputText.setText(m_inputText.getText() + char(97 + i));
-    }
-
-    // handle letters from A to Z
-    for(int i = 0; i < 26; ++i)
-    {
-        if(utility::Keyboard.isKeyDown(static_cast<const sf::Keyboard::Key>(i)) && shiftKey)
-            m_inputText.setText(m_inputText.getText() + char(65 + i));
+        if(utility::Keyboard.isKeyDown(static_cast<const sf::Keyboard::Key>(i)))
+        {
+            if(shiftKey)
+                m_inputText.setText(m_inputText.getText() + char(65 + i));
+            else
+                m_inputText.setText(m_inputText.getText() + char(97 + i));
+        }
     }
 
     // handle numbers from 0 to 9
     for(int i = 0; i < 10; ++i)
     {
-        if(utility::Keyboard.isKeyDown(static_cast<const sf::Keyboard::Key>(26 + i)))
-            m_inputText.setText(m_inputText.getText() + char(48 + i));
-    }
-
-    // handle numpadnumbers from 0 to 9
-    for(int i = 0; i < 10; ++i)
-    {
-        if(utility::Keyboard.isKeyDown(static_cast<const sf::Keyboard::Key>(75 + i)))
+        if((utility::Keyboard.isKeyDown(static_cast<const sf::Keyboard::Key>(26 + i)) ||
+           utility::Keyboard.isKeyDown(static_cast<const sf::Keyboard::Key>(75 + i))) &&
+           !shiftKey)
             m_inputText.setText(m_inputText.getText() + char(48 + i));
     }
 }
