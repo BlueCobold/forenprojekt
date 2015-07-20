@@ -252,7 +252,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         else
             return nullptr; // no shaders available -> skip animation
     }
-    else if(xml->Attribute("whenShaders") && xml->BoolAttribute("whenShaders") == Shader::isUsable())
+    else if(xml->Attribute("whenShaders") && xml->BoolAttribute("whenShaders") != Shader::isUsable())
         return nullptr; // this animation requires an explicit shader-availability to decide if to draw or not
 
     if(auto stencil = xml->FirstChildElement("stencil"))
