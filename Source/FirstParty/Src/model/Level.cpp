@@ -133,7 +133,7 @@ void Level::update(const float elapsedTime)
 
     int steps = std::min(20, std::max(1, static_cast<int>(ceilf(m_timeStep / (1 / (60.0f * 2))))));
     float delta = 0;
-    for(int i=1; i<=steps; i++)
+    for(int i = 1; i <= steps; i++)
     {
         utility::Mouse.interpolate(steps, i);
 
@@ -145,6 +145,7 @@ void Level::update(const float elapsedTime)
 
         cleanupKilledEntities();
         respawnDeadBalls();
+        reciveFactoryProducts();
         spawnPendingEntities(m_lastTime + delta);
 
         m_world.Step(m_timeStep / steps, m_velocityIterations, m_positionIterations);
@@ -158,8 +159,6 @@ void Level::update(const float elapsedTime)
 
         updatePointLabels();
     }
-    
-    reciveFactoryProducts();
 
     if(m_extraBallGoody.isActive() && m_remainingBall > 0)
     {
@@ -785,6 +784,4 @@ void Level::reciveFactoryProducts()
 {
     for(auto it = begin(m_factory); it != end(m_factory); ++it)
         (*it)->deliver(m_entitiesToSpawn);
-
-    std::sort(m_entities.begin(), m_entities.end(), compareDrawOrder);
 }
