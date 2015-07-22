@@ -434,16 +434,12 @@ std::unique_ptr<Entity> Level::parseEntity(
     tinyxml2::XMLElement* physic = nullptr;
     tinyxml2::XMLElement* shape = nullptr;
     findPhysicAndShapeTag(physic, shape, entity, templates);
-
+    
+    std::unique_ptr<Entity> graphicalObject = createEntity(entity, position, shape, physic, templates, bindInstantly);
     if(entity->Attribute("z") != nullptr)
-    {
-        std::unique_ptr<Entity> graphicalObject = createEntity(entity, position, shape, physic, templates, bindInstantly);
         graphicalObject.get()->setDrawOrder(entity->FloatAttribute("z"));
 
-        return graphicalObject;
-    }
-
-    return createEntity(entity, position, shape, physic, templates, bindInstantly);
+    return graphicalObject;
 }
 
 bool Level::validate(const tinyxml2::XMLDocument& document)
