@@ -15,7 +15,7 @@ class Step : public MultiProvider
 {
 public:
 
-    Step(std::vector<std::unique_ptr<ValueProvider>>&& provider, float threshold = 1) :
+    Step(std::vector<std::unique_ptr<ValueProvider>> provider, float threshold = 1) :
        MultiProvider(std::move(provider)),
        m_threshold(threshold)
     {

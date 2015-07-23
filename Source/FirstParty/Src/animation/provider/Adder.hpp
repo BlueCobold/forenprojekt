@@ -14,7 +14,7 @@ class Adder : public MultiProvider
 {
 public:
 
-    Adder(std::vector<std::unique_ptr<ValueProvider>>&& provider) : MultiProvider(std::move(provider))
+    Adder(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
     {
        if(getProvider().size() < 1)
            throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Add"));

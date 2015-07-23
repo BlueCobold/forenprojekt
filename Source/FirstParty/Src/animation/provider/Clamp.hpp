@@ -15,7 +15,7 @@ class Clamp : public MultiProvider
 {
 public:
 
-    Clamp(std::vector<std::unique_ptr<ValueProvider>>&& provider) : MultiProvider(std::move(provider))
+    Clamp(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
     {
        if(getProvider().size() != 3)
            throw std::runtime_error(utility::replace(utility::translateKey("ThreeChilds"), "Clamp"));

@@ -14,7 +14,7 @@ class Switch : public MultiProvider
 {
 public:
 
-    Switch(std::vector<std::unique_ptr<ValueProvider>>&& provider, const std::vector<float>& constants)
+    Switch(std::vector<std::unique_ptr<ValueProvider>> provider, const std::vector<float>& constants)
        : MultiProvider(std::move(provider)),
          m_constants(constants)
     {

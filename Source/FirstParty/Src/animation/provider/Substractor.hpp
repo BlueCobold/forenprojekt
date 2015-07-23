@@ -15,7 +15,7 @@ class Substractor : public MultiProvider
 {
 public:
 
-    Substractor(std::vector<std::unique_ptr<ValueProvider>>&& provider) : MultiProvider(std::move(provider))
+    Substractor(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
     {
        if(getProvider().size() < 1)
            throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Sub"));
