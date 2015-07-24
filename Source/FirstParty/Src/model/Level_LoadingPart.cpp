@@ -612,11 +612,12 @@ std::unique_ptr<Entity> Level::createEntity(
 
             std::unique_ptr<Entity> product = parseEntityFromTemplate(productName, templates, position, false);
 
-            EntityFactory* factory = new EntityFactory(m_cloneHandler, respawnable, autoStop, 
-                                                       product, min, max, spawnOffset);
-
-            m_factory.push_back(factory);
-            entity = std::unique_ptr<EntityFactory>(factory);
+            auto factory = std::unique_ptr<EntityFactory>(new EntityFactory(m_cloneHandler, respawnable, autoStop, 
+                                                                            product, min, max, spawnOffset));
+            factory->registerForDelivery([&](std::unique_ptr<Entity>& product){
+                m_entitiesToSpawn.push_back(std::move(product));
+            });
+            entity = std::move(factory);
         }
         else // No type or unknown type specified => normal Entity
         {

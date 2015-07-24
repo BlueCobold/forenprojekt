@@ -145,8 +145,6 @@ void Level::update(const float elapsedTime)
 
         cleanupKilledEntities();
         respawnDeadBalls();
-        reciveFactoryProducts();
-        spawnPendingEntities(m_lastTime + delta);
 
         m_world.Step(m_timeStep / steps, m_velocityIterations, m_positionIterations);
 
@@ -156,6 +154,7 @@ void Level::update(const float elapsedTime)
             m_updatingEntity->update(m_lastTime + delta);
         }
         m_updatingEntity = nullptr;
+        spawnPendingEntities(m_lastTime + delta);
 
         updatePointLabels();
     }
@@ -778,10 +777,4 @@ bool Level::isOriginal()
         delete[] signature;
 
     return result;
-}
-
-void Level::reciveFactoryProducts()
-{
-    for(auto it = begin(m_factory); it != end(m_factory); ++it)
-        (*it)->deliver(m_entitiesToSpawn);
 }

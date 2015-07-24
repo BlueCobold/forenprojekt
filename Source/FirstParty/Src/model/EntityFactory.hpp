@@ -5,18 +5,22 @@
 
 #include "Entity.hpp"
 #include "../animation/provider/RandomProvider.hpp"
-#include <iostream>
+
+#include <functional>
+#include <memory>
 
 class EntityFactory : public Entity
 {
+public:
+    typedef std::function<void(std::unique_ptr<Entity>&)> DeliveryCallback;
+
 private:
     std::unique_ptr<Entity> m_product;
     float m_manufactureMoment;
     b2Vec2 m_spawnOffset;
-    std::string m_productName;
     RandomProvider m_randomGenerator;
+    DeliveryCallback m_callback;
 
-    bool m_ready;
 public:
     EntityFactory(CloneHandler& cloneHandler,
                   bool respawnable, 
@@ -27,8 +31,9 @@ public:
                   const b2Vec2& spawnOffset);
 
     virtual void update(const float value);
+    virtual void restartAt(const float value);
 
-    void deliver(std::vector<std::unique_ptr<Entity>>& packet);
+    void registerForDelivery(DeliveryCallback callback);
 };
 
 #endif

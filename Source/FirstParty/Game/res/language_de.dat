@@ -88,6 +88,7 @@ ShaderEntryMissing = Der Shader-Konfiguration fehlt die "parameters" Sektion: %.
 JointCopyError = Unterschiedliche Jointtypen können nicht kopiert werden
 MultipleProducts = Mehrere Produkte für eine Fabrik gefunden.
 NoCaret = Kein Textcursor in der XML-Datei Definiert.
+InvalidFactoryTime = Delays müssen größer als 0 sein.
 
 [GUI]
 gui_game_paused = Spiel pausiert

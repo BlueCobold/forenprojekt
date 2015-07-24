@@ -11,29 +11,30 @@ EntityFactory::EntityFactory(CloneHandler& cloneHandler,
     m_randomGenerator(minDelayTime, maxDelayTime),
     m_product(std::move(product)),
     m_spawnOffset(spawnOffset),
-    m_manufactureMoment(0),
-    m_ready(false)
-{ }
+    m_manufactureMoment(0)
+{
+    if(minDelayTime <= 0 || maxDelayTime <= 0)
+        throw std::runtime_error(utility::translateKey("InvalidFactoryTime"));
+}
 
 void EntityFactory::update(const float value)
 {
     Entity::update(value);
 
-    if(m_manufactureMoment == 0 || value > m_manufactureMoment)
+    while(m_manufactureMoment < getCurrentTime() && m_callback != nullptr)
     {
-        if(value > m_manufactureMoment)
-            m_ready = true;
-
-        m_manufactureMoment = value + m_randomGenerator.getValue();
+        m_callback(m_product->clone());
+        m_manufactureMoment += m_randomGenerator.getValue();
     }
 }
 
-void EntityFactory::deliver(std::vector<std::unique_ptr<Entity>>& packet)
+void EntityFactory::restartAt(const float value)
 {
-    if(m_ready && m_product)
-    {
-        m_ready = false;
-        m_product->setPosition(m_spawnOffset + getPosition());
-        packet.push_back(m_product->clone());
-    }
+    Entity::restartAt(value);
+    m_manufactureMoment = getCurrentTime();
+}
+
+void EntityFactory::registerForDelivery(DeliveryCallback callback)
+{
+    m_callback = callback;
 }
