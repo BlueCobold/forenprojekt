@@ -23,7 +23,9 @@ void EntityFactory::update(const float value)
 
     while(m_manufactureMoment < getCurrentTime() && m_callback != nullptr)
     {
-        m_callback(m_product->clone());
+        auto product = m_product->clone();
+        product->setPosition(m_spawnOffset + getPosition());
+        m_callback(product);
         m_manufactureMoment += m_randomGenerator.getValue();
     }
 }
