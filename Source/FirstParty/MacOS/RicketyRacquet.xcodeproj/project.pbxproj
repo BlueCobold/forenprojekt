@@ -125,6 +125,7 @@
 		6E4AADA71ABAC116004DD346 /* StateManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E4AAD311ABAC116004DD346 /* StateManager.cpp */; };
 		6E4AADA81ABAC116004DD346 /* TransitionState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E4AAD331ABAC116004DD346 /* TransitionState.cpp */; };
 		6E4AADA91ABAC116004DD346 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E4AAD351ABAC116004DD346 /* Utility.cpp */; };
+		6E5ACDBA1B68A2490052FE08 /* Caret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5ACDB91B68A2490052FE08 /* Caret.cpp */; };
 		6EBBA9241A134EA300F9AD65 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBBA9231A134EA300F9AD65 /* OpenGL.framework */; };
 		6EBBAAD31A139F3D00F9AD65 /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBBAAD21A139F3D00F9AD65 /* libBox2D.a */; };
 		6EBBABDC1A13A62100F9AD65 /* Config.ini in Resources */ = {isa = PBXBuildFile; fileRef = 6EBBABD91A13A62100F9AD65 /* Config.ini */; };
@@ -457,6 +458,8 @@
 		6E4AAD341ABAC116004DD346 /* TransitionState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TransitionState.hpp; sourceTree = "<group>"; };
 		6E4AAD351ABAC116004DD346 /* Utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utility.cpp; sourceTree = "<group>"; };
 		6E4AAD361ABAC116004DD346 /* Utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Utility.hpp; sourceTree = "<group>"; };
+		6E5ACDB81B68A2490052FE08 /* Carat.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Carat.hpp; sourceTree = "<group>"; };
+		6E5ACDB91B68A2490052FE08 /* Caret.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Caret.cpp; sourceTree = "<group>"; };
 		6EBBA75E1A125CBC00F9AD65 /* RicketyRacquet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RicketyRacquet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EBBA7621A125CBC00F9AD65 /* RicketyRacquet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RicketyRacquet-Info.plist"; sourceTree = "<group>"; };
 		6EBBA9231A134EA300F9AD65 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenGL.framework; sourceTree = DEVELOPER_DIR; };
@@ -612,6 +615,8 @@
 		6E4AAC2F1ABAC116004DD346 /* gui */ = {
 			isa = PBXGroup;
 			children = (
+				6E5ACDB81B68A2490052FE08 /* Carat.hpp */,
+				6E5ACDB91B68A2490052FE08 /* Caret.cpp */,
 				6E2EABE81B36B6D90010CE54 /* InteractiveLabel.cpp */,
 				6E2EABE91B36B6D90010CE54 /* InteractiveLabel.hpp */,
 				6EBF3D831B355C1F00E0CAE8 /* AchievementMenu.cpp */,
@@ -1154,6 +1159,7 @@
 				6E4AAD5B1ABAC116004DD346 /* MenuPanel.cpp in Sources */,
 				6E4AAD9A1ABAC116004DD346 /* GameFinishedState.cpp in Sources */,
 				6E4AAD5F1ABAC116004DD346 /* PauseMenu.cpp in Sources */,
+				6E5ACDBA1B68A2490052FE08 /* Caret.cpp in Sources */,
 				6E4AAD551ABAC116004DD346 /* KeyboardMenu.cpp in Sources */,
 				6E4AAD3A1ABAC116004DD346 /* KeyProvider.cpp in Sources */,
 				6ED3AD2C1B4BA21C00E32567 /* MusicPlayer.cpp in Sources */,
