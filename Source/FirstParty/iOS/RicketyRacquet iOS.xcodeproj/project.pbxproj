@@ -13,6 +13,8 @@
 		6E33AD3C1AA594E800F9FB58 /* SingleRevoluteJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E33AD381AA594E800F9FB58 /* SingleRevoluteJoint.cpp */; };
 		6E33AD3F1AA5955D00F9FB58 /* KeyboardMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E33AD3D1AA5955D00F9FB58 /* KeyboardMenu.cpp */; };
 		6E35B0371B4FCF1A007808F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E35B0361B4FCF1A007808F0 /* Images.xcassets */; };
+		6E5ACDC31B68A2E80052FE08 /* EntityFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5ACDC11B68A2E80052FE08 /* EntityFactory.cpp */; };
+		6E5ACDC61B68A2F00052FE08 /* Caret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5ACDC51B68A2F00052FE08 /* Caret.cpp */; };
 		6E745C5B1A1B79AE001595DE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E745C5A1A1B79AE001595DE /* OpenGLES.framework */; };
 		6E745C5D1A1B79B3001595DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E745C5C1A1B79B3001595DE /* QuartzCore.framework */; };
 		6E745C5F1A1B79BC001595DE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E745C5E1A1B79BC001595DE /* CoreMotion.framework */; };
@@ -174,6 +176,10 @@
 		6E33AD3D1AA5955D00F9FB58 /* KeyboardMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyboardMenu.cpp; sourceTree = "<group>"; };
 		6E33AD3E1AA5955D00F9FB58 /* KeyboardMenu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KeyboardMenu.hpp; sourceTree = "<group>"; };
 		6E35B0361B4FCF1A007808F0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		6E5ACDC11B68A2E80052FE08 /* EntityFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityFactory.cpp; sourceTree = "<group>"; };
+		6E5ACDC21B68A2E80052FE08 /* EntityFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityFactory.hpp; sourceTree = "<group>"; };
+		6E5ACDC41B68A2F00052FE08 /* Carat.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Carat.hpp; sourceTree = "<group>"; };
+		6E5ACDC51B68A2F00052FE08 /* Caret.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Caret.cpp; sourceTree = "<group>"; };
 		6E745C051A1B744E001595DE /* RicketyRacquet iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RicketyRacquet iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E745C091A1B744E001595DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E745C5A1A1B79AE001595DE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -715,6 +721,8 @@
 		6E745E3D1A1B7C11001595DE /* gui */ = {
 			isa = PBXGroup;
 			children = (
+				6E5ACDC41B68A2F00052FE08 /* Carat.hpp */,
+				6E5ACDC51B68A2F00052FE08 /* Caret.cpp */,
 				6ED3AE761B4D942A00E32567 /* AchievementMenu.cpp */,
 				6ED3AE771B4D942A00E32567 /* AchievementMenu.hpp */,
 				6ED3AE781B4D942A00E32567 /* InteractiveLabel.cpp */,
@@ -819,6 +827,8 @@
 		6E745E911A1B7C12001595DE /* model */ = {
 			isa = PBXGroup;
 			children = (
+				6E5ACDC11B68A2E80052FE08 /* EntityFactory.cpp */,
+				6E5ACDC21B68A2E80052FE08 /* EntityFactory.hpp */,
 				6E33AD321AA594E800F9FB58 /* joint */,
 				6E745E921A1B7C12001595DE /* AnimatedGraphics.hpp */,
 				6E745E931A1B7C12001595DE /* Background.cpp */,
@@ -1204,6 +1214,7 @@
 				6E745F401A1B7C12001595DE /* KeyProvider.cpp in Sources */,
 				6E745F4E1A1B7C12001595DE /* BallHUD.cpp in Sources */,
 				6E745F961A1B7C12001595DE /* HighScoreState.cpp in Sources */,
+				6E5ACDC61B68A2F00052FE08 /* Caret.cpp in Sources */,
 				6E745F4F1A1B7C12001595DE /* FPSCounterHUD.cpp in Sources */,
 				6E745FA81A1B7C12001595DE /* ScrollView.cpp in Sources */,
 				6E745F6C1A1B7C12001595DE /* Level.cpp in Sources */,
@@ -1250,6 +1261,7 @@
 				6E745F9D1A1B7C12001595DE /* NewHighScoreState.cpp in Sources */,
 				6E745FA61A1B7C12001595DE /* Input.cpp in Sources */,
 				6E745F431A1B7C12001595DE /* Button.cpp in Sources */,
+				6E5ACDC31B68A2E80052FE08 /* EntityFactory.cpp in Sources */,
 				6E745F7A1A1B7C12001595DE /* HorizontalHalvesTransition.cpp in Sources */,
 				6ED3AE611B4D8CD500E32567 /* Achievement.cpp in Sources */,
 				6E745F6E1A1B7C12001595DE /* ParallaxLayer.cpp in Sources */,
@@ -1435,14 +1447,8 @@
 		6E745C2A1A1B744E001595DE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
-				"ARCHS[sdk=iphoneos*]" = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD)";
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREPROCESSOR_DEFINITIONS = IOS;
