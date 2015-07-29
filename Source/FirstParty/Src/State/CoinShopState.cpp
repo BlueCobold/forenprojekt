@@ -134,20 +134,15 @@ StateChangeInformation CoinShopState::update(const float time)
     case CoinShopMenu::BUTTON_CLOSE:
         if(m_transitionStateInfo.m_followingState == LevelPreviewStateId)
         {
-            m_levelPreviewInfo.m_level = m_level;
-            m_levelPreviewInfo.m_levelNumber = m_levelNumber;
-            m_levelPreviewInfo.m_prepareOnly = false;
             m_levelPreviewInfo.m_returnFromPause = false;
             m_transitionStateInfo.m_onEnterInformation = &m_levelPreviewInfo;
         }
         else if(m_transitionStateInfo.m_followingState == PauseStateId)
-        {
-            m_pauseStateInfo.m_level = m_level;
-            m_pauseStateInfo.m_levelNumber = m_levelNumber;
-            m_pauseStateInfo.m_prepareOnly = false;
             m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
-        }
-        m_transitionStateInfo.m_level = m_level;
+
+        m_levelPreviewInfo.m_level = m_level;
+        m_levelPreviewInfo.m_levelNumber = m_levelNumber;
+        m_levelPreviewInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_comeFromeState = CoinShopStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
@@ -216,8 +211,8 @@ void CoinShopState::draw(const DrawParameter& params)
     }
     else
         whiteRect.setFillColor(sf::Color(255, 255, 255, 255));
-    params.getTarget().draw(whiteRect);
 
+    params.getTarget().draw(whiteRect);
     m_menu.draw(params);
 }
 

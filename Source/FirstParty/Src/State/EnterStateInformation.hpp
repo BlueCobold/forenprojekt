@@ -3,12 +3,10 @@
 #ifndef ENTERSTATEINFORMATION_HPP
 #define ENTERSTATEINFORMATION_HPP
 
-//#include "../model/Level.hpp"
-#include "State.hpp"
 
 #include <memory>
 #ifdef LEVELTESTING
-#include <iostream>
+#include <string>
 #endif
 
 class Level;
@@ -75,4 +73,5 @@ public:
     std::string m_file;
 #endif
 };
+
 #endif // ENTERSTATEINFORMATION_HPP
