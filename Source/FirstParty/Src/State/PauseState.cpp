@@ -21,7 +21,8 @@ PauseState::PauseState(sf::RenderWindow& screen,
     m_background(nullptr),
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
-    m_levelNumber(0)
+    m_levelNumber(0),
+    m_optionStateInfo(PauseStateId)
 {
 }
 

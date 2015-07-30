@@ -44,9 +44,6 @@ StateChangeInformation GameFinishedState::update(const float time)
 
     if(clicked == GameFinishedMenu::BUTTON_CLOSE)
     {
-        m_stateInfo.m_prepareOnly = false;
-        m_stateInfo.m_level = nullptr;
-        m_stateInfo.m_levelNumber = 1;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         m_transitionStateInfo.m_comeFromeState = GameFinishedStateId;

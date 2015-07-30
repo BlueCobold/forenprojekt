@@ -16,6 +16,12 @@ class State;
 class EnterStateInformation
 {
 public:
+    EnterStateInformation() :
+        m_level(nullptr),
+        m_prepareOnly(false),
+        m_levelNumber(1)
+    { }
+
     virtual ~EnterStateInformation()
     { }
 
@@ -50,6 +56,10 @@ public:
 class EnterOptionStateInformation : public EnterStateInformation
 {
 public:
+    EnterOptionStateInformation(StateId fromStateId) :
+        m_comeFromState(fromStateId)
+    { }
+
     StateId m_comeFromState;
 };
 
@@ -68,6 +78,10 @@ public:
 class EnterLoadLevelStateInformation : public EnterStateInformation
 {
 public:
+    EnterLoadLevelStateInformation() : 
+        m_directPlay(false)
+    { }
+
     bool m_directPlay;
 #ifdef LEVELTESTING
     std::string m_file;

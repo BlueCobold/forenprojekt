@@ -17,7 +17,8 @@ MainMenuState::MainMenuState(sf::RenderWindow& screen,
                              ResourceManager& resourceManager, 
                              AppConfig& config) :
     State(screen, resourceManager, config),
-    m_menu(screen, resourceManager)
+    m_menu(screen, resourceManager),
+    m_optionStateInfo(MainMenuStateId)
 {
 }
 
@@ -47,10 +48,7 @@ StateChangeInformation MainMenuState::update(const float time)
 
     if(clicked == MainMenu::BUTTON_START_NEW_GAME)
     {
-        m_loadLevelStateInfo.m_prepareOnly = false;
-        m_loadLevelStateInfo.m_level = nullptr;
-        m_loadLevelStateInfo.m_levelNumber = 1;
-        m_loadLevelStateInfo.m_directPlay = false;
+        m_loadLevelStateInfo = EnterLoadLevelStateInformation();
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
         m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
@@ -59,9 +57,7 @@ StateChangeInformation MainMenuState::update(const float time)
     }
     else if(clicked == MainMenu::BUTTON_OPTIONS)
     {
-        m_optionStateInfo.m_comeFromState = MainMenuStateId;
-        m_optionStateInfo.m_level = nullptr;
-        m_optionStateInfo.m_prepareOnly = false;
+        m_optionStateInfo = EnterOptionStateInformation(MainMenuStateId);
         m_transitionStateInfo.m_followingState = OptionMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_optionStateInfo;
         m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
@@ -70,8 +66,7 @@ StateChangeInformation MainMenuState::update(const float time)
     }
     else if(clicked == MainMenu::BUTTON_CREDITS)
     {
-        m_stateInfo.m_prepareOnly = false;
-        m_stateInfo.m_level = nullptr;
+        m_stateInfo = EnterStateInformation();
         m_transitionStateInfo.m_followingState = CreditMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
@@ -90,8 +85,7 @@ StateChangeInformation MainMenuState::update(const float time)
                 m_loadLevelStateInfo.m_file = ofd.getFile();
             else
                 return StateChangeInformation::Empty();
-            m_loadLevelStateInfo.m_level = nullptr;
-            m_loadLevelStateInfo.m_prepareOnly = false;
+            m_loadLevelStateInfo = EnterLoadLevelStateInformation();
             m_loadLevelStateInfo.m_levelNumber = 0;
             m_loadLevelStateInfo.m_directPlay = true;
             m_transitionStateInfo.m_followingState = LoadLevelStateId;
@@ -102,8 +96,7 @@ StateChangeInformation MainMenuState::update(const float time)
         }
         else
         {
-            m_stateInfo.m_prepareOnly = false;
-            m_stateInfo.m_level = nullptr;
+            m_stateInfo = EnterStateInformation();
             m_transitionStateInfo.m_followingState = LevelSelectStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
             m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
@@ -111,8 +104,7 @@ StateChangeInformation MainMenuState::update(const float time)
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
 #else
-        m_stateInfo.m_prepareOnly = false;
-        m_stateInfo.m_level = nullptr;
+        m_stateInfo = EnterStateInformation();
         m_transitionStateInfo.m_followingState = LevelSelectStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
@@ -124,9 +116,7 @@ StateChangeInformation MainMenuState::update(const float time)
         State::m_screen.close();
     else if(utility::Keyboard.isKeyDown(sf::Keyboard::A) || utility::Keyboard.isKeyPressed(sf::Keyboard::A))
     {
-        m_optionStateInfo.m_comeFromState = MainMenuStateId;
-        m_optionStateInfo.m_level = nullptr;
-        m_optionStateInfo.m_prepareOnly = false;
+        m_optionStateInfo = EnterOptionStateInformation(MainMenuStateId);
         m_transitionStateInfo.m_followingState = AchievementStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_optionStateInfo;
         m_transitionStateInfo.m_comeFromeState = MainMenuStateId;

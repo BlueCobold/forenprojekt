@@ -119,8 +119,8 @@ void AchievementState::updateRightButton()
 
 void AchievementState::updateButtons()
 {
-//    updateRightButton();
-//    updateLeftButton();
+    updateRightButton();
+    updateLeftButton();
 }
 
 void AchievementState::updateAchievementData()
