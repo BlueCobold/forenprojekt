@@ -20,6 +20,8 @@ MainMenuState::MainMenuState(sf::RenderWindow& screen,
     m_menu(screen, resourceManager),
     m_optionStateInfo(MainMenuStateId)
 {
+    m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
+    m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
 }
 
 MainMenuState::~MainMenuState()
@@ -51,8 +53,6 @@ StateChangeInformation MainMenuState::update(const float time)
         m_loadLevelStateInfo = EnterLoadLevelStateInformation();
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
-        m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == MainMenu::BUTTON_OPTIONS)
@@ -60,8 +60,6 @@ StateChangeInformation MainMenuState::update(const float time)
         m_optionStateInfo = EnterOptionStateInformation(MainMenuStateId);
         m_transitionStateInfo.m_followingState = OptionMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_optionStateInfo;
-        m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == MainMenu::BUTTON_CREDITS)
@@ -69,8 +67,6 @@ StateChangeInformation MainMenuState::update(const float time)
         m_stateInfo = EnterStateInformation();
         m_transitionStateInfo.m_followingState = CreditMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
-        m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == MainMenu::BUTTON_SELECT_LEVEL)
@@ -90,8 +86,6 @@ StateChangeInformation MainMenuState::update(const float time)
             m_loadLevelStateInfo.m_directPlay = true;
             m_transitionStateInfo.m_followingState = LoadLevelStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
-            m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
-            m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
         else
@@ -99,16 +93,12 @@ StateChangeInformation MainMenuState::update(const float time)
             m_stateInfo = EnterStateInformation();
             m_transitionStateInfo.m_followingState = LevelSelectStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
-            m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
-            m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
 #else
         m_stateInfo = EnterStateInformation();
         m_transitionStateInfo.m_followingState = LevelSelectStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
-        m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 #endif
     }
@@ -119,8 +109,6 @@ StateChangeInformation MainMenuState::update(const float time)
         m_optionStateInfo = EnterOptionStateInformation(MainMenuStateId);
         m_transitionStateInfo.m_followingState = AchievementStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_optionStateInfo;
-        m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 
