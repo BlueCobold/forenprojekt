@@ -25,6 +25,8 @@ AchievementState::AchievementState(sf::RenderWindow& screen,
         updateAchievementData();
         updateButtons();
     }
+    m_transitionStateInfo.m_comeFromeState = AchievementStateId;
+    m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
 }
 
 AchievementState::~AchievementState()
@@ -48,12 +50,8 @@ StateChangeInformation AchievementState::update(const float time)
 
     if(clicked == AchievementMenu::BUTTON_MAIN_MENU)
     {
-        m_stateInfo.m_level = nullptr;
-        m_stateInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
-        m_transitionStateInfo.m_comeFromeState = AchievementStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 
