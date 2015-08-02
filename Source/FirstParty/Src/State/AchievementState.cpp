@@ -17,7 +17,8 @@ AchievementState::AchievementState(sf::RenderWindow& screen,
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_achievementManager(achievementManager),
-    m_currentAchievementIndex(0)
+    m_currentAchievementIndex(0),
+    m_transitionStateInfo(AchievementStateId)
 {
     auto achievement = m_achievementManager.getAchievement(m_currentAchievementIndex);
     if(achievement)

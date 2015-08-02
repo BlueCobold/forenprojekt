@@ -3,6 +3,7 @@
 #ifndef ENTERSTATEINFORMATION_HPP
 #define ENTERSTATEINFORMATION_HPP
 
+#include "../rendering/transitions/RandomTransition.hpp"
 
 #include <memory>
 #ifdef LEVELTESTING
@@ -37,6 +38,11 @@ class EnterPauseStateInformation : public EnterStateInformation
 class EnterTransitionStateInformation : public EnterStateInformation
 {
 public:
+    EnterTransitionStateInformation(StateId sourceState) :
+        m_comeFromeState(sourceState),
+        m_transitionType(RandomTransition::TypeCount)
+    { }
+
     StateId m_followingState;
     StateId m_comeFromeState;
     EnterStateInformation* m_onEnterInformation;

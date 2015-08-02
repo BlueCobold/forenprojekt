@@ -3,7 +3,6 @@
 #include "../gui/Button.hpp"
 #include "../model/Level.hpp"
 #include "../resources/Config.hpp"
-#include "../rendering/transitions/RandomTransition.hpp"
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
@@ -14,7 +13,8 @@ OptionMenuState::OptionMenuState(sf::RenderWindow& screen,
     m_menu(screen, resourceManager, config),
     m_HUD(resourceManager, config),
     m_level(nullptr),
-    m_clicked(-1)
+    m_clicked(-1),
+    m_transitionStateInfo(OptionMenuStateId)
 {
     auto buttonFunc = [&](const Button& sender){ m_clicked = sender.getId(); };
     m_menu.getButton(OptionMenu::BUTTON_ARROW_LEFT).registerOnPressed(buttonFunc);
@@ -59,8 +59,6 @@ StateChangeInformation OptionMenuState::update(const float time)
         m_pauseStateInfo.m_level = m_level;
         m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
         m_menu.applyChanges();
-        m_transitionStateInfo.m_comeFromeState = OptionMenuStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(m_clicked == OptionMenu::BUTTON_ARROW_LEFT)

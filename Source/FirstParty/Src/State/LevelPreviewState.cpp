@@ -15,7 +15,8 @@ LevelPreviewState::LevelPreviewState(sf::RenderWindow& screen,
     m_HUD(resourceManager, config),
     m_level(nullptr),
     m_levelUpdated(false),
-    m_levelNumber(0)
+    m_levelNumber(0),
+    m_transitionStateInfo(LevelPreviewStateId)
 {
     m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
     m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(true);
@@ -96,8 +97,6 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_playStateInfo.m_levelNumber = m_levelNumber;
         m_transitionStateInfo.m_followingState = PlayStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
-        m_transitionStateInfo.m_comeFromeState = LevelPreviewStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == LevelPreviewMenu::BUTTON_MAIN_MENU)
@@ -108,8 +107,6 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_playStateInfo.m_levelNumber = m_levelNumber;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
-        m_transitionStateInfo.m_comeFromeState = LevelPreviewStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == LevelPreviewMenu::BUTTON_COINS)
@@ -120,8 +117,6 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_coinShopStateInfo.m_levelNumber = m_levelNumber;
         m_transitionStateInfo.m_followingState = CoinShopStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_coinShopStateInfo;
-        m_transitionStateInfo.m_comeFromeState = LevelPreviewStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == LevelPreviewMenu::BUTTON_HIGHSCORE)
@@ -131,8 +126,6 @@ StateChangeInformation LevelPreviewState::update(const float time)
         m_highScoreInfo.m_levelNumber = m_levelNumber;
         m_transitionStateInfo.m_followingState = HighScoreStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_highScoreInfo;
-        m_transitionStateInfo.m_comeFromeState = LevelPreviewStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 

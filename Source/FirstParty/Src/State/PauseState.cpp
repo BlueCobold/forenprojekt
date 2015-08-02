@@ -5,7 +5,6 @@
 #include "../model/Level.hpp"
 #include "../resources/Config.hpp"
 #include "../resources/ResourceManager.hpp"
-#include "../rendering/transitions/RandomTransition.hpp"
 
 #include <memory>
 
@@ -22,7 +21,8 @@ PauseState::PauseState(sf::RenderWindow& screen,
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_levelNumber(0),
-    m_optionStateInfo(PauseStateId)
+    m_optionStateInfo(PauseStateId),
+    m_transitionStateInfo(PauseStateId)
 {
 }
 
@@ -69,8 +69,6 @@ StateChangeInformation PauseState::update(const float time)
         m_transitionStateInfo.m_level = m_level;
         m_transitionStateInfo.m_followingState = PlayStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
-        m_transitionStateInfo.m_comeFromeState = PauseStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(clicked == PauseMenu::BUTTON_OPTIONS)

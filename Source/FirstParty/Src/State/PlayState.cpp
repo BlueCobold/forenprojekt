@@ -19,7 +19,8 @@ PlayState::PlayState(sf::RenderWindow& screen,
     m_hud(resourceManager, config),
     m_shouldPause(false),
     m_minPoints(0),
-    m_onlineHighScoreLoaderJob(nullptr)
+    m_onlineHighScoreLoaderJob(nullptr),
+    m_transitionStateInfo(PlayStateId)
 {
     m_onlineHighScoreLoaderJob = std::unique_ptr<BackgroundLoader<PlayState>>(new BackgroundLoader<PlayState>(&PlayState::loadOnlineHighscore, *this));
 }
@@ -87,8 +88,6 @@ StateChangeInformation PlayState::update(const float time)
             m_loadLevelStateInfo.m_prepareOnly = false;
             m_transitionStateInfo.m_followingState = LoadLevelStateId;
             m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
-            m_transitionStateInfo.m_comeFromeState = PlayStateId;
-            m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 #else
             m_loadLevelStateInfo.m_prepareOnly = false;

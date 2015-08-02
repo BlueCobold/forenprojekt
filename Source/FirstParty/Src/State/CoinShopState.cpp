@@ -4,7 +4,6 @@
 #include "../Input.hpp"
 #include "../resources/Config.hpp"
 #include "../resources/ResourceManager.hpp"
-#include "../rendering/transitions/RandomTransition.hpp"
 #include "../model/Level.hpp"
 #include "EnterStateInformation.hpp"
 #include "../resources/AppConfig.hpp"
@@ -25,7 +24,8 @@ CoinShopState::CoinShopState(sf::RenderWindow& screen,
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_clicked(-1),
-    m_achievementManager(achievementManager)
+    m_achievementManager(achievementManager),
+    m_transitionStateInfo(CoinShopStateId)
 {
     auto buttonFunc = [&](const Button& sender){ m_clicked = sender.getId(); };
     m_menu.getButton(CoinShopMenu::BUTTON_GRAVITY_PLUS).registerOnPressed(buttonFunc);
@@ -142,9 +142,6 @@ StateChangeInformation CoinShopState::update(const float time)
 
         m_levelPreviewInfo.m_level = m_level;
         m_levelPreviewInfo.m_levelNumber = m_levelNumber;
-        m_levelPreviewInfo.m_prepareOnly = false;
-        m_transitionStateInfo.m_comeFromeState = CoinShopStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     case CoinShopMenu::BUTTON_GRAVITY_PLUS:
         {

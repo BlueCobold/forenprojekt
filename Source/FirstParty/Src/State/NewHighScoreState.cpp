@@ -21,7 +21,8 @@ NewHighScoreState::NewHighScoreState(sf::RenderWindow& screen,
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_replay(false),
-    m_lastName("")
+    m_lastName(""),
+    m_transitionStateInfo(NewHighScoreStateId)
 {
 }
 
@@ -81,10 +82,8 @@ StateChangeInformation NewHighScoreState::update(const float time)
 
         m_stateInfo.m_levelNumber = m_level->number();
         m_stateInfo.m_level = m_level;
-        m_stateInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         m_transitionStateInfo.m_followingState = LevelPassStateId;
-        m_transitionStateInfo.m_comeFromeState = NewHighScoreStateId;
         m_transitionStateInfo.m_transitionType = RandomTransition::Alpha;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }

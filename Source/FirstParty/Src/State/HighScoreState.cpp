@@ -25,7 +25,8 @@ HighScoreState::HighScoreState(sf::RenderWindow& screen,
     m_showPoints(true),
     m_clicked(-1),
     m_offset(0, 60),
-    m_offsetAdded(false)
+    m_offsetAdded(false),
+    m_transitionStateInfo(HighScoreStateId)
 { 
     m_onlineHighscoreLoaderJob = std::unique_ptr<BackgroundLoader<HighScoreState>>(new BackgroundLoader<HighScoreState>(&HighScoreState::loadOnlineHighscore, *this));
 
@@ -117,7 +118,6 @@ StateChangeInformation HighScoreState::update(const float time)
         m_stateInfo.m_level = m_highScoreStateInfo.m_level;
         m_stateInfo.m_levelNumber = m_highScoreStateInfo.m_levelNumber;
         m_transitionStateInfo.m_followingState = m_highScoreStateInfo.m_comeFromState;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         m_onlineHighscoreLoaderJob->reset();
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
 

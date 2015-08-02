@@ -8,7 +8,8 @@
 StartState::StartState(sf::RenderWindow& screen, 
                        ResourceManager& resourceManager, 
                        AppConfig& config) :
-    State(screen, resourceManager, config)
+    State(screen, resourceManager, config),
+    m_transitionStateInfo(StartStateId)
 {
 }
 
@@ -23,12 +24,8 @@ void StartState::onEnter(const EnterStateInformation* enterInformation, const fl
 
 StateChangeInformation StartState::update(const float time)
 {
-    m_stateInfo.m_prepareOnly = false;
-    m_stateInfo.m_level = nullptr;
     m_transitionStateInfo.m_followingState = MainMenuStateId;
     m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
-    m_transitionStateInfo.m_comeFromeState = StartStateId;
-    m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
     return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 }
 

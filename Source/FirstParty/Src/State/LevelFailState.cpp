@@ -21,7 +21,8 @@ LevelFailState::LevelFailState(sf::RenderWindow& screen,
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_replay(false),
-    m_achievementManager(achievementManager)
+    m_achievementManager(achievementManager),
+    m_transitionStateInfo(LevelFailStateId)
 {
 }
 
@@ -77,22 +78,16 @@ StateChangeInformation LevelFailState::update(const float time)
             m_loadLevelStateInfo.m_directPlay = false;
             m_loadLevelStateInfo.m_levelNumber = m_playStateInfo.m_levelNumber;
         }
-        m_loadLevelStateInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
-        m_transitionStateInfo.m_comeFromeState = LevelFailStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         m_achievementManager.saveValues();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 #else
-        m_loadLevelStateInfo.m_prepareOnly = false;
         m_loadLevelStateInfo.m_level = m_level;
         m_loadLevelStateInfo.m_directPlay = false;
         m_loadLevelStateInfo.m_levelNumber = m_playStateInfo.m_levelNumber;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
-        m_transitionStateInfo.m_comeFromeState = LevelFailStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         m_achievementManager.saveValues();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 #endif
@@ -103,8 +98,6 @@ StateChangeInformation LevelFailState::update(const float time)
         m_playStateInfo.m_level = nullptr;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
-        m_transitionStateInfo.m_comeFromeState = LevelFailStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         m_achievementManager.saveValues();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
@@ -114,8 +107,6 @@ StateChangeInformation LevelFailState::update(const float time)
         m_highScoreInfo.m_comeFromState = LevelFailStateId;
         m_transitionStateInfo.m_followingState = HighScoreStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_highScoreInfo;
-        m_transitionStateInfo.m_comeFromeState = LevelFailStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 

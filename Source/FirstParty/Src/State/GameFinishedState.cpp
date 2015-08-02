@@ -14,7 +14,8 @@ GameFinishedState::GameFinishedState(sf::RenderWindow& screen,
                                      ResourceManager& resourceManager, 
                                      AppConfig& config) :
     State(screen, resourceManager, config),
-    m_menu(screen, resourceManager)
+    m_menu(screen, resourceManager),
+    m_transitionStateInfo(GameFinishedStateId)
 {
 }
 
@@ -46,8 +47,6 @@ StateChangeInformation GameFinishedState::update(const float time)
     {
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
-        m_transitionStateInfo.m_comeFromeState = GameFinishedStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 

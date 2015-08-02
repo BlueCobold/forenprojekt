@@ -19,7 +19,8 @@ LevelSelectState::LevelSelectState(sf::RenderWindow& screen,
     State(screen, resourceManager, config),
     m_menu(screen, resourceManager),
     m_currentLevelNumber(1),
-    m_unlockedLevel(1)
+    m_unlockedLevel(1),
+    m_transitionStateInfo(LevelSelectStateId)
 {
     loadLevelInfos();
     auto captionName = m_levelNames.find(1);
@@ -62,24 +63,15 @@ StateChangeInformation LevelSelectState::update(const float time)
 
     if(clicked == LevelSelectMenu::BUTTON_MAIN_MENU)
     {
-        m_stateInfo.m_level = nullptr;
-        m_stateInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
-        m_transitionStateInfo.m_comeFromeState = LevelSelectStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     if(clicked == LevelSelectMenu::BUTTON_SHOW_DETAILS && !(m_currentLevelNumber > m_unlockedLevel))
     {
-        m_loadLevelStateInfo.m_level = nullptr;
-        m_loadLevelStateInfo.m_prepareOnly = false;
         m_loadLevelStateInfo.m_levelNumber = m_currentLevelNumber;
-        m_loadLevelStateInfo.m_directPlay = false;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
-        m_transitionStateInfo.m_comeFromeState = LevelSelectStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     if(clicked == LevelSelectMenu::BUTTON_LEFT)

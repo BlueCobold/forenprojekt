@@ -9,7 +9,8 @@ CreditMenuState::CreditMenuState(sf::RenderWindow& screen,
                                  ResourceManager& resourceManager, 
                                  AppConfig& config) :
     State(screen, resourceManager, config),
-    m_menu(screen, resourceManager)
+    m_menu(screen, resourceManager),
+    m_transitionStateInfo(CreditMenuStateId)
 {
 }
 
@@ -37,12 +38,8 @@ StateChangeInformation CreditMenuState::update(const float time)
 
     if(clicked == CreditMenu::BUTTON_CLOSE)
     {
-        m_stateInfo.m_level = nullptr;
-        m_stateInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
-        m_transitionStateInfo.m_comeFromeState = CreditMenuStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 

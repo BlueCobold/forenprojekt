@@ -23,7 +23,8 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
     m_lastLevel(nullptr),
     m_levelLoaderJob(nullptr),    
     m_currentLevel(1),
-    m_directPlay(false)
+    m_directPlay(false),
+    m_transitionStateInfo(LoadLevelStateId)
 {
     m_loadingErrorMessage = "";
     m_levelLoaderJob = std::unique_ptr<BackgroundLoader<LoadLevelState>>(new BackgroundLoader<LoadLevelState>(&LoadLevelState::loadLevel, *this));
@@ -78,8 +79,6 @@ StateChangeInformation LoadLevelState::update(const float time)
             m_transitionStateInfo.m_followingState = LevelPreviewStateId;
 
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
-        m_transitionStateInfo.m_comeFromeState = LoadLevelStateId;
-        m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
         m_levelLoaderJob->reset();
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }

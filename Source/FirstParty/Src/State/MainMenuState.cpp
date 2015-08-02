@@ -18,10 +18,9 @@ MainMenuState::MainMenuState(sf::RenderWindow& screen,
                              AppConfig& config) :
     State(screen, resourceManager, config),
     m_menu(screen, resourceManager),
-    m_optionStateInfo(MainMenuStateId)
+    m_optionStateInfo(MainMenuStateId),
+    m_transitionStateInfo(MainMenuStateId)
 {
-    m_transitionStateInfo.m_comeFromeState = MainMenuStateId;
-    m_transitionStateInfo.m_transitionType = RandomTransition::TypeCount;
 }
 
 MainMenuState::~MainMenuState()
