@@ -79,7 +79,7 @@ UnknownAchievementObject = Unknown achievement object: %.
 UnknownAchievementCondition = Unknown achievement condition: %.
 UnknownAchievementSpecifically = Unknown achievement specifically: %.
 DoubleAchievement = It exist allready a second achievement with id: %.
-AchievementLoadError = An error happens, while loading file: %.
+AchievementLoadError = An error happened, while loading file: %.
 UnknownPublicKey = PublicKey isn't registered: %.
 NoOriginalFile = This file '%' is not an original.
 ShaderFailed = The shader cannot be loaded (%, %).
@@ -89,6 +89,7 @@ JointCopyError = Different jointtyp can not copy.
 MultipleProducts = Found more then on product for a factory.
 NoCaret = No caret defined in XML-file.
 InvalidFactoryTime = Delays may not be 0.
+Error = Error
 
 [GUI]
 gui_game_paused = Game Paused
@@ -151,6 +152,7 @@ gui_highscore_skip = Skip
 gui_highscore_ok = Ok
 gui_highscore_time = Time
 gui_highscore_points = Points
+gui_alert_button_ok = Ok
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %

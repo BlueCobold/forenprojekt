@@ -15,6 +15,11 @@
 
 #import "MacHelper.hpp"
 
+namespace utility
+{
+    std::string translateKey(std::string key);
+}
+
 void minimize(void* handle){
 #ifdef IOS
 #else
@@ -80,6 +85,13 @@ std::string documentPathIos()
 void showErrorMac(const std::string& msg)
 {
 #ifdef IOS
+    @autoreleasepool {
+        auto title = [NSString stringWithCString:utility::translateKey("Error").c_str()  encoding:[NSString defaultCStringEncoding]];
+        auto message = [NSString stringWithCString:msg.c_str() encoding:[NSString defaultCStringEncoding]];
+        auto button = [NSString stringWithCString:utility::translateKey("gui_alert_button_ok").c_str() encoding:[NSString defaultCStringEncoding]];
+        auto alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:button otherButtonTitles: nil];
+        [alert show];
+    }
 #else
     @autoreleasepool
     {

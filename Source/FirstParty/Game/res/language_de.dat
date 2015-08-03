@@ -89,6 +89,7 @@ JointCopyError = Unterschiedliche Jointtypen können nicht kopiert werden
 MultipleProducts = Mehrere Produkte für eine Fabrik gefunden.
 NoCaret = Kein Textcursor in der XML-Datei Definiert.
 InvalidFactoryTime = Delays müssen größer als 0 sein.
+Error = Fehler
 
 [GUI]
 gui_game_paused = Spiel pausiert
@@ -151,6 +152,7 @@ gui_highscore_time = Zeit
 gui_highscore_points = Punkte
 gui_label_achievement_name = name
 gui_label_achievement_counter = counter
+gui_alert_button_ok = Ok
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilber: %\r\nbronze: %
