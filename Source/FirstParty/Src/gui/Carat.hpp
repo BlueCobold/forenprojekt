@@ -9,6 +9,7 @@
 
 class ResourceManager;
 class DrawParameter;
+
 namespace sf
 {
     class RenderWindow;
@@ -37,4 +38,4 @@ public:
     bool isActive();
 };
 
-#endif 
+#endif

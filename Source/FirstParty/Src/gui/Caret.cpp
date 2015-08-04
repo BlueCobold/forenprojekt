@@ -39,7 +39,7 @@ void Caret::update(const float time)
     if(m_nextFullFadeOut < time)
         m_nextFullFadeOut = time + m_blinkTime;
 
-    int alpha = static_cast<int>((m_nextFullFadeOut - time) / m_blinkTime * 255.f);
+    int alpha = static_cast<int>(pow(abs(sin(3.1415f * time / m_blinkTime)), 8) * 255.f);
 
     m_sprite.setColor(sf::Color(255, 255, 255, alpha));
 }
