@@ -449,20 +449,7 @@ bool Level::validate(const tinyxml2::XMLDocument& document)
         document.PrintError();
         return false;
     }
-
-    // TODO: really?
     return true;
-
-    // Check for required tags
-    bool tagCheck = true;
-    tagCheck &= (document.FirstChildElement("level") != nullptr);
-    tagCheck &= (document.FirstChildElement("level")->FirstChildElement("objects") != nullptr);
-    tagCheck &= (document.FirstChildElement("level")->FirstChildElement("world") != nullptr);
-    tagCheck &= (document.FirstChildElement("level")->FirstChildElement("grid") != nullptr);
-    tagCheck &= (document.FirstChildElement("level")->FirstChildElement("objects")
-        ->FirstChildElement("grid") != nullptr);
-
-    return tagCheck;
 }
 
 // Helper function to compute the area of a given polygon
@@ -505,7 +492,7 @@ void Level::parsePhysics(tinyxml2::XMLElement* physic,
         }
         // Construct the b2Shape
         std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
-        ps->Set(vertices.data(), vertices.size());
+        ps->Set(vertices.data(), static_cast<int>(vertices.size()));
         shapes.push_back(std::move(ps));
     }
     else if(std::string(shape->Attribute("type")) == "complex_polygon") // Load polygon
@@ -528,7 +515,7 @@ void Level::parsePhysics(tinyxml2::XMLElement* physic,
             // A wrong order can be fixed by simply reversing all given vertices.
             if(area < 0)
                 std::reverse(begin(vertices), end(vertices));
-            ps->Set(vertices.data(), vertices.size());
+            ps->Set(vertices.data(), static_cast<int>(vertices.size()));
             shapes.push_back(std::move(ps));
         }
     }
