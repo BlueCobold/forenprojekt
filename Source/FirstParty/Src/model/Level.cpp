@@ -196,10 +196,7 @@ void Level::update(const float elapsedTime)
 
 #ifdef _DEBUG
     if(utility::Keyboard.isKeyPressed(sf::Keyboard::Z))
-    {
-        sf::Vector2f ballpos = sf::Vector2f(utility::toPixel(m_ball->getPosition().x), utility::toPixel(m_ball->getPosition().y));
         m_scrollView.setZoomFactor(3.0f);
-    }
 #endif
 
     if(gravityEvent != m_gravityGoody.isActive())
