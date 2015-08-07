@@ -39,8 +39,9 @@ void AchievementManager::addAchievement(const std::string& name,
 {
     std::string id = Achievement::createId(condition, specifically, object, atOnceAmount);
 
-    for(auto it = m_achievements.begin(); it != m_achievements.begin(); ++it)
-        throw std::runtime_error(utility::replace(utility::translateKey("DoubleAchievement"), id));
+    for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
+        if(it->first == id)
+            throw std::runtime_error(utility::replace(utility::translateKey("DoubleAchievement"), id));
     
     m_achievements.push_back(std::make_pair(id, Achievement(name, condition, specifically, object, bronze, silver, gold, atOnceAmount)));
 }
