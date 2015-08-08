@@ -78,7 +78,7 @@ public:
 
     int getOffscreenCount() const
     {
-        return m_buffers.size() - 1;
+        return static_cast<int>(m_buffers.size()) - 1;
     }
 
 private:
