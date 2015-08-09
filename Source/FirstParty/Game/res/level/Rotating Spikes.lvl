@@ -1,0 +1,212 @@
+<level>
+	<levelinfo name="Rotating Spikes">
+		<infoimage spriteSheet="gui_elements" sprite="preview: Beginner Level" />
+	</levelinfo>
+	<medal bronze="250" silver="300" gold="450" />
+	<gameplay maxBalls="5" />
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+		
+		<shapes>
+			<shape name="spike_okpart" type="complex_polygon">
+				<polygon>
+					<vertex x="-60" y="59" />
+					<vertex x="-52" y="32" />
+					<vertex x="-44" y="32" />
+					<vertex x="-37" y="59" />
+				</polygon>
+				<polygon>
+					<vertex x="-36" y="59" />
+					<vertex x="-28" y="32" />
+					<vertex x="-20" y="32" />
+					<vertex x="-13" y="59" />
+				</polygon>
+				<polygon>
+					<vertex x="-12" y="59" />
+					<vertex x="-4" y="32" />
+					<vertex x="4" y="32" />
+					<vertex x="11" y="59" />
+				</polygon>
+				<polygon>
+					<vertex x="12" y="59" />
+					<vertex x="20" y="32" />
+					<vertex x="28" y="32" />
+					<vertex x="35" y="59" />
+				</polygon>
+				<polygon>
+					<vertex x="36" y="59" />
+					<vertex x="44" y="32" />
+					<vertex x="52" y="32" />
+					<vertex x="59" y="59" />
+				</polygon>
+			</shape>
+			<shape name="spike_killer" type="complex_polygon">
+				<polygon>
+					<vertex x="-52" y="32" />
+					<vertex x="-48" y="19" />
+					<vertex x="-47" y="19" />
+					<vertex x="-44" y="32" />
+				</polygon>
+				<polygon>
+					<vertex x="-28" y="32" />
+					<vertex x="-24" y="19" />
+					<vertex x="-23" y="19" />
+					<vertex x="-20" y="32" />
+				</polygon>
+				<polygon>
+					<vertex x="-4" y="32" />
+					<vertex x="0" y="19" />
+					<vertex x="1" y="19" />
+					<vertex x="4" y="32" />
+				</polygon>
+				<polygon>
+					<vertex x="20" y="32" />
+					<vertex x="24" y="19" />
+					<vertex x="25" y="19" />
+					<vertex x="28" y="32" />
+				</polygon>
+				<polygon>
+					<vertex x="44" y="32" />
+					<vertex x="48" y="19" />
+					<vertex x="49" y="19" />
+					<vertex x="52" y="32" />
+				</polygon>
+			</shape>
+		</shapes>
+		<physics>
+			<physic name="rotating_spikes">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<rotation>
+							<mul>
+								<static value="60" />
+								<time />
+							</mul>
+						</rotation>
+			
+						<position axis="x">
+						<add>
+							<mul> 
+								<sine>
+									<mul>
+										<time />
+										<static value="-60" />
+									</mul>
+								</sine> 
+								<static value="240" /> 
+							</mul>
+							<static value="60" />
+						</add>
+						</position>
+						<position axis="y"> 
+							<mul> 
+								<sine> 
+									<add>
+										<static value="90" /> 
+										<mul> 
+											<time /> 
+											<static value="-60" /> 
+										</mul>
+									</add>
+								</sine> 
+								<static value="240" />
+							</mul> 
+						</position> 
+					</kinematics>
+				</body>
+				<fixture density="0.5" friction="0.8" restitution="0.1" />
+			</physic>
+			<physic name="rotating_spikes2">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<rotation>
+							<mul>
+								<static value="60" />
+								<time />
+							</mul>
+						</rotation>
+						<position axis="x">
+							<mul> 
+								<sine>
+									<mul>
+										<time />
+										<static value="-60" />
+									</mul>
+								</sine> 
+								<static value="240" /> 
+							</mul>
+						</position>
+						<position axis="y"> 
+							<mul> 
+								<sine> 
+									<add>
+										<static value="90" /> 
+										<mul> 
+											<time /> 
+											<static value="-60" /> 
+										</mul>
+									</add>
+								</sine> 
+								<static value="240" />
+							</mul> 
+						</position> 
+					</kinematics>
+				</body>
+				<fixture density="0.5" friction="0.8" restitution="0.1" />
+			</physic>
+		</physics>
+		<entities>
+			<entity name="spike_okpart" rep="^O" type="entity" collideWithBall="true" >
+				<physics name="rotating_spikes" shape="spike_okpart" />
+				<animations>
+					<animation texture="gravity_arrow" midx="60" midy="-20"srcx="224" srcy="128" width="24" height="40" rotate="true" />
+					<animation texture="gravity_arrow" midx="36" midy="-20" srcx="224" srcy="128" width="24" height="40" rotate="true" />
+					<animation texture="gravity_arrow" midx="12" midy="-20" srcx="224" srcy="128" width="24" height="40" rotate="true" />
+					<animation texture="gravity_arrow" midx="-12" midy="-20" srcx="224" srcy="128" width="24" height="40" rotate="true" />
+					<animation texture="gravity_arrow" midx="-36" midy="-20" srcx="224" srcy="128" width="24" height="40" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="spike_okpart" rep="^X" type="entity" collideWithBall="true">
+				<physics name="rotating_spikes2" shape="spike_killer" />
+				<onCollision>
+					<killBall />
+				</onCollision>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="2460" height="1440">
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                      gagb                                                  
+                                    /1w1w2\1                                  
+                              go/1w3w2    w4w6\2gi                                
+                            gp/3d5w2w1  t1w5w3d1\4gj                                
+                          gr/6d4)1            (4d3\6gh                              
+                          /1d3)6                (2d5\1                            
+                        /6w2)4                    (1w6\3                            
+                        w2                            w2                            
+                        w5  t1          BB          t1w5                            
+                        w6\3          ^O^X          /6w4                            
+                        w1w2                      gow5w6                            
+                        (2d4\3gg                gp/1d6)3                            
+                          (6d5\1gh            gr/3d4)1                              
+                            (3d2\6            /2d5)2                                
+                              (1w4            w1)3                                  
+                                        TT                                          
+                                                                                    
+                                                                                    
+                                                                                    
+	</grid>	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+</level>
