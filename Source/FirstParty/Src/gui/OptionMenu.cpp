@@ -233,7 +233,7 @@ void OptionMenu::prevVideoMode()
 {
     m_currentVideoModeIndex--;
     if(m_currentVideoModeIndex < 0)
-        m_currentVideoModeIndex = m_availableVideoMode.size() - 1;
+        m_currentVideoModeIndex = static_cast<int>(m_availableVideoMode.size()) - 1;
 
     m_currentVideoMode = m_availableVideoMode[m_currentVideoModeIndex];
 
