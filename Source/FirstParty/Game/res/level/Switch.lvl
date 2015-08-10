@@ -1,0 +1,301 @@
+<level>
+	<levelinfo name="Switch">
+		<infoimage srcx="312" srcy="561" width="192" height="108" />
+	</levelinfo>
+	<constants gate1="0" gatetime1="0" gate2="0" gatetime2="0"/>
+	<gameplay maxBalls="5" time="90"/>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/phase_out.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		<include file="sandy/walls.inc" />
+		
+		<shapes>
+			<shape name="plate" type="polygon">
+				<vertex x="19" y="0" />
+				<vertex x="101" y="0" />
+				<vertex x="101" y="20" />
+				<vertex x="19" y="20" />
+			</shape>
+			<shape name="pump" type="polygon">
+				<vertex x="0" y="0" />
+				<vertex x="60" y="0" />
+				<vertex x="60" y="60" />
+				<vertex x="0" y="60" />
+			</shape>
+		</shapes>
+		<physics>
+			<physic name="door">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="x">
+							<mul>
+								<var name="gate1" />
+								<max>
+									<mul>
+										<sub>
+											<time />
+											<var name="gatetime1" />
+										</sub>
+										<static value="-60" />
+									</mul>
+									<static value="-120" />
+								</max>
+							</mul>
+							<!-- 90*abs(sin(max(min(180-abs(180-(x % 540)),90),0)*pi/180)^2) -->
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="door2">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="x">
+							<mul>
+								<var name="gate1" />
+								<min>
+									<mul>
+										<sub>
+											<time />
+											<var name="gatetime1" />
+										</sub>
+										<static value="60" />
+									</mul>
+									<static value="120" />
+								</min>
+							</mul>
+							<!-- 90*abs(sin(max(min(180-abs(180-(x % 540)),90),0)*pi/180)^2) -->
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="door3">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="x">
+							<mul>
+								<var name="gate2" />
+								<max>
+									<mul>
+										<sub>
+											<time />
+											<var name="gatetime2" />
+										</sub>
+										<static value="-60" />
+									</mul>
+									<static value="-120" />
+								</max>
+							</mul>
+							<!-- 90*abs(sin(max(min(180-abs(180-(x % 540)),90),0)*pi/180)^2) -->
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			<physic name="door4">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="x">
+							<mul>
+								<var name="gate2" />
+								<min>
+									<mul>
+										<sub>
+											<time />
+											<var name="gatetime2" />
+										</sub>
+										<static value="60" />
+									</mul>
+									<static value="120" />
+								</min>
+							</mul>
+							<!-- 90*abs(sin(max(min(180-abs(180-(x % 540)),90),0)*pi/180)^2) -->
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+			
+			<physic name="pump">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="-30" />
+							</mul>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+		</physics>
+
+		<entities>
+			<entity name="pump_1" rep="P1">
+				<constants offset="0" />
+				<physics name="pump" shape="pump" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_02"  x="30" y="30" rotate="false" />
+				</animations>
+				<onCollision>
+					<changeProperty name="offset">
+						<time />
+					</changeProperty>
+				</onCollision>
+			</entity>
+
+			<entity name="spike_right1" rep="^L">
+				<physics name="door" shape="spike_okpart2" />
+				<animations>
+					<animation texture="gravity_arrow" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="24" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="48" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="72" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="96" y="0" srcx="248" srcy="128" width="24" height="40" />
+				</animations>
+			</entity>
+			<entity name="spike_right2" rep="L^">
+				<physics name="door" shape="spike_killer2" />
+				<onCollision>
+					<killBall />
+				</onCollision>
+			</entity>
+			<entity name="spike_right1" rep="^R">
+				<physics name="door2" shape="spike_okpart2" />
+				<animations>
+					<animation texture="gravity_arrow" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="24" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="48" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="72" y="0" srcx="248" srcy="128" width="24" height="40" />
+					<animation texture="gravity_arrow" x="96" y="0" srcx="248" srcy="128" width="24" height="40" />
+				</animations>
+			</entity>
+			<entity name="spike_right2" rep="R^">
+				<physics name="door2" shape="spike_killer2" />
+				<onCollision>
+					<killBall />
+				</onCollision>
+			</entity>
+			<entity name="wide_door_1" rep="dl">
+				<physics name="door" shape="wide_wall" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_wide_01" rotate="true"/>
+				</animations>
+			</entity>
+
+			<entity name="wide_door_2" rep="dr">
+				<physics name="door2" shape="wide_wall" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_wide_01" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="wide_door_1" rep="GL">
+				<physics name="door3" shape="wide_wall" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_wide_01" rotate="true"/>
+				</animations>
+			</entity>
+
+			<entity name="wide_door_2" rep="GR">
+				<physics name="door4" shape="wide_wall" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_wide_01" rotate="true" />
+				</animations>
+			</entity>
+			<entity name="wide_door_2" rep="SW">
+				<physics name="wall" shape="plate" />
+				<animations>
+					<animation spritesheet="assets_misc" sprite="plate" x="60" y="10" rotate="false" />
+				</animations>
+				<onCollision>
+					<changeProperty name="global:gate1">
+						<step>
+							<var name="global:gate1" />
+							<nop>
+								<static value="1"/>
+								<setVar name="global:gatetime1">
+									<time />
+								</setVar>
+							</nop>
+							<static value="1"/>
+						</step>
+					</changeProperty>
+				</onCollision>
+			</entity>
+			<entity name="wide_door_2" rep="sw">
+				<physics name="wall" shape="plate" />
+				<animations>
+					<animation spritesheet="assets_misc" sprite="plate" x="60" y="10" rotate="false" />
+				</animations>
+				<onCollision>
+					<changeProperty name="global:gate2">
+						<step>
+							<var name="global:gate2" />
+							<nop>
+								<static value="1"/>
+								<setVar name="global:gatetime2">
+									<time />
+								</setVar>
+							</nop>
+							<static value="1"/>
+						</step>
+					</changeProperty>
+				</onCollision>
+			</entity>
+		</entities>
+	</templates>
+
+	<grid size="60" width="2460" height="1410">
+                                                                                      
+                  W1 1w3W2 2w5W2 2w2w4w1w2W5 5w2w3w2W5 5w4w6w1w2w5                  
+                  w5s4s2s6w1        w3s6s2s6s2w3        w2s4s3s2w1                  
+                  w3d4d6d1w5    t1  w5d5d2d3d5w6    t1  w5d1D4 4w2                  
+                  w2D4 4d3w2        w4d2D2 2d1w2        w4d3d2d2w3                  
+                  W4 4w4    GL  GR      w5w1    GL  GR      w5W6 6                  
+                  w3s4w2    dl  dr      w2w3    dl  dr      w1s5w4                  
+                  W1 1w5    ^LL^^RR^    w1w1    ^LL^^RR^    w2W4 4                  
+                  w5s6d2s1w6        w1)1o^x^(1w6        w3s4d6s1h1                  
+                  W2 2d4W3 3    t1  w1\1    /1w2  t1    W6 6d3W5 5                  
+                  w2s1d3s6w2        SW      sw          w2s2d3s5w2                  
+                  W4 4w1W5 5                            W2 2w4W1 1                  
+                  w6s6s5s4w6        BB                  w2s3s1s6w3                  
+                  W1 1d3W6 6                            W1 1d5W4 4                  
+                  w5s2d1s2w5                            w1s3d2s5w3                  
+                  W3 3d6W2 2                            W2 2d3W3 3                  
+                  w2s4d2s4w3  \1        /2\4        /3  w4s5d2s6w3                  
+                  W4 4d3W1 1        TT          TT      W6 6d1W1 1                  
+                  w6s6d6s1w5                            w1s2d2s3h5                  
+                  W5 5w5W3 3                            W4 4w4W2 2                  
+                  w4s4s1s3w3P1                        P1w2s4s6s2w1                  
+                  W2 2d4W6 6                            W3 3d3W5 5                  
+                  w5s3d2s3w4                            w4s2d1d1w3                  
+                  W1 1d1W4 4                            W5 5d2W6 6                  
+                  w3w1w5w3w2                            w1w1w3w4w6                  
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="400" silver="500" gold="600" />
+</level>
