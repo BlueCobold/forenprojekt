@@ -115,7 +115,7 @@ void Level::load()
             if(name == "  ")
                 continue;
 
-            auto pos = sf::Vector2u((column / 2) * size, row * size);
+            auto pos = sf::Vector2u(static_cast<unsigned int>((column / 2) * size), static_cast<unsigned int>(row * size));
             std::unique_ptr<Entity> entity = parseEntityFromTemplate(name, templates, pos);
             if(entity != nullptr)
                 m_entities.push_back(std::move(entity));
