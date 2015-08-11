@@ -761,7 +761,7 @@ bool Level::isOriginal()
     message.append(filename);
 
     CryptoPP::RSASS<CryptoPP::PKCS1v15, CryptoPP::SHA>::Verifier verifier(*publicKey);
-    unsigned int length = (signaturKey.length() + 1) / 2;
+    unsigned int length = static_cast<unsigned int>(signaturKey.length() / 2);
 
     byte* signature = new byte[verifier.MaxSignatureLength()];
 
