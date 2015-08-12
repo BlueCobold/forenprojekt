@@ -5,6 +5,8 @@
 
 #ifdef WINDOWS
 #include <Windows.h>
+#else
+#include "MacHelper.hpp"
 #endif
 
 namespace utility
@@ -154,7 +156,7 @@ namespace utility
         else
             return std::string("Player");
 #else
-        return std::string("Player");
+        return defaultUserNameApple();
 #endif
         
     }

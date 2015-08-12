@@ -36,7 +36,7 @@ void maximize(void* handle){
 #endif
 }
 
-std::string resourcePathMac()
+std::string resourcePathApple()
 {
 #ifdef _DEBUG
     return "";
@@ -82,22 +82,32 @@ std::string documentPathIos()
 }
 #endif
 
-void showErrorMac(const std::string& msg)
+std::string defaultUserNameApple()
 {
+    @autoreleasepool
+    {
 #ifdef IOS
-    @autoreleasepool {
+        return std::string([[UIDevice currentDevice].name UTF8String]);
+#else
+        return std::string([NSUserName() UTF8String]);
+#endif
+    }
+}
+
+void showErrorApple(const std::string& msg)
+{
+    @autoreleasepool
+    {
+#ifdef IOS
         auto title = [NSString stringWithCString:utility::translateKey("Error").c_str()  encoding:[NSString defaultCStringEncoding]];
         auto message = [NSString stringWithCString:msg.c_str() encoding:[NSString defaultCStringEncoding]];
         auto button = [NSString stringWithCString:utility::translateKey("gui_alert_button_ok").c_str() encoding:[NSString defaultCStringEncoding]];
         auto alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:button otherButtonTitles: nil];
         [alert show];
-    }
 #else
-    @autoreleasepool
-    {
         auto alert = [[NSAlert alloc] init];
         [alert setMessageText:[NSString stringWithCString:msg.c_str() encoding:[NSString defaultCStringEncoding]]];
         [alert runModal];
-    }
 #endif
+    }
 }

@@ -17,7 +17,7 @@ std::string resourcePath()
 #ifdef WINDOWS
     return "";
 #else
-    return resourcePathMac();
+    return resourcePathApple();
 #endif
 }
 

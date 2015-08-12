@@ -14,9 +14,11 @@
 void minimize(void* handle);
 void maximize(void* handle);
 
-std::string resourcePathMac();
+std::string resourcePathApple();
 
-void showErrorMac(const std::string& msg);
+void showErrorApple(const std::string& msg);
+
+std::string defaultUserNameApple();
 
 #ifdef IOS
 float iosContentScaleFactor();

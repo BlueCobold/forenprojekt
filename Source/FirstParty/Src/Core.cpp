@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 #elif WINDOWS
         ErrorMessageBox(error.what());
 #else
-        showErrorMac(error.what());
+        showErrorApple(error.what());
 #endif
         return 1;
     }
