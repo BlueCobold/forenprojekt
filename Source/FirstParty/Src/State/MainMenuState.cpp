@@ -73,6 +73,7 @@ StateChangeInformation MainMenuState::update(const float time)
 #ifdef LEVELTESTING
         if(utility::Keyboard.isKeyDown(sf::Keyboard::L) || utility::Keyboard.isKeyPressed(sf::Keyboard::L))
         {
+            m_loadLevelStateInfo = EnterLoadLevelStateInformation();
             OpenFileDialoge ofd("Level\0*.lvl\0");
             bool result = ofd.openDialoge();
             utility::Keyboard.notifyKeyReleased(sf::Keyboard::L);
@@ -80,7 +81,6 @@ StateChangeInformation MainMenuState::update(const float time)
                 m_loadLevelStateInfo.m_file = ofd.getFile();
             else
                 return StateChangeInformation::Empty();
-            m_loadLevelStateInfo = EnterLoadLevelStateInformation();
             m_loadLevelStateInfo.m_levelNumber = 0;
             m_loadLevelStateInfo.m_directPlay = true;
             m_transitionStateInfo.m_followingState = LoadLevelStateId;
