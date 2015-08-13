@@ -153,6 +153,8 @@ gui_highscore_points = Punkte
 gui_label_achievement_name = name
 gui_label_achievement_counter = counter
 gui_alert_button_ok = Ok
+gui_music = Musik
+gui_level = Level-Design
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilber: %\r\nbronze: %
@@ -227,6 +229,7 @@ bc = Blue Cobold
 dp = Default Player
 ed = EuadeLuxe
 ex = Expl0it3r
+fe = Felix
 ft = ftb
 ko = Koschi
 mi = Michi95

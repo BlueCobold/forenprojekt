@@ -153,6 +153,8 @@ gui_highscore_ok = Ok
 gui_highscore_time = Time
 gui_highscore_points = Points
 gui_alert_button_ok = Ok
+gui_music = Music
+gui_level = Level-Design
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %
@@ -228,6 +230,7 @@ bc = Blue Cobold
 dp = Default Player
 ed = EuadeLuxe
 ex = Expl0it3r
+fe = Felix
 ft = ftb
 ko = Koschi
 mi = Michi95

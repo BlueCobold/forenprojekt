@@ -5,7 +5,7 @@
 	<styles source="Styles.inc"/>
 	<elements>
 		<button id="0" text="gui_close" style="default" x="261" y="270" />
-		<subwindow id="1" x="80" y="108" sizex="352" sizey="150" innerheight="700">
+		<subwindow id="1" x="80" y="108" sizex="352" sizey="150" innerheight="950">
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
 				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
@@ -20,7 +20,7 @@
 				<label text="gui_core_code" font="buttonIdleFont" alignment="1" x="170" y="190" />
 				<label text="bc" font="buttonHoverFont" alignment="1" x="170" y="230" />
 				<label text="ko" font="buttonHoverFont" alignment="1" x="170" y="270" />
-				
+
 				<label text="gui_more_code" font="buttonIdleFont" alignment="1" x="170" y="330" />
 				<label text="ae" font="buttonHoverFont" alignment="1" x="170" y="370" />
 				<label text="dp" font="buttonHoverFont" alignment="1" x="170" y="410" />
@@ -30,6 +30,13 @@
 				<label text="mi" font="buttonHoverFont" alignment="1" x="170" y="570" />
 				<label text="tr" font="buttonHoverFont" alignment="1" x="170" y="610" />
 				<label text="ya" font="buttonHoverFont" alignment="1" x="170" y="650" />
+
+				<label text="gui_music" font="buttonIdleFont" alignment="1" x="170" y="710" />
+				<label text="fe" font="buttonHoverFont" alignment="1" x="170" y="750" />
+
+				<label text="gui_level" font="buttonIdleFont" alignment="1" x="170" y="810" />
+				<label text="bc" font="buttonHoverFont" alignment="1" x="170" y="850" />
+				<label text="ko" font="buttonHoverFont" alignment="1" x="170" y="890" />
 			</elements>
 		</subwindow>
 		<image id="22" x="76" y="105" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
