@@ -452,64 +452,64 @@
       <Filter>Headers\resources</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\CoinShopState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\CreditMenuState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\EnterStateInformation.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\GameFinishedState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\HighScoreState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\LevelFailState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\LevelPassState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\LevelPreviewState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\LevelSelectState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\LoadLevelState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\MainMenuState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\NewHighScoreState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\OptionMenuState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\PauseState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\PlayState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\StartState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\State.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\StateChangeInformation.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\StateManager.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\TransitionState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\model\joint\JointObject.hpp">
       <Filter>Headers\model\joint</Filter>
@@ -572,7 +572,7 @@
       <Filter>Headers\resources</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\State\AchievementState.hpp">
-      <Filter>Headers\State</Filter>
+      <Filter>Headers\state</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\gui\hud\GoodyHUD.hpp">
       <Filter>Headers\gui\menus</Filter>
@@ -651,9 +651,6 @@
     <Filter Include="Sources\gui\hud">
       <UniqueIdentifier>{86d846fa-6ac3-433e-8fa5-648986be7160}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\State">
-      <UniqueIdentifier>{f34a6103-1abb-48f9-952b-68f10e8af582}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sources\animation">
       <UniqueIdentifier>{78c81f4f-30be-49c1-8df7-ec1ba111d3a1}</UniqueIdentifier>
     </Filter>
@@ -699,9 +696,6 @@
     <Filter Include="Headers\resources">
       <UniqueIdentifier>{4791be80-cb45-4d2c-b86f-652901bb73d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\State">
-      <UniqueIdentifier>{e89db21f-a3fd-4024-8fdd-62bf62b11ab1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resouces\res">
       <UniqueIdentifier>{65a8bc6a-1a95-45c5-b40a-1c65b7680ae3}</UniqueIdentifier>
     </Filter>
@@ -722,6 +716,12 @@
     </Filter>
     <Filter Include="Sources\rendering\parameter">
       <UniqueIdentifier>{fc4e6b50-3567-49be-9d93-fab53c7daf71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\state">
+      <UniqueIdentifier>{f34a6103-1abb-48f9-952b-68f10e8af582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\state">
+      <UniqueIdentifier>{e89db21f-a3fd-4024-8fdd-62bf62b11ab1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1009,55 +1009,55 @@
       <Filter>Sources\rendering\transitions</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\CoinShopState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\CreditMenuState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\GameFinishedState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\HighScoreState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\LevelFailState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\LevelPassState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\LevelPreviewState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\LevelSelectState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\LoadLevelState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\MainMenuState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\NewHighScoreState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\OptionMenuState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\PauseState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\PlayState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\StartState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\StateManager.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\TransitionState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\App.cpp">
       <Filter>Sources</Filter>
@@ -1090,7 +1090,7 @@
       <Filter>Sources\resources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\AchievementState.cpp">
-      <Filter>Sources\State</Filter>
+      <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\AchievementMenu.cpp">
       <Filter>Sources\gui\menus</Filter>
