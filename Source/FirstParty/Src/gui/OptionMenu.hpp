@@ -15,6 +15,7 @@ public:
     static const int BUTTON_CLOSE = 0;
     static const int CHECKBOX_FULLSCREEN = 2;
     static const int SLIDER_MASTERVOLUMEN = 3;
+    static const int SLIDER_MUSICVOLUMEN = 33;
     static const int CHECKBOX_MUTEINACTIVE = 6;
     static const int BUTTON_ARROW_RIGHT = 9;
     static const int BUTTON_ARROW_LEFT = 10;
@@ -34,6 +35,7 @@ private:
 
     bool m_fullScreen;
     float m_masterVolume;
+    float m_musicVolume;
     bool m_muteSoundWhenInactive;
     bool m_invertAxis;
     bool m_useVerticalAxis;

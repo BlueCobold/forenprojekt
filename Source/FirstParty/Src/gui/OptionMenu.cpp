@@ -26,6 +26,8 @@ OptionMenu::OptionMenu(sf::RenderWindow& screen,
 
     m_masterVolume = m_config.get<float>("MasterVolume");
 
+    m_musicVolume = m_config.get<float>("MusicVolume");
+
     m_useVerticalAxis = m_config.get<bool>("UseVerticalAxis");
 
     m_invertAxis = m_config.get<bool>("InvertAxis");
@@ -39,6 +41,8 @@ OptionMenu::OptionMenu(sf::RenderWindow& screen,
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
     Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
+
+    Menu::getSlider(SLIDER_MUSICVOLUMEN).setValue(static_cast<float>(m_musicVolume));
 
     Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
 
@@ -107,6 +111,12 @@ void OptionMenu::applyChanges()
         sf::Listener::setGlobalVolume(m_masterVolume);
 #endif
         m_config.set("MasterVolume", m_masterVolume);
+    }
+    
+    if(Menu::getSlider(SLIDER_MUSICVOLUMEN).getValue() != m_musicVolume)
+    {
+        m_musicVolume = Menu::getSlider(SLIDER_MUSICVOLUMEN).getValue();
+        m_config.set("MusicVolume", m_musicVolume);
     }
 
     if(Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).getChecked() != m_muteSoundWhenInactive)
@@ -185,6 +195,8 @@ void OptionMenu::onEnter()
     m_muteSoundWhenInactive = m_config.get<bool>("MuteSoundWhenInactiv");
 
     m_masterVolume = m_config.get<float>("MasterVolume");
+
+    m_musicVolume = m_config.get<float>("MusicVolume");
 #ifndef NO_SOUND
     sf::Listener::setGlobalVolume(m_masterVolume);
 #endif
@@ -194,6 +206,8 @@ void OptionMenu::onEnter()
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
     Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
+
+    Menu::getSlider(SLIDER_MUSICVOLUMEN).setValue(static_cast<float>(m_musicVolume));
 
     Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
 

@@ -1,19 +1,29 @@
 #include "MusicPlayer.hpp"
 #include <SFML/Audio/Music.hpp>
+#include "../resources/AppConfig.hpp"
 
-MusicPlayer::MusicPlayer(std::vector<sf::Music*>& music, MusicPlayer::PlayMode mode) :
+MusicPlayer::MusicPlayer(AppConfig& config, std::vector<sf::Music*>& music, MusicPlayer::PlayMode mode) :
     m_music(music),
     m_randomGenerator(0.f, static_cast<float>(music.size())),
     m_mode(mode),
     m_isPlaying(false),
-    m_currentIndex(0)
+    m_currentIndex(0),
+    m_config(config)
 {
     if(m_mode == MusicPlayer::Shuffle)
         m_currentIndex = getRandomNumber();
+
+    m_currentVolume = m_config.get<float>("MusicVolume");
 }
 
 void MusicPlayer::update()
 {
+    if(m_config.get<float>("MusicVolume") != m_currentVolume)
+    {
+        m_currentVolume = m_config.get<float>("MusicVolume");
+        m_music[m_currentIndex]->setVolume(m_currentVolume);
+    }
+
     if(!m_isPlaying || 
        m_music[m_currentIndex]->getStatus() == sf::Music::Playing ||
        m_music.empty())
@@ -28,6 +38,7 @@ void MusicPlayer::play()
     {
         m_isPlaying = true;
         m_music[m_currentIndex]->play();
+        m_music[m_currentIndex]->setVolume(m_currentVolume);
     }
 }
 
@@ -67,6 +78,7 @@ void MusicPlayer::next()
             m_currentIndex = getRandomNumber();
 
         m_music[m_currentIndex]->play();
+        m_music[m_currentIndex]->setVolume(m_currentVolume);
     }
 }
 

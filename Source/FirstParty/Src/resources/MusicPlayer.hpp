@@ -11,6 +11,8 @@ namespace sf
     class Music;
 }
 
+class AppConfig;
+
 class MusicPlayer
 {
 public:
@@ -25,11 +27,13 @@ private:
     PlayMode m_mode;
     unsigned int m_currentIndex;
     bool m_isPlaying;
+    AppConfig& m_config;
+    float m_currentVolume;
 
     unsigned int getRandomNumber();
 
 public:
-    MusicPlayer(std::vector<sf::Music*>& music, MusicPlayer::PlayMode mode);
+    MusicPlayer(AppConfig& config, std::vector<sf::Music*>& music, MusicPlayer::PlayMode mode);
 
     void update();
 

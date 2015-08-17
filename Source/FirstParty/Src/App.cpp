@@ -53,7 +53,7 @@ App::App(AppConfig& config) :
     m_achievementManager("Achievement.dat", m_config),
     m_shaderContext(),
     m_resourceManager(m_shaderContext),
-    m_musicPlayer(m_resourceManager.getMusic(), MusicPlayer::Normal)
+    m_musicPlayer(m_config, m_resourceManager.getMusic(), MusicPlayer::Normal)
 {
     gl::sys::LoadFunctions();
     int maxTextureSize = 0;
