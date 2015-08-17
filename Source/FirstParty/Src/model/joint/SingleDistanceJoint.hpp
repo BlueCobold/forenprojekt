@@ -20,13 +20,12 @@ public:
 
     SingleDistanceJoint();
 
-    ~SingleDistanceJoint();
-
     void update() override;
 
     bool reinstall(b2Body* body) override;
 
     void copyFrom(const JointObject* other) override;
+
 protected:
     void bindBodies(b2Body* bodyA, b2Body* bodyB) override;
 };

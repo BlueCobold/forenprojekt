@@ -180,7 +180,7 @@ public:
     void reinstallJoints()
     {
         for(auto it = begin(m_joints); it != end(m_joints); ++it)
-            (*it).get()->reinstall(m_body);
+            (*it)->reinstall(m_body);
     }
 
 protected:

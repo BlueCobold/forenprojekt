@@ -8,27 +8,13 @@ SingleRevoluteJoint::SingleRevoluteJoint(b2World* world, const b2RevoluteJointDe
     m_anchorBodyDef.type = b2_staticBody;
     m_anchorBody = world->CreateBody(&m_anchorBodyDef);
 
-    if(body->GetType() == b2_dynamicBody)
-    {
-        bindBodies(body, m_anchorBody);
-        m_jointDef.Initialize(body, m_anchorBody, body->GetPosition() + m_jointDef.localAnchorA);
-    }
-    else
-        throw std::runtime_error(utility::replace(utility::translateKey("WrongBodyType"), "SingleRevoluteJoint"));
-
-    getJoint() = static_cast<b2RevoluteJoint*>(JointObject::getWorld()->CreateJoint(&m_jointDef));
+    reinstall(body);
 }
 
 SingleRevoluteJoint::SingleRevoluteJoint() :
     JointObject(JointObject::SingleRevolute),
     m_anchorBody(nullptr)
-{
-}
-
-SingleRevoluteJoint::~SingleRevoluteJoint()
-{
-    m_anchorBody = nullptr;
-}
+{ }
 
 void SingleRevoluteJoint::bindBodies(b2Body* bodyA, b2Body* bodyB)
 {
@@ -48,7 +34,7 @@ bool SingleRevoluteJoint::reinstall(b2Body* body)
         else
             throw std::runtime_error(utility::replace(utility::translateKey("WrongBodyType"), "SingleRevoluteJoint"));
 
-        getJoint() = static_cast<b2RevoluteJoint*>(JointObject::getWorld()->CreateJoint(&m_jointDef));
+        create(m_jointDef);
 
         return true;
     }

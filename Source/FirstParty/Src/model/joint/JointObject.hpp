@@ -7,6 +7,8 @@
 #include <Box2D/Dynamics/Joints/b2Joint.h>
 #include <Box2D/Dynamics/b2World.h>
 
+#include <vector>
+
 /// basis for all other joint types
 class JointObject
 {
@@ -56,10 +58,16 @@ public:
     {
         m_world = other->m_world;
     }
+
 protected:
     virtual void bindBodies(b2Body* bodyA, b2Body* bodyB) = 0;
 
-    b2Joint*& getJoint()
+    void create(const b2JointDef& jointDef)
+    {
+        m_joint = getWorld()->CreateJoint(&jointDef);
+    }
+
+    b2Joint* getJoint()
     {
         return m_joint;
     }
