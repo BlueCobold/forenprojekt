@@ -495,7 +495,7 @@ void Level::draw(const DrawParameter& param)
     if(m_debugDraw)
     {
         DebugDraw d(param.getTarget());
-        d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit);
+        d.SetFlags(b2Draw::e_shapeBit | b2Draw::e_centerOfMassBit | b2Draw::e_jointBit);
         m_world.SetDebugDraw(&d);
         m_world.DrawDebugData();
     }
