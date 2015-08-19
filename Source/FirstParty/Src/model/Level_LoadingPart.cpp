@@ -48,17 +48,17 @@ void Level::load()
 #endif
     tinyxml2::XMLDocument doc;
 
+    std::string filePath;
 #ifdef LEVELTESTING
     if(number() == 0)
-        doc.LoadFile(m_filename.c_str());
+        filePath = m_filename;
     else
-        doc.LoadFile((resourcePath() + filename()).c_str());
-#else
-    doc.LoadFile((resourcePath() + filename()).c_str());
 #endif
+    filePath = resourcePath() + filename();
+    doc.LoadFile(filePath.c_str());
 
     if(!validate(doc)) // Validate the XML file
-        throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename()));
+        throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filePath));
 
     // Parse templates
     Templates templates;
