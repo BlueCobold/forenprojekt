@@ -31,10 +31,10 @@ int main(int argc, char* argv[])
     std::streambuf* previous = nullptr;
     try
     {
-#if IOS
-        file.open("error-log.txt");
-#else
+#if defined(IOS) || (defined(OSX) && defined(_DEBUG))
         file.open(documentPath() + "error-log.txt");
+#else
+        file.open("error-log.txt");
 #endif
         previous = sf::err().rdbuf(file.rdbuf());
         sf::err() << "=== Rickety Racquet starting ===" << std::endl;
