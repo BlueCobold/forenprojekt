@@ -4,9 +4,11 @@
 #define ERRORMESSAGEBOX_HPP
 
 #ifdef WINDOWS
-
 #include <Windows.h>
-#include <iostream>
+#include <string>
+#elif defined(IOS) || defined(OSX)
+#include "../MacHelper.hpp"
+#endif
 
 class ErrorMessageBox
 {
@@ -22,10 +24,13 @@ public:
 
     int show()
     {
+#ifdef WINDOWS
          return MessageBox(0, m_message.c_str(), "Error:", MB_OK | MB_ICONSTOP);
+#elif defined(IOS) || defined(OSX)
+        showErrorApple(m_message);
+        return 1;
+#endif
     }
 };
-
-#endif  // WINDOWS
 
 #endif

@@ -9,12 +9,6 @@
 
 #include <SFML/System.hpp>
 
-#include <iostream>
-
-#ifndef WINDOWS
-#include "MacHelper.hpp"
-#endif
-
 #ifdef IOS
 int main2(int argc, char* argv[]);
 
@@ -48,10 +42,8 @@ int main(int argc, char* argv[])
 #ifdef _DEBUG
         std::cout << "An error occurred: " << error.what();
         getchar();
-#elif WINDOWS
-        ErrorMessageBox(error.what());
 #else
-        showErrorApple(error.what());
+        ErrorMessageBox(error.what());
 #endif
         return 1;
     }
