@@ -237,13 +237,15 @@ protected:
         {
             for(auto joint = begin(other->m_joints); joint != end(other->m_joints); ++joint)
             {
-                JointObject* newJoint;
+                JointObject* newJoint = nullptr;
                 if((*joint)->getType() == JointObject::SingleDistance)
                     newJoint = new SingleDistanceJoint;
                 else if((*joint)->getType() == JointObject::SinglePrismatic)
                     newJoint = new SinglePrismaticJoint;
                 else if((*joint)->getType() == JointObject::SingleRevolute)
                     newJoint = new SingleRevoluteJoint;
+                else
+                    continue;
 
                 newJoint->copyFrom(joint->get());
                 if(m_body)
