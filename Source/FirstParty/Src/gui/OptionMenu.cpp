@@ -24,9 +24,9 @@ OptionMenu::OptionMenu(sf::RenderWindow& screen,
 
     m_muteSoundWhenInactive = m_config.get<bool>("MuteSoundWhenInactiv");
 
-    m_masterVolume = m_config.get<float>("MasterVolume");
-
     m_musicVolume = m_config.get<float>("MusicVolume");
+
+    m_soundVolume = m_config.get<float>("SoundVolume");
 
     m_useVerticalAxis = m_config.get<bool>("UseVerticalAxis");
 
@@ -34,13 +34,9 @@ OptionMenu::OptionMenu(sf::RenderWindow& screen,
 
     m_useStencilEffects = m_config.get<bool>("UseStencilEffects");
 
-#ifndef NO_SOUND
-    sf::Listener::setGlobalVolume(m_masterVolume);
-#endif
-
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
-    Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
+    Menu::getSlider(SLIDER_SOUNDVOLUMEN).setValue(static_cast<float>(m_soundVolume));
 
     Menu::getSlider(SLIDER_MUSICVOLUMEN).setValue(static_cast<float>(m_musicVolume));
 
@@ -103,20 +99,16 @@ void OptionMenu::applyChanges()
         Menu::getRenderWindow().setFramerateLimit(m_config.get<int>("FrameRateLimit"));
         Menu::getRenderWindow().setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
     }
-
-    if(Menu::getSlider(SLIDER_MASTERVOLUMEN).getValue() != m_masterVolume)
-    {
-        m_masterVolume = Menu::getSlider(SLIDER_MASTERVOLUMEN).getValue();
-#ifndef NO_SOUND
-        sf::Listener::setGlobalVolume(m_masterVolume);
-#endif
-        m_config.set("MasterVolume", m_masterVolume);
-    }
     
     if(Menu::getSlider(SLIDER_MUSICVOLUMEN).getValue() != m_musicVolume)
     {
         m_musicVolume = Menu::getSlider(SLIDER_MUSICVOLUMEN).getValue();
         m_config.set("MusicVolume", m_musicVolume);
+    }
+    if(Menu::getSlider(SLIDER_SOUNDVOLUMEN).getValue() != m_soundVolume)
+    {
+        m_soundVolume = Menu::getSlider(SLIDER_SOUNDVOLUMEN).getValue();
+        m_config.set("SoundVolume", m_soundVolume);
     }
 
     if(Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).getChecked() != m_muteSoundWhenInactive)
@@ -194,19 +186,15 @@ void OptionMenu::onEnter()
 
     m_muteSoundWhenInactive = m_config.get<bool>("MuteSoundWhenInactiv");
 
-    m_masterVolume = m_config.get<float>("MasterVolume");
-
     m_musicVolume = m_config.get<float>("MusicVolume");
-#ifndef NO_SOUND
-    sf::Listener::setGlobalVolume(m_masterVolume);
-#endif
+    m_soundVolume = m_config.get<float>("SoundVolume");
+
     m_invertAxis = m_config.get<bool>("InvertAxis");
     m_useVerticalAxis = m_config.get<bool>("UseVerticalAxis");
 
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
-    Menu::getSlider(SLIDER_MASTERVOLUMEN).setValue(static_cast<float>(m_masterVolume));
-
+    Menu::getSlider(SLIDER_SOUNDVOLUMEN).setValue(static_cast<float>(m_soundVolume));
     Menu::getSlider(SLIDER_MUSICVOLUMEN).setValue(static_cast<float>(m_musicVolume));
 
     Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);

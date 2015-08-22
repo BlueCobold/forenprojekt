@@ -12,12 +12,14 @@
 #include <map>
 #include <memory>
 
+class AppConfig;
+
 /// This class will be used to manage all the sounds
 /// of the game
 class SoundManager 
 {
 public:
-    SoundManager(SoundBufferManager& resourceManager);
+    SoundManager(SoundBufferManager& resourceManager, AppConfig& config);
     ~SoundManager();
 
     void update();
@@ -26,6 +28,7 @@ public:
 
 private:
     SoundBufferManager& m_resourceManager;
+    AppConfig& m_config;
 #ifndef NO_SOUND
     std::queue<std::pair<std::string, std::unique_ptr<sf::Sound>>> m_sounds;
 #endif

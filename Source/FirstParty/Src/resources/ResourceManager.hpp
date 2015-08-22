@@ -36,10 +36,12 @@ namespace tinyxml2
     class XMLDocument;
 }
 
+class AppConfig;
+
 class ResourceManager : public SoundBufferManager
 {
 public:
-    ResourceManager(ShaderContext& context);
+    ResourceManager(ShaderContext& context, AppConfig& config);
     ~ResourceManager();
 
     const sf::Texture* getTexture(const std::string& key);

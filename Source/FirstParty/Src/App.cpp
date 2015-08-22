@@ -52,7 +52,7 @@ App::App(AppConfig& config) :
     m_isMinimized(false),
     m_achievementManager("Achievement.dat", m_config),
     m_shaderContext(),
-    m_resourceManager(m_shaderContext),
+    m_resourceManager(m_shaderContext, m_config),
     m_musicPlayer(m_config, m_resourceManager.getMusic(), MusicPlayer::Normal)
 {
     gl::sys::LoadFunctions();

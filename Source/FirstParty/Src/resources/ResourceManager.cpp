@@ -5,16 +5,16 @@
 #include "../MacHelper.hpp"
 #include "../gui/BitmapFont.hpp"
 #include "../rendering/GLExt.hpp"
-
+#include "../resources/AppConfig.hpp"
 #include <tinyxml2.h>
 
 #include <exception>
 #include <functional> // bind
 
-ResourceManager::ResourceManager(ShaderContext& context) : 
+ResourceManager::ResourceManager(ShaderContext& context, AppConfig& config) : 
     m_context(&context)
 {
-    m_soundManager = std::unique_ptr<SoundManager>(new SoundManager(*this));
+    m_soundManager = std::unique_ptr<SoundManager>(new SoundManager(*this, config));
     // Parse resource information
     tinyxml2::XMLDocument doc;
     doc.LoadFile((resourcePath() + "res/resources.nfo").c_str());
