@@ -156,6 +156,8 @@ gui_label_achievement_counter = counter
 gui_alert_button_ok = Ok
 gui_music = Musik
 gui_level = Level-Design
+gui_label_enable = aktiviere
+gui_label_shader = Shader
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilber: %\r\nbronze: %

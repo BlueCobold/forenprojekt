@@ -156,6 +156,8 @@ gui_highscore_points = Points
 gui_alert_button_ok = Ok
 gui_music = Music
 gui_level = Level-Design
+gui_label_enable = Enable
+gui_label_shader = Shader
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %

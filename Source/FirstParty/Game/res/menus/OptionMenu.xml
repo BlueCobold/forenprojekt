@@ -5,7 +5,7 @@
 	<styles source="Styles.inc"/>
 	<elements>
 		<button id="0" text="gui_close" style="default" x="261" y="270" />
-		<subwindow id="1" x="80" y="108" sizex="352" sizey="150" innerheight="650">
+		<subwindow id="1" x="80" y="108" sizex="352" sizey="150" innerheight="710">
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
 				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
@@ -25,26 +25,30 @@
 				<label id="31" text="gui_label_draw" font="buttonHoverFont" alignment="0" x="120" y="145" />
 				<label id="32" text="gui_label_shadows" font="buttonHoverFont" alignment="0" x="120" y="175" />
 
-				<label text="gui_soundsetup" font="buttonIdleFont" alignment="1" x="170" y="220" />
-				
-				<slider id="3" style="default" x="0" y="270" />
-				<label id="5" text="gui_label_soundvolumen" font="buttonHoverFont" alignment="0" x="120" y="270" />
-				<slider id="33" style="default" x="0" y="320" />
-				<label id="34" text="gui_label_musicvolumen" font="buttonHoverFont" alignment="0" x="120" y="320" />
-				
-				<checkbox id="6" style="default" x="76" y="380" />
-				<label id="7" text="gui_label_mutesound" font="buttonHoverFont" alignment="0" x="120" y="365" />
-				<label id="8" text="gui_label_wheninactive" font="buttonHoverFont" alignment="0" x="120" y="395" />
-				
-				<label text="gui_gameplaysetup" font="buttonIdleFont" alignment="1" x="170" y="440" />
+				<checkbox id="35" style="default" x="76" y="230" />
+				<label id="36" text="gui_label_enable" font="buttonHoverFont" alignment="0" x="120" y="215" />
+				<label id="37" text="gui_label_shader" font="buttonHoverFont" alignment="0" x="120" y="245" />
 
-				<checkbox id="12" style="default" x="76" y="490" />
-				<label id="13" text="gui_label_use_vertical1" font="buttonHoverFont" alignment="0" x="120" y="485" />
-				<label id="14" text="gui_label_use_vertical2" font="buttonHoverFont" alignment="0" x="120" y="515" />
+				<label text="gui_soundsetup" font="buttonIdleFont" alignment="1" x="170" y="290" />
 				
-				<checkbox id="15" style="default" x="76" y="530" />
-				<label id="16" text="gui_label_invert_used1" font="buttonHoverFont" alignment="0" x="120" y="565" />
-				<label id="17" text="gui_label_invert_used2" font="buttonHoverFont" alignment="0" x="120" y="605" />
+				<slider id="3" style="default" x="0" y="340" />
+				<label id="5" text="gui_label_soundvolumen" font="buttonHoverFont" alignment="0" x="120" y="340" />
+				<slider id="33" style="default" x="0" y="390" />
+				<label id="34" text="gui_label_musicvolumen" font="buttonHoverFont" alignment="0" x="120" y="390" />
+				
+				<checkbox id="6" style="default" x="76" y="450" />
+				<label id="7" text="gui_label_mutesound" font="buttonHoverFont" alignment="0" x="120" y="445" />
+				<label id="8" text="gui_label_wheninactive" font="buttonHoverFont" alignment="0" x="120" y="475" />
+				
+				<label text="gui_gameplaysetup" font="buttonIdleFont" alignment="1" x="170" y="520" />
+
+				<checkbox id="12" style="default" x="76" y="570" />
+				<label id="13" text="gui_label_use_vertical1" font="buttonHoverFont" alignment="0" x="120" y="565" />
+				<label id="14" text="gui_label_use_vertical2" font="buttonHoverFont" alignment="0" x="120" y="595" />
+				
+				<checkbox id="15" style="default" x="76" y="640" />
+				<label id="16" text="gui_label_invert_used1" font="buttonHoverFont" alignment="0" x="120" y="635" />
+				<label id="17" text="gui_label_invert_used2" font="buttonHoverFont" alignment="0" x="120" y="665" />
 			</elements>
 		</subwindow>
 		

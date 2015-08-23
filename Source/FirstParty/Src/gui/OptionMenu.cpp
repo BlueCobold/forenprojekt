@@ -6,7 +6,7 @@
 #include "../resources/AppConfig.hpp"
 #include "../resources/ResourceManager.hpp"
 #include "../resources/SpriteSheet.hpp"
-
+#include "../rendering/Shader.hpp"
 #include <SFML/Audio/Listener.hpp>
 
 template<class T>
@@ -34,6 +34,8 @@ OptionMenu::OptionMenu(sf::RenderWindow& screen,
 
     m_useStencilEffects = m_config.get<bool>("UseStencilEffects");
 
+    m_useShaderEffects = m_config.get<bool>("UseShaderEffects");
+
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
     Menu::getSlider(SLIDER_SOUNDVOLUMEN).setValue(static_cast<float>(m_soundVolume));
@@ -48,6 +50,9 @@ OptionMenu::OptionMenu(sf::RenderWindow& screen,
 
     Menu::getCheckbox(CHECKBOX_USE_STENCIL_EFFECTS).setChecked(m_useStencilEffects);
     Animation::enableStencilEffects(m_useStencilEffects);
+
+    Menu::getCheckbox(CHECKBOX_USE_SHADER_EFFECTS).setChecked(m_useShaderEffects);
+    Shader::allowUsage(m_useShaderEffects);
 
     for(auto it = begin(sf::VideoMode::getFullscreenModes()); it != end(sf::VideoMode::getFullscreenModes()); ++it)
     {
@@ -134,6 +139,13 @@ void OptionMenu::applyChanges()
         m_useStencilEffects = !m_useStencilEffects;
         m_config.set("UseStencilEffects", m_useStencilEffects);
         Animation::enableStencilEffects(m_useStencilEffects);
+    }
+
+    if(Menu::getCheckbox(CHECKBOX_USE_SHADER_EFFECTS).getChecked() != m_useShaderEffects)
+    {
+        m_useShaderEffects = !m_useShaderEffects;
+        m_config.set("UseShaderEffects", m_useShaderEffects);
+        Shader::allowUsage(m_useShaderEffects);
     }
 }
 

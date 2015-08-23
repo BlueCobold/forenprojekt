@@ -23,9 +23,10 @@ public:
     static const int CHECKBOX_USE_VERTICALAXIS = 12;
     static const int CHECKBOX_INVERT_AXIS = 15;
     static const int CHECKBOX_USE_STENCIL_EFFECTS = 30;
+    static const int CHECKBOX_USE_SHADER_EFFECTS = 35;
 
     OptionMenu(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
-    
+
     void applyChanges();
     void onEnter();
     void nextVideoMode();
@@ -40,6 +41,7 @@ private:
     bool m_invertAxis;
     bool m_useVerticalAxis;
     bool m_useStencilEffects;
+    bool m_useShaderEffects;
     std::vector<sf::Vector2u> m_availableVideoMode;
     sf::Vector2u m_currentVideoMode;
     sf::Vector2u m_appointedVideoMode;
