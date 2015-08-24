@@ -86,7 +86,7 @@ public:
             m_pauseDelay += time - m_pauseStart;
         m_pause = false;
 #ifndef NO_SOUND
-        sf::Listener::setGlobalVolume(m_config.get<float>("MasterVolume"));
+        sf::Listener::setGlobalVolume(100.f);
 #endif
     }
 
