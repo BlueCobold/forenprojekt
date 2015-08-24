@@ -77,7 +77,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;NDEBUG;_CONSOLE;LEVELTESTING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>../../../ThirdParty/CryptoPP/include/;../../../ThirdParty/SFML/include/;../../../ThirdParty/Box2D/include/;../../../ThirdParty/tinyxml2/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
@@ -304,6 +304,7 @@
     <ClInclude Include="..\..\Src\state\StateManager.hpp" />
     <ClInclude Include="..\..\Src\state\TransitionState.hpp" />
     <ClInclude Include="..\..\Src\Utility.hpp" />
+    <ClInclude Include="..\..\Src\WindowsHelper.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\Src\app.rc" />

@@ -625,6 +625,9 @@
     <ClInclude Include="..\..\Src\gui\Carat.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\WindowsHelper.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

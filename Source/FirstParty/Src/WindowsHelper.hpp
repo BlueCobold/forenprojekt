@@ -8,9 +8,9 @@
 #include <Windows.h>
 #include <string>
 
-bool pickFileWin(const std::string& path, const std::string& filter)
+bool pickFileWin(std::string& path, const std::string& filter)
 {
-    auto bufferLength = 1024;
+    const auto bufferLength = 1024;
     char file[bufferLength];
     file[0] = '\0';
     
@@ -33,7 +33,7 @@ bool pickFileWin(const std::string& path, const std::string& filter)
     
     SetCurrentDirectory(currentPath);
     if(result == 1)
-        path = std::string(file)
+        path = std::string(file);
         
     return result == 1;
 }
