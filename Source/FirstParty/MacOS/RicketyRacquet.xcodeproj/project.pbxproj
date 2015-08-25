@@ -10,6 +10,7 @@
 		6E0A82781A2713B200ED9747 /* libtinyxml2-s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0A82771A2713B200ED9747 /* libtinyxml2-s.a */; };
 		6E2EABEA1B36B6D90010CE54 /* InteractiveLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E2EABE81B36B6D90010CE54 /* InteractiveLabel.cpp */; };
 		6E33AD4A1AA5A2AA00F9FB58 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E33AD491AA5A2AA00F9FB58 /* OpenAL.framework */; };
+		6E476EFD1B85ACD9009CBA0F /* OpenFileDialoge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E476EFB1B85ACD9009CBA0F /* OpenFileDialoge.cpp */; };
 		6E4AAD371ABAC116004DD346 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E4AABFD1ABAC116004DD346 /* Animation.cpp */; };
 		6E4AAD381ABAC116004DD346 /* Interpolation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E4AAC001ABAC116004DD346 /* Interpolation.cpp */; };
 		6E4AAD391ABAC116004DD346 /* ParticleTrail.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E4AAC031ABAC116004DD346 /* ParticleTrail.cpp */; };
@@ -155,6 +156,9 @@
 		6E2EABE81B36B6D90010CE54 /* InteractiveLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InteractiveLabel.cpp; sourceTree = "<group>"; };
 		6E2EABE91B36B6D90010CE54 /* InteractiveLabel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InteractiveLabel.hpp; sourceTree = "<group>"; };
 		6E33AD491AA5A2AA00F9FB58 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/OpenAL.framework; sourceTree = DEVELOPER_DIR; };
+		6E476EFB1B85ACD9009CBA0F /* OpenFileDialoge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenFileDialoge.cpp; sourceTree = "<group>"; };
+		6E476EFC1B85ACD9009CBA0F /* OpenFileDialoge.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenFileDialoge.hpp; sourceTree = "<group>"; };
+		6E476EFE1B85AD55009CBA0F /* WindowsHelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WindowsHelper.hpp; sourceTree = "<group>"; };
 		6E4AABFC1ABAC116004DD346 /* AnimatedObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AnimatedObject.hpp; sourceTree = "<group>"; };
 		6E4AABFD1ABAC116004DD346 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
 		6E4AABFE1ABAC116004DD346 /* Animation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Animation.hpp; sourceTree = "<group>"; };
@@ -543,6 +547,7 @@
 				6E4AAD0E1ABAC116004DD346 /* ScrollView.hpp */,
 				6E4AAD351ABAC116004DD346 /* Utility.cpp */,
 				6E4AAD361ABAC116004DD346 /* Utility.hpp */,
+				6E476EFE1B85AD55009CBA0F /* WindowsHelper.hpp */,
 			);
 			name = Src;
 			path = ../../Src;
@@ -881,6 +886,8 @@
 		6E4AACF51ABAC116004DD346 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				6E476EFB1B85ACD9009CBA0F /* OpenFileDialoge.cpp */,
+				6E476EFC1B85ACD9009CBA0F /* OpenFileDialoge.hpp */,
 				6ED3AD271B4BA21C00E32567 /* MusicPlayer.cpp */,
 				6ED3AD281B4BA21C00E32567 /* MusicPlayer.hpp */,
 				6ED3AD291B4BA21C00E32567 /* ShaderContext.cpp */,
@@ -1146,6 +1153,7 @@
 				6E4AAD521ABAC116004DD346 /* TargetHUD.cpp in Sources */,
 				6E2EABEA1B36B6D90010CE54 /* InteractiveLabel.cpp in Sources */,
 				6E4AAD701ABAC116004DD346 /* Level.cpp in Sources */,
+				6E476EFD1B85ACD9009CBA0F /* OpenFileDialoge.cpp in Sources */,
 				6E4AAD711ABAC116004DD346 /* Level_LoadingPart.cpp in Sources */,
 				6E4AAD721ABAC116004DD346 /* ParallaxLayer.cpp in Sources */,
 				6E4AAD871ABAC116004DD346 /* VerticalExpandTransition.cpp in Sources */,

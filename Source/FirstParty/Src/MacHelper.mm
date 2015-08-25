@@ -1,15 +1,7 @@
-//
-//  MacHelper.m
-//  RicketyRacquet
-//
-//  Created by Sebastian Kohl on 12.11.14.
-//
-//
-
 #import <Foundation/Foundation.h>
 #ifdef IOS
 #import <UIKit/UIKit.h>
-#else
+#elif defined(OSX)
 #import <AppKit/AppKit.h>
 #endif
 
@@ -20,27 +12,10 @@ namespace utility
     std::string translateKey(std::string key);
 }
 
-void minimize(void* handle){
-#ifdef IOS
-#else
-    NSWindow* window = (NSWindow*)handle;
-    [window setIsMiniaturized:YES];
-#endif
-}
-
-void maximize(void* handle){
-#ifdef IOS
-#else
-    NSWindow* window = (NSWindow*)handle;
-    [window setIsMiniaturized:NO];
-#endif
-}
+#if defined(IOS) || defined(OSX)
 
 std::string resourcePathApple()
 {
-#ifdef _DEBUG
-    return "";
-#endif
     std::string path;
     @autoreleasepool
     {
@@ -53,7 +28,46 @@ std::string resourcePathApple()
     return path;
 }
 
+std::string defaultUserNameApple()
+{
 #ifdef IOS
+    @autoreleasepool
+    {
+        return std::string([[UIDevice currentDevice].name UTF8String]);
+    }
+#elif defined(OSX)
+    @autoreleasepool
+    {
+        return std::string([NSUserName() UTF8String]);
+    }
+#endif
+}
+
+void showErrorApple(const std::string& msg)
+{
+#ifdef IOS
+    @autoreleasepool
+    {
+        auto title = [NSString stringWithCString:utility::translateKey("Error").c_str()  encoding:[NSString defaultCStringEncoding]];
+        auto message = [NSString stringWithCString:msg.c_str() encoding:[NSString defaultCStringEncoding]];
+        auto button = [NSString stringWithCString:utility::translateKey("gui_alert_button_ok").c_str() encoding:[NSString defaultCStringEncoding]];
+        auto alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:button otherButtonTitles: nil];
+        [alert show];
+    }
+#elif defined(OSX)
+    @autoreleasepool
+    {
+        auto alert = [[NSAlert alloc] init];
+        [alert setMessageText:[NSString stringWithCString:msg.c_str() encoding:[NSString defaultCStringEncoding]]];
+        [alert runModal];
+    }
+#endif
+}
+
+#endif
+
+#ifdef IOS
+
 float iosContentScaleFactor()
 {
     static bool inited = false;
@@ -80,34 +94,38 @@ std::string documentPathIos()
     }
     return path;
 }
+
 #endif
 
-std::string defaultUserNameApple()
+#ifdef OSX
+
+void minimize(void* handle){
+    NSWindow* window = (NSWindow*)handle;
+    [window setIsMiniaturized:YES];
+}
+
+void maximize(void* handle){
+    NSWindow* window = (NSWindow*)handle;
+    [window setIsMiniaturized:NO];
+}
+
+bool pickFileMac(std::string& path)
 {
     @autoreleasepool
     {
-#ifdef IOS
-        return std::string([[UIDevice currentDevice].name UTF8String]);
-#else
-        return std::string([NSUserName() UTF8String]);
-#endif
+        NSOpenPanel *panel = [NSOpenPanel openPanel];
+        [panel setCanChooseFiles:YES];
+        [panel setCanChooseDirectories:NO];
+        [panel setAllowsMultipleSelection:NO];
+        
+        if ([panel runModal] == NSFileHandlingPanelOKButton) {
+            for (NSURL *url in [panel URLs]) {
+                path = std::string([[url path] UTF8String]);
+                return true;
+            }
+        }
+        return false;
     }
 }
 
-void showErrorApple(const std::string& msg)
-{
-    @autoreleasepool
-    {
-#ifdef IOS
-        auto title = [NSString stringWithCString:utility::translateKey("Error").c_str()  encoding:[NSString defaultCStringEncoding]];
-        auto message = [NSString stringWithCString:msg.c_str() encoding:[NSString defaultCStringEncoding]];
-        auto button = [NSString stringWithCString:utility::translateKey("gui_alert_button_ok").c_str() encoding:[NSString defaultCStringEncoding]];
-        auto alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:button otherButtonTitles: nil];
-        [alert show];
-#else
-        auto alert = [[NSAlert alloc] init];
-        [alert setMessageText:[NSString stringWithCString:msg.c_str() encoding:[NSString defaultCStringEncoding]]];
-        [alert runModal];
 #endif
-    }
-}

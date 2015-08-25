@@ -2,6 +2,8 @@
 
 #ifdef WINDOWS
 #include "../WindowsHelper.hpp"
+#elif defined(OSX)
+#include "../MacHelper.hpp"
 #endif
 
 OpenFileDialoge::OpenFileDialoge(const std::string& filter) :
@@ -13,6 +15,8 @@ bool OpenFileDialoge::openDialoge()
 {
 #ifdef WINDOWS
     return pickFileWin(m_file, m_filter);
+#elif defined(OSX)
+    return pickFileMac(m_file);
 #endif
 }
 
