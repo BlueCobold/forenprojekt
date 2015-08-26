@@ -11,7 +11,7 @@
 #include <exception>
 #include <functional> // bind
 
-ResourceManager::ResourceManager(ShaderContext& context, AppConfig& config) : 
+ResourceManager::ResourceManager(ShaderContext& context, AppConfig& config) :
     m_context(&context)
 {
     m_soundManager = std::unique_ptr<SoundManager>(new SoundManager(*this, config));
@@ -235,7 +235,7 @@ void ResourceManager::parseTextures(tinyxml2::XMLDocument& doc)
 {
     parse(doc, "textures", "texture", [&](const tinyxml2::XMLElement* element)
     {
-        m_textureKeys.insert(std::make_pair(std::string(element->Attribute("name")), 
+        m_textureKeys.insert(std::make_pair(std::string(element->Attribute("name")),
                                             ResourceManager::TextureParams(
                                                 std::string(element->Attribute("path")),
                                                 element->BoolAttribute("smooth"))));

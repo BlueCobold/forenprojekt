@@ -10,10 +10,13 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
+#include <memory>
+#include <vector>
+
 class HorizontalStripesTransition : public Transition
 {
 public:
-    
+
     HorizontalStripesTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,

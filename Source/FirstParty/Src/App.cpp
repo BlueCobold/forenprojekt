@@ -113,8 +113,8 @@ App::App(AppConfig& config) :
     m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
     m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
 
-    m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config))); 
-    m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config))); 
+    m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(PauseStateId, std::unique_ptr<PauseState>(new PauseState(m_screen, m_resourceManager, m_config)));
     std::vector<sf::RenderTexture*> buffers;
     for(unsigned int i = 0; i < m_offscreens.size(); i++)
@@ -134,7 +134,7 @@ App::App(AppConfig& config) :
     m_stateManager.registerState(GameFinishedStateId, std::unique_ptr<GameFinishedState>(new GameFinishedState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(AchievementStateId, std::unique_ptr<AchievementState>(new AchievementState(m_screen, m_resourceManager, m_config, m_achievementManager)));
     m_stateManager.setState(StartStateId);
-    
+
     m_screen.setMouseCursorVisible(false);
 #ifdef IOS
     utility::Mouse.enableSensors(true);
@@ -299,7 +299,7 @@ void App::handleEvents()
         else if(event.type == sf::Event::TouchMoved)
             utility::Mouse.notifyTouch(sf::Vector2i(event.touch.x, event.touch.y));
 #endif
-        
+
         m_stateManager.passEvent(m_event.m_eventType);
     }
 }
@@ -337,7 +337,7 @@ void App::onResize()
     sf::VideoMode mode(m_screen.getSize().x, m_screen.getSize().y);
 
     adjustVideoMode(mode);
-    
+
     // Apply possible size changes
     m_screen.setSize(sf::Vector2u(mode.width, mode.height));
 }
@@ -399,7 +399,7 @@ void App::minimize()
     }
 #ifdef WINDOWS
     ShowWindow(m_screen.getSystemHandle(), SW_MINIMIZE);
-#else
+#elif defined(OSX)
     ::minimize(m_screen.getSystemHandle());
 #endif
 }
@@ -419,7 +419,7 @@ void App::restore()
     }
 #ifdef WINDOWS
     ShowWindow(m_screen.getSystemHandle(), SW_RESTORE);
-#else
+#elif defined(OSX)
     ::maximize(m_screen.getSystemHandle());
 #endif
 }

@@ -155,9 +155,10 @@ namespace utility
             return std::string(infoBuffer);
         else
             return std::string("Player");
-#else
+#elif defined(IOS) || defined(OSX)
         return defaultUserNameApple();
+#else
+        return "";
 #endif
-        
     }
 }

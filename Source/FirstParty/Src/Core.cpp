@@ -37,7 +37,8 @@ int main(int argc, char* argv[])
         App app(configFile);
         app.run();
     }
-    catch (std::exception& error)
+//    catch (std::exception& error)
+    catch(std::runtime_error& error)
     {
 #ifdef _DEBUG
         std::cout << "An error occurred: " << error.what();

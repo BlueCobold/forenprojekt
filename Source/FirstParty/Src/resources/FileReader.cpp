@@ -96,8 +96,8 @@ void FileReader::readFile()
 
             if(!key.empty() && !value.empty())
                 m_content.insert(std::make_pair(key, value));
-        } 
-    } 
+        }
+    }
     else
         // cannot use translate here, because translate may need this file which cannot be loaded!
         throw std::runtime_error(std::string("File missing: ") + m_fileName);
@@ -131,8 +131,8 @@ void FileReader::readString()
 
             if(!key.empty() && !value.empty())
                 m_content.insert(std::make_pair(key, value));
-        } 
-    } 
+        }
+    }
 }
 
 std::string FileReader::get(const std::string& key)

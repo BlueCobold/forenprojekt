@@ -56,7 +56,7 @@ std::vector<sf::Vector2i> parseValueList(tinyxml2::XMLElement* xml, const std::s
     while(std::getline(tokens, token, ','))
         result.push_back(sf::Vector2i(utility::stringTo<int>(token), 0));
 
-    tokens = std::istringstream(yxml->GetText());
+    tokens.str(yxml->GetText());
     size_t i = 0;
     while(std::getline(tokens, token, ','))
     {
@@ -179,7 +179,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     int frames = 1;
     if(frameIndex != nullptr)
         frames = frameIndex->IntAttribute("frames");
-    
+
     const sf::Texture* texture = nullptr;
     bool bindOnUsage = false;
     const SpriteSheet* sheet = nullptr;
@@ -233,7 +233,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     bool horizontal = true;
     if(xml->Attribute("alignment"))
         horizontal = std::string("vertical") != xml->Attribute("alignment");
-    
+
     std::unique_ptr<Animation> anim(new Animation(frames, width, height, rotate, origin, offset, horizontal));
     if(handler == nullptr)
         handler = anim.get();
@@ -266,7 +266,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         }
     }
     anim->setStopOnAlphaZero(xml->BoolAttribute("stopOnAlphaZero"));
-    
+
     std::unique_ptr<ValueProvider> provider;
     if(frameIndex == nullptr)
         provider.reset(new StaticProvider(0));
@@ -298,7 +298,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     parseScaleController(anim.get(), xml, animated, handler, functions, cloneHandler);
     parseColorController(anim.get(), xml, animated, handler, functions, cloneHandler);
     parseRotationController(anim.get(), xml, animated, handler, functions, cloneHandler);
-    
+
     if(auto constants = xml->FirstChildElement("constants"))
         parseConstants(constants, anim.get());
 
@@ -336,7 +336,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     return anim;
 }
 
-std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(tinyxml2::XMLElement* xml, 
+std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(tinyxml2::XMLElement* xml,
     AnimatedObject* animated,
     VariableHandler* handler,
     Stoppable* stoppable,
@@ -377,7 +377,7 @@ std::vector<float> parseFloatList(const std::string& valueString)
     return results;
 }
 
-std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLElement* xml, 
+std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLElement* xml,
     AnimatedObject* animated,
     VariableHandler* handler,
     Stoppable* stoppable,

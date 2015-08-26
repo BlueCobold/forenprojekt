@@ -16,8 +16,10 @@ std::string resourcePath()
 {
 #ifdef WINDOWS
     return "";
-#else
+#elif defined(IOS) || defined(OSX)
     return resourcePathApple();
+#else
+    return "/home/parallels/Desktop/Parallels Shared Folders/Host/Users/skohl1/Applications (Parallels)/ubuntu_share/forenprojekt/Source/FirstParty/Game/";
 #endif
 }
 
