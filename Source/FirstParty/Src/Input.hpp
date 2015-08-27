@@ -96,8 +96,8 @@ namespace utility
         bool m_sensorsEnabled;
 #endif
         bool m_cursorVisible;
-        bool m_leftDown;
         bool m_leftPressed;
+        bool m_leftDown;
         bool m_leftReleased;
         bool m_isLeftDown; // tracks the physical state of the left mouse button
         bool m_isRightDown; // tracks the physical state of the right mouse button

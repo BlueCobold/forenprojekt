@@ -40,8 +40,8 @@
 #include <sstream>
 #include <utility> // move, make_pair
 
-#ifndef WINDOWS
-#import "MacHelper.hpp"
+#if defined(IOS) || defined(OSX)
+#include "MacHelper.hpp"
 #endif
 
 App::App(AppConfig& config) :
@@ -50,9 +50,9 @@ App::App(AppConfig& config) :
     m_fullscreen(false),
     m_focus(true),
     m_isMinimized(false),
-    m_achievementManager("Achievement.dat", m_config),
     m_shaderContext(),
     m_resourceManager(m_shaderContext, m_config),
+    m_achievementManager("Achievement.dat", m_config),
     m_musicPlayer(m_config, m_resourceManager.getMusic(), MusicPlayer::Normal)
 {
     gl::sys::LoadFunctions();
@@ -71,7 +71,7 @@ App::App(AppConfig& config) :
         std::swap(videoMode.width, videoMode.height);
     }
 #else
-    sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+    sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"), 16);
 #endif
 
     adjustVideoMode(videoMode);
@@ -85,7 +85,7 @@ App::App(AppConfig& config) :
     // This kind of redundant line prevents a thread-based crash when closing the app.
     // It is based on a known SFML bug: https://github.com/LaurentGomila/SFML/issues/790
     sf::Shader::isAvailable();
-    
+
     auto desktopMode = sf::VideoMode::getDesktopMode();
     auto size = static_cast<int>(desktopMode.width > desktopMode.height ?
         desktopMode.width : desktopMode.height);

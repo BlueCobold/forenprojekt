@@ -46,15 +46,15 @@ private:
     void restore();
 
 private:
-    sf::RenderWindow m_screen;
-    std::array<sf::RenderTexture, 2> m_offscreens;
-    std::unique_ptr<Cursor> m_cursor;
-
     AppConfig& m_config;
     std::string m_windowTitle;
+    sf::RenderWindow m_screen;
     bool m_fullscreen;
     bool m_focus;
     bool m_isMinimized;
+
+    std::array<sf::RenderTexture, 2> m_offscreens;
+    std::unique_ptr<Cursor> m_cursor;
 
     utility::Event m_event;
     ShaderContext m_shaderContext;
