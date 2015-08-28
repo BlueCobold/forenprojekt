@@ -8,12 +8,12 @@ Interpolation::Interpolation(
     const float duration,
     const float time) :
     TimedObject(time),
+    m_started(false),
+    m_finished(false),
     m_startValue(startValue),
     m_targetValue(targetValue),
-    m_duration(duration),
     m_currentValue(0),
-    m_finished(false),
-    m_started(false)
+    m_duration(duration)
 {
     update(0);
 }

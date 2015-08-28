@@ -20,20 +20,20 @@ Animation::Animation(const unsigned int frames,
                      const sf::Vector2f& origin,
                      const sf::Vector2f& drawOffset,
                      const bool horizontal) :
-    m_blending(sf::BlendAlpha),
+    m_applyRotation(applyRotation),
+    m_stopOnAlphaZero(false),
     m_frames(frames),
     m_frame(0),
     m_frameWidth(frameWidth),
     m_frameHeight(frameHeight),
-    m_applyRotation(applyRotation),
-    m_drawOffset(drawOffset),
-    m_externalRotation(0.f),
     m_horizontal(horizontal),
-    m_stopOnAlphaZero(false),
-    m_cloneHandler(nullptr),
+    m_externalRotation(0.f),
+    m_drawOffset(drawOffset),
+    m_blending(sf::BlendAlpha),
     m_targetBuffer(UINT_MAX),
     m_isViewAligned(false),
-    m_shader(nullptr)
+    m_shader(nullptr),
+    m_cloneHandler(nullptr)
 {
     m_sprite.setOrigin(origin);
 }
@@ -56,14 +56,14 @@ void Animation::update()
     else
         m_frame = static_cast<int>(m_frameProvider->getValue()) % m_frames;
     m_sprite.setTextureRect(getTextureRect());
-    
+
     float rotation = m_externalRotation;
     if(m_rotationProvider != nullptr)
         rotation += m_rotationProvider->getValue();
     m_sprite.setRotation(rotation);
 
     updatePosition();
-    
+
     float scaleX = 1, scaleY = 1;
     if(m_xScaleProvider != nullptr)
         scaleX = m_xScaleProvider->getValue();
@@ -265,7 +265,7 @@ std::unique_ptr<Animation> Animation::clone() const
 {
     auto ani = std::unique_ptr<Animation>(new Animation(m_frames, m_frameWidth, m_frameHeight,
         m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal));
-    
+
     if(m_cloneHandler != nullptr)
         m_cloneHandler->registerClone(*this, *ani.get(), *ani.get(), *ani.get());
 
@@ -288,15 +288,15 @@ std::unique_ptr<Animation> Animation::clone() const
         ani->m_xScaleProvider = m_xScaleProvider->clone();
     if(m_yScaleProvider)
         ani->m_yScaleProvider = m_yScaleProvider->clone();
-    
+
     if(m_rotationProvider)
         ani->m_rotationProvider = m_rotationProvider->clone();
-    
+
     if(m_xPositionProvider)
         ani->m_xPositionProvider = m_xPositionProvider->clone();
     if(m_yPositionProvider)
         ani->m_yPositionProvider = m_yPositionProvider->clone();
-    
+
     if(m_cloneHandler != nullptr)
         m_cloneHandler->unregisterClone(*this);
 
@@ -358,7 +358,7 @@ void Animation::setStencilInfo(StencilInfo info)
     m_stencil = info;
     _stencilAnimations.remove(this);
     _stencilAnimations.push_back(this);
-};
+}
 
 void Animation::StencilInfo::enable()
 {
