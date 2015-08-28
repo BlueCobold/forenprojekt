@@ -71,7 +71,7 @@ App::App(AppConfig& config) :
         std::swap(videoMode.width, videoMode.height);
     }
 #else
-    sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"), 16);
+    sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
 #endif
 
     adjustVideoMode(videoMode);
