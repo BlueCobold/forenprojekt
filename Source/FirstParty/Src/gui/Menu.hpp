@@ -73,13 +73,13 @@ private:
     template<class T>
     T* find(int id, const MenuElementType::Type type) const;
 
-    MenuPanel m_panel;
-    MenuTemplate m_template;
+    sf::RenderWindow* m_screen;
     sf::Vector2i m_size;
     sf::Vector2f m_position;
     sf::Vector2f m_offset;
     sf::Vector2f m_currentPosition;
-    sf::RenderWindow* m_screen;
+    MenuPanel m_panel;
+    MenuTemplate m_template;
 };
 
 #endif // MENU_HPP

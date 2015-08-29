@@ -26,6 +26,7 @@ void Cursor::update()
 #else
     auto pos = sf::Mouse::getPosition(m_screen) - sf::Vector2i(6, 5);
 #endif
+
     m_sprite.setPosition(static_cast<float>(pos.x), static_cast<float>(pos.y));
 }
 

@@ -48,6 +48,7 @@ protected:
 private:
 
     MenuPanel m_panel;
+    SubWindowStyle m_style;
     int m_innerHeight;
     sf::Vector2f m_center;
     sf::Vector2f m_size;
@@ -57,7 +58,6 @@ private:
     int m_endValue;
     bool m_active;
 
-    SubWindowStyle m_style;
     sf::RectangleShape m_windowRect;
     sf::RectangleShape m_sliderRect;
     sf::RectangleShape m_positionRect;

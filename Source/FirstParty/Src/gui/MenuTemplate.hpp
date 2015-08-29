@@ -76,9 +76,9 @@ struct MenuElements
         checkboxes(other.checkboxes),
         slider(other.slider),
         labels(other.labels),
+        interactiveLabels(other.interactiveLabels),
         sprites(other.sprites),
-        infobox(other.infobox),
-        interactiveLabels(other.interactiveLabels)
+        infobox(other.infobox)
     {
         for(auto it = begin(other.animationContainer); it != end(other.animationContainer); ++it)
             animationContainer.push_back((*it)->clone());
@@ -135,7 +135,7 @@ struct SubWindowInfo
         id(other.id),
         style(other.style)
     { }
-    
+
     SubWindowInfo(SubWindowInfo&& other)
     {
         move(other);

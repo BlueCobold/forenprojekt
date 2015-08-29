@@ -24,7 +24,6 @@ private:
     sf::Vector2f m_currentPosition;
 
     float m_horizontalPercentage;
-
     float m_verticalPercentage;
 
 public:

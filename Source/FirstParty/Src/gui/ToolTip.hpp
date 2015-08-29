@@ -14,15 +14,15 @@ namespace sf
 class ToolTip : public Drawable
 {
 private:
-    std::unordered_map<int, LineLabel> m_label;
-    const BitmapFont* m_font;
-    sf::Vector2f m_offset;
-    sf::Vector2f m_position;
-    sf::Vector2f m_textOffset;
     std::unordered_map<int, sf::Sprite> m_background;
+    std::unordered_map<int, LineLabel> m_label;
+    sf::Vector2f m_offset;
+    sf::Vector2f m_textOffset;
+    sf::Vector2f m_position;
     float m_scalefactorHorizontal;
     float m_scalefactorVertical;
     int m_lines;
+    const BitmapFont* m_font;
     int m_longestLine;
     float m_width;
     float m_height;
@@ -44,8 +44,8 @@ public:
                       BottomRight = 9};
 
     ToolTip(const std::string& text,
-            const BitmapFont* font, 
-            const sf::Vector2f& textOffset, 
+            const BitmapFont* font,
+            const sf::Vector2f& textOffset,
             const sf::Vector2f& offset,
             const std::unordered_map<int, sf::Sprite>& background);
     ToolTip();

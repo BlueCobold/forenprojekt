@@ -10,9 +10,9 @@ const std::string SHEET_NAME = "gui_elements";
 const std::string SPRITE_NAME = "Caret";
 
 Caret::Caret(float frequency, const sf::Vector2f& offset, const sf::Sprite& sprite) :
+    m_sprite(sprite),
     m_blinkTime(1.f / frequency),
     m_nextFullFadeOut(0),
-    m_sprite(sprite),
     m_offset(offset),
     m_activated(false)
 {

@@ -10,12 +10,12 @@ HUD::HUD(ResourceManager& resourceManager, AppConfig& config) :
     m_arrow(resourceManager),
     m_ball(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.66f),
     m_time(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.33f),
+    m_ballShow(false),
+    m_timeShow(false),
     m_gravityGoody(resourceManager, "goodie", sf::IntRect(0,0,56,64), sf::Vector2f(0,50)),
     m_invulnerableGoody(resourceManager, "goodie", sf::IntRect(56,0,56,64), sf::Vector2f(0,114)),
     m_extraBallGoody(resourceManager, "goodie", sf::IntRect(112,0,56,64), sf::Vector2f(0,178)),
-    m_extraTimeGoody(resourceManager, "goodie", sf::IntRect(168,0,56,64), sf::Vector2f(0,242)),
-    m_ballShow(false),
-    m_timeShow(false)
+    m_extraTimeGoody(resourceManager, "goodie", sf::IntRect(168,0,56,64), sf::Vector2f(0,242))
 {
     m_fpsShow = config.get<bool>("ShowFps");
 }
@@ -61,7 +61,7 @@ void HUD::draw(const DrawParameter& params)
     m_arrow.draw(params);
 
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), params.getTarget().getView().getSize()));
-   
+
     m_target.update(params);
     m_target.draw(params);
 

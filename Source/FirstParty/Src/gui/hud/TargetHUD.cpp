@@ -2,15 +2,15 @@
 #include "../../resources/ResourceManager.hpp"
 #include "../../Utility.hpp"
 
-TargetHUD::TargetHUD(ResourceManager& resourceManager, 
-                    const sf::Vector2f& position, 
-                    const float rotation, 
+TargetHUD::TargetHUD(ResourceManager& resourceManager,
+                    const sf::Vector2f& position,
+                    const float rotation,
                     const BitmapFont* bitmapFont,
                     const float hReference,
                     const float vReference) :
     LabelHUD(position, rotation, bitmapFont, hReference, vReference),
-    m_remainingTarget(0),
     m_totalTarget(0),
+    m_remainingTarget(0),
     m_resourceManager(resourceManager)
 {
     m_label.setAlignment(LineLabel::Right);

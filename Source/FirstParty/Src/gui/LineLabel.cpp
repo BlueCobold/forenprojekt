@@ -4,9 +4,9 @@
 LineLabel::LineLabel() :
     MenuElement(-1, MenuElementType::Label, sf::Vector2f(0,0), sf::Vector2f(0,0)),
     m_text(""),
-    m_progressPosition(0, 0),
     m_rotation(0),
-    m_font(nullptr)
+    m_font(nullptr),
+    m_progressPosition(0, 0)
 {
     rebuild();
 }
@@ -20,10 +20,10 @@ LineLabel::LineLabel(const std::string& text,
                     int id) :
     MenuElement(id, MenuElementType::Label, position, offset),
     m_text(text),
-    m_progressPosition(0, 0),
     m_rotation(rotation),
     m_font(font),
-    m_alignment(alignment)
+    m_alignment(alignment),
+    m_progressPosition(0, 0)
 {
     rebuild();
 }
@@ -38,10 +38,10 @@ LineLabel::LineLabel(const std::string& text,
                      int id) :
     MenuElement(id, type, position, offset),
     m_text(text),
-    m_progressPosition(0, 0),
     m_rotation(rotation),
     m_font(font),
-    m_alignment(alignment)
+    m_alignment(alignment),
+    m_progressPosition(0, 0)
 {
     rebuild();
 }
@@ -51,7 +51,7 @@ void LineLabel::draw(const DrawParameter& params)
     if(!isVisible())
         return;
 
-    for(auto it = begin(m_glyphs); it != end(m_glyphs); it++) 
+    for(auto it = begin(m_glyphs); it != end(m_glyphs); it++)
     {
         auto glyph = (*it);
         glyph.setPosition(

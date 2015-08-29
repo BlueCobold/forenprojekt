@@ -129,12 +129,12 @@ protected:
 private:
 
     int m_id;
-    bool m_visible;
-    int m_masterId;
-    const MenuElement* m_visibleWhen;
     MenuElementType::Type m_type;
     sf::Vector2f m_position;
     sf::Vector2f m_offset;
+    bool m_visible;
+    const MenuElement* m_visibleWhen;
+    int m_masterId;
 };
 
 #endif // MENU_ELEMENT_HPP

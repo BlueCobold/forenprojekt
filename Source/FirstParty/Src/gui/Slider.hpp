@@ -28,19 +28,17 @@ protected:
 
 private:
 
-    bool m_active;
+    SliderStyle m_style;
 
+    bool m_active;
     float m_value;
     float m_min;
     float m_max;
     int m_pick;
 
     sf::Vector2f m_sliderPosition;
-
     sf::Sprite* m_spriteSlider;
     sf::Sprite* m_spriteBackground;
-
-    SliderStyle m_style;
 
     void calculateSliderPosition(const sf::IntRect& rect);
     void calculateValue(const int left, const int mousex);

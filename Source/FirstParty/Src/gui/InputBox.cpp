@@ -13,8 +13,8 @@ InputBox::InputBox(const int id,
     m_inputLimit(inputLimit),
     m_size(size),
     m_finished(false),
-    m_background(style.background),
     m_activated(false),
+    m_background(style.background),
     m_caret(style.caretBlinkFrequency, style.caretOffset, style.caret)
 {
     if(m_size.y == 0)
@@ -22,7 +22,7 @@ InputBox::InputBox(const int id,
 
     m_backgroundShade.setSize(m_size);
     m_backgroundShade.setFillColor(sf::Color(128,128,128,128));
-    
+
     m_scalefactorHorizontal = m_size.x / static_cast<float>(m_background[TopCenter].getTextureRect().width);
     m_scalefactorVertical = m_size.y / static_cast<float>(m_background[MiddleCenter].getTextureRect().height);
 
@@ -129,14 +129,14 @@ void InputBox::setBackGroundPosition(const sf::Vector2f& position)
 
     m_background[TopLeft].setPosition(position - sf::Vector2f(static_cast<float>(m_background[TopLeft].getTextureRect().width),
                                                               static_cast<float>(m_background[TopLeft].getTextureRect().height)));
-    m_background[TopCenter].setPosition(position - sf::Vector2f(0, 
+    m_background[TopCenter].setPosition(position - sf::Vector2f(0,
                                                                 static_cast<float>(m_background[TopLeft].getTextureRect().height)));
-    m_background[TopRight].setPosition(position + sf::Vector2f(m_size.x, 
+    m_background[TopRight].setPosition(position + sf::Vector2f(m_size.x,
                                                                static_cast<float>(-m_background[TopLeft].getTextureRect().height)));
     m_background[MiddleLeft].setPosition(position - sf::Vector2f(static_cast<float>(m_background[MiddleLeft].getTextureRect().width), 0));
     m_background[MiddleCenter].setPosition(position);
     m_background[MiddleRight].setPosition(position + sf::Vector2f(m_size.x, 0));
-    m_background[BottomLeft].setPosition(position + sf::Vector2f(static_cast<float>(-m_background[BottomLeft].getTextureRect().width), 
+    m_background[BottomLeft].setPosition(position + sf::Vector2f(static_cast<float>(-m_background[BottomLeft].getTextureRect().width),
                                                                           m_size.y));
     m_background[BottomCenter].setPosition(position + sf::Vector2f(0, m_size.y));
     m_background[BottomRight].setPosition(position + m_size);
@@ -161,7 +161,7 @@ void InputBox::setText(const std::string& text)
 void InputBox::setActivatedByMouse(const sf::RenderWindow& screen)
 {
     sf::Rect<float> hitBox(m_backgroundShade.getPosition(), m_backgroundShade.getSize());
-    
+
     if(utility::Mouse.leftButtonDown())
     {
         m_activated = hitBox.contains(static_cast<sf::Vector2f>(getCursorPosition(screen)));

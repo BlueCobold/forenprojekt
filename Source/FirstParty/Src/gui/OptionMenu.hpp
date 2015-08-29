@@ -34,6 +34,8 @@ public:
 
 private:
 
+    AppConfig& m_config;
+
     bool m_fullScreen;
     float m_musicVolume;
     float m_soundVolume;
@@ -47,8 +49,6 @@ private:
     sf::Vector2u m_appointedVideoMode;
     int m_currentVideoModeIndex;
     sf::Image m_icon;
-
-    AppConfig& m_config;
 
     void adjustVideoMode(sf::VideoMode& mode, bool fullScreen);
     bool acceptableVideoMode(const sf::VideoMode videoMode);

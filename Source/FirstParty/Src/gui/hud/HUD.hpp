@@ -26,18 +26,14 @@ class HUD : public Drawable
 private:
 
     FPSCounterHUD m_fpsCounter;
-    bool m_fpsShow;
-
     TargetHUD m_target;
-
     PointsHUD m_points;
-
     ArrowHUD m_arrow;
-
     BallHUD m_ball;
-    bool m_ballShow;
-
     TimeHUD m_time;
+
+    bool m_fpsShow;
+    bool m_ballShow;
     bool m_timeShow;
 
     GoodyHUD m_gravityGoody;

@@ -6,9 +6,10 @@
 Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers) :
     MenuElement(id, MenuElementType::Button, position, offset),
     m_style(style),
-    m_playHoverSound(false),
     m_showToolTip(false),
-    m_isTriggering(triggers)
+    m_isTriggering(triggers),
+    m_playHoverSound(false),
+    m_playPressedSound(false)
 {
     m_sprite = &m_style.idleStyle.sprite;
     m_label = &m_style.idleStyle.label;
@@ -38,7 +39,7 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
 
         m_showToolTip = true;
         m_toolTip.setPosition(static_cast<const sf::Vector2f>(mousePosition), screen);
-        
+
         if(utility::Mouse.leftButtonPressed())
         {
             m_sprite = &m_style.pressedStyle.sprite;
@@ -50,7 +51,7 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
                 m_playPressedSound = true;
                 m_style.pressedStyle.sound->play();
             }
-        } 
+        }
         else
         {
             m_playPressedSound = false;
@@ -94,7 +95,7 @@ void Button::onPositionChanged()
     sf::Vector2f half = sf::Vector2f(getSize().x / 2.f, 0);
     m_style.idleStyle.sprite.setPosition(position + offset + m_style.idleStyle.spriteOffset - half);
     m_style.idleStyle.label.setPosition(position + offset + m_style.idleStyle.textOffset);
-    
+
     m_style.hoverStyle.sprite.setPosition(position + offset + m_style.hoverStyle.spriteOffset - half);
     m_style.hoverStyle.label.setPosition(position + offset + m_style.hoverStyle.textOffset);
 

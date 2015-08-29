@@ -9,14 +9,14 @@ const float HUDElement::Top = 0.0f;
 const float HUDElement::Middle = 0.5f;
 const float HUDElement::Bottom = 1.0f;
 
-HUDElement::HUDElement(const sf::Vector2f& position, 
+HUDElement::HUDElement(const sf::Vector2f& position,
                        const float rotation,
-                       const float horizontalPercentage, 
+                       const float horizontalPercentage,
                        const float verticalPercentage) :
     m_position(position),
-    m_verticalPercentage(verticalPercentage),
+    m_currentPosition(sf::Vector2f(0, 0)),
     m_horizontalPercentage(horizontalPercentage),
-    m_currentPosition(sf::Vector2f(0, 0))
+    m_verticalPercentage(verticalPercentage)
 {
 }
 
@@ -24,7 +24,7 @@ void HUDElement::update(const DrawParameter& params)
 {
     sf::Vector2f screenSize = params.getTarget().getView().getSize();
     sf::Vector2f screenCenter = params.getTarget().getView().getCenter();
-    
+
     sf::Vector2f topLeftViewStart = screenCenter - screenSize * 0.5f;
     sf::Vector2f bottomRightViewEnd = screenCenter + screenSize * 0.5f;
     sf::Vector2f delta = bottomRightViewEnd - topLeftViewStart;

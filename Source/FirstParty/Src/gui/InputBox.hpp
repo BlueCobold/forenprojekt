@@ -16,9 +16,9 @@ class InputBox : public MenuElement
 {
 private:
     sf::RectangleShape m_backgroundShade;
+    LineLabel m_inputText;
     unsigned int m_inputLimit;
     sf::Vector2f m_size;
-    LineLabel m_inputText;
     bool m_finished;
     bool m_activated;
     std::unordered_map<int, sf::Sprite> m_background;

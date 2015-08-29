@@ -20,12 +20,12 @@ SubWindow::SubWindow(const int id,
                      const SubWindowStyle& style) :
     MenuElement(id, MenuElementType::SubWindow, position, offset),
     m_panel(elements, position),
-    m_size(size),
+    m_style(style),
     m_innerHeight(innerHeight),
+    m_size(size),
     m_startValue(0),
     m_endValue(0),
-    m_active(false),
-    m_style(style)
+    m_active(false)
 {
     float scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
 

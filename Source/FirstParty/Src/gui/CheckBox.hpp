@@ -19,26 +19,25 @@ public:
     virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     virtual void draw(const DrawParameter& params) override;
     virtual void drawAdditionalForeground(const DrawParameter& params) override;
-    
+
     bool getChecked();
     void setChecked(bool checked);
-    
+
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text);
 
 protected:
-    
+
     virtual void onPositionChanged() override;
 
 private:
-    
-    ToolTip m_toolTip;
-    bool m_showToolTip;
 
+    CheckBoxStyle m_style;
     bool m_checked;
     bool m_hover;
+    ToolTip m_toolTip;
+    bool m_showToolTip;
     sf::Sprite* m_sprite;
-    CheckBoxStyle m_style;
 };
 
 #endif // CHECKBOX_HPP
