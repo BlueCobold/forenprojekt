@@ -30,20 +30,19 @@ private:
     std::unique_ptr<ValueProvider> m_xPositionProvider;
     std::unique_ptr<ValueProvider> m_yPositionProvider;
     b2Vec2 m_basePosition;
-    
-    b2Body* m_body;
-    std::vector<b2FixtureDef> m_fixtureDefs;
-    b2BodyDef m_bodyDef;
-    b2World* m_world;
-    std::vector<std::unique_ptr<b2Shape>> m_shapes;
-
     bool m_basePosChanged;
+
+    std::vector<b2FixtureDef> m_fixtureDefs;
+    b2World* m_world;
+    b2Body* m_body;
+    b2BodyDef m_bodyDef;
+    std::vector<std::unique_ptr<b2Shape>> m_shapes;
 
     std::vector<std::unique_ptr<JointObject>> m_joints;
 
 public:
 
-    PhysicalObject() : m_world(nullptr), m_body(nullptr), m_basePosChanged(false)
+    PhysicalObject() : m_basePosChanged(false), m_world(nullptr), m_body(nullptr)
     { }
 
     virtual ~PhysicalObject()

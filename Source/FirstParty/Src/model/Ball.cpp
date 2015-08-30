@@ -7,19 +7,19 @@ Ball::Ball(float resetTime,
            CloneHandler& cloneHandler,
            const Entity* spawnAnimationEntity,
            const Entity* killAnimationEntity) :
+    Entity(Entity::Ball, cloneHandler),
+    m_ballResetTime(0.0f),
     m_resetTime(resetTime),
     m_hideTime(1.0f),
     m_blowUpTime(1.0f),
-    Entity(Entity::Ball, cloneHandler),
-    m_spawnAnimationEntity(spawnAnimationEntity),
     m_lostBall(false),
-    m_ballResetTime(0.0f),
     m_blownUp(false),
     m_isTeleporting(false),
+    m_spawnAnimationEntity(spawnAnimationEntity),
     m_stuckBallSpeed(stuckBallSpeed),
-    m_isStucking(false),
-    m_stuckBallTime(5.f)
-{ 
+    m_stuckBallTime(5.f),
+    m_isStucking(false)
+{
     Entity::setValueOf("hitTeeterTime", 0.f);
     Entity::setValueOf("stuckBallTimer", 0.f);
     bindKillAnimationEntity(killAnimationEntity);
@@ -33,7 +33,7 @@ void Ball::autoResetBall(const float elapsedTime)
         {
             getBody()->SetLinearVelocity(b2Vec2(0, 0));
             getBody()->SetAngularVelocity(0.0f);
-        } 
+        }
         getBody()->SetTransform(m_teleportPosition, 0.0f);
         m_isTeleporting = false;
     }

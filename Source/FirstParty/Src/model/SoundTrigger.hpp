@@ -9,11 +9,11 @@
 class SoundTrigger
 {
 private:
-    std::unique_ptr<ValueProvider> m_trigger;
     SoundObject m_sound;
+    std::unique_ptr<ValueProvider> m_trigger;
 
 public:
-    SoundTrigger(const std::string& key, 
+    SoundTrigger(const std::string& key,
                  SoundManager& soundManager,
                  std::unique_ptr<ValueProvider> trigger);
 

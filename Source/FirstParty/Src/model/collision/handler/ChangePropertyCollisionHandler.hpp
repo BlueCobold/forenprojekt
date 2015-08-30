@@ -17,13 +17,13 @@ class ChangePropertyCollisionHandler :
     public AnimatedObject
 {
 public:
-    ChangePropertyCollisionHandler(const std::string& name, VariableHandler* handler = nullptr) 
-        : m_name(name),
-        m_entityA(nullptr),
-        m_entityB(nullptr),
+    ChangePropertyCollisionHandler(const std::string& name, VariableHandler* handler = nullptr) :
+        m_name(name),
         m_useValuesFromA((name.length() < 5) || (name.substr(0, 5) != "ball:")),
         m_useGlobal(handler != nullptr && (name.length() > 7) && (name.substr(0, 7) == "global:")),
-        m_globalHandler(handler)
+        m_globalHandler(handler),
+        m_entityA(nullptr),
+        m_entityB(nullptr)
     {
         if(m_useGlobal)
             m_trimmedVar = m_name.substr(7);
@@ -126,11 +126,11 @@ public:
     }
 
 private:
+    std::string m_name;
     std::unique_ptr<ValueProvider> m_provider;
-    VariableHandler* m_globalHandler;
     bool m_useValuesFromA;
     bool m_useGlobal;
-    std::string m_name;
+    VariableHandler* m_globalHandler;
     std::string m_trimmedVar;
     Entity* m_entityA;
     Entity* m_entityB;

@@ -26,8 +26,8 @@ protected:
 
 private:
 
-    std::string m_soundName;
     SoundManager& m_soundManager;
+    std::string m_soundName;
 
     bool m_volumeFixed;
     float m_volume;

@@ -25,44 +25,53 @@ Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConf
 Level::Level(const std::string& filename, const unsigned int level, ResourceManager& resourceManager, AppConfig& config) :
     m_filename(filename),
 #endif
-    m_number(level),
     m_resourceManager(resourceManager),
+    m_config(config),
     m_world(b2Vec2(0.f, 9.81f)),
+    m_gravityFactor(1),
+    m_number(level),
+    m_updatingEntity(nullptr),
+
     m_timeStep(1.f / 60.f),
     m_velocityIterations(4),
     m_positionIterations(4),
-    m_gravityFactor(1),
-    m_config(config),
+
+    m_lastTime(0),
+    m_levelEndingTime(0),
+    m_levelPlayTime(0),
+
+    m_ball(nullptr),
+    m_remainingBall(-1),
+    m_lostBallCounter(0),
+
+    m_ballImpulseTime(0.0f),
+    m_ballTravelDistance(0.0f),
+    m_ballImpulseAngle(-20.0f, 20.0f),
+
     m_totalTarget(0),
     m_remainingTarget(0),
+
     m_points(0),
     m_bonusTargetPoints(10),
     m_normalTargetPoints(100),
     m_multiHit(0),
-    m_ball(nullptr),
-    m_lostBallCounter(0),
-    m_updatingEntity(nullptr),
-    m_remainingBall(-1),
-    m_levelPass(false),
     m_remainingTime(-1),
     m_totalTime(-1),
-    m_levelEndingTime(0),
+    m_initialTime(0),
+    m_defaultTargetBuffer(UINT_MAX),
+    m_levelPass(false),
+
     m_timeAttackMode(false),
-    m_ballTravelDistance(0.0f),
-    m_ballImpulseTime(0.0f),
-    m_ballImpulseAngle(-20.0f, 20.0f),
     m_goldMedal(0),
     m_silverMedal(0),
     m_bronzeMedal(0),
     m_levelName(""),
-    m_lastTime(0),
     m_gravityGoody(sf::Keyboard::Num1, 2.f, m_gravity, config.get<int>("goodygravity")),
     m_invulnerableGoody(sf::Keyboard::Num2, 3.f, m_ball, config.get<int>("goodyinvulnerable")),
     m_extraBallGoody(sf::Keyboard::Num3, Goody::ExtraBallGoody, 0, 0, config.get<int>("goodyextraball")),
     m_extraTimeGoody(sf::Keyboard::Num4, Goody::ExtraTimeGoody, 0, 0, config.get<int>("goodyextratime")),
     m_currentSeletedGoody(0),
-    m_playing(false),
-    m_defaultTargetBuffer(UINT_MAX)
+    m_playing(false)
 {
     auto func = [this](Goody& sender)
     {
@@ -453,7 +462,7 @@ void Level::createLabelAt(const Entity* target, const std::string& fontName, con
 void Level::createLabelAt(const Entity* target, const std::string& fontName, const std::string& text)
 {
     return createLabelAt(sf::Vector2f(
-                utility::toPixel(target->getPosition().x), 
+                utility::toPixel(target->getPosition().x),
                 utility::toPixel(target->getPosition().y)),
                 fontName,
                 text);
@@ -555,7 +564,7 @@ const int Level::getPoints() const
 
 const sf::Vector2f Level::getBallCoords() const
 {
-    return sf::Vector2f(utility::toPixel(m_ball->getPosition().x), 
+    return sf::Vector2f(utility::toPixel(m_ball->getPosition().x),
                         utility::toPixel(m_ball->getPosition().y));
 }
 

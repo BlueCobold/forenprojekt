@@ -14,9 +14,9 @@ class Background : public Drawable, public TimedObject, public VariableHandler
 {
 private:
 
+    sf::Vector2u m_size;
     Animation* m_updatingAni;
     std::vector<std::unique_ptr<ParallaxLayer>> m_layers;
-    sf::Vector2u m_size;
 
 public:
 

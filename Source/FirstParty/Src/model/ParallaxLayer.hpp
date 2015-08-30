@@ -10,8 +10,8 @@ class ParallaxLayer : public AnimatedGraphics
 {
 private:
 
-    Animation* m_updatingAni;
     sf::Vector2f m_layerSize;
+    Animation* m_updatingAni;
 
 public:
 

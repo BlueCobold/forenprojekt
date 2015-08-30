@@ -3,18 +3,18 @@
 Goody::Goody(const sf::Keyboard::Key key,
              const Type type,
              const float durationTime,
-             const float cooldownTime, 
+             const float cooldownTime,
              const int charges) :
     m_key(key),
-    m_durationTime(durationTime),
-    m_cooldownTime(cooldownTime),
+    m_active(false),
     m_charges(charges),
+    m_cooldownTime(cooldownTime),
     m_nextUseTime(0),
+    m_durationTime(durationTime),
     m_durationUntilTime(0),
     m_selected(false),
     m_type(type),
-    m_callback(nullptr),
-    m_active(false)
+    m_callback(nullptr)
 {
 }
 
@@ -40,7 +40,7 @@ void Goody::update(const float elapsedTime)
     {
         if(canActivate())
             m_active = true;
-        
+
         if(m_callback != nullptr)
             m_callback(*this);
     }

@@ -17,11 +17,11 @@ class PropertyFilter :
     public AnimatedObject
 {
 public:
-    PropertyFilter(const bool useEntityProperties, VariableHandler* handler = nullptr)
-        : m_entityA(nullptr),
-        m_entityB(nullptr),
+    PropertyFilter(const bool useEntityProperties, VariableHandler* handler = nullptr) :
         m_useValuesFromA(useEntityProperties),
-        m_globalHandler(handler)
+        m_globalHandler(handler),
+        m_entityA(nullptr),
+        m_entityB(nullptr)
     { }
 
     void bindProvider(std::unique_ptr<ValueProvider> provider)
@@ -40,7 +40,7 @@ public:
         m_entityB = nullptr;
         return val >= 1;
     }
-    
+
     virtual float getValueOf(const std::string& name) const override
     {
         if(m_globalHandler != nullptr && name.length() > 7 && name.substr(0,7) == "global:")
@@ -108,9 +108,9 @@ public:
 
 private:
     std::unique_ptr<ValueProvider> m_provider;
-    VariableHandler* m_globalHandler;
     bool m_useValuesFromA;
     bool m_useGlobal;
+    VariableHandler* m_globalHandler;
     Entity* m_entityA;
     Entity* m_entityB;
 };

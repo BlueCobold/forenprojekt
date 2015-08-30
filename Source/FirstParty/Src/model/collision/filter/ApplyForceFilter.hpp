@@ -10,11 +10,9 @@ class ApplyForceFilter : public ActionFilter
 {
 public:
 
-    ApplyForceFilter(
-        const b2Vec2& force,
-        std::unique_ptr<CollisionFilter> child) :
-            m_force(force),
-            ActionFilter(std::move(child))
+    ApplyForceFilter(const b2Vec2& force, std::unique_ptr<CollisionFilter> child) :
+        ActionFilter(std::move(child)),
+        m_force(force)
     { }
 
     virtual ~ApplyForceFilter()

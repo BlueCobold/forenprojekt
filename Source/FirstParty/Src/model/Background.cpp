@@ -2,7 +2,9 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 
 
-Background::Background(const sf::Vector2u& size) : m_size(size), m_updatingAni(nullptr)
+Background::Background(const sf::Vector2u& size) :
+    m_size(size),
+    m_updatingAni(nullptr)
 {
 }
 

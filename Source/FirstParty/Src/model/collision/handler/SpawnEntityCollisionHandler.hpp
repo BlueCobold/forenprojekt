@@ -13,9 +13,9 @@ public:
     SpawnEntityCollisionHandler(const SpawnHandler& spawnHandler,
                                 const Entity* owner,
                                 const Entity* spawn) :
+        m_handler(spawnHandler),
         m_owner(owner),
         m_spawn(spawn),
-        m_handler(spawnHandler),
         m_spawned(false)
     {
     }
@@ -31,10 +31,10 @@ public:
 
 private:
 
-    bool m_spawned;
     SpawnHandler m_handler;
     const Entity* m_owner;
     const Entity* m_spawn;
+    bool m_spawned;
 };
 
 #endif // SPAWN_ENTITY_COLLISION_HANDLER_HPP

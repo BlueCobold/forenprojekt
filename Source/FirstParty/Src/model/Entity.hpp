@@ -16,12 +16,12 @@
 #include <string>
 
 /// This class will be used to draw objects that have a binding
-/// to Box2D 
+/// to Box2D
 class Entity : public PhysicalObject, public AnimatedGraphics, public Cloneable<Entity>
 {
 public:
 
-    enum Type 
+    enum Type
     {
         Teeter,
         Ball,
@@ -37,13 +37,13 @@ private:
     Type m_type;
     float m_lastTime;
     bool m_killed;
+    bool m_respawnable;
+    bool m_autoKill;
     bool m_collideWithBall;
     Animation* m_updatingAni;
     std::vector<std::unique_ptr<CollisionHandler>> m_collisionHandler;
     std::unique_ptr<CollisionFilter> m_collisionFilter;
     std::map<std::string, float> m_variables;
-    bool m_respawnable;
-    bool m_autoKill;
     float m_animationAngle;
     std::unique_ptr<SoundObject> m_collisionSound;
     std::vector<std::unique_ptr<SoundTrigger>> m_otherSounds;

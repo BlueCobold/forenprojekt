@@ -114,13 +114,19 @@ private:
     struct EntitySpawn
     {
     public:
-        EntitySpawn(std::unique_ptr<Entity> target) : respawnAt(-1.f), target(std::move(target))
+        EntitySpawn(std::unique_ptr<Entity> target) :
+            target(std::move(target)),
+            respawnAt(-1.f)
         { }
 
-        EntitySpawn(std::unique_ptr<Entity> target, const float time) : respawnAt(time), target(std::move(target))
+        EntitySpawn(std::unique_ptr<Entity> target, const float time) :
+            target(std::move(target)),
+            respawnAt(time)
         { }
 
-        EntitySpawn(EntitySpawn&& source) : target(std::move(source.target)), respawnAt(source.respawnAt)
+        EntitySpawn(EntitySpawn&& source) :
+            target(std::move(source.target)),
+            respawnAt(source.respawnAt)
         { }
 
         EntitySpawn& operator=(EntitySpawn&& source)
@@ -130,8 +136,8 @@ private:
             return *this;
         }
 
-        float respawnAt;
         std::unique_ptr<Entity> target;
+        float respawnAt;
     };
 
     struct Templates
@@ -143,7 +149,7 @@ private:
         std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
         std::unordered_map<std::string, tinyxml2::XMLElement*> overrides;
     };
-    
+
     void createLabelAt(const Entity* target, const std::string& fontName, const int points);
     void createLabelAt(const Entity* target, const std::string& fontName, const std::string& text);
     void createLabelAt(const sf::Vector2f& position, const std::string& fontName, const std::string& text);
@@ -167,7 +173,7 @@ private:
     void load();
 
     bool validate(const tinyxml2::XMLDocument& document);
-    
+
     void parseObjects(
         Templates& templates,
         tinyxml2::XMLElement* root,
@@ -197,13 +203,13 @@ private:
         sf::Vector2u& position,
         Templates& templates,
         bool bindInstantly = true);
-    
+
     static void findPhysicAndShapeTag(
         tinyxml2::XMLElement*& physic,
-        tinyxml2::XMLElement*& shape, 
+        tinyxml2::XMLElement*& shape,
         tinyxml2::XMLElement* entity,
         Templates& templates);
-    
+
     void parsePhysics(
         tinyxml2::XMLElement* physic,
         tinyxml2::XMLElement* shape,
@@ -251,12 +257,14 @@ private:
     bool isOriginal();
 private:
 
+    ResourceManager& m_resourceManager;
+    AppConfig& m_config;
+
     b2World m_world;
     b2Vec2 m_defaultGravity;
     b2Vec2 m_gravity;
     float m_gravityFactor;
 
-    ResourceManager& m_resourceManager;
     CloneHandler m_cloneHandler;
 
     unsigned int m_number;
@@ -281,8 +289,6 @@ private:
     float m_lastTime;
     float m_levelEndingTime;
     float m_levelPlayTime;
-
-    AppConfig& m_config;
 
 #ifdef _DEBUG_BOX2D
     bool m_debugDraw;
@@ -334,7 +340,7 @@ private:
         std::unique_ptr<LineLabel> label;
         float time;
     };
-    
+
     std::vector<std::unique_ptr<TimedLabel>> m_pointLabels;
 
     bool m_levelPass;

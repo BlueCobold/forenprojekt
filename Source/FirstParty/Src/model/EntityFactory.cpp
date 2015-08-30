@@ -1,17 +1,17 @@
 #include "EntityFactory.hpp"
 
 EntityFactory::EntityFactory(CloneHandler& cloneHandler,
-                             bool respawnable, 
+                             bool respawnable,
                              bool autoKill,
                              std::unique_ptr<Entity>& product,
                              float minDelayTime,
                              float maxDelayTime,
                              const b2Vec2& spawnOffset) :
     Entity(Entity::EntityFactory, cloneHandler, respawnable, autoKill),
-    m_randomGenerator(minDelayTime, maxDelayTime),
     m_product(std::move(product)),
+    m_manufactureMoment(0),
     m_spawnOffset(spawnOffset),
-    m_manufactureMoment(0)
+    m_randomGenerator(minDelayTime, maxDelayTime)
 {
     if(minDelayTime <= 0 || maxDelayTime <= 0)
         throw std::runtime_error(utility::translateKey("InvalidFactoryTime"));

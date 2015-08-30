@@ -14,15 +14,14 @@ class SpawnEntity : public ActionFilter
 public:
     typedef std::function<void(const Entity* owner, const Entity* spawned)> SpawnHandler;
 
-    SpawnEntity(
-            const SpawnHandler& spawnHandler,
-            const Entity* owner,
-            const Entity* spawn,
-            std::unique_ptr<CollisionFilter> child) :
+    SpawnEntity(const SpawnHandler& spawnHandler,
+                const Entity* owner,
+                const Entity* spawn,
+                std::unique_ptr<CollisionFilter> child) :
         ActionFilter(std::move(child)),
+        m_handler(spawnHandler),
         m_owner(owner),
         m_spawn(spawn),
-        m_handler(spawnHandler),
         m_spawned(false)
     {
         if(m_spawn == nullptr || m_owner == nullptr)
@@ -45,10 +44,10 @@ public:
 
 private:
 
-    bool m_spawned;
     SpawnHandler m_handler;
     const Entity* m_owner;
     const Entity* m_spawn;
+    bool m_spawned;
 };
 
 #endif // SPAWN_ENTITY_HPP

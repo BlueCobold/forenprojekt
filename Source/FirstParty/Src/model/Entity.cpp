@@ -9,14 +9,14 @@
 #include <Box2D/Dynamics/b2World.h>
 
 Entity::Entity(Type type, CloneHandler& cloneHandler, bool respawnable, bool autoKill) :
-    m_killed(false),
     m_type(type),
-    m_updatingAni(nullptr),
-    m_collideWithBall(true),
+    m_killed(false),
     m_respawnable(respawnable),
     m_autoKill(autoKill),
-    m_killAnimationEntity(nullptr),
+    m_collideWithBall(true),
+    m_updatingAni(nullptr),
     m_animationAngle(0),
+    m_killAnimationEntity(nullptr),
     m_cloneHandler(cloneHandler)
 {
 }
@@ -114,7 +114,7 @@ void Entity::restartAt(const float value)
 }
 
 void Entity::kill()
-{    
+{
     m_killed = true;
 }
 

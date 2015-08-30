@@ -13,7 +13,7 @@
 class JointObject
 {
 public:
-    enum JointType 
+    enum JointType
     {
         Unknown,
         SingleRevolute,
@@ -24,19 +24,18 @@ public:
 private:
     b2World* m_world;
     b2Joint* m_joint;
-
     JointType m_type;
 
 public:
     JointObject(b2World* world, JointType type) :
-        m_joint(nullptr),
         m_world(world),
+        m_joint(nullptr),
         m_type(type)
     { }
 
     JointObject(JointType type) :
-        m_joint(nullptr),
         m_world(nullptr),
+        m_joint(nullptr),
         m_type(type)
     { }
 
