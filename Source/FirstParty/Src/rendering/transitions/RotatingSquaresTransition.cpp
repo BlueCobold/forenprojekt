@@ -1,16 +1,15 @@
 #include "RotatingSquaresTransition.hpp"
 #include "../../Utility.hpp"
 
-RotatingSquaresTransition::RotatingSquaresTransition(
-    const sf::Texture* sourceTexture,
-    const sf::Texture* targetTexture,
-    const int columns,
-    const int rows,
-    const float duration,
-    const sf::Vector2u& size) :
+RotatingSquaresTransition::RotatingSquaresTransition(const sf::Texture* sourceTexture,
+                                                     const sf::Texture* targetTexture,
+                                                     const int columns,
+                                                     const int rows,
+                                                     const float duration,
+                                                     const sf::Vector2u& size) :
+    Transition(sourceTexture, targetTexture, duration, size),
     m_columns(columns),
-    m_rows(rows),
-    Transition(sourceTexture, targetTexture, duration, size)
+    m_rows(rows)
 {
     if(targetTexture != nullptr)
     {

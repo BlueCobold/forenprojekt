@@ -6,8 +6,10 @@ ScrollView::ScrollView()
 {
 }
 
-ScrollView::ScrollView(const sf::Vector2u& levelsize, const sf::Vector2f& viewsize)
-    : m_viewSize(viewsize), m_levelSize(levelsize), m_zoomFactor(1.0f)
+ScrollView::ScrollView(const sf::Vector2u& levelsize, const sf::Vector2f& viewsize) :
+    m_viewSize(viewsize),
+    m_levelSize(levelsize),
+    m_zoomFactor(1.0f)
 {
 }
 

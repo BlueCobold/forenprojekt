@@ -19,11 +19,11 @@ public:
         const sf::Texture* targetTexture,
         const float duration,
         const sf::Vector2u& size) :
-        m_sourceTexture(sourceTexture),
+        m_size(size),
         m_targetTexture(targetTexture),
+        m_sourceTexture(sourceTexture),
         m_duration(duration),
-        m_isFinished(false),
-        m_size(size)
+        m_isFinished(false)
     {
         TimedObject::restartAt(m_frameTime.getElapsedTime().asSeconds());
     }
@@ -59,7 +59,7 @@ private:
 
     Transition( const Transition& other );
     Transition& operator=( const Transition& );
-    
+
     const sf::Vector2u m_size;
     const sf::Texture* m_targetTexture;
     const sf::Texture* m_sourceTexture;

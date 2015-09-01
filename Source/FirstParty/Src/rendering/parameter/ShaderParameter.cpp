@@ -4,9 +4,9 @@
 #include "../GLExt.hpp"
 
 ShaderParameter::ShaderParameter(const std::string& name) :
+        m_name(name),
         m_paramLocation(-1),
-        m_paramLocationLoaded(false),
-        m_name(name)
+        m_paramLocationLoaded(false)
 { }
 
 void ShaderParameter::bind(int shaderProgram)

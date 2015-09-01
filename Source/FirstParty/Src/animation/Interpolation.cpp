@@ -2,11 +2,10 @@
 
 #include <iostream>
 
-Interpolation::Interpolation(
-    const float startValue,
-    const float targetValue,
-    const float duration,
-    const float time) :
+Interpolation::Interpolation(const float startValue,
+                             const float targetValue,
+                             const float duration,
+                             const float time) :
     TimedObject(time),
     m_started(false),
     m_finished(false),
@@ -20,12 +19,12 @@ Interpolation::Interpolation(
 
 Interpolation::Interpolation() :
     TimedObject(0),
+    m_started(false),
+    m_finished(false),
     m_startValue(0),
     m_targetValue(0),
-    m_duration(0),
     m_currentValue(0),
-    m_finished(false),
-    m_started(false)
+    m_duration(0)
 {
     update(0);
 }

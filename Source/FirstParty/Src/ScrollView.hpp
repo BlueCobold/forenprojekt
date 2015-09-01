@@ -17,7 +17,7 @@ public:
     ScrollView(const sf::Vector2u& levelsize, const sf::Vector2f& viewsize);
 
     /*
-        Adjust the view of the given render window. 
+        Adjust the view of the given render window.
         scrollvec is the ball's position.
     */
     void adjustView(const sf::Vector2f& scrollvec, const DrawParameter& window);
@@ -26,9 +26,9 @@ public:
     void setZoomFactor(const float factor);
 
 private:
-    float m_zoomFactor;
     sf::Vector2f m_viewSize;
     sf::Vector2f m_levelSize;
+    float m_zoomFactor;
 };
 
 #endif

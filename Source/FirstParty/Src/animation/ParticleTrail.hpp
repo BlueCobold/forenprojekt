@@ -24,12 +24,12 @@ public:
     float getSpeedMin() const { return m_speedMin; }
 
 private:
-    Animation* m_current;
+    std::unique_ptr<Animation> m_template;
     float m_density;
     float m_speedMin;
+    Animation* m_current;
     float m_lastX;
     float m_lastY;
-    std::unique_ptr<Animation> m_template;
     std::vector<std::unique_ptr<Animation>> m_runningAnimations;
 };
 
