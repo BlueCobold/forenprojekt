@@ -31,8 +31,8 @@ public:
     BackgroundLoader(void(T::*function)(), T& object) :
         m_loaded(false),
         m_loadInProgress(false),
-        m_function(function),
         m_backgroundProcess(nullptr),
+        m_function(function),
         m_object(object)
     {
         m_backgroundProcess = std::unique_ptr<sf::Thread>(new sf::Thread(&BackgroundLoader::load, this));

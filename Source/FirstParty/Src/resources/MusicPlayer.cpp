@@ -3,12 +3,13 @@
 #include "../resources/AppConfig.hpp"
 
 MusicPlayer::MusicPlayer(AppConfig& config, std::vector<sf::Music*>& music, MusicPlayer::PlayMode mode) :
+    m_config(config),
     m_music(music),
     m_randomGenerator(0.f, static_cast<float>(music.size())),
     m_mode(mode),
     m_isPlaying(false),
     m_currentIndex(0),
-    m_config(config)
+    m_currentVolume(0)
 {
     if(m_mode == MusicPlayer::Shuffle)
         m_currentIndex = getRandomNumber();
@@ -24,7 +25,7 @@ void MusicPlayer::update()
         m_music[m_currentIndex]->setVolume(m_currentVolume);
     }
 
-    if(!m_isPlaying || 
+    if(!m_isPlaying ||
        m_music[m_currentIndex]->getStatus() == sf::Music::Playing ||
        m_music.empty())
         return;
@@ -88,7 +89,7 @@ void MusicPlayer::previous()
     {
         m_isPlaying = true;
         m_music[m_currentIndex]->stop();
-    
+
         if(m_mode == MusicPlayer::Shuffle)
             next();
 

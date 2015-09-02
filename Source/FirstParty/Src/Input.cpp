@@ -96,9 +96,7 @@ namespace utility
     void MouseWrapper::capture()
     {
         m_lastPosition = m_totalPosition;
-        m_position = sf::Vector2f(
-            static_cast<float>(m_lastPosition.x),
-            static_cast<float>(m_lastPosition.y));
+        m_position = sf::Vector2f(m_lastPosition);
         // TODO: remove not needed code
         m_leftDown = /*sf::Mouse::isButtonPressed(sf::Mouse::Left)*/ m_isLeftDown && !m_leftPressed;
         bool last = m_leftPressed;

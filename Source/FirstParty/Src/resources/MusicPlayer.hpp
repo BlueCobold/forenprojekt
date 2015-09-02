@@ -16,18 +16,18 @@ class AppConfig;
 class MusicPlayer
 {
 public:
-    enum PlayMode 
+    enum PlayMode
     {
         Normal,
         Shuffle
     };
 private:
+    AppConfig& m_config;
     std::vector<sf::Music*>& m_music;
     RandomProvider m_randomGenerator;
     PlayMode m_mode;
-    unsigned int m_currentIndex;
     bool m_isPlaying;
-    AppConfig& m_config;
+    unsigned int m_currentIndex;
     float m_currentVolume;
 
     unsigned int getRandomNumber();

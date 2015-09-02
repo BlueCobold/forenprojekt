@@ -3,15 +3,15 @@
 #include <tinyxml2.h>
 
 SpriteSheet::SpriteSheet(const std::string& fileName) :
-    m_fileName(fileName),
-    m_textureName("")
+    m_textureName(""),
+    m_fileName(fileName)
 {
     loadFromFile(m_fileName);
 }
 
 SpriteSheet::SpriteSheet() :
-    m_fileName(""),
-    m_textureName("")
+    m_textureName(""),
+    m_fileName("")
 {
 }
 

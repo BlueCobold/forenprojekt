@@ -1,6 +1,5 @@
 
 #include "App.hpp"
-#include "gui/Cursor.hpp"
 #include "gui/ErrorMessageBox.hpp"
 #include "gui/MenuTemplate.hpp"
 #include "rendering/Shader.hpp"
@@ -8,6 +7,10 @@
 #include "resources/SpriteSheet.hpp"
 
 #include <SFML/System.hpp>
+
+#ifdef LINUX
+#include "LinuxHelper.hpp"
+#endif
 
 #ifdef IOS
 int main2(int argc, char* argv[]);
@@ -21,6 +24,11 @@ int sfmlMain(int argc, char* argv[])
 int main(int argc, char* argv[])
 #endif
 {
+
+#ifdef LINUX
+    init();
+#endif
+
     std::ofstream file;
     std::streambuf* previous = nullptr;
     try

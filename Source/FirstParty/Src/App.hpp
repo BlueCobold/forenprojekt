@@ -3,6 +3,8 @@
 #ifndef APP_HPP
 #define APP_HPP
 
+#include "gui/Cursor.hpp"
+#include "resources/AppConfig.hpp"
 #include "resources/ResourceManager.hpp"
 #include "resources/AchievementManager.hpp"
 #include "resources/MusicPlayer.hpp"
@@ -14,9 +16,6 @@
 
 #include <string>
 #include <map>
-
-class Cursor;
-class AppConfig;
 
 /// This class will be used to handle the window or fullscreen
 /// and to handle the rendering
