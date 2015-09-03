@@ -76,7 +76,8 @@ void OptionMenu::applyChanges()
         if(Menu::getCheckbox(CHECKBOX_FULLSCREEN).getChecked() != m_fullScreen)
             m_fullScreen = !m_fullScreen;
 
-        sf::VideoMode videoMode(m_currentVideoMode.x, m_currentVideoMode.y);
+        sf::VideoMode videoMode(m_currentVideoMode.x, m_currentVideoMode.y,
+                                sf::VideoMode::getDesktopMode().bitsPerPixel);
         adjustVideoMode(videoMode, m_fullScreen);
 
         sf::ContextSettings settings = sf::ContextSettings(24, 8, 0);
@@ -84,10 +85,10 @@ void OptionMenu::applyChanges()
             Menu::getRenderWindow().create(videoMode, utility::translateKey("gui_rickety_racquet"), sf::Style::Fullscreen, settings);
         if(!m_fullScreen)
         {
-            Menu::getRenderWindow().create(sf::VideoMode(videoMode), utility::translateKey("gui_rickety_racquet"), sf::Style::Default, settings); 
+            Menu::getRenderWindow().create(sf::VideoMode(videoMode), utility::translateKey("gui_rickety_racquet"), sf::Style::Default, settings);
             Menu::getRenderWindow().setIcon(m_icon.getSize().x, m_icon.getSize().y, m_icon.getPixelsPtr());
         }
-        
+
         if(!sf::VideoMode(m_appointedVideoMode.x, m_appointedVideoMode.y).isValid())
         {
             auto index = std::find(begin(m_availableVideoMode), end(m_availableVideoMode), m_appointedVideoMode);
@@ -104,7 +105,7 @@ void OptionMenu::applyChanges()
         Menu::getRenderWindow().setFramerateLimit(m_config.get<int>("FrameRateLimit"));
         Menu::getRenderWindow().setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
     }
-    
+
     if(Menu::getSlider(SLIDER_MUSICVOLUMEN).getValue() != m_musicVolume)
     {
         m_musicVolume = Menu::getSlider(SLIDER_MUSICVOLUMEN).getValue();
@@ -238,8 +239,8 @@ void OptionMenu::nextVideoMode()
     if(m_appointedVideoMode == m_currentVideoMode)
         getLabel(LABEL_RESOLUTION).setText(utility::translateKey("gui_label_resolution"));
     else
-        getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.x) + 
-                                           utility::toString(" x ") + 
+        getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.x) +
+                                           utility::toString(" x ") +
                                            utility::toString(m_currentVideoMode.y));
 }
 
@@ -254,8 +255,8 @@ void OptionMenu::prevVideoMode()
     if(m_appointedVideoMode == m_currentVideoMode)
         getLabel(LABEL_RESOLUTION).setText(utility::translateKey("gui_label_resolution"));
     else
-        getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.x) + 
-                                           utility::toString(" x ") + 
+        getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.x) +
+                                           utility::toString(" x ") +
                                            utility::toString(m_currentVideoMode.y));
 }
 

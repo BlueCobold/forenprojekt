@@ -71,7 +71,8 @@ App::App(AppConfig& config) :
         std::swap(videoMode.width, videoMode.height);
     }
 #else
-    sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+    sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"),
+                            sf::VideoMode::getDesktopMode().bitsPerPixel);
 #endif
 
     adjustVideoMode(videoMode);
@@ -306,7 +307,8 @@ void App::handleEvents()
 
 void App::switchDisplayMode()
 {
-    sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+    sf::VideoMode videoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"),
+                            sf::VideoMode::getDesktopMode().bitsPerPixel);
 
     adjustVideoMode(videoMode);
 
@@ -334,7 +336,8 @@ void App::switchDisplayMode()
 
 void App::onResize()
 {
-    sf::VideoMode mode(m_screen.getSize().x, m_screen.getSize().y);
+    sf::VideoMode mode(m_screen.getSize().x, m_screen.getSize().y,
+                       sf::VideoMode::getDesktopMode().bitsPerPixel);
 
     adjustVideoMode(mode);
 
@@ -409,7 +412,8 @@ void App::restore()
     m_isMinimized = false;
     if(m_config.get<int>("IsFullScreen"))
     {
-        auto mode = sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"));
+        auto mode = sf::VideoMode(m_config.get<unsigned int>("ResolutionX"), m_config.get<unsigned int>("ResolutionY"),
+                                  sf::VideoMode::getDesktopMode().bitsPerPixel);
         adjustVideoMode(mode);
         if(mode.width != m_config.get<unsigned int>("ResolutionX") && mode.height != m_config.get<unsigned int>("ResolutionY"))
             m_screen.create(mode, m_windowTitle, sf::Style::Fullscreen, sf::ContextSettings(24, 8, 0));
