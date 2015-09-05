@@ -9,7 +9,7 @@
 #include <memory>
 #include <cstring>
 
-LoadLevelState::LoadLevelState(sf::RenderWindow& screen, 
+LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
                                ResourceManager& resourceManager,
                                AppConfig& config) :
     State(screen, resourceManager, config),
@@ -19,9 +19,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
             0,
             resourceManager.getBitmapFont("red"),
             LineLabel::Left),
-    m_level(nullptr),
     m_lastLevel(nullptr),
-    m_levelLoaderJob(nullptr),    
     m_currentLevel(1),
     m_directPlay(false),
     m_transitionStateInfo(LoadLevelStateId)
@@ -72,7 +70,7 @@ StateChangeInformation LoadLevelState::update(const float time)
         m_playStateInfo.m_level = m_lastLevel;
         m_playStateInfo.m_levelNumber = m_currentLevel;
         m_transitionStateInfo.m_level = m_lastLevel;
-        
+
         if(m_directPlay)
             m_transitionStateInfo.m_followingState = PlayStateId;
         else
@@ -86,7 +84,7 @@ StateChangeInformation LoadLevelState::update(const float time)
     if(!m_levelLoaderJob->isLoading() && !m_levelLoaderJob->isLoaded())
         m_levelLoaderJob->run();
 
-    
+
     for(int i = 0; i < step; ++i)
         text.append(".");
 

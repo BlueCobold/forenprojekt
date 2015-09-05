@@ -15,17 +15,17 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 
-LevelPassState::LevelPassState(sf::RenderWindow& screen, 
-                               ResourceManager& resourceManager, 
+LevelPassState::LevelPassState(sf::RenderWindow& screen,
+                               ResourceManager& resourceManager,
                                AppConfig& config,
                                AchievementManager& achievementManager ) :
     State(screen, resourceManager, config),
+    m_achievementManager(achievementManager),
     m_background(nullptr),
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_replay(false),
     m_gotCoins(false),
-    m_achievementManager(achievementManager),
     m_transitionStateInfo(LevelPassStateId)
 {
 }
@@ -47,9 +47,9 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
     m_menu.setPoints(m_level->getPoints());
     m_menu.setGrade(m_level->getMedal());
     m_menu.setLostBalls(m_level->getLostBalls());
-    std::string text = utility::replace(utility::replace(utility::replace(utility::translateKey("tooltip_medals"), 
+    std::string text = utility::replace(utility::replace(utility::replace(utility::translateKey("tooltip_medals"),
                                         utility::toString(m_level->getMedal(Level::Gold))),   // first replace
-                                        utility::toString(m_level->getMedal(Level::Silver))), // second replace 
+                                        utility::toString(m_level->getMedal(Level::Silver))), // second replace
                                         utility::toString(m_level->getMedal(Level::Bronze))); // third replace
     m_menu.setMedalToolTipText(text);
     if(!enterInformation->m_prepareOnly && !m_gotCoins)
@@ -128,7 +128,7 @@ StateChangeInformation LevelPassState::update(const float time)
         if(m_level->number() == 0  || loadKey)
         {
             OpenFileDialoge ofd("Level\0*.lvl\0");
-            if(ofd.openDialoge())        
+            if(ofd.openDialoge())
                 m_loadLevelStateInfo.m_file = ofd.getFile();
             else
                 return StateChangeInformation::Empty();
@@ -205,14 +205,14 @@ void LevelPassState::draw(const DrawParameter& params)
     m_level->draw(params);
 
     m_HUD.draw(params);
-    
+
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 
     sf::RectangleShape whiteRect;
     whiteRect.setSize(m_screen.getView().getSize());
     whiteRect.setFillColor(sf::Color(255, 255, 255, 128));
     params.getTarget().draw(whiteRect);
-    
+
     m_menu.draw(params);
 }
 

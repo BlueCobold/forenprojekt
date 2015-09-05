@@ -7,10 +7,9 @@
 #include <sstream>
 
 StateManager::StateManager() :
+    m_currentTime(m_frametime.getElapsedTime().asSeconds()),
     m_currentState(nullptr),
     m_currentStateId(None),
-    m_currentLevel(nullptr),
-    m_currentTime(m_frametime.getElapsedTime().asSeconds()),
     m_pause(false)
 {
 }

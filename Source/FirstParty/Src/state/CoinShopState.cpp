@@ -24,8 +24,8 @@ CoinShopState::CoinShopState(sf::RenderWindow& screen,
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_clicked(-1),
-    m_achievementManager(achievementManager),
-    m_transitionStateInfo(CoinShopStateId)
+    m_transitionStateInfo(CoinShopStateId),
+    m_achievementManager(achievementManager)
 {
     auto buttonFunc = [&](const Button& sender){ m_clicked = sender.getId(); };
     m_menu.getButton(CoinShopMenu::BUTTON_GRAVITY_PLUS).registerOnPressed(buttonFunc);

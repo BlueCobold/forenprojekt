@@ -36,14 +36,13 @@ private:
     const std::string createHighscoreString(const std::string& name) const;
 
     std::unique_ptr<sf::Texture> m_background;
-    sf::RenderTexture m_renderTexture;
-    Level* m_level;
-
-    HUD m_HUD;
-    bool m_replay;
-
     NewHighScoreMenu m_menu;
+    HUD m_HUD;
 
+    sf::RenderTexture m_renderTexture;
+
+    Level* m_level;
+    bool m_replay;
     std::string m_lastName;
 
     EnterPauseStateInformation m_stateInfo;

@@ -7,7 +7,7 @@
 #include <cmath>
 
 TransitionState::TransitionState(sf::RenderWindow& screen,
-                                 ResourceManager& resourceManager, 
+                                 ResourceManager& resourceManager,
                                  AppConfig& config,
                                  std::vector<sf::RenderTexture*>& offscreenBuffers) :
     State(screen, resourceManager, config),
@@ -22,8 +22,8 @@ TransitionState::TransitionState(sf::RenderWindow& screen,
         powerOfTwo *= 2;
     // BUG: the PC might not be able to handle this size!
     // we still need a texture as big as possible to handle screen-size-changes during the gameplay
-    bool s = m_sourceImage.create(powerOfTwo, powerOfTwo, true);
-    s = m_targetImage.create(powerOfTwo, powerOfTwo, true);
+    m_sourceImage.create(powerOfTwo, powerOfTwo, true);
+    m_targetImage.create(powerOfTwo, powerOfTwo, true);
 }
 
 TransitionState::~TransitionState()
@@ -36,10 +36,10 @@ void TransitionState::onEnter(const EnterStateInformation* enterInformation, con
     const EnterTransitionStateInformation* info = dynamic_cast<const EnterTransitionStateInformation*>(enterInformation);
     m_followingState = info->m_followingState;
     m_followingEnterInformation = info->m_onEnterInformation;
-    
+
     info->m_source->pause(time);
     render(info, m_sourceImage, info->m_source, time);
-    
+
     info->m_onEnterInformation->m_prepareOnly = true;
     info->m_target->onEnter(info->m_onEnterInformation, time);
     info->m_target->update(time);
@@ -57,7 +57,7 @@ void TransitionState::render(const EnterTransitionStateInformation* info,
     target.setView(utility::getDefaultView(target, size));
     target.clear();
     DrawParameter params(target);
-    
+
     std::unordered_map<const sf::Texture*, sf::RenderTexture*> offscreens;
     for(unsigned int i = 0; i < m_offscreenBuffers.size(); i++)
     {

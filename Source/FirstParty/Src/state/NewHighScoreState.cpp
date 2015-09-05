@@ -13,13 +13,14 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Network/Http.hpp>
 
-NewHighScoreState::NewHighScoreState(sf::RenderWindow& screen, 
-                               ResourceManager& resourceManager, 
+NewHighScoreState::NewHighScoreState(sf::RenderWindow& screen,
+                               ResourceManager& resourceManager,
                                AppConfig& config) :
     State(screen, resourceManager, config),
     m_background(nullptr),
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
+    m_level(nullptr),
     m_replay(false),
     m_lastName(""),
     m_transitionStateInfo(NewHighScoreStateId)
@@ -120,7 +121,7 @@ void NewHighScoreState::draw(const DrawParameter& params)
     m_level->draw(params);
 
     m_HUD.draw(params);
-    
+
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 
     sf::RectangleShape whiteRect;
@@ -142,7 +143,7 @@ void NewHighScoreState::addNewHighScore(int points, float time, std::string name
     int newPlacePoints = 0;
     int newPlaceTime = 0;
     int number = m_level->number();
-    
+
     std::string mode = "NAM";
 
     if(m_level->isTimeAttackMode())

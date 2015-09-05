@@ -33,22 +33,22 @@ public:
     std::unique_ptr<Level> gainLevel();
 
 private:
+    void loadLevel();
+    void onEvent(utility::Event::EventType type);
 
+    LineLabel m_label;
     std::unique_ptr<Level> m_level;
     Level* m_lastLevel;
     std::string m_loadingErrorMessage;
-    bool m_directPlay;
 #ifdef LEVELTESTING
     std::string m_file;
 #endif
-    LineLabel m_label;
     int m_currentLevel;
+    bool m_directPlay;
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
 
     std::unique_ptr<BackgroundLoader<LoadLevelState>> m_levelLoaderJob;
-    void loadLevel();
-    void onEvent(utility::Event::EventType type);
 };
 
 #endif // LOADLEVELSTATE_HPP

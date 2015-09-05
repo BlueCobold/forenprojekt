@@ -12,16 +12,16 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 
-LevelFailState::LevelFailState(sf::RenderWindow& screen, 
-                               ResourceManager& resourceManager, 
+LevelFailState::LevelFailState(sf::RenderWindow& screen,
+                               ResourceManager& resourceManager,
                                AppConfig& config,
                                AchievementManager& achievementManager) :
     State(screen, resourceManager, config),
+    m_achievementManager(achievementManager),
     m_background(nullptr),
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_replay(false),
-    m_achievementManager(achievementManager),
     m_transitionStateInfo(LevelFailStateId)
 {
 }
@@ -41,7 +41,7 @@ void LevelFailState::onEnter(const EnterStateInformation* enterInformation, cons
     m_HUD.onEnter(m_level);
 
     m_menu.updateLayout();
-    
+
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
     if(!enterInformation->m_prepareOnly)
@@ -119,7 +119,7 @@ void LevelFailState::draw(const DrawParameter& params)
     m_level->draw(params);
 
     m_HUD.draw(params);
-    
+
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 
     sf::RectangleShape whiteRect;
@@ -134,7 +134,7 @@ void LevelFailState::setAchievements()
 {
     m_achievementManager.analyseGameEvents(m_level->getGameEvents());
     m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::Ball, m_level->getLostBalls());
-    
+
     if(m_level->isTimeAttackMode())
         m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::LevelTAM, 1);
     else

@@ -47,11 +47,11 @@ public:
     
     State(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config) :
         m_screen(screen),
+        m_config(config),
         m_resourceManager(resourceManager),
         m_pause(false),
-        m_pauseDelay(0),
-        m_config(config),
-        m_currentTime(0)
+        m_currentTime(0),
+        m_pauseDelay(0)
     {
         pause(m_currentTime);
     }

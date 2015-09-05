@@ -14,20 +14,19 @@
 #include <SFML/Network/Http.hpp>
 #include <string>
 
-HighScoreState::HighScoreState(sf::RenderWindow& screen, 
-                               ResourceManager& resourceManager, 
+HighScoreState::HighScoreState(sf::RenderWindow& screen,
+                               ResourceManager& resourceManager,
                                AppConfig& config) :
     State(screen, resourceManager, config),
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
-    m_onlineHighscore(false),
-    m_onlineHighscoreLoaderJob(nullptr),
     m_showPoints(true),
-    m_clicked(-1),
-    m_offset(0, 60),
     m_offsetAdded(false),
-    m_transitionStateInfo(HighScoreStateId)
-{ 
+    m_offset(0, 60),
+    m_clicked(-1),
+    m_transitionStateInfo(HighScoreStateId),
+    m_onlineHighscore(false)
+{
     m_onlineHighscoreLoaderJob = std::unique_ptr<BackgroundLoader<HighScoreState>>(new BackgroundLoader<HighScoreState>(&HighScoreState::loadOnlineHighscore, *this));
 
     auto buttonFunc = [&](const Button& sender){ m_clicked = sender.getId(); };
@@ -78,7 +77,7 @@ StateChangeInformation HighScoreState::update(const float time)
 
     updateTime(time - m_timeDiff);
     m_menu.update(m_screen, getPassedTime());
-    
+
     if(m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).getChecked())
     {
         if(m_clicked == HighScoreMenu::BUTTON_TAB_TIME)
@@ -113,7 +112,7 @@ StateChangeInformation HighScoreState::update(const float time)
     }
 
     if(m_clicked == HighScoreMenu::BUTTON_CLOSE)
-    { 
+    {
         m_stateInfo.m_prepareOnly = true;
         m_stateInfo.m_level = m_highScoreStateInfo.m_level;
         m_stateInfo.m_levelNumber = m_highScoreStateInfo.m_levelNumber;

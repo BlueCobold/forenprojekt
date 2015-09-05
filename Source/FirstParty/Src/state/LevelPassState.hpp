@@ -33,12 +33,14 @@ private:
     void addNewHighScore(int points, std::string name);
     void setAchievements();
 
+    AchievementManager& m_achievementManager;
+
     std::unique_ptr<sf::Texture> m_background;
     sf::RenderTexture m_renderTexture;
     Level* m_level;
 
-    HUD m_HUD;
     ReplayMenu m_menu;
+    HUD m_HUD;
     bool m_replay;
     bool m_gotCoins;
 
@@ -47,8 +49,6 @@ private:
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterHighScoreStateInformation m_highScoreInfo;
     EnterLoadLevelStateInformation m_loadLevelStateInfo;
-
-    AchievementManager& m_achievementManager;
 
     void setMedal(int medal);
 };

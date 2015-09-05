@@ -29,12 +29,12 @@ private:
     void render(sf::RenderTarget& m_renderTexture);
 
     std::unique_ptr<sf::Texture> m_background;
+    PauseMenu m_menu;
+    HUD m_HUD;
+
     sf::RenderTexture m_renderTexture;
     Level* m_level;
     int m_levelNumber;
-
-    HUD m_HUD;
-    PauseMenu m_menu;
 
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;

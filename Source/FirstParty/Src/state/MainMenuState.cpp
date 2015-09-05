@@ -13,13 +13,13 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
 
-MainMenuState::MainMenuState(sf::RenderWindow& screen, 
-                             ResourceManager& resourceManager, 
+MainMenuState::MainMenuState(sf::RenderWindow& screen,
+                             ResourceManager& resourceManager,
                              AppConfig& config) :
     State(screen, resourceManager, config),
     m_menu(screen, resourceManager),
-    m_optionStateInfo(MainMenuStateId),
-    m_transitionStateInfo(MainMenuStateId)
+    m_transitionStateInfo(MainMenuStateId),
+    m_optionStateInfo(MainMenuStateId)
 {
 }
 
@@ -77,7 +77,7 @@ StateChangeInformation MainMenuState::update(const float time)
             OpenFileDialoge ofd("Level\0*.lvl\0");
             bool result = ofd.openDialoge();
             utility::Keyboard.notifyKeyReleased(sf::Keyboard::L);
-            if(result)        
+            if(result)
                 m_loadLevelStateInfo.m_file = ofd.getFile();
             else
                 return StateChangeInformation::Empty();
@@ -115,7 +115,7 @@ StateChangeInformation MainMenuState::update(const float time)
 }
 
 void MainMenuState::draw(const DrawParameter& params)
-{    
+{
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 
     sf::RectangleShape whiteRect;

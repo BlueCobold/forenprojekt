@@ -23,9 +23,9 @@ public:
 
 private:
     LevelPreviewMenu m_menu;
+    HUD m_HUD;
     Level* m_level;
     bool m_levelUpdated;
-    HUD m_HUD;
     int m_levelNumber;
 
     EnterPlayStateInformation m_playStateInfo;

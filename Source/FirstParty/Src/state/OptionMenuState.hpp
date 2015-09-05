@@ -23,8 +23,8 @@ public:
 
 private:
     OptionMenu m_menu;
-    Level* m_level;
     HUD m_HUD;
+    Level* m_level;
 
     int m_clicked;
 

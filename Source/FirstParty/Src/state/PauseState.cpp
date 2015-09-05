@@ -20,9 +20,10 @@ PauseState::PauseState(sf::RenderWindow& screen,
     m_background(nullptr),
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
+    m_level(nullptr),
     m_levelNumber(0),
-    m_optionStateInfo(PauseStateId),
-    m_transitionStateInfo(PauseStateId)
+    m_transitionStateInfo(PauseStateId),
+    m_optionStateInfo(PauseStateId)
 {
 }
 
@@ -45,7 +46,7 @@ void PauseState::onEnter(const EnterStateInformation* enterInformation, const fl
 
     m_menu.updateLayout();
 
-    m_menu.setCoinToolTipText(utility::replace(utility::translateKey("tooltip_coins"), 
+    m_menu.setCoinToolTipText(utility::replace(utility::translateKey("tooltip_coins"),
                                            utility::toString(m_config.get<int>("coins"))));
 }
 
@@ -100,7 +101,7 @@ StateChangeInformation PauseState::update(const float time)
             m_loadLevelStateInfo.m_directPlay = false;
             m_loadLevelStateInfo.m_levelNumber = m_playStateInfo.m_levelNumber;
         }
-        m_loadLevelStateInfo.m_prepareOnly = false;        
+        m_loadLevelStateInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
         m_transitionStateInfo.m_comeFromeState = PauseStateId;
