@@ -9,33 +9,23 @@
 #include "AnimationContainer.hpp"
 #include "InteractiveLabel.hpp"
 
-MenuPanel::MenuPanel(const MenuElements& elements,
+MenuPanel::MenuPanel(const std::vector<std::unique_ptr<MenuElement>>& elements,
                      const sf::Vector2f& position) :
     m_position(position)
 {
-    for(auto button = begin(elements.buttons); button != end(elements.buttons); ++button)
-        createButton(*button);
-
-    for(auto checkbox = begin(elements.checkboxes); checkbox != end(elements.checkboxes); ++checkbox)
-        createCheckBox(*checkbox);
-
-    for(auto slider = begin(elements.slider); slider != end(elements.slider); ++slider)
-        createSlider(*slider);
-
-    for(auto label = begin(elements.labels); label != end(elements.labels); ++label)
-        createLabel(*label);
-
-    for(auto label = begin(elements.interactiveLabels); label != end(elements.interactiveLabels); ++label)
-        createLabel(*label);
-
-    for(auto sprite = begin(elements.sprites); sprite != end(elements.sprites); ++sprite)
-        createSprite(*sprite);
-    
-    for(auto inputbox = begin(elements.infobox); inputbox != end(elements.infobox); ++inputbox)
-        createInputBox(*inputbox);
-
-    for(auto it = begin(elements.animationContainer); it != end(elements.animationContainer); ++it)
-        createAnimationContainer((*it)->clone());
+    for(auto element = begin(elements); element != end(elements); ++element)
+    {
+        auto clone = (*element)->clone();
+        if(clone->getType() == MenuElementType::Button)
+        {
+            dynamic_cast<Button*>(clone.get())->registerOnPressed([this](const Button& sender)
+            {
+                if(m_clickCallback != nullptr)
+                    m_clickCallback(sender);
+            });
+        }
+        m_elements.push_back(std::move(clone));
+    }
 
     setCorrelation();
     std::sort(m_elements.begin(), m_elements.end(), 
@@ -102,54 +92,6 @@ void MenuPanel::setCorrelation()
     }
 }
 
-void MenuPanel::createButton(const ButtonInfo& info)
-{
-    std::unique_ptr<Button> button(new Button(info.id, info.style, m_position, info.position, info.triggers));
-
-    button->registerOnPressed([this](const Button& sender)
-    {
-        if(m_clickCallback != nullptr)
-            m_clickCallback(sender);
-    });
-
-    button->setToolTip(info.toolTip);
-    button->setVisibleWhenId(info.visibleWhenId);
-    m_elements.push_back(std::move(button));
-}
-
-void MenuPanel::createCheckBox(const CheckBoxInfo& info)
-{
-    std::unique_ptr<CheckBox> checkbox(new CheckBox(info.id, info.style, m_position, info.position));
-    checkbox->setToolTip(info.toolTip);
-    checkbox->setVisibleWhenId(info.visibleWhenId);
-    m_elements.push_back(std::move(checkbox));
-}
-
-void MenuPanel::createSlider(const SliderInfo& info)
-{
-    std::unique_ptr<Slider> slider(new Slider(info.id, info.style, m_position, info.position));
-    slider->setVisibleWhenId(info.visibleWhenId);
-    m_elements.push_back(std::move(slider));
-}
-
-void MenuPanel::createLabel(const LineLabel& info)
-{
-    std::unique_ptr<LineLabel> label(new LineLabel(info));
-    m_elements.push_back(std::move(label));
-}
-
-void MenuPanel::createLabel(const InteractiveLabel& info)
-{
-    std::unique_ptr<InteractiveLabel> label(new InteractiveLabel(info));
-    m_elements.push_back(std::move(label));
-}
-
-void MenuPanel::createSprite(const MenuSprite& info)
-{
-    std::unique_ptr<MenuSprite> sprite(new MenuSprite(info));
-    m_elements.push_back(std::move(sprite));
-}
-
 void MenuPanel::registerOnClick(std::function<void(const Button& sender)> callback)
 {
     m_clickCallback = callback;
@@ -161,25 +103,12 @@ void MenuPanel::drawAdditionalForeground(const DrawParameter& params)
         it->get()->drawAdditionalForeground(params);
 }
 
-void MenuPanel::createInputBox(const InputBoxInfo& info)
-{
-    std::unique_ptr<InputBox> inputBox(new InputBox(info.id,
-                                                    m_position,
-                                                    info.position,
-                                                    info.size,
-                                                    info.inputLimit,
-                                                    info.style));
-    inputBox->setVisibleWhenId(info.visibleWhenId);
-
-    m_elements.push_back(std::move(inputBox));
-}
-
-void MenuPanel::createAnimationContainer(std::unique_ptr<AnimationContainer> info)
-{
-    m_elements.push_back(std::move(info));
-}
-
 void MenuPanel::updateLayout(const sf::Vector2f& position)
 {
     setPosition(position);
+}
+
+const std::vector<std::unique_ptr<MenuElement>>& MenuPanel::getElements() const
+{
+    return m_elements;
 }

@@ -14,12 +14,12 @@ class Slider : public MenuElement
 public:
     Slider(const int id, const SliderStyle style, const sf::Vector2f& position, const sf::Vector2f& offset);
 
-    virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
+    virtual std::unique_ptr<MenuElement> clone() const override;
 
+    virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     virtual void draw(const DrawParameter& params) override;
 
     float getValue() const;
-
     void setValue(const float value);
 
 protected:

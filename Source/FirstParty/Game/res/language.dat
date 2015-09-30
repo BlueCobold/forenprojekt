@@ -54,6 +54,7 @@ NoSoundName = A sound without name has been specified.
 InvalidColorFormat = Color-values must be in the format RRGGBBAA.
 UnknownCheckBoxStyle = CheckBoxStyle isn't registered: %.
 UnknownSliderStyle = SliderStyle isn't registered: %.
+UnknownInputBoxStyle = InputBoxStyle isn't registered: %.
 SliderId = The slider with id % doesn't exist.
 CheckboxId = The checkbox with id % doesn't exist.
 LineLabelId = The label with id % doesn't exist.

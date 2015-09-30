@@ -1,5 +1,6 @@
 #include "ReplayMenu.hpp"
 
+#include "MenuSprite.hpp"
 #include "../resources/ResourceManager.hpp"
 
 ReplayMenu::ReplayMenu(sf::RenderWindow& screen,

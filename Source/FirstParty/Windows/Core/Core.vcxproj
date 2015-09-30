@@ -147,7 +147,7 @@
     <ClInclude Include="..\..\Src\gui\Button.hpp" />
     <ClInclude Include="..\..\Src\gui\ButtonStyle.hpp" />
     <ClInclude Include="..\..\Src\gui\CaptionMenu.hpp" />
-    <ClInclude Include="..\..\Src\gui\Carat.hpp" />
+    <ClInclude Include="..\..\Src\gui\Caret.hpp" />
     <ClInclude Include="..\..\Src\gui\CheckBox.hpp" />
     <ClInclude Include="..\..\Src\gui\CheckboxStyle.hpp" />
     <ClInclude Include="..\..\Src\gui\CoinShopMenu.hpp" />

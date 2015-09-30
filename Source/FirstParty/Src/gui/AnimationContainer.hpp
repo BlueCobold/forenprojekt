@@ -7,7 +7,7 @@
 #include "../model/AnimatedGraphics.hpp"
 #include "MenuElement.hpp"
 
-class AnimationContainer : public virtual AnimatedGraphics, public virtual MenuElement, public Cloneable<AnimationContainer>
+class AnimationContainer : public virtual AnimatedGraphics, public virtual MenuElement
 {
 private:
     std::map<std::string, float> m_variables;
@@ -18,7 +18,7 @@ public:
     AnimationContainer(const sf::Vector2f& position, int id, CloneHandler& cloneHandler);
     AnimationContainer(AnimationContainer&& toMove);
 
-    virtual std::unique_ptr<AnimationContainer> clone() const override;
+    virtual std::unique_ptr<MenuElement> clone() const override;
 
     virtual float getValueOf(const std::string& name) const override;
     virtual void setValueOf(const std::string& name, const float value) override;

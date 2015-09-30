@@ -12,6 +12,14 @@ CheckBox::CheckBox(int id, CheckBoxStyle style, const sf::Vector2f& position, co
     onPositionChanged();
 }
 
+std::unique_ptr<MenuElement> CheckBox::clone() const
+{
+    auto clone = std::unique_ptr<CheckBox>(new CheckBox(getId(), m_style, getPosition(), getOffset()));
+    clone->setVisibleWhenId(getVisibleWhenId());
+    clone->m_toolTip = m_toolTip;
+    return std::move(clone);
+}
+
 void CheckBox::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     auto position = getPosition();

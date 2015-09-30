@@ -7,31 +7,13 @@
 #include "MenuElement.hpp"
 #include "LineLabel.hpp"
 #include "InputBoxStyle.hpp"
-#include "Carat.hpp"
+#include "Caret.hpp"
 #include <unordered_map>
 
 class ResourceManager;
 
 class InputBox : public MenuElement
 {
-private:
-    sf::RectangleShape m_backgroundShade;
-    LineLabel m_inputText;
-    unsigned int m_inputLimit;
-    sf::Vector2f m_size;
-    bool m_finished;
-    bool m_activated;
-    std::unordered_map<int, sf::Sprite> m_background;
-    float m_scalefactorHorizontal;
-    float m_scalefactorVertical;
-    Caret m_caret;
-
-    void handleInput();
-    void stretchBackground();
-    void setBackGroundPosition(const sf::Vector2f& position);
-
-    void setActivatedByMouse(const sf::RenderWindow& screen);
-
 public:
     enum BackgroundId {TopLeft = 1,
                       TopCenter = 2,
@@ -50,13 +32,14 @@ public:
              const unsigned int inputLimit,
              const InputBoxStyle& style);
 
+    virtual std::unique_ptr<MenuElement> clone() const override;
+
     virtual void draw(const DrawParameter& params) override;
     virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 
     bool isFinished();
 
     void setText(const std::string& text);
-
     std::string getText() const;
 
     bool isActivatedByMouse() const;
@@ -64,8 +47,28 @@ public:
     void disableCaret();
 
     unsigned int getInputLimit() const;
+
 protected:
     virtual void onPositionChanged() override;
+    
+private:
+    sf::RectangleShape m_backgroundShade;
+    LineLabel m_inputText;
+    unsigned int m_inputLimit;
+    sf::Vector2f m_size;
+    bool m_finished;
+    bool m_activated;
+    InputBoxStyle m_style;
+    std::unordered_map<int, sf::Sprite> m_background;
+    float m_scalefactorHorizontal;
+    float m_scalefactorVertical;
+    Caret m_caret;
+
+    void handleInput();
+    void stretchBackground();
+    void setBackGroundPosition(const sf::Vector2f& position);
+
+    void setActivatedByMouse(const sf::RenderWindow& screen);
 };
 
 #endif // INPUTBOX_HPP

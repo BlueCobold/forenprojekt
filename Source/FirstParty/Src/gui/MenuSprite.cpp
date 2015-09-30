@@ -10,6 +10,14 @@ MenuSprite::MenuSprite(const sf::Sprite& sprite, const sf::Vector2f& position, c
     onPositionChanged();
 }
 
+std::unique_ptr<MenuElement> MenuSprite::clone() const
+{
+    auto clone = std::unique_ptr<MenuSprite>(new MenuSprite(m_sprite, getPosition(), getOffset(), getId()));
+    clone->setVisibleWhenId(getVisibleWhenId());
+    clone->m_toolTip = m_toolTip;
+    return std::move(clone);
+}
+
 void MenuSprite::draw(const DrawParameter& params)
 {
     if(!isVisible())

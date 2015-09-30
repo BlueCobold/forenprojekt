@@ -21,36 +21,22 @@ OptionMenu::OptionMenu(sf::RenderWindow& screen,
     m_currentVideoModeIndex(0)
 {
     m_fullScreen = m_config.get<bool>("IsFullScreen");
-
     m_muteSoundWhenInactive = m_config.get<bool>("MuteSoundWhenInactiv");
-
     m_musicVolume = m_config.get<float>("MusicVolume");
-
     m_soundVolume = m_config.get<float>("SoundVolume");
-
     m_useVerticalAxis = m_config.get<bool>("UseVerticalAxis");
-
     m_invertAxis = m_config.get<bool>("InvertAxis");
-
     m_useStencilEffects = m_config.get<bool>("UseStencilEffects");
-
     m_useShaderEffects = m_config.get<bool>("UseShaderEffects");
 
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
-
     Menu::getSlider(SLIDER_SOUNDVOLUMEN).setValue(static_cast<float>(m_soundVolume));
-
     Menu::getSlider(SLIDER_MUSICVOLUMEN).setValue(static_cast<float>(m_musicVolume));
-
     Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
-
     Menu::getCheckbox(CHECKBOX_INVERT_AXIS).setChecked(m_invertAxis);
-
     Menu::getCheckbox(CHECKBOX_USE_VERTICALAXIS).setChecked(m_useVerticalAxis);
-
     Menu::getCheckbox(CHECKBOX_USE_STENCIL_EFFECTS).setChecked(m_useStencilEffects);
     Animation::enableStencilEffects(m_useStencilEffects);
-
     Menu::getCheckbox(CHECKBOX_USE_SHADER_EFFECTS).setChecked(m_useShaderEffects);
     Shader::allowUsage(m_useShaderEffects);
 

@@ -46,6 +46,13 @@ LineLabel::LineLabel(const std::string& text,
     rebuild();
 }
 
+std::unique_ptr<MenuElement> LineLabel::clone() const
+{
+    auto clone = std::unique_ptr<MenuElement>(new LineLabel(m_text, getPosition(), getOffset(), m_rotation, getType(), m_font, m_alignment, getId()));
+    clone->setVisibleWhenId(getVisibleWhenId());
+    return std::move(clone);
+}
+
 void LineLabel::draw(const DrawParameter& params)
 {
     if(!isVisible())
@@ -204,4 +211,9 @@ unsigned int LineLabel::getFontSize()
 LineLabel::Alignment LineLabel::getAlignment() const
 {
     return m_alignment;
+}
+
+const BitmapFont* LineLabel::getFont() const
+{
+    return m_font;
 }

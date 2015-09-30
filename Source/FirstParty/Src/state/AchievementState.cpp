@@ -1,6 +1,7 @@
 #include "AchievementState.hpp"
 
 #include "../gui/Button.hpp"
+#include "../gui/InteractiveLabel.hpp"
 #include "../resources/Config.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
 #include "../MacHelper.hpp"

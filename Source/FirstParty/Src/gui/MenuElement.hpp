@@ -3,6 +3,7 @@
 #ifndef MENU_ELEMENT_HPP
 #define MENU_ELEMENT_HPP
 
+#include "../animation/Cloneable.hpp"
 #include "../rendering/Drawable.hpp"
 #include "../Input.hpp"
 
@@ -26,7 +27,7 @@ namespace MenuElementType
 }
 
 /// The basic interface type of all menu elements to unify their common attributes
-class MenuElement : public Drawable
+class MenuElement : public Drawable, public Cloneable<MenuElement>
 {
 public:
 
@@ -112,7 +113,7 @@ protected:
     virtual void onPositionChanged()
     { }
 
-    const sf::Vector2f& getOffset()
+    const sf::Vector2f& getOffset() const
     {
         return m_offset;
     }

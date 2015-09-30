@@ -24,14 +24,13 @@ public:
         const Alignment alignment = Left,
         int id = -1);
 
-    void setToolTip(const ToolTip& toolTip);
+    virtual std::unique_ptr<MenuElement> clone() const override;
 
+    void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text);
 
     void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
-
     void draw(const DrawParameter& params);
-
     void drawAdditionalForeground(const DrawParameter& params);
 };
 

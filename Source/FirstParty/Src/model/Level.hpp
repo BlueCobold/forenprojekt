@@ -143,11 +143,11 @@ private:
     struct Templates
     {
     public:
-        std::unordered_map<std::string, tinyxml2::XMLElement*> physics;
-        std::unordered_map<std::string, tinyxml2::XMLElement*> shapes;
-        std::unordered_map<std::string, tinyxml2::XMLElement*> entities;
-        std::unordered_map<std::string, tinyxml2::XMLElement*> functions;
-        std::unordered_map<std::string, tinyxml2::XMLElement*> overrides;
+        std::unordered_map<std::string, const tinyxml2::XMLElement*> physics;
+        std::unordered_map<std::string, const tinyxml2::XMLElement*> shapes;
+        std::unordered_map<std::string, const tinyxml2::XMLElement*> entities;
+        std::unordered_map<std::string, const tinyxml2::XMLElement*> functions;
+        std::unordered_map<std::string, const tinyxml2::XMLElement*> overrides;
     };
 
     void createLabelAt(const Entity* target, const std::string& fontName, const int points);
@@ -172,23 +172,23 @@ private:
     /// Load the level after m_number
     void load();
 
-    bool validate(const tinyxml2::XMLDocument& document);
+    bool validate(const tinyxml2::XMLDocument& document) const;
 
     void parseObjects(
         Templates& templates,
-        tinyxml2::XMLElement* root,
+        const tinyxml2::XMLElement* root,
         std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs);
 
     void parseTemplates(
         Templates& templates,
-        tinyxml2::XMLElement* root,
+        const tinyxml2::XMLElement* root,
         std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs);
 
     std::unique_ptr<Entity> createEntity(
-        tinyxml2::XMLElement* xml,
+        const tinyxml2::XMLElement* xml,
         sf::Vector2u& position,
-        tinyxml2::XMLElement* shape,
-        tinyxml2::XMLElement* physic,
+        const tinyxml2::XMLElement* shape,
+        const tinyxml2::XMLElement* physic,
         Templates& templates,
         bool bindInstantly = true);
 
@@ -199,20 +199,20 @@ private:
         bool bindInstantly = true);
 
     std::unique_ptr<Entity> parseEntity(
-        tinyxml2::XMLElement* xml,
+        const tinyxml2::XMLElement* xml,
         sf::Vector2u& position,
         Templates& templates,
         bool bindInstantly = true);
 
     static void findPhysicAndShapeTag(
-        tinyxml2::XMLElement*& physic,
-        tinyxml2::XMLElement*& shape,
-        tinyxml2::XMLElement* entity,
+        const tinyxml2::XMLElement*& physic,
+        const tinyxml2::XMLElement*& shape,
+        const tinyxml2::XMLElement* entity,
         Templates& templates);
 
     void parsePhysics(
-        tinyxml2::XMLElement* physic,
-        tinyxml2::XMLElement* shape,
+        const tinyxml2::XMLElement* physic,
+        const tinyxml2::XMLElement* shape,
         Entity* entity,
         const sf::Vector2u& position,
         Templates& templates,
@@ -220,35 +220,32 @@ private:
 
     void parseCollider(
         Entity* entity,
-        tinyxml2::XMLElement* collider,
+        const tinyxml2::XMLElement* collider,
         Templates& templates);
 
     void parseCollisionFilter(
         Entity* entity,
-        tinyxml2::XMLElement* xml,
+        const tinyxml2::XMLElement* xml,
         Templates& templates);
 
     std::unique_ptr<CollisionFilter> getCollisionFilter(
         Entity* entity,
-        tinyxml2::XMLElement* xml,
+        const tinyxml2::XMLElement* xml,
         Templates& templates);
 
     std::unique_ptr<Entity> parseEntityReference(
         const std::string& key,
-        tinyxml2::XMLElement* xml,
+        const tinyxml2::XMLElement* xml,
         Templates& templates);
 
-    void parseGameplayAttributes(tinyxml2::XMLElement* xml);
+    void parseGameplayAttributes(const tinyxml2::XMLElement* xml);
 
-    void parseJoints(tinyxml2::XMLElement* joints, Entity* entity);
+    void parseJoints(const tinyxml2::XMLElement* joints, Entity* entity);
+    void parseSingleRevoluteJoint(const tinyxml2::XMLElement* jointXml, Entity* entity);
+    void parseSinglePrismaticJoint(const tinyxml2::XMLElement* jointXml, Entity* entity);
+    void parseSingleDistanceJoint(const tinyxml2::XMLElement* jointXml, Entity* entity);
 
-    void parseSingleRevoluteJoint(tinyxml2::XMLElement* jointXml, Entity* entity);
-
-    void parseSinglePrismaticJoint(tinyxml2::XMLElement* jointXml, Entity* entity);
-
-    void parseSingleDistanceJoint(tinyxml2::XMLElement* jointXml, Entity* entity);
-
-    std::unique_ptr<CollisionHandler> parseShowLabelHandler(tinyxml2::XMLElement* xml);
+    std::unique_ptr<CollisionHandler> parseShowLabelHandler(const tinyxml2::XMLElement* xml);
 
     /// Construct the full level filename from the level number
     const std::string filename();

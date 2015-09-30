@@ -622,11 +622,11 @@
     <ClInclude Include="..\..\Src\model\EntityFactory.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\gui\Carat.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\WindowsHelper.hpp">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\Caret.hpp">
+      <Filter>Headers\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

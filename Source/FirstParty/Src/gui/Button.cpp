@@ -20,6 +20,14 @@ Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf
     onPositionChanged();
 }
 
+std::unique_ptr<MenuElement> Button::clone() const
+{
+    auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), getOffset(), m_isTriggering));
+    clone->setVisibleWhenId(getVisibleWhenId());
+    clone->m_toolTip = m_toolTip;
+    return std::move(clone);
+}
+
 void Button::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     auto position = getPosition();

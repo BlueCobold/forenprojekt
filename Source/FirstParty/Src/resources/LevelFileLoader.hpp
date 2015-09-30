@@ -25,100 +25,102 @@ class LevelFileLoader
 public:
 
     static std::unique_ptr<Animation> parseAnimation(
-        tinyxml2::XMLElement* xml,
+        const tinyxml2::XMLElement* xml,
         AnimatedGraphics* animated,
         VariableHandler* handler,
         ResourceManager& resourceManager,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
         CloneHandler& cloneHandler);
 
     static void parseColorController(
         Animation* animation,
-        tinyxml2::XMLElement* xml,
+        const tinyxml2::XMLElement* xml,
         AnimatedGraphics* animated,
         VariableHandler* handler,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
         CloneHandler& cloneHandler);
     
     static void parsePositionController(
         Animation* animation,
-        tinyxml2::XMLElement* xml,
+        const tinyxml2::XMLElement* xml,
         AnimatedGraphics* animated,
         VariableHandler* handler,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
         CloneHandler& cloneHandler);
     
     static void parseScaleController(
         Animation* animation,
-        tinyxml2::XMLElement* xml,
+        const tinyxml2::XMLElement* xml,
         AnimatedGraphics* animated,
         VariableHandler* handler,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
         CloneHandler& cloneHandler);
     
     static void parseRotationController(
         Animation* animation,
-        tinyxml2::XMLElement* xml,
+        const tinyxml2::XMLElement* xml,
         AnimatedGraphics* animated,
         VariableHandler* handler,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
         CloneHandler& cloneHandler);
 
-    static std::unordered_map<std::string, tinyxml2::XMLElement*> parseList(
-        tinyxml2::XMLElement* xml, const std::string& name, const std::string& key);
+    static std::unordered_map<std::string, const tinyxml2::XMLElement*> parseList(
+        const tinyxml2::XMLElement* xml,
+        const std::string& name,
+        const std::string& key);
 
-    static std::vector<std::string> parseGrid(tinyxml2::XMLElement* xml);
+    static std::vector<std::string> parseGrid(const tinyxml2::XMLElement* xml);
 
-    static void parseBodyDef(tinyxml2::XMLElement* element,
+    static void parseBodyDef(const tinyxml2::XMLElement* element,
         Entity* entity,
         VariableHandler* handler,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
         b2BodyDef& bodyDef,
         const sf::Vector2u& position,
         CloneHandler& cloneHandler);
 
-    static void parseKinematics(tinyxml2::XMLElement* element,
+    static void parseKinematics(const tinyxml2::XMLElement* element,
         Entity* entity,
         VariableHandler* handler,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
         CloneHandler& cloneHandler);
 
     static std::unique_ptr<ValueProvider> parseProvider(
-        tinyxml2::XMLElement* xml, 
+        const tinyxml2::XMLElement* xml, 
         AnimatedObject* animated,
         VariableHandler* handler,
         Stoppable* stoppable,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
         CloneHandler& cloneHandler);
 
-    static void parseConstants(tinyxml2::XMLElement* xml,
+    static void parseConstants(const tinyxml2::XMLElement* xml,
         VariableHandler* holder);
 
     static std::unique_ptr<ParticleTrail> parseTrail(
         AnimatedGraphics* animated,
-        tinyxml2::XMLElement* xml,
+        const tinyxml2::XMLElement* xml,
         ResourceManager& resourceManager,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
         CloneHandler& cloneHandler);
 
 private:
 
     static std::vector<std::unique_ptr<ValueProvider>> parseProviders(
-        tinyxml2::XMLElement* xml, 
+        const tinyxml2::XMLElement* xml, 
         AnimatedObject* animated,
         VariableHandler* handler,
         Stoppable* stoppable,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
         CloneHandler& cloneHandler);
 
-    static std::unique_ptr<ValueProvider> findController(tinyxml2::XMLElement* xml,
+    static std::unique_ptr<ValueProvider> findController(const tinyxml2::XMLElement* xml,
         AnimatedGraphics* animated,
         VariableHandler* handler,
         Stoppable* stoppable,
         const std::string& childName,
         const std::string& propertyName,
         const std::string& propertyValue,
-        std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
         CloneHandler& cloneHandler);
 };
 

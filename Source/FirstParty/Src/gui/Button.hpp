@@ -39,22 +39,18 @@ public:
 
     Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers = true);
 
-    virtual ~Button()
-    { }
+    virtual std::unique_ptr<MenuElement> clone() const override;
 
     virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
-
     virtual void draw(const DrawParameter& params) override;
+    virtual void drawAdditionalForeground(const DrawParameter& params) override;
 
     void registerOnPressed(std::function<void (const Button& sender)> callback);
 
     const sf::Vector2i& getSize() const;
     
     void setToolTip(const ToolTip& toolTip);
-
     void setToolTipText(const std::string& text);
-
-    virtual void drawAdditionalForeground(const DrawParameter& params) override;
 
     void changeIdleSprite(const sf::Sprite& sprite);
     void changeHoverSprite(const sf::Sprite& sprite);

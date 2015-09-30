@@ -19,6 +19,8 @@ public:
     void setTextureRect(const sf::IntRect& textureRect);
     void setTexture(const sf::Texture& texture);
 
+    virtual std::unique_ptr<MenuElement> clone() const override;
+
     virtual void draw(const DrawParameter& params) override;
     virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& offset = sf::Vector2i(0, 0)) override;
 

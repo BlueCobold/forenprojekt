@@ -4,9 +4,10 @@
 #include "CheckBox.hpp"
 #include "LineLabel.hpp"
 #include "MenuSprite.hpp"
+#include "InputBox.hpp"
+#include "InteractiveLabel.hpp"
 #include "Slider.hpp"
 #include "SubWindow.hpp"
-#include "InputBox.hpp"
 #include "../resources/ResourceManager.hpp"
 
 #include <algorithm>
@@ -31,12 +32,6 @@ Menu::Menu(const MenuTemplate& menuTemplate, sf::RenderWindow& screen) :
     m_template.background.setPosition(m_currentPosition);
 
     m_size = sf::Vector2i(m_template.background.getTextureRect().width, m_template.background.getTextureRect().height);
-
-    for(auto info = begin(m_template.subWindow); info != end(m_template.subWindow); ++info)
-    {
-        std::unique_ptr<SubWindow> subWindow(new SubWindow(info->id, m_currentPosition, info->size, info->position, info->innerHeight, info->menuElements, info->style));
-        m_panel.add(std::move(subWindow));
-    }
 }
 
 Menu::~Menu()
@@ -120,10 +115,12 @@ T* Menu::find(int id, const MenuElementType::Type type) const
         return result;
     else
     {
-        for(auto it = m_template.subWindow.begin(); it != m_template.subWindow.end(); ++it)
+        for(auto it = begin(m_panel.getElements()); it != end(m_panel.getElements()); ++it)
         {
-            MenuPanel* panel = m_panel.find<SubWindow>(it->id, MenuElementType::SubWindow)->getPanel();
-            if(auto result2 = panel->find<T>(id, type))
+            if((*it)->getType() != MenuElementType::SubWindow)
+                continue;
+
+            if(auto result2 = dynamic_cast<SubWindow*>((*it).get())->getPanel()->find<T>(id, type))
                 return result2;
         }
     }

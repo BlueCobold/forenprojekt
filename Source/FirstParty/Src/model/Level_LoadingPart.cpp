@@ -161,15 +161,15 @@ void Level::load()
 
 void Level::parseObjects(
     Templates& templates,
-    tinyxml2::XMLElement* root,
+    const tinyxml2::XMLElement* root,
     std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs)
 {
-    tinyxml2::XMLElement* objects = root->FirstChildElement("objects");
+    auto objects = root->FirstChildElement("objects");
     if(objects == nullptr)
         return;
 
     // Load background-image
-    if(tinyxml2::XMLElement* backgroundXml = objects->FirstChildElement("background"))
+    if(auto backgroundXml = objects->FirstChildElement("background"))
     {
         std::unique_ptr<Background> background(new Background(sf::Vector2u(
             static_cast<unsigned int>(m_width),
@@ -200,7 +200,7 @@ void Level::parseObjects(
         m_background = std::move(background);
     }
 
-    for(tinyxml2::XMLElement* entitiesIterator = objects->FirstChildElement("entity");
+    for(auto entitiesIterator = objects->FirstChildElement("entity");
         entitiesIterator != nullptr; entitiesIterator = entitiesIterator->NextSiblingElement("entity"))
     {
         auto pos = sf::Vector2u(0, 0);
@@ -222,32 +222,32 @@ void Level::parseObjects(
 
 void Level::parseTemplates(
     Templates& templates,
-    tinyxml2::XMLElement* root,
+    const tinyxml2::XMLElement* root,
     std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs)
 {
-    tinyxml2::XMLElement* xmlTemplates = root->FirstChildElement("templates");
+    auto xmlTemplates = root->FirstChildElement("templates");
     if(xmlTemplates == nullptr)
         return;
 
-    if(tinyxml2::XMLElement* shapes = xmlTemplates->FirstChildElement("shapes"))
+    if(auto shapes = xmlTemplates->FirstChildElement("shapes"))
     {
         auto values = std::move(LevelFileLoader::parseList(shapes, "shape", "name"));
         templates.shapes.insert(begin(values), end(values));
     }
 
-    if(tinyxml2::XMLElement* physics = xmlTemplates->FirstChildElement("physics"))
+    if(auto physics = xmlTemplates->FirstChildElement("physics"))
     {
         auto values = std::move(LevelFileLoader::parseList(physics, "physic", "name"));
         templates.physics.insert(begin(values), end(values));
     }
 
-    if(tinyxml2::XMLElement* functions = xmlTemplates->FirstChildElement("functions"))
+    if(auto functions = xmlTemplates->FirstChildElement("functions"))
     {
         auto values = std::move(LevelFileLoader::parseList(functions, "function", "name"));
         templates.functions.insert(begin(values), end(values));
     }
 
-    if(tinyxml2::XMLElement* entities = xmlTemplates->FirstChildElement("entities"))
+    if(auto entities = xmlTemplates->FirstChildElement("entities"))
     {
         // Add use keys 'name' (objects) and 'rep' (grid)
         auto reps = std::move(LevelFileLoader::parseList(entities, "entity", "rep"));
@@ -256,7 +256,7 @@ void Level::parseTemplates(
         templates.entities.insert(begin(temp), end(temp));
     }
 
-    if(tinyxml2::XMLElement* functions = xmlTemplates->FirstChildElement("overrides"))
+    if(auto functions = xmlTemplates->FirstChildElement("overrides"))
     {
         auto values = std::move(LevelFileLoader::parseList(functions, "override", "newRep"));
         templates.overrides.insert(begin(values), end(values));
@@ -367,8 +367,8 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
             if(auto name = xml->Attribute("newName"))
                 entity->setName(name);
 
-            tinyxml2::XMLElement* physic = nullptr;
-            tinyxml2::XMLElement* shape = nullptr;
+            const tinyxml2::XMLElement* physic = nullptr;
+            const tinyxml2::XMLElement* shape = nullptr;
             findPhysicAndShapeTag(physic, shape, xml, templates);
             if(auto draworder = it->second->FloatAttribute("draworder"))
                 entity->setDrawOrder(draworder);
@@ -382,8 +382,10 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
     return parseEntity(match->second, position, templates, bindInstantly);
 }
 
-void Level::findPhysicAndShapeTag(tinyxml2::XMLElement*& physic, tinyxml2::XMLElement*& shape,
-    tinyxml2::XMLElement* entity,
+void Level::findPhysicAndShapeTag(
+    const tinyxml2::XMLElement*& physic,
+    const tinyxml2::XMLElement*& shape,
+    const tinyxml2::XMLElement* entity,
     Templates& templates)
 {
     auto physics = entity->FirstChildElement("physics");
@@ -415,7 +417,7 @@ void Level::findPhysicAndShapeTag(tinyxml2::XMLElement*& physic, tinyxml2::XMLEl
 }
 
 std::unique_ptr<Entity> Level::parseEntity(
-    tinyxml2::XMLElement* entity,
+    const tinyxml2::XMLElement* entity,
     sf::Vector2u& position,
     Templates& templates,
     bool bindInstantly)
@@ -431,8 +433,8 @@ std::unique_ptr<Entity> Level::parseEntity(
         position.y += entity->IntAttribute("offsety");
 
     // Identify the needed parts of an entity
-    tinyxml2::XMLElement* physic = nullptr;
-    tinyxml2::XMLElement* shape = nullptr;
+    const tinyxml2::XMLElement* physic = nullptr;
+    const tinyxml2::XMLElement* shape = nullptr;
     findPhysicAndShapeTag(physic, shape, entity, templates);
     
     std::unique_ptr<Entity> graphicalObject = createEntity(entity, position, shape, physic, templates, bindInstantly);
@@ -442,7 +444,7 @@ std::unique_ptr<Entity> Level::parseEntity(
     return graphicalObject;
 }
 
-bool Level::validate(const tinyxml2::XMLDocument& document)
+bool Level::validate(const tinyxml2::XMLDocument& document) const
 {
     if(document.Error()) // Error while loading file
     {
@@ -467,8 +469,8 @@ float computeArea(const std::vector<b2Vec2>& vertices)
     return area;
 }
 
-void Level::parsePhysics(tinyxml2::XMLElement* physic,
-    tinyxml2::XMLElement* shape,
+void Level::parsePhysics(const tinyxml2::XMLElement* physic,
+    const tinyxml2::XMLElement* shape,
     Entity* entity,
     const sf::Vector2u& position,
     Templates& templates,
@@ -484,7 +486,7 @@ void Level::parsePhysics(tinyxml2::XMLElement* physic,
     {
         std::vector<b2Vec2> vertices;
         // Iterate over the vertices
-        for(tinyxml2::XMLElement* vertexIterator = shape->FirstChildElement("vertex");
+        for(auto vertexIterator = shape->FirstChildElement("vertex");
             vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
         {
             vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
@@ -538,10 +540,10 @@ void Level::parsePhysics(tinyxml2::XMLElement* physic,
 }
 
 std::unique_ptr<Entity> Level::createEntity(
-    tinyxml2::XMLElement* xml,
+    const tinyxml2::XMLElement* xml,
     sf::Vector2u& position,
-    tinyxml2::XMLElement* shape,
-    tinyxml2::XMLElement* physic,
+    const tinyxml2::XMLElement* shape,
+    const tinyxml2::XMLElement* physic,
     Templates& templates,
     bool bindInstantly)
 {
@@ -704,7 +706,7 @@ enum SpawnLocation
 
 void Level::parseCollider(
     Entity* entity,
-    tinyxml2::XMLElement* xml,
+    const tinyxml2::XMLElement* xml,
     Templates& templates)
 {
 
@@ -800,7 +802,7 @@ void Level::parseCollider(
     }
 }
 
-std::unique_ptr<CollisionHandler> Level::parseShowLabelHandler(tinyxml2::XMLElement* xml)
+std::unique_ptr<CollisionHandler> Level::parseShowLabelHandler(const tinyxml2::XMLElement* xml)
 {
     std::string font(xml->Attribute("font"));
     auto distance = xml->FloatAttribute("offset");
@@ -837,7 +839,7 @@ std::unique_ptr<CollisionHandler> Level::parseShowLabelHandler(tinyxml2::XMLElem
 
 std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
     Entity* entity,
-    tinyxml2::XMLElement* xml,
+    const tinyxml2::XMLElement* xml,
     Templates& templates)
 {
     if(std::string(xml->Name()) == "always")
@@ -915,7 +917,7 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
 
 void Level::parseCollisionFilter(
     Entity* entity,
-    tinyxml2::XMLElement* xml,
+    const tinyxml2::XMLElement* xml,
     Templates& templates)
 {
     entity->bindCollisionFilter(getCollisionFilter(entity, xml->FirstChildElement(), templates));
@@ -923,7 +925,7 @@ void Level::parseCollisionFilter(
 
 std::unique_ptr<Entity> Level::parseEntityReference(
     const std::string& key,
-    tinyxml2::XMLElement* xml,
+    const tinyxml2::XMLElement* xml,
     Templates& templates)
 {
     auto spawn = xml->FirstChildElement(key.c_str());
@@ -959,7 +961,7 @@ void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn, f
     }
 }
 
-void Level::parseGameplayAttributes(tinyxml2::XMLElement* xml)
+void Level::parseGameplayAttributes(const tinyxml2::XMLElement* xml)
 {
     int balls = xml->IntAttribute("maxBalls");
     float remainingTime = xml->FloatAttribute("time");
@@ -982,7 +984,7 @@ void Level::parseGameplayAttributes(tinyxml2::XMLElement* xml)
     }
 }
 
-void Level::parseJoints(tinyxml2::XMLElement* joints, Entity* entity)
+void Level::parseJoints(const tinyxml2::XMLElement* joints, Entity* entity)
 {
     for(auto jointXml = joints->FirstChildElement("singleRevolute");
         jointXml != nullptr; jointXml = jointXml->NextSiblingElement("singleRevolute"))
@@ -1003,7 +1005,7 @@ void Level::parseJoints(tinyxml2::XMLElement* joints, Entity* entity)
     }
 }
 
-void Level::parseSingleRevoluteJoint(tinyxml2::XMLElement* jointXml, Entity* entity)
+void Level::parseSingleRevoluteJoint(const tinyxml2::XMLElement* jointXml, Entity* entity)
 {
     b2RevoluteJointDef jointDef;
 
@@ -1030,7 +1032,7 @@ void Level::parseSingleRevoluteJoint(tinyxml2::XMLElement* jointXml, Entity* ent
     entity->addJoint(std::unique_ptr<SingleRevoluteJoint>(new SingleRevoluteJoint(&m_world, jointDef, entity->getBody())));
 }
 
-void Level::parseSinglePrismaticJoint(tinyxml2::XMLElement* jointXml, Entity* entity)
+void Level::parseSinglePrismaticJoint(const tinyxml2::XMLElement* jointXml, Entity* entity)
 {
     b2PrismaticJointDef jointDef;
 
@@ -1062,7 +1064,7 @@ void Level::parseSinglePrismaticJoint(tinyxml2::XMLElement* jointXml, Entity* en
     entity->addJoint(std::unique_ptr<SinglePrismaticJoint>(new SinglePrismaticJoint(&m_world, jointDef, entity->getBody(), direction)));
 }
 
-void Level::parseSingleDistanceJoint(tinyxml2::XMLElement* jointXml, Entity* entity)
+void Level::parseSingleDistanceJoint(const tinyxml2::XMLElement* jointXml, Entity* entity)
 {
     b2DistanceJointDef jointDef;
 

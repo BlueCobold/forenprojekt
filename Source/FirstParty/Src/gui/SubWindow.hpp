@@ -20,6 +20,13 @@ class LineLabel;
 class MenuSprite;
 class Slider;
 
+struct SubWindowStyle
+{
+    sf::Sprite scrollbarTop;
+    sf::Sprite scrollbarMiddle;
+    sf::Sprite scrollbarBottom;
+};
+
 class SubWindow : public MenuElement
 {
 public:
@@ -29,8 +36,10 @@ public:
               const sf::Vector2f& size,
               const sf::Vector2f& offset,
               const int innerHeight,
-              MenuElements& elements,
+              const std::vector<std::unique_ptr<MenuElement>>& elements,
               const SubWindowStyle& style);
+
+    virtual std::unique_ptr<MenuElement> clone() const override;
 
     virtual void draw(const DrawParameter& params) override;
     void drawAdditionalForeground(const DrawParameter& params) override;

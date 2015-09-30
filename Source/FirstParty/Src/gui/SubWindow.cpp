@@ -16,7 +16,7 @@ SubWindow::SubWindow(const int id,
                      const sf::Vector2f& size,
                      const sf::Vector2f& offset,
                      const int innerHeight,
-                     MenuElements& elements,
+                     const std::vector<std::unique_ptr<MenuElement>>& elements,
                      const SubWindowStyle& style) :
     MenuElement(id, MenuElementType::SubWindow, position, offset),
     m_panel(elements, position),
@@ -49,6 +49,13 @@ SubWindow::SubWindow(const int id,
     m_center.y = m_size.y / 2.f;
 
     onPositionChanged();
+}
+
+std::unique_ptr<MenuElement> SubWindow::clone() const
+{
+    auto clone = std::unique_ptr<MenuElement>(new SubWindow(getId(), getPosition(), m_size, getOffset(), m_innerHeight, m_panel.getElements(), m_style));
+    clone->setVisibleWhenId(getVisibleWhenId());
+    return std::move(clone);
 }
 
 MenuPanel* SubWindow::getPanel()

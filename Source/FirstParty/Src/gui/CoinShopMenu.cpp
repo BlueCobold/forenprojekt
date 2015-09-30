@@ -1,6 +1,7 @@
 #include "CoinShopMenu.hpp"
-#include "Button.hpp"
 
+#include "Button.hpp"
+#include "MenuSprite.hpp"
 #include "../resources/ResourceManager.hpp"
 
 const float CoinShopMenu::SellModifier = 0.8f;

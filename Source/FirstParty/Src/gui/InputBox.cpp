@@ -14,6 +14,7 @@ InputBox::InputBox(const int id,
     m_size(size),
     m_finished(false),
     m_activated(false),
+    m_style(style),
     m_background(style.background),
     m_caret(style.caretBlinkFrequency, style.caretOffset, style.caret)
 {
@@ -36,6 +37,13 @@ InputBox::InputBox(const int id,
     m_caret.enable();
 #endif
 
+}
+
+std::unique_ptr<MenuElement> InputBox::clone() const
+{
+    auto clone = std::unique_ptr<MenuElement>(new InputBox(getId(), getPosition(), getOffset(), m_size, m_inputLimit, m_style));
+    clone->setVisibleWhenId(getVisibleWhenId());
+    return std::move(clone);
 }
 
 void InputBox::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)

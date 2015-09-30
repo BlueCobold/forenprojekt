@@ -15,6 +15,21 @@ InteractiveLabel::InteractiveLabel(const std::string& text,
 {
 }
 
+std::unique_ptr<MenuElement> InteractiveLabel::clone() const
+{
+    auto clone = std::unique_ptr<InteractiveLabel>(new InteractiveLabel(
+                                                            getText(),
+                                                            getPosition(),
+                                                            getOffset(),
+                                                            getRotation(),
+                                                            getFont(),
+                                                            getAlignment(),
+                                                            getId()));
+    clone->setVisibleWhenId(getVisibleWhenId());
+    clone->m_toolTip = m_toolTip;
+    return std::move(clone);
+}
+
 void InteractiveLabel::setToolTip(const ToolTip& toolTip)
 {
     m_toolTip = toolTip;

@@ -3,6 +3,7 @@
 #ifndef CAPTIONMENU_HPP
 #define CAPTIONMENU_HPP
 
+#include "LineLabel.hpp"
 #include "Menu.hpp"
 
 class CaptionMenu : public Menu

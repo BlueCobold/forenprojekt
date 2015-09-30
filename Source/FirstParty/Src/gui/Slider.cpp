@@ -19,6 +19,13 @@ Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& positi
     onPositionChanged();
 }
 
+std::unique_ptr<MenuElement> Slider::clone() const
+{
+    auto clone = std::unique_ptr<Slider>(new Slider(getId(), m_style, getPosition(), getOffset()));
+    clone->setVisibleWhenId(getVisibleWhenId());
+    return std::move(clone);
+}
+
 void Slider::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     auto position = getPosition();

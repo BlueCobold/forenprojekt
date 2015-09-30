@@ -1,5 +1,7 @@
 #include "LevelSelectMenu.hpp"
+
 #include "Button.hpp"
+#include "MenuSprite.hpp"
 #include "../resources/ResourceManager.hpp"
 
 LevelSelectMenu::LevelSelectMenu(sf::RenderWindow& screen,

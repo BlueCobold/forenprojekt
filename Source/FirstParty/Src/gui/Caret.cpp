@@ -1,4 +1,4 @@
-#include "Carat.hpp"
+#include "Caret.hpp"
 
 #include "../rendering/DrawParameter.hpp"
 #include "../resources/ResourceManager.hpp"

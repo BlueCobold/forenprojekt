@@ -35,7 +35,7 @@
 #include <map>
 #include <vector>
 
-void LevelFileLoader::parseConstants(tinyxml2::XMLElement* xml,
+void LevelFileLoader::parseConstants(const tinyxml2::XMLElement* xml,
     VariableHandler* holder)
 {
     std::map<std::string, std::unique_ptr<ValueProvider>> map;
@@ -43,7 +43,7 @@ void LevelFileLoader::parseConstants(tinyxml2::XMLElement* xml,
         holder->setValueOf(var->Name(), var->FloatValue());
 }
 
-std::vector<sf::Vector2i> parseValueList(tinyxml2::XMLElement* xml, const std::string& x, const std::string& y)
+std::vector<sf::Vector2i> parseValueList(const tinyxml2::XMLElement* xml, const std::string& x, const std::string& y)
 {
     std::vector<sf::Vector2i> result;
     auto xxml = xml->FirstChildElement(x.c_str());
@@ -89,14 +89,14 @@ void parseSpriteValueList(const tinyxml2::XMLElement* xml,
 
 void LevelFileLoader::parseColorController(
     Animation* animation,
-    tinyxml2::XMLElement* xml,
+    const tinyxml2::XMLElement* xml,
     AnimatedGraphics* animated,
     VariableHandler* handler,
-    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+    std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
     CloneHandler& cloneHandler)
 {
     std::unique_ptr<ValueProvider> red, green, blue, alpha, tmp;
-    tinyxml2::XMLElement* static_color_element = xml->FirstChildElement("color");
+    auto static_color_element = xml->FirstChildElement("color");
     const char* value = nullptr;
     while(static_color_element && !(value = static_color_element->Attribute("value")))
         static_color_element = static_color_element->NextSiblingElement("color");
@@ -128,10 +128,10 @@ void LevelFileLoader::parseColorController(
 
 void LevelFileLoader::parsePositionController(
     Animation* animation,
-    tinyxml2::XMLElement* xml,
+    const tinyxml2::XMLElement* xml,
     AnimatedGraphics* animated,
     VariableHandler* handler,
-    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+    std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
     CloneHandler& cloneHandler)
 {
     std::unique_ptr<ValueProvider> xProvider = findController(xml, animated, handler, animation, "position", "axis", "x", functions, cloneHandler);
@@ -141,10 +141,10 @@ void LevelFileLoader::parsePositionController(
 
 void LevelFileLoader::parseScaleController(
     Animation* animation,
-    tinyxml2::XMLElement* xml,
+    const tinyxml2::XMLElement* xml,
     AnimatedGraphics* animated,
     VariableHandler* handler,
-    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+    std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
     CloneHandler& cloneHandler)
 {
     std::unique_ptr<ValueProvider> xScaleProvider = findController(xml, animated, handler, animation, "scale", "axis", "x", functions, cloneHandler);
@@ -154,13 +154,13 @@ void LevelFileLoader::parseScaleController(
 
 void LevelFileLoader::parseRotationController(
     Animation* animation,
-    tinyxml2::XMLElement* xml,
+    const tinyxml2::XMLElement* xml,
     AnimatedGraphics* animated,
     VariableHandler* handler,
-    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+    std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
     CloneHandler& cloneHandler)
 {
-    tinyxml2::XMLElement* rotation = xml->FirstChildElement("rotation");
+    auto rotation = xml->FirstChildElement("rotation");
     if(rotation != nullptr && rotation->FirstChildElement() != nullptr)
     {
         std::unique_ptr<ValueProvider> rotProvider = parseProvider(rotation->FirstChildElement(), animated, handler, animation, functions, cloneHandler);
@@ -168,14 +168,15 @@ void LevelFileLoader::parseRotationController(
     }
 }
 
-std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement* xml,
+std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
+    const tinyxml2::XMLElement* xml,
     AnimatedGraphics* animated,
     VariableHandler* handler,
     ResourceManager& resourceManager,
-    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+    std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
     CloneHandler& cloneHandler)
 {
-    tinyxml2::XMLElement* frameIndex = xml->FirstChildElement("frameindex");
+    auto frameIndex = xml->FirstChildElement("frameindex");
     int frames = 1;
     if(frameIndex != nullptr)
         frames = frameIndex->IntAttribute("frames");
@@ -272,7 +273,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
         provider.reset(new StaticProvider(0));
     else
     {
-        tinyxml2::XMLElement* child = frameIndex->FirstChildElement();
+        auto child = frameIndex->FirstChildElement();
         if(child == nullptr)
             throw std::runtime_error(utility::translateKey("NoProvider"));
         provider = std::move(parseProvider(child, animated, handler, anim.get(), functions, cloneHandler));
@@ -336,11 +337,11 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(tinyxml2::XMLElement*
     return anim;
 }
 
-std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(tinyxml2::XMLElement* xml,
+std::vector<std::unique_ptr<ValueProvider>> LevelFileLoader::parseProviders(const tinyxml2::XMLElement* xml,
     AnimatedObject* animated,
     VariableHandler* handler,
     Stoppable* stoppable,
-    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+    std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
     CloneHandler& cloneHandler)
 {
     std::vector<std::unique_ptr<ValueProvider>> providers;
@@ -377,11 +378,11 @@ std::vector<float> parseFloatList(const std::string& valueString)
     return results;
 }
 
-std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLElement* xml,
+std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(const tinyxml2::XMLElement* xml,
     AnimatedObject* animated,
     VariableHandler* handler,
     Stoppable* stoppable,
-    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+    std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
     CloneHandler& cloneHandler)
 {
     if(std::string(xml->Name())=="time")
@@ -482,10 +483,12 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(tinyxml2::XMLEleme
     throw std::runtime_error(utility::replace(utility::translateKey("Unknown"), xml->Name()));
 }
 
-std::unordered_map<std::string, tinyxml2::XMLElement*> LevelFileLoader::parseList(
-     tinyxml2::XMLElement* xml, const std::string& attributeName, const std::string& key)
+std::unordered_map<std::string, const tinyxml2::XMLElement*> LevelFileLoader::parseList(
+     const tinyxml2::XMLElement* xml,
+     const std::string& attributeName,
+     const std::string& key)
 {
-    std::unordered_map<std::string, tinyxml2::XMLElement*> tempList;
+    std::unordered_map<std::string, const tinyxml2::XMLElement*> tempList;
 
     for(auto iterator = xml->FirstChildElement(attributeName.c_str());
        iterator != nullptr; iterator = iterator->NextSiblingElement(attributeName.c_str()))
@@ -497,7 +500,7 @@ std::unordered_map<std::string, tinyxml2::XMLElement*> LevelFileLoader::parseLis
     return std::move(tempList);
 }
 
-std::vector<std::string> LevelFileLoader::parseGrid(tinyxml2::XMLElement* xml)
+std::vector<std::string> LevelFileLoader::parseGrid(const tinyxml2::XMLElement* xml)
 {
     std::string data = xml->GetText();
 
@@ -513,10 +516,10 @@ std::vector<std::string> LevelFileLoader::parseGrid(tinyxml2::XMLElement* xml)
     return std::move(lines);
 }
 
-void LevelFileLoader::parseBodyDef(tinyxml2::XMLElement* physicXml,
+void LevelFileLoader::parseBodyDef(const tinyxml2::XMLElement* physicXml,
     Entity* entity,
     VariableHandler* handler,
-    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+    std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
     b2BodyDef& bodyDef,
     const sf::Vector2u& position,
     CloneHandler& cloneHandler)
@@ -535,16 +538,16 @@ void LevelFileLoader::parseBodyDef(tinyxml2::XMLElement* physicXml,
     parseKinematics(bodyXml, entity, handler, functions, cloneHandler);
 }
 
-void LevelFileLoader::parseKinematics(tinyxml2::XMLElement* element,
+void LevelFileLoader::parseKinematics(const tinyxml2::XMLElement* element,
     Entity* entity,
     VariableHandler* handler,
-    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+    std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
     CloneHandler& cloneHandler)
 {
-    tinyxml2::XMLElement* kinematics = element->FirstChildElement("kinematics");
+    auto kinematics = element->FirstChildElement("kinematics");
     if(kinematics == nullptr)
         return;
-    tinyxml2::XMLElement* rotation = kinematics->FirstChildElement("rotation");
+    auto rotation = kinematics->FirstChildElement("rotation");
     if(rotation != nullptr && rotation->FirstChildElement() != nullptr)
     {
         std::unique_ptr<ValueProvider> provider = parseProvider(rotation->FirstChildElement(), entity, handler, nullptr, functions, cloneHandler);
@@ -558,14 +561,14 @@ void LevelFileLoader::parseKinematics(tinyxml2::XMLElement* element,
 }
 
 std::unique_ptr<ValueProvider> LevelFileLoader::findController(
-    tinyxml2::XMLElement* xml,
+    const tinyxml2::XMLElement* xml,
     AnimatedGraphics* animated,
     VariableHandler* handler,
     Stoppable* stoppable,
     const std::string& childName,
     const std::string& propertyName,
     const std::string& propertyValue,
-    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+    std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
     CloneHandler& cloneHandler)
 {
     for(auto iterator = xml->FirstChildElement(childName.c_str());
@@ -583,9 +586,9 @@ std::unique_ptr<ValueProvider> LevelFileLoader::findController(
 
 std::unique_ptr<ParticleTrail> LevelFileLoader::parseTrail(
     AnimatedGraphics* animated,
-    tinyxml2::XMLElement* xml,
+    const tinyxml2::XMLElement* xml,
     ResourceManager& resourceManager,
-    std::unordered_map<std::string, tinyxml2::XMLElement*>* functions,
+    std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
     CloneHandler& cloneHandler)
 {
     if(auto xmltrail = xml->FirstChildElement("trailing"))

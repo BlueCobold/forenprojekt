@@ -34,8 +34,7 @@ public:
         const Alignment alignment = Left,
         int id = -1);
 
-    virtual ~LineLabel()
-    { }
+    virtual std::unique_ptr<MenuElement> clone() const override;
 
     virtual void draw(const DrawParameter& params) override;
 
@@ -72,6 +71,7 @@ protected:
         int id = -1);
 
     Alignment getAlignment() const;
+    const BitmapFont* getFont() const;
 
 private:
 
