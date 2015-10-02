@@ -29,6 +29,7 @@ private:
 
     LineLabel* m_label;
     sf::Sprite* m_sprite;
+    AnimationContainer* m_animation;
 
     bool m_playHoverSound;
     bool m_playPressedSound;
@@ -48,7 +49,7 @@ public:
     void registerOnPressed(std::function<void (const Button& sender)> callback);
 
     const sf::Vector2i& getSize() const;
-    
+
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text);
 

@@ -438,6 +438,22 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(tinyxml2::XMLElement* xml, Res
     style.sprite = getSprite(xml, resourceManager);
     if(auto soundName = xml->Attribute("sound"))
         style.sound = std::shared_ptr<SoundObject>(new SoundObject(soundName, resourceManager.getSoundManager()));
+
+    if(auto animations = xml->FirstChildElement("animations"))
+    {
+        style.animation = std::unique_ptr<AnimationContainer>(new AnimationContainer(sf::Vector2f(0, 0), 0, _cloneHandler));
+        std::unordered_map<std::string, const tinyxml2::XMLElement*> functions;
+
+        for(auto animation = animations->FirstChildElement("animation");
+            animation != nullptr; 
+            animation = animation->NextSiblingElement("animation"))
+        {
+            if(auto ani = LevelFileLoader::parseAnimation(animation, style.animation.get(),
+                                                            style.animation.get(), resourceManager,
+                                                            &functions, _cloneHandler))
+                style.animation->bindAnimation(std::move(ani));
+        }
+    }
     return style;
 }
 

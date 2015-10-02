@@ -116,6 +116,12 @@ namespace utility
     std::string fileToString(const std::string& file);
 
     std::string getUserName();
+
+    template<typename T, typename F>
+    std::unique_ptr<T> unique_cast(std::unique_ptr<F>& toCast)
+    {
+        return std::unique_ptr<T>(dynamic_cast<T*>(toCast.release()));
+    }
 } // namespace utility
 
 #endif // UTILITY_HPP

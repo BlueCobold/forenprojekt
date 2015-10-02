@@ -13,6 +13,7 @@ Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf
 {
     m_sprite = &m_style.idleStyle.sprite;
     m_label = &m_style.idleStyle.label;
+    m_animation = m_style.idleStyle.animation.get();
 
     m_size.x = m_style.idleStyle.sprite.getTextureRect().width;
     m_size.y = m_style.idleStyle.sprite.getTextureRect().height;
@@ -37,6 +38,7 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
                            m_style.mouseRect.width,
                            m_style.mouseRect.height);
     auto mousePosition = getCursorPosition(screen);
+
     if(buttonRect.contains(mousePosition + mouseOffset) && isVisible())
     {
         if(!m_playHoverSound && m_style.hoverStyle.sound)
@@ -48,10 +50,13 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
         m_showToolTip = true;
         m_toolTip.setPosition(static_cast<const sf::Vector2f>(mousePosition), screen);
 
+        m_animation = m_style.hoverStyle.animation.get();
+
         if(utility::Mouse.leftButtonPressed())
         {
             m_sprite = &m_style.pressedStyle.sprite;
             m_label = &m_style.pressedStyle.label;
+            m_animation = m_style.pressedStyle.animation.get();
             onPositionChanged();
 
             if(!m_playPressedSound && m_style.pressedStyle.sound)
@@ -77,9 +82,13 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
         m_playPressedSound = false;
         m_sprite = &m_style.idleStyle.sprite;
         m_label = &m_style.idleStyle.label;
+        m_animation = m_style.idleStyle.animation.get();
         onPositionChanged();
         m_showToolTip = false;
     }
+
+    if(m_animation != nullptr)
+        m_animation->update(screen, time, mouseOffset);
 }
 
 void Button::draw(const DrawParameter& params)
@@ -87,8 +96,13 @@ void Button::draw(const DrawParameter& params)
     if(!isVisible())
         return;
 
-    params.getTarget().draw(*m_sprite);
-    m_label->draw(params);
+    if(m_animation != nullptr)
+        m_animation->draw(params);
+    else
+    {
+        params.getTarget().draw(*m_sprite);
+        m_label->draw(params);
+    }
 }
 
 void Button::registerOnPressed(std::function<void (const Button& sender)> callback)
@@ -103,12 +117,19 @@ void Button::onPositionChanged()
     sf::Vector2f half = sf::Vector2f(getSize().x / 2.f, 0);
     m_style.idleStyle.sprite.setPosition(position + offset + m_style.idleStyle.spriteOffset - half);
     m_style.idleStyle.label.setPosition(position + offset + m_style.idleStyle.textOffset);
+    if(m_style.idleStyle.animation.get())
+        m_style.idleStyle.animation->setPosition(position + offset);
 
     m_style.hoverStyle.sprite.setPosition(position + offset + m_style.hoverStyle.spriteOffset - half);
     m_style.hoverStyle.label.setPosition(position + offset + m_style.hoverStyle.textOffset);
+    if(m_style.hoverStyle.animation.get())
+        m_style.hoverStyle.animation->setPosition(position + offset);
 
     m_style.pressedStyle.sprite.setPosition(position + offset + m_style.pressedStyle.spriteOffset - half);
     m_style.pressedStyle.label.setPosition(position + offset + m_style.pressedStyle.textOffset);
+    if(m_style.pressedStyle.animation.get())
+        m_style.pressedStyle.animation->setPosition(position + offset);
+
 }
 
 const sf::Vector2i& Button::getSize() const
