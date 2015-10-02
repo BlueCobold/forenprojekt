@@ -34,24 +34,6 @@ std::unique_ptr<MenuElement> AnimationContainer::clone() const
     return std::move(other);
 }
 
-std::unique_ptr<AnimationContainer> AnimationContainer::clone2() const
-{
-    auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getPosition(), getId(), m_cloneHandler));
-    m_cloneHandler.registerCloneAll(*this, *other.get());
-    
-    other->setVisibleWhenId(getVisibleWhenId());
-
-    for(auto it = begin(m_variables); it != end(m_variables); ++it)
-        other->m_variables[it->first] = it->second;
-
-    for(auto it = begin(getAnimations()); it != end(getAnimations()); ++it)
-        other->bindAnimation((*it)->clone());
-
-    m_cloneHandler.unregisterCloneAll(*this);
-
-    return std::move(other);
-}
-
 float AnimationContainer::getValueOf(const std::string& name) const
 {
     auto match = m_variables.find(name);
