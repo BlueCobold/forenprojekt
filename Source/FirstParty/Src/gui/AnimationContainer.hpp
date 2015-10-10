@@ -15,7 +15,10 @@ private:
     CloneHandler& m_cloneHandler;
 
 public:
-    AnimationContainer(const sf::Vector2f& position, int id, CloneHandler& cloneHandler);
+    AnimationContainer(const sf::Vector2f& position, 
+                       const sf::Vector2f& offset,
+                       int id,
+                       CloneHandler& cloneHandler);
     AnimationContainer(AnimationContainer&& toMove);
 
     virtual std::unique_ptr<MenuElement> clone() const override;

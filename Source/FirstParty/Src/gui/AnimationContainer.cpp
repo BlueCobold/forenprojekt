@@ -2,8 +2,10 @@
 #include "AnimationContainer.hpp"
 #include "../animation/CloneHandler.hpp"
 
-AnimationContainer::AnimationContainer(const sf::Vector2f& position, int id, CloneHandler& cloneHandler) :
-    MenuElement(id, MenuElementType::Animation, position, sf::Vector2f(0, 0)),
+AnimationContainer::AnimationContainer(const sf::Vector2f& position,
+                                       const sf::Vector2f& offset,
+                                       int id, CloneHandler& cloneHandler) :
+    MenuElement(id, MenuElementType::Animation, position, offset),
     m_updatingAni(nullptr),
     m_cloneHandler(cloneHandler)
 {
@@ -18,7 +20,7 @@ AnimationContainer::AnimationContainer(AnimationContainer&& toMove) :
 
 std::unique_ptr<MenuElement> AnimationContainer::clone() const
 {
-    auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getPosition(), getId(), m_cloneHandler));
+    auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getPosition(), getOffset(), getId(), m_cloneHandler));
     m_cloneHandler.registerCloneAll(*this, *other.get());
     
     other->setVisibleWhenId(getVisibleWhenId());
@@ -69,7 +71,7 @@ void AnimationContainer::update(const sf::RenderWindow& screen, const float time
         if(ani->isStopped())
             continue;
         m_updatingAni = ani;
-        ani->setPosition(getPosition().x, getPosition().y);
+        ani->setPosition(getPosition().x + getOffset().x, getPosition().y + getOffset().x);
         ani->update();
     }
     m_updatingAni = nullptr;

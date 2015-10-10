@@ -441,7 +441,7 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(tinyxml2::XMLElement* xml, Res
 
     if(auto animations = xml->FirstChildElement("animations"))
     {
-        style.animation = std::unique_ptr<AnimationContainer>(new AnimationContainer(sf::Vector2f(0, 0), 0, _cloneHandler));
+        style.animation = std::unique_ptr<AnimationContainer>(new AnimationContainer(sf::Vector2f(), sf::Vector2f(), 0, _cloneHandler));
         std::unordered_map<std::string, const tinyxml2::XMLElement*> functions;
 
         for(auto animation = animations->FirstChildElement("animation");
@@ -689,7 +689,7 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
         {
             int id = animationContainer->IntAttribute("id");
             sf::Vector2f position = sf::Vector2f(animationContainer->FloatAttribute("x"), animationContainer->FloatAttribute("y"));
-            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(position, id, _cloneHandler));
+            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(sf::Vector2f(), position, id, _cloneHandler));
             std::unordered_map<std::string, const tinyxml2::XMLElement*> functions;
             if(auto animations = animationContainer->FirstChildElement("animations"))
             {
