@@ -27,6 +27,8 @@ public:
 
     void copyFrom(const JointObject* other) override;
 
+    std::vector<b2Vec2> getAnchorPoints() override;
+
 protected:
     void bindBodies(b2Body* bodyA, b2Body* bodyB) override;
 };

@@ -58,3 +58,14 @@ void SingleDistanceJoint::copyFrom(const JointObject* other)
 
     m_anchorBody = getWorld()->CreateBody(&m_anchorBodyDef);
 }
+
+std::vector<b2Vec2> SingleDistanceJoint::getAnchorPoints()
+{
+    std::vector<b2Vec2> anchors;
+    if(auto joint = getJoint())
+    {
+        anchors.push_back(getJoint()->GetAnchorA());
+        anchors.push_back(getJoint()->GetAnchorB());
+    }
+    return anchors;
+}

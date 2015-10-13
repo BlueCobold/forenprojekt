@@ -75,6 +75,8 @@ protected:
     {
         return m_world;
     }
+
+    virtual std::vector<b2Vec2> getAnchorPoints() = 0;
 };
 
 #endif

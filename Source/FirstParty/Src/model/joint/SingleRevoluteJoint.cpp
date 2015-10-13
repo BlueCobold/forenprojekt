@@ -58,3 +58,11 @@ void SingleRevoluteJoint::copyFrom(const JointObject* other)
 
     m_anchorBody = getWorld()->CreateBody(&m_anchorBodyDef);
 }
+
+std::vector<b2Vec2> SingleRevoluteJoint::getAnchorPoints()
+{
+    std::vector<b2Vec2> anchors;
+    if(auto joint = getJoint())
+        anchors.push_back(getJoint()->GetAnchorA());
+    return anchors;
+}
