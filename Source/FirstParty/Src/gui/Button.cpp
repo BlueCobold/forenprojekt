@@ -3,9 +3,9 @@
 
 #include <SFML/Window/Event.hpp>
 
-Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers) :
+Button::Button(int id, ButtonStyle&& style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers) :
     MenuElement(id, MenuElementType::Button, position, offset),
-    m_style(style),
+    m_style(std::move(style)),
     m_showToolTip(false),
     m_isTriggering(triggers),
     m_playHoverSound(false),
@@ -23,7 +23,7 @@ Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf
 
 std::unique_ptr<MenuElement> Button::clone() const
 {
-    auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), getOffset(), m_isTriggering));
+    auto clone = std::unique_ptr<Button>(new Button(getId(), ButtonStyle(m_style), getPosition(), getOffset(), m_isTriggering));
     clone->setVisibleWhenId(getVisibleWhenId());
     clone->m_toolTip = m_toolTip;
     return std::move(clone);

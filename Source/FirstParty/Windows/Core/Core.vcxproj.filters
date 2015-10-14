@@ -1137,5 +1137,8 @@
     <ClCompile Include="..\..\Src\gui\Caret.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\gui\ButtonStyle.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -23,58 +23,14 @@ struct ButtonStateStyle
     std::shared_ptr<SoundObject> sound;
     std::unique_ptr<AnimationContainer> animation;
 
-    ButtonStateStyle() :
-    font(nullptr),
-    animation(nullptr)
-    { }
+    ButtonStateStyle();
+    ButtonStateStyle(const ButtonStateStyle& other);
+    ButtonStateStyle(ButtonStateStyle&& other);
 
-    ButtonStateStyle(const ButtonStateStyle& other) :
-        font(other.font),
-        spriteOffset(other.spriteOffset),
-        textOffset(other.textOffset),
-        sprite(other.sprite),
-        label(other.label),
-        sound(other.sound)
-    {
-        if(other.animation != nullptr)
-            animation = utility::unique_cast<AnimationContainer>(other.animation->clone());
-    }
+    ButtonStateStyle& operator= (ButtonStateStyle&& other);
 
-    ButtonStateStyle(ButtonStateStyle&& other)
-    {
-        font = other.font;
-        spriteOffset = other.spriteOffset;
-        textOffset = other.textOffset;
-        sprite = other.sprite;
-        label = other.label;
-        sound = other.sound;
-        animation = std::move(other.animation);
-    }
-
-    ButtonStateStyle& operator= (ButtonStateStyle&& other)
-    {
-        font = other.font;
-        spriteOffset = other.spriteOffset;
-        textOffset = other.textOffset;
-        sprite = other.sprite;
-        label = other.label;
-        sound = other.sound;
-        animation = std::move(other.animation);
-        return *this;
-    }
-
-    ButtonStateStyle& operator= (ButtonStateStyle& other)
-    {
-        font = other.font;
-        spriteOffset = other.spriteOffset;
-        textOffset = other.textOffset;
-        sprite = other.sprite;
-        label = other.label;
-        sound = other.sound;
-        if(other.animation != nullptr)
-            animation = utility::unique_cast<AnimationContainer>(other.animation->clone());
-        return *this;
-    }
+private:
+    void copyValues(const ButtonStateStyle& other);
 };
 
 struct ButtonStyle
@@ -83,6 +39,12 @@ struct ButtonStyle
     ButtonStateStyle hoverStyle;
     ButtonStateStyle pressedStyle;
     sf::IntRect mouseRect;
+    
+    ButtonStyle();
+    ButtonStyle(const ButtonStyle& other);
+    ButtonStyle(ButtonStyle&& other);
+
+    ButtonStyle& operator= (ButtonStyle&& other);
 };
 
 #endif //BUTTON_STYLE_HPP

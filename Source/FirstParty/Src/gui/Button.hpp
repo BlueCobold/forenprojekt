@@ -38,7 +38,7 @@ private:
 
 public:
 
-    Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers = true);
+    Button(int id, ButtonStyle&& style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers = true);
 
     virtual std::unique_ptr<MenuElement> clone() const override;
 

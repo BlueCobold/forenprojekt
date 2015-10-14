@@ -105,7 +105,7 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     std::unordered_map<std::string, ToolTip> toolTip = parseToolTipStyle(menuXml, resourceManager);
     std::unordered_map<std::string, InputBoxStyle> inputBoxStyle = parseInputBoxStyle(menuXml, resourceManager);
 
-    addAll(std::move(parseButtons(menuXml, buttonStyles, toolTip, resourceManager)), menu.menuElements);
+    addAll(parseButtons(menuXml, buttonStyles, toolTip, resourceManager), menu.menuElements);
     addAll(parseCheckBoxes(menuXml, checkboxStyles, toolTip, resourceManager), menu.menuElements);
     addAll(parseSliders(menuXml, sliderStyles, resourceManager), menu.menuElements);
     addAll(parseLabels(menuXml, resourceManager), menu.menuElements);
@@ -162,7 +162,7 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
                 position, style.pressedStyle.textOffset,
                 0, style.pressedStyle.font, LineLabel::Centered);
 
-            auto button = std::unique_ptr<Button>(new Button(id, style, sf::Vector2f(), position, triggers));
+            auto button = std::unique_ptr<Button>(new Button(id, std::move(style), sf::Vector2f(), position, triggers));
             
             if(auto visibleWhenId = buttonXml->IntAttribute("visibleWhen"))
                 button->setVisibleWhenId(visibleWhenId);
@@ -416,14 +416,14 @@ std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(tinyx
             styleXml != nullptr; styleXml = styleXml->NextSiblingElement("buttonStyle"))
         {
             ButtonStyle style;
-            style.idleStyle = loadButtonStateStyle(styleXml->FirstChildElement("idle"), resourceManager);
-            style.hoverStyle = loadButtonStateStyle(styleXml->FirstChildElement("hover"), resourceManager);
-            style.pressedStyle = loadButtonStateStyle(styleXml->FirstChildElement("pressed"), resourceManager);
+            style.idleStyle = std::move(loadButtonStateStyle(styleXml->FirstChildElement("idle"), resourceManager));
+            style.hoverStyle = std::move(loadButtonStateStyle(styleXml->FirstChildElement("hover"), resourceManager));
+            style.pressedStyle = std::move(loadButtonStateStyle(styleXml->FirstChildElement("pressed"), resourceManager));
             if(auto rect = styleXml->FirstChildElement("mouseRect"))
                 style.mouseRect = sf::IntRect(
                     rect->IntAttribute("left"), rect->IntAttribute("top"),
                     rect->IntAttribute("width"), rect->IntAttribute("height"));
-            buttonStyles[styleXml->Attribute("name")] = style;
+            buttonStyles.emplace(std::make_pair(styleXml->Attribute("name"), std::move(style)));
         }
     }
     return buttonStyles;

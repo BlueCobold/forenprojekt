@@ -328,6 +328,7 @@
     <ClCompile Include="..\..\Src\gui\AnimationContainer.cpp" />
     <ClCompile Include="..\..\Src\gui\BitmapFont.cpp" />
     <ClCompile Include="..\..\Src\gui\Button.cpp" />
+    <ClCompile Include="..\..\Src\gui\ButtonStyle.cpp" />
     <ClCompile Include="..\..\Src\gui\CaptionMenu.cpp" />
     <ClCompile Include="..\..\Src\gui\Caret.cpp" />
     <ClCompile Include="..\..\Src\gui\CheckBox.cpp" />
