@@ -455,7 +455,10 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(tinyxml2::XMLElement* xml, Res
                 if(auto ani = LevelFileLoader::parseAnimation(animation, style.animation.get(),
                                                                 style.animation.get(), resourceManager,
                                                                 &functions, _cloneHandler))
+                {
+                    ani->setValueOf("cloneId", static_cast<float>(copy));
                     style.animation->bindAnimation(std::move(ani));
+                }
             }
         }
     }
@@ -709,7 +712,10 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
                         if(auto ani = LevelFileLoader::parseAnimation(animation, animContainer.get(),
                                                                       animContainer.get(), resourceManager,
                                                                       &functions, _cloneHandler))
+                        {
+                            ani->setValueOf("cloneId", static_cast<float>(copy));
                             animContainer->bindAnimation(std::move(ani));
+                        }
                     }
                 }
             }

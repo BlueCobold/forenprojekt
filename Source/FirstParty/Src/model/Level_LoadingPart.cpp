@@ -638,6 +638,7 @@ std::unique_ptr<Entity> Level::createEntity(
                 {
                     if(animation->getBufferId() == UINT_MAX)
                         animation->setBufferId(m_defaultTargetBuffer);
+                    animation->setValueOf("cloneId", static_cast<float>(copy));
                     entity->bindAnimation(std::move(animation));
                 }
             }
