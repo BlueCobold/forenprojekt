@@ -278,6 +278,8 @@ std::unique_ptr<Animation> Animation::clone() const
     ani->m_blending = m_blending;
     ani->m_stencil = m_stencil;
     ani->m_targetBuffer = m_targetBuffer;
+    ani->m_sizes = m_sizes;
+    ani->m_origins = m_origins;
 
     std::array<std::unique_ptr<ValueProvider>, 4> colors;
     for(int i = 0; i < 4; i++)
