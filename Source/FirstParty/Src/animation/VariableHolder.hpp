@@ -36,6 +36,11 @@ public:
     {
         m_variables[name] = value;
     }
+
+    void copyValuesFrom(const VariableHolder& other)
+    {
+        m_variables = other.m_variables;
+    }
 };
 
 #endif //VARIABLE_HOLDER_HPP
