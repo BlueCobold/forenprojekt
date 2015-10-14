@@ -32,6 +32,7 @@ Menu::Menu(const MenuTemplate& menuTemplate, sf::RenderWindow& screen) :
     m_template.background.setPosition(m_currentPosition);
 
     m_size = sf::Vector2i(m_template.background.getTextureRect().width, m_template.background.getTextureRect().height);
+    update(screen, 0);
 }
 
 Menu::~Menu()
