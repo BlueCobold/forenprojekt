@@ -79,6 +79,7 @@ public:
         std::unique_ptr<ValueProvider> blue,
         std::unique_ptr<ValueProvider> alpha);
     void setLayout(
+        const std::vector<sf::Vector2i>& srcPositions,
         const std::vector<sf::Vector2i>& srcOffsets,
         const std::vector<sf::Vector2i>& sizes,
         const std::vector<sf::Vector2i>& origins);
@@ -118,6 +119,7 @@ private:
     std::unique_ptr<ValueProvider> m_frameProvider;
     std::array<std::unique_ptr<ValueProvider>, 4> m_colorProviders;
     std::vector<sf::IntRect> m_sizes;
+    std::vector<sf::Vector2i> m_offsets;
     std::vector<sf::Vector2i> m_origins;
     bool m_applyRotation;
     bool m_stopOnAlphaZero;

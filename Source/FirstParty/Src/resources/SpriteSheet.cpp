@@ -49,6 +49,8 @@ bool SpriteSheet::loadFromFile(const std::string& filename)
                 spriteData.height = sprite->IntAttribute("height");
                 spriteData.originX = sprite->FloatAttribute("originx");
                 spriteData.originY = sprite->FloatAttribute("originy");
+                spriteData.offsetX = sprite->IntAttribute("xoffset");
+                spriteData.offsetY = sprite->IntAttribute("yoffset");
                 insert(key, spriteData);
             }
         }

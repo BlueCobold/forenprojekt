@@ -133,7 +133,11 @@ void Animation::updatePosition()
         m_dynamicPosition.x += m_xPositionProvider->getValue();
     if(m_yPositionProvider != nullptr)
         m_dynamicPosition.y += m_yPositionProvider->getValue();
-    m_sprite.setPosition(m_externalPosition + m_dynamicPosition + m_drawOffset);
+
+    auto offset = sf::Vector2f();
+    if(m_offsets.size() != 0)
+        offset = sf::Vector2f(m_offsets[m_frame]);
+    m_sprite.setPosition(m_externalPosition + m_dynamicPosition + m_drawOffset + offset);
 }
 
 void Animation::setRotation(const float radians)
@@ -243,10 +247,14 @@ void Animation::bindColorController(std::unique_ptr<ValueProvider> red,
 }
 
 void Animation::setLayout(
+    const std::vector<sf::Vector2i>& srcPositions,
     const std::vector<sf::Vector2i>& srcOffsets,
     const std::vector<sf::Vector2i>& sizes,
     const std::vector<sf::Vector2i>& origins)
 {
+    if(m_frames > srcPositions.size())
+        throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "srcPositions"));
+
     if(m_frames > srcOffsets.size())
         throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "srcOffsets"));
 
@@ -257,8 +265,9 @@ void Animation::setLayout(
         throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "origins"));
 
     for(unsigned i = 0; i < m_frames; i++)
-        m_sizes.push_back(sf::IntRect(srcOffsets[i].x, srcOffsets[i].y, sizes[i].y, sizes[i].y));
+        m_sizes.push_back(sf::IntRect(srcPositions[i].x, srcPositions[i].y, sizes[i].x, sizes[i].y));
     m_origins = origins;
+    m_offsets = srcOffsets;
 }
 
 std::unique_ptr<Animation> Animation::clone() const
@@ -279,6 +288,7 @@ std::unique_ptr<Animation> Animation::clone() const
     ani->m_stencil = m_stencil;
     ani->m_targetBuffer = m_targetBuffer;
     ani->m_sizes = m_sizes;
+    ani->m_offsets = m_offsets;
     ani->m_origins = m_origins;
 
     std::array<std::unique_ptr<ValueProvider>, 4> colors;

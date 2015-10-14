@@ -73,6 +73,7 @@ std::vector<sf::Vector2i> parseValueList(const tinyxml2::XMLElement* xml, const 
 void parseSpriteValueList(const tinyxml2::XMLElement* xml,
     const SpriteSheet* sheet,
     std::vector<sf::Vector2i>& src,
+    std::vector<sf::Vector2i>& offset,
     std::vector<sf::Vector2i>& sizes,
     std::vector<sf::Vector2i>& origins)
 {
@@ -83,6 +84,7 @@ void parseSpriteValueList(const tinyxml2::XMLElement* xml,
         auto sprite = sheet->get(token);
         src.push_back(sf::Vector2i(sprite.x, sprite.y));
         sizes.push_back(sf::Vector2i(sprite.width, sprite.height));
+        offset.push_back(sf::Vector2i(sprite.offsetX, sprite.offsetY));
         origins.push_back(sf::Vector2i(static_cast<int>(sprite.originX), static_cast<int>(sprite.originY)));
     }
 }
@@ -309,16 +311,17 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
         {
             if(sheet == nullptr)
                 throw std::runtime_error(utility::translateKey("CannotUseSpriteLayout"));
-            std::vector<sf::Vector2i> srcoffsets, sizes, origins;
-            parseSpriteValueList(sprites, sheet, srcoffsets, sizes, origins);
-            anim->setLayout(srcoffsets, sizes, origins);
+            std::vector<sf::Vector2i> srcPos, sizes, origins, srcOffset;
+            parseSpriteValueList(sprites, sheet, srcPos, srcOffset, sizes, origins);
+            anim->setLayout(srcPos, srcOffset, sizes, origins);
         }
         else
         {
             std::vector<sf::Vector2i> srcoffsets = parseValueList(layout, "srcx", "srcy");
             std::vector<sf::Vector2i> sizes = parseValueList(layout, "width", "height");
             std::vector<sf::Vector2i> origins = parseValueList(layout, "midx", "midy");
-            anim->setLayout(srcoffsets, sizes, origins);
+            std::vector<sf::Vector2i> offsets = parseValueList(layout, "xoffset", "yoffset");
+            anim->setLayout(srcoffsets, offsets, sizes, origins);
         }
     }
 

@@ -22,8 +22,10 @@ public:
         int height;
         float originX;
         float originY;
+        int offsetX;
+        int offsetY;
 
-        SpriteData() : x(0), y(0), width(0), height(0), originX(0), originY(0)
+        SpriteData() : x(0), y(0), width(0), height(0), originX(0), originY(0), offsetX(0), offsetY(0)
         { }
     };
 
