@@ -448,10 +448,15 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(tinyxml2::XMLElement* xml, Res
             animation != nullptr; 
             animation = animation->NextSiblingElement("animation"))
         {
-            if(auto ani = LevelFileLoader::parseAnimation(animation, style.animation.get(),
-                                                            style.animation.get(), resourceManager,
-                                                            &functions, _cloneHandler))
-                style.animation->bindAnimation(std::move(ani));
+            int copies = 1;
+            animation->QueryIntAttribute("copies", &copies);
+            for(int copy = 0; copy < copies; copy++)
+            {
+                if(auto ani = LevelFileLoader::parseAnimation(animation, style.animation.get(),
+                                                                style.animation.get(), resourceManager,
+                                                                &functions, _cloneHandler))
+                    style.animation->bindAnimation(std::move(ani));
+            }
         }
     }
     return style;
@@ -697,10 +702,15 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
                     animation != nullptr; 
                     animation = animation->NextSiblingElement("animation"))
                 {
-                    if(auto ani = LevelFileLoader::parseAnimation(animation, animContainer.get(),
-                                                                  animContainer.get(), resourceManager,
-                                                                  &functions, _cloneHandler))
-                        animContainer->bindAnimation(std::move(ani));
+                    int copies = 1;
+                    animation->QueryIntAttribute("copies", &copies);
+                    for(int copy = 0; copy < copies; copy++)
+                    {
+                        if(auto ani = LevelFileLoader::parseAnimation(animation, animContainer.get(),
+                                                                      animContainer.get(), resourceManager,
+                                                                      &functions, _cloneHandler))
+                            animContainer->bindAnimation(std::move(ani));
+                    }
                 }
             }
 
