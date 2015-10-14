@@ -22,6 +22,7 @@ struct ButtonStateStyle
     LineLabel label;
     std::shared_ptr<SoundObject> sound;
     std::unique_ptr<AnimationContainer> animation;
+    bool resetOnExit;
 
     ButtonStateStyle();
     ButtonStateStyle(const ButtonStateStyle& other);

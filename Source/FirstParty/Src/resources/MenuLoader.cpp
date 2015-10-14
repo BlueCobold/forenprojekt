@@ -441,6 +441,8 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(tinyxml2::XMLElement* xml, Res
 
     if(auto animations = xml->FirstChildElement("animations"))
     {
+        animations->QueryBoolAttribute("resetOnExit", &style.resetOnExit);
+
         style.animation = std::unique_ptr<AnimationContainer>(new AnimationContainer(sf::Vector2f(), sf::Vector2f(), 0, _cloneHandler));
         std::unordered_map<std::string, const tinyxml2::XMLElement*> functions;
 

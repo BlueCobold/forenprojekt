@@ -14,6 +14,7 @@ Button::Button(int id, ButtonStyle&& style, const sf::Vector2f& position, const 
     m_sprite = &m_style.idleStyle.sprite;
     m_label = &m_style.idleStyle.label;
     m_animation = m_style.idleStyle.animation.get();
+    m_resetAnimation = m_style.idleStyle.resetOnExit;
 
     m_size.x = m_style.idleStyle.sprite.getTextureRect().width;
     m_size.y = m_style.idleStyle.sprite.getTextureRect().height;
@@ -50,13 +51,9 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
         m_showToolTip = true;
         m_toolTip.setPosition(static_cast<const sf::Vector2f>(mousePosition), screen);
 
-        m_animation = m_style.hoverStyle.animation.get();
-
         if(utility::Mouse.leftButtonPressed())
         {
-            m_sprite = &m_style.pressedStyle.sprite;
-            m_label = &m_style.pressedStyle.label;
-            m_animation = m_style.pressedStyle.animation.get();
+            setStyle(m_style.pressedStyle, time);
             onPositionChanged();
 
             if(!m_playPressedSound && m_style.pressedStyle.sound)
@@ -67,9 +64,8 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
         }
         else
         {
+            setStyle(m_style.hoverStyle, time);
             m_playPressedSound = false;
-            m_sprite = &m_style.hoverStyle.sprite;
-            m_label = &m_style.hoverStyle.label;
             onPositionChanged();
 
             if(m_isTriggering && utility::Mouse.leftButtonReleased() && m_callback != nullptr)
@@ -80,15 +76,30 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
     {
         m_playHoverSound = false;
         m_playPressedSound = false;
-        m_sprite = &m_style.idleStyle.sprite;
-        m_label = &m_style.idleStyle.label;
-        m_animation = m_style.idleStyle.animation.get();
-        onPositionChanged();
+        setStyle(m_style.idleStyle, time);
         m_showToolTip = false;
     }
 
     if(m_animation != nullptr)
         m_animation->update(screen, time, mouseOffset);
+}
+
+void Button::setStyle(ButtonStateStyle& style, float time)
+{
+    m_sprite = &style.sprite;
+    m_label = &style.label;
+    
+    if(m_animation != style.animation.get())
+    {
+        if(m_resetAnimation)
+        {
+            m_style.idleStyle.animation->restartAt(time);
+            m_style.hoverStyle.animation->restartAt(time);
+            m_style.pressedStyle.animation->restartAt(time);
+        }
+        m_animation = style.animation.get();
+        m_resetAnimation = style.resetOnExit;
+    }
 }
 
 void Button::draw(const DrawParameter& params)

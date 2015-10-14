@@ -33,6 +33,7 @@ void ButtonStateStyle::copyValues(const ButtonStateStyle& other)
     sprite = other.sprite;
     label = other.label;
     sound = other.sound;
+    resetOnExit = other.resetOnExit;
 }
 
 ButtonStyle::ButtonStyle()

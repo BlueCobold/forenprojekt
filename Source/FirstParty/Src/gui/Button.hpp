@@ -33,6 +33,7 @@ private:
 
     bool m_playHoverSound;
     bool m_playPressedSound;
+    bool m_resetAnimation;
 
     std::function<void (const Button& sender)> m_callback;
 
@@ -60,6 +61,9 @@ public:
 protected:
 
     virtual void onPositionChanged() override;
+
+private:
+    void setStyle(ButtonStateStyle& style, float time);
 };
 
 #endif // BUTTON_HPP
