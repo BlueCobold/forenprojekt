@@ -81,6 +81,10 @@ void parseSpriteValueList(const tinyxml2::XMLElement* xml,
     std::string token;
     while(std::getline(tokens, token, ','))
     {
+        std::stringstream trimmer;
+        trimmer << token;
+        token.clear();
+        trimmer >> token;
         auto sprite = sheet->get(token);
         src.push_back(sf::Vector2i(sprite.x, sprite.y));
         sizes.push_back(sf::Vector2i(sprite.width, sprite.height));
