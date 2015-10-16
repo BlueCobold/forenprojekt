@@ -68,6 +68,7 @@
 	<spritesheet name="walls" path="assets/walls.xml" />
 	<spritesheet name="walls_nort" path="assets/norT.xml" />
 	<spritesheet name="gui_elements" path="gui/gui_elements.xml" />
+	<spritesheet name="gui_window" path="backgrounds/gui_window.xml" />
 </spritesheets>
 <levels>
 	<level number="1" filename="Beginner Level.lvl" />

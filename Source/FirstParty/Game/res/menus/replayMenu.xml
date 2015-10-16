@@ -1,27 +1,28 @@
 <menu>
-	<position horizontalpercentage="0.5" verticalpercentage="0.5" offsetx="-255" offsety="-200.5" />
-	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
-	<caption font="gui_large" text="gui_level_success" offsetx="255" offsety="50" />
 	<styles source="Styles.inc"/>
 	<elements>
-		<button id="0" text="gui_play_again" style="small" x="179" y="215" />
-		<button id="1" text="gui_play_next" style="small" x="343" y="215" />
-		<button id="2" text="gui_mainmenu" style="default" x="261" y="270" />
+		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
+		<label id="-1" text="gui_level_success" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
+		<button id="0" text="gui_play_again" style="small" x="0.5" y="0.5" offsetx="82" offsety="30" />
+		<button id="1" text="gui_play_next" style="small" x="0.5" y="0.5" offsetx="-82" offsety="30" />
+		<button id="2" text="gui_mainmenu" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
 		
-		<label id="10" text="gui_score" font="buttonHoverFont" alignment="2" x="440" y="100" />
-		<label id="11" text="gui_score" font="buttonHoverFont" alignment="0" x="70" y="100" />
-		<label id="12" text="gui_ball_lost" font="buttonHoverFont" alignment="2" x="440" y="140" />
-		<label id="13" text="gui_ball_lost" font="buttonHoverFont" alignment="0" x="70" y="140" />
-		<image id="14" x="82" y="-69" spriteSheet="gui_elements" sprite="stars_0"/>
+		<label id="10" text="gui_score" font="buttonHoverFont" alignment="2" x="0.5" y="0.5" offsetx="130" offsety="-110" />
+		<label id="11" text="gui_score" font="buttonHoverFont" alignment="0" x="0.5" y="0.5" offsetx="-180" offsety="-106" />
+
+		<label id="12" text="gui_ball_lost" font="buttonHoverFont" alignment="2" x="0.5" y="0.5" offsetx="130" offsety="-70" />
+		<label id="13" text="gui_ball_lost" font="buttonHoverFont" alignment="0" x="0.5" y="0.5" offsetx="-180" offsety="-66" />
+
+		<image id="14" x="0.5" y="0.5" offsetx="-176" offsety="-269" spriteSheet="gui_elements" sprite="stars_0"/>
 		
-		<image id="25" tooltip="default" tooltiptext="tooltip_medals" x="172" y="-12" spriteSheet="gui_elements" sprite="empty_small"/>
-		<image id="26" tooltip="default" tooltiptext="tooltip_medals" x="294" y="-12" spriteSheet="gui_elements" sprite="empty_small"/>
-		<image id="27" tooltip="default" tooltiptext="tooltip_medals" x="220" y="-39" spriteSheet="gui_elements" sprite="empty_large"/>
-		<image id="35" tooltip="default" tooltiptext="tooltip_medals" x="161" y="-23" spriteSheet="gui_elements" sprite="filled_small"/>
-		<image id="36" tooltip="default" tooltiptext="tooltip_medals" x="283" y="-23" spriteSheet="gui_elements" sprite="filled_small"/>
-		<image id="37" tooltip="default" tooltiptext="tooltip_medals" x="209" y="-46" spriteSheet="gui_elements" sprite="filled_large"/>
+		<image id="25" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="-87" offsety="-212" spriteSheet="gui_elements" sprite="empty_small"/>
+		<image id="26" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="35" offsety="-212" spriteSheet="gui_elements" sprite="empty_small"/>
+		<image id="27" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="-39" offsety="-239" spriteSheet="gui_elements" sprite="empty_large"/>
+		<image id="35" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="-98" offsety="-223" spriteSheet="gui_elements" sprite="filled_small"/>
+		<image id="36" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="24" offsety="-223" spriteSheet="gui_elements" sprite="filled_small"/>
+		<image id="37" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="-50" offsety="-246" spriteSheet="gui_elements" sprite="filled_large"/>
 		
-		<image id="20" x="381" y="-20" spriteSheet="gui_elements" sprite="highscoreBackground2"/>
-		<button id="30" text="" style="goblet" x="403" y="-3" tooltip="default" tooltiptext="tooltip_highscore"/>
+		<image id="20" x="0.5" y="0.5" offsetx="102" offsety="-218" spriteSheet="gui_elements" sprite="highscoreBackground"/>
+		<button id="30" text="" style="goblet" x="0.5" y="0.5" offsetx="157" offsety="-204" tooltip="default" tooltiptext="tooltip_highscore"/>
 	</elements>
 </menu>

@@ -85,11 +85,6 @@ std::string LineLabel::getText() const
     return m_text;
 }
 
-void LineLabel::onPositionChanged()
-{
-    rebuild();
-}
-
 void LineLabel::rebuild()
 {
     m_glyphs.clear();
@@ -107,12 +102,12 @@ void LineLabel::rebuild()
     }
 
     float xOffset = 0;
-    auto position = getPosition();
+    auto currentPosition = getCurrentPosition();
     auto offset = getOffset();
     for(auto it = begin(m_text); it != end(m_text); it++)
     {
         auto glyph = m_font->getGlyph(*it);
-        glyph.setPosition(shift + position.x + xOffset + offset.x, position.y + glyph.getVerticalOffset() + offset.y);
+        glyph.setPosition(shift + currentPosition.x + xOffset, currentPosition.y + glyph.getVerticalOffset());
         glyph.setRotation(m_rotation);
         m_glyphs.push_back(glyph);
 
@@ -216,4 +211,15 @@ LineLabel::Alignment LineLabel::getAlignment() const
 const BitmapFont* LineLabel::getFont() const
 {
     return m_font;
+}
+
+void LineLabel::updateLayout(const sf::Vector2f& screenSize)
+{
+    MenuElement::updateLayout(screenSize);
+    rebuild();
+}
+
+void LineLabel::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+{
+    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 }

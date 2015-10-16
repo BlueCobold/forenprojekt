@@ -14,51 +14,16 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-const float Menu::Left = 0.0f;
-const float Menu::Right = 1.0f;
-const float Menu::Center= 0.5f;
-const float Menu::Top = 0.0f;
-const float Menu::Bottom = 1.0f;
-
 Menu::Menu(const MenuTemplate& menuTemplate, sf::RenderWindow& screen) :
            m_screen(&screen),
-           m_position(menuTemplate.relativePosition),
-           m_offset(menuTemplate.menuOffset),
-           m_currentPosition(sf::Vector2f(screen.getSize().x * menuTemplate.relativePosition.x,
-                                          screen.getSize().y * menuTemplate.relativePosition.y) + menuTemplate.menuOffset),
-           m_panel(menuTemplate.menuElements, m_currentPosition),
+           m_panel(menuTemplate.menuElements),
            m_template(menuTemplate)
 {
-    m_template.background.setPosition(m_currentPosition);
-
-    m_size = sf::Vector2i(m_template.background.getTextureRect().width, m_template.background.getTextureRect().height);
     update(screen, 0);
 }
 
 Menu::~Menu()
 {}
-
-const sf::Vector2i& Menu::getSize() const
-{
-    return m_size;
-}
-
-void Menu::setPosition(const sf::Vector2f& relativePosition,
-                       const sf::Vector2f& offset)
-{
-    m_offset = offset;
-    m_position = relativePosition;
-    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_position.x,
-                                     m_screen->getSize().y * m_position.y) + m_offset;
-
-    m_template.background.setPosition(m_currentPosition);
-    m_panel.setPosition(m_currentPosition);
-}
-
-const sf::Vector2f& Menu::getPosition() const
-{
-    return m_currentPosition;
-}
 
 void Menu::draw(const DrawParameter& params)
 {
@@ -79,23 +44,11 @@ void Menu::drawAdditionalForeground(const DrawParameter& params)
 
 void Menu::update(sf::RenderWindow& screen, const float time)
 {
-    m_screen = &screen;
-
-    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_position.x,
-                                     m_screen->getSize().y * m_position.y) + m_offset;
-
-    updateLayout();
     m_panel.update(screen, time);
 }
 
 void Menu::update(sf::RenderWindow& screen, const float time, const MenuElementType::Type type)
 {
-    m_screen = &screen;
-
-    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_position.x,
-                                     m_screen->getSize().y * m_position.y) + m_offset;
-
-    updateLayout();
     m_panel.update(screen, time, type);
 }
 
@@ -176,14 +129,6 @@ void Menu::changePressedSprite(const int id, const sf::Sprite& sprite)
 InputBox& Menu::getInputBox(int id) const
 {
     return *find<InputBox>(id, MenuElementType::InputBox);
-}
-
-void Menu::updateLayout()
-{
-    m_currentPosition = sf::Vector2f(m_screen->getSize().x * m_position.x,
-                                     m_screen->getSize().y * m_position.y) + m_offset;
-    m_template.background.setPosition(m_currentPosition);
-    m_panel.updateLayout(m_currentPosition);
 }
 
 SubWindow& Menu::getSubWindow(int id) const

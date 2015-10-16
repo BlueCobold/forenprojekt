@@ -39,7 +39,7 @@ private:
 
 public:
 
-    Button(int id, ButtonStyle&& style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers = true);
+    Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers = true);
 
     virtual std::unique_ptr<MenuElement> clone() const override;
 
@@ -57,10 +57,8 @@ public:
     void changeIdleSprite(const sf::Sprite& sprite);
     void changeHoverSprite(const sf::Sprite& sprite);
     void changePressedSprite(const sf::Sprite& sprite);
-
 protected:
-
-    virtual void onPositionChanged() override;
+    void updateLayout(const sf::Vector2f& screenSize) override;
 
 private:
     void setStyle(ButtonStateStyle& style, float time);

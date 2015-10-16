@@ -37,7 +37,6 @@ void OptionMenuState::onEnter(const EnterStateInformation* enterInformation, con
     m_HUD.onEnter(m_level);
 
     m_menu.onEnter();
-    m_menu.updateLayout();
 
     m_pauseStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 

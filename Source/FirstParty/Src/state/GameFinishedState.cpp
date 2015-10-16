@@ -26,7 +26,6 @@ GameFinishedState::~GameFinishedState()
 void GameFinishedState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
     State::onEnter(enterInformation, time);
-    m_menu.updateLayout();
 }
 
 StateChangeInformation GameFinishedState::update(const float time)

@@ -14,6 +14,7 @@ public:
     static const int BUTTON_OPTIONS = 2;
     static const int BUTTON_CREDITS = 3;
     static const int BUTTON_CLOSE = 4;
+    static const int BUTTON_ACHIEVEMENT = 6;
 
     MainMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 };

@@ -1,14 +1,13 @@
 <menu>
-	<position horizontalpercentage="0.5" verticalpercentage="0.5" offsetx="-255" offsety="-200.5" />
-	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
-	<caption font="gui_large" text="gui_game_paused" offsetx="255" offsety="50" />
 	<styles source="Styles.inc"/>
 	<elements>
-		<button id="0" text="gui_continue" style="default" x="261" y="110" />
-		<button id="2" text="gui_restart" style="default" x="261" y="165" />
-		<button id="1" text="gui_option" style="default" x="261" y="220" />
-		<button id="3" text="gui_mainmenu" style="default" x="261" y="275" />
-		<button id="4" text="" style="coins" x="115" y="-7" tooltip="default" tooltiptext="tooltip_coins"/>
-		<image id="-1" x="60" y="-21"  spriteSheet="gui_elements" sprite="coins"/>
+		<label id="1" text="gui_game_paused" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
+		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
+		<button id="0" text="gui_continue" style="default" x="0.5" y="0.5" offsetx="0" offsety="-70" />
+		<button id="2" text="gui_restart" style="default" x="0.5" y="0.5" offsetx="0" offsety="-20" />
+		<button id="1" text="gui_option" style="default" x="0.5" y="0.5" offsetx="0" offsety="30" />
+		<button id="3" text="gui_mainmenu" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
+		<image id="-1" x="0.5" y="0.5" offsetx="-197" offsety="-221" spriteSheet="gui_elements" sprite="coins" />
+		<button id="4" text="" style="coins" x="0.5" y="0.5" offsetx="-143" offsety="-208" tooltip="default" tooltiptext="tooltip_coins"/>
 	</elements>
 </menu>

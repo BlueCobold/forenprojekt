@@ -40,8 +40,6 @@ void LevelFailState::onEnter(const EnterStateInformation* enterInformation, cons
     m_HUD.restartAt(getPassedTime());
     m_HUD.onEnter(m_level);
 
-    m_menu.updateLayout();
-
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
     if(!enterInformation->m_prepareOnly)

@@ -76,29 +76,6 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
 
     MenuTemplate menu;
 
-    if(auto position = menuXml->FirstChildElement("position"))
-    {
-        menu.relativePosition = sf::Vector2f(position->FloatAttribute("horizontalpercentage"),
-                                             position->FloatAttribute("verticalpercentage"));
-        menu.menuOffset = sf::Vector2f(position->FloatAttribute("offsetx"),
-                                       position->FloatAttribute("offsety"));
-    }
-    else
-    {
-        menu.relativePosition = sf::Vector2f(0, 0);
-        menu.menuOffset = sf::Vector2f(0, 0);
-    }
-
-    if(auto background = menuXml->FirstChildElement("background"))
-        menu.background = getSprite(background, resourceManager);
-
-    if(auto caption = menuXml->FirstChildElement("caption"))
-    {
-        menu.captionFont = resourceManager.getBitmapFont(caption->Attribute("font"));
-        menu.captionResourceKey = caption->Attribute("text");
-        menu.captionOffset = sf::Vector2f(caption->FloatAttribute("offsetx"), caption->FloatAttribute("offsety"));
-    }
-    
     std::unordered_map<std::string, ButtonStyle> buttonStyles = parseButtonStyles(menuXml, resourceManager);
     std::unordered_map<std::string, CheckBoxStyle> checkboxStyles = parseCheckBoxStyles(menuXml, resourceManager);
     std::unordered_map<std::string, SliderStyle> sliderStyles = parseSliderStyles(menuXml, resourceManager);
@@ -135,6 +112,7 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
                 throw std::runtime_error(utility::replace(utility::translateKey("UnknownButtonStyle"), buttonXml->Attribute("style")));
             auto style = styleIt->second;
             auto position = sf::Vector2f(buttonXml->FloatAttribute("x"), buttonXml->FloatAttribute("y"));
+            auto offset = sf::Vector2f(buttonXml->FloatAttribute("offsetx"), buttonXml->FloatAttribute("offsety"));
             auto id = buttonXml->IntAttribute("id");
             auto triggers = false;
             if(buttonXml->Attribute("triggering"))
@@ -149,20 +127,20 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
 
             style.idleStyle.label = LineLabel(
                 textResourceKey, 
-                position, style.idleStyle.textOffset,
+                position, offset + style.idleStyle.textOffset,
                 0, style.idleStyle.font, LineLabel::Centered);
 
             style.hoverStyle.label = LineLabel(
                 textResourceKey, 
-                position, style.hoverStyle.textOffset,
+                position, offset + style.hoverStyle.textOffset,
                 0, style.hoverStyle.font, LineLabel::Centered);
 
             style.pressedStyle.label = LineLabel(
                 textResourceKey, 
-                position, style.pressedStyle.textOffset,
+                position, offset + style.pressedStyle.textOffset,
                 0, style.pressedStyle.font, LineLabel::Centered);
 
-            auto button = std::unique_ptr<Button>(new Button(id, std::move(style), sf::Vector2f(), position, triggers));
+            auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, offset, triggers));
             
             if(auto visibleWhenId = buttonXml->IntAttribute("visibleWhen"))
                 button->setVisibleWhenId(visibleWhenId);
@@ -201,9 +179,10 @@ std::vector<std::unique_ptr<CheckBox>> MenuLoader::parseCheckBoxes(
             auto style = styleIt->second;
             
             auto position = sf::Vector2f(checkboxXml->FloatAttribute("x"), checkboxXml->FloatAttribute("y"));
+            auto offset = sf::Vector2f(checkboxXml->FloatAttribute("offsetx"), checkboxXml->FloatAttribute("offsety"));
             auto id = checkboxXml->IntAttribute("id");
 
-            auto checkBox = std::unique_ptr<CheckBox>(new CheckBox(id, style, sf::Vector2f(), position));
+            auto checkBox = std::unique_ptr<CheckBox>(new CheckBox(id, style, position, offset));
             if(auto toolTipName = checkboxXml->Attribute("tooltip"))
             {
                 auto tooltip = toolTip.find(toolTipName);
@@ -260,8 +239,8 @@ std::vector<std::unique_ptr<LineLabel>> MenuLoader::parseLabels(
             labelXml != nullptr; labelXml = labelXml->NextSiblingElement("label"))
         {
             auto label = std::unique_ptr<LineLabel>(new LineLabel(utility::translateKey(labelXml->Attribute("text")),
-                            sf::Vector2f(0, 0),
                             sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
+                            sf::Vector2f(labelXml->FloatAttribute("offsetx"), labelXml->FloatAttribute("offsety")),
                             0,
                             resourceManager.getBitmapFont(labelXml->Attribute("font")),
                             static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
@@ -329,8 +308,8 @@ std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
             sf::Sprite baseSprite = getSprite(imageXml, resourceManager);
             auto sprite = std::unique_ptr<MenuSprite>(new MenuSprite(
                                                           baseSprite,
-                                                          sf::Vector2f(),
                                                           sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")),
+                                                          sf::Vector2f(imageXml->FloatAttribute("offsetx"), imageXml->FloatAttribute("offsety")),
                                                           imageXml->IntAttribute("id")));
 
             auto toolTipText = imageXml->Attribute("tooltiptext");
@@ -382,6 +361,7 @@ std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
 
             }
             auto position = sf::Vector2f(subXml->FloatAttribute("x"), subXml->FloatAttribute("y"));
+            auto offset = sf::Vector2f(subXml->FloatAttribute("offsetx"), subXml->FloatAttribute("offsety"));
             auto size = sf::Vector2f(subXml->FloatAttribute("sizex"), subXml->FloatAttribute("sizey"));
             auto innerHeight = subXml->IntAttribute("innerheight");
             std::vector<std::unique_ptr<MenuElement>> subElements;
@@ -391,7 +371,7 @@ std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
             addAll(parseLabels(subXml, resourceManager), subElements);
             addAll(parseImages(subXml, toolTip, resourceManager), subElements);
             addAll(parseAnimationContainer(subXml, resourceManager), subElements);
-            elements.push_back(std::unique_ptr<SubWindow>(new SubWindow(id, sf::Vector2f(), size, position, innerHeight, subElements, style)));
+            elements.push_back(std::unique_ptr<SubWindow>(new SubWindow(id, position, size, offset, innerHeight, subElements, style)));
         }
     }
     return elements;

@@ -49,8 +49,6 @@ void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, c
         m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setToolTipText(utility::translateKey("tooltip_preview_timeattack"));
 
     m_levelNumber = enterInformation->m_levelNumber;
-
-    m_menu.updateLayout();
 }
 
 StateChangeInformation LevelPreviewState::update(const float time)

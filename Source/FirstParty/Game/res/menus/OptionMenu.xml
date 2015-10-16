@@ -1,11 +1,8 @@
 <menu>
-	<position horizontalpercentage="0.5" verticalpercentage="0.5" offsetx="-255" offsety="-200.5" />
-	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
-	<caption font="gui_large" text="gui_optin_menu" offsetx="255" offsety="50" />
 	<styles source="Styles.inc"/>
 	<elements>
-		<button id="0" text="gui_close" style="default" x="261" y="270" />
-		<subwindow id="1" x="80" y="108" sizex="352" sizey="150" innerheight="710">
+		<button id="0" text="gui_close" style="default" x="0.5" y="0.5" offsetx="0" offsety="150" />
+		<subwindow id="1" x="0.5" y="0.5" offsetx="-176" offsety="-54" sizex="352" sizey="150" innerheight="710">
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
 				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />

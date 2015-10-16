@@ -6,6 +6,7 @@
 #include "../animation/Cloneable.hpp"
 #include "../rendering/Drawable.hpp"
 #include "../Input.hpp"
+#include "ScreenLocation.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -37,8 +38,7 @@ public:
                 const sf::Vector2f& offset) :
         m_id(id),
         m_type(type),
-        m_position(position),
-        m_offset(offset),
+        m_screenLocation(position, offset),
         m_visible(true),
         m_visibleWhen(nullptr),
         m_masterId(-1)
@@ -56,11 +56,7 @@ public:
 
     void setPosition(const sf::Vector2f& position)
     {
-        if(position != m_position)
-        {
-            m_position = position;
-            onPositionChanged();
-        }
+        m_screenLocation.setPosition(position);
     }
 
     void setVisible(const bool visible)
@@ -70,7 +66,7 @@ public:
 
     virtual void setPosition(const float x, const float y)
     {
-        setPosition(sf::Vector2f(x, y));
+        m_screenLocation.setPosition(sf::Vector2f(x, y));
     }
 
     int getId() const
@@ -85,7 +81,7 @@ public:
 
     const sf::Vector2f& getPosition() const
     {
-        return m_position;
+        return m_screenLocation.getPosition();
     }
 
     bool isVisible() const
@@ -108,6 +104,15 @@ public:
         m_visibleWhen = subject;
     }
 
+    virtual void updateLayout(const sf::Vector2f& screenSize)
+    {
+        m_screenLocation.setScreenSize(screenSize);
+    }
+
+    virtual void setOffset(const sf::Vector2f& offset)
+    {
+        m_screenLocation.setOffset(offset);
+    }
 protected:
 
     virtual void onPositionChanged()
@@ -115,7 +120,12 @@ protected:
 
     const sf::Vector2f& getOffset() const
     {
-        return m_offset;
+        return m_screenLocation.getOffset();
+    }
+
+    const sf::Vector2f& getCurrentPosition() const
+    {
+        return m_screenLocation.getCurrentPosition();
     }
 
     const sf::Vector2i getCursorPosition(const sf::RenderWindow& screen) const
@@ -131,8 +141,7 @@ private:
 
     int m_id;
     MenuElementType::Type m_type;
-    sf::Vector2f m_position;
-    sf::Vector2f m_offset;
+    ScreenLocation m_screenLocation;
     bool m_visible;
     const MenuElement* m_visibleWhen;
     int m_masterId;

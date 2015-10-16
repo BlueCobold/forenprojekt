@@ -7,7 +7,6 @@ MenuSprite::MenuSprite(const sf::Sprite& sprite, const sf::Vector2f& position, c
     m_sprite(sprite),
     m_showToolTip(false)
 {
-    onPositionChanged();
 }
 
 std::unique_ptr<MenuElement> MenuSprite::clone() const
@@ -31,13 +30,10 @@ void MenuSprite::setToolTip(const ToolTip& toolTip)
     m_toolTip = toolTip;
 }
 
-void MenuSprite::onPositionChanged()
-{
-    m_sprite.setPosition(getPosition() + getOffset());
-}
-
 void MenuSprite::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
+    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+
     sf::IntRect rect = sf::IntRect(static_cast<int>(m_sprite.getPosition().x),
                                    static_cast<int>(m_sprite.getPosition().y),
                                    m_sprite.getTextureRect().width,
@@ -74,4 +70,10 @@ void MenuSprite::drawAdditionalForeground(const DrawParameter& params)
         m_toolTip.draw(params);
 
     m_showToolTip = false;
+}
+
+void MenuSprite::updateLayout(const sf::Vector2f& screenSize)
+{
+    MenuElement::updateLayout(screenSize);
+    m_sprite.setPosition(getCurrentPosition());
 }

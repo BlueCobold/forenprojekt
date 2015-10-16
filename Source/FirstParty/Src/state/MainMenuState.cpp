@@ -30,7 +30,6 @@ MainMenuState::~MainMenuState()
 void MainMenuState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
     State::onEnter(enterInformation, time);
-    m_menu.updateLayout();
 }
 
 StateChangeInformation MainMenuState::update(const float time)
@@ -103,7 +102,7 @@ StateChangeInformation MainMenuState::update(const float time)
     }
     else if(clicked == MainMenu::BUTTON_CLOSE)
         State::m_screen.close();
-    else if(utility::Keyboard.isKeyDown(sf::Keyboard::A) || utility::Keyboard.isKeyPressed(sf::Keyboard::A))
+    else if(clicked == MainMenu::BUTTON_ACHIEVEMENT)
     {
         m_optionStateInfo = EnterOptionStateInformation(MainMenuStateId);
         m_transitionStateInfo.m_followingState = AchievementStateId;

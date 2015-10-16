@@ -22,10 +22,11 @@ std::unique_ptr<MenuElement> CheckBox::clone() const
 
 void CheckBox::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
-    auto position = getPosition();
-    auto offset = getOffset();
-    sf::IntRect checkboxRect(static_cast<int>(position.x + offset.x + m_style.mouseRect.left),
-                             static_cast<int>(position.y + offset.y + m_style.mouseRect.top),
+    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+
+    auto currentPosition = getCurrentPosition();
+    sf::IntRect checkboxRect(static_cast<int>(currentPosition.x + m_style.mouseRect.left),
+                             static_cast<int>(currentPosition.y + m_style.mouseRect.top),
                              m_style.mouseRect.width,
                              m_style.mouseRect.height);
     
@@ -38,8 +39,6 @@ void CheckBox::update(const sf::RenderWindow& screen, const float time, const sf
 
         if(utility::Mouse.leftButtonReleased())
             m_checked = !m_checked;
-
-        onPositionChanged();
     }
     else
     {
@@ -69,15 +68,6 @@ void CheckBox::drawAdditionalForeground(const DrawParameter& params)
         m_toolTip.draw(params);
 }
 
-void CheckBox::onPositionChanged()
-{
-    auto position = getPosition();
-    auto offset = getOffset();
-    m_style.uncheckedStyle.sprite.setPosition(position + offset + m_style.uncheckedStyle.spriteOffset);
-    m_style.checkedStyle.sprite.setPosition(position + offset + m_style.checkedStyle.spriteOffset);
-    m_style.hoverStyle.sprite.setPosition(position + offset + m_style.hoverStyle.spriteOffset);
-}
-
 bool CheckBox::getChecked()
 {
     return m_checked;
@@ -88,21 +78,15 @@ void CheckBox::setChecked(bool checked)
     m_checked = checked;
 
     if(m_hover && !m_checked)
-    {
         m_sprite = &m_style.hoverStyle.sprite;
-        onPositionChanged();
-    }
     else if(m_checked)
     {
         m_sprite = &m_style.checkedStyle.sprite;
         m_hover = false;
-        onPositionChanged();
     }
     else
-    {
         m_sprite = &m_style.uncheckedStyle.sprite;
-        onPositionChanged();
-    }
+
 }
 
 void CheckBox::setToolTip(const ToolTip& toolTip)
@@ -113,4 +97,14 @@ void CheckBox::setToolTip(const ToolTip& toolTip)
 void CheckBox::setToolTipText(const std::string& text)
 {
     m_toolTip.setText(text);
+}
+
+void CheckBox::updateLayout(const sf::Vector2f& screenSize)
+{
+    MenuElement::updateLayout(screenSize);
+
+    auto currentPosition = getCurrentPosition();
+    m_style.uncheckedStyle.sprite.setPosition(currentPosition + m_style.uncheckedStyle.spriteOffset);
+    m_style.checkedStyle.sprite.setPosition(currentPosition + m_style.checkedStyle.spriteOffset);
+    m_style.hoverStyle.sprite.setPosition(currentPosition + m_style.hoverStyle.spriteOffset);
 }

@@ -1,22 +1,21 @@
 <menu>
-	<position horizontalpercentage="0.5" verticalpercentage="0.5" offsetx="-255" offsety="-200.5" />
-	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
 	<styles source="Styles.inc"/>
 	<elements>
-		<button id="0" text="gui_start" style="default" x="261" y="215" />
-		<button id="7" text="gui_mainmenu" style="default" x="261" y="270" />
-		<label id="1" text="gui_levelname" font="gui_large" alignment="1" x="255" y="50" />
-		<label id="2" text="gui_balls" font="buttonHoverFont" alignment="0" x="70" y="100" />
-		<label id="3" text="gui_balls" font="buttonHoverFont" alignment="2" x="440" y="100" />
-		<label id="4" text="gui_time" font="buttonHoverFont" alignment="0" x="70" y="140" />
-		<label id="5" text="gui_time" font="buttonHoverFont" alignment="2" x="440" y="140" />
+		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
+		<button id="0" text="gui_start" style="default" x="0.5" y="0.5" offsetx="0" offsety="30" />
+		<button id="7" text="gui_mainmenu" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
+		<label id="1" text="gui_levelname" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
+		<label id="2" text="gui_balls" font="buttonHoverFont" alignment="0" x="0.5" y="0.5" offsetx="-180" offsety="-110" />
+		<label id="3" text="gui_balls" font="buttonHoverFont" alignment="2" x="0.5" y="0.5" offsetx="130" offsety="-106" />
+		<label id="4" text="gui_time" font="buttonHoverFont" alignment="0" x="0.5" y="0.5" offsetx="-180" offsety="-70" />
+		<label id="5" text="gui_time" font="buttonHoverFont" alignment="2" x="0.5" y="0.5" offsetx="130" offsety="-66" />
 
-		<image id="-1" x="60" y="-21" spriteSheet="gui_elements" sprite="coins" />
-		<button id="8" text="" style="coins" x="115" y="-7" tooltip="default" tooltiptext="tooltip_coins"/>
-		<image id="-1" x="4" y="45" spriteSheet="gui_elements" sprite="mode_background"/>
-		<checkbox id="11" style="targetmode" x="14" y="76" tooltip="default" tooltiptext="tooltip_preview_targetmode" />
-		<checkbox id="10" style="timemode" x="14" y="128" tooltip="default" tooltiptext="tooltip_preview_timeattack"/>
-		<image id="-1" x="356" y="-18" spriteSheet="gui_elements" sprite="highscoreBackground"/>
-		<button id="9" text="" style="goblet" x="403" y="-3" tooltip="default" tooltiptext="tooltip_highscore"/>
+		<image id="-1" x="0.5" y="0.5" offsetx="-197" offsety="-221" spriteSheet="gui_elements" sprite="coins" />
+		<button id="8" text="" style="coins" x="0.5" y="0.5" offsetx="-143" offsety="-208" tooltip="default" tooltiptext="tooltip_coins"/>
+		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-181" spriteSheet="gui_elements" sprite="mode_background"/>
+		<checkbox id="11" style="targetmode" x="0.5" y="0.5" offsetx="-245" offsety="-150" tooltip="default" tooltiptext="tooltip_preview_targetmode" />
+		<checkbox id="10" style="timemode" x="0.5" y="0.5" offsetx="-245" offsety="-98" tooltip="default" tooltiptext="tooltip_preview_timeattack"/>
+		<image id="-1" x="0.5" y="0.5" offsetx="102" offsety="-218" spriteSheet="gui_elements" sprite="highscoreBackground"/>
+		<button id="9" text="" style="goblet" x="0.5" y="0.5" offsetx="157" offsety="-204" tooltip="default" tooltiptext="tooltip_highscore"/>
 	</elements>
 </menu>

@@ -628,6 +628,9 @@
     <ClInclude Include="..\..\Src\gui\Caret.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\gui\ScreenLocation.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -1135,6 +1138,9 @@
       <Filter>Sources\model</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\Caret.cpp">
+      <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\ScreenLocation.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\ButtonStyle.cpp">

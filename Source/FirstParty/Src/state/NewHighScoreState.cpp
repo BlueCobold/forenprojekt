@@ -41,8 +41,6 @@ void NewHighScoreState::onEnter(const EnterStateInformation* enterInformation, c
     m_HUD.restartAt(getPassedTime());
     m_HUD.onEnter(m_level);
 
-    m_menu.updateLayout();
-
     m_stateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
     if(m_lastName == "")

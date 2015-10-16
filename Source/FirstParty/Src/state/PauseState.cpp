@@ -44,8 +44,6 @@ void PauseState::onEnter(const EnterStateInformation* enterInformation, const fl
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
     m_optionStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
-    m_menu.updateLayout();
-
     m_menu.setCoinToolTipText(utility::replace(utility::translateKey("tooltip_coins"),
                                            utility::toString(m_config.get<int>("coins"))));
 }

@@ -67,8 +67,12 @@ void ToolTip::setPosition(const sf::Vector2f& position, const sf::RenderWindow& 
         sf::Vector2f offset = calculateNeededOffset(position, screen);
 
         for(auto it = begin(m_label); it != end(m_label); ++it)
-            it->second.setPosition(position.x + m_offset.x + m_textOffset.x + offset.x,
-                                   position.y + m_textOffset.y + m_offset.y + offset.y + it->first * m_height / m_lines);
+        {
+            it->second.setOffset(sf::Vector2f(position.x + m_offset.x + m_textOffset.x + offset.x,
+                                 position.y + m_textOffset.y + m_offset.y + offset.y + it->first * m_height / m_lines));
+
+            it->second.update(screen, 0);
+        }
 
         auto height = m_background[TopLeft].getTextureRect().height;
         auto width = m_background[TopLeft].getTextureRect().width;

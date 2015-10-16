@@ -57,7 +57,6 @@ void CoinShopState::onEnter(const EnterStateInformation* enterInformation, const
     m_menu.setGoodyCharges(Goody::ExtraBallGoody, m_config.get<int>("goodyextraball"));
     m_menu.setGoodyCharges(Goody::ExtraTimeGoody, m_config.get<int>("goodyextratime"));
 
-    m_menu.updateLayout();
     updateButtons();
 }
 

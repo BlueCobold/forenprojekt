@@ -49,6 +49,7 @@ public:
 
     int getInnerHeight() const;
     void setInnerHeight(int innerHeight);
+    void updateLayout(const sf::Vector2f& screenSize);
 
 protected:
 

@@ -24,10 +24,10 @@ class MenuPanel : public Drawable
 {
 public:
 
-    MenuPanel(const std::vector<std::unique_ptr<MenuElement>>& elements, const sf::Vector2f& position);
+    MenuPanel(const std::vector<std::unique_ptr<MenuElement>>& elements);
 
-    virtual void setPosition(const sf::Vector2f& position);
-    const sf::Vector2f& getPosition() const;
+    /*virtual void setPosition(const sf::Vector2f& position);
+    const sf::Vector2f& getPosition() const;*/
 
     virtual void draw(const DrawParameter& params) override;
     void drawAdditionalForeground(const DrawParameter& params);
@@ -40,8 +40,6 @@ public:
         const float time,
         const MenuElementType::Type type,
         const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0));
-    
-    void updateLayout(const sf::Vector2f& position);
 
     void registerOnClick(std::function<void(const Button& sender)> callback);
 
@@ -60,8 +58,6 @@ public:
     const std::vector<std::unique_ptr<MenuElement>>& getElements() const;
 
 private:
-
-    sf::Vector2f m_position;
     std::vector<std::unique_ptr<MenuElement>> m_elements;
     std::function<void(const Button& sender)> m_clickCallback;
 

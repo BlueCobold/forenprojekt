@@ -21,8 +21,6 @@ CreditMenuState::~CreditMenuState()
 void CreditMenuState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
     State::onEnter(enterInformation, time);
-
-    m_menu.updateLayout();
 }
 
 StateChangeInformation CreditMenuState::update(const float time)

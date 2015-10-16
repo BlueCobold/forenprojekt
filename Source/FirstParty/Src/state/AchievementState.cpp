@@ -38,8 +38,6 @@ AchievementState::~AchievementState()
 void AchievementState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
     State::onEnter(enterInformation, time);
-    
-    m_menu.updateLayout();
 }
 
 StateChangeInformation AchievementState::update(const float time)

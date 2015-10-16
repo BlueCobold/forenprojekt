@@ -186,6 +186,7 @@
     <ClInclude Include="..\..\Src\gui\OptionMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\PauseMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\ReplayMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\ScreenLocation.hpp" />
     <ClInclude Include="..\..\Src\gui\Slider.hpp" />
     <ClInclude Include="..\..\Src\gui\SliderStyle.hpp" />
     <ClInclude Include="..\..\Src\gui\SubWindow.hpp" />
@@ -363,6 +364,7 @@
     <ClCompile Include="..\..\Src\gui\OptionMenu.cpp" />
     <ClCompile Include="..\..\Src\gui\PauseMenu.cpp" />
     <ClCompile Include="..\..\Src\gui\ReplayMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\ScreenLocation.cpp" />
     <ClCompile Include="..\..\Src\gui\Slider.cpp" />
     <ClCompile Include="..\..\Src\gui\SubWindow.cpp" />
     <ClCompile Include="..\..\Src\gui\ToolTip.cpp" />

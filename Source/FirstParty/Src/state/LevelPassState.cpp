@@ -66,8 +66,6 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
     }
 
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
-
-    m_menu.updateLayout();
 }
 
 StateChangeInformation LevelPassState::update(const float time)

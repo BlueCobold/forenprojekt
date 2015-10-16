@@ -13,11 +13,7 @@ public:
     CaptionMenu(const MenuTemplate& menuTemplate,
                 sf::RenderWindow& screen);
 
-    virtual void setPosition(const sf::Vector2f& relativePosition,
-                             const sf::Vector2f& offset) override;
-
     virtual void setCaption(const std::string& caption);
-    virtual void updateLayout() override;
 
 protected:
     
@@ -25,7 +21,7 @@ protected:
 
 private:
 
-    LineLabel m_caption;
+    //LineLabel m_caption;
 
     void rebuild();
 };

@@ -9,9 +9,7 @@
 #include "AnimationContainer.hpp"
 #include "InteractiveLabel.hpp"
 
-MenuPanel::MenuPanel(const std::vector<std::unique_ptr<MenuElement>>& elements,
-                     const sf::Vector2f& position) :
-    m_position(position)
+MenuPanel::MenuPanel(const std::vector<std::unique_ptr<MenuElement>>& elements)
 {
     for(auto element = begin(elements); element != end(elements); ++element)
     {
@@ -43,18 +41,6 @@ void MenuPanel::add(std::unique_ptr<MenuElement> element)
     { 
         return a->getId() < b->getId(); 
     });
-}
-
-void MenuPanel::setPosition(const sf::Vector2f& position)
-{
-    m_position = position;
-    for(auto it = begin(m_elements); it != end(m_elements); ++it)
-        (*it)->setPosition(m_position);
-}
-
-const sf::Vector2f& MenuPanel::getPosition() const
-{
-    return m_position;
 }
 
 void MenuPanel::draw(const DrawParameter& params)
@@ -101,11 +87,6 @@ void MenuPanel::drawAdditionalForeground(const DrawParameter& params)
 {
     for(auto it = begin(m_elements); it != end(m_elements); ++it)
         it->get()->drawAdditionalForeground(params);
-}
-
-void MenuPanel::updateLayout(const sf::Vector2f& position)
-{
-    setPosition(position);
 }
 
 const std::vector<std::unique_ptr<MenuElement>>& MenuPanel::getElements() const

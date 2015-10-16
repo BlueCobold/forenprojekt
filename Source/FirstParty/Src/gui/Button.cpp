@@ -3,7 +3,7 @@
 
 #include <SFML/Window/Event.hpp>
 
-Button::Button(int id, ButtonStyle&& style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers) :
+Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers) :
     MenuElement(id, MenuElementType::Button, position, offset),
     m_style(std::move(style)),
     m_showToolTip(false),
@@ -18,8 +18,6 @@ Button::Button(int id, ButtonStyle&& style, const sf::Vector2f& position, const 
 
     m_size.x = m_style.idleStyle.sprite.getTextureRect().width;
     m_size.y = m_style.idleStyle.sprite.getTextureRect().height;
-
-    onPositionChanged();
 }
 
 std::unique_ptr<MenuElement> Button::clone() const
@@ -32,10 +30,11 @@ std::unique_ptr<MenuElement> Button::clone() const
 
 void Button::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
-    auto position = getPosition();
-    auto offset = getOffset();
-    sf::IntRect buttonRect(static_cast<int>(position.x + offset.x + m_style.mouseRect.left - getSize().x / 2),
-                           static_cast<int>(position.y + offset.y + m_style.mouseRect.top),
+    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+
+    auto currentPosition = getCurrentPosition();
+    sf::IntRect buttonRect(static_cast<int>(currentPosition.x + m_style.mouseRect.left - getSize().x / 2),
+                           static_cast<int>(currentPosition.y + m_style.mouseRect.top),
                            m_style.mouseRect.width,
                            m_style.mouseRect.height);
     auto mousePosition = getCursorPosition(screen);
@@ -54,7 +53,6 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
         if(utility::Mouse.leftButtonPressed())
         {
             setStyle(m_style.pressedStyle, time);
-            onPositionChanged();
 
             if(!m_playPressedSound && m_style.pressedStyle.sound)
             {
@@ -66,7 +64,6 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
         {
             setStyle(m_style.hoverStyle, time);
             m_playPressedSound = false;
-            onPositionChanged();
 
             if(m_isTriggering && utility::Mouse.leftButtonReleased() && m_callback != nullptr)
                 m_callback(*this);
@@ -121,28 +118,6 @@ void Button::registerOnPressed(std::function<void (const Button& sender)> callba
     m_callback = callback;
 }
 
-void Button::onPositionChanged()
-{
-    auto position = getPosition();
-    auto offset = getOffset();
-    sf::Vector2f half = sf::Vector2f(getSize().x / 2.f, 0);
-    m_style.idleStyle.sprite.setPosition(position + offset + m_style.idleStyle.spriteOffset - half);
-    m_style.idleStyle.label.setPosition(position + offset + m_style.idleStyle.textOffset);
-    if(m_style.idleStyle.animation.get())
-        m_style.idleStyle.animation->setPosition(position + offset);
-
-    m_style.hoverStyle.sprite.setPosition(position + offset + m_style.hoverStyle.spriteOffset - half);
-    m_style.hoverStyle.label.setPosition(position + offset + m_style.hoverStyle.textOffset);
-    if(m_style.hoverStyle.animation.get())
-        m_style.hoverStyle.animation->setPosition(position + offset);
-
-    m_style.pressedStyle.sprite.setPosition(position + offset + m_style.pressedStyle.spriteOffset - half);
-    m_style.pressedStyle.label.setPosition(position + offset + m_style.pressedStyle.textOffset);
-    if(m_style.pressedStyle.animation.get())
-        m_style.pressedStyle.animation->setPosition(position + offset);
-
-}
-
 const sf::Vector2i& Button::getSize() const
 {
     return m_size;
@@ -185,4 +160,28 @@ void Button::changePressedSprite(const sf::Sprite& sprite)
     sf::Sprite s(sprite);
     s.setPosition(m_style.pressedStyle.sprite.getPosition());
     m_style.pressedStyle.sprite = s;
+}
+
+void Button::updateLayout(const sf::Vector2f& screenSize)
+{
+    MenuElement::updateLayout(screenSize);
+    m_style.idleStyle.label.updateLayout(screenSize);
+    m_style.hoverStyle.label.updateLayout(screenSize);
+    m_style.pressedStyle.label.updateLayout(screenSize);
+
+    sf::Vector2f half = sf::Vector2f(getSize().x / 2.f, 0);
+    auto currentPosition = getCurrentPosition();
+
+    m_style.idleStyle.sprite.setPosition(currentPosition + m_style.idleStyle.spriteOffset - half);
+    m_style.hoverStyle.sprite.setPosition(currentPosition + m_style.hoverStyle.spriteOffset - half);
+    m_style.pressedStyle.sprite.setPosition(currentPosition + m_style.pressedStyle.spriteOffset - half);
+
+    if(m_style.idleStyle.animation.get())
+        m_style.idleStyle.animation->updateLayout(screenSize);
+
+    if(m_style.hoverStyle.animation.get())
+        m_style.hoverStyle.animation->updateLayout(screenSize);
+
+    if(m_style.pressedStyle.animation.get())
+        m_style.pressedStyle.animation->updateLayout(screenSize);
 }
