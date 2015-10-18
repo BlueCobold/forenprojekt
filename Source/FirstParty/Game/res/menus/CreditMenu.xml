@@ -1,51 +1,50 @@
 <menu>
-	<position horizontalpercentage="0.5" verticalpercentage="0.5" offsetx="-255" offsety="-200.5" />
-	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
-	<caption font="gui_large" text="gui_credit" offsetx="255" offsety="50" />
 	<styles source="Styles.inc"/>
 	<elements>
-		<button id="0" text="gui_close" style="default" x="261" y="270" />
-		<subwindow id="1" x="80" y="108" sizex="352" sizey="150" innerheight="950">
+		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
+		<label text="gui_credit" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
+		<button id="0" text="gui_close" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
+		<subwindow id="1" x="0.5" y="0.5" offsetx="-176" offsety="-94" sizex="352" sizey="150" innerheight="950">
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
 				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
 				<scrollBottom spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="10" />
 			</style>
 			<elements>
-				<label text="gui_team_lead" font="buttonIdleFont" alignment="1" x="170" y="10" />
-				<label text="gui_design" font="buttonIdleFont" alignment="1" x="170" y="50" />
-				<label text="gui_graphics" font="buttonIdleFont" alignment="1" x="170" y="90" />
-				<label text="bc" font="buttonHoverFont" alignment="1" x="170" y="130" />
+				<label text="gui_team_lead" font="buttonIdleFont" alignment="1" offsetx="170" offsety="10" />
+				<label text="gui_design" font="buttonIdleFont" alignment="1" offsetx="170" offsety="50" />
+				<label text="gui_graphics" font="buttonIdleFont" alignment="1" offsetx="170" offsety="90" />
+				<label text="bc" font="buttonHoverFont" alignment="1" offsetx="170" offsety="130" />
 				
-				<label text="gui_core_code" font="buttonIdleFont" alignment="1" x="170" y="190" />
-				<label text="bc" font="buttonHoverFont" alignment="1" x="170" y="230" />
-				<label text="ko" font="buttonHoverFont" alignment="1" x="170" y="270" />
+				<label text="gui_core_code" font="buttonIdleFont" alignment="1" offsetx="170" offsety="190" />
+				<label text="bc" font="buttonHoverFont" alignment="1" offsetx="170" offsety="230" />
+				<label text="ko" font="buttonHoverFont" alignment="1" offsetx="170" offsety="270" />
 
-				<label text="gui_more_code" font="buttonIdleFont" alignment="1" x="170" y="330" />
-				<label text="ae" font="buttonHoverFont" alignment="1" x="170" y="370" />
-				<label text="dp" font="buttonHoverFont" alignment="1" x="170" y="410" />
-				<label text="ed" font="buttonHoverFont" alignment="1" x="170" y="450" />
-				<label text="ex" font="buttonHoverFont" alignment="1" x="170" y="490" />
-				<label text="ft" font="buttonHoverFont" alignment="1" x="170" y="530" />
-				<label text="mi" font="buttonHoverFont" alignment="1" x="170" y="570" />
-				<label text="tr" font="buttonHoverFont" alignment="1" x="170" y="610" />
-				<label text="ya" font="buttonHoverFont" alignment="1" x="170" y="650" />
+				<label text="gui_more_code" font="buttonIdleFont" alignment="1" offsetx="170" offsety="330" />
+				<label text="ae" font="buttonHoverFont" alignment="1" offsetx="170" offsety="370" />
+				<label text="dp" font="buttonHoverFont" alignment="1" offsetx="170" offsety="410" />
+				<label text="ed" font="buttonHoverFont" alignment="1" offsetx="170" offsety="450" />
+				<label text="ex" font="buttonHoverFont" alignment="1" offsetx="170" offsety="490" />
+				<label text="ft" font="buttonHoverFont" alignment="1" offsetx="170" offsety="530" />
+				<label text="mi" font="buttonHoverFont" alignment="1" offsetx="170" offsety="570" />
+				<label text="tr" font="buttonHoverFont" alignment="1" offsetx="170" offsety="610" />
+				<label text="ya" font="buttonHoverFont" alignment="1" offsetx="170" offsety="650" />
 
-				<label text="gui_music" font="buttonIdleFont" alignment="1" x="170" y="710" />
-				<label text="fe" font="buttonHoverFont" alignment="1" x="170" y="750" />
+				<label text="gui_music" font="buttonIdleFont" alignment="1" offsetx="170" offsety="710" />
+				<label text="fe" font="buttonHoverFont" alignment="1" offsetx="170" offsety="750" />
 
-				<label text="gui_level" font="buttonIdleFont" alignment="1" x="170" y="810" />
-				<label text="bc" font="buttonHoverFont" alignment="1" x="170" y="850" />
-				<label text="ko" font="buttonHoverFont" alignment="1" x="170" y="890" />
+				<label text="gui_level" font="buttonIdleFont" alignment="1" offsetx="170" offsety="810" />
+				<label text="bc" font="buttonHoverFont" alignment="1" offsetx="170" offsety="850" />
+				<label text="ko" font="buttonHoverFont" alignment="1" offsetx="170" offsety="890" />
 			</elements>
 		</subwindow>
-		<image id="22" x="76" y="105" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
-		<image id="23" x="76" y="205" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="59" height="60"/>
-		<image id="24" x="96" y="105" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
-		<image id="25" x="259" y="105" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
-		<image id="26" x="422" y="105" spriteSheet="gui_elements" sprite="frame_right" height="100"/>
-		<image id="27" x="422" y="205" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
-		<image id="28" x="96" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
-		<image id="29" x="259" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		<image id="22" x="0.5" y="0.5" offsetx="-179" offsety="-97" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
+		<image id="23" x="0.5" y="0.5" offsetx="-179" offsety="3" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="59" height="60"/>
+		<image id="24" x="0.5" y="0.5" offsetx="-159" offsety="-97" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
+		<image id="25" x="0.5" y="0.5" offsetx="4" offsety="-97" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
+		<image id="26" x="0.5" y="0.5" offsetx="167" offsety="-97" spriteSheet="gui_elements" sprite="frame_right" height="100"/>
+		<image id="27" x="0.5" y="0.5" offsetx="167" offsety="3" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
+		<image id="28" x="0.5" y="0.5" offsetx="-159" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		<image id="29" x="0.5" y="0.5" offsetx="4" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
 	</elements>
 </menu>

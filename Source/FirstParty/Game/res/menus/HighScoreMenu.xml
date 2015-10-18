@@ -1,42 +1,42 @@
 <menu>
-	<position horizontalpercentage="0.5" verticalpercentage="0.5" offsetx="-255" offsety="-200.5" />
-	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
-	<caption font="gui_large" text="gui_highscore" offsetx="255" offsety="50" />
 	<styles source="Styles.inc"/>
 	<elements>
-		<button id="0" text="gui_close" style="default" x="261" y="270" />
-		<subwindow id="1" x="80" y="108" sizex="352" sizey="150" innerheight="220">
+		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
+		<label text="gui_credit" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
+		<button id="0" text="gui_close" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
+		<subwindow id="1" x="0.5" y="0.5" offsetx="-176" offsety="-94" sizex="352" sizey="150" innerheight="220">
+
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
 				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
 				<scrollBottom spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="10" />
 			</style>
 			<elements>
-				<button id="32" text="gui_highscore_time" style="small" x="240" y="10" />
-				<button id="33" text="gui_highscore_points" style="small" x="80" y="10" />
-				<label id="11" text="" font="buttonHoverFont" alignment="0" x="20" y="10" />
-				<label id="12" text="" font="buttonHoverFont" alignment="0" x="20" y="50" />
-				<label id="13" text="" font="buttonHoverFont" alignment="0" x="20" y="90" />
-				<label id="14" text="" font="buttonHoverFont" alignment="0" x="20" y="130" />
-				<label id="15" text="" font="buttonHoverFont" alignment="0" x="20" y="170" />
+				<button id="32" text="gui_highscore_time" style="small" offsetx="240" offsety="10" />
+				<button id="33" text="gui_highscore_points" style="small" offsetx="80" offsety="10" />
+				<label id="11" text="" font="buttonHoverFont" alignment="0" offsetx="20" offsety="10" />
+				<label id="12" text="" font="buttonHoverFont" alignment="0" offsetx="20" offsety="50" />
+				<label id="13" text="" font="buttonHoverFont" alignment="0" offsetx="20" offsety="90" />
+				<label id="14" text="" font="buttonHoverFont" alignment="0" offsetx="20" offsety="130" />
+				<label id="15" text="" font="buttonHoverFont" alignment="0" offsetx="20" offsety="170" />
 
-				<label id="21" text="" font="buttonHoverFont" alignment="2" x="325" y="10" />
-				<label id="22" text="" font="buttonHoverFont" alignment="2" x="325" y="50" />
-				<label id="23" text="" font="buttonHoverFont" alignment="2" x="325" y="90" />
-				<label id="24" text="" font="buttonHoverFont" alignment="2" x="325" y="130" />
-				<label id="25" text="" font="buttonHoverFont" alignment="2" x="325" y="170" />
+				<label id="21" text="" font="buttonHoverFont" alignment="2" offsetx="325" offsety="10" />
+				<label id="22" text="" font="buttonHoverFont" alignment="2" offsetx="325" offsety="50" />
+				<label id="23" text="" font="buttonHoverFont" alignment="2" offsetx="325" offsety="90" />
+				<label id="24" text="" font="buttonHoverFont" alignment="2" offsetx="325" offsety="130" />
+				<label id="25" text="" font="buttonHoverFont" alignment="2" offsetx="325" offsety="170" />
 
-				<label id="27" text="" font="buttonHoverFont" alignment="0" x="80" y="60" />
+				<label id="27" text="" font="buttonHoverFont" alignment="0" offsetx="80" offsety="60" />
 			</elements>
 		</subwindow>
-		<image id="22" x="76" y="105" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
-		<image id="23" x="76" y="205" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="59" height="60"/>
-		<image id="24" x="96" y="105" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
-		<image id="25" x="259" y="105" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
-		<image id="26" x="422" y="105" spriteSheet="gui_elements" sprite="frame_right" height="100"/>
-		<image id="27" x="422" y="205" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
-		<image id="28" x="96" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
-		<image id="29" x="259" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		<image id="22" x="0.5" y="0.5" offsetx="-179" offsety="-97" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
+		<image id="23" x="0.5" y="0.5" offsetx="-179" offsety="3" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="59" height="60"/>
+		<image id="24" x="0.5" y="0.5" offsetx="-159" offsety="-97" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
+		<image id="25" x="0.5" y="0.5" offsetx="4" offsety="-97" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
+		<image id="26" x="0.5" y="0.5" offsetx="167" offsety="-97" spriteSheet="gui_elements" sprite="frame_right" height="100"/>
+		<image id="27" x="0.5" y="0.5" offsetx="167" offsety="3" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
+		<image id="28" x="0.5" y="0.5" offsetx="-159" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		<image id="29" x="0.5" y="0.5" offsetx="4" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
 		
 		<image id="-1" x="4" y="45" spriteSheet="gui_elements" sprite="mode_background"/>
 		<checkbox id="30" style="offlineHighscore" x="14" y="76" tooltip="default" tooltiptext="tooltip_offline_highscore" />

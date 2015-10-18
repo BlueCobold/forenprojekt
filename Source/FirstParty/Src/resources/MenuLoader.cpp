@@ -216,9 +216,10 @@ std::vector<std::unique_ptr<Slider>> MenuLoader::parseSliders(
                 throw std::runtime_error(utility::replace(utility::translateKey("UnknownSliderStyle"), sliderXml->Attribute("style")));
             auto style = styleIt->second;
             auto position = sf::Vector2f(sliderXml->FloatAttribute("x"), sliderXml->FloatAttribute("y"));
+            auto offset = sf::Vector2f(sliderXml->FloatAttribute("offsetx"), sliderXml->FloatAttribute("offsety"));
             auto id = sliderXml->IntAttribute("id");
             
-            auto slider = std::unique_ptr<Slider>(new Slider(id, style, sf::Vector2f(), position));
+            auto slider = std::unique_ptr<Slider>(new Slider(id, style, position, offset));
             if(auto visibleWhenId = sliderXml->IntAttribute("visibleWhen"))
                 slider->setVisibleWhenId(visibleWhenId);
             

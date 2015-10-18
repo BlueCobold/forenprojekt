@@ -1,49 +1,48 @@
 <menu>
-	<position horizontalpercentage="0.5" verticalpercentage="0.5" offsetx="-255" offsety="-200.5" />
-	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
-	<caption font="gui_large" text="gui_coin_shop_title" offsetx="255" offsety="50" />
 	<styles source="Styles.inc"/>
 	<elements>
-		<subwindow id="0" x="80" y="108" sizex="352" sizey="150" innerheight="227">
+		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
+		<label text="gui_coin_shop_title" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
+		<button id="17" text="gui_close" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
+		<subwindow id="0" x="0.5" y="0.5" offsetx="-176" offsety="-94" sizex="352" sizey="150" innerheight="227">
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
 				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
 				<scrollBottom spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="10" />
 			</style>
 			<elements>
-				<image id="1" tooltip="default" tooltiptext="tooltip_goody_gravity" texture="goodie" x="10" y="10" srcx="0" srcy="8" width="48" height="48" />
-				<label text="gui_goody_gravity" font="labelSmallFont" alignment="0" x="59" y="18" />
-				<label id="2" text="" font="labelSmallFont" alignment="2" x="240" y="18" />
-				<button id="3" tooltip="default" tooltiptext="tooltip_goody_cost" text="@@+" style="square" x="267" y="12" />
-				<button id="4" tooltip="default" tooltiptext="tooltip_goody_refund" text="@@-" style="square" x="307" y="12" />
+				<image id="1" tooltip="default" tooltiptext="tooltip_goody_gravity" texture="goodie" offsetx="10" offsety="10" srcx="0" srcy="8" width="48" height="48" />
+				<label text="gui_goody_gravity" font="labelSmallFont" alignment="0" offsetx="59" offsety="18" />
+				<label id="2" text="" font="labelSmallFont" alignment="2" offsetx="240" offsety="18" />
+				<button id="3" tooltip="default" tooltiptext="tooltip_goody_cost" text="@@+" style="square" offsetx="267" offsety="12" />
+				<button id="4" tooltip="default" tooltiptext="tooltip_goody_refund" text="@@-" style="square" offsetx="307" offsety="12" />
 				
-				<image id="5" tooltip="default" tooltiptext="tooltip_goody_invulnerable" texture="goodie" x="10" y="63" srcx="56" srcy="8" width="48" height="48" />
-				<label text="gui_goody_invulnerable" font="labelSmallFont" alignment="0" x="59" y="75" />
-				<label id="6" text="" font="labelSmallFont" alignment="2" x="240" y="75" />
-				<button id="7" tooltip="default" tooltiptext="tooltip_goody_cost" text="@@+" style="square" x="267" y="69" />
-				<button id="8" tooltip="default" tooltiptext="tooltip_goody_refund" text="@@-" style="square" x="307" y="69" />
+				<image id="5" tooltip="default" tooltiptext="tooltip_goody_invulnerable" texture="goodie" offsetx="10" offsety="63" srcx="56" srcy="8" width="48" height="48" />
+				<label text="gui_goody_invulnerable" font="labelSmallFont" alignment="0" offsetx="59" offsety="75" />
+				<label id="6" text="" font="labelSmallFont" alignment="2" offsetx="240" offsety="75" />
+				<button id="7" tooltip="default" tooltiptext="tooltip_goody_cost" text="@@+" style="square" offsetx="267" offsety="69" />
+				<button id="8" tooltip="default" tooltiptext="tooltip_goody_refund" text="@@-" style="square" offsetx="307" offsety="69" />
 				
-				<image id="9" tooltip="default" tooltiptext="tooltip_goody_extraball" texture="goodie" x="10" y="116" srcx="112" srcy="8" width="48" height="48" />
-				<label text="gui_goody_extra_ball" font="labelSmallFont" alignment="0" x="59" y="128" />
-				<label id="10" text="" font="labelSmallFont" alignment="2" x="240" y="128" />
-				<button id="11" tooltip="default" tooltiptext="tooltip_goody_cost" text="@@+" style="square" x="267" y="122" />
-				<button id="12" tooltip="default" tooltiptext="tooltip_goody_refund" text="@@-" style="square" x="307" y="122" />
+				<image id="9" tooltip="default" tooltiptext="tooltip_goody_extraball" texture="goodie" offsetx="10" offsety="116" srcx="112" srcy="8" width="48" height="48" />
+				<label text="gui_goody_extra_ball" font="labelSmallFont" alignment="0" offsetx="59" offsety="128" />
+				<label id="10" text="" font="labelSmallFont" alignment="2" offsetx="240" offsety="128" />
+				<button id="11" tooltip="default" tooltiptext="tooltip_goody_cost" text="@@+" style="square" offsetx="267" offsety="122" />
+				<button id="12" tooltip="default" tooltiptext="tooltip_goody_refund" text="@@-" style="square" offsetx="307" offsety="122" />
 				
-				<image id="13" tooltip="default" tooltiptext="tooltip_goody_extratime" texture="goodie" x="10" y="169" srcx="168" srcy="8" width="48" height="48" />
-				<label text="gui_goody_extra_time" font="labelSmallFont" alignment="0" x="59" y="181" />
-				<label id="14" text="" font="labelSmallFont" alignment="2" x="240" y="181" />
-				<button id="15" tooltip="default" tooltiptext="tooltip_goody_cost" text="@@+" style="square" x="267" y="175" />
-				<button id="16" tooltip="default" tooltiptext="tooltip_goody_refund" text="@@-" style="square" x="307" y="175" />
+				<image id="13" tooltip="default" tooltiptext="tooltip_goody_extratime" texture="goodie" offsetx="10" offsety="169" srcx="168" srcy="8" width="48" height="48" />
+				<label text="gui_goody_extra_time" font="labelSmallFont" alignment="0" offsetx="59" offsety="181" />
+				<label id="14" text="" font="labelSmallFont" alignment="2" offsetx="240" offsety="181" />
+				<button id="15" tooltip="default" tooltiptext="tooltip_goody_cost" text="@@+" style="square" offsetx="267" offsety="175" />
+				<button id="16" tooltip="default" tooltiptext="tooltip_goody_refund" text="@@-" style="square" offsetx="307" offsety="175" />
 			</elements>
 		</subwindow>
-		<button id="17" text="gui_close" style="default" x="261" y="270" />
-		<image id="22" x="76" y="105" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
-		<image id="23" x="76" y="205" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="59" height="60"/>
-		<image id="24" x="96" y="105" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
-		<image id="25" x="259" y="105" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
-		<image id="26" x="422" y="105" spriteSheet="gui_elements" sprite="frame_right" height="100"/>
-		<image id="27" x="422" y="205" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
-		<image id="28" x="96" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
-		<image id="29" x="259" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		<image id="22" x="0.5" y="0.5" offsetx="-179" offsety="-97" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
+		<image id="23" x="0.5" y="0.5" offsetx="-179" offsety="3" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="59" height="60"/>
+		<image id="24" x="0.5" y="0.5" offsetx="-159" offsety="-97" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
+		<image id="25" x="0.5" y="0.5" offsetx="4" offsety="-97" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
+		<image id="26" x="0.5" y="0.5" offsetx="167" offsety="-97" spriteSheet="gui_elements" sprite="frame_right" height="100"/>
+		<image id="27" x="0.5" y="0.5" offsetx="167" offsety="3" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
+		<image id="28" x="0.5" y="0.5" offsetx="-159" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		<image id="29" x="0.5" y="0.5" offsetx="4" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
 	</elements>
 </menu>

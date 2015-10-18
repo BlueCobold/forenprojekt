@@ -1,61 +1,63 @@
 <menu>
 	<styles source="Styles.inc"/>
 	<elements>
-		<button id="0" text="gui_close" style="default" x="0.5" y="0.5" offsetx="0" offsety="150" />
-		<subwindow id="1" x="0.5" y="0.5" offsetx="-176" offsety="-54" sizex="352" sizey="150" innerheight="710">
+		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
+		<label text="gui_option" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
+		<button id="0" text="gui_close" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
+		<subwindow id="1" x="0.5" y="0.5" offsetx="-176" offsety="-94" sizex="352" sizey="150" innerheight="710">
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
 				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
 				<scrollBottom spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="10" />
 			</style>
 			<elements>
-				<label text="gui_graphicsetup" font="buttonIdleFont" alignment="1" x="180" y="10" />
+				<label text="gui_graphicsetup" font="buttonIdleFont" alignment="1" offsetx="180" offsety="10" />
 
-				<button id="9" text="" style="arrowright" x="290" y="50" />
-				<button id="10" text="" style="arrowleft" x="40" y="50" />
-				<label id="11" text="gui_label_resolution" font="buttonHoverFont" alignment="1" x="167" y="56" />
+				<button id="9" text="" style="arrowright" offsetx="290" offsety="50" />
+				<button id="10" text="" style="arrowleft" offsetx="40" offsety="50" />
+				<label id="11" text="gui_label_resolution" font="buttonHoverFont" alignment="1" offsetx="167" offsety="56" />
 
-				<checkbox id="2" style="default" x="76" y="100" />
-				<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" alignment="0" x="120" y="102" />
+				<checkbox id="2" style="default" offsetx="76" offsety="100" />
+				<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" alignment="0" offsetx="120" offsety="102" />
 
-				<checkbox id="30" style="default" x="76" y="160" />
-				<label id="31" text="gui_label_draw" font="buttonHoverFont" alignment="0" x="120" y="145" />
-				<label id="32" text="gui_label_shadows" font="buttonHoverFont" alignment="0" x="120" y="175" />
+				<checkbox id="30" style="default" offsetx="76" offsety="160" />
+				<label id="31" text="gui_label_draw" font="buttonHoverFont" alignment="0" offsetx="120" offsety="145" />
+				<label id="32" text="gui_label_shadows" font="buttonHoverFont" alignment="0" offsetx="120" offsety="175" />
 
-				<checkbox id="35" style="default" x="76" y="230" />
-				<label id="36" text="gui_label_enable" font="buttonHoverFont" alignment="0" x="120" y="215" />
-				<label id="37" text="gui_label_shader" font="buttonHoverFont" alignment="0" x="120" y="245" />
+				<checkbox id="35" style="default" offsetx="76" offsety="230" />
+				<label id="36" text="gui_label_enable" font="buttonHoverFont" alignment="0" offsetx="120" offsety="215" />
+				<label id="37" text="gui_label_shader" font="buttonHoverFont" alignment="0" offsetx="120" offsety="245" />
 
-				<label text="gui_soundsetup" font="buttonIdleFont" alignment="1" x="170" y="290" />
+				<label text="gui_soundsetup" font="buttonIdleFont" alignment="1" offsetx="170" offsety="290" />
 				
-				<slider id="3" style="default" x="0" y="340" />
-				<label id="5" text="gui_label_soundvolumen" font="buttonHoverFont" alignment="0" x="120" y="340" />
-				<slider id="33" style="default" x="0" y="390" />
-				<label id="34" text="gui_label_musicvolumen" font="buttonHoverFont" alignment="0" x="120" y="390" />
+				<slider id="3" style="default" offsetx="0" offsety="340" />
+				<label id="5" text="gui_label_soundvolumen" font="buttonHoverFont" alignment="0" offsetx="120" offsety="340" />
+				<slider id="33" style="default" offsetx="0" offsety="390" />
+				<label id="34" text="gui_label_musicvolumen" font="buttonHoverFont" alignment="0" offsetx="120" offsety="390" />
 				
-				<checkbox id="6" style="default" x="76" y="450" />
-				<label id="7" text="gui_label_mutesound" font="buttonHoverFont" alignment="0" x="120" y="445" />
-				<label id="8" text="gui_label_wheninactive" font="buttonHoverFont" alignment="0" x="120" y="475" />
+				<checkbox id="6" style="default" offsetx="76" offsety="450" />
+				<label id="7" text="gui_label_mutesound" font="buttonHoverFont" alignment="0" offsetx="120" offsety="445" />
+				<label id="8" text="gui_label_wheninactive" font="buttonHoverFont" alignment="0" offsetx="120" offsety="475" />
 				
-				<label text="gui_gameplaysetup" font="buttonIdleFont" alignment="1" x="170" y="520" />
+				<label text="gui_gameplaysetup" font="buttonIdleFont" alignment="1" offsetx="170" offsety="520" />
 
-				<checkbox id="12" style="default" x="76" y="570" />
-				<label id="13" text="gui_label_use_vertical1" font="buttonHoverFont" alignment="0" x="120" y="565" />
-				<label id="14" text="gui_label_use_vertical2" font="buttonHoverFont" alignment="0" x="120" y="595" />
+				<checkbox id="12" style="default" offsetx="76" offsety="570" />
+				<label id="13" text="gui_label_use_vertical1" font="buttonHoverFont" alignment="0" offsetx="120" offsety="565" />
+				<label id="14" text="gui_label_use_vertical2" font="buttonHoverFont" alignment="0" offsetx="120" offsety="595" />
 				
-				<checkbox id="15" style="default" x="76" y="640" />
-				<label id="16" text="gui_label_invert_used1" font="buttonHoverFont" alignment="0" x="120" y="635" />
-				<label id="17" text="gui_label_invert_used2" font="buttonHoverFont" alignment="0" x="120" y="665" />
+				<checkbox id="15" style="default" offsetx="76" offsety="640" />
+				<label id="16" text="gui_label_invert_used1" font="buttonHoverFont" alignment="0" offsetx="120" offsety="635" />
+				<label id="17" text="gui_label_invert_used2" font="buttonHoverFont" alignment="0" offsetx="120" offsety="665" />
 			</elements>
 		</subwindow>
 		
-		<image id="22" x="76" y="105" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
-		<image id="23" x="76" y="205" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="59" height="60"/>
-		<image id="24" x="96" y="105" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
-		<image id="25" x="259" y="105" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
-		<image id="26" x="422" y="105" spriteSheet="gui_elements" sprite="frame_right" height="100"/>
-		<image id="27" x="422" y="205" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
-		<image id="28" x="96" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
-		<image id="29" x="259" y="254" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		<image id="22" x="0.5" y="0.5" offsetx="-179" offsety="-97" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
+		<image id="23" x="0.5" y="0.5" offsetx="-179" offsety="3" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="59" height="60"/>
+		<image id="24" x="0.5" y="0.5" offsetx="-159" offsety="-97" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
+		<image id="25" x="0.5" y="0.5" offsetx="4" offsety="-97" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
+		<image id="26" x="0.5" y="0.5" offsetx="167" offsety="-97" spriteSheet="gui_elements" sprite="frame_right" height="100"/>
+		<image id="27" x="0.5" y="0.5" offsetx="167" offsety="3" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
+		<image id="28" x="0.5" y="0.5" offsetx="-159" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		<image id="29" x="0.5" y="0.5" offsetx="4" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
 	</elements>
 </menu>

@@ -47,8 +47,6 @@ SubWindow::SubWindow(const int id,
 
     m_center.x = m_size.x / 2.f;
     m_center.y = m_size.y / 2.f;
-
-    //onPositionChanged();
 }
 
 std::unique_ptr<MenuElement> SubWindow::clone() const
@@ -124,7 +122,9 @@ void SubWindow::update(const sf::RenderWindow& screen, const float time, const s
             y = currentPosition.y;
         if(y > currentPosition.y + m_size.y - m_positionRect.getSize().y)
             y = currentPosition.y + m_size.y - m_positionRect.getSize().y;
+
         m_positionRect.setPosition(m_positionRect.getPosition().x, y);
+
         m_center.y = floorf(m_size.y / 2.f + sliderPixelToWindowPixel(m_positionRect.getPosition().y - getCurrentPosition().y));
     }
 
@@ -166,7 +166,7 @@ void SubWindow::update(const sf::RenderWindow& screen, const float time, const s
 
 void SubWindow::onPositionChanged()
 {
-    float scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
+    /*float scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
     auto position = getPosition();
     auto offset = getOffset();
     m_windowRect.setPosition(position.x + offset.x,
@@ -183,7 +183,7 @@ void SubWindow::onPositionChanged()
                     - m_style.scrollbarTop.getTextureRect().height
                     - m_style.scrollbarBottom.getTextureRect().height;
     m_style.scrollbarMiddle.setScale(1, height/m_style.scrollbarMiddle.getTextureRect().height);
-    m_style.scrollbarBottom.setPosition(position.x, position.y + height + m_style.scrollbarTop.getTextureRect().height);
+    m_style.scrollbarBottom.setPosition(position.x, position.y + height + m_style.scrollbarTop.getTextureRect().height);*/
 
     //m_panel.updateLayout(sf::Vector2f(0, 0));
 }
@@ -222,17 +222,19 @@ void SubWindow::setInnerHeight(int innerHeight)
 }
 void SubWindow::updateLayout(const sf::Vector2f& screenSize)
 {
+    auto currentPosition = getCurrentPosition();
+    auto rectPosition = m_positionRect.getPosition().y - currentPosition.y;
+
     MenuElement::updateLayout(screenSize);
+    currentPosition = getCurrentPosition();
 
     float scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
 
-    auto currentPosition = getCurrentPosition();
-    m_windowRect.setPosition(currentPosition.x,
-                             currentPosition.y);
+    m_windowRect.setPosition(currentPosition);
     m_sliderRect.setPosition(currentPosition.x + m_size.x - scrollWidth,
                              currentPosition.y);
     m_positionRect.setPosition(currentPosition.x + m_size.x - scrollWidth,
-                               currentPosition.y);
+                               currentPosition.y + rectPosition);
 
     auto position = m_positionRect.getPosition();
     m_style.scrollbarTop.setPosition(position);
