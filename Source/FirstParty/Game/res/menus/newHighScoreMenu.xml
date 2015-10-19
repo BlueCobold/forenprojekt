@@ -1,13 +1,12 @@
 <menu>
-	<position horizontalpercentage="0.5" verticalpercentage="0.5" offsetx="-255" offsety="-200.5" />
-	<background texture="Window" srcx="0" srcy="0" width="510" height="401" />
 	<styles source="Styles.inc"/>
 	<elements>
-		<inputbox id="1" style="default" inputlimit="10" x="115" y="170" width="286" />
-		<label id="2" text="gui_newHighScore1" font="buttonHoverFont" alignment="1" x="255" y="55" />
-		<label id="3" text="gui_newHighScore2" font="buttonHoverFont" alignment="1" x="255" y="85" />
-		<label id="4" text="gui_newHighScore3" font="buttonHoverFont" alignment="1" x="255" y="115" />
-		<button id="5" text="gui_highscore_skip" style="small" x="179" y="255" />
-		<button id="6" text="gui_highscore_ok" style="small" x="343" y="255" />
+		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
+		<inputbox id="1" style="default" inputlimit="10" x="0.5" y="0.5" offsetx="-142" offsety="0" width="286" />
+		<label id="2" text="gui_newHighScore1" font="buttonHoverFont" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
+		<label id="3" text="gui_newHighScore2" font="buttonHoverFont" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-130" />
+		<label id="4" text="gui_newHighScore3" font="buttonHoverFont" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-100" />
+		<button id="5" text="gui_highscore_skip" style="small" x="0.5" y="0.5" offsetx="82" offsety="80" />
+		<button id="6" text="gui_highscore_ok" style="small" x="0.5" y="0.5" offsetx="-82" offsety="80" />
 	</elements>
 </menu>

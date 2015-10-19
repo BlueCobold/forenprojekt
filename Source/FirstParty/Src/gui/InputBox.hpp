@@ -48,6 +48,7 @@ public:
 
     unsigned int getInputLimit() const;
 
+    void updateLayout(const sf::Vector2f& screenSize) override;
 protected:
     virtual void onPositionChanged() override;
     

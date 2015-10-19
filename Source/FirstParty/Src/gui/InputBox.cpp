@@ -54,10 +54,12 @@ void InputBox::update(const sf::RenderWindow& screen, const float time, const sf
 #endif
 
     MenuElement::update(screen, time, mouseOffset);
+    
     setActivatedByMouse(screen);
     handleInput();
     m_caret.update(time);
-    m_caret.setPosition(getPosition() + getOffset() + sf::Vector2f(m_inputText.getWidth(), 0));
+    m_inputText.update(screen, time, mouseOffset);
+    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 }
 
 void InputBox::draw(const DrawParameter& params)
@@ -195,4 +197,16 @@ void InputBox::disableCaret()
 unsigned int InputBox::getInputLimit() const
 {
     return m_inputLimit;
+}
+
+void InputBox::updateLayout(const sf::Vector2f& screenSize)
+{
+    MenuElement::updateLayout(screenSize);
+
+    auto currentPosition = getCurrentPosition();
+
+    setBackGroundPosition(currentPosition);
+
+    m_inputText.setPosition(getPosition());
+    m_caret.setPosition(currentPosition + sf::Vector2f(m_inputText.getWidth(), 0));
 }

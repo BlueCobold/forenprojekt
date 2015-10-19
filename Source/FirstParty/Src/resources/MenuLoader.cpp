@@ -269,8 +269,8 @@ std::vector<std::unique_ptr<InteractiveLabel>> MenuLoader::parseInteractiveLabel
         {
             auto label = std::unique_ptr<InteractiveLabel>(new InteractiveLabel(
                             utility::translateKey(labelXml->Attribute("text")),
-                            sf::Vector2f(),
                             sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
+                            sf::Vector2f(labelXml->FloatAttribute("offsetx"), labelXml->FloatAttribute("offsety")),
                             0,
                             resourceManager.getBitmapFont(labelXml->Attribute("font")),
                             static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
@@ -655,9 +655,10 @@ std::vector<std::unique_ptr<InputBox>> MenuLoader::parseInputBox(
             auto id = inputBoxXml->IntAttribute("id");
             auto inputLimit = inputBoxXml->IntAttribute("inputlimit");
             auto position = sf::Vector2f(inputBoxXml->FloatAttribute("x"), inputBoxXml->FloatAttribute("y"));
+            auto offset = sf::Vector2f(inputBoxXml->FloatAttribute("offsetx"), inputBoxXml->FloatAttribute("offsety"));
             auto size = sf::Vector2f(inputBoxXml->FloatAttribute("width"), inputBoxXml->FloatAttribute("height"));
 
-            auto inputBox = std::unique_ptr<InputBox>(new InputBox(id, sf::Vector2f(), position, size, inputLimit, style));
+            auto inputBox = std::unique_ptr<InputBox>(new InputBox(id, position, offset, size, inputLimit, style));
 
             if(auto visibleWhenId = inputBoxXml->IntAttribute("visibleWhen"))
                 inputBox->setVisibleWhenId(visibleWhenId);

@@ -48,7 +48,9 @@ void InteractiveLabel::update(const sf::RenderWindow& screen, const float time, 
     else if(LineLabel::Right == getAlignment())
         offset = -getWidth();
 
-    auto position = getPosition() + getOffset() + sf::Vector2f(offset,0);
+    LineLabel::update(screen, time, mouseOffset);
+
+    auto position = getCurrentPosition() + sf::Vector2f(offset,0);
     auto size = sf::Vector2i(static_cast<int>(getWidth()), getFontSize());
     auto mousePosition = getCursorPosition(screen);
     sf::IntRect hitBox(static_cast<sf::Vector2i>(position), size);

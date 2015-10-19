@@ -1,0 +1,5 @@
+<spriteSheet texture="Window">
+	<sprites>
+		<sprite name="menu_window" x="0" y="0" width="510" height="401" originx="0" originy="0" />
+	</sprites>
+</spriteSheet>
