@@ -164,30 +164,6 @@ void SubWindow::update(const sf::RenderWindow& screen, const float time, const s
         m_panel.update(screen, time, static_cast<sf::Vector2i>(screen.getSize()));
 }
 
-void SubWindow::onPositionChanged()
-{
-    /*float scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
-    auto position = getPosition();
-    auto offset = getOffset();
-    m_windowRect.setPosition(position.x + offset.x,
-                             position.y + offset.y);
-    m_sliderRect.setPosition(position.x + offset.x + m_size.x - scrollWidth,
-                             position.y + offset.y);
-    m_positionRect.setPosition(position.x + offset.x + m_size.x - scrollWidth,
-                               position.y + offset.y);
-
-    position = m_positionRect.getPosition();
-    m_style.scrollbarTop.setPosition(position);
-    m_style.scrollbarMiddle.setPosition(position.x, position.y + m_style.scrollbarTop.getTextureRect().height);
-    float height = m_positionRect.getSize().y
-                    - m_style.scrollbarTop.getTextureRect().height
-                    - m_style.scrollbarBottom.getTextureRect().height;
-    m_style.scrollbarMiddle.setScale(1, height/m_style.scrollbarMiddle.getTextureRect().height);
-    m_style.scrollbarBottom.setPosition(position.x, position.y + height + m_style.scrollbarTop.getTextureRect().height);*/
-
-    //m_panel.updateLayout(sf::Vector2f(0, 0));
-}
-
 float SubWindow::sliderPixelToWindowPixel(float pixel)
 {
     return pixel * (m_innerHeight - m_size.y) / (m_sliderRect.getSize().y - m_positionRect.getSize().y);
@@ -200,7 +176,7 @@ float SubWindow::windowPixelToSliderPixel(float pixel)
 
 sf::Vector2i SubWindow::getMouseOffset(const sf::RenderWindow& screen)
 {
-    sf::Vector2i mouseOffset = - static_cast<sf::Vector2i>(getPosition() + getOffset()) +
+    sf::Vector2i mouseOffset = - static_cast<sf::Vector2i>(getCurrentPosition()) +
                                  sf::Vector2i(static_cast<int>(m_center.x - m_size.x / 2.f), static_cast<int>(m_center.y - m_size.y / 2.f));
 
     return mouseOffset;

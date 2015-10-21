@@ -26,9 +26,6 @@ public:
 
     MenuPanel(const std::vector<std::unique_ptr<MenuElement>>& elements);
 
-    /*virtual void setPosition(const sf::Vector2f& position);
-    const sf::Vector2f& getPosition() const;*/
-
     virtual void draw(const DrawParameter& params) override;
     void drawAdditionalForeground(const DrawParameter& params);
 

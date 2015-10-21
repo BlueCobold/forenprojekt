@@ -51,10 +51,6 @@ public:
     void setInnerHeight(int innerHeight);
     void updateLayout(const sf::Vector2f& screenSize);
 
-protected:
-
-    virtual void onPositionChanged() override;
-
 private:
 
     MenuPanel m_panel;

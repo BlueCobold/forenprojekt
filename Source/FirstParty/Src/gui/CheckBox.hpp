@@ -27,7 +27,7 @@ public:
 
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text);
-
+protected:
     void updateLayout(const sf::Vector2f& screenSize);
 
 private:

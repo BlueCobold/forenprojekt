@@ -152,16 +152,6 @@ void InputBox::setBackGroundPosition(const sf::Vector2f& position)
     m_background[BottomRight].setPosition(position + m_size);
 }
 
-void InputBox::onPositionChanged()
-{
-    auto position = getPosition();
-    auto offset = getOffset();
-
-    setBackGroundPosition(position + offset);
-
-    m_inputText.setPosition(position);
-}
-
 void InputBox::setText(const std::string& text)
 {
     m_finished = false;

@@ -47,11 +47,9 @@ public:
     void disableCaret();
 
     unsigned int getInputLimit() const;
-
-    void updateLayout(const sf::Vector2f& screenSize) override;
 protected:
-    virtual void onPositionChanged() override;
-    
+    void updateLayout(const sf::Vector2f& screenSize) override;
+
 private:
     sf::RectangleShape m_backgroundShade;
     LineLabel m_inputText;

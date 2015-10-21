@@ -81,3 +81,8 @@ void AnimationContainer::draw(const DrawParameter& param)
 {
     GraphicalObject::draw(param);
 }
+
+void AnimationContainer::updateLayout(const sf::Vector2f& screenSize)
+{
+    MenuElement::updateLayout(screenSize);
+}

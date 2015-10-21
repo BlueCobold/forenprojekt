@@ -104,19 +104,15 @@ public:
         m_visibleWhen = subject;
     }
 
-    virtual void updateLayout(const sf::Vector2f& screenSize)
-    {
-        m_screenLocation.setScreenSize(screenSize);
-    }
-
     virtual void setOffset(const sf::Vector2f& offset)
     {
         m_screenLocation.setOffset(offset);
     }
 protected:
-
-    virtual void onPositionChanged()
-    { }
+    virtual void updateLayout(const sf::Vector2f& screenSize)
+    {
+        m_screenLocation.setScreenSize(screenSize);
+    }
 
     const sf::Vector2f& getOffset() const
     {

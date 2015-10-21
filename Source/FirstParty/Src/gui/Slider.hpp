@@ -21,11 +21,8 @@ public:
 
     float getValue() const;
     void setValue(const float value);
-
 protected:
-
-    virtual void onPositionChanged() override;
-
+    void updateLayout(const sf::Vector2f& screenSize) override;
 private:
 
     SliderStyle m_style;

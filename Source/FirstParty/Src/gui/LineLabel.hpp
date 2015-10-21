@@ -57,8 +57,6 @@ public:
 
     unsigned int getFontSize();
 
-    void updateLayout(const sf::Vector2f& screenSize) override;
-
     LineLabel(const std::string& text,
         const sf::Vector2f& position,
         const sf::Vector2f& offset,
@@ -72,6 +70,7 @@ public:
     const BitmapFont* getFont() const;
     void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 
+    void updateLayout(const sf::Vector2f& screenSize) override;
 private:
 
     void rebuild();

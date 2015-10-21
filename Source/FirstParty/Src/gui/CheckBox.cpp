@@ -9,7 +9,6 @@ CheckBox::CheckBox(int id, CheckBoxStyle style, const sf::Vector2f& position, co
     m_showToolTip(false)
 {
     m_sprite = &m_style.uncheckedStyle.sprite;
-    onPositionChanged();
 }
 
 std::unique_ptr<MenuElement> CheckBox::clone() const

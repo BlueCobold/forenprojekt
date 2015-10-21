@@ -25,7 +25,7 @@ public:
     virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& offset = sf::Vector2i(0, 0)) override;
 
     void drawAdditionalForeground(const DrawParameter& params) override;
-
+protected:
     void updateLayout(const sf::Vector2f& screenSize) override;
 
 private:
