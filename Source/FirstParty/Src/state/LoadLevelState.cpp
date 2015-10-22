@@ -14,7 +14,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
                                AppConfig& config) :
     State(screen, resourceManager, config),
     m_label(utility::translateKey("gui_loading_screen"),
-            sf::Vector2f(screen.getSize().x / 2.f, screen.getSize().y / 2.f),
+            sf::Vector2f(ScreenLocation::Center, ScreenLocation::Center),
             sf::Vector2f(),
             0,
             resourceManager.getBitmapFont("red"),
@@ -26,7 +26,7 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
 {
     m_loadingErrorMessage = "";
     m_levelLoaderJob = std::unique_ptr<BackgroundLoader<LoadLevelState>>(new BackgroundLoader<LoadLevelState>(&LoadLevelState::loadLevel, *this));
-    m_label.setPosition(m_screen.getSize().x / 2.f - m_label.getWidth() / 2.f, m_screen.getSize().y / 2.f);
+    m_label.setOffset(sf::Vector2f(- m_label.getWidth() / 2.f, 0));
 }
 
 LoadLevelState::~LoadLevelState()
@@ -42,7 +42,6 @@ void LoadLevelState::onEnter(const EnterStateInformation* enterInformation, cons
 #ifdef LEVELTESTING
     m_file = info->m_file;
 #endif
-    m_label.setPosition(m_screen.getSize().x / 2.f - m_label.getWidth() / 2.f, m_screen.getSize().y / 2.f);
     if(enterInformation->m_prepareOnly)
         m_levelLoaderJob->reset();
 
@@ -57,6 +56,8 @@ std::unique_ptr<Level> LoadLevelState::gainLevel()
 StateChangeInformation LoadLevelState::update(const float time)
 {
     std::string text(utility::translateKey("gui_loading_screen"));
+
+    m_label.updateLayout(static_cast<sf::Vector2f>(m_screen.getSize()));
 
     updateTime(time);
     int step = static_cast<int>(getPassedTime() * 2) % 4;
