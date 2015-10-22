@@ -5,7 +5,7 @@
 
 PauseMenu::PauseMenu(sf::RenderWindow& screen,
                      ResourceManager& resourceManager) :
-    CaptionMenu(*resourceManager.getMenuTemplate("pauseMenu"), screen)
+    Menu(*resourceManager.getMenuTemplate("pauseMenu"), screen)
 {
 }
 

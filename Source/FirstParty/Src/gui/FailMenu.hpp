@@ -3,9 +3,9 @@
 #ifndef FAIL_MENU_HPP
 #define FAIL_MENU_HPP
 
-#include "CaptionMenu.hpp"
+#include "Menu.hpp"
 
-class FailMenu : public CaptionMenu
+class FailMenu : public Menu
 {
 public:
 

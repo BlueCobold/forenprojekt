@@ -3,7 +3,7 @@
 #ifndef NEWHIGHSCOREMENU_HPP
 #define NEWHIGHSCOREMENU_HPP
 
-#include "CaptionMenu.hpp"
+#include "Menu.hpp"
 #include "KeyboardMenu.hpp"
 
 class NewHighScoreMenu : public Menu

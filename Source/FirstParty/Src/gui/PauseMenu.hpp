@@ -3,9 +3,9 @@
 #ifndef PAUSE_MENU_HPP
 #define PAUSE_MENU_HPP
 
-#include "CaptionMenu.hpp"
+#include "Menu.hpp"
 
-class PauseMenu : public CaptionMenu
+class PauseMenu : public Menu
 {
 public:
 

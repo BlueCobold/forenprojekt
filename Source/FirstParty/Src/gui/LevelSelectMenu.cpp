@@ -6,7 +6,7 @@
 
 LevelSelectMenu::LevelSelectMenu(sf::RenderWindow& screen,
                                  ResourceManager& resourceManager) :
-    CaptionMenu(*resourceManager.getMenuTemplate("LevelSelectMenu"), screen)
+    Menu(*resourceManager.getMenuTemplate("LevelSelectMenu"), screen)
 {
 }
 

@@ -2,7 +2,7 @@
 	<styles source="Styles.inc"/>
 	<elements>
 		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
-		<label id="99" text="gui_levelselect" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
+		<label id="38" text="gui_levelselect" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
 		<button id="0" text="gui_show_details" style="default" x="0.5" y="0.5" offsetx="0" offsety="30" />
 		<button id="1" text="gui_mainmenu" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
 

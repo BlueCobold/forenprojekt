@@ -3,9 +3,9 @@
 #ifndef CREDITNMENU_HPP
 #define CREDITNMENU_HPP
 
-#include "CaptionMenu.hpp"
+#include "Menu.hpp"
 
-class CreditMenu : public CaptionMenu
+class CreditMenu : public Menu
 {
 public:
 

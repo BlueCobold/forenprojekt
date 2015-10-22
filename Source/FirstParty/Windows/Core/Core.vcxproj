@@ -146,7 +146,6 @@
     <ClInclude Include="..\..\Src\gui\BitmapFont.hpp" />
     <ClInclude Include="..\..\Src\gui\Button.hpp" />
     <ClInclude Include="..\..\Src\gui\ButtonStyle.hpp" />
-    <ClInclude Include="..\..\Src\gui\CaptionMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\Caret.hpp" />
     <ClInclude Include="..\..\Src\gui\CheckBox.hpp" />
     <ClInclude Include="..\..\Src\gui\CheckboxStyle.hpp" />
@@ -330,7 +329,6 @@
     <ClCompile Include="..\..\Src\gui\BitmapFont.cpp" />
     <ClCompile Include="..\..\Src\gui\Button.cpp" />
     <ClCompile Include="..\..\Src\gui\ButtonStyle.cpp" />
-    <ClCompile Include="..\..\Src\gui\CaptionMenu.cpp" />
     <ClCompile Include="..\..\Src\gui\Caret.cpp" />
     <ClCompile Include="..\..\Src\gui\CheckBox.cpp" />
     <ClCompile Include="..\..\Src\gui\CoinShopMenu.cpp" />

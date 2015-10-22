@@ -3,9 +3,9 @@
 #ifndef REPLAY_MENU_HPP
 #define REPLAY_MENU_HPP
 
-#include "CaptionMenu.hpp"
+#include "Menu.hpp"
 
-class ReplayMenu : public CaptionMenu
+class ReplayMenu : public Menu
 {
 public:
 

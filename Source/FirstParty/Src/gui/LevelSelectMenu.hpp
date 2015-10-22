@@ -3,10 +3,10 @@
 #ifndef LEVELSELECTMENU_HPP
 #define LEVELSELECTMENU_HPP
 
-#include "CaptionMenu.hpp"
+#include "Menu.hpp"
 #include <SFML/Graphics/Rect.hpp>
 
-class LevelSelectMenu : public CaptionMenu
+class LevelSelectMenu : public Menu
 {
 public:
 
@@ -15,6 +15,7 @@ public:
     static const int SPRITE_LEVELINFO = 2;
     static const int BUTTON_LEFT = 3;
     static const int BUTTON_RIGHT = 4;
+    static const int LABEL_CAPTION = 38;
 
     LevelSelectMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 

@@ -4,6 +4,6 @@
 
 CreditMenu::CreditMenu(sf::RenderWindow& screen,
                        ResourceManager& resourceManager) :
-    CaptionMenu(*resourceManager.getMenuTemplate("CreditMenu"), screen)
+    Menu(*resourceManager.getMenuTemplate("CreditMenu"), screen)
 {
 }

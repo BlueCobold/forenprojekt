@@ -3,10 +3,10 @@
 #ifndef COIN_SHOP_MENU_HPP
 #define COIN_SHOP_MENU_HPP
 
-#include "CaptionMenu.hpp"
+#include "Menu.hpp"
 #include "../model/Goody.hpp"
 
-class CoinShopMenu : public CaptionMenu
+class CoinShopMenu : public Menu
 {
 public:
     static const int BUTTON_CLOSE = 17;

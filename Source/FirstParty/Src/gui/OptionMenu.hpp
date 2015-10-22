@@ -3,12 +3,12 @@
 #ifndef OPTIONMENU_HPP
 #define OPTIONMENU_HPP
 
-#include "CaptionMenu.hpp"
+#include "Menu.hpp"
 #include "../gui/CheckBox.hpp"
 
 class AppConfig;
 
-class OptionMenu : public CaptionMenu
+class OptionMenu : public Menu
 {
 public:
 

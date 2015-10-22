@@ -25,7 +25,7 @@ LevelSelectState::LevelSelectState(sf::RenderWindow& screen,
     loadLevelInfos();
     auto captionName = m_levelNames.find(1);
     if(captionName != end(m_levelNames))
-        m_menu.setCaption(captionName->second);
+        m_menu.getLabel(LevelSelectMenu::LABEL_CAPTION).setText(captionName->second);
 
     auto preview = m_textureCoordinates.find(1);
     if(preview != end(m_textureCoordinates))
@@ -77,7 +77,7 @@ StateChangeInformation LevelSelectState::update(const float time)
         if(m_levelNames.find(m_currentLevelNumber - 1) != end(m_levelNames))
         {
             m_currentLevelNumber--;
-            m_menu.setCaption(m_levelNames.find(m_currentLevelNumber)->second);
+            m_menu.getLabel(LevelSelectMenu::LABEL_CAPTION).setText(m_levelNames.find(m_currentLevelNumber)->second);
             auto preview = m_textureCoordinates.find(m_currentLevelNumber);
             if(preview != end(m_textureCoordinates))
                 m_menu.setLevelPreview(*preview->second.texture, preview->second.rect);
@@ -88,7 +88,7 @@ StateChangeInformation LevelSelectState::update(const float time)
         if(m_levelNames.find(m_currentLevelNumber + 1) != end(m_levelNames))
         {
             m_currentLevelNumber++;
-            m_menu.setCaption(m_levelNames.find(m_currentLevelNumber)->second);
+            m_menu.getLabel(LevelSelectMenu::LABEL_CAPTION).setText(m_levelNames.find(m_currentLevelNumber)->second);
             auto preview = m_textureCoordinates.find(m_currentLevelNumber);
             if(preview != end(m_textureCoordinates))
                 m_menu.setLevelPreview(*preview->second.texture, preview->second.rect);

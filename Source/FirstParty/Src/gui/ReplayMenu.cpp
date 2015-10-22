@@ -5,7 +5,7 @@
 
 ReplayMenu::ReplayMenu(sf::RenderWindow& screen,
                        ResourceManager& resourceManager) :
-    CaptionMenu(*resourceManager.getMenuTemplate("replayMenu"), screen)
+    Menu(*resourceManager.getMenuTemplate("replayMenu"), screen)
 {
 }
 

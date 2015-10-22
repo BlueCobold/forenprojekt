@@ -3,9 +3,9 @@
 #ifndef HIGHSCOREMENU_HPP
 #define HIGHSCOREMENU_HPP
 
-#include "CaptionMenu.hpp"
+#include "Menu.hpp"
 
-class HighScoreMenu : public CaptionMenu
+class HighScoreMenu : public Menu
 {
 public:
 

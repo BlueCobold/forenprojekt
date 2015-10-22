@@ -4,6 +4,6 @@
 
 HighScoreMenu::HighScoreMenu(sf::RenderWindow& screen,
                              ResourceManager& resourceManager) :
-    CaptionMenu(*resourceManager.getMenuTemplate("HighScoreMenu"), screen)
+    Menu(*resourceManager.getMenuTemplate("HighScoreMenu"), screen)
 {
 }

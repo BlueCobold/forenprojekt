@@ -157,9 +157,6 @@
     <ClInclude Include="..\..\Src\gui\ButtonStyle.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\gui\CaptionMenu.hpp">
-      <Filter>Headers\gui</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\gui\CheckBox.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
@@ -1081,9 +1078,6 @@
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\Menu.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\gui\CaptionMenu.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\resources\OpenFileDialoge.cpp">
