@@ -2,15 +2,13 @@
 #include "../../Utility.hpp"
 
 PointsHUD::PointsHUD(ResourceManager& resourceManager,
-          const sf::Vector2f& position,
-          const float rotation,
-          const BitmapFont* bitmapFont,
-          const float horizontalPercentage,
-          const float verticalPercentage) :
-LabelHUD(position,rotation, bitmapFont, horizontalPercentage, verticalPercentage),
-m_pointCounter(0.f,0.f,0.f),
-m_elapsedTime(0.f),
-m_resourceManager(resourceManager)
+                     const sf::Vector2f& position,
+                     const sf::Vector2f& offset,
+                     const BitmapFont* bitmapFont) :
+    LabelHUD(position, offset, bitmapFont),
+    m_pointCounter(0.f,0.f,0.f),
+    m_elapsedTime(0.f),
+    m_resourceManager(resourceManager)
 {
     m_coinTexture.setTexture(*m_resourceManager.getTexture("guiMisc"));
     m_coinTexture.setTextureRect(sf::IntRect(44, 0, 22, 22));
@@ -27,8 +25,8 @@ void PointsHUD::update(const DrawParameter& params)
     setText(utility::toString<int>(static_cast<int>(m_pointCounter.getCurrentValue())));
     LabelHUD::update(params);
 
-    m_coinTexture.setPosition(m_label.getPosition().x - 10 - m_coinTexture.getTextureRect().width,
-                              m_label.getPosition().y);
+    m_coinTexture.setPosition(getCurrentPosition().x - 10 - m_coinTexture.getTextureRect().width,
+                              getCurrentPosition().y);
 }
 
 void PointsHUD::restartAt(const float time)

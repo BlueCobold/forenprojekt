@@ -2,13 +2,11 @@
 #include "../../resources/ResourceManager.hpp"
 #include "../../Utility.hpp"
 
-BallHUD::BallHUD(ResourceManager& resourceManager, 
-                    const sf::Vector2f& position, 
-                    const float rotation, 
-                    const BitmapFont* bitmapFont,
-                    const float hReference,
-                    const float vReference) :
-    LabelHUD(position, rotation, bitmapFont, hReference, vReference),
+BallHUD::BallHUD(ResourceManager& resourceManager,
+                 const sf::Vector2f& position,
+                 const sf::Vector2f& offset,
+                 const BitmapFont* bitmapFont) :
+    LabelHUD(position, offset, bitmapFont),
     m_remainingBall(0),
     m_resourceManager(resourceManager)
 {
@@ -29,9 +27,9 @@ void BallHUD::update(const DrawParameter& params)
 
     m_label.setText(" " + utility::toString<int>(m_remainingBall));
 
-    m_ball.setPosition(m_label.getPosition().x
-        - m_label.getWidth() - m_ball.getTextureRect().width,
-        m_label.getPosition().y);
+    m_ball.setPosition(getCurrentPosition().x
+                       - m_label.getWidth() - m_ball.getTextureRect().width,
+                       getCurrentPosition().y);
 }
 
 void BallHUD::draw(const DrawParameter& params)

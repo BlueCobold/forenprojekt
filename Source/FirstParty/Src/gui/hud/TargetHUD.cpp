@@ -3,12 +3,10 @@
 #include "../../Utility.hpp"
 
 TargetHUD::TargetHUD(ResourceManager& resourceManager,
-                    const sf::Vector2f& position,
-                    const float rotation,
-                    const BitmapFont* bitmapFont,
-                    const float hReference,
-                    const float vReference) :
-    LabelHUD(position, rotation, bitmapFont, hReference, vReference),
+                     const sf::Vector2f& position,
+                     const sf::Vector2f& offset,
+                     const BitmapFont* bitmapFont) :
+    LabelHUD(position, offset, bitmapFont),
     m_totalTarget(0),
     m_remainingTarget(0),
     m_resourceManager(resourceManager)
@@ -30,9 +28,9 @@ void TargetHUD::update(const DrawParameter& params)
 
     m_label.setText(" " + utility::toString<int>(m_remainingTarget) + "/" + utility::toString<int>(m_totalTarget));
 
-    m_targetTexture.setPosition(m_label.getPosition().x
+    m_targetTexture.setPosition(getCurrentPosition().x
         - m_label.getWidth() - m_targetTexture.getTextureRect().width,
-        m_label.getPosition().y);
+        getCurrentPosition().y);
 }
 
 void TargetHUD::draw(const DrawParameter& params)

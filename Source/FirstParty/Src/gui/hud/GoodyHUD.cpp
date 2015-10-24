@@ -8,10 +8,9 @@ GoodyHUD::GoodyHUD(ResourceManager& resourceManager,
                    const std::string& iconKey,
                    const sf::IntRect& textureRect,
                    const sf::Vector2f& position,
-                   float hReference,
-                   float vReference) :
-    HUDElement(position, 0, hReference, vReference),
-    m_charges("", position, sf::Vector2f(35, 44), 0, resourceManager.getBitmapFont("goodyFont"))
+                   const sf::Vector2f& offset) :
+    HUDElement(position, offset),
+    m_charges("", position, offset + sf::Vector2f(35, 44), 0, resourceManager.getBitmapFont("goodyFont"))
 {
     m_icon.setTexture(*resourceManager.getTexture(iconKey));
     m_icon.setTextureRect(textureRect);
@@ -23,8 +22,7 @@ GoodyHUD::GoodyHUD(ResourceManager& resourceManager,
 void GoodyHUD::update(const DrawParameter& params)
 {
     HUDElement::update(params);
-    m_icon.setPosition(getPosition());
-    m_charges.setPosition(getPosition());
+    m_icon.setPosition(getCurrentPosition());
 
     if(m_active)
         m_icon.setTextureRect(sf::IntRect(m_startRect.left, m_startRect.top + m_iconHeight * Active, m_startRect.width, m_startRect.height));

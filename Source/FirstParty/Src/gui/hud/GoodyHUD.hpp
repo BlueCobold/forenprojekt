@@ -18,8 +18,7 @@ public:
              const std::string& iconKey,
              const sf::IntRect& textureRect,
              const sf::Vector2f& position,
-             float hReference = HUDElement::Left,
-             float vReference = HUDElement::Top);
+             const sf::Vector2f& offset);
 
     void update(const DrawParameter& params);
 

@@ -2,22 +2,20 @@
 #include "../../Utility.hpp"
 #include "../../resources/ResourceManager.hpp"
 
-LabelHUD::LabelHUD(const sf::Vector2f& position, 
-                   const float rotation, 
+LabelHUD::LabelHUD(const sf::Vector2f& position,
+                   const sf::Vector2f& offset,
                    const BitmapFont* bitmapFont,
-                   const float horizontalPercentage, 
-                   const float verticalPercentage,
                    const std::string& text,
                    const LineLabel::Alignment alignment) :
-    HUDElement(position, rotation, horizontalPercentage, verticalPercentage),
-    m_label(text, sf::Vector2f(), sf::Vector2f(), rotation, bitmapFont, alignment)
+    HUDElement(position, offset),
+    m_label(text, position, offset, 0, bitmapFont, alignment)
 {
 }
 
 void LabelHUD::update(const DrawParameter& params)
 {
     HUDElement::update(params);
-    m_label.setPosition(getPosition());
+    m_label.updateLayout(static_cast<sf::Vector2f>(params.getTarget().getSize()));
 }
 
 void LabelHUD::draw(const DrawParameter& params)
@@ -28,4 +26,10 @@ void LabelHUD::draw(const DrawParameter& params)
 void LabelHUD::setText(const std::string& text)
 {
     m_label.setText(text);
+}
+void LabelHUD::setPosition(const sf::Vector2f& position, const sf::Vector2f& offset)
+{
+    HUDElement::setPosition(position, offset);
+    m_label.setPosition(position);
+    m_label.setOffset(offset);
 }

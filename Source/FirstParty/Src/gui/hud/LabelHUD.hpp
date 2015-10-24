@@ -14,14 +14,11 @@ protected:
     LineLabel m_label;
 
 public:
-    LabelHUD(
-        const sf::Vector2f& position,
-        const float rotation,
-        const BitmapFont* bitmapFont,
-        const float horizontalPercentage = HUDElement::Left,
-        const float verticalPercentage = HUDElement::Top,
-        const std::string& text = "",
-        const LineLabel::Alignment alignment = LineLabel::Left);
+    LabelHUD(const sf::Vector2f& position,
+             const sf::Vector2f& offset,
+             const BitmapFont* bitmapFont,
+             const std::string& text = "",
+             const LineLabel::Alignment alignment = LineLabel::Left);
 
     virtual ~LabelHUD()
     { }
@@ -31,6 +28,8 @@ public:
     virtual void draw(const DrawParameter& params);
 
     void setText(const std::string& text);
+
+    virtual void setPosition(const sf::Vector2f& position, const sf::Vector2f& offset) override;
 };
 
 #endif

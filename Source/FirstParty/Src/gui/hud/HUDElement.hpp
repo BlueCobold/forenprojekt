@@ -1,7 +1,8 @@
 #ifndef HUDELEMENT_HPP
 #define HUDELEMENT_HPP
 
-#include <SFML/System/Vector2.hpp>
+//#include <SFML/System/Vector2.hpp>
+#include "../ScreenLocation.hpp"
 #include "../../rendering/Drawable.hpp"
 
 class ResourceManager;
@@ -9,29 +10,12 @@ class ResourceManager;
 /// Basis class for HUD
 class HUDElement : public Drawable
 {
-public:
-
-    static const float Left;
-    static const float Right;
-    static const float Center;
-    static const float Top;
-    static const float Middle;
-    static const float Bottom;
-
 private:
 
-    sf::Vector2f m_position;
-    sf::Vector2f m_currentPosition;
-
-    float m_horizontalPercentage;
-    float m_verticalPercentage;
-
+    ScreenLocation m_screenLocation;
 public:
-    HUDElement(
-        const sf::Vector2f& position,
-        const float rotation,
-        const float horizontalPercentage = HUDElement::Left,
-        const float verticalPercentage = HUDElement::Top);
+    HUDElement(const sf::Vector2f& position,
+               const sf::Vector2f& offset = sf::Vector2f(ScreenLocation::Left, ScreenLocation::Top));
 
     virtual ~HUDElement()
     { }
@@ -40,10 +24,10 @@ public:
 
     virtual void draw(const DrawParameter& params) = 0;
 
-    void setPosition(const sf::Vector2f& position, const float horizontalPercentage = HUDElement::Left, const float verticalPercentage = HUDElement::Top);
+    virtual void setPosition(const sf::Vector2f& position, const sf::Vector2f& offset);
 
 protected:
-    const sf::Vector2f getPosition() const;
+    const sf::Vector2f getCurrentPosition() const;
 };
 
 #endif

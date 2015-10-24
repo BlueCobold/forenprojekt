@@ -2,13 +2,10 @@
 #include "../../resources/ResourceManager.hpp"
 #include "../../Utility.hpp"
 
-FPSCounterHUD::FPSCounterHUD(
-    const sf::Vector2f& position,
-    const float rotation,
-    const BitmapFont* bitmapFont,
-    float hReference,
-    float vReference) :
-    LabelHUD(position, rotation, bitmapFont, hReference, vReference) 
+FPSCounterHUD::FPSCounterHUD(const sf::Vector2f& position,
+                             const sf::Vector2f& offset,
+                             const BitmapFont* bitmapFont) :
+    LabelHUD(position, offset, bitmapFont) 
 {
     m_label.setText(utility::toString<int>(m_fpsCounter.getFPS()));
 }

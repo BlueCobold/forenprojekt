@@ -4,7 +4,7 @@
 #include <cmath>
 
 ArrowHUD::ArrowHUD(ResourceManager& resourceManager):
-HUDElement(sf::Vector2f(0.f, 0.f), 0.f),
+HUDElement(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f)),
 m_resourceManager(resourceManager),
 m_outOfView(false)
 {

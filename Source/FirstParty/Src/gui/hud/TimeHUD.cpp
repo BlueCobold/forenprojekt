@@ -2,13 +2,11 @@
 #include "../../resources/ResourceManager.hpp"
 #include "../../Utility.hpp"
 
-TimeHUD::TimeHUD(ResourceManager& resourceManager, 
-                 const sf::Vector2f& position, 
-                 const float rotation, 
-                 const BitmapFont* bitmapFont,
-                 const float hReference,
-                 const float vReference) :
-    LabelHUD(position, rotation, bitmapFont, hReference, vReference),
+TimeHUD::TimeHUD(ResourceManager& resourceManager,
+                 const sf::Vector2f& position,
+                 const sf::Vector2f& offset,
+                 const BitmapFont* bitmapFont) :
+    LabelHUD(position, offset, bitmapFont),
     m_seconds("00"),
     m_minutes("00"),
     m_totalSeconds(0),
@@ -44,8 +42,8 @@ void TimeHUD::update(const DrawParameter& params)
 
     m_label.setText(m_minutes + ":" + m_seconds);
 
-    m_clock.setPosition(m_label.getPosition().x - 10 - m_clock.getTextureRect().width,
-        m_label.getPosition().y);
+    m_clock.setPosition(getCurrentPosition().x - 10 - m_clock.getTextureRect().width,
+                        getCurrentPosition().y);
 }
 
 void TimeHUD::draw(const DrawParameter& params)

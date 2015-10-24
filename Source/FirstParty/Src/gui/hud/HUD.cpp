@@ -4,18 +4,18 @@
 #include "../../resources/ResourceManager.hpp"
 
 HUD::HUD(ResourceManager& resourceManager, AppConfig& config) :
-    m_fpsCounter(sf::Vector2f(30.f,-30.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Left, HUDElement::Bottom),
-    m_target(resourceManager, sf::Vector2f(-30.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Right),
-    m_points(resourceManager, sf::Vector2f(40.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), HUDElement::Left),
+    m_fpsCounter(sf::Vector2f(ScreenLocation::Left, ScreenLocation::Bottom), sf::Vector2f(30.f,-30.f), resourceManager.getBitmapFont("gold")),
+    m_target(resourceManager, sf::Vector2f(ScreenLocation::Right, ScreenLocation::Top), sf::Vector2f(-30.f,10.f), resourceManager.getBitmapFont("gold")),
+    m_points(resourceManager, sf::Vector2f(ScreenLocation::Left, ScreenLocation::Top), sf::Vector2f(40.f,10.f), resourceManager.getBitmapFont("gold")),
     m_arrow(resourceManager),
-    m_ball(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.66f),
-    m_time(resourceManager, sf::Vector2f(0.f,10.f), 0.f, resourceManager.getBitmapFont("gold"), 0.33f),
+    m_ball(resourceManager, sf::Vector2f(0.66f, ScreenLocation::Top), sf::Vector2f(0.f,10.f), resourceManager.getBitmapFont("gold")),
+    m_time(resourceManager, sf::Vector2f(0.33f, ScreenLocation::Top), sf::Vector2f(0.f,10.f), resourceManager.getBitmapFont("gold")),
     m_ballShow(false),
     m_timeShow(false),
-    m_gravityGoody(resourceManager, "goodie", sf::IntRect(0,0,56,64), sf::Vector2f(0,50)),
-    m_invulnerableGoody(resourceManager, "goodie", sf::IntRect(56,0,56,64), sf::Vector2f(0,114)),
-    m_extraBallGoody(resourceManager, "goodie", sf::IntRect(112,0,56,64), sf::Vector2f(0,178)),
-    m_extraTimeGoody(resourceManager, "goodie", sf::IntRect(168,0,56,64), sf::Vector2f(0,242))
+    m_gravityGoody(resourceManager, "goodie", sf::IntRect(0,0,56,64), sf::Vector2f(ScreenLocation::Left, ScreenLocation::Top), sf::Vector2f(0,50)),
+    m_invulnerableGoody(resourceManager, "goodie", sf::IntRect(56,0,56,64), sf::Vector2f(ScreenLocation::Left, ScreenLocation::Top), sf::Vector2f(0,114)),
+    m_extraBallGoody(resourceManager, "goodie", sf::IntRect(112,0,56,64), sf::Vector2f(ScreenLocation::Left, ScreenLocation::Top), sf::Vector2f(0,178)),
+    m_extraTimeGoody(resourceManager, "goodie", sf::IntRect(168,0,56,64), sf::Vector2f(ScreenLocation::Left, ScreenLocation::Top), sf::Vector2f(0,242))
 {
     m_fpsShow = config.get<bool>("ShowFps");
 }
@@ -99,11 +99,11 @@ void HUD::setBallShow(bool ballShow)
 
     if(m_timeShow && m_ballShow)
     {
-        m_time.setPosition(sf::Vector2f(0.f,10.f), 0.33f);
-        m_ball.setPosition(sf::Vector2f(0.f,10.f), 0.66f);
+        m_time.setPosition(sf::Vector2f(0.33f, 0.f), sf::Vector2f(0.f,10.f));
+        m_ball.setPosition(sf::Vector2f(0.66f, 0.f), sf::Vector2f(0.f,10.f));
     }
     else if(m_ballShow)
-        m_ball.setPosition(sf::Vector2f(0.f,10.f), 0.5f);
+        m_ball.setPosition(sf::Vector2f(0.5f, 0.f), sf::Vector2f(0.f,10.f));
 }
 
 void HUD::setTimeShow(bool timeShow)
@@ -112,11 +112,11 @@ void HUD::setTimeShow(bool timeShow)
 
     if(m_timeShow && m_ballShow)
     {
-        m_time.setPosition(sf::Vector2f(0.f,10.f), 0.33f);
-        m_ball.setPosition(sf::Vector2f(0.f,10.f), 0.66f);
+        m_time.setPosition(sf::Vector2f(0.33f, 0.f), sf::Vector2f(0.f,10.f));
+        m_ball.setPosition(sf::Vector2f(0.66f, 0.f), sf::Vector2f(0.f,10.f));
     }
     else if(m_timeShow)
-        m_time.setPosition(sf::Vector2f(0.f,10.f), 0.5f);
+        m_time.setPosition(sf::Vector2f(0.5f, 0.f), sf::Vector2f(0.f,10.f));
 }
 
 void HUD::onEnter(Level* level)

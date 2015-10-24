@@ -16,11 +16,9 @@ private:
 
 public:
     BallHUD(ResourceManager& resourceManager,
-        const sf::Vector2f& position,
-        const float rotation,
-        const BitmapFont* bitmapFont,
-        float hReference = HUDElement::Left,
-        float vReference = HUDElement::Top);
+            const sf::Vector2f& position,
+            const sf::Vector2f& offset,
+            const BitmapFont* bitmapFont);
 
     void update(const DrawParameter& params);
 

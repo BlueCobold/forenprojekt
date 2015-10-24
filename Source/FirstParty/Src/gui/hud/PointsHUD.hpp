@@ -12,10 +12,8 @@ class PointsHUD : public LabelHUD
 public:
     PointsHUD(ResourceManager& resourceManager,
               const sf::Vector2f& position,
-              const float rotation,
-              const BitmapFont* bitmapFont,
-              const float horizontalPercentage = HUDElement::Left,
-              const float verticalPercentage = HUDElement::Top);
+              const sf::Vector2f& offset,
+              const BitmapFont* bitmapFont);
 
     void skipInterpolation();
 
