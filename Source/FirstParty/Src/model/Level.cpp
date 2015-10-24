@@ -473,7 +473,7 @@ void Level::createLabelAt(const sf::Vector2f& position, const std::string& fontN
 
     std::unique_ptr<LineLabel> label(new LineLabel(
             text,
-            position, sf::Vector2f(),
+            sf::Vector2f(), position, 
             0,
             m_resourceManager.getBitmapFont(fontName),
             LineLabel::Centered));
