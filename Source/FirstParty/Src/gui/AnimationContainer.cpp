@@ -65,13 +65,16 @@ void AnimationContainer::setValueOf(const std::string& name, const float value)
 void AnimationContainer::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     updateCurrentTime(time);
+    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+    auto currentPosition = getCurrentPosition();
     for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
     {
         auto ani = (*animation).get();
         if(ani->isStopped())
             continue;
         m_updatingAni = ani;
-        ani->setPosition(getPosition().x + getOffset().x, getPosition().y + getOffset().x);
+        
+        ani->setPosition(currentPosition.x, currentPosition.y);
         ani->update();
     }
     m_updatingAni = nullptr;

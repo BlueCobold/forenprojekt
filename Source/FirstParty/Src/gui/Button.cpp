@@ -175,13 +175,4 @@ void Button::updateLayout(const sf::Vector2f& screenSize)
     m_style.idleStyle.sprite.setPosition(currentPosition + m_style.idleStyle.spriteOffset - half);
     m_style.hoverStyle.sprite.setPosition(currentPosition + m_style.hoverStyle.spriteOffset - half);
     m_style.pressedStyle.sprite.setPosition(currentPosition + m_style.pressedStyle.spriteOffset - half);
-
-    if(m_style.idleStyle.animation.get())
-        m_style.idleStyle.animation->updateLayout(screenSize);
-
-    if(m_style.hoverStyle.animation.get())
-        m_style.hoverStyle.animation->updateLayout(screenSize);
-
-    if(m_style.pressedStyle.animation.get())
-        m_style.pressedStyle.animation->updateLayout(screenSize);
 }
