@@ -31,11 +31,7 @@ InputBox::InputBox(const int id,
 
     setBackGroundPosition(position + offset);
 
-#ifdef IOS
-    m_caret.disable();
-#else
     m_caret.enable();
-#endif
 
 }
 
@@ -48,7 +44,7 @@ std::unique_ptr<MenuElement> InputBox::clone() const
 
 void InputBox::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
     if(!m_caret.isActive())
         m_caret.disable();
 #endif
@@ -165,7 +161,7 @@ void InputBox::setActivatedByMouse(const sf::RenderWindow& screen)
     if(utility::Mouse.leftButtonDown())
     {
         m_activated = hitBox.contains(static_cast<sf::Vector2f>(getCursorPosition(screen)));
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
         if(m_activated)
             m_caret.enable();
 #endif

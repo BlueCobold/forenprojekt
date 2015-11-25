@@ -21,7 +21,7 @@ Cursor::Cursor(ResourceManager& resourceManager, const sf::RenderWindow& screen)
 
 void Cursor::update()
 {
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
     auto pos = utility::Mouse.getTouchPosition() - sf::Vector2i(6, 5);
 #else
     auto pos = sf::Mouse::getPosition(m_screen) - sf::Vector2i(6, 5);

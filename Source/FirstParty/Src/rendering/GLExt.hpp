@@ -113,7 +113,11 @@ typedef unsigned __int64 uint64_t;
     typedef signed char GLbyte;
     typedef short GLshort;
     typedef int GLint;
+#ifdef ANDROID
+    typedef char GLubyte;
+#else
     typedef unsigned char GLubyte;
+#endif
     typedef unsigned short GLushort;
     typedef unsigned int GLuint;
     typedef int GLsizei;

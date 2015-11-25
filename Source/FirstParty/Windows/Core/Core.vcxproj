@@ -52,7 +52,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG_BOX2D;WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;_DEBUG;_CONSOLE;LEVELTESTING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG_BOX2D;WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalIncludeDirectories>../../../ThirdParty/CryptoPP/include/;../../../ThirdParty/SFML/include/;../../../ThirdParty/Box2D/include/;../../../ThirdParty/tinyxml2/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
@@ -77,7 +77,7 @@
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LEVELTESTING;WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>../../../ThirdParty/CryptoPP/include/;../../../ThirdParty/SFML/include/;../../../ThirdParty/Box2D/include/;../../../ThirdParty/tinyxml2/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
@@ -96,6 +96,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Src\AndroidHelper.hpp" />
     <ClInclude Include="..\..\Src\animation\AnimatedObject.hpp" />
     <ClInclude Include="..\..\Src\animation\Animation.hpp" />
     <ClInclude Include="..\..\Src\animation\Cloneable.hpp" />
@@ -317,6 +318,7 @@
     <None Include="..\..\Game\stash.dat" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Src\AndroidHelper.cpp" />
     <ClCompile Include="..\..\Src\animation\Animation.cpp" />
     <ClCompile Include="..\..\Src\animation\Interpolation.cpp" />
     <ClCompile Include="..\..\Src\animation\ParticleTrail.cpp" />

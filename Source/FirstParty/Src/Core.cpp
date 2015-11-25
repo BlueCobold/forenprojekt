@@ -8,8 +8,10 @@
 
 #include <SFML/System.hpp>
 
-#ifdef LINUX
+#if defined(LINUX)
 #include "LinuxHelper.hpp"
+#elif defined(ANDROID)
+#include "ANDROIDHelper.hpp"
 #endif
 
 #ifdef IOS
@@ -25,7 +27,7 @@ int main(int argc, char* argv[])
 #endif
 {
 
-#ifdef LINUX
+#if defined(LINUX) || defined(ANDROID)
     init();
 #endif
 
@@ -40,12 +42,21 @@ int main(int argc, char* argv[])
 #endif
         previous = sf::err().rdbuf(file.rdbuf());
         sf::err() << "=== Rickety Racquet starting ===" << std::endl;
-
         AppConfig configFile("Config.ini", "stash.dat");
+
         App app(configFile);
         app.run();
     }
-//    catch (std::exception& error)
+    catch(std::bad_alloc& error)
+    {
+#ifdef _DEBUG
+        std::cout << "An error occurred: " << error.what();
+        getchar();
+#else
+        ErrorMessageBox(error.what());
+#endif
+        return 1;
+    }
     catch(std::runtime_error& error)
     {
 #ifdef _DEBUG

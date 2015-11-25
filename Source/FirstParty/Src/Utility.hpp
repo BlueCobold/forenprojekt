@@ -48,8 +48,8 @@ namespace utility
         {
             auto str2 = str;
             // clang/MacOS doesn't like a trailing "f" in floats...
-            stringstream.str(str2.replace(str.find("f"), 1, ""));
-            stringstream >> value;
+            std::stringstream s2(str2.replace(str.find("f"), 1, ""));
+            s2 >> value;
         }
 
         return value;
@@ -118,7 +118,7 @@ namespace utility
     std::string getUserName();
 
     template<typename T, typename F>
-    std::unique_ptr<T> unique_cast(std::unique_ptr<F>& toCast)
+    std::unique_ptr<T> unique_cast(std::unique_ptr<F>&& toCast)
     {
         return std::unique_ptr<T>(dynamic_cast<T*>(toCast.release()));
     }

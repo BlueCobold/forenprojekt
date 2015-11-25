@@ -126,7 +126,7 @@ protected:
 
     const sf::Vector2i getCursorPosition(const sf::RenderWindow& screen) const
     {
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
         return utility::Mouse.getTouchPosition();
 #else
         return sf::Mouse::getPosition(screen);

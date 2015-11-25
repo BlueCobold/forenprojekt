@@ -6,7 +6,7 @@
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
 #include <SFML/System/Vector3.hpp>
 #endif
 
@@ -44,7 +44,7 @@ namespace utility
     {
     public:
         MouseWrapper() : m_leftPressed(false),
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
             m_sensorsEnabled(false),
 #endif
             m_leftDown(false)
@@ -56,7 +56,7 @@ namespace utility
 
         void startInterpolation(const sf::Window& relativeTo);
         void interpolate(int steps, int current);
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
         void notifyTouch(const sf::Vector2i& pos);
         const sf::Vector2i& getTouchPosition() const;
         const sf::Vector3f& getAcceleration() const;
@@ -83,17 +83,18 @@ namespace utility
 
         bool isCursorVisible() const;
 
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
         void enableSensors(bool enabled);
 #endif
 
     private:
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
         sf::Vector2i m_touchPosition;
         sf::Vector3f m_lastAcceleration;
         sf::Vector3f m_currentAcceleration;
         sf::Vector3f m_acceleration;
         bool m_sensorsEnabled;
+        bool m_sensorsInited;
 #endif
         bool m_cursorVisible;
         bool m_leftPressed;

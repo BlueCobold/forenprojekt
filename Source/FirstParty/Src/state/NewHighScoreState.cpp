@@ -60,7 +60,7 @@ void NewHighScoreState::onEnter(const EnterStateInformation* enterInformation, c
     else
         m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).setText(m_lastName);
 
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
     m_menu.showKeyboard();
 #endif
 }
@@ -94,7 +94,7 @@ StateChangeInformation NewHighScoreState::update(const float time)
     }
     if(m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).isActivatedByMouse())
         m_menu.showKeyboard();
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
     if(!m_menu.isKeyboardShown())
         m_menu.getInputBox(NewHighScoreMenu::INPUTBOX).disableCaret();
 #endif

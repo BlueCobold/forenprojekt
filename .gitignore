@@ -213,3 +213,5 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+assets
+libs

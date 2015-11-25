@@ -628,6 +628,9 @@
     <ClInclude Include="..\..\Src\gui\ScreenLocation.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\AndroidHelper.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -1139,6 +1142,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\ButtonStyle.cpp">
       <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\AndroidHelper.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

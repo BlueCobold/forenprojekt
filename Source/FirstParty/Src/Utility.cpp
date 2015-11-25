@@ -142,6 +142,8 @@ namespace utility
                 message.append(line);
             }
         }
+        else
+            throw std::runtime_error(utility::replace(utility::translateKey("MissingFile"), file));
 
         return message;
     }

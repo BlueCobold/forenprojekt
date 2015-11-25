@@ -42,6 +42,9 @@
 
 #if defined(IOS) || defined(OSX)
 #include "MacHelper.hpp"
+#elif defined(ANDROID)
+#include "AndroidHelper.hpp"
+#include "gui/ErrorMessageBox.hpp"
 #endif
 
 App::App(AppConfig& config) :
@@ -65,7 +68,7 @@ App::App(AppConfig& config) :
     sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
     m_windowTitle = m_config.get<std::string>("WindowName");
     m_fullscreen = m_config.get<bool>("IsFullScreen");
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
     auto videoMode = sf::VideoMode::getDesktopMode();
     if(videoMode.width < videoMode.height) {
         std::swap(videoMode.width, videoMode.height);
@@ -79,7 +82,6 @@ App::App(AppConfig& config) :
 
     sf::ContextSettings settings = sf::ContextSettings(24, 8, 0);
     m_screen.create(videoMode, m_windowTitle, m_fullscreen ? sf::Style::Fullscreen : sf::Style::Default, settings);
-
     // This kind of redundant line prevents shader-renderings to show the first frame incorrectly
     m_screen.resetGLStates();
 
@@ -137,7 +139,7 @@ App::App(AppConfig& config) :
     m_stateManager.setState(StartStateId);
 
     m_screen.setMouseCursorVisible(false);
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
     utility::Mouse.enableSensors(true);
 #endif
 }
@@ -156,6 +158,10 @@ void App::run()
 
 void App::update()
 {
+#ifdef ANDROID
+    try
+    {
+#endif
     sf::View view(sf::FloatRect(0.f, 0.f,
         static_cast<float>(m_screen.getSize().x),
         static_cast<float>(m_screen.getSize().y)));
@@ -172,14 +178,34 @@ void App::update()
     if(!m_isMinimized)
         utility::Mouse.capture();
     m_cursor->update();
+
+#ifdef ANDROID
+    // android needs to keep the window/activity open or won't display anything
+    }
+    catch(std::runtime_error& error)
+    {
+        ErrorMessageBox(error.what());   
+        sf::Event event;
+        m_event.m_eventType = utility::Event::NoEvent;
+        while(m_screen.isOpen())
+        {
+            while(m_screen.isOpen() && m_screen.pollEvent(event))
+            {
+                if(event.type == sf::Event::Closed)
+                    m_screen.close();
+            }
+            sf::sleep(sf::milliseconds(20));
+        }
+    }
+#endif
 }
 
 void App::draw()
 {
-#if IOS
+#if defined(IOS) || defined(ANDROID)
     if(!m_focus)
     {
-        sf::sleep(sf::milliseconds(10));
+        sf::sleep(sf::milliseconds(100));
         return;
     }
 #endif
@@ -257,7 +283,7 @@ void App::handleEvents()
         {
             m_event.m_eventType = utility::Event::LostFocus;
             m_focus = false;
-#if IOS
+#if defined(IOS) || defined(ANDROID)
             // The app might never return due to the user closing the app which causes
             // a sigkill and thus destructors will not be called.
             // So better save now than losing everything in the process.
@@ -286,7 +312,7 @@ void App::handleEvents()
             utility::Mouse.notifyButtonPressed(event.mouseButton.button);
         else if(event.type == sf::Event::MouseButtonReleased)
             utility::Mouse.notifyButtonReleased(event.mouseButton.button);
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
         else if(event.type == sf::Event::TouchBegan)
         {
             utility::Mouse.notifyButtonPressed(event.mouseButton.button);
@@ -347,7 +373,7 @@ void App::onResize()
 
 void App::adjustVideoMode(sf::VideoMode& mode)
 {
-#ifndef IOS
+#if !defined(IOS) && !defined(ANDROID)
     // Ensure minimas and maximas
     if(mode.width > 1920)
         mode.width = 1920;

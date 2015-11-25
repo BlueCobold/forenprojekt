@@ -4,33 +4,26 @@
 #include <stddef.h>
 #include "GLExt.hpp"
 
-#if defined(__APPLE__) && !defined(IOS)
+#if defined(OSX)
 #include <mach-o/dyld.h>
+#include <dlfcn.h>
 #include <cstdlib>
 static void* AppleGLGetProcAddress (const char *name)
 {
-    static const struct mach_header* image = NULL;
-    NSSymbol symbol;
-    char* symbolName;
-    if (NULL == image)
-        image = NSAddImage("/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL", NSADDIMAGE_OPTION_RETURN_ON_ERROR);
-    /* prepend a '_' for the Unix C symbol mangling convention */
-    symbolName = new char[strlen((const char*)name) + 2];
-    strcpy(symbolName+1, (const char*)name);
-    symbolName[0] = '_';
-    symbol = NULL;
-    /* if (NSIsSymbolNameDefined(symbolName))
-        symbol = NSLookupAndBindSymbol(symbolName); */
-    symbol = image ? NSLookupSymbolInImage(image, symbolName, NSLOOKUPSYMBOLINIMAGE_OPTION_BIND | NSLOOKUPSYMBOLINIMAGE_OPTION_RETURN_ON_ERROR) : NULL;
-    delete symbolName;
-    return symbol ? NSAddressOfSymbol(symbol) : NULL;
+    static void* image = nullptr;
+    if (image == nullptr)
+        image = dlopen("/System/Library/Frameworks/OpenGL.framework/Versions/Current/OpenGL", RTLD_LAZY);
+    return (image ? dlsym(image, name) : nullptr);
 }
-#endif /* __APPLE__ */
+#endif // OSX
 
 #if defined(IOS)
 typedef int32_t  GLclampx;
 #include <OpenGLES/ES1/gl.h>
 #include <OpenGLES/ES1/glext.h>
+#include <cstdlib>
+#elif defined(ANDROID)
+#include <EGL/egl.h>
 #include <cstdlib>
 #endif
 
@@ -92,9 +85,10 @@ static PROC WinGetProcAddress(const char *name)
     #else
         #if defined(__sgi) || defined(__sun)
             #define IntGetProcAddress(name) SunGetProcAddress(name)
+        #elif defined(ANDROID)
+            #define IntGetProcAddress(name) (*eglGetProcAddress)((const GLubyte*)name)
         #else /* GLX */
             #include <GL/glx.h>
-
             #define IntGetProcAddress(name) (*glXGetProcAddressARB)((const GLubyte*)name)
         #endif
     #endif
@@ -262,11 +256,13 @@ namespace gl
         {
             static void ProcExtsFromExtString(const char *strExtList, std::vector<MapEntry> &table)
             {
+                if(strExtList == nullptr)
+                    return;
                 size_t iExtListLen = strlen(strExtList);
                 const char *strExtListEnd = strExtList + iExtListLen;
                 const char *strCurrPos = strExtList;
                 char strWorkBuff[256];
-
+                
                 while(*strCurrPos)
                 {
                     /*Get the extension at our position.*/
@@ -301,7 +297,6 @@ namespace gl
             ClearExtensionVars();
             std::vector<MapEntry> table;
             InitializeMappingTable(table);
-
 #ifndef IOS
             GetString = reinterpret_cast<PFNGETSTRING>(IntGetProcAddress("glGetString"));
             if(!GetString)
@@ -310,14 +305,14 @@ namespace gl
             GetString = glGetString;
 #endif
             ProcExtsFromExtString((const char *)gl::GetString(gl::EXTENSIONS), table);
-
+            
             int numFailed = LoadCoreFunctions();
             return exts::LoadTest(true, numFailed);
         }
 
         static void ParseVersionFromString(int *pOutMajor, int *pOutMinor, const char *strVersion)
         {
-#if !defined(IOS)
+#if !defined(IOS) && !defined(ANDROID)
             const char *strDotPos = NULL;
             int iLength = 0;
             char strWorkBuff[10];

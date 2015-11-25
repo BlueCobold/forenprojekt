@@ -3,6 +3,7 @@
 #include "Teeter.hpp"
 #include "../rendering/DrawParameter.hpp"
 #include "../resources/AppConfig.hpp"
+#include "../resources/PathHelper.hpp"
 #include "../resources/ResourceManager.hpp"
 #include "../Utility.hpp" // toString, toMeter
 #include "../Input.hpp"
@@ -766,7 +767,7 @@ bool Level::isOriginal()
     CryptoPP::RSA::PublicKey* publicKey = m_resourceManager.getPublicKey("LevelKey");
     std::string signaturKey = m_resourceManager.getHashValue(filename);
 
-    message.append(utility::fileToString(Level::filename()));
+    message.append(utility::fileToString(resourcePath() + Level::filename()));
     message.append(filename);
 
     CryptoPP::RSASS<CryptoPP::PKCS1v15, CryptoPP::SHA>::Verifier verifier(*publicKey);

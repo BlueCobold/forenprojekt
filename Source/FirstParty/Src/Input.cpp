@@ -3,8 +3,10 @@
 
 //#include "Utility.hpp"
 
-#ifdef IOS
+#if defined(IOS)
 #include "MacHelper.hpp"
+#endif
+#if defined(IOS) || defined(ANDROID)
 #include <SFML/Window/Sensor.hpp>
 #endif
 
@@ -57,7 +59,7 @@ namespace utility
         return m_position;
     }
 
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
     void MouseWrapper::notifyTouch(const sf::Vector2i& pos)
     {
         m_touchPosition = pos;
@@ -88,7 +90,7 @@ namespace utility
         m_position = sf::Vector2f(
             m_lastPosition.x + (m_totalPosition.x - m_lastPosition.x) * percent,
             m_lastPosition.y + (m_totalPosition.y - m_lastPosition.y) * percent);
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
         m_currentAcceleration = m_lastAcceleration + (m_acceleration - m_lastAcceleration) * percent;
 #endif
     }
@@ -106,10 +108,14 @@ namespace utility
         m_mouseWheelDown = false;
         m_mouseWheelUp = false;
         
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
         if(m_sensorsEnabled && sf::Sensor::isAvailable(sf::Sensor::Accelerometer))
         {
-            sf::Sensor::setEnabled(sf::Sensor::Accelerometer, true);
+            if(!m_sensorsInited)
+            {
+                sf::Sensor::setEnabled(sf::Sensor::Accelerometer, true);
+                m_sensorsInited = true;
+            }
             m_lastAcceleration = m_acceleration;
             m_acceleration = sf::Sensor::getValue(sf::Sensor::Accelerometer);
         }
@@ -186,10 +192,11 @@ namespace utility
         return m_cursorVisible;
     }
 
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
     void MouseWrapper::enableSensors(bool enabled)
     {
         m_sensorsEnabled = enabled;
+        m_sensorsInited = false;
     }
 #endif
 }

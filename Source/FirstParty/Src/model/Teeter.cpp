@@ -36,7 +36,7 @@ void Teeter::update(const float value)
     auto angle = utility::toDegree<float, float>(getAngle());
     auto timeDiff = value - m_lastTime;
 
-#ifdef IOS
+#if defined(IOS) || defined(ANDROID)
     auto gravToAngle = 90 / 9.81f;
     sf::Vector2f mousePos = 0.5f * sf::Vector2f(utility::Mouse.getAcceleration().y, utility::Mouse.getAcceleration().x)
                            +0.5f * m_lastMousePos;
@@ -66,6 +66,7 @@ void Teeter::update(const float value)
     m_lastMousePos = mousePos;
     Entity::update(value);
 }
+
 void Teeter::setControl(const bool invertAxis, const bool useVerticalAxis)
 {
     m_invertAxis = invertAxis;

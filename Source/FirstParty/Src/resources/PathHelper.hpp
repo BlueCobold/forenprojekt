@@ -13,6 +13,12 @@
 
 std::string resourcePath();
 
+#ifdef ANDROID
+std::string packedPath();
+#else
+#define packedPath resourcePath
+#endif
+
 std::string documentPath();
 
 #endif
