@@ -103,7 +103,6 @@ void LineLabel::rebuild()
 
     float xOffset = 0;
     auto currentPosition = getCurrentPosition();
-    auto offset = getOffset();
     for(auto it = begin(m_text); it != end(m_text); it++)
     {
         auto glyph = m_font->getGlyph(*it);

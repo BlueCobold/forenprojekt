@@ -59,7 +59,7 @@ public:
 #endif
     ~Level();
 
-    virtual void restartAt(const float time);
+    virtual void restartAt(const float time) override;
     void update(const float dt);
     virtual void draw(const DrawParameter& param) override;
     void adjustView(const DrawParameter& params);
@@ -161,8 +161,8 @@ private:
     void updateGoodyChoice();
     void updateGoodyCharges();
 
-    virtual bool shouldCollide(Entity* entityA, Entity* entityB);
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse);
+    virtual bool shouldCollide(Entity* entityA, Entity* entityB) override;
+    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse) override;
     void killTarget(Entity* target);
     void killBonusTarget(Entity* target);
     void prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn, float angle = 0);

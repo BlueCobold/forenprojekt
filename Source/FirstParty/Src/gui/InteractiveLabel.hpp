@@ -30,8 +30,8 @@ public:
     void setToolTipText(const std::string& text);
 
     void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
-    void draw(const DrawParameter& params);
-    void drawAdditionalForeground(const DrawParameter& params);
+    void draw(const DrawParameter& params) override;
+    void drawAdditionalForeground(const DrawParameter& params) override;
 };
 
 #endif

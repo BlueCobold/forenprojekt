@@ -20,16 +20,13 @@ public:
              const std::string& text = "",
              const LineLabel::Alignment alignment = LineLabel::Left);
 
-    virtual ~LabelHUD()
-    { }
+    void update(const DrawParameter& params) override;
 
-    virtual void update(const DrawParameter& params);
-
-    virtual void draw(const DrawParameter& params);
+    void draw(const DrawParameter& params) override;
 
     void setText(const std::string& text);
 
-    virtual void setPosition(const sf::Vector2f& position, const sf::Vector2f& offset) override;
+    void setPosition(const sf::Vector2f& position, const sf::Vector2f& offset) override;
 };
 
 #endif

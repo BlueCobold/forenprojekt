@@ -17,7 +17,7 @@ public:
 
     void skipInterpolation();
 
-    void update(const DrawParameter& params);
+    void update(const DrawParameter& params) override;
     void restartAt(const float time);
 
     void setPoints(int points);

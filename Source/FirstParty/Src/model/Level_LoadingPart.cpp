@@ -45,6 +45,7 @@ void Level::load()
 
     if(!isOriginal())
         throw std::runtime_error(utility::replace(utility::translateKey("NoOriginalFile"), filename()));
+
 #endif
     tinyxml2::XMLDocument doc;
 
@@ -64,7 +65,7 @@ void Level::load()
     Templates templates;
     std::vector<std::unique_ptr<tinyxml2::XMLDocument>> docs;
     parseTemplates(templates, doc.FirstChildElement("level"), docs);
-    
+
     auto constants = doc.FirstChildElement("level")->FirstChildElement("constants");
     if(constants != nullptr)
         LevelFileLoader::parseConstants(constants, this);
@@ -105,7 +106,6 @@ void Level::load()
 
     // Separate the lines for easier processing
     std::vector<std::string> lines = LevelFileLoader::parseGrid(grid);
-
     for(size_t row = 0; row < lines.size(); ++row)
         for(std::size_t column = 0; column < lines[row].length(); column += 2)
         {
@@ -120,7 +120,6 @@ void Level::load()
             if(entity != nullptr)
                 m_entities.push_back(std::move(entity));
         }
-
     parseObjects(templates, doc.FirstChildElement("level"), docs);
     
     tinyxml2::XMLElement* world = doc.FirstChildElement("level")->FirstChildElement("world");
@@ -329,12 +328,14 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
                 original = parseEntityFromTemplate(originalName, templates, position, bindInstantly);
             if(original == nullptr)
                 return nullptr;
+
             auto xml = it->second;
             auto entity = original.get();
             if(it->second->Attribute("z") != nullptr)
                 entity->setDrawOrder(it->second->FloatAttribute("z"));
             if(auto constantsXml = xml->FirstChildElement("constants"))
                 LevelFileLoader::parseConstants(constantsXml, entity);
+
             if(original->hasPhysics())
             {
                 if(auto collider = xml->FirstChildElement("onCollision"))
@@ -359,6 +360,7 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
                         LevelFileLoader::parseConstants(constants, animation);
                 });
             }
+
             if(auto kill = parseEntityReference("onKill", xml, templates))
             {
                 entity->bindKillAnimationEntity(kill.get());
@@ -551,7 +553,6 @@ std::unique_ptr<Entity> Level::createEntity(
     
     bool respawnable = xml->BoolAttribute("respawnable");
     bool autoStop = xml->BoolAttribute("stopWithLastAnimation");
-
     bool isBullet = false;
     if(auto name = xml->Attribute("base"))
         entity = parseEntityFromTemplate(name, templates, position, false);
@@ -644,7 +645,6 @@ std::unique_ptr<Entity> Level::createEntity(
             }
         }
     }
-
     if(physic == nullptr)
         entity->setPosition(b2Vec2(static_cast<float>(utility::toMeter(position.x)),
                                    static_cast<float>(utility::toMeter(position.y))));
@@ -660,6 +660,7 @@ std::unique_ptr<Entity> Level::createEntity(
             sound->fixVolume(xml->FirstChildElement("sound")->FloatAttribute("volume"));
         entity->bindCollisionSound(std::move(sound));
     }
+
     if(xml->FirstChildElement("sounds") != nullptr)
     {
         std::vector<std::unique_ptr<SoundTrigger>> otherSounds;
@@ -672,9 +673,10 @@ std::unique_ptr<Entity> Level::createEntity(
         }
         entity->bindOtherSounds(std::move(otherSounds));
     }
+
     if(physic != nullptr)
         parsePhysics(physic, shape, entity.get(), position, templates, isBullet);
-    
+
     if(auto collider = xml->FirstChildElement("onCollision"))
         parseCollider(entity.get(), collider, templates);
 

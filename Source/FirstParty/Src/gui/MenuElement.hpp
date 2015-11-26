@@ -108,11 +108,13 @@ public:
     {
         m_screenLocation.setOffset(offset);
     }
-protected:
+
     virtual void updateLayout(const sf::Vector2f& screenSize)
     {
         m_screenLocation.setScreenSize(screenSize);
     }
+
+protected:
 
     const sf::Vector2f& getOffset() const
     {
