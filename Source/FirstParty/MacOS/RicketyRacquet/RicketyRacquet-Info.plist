@@ -16,9 +16,9 @@
 	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>NSHighResolutionCapable</key>
-	<true/>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>NSHighResolutionCapable</key>
+	<false/>
 </dict>
 </plist>
