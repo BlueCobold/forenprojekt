@@ -29,7 +29,7 @@ Animation::Animation(const unsigned int frames,
     m_horizontal(horizontal),
     m_externalRotation(0.f),
     m_drawOffset(drawOffset),
-    m_blending(sf::BlendAlpha),
+    m_blending(Blending::RegularAlpha),
     m_targetBuffer(UINT_MAX),
     m_isViewAligned(false),
     m_shader(nullptr),
@@ -92,6 +92,12 @@ void Animation::update()
         }
         color.a = static_cast<sf::Uint8>(255*alpha);
     }
+    if(m_blending == Blending::PreMultipliedAlpha)
+    {
+        color.r = color.r * color.a / 255;
+        color.g = color.b * color.a / 255;
+        color.b = color.g * color.a / 255;
+    }
     m_sprite.setColor(color);
 }
 
@@ -146,7 +152,7 @@ void Animation::setRotation(const float radians)
         m_externalRotation = utility::toDegree<float, float>(radians);
 }
 
-void Animation::setBlending(const sf::BlendMode mode)
+void Animation::setBlending(const Blending::Mode mode)
 {
     m_blending = mode;
 }
@@ -196,15 +202,20 @@ void Animation::draw(const DrawParameter& param)
     else if(!param.getScreenRect().intersects(m_sprite.getGlobalBounds()))
         return;
 
-    m_stencil.enable();
+    if(Animation::_renderStencilEffects)
+        m_stencil.enable();
+
     if(m_prepareTextureOnUse)
         param.prepareTexture(m_sprite.getTexture());
 
     if(m_shader)
         m_shader->prepare(param);
 
-    targetBuffer->draw(m_sprite, m_blending);
-    m_stencil.disable();
+    targetBuffer->draw(m_sprite, Blending::toSfmlMode(m_blending));
+
+    if(Animation::_renderStencilEffects)
+        m_stencil.disable();
+
     if(m_shader)
         m_shader->unbind();
 }
@@ -373,11 +384,8 @@ void Animation::setStencilInfo(StencilInfo info)
     _stencilAnimations.push_back(this);
 }
 
-void Animation::StencilInfo::enable()
+void StencilInfo::enable()
 {
-    if(!Animation::_renderStencilEffects)
-        return;
-
     if(mode == StencilInfo::Write)
     {
         gl::Enable(gl::STENCIL_TEST);
@@ -397,10 +405,8 @@ void Animation::StencilInfo::enable()
     }
 }
 
-void Animation::StencilInfo::disable()
+void StencilInfo::disable()
 {
-    if(!Animation::_renderStencilEffects)
-        return;
     if(mode != StencilInfo::None)
     {
         gl::Disable(gl::STENCIL_TEST);

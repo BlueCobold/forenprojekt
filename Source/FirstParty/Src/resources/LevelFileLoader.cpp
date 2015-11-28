@@ -200,7 +200,8 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
             bindOnUsage = true;
     }
     else
-    {   auto sheetName = xml->Attribute("spritesheet");
+    {
+        auto sheetName = xml->Attribute("spritesheet");
         auto spriteName = xml->Attribute("sprite");
         if(sheetName && spriteName && (sheet = resourceManager.getSpriteSheet(sheetName)) != nullptr)
         {
@@ -251,7 +252,6 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
         anim->alignToView(xml->BoolAttribute("alignToView"));
 
     anim->bindCloneHandler(cloneHandler);
-
     if(auto shaderName = xml->Attribute("shader"))
     {
         if(Shader::isUsable())
@@ -267,9 +267,9 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
         if(auto op = stencil->Attribute("op"))
         {
             if(std::string(op) == "write")
-                anim->setStencilInfo(Animation::StencilInfo(Animation::StencilInfo::Write, stencil->IntAttribute("ref"), stencil->IntAttribute("mask")));
+                anim->setStencilInfo(StencilInfo(StencilInfo::Write, stencil->IntAttribute("ref"), stencil->IntAttribute("mask")));
             if(std::string(op) == "test")
-                anim->setStencilInfo(Animation::StencilInfo(Animation::StencilInfo::Test, stencil->IntAttribute("ref"), stencil->IntAttribute("mask")));
+                anim->setStencilInfo(StencilInfo(StencilInfo::Test, stencil->IntAttribute("ref"), stencil->IntAttribute("mask")));
         }
     }
     anim->setStopOnAlphaZero(xml->BoolAttribute("stopOnAlphaZero"));
@@ -331,13 +331,13 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
 
     if(auto blend = xml->Attribute("blending"))
     {
-        sf::BlendMode mode = sf::BlendAlpha;
+        auto mode = Blending::RegularAlpha;
         if(std::string("add") == blend)
-            mode = sf::BlendAdd;
+            mode = Blending::Add;
         else if(std::string("mul") == blend)
-            mode = sf::BlendMultiply;
+            mode = Blending::Multiply;
         else if(std::string("premul") == blend)
-            mode = sf::BlendMode(sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha);
+            mode = Blending::PreMultipliedAlpha;
         anim->setBlending(mode);
     }
 

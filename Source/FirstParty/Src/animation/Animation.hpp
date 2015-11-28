@@ -22,33 +22,59 @@ class Shader;
 
 class CloneHandler;
 
+struct Blending
+{
+    enum Mode
+    {
+        RegularAlpha,
+        PreMultipliedAlpha,
+        Multiply,
+        Add
+    };
+    
+    static sf::BlendMode toSfmlMode(const Mode mode) 
+    {
+        switch (mode)
+        {
+            case RegularAlpha:
+                return sf::BlendAlpha;
+            case PreMultipliedAlpha:
+                return sf::BlendMode(sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha);
+            case Multiply:
+                return sf::BlendMultiply;
+            case Add:
+                return sf::BlendAdd;
+        }
+        return sf::BlendAlpha;
+    }
+};
+
+struct StencilInfo
+{
+    enum StencilMode
+    {
+        None,
+        Write,
+        Test
+    };
+    
+    StencilInfo(StencilMode mode = None, int ref = 0, int mask = 0) :
+        mode(mode),
+        ref(ref),
+        mask(mask)
+    { }
+    
+    void enable();
+    void disable();
+    
+    StencilMode mode;
+    int ref;
+    int mask;
+};
+
 class Animation : public Drawable, public VariableHolder, public Stoppable, public Cloneable<Animation>
 {
 public:
-
-    struct StencilInfo
-    {
-        enum StencilMode
-        {
-            None,
-            Write,
-            Test
-        };
-
-        StencilInfo(StencilMode mode = None, int ref = 0, int mask = 0)
-          : mode(mode),
-            ref(ref),
-            mask(mask)
-        { }
-
-        void enable();
-        void disable();
-
-        StencilMode mode;
-        int ref;
-        int mask;
-    };
-
 
     Animation(
         const unsigned int frames,
@@ -67,7 +93,7 @@ public:
 
     void setPosition(const float x, const float y);
     void setRotation(const float radians);
-    void setBlending(const sf::BlendMode mode);
+    void setBlending(const Blending::Mode mode);
     void bindTexture(const sf::Texture& texture, const sf::Vector2f& sourceOffset, bool prepareOnUsage = false);
     void bindFrameProvider(std::unique_ptr<ValueProvider> frames);
     void bindPositionController(std::unique_ptr<ValueProvider> x, std::unique_ptr<ValueProvider> y);
@@ -136,7 +162,7 @@ private:
     sf::Vector2f m_dynamicPosition;
     float m_externalRotation;
     sf::Vector2f m_drawOffset;
-    sf::BlendMode m_blending;
+    Blending::Mode m_blending;
     unsigned int m_targetBuffer;
     bool m_isViewAligned;
     Shader* m_shader;
