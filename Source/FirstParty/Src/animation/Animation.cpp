@@ -301,6 +301,7 @@ std::unique_ptr<Animation> Animation::clone() const
     ani->m_sizes = m_sizes;
     ani->m_offsets = m_offsets;
     ani->m_origins = m_origins;
+    ani->m_shader = m_shader;
     ani->copyValuesFrom(*this);
 
     std::array<std::unique_ptr<ValueProvider>, 4> colors;
