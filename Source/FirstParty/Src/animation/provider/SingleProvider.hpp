@@ -23,8 +23,6 @@ public:
             throw std::runtime_error(utility::translateKey("TheProviderNull"));
     }
 
-    virtual float getValue() = 0;
-
     virtual void reset() override
     {
         m_provider->reset();

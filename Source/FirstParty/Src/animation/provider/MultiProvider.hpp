@@ -25,8 +25,6 @@ public:
                 throw std::runtime_error(utility::translateKey("ProviderNull"));
     }
 
-    virtual float getValue() = 0;
-
     virtual void reset() override
     {
         for(auto it = begin(m_provider); it != end(m_provider); ++it)
