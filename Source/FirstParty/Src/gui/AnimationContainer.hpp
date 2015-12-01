@@ -21,13 +21,12 @@ public:
                        CloneHandler& cloneHandler);
     AnimationContainer(AnimationContainer&& toMove);
 
-    virtual std::unique_ptr<MenuElement> clone() const override;
+    std::unique_ptr<MenuElement> clone() const override;
 
-    virtual float getValueOf(const std::string& name) const override;
-    virtual void setValueOf(const std::string& name, const float value) override;
-    virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
-    virtual void draw(const DrawParameter& param) override;
-private:
+    float getValueOf(const std::string& name) const override;
+    void setValueOf(const std::string& name, const float value) override;
+    void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
+    void draw(const DrawParameter& param) override;
     void updateLayout(const sf::Vector2f& screenSize) override;
 };
 
