@@ -38,10 +38,6 @@ public:
 
     void registerOnClick(std::function<void(const Button& sender)> callback);
 
-    void changeIdleSprite(const int id, const sf::Sprite& sprite);
-    void changeHoverSprite(const int id, const sf::Sprite& sprite);
-    void changePressedSprite(const int id, const sf::Sprite& sprite);
-
     sf::RenderWindow& getRenderWindow() const;
 
     CheckBox& getCheckbox(int id) const;

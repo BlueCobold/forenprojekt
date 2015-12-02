@@ -11,8 +11,6 @@
 
 #include <tinyxml2.h>
 
-#include <fstream>
-
 LevelSelectState::LevelSelectState(sf::RenderWindow& screen, 
                                  ResourceManager& resourceManager, 
                                  AppConfig& config) :
@@ -166,9 +164,10 @@ void LevelSelectState::updateLeftButton()
     if(preview != end(m_textureCoordinates))
     {
         sf::Sprite sprite(*preview->second.texture, preview->second.rect);
-        m_menu.changeIdleSprite(LevelSelectMenu::BUTTON_LEFT, sprite);
-        m_menu.changeHoverSprite(LevelSelectMenu::BUTTON_LEFT, sprite);
-        m_menu.changePressedSprite(LevelSelectMenu::BUTTON_LEFT, sprite);
+        auto& b = m_menu.getButton(LevelSelectMenu::BUTTON_LEFT);
+        b.changeIdleSprite(sprite);
+        b.changeHoverSprite(sprite);
+        b.changePressedSprite(sprite);
     }
     m_menu.hideLeftButton(false);
 }
@@ -179,9 +178,10 @@ void LevelSelectState::updateRightButton()
     if(preview != end(m_textureCoordinates))
     {
         sf::Sprite sprite(*preview->second.texture, preview->second.rect);
-        m_menu.changeIdleSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
-        m_menu.changeHoverSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
-        m_menu.changePressedSprite(LevelSelectMenu::BUTTON_RIGHT, sprite);
+        auto& b = m_menu.getButton(LevelSelectMenu::BUTTON_RIGHT);
+        b.changeIdleSprite(sprite);
+        b.changeHoverSprite(sprite);
+        b.changePressedSprite(sprite);
     }
     m_menu.hideRightButton(false);
 }

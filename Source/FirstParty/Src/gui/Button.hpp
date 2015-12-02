@@ -27,13 +27,10 @@ private:
     bool m_showToolTip;
     bool m_isTriggering;
 
-    LineLabel* m_label;
-    sf::Sprite* m_sprite;
-    AnimationContainer* m_animation;
+    ButtonStateStyle* m_currentStyle;
 
     bool m_playHoverSound;
     bool m_playPressedSound;
-    bool m_resetAnimation;
 
     std::function<void (const Button& sender)> m_callback;
 
@@ -61,7 +58,7 @@ protected:
     void updateLayout(const sf::Vector2f& screenSize) override;
 
 private:
-    void setStyle(ButtonStateStyle& style, float time);
+    void setStyle(ButtonStateStyle& style, float time, const sf::Vector2f& screenSize);
 };
 
 #endif // BUTTON_HPP

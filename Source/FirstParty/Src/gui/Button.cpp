@@ -11,18 +11,31 @@ Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf
     m_playHoverSound(false),
     m_playPressedSound(false)
 {
-    m_sprite = &m_style.idleStyle.sprite;
-    m_label = &m_style.idleStyle.label;
-    m_animation = m_style.idleStyle.animation.get();
-    m_resetAnimation = m_style.idleStyle.resetOnExit;
+    m_currentStyle = &m_style.idleStyle;
 
     m_size.x = m_style.idleStyle.sprite.getTextureRect().width;
     m_size.y = m_style.idleStyle.sprite.getTextureRect().height;
+
+    if(m_style.idleStyle.animation != nullptr)
+    {
+        m_style.idleStyle.animation->setPosition(position);
+        m_style.idleStyle.animation->setOffset(offset + m_style.idleStyle.spriteOffset);
+    }
+    if(m_style.hoverStyle.animation != nullptr)
+    {
+        m_style.hoverStyle.animation->setPosition(position);
+        m_style.hoverStyle.animation->setOffset(offset + m_style.hoverStyle.spriteOffset);
+    }
+    if(m_style.pressedStyle.animation != nullptr)
+    {
+        m_style.pressedStyle.animation->setPosition(position);
+        m_style.pressedStyle.animation->setOffset(offset + m_style.pressedStyle.spriteOffset);
+    }
 }
 
 std::unique_ptr<MenuElement> Button::clone() const
 {
-    auto clone = std::unique_ptr<Button>(new Button(getId(), ButtonStyle(m_style), getPosition(), getOffset(), m_isTriggering));
+    auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), getOffset(), m_isTriggering));
     clone->setVisibleWhenId(getVisibleWhenId());
     clone->m_toolTip = m_toolTip;
     return std::move(clone);
@@ -30,7 +43,8 @@ std::unique_ptr<MenuElement> Button::clone() const
 
 void Button::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
-    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+    auto screenSize = static_cast<sf::Vector2f>(screen.getSize());
+    updateLayout(screenSize);
 
     auto currentPosition = getCurrentPosition();
     sf::IntRect buttonRect(static_cast<int>(currentPosition.x + m_style.mouseRect.left - getSize().x / 2),
@@ -52,7 +66,7 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
 
         if(utility::Mouse.leftButtonPressed())
         {
-            setStyle(m_style.pressedStyle, time);
+            setStyle(m_style.pressedStyle, time, screenSize);
 
             if(!m_playPressedSound && m_style.pressedStyle.sound)
             {
@@ -62,7 +76,7 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
         }
         else
         {
-            setStyle(m_style.hoverStyle, time);
+            setStyle(m_style.hoverStyle, time, screenSize);
             m_playPressedSound = false;
 
             if(m_isTriggering && utility::Mouse.leftButtonReleased() && m_callback != nullptr)
@@ -73,30 +87,27 @@ void Button::update(const sf::RenderWindow& screen, const float time, const sf::
     {
         m_playHoverSound = false;
         m_playPressedSound = false;
-        setStyle(m_style.idleStyle, time);
+        setStyle(m_style.idleStyle, time, screenSize);
         m_showToolTip = false;
     }
 
-    if(m_animation != nullptr)
-        m_animation->update(screen, time, mouseOffset);
+    if(m_currentStyle->animation != nullptr)
+        m_currentStyle->animation->update(screen, time, mouseOffset);
 }
 
-void Button::setStyle(ButtonStateStyle& style, float time)
+void Button::setStyle(ButtonStateStyle& style, float time, const sf::Vector2f& screenSize)
 {
-    m_sprite = &style.sprite;
-    m_label = &style.label;
-    
-    if(m_animation != style.animation.get())
+    if(m_currentStyle->animation != style.animation)
     {
-        if(m_resetAnimation)
+        if(m_currentStyle->resetOnExit)
         {
             m_style.idleStyle.animation->restartAt(time);
             m_style.hoverStyle.animation->restartAt(time);
             m_style.pressedStyle.animation->restartAt(time);
         }
-        m_animation = style.animation.get();
-        m_resetAnimation = style.resetOnExit;
     }
+    m_currentStyle = &style;
+    updateLayout(screenSize);
 }
 
 void Button::draw(const DrawParameter& params)
@@ -104,12 +115,12 @@ void Button::draw(const DrawParameter& params)
     if(!isVisible())
         return;
 
-    if(m_animation != nullptr)
-        m_animation->draw(params);
+    if(m_currentStyle->animation != nullptr)
+        m_currentStyle->animation->draw(params);
     else
     {
-        params.getTarget().draw(*m_sprite);
-        m_label->draw(params);
+        params.getTarget().draw(m_currentStyle->sprite);
+        m_currentStyle->label.draw(params);
     }
 }
 
@@ -165,14 +176,16 @@ void Button::changePressedSprite(const sf::Sprite& sprite)
 void Button::updateLayout(const sf::Vector2f& screenSize)
 {
     MenuElement::updateLayout(screenSize);
-    m_style.idleStyle.label.updateLayout(screenSize);
-    m_style.hoverStyle.label.updateLayout(screenSize);
-    m_style.pressedStyle.label.updateLayout(screenSize);
-
-    sf::Vector2f half = sf::Vector2f(getSize().x / 2.f, 0);
-    auto currentPosition = getCurrentPosition();
-
-    m_style.idleStyle.sprite.setPosition(currentPosition + m_style.idleStyle.spriteOffset - half);
-    m_style.hoverStyle.sprite.setPosition(currentPosition + m_style.hoverStyle.spriteOffset - half);
-    m_style.pressedStyle.sprite.setPosition(currentPosition + m_style.pressedStyle.spriteOffset - half);
+    
+    if(m_currentStyle->animation != nullptr)
+        m_currentStyle->animation->updateLayout(screenSize);
+    else
+    {
+        auto half = sf::Vector2f(getSize().x / 2.f, 0);
+        auto currentPosition = getCurrentPosition();
+        m_currentStyle->sprite.setPosition(currentPosition + m_currentStyle->spriteOffset - half);
+    }
+    
+    m_currentStyle->label.updateLayout(screenSize);
 }
+

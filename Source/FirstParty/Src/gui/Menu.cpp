@@ -111,21 +111,6 @@ Button& Menu::getButton(int id) const
     return *find<Button>(id, MenuElementType::Button);
 }
 
-void Menu::changeIdleSprite(const int id, const sf::Sprite& sprite)
-{
-    getButton(id).changeIdleSprite(sprite);
-}
-
-void Menu::changeHoverSprite(const int id, const sf::Sprite& sprite)
-{
-    getButton(id).changeHoverSprite(sprite);
-}
-
-void Menu::changePressedSprite(const int id, const sf::Sprite& sprite)
-{
-    getButton(id).changePressedSprite(sprite);
-}
-
 InputBox& Menu::getInputBox(int id) const
 {
     return *find<InputBox>(id, MenuElementType::InputBox);
