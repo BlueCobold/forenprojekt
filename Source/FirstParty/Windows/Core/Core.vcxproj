@@ -110,6 +110,7 @@
     <ClInclude Include="..\..\Src\animation\provider\CachedProvider.hpp" />
     <ClInclude Include="..\..\Src\animation\provider\Clamp.hpp" />
     <ClInclude Include="..\..\Src\animation\provider\Count.hpp" />
+    <ClInclude Include="..\..\Src\animation\provider\Delay.hpp" />
     <ClInclude Include="..\..\Src\animation\provider\FloatToInt.hpp" />
     <ClInclude Include="..\..\Src\animation\provider\IfPositive.hpp" />
     <ClInclude Include="..\..\Src\animation\provider\Inverse.hpp" />

@@ -631,6 +631,9 @@
     <ClInclude Include="..\..\Src\AndroidHelper.hpp">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\animation\provider\Delay.hpp">
+      <Filter>Headers\animation\provider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

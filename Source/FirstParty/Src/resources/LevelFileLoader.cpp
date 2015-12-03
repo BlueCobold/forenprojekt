@@ -6,6 +6,7 @@
 #include "../animation/provider/CachedProvider.hpp"
 #include "../animation/provider/Clamp.hpp"
 #include "../animation/provider/Count.hpp"
+#include "../animation/provider/Delay.hpp"
 #include "../animation/provider/FloatToInt.hpp"
 #include "../animation/provider/IfPositive.hpp"
 #include "../animation/provider/Inverse.hpp"
@@ -186,7 +187,6 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
     int frames = 1;
     if(frameIndex != nullptr)
         frames = frameIndex->IntAttribute("frames");
-
     const sf::Texture* texture = nullptr;
     bool bindOnUsage = false;
     const SpriteSheet* sheet = nullptr;
@@ -211,7 +211,6 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
     }
     if(texture == nullptr)
         throw std::runtime_error(utility::translateKey("NoTextureFound"));
-
     int width = -1, height = -1;
     if(sheet != nullptr)
     {
@@ -305,7 +304,6 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
     parseScaleController(anim.get(), xml, animated, handler, functions, cloneHandler);
     parseColorController(anim.get(), xml, animated, handler, functions, cloneHandler);
     parseRotationController(anim.get(), xml, animated, handler, functions, cloneHandler);
-
     if(auto constants = xml->FirstChildElement("constants"))
         parseConstants(constants, anim.get());
 
@@ -483,7 +481,10 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(const tinyxml2::XM
             return std::unique_ptr<Negate>(new Negate(std::move(providers[0])));
         else if(std::string(xml->Name())=="ramp")
             return std::unique_ptr<Ramp>(new Ramp(xml->FloatAttribute("min"), xml->FloatAttribute("max"),
-                std::move(providers[0])));
+                                                  std::move(providers[0])));
+        else if(std::string(xml->Name())=="delay")
+            return std::unique_ptr<Delay>(new Delay(xml->FloatAttribute("start"), xml->FloatAttribute("duration"),
+                                                  std::move(providers[0])));
         else if(std::string(xml->Name())=="inv")
             return std::unique_ptr<Inverse>(new Inverse(std::move(providers[0])));
     }
