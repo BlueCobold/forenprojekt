@@ -21,7 +21,8 @@ class ShaderLoader
 {
 public:
 
-    static Shader* loadShader(const std::string& vertexPath, 
+    static std::unique_ptr<Shader> loadShader(
+                              const std::string& vertexPath,
                               const std::string& fragmentPath, 
                               const std::string& definitionPath,
                               ResourceManager& resourceManager)
@@ -31,12 +32,10 @@ public:
 
         auto shader = std::unique_ptr<Shader>(new Shader(resourcePath() + "res/shader/" + vertexPath,
                                                          resourcePath() + "res/shader/" + fragmentPath));
-        auto sp = shader.get();
 
         loadConfig(shader.get(), definitionPath, resourceManager);
 
-        shader.release();
-        return sp;
+        return shader;
     }
 
     static void loadConfig(Shader* shader, const std::string& path, ResourceManager& resourceManager)

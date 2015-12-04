@@ -45,14 +45,12 @@ ResourceManager::~ResourceManager()
     m_soundManager->clear();
 }
 
-sf::Texture* ResourceManager::loadTexture(const std::string& path, bool smooth)
+std::unique_ptr<sf::Texture> ResourceManager::loadTexture(const std::string& path, bool smooth)
 {
-    sf::Texture* texture = new sf::Texture;
-    if(!texture->loadFromFile(resourcePath() + "res/img/" + path))
-    {
-        delete texture; // No memory leak
+    auto texture = std::unique_ptr<sf::Texture>(new sf::Texture);
+    auto fullPath = packedPath() + "res/img/" + path;
+    if(!texture->loadFromFile(fullPath))
         return nullptr;
-    }
     else
     {
         texture->setSmooth(smooth);
@@ -61,59 +59,47 @@ sf::Texture* ResourceManager::loadTexture(const std::string& path, bool smooth)
     }
 }
 
-sf::Font* ResourceManager::loadFont(const std::string& path)
+std::unique_ptr<sf::Font> ResourceManager::loadFont(const std::string& path)
 {
-    sf::Font* font = new sf::Font;
+    auto font = std::unique_ptr<sf::Font>(new sf::Font);
     if(!font->loadFromFile(resourcePath() + "res/font/" + path))
-    {
-        delete font;
         return nullptr;
-    }
     else
         return font;
 }
 
 #ifndef NO_SOUND
-sf::SoundBuffer* ResourceManager::loadSoundBuffer(const std::string& path)
+std::unique_ptr<sf::SoundBuffer> ResourceManager::loadSoundBuffer(const std::string& path)
 {
-    sf::SoundBuffer* soundBuffer = new sf::SoundBuffer;
-    if(!soundBuffer->loadFromFile(resourcePath() + "res/audio/" + path))
-    {
-        delete soundBuffer;
+    auto soundBuffer = std::unique_ptr<sf::SoundBuffer>(new sf::SoundBuffer);
+    if(!soundBuffer->loadFromFile(packedPath() + "res/audio/" + path))
         return nullptr;
-    }
     else
         return soundBuffer;
 }
 #endif
 
-BitmapFont* ResourceManager::loadBitmapFont(const std::string& path)
+std::unique_ptr<BitmapFont> ResourceManager::loadBitmapFont(const std::string& path)
 {
-    BitmapFont* font = new BitmapFont;
+    auto font = std::unique_ptr<BitmapFont>(new BitmapFont);
     if(!font->loadFromFile(resourcePath() + "res/bitmapfont/" + path, *this))
-    {
-        delete font;
         return nullptr;
-    }
     else
         return font;
 }
 
-SpriteSheet* ResourceManager::loadSpriteSheet(const std::string& path)
+std::unique_ptr<SpriteSheet> ResourceManager::loadSpriteSheet(const std::string& path)
 {
-    SpriteSheet* sheet = new SpriteSheet;
+    auto sheet = std::unique_ptr<SpriteSheet>(new SpriteSheet);
     if(!sheet->loadFromFile(resourcePath() + "res/spritesheet/" + path))
-    {
-        delete sheet;
         return nullptr;
-    }
     else
         return sheet;
 }
 
-CryptoPP::RSA::PublicKey* ResourceManager::loadPublicKey(const std::string& path)
+std::unique_ptr<CryptoPP::RSA::PublicKey> ResourceManager::loadPublicKey(const std::string& path)
 {
-    CryptoPP::RSA::PublicKey* publicKey = new CryptoPP::RSA::PublicKey;
+    auto publicKey = std::unique_ptr<CryptoPP::RSA::PublicKey>(new CryptoPP::RSA::PublicKey);
     CryptoPP::ByteQueue queue;
     CryptoPP::FileSource file((resourcePath() + "res/key/" + path).c_str(), true);
 
@@ -123,14 +109,11 @@ CryptoPP::RSA::PublicKey* ResourceManager::loadPublicKey(const std::string& path
     return publicKey;
 }
 
-sf::Music* ResourceManager::loadMusic(const std::string& path)
+std::unique_ptr<sf::Music> ResourceManager::loadMusic(const std::string& path)
 {
-    sf::Music* music = new sf::Music;
-    if(!music->openFromFile(resourcePath() + "res/music/" + path))
-    {
-        delete music;
+    auto music = std::unique_ptr<sf::Music>(new sf::Music);
+    if(!music->openFromFile(packedPath() + "res/music/" + path))
         return nullptr;
-    }
     else
         return music;
 }
@@ -139,9 +122,9 @@ const BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
 {
     auto self = this;
     return getOrFail<const BitmapFont, std::string>(m_bitmapFontKeys, m_bitmapFonts, key,
-        [=](const std::string& path)->std::function<BitmapFont*()>
+        [=](const std::string& path)->std::function<std::unique_ptr<const BitmapFont>()>
         {
-            return [=](){ return self->loadBitmapFont(path); };
+            return [=](){ return std::move(self->loadBitmapFont(path)); };
         }, "UnknownBitmapFont");
 }
 
@@ -149,7 +132,7 @@ const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
 {
     auto self = this;
     return getOrFail<MenuTemplate, std::string>(m_menuKeys, m_menus, key,
-        [=](const std::string& path)->std::function<MenuTemplate*()>
+        [=](const std::string& path)->std::function<std::unique_ptr<MenuTemplate>()>
         {
             return [=](){ return MenuLoader::loadMenuTemplate(std::string("res/menus/") + path, *self); };
         }, "UnknownMenuTemplate");
@@ -159,7 +142,7 @@ const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
 sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
 {
     return getOrFail<sf::SoundBuffer, std::string>(m_soundBufferKeys, m_soundBuffers, key,
-        [=](const std::string& path)->std::function<sf::SoundBuffer*()>
+        [=](const std::string& path)->std::function<std::unique_ptr<sf::SoundBuffer>()>
         {
             return [=](){ return ResourceManager::loadSoundBuffer(path); };
         }, "UnknownSound");
@@ -169,7 +152,7 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
 const sf::Texture* ResourceManager::getTexture(const std::string& key)
 {
     return getOrFail<const sf::Texture, TextureParams>(m_textureKeys, m_textures, key,
-        [=](const TextureParams& params)->std::function<const sf::Texture*()>
+        [=](const TextureParams& params)->std::function<std::unique_ptr<const sf::Texture>()>
         {
             return [=](){ return ResourceManager::loadTexture(std::get<0>(params), std::get<1>(params)); };
         }, "UnknownTexture");
@@ -187,7 +170,7 @@ Shader* ResourceManager::getShader(const std::string& key)
 
     auto self = this;
     return getOrFail<Shader, ShaderParams>(m_shaderKeys, m_shaders, key,
-        [=](const ShaderParams& params)->std::function<Shader*()>
+        [=](const ShaderParams& params)->std::function<std::unique_ptr<Shader>()>
         {
             return [=](){ return ShaderLoader::loadShader(std::get<0>(params), std::get<1>(params), std::get<2>(params), *self); };
         }, "UnknownShader");
@@ -201,7 +184,7 @@ ShaderContext& ResourceManager::getShaderContext() const
 const SpriteSheet* ResourceManager::getSpriteSheet(const std::string& key)
 {
     return getOrFail<const SpriteSheet, std::string>(m_spriteSheetKeys, m_spriteSheets, key,
-        [=](const std::string& path)->std::function<SpriteSheet*()>
+        [=](const std::string& path)->std::function<std::unique_ptr<SpriteSheet>()>
         {
             return [=](){ return ResourceManager::loadSpriteSheet(path); };
         }, "UnknownSpriteSheet");
@@ -210,7 +193,7 @@ const SpriteSheet* ResourceManager::getSpriteSheet(const std::string& key)
 const sf::Font* ResourceManager::getFont(const std::string& key)
 {
     return getOrFail<const sf::Font, std::string>(m_fontKeys, m_fonts, key,
-        [=](const std::string& path)->std::function<sf::Font*()>
+        [=](const std::string& path)->std::function<std::unique_ptr<sf::Font>()>
         {
             return [=](){ return ResourceManager::loadFont(path); };
         }, "UnknownFont");
@@ -384,7 +367,7 @@ void ResourceManager::parseMusic(tinyxml2::XMLDocument& doc)
 sf::Music* ResourceManager::getMusic(const std::string& key)
 {
     return getOrFail<sf::Music, std::string>(m_musicKeys, m_music, key,
-        [=](const std::string& path)->std::function<sf::Music*()>
+        [=](const std::string& path)->std::function<std::unique_ptr<sf::Music>()>
         {
             return [=](){ return ResourceManager::loadMusic(path); };
         }, "UnknownMusic");

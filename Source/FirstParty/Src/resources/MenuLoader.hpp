@@ -28,7 +28,7 @@ class MenuLoader
 {
 public:
 
-    static MenuTemplate* loadMenuTemplate(const std::string& path, ResourceManager& resourceManager);
+    static std::unique_ptr<MenuTemplate> loadMenuTemplate(const std::string& path, ResourceManager& resourceManager);
 
 private:
 
@@ -86,16 +86,16 @@ private:
         const tinyxml2::XMLElement* menuXml,
         ResourceManager& resourceManager);
 
-    static std::unordered_map<std::string, ButtonStyle> parseButtonStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
-    static std::unordered_map<std::string, SoundObject> parseSounds(tinyxml2::XMLElement* menuXml, SoundManager& soundManager);
-    static std::unordered_map<std::string, CheckBoxStyle> parseCheckBoxStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
-    static std::unordered_map<std::string, SliderStyle> parseSliderStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
-    static std::unordered_map<std::string, ToolTip> parseToolTipStyle(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
-    static std::unordered_map<std::string, InputBoxStyle> parseInputBoxStyle(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, ButtonStyle> parseButtonStyles(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, SoundObject> parseSounds(const tinyxml2::XMLElement* menuXml, SoundManager& soundManager);
+    static std::unordered_map<std::string, CheckBoxStyle> parseCheckBoxStyles(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, SliderStyle> parseSliderStyles(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, ToolTip> parseToolTipStyle(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, InputBoxStyle> parseInputBoxStyle(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
 
-    static ButtonStateStyle loadButtonStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
-    static CheckBoxStateStyle loadCheckBoxStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
-    static SliderStateStyle loadSliderStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
+    static ButtonStateStyle loadButtonStateStyle(const tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
+    static CheckBoxStateStyle loadCheckBoxStateStyle(const tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
+    static SliderStateStyle loadSliderStateStyle(const tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
 };
 
 #endif // MENU_LOADER_HPP

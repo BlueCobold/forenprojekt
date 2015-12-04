@@ -83,15 +83,15 @@ private:
                       const std::string& element,
                       std::function<void(const tinyxml2::XMLElement*)> operation);
 
-    static sf::Texture* loadTexture(const std::string& path, bool smooth);
-    static sf::Font* loadFont(const std::string& path);
+    static std::unique_ptr<sf::Texture> loadTexture(const std::string& path, bool smooth);
+    static std::unique_ptr<sf::Font> loadFont(const std::string& path);
 #ifndef NO_SOUND
-    static sf::SoundBuffer* loadSoundBuffer(const std::string& path);
+    static std::unique_ptr<sf::SoundBuffer> loadSoundBuffer(const std::string& path);
 #endif
-    BitmapFont* loadBitmapFont(const std::string& path);
-    static SpriteSheet* loadSpriteSheet(const std::string& path);
-    static CryptoPP::RSA::PublicKey* loadPublicKey(const std::string& path);
-    static sf::Music* loadMusic(const std::string& path);
+    std::unique_ptr<BitmapFont> loadBitmapFont(const std::string& path);
+    static std::unique_ptr<SpriteSheet> loadSpriteSheet(const std::string& path);
+    static std::unique_ptr<CryptoPP::RSA::PublicKey> loadPublicKey(const std::string& path);
+    static std::unique_ptr<sf::Music> loadMusic(const std::string& path);
 
 private:
 
@@ -130,7 +130,7 @@ private:
     C* getOrFail(std::unordered_map<std::string, T>& container,
                  ResourceCache<C>& cache,
                  const std::string& key,
-                 std::function<std::function<C*()>(const T&)> operation,
+                 std::function<std::function<std::unique_ptr<C>()>(const T&)> operation,
                  const std::string& errorKey)
     {
         auto result = cache.get(key);

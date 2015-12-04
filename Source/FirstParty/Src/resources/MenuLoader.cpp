@@ -60,7 +60,7 @@ void addAll(std::vector<std::unique_ptr<T>> source, std::vector<std::unique_ptr<
         target.push_back(std::move(*it));
 }
 
-MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager)
+std::unique_ptr<MenuTemplate> MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager)
 {
     tinyxml2::XMLDocument doc;
     doc.LoadFile((resourcePath() + path).c_str());
@@ -70,11 +70,11 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
         doc.PrintError();
         throw std::runtime_error(utility::replace(utility::translateKey("MenuFileInvalid"), path));
     }
-    tinyxml2::XMLElement* menuXml = doc.FirstChildElement("menu");
+    auto menuXml = doc.FirstChildElement("menu");
     if(menuXml == nullptr)
         throw std::runtime_error(utility::replace(utility::translateKey("MenuEntryMissing"), path));
 
-    MenuTemplate menu;
+    auto menu = std::unique_ptr<MenuTemplate>(new MenuTemplate);
 
     std::unordered_map<std::string, ButtonStyle> buttonStyles = parseButtonStyles(menuXml, resourceManager);
     std::unordered_map<std::string, CheckBoxStyle> checkboxStyles = parseCheckBoxStyles(menuXml, resourceManager);
@@ -82,17 +82,17 @@ MenuTemplate* MenuLoader::loadMenuTemplate(const std::string& path, ResourceMana
     std::unordered_map<std::string, ToolTip> toolTip = parseToolTipStyle(menuXml, resourceManager);
     std::unordered_map<std::string, InputBoxStyle> inputBoxStyle = parseInputBoxStyle(menuXml, resourceManager);
 
-    addAll(parseButtons(menuXml, buttonStyles, toolTip, resourceManager), menu.menuElements);
-    addAll(parseCheckBoxes(menuXml, checkboxStyles, toolTip, resourceManager), menu.menuElements);
-    addAll(parseSliders(menuXml, sliderStyles, resourceManager), menu.menuElements);
-    addAll(parseLabels(menuXml, resourceManager), menu.menuElements);
-    addAll(parseInteractiveLabels(menuXml, toolTip, resourceManager), menu.menuElements);
-    addAll(parseImages(menuXml, toolTip, resourceManager), menu.menuElements);
-    addAll(parseInputBox(menuXml, inputBoxStyle, resourceManager), menu.menuElements);
-    addAll(parseAnimationContainer(menuXml, resourceManager), menu.menuElements);
-    addAll(parseSubWindow(menuXml, resourceManager, toolTip, sliderStyles, checkboxStyles, buttonStyles), menu.menuElements);
+    addAll(parseButtons(menuXml, buttonStyles, toolTip, resourceManager), menu->menuElements);
+    addAll(parseCheckBoxes(menuXml, checkboxStyles, toolTip, resourceManager), menu->menuElements);
+    addAll(parseSliders(menuXml, sliderStyles, resourceManager), menu->menuElements);
+    addAll(parseLabels(menuXml, resourceManager), menu->menuElements);
+    addAll(parseInteractiveLabels(menuXml, toolTip, resourceManager), menu->menuElements);
+    addAll(parseImages(menuXml, toolTip, resourceManager), menu->menuElements);
+    addAll(parseInputBox(menuXml, inputBoxStyle, resourceManager), menu->menuElements);
+    addAll(parseAnimationContainer(menuXml, resourceManager), menu->menuElements);
+    addAll(parseSubWindow(menuXml, resourceManager, toolTip, sliderStyles, checkboxStyles, buttonStyles), menu->menuElements);
     
-    return new MenuTemplate(std::move(menu));
+    return menu;
 }
 
 std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
@@ -378,22 +378,22 @@ std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
     return elements;
 }
 
-std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, ButtonStyle> buttonStyles;
     if(auto styles = menuXml->FirstChildElement("styles"))
     {
-        std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
+        tinyxml2::XMLDocument doc;
         std::string filename = resourcePath() + utility::toString("res/menus/") + styles->Attribute("source");
-        doc->LoadFile(filename.c_str());
+        doc.LoadFile(filename.c_str());
 
-        if(doc->Error())
+        if(doc.Error())
         {
-            doc->PrintError();
+            doc.PrintError();
             throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
         }
 
-        for(auto styleXml = doc->FirstChildElement("styles")->FirstChildElement("buttonStyle");
+        for(auto styleXml = doc.FirstChildElement("styles")->FirstChildElement("buttonStyle");
             styleXml != nullptr; styleXml = styleXml->NextSiblingElement("buttonStyle"))
         {
             ButtonStyle style;
@@ -410,7 +410,7 @@ std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(tinyx
     return buttonStyles;
 }
 
-ButtonStateStyle MenuLoader::loadButtonStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
+ButtonStateStyle MenuLoader::loadButtonStateStyle(const tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
 {
     ButtonStateStyle style;
     style.font = resourceManager.getBitmapFont(xml->Attribute("font"));
@@ -448,22 +448,22 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(tinyxml2::XMLElement* xml, Res
     return style;
 }
 
-std::unordered_map<std::string, CheckBoxStyle> MenuLoader::parseCheckBoxStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+std::unordered_map<std::string, CheckBoxStyle> MenuLoader::parseCheckBoxStyles(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, CheckBoxStyle> checkboxStyles;
     if(auto styles = menuXml->FirstChildElement("styles"))
     {
-        std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
+        tinyxml2::XMLDocument doc;
         std::string filename = resourcePath() + utility::toString("res/menus/") + styles->Attribute("source");
-        doc->LoadFile(filename.c_str());
+        doc.LoadFile(filename.c_str());
 
-        if(doc->Error())
+        if(doc.Error())
         {
-            doc->PrintError();
+            doc.PrintError();
             throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
         }
 
-        for(auto styleXml = doc->FirstChildElement("styles")->FirstChildElement("checkboxStyle");
+        for(auto styleXml = doc.FirstChildElement("styles")->FirstChildElement("checkboxStyle");
             styleXml != nullptr; styleXml = styleXml->NextSiblingElement("checkboxStyle"))
         {
             CheckBoxStyle style;
@@ -482,7 +482,7 @@ std::unordered_map<std::string, CheckBoxStyle> MenuLoader::parseCheckBoxStyles(t
     return checkboxStyles;
 }
 
-CheckBoxStateStyle MenuLoader::loadCheckBoxStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
+CheckBoxStateStyle MenuLoader::loadCheckBoxStateStyle(const tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
 {
     CheckBoxStateStyle style;
     style.spriteOffset = sf::Vector2f(xml->FloatAttribute("offsetx"), xml->FloatAttribute("offsety"));
@@ -490,22 +490,22 @@ CheckBoxStateStyle MenuLoader::loadCheckBoxStateStyle(tinyxml2::XMLElement* xml,
     return style;
 }
 
-std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, SliderStyle> sliderStyles;
     if(auto styles = menuXml->FirstChildElement("styles"))
     {
-        std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
+        tinyxml2::XMLDocument doc;
         std::string filename = resourcePath() + utility::toString("res/menus/") + styles->Attribute("source");
-        doc->LoadFile(filename.c_str());
+        doc.LoadFile(filename.c_str());
 
-        if(doc->Error())
+        if(doc.Error())
         {
-            doc->PrintError();
+            doc.PrintError();
             throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
         }
 
-        for(auto styleXml = doc->FirstChildElement("styles")->FirstChildElement("sliderStyle");
+        for(auto styleXml = doc.FirstChildElement("styles")->FirstChildElement("sliderStyle");
             styleXml != nullptr; styleXml = styleXml->NextSiblingElement("sliderStyle"))
         {
             SliderStyle style;
@@ -529,7 +529,7 @@ std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(tinyx
     return sliderStyles;
 }
 
-SliderStateStyle MenuLoader::loadSliderStateStyle(tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
+SliderStateStyle MenuLoader::loadSliderStateStyle(const tinyxml2::XMLElement* xml, ResourceManager& resourceManager)
 {
     SliderStateStyle style;
     style.backgroundOffset = sf::Vector2f(xml->FloatAttribute("backgroundoffsetx"), xml->FloatAttribute("backgroundoffsety"));
@@ -540,22 +540,22 @@ SliderStateStyle MenuLoader::loadSliderStateStyle(tinyxml2::XMLElement* xml, Res
     return style;
 }
 
-std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, ToolTip> toolTip;
     if(auto styles = menuXml->FirstChildElement("styles"))
     {
-        std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
+        tinyxml2::XMLDocument doc;
         std::string filename = resourcePath() + utility::toString("res/menus/") + styles->Attribute("source");
-        doc->LoadFile(filename.c_str());
+        doc.LoadFile(filename.c_str());
 
-        if(doc->Error())
+        if(doc.Error())
         {
-            doc->PrintError();
+            doc.PrintError();
             throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
         }
 
-        for(auto tooltipXml = doc->FirstChildElement("styles")->FirstChildElement("tooltipStyle");
+        for(auto tooltipXml = doc.FirstChildElement("styles")->FirstChildElement("tooltipStyle");
             tooltipXml != nullptr; tooltipXml = tooltipXml->NextSiblingElement("tooltipStyle"))
         {
             sf::Sprite texture;
@@ -587,22 +587,22 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(tinyxml2:
     return toolTip;
 }
 
-std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
+std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, InputBoxStyle> inputBoxStyle;
     if(auto styles = menuXml->FirstChildElement("styles"))
     {
-        std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
+        tinyxml2::XMLDocument doc;
         std::string filename = resourcePath() + utility::toString("res/menus/") + styles->Attribute("source");
-        doc->LoadFile(filename.c_str());
+        doc.LoadFile(filename.c_str());
 
-        if(doc->Error())
+        if(doc.Error())
         {
-            doc->PrintError();
+            doc.PrintError();
             throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
         }
 
-        for(auto inputBoxStyleXml = doc->FirstChildElement("styles")->FirstChildElement("inputboxStyle");
+        for(auto inputBoxStyleXml = doc.FirstChildElement("styles")->FirstChildElement("inputboxStyle");
             inputBoxStyleXml != nullptr; inputBoxStyleXml = inputBoxStyleXml->NextSiblingElement("inputboxStyle"))
         {
             auto styleName = inputBoxStyleXml->Attribute("name");
@@ -680,8 +680,9 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
             animationContainer != nullptr; animationContainer = animationContainer->NextSiblingElement("animationContainer"))
         {
             int id = animationContainer->IntAttribute("id");
-            sf::Vector2f position = sf::Vector2f(animationContainer->FloatAttribute("x"), animationContainer->FloatAttribute("y"));
-            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(sf::Vector2f(), position, id, _cloneHandler));
+            auto position = sf::Vector2f(animationContainer->FloatAttribute("x"), animationContainer->FloatAttribute("y"));
+            auto offset = sf::Vector2f(animationContainer->FloatAttribute("offsetx"), animationContainer->FloatAttribute("offsety"));
+            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(position, offset, id, _cloneHandler));
             std::unordered_map<std::string, const tinyxml2::XMLElement*> functions;
             if(auto animations = animationContainer->FirstChildElement("animations"))
             {

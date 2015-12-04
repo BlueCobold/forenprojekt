@@ -4,25 +4,24 @@
 #define RESOURCE_CACHE_HPP
 
 #include <exception>
-#include <functional> // function
+#include <functional>
 #include <map>
-#include <memory> // unique_ptr
+#include <memory>
 #include <string>
-#include <utility> // make_pair
+#include <utility>
 #include "../Utility.hpp"
 
-/// This class is a light header-only ResourceManager
+/// This class is a light header-only cache
 /// and is capabale of handling all sorts of resources,
 /// including the ones from SFML.
-/// Author & Maintainer: ftb
 template <typename T>
 class ResourceCache
 {
 public:
 
     typedef std::string Key;
-    typedef std::unique_ptr<T> Value;
-    typedef std::function<T*()> Functor;
+    typedef std::unique_ptr<T> Resource;
+    typedef std::function<std::unique_ptr<T>()> Functor;
 
 public:
 
@@ -36,8 +35,9 @@ public:
         if(resource == nullptr)
             throw std::runtime_error(utility::replace(utility::translateKey("LoadFail"), key));
 
-        m_resources.insert(std::make_pair(key, std::unique_ptr<T>(resource)));
-        return resource;
+        auto ptr = resource.get();
+        m_resources.insert(std::make_pair(key, std::move(resource)));
+        return ptr;
     }
 
     bool exists(const Key& key)
@@ -67,7 +67,7 @@ public:
 
 private:
 
-    std::map<Key, Value> m_resources;
+    std::map<Key, Resource> m_resources;
     std::map<Key, T*> m_externalResources;
 };
 
