@@ -106,7 +106,11 @@ void LoadLevelState::loadLevel()
 #endif
         m_lastLevel = m_level.get();
     }
-    catch(std::runtime_error e)
+    catch(std::bad_alloc& e)
+    {
+        m_loadingErrorMessage = e.what();
+    }
+    catch(std::runtime_error& e)
     {
         m_loadingErrorMessage = e.what();
     }
