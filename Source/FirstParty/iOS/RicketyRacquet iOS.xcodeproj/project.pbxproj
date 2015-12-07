@@ -114,6 +114,8 @@
 		6E74608A1A1B87D7001595DE /* res in Resources */ = {isa = PBXBuildFile; fileRef = 6E7460871A1B87D7001595DE /* res */; };
 		6E74608B1A1B87D7001595DE /* Config.ini in Resources */ = {isa = PBXBuildFile; fileRef = 6E7460881A1B87D7001595DE /* Config.ini */; };
 		6E74608C1A1B87D7001595DE /* stash.dat in Resources */ = {isa = PBXBuildFile; fileRef = 6E7460891A1B87D7001595DE /* stash.dat */; };
+		6E93C3CB1BB428E9009980E1 /* libCryptoPPios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E93C3CA1BB428E9009980E1 /* libCryptoPPios.a */; settings = {ASSET_TAGS = (); }; };
+		6E93C3CD1BB42AFB009980E1 /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E93C3CC1BB42AFB009980E1 /* libFreetype2.a */; settings = {ASSET_TAGS = (); }; };
 		6EC866B51B807264004192B1 /* AchievementState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8668E1B807264004192B1 /* AchievementState.cpp */; };
 		6EC866B61B807264004192B1 /* CoinShopState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866901B807264004192B1 /* CoinShopState.cpp */; };
 		6EC866B71B807264004192B1 /* CreditMenuState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866921B807264004192B1 /* CreditMenuState.cpp */; };
@@ -145,10 +147,8 @@
 		6ED3AE751B4D940E00E32567 /* RandomProvider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE741B4D940E00E32567 /* RandomProvider.cpp */; };
 		6ED3AE7A1B4D942A00E32567 /* AchievementMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE761B4D942A00E32567 /* AchievementMenu.cpp */; };
 		6ED3AE7B1B4D942A00E32567 /* InteractiveLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ED3AE781B4D942A00E32567 /* InteractiveLabel.cpp */; };
-		6ED3B0131B4DA2BB00E32567 /* libCryptoPPios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B0121B4DA2BB00E32567 /* libCryptoPPios.a */; };
 		6ED3B0151B4DAB9000E32567 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B0141B4DAB9000E32567 /* libjpeg.a */; };
 		6ED3B01D1B4DAD0F00E32567 /* libflac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B0161B4DAD0F00E32567 /* libflac.a */; };
-		6ED3B01E1B4DAD0F00E32567 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B0171B4DAD0F00E32567 /* libfreetype.a */; };
 		6ED3B01F1B4DAD0F00E32567 /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B0181B4DAD0F00E32567 /* libjpeg.a */; };
 		6ED3B0201B4DAD0F00E32567 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B0191B4DAD0F00E32567 /* libogg.a */; };
 		6ED3B0211B4DAD0F00E32567 /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED3B01A1B4DAD0F00E32567 /* libvorbis.a */; };
@@ -444,6 +444,8 @@
 		6E7460871A1B87D7001595DE /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; name = res; path = ../../Game/res; sourceTree = "<group>"; };
 		6E7460881A1B87D7001595DE /* Config.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Config.ini; path = ../../Game/Config.ini; sourceTree = "<group>"; };
 		6E7460891A1B87D7001595DE /* stash.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = stash.dat; path = ../../Game/stash.dat; sourceTree = "<group>"; };
+		6E93C3CA1BB428E9009980E1 /* libCryptoPPios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCryptoPPios.a; path = ../../../../cryptopp562/build/CryptoPP/libCryptoPPios.a; sourceTree = "<group>"; };
+		6E93C3CC1BB42AFB009980E1 /* libFreetype2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFreetype2.a; path = "../../ThirdParty/lib-ios/libFreetype2.a"; sourceTree = "<group>"; };
 		6EC8668E1B807264004192B1 /* AchievementState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AchievementState.cpp; path = ../state/AchievementState.cpp; sourceTree = "<group>"; };
 		6EC8668F1B807264004192B1 /* AchievementState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AchievementState.hpp; path = ../state/AchievementState.hpp; sourceTree = "<group>"; };
 		6EC866901B807264004192B1 /* CoinShopState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CoinShopState.cpp; path = ../state/CoinShopState.cpp; sourceTree = "<group>"; };
@@ -509,10 +511,8 @@
 		6ED3AE771B4D942A00E32567 /* AchievementMenu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AchievementMenu.hpp; sourceTree = "<group>"; };
 		6ED3AE781B4D942A00E32567 /* InteractiveLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InteractiveLabel.cpp; sourceTree = "<group>"; };
 		6ED3AE791B4D942A00E32567 /* InteractiveLabel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InteractiveLabel.hpp; sourceTree = "<group>"; };
-		6ED3B0121B4DA2BB00E32567 /* libCryptoPPios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCryptoPPios.a; path = ../../../../cryptopp562/build/CryptoPP/Build/Products/libCryptoPPios.a; sourceTree = "<group>"; };
 		6ED3B0141B4DAB9000E32567 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = "../../../../SFML/extlibs/libs-ios/libjpeg.a"; sourceTree = "<group>"; };
 		6ED3B0161B4DAD0F00E32567 /* libflac.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libflac.a; path = "../../../../SFML-ios/extlibs/libs-ios/libflac.a"; sourceTree = "<group>"; };
-		6ED3B0171B4DAD0F00E32567 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = "../../../../SFML-ios/extlibs/libs-ios/libfreetype.a"; sourceTree = "<group>"; };
 		6ED3B0181B4DAD0F00E32567 /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = "../../../../SFML-ios/extlibs/libs-ios/libjpeg.a"; sourceTree = "<group>"; };
 		6ED3B0191B4DAD0F00E32567 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = "../../../../SFML-ios/extlibs/libs-ios/libogg.a"; sourceTree = "<group>"; };
 		6ED3B01A1B4DAD0F00E32567 /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = "../../../../SFML-ios/extlibs/libs-ios/libvorbis.a"; sourceTree = "<group>"; };
@@ -535,7 +535,7 @@
 			files = (
 				6E33AD1B1AA46BB200F9FB58 /* OpenAL.framework in Frameworks */,
 				6ED3B0151B4DAB9000E32567 /* libjpeg.a in Frameworks */,
-				6ED3B01E1B4DAD0F00E32567 /* libfreetype.a in Frameworks */,
+				6E93C3CD1BB42AFB009980E1 /* libFreetype2.a in Frameworks */,
 				6ED9D1C61ABAD4DA00541F5C /* libsfml-window-s.a in Frameworks */,
 				6ED9D1CA1ABAD4E700541F5C /* libtinyxml-ios.a in Frameworks */,
 				6ED3B0221B4DAD0F00E32567 /* libvorbisenc.a in Frameworks */,
@@ -553,7 +553,7 @@
 				6ED9D1C31ABAD4DA00541F5C /* libsfml-main-s.a in Frameworks */,
 				6ED9D1C51ABAD4DA00541F5C /* libsfml-system-s.a in Frameworks */,
 				6E745C5D1A1B79B3001595DE /* QuartzCore.framework in Frameworks */,
-				6ED3B0131B4DA2BB00E32567 /* libCryptoPPios.a in Frameworks */,
+				6E93C3CB1BB428E9009980E1 /* libCryptoPPios.a in Frameworks */,
 				6ED3B0201B4DAD0F00E32567 /* libogg.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -579,7 +579,6 @@
 			isa = PBXGroup;
 			children = (
 				6ED3B0161B4DAD0F00E32567 /* libflac.a */,
-				6ED3B0171B4DAD0F00E32567 /* libfreetype.a */,
 				6ED3B0181B4DAD0F00E32567 /* libjpeg.a */,
 				6ED3B0191B4DAD0F00E32567 /* libogg.a */,
 				6ED3B01A1B4DAD0F00E32567 /* libvorbis.a */,
@@ -1072,8 +1071,9 @@
 		6E74608D1A1DF157001595DE /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				6E93C3CC1BB42AFB009980E1 /* libFreetype2.a */,
 				6ED3B0141B4DAB9000E32567 /* libjpeg.a */,
-				6ED3B0121B4DA2BB00E32567 /* libCryptoPPios.a */,
+				6E93C3CA1BB428E9009980E1 /* libCryptoPPios.a */,
 				6ED9D1C71ABAD4E700541F5C /* libBox2D-ios.a */,
 				6ED9D1C81ABAD4E700541F5C /* libtinyxml-ios.a */,
 				6E33AD1A1AA46BB200F9FB58 /* OpenAL.framework */,
@@ -1414,6 +1414,7 @@
 					armv7s,
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1429,13 +1430,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = RicketyRacquet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../../../../SFML-ios/extlibs/libs-ios",
 					"$(SRCROOT)/../../ThirdParty/lib-ios",
-					"$(SRCROOT)/../../../../cryptopp562/build/CryptoPP/Build/Products/",
+					"$(SRCROOT)/../../../../cryptopp562/build/CryptoPP",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "RicketyRacquet iOS";
@@ -1448,9 +1449,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				"ARCHS[sdk=iphoneos*]" = "$(ARCHS_STANDARD)";
+				"ARCHS[sdk=iphoneos*]" = armv7;
 				"ARCHS[sdk=iphonesimulator*]" = i386;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = IOS;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../ThirdParty/CryptoPP/include",
@@ -1461,13 +1463,13 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = RicketyRacquet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../../../../SFML-ios/extlibs/libs-ios",
 					"$(SRCROOT)/../../ThirdParty/lib-ios",
-					"$(SRCROOT)/../../../../cryptopp562/build/CryptoPP/Build/Products/",
+					"$(SRCROOT)/../../../../cryptopp562/build/CryptoPP",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "RicketyRacquet iOS";
