@@ -83,7 +83,6 @@ public:
         const bool applyRotation,
         const sf::Vector2f& origin,
         const sf::Vector2f& drawOffset,
-        const bool scaleToScreenSize,
         const bool horizontal = true);
     ~Animation();
 
@@ -116,6 +115,7 @@ public:
     void applyRotation(bool apply);
     void bindCloneHandler(CloneHandler& handler);
     void alignToView(bool align);
+    void scaleToScreenSize(bool scale);
     void bindShader(Shader& shader);
 
     virtual void draw(const DrawParameter& param) override;

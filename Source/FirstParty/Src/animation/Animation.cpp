@@ -19,7 +19,6 @@ Animation::Animation(const unsigned int frames,
                      const bool applyRotation,
                      const sf::Vector2f& origin,
                      const sf::Vector2f& drawOffset,
-                     const bool scaleToScreenSize,
                      const bool horizontal) :
     m_applyRotation(applyRotation),
     m_stopOnAlphaZero(false),
@@ -35,7 +34,7 @@ Animation::Animation(const unsigned int frames,
     m_isViewAligned(false),
     m_shader(nullptr),
     m_cloneHandler(nullptr),
-    m_scaleToScreenSize(scaleToScreenSize)
+    m_scaleToScreenSize(false)
 {
     m_sprite.setOrigin(origin);
 }
@@ -71,7 +70,6 @@ void Animation::update()
         scaleX = m_xScaleProvider->getValue();
     if(m_yScaleProvider != nullptr)
         scaleY = m_yScaleProvider->getValue();
-    if(m_xScaleProvider != nullptr || m_yScaleProvider != nullptr)
     m_sprite.setScale(scaleX, scaleY);
 
     if(m_origins.size() != 0)
@@ -295,7 +293,7 @@ void Animation::setLayout(
 std::unique_ptr<Animation> Animation::clone() const
 {
     auto ani = std::unique_ptr<Animation>(new Animation(m_frames, m_frameWidth, m_frameHeight,
-        m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_scaleToScreenSize, m_horizontal));
+        m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal));
 
     if(m_cloneHandler != nullptr)
         m_cloneHandler->registerClone(*this, *ani.get(), *ani.get(), *ani.get());
@@ -313,6 +311,7 @@ std::unique_ptr<Animation> Animation::clone() const
     ani->m_offsets = m_offsets;
     ani->m_origins = m_origins;
     ani->m_shader = m_shader;
+    ani->m_scaleToScreenSize = m_scaleToScreenSize;
     ani->copyValuesFrom(*this);
 
     std::array<std::unique_ptr<ValueProvider>, 4> colors;
@@ -372,6 +371,11 @@ void Animation::bindShader(Shader& shader)
 void Animation::alignToView(bool align)
 {
     m_isViewAligned = align;
+}
+
+void Animation::scaleToScreenSize(bool scale)
+{
+    m_scaleToScreenSize = scale;
 }
 
 void Animation::enableStencilEffects(bool enable)

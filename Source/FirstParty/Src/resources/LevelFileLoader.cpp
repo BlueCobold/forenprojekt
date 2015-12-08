@@ -242,7 +242,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
     if(xml->Attribute("alignment"))
         horizontal = std::string("vertical") != xml->Attribute("alignment");
 
-    std::unique_ptr<Animation> anim(new Animation(frames, width, height, rotate, origin, offset, scaleToScreenSize, horizontal));
+    std::unique_ptr<Animation> anim(new Animation(frames, width, height, rotate, origin, offset, horizontal));
     if(handler == nullptr)
         handler = anim.get();
 
@@ -250,6 +250,8 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
         anim->setBufferId(xml->IntAttribute("bufferId"));
     if(xml->Attribute("alignToView"))
         anim->alignToView(xml->BoolAttribute("alignToView"));
+    if(xml->Attribute("scaleToScreenSize"))
+        anim->scaleToScreenSize(true);
 
     anim->bindCloneHandler(cloneHandler);
     if(auto shaderName = xml->Attribute("shader"))
