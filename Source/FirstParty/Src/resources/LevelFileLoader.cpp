@@ -223,6 +223,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
         height = xml->IntAttribute("height");
 
     bool rotate = xml->BoolAttribute("rotate");
+    bool scaleToScreenSize = xml->BoolAttribute("scaleToScreenSize");
     sf::Vector2f offset;
     offset.x = xml->FloatAttribute("x");
     offset.y = xml->FloatAttribute("y");
@@ -241,7 +242,7 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
     if(xml->Attribute("alignment"))
         horizontal = std::string("vertical") != xml->Attribute("alignment");
 
-    std::unique_ptr<Animation> anim(new Animation(frames, width, height, rotate, origin, offset, horizontal));
+    std::unique_ptr<Animation> anim(new Animation(frames, width, height, rotate, origin, offset, scaleToScreenSize, horizontal));
     if(handler == nullptr)
         handler = anim.get();
 

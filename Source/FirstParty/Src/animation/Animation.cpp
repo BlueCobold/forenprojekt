@@ -19,6 +19,7 @@ Animation::Animation(const unsigned int frames,
                      const bool applyRotation,
                      const sf::Vector2f& origin,
                      const sf::Vector2f& drawOffset,
+                     const bool scaleToScreenSize,
                      const bool horizontal) :
     m_applyRotation(applyRotation),
     m_stopOnAlphaZero(false),
@@ -33,7 +34,8 @@ Animation::Animation(const unsigned int frames,
     m_targetBuffer(UINT_MAX),
     m_isViewAligned(false),
     m_shader(nullptr),
-    m_cloneHandler(nullptr)
+    m_cloneHandler(nullptr),
+    m_scaleToScreenSize(scaleToScreenSize)
 {
     m_sprite.setOrigin(origin);
 }
@@ -191,6 +193,15 @@ void Animation::draw(const DrawParameter& param)
         return;
 
     auto targetBuffer = &param.getTarget(m_targetBuffer != UINT_MAX ? m_targetBuffer : 0);
+
+    if(m_scaleToScreenSize)
+    {
+        auto spriteSize = sf::Vector2i(m_sprite.getTextureRect().width, m_sprite.getTextureRect().height);
+        auto scaleFactor = sf::Vector2f(targetBuffer->getView().getSize().x / spriteSize.x * m_sprite.getScale().x,
+                                        targetBuffer->getView().getSize().y / spriteSize.y * m_sprite.getScale().y);
+        m_sprite.setScale(scaleFactor);
+    }
+
     if(m_isViewAligned)
     {
         auto topLeft = targetBuffer->getView().getCenter() - 0.5f * targetBuffer->getView().getSize();
@@ -284,7 +295,7 @@ void Animation::setLayout(
 std::unique_ptr<Animation> Animation::clone() const
 {
     auto ani = std::unique_ptr<Animation>(new Animation(m_frames, m_frameWidth, m_frameHeight,
-        m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal));
+        m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_scaleToScreenSize, m_horizontal));
 
     if(m_cloneHandler != nullptr)
         m_cloneHandler->registerClone(*this, *ani.get(), *ani.get(), *ani.get());

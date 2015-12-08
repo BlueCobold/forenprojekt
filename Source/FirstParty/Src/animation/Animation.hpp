@@ -83,6 +83,7 @@ public:
         const bool applyRotation,
         const sf::Vector2f& origin,
         const sf::Vector2f& drawOffset,
+        const bool scaleToScreenSize,
         const bool horizontal = true);
     ~Animation();
 
@@ -116,7 +117,7 @@ public:
     void bindCloneHandler(CloneHandler& handler);
     void alignToView(bool align);
     void bindShader(Shader& shader);
-    
+
     virtual void draw(const DrawParameter& param) override;
 
     virtual std::unique_ptr<Animation> clone() const override;
@@ -167,6 +168,7 @@ private:
     bool m_isViewAligned;
     Shader* m_shader;
     CloneHandler* m_cloneHandler;
+    bool m_scaleToScreenSize;
 };
 
 #endif // ANIMATION_HPP
