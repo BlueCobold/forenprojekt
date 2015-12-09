@@ -1,0 +1,8 @@
+<spriteSheet texture="icon_backgrounds">
+	<sprites>
+		<sprite name="Icon_Backgrounds2" x="0" y="0" width="190" height="201" originx="93" originy="97" />
+		<sprite name="Icon_Backgrounds4" x="192" y="0" width="188" height="201" originx="89" originy="101" />
+		<sprite name="Icon_Backgrounds1" x="0" y="203" width="186" height="199" originx="92" originy="96" />
+		<sprite name="Icon_Backgrounds3" x="188" y="203" width="196" height="197" originx="96" originy="94" />
+	</sprites>
+</spriteSheet>

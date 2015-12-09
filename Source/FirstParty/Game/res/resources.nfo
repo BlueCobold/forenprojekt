@@ -22,13 +22,17 @@
 	<texture name="arrowHUD" path="gui/arrows.png" smooth="true" />
 	<texture name="guiMisc" path="gui/misc.png" smooth="false" />
 	<texture name="sparkles" path="assets/misc/sparkles.png" smooth="false" />
-	<texture name="GuiElements" path="gui/gui_elements.png" smooth="false" />
+	<texture name="GuiElements" path="gui/gui_elements.png" smooth="true" />
 	<texture name="Window" path="gui/Window.png" smooth="false" />
 	<texture name="goodie" path="gui/Goodies.png" smooth="true" />
 	<texture name="walls" path="assets/walls.png" smooth="true" />
 	<texture name="norT" path="assets/norT.png" smooth="true" />
 	<texture name="teleport" path="assets/misc/Teleport.png" smooth="true" />
 	<texture name="slimeNormal" path="assets/misc/result.png" smooth="true" />
+	<texture name="icon_backgrounds" path="gui/icon_backgrounds.png" smooth="true" />
+	<texture name="icon_play" path="gui/icon_play.png" smooth="true" />
+	<texture name="icon_select" path="gui/icon_select.png" smooth="true" />
+	<texture name="gui_animations" path="gui/gui_animations.png" smooth="true" />
 </textures>
 <sounds>
 	<sound name="bounce" path="bounce.ogg" />
@@ -69,6 +73,10 @@
 	<spritesheet name="walls_nort" path="assets/norT.xml" />
 	<spritesheet name="gui_elements" path="gui/gui_elements.xml" />
 	<spritesheet name="gui_window" path="backgrounds/gui_window.xml" />
+	<spritesheet name="icon_play" path="gui/icon_play.xml" />
+	<spritesheet name="icon_select" path="gui/icon_select.xml" />
+	<spritesheet name="icon_backgrounds" path="gui/icon_backgrounds.xml" />
+	<spritesheet name="gui_animations" path="gui/gui_animations.xml" />
 </spritesheets>
 <levels>
 	<level number="1" filename="Beginner Level.lvl" />
@@ -86,6 +94,7 @@
 </levels>
 <shaders>
 	<shader name="slime" vertexPath="slime.vert" fragmentPath="slime.frag" configPath="slime.conf" />
+	<shader name="test" vertexPath="test.vert" fragmentPath="test.frag" configPath="test.conf" />
 </shaders>
 <keys>
 	<key name="LevelKey" path="LevelPublic.key" />

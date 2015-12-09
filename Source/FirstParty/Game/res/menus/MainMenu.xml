@@ -1,13 +1,809 @@
 <menu>
 	<styles source="Styles.inc"/>
 	<elements>
-		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
-		<image id="5" x="0.5" y="0.5" offsetx="-129" offsety="-267" spriteSheet="gui_elements" sprite="Logo" />
-		<button id="0" text="gui_start_new_game" style="default" x="0.5" y="0.5" offsetx="0" offsety="-158" />
-		<button id="1" text="gui_select_level" style="default" x="0.5" y="0.5" offsetx="0" offsety="-108" />
-		<button id="6" text="gui_achievement" style="default" x="0.5" y="0.5" offsetx="0" offsety="-58" />
-		<button id="2" text="gui_option" style="default" x="0.5" y="0.5" offsetx="0" offsety="-8" />
-		<button id="3" text="gui_credit" style="default" x="0.5" y="0.5" offsetx="0" offsety="42" />
-		<button id="4" text="gui_close" style="default" x="0.5" y="0.5" offsetx="0" offsety="92" />
+		<animationContainer id="-1" x="0.5" y="0.5" >
+			<animations>
+				<animation spritesheet="gui_elements" sprite="BackgroundGradient" scaleToScreenSize="true" alignToScreen="true" blending="premul"/>
+			</animations>
+		</animationContainer>
+
+		<image id="5" x="0.5" y="0" offsetx="-137" offsety="-1" spriteSheet="gui_elements" sprite="Icon_Backgrounds_Logo" />
+		
+		<animationContainer id="100" x="0.5" y="0.0" offsetx="-65" offsety="30">
+			<animations>
+				<animation spritesheet="gui_elements" sprite="Logo" copies="28" blending="premul" >
+					<constants orderId="0"/>
+					<layout>
+						<sprites>
+								 r_ickety_shadow, r_i_ckety_shadow, ri_c_kety_shadow, ric_k_ety_shadow, rick_e_ty_shadow, ricke_t_y_shadow, ricket_y_shadow,
+								 r_acquet_shadow, r_a_cquet_shadow, ra_c_quet_shadow, rac_q_uet_shadow, racq_u_et_shadow, racqu_e_t_shadow, racque_t_shadow,
+								 r_ickety_f, r_i_ckety_f, ri_c_kety_f, ric_k_ety_f, rick_e_ty_f, ricke_t_y_f, ricket_y_f,
+								 r_acquet_f, r_a_cquet_f, ra_c_quet_f, rac_q_uet_f, racq_u_et_f, racqu_e_t_f, racque_t_f
+						</sprites>
+					</layout>
+					<frameindex frames="28">
+						<cache>
+							<setVariable name="orderId">
+								<switch cases="0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27">
+									<variable name="cloneId"/>
+									<static value="6"/><!-- y -->
+									<static value="5"/><!-- t -->
+									<static value="4"/><!-- e -->
+									<static value="3"/><!-- k -->
+									<static value="2"/><!-- c -->
+									<static value="1"/><!-- i -->
+									<static value="7"/><!-- R -->
+									<static value="13"/><!-- t -->
+									<static value="8"/><!-- a -->
+									<static value="12"/><!-- e -->
+									<static value="9"/><!-- c -->
+									<static value="11"/><!-- u -->
+									<static value="10"/><!-- q -->
+									<static value="0"/><!-- R -->
+									<static value="20"/><!-- y -->
+									<static value="19"/><!-- t -->
+									<static value="18"/><!-- e -->
+									<static value="17"/><!-- k -->
+									<static value="16"/><!-- c -->
+									<static value="15"/><!-- i -->
+									<static value="21"/><!-- R -->
+									<static value="27"/><!-- t -->
+									<static value="22"/><!-- a -->
+									<static value="26"/><!-- e -->
+									<static value="23"/><!-- c -->
+									<static value="25"/><!-- u -->
+									<static value="24"/><!-- q -->
+									<static value="14"/><!-- R -->
+								</switch>
+							</setVariable>
+						</cache>
+					</frameindex>
+					<rotation>
+						<mul>
+							<sine>
+								<mul>
+									<add>
+										<cache>
+											<add>
+												<static value="0.25"/>
+												<mul>
+													<mod>
+														<variable name="orderId"/>
+														<static value="14" />
+													</mod>
+													<static value="10"/>
+												</mul>
+											</add>
+										</cache>
+										<time />
+									</add>
+									<static value="220"/>
+								</mul>
+							</sine>
+							<static value="7" />
+						</mul>
+					</rotation>
+					<position axis="x">
+						<cache>
+							<add>
+								<!-- shift individual letters -->
+								<switch cases="0,1,2,3,4,5,6,7,8,9,10,11,12,13">
+									<mod>
+										<variable name="orderId"/>
+										<static value="14" />
+									</mod>
+									<static value="0" /><!-- R -->
+									<static value="3" /><!-- i -->
+									<static value="-3" /><!-- c -->
+									<static value="-1" /><!-- k -->
+									<static value="0" /><!-- e -->
+									<static value="-2" /><!-- t -->
+									<static value="-2" /><!-- y -->
+									<static value="0" /><!-- R -->
+									<static value="3" /><!-- a -->
+									<static value="0" /><!-- c -->
+									<static value="0" /><!-- q -->
+									<static value="0" /><!-- u -->
+									<static value="0" /><!-- e -->
+									<static value="-5" /><!-- t -->
+									<static value="0" /><!-- * -->
+								</switch>
+								<mul><!-- center the lower row in relation to the upper -->
+									<static value="-8" />
+									<int>
+										<mul>
+											<mod>
+												<variable name="orderId"/>
+												<static value="14" />
+											</mod>
+											<static value="0.142857143" />
+										</mul>
+									</int>
+								</mul>
+								<mul><!-- shift each letter -->
+									<mod>
+										<variable name="orderId"/>
+										<static value="7" />
+									</mod>
+									<add>
+										<static value="20"/>
+										<mul><!-- lower row is wider than upper -->
+											<static value="3" />
+											<int>
+												<mul>
+													<mod>
+														<variable name="orderId"/>
+														<static value="14" />
+													</mod>
+													<static value="0.142857143" />
+												</mul>
+											</int>
+										</mul>
+									</add>
+								</mul>
+							</add>
+						</cache>
+					</position>
+					<position axis="y">
+						<add>
+							<cache>
+								<add>
+								<mul>
+									<int>
+										<mul>
+											<mod>
+												<variable name="orderId"/>
+												<static value="14" />
+											</mod>
+											<static value="0.142857143" />
+										</mul>
+									</int>
+									<static value="47"/>
+								</mul>
+								<switch cases="0,1,2,3,4,5,6,7,8,9,10,11,12,13">
+									<mod>
+										<variable name="orderId"/>
+										<static value="14" />
+									</mod>
+									<static value="9" /><!-- R -->
+									<static value="0" /><!-- i -->
+									<static value="2" /><!-- c -->
+									<static value="0" /><!-- k -->
+									<static value="4" /><!-- e -->
+									<static value="0" /><!-- t -->
+									<static value="11" /><!-- y -->
+									<static value="-4" /><!-- R -->
+									<static value="0" /><!-- a -->
+									<static value="-1" /><!-- c -->
+									<static value="4" /><!-- q -->
+									<static value="1" /><!-- u -->
+									<static value="0" /><!-- e -->
+									<static value="-6" /><!-- t -->
+									<static value="0" /><!-- * -->
+								</switch>
+								</add>
+							</cache>
+							<mul>
+								<pow>
+									<abs>
+										<sine>
+											<mul>
+												<sub>
+													<cache>
+														<mul>
+															<mod>
+																<variable name="orderId"/>
+																<static value="14" />
+															</mod>
+															<static value="-10"/>
+														</mul>
+													</cache>
+													<time />
+												</sub>
+												<static value="220"/>
+											</mul>
+										</sine>
+									</abs>
+									<static value="0.7" />
+								</pow>
+								<static value="-2.5" />
+							</mul>
+						</add>
+					</position>
+				</animation>
+			</animations>
+		</animationContainer>
+		<animationContainer id="-1" x="0.32" y="0.3" offsetx="-70">
+			<animations>
+				<animation spritesheet="icon_backgrounds" sprite="Icon_Backgrounds1" blending="premul">
+					<scale axis="x">
+						<add>
+							<static value="1"/>
+							<mul>
+								<static value="0.02"/>
+								<sine>
+									<mul>
+										<time />
+										<static value="200"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</scale>
+					<scale axis="y">
+						<add>
+							<static value="1"/>
+							<mul>
+								<static value="0.02"/>
+								<sine>
+									<mul>
+										<add>
+											<time />
+											<static value="4.5"/>
+										</add>
+										<static value="200"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</scale>
+					<position axis="x">
+						<add>
+							<mul>
+								<static value="3"/>
+								<sine>
+									<mul>
+										<time />
+										<static value="30"/>
+									</mul>
+								</sine>
+							</mul>
+							<mul>
+								<static value="1"/>
+								<sine>
+									<mul>
+										<time />
+										<static value="37"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</position>
+					<position axis="y">
+						<add>
+							<mul>
+								<static value="3"/>
+								<sine>
+									<mul>
+										<time />
+										<static value="32"/>
+									</mul>
+								</sine>
+							</mul>
+							<mul>
+								<static value="1"/>
+								<sine>
+									<mul>
+										<time />
+										<static value="39"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</position>
+				</animation>
+			</animations>
+		</animationContainer>
+		<animationContainer id="-1" x="0.7" y="0.25" offsetx="50">
+			<animations>
+				<animation spritesheet="icon_backgrounds" sprite="Icon_Backgrounds2" blending="premul">
+					<scale axis="x">
+						<add>
+							<static value="1"/>
+							<mul>
+								<static value="0.02"/>
+								<sine>
+									<mul>
+										<time />
+										<static value="200"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</scale>
+					<scale axis="y">
+						<add>
+							<static value="1"/>
+							<mul>
+								<static value="0.02"/>
+								<sine>
+									<mul>
+										<add>
+											<time />
+											<static value="4.5"/>
+										</add>
+										<static value="200"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</scale>
+					<position axis="x">
+						<add>
+							<mul>
+								<static value="3"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="30"/>
+									</mul>
+								</sine>
+							</mul>
+							<mul>
+								<static value="1"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="37"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</position>
+					<position axis="y">
+						<add>
+							<mul>
+								<static value="3"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="32"/>
+									</mul>
+								</sine>
+							</mul>
+							<mul>
+								<static value="1"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="39"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</position>
+				</animation>
+			</animations>
+		</animationContainer>
+		<animationContainer id="-1" x="0.25" y="0.65" offsetx="-50">
+			<animations>
+				<animation spritesheet="icon_backgrounds" sprite="Icon_Backgrounds2" blending="premul">
+					<scale axis="x">
+						<add>
+							<static value="1"/>
+							<mul>
+								<static value="0.02"/>
+								<sine>
+									<mul>
+										<time />
+										<static value="200"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</scale>
+					<scale axis="y">
+						<add>
+							<static value="1"/>
+							<mul>
+								<static value="0.02"/>
+								<sine>
+									<mul>
+										<add>
+											<time />
+											<static value="4.5"/>
+										</add>
+										<static value="200"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</scale>
+					<position axis="x">
+						<add>
+							<mul>
+								<static value="3"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="30"/>
+									</mul>
+								</sine>
+							</mul>
+							<mul>
+								<static value="1"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="37"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</position>
+					<position axis="y">
+						<add>
+							<mul>
+								<static value="3"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="32"/>
+									</mul>
+								</sine>
+							</mul>
+							<mul>
+								<static value="1"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="39"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</position>
+				</animation>
+			</animations>
+		</animationContainer>
+		<animationContainer id="-1" x="0.48" y="0.8">
+			<animations>
+				<animation spritesheet="icon_backgrounds" sprite="Icon_Backgrounds3" blending="premul">
+					<scale axis="x">
+						<add>
+							<static value="1"/>
+							<mul>
+								<static value="0.02"/>
+								<sine>
+									<mul>
+										<time />
+										<static value="200"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</scale>
+					<scale axis="y">
+						<add>
+							<static value="1"/>
+							<mul>
+								<static value="0.02"/>
+								<sine>
+									<mul>
+										<add>
+											<time />
+											<static value="4.5"/>
+										</add>
+										<static value="200"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</scale>
+					<position axis="x">
+						<add>
+							<mul>
+								<static value="3"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="30"/>
+									</mul>
+								</sine>
+							</mul>
+							<mul>
+								<static value="1"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="37"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</position>
+					<position axis="y">
+						<add>
+							<mul>
+								<static value="3"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="32"/>
+									</mul>
+								</sine>
+							</mul>
+							<mul>
+								<static value="1"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="39"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</position>
+				</animation>
+			</animations>
+		</animationContainer>
+		<animationContainer id="-1" x="0.75" y="0.6" offsetx="50">
+			<animations>
+				<animation spritesheet="icon_backgrounds" sprite="Icon_Backgrounds1" blending="premul">
+					<scale axis="x">
+						<add>
+							<static value="1"/>
+							<mul>
+								<static value="0.02"/>
+								<sine>
+									<mul>
+										<time />
+										<static value="200"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</scale>
+					<scale axis="y">
+						<add>
+							<static value="1"/>
+							<mul>
+								<static value="0.02"/>
+								<sine>
+									<mul>
+										<add>
+											<time />
+											<static value="4.5"/>
+										</add>
+										<static value="200"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</scale>
+					<position axis="x">
+						<add>
+							<mul>
+								<static value="3"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="30"/>
+									</mul>
+								</sine>
+							</mul>
+							<mul>
+								<static value="1"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="37"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</position>
+					<position axis="y">
+						<add>
+							<mul>
+								<static value="3"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="32"/>
+									</mul>
+								</sine>
+							</mul>
+							<mul>
+								<static value="1"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="39"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</position>
+				</animation>
+			</animations>
+		</animationContainer>
+		<animationContainer id="-1" x="0.5" y="0.45" offsetx="0">
+			<animations>
+				<animation spritesheet="icon_backgrounds" sprite="Icon_Backgrounds4" blending="premul">
+					<scale axis="x">
+						<add>
+							<static value="1"/>
+							<mul>
+								<static value="0.02"/>
+								<sine>
+									<mul>
+										<time />
+										<static value="200"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</scale>
+					<scale axis="y">
+						<add>
+							<static value="1"/>
+							<mul>
+								<static value="0.02"/>
+								<sine>
+									<mul>
+										<add>
+											<time />
+											<static value="4.5"/>
+										</add>
+										<static value="200"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</scale>
+					<position axis="x">
+						<add>
+							<mul>
+								<static value="3"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="30"/>
+									</mul>
+								</sine>
+							</mul>
+							<mul>
+								<static value="1"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="37"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</position>
+					<position axis="y">
+						<add>
+							<mul>
+								<static value="3"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="32"/>
+									</mul>
+								</sine>
+							</mul>
+							<mul>
+								<static value="1"/>
+								<sine>
+									<mul>
+										<add>
+											<cache>
+												<random min="0" max="1000" />
+											</cache>
+											<time />
+										</add>
+										<static value="39"/>
+									</mul>
+								</sine>
+							</mul>
+						</add>
+					</position>
+				</animation>
+			</animations>
+		</animationContainer>
+		<button id="0" text="gui_start_new_game" style="playButtonStyle" x="0.5" y="0.45" offsetx="-5" offsety="-5" />
+		<button id="1" text="gui_select_level" style="selectButtonStyle" x="0.7" y="0.25" offsetx="50" offsety="-5" />
+		<button id="6" text="gui_achievement" style="achieveButtonStyle" x="0.32" y="0.3" offsetx="-75" offsety="-10" />
+		<button id="2" text="gui_option" style="optionButtonStyle" x="0.75" y="0.6" offsetx="45" offsety="-10" />
+		<button id="3" text="gui_credit" style="creditButtonStyle" x="0.25" y="0.65" offsetx="-55" offsety="-5" />
+		<button id="4" text="gui_close" style="exitButtonStyle" x="0.48" y="0.8" offsetx="-5" offsety="-5" />
 	</elements>
 </menu>
