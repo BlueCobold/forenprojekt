@@ -8,7 +8,7 @@
 #include <Windows.h>
 #include <string>
 
-bool pickFileWin(std::string& path, const std::string& filter)
+bool pickFileWin(std::string& path, const char* filter)
 {
     const auto bufferLength = 1024;
     char file[bufferLength];
@@ -20,7 +20,7 @@ bool pickFileWin(std::string& path, const std::string& filter)
     openFileName.hwndOwner = nullptr;
     openFileName.lpstrFile = file;
     openFileName.nMaxFile = sizeof(file);
-    openFileName.lpstrFilter = filter.c_str();
+    openFileName.lpstrFilter = filter;
     openFileName.nFilterIndex = 1;
     openFileName.lpstrFileTitle = nullptr;
     openFileName.nMaxFileTitle = 0;

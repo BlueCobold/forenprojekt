@@ -8,11 +8,11 @@
 class OpenFileDialoge
 {
 private:
-    std::string m_filter;
+    const char* m_filter;
     std::string m_file;
 
 public:
-    OpenFileDialoge(const std::string& filter);
+    OpenFileDialoge(const char* filter);
     bool openDialoge();
     std::string getFile();
 };

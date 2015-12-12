@@ -125,7 +125,7 @@ StateChangeInformation LevelPassState::update(const float time)
         bool loadKey = utility::Keyboard.isKeyDown(sf::Keyboard::L) || utility::Keyboard.isKeyPressed(sf::Keyboard::L);
         if(m_level->number() == 0  || loadKey)
         {
-            OpenFileDialoge ofd("Level\0*.lvl\0");
+            OpenFileDialoge ofd("Level\0*.lvl\0\0");
             if(ofd.openDialoge())
                 m_loadLevelStateInfo.m_file = ofd.getFile();
             else

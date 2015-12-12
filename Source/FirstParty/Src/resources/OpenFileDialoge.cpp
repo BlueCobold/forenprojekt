@@ -6,7 +6,7 @@
 #include "../MacHelper.hpp"
 #endif
 
-OpenFileDialoge::OpenFileDialoge(const std::string& filter) :
+OpenFileDialoge::OpenFileDialoge(const char* filter) :
     m_filter(filter)
 {
 }
