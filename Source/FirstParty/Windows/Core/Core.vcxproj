@@ -52,7 +52,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG_BOX2D;WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LEVELTESTING;_DEBUG_BOX2D;WINDOWS;SFML_STATIC;TIXML_USE_STL;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <AdditionalIncludeDirectories>../../../ThirdParty/CryptoPP/include/;../../../ThirdParty/SFML/include/;../../../ThirdParty/Box2D/include/;../../../ThirdParty/tinyxml2/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
@@ -219,6 +219,8 @@
     <ClInclude Include="..\..\Src\model\Goody.hpp" />
     <ClInclude Include="..\..\Src\model\GravityGoody.hpp" />
     <ClInclude Include="..\..\Src\model\InvulnerableGoody.hpp" />
+    <ClInclude Include="..\..\Src\model\JointAnimation.hpp" />
+    <ClInclude Include="..\..\Src\model\JointValueProvider.hpp" />
     <ClInclude Include="..\..\Src\model\joint\JointObject.hpp" />
     <ClInclude Include="..\..\Src\model\joint\SingleDistanceJoint.hpp" />
     <ClInclude Include="..\..\Src\model\joint\SinglePrismaticJoint.hpp" />
@@ -272,6 +274,7 @@
     <ClInclude Include="..\..\Src\resources\FileReader.hpp" />
     <ClInclude Include="..\..\Src\resources\GameEvent.hpp" />
     <ClInclude Include="..\..\Src\resources\GameEventRecorder.hpp" />
+    <ClInclude Include="..\..\Src\resources\JointParser.hpp" />
     <ClInclude Include="..\..\Src\resources\LevelFileLoader.hpp" />
     <ClInclude Include="..\..\Src\resources\MenuLoader.hpp" />
     <ClInclude Include="..\..\Src\resources\MusicPlayer.hpp" />
@@ -321,6 +324,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Src\AndroidHelper.cpp" />
     <ClCompile Include="..\..\Src\animation\Animation.cpp" />
+    <ClCompile Include="..\..\Src\animation\CloneHandler.cpp" />
     <ClCompile Include="..\..\Src\animation\Interpolation.cpp" />
     <ClCompile Include="..\..\Src\animation\ParticleTrail.cpp" />
     <ClCompile Include="..\..\Src\animation\provider\KeyProvider.cpp" />
@@ -390,6 +394,7 @@
     <ClCompile Include="..\..\Src\model\Teeter.cpp" />
     <ClCompile Include="..\..\Src\rendering\DebugDraw.cpp" />
     <ClCompile Include="..\..\Src\rendering\GLExt.cpp" />
+    <ClCompile Include="..\..\Src\rendering\GraphicalObject.cpp" />
     <ClCompile Include="..\..\Src\rendering\parameter\FloatParameter.cpp" />
     <ClCompile Include="..\..\Src\rendering\parameter\IntParameter.cpp" />
     <ClCompile Include="..\..\Src\rendering\parameter\ShaderParameter.cpp" />
@@ -422,6 +427,7 @@
     <ClCompile Include="..\..\Src\resources\Config.cpp" />
     <ClCompile Include="..\..\Src\resources\FileReader.cpp" />
     <ClCompile Include="..\..\Src\resources\GameEventRecorder.cpp" />
+    <ClCompile Include="..\..\Src\resources\JointParser.cpp" />
     <ClCompile Include="..\..\Src\resources\LevelFileLoader.cpp" />
     <ClCompile Include="..\..\Src\resources\MenuLoader.cpp" />
     <ClCompile Include="..\..\Src\resources\MusicPlayer.cpp" />

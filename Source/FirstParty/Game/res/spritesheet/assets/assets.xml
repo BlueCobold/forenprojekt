@@ -1,0 +1,7 @@
+<spriteSheet texture="assets">
+	<sprites>
+		<sprite name="dispenser" x="1" y="1" width="180" height="120" originx="90" originy="60" />
+		<sprite name="bolt" x="183" y="1" width="20" height="20" originx="10" originy="10" />
+		<sprite name="rod" x="183" y="23" width="15" height="60" originx="7" originy="30" />
+	</sprites>
+</spriteSheet>

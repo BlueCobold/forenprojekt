@@ -8,7 +8,7 @@
 #include "../gui/Button.hpp"
 #include "../gui/FailMenu.hpp"
 #include "../gui/hud/HUD.hpp"
-#include "../model/Level.hpp"
+class Level;
 
 #include <SFML/Graphics/RenderTexture.hpp>
 

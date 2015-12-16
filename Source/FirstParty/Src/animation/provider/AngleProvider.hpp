@@ -16,13 +16,13 @@ class AngleProvider : public ValueProvider, public Observer<const OrientedObject
 private:
 
 public:
-    AngleProvider(const OrientedObject* observed, const CloneCallback cloneCallback = nullptr) :
+    AngleProvider(const OrientedObject& observed, const CloneCallback cloneCallback = nullptr) :
         Observer(observed, cloneCallback)
     { }
 
     virtual float getValue() override
     {
-        float angle = fmod(utility::toDegree<float, float>(getObserved()->getAngle()), 360.f);
+        float angle = fmod(utility::toDegree(getObserved().getAngle()), 360.f);
         if(angle < 0)
             return angle + 360;
         return angle;

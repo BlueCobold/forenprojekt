@@ -33,6 +33,7 @@
 	<texture name="icon_play" path="gui/icon_play.png" smooth="true" />
 	<texture name="icon_select" path="gui/icon_select.png" smooth="true" />
 	<texture name="gui_animations" path="gui/gui_animations.png" smooth="true" />
+	<texture name="assets" path="assets/assets.png" smooth="true" />
 </textures>
 <sounds>
 	<sound name="bounce" path="bounce.ogg" />
@@ -77,6 +78,7 @@
 	<spritesheet name="icon_select" path="gui/icon_select.xml" />
 	<spritesheet name="icon_backgrounds" path="gui/icon_backgrounds.xml" />
 	<spritesheet name="gui_animations" path="gui/gui_animations.xml" />
+	<spritesheet name="assets" path="assets/assets.xml" />
 </spritesheets>
 <levels>
 	<level number="1" filename="Beginner Level.lvl" />

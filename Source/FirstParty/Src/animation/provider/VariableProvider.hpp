@@ -17,14 +17,14 @@ private:
     std::string m_varName;
 
 public:
-    VariableProvider(const VariableHandler* observed, const std::string& varName, const CloneCallback cloneCallback = nullptr) :
+    VariableProvider(const VariableHandler& observed, const std::string& varName, const CloneCallback cloneCallback = nullptr) :
         Observer(observed, cloneCallback),
         m_varName(varName)
     { }
 
     virtual float getValue() override
     {
-        return getObserved()->getValueOf(m_varName);
+        return getObserved().getValueOf(m_varName);
     }
 
     virtual std::unique_ptr<ValueProvider> clone() const override

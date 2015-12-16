@@ -634,6 +634,15 @@
     <ClInclude Include="..\..\Src\animation\provider\Delay.hpp">
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\model\JointAnimation.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\JointParser.hpp">
+      <Filter>Headers\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\JointValueProvider.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -1148,6 +1157,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\AndroidHelper.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\JointParser.cpp">
+      <Filter>Sources\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\animation\CloneHandler.cpp">
+      <Filter>Sources\animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\GraphicalObject.cpp">
+      <Filter>Sources\rendering</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

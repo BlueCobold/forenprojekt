@@ -181,8 +181,9 @@ public:
 
     void reinstallJoints()
     {
-        for(auto it = begin(m_joints); it != end(m_joints); ++it)
-            (*it)->reinstall(m_body);
+        if(m_body != nullptr)
+            for(auto it = begin(m_joints); it != end(m_joints); ++it)
+                (*it)->reinstall(*m_body);
     }
 
     void setSpawnSpeed(const b2Vec2& speed)
@@ -196,17 +197,23 @@ protected:
         return m_basePosition;
     }
 
+    void updateJoints()
+    {
+        for(auto it = begin(m_joints); it != end(m_joints); ++it)
+            (*it)->update();
+    }
+
     void copyFrom(const PhysicalObject* other)
     {
         m_body = nullptr;
         m_fixtureDefs.clear();
 
         if(other->m_rotation)
-            m_rotation = std::move(other->m_rotation->clone());
+            m_rotation = other->m_rotation->clone();
         if(other->m_xPositionProvider)
-            m_xPositionProvider = std::move(other->m_xPositionProvider->clone());
+            m_xPositionProvider = other->m_xPositionProvider->clone();
         if(other->m_yPositionProvider)
-            m_yPositionProvider = std::move(other->m_yPositionProvider->clone());
+            m_yPositionProvider = other->m_yPositionProvider->clone();
 
         m_basePosition = other->m_basePosition;
         m_basePosChanged = other->m_basePosChanged;
@@ -253,9 +260,9 @@ protected:
                 else
                     continue;
 
-                newJoint->copyFrom(joint->get());
+                newJoint->copyFrom(*joint->get());
                 if(m_body)
-                    newJoint->reinstall(m_body);
+                    newJoint->reinstall(*m_body);
 
                 m_joints.push_back(std::unique_ptr<JointObject>(newJoint));
             }

@@ -18,20 +18,22 @@ private:
     b2Vec2 m_direction;
 
 public:
-    SinglePrismaticJoint(b2World* world, const b2PrismaticJointDef& jointDef, b2Body* body, const b2Vec2& direction);
+    SinglePrismaticJoint(b2World& world, const b2PrismaticJointDef& jointDef, b2Body& body, const b2Vec2& direction);
 
     SinglePrismaticJoint();
 
     void update() override;
 
-    bool reinstall(b2Body* body) override;
+    bool reinstall(b2Body& body) override;
 
-    void copyFrom(const JointObject* other) override;
+    void doCopyFrom(const JointObject& other) override;
 
-    std::vector<b2Vec2> getAnchorPoints();
+    std::vector<b2Vec2> getAnchorPoints() const override;
+    
+    std::vector<b2Vec2> getAnchorOffsets() const override;
 
 protected:
-    void bindBodies(b2Body* bodyA, b2Body* bodyB) override;
+    void bindBodies(b2Body& bodyA, b2Body& bodyB) override;
 };
 
 #endif

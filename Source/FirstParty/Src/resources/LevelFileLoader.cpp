@@ -248,6 +248,8 @@ std::unique_ptr<Animation> LevelFileLoader::parseAnimation(
 
     if(xml->Attribute("bufferId"))
         anim->setBufferId(xml->IntAttribute("bufferId"));
+    if(xml->Attribute("z"))
+        anim->setDrawOrder(xml->IntAttribute("z"));
     if(xml->Attribute("alignToView"))
         anim->alignToView(xml->BoolAttribute("alignToView"));
     if(xml->Attribute("scaleToScreenSize"))
@@ -394,21 +396,21 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(const tinyxml2::XM
     CloneHandler& cloneHandler)
 {
     if(std::string(xml->Name())=="time")
-        return std::unique_ptr<TimeProvider>(new TimeProvider(animated, cloneHandler.createTimeProviderCloneHandler()));
+        return std::unique_ptr<TimeProvider>(new TimeProvider(*animated, cloneHandler.createTimeProviderCloneHandler()));
     else if(std::string(xml->Name())=="stop")
-        return std::unique_ptr<Stop>(new Stop(animated, cloneHandler.createStopProviderCloneHandler()));
+        return std::unique_ptr<Stop>(new Stop(*animated, cloneHandler.createStopProviderCloneHandler()));
     else if(std::string(xml->Name())=="stopAnimation")
     {
         if(stoppable != nullptr)
-            return std::unique_ptr<Stop>(new Stop(stoppable, cloneHandler.createStopProviderCloneHandler()));
+            return std::unique_ptr<Stop>(new Stop(*stoppable, cloneHandler.createStopProviderCloneHandler()));
         throw std::runtime_error("<stopAnimation> has been used on an invalid element");
     }
     else if(std::string(xml->Name())=="angle")
-        return std::unique_ptr<AngleProvider>(new AngleProvider(animated, cloneHandler.createAngleProviderCloneHandler()));
+        return std::unique_ptr<AngleProvider>(new AngleProvider(*animated, cloneHandler.createAngleProviderCloneHandler()));
     else if(std::string(xml->Name())=="static")
         return std::unique_ptr<StaticProvider>(new StaticProvider(xml->FloatAttribute("value")));
     else if(std::string(xml->Name())=="var" || std::string(xml->Name())=="variable")
-        return std::unique_ptr<VariableProvider>(new VariableProvider(handler, xml->Attribute("name"),
+        return std::unique_ptr<VariableProvider>(new VariableProvider(*handler, xml->Attribute("name"),
                                                                       cloneHandler.createVariableProviderCloneHandler()));
     else if(std::string(xml->Name())=="count")
         return std::unique_ptr<Count>(new Count(xml->FloatAttribute("start"), xml->FloatAttribute("increment")));
@@ -441,7 +443,7 @@ std::unique_ptr<ValueProvider> LevelFileLoader::parseProvider(const tinyxml2::XM
     {
         auto providers = parseProviders(xml, animated, handler, stoppable, functions, cloneHandler);
         if(std::string(xml->Name())=="setVar" || std::string(xml->Name())=="setVariable")
-            return std::unique_ptr<SetVariable>(new SetVariable(handler, xml->Attribute("name"), std::move(providers[0]), xml->BoolAttribute("print"),
+            return std::unique_ptr<SetVariable>(new SetVariable(*handler, xml->Attribute("name"), std::move(providers[0]), xml->BoolAttribute("print"),
                                                                 cloneHandler.createSetVariableProviderCloneHandler()));
         else if(std::string(xml->Name())=="abs")
             return std::unique_ptr<Absolute>(new Absolute(std::move(providers[0])));
@@ -543,7 +545,7 @@ void LevelFileLoader::parseBodyDef(const tinyxml2::XMLElement* physicXml,
     else if(std::string(bodyXml->Attribute("type")) == "dynamic")
         bodyDef.type = b2_dynamicBody;
     bodyDef.position = b2Vec2(static_cast<float>(utility::toMeter(position.x)), static_cast<float>(utility::toMeter(position.y)));
-    bodyDef.angle = utility::toRadian<float, float>(bodyXml->FloatAttribute("angle"));
+    bodyDef.angle = utility::toRadian(bodyXml->FloatAttribute("angle"));
     bodyDef.fixedRotation = bodyXml->BoolAttribute("fixedRotation");
     bodyDef.angularDamping = bodyXml->BoolAttribute("angularDamping");
     parseKinematics(bodyXml, entity, handler, functions, cloneHandler);

@@ -4,7 +4,6 @@
 #define GRAPHICAL_OBJECT_HPP
 
 #include "../animation/Animation.hpp"
-#include "../model/AnimatedGraphics.hpp"
 #include "Drawable.hpp"
 
 #include <memory>
@@ -27,67 +26,22 @@ public:
     {
     }
 
-    GraphicalObject(const GraphicalObject& rhs)
-    {
-        m_hide = rhs.m_hide;
-        for(auto it = std::begin(rhs.m_animations); it != std::end(rhs.m_animations); ++it)
-            m_animations.push_back(it->get()->clone());
-    }
+    GraphicalObject(const GraphicalObject& rhs);
+    GraphicalObject& operator=(const GraphicalObject& rhs);
 
-    GraphicalObject& operator=(const GraphicalObject& rhs)
-    {
-        m_hide = rhs.m_hide;
-        for(auto it = std::begin(rhs.m_animations); it != std::end(rhs.m_animations); ++it)
-            m_animations.push_back(it->get()->clone());
+    void hide();
+    void unhide();
+    bool hidden() const;
 
-        return *this;
-    }
+    virtual void draw(const DrawParameter& param);
 
-    void hide()
-    {
-        m_hide = true;
-    }
+    void bindAnimation(std::unique_ptr<Animation> animation);
 
-    void unhide()
-    {
-        m_hide = false;
-    }
-
-    bool hidden() const
-    {
-        return m_hide;
-    }
-
-    virtual void draw(const DrawParameter& param)
-    {
-        if(m_hide)
-            return;
-
-        for(auto animation = begin(m_animations); animation != end(m_animations); ++animation)
-            if((*animation) != nullptr && !(*animation)->isStopped())
-                (*animation)->draw(param);
-    }
-
-    void bindAnimation(std::unique_ptr<Animation> animation)
-    {
-        m_animations.push_back(std::move(animation));
-    }
-
-    void setDrawOrder(const float drawOrder)
-    {
-        m_z = drawOrder;
-    }
-
-    float getDrawOrder() const
-    {
-        return m_z;
-    }
+    void setDrawOrder(const float drawOrder);
+    float getDrawOrder() const;
 
 protected:
-    const std::vector<std::unique_ptr<Animation>>& getAnimations() const
-    {
-        return m_animations;
-    }
+    const std::vector<std::unique_ptr<Animation>>& getAnimations() const;
 };
 
 #endif // GRAPHICAL_OBJECT_HPP

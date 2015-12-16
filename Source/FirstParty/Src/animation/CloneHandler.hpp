@@ -19,10 +19,10 @@ class CloneHandler
 public:
     
     template<typename T>
-    const T* addr(const T& source)
+    const T& addr(const T& source)
     {
         const T& t = source;
-        return &t;
+        return t;
     }
 
     template<typename Source>
@@ -31,63 +31,44 @@ public:
         const VariableHandler& readVariableTarget,
         VariableHandler& writeVariableTarget)
     {
-        stopReplacements.insert(std::make_pair(addr<Stoppable>(source), &stopTarget));
-        varReplacements.insert(std::make_pair(addr<VariableHandler>(source), &readVariableTarget));
-        setReplacements.insert(std::make_pair(addr<VariableHandler>(source), &writeVariableTarget));
+        stopReplacements.insert(std::make_pair(&addr<Stoppable>(source), &stopTarget));
+        varReplacements.insert(std::make_pair(&addr<VariableHandler>(source), &readVariableTarget));
+        setReplacements.insert(std::make_pair(&addr<VariableHandler>(source), &writeVariableTarget));
     }
 
     template<typename Source>
     void registerCloneAll(const Source& source, Source& target)
     {
-        timeReplacements.insert(std::make_pair(addr<TimedObject>(source), &target));
-        oriReplacements.insert(std::make_pair(addr<OrientedObject>(source), &target));
-        stopReplacements.insert(std::make_pair(addr<Stoppable>(source), &target));
-        varReplacements.insert(std::make_pair(addr<VariableHandler>(source), &target));
-        setReplacements.insert(std::make_pair(addr<VariableHandler>(source), &target));
+        timeReplacements.insert(std::make_pair(&addr<TimedObject>(source), &target));
+        oriReplacements.insert(std::make_pair(&addr<OrientedObject>(source), &target));
+        stopReplacements.insert(std::make_pair(&addr<Stoppable>(source), &target));
+        varReplacements.insert(std::make_pair(&addr<VariableHandler>(source), &target));
+        setReplacements.insert(std::make_pair(&addr<VariableHandler>(source), &target));
     }
     
     template<typename Source>
     void unregisterClone(const Source& source)
     {
-        stopReplacements.erase(stopReplacements.find(addr<Stoppable>(source)));
-        varReplacements.erase(varReplacements.find(addr<VariableHandler>(source)));
-        setReplacements.erase(setReplacements.find(addr<VariableHandler>(source)));
+        stopReplacements.erase(stopReplacements.find(&addr<Stoppable>(source)));
+        varReplacements.erase(varReplacements.find(&addr<VariableHandler>(source)));
+        setReplacements.erase(setReplacements.find(&addr<VariableHandler>(source)));
     }
 
     template<typename Source>
     void unregisterCloneAll(const Source& source)
     {
-        timeReplacements.erase(timeReplacements.find(addr<TimedObject>(source)));
-        oriReplacements.erase(oriReplacements.find(addr<OrientedObject>(source)));
-        stopReplacements.erase(stopReplacements.find(addr<Stoppable>(source)));
-        varReplacements.erase(varReplacements.find(addr<VariableHandler>(source)));
-        setReplacements.erase(setReplacements.find(addr<VariableHandler>(source)));
+        timeReplacements.erase(timeReplacements.find(&addr<TimedObject>(source)));
+        oriReplacements.erase(oriReplacements.find(&addr<OrientedObject>(source)));
+        stopReplacements.erase(stopReplacements.find(&addr<Stoppable>(source)));
+        varReplacements.erase(varReplacements.find(&addr<VariableHandler>(source)));
+        setReplacements.erase(setReplacements.find(&addr<VariableHandler>(source)));
     }
 
-    TimeProvider::CloneCallback createTimeProviderCloneHandler()
-    {
-        return [this](TimeProvider::CallbackParam* original){ return replace(original, timeReplacements); };
-    }
-
-    AngleProvider::CloneCallback createAngleProviderCloneHandler()
-    {
-        return [this](AngleProvider::CallbackParam* original){ return replace(original, oriReplacements); };
-    }
-
-    Stop::CloneCallback createStopProviderCloneHandler()
-    {
-        return [this](Stop::CallbackParam* original){ return replace(original, stopReplacements); };
-    }
-
-    VariableProvider::CloneCallback createVariableProviderCloneHandler()
-    {
-        return [this](VariableProvider::CallbackParam* original){ return replace(original, varReplacements); };
-    }
-
-    SetVariable::CloneCallback createSetVariableProviderCloneHandler()
-    {
-        return [this](SetVariable::CallbackParam* original){ return replace(original, setReplacements); };
-    }
+    TimeProvider::CloneCallback createTimeProviderCloneHandler();
+    AngleProvider::CloneCallback createAngleProviderCloneHandler();
+    Stop::CloneCallback createStopProviderCloneHandler();
+    VariableProvider::CloneCallback createVariableProviderCloneHandler();
+    SetVariable::CloneCallback createSetVariableProviderCloneHandler();
 
 private:
     std::unordered_map<const void*, const TimedObject*> timeReplacements;
@@ -97,12 +78,12 @@ private:
     std::unordered_map<const void*, VariableHandler*> setReplacements;
 
     template<typename Provider, typename Observed>
-    Observed* replace(Provider* original, std::unordered_map<const void*, Observed*>& map)
+    Observed& replace(Provider& original, std::unordered_map<const void*, Observed*>& map)
     {
-        auto replacement = map.find(original->getObserved());
+        auto replacement = map.find(&original.getObserved());
         if(replacement != end(map))
-            return replacement->second;
-        return original->getObserved();
+            return *replacement->second;
+        return original.getObserved();
     }
 };
 

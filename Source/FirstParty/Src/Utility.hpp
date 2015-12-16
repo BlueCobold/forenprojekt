@@ -58,18 +58,18 @@ namespace utility
     template<>
     std::string stringTo(const std::string& str);
 
-    template<typename T, typename Z>
-    Z toDegree(T value)
+    template<typename T>
+    T toDegree(T value)
     {
         value *= 57.295779513082320876f;
-        return (Z)value;
+        return value;
     }
 
-    template<typename T, typename Z>
-    Z toRadian(T value)
+    template<typename T>
+    T toRadian(T value)
     {
         value *= 0.0174532925199432957f;
-        return (Z)value;
+        return value;
     }
 
     template<typename T>

@@ -17,20 +17,22 @@ private:
     b2BodyDef m_anchorBodyDef;
 
 public:
-    SingleRevoluteJoint(b2World* world, const b2RevoluteJointDef& jointDef, b2Body* body);
+    SingleRevoluteJoint(b2World& world, const b2RevoluteJointDef& jointDef, b2Body& body);
 
     SingleRevoluteJoint();
 
     void update() override;
 
-    bool reinstall(b2Body* body) override;
+    bool reinstall(b2Body& body) override;
 
-    void copyFrom(const JointObject* other) override;
+    void doCopyFrom(const JointObject& other) override;
 
-    std::vector<b2Vec2> getAnchorPoints() override;
+    std::vector<b2Vec2> getAnchorPoints() const override;
+    
+    std::vector<b2Vec2> getAnchorOffsets() const override;
 
 protected:
-    void bindBodies(b2Body* bodyA, b2Body* bodyB) override;
+    void bindBodies(b2Body& bodyA, b2Body& bodyB) override;
 };
 
 #endif

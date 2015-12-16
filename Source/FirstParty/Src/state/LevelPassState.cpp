@@ -4,11 +4,13 @@
 #include "../resources/AppConfig.hpp"
 #include "../resources/ResourceManager.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
+#include "../gui/Button.hpp"
 #include "../gui/InputBox.hpp"
 #include "../resources/AchievementManager.hpp"
 #ifdef LEVELTESTING
 #include "../resources/OpenFileDialoge.hpp"
 #endif
+
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>

@@ -22,6 +22,7 @@ Animation::Animation(const unsigned int frames,
                      const bool horizontal) :
     m_applyRotation(applyRotation),
     m_stopOnAlphaZero(false),
+    m_order(0),
     m_frames(frames),
     m_frame(0),
     m_frameWidth(frameWidth),
@@ -149,7 +150,7 @@ void Animation::updatePosition()
 void Animation::setRotation(const float radians)
 {
     if(m_applyRotation)
-        m_externalRotation = utility::toDegree<float, float>(radians);
+        m_externalRotation = utility::toDegree(radians);
 }
 
 void Animation::setBlending(const Blending::Mode mode)
@@ -295,6 +296,9 @@ std::unique_ptr<Animation> Animation::clone() const
     auto ani = std::unique_ptr<Animation>(new Animation(m_frames, m_frameWidth, m_frameHeight,
         m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal));
 
+    for(auto& it = begin(m_beforeCloneCallbacks); it != end(m_beforeCloneCallbacks); ++it)
+        (*it)(*this, *ani.get());
+
     if(m_cloneHandler != nullptr)
         m_cloneHandler->registerClone(*this, *ani.get(), *ani.get(), *ani.get());
 
@@ -313,6 +317,8 @@ std::unique_ptr<Animation> Animation::clone() const
     ani->m_shader = m_shader;
     ani->m_scaleToScreenSize = m_scaleToScreenSize;
     ani->copyValuesFrom(*this);
+    ani->m_beforeCloneCallbacks = m_beforeCloneCallbacks;
+    ani->m_afterCloneCallbacks = m_afterCloneCallbacks;
 
     std::array<std::unique_ptr<ValueProvider>, 4> colors;
     for(int i = 0; i < 4; i++)
@@ -334,6 +340,9 @@ std::unique_ptr<Animation> Animation::clone() const
 
     if(m_cloneHandler != nullptr)
         m_cloneHandler->unregisterClone(*this);
+    
+    for(auto& it = begin(m_afterCloneCallbacks); it != end(m_afterCloneCallbacks); ++it)
+        (*it)(*this, *ani.get());
 
     return ani;
 }
@@ -398,6 +407,43 @@ void Animation::setStencilInfo(StencilInfo info)
     m_stencil = info;
     _stencilAnimations.remove(this);
     _stencilAnimations.push_back(this);
+}
+
+sf::Vector2f Animation::getSize() const
+{
+    auto& texRect = m_sprite.getTextureRect();
+    return sf::Vector2f(static_cast<float>(texRect.width), static_cast<float>(texRect.height));
+}
+
+const sf::Vector2f& Animation::getScale() const
+{
+    return m_sprite.getScale();
+}
+
+void Animation::setScale(const float x, const float y)
+{
+    m_sprite.setScale(x, y);
+}
+
+void Animation::registerCloneCallbacks(
+    std::function<void(const Animation& src, Animation& clone)> before,
+    std::function<void(const Animation& src, Animation& clone)> after)
+{
+    if(before != nullptr)
+        m_beforeCloneCallbacks.emplace_back(before);
+
+    if(after != nullptr)
+        m_afterCloneCallbacks.emplace_back(before);
+}
+
+int Animation::getDrawOrder() const
+{
+    return m_order;
+}
+
+void Animation::setDrawOrder(int order)
+{
+    m_order = order;
 }
 
 void StencilInfo::enable()

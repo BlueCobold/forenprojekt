@@ -7,9 +7,9 @@
 #include "PhysicalObject.hpp"
 #include "SoundTrigger.hpp"
 #include "../animation/Cloneable.hpp"
-#include "../animation/CloneHandler.hpp"
 #include "collision/handler/CollisionHandler.hpp"
 #include "collision/filter/CollisionFilter.hpp"
+class CloneHandler;
 
 #include <functional>
 #include <memory> // std::unique_ptr

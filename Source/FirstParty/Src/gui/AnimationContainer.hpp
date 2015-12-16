@@ -3,9 +3,10 @@
 #ifndef ANIMATIONCONTAINER_HPP
 #define ANIMATIONCONTAINER_HPP
 
-#include "../animation/CloneHandler.hpp"
 #include "../model/AnimatedGraphics.hpp"
 #include "MenuElement.hpp"
+
+class CloneHandler;
 
 class AnimationContainer : public virtual AnimatedGraphics, public virtual MenuElement
 {

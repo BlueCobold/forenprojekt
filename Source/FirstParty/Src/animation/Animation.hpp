@@ -93,6 +93,7 @@ public:
 
     void setPosition(const float x, const float y);
     void setRotation(const float radians);
+    void setScale(const float x, const float y);
     void setBlending(const Blending::Mode mode);
     void bindTexture(const sf::Texture& texture, const sf::Vector2f& sourceOffset, bool prepareOnUsage = false);
     void bindFrameProvider(std::unique_ptr<ValueProvider> frames);
@@ -124,6 +125,16 @@ public:
 
     static void enableStencilEffects(bool enable);
     static bool usesStencilEffects();
+    
+    sf::Vector2f getSize() const;
+    const sf::Vector2f& getScale() const;
+
+    int getDrawOrder() const;
+    void setDrawOrder(int order);
+
+    void registerCloneCallbacks(
+        std::function<void(const Animation& src, Animation& clone)> before,
+        std::function<void(const Animation& src, Animation& clone)> after);
 
 private:
 
@@ -151,6 +162,7 @@ private:
     bool m_applyRotation;
     bool m_stopOnAlphaZero;
     StencilInfo m_stencil;
+    int m_order;
     unsigned int m_frames;
     unsigned int m_frame;
     int m_frameWidth;
@@ -168,6 +180,8 @@ private:
     bool m_isViewAligned;
     Shader* m_shader;
     CloneHandler* m_cloneHandler;
+    std::vector<std::function<void(const Animation& src, Animation& clone)>> m_beforeCloneCallbacks;
+    std::vector<std::function<void(const Animation& src, Animation& clone)>> m_afterCloneCallbacks;
     bool m_scaleToScreenSize;
 };
 

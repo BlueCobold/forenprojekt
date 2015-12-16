@@ -32,7 +32,13 @@
 					<animation spritesheet="walls" sprite="sand_01" rotate="true"/>
 				</animations>
 				<joints>
-					<singleDistance x="0" y="0" anchorX="60" anchorY="0"/>
+					<singleDistance x="0" y="-10" anchorX="60" anchorY="0">
+						<animations>
+							<animation spritesheet="assets" sprite="rod" blending="premul" />
+							<animation spritesheet="assets" sprite="bolt" location="entity" blending="premul" />
+							<animation spritesheet="assets" sprite="bolt" location="anchor" blending="premul" />
+						</animations>
+					</singleDistance>
 				</joints>
 			</entity> 
 		</entities>
@@ -50,7 +56,7 @@
                     w1      t1      t1      t1    w1
                     w1                            w1
                     w1                            w1
-                    w1      WP  WP  WP  WP  WP    w1
+                    w1    WP  WP  WP  WP  WP      w1
                     w2\1                      go/1w2
                     w2w1\1gg                gp/1w1w2
                     w2w1w4\1gh            gq/1w3w1w2

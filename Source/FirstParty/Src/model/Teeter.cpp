@@ -33,7 +33,7 @@ void Teeter::adaptToMouse()
 void Teeter::update(const float value)
 {
     auto velocity = 0.f;
-    auto angle = utility::toDegree<float, float>(getAngle());
+    auto angle = utility::toDegree(getAngle());
     auto timeDiff = value - m_lastTime;
 
 #if defined(IOS) || defined(ANDROID)
@@ -58,7 +58,7 @@ void Teeter::update(const float value)
     else
         maxVelocity = std::min(maxVelocity, std::max(minVelocity, mouseDiff.x));
 
-    velocity = utility::toRadian<float, float>(maxVelocity);
+    velocity = utility::toRadian(maxVelocity);
 
     getBody()->SetAngularVelocity(velocity);
 

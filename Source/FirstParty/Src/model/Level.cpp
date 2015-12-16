@@ -194,7 +194,7 @@ void Level::update(const float elapsedTime)
         float angle = m_ballImpulseAngle.getValue();
         float g = m_world.GetGravity().Length();
         float strength = m_ball->getBody()->GetMass() * sqrt(2 * g * utility::toMeter<float>(100.0f));
-        m_ball->getBody()->ApplyLinearImpulse(utility::rotate(-strength / g * m_world.GetGravity(), utility::toRadian<float, float>(angle)), m_ball->getBody()->GetWorldCenter(), false);
+        m_ball->getBody()->ApplyLinearImpulse(utility::rotate(-strength / g * m_world.GetGravity(), utility::toRadian(angle)), m_ball->getBody()->GetWorldCenter(), false);
     }
 
     trackBallMovement(elapsedTime);

@@ -22,7 +22,7 @@ private:
 
 public:
     SetVariable(
-        VariableHandler* observed,
+        VariableHandler& observed,
         const std::string& varName,
         std::unique_ptr<ValueProvider> provider,
         bool print = false,
@@ -36,7 +36,7 @@ public:
     virtual float getValue() override
     {
         float value = getProvider()->getValue();
-        getObserved()->setValueOf(m_varName, value);
+        getObserved().setValueOf(m_varName, value);
         if(m_print)
             std::cout << m_varName << "=" << value << std::endl;
         return value;

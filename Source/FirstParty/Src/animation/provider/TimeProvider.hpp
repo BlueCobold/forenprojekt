@@ -12,13 +12,13 @@ class TimeProvider : public ValueProvider, public Observer<const TimedObject>
 {
 public:
 
-    TimeProvider(const TimedObject* observer, const CloneCallback cloneCallback = nullptr) :
+    TimeProvider(const TimedObject& observer, const CloneCallback cloneCallback = nullptr) :
         Observer(observer, cloneCallback)
     { }
 
     virtual float getValue() override
     {
-        return getObserved()->getPassedTime();
+        return getObserved().getPassedTime();
     }
 
     virtual std::unique_ptr<ValueProvider> clone() const override

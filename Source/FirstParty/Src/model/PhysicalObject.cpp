@@ -18,10 +18,10 @@ void PhysicalObject::updateKinematics(const float value, const float delta)
 
     if(m_rotation != nullptr)
     {
-        float angle = utility::toDegree<float,float>(m_body->GetAngle());
+        float angle = utility::toDegree(m_body->GetAngle());
         float targetAngle = m_rotation->getValue();
         float velocity = (targetAngle - angle) / delta;
-        m_body->SetAngularVelocity(utility::toRadian<float,float>(velocity));
+        m_body->SetAngularVelocity(utility::toRadian(velocity));
     }
 
     if(m_xPositionProvider == nullptr && m_yPositionProvider == nullptr)

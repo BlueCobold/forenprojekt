@@ -15,27 +15,27 @@ class Observer
 public:
 
     typedef const Observer<O> CallbackParam;
-    typedef std::function<O*(CallbackParam*)> CloneCallback;
+    typedef std::function<O&(CallbackParam&)> CloneCallback;
 
-    Observer(O* observed, const CloneCallback callback = nullptr) :
+    Observer(O& observed, const CloneCallback callback = nullptr) :
         m_observed(observed),
         m_cloneCallback(callback)
     {
-        if(observed == nullptr)
+        if(&observed == nullptr)
             throw std::runtime_error(utility::replace(utility::translateKey("OwnerNull"), "?Provider"));
     }
 
-    O* getObserved() const
+    O& getObserved() const
     {
         return m_observed;
     }
 
 protected:
 
-    O* getCloneObservable() const
+    O& getCloneObservable() const
     {
         if(m_cloneCallback)
-            return m_cloneCallback(this);
+            return m_cloneCallback(*this);
         return m_observed;
     }
 
@@ -46,7 +46,7 @@ protected:
 
 private:
 
-    O* m_observed;
+    O& m_observed;
     const CloneCallback m_cloneCallback;
 };
 

@@ -14,12 +14,12 @@ class Stop : public ValueProvider, public Observer<Stoppable>
 {
 public:
 
-    Stop(Stoppable* observed, const CloneCallback cloneCallback = nullptr) : Observer(observed, cloneCallback)
+    Stop(Stoppable& observed, const CloneCallback cloneCallback = nullptr) : Observer(observed, cloneCallback)
     { }
 
     virtual float getValue() override
     {
-        getObserved()->stop();
+        getObserved().stop();
         return 0;
     }
 

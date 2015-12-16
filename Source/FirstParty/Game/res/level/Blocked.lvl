@@ -43,6 +43,9 @@
 			<joints>
 				<singleRevolute x="180" y="0" cwlimit="-175" ccwlimit="180">
 					<motor maxTorque="0" speed="0" />
+					<animations>
+						<animation spritesheet="assets" sprite="bolt" position="anchor" blending="premul" />
+					</animations>
 				</singleRevolute>
 			</joints>
 			<animations>
@@ -160,6 +163,11 @@
 			<joints>
 				<singlePrismatic x="33.5" y="33.5" directionX="0" directionY="-1" endPointBackward="0" endPointForward="300">
 					<motor maxForce="0" speed="0" />
+					<animations>
+						<animation spritesheet="assets" sprite="rod" blending="premul" />
+						<animation spritesheet="assets" sprite="bolt" location="entity" blending="premul" />
+						<animation spritesheet="assets" sprite="bolt" location="anchor" blending="premul" />
+					</animations>
 				</singlePrismatic>
 			</joints>
 		</entity>
@@ -222,32 +230,32 @@
 		</overrides>
 	</templates>
 	<grid size="60" width="2460" height="1600">
-
-
-                                        
-                                      
-                                                  
-                                      /1\1
-                                    /1w1w1\1
-                                  /1w1w1w1w1\1              
-          w1                    /1W1 1w1w1W1 1\1                    w1
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                      /1\1                                          
+                                    /1w1w1\1                                        
+                                  /1w1w1w1w1\1                                      
+          w1                    /1W1 1w1w1W1 1\1                    w1              
           w1                    w1    w1w1    w1                    w1              
-          w1                    w1  tsw1w1  tsw1                    w1           
-          w1              1Lxxxxxxxxxxw1w11Lxxxxxxxxxx              w1 
-          w1              i2        k1    k1        i2              w1         
-          w6\1                      i2    i2                      /1w2        
-          w5d1\1                                                /1d1w1
-          w5d2d4\1                                            /1d2d4w3            
-          w4d3d5d3\1                                        /1d3d5d3w4          
-          w4d6d2d4d6\1                          BB        /1d6d2d4d6w4    
-          w3d1d2d3d4d5\1                                /1d1d2d3d4d5w5          
-          w2d2d3d4d5d5d6\1                            /1d2d3d4d5d5d6w6         
-          w1d6d1d3d4d5d4d2\1        /1^O^X\1        /1d6d1d3d4d5d4d2w1        
-          w2w3w4w1w6w2w4w2w1    TT  w1w1w1w1    TT  w1w1w2w3w4w4w5w5w4
-                                                                                  
+          w1                    w1  tsw1w1  tsw1                    w1              
+          w1              1Lxxxxxxxxxxw1w11Lxxxxxxxxxx              w1              
+          w1              i2        k1    k1        i2              w1              
+          w6\1                      i2    i2                      /1w2              
+          w5d1\1                                                /1d1w1              
+          w5d2d4\1                                            /1d2d4w3              
+          w4d3d5d3\1                                        /1d3d5d3w4              
+          w4d6d2d4d6\1                          BB        /1d6d2d4d6w4              
+          w3d1d2d3d4d5\1                                /1d1d2d3d4d5w5              
+          w2d2d3d4d5d5d6\1                            /1d2d3d4d5d5d6w6              
+          w1d6d1d3d4d5d4d2\1        /1^O^X\1        /1d6d1d3d4d5d4d2w1              
+          w2w3w4w1w6w2w4w2w1    TT  w1w1w1w1    TT  w1w1w2w3w4w4w5w5w4              
                                                                                     
                                                                                     
-                               
+                                                                                    
+                                                                                    
                                                                                     
 	</grid>
 	<objects>

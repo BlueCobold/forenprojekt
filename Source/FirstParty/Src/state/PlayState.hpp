@@ -5,11 +5,13 @@
 
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
-#include "../model/Level.hpp"
 #include "../gui/hud/HUD.hpp"
+#include "../resources/BackgroundLoader.hpp"
+class Level;
+
 #include <SFML/System/Thread.hpp>
 #include <SFML/System/Clock.hpp>
-#include "../resources/BackgroundLoader.hpp"
+
 #include <memory> // unique_ptr
 
 class ResourceManager;

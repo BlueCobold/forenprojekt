@@ -13,20 +13,20 @@
 		<shape name="lever1" type="complex_polygon">
 			<polygon>
 				<vertex x="0" y="0" />
-				<vertex x="480" y="0" />
-				<vertex x="480" y="2" />
+				<vertex x="240" y="0" />
+				<vertex x="240" y="2" />
 				<vertex x="0" y="2" />
 			</polygon>
 			<polygon>
-				<vertex x="478" y="0" />
-				<vertex x="480" y="0" />
-				<vertex x="480" y="60" />
-				<vertex x="478" y="60" />
+				<vertex x="238" y="0" />
+				<vertex x="240" y="0" />
+				<vertex x="240" y="60" />
+				<vertex x="238" y="60" />
 			</polygon>
 			<polygon>
 				<vertex x="0" y="58" />
-				<vertex x="480" y="55" />
-				<vertex x="480" y="60" />
+				<vertex x="240" y="55" />
+				<vertex x="240" y="60" />
 				<vertex x="0" y="60" />
 			</polygon>
 			<polygon>
@@ -64,9 +64,9 @@
 
 		<physic name="specialtarget">
 			<body type="dynamic" angle="0" />
-			<fixture density="0.1" friction="0.8" restitution="0.5" />
+			<fixture density="0.01" friction="0.8" restitution="0.5" />
 		</physic>
-		<physic name="heavywight">
+		<physic name="heavyweight">
 			<body type="dynamic" angle="0" />
 			<fixture density="9.00" friction="0.8" restitution="0.5" />
 		</physic>
@@ -76,27 +76,28 @@
 		</physic>
 		<physic name="product">
 			<body type="dynamic" angle="0" angularDamping="4.0" />
-			<fixture density="0.5" friction="0.7" restitution="0.4" />
+			<fixture density="2" friction="0.7" restitution="0.4" />
 		</physic>
 	</physics>
 
 	<entities>
-		<entity name="Factory" rep="F1" type="entityFactory" productName="DummyBall" minDelayTime="5.0" maxDelayTime="10.0" spawnOffsetX="9" spawnOffsetY="7">
+		<entity name="Factory" rep="F1" type="entityFactory" productName="DummyBall" minDelayTime="4.0" maxDelayTime="4.0" spawnOffsetX="9" spawnOffsetY="7" z="10">
 			<physics name="factory" shape="factory" />
 			<joints>
 				<singlePrismatic x="90" y="60" directionX="-1" directionY="0" endPointBackward="0" endPointForward="2400">
 					<motor maxForce="5" speed="-120" />
+					<animations>
+						<animation spritesheet="assets" sprite="rod" blending="premul" />
+						<animation spritesheet="assets" sprite="bolt" location="entity" blending="premul" />
+						<animation spritesheet="assets" sprite="bolt" location="anchor" blending="premul" />
+					</animations>
 				</singlePrismatic>
 			</joints>
 			<animations>
-				<animation spritesheet="walls" sprite="sand_01" midx="0" midy="0" rotate="true" />
-				<animation spritesheet="walls" sprite="sand_01" midx="-60" midy="0" rotate="true" />
-				<animation spritesheet="walls" sprite="sand_01" midx="-120" midy="0" rotate="true" />
-				<animation spritesheet="walls" sprite="sand_right_upper" midx="-5" midy="-61" rotate="true" />
-				<animation spritesheet="walls" sprite="sand_left_upper" midx="-120" midy="-61" rotate="true" />
+				<animation spritesheet="assets" sprite="dispenser" x="90" y="60" z="2" />
 			</animations>
 		</entity>
-		<entity name="DummyBall" rep="B#" >
+		<entity name="DummyBall" rep="B#" z="8" >
 			<physics name="product">
 				<shape type="circle" radius="15" />
 			</physics>
@@ -116,7 +117,7 @@
 						<nop>
 							<ifpositive>
 								<sub>
-									<static value="1400" />
+									<static value="1280" />
 									<var name="position.y" />
 								</sub>
 								<stop />
@@ -137,18 +138,19 @@
 			<physics name="phy_lever" shape="lever1" />
 			<joints>
 				<singleRevolute x="0" y="0" cwlimit="-175" ccwlimit="0">
-					<motor maxTorque="40000" speed="5" />
+					<motor maxTorque="22000" speed="5" />
+					<animations>
+						<animation spritesheet="assets" sprite="bolt" position="anchor" blending="premul" />
+					</animations>
 				</singleRevolute>
 			</joints>
 			<animations>
 				<animation spritesheet="walls" sprite="sand_wide_01" rotate="true" />
 				<animation spritesheet="walls" sprite="sand_wide_01" midx="-120" midy="0" rotate="true" />
-				<animation spritesheet="walls" sprite="sand_wide_01" midx="-240" midy="0" rotate="true" />
-				<animation spritesheet="walls" sprite="sand_wide_01" midx="-360" midy="0" rotate="true" />
 			</animations>
 		</entity>
 		
-		<entity name="target_special" rep="ts" type="target" respawnable="true" points="100" collideWithBall="false">
+		<entity name="target_special" rep="ts" type="target" respawnable="true" points="100" collideWithBall="false" z="10">
 			<physics name="specialtarget">
 				<shape type="circle" radius="31" />
 			</physics>
@@ -160,47 +162,27 @@
 				</spawnEntity>
 			</collides>
 			<animations>
-				<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="true" />
+				<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="false" />
+				<animation spritesheet="assets" sprite="bolt" blending="premul" z="2"/>
 			</animations>
 			<joints>
-				<singleDistance x="33.5" y="33.5" anchorX="180" anchorY="0"/>
+				<singleDistance x="90" y="0" anchorX="180" anchorY="0">
+					<animations>
+						<animation spritesheet="assets" sprite="rod" blending="premul" z="1" />
+						<animation spritesheet="assets" sprite="rod" location="intermediate" blending="premul" z="1" />
+						<animation spritesheet="assets" sprite="bolt" location="entity" blending="premul" z="2" />
+						<animation spritesheet="assets" sprite="bolt" location="anchor" blending="premul" z="2" />
+					</animations>
+				</singleDistance>
 			</joints>
 		</entity>
 
-		<entity name="wigth" rep="hw" >
-			<physics name="heavywight">
+		<entity name="weigth" rep="hw" offsety="30">
+			<physics name="heavyweight">
 				<shape type="circle" radius="10" />
 			</physics>
 		</entity>
-		<entity base="left_lower" name="green_colored_left_lower" rep="\d">
-				<sound name="refuse" />
-				<collides>
-					<propertyFilter target="ball">
-						<abs>
-							<sub>
-								<static value="1" />
-								<var name="ball:color" />
-							</sub>
-						</abs>
-					</propertyFilter>
-				</collides>
-				<onCollision>
-					<showLabel font="red" offset="50">
-						<label>levelBlocked1</label>
-						<label>levelBlocked2</label>
-						<label>levelBlocked3</label>
-					</showLabel>
-				</onCollision>
-				<animations>
-					<animation spritesheet="walls" sprite="sand_left_lower" rotate="false">
-						<frameindex frames="5">
-							<static value="0"/>
-						</frameindex>
-						<color value="60FF60FF" />
-					</animation>
-				</animations>
-			</entity>
-			<entity name="info1" rep="i1">
+		<entity name="info1" rep="i1">
 			<animations>
 				<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0" midx="0" midy="0">
 					<frameindex frames="4">
@@ -292,44 +274,34 @@
 		</entities>
 	</templates>
 	<grid size="60" width="4000" height="2600">
-
-                                              /5\1
-                                            /4d1d3\1
-                                          /4d1d3d3d3\2
-                                        /3d1d2d3d4d5d6\2
-                                      /2d2d3d4d5d6d1d2d3\3
-                                    /1d1d2d3d4d5d6d1d2d3d3\1
-          w2                      /1d1d2d3d4d5d6d1d2d3d4d4d3\1
-          w1                      w1w1w2w3w4w5w6w5w4w3w2w1w1w3\4
-          w1                      w1                          w1
-          w1                      w1                          w2
-          w1                      w1                          w2
-                                  (1                          w1
-                            i1    F1                          w5
-          T2                i1                                w4
-                                  /1                          w2
-          w1                      w3\1        \1            /1w1
-          w1  t1                  (1w1\1    /1w1\1        /1)1w3       
-          w1                        (1w1)1/1w1w2w3\1    /1)1  w6                             
-          w1                              w3w1    w1    w1    w1                   
-          w1              TT          t1  w4w1    w1    w1    w1              
-          w1                              w6w1  tsw1    w1    w1           
-          w1                              1Lhwxxxxxxxxxxxx    w1 
-          w1                                                  w1         
-          w6      TT                                          w2        
-          w5                                                  w1
-          w5                                                  w3            
-          w4\1                                                w4          
-          w4d6\1                                              w4    
-          w3d1d2\1        BB                                  w5          
-          w2d2d3d4\1            /1\1            /2\1          w6         
-          w1d6d1d3d4\1        /1d2d5\1        /1d2d6\1        w1        
-          w2w3w4w1w6w1    TT  w1w1w1w1    TT  w1w1w1w1    TT
-                                                                                  
+            w3                                /5\1                                  
+            w1  bt                        bt/4d1d3\6bt                              
+            w2  bt                      bt/4d1d3d3d3\4bt                            
+            w5  bt                    bt/3d1d2d3d4d5d6\2bt                          
+            w6  bt                  bt/2d2d3d4d5d6d1d2d3\3bt                        
+            w4                      /1d1d2d3d4d5d6d1d2d3d3\1                        
+            w2                    /1d1d2d3d4d5d6d1d2d3d4d4d3\1                      
+            w1                    w1w1w2w3w4w5w6w5w4w3w2w1w1w3\4                    
+            w4                    w2                          w1                    
+            w3                    w4                          w6                    
+            w1                    w2                          w2                    
+                t1                (3                          w1                    
+                            i1    F1                          w5                    
+            T2              i1                              /3w4                    
+                                  /4    /2\4              /4w6w2                    
+            w1  t1                (2\1  w1w3w1\3        /1w1w3w5                    
+            w1                      (1\1(5w2w1w2w3\1  /2w6w3w6w4                    
+            w1    TT          TT          w4w5    w1  w2w3)2(3w1                    
+            w1          t1          t1    w6w1  tsw1  w3)1    w5                    
+            w1                                1Lhwxxxx        w2                    
+            w4\1                                              w4                    
+            w1d2\2                        BB                  w5                    
+            w2d3d4\5                                          w6                    
+            w6d1d3d4\1        /3w2w5\4        /2w2w6\1        w1                    
+            w3w4w1w6w1    TT  w1w1w1w1    TT  w1w1w1w1    TT  w2                    
                                                                                     
                                                                                     
-                              
-
+                                                                                    
 	</grid>
 	<objects>
 		<include file="pastureland/background.inc" />

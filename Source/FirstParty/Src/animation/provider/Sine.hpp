@@ -20,7 +20,7 @@ public:
 
     virtual float getValue() override
     {
-        return sinf(utility::toRadian<float, float>(getProvider()->getValue()));
+        return sinf(utility::toRadian(getProvider()->getValue()));
     }
 
     virtual std::unique_ptr<ValueProvider> clone() const override

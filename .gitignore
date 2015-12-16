@@ -213,5 +213,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-assets
-libs
+
+# Android
+**/Android/assets/
+libs/

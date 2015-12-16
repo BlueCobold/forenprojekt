@@ -240,11 +240,6 @@ private:
 
     void parseGameplayAttributes(const tinyxml2::XMLElement* xml);
 
-    void parseJoints(const tinyxml2::XMLElement* joints, Entity* entity);
-    void parseSingleRevoluteJoint(const tinyxml2::XMLElement* jointXml, Entity* entity);
-    void parseSinglePrismaticJoint(const tinyxml2::XMLElement* jointXml, Entity* entity);
-    void parseSingleDistanceJoint(const tinyxml2::XMLElement* jointXml, Entity* entity);
-
     std::unique_ptr<CollisionHandler> parseShowLabelHandler(const tinyxml2::XMLElement* xml);
 
     /// Construct the full level filename from the level number

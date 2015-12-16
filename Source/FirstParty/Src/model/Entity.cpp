@@ -1,5 +1,6 @@
 
 #include "Entity.hpp"
+#include "../animation/CloneHandler.hpp"
 #include "../Utility.hpp"
 
 #include <exception>
@@ -52,11 +53,13 @@ void Entity::update(const float value)
                 ani->setRotation(m_animationAngle);
             ani->update();
             running |= !ani->isStopped();
+            m_updatingAni = nullptr;
         }
+        updateJoints();
+
         for(auto sound = begin(m_otherSounds); sound != end(m_otherSounds); ++sound)
             (*sound)->update();
 
-        m_updatingAni = nullptr;
         m_lastTime = value;
 
         if(!running && m_autoKill)

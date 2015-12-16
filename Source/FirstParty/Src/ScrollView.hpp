@@ -7,7 +7,6 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-#include "model/Entity.hpp"
 #include "rendering/DrawParameter.hpp"
 
 class ScrollView
