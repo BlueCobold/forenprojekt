@@ -30,6 +30,7 @@ private:
     std::unique_ptr<ValueProvider> m_xPositionProvider;
     std::unique_ptr<ValueProvider> m_yPositionProvider;
     b2Vec2 m_basePosition;
+    b2Vec2 m_spawnSpeed;
     bool m_basePosChanged;
 
     std::vector<b2FixtureDef> m_fixtureDefs;
@@ -93,6 +94,8 @@ public:
             m_body->SetTransform(m_basePosition, m_bodyDef.angle);
         else
             m_basePosition = m_body->GetPosition();
+
+        m_body->SetLinearVelocity(m_spawnSpeed);
     }
 
     void unbindBody()
@@ -182,6 +185,10 @@ public:
             (*it)->reinstall(m_body);
     }
 
+    void setSpawnSpeed(const b2Vec2& speed)
+    {
+        m_spawnSpeed = speed;
+    }
 protected:
 
     const b2Vec2& getStartPosition() const

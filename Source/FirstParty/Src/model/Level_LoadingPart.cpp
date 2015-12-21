@@ -604,6 +604,9 @@ std::unique_ptr<Entity> Level::createEntity(
 
             auto factory = std::unique_ptr<EntityFactory>(new EntityFactory(m_cloneHandler, respawnable, autoStop, 
                                                                             product, min, max, spawnOffset));
+
+            factory->setOwnSpeedTransfer(xml->BoolAttribute("transferOwnSpeed"));
+
             factory->registerForDelivery([&](std::unique_ptr<Entity>& product){
                 m_entitiesToSpawn.push_back(std::move(product));
             });

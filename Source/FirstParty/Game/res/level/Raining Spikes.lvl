@@ -52,7 +52,7 @@
 		</physics>
 
 		<entities>
-			<entity name="FactorySpike1" rep="f1" type="entityFactory" collideWithBall="false" productName="singlespike" minDelayTime="4.0" maxDelayTime="4.0" spawnOffsetX="0" spawnOffsetY="10">
+			<entity name="FactorySpike1" rep="f1" type="entityFactory" collideWithBall="false" productName="singlespike" minDelayTime="4.0" maxDelayTime="4.0" spawnOffsetX="0" spawnOffsetY="10" transferOwnSpeed="true">
 				<physics name="verticalmoving" shape="singlespike" />
 			</entity>
 			<entity name="FactorySpike2" rep="f2" type="entityFactory" collideWithBall="false" productName="singlespikekill" minDelayTime="4.0" maxDelayTime="4.0" spawnOffsetX="0" spawnOffsetY="10">

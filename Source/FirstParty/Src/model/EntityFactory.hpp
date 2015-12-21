@@ -20,6 +20,7 @@ private:
     b2Vec2 m_spawnOffset;
     RandomProvider m_randomGenerator;
     DeliveryCallback m_callback;
+    bool m_transferOwnSpeed;
 
 public:
     EntityFactory(CloneHandler& cloneHandler,
@@ -34,6 +35,8 @@ public:
     virtual void restartAt(const float value);
 
     void registerForDelivery(DeliveryCallback callback);
+
+    void setOwnSpeedTransfer(bool value);
 };
 
 #endif
