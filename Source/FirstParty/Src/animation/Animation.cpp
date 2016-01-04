@@ -296,7 +296,7 @@ std::unique_ptr<Animation> Animation::clone() const
     auto ani = std::unique_ptr<Animation>(new Animation(m_frames, m_frameWidth, m_frameHeight,
         m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal));
 
-    for(auto& it = begin(m_beforeCloneCallbacks); it != end(m_beforeCloneCallbacks); ++it)
+    for(auto it = begin(m_beforeCloneCallbacks); it != end(m_beforeCloneCallbacks); ++it)
         (*it)(*this, *ani.get());
 
     if(m_cloneHandler != nullptr)
@@ -341,7 +341,7 @@ std::unique_ptr<Animation> Animation::clone() const
     if(m_cloneHandler != nullptr)
         m_cloneHandler->unregisterClone(*this);
     
-    for(auto& it = begin(m_afterCloneCallbacks); it != end(m_afterCloneCallbacks); ++it)
+    for(auto it = begin(m_afterCloneCallbacks); it != end(m_afterCloneCallbacks); ++it)
         (*it)(*this, *ani.get());
 
     return ani;

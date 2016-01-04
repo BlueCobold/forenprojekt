@@ -81,7 +81,7 @@
 	</physics>
 
 	<entities>
-		<entity name="Factory" rep="F1" type="entityFactory" productName="DummyBall" minDelayTime="4.0" maxDelayTime="4.0" spawnOffsetX="9" spawnOffsetY="7" z="10">
+		<entity name="Factory" rep="F1" type="entityFactory" productName="DummyBall" minDelayTime="4.0" maxDelayTime="4.0" spawnOffsetX="9" spawnOffsetY="7" z="10" transferOwnSpeed="true" >
 			<physics name="factory" shape="factory" />
 			<joints>
 				<singlePrismatic x="90" y="60" directionX="-1" directionY="0" endPointBackward="0" endPointForward="2400">

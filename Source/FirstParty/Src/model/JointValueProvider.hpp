@@ -136,7 +136,7 @@ public:
 
         auto dist = utility::toPixel(std::sqrtf(diff.x * diff.x + diff.y * diff.y));
         auto& ani = AnimationObserver::getObserved();
-        auto& size = ani.getSize();
+        auto size = ani.getSize();
         return dist / size.y;
     }
 

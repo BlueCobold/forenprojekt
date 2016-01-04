@@ -30,8 +30,6 @@
 	<texture name="teleport" path="assets/misc/Teleport.png" smooth="true" />
 	<texture name="slimeNormal" path="assets/misc/result.png" smooth="true" />
 	<texture name="icon_backgrounds" path="gui/icon_backgrounds.png" smooth="true" />
-	<texture name="icon_play" path="gui/icon_play.png" smooth="true" />
-	<texture name="icon_select" path="gui/icon_select.png" smooth="true" />
 	<texture name="gui_animations" path="gui/gui_animations.png" smooth="true" />
 	<texture name="assets" path="assets/assets.png" smooth="true" />
 </textures>
@@ -74,8 +72,6 @@
 	<spritesheet name="walls_nort" path="assets/norT.xml" />
 	<spritesheet name="gui_elements" path="gui/gui_elements.xml" />
 	<spritesheet name="gui_window" path="backgrounds/gui_window.xml" />
-	<spritesheet name="icon_play" path="gui/icon_play.xml" />
-	<spritesheet name="icon_select" path="gui/icon_select.xml" />
 	<spritesheet name="icon_backgrounds" path="gui/icon_backgrounds.xml" />
 	<spritesheet name="gui_animations" path="gui/gui_animations.xml" />
 	<spritesheet name="assets" path="assets/assets.xml" />

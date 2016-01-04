@@ -709,9 +709,9 @@ std::unique_ptr<Entity> Level::createEntity(
                                   *entity->getBody(),
                                   m_defaultTargetBuffer);
         auto joints = parser.parse();
-        for(auto& it = begin(joints); it != end(joints); ++it)
+        for(auto it = begin(joints); it != end(joints); ++it)
         {
-            for(auto& ani = begin(it->animations); ani != end(it->animations); ++ani)
+            for(auto ani = begin(it->animations); ani != end(it->animations); ++ani)
                 entity->bindAnimation(std::move(*ani));
             entity->addJoint(std::move(it->joint));
         }

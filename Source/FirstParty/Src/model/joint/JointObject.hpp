@@ -58,13 +58,13 @@ public:
 
     void copyFrom(const JointObject& other)
     {
-        for(auto& it = begin(m_beforeCopyCallbacks); it != end(m_beforeCopyCallbacks); ++it)
+        for(auto it = begin(m_beforeCopyCallbacks); it != end(m_beforeCopyCallbacks); ++it)
             (*it)(other, *this);
 
         m_world = other.m_world;
         doCopyFrom(other);
 
-        for(auto& it = begin(m_beforeCopyCallbacks); it != end(m_beforeCopyCallbacks); ++it)
+        for(auto it = begin(m_beforeCopyCallbacks); it != end(m_beforeCopyCallbacks); ++it)
             (*it)(other, *this);
     }
 
