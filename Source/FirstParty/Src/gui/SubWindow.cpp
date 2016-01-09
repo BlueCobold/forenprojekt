@@ -25,7 +25,8 @@ SubWindow::SubWindow(const int id,
     m_size(size),
     m_startValue(0),
     m_endValue(0),
-    m_active(false)
+    m_active(false),
+    m_zoomFactor(1.f)
 {
     float scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
 
@@ -67,10 +68,10 @@ void SubWindow::on(const DrawParameter& params)
     auto currentPosition = getCurrentPosition();
     auto orginalScreenRect = params.getTarget().getSize();
     sf::FloatRect windowViewport;
-    windowViewport.left = currentPosition.x / (orginalScreenRect.x - 0.2f);
-    windowViewport.top = currentPosition.y / (orginalScreenRect.y - 0.2f);
-    windowViewport.width = m_size.x / (orginalScreenRect.x - 0.2f);
-    windowViewport.height = m_size.y / (orginalScreenRect.y - 0.2f);
+    windowViewport.width = m_size.x / (orginalScreenRect.x - 0.2f) / m_zoomFactor;
+    windowViewport.height = m_size.y / (orginalScreenRect.y - 0.2f) / m_zoomFactor;
+    windowViewport.left = currentPosition.x / (orginalScreenRect.x - 0.2f) + windowViewport.width * ((m_zoomFactor - 1.f) / 2.f);
+    windowViewport.top = currentPosition.y / (orginalScreenRect.y - 0.2f)  + windowViewport.height * ((m_zoomFactor - 1.f) / 1.6f);
     sf::View windowView;
     windowView.setViewport(windowViewport);
     windowView.setCenter(m_center);
@@ -220,4 +221,9 @@ void SubWindow::updateLayout(const sf::Vector2f& screenSize)
                     - m_style.scrollbarBottom.getTextureRect().height;
     m_style.scrollbarMiddle.setScale(1, height/m_style.scrollbarMiddle.getTextureRect().height);
     m_style.scrollbarBottom.setPosition(position.x, position.y + height + m_style.scrollbarTop.getTextureRect().height);
+}
+
+void SubWindow::setZoomFactor(float zoomFactor)
+{
+    m_zoomFactor = zoomFactor;
 }

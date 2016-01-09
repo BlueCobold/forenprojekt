@@ -51,6 +51,8 @@ public:
     void setInnerHeight(int innerHeight);
     void updateLayout(const sf::Vector2f& screenSize) override;
 
+    void setZoomFactor(float zoomFactor);
+
 private:
 
     MenuPanel m_panel;
@@ -59,6 +61,7 @@ private:
     sf::Vector2f m_center;
     sf::Vector2f m_size;
     sf::View m_orginalView;
+    float m_zoomFactor;
 
     int m_startValue;
     int m_endValue;

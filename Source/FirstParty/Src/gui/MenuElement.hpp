@@ -129,9 +129,9 @@ protected:
     const sf::Vector2i getCursorPosition(const sf::RenderWindow& screen) const
     {
 #if defined(IOS) || defined(ANDROID)
-        return utility::Mouse.getTouchPosition();
+        return static_cast<sf::Vector2i>(screen.mapPixelToCoords(utility::Mouse.getTouchPosition());
 #else
-        return sf::Mouse::getPosition(screen);
+        return static_cast<sf::Vector2i>(screen.mapPixelToCoords(sf::Mouse::getPosition(screen)));
 #endif
     }
 

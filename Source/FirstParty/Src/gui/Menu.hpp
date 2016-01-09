@@ -49,6 +49,8 @@ public:
     InputBox& getInputBox(int id) const;
     SubWindow& getSubWindow(int id) const;
 
+    void setZoomFactor(float zoomFactor);
+
 protected:
 
     virtual void drawAdditionalBackground(const DrawParameter& params);
@@ -59,12 +61,9 @@ private:
     T* find(int id, const MenuElementType::Type type) const;
 
     sf::RenderWindow* m_screen;
-    /*sf::Vector2i m_size;
-    sf::Vector2f m_position;
-    sf::Vector2f m_offset;
-    sf::Vector2f m_currentPosition;*/
     MenuPanel m_panel;
     MenuTemplate m_template;
+    float m_zoomFactor;
 };
 
 #endif // MENU_HPP

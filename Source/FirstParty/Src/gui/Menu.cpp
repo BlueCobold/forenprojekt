@@ -17,7 +17,8 @@
 Menu::Menu(const MenuTemplate& menuTemplate, sf::RenderWindow& screen) :
            m_screen(&screen),
            m_panel(menuTemplate.menuElements),
-           m_template(menuTemplate)
+           m_template(menuTemplate),
+           m_zoomFactor(1.0f)
 {
     update(screen, 0);
 }
@@ -27,10 +28,17 @@ Menu::~Menu()
 
 void Menu::draw(const DrawParameter& params)
 {
+    auto view = params.getTarget().getView();
+    view.zoom(m_zoomFactor);
+    params.getTarget().setView(view);
+
     params.getTarget().draw(m_template.background);
     drawAdditionalBackground(params);
     m_panel.draw(params);
     drawAdditionalForeground(params);
+
+    view.zoom(1.f);
+    params.getTarget().setView(view);
 }
 
 void Menu::drawAdditionalBackground(const DrawParameter& params)
@@ -119,4 +127,15 @@ InputBox& Menu::getInputBox(int id) const
 SubWindow& Menu::getSubWindow(int id) const
 {
     return *find<SubWindow>(id, MenuElementType::SubWindow);
+}
+
+void Menu::setZoomFactor(float zoomFactor)
+{
+    m_zoomFactor = zoomFactor;
+
+    for(auto it = begin(m_panel.getElements()); it != end(m_panel.getElements()); ++it)
+    {
+        if((*it)->getType() == MenuElementType::SubWindow)
+            dynamic_cast<SubWindow*>((*it).get())->setZoomFactor(m_zoomFactor);
+    }
 }
