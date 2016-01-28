@@ -43,7 +43,11 @@ private:
 
 public:
 
-    PhysicalObject() : m_basePosChanged(false), m_world(nullptr), m_body(nullptr)
+    PhysicalObject() :
+		m_basePosChanged(false),
+		m_world(nullptr),
+		m_body(nullptr),
+		m_spawnSpeed(0)
     { }
 
     virtual ~PhysicalObject()
