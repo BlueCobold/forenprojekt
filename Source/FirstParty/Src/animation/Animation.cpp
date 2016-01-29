@@ -53,10 +53,11 @@ void Animation::update()
     if(!_renderStencilEffects && m_stencil.mode == StencilInfo::Test)
         return;
 
-    if(m_frameProvider == nullptr)
-        m_frame = 0;
-    else
+    if(m_frameProvider != nullptr)
         m_frame = static_cast<int>(m_frameProvider->getValue()) % m_frames;
+    else
+        m_frame = 0;
+
     m_sprite.setTextureRect(getTextureRect());
 
     float rotation = m_externalRotation;
@@ -106,7 +107,7 @@ void Animation::reset()
 {
     Stoppable::continueNow();
 
-    if(m_frameProvider == nullptr)
+    if(m_frameProvider != nullptr)
         m_frameProvider->reset();
 
     if(m_xPositionProvider != nullptr)
@@ -302,7 +303,7 @@ std::unique_ptr<Animation> Animation::clone() const
     if(m_cloneHandler != nullptr)
         m_cloneHandler->registerClone(*this, *ani.get(), *ani.get(), *ani.get());
 
-    if(m_frameProvider)
+    if(m_frameProvider != nullptr)
         ani->bindFrameProvider(m_frameProvider->clone());
 
     ani->m_stopOnAlphaZero = m_stopOnAlphaZero;

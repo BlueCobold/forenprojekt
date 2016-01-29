@@ -9,6 +9,8 @@
 #include "../rendering/parameter/FloatParameter.hpp"
 #include "../rendering/parameter/IntParameter.hpp"
 #include "../rendering/parameter/TextureParameter.hpp"
+#include "../resources/ProviderParser.hpp"
+#include "../resources/ProviderParserContext.hpp"
 
 #include <SFML/Graphics/Shader.hpp>
 
@@ -79,12 +81,13 @@ public:
                     if(auto child = paramXml->FirstChildElement())
                     {
                         static CloneHandler handler;
-                        auto provider = LevelFileLoader::parseProvider(child,
-                                                                       &resourceManager.getShaderContext(),
-                                                                       &resourceManager.getShaderContext(),
-                                                                       nullptr,
-                                                                       nullptr,
-                                                                       handler);
+                        ProviderParserContext context(&resourceManager.getShaderContext(),
+                                                      nullptr,
+                                                      &resourceManager.getShaderContext(),
+                                                      nullptr,
+                                                      handler);
+                        ProviderParser parser(context);
+                        auto provider = parser.parseSingle(*child);
                         std::unique_ptr<ShaderParameter> param;
                         if(type == "float")
                             param = std::unique_ptr<ShaderParameter>(new FloatParameter(paramXml->Attribute("uniform"), std::move(provider)));

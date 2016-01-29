@@ -1,8 +1,10 @@
 
 #include "JointParser.hpp"
 
-#include "ResourceManager.hpp"
+#include "AnimationParser.hpp"
 #include "LevelFileLoader.hpp"
+#include "ProviderParserContext.hpp"
+#include "ResourceManager.hpp"
 #include "../animation/CloneHandler.hpp"
 #include "../animation/VariableHandler.hpp"
 #include "../model/AnimatedGraphics.hpp"
@@ -167,15 +169,12 @@ std::vector<std::unique_ptr<Animation>> JointParser::parseAnimations(const tinyx
 
     if(auto animXmls = jointXml.FirstChildElement("animations"))
     {
+        ProviderParserContext context(&m_handler, &m_graphics, &m_graphics, &m_graphics, m_cloneHandler);
+        AnimationParser loader(context, m_resourceManager);
         for(auto animXml = animXmls->FirstChildElement("animation"); animXml != nullptr;
             animXml = animXml->NextSiblingElement("animation"))
         {
-            if(auto animation = LevelFileLoader::parseAnimation(animXml,
-                                                                &m_graphics,
-                                                                &m_handler,
-                                                                m_resourceManager,
-                                                                nullptr,
-                                                                m_cloneHandler))
+            if(auto animation = loader.parseSingle(*animXml))
             {
                 if(animation->getBufferId() == UINT_MAX)
                     animation->setBufferId(m_defaultTargetBuffer);

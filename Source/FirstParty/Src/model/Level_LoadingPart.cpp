@@ -2,9 +2,12 @@
 #include "Teeter.hpp"
 #include "EntityFactory.hpp"
 
+#include "../resources/AnimationParser.hpp"
 #include "../resources/AppConfig.hpp"
-#include "../resources/LevelFileLoader.hpp"
+#include "../resources/ControllerParser.hpp"
 #include "../resources/JointParser.hpp"
+#include "../resources/LevelFileLoader.hpp"
+#include "../resources/ValueParser.hpp"
 #include "../Utility.hpp"
 #include "../MacHelper.hpp"
 
@@ -69,7 +72,7 @@ void Level::load()
 
     auto constants = doc.FirstChildElement("level")->FirstChildElement("constants");
     if(constants != nullptr)
-        LevelFileLoader::parseConstants(constants, this);
+        ValueParser::parseConstants(*constants, *this);
 
     // get optional Attribute
     if(auto gameplay = doc.FirstChildElement("level")->FirstChildElement("gameplay"))
@@ -106,7 +109,7 @@ void Level::load()
     m_width = grid->FloatAttribute("width");
 
     // Separate the lines for easier processing
-    std::vector<std::string> lines = LevelFileLoader::parseGrid(grid);
+    std::vector<std::string> lines = LevelFileLoader::parseGrid(*grid);
     for(size_t row = 0; row < lines.size(); ++row)
         for(std::size_t column = 0; column < lines[row].length(); column += 2)
         {
@@ -183,12 +186,10 @@ void Level::parseObjects(
             for(auto anim = parallax->FirstChildElement("animation"); anim != nullptr;
                 anim = anim->NextSiblingElement("animation"))
             {
-                if(auto animation = LevelFileLoader::parseAnimation(anim,
-                                                                    layer.get(),
-                                                                    nullptr,
-                                                                    m_resourceManager,
-                                                                    &templates.functions,
-                                                                    m_cloneHandler))
+                auto context = ProviderParserContext(nullptr, layer.get(), layer.get(), layer.get(), m_cloneHandler)
+                                                    .withFunctions(templates.functions);
+                AnimationParser loader(context, m_resourceManager);
+                if(auto animation = loader.parseSingle(*anim))
                 {
                     if(animation->getBufferId() == UINT_MAX)
                         animation->setBufferId(m_defaultTargetBuffer);
@@ -231,36 +232,36 @@ void Level::parseTemplates(
 
     if(auto shapes = xmlTemplates->FirstChildElement("shapes"))
     {
-        auto values = std::move(LevelFileLoader::parseList(shapes, "shape", "name"));
+        auto values = std::move(ValueParser::parseList(*shapes, "shape", "name"));
         templates.shapes.insert(begin(values), end(values));
     }
 
     if(auto physics = xmlTemplates->FirstChildElement("physics"))
     {
-        auto values = std::move(LevelFileLoader::parseList(physics, "physic", "name"));
+        auto values = std::move(ValueParser::parseList(*physics, "physic", "name"));
         templates.physics.insert(begin(values), end(values));
     }
 
     if(auto functions = xmlTemplates->FirstChildElement("functions"))
     {
-        auto values = std::move(LevelFileLoader::parseList(functions, "function", "name"));
+        auto values = std::move(ValueParser::parseList(*functions, "function", "name"));
         templates.functions.insert(begin(values), end(values));
     }
 
     if(auto entities = xmlTemplates->FirstChildElement("entities"))
     {
         // Add use keys 'name' (objects) and 'rep' (grid)
-        auto reps = std::move(LevelFileLoader::parseList(entities, "entity", "rep"));
+        auto reps = std::move(ValueParser::parseList(*entities, "entity", "rep"));
         templates.entities.insert(begin(reps), end(reps));
-        auto temp = std::move(LevelFileLoader::parseList(entities, "entity", "name"));
+        auto temp = std::move(ValueParser::parseList(*entities, "entity", "name"));
         templates.entities.insert(begin(temp), end(temp));
     }
 
     if(auto functions = xmlTemplates->FirstChildElement("overrides"))
     {
-        auto values = std::move(LevelFileLoader::parseList(functions, "override", "newRep"));
+        auto values = std::move(ValueParser::parseList(*functions, "override", "newRep"));
         templates.overrides.insert(begin(values), end(values));
-        values = std::move(LevelFileLoader::parseList(functions, "override", "newName"));
+        values = std::move(ValueParser::parseList(*functions, "override", "newName"));
         templates.overrides.insert(begin(values), end(values));
     }
 
@@ -334,8 +335,9 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
             auto entity = original.get();
             if(it->second->Attribute("z") != nullptr)
                 entity->setDrawOrder(it->second->FloatAttribute("z"));
+
             if(auto constantsXml = xml->FirstChildElement("constants"))
-                LevelFileLoader::parseConstants(constantsXml, entity);
+                ValueParser::parseConstants(*constantsXml, *entity);
 
             if(original->hasPhysics())
             {
@@ -348,17 +350,27 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
             {
                 entity->applyOverrides([&](Animation* animation)
                 {
-                    LevelFileLoader::parseColorController(animation, aniXml, entity, this, &templates.functions, m_cloneHandler);
-                    LevelFileLoader::parsePositionController(animation, aniXml, entity, this, &templates.functions, m_cloneHandler);
-                    LevelFileLoader::parseScaleController(animation, aniXml, entity, this, &templates.functions, m_cloneHandler);
-                    LevelFileLoader::parseRotationController(animation, aniXml, entity, this, &templates.functions, m_cloneHandler);
+                    auto context = ProviderParserContext(this, entity, entity, entity, m_cloneHandler).withFunctions(templates.functions);
+
+                    ControllerParser controllerParser(context);
+                    auto position = controllerParser.parsePosition(*aniXml);
+                    animation->bindPositionController(std::move(*position[0]), std::move(*position[1]));
+
+                    auto scale = controllerParser.parseScale(*aniXml);
+                    animation->bindScaleController(std::move(*scale[0]), std::move(*scale[1]));
+
+                    auto color = controllerParser.parseColor(*aniXml);
+                    animation->bindColorController(std::move(*color[0]), std::move(*color[1]), std::move(*color[2]), std::move(*color[3]));
+
+                    animation->bindRotationController(controllerParser.parseRotation(*aniXml));
+
                     if(auto setXml = aniXml->FirstChildElement("set"))
                     {
                         if(setXml->Attribute("rotate"))
                             animation->applyRotation(setXml->BoolAttribute("rotate"));
                     }
                     if(auto constants = aniXml->FirstChildElement("constants"))
-                        LevelFileLoader::parseConstants(constants, animation);
+                        ValueParser::parseConstants(*constants, *animation);
                 });
             }
 
@@ -480,7 +492,9 @@ void Level::parsePhysics(const tinyxml2::XMLElement* physic,
     bool isBullet)
 {
     b2BodyDef bodyDef;
-    LevelFileLoader::parseBodyDef(physic, entity, this, &templates.functions, bodyDef, position, m_cloneHandler);
+    ProviderParserContext context(this, entity, entity, entity, m_cloneHandler);
+    LevelFileLoader loader(context, m_resourceManager);
+    loader.parseBodyDef(physic, entity, this, &templates.functions, bodyDef, position, m_cloneHandler);
     bodyDef.bullet = isBullet;
 
     std::vector<std::unique_ptr<b2Shape>> shapes;
@@ -569,15 +583,21 @@ std::unique_ptr<Entity> Level::createEntity(
         {
             isBullet = true;
             std::unique_ptr<Entity> spawn = parseEntityReference("onRespawn", xml, templates);
-            std::unique_ptr<Entity> kill = parseEntityReference("onKill", xml, templates);
-            float autoKillSpeed = xml->FloatAttribute("autoKillSpeed");
-            auto ball = new Ball(m_config.get<float>("BallResetTime"), autoKillSpeed, m_cloneHandler, spawn.get(), kill.get());
-            ball->bindTrail(LevelFileLoader::parseTrail(ball, xml, m_resourceManager, &templates.functions, m_cloneHandler));
-            entity = std::unique_ptr<Ball>(ball);
             if(spawn != nullptr)
                 m_unspawnedEntities.push_back(EntitySpawn(std::move(spawn)));
+
+            std::unique_ptr<Entity> kill = parseEntityReference("onKill", xml, templates);
             if(kill != nullptr)
                 m_unspawnedEntities.push_back(EntitySpawn(std::move(kill)));
+
+            float autoKillSpeed = xml->FloatAttribute("autoKillSpeed");
+            auto ball = std::unique_ptr<Ball>(new Ball(m_config.get<float>("BallResetTime"), autoKillSpeed, m_cloneHandler, spawn.get(), kill.get()));
+
+            auto context = ProviderParserContext(this, ball.get(), ball.get(), ball.get(), m_cloneHandler)
+                                                .withFunctions(templates.functions);
+            LevelFileLoader loader(context, m_resourceManager);
+            ball->bindTrail(loader.parseTrail(*xml));
+            entity = std::move(ball);
         }
         else if(typeName == "target")
         {
@@ -629,6 +649,10 @@ std::unique_ptr<Entity> Level::createEntity(
     if(xml->Attribute("draworder") != nullptr)
         entity->setDrawOrder(xml->FloatAttribute("draworder"));
 
+    auto context = ProviderParserContext(this, entity.get(), entity.get(), entity.get(), m_cloneHandler)
+                                        .withFunctions(templates.functions);
+    AnimationParser loader(context, m_resourceManager);
+
     if(auto animations = xml->FirstChildElement("animations"))
     {
         // Load animation
@@ -639,7 +663,7 @@ std::unique_ptr<Entity> Level::createEntity(
             element->QueryIntAttribute("copies", &copies);
             for(int copy = 0; copy < copies; copy++)
             {
-                if(auto animation = LevelFileLoader::parseAnimation(element, entity.get(), this, m_resourceManager, &templates.functions, m_cloneHandler))
+                if(auto animation = loader.parseSingle(*element))
                 {
                     if(animation->getBufferId() == UINT_MAX)
                         animation->setBufferId(m_defaultTargetBuffer);
@@ -654,7 +678,7 @@ std::unique_ptr<Entity> Level::createEntity(
                                    static_cast<float>(utility::toMeter(position.y))));
 
     if(auto constants = xml->FirstChildElement("constants"))
-        LevelFileLoader::parseConstants(constants, entity.get());
+        ValueParser::parseConstants(*constants, *entity);
 
     // Load sound
     if(xml->FirstChildElement("sound") != nullptr)
@@ -671,8 +695,9 @@ std::unique_ptr<Entity> Level::createEntity(
         for(auto sound = xml->FirstChildElement("sounds")->FirstChildElement("sound"); sound != nullptr; sound = sound->NextSiblingElement())
         {
             std::string soundName = sound->Attribute("name");
-            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(sound->FirstChildElement(), nullptr, nullptr, nullptr,
-                                                                                   &templates.functions, m_cloneHandler));
+            auto soundContext = ProviderParserContext(nullptr, nullptr, nullptr, nullptr, m_cloneHandler).withFunctions(templates.functions);
+            ProviderParser parser(context);
+            std::unique_ptr<ValueProvider> provider(parser.parseSingle(*sound->FirstChildElement()));
             otherSounds.push_back(std::unique_ptr<SoundTrigger>(new SoundTrigger(soundName, m_resourceManager.getSoundManager(), std::move(provider))));
         }
         entity->bindOtherSounds(std::move(otherSounds));
@@ -743,8 +768,10 @@ void Level::parseCollider(
         if(std::string(child->Name()) == "changeProperty")
         {
             std::unique_ptr<ChangePropertyCollisionHandler> collider(new ChangePropertyCollisionHandler(child->Attribute("name"), this));
-            std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(child->FirstChildElement(), collider.get(), collider.get(), nullptr,
-                                                                                   &templates.functions, m_cloneHandler));
+            auto context = ProviderParserContext(collider.get(), nullptr, collider.get(), collider.get(), m_cloneHandler)
+                                                .withFunctions(templates.functions);
+            ProviderParser parser(context);
+            std::unique_ptr<ValueProvider> provider(parser.parseSingle(*child->FirstChildElement()));
             collider->bindProvider(std::move(provider));
             entity->bindCollisionHandler(std::move(collider));
         }
@@ -870,15 +897,12 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
     const tinyxml2::XMLElement* xml,
     Templates& templates)
 {
-    if(std::string(xml->Name()) == "always")
-    {
+    std::string name(xml->Name());
+    if(name == "always")
         return std::unique_ptr<CollisionFilter>(new Always());
-    }
-    else if(std::string(xml->Name()) == "never")
-    {
+    else if(name == "never")
         return std::unique_ptr<CollisionFilter>(new Never());
-    }
-    else if(std::string(xml->Name()) == "spawnEntity")
+    else if(name == "spawnEntity")
     {
         auto name = xml->Attribute("name");
         if(!name)
@@ -898,13 +922,13 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
         m_unspawnedEntities.push_back(EntitySpawn(std::move(spawned)));
         return std::move(filter);
     }
-    else if(std::string(xml->Name()) == "copySpawnLocation")
+    else if(name == "copySpawnLocation")
     {
         std::unique_ptr<CollisionFilter> subFilter = getCollisionFilter(entity, xml->FirstChildElement(), templates);
         std::unique_ptr<ChangeBallSpawnFilter> filter(new ChangeBallSpawnFilter(std::move(subFilter)));
         return std::move(filter);
     }
-    else if(std::string(xml->Name()) == "setBallVelocity")
+    else if(name == "setBallVelocity")
     {
         std::unique_ptr<CollisionFilter> subFilter = getCollisionFilter(entity, xml->FirstChildElement(), templates);
         std::unique_ptr<ChangeBallVelocityFilter> filter(new ChangeBallVelocityFilter(
@@ -913,29 +937,33 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
             std::move(subFilter)));
         return std::move(filter);
     }
-    else if(std::string(xml->Name()) == "applyForce")
+    else if(name == "applyForce")
     {
         b2Vec2 force(xml->FloatAttribute("x"), xml->FloatAttribute("y"));
         std::unique_ptr<CollisionFilter> subFilter = getCollisionFilter(entity, xml->FirstChildElement(), templates);
         std::unique_ptr<ApplyForceFilter> filter(new ApplyForceFilter(force, std::move(subFilter)));
         return std::move(filter);
     }
-    else if(std::string(xml->Name()) == "changeGravity")
+    else if(name == "changeGravity")
     {
         bool target = true;//std::string("entity") == child->Attribute("target");
         b2Vec2 gravity(xml->FloatAttribute("x"), xml->FloatAttribute("y"));
         std::unique_ptr<ChangeGravityFilter> filter(new ChangeGravityFilter(m_gravity, gravity, target, this));
-        std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(xml->FirstChildElement(), filter.get(), filter.get(), nullptr,
-                                                                               &templates.functions, m_cloneHandler));
+        auto context = ProviderParserContext(filter.get(), nullptr, filter.get(), filter.get(), m_cloneHandler)
+                                            .withFunctions(templates.functions);
+        ProviderParser parser(context);
+        std::unique_ptr<ValueProvider> provider(parser.parseSingle(*xml->FirstChildElement()));
         filter->bindProvider(std::move(provider));
         return std::move(filter);
     }
-    else if(std::string(xml->Name()) == "propertyFilter")
+    else if(name == "propertyFilter")
     {
         bool target = std::string("entity") == xml->Attribute("target");
         std::unique_ptr<PropertyFilter> filter(new PropertyFilter(target, this));
-        std::unique_ptr<ValueProvider> provider(LevelFileLoader::parseProvider(xml->FirstChildElement(), filter.get(), filter.get(), nullptr,
-                                                                               &templates.functions, m_cloneHandler));
+        auto context = ProviderParserContext(filter.get(), nullptr, filter.get(), filter.get(), m_cloneHandler)
+                                            .withFunctions(templates.functions);
+        ProviderParser parser(context);
+        std::unique_ptr<ValueProvider> provider(parser.parseSingle(*xml->FirstChildElement()));
         filter->bindProvider(std::move(provider));
         return std::move(filter);
     }

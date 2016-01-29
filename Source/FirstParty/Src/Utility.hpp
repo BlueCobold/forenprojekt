@@ -57,7 +57,7 @@ namespace utility
 
     template<>
     std::string stringTo(const std::string& str);
-
+    
     template<typename T>
     T toDegree(T value)
     {

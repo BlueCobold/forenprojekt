@@ -1,5 +1,5 @@
 
-#include "LevelFileLoader.hpp"
+#include "AnimationParser.hpp"
 #include "MenuLoader.hpp"
 #include "ResourceManager.hpp"
 #include "SpriteSheet.hpp"
@@ -427,6 +427,8 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(const tinyxml2::XMLElement* xm
         style.animation = std::unique_ptr<AnimationContainer>(new AnimationContainer(sf::Vector2f(), sf::Vector2f(), 0, _cloneHandler));
         std::unordered_map<std::string, const tinyxml2::XMLElement*> functions;
 
+        ProviderParserContext context(style.animation.get(), style.animation.get(), style.animation.get(), style.animation.get(), _cloneHandler);
+        AnimationParser loader(context, resourceManager);
         for(auto animation = animations->FirstChildElement("animation");
             animation != nullptr; 
             animation = animation->NextSiblingElement("animation"))
@@ -435,9 +437,7 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(const tinyxml2::XMLElement* xm
             animation->QueryIntAttribute("copies", &copies);
             for(int copy = 0; copy < copies; copy++)
             {
-                if(auto ani = LevelFileLoader::parseAnimation(animation, style.animation.get(),
-                                                                style.animation.get(), resourceManager,
-                                                                &functions, _cloneHandler))
+                if(auto ani = loader.parseSingle(*animation))
                 {
                     ani->setValueOf("cloneId", static_cast<float>(copy));
                     style.animation->bindAnimation(std::move(ani));
@@ -683,9 +683,10 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
             auto position = sf::Vector2f(animationContainer->FloatAttribute("x"), animationContainer->FloatAttribute("y"));
             auto offset = sf::Vector2f(animationContainer->FloatAttribute("offsetx"), animationContainer->FloatAttribute("offsety"));
             std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(position, offset, id, _cloneHandler));
-            std::unordered_map<std::string, const tinyxml2::XMLElement*> functions;
             if(auto animations = animationContainer->FirstChildElement("animations"))
             {
+                ProviderParserContext context(animContainer.get(), animContainer.get(), animContainer.get(), animContainer.get(), _cloneHandler);
+                nimationParser loader(context, resourceManager);
                 for(auto animation = animations->FirstChildElement("animation");
                     animation != nullptr; 
                     animation = animation->NextSiblingElement("animation"))
@@ -694,9 +695,7 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
                     animation->QueryIntAttribute("copies", &copies);
                     for(int copy = 0; copy < copies; copy++)
                     {
-                        if(auto ani = LevelFileLoader::parseAnimation(animation, animContainer.get(),
-                                                                      animContainer.get(), resourceManager,
-                                                                      &functions, _cloneHandler))
+                        if(auto ani = loader.parseSingle(*animation))
                         {
                             ani->setValueOf("cloneId", static_cast<float>(copy));
                             animContainer->bindAnimation(std::move(ani));

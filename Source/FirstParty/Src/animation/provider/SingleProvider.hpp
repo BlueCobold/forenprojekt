@@ -4,6 +4,7 @@
 #define SINGLE_PROVIDER_HPP
 
 #include "ValueProvider.hpp"
+#include "../../Utility.hpp"
 
 #include <exception>
 #include <memory>
