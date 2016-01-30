@@ -25,7 +25,7 @@ class LevelFileLoader
 {
 public:
 
-    LevelFileLoader(ProviderParserContext context,
+    LevelFileLoader(ProviderContext context,
                     ResourceManager& resourceManager) :
         m_context(context),
         m_providerParser(context),
@@ -34,25 +34,11 @@ public:
 
     static std::vector<std::string> parseGrid(const tinyxml2::XMLElement& xml);
 
-    void parseBodyDef(const tinyxml2::XMLElement* element,
-        Entity* entity,
-        VariableHandler* handler,
-        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
-        b2BodyDef& bodyDef,
-        const sf::Vector2u& position,
-        CloneHandler& cloneHandler);
-
-    void parseKinematics(const tinyxml2::XMLElement* element,
-        Entity* entity,
-        VariableHandler* handler,
-        std::unordered_map<std::string, const tinyxml2::XMLElement*>* functions,
-        CloneHandler& cloneHandler);
-
     std::unique_ptr<ParticleTrail> parseTrail(const tinyxml2::XMLElement& xml);
 
 private:
 
-    ProviderParserContext m_context;
+    ProviderContext m_context;
     ProviderParser m_providerParser;
     ResourceManager& m_resourceManager;
 };

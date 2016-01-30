@@ -4,7 +4,7 @@
 #define ANIMATION_PARSER_HPP
 
 #include "../animation/Animation.hpp"
-#include "ProviderParserContext.hpp"
+#include "ProviderContext.hpp"
 #include "ProviderParser.hpp"
 
 #include <memory>
@@ -16,12 +16,12 @@ class ResourceManager;
 
 class AnimationParser
 {
-    ProviderParserContext m_context;
+    ProviderContext m_context;
     ProviderParser m_providerParser;
     ResourceManager& m_resourceManager;
-    
+
 public:
-    AnimationParser(ProviderParserContext context, ResourceManager& resourceManager) :
+    AnimationParser(ProviderContext context, ResourceManager& resourceManager) :
         m_context(context),
         m_providerParser(context),
         m_resourceManager(resourceManager)

@@ -39,7 +39,7 @@
 #include "../animation/Stoppable.hpp"
 #include "../Utility.hpp"
 
-std::vector<std::unique_ptr<ValueProvider>> ProviderParser::parseMultiple(const tinyxml2::XMLElement& xml)
+std::vector<std::unique_ptr<ValueProvider>> ProviderParser::parseMultiple(const tinyxml2::XMLElement& xml) const
 {
     std::vector<std::unique_ptr<ValueProvider>> providers;
     for(auto child = xml.FirstChildElement(); child != nullptr; child = child->NextSiblingElement())
@@ -67,7 +67,7 @@ std::vector<std::unique_ptr<ValueProvider>> ProviderParser::parseMultiple(const 
     return providers;
 }
 
-std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLElement& xml)
+std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLElement& xml) const
 {
     std::string name(xml.Name());
     if(name == "time")
@@ -177,7 +177,7 @@ std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLEl
     throw std::runtime_error(utility::replace(utility::translateKey("Unknown"), name));
 }
 
-std::vector<float> ProviderParser::parseFloatList(const std::string& valueString)
+std::vector<float> ProviderParser::parseFloatList(const std::string& valueString) const
 {
     std::vector<float> results;
     std::stringstream ss(valueString);

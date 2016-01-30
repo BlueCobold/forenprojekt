@@ -10,7 +10,7 @@
 #include "../rendering/parameter/IntParameter.hpp"
 #include "../rendering/parameter/TextureParameter.hpp"
 #include "../resources/ProviderParser.hpp"
-#include "../resources/ProviderParserContext.hpp"
+#include "../resources/ProviderContext.hpp"
 
 #include <SFML/Graphics/Shader.hpp>
 
@@ -81,11 +81,11 @@ public:
                     if(auto child = paramXml->FirstChildElement())
                     {
                         static CloneHandler handler;
-                        ProviderParserContext context(&resourceManager.getShaderContext(),
-                                                      nullptr,
-                                                      &resourceManager.getShaderContext(),
-                                                      nullptr,
-                                                      handler);
+                        ProviderContext context(&resourceManager.getShaderContext(),
+                                                nullptr,
+                                                &resourceManager.getShaderContext(),
+                                                nullptr,
+                                                handler);
                         ProviderParser parser(context);
                         auto provider = parser.parseSingle(*child);
                         std::unique_ptr<ShaderParameter> param;

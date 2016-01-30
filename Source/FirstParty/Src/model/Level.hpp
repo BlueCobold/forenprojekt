@@ -210,14 +210,6 @@ private:
         const tinyxml2::XMLElement* entity,
         Templates& templates);
 
-    void parsePhysics(
-        const tinyxml2::XMLElement* physic,
-        const tinyxml2::XMLElement* shape,
-        Entity* entity,
-        const sf::Vector2u& position,
-        Templates& templates,
-        bool isBullet = false);
-
     void parseCollider(
         Entity* entity,
         const tinyxml2::XMLElement* collider,

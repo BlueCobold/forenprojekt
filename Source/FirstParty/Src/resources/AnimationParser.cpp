@@ -79,7 +79,7 @@ std::unique_ptr<Animation> AnimationParser::parseSingle(const tinyxml2::XMLEleme
         horizontal = std::string("vertical") != alignment;
 
     std::unique_ptr<Animation> anim(new Animation(frames, width, height, rotate, origin, offset, horizontal));
-    auto aniContext = ProviderParserContext(m_context).withCustomTag("stopAnimation", anim.get());
+    auto aniContext = ProviderContext(m_context).withCustomTag("stopAnimation", anim.get());
     if(aniContext.variableHandler == nullptr)
         aniContext.variableHandler = anim.get();
     ProviderParser providerParser(aniContext);
@@ -139,7 +139,7 @@ std::unique_ptr<Animation> AnimationParser::parseSingle(const tinyxml2::XMLEleme
     
     ControllerParser controllerParser(aniContext);
     auto position = controllerParser.parsePosition(xml);
-    nim->bindPositionController(std::move(*position[0]), std::move(*position[1]));
+    anim->bindPositionController(std::move(*position[0]), std::move(*position[1]));
 
     auto scale = controllerParser.parseScale(xml);
     anim->bindScaleController(std::move(*scale[0]), std::move(*scale[1]));

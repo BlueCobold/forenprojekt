@@ -643,9 +643,6 @@
     <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp">
       <Filter>Headers\resources\parsers</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\resources\ProviderParserContext.hpp">
-      <Filter>Headers\resources\parsers</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\resources\ShaderContext.hpp">
       <Filter>Headers\resources\parsers</Filter>
     </ClInclude>
@@ -657,6 +654,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\ValueParser.hpp">
       <Filter>Headers\resources\parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\ProviderContext.hpp">
+      <Filter>Headers\resources\parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\PhysicsParser.hpp">
+      <Filter>Headers\resources\parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\Array.hpp">
+      <Filter>Headers\model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1200,7 +1206,7 @@
     <ClCompile Include="..\..\Src\resources\ValueParser.cpp">
       <Filter>Sources\resources\parsers</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\resources\ProviderParserContext.cpp">
+    <ClCompile Include="..\..\Src\resources\PhysicsParser.cpp">
       <Filter>Sources\resources\parsers</Filter>
     </ClCompile>
   </ItemGroup>

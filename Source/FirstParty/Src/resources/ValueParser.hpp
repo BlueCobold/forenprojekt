@@ -4,7 +4,7 @@
 #define VALUE_PARSER_HPP
 
 #include "../animation/Animation.hpp"
-#include "ProviderParserContext.hpp"
+#include "ProviderContext.hpp"
 #include "ProviderParser.hpp"
 
 #include <unordered_map>

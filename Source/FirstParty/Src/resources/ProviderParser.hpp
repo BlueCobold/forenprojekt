@@ -4,7 +4,7 @@
 #define PROVIDER_PARSER_HPP
 
 #include "../animation/provider/ValueProvider.hpp"
-#include "ProviderParserContext.hpp"
+#include "ProviderContext.hpp"
 
 #include <memory>
 #include <vector>
@@ -13,19 +13,19 @@
 
 class ProviderParser
 {
-    ProviderParserContext m_context;
+    ProviderContext m_context;
 
 public:
-    ProviderParser(ProviderParserContext context) :
+    ProviderParser(ProviderContext context) :
         m_context(context)
     { }
 
-    std::vector<std::unique_ptr<ValueProvider>> parseMultiple(const tinyxml2::XMLElement& xml);
+    std::vector<std::unique_ptr<ValueProvider>> parseMultiple(const tinyxml2::XMLElement& xml) const;
 
-    std::unique_ptr<ValueProvider> parseSingle(const tinyxml2::XMLElement& xml);
+    std::unique_ptr<ValueProvider> parseSingle(const tinyxml2::XMLElement& xml) const;
 
 private:
-    std::vector<float> parseFloatList(const std::string& valueString);
+    std::vector<float> parseFloatList(const std::string& valueString) const;
 };
 
 #endif // PROVIDER_PARSER_HPP

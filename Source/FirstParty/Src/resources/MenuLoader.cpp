@@ -427,7 +427,7 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(const tinyxml2::XMLElement* xm
         style.animation = std::unique_ptr<AnimationContainer>(new AnimationContainer(sf::Vector2f(), sf::Vector2f(), 0, _cloneHandler));
         std::unordered_map<std::string, const tinyxml2::XMLElement*> functions;
 
-        ProviderParserContext context(style.animation.get(), style.animation.get(), style.animation.get(), style.animation.get(), _cloneHandler);
+        ProviderContext context(style.animation.get(), style.animation.get(), style.animation.get(), style.animation.get(), _cloneHandler);
         AnimationParser loader(context, resourceManager);
         for(auto animation = animations->FirstChildElement("animation");
             animation != nullptr; 
@@ -685,8 +685,8 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
             std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(position, offset, id, _cloneHandler));
             if(auto animations = animationContainer->FirstChildElement("animations"))
             {
-                ProviderParserContext context(animContainer.get(), animContainer.get(), animContainer.get(), animContainer.get(), _cloneHandler);
-                nimationParser loader(context, resourceManager);
+                ProviderContext context(animContainer.get(), animContainer.get(), animContainer.get(), animContainer.get(), _cloneHandler);
+                AnimationParser loader(context, resourceManager);
                 for(auto animation = animations->FirstChildElement("animation");
                     animation != nullptr; 
                     animation = animation->NextSiblingElement("animation"))

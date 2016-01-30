@@ -7,6 +7,7 @@
 #include "../resources/ControllerParser.hpp"
 #include "../resources/JointParser.hpp"
 #include "../resources/LevelFileLoader.hpp"
+#include "../resources/PhysicsParser.hpp"
 #include "../resources/ValueParser.hpp"
 #include "../Utility.hpp"
 #include "../MacHelper.hpp"
@@ -186,7 +187,7 @@ void Level::parseObjects(
             for(auto anim = parallax->FirstChildElement("animation"); anim != nullptr;
                 anim = anim->NextSiblingElement("animation"))
             {
-                auto context = ProviderParserContext(nullptr, layer.get(), layer.get(), layer.get(), m_cloneHandler)
+                auto context = ProviderContext(nullptr, layer.get(), layer.get(), layer.get(), m_cloneHandler)
                                                     .withFunctions(templates.functions);
                 AnimationParser loader(context, m_resourceManager);
                 if(auto animation = loader.parseSingle(*anim))
@@ -350,7 +351,7 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
             {
                 entity->applyOverrides([&](Animation* animation)
                 {
-                    auto context = ProviderParserContext(this, entity, entity, entity, m_cloneHandler).withFunctions(templates.functions);
+                    auto context = ProviderContext(this, entity, entity, entity, m_cloneHandler).withFunctions(templates.functions);
 
                     ControllerParser controllerParser(context);
                     auto position = controllerParser.parsePosition(*aniXml);
@@ -387,8 +388,16 @@ std::unique_ptr<Entity> Level::parseEntityFromTemplate(
             findPhysicAndShapeTag(physic, shape, xml, templates);
             if(auto draworder = it->second->FloatAttribute("draworder"))
                 entity->setDrawOrder(draworder);
-            if(physic != nullptr)
-                parsePhysics(physic, shape, entity, position, templates);
+            if(physic != nullptr && shape != nullptr)
+            {
+                PhysicsParser parser(ProviderContext(entity, entity, entity, entity, m_cloneHandler));
+                auto physics = parser.parse(*physic, *shape);
+                physics.bodyDef.position = b2Vec2(static_cast<float>(utility::toMeter(position.x)),
+                                                  static_cast<float>(utility::toMeter(position.y)));
+                entity->bindDefs(physics.fixtureDef, physics.shapes, physics.bodyDef, &m_world);
+                entity->bindRotationController(std::move(physics.controllers.rotation));
+                entity->bindPositionController(std::move(*physics.controllers.position[0]), std::move(*physics.controllers.position[1]));
+            }
             return std::move(original);
         }
         return nullptr;
@@ -407,24 +416,24 @@ void Level::findPhysicAndShapeTag(
     if(physics != nullptr)
     {
         // Shape template exists
-        if(physics->Attribute("shape") != nullptr)
+        if(auto shapeName = physics->Attribute("shape"))
         {
-            std::string name(physics->Attribute("shape"));
-            if(templates.shapes.find(name) != end(templates.shapes))
-                shape = templates.shapes.find(std::string(physics->Attribute("shape")))->second;
+            auto shapeTemplate = templates.shapes.find(shapeName);
+            if(shapeTemplate != end(templates.shapes))
+                shape = shapeTemplate->second;
         }
         // Physics doesn't use a template
         else
             shape = physics->FirstChildElement("shape");
 
-        if(physics->Attribute("name"))
+        if(auto physicsName = physics->Attribute("name"))
         {
-            auto name = std::string(physics->Attribute("name"));
-            // Physics template exists other wise no template is used
-            if(templates.physics.find(std::string(physics->Attribute("name"))) != end(templates.physics))
-                physic = templates.physics.find(name)->second;
+            auto physicsTemplate = templates.physics.find(physicsName);
+            if(physicsTemplate != end(templates.physics))
+                physic = physicsTemplate->second;
+
             if(physic == nullptr)
-                throw std::runtime_error(utility::replace(utility::translateKey("UnknownPhysicReference"), name));
+                throw std::runtime_error(utility::replace(utility::translateKey("UnknownPhysicReference"), physicsName));
         }
         else
             physic = physics;
@@ -437,7 +446,6 @@ std::unique_ptr<Entity> Level::parseEntity(
     Templates& templates,
     bool bindInstantly)
 {
-
     if(entity->Attribute("x") != nullptr)
         position.x = entity->IntAttribute("x");
     if(entity->Attribute("y") != nullptr)
@@ -467,93 +475,6 @@ bool Level::validate(const tinyxml2::XMLDocument& document) const
         return false;
     }
     return true;
-}
-
-// Helper function to compute the area of a given polygon
-float computeArea(const std::vector<b2Vec2>& vertices)
-{
-    auto area = 0.0f;
-    b2Vec2 origin(0.0f, 0.0f);
-    for(size_t i = 0; i < vertices.size(); ++i)
-    {
-        b2Vec2 d1 = vertices[i] - origin;
-        b2Vec2 d2 = vertices[(i + 1) % vertices.size()] - origin;
-
-        area += 0.5f * b2Cross(d1, d2);
-    }
-    return area;
-}
-
-void Level::parsePhysics(const tinyxml2::XMLElement* physic,
-    const tinyxml2::XMLElement* shape,
-    Entity* entity,
-    const sf::Vector2u& position,
-    Templates& templates,
-    bool isBullet)
-{
-    b2BodyDef bodyDef;
-    ProviderParserContext context(this, entity, entity, entity, m_cloneHandler);
-    LevelFileLoader loader(context, m_resourceManager);
-    loader.parseBodyDef(physic, entity, this, &templates.functions, bodyDef, position, m_cloneHandler);
-    bodyDef.bullet = isBullet;
-
-    std::vector<std::unique_ptr<b2Shape>> shapes;
-    // Load shape
-    if(std::string(shape->Attribute("type")) == "polygon") // Load polygon
-    {
-        std::vector<b2Vec2> vertices;
-        // Iterate over the vertices
-        for(auto vertexIterator = shape->FirstChildElement("vertex");
-            vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
-        {
-            vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
-                utility::toMeter(vertexIterator->FloatAttribute("y"))));
-        }
-        // Construct the b2Shape
-        std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
-        ps->Set(vertices.data(), static_cast<int>(vertices.size()));
-        shapes.push_back(std::move(ps));
-    }
-    else if(std::string(shape->Attribute("type")) == "complex_polygon") // Load polygon
-    {
-        for(auto polyIterator = shape->FirstChildElement("polygon");
-            polyIterator != nullptr; polyIterator = polyIterator->NextSiblingElement("polygon"))
-        {
-            std::vector<b2Vec2> vertices;
-            // Iterate over the vertices
-            for(auto vertexIterator = polyIterator->FirstChildElement("vertex");
-                vertexIterator != nullptr; vertexIterator = vertexIterator->NextSiblingElement("vertex"))
-            {
-                vertices.push_back(b2Vec2(utility::toMeter(vertexIterator->FloatAttribute("x")),
-                    utility::toMeter(vertexIterator->FloatAttribute("y"))));
-            }
-            // Construct the b2Shape
-            std::unique_ptr<b2PolygonShape> ps(new b2PolygonShape);
-            float area = computeArea(vertices);
-            // If the area is negative, the polygon is either messed up or defined in wrong order.
-            // A wrong order can be fixed by simply reversing all given vertices.
-            if(area < 0)
-                std::reverse(begin(vertices), end(vertices));
-            ps->Set(vertices.data(), static_cast<int>(vertices.size()));
-            shapes.push_back(std::move(ps));
-        }
-    }
-    else if(std::string(shape->Attribute("type")) == "circle") // Load circle
-    {
-        std::unique_ptr<b2CircleShape> cs(new b2CircleShape);
-        cs->m_radius = utility::toMeter(shape->FloatAttribute("radius"));
-        shapes.push_back(std::move(cs));
-    }
-
-    // Load fixtures
-    auto fixtureXml = physic->FirstChildElement("fixture");
-    b2FixtureDef fixtureDef;
-    //fixtureDef.shape = &shapes.g m_shapes.back().get();
-    fixtureDef.density = fixtureXml->FloatAttribute("density");
-    fixtureDef.friction = fixtureXml->FloatAttribute("friction");
-    fixtureDef.restitution = fixtureXml->FloatAttribute("restitution");
-
-    entity->bindDefs(fixtureDef, shapes, bodyDef, &m_world);
 }
 
 std::unique_ptr<Entity> Level::createEntity(
@@ -593,8 +514,8 @@ std::unique_ptr<Entity> Level::createEntity(
             float autoKillSpeed = xml->FloatAttribute("autoKillSpeed");
             auto ball = std::unique_ptr<Ball>(new Ball(m_config.get<float>("BallResetTime"), autoKillSpeed, m_cloneHandler, spawn.get(), kill.get()));
 
-            auto context = ProviderParserContext(this, ball.get(), ball.get(), ball.get(), m_cloneHandler)
-                                                .withFunctions(templates.functions);
+            auto context = ProviderContext(this, ball.get(), ball.get(), ball.get(), m_cloneHandler)
+                                          .withFunctions(templates.functions);
             LevelFileLoader loader(context, m_resourceManager);
             ball->bindTrail(loader.parseTrail(*xml));
             entity = std::move(ball);
@@ -649,8 +570,8 @@ std::unique_ptr<Entity> Level::createEntity(
     if(xml->Attribute("draworder") != nullptr)
         entity->setDrawOrder(xml->FloatAttribute("draworder"));
 
-    auto context = ProviderParserContext(this, entity.get(), entity.get(), entity.get(), m_cloneHandler)
-                                        .withFunctions(templates.functions);
+    auto context = ProviderContext(this, entity.get(), entity.get(), entity.get(), m_cloneHandler)
+                                  .withFunctions(templates.functions);
     AnimationParser loader(context, m_resourceManager);
 
     if(auto animations = xml->FirstChildElement("animations"))
@@ -695,7 +616,8 @@ std::unique_ptr<Entity> Level::createEntity(
         for(auto sound = xml->FirstChildElement("sounds")->FirstChildElement("sound"); sound != nullptr; sound = sound->NextSiblingElement())
         {
             std::string soundName = sound->Attribute("name");
-            auto soundContext = ProviderParserContext(nullptr, nullptr, nullptr, nullptr, m_cloneHandler).withFunctions(templates.functions);
+            auto soundContext = ProviderContext(nullptr, nullptr, nullptr, nullptr, m_cloneHandler)
+                                               .withFunctions(templates.functions);
             ProviderParser parser(context);
             std::unique_ptr<ValueProvider> provider(parser.parseSingle(*sound->FirstChildElement()));
             otherSounds.push_back(std::unique_ptr<SoundTrigger>(new SoundTrigger(soundName, m_resourceManager.getSoundManager(), std::move(provider))));
@@ -703,8 +625,17 @@ std::unique_ptr<Entity> Level::createEntity(
         entity->bindOtherSounds(std::move(otherSounds));
     }
 
-    if(physic != nullptr)
-        parsePhysics(physic, shape, entity.get(), position, templates, isBullet);
+    if(physic != nullptr && shape != nullptr)
+    {
+        PhysicsParser parser(ProviderContext(entity.get(), entity.get(), entity.get(), entity.get(), m_cloneHandler));
+        auto physics = parser.parse(*physic, *shape);
+        physics.bodyDef.bullet = isBullet;
+        physics.bodyDef.position = b2Vec2(static_cast<float>(utility::toMeter(position.x)),
+                                          static_cast<float>(utility::toMeter(position.y)));
+        entity->bindDefs(physics.fixtureDef, physics.shapes, physics.bodyDef, &m_world);
+        entity->bindRotationController(std::move(physics.controllers.rotation));
+        entity->bindPositionController(std::move(*physics.controllers.position[0]), std::move(*physics.controllers.position[1]));
+    }
 
     if(auto collider = xml->FirstChildElement("onCollision"))
         parseCollider(entity.get(), collider, templates);
@@ -768,8 +699,8 @@ void Level::parseCollider(
         if(std::string(child->Name()) == "changeProperty")
         {
             std::unique_ptr<ChangePropertyCollisionHandler> collider(new ChangePropertyCollisionHandler(child->Attribute("name"), this));
-            auto context = ProviderParserContext(collider.get(), nullptr, collider.get(), collider.get(), m_cloneHandler)
-                                                .withFunctions(templates.functions);
+            auto context = ProviderContext(collider.get(), nullptr, collider.get(), collider.get(), m_cloneHandler)
+                                          .withFunctions(templates.functions);
             ProviderParser parser(context);
             std::unique_ptr<ValueProvider> provider(parser.parseSingle(*child->FirstChildElement()));
             collider->bindProvider(std::move(provider));
@@ -949,8 +880,8 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
         bool target = true;//std::string("entity") == child->Attribute("target");
         b2Vec2 gravity(xml->FloatAttribute("x"), xml->FloatAttribute("y"));
         std::unique_ptr<ChangeGravityFilter> filter(new ChangeGravityFilter(m_gravity, gravity, target, this));
-        auto context = ProviderParserContext(filter.get(), nullptr, filter.get(), filter.get(), m_cloneHandler)
-                                            .withFunctions(templates.functions);
+        auto context = ProviderContext(filter.get(), nullptr, filter.get(), filter.get(), m_cloneHandler)
+                                      .withFunctions(templates.functions);
         ProviderParser parser(context);
         std::unique_ptr<ValueProvider> provider(parser.parseSingle(*xml->FirstChildElement()));
         filter->bindProvider(std::move(provider));
@@ -960,8 +891,8 @@ std::unique_ptr<CollisionFilter> Level::getCollisionFilter(
     {
         bool target = std::string("entity") == xml->Attribute("target");
         std::unique_ptr<PropertyFilter> filter(new PropertyFilter(target, this));
-        auto context = ProviderParserContext(filter.get(), nullptr, filter.get(), filter.get(), m_cloneHandler)
-                                            .withFunctions(templates.functions);
+        auto context = ProviderContext(filter.get(), nullptr, filter.get(), filter.get(), m_cloneHandler)
+                                      .withFunctions(templates.functions);
         ProviderParser parser(context);
         std::unique_ptr<ValueProvider> provider(parser.parseSingle(*xml->FirstChildElement()));
         filter->bindProvider(std::move(provider));

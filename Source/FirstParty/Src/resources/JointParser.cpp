@@ -3,7 +3,7 @@
 
 #include "AnimationParser.hpp"
 #include "LevelFileLoader.hpp"
-#include "ProviderParserContext.hpp"
+#include "ProviderContext.hpp"
 #include "ResourceManager.hpp"
 #include "../animation/CloneHandler.hpp"
 #include "../animation/VariableHandler.hpp"
@@ -169,7 +169,7 @@ std::vector<std::unique_ptr<Animation>> JointParser::parseAnimations(const tinyx
 
     if(auto animXmls = jointXml.FirstChildElement("animations"))
     {
-        ProviderParserContext context(&m_handler, &m_graphics, &m_graphics, &m_graphics, m_cloneHandler);
+        ProviderContext context(&m_handler, &m_graphics, &m_graphics, &m_graphics, m_cloneHandler);
         AnimationParser loader(context, m_resourceManager);
         for(auto animXml = animXmls->FirstChildElement("animation"); animXml != nullptr;
             animXml = animXml->NextSiblingElement("animation"))

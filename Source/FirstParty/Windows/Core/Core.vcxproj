@@ -195,6 +195,7 @@
     <ClInclude Include="..\..\Src\Input.hpp" />
     <ClInclude Include="..\..\Src\MacHelper.hpp" />
     <ClInclude Include="..\..\Src\model\AnimatedGraphics.hpp" />
+    <ClInclude Include="..\..\Src\model\Array.hpp" />
     <ClInclude Include="..\..\Src\model\Background.hpp" />
     <ClInclude Include="..\..\Src\model\Ball.hpp" />
     <ClInclude Include="..\..\Src\model\collision\ContactListener.hpp" />
@@ -282,8 +283,9 @@
     <ClInclude Include="..\..\Src\resources\MusicPlayer.hpp" />
     <ClInclude Include="..\..\Src\resources\OpenFileDialoge.hpp" />
     <ClInclude Include="..\..\Src\resources\PathHelper.hpp" />
+    <ClInclude Include="..\..\Src\resources\PhysicsParser.hpp" />
     <ClInclude Include="..\..\Src\resources\ProviderParser.hpp" />
-    <ClInclude Include="..\..\Src\resources\ProviderParserContext.hpp" />
+    <ClInclude Include="..\..\Src\resources\ProviderContext.hpp" />
     <ClInclude Include="..\..\Src\resources\ResourceCache.hpp" />
     <ClInclude Include="..\..\Src\resources\ResourceManager.hpp" />
     <ClInclude Include="..\..\Src\resources\ShaderContext.hpp" />
@@ -440,8 +442,8 @@
     <ClCompile Include="..\..\Src\resources\MusicPlayer.cpp" />
     <ClCompile Include="..\..\Src\resources\OpenFileDialoge.cpp" />
     <ClCompile Include="..\..\Src\resources\PathHelper.cpp" />
+    <ClCompile Include="..\..\Src\resources\PhysicsParser.cpp" />
     <ClCompile Include="..\..\Src\resources\ProviderParser.cpp" />
-    <ClCompile Include="..\..\Src\resources\ProviderParserContext.cpp" />
     <ClCompile Include="..\..\Src\resources\ResourceManager.cpp" />
     <ClCompile Include="..\..\Src\resources\ShaderContext.cpp" />
     <ClCompile Include="..\..\Src\resources\SpriteSheet.cpp" />
