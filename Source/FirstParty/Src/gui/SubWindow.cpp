@@ -110,23 +110,29 @@ void SubWindow::update(const sf::RenderWindow& screen, const float time, const s
     sf::IntRect mouseRect(static_cast<sf::Vector2i>(m_windowRect.getPosition()) + mouseOffset, static_cast<sf::Vector2i>(m_windowRect.getSize()));
     sf::IntRect sliderRect(static_cast<sf::Vector2i>(m_positionRect.getPosition()), static_cast<sf::Vector2i>(m_positionRect.getSize()));
 
-    float scroll = 0;
     auto cursorPosition = getCursorPosition(screen);
-    if(mouseRect.contains(cursorPosition) && utility::Mouse.isWheelMovedDown())
-        scroll = 15;
-    else if(mouseRect.contains(cursorPosition) && utility::Mouse.isWheelMovedUp())
-        scroll = -15;
-    if(scroll != 0)
+
+    if(mouseRect.contains(cursorPosition))
     {
-        float y = m_positionRect.getPosition().y + ceilf(windowPixelToSliderPixel(scroll));
-        if(y < currentPosition.y)
-            y = currentPosition.y;
-        if(y > currentPosition.y + m_size.y - m_positionRect.getSize().y)
-            y = currentPosition.y + m_size.y - m_positionRect.getSize().y;
+        float scroll = 0;
 
-        m_positionRect.setPosition(m_positionRect.getPosition().x, y);
+        if(utility::Mouse.isWheelMovedDown())
+            scroll = m_positionRect.getPosition().y + ceilf(windowPixelToSliderPixel(15));
+        else if(utility::Mouse.isWheelMovedUp())
+            scroll = m_positionRect.getPosition().y + ceilf(windowPixelToSliderPixel(-15));
+        else if(utility::Mouse.leftButtonPressed())
+            scroll = m_positionRect.getPosition().y + windowPixelToSliderPixel(utility::Mouse.getMoveDistanze().y * 2.f);
+        if(scroll != 0)
+        {
+            if(scroll < currentPosition.y)
+                scroll = currentPosition.y;
+            if(scroll > currentPosition.y + m_size.y - m_positionRect.getSize().y)
+                scroll = currentPosition.y + m_size.y - m_positionRect.getSize().y;
 
-        m_center.y = floorf(m_size.y / 2.f + sliderPixelToWindowPixel(m_positionRect.getPosition().y - getCurrentPosition().y));
+            m_positionRect.setPosition(m_positionRect.getPosition().x, scroll);
+
+            m_center.y = floorf(m_size.y / 2.f + sliderPixelToWindowPixel(m_positionRect.getPosition().y - getCurrentPosition().y));
+        }
     }
 
     if(sliderRect.contains(cursorPosition) && utility::Mouse.leftButtonDown())
