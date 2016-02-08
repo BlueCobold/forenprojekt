@@ -34,9 +34,10 @@ std::unique_ptr<ParticleTrail> LevelFileLoader::parseTrail(const tinyxml2::XMLEl
         auto minSpeed = xmltrail->FloatAttribute("speedMin");
         if(auto xmlani = xmltrail->FirstChildElement("animation"))
         {
-            AnimationParser parser(m_context, m_resourceManager);
-            if(auto animation = std::unique_ptr<Animation>(parser.parseSingle(*xmlani)))
-                return std::unique_ptr<ParticleTrail>(new ParticleTrail(std::move(animation), distance, minSpeed));
+            AnimationParser parser(m_context, m_resourceManager, m_defaultTargetBuffer);
+            auto animations = parser.parseSingle(*xmlani);
+            if(animations.size() > 0)
+                return std::unique_ptr<ParticleTrail>(new ParticleTrail(std::move(animations[0]), distance, minSpeed));
         }
     }
     return nullptr;

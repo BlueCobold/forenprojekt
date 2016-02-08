@@ -26,10 +26,12 @@ class LevelFileLoader
 public:
 
     LevelFileLoader(ProviderContext context,
-                    ResourceManager& resourceManager) :
+                    ResourceManager& resourceManager,
+                    unsigned int defaultTargetBuffer) :
         m_context(context),
         m_providerParser(context),
-        m_resourceManager(resourceManager)
+        m_resourceManager(resourceManager),
+        m_defaultTargetBuffer(defaultTargetBuffer)
     { }
 
     static std::vector<std::string> parseGrid(const tinyxml2::XMLElement& xml);
@@ -41,6 +43,7 @@ private:
     ProviderContext m_context;
     ProviderParser m_providerParser;
     ResourceManager& m_resourceManager;
+    unsigned int m_defaultTargetBuffer;
 };
 
 #endif // LEVEL_FILE_LOADER_HPP

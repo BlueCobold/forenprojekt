@@ -31,40 +31,34 @@ JointData& JointData::operator=(JointData&& other)
     return *this;
 }
 
-JointParser::JointParser(const tinyxml2::XMLElement& jointXml,
+JointParser::JointParser(ProviderContext context,
                          ResourceManager& resourceManager,
-                         AnimatedGraphics& graphics,
-                         VariableHandler& handler,
-                         CloneHandler& cloneHandler,
                          b2World& world,
                          b2Body& body,
                          unsigned int defaultTargetBuffer) :
-    m_xmlRoot(jointXml),
+    m_context(context),
     m_resourceManager(resourceManager),
-    m_graphics(graphics),
-    m_handler(handler),
-    m_cloneHandler(cloneHandler),
     m_world(world),
     m_body(body),
     m_defaultTargetBuffer(defaultTargetBuffer)
 { }
 
-std::vector<JointData> JointParser::parse()
+std::vector<JointData> JointParser::parse(const tinyxml2::XMLElement& xml)
 {
     std::vector<JointData> results;
-    for(auto jointXml = m_xmlRoot.FirstChildElement("singleRevolute");
+    for(auto jointXml = xml.FirstChildElement("singleRevolute");
         jointXml != nullptr; jointXml = jointXml->NextSiblingElement("singleRevolute"))
     {
         results.emplace_back(parseSingleRevoluteJoint(*jointXml));
     }
 
-    for(auto jointXml = m_xmlRoot.FirstChildElement("singlePrismatic");
+    for(auto jointXml = xml.FirstChildElement("singlePrismatic");
         jointXml != nullptr; jointXml = jointXml->NextSiblingElement("singlePrismatic"))
     {
         results.emplace_back(parseSinglePrismaticJoint(*jointXml));
     }
 
-    for(auto jointXml = m_xmlRoot.FirstChildElement("singleDistance");
+    for(auto jointXml = xml.FirstChildElement("singleDistance");
         jointXml != nullptr; jointXml = jointXml->NextSiblingElement("singleDistance"))
     {
         results.emplace_back(parseSingleDistanceJoint(*jointXml));
@@ -164,65 +158,68 @@ JointData JointParser::parseSingleDistanceJoint(const tinyxml2::XMLElement& join
 std::vector<std::unique_ptr<Animation>> JointParser::parseAnimations(const tinyxml2::XMLElement& jointXml, JointObject& joint)
 {
     std::vector<std::unique_ptr<Animation>> results;
-    static std::unordered_map<const Animation*, const Animation*> clonedAnimations;
-    static std::unordered_map<const JointObject*, const JointObject*> clonedJoints;
 
     if(auto animXmls = jointXml.FirstChildElement("animations"))
     {
-        ProviderContext context(&m_handler, &m_graphics, &m_graphics, &m_graphics, m_cloneHandler);
-        AnimationParser loader(context, m_resourceManager);
-        for(auto animXml = animXmls->FirstChildElement("animation"); animXml != nullptr;
-            animXml = animXml->NextSiblingElement("animation"))
+        auto loader = AnimationParser(m_context, m_resourceManager, m_defaultTargetBuffer)
+                                     .withElementCallback([&](std::unique_ptr<Animation>& animation,
+                                                              const tinyxml2::XMLElement& xml)
         {
-            if(auto animation = loader.parseSingle(*animXml))
-            {
-                if(animation->getBufferId() == UINT_MAX)
-                    animation->setBufferId(m_defaultTargetBuffer);
-
-                joint.registerCopyCallbacks(
-                    [&](const JointObject& src, JointObject& clone) { clonedJoints.insert(std::make_pair(&src, &clone)); }, nullptr);
-
-                animation->registerCloneCallbacks(
-                    [&](const Animation& src, Animation& clone) { clonedAnimations.insert(std::make_pair(&src, &clone)); },
-                    [&](const Animation& src, Animation& clone) { clonedAnimations.erase(clonedAnimations.find(&src)); });
-                
-                ProviderLocation index = ::Link;
-                if(auto adherence = animXml->Attribute("location"))
-                {
-                    if(std::string(adherence) == "entity")
-                        index = ::Entity;
-                    else if(std::string(adherence) == "anchor")
-                        index = ::Anchor;
-                    else if(std::string(adherence) == "intermediate")
-                        index = ::Intermediate;
-                }
-
-                if(index == ::Link || index == ::Intermediate)
-                {
-                    animation->bindScaleController(nullptr, std::unique_ptr<JointScaleProvider>(new JointScaleProvider(joint, *animation.get(),
-                        [&](const JointObserver& old) -> const JointObject& { return *clonedJoints[&old.getObserved()]; },
-                        [&](const AnimationObserver& old) -> const Animation& { return *clonedAnimations[&old.getObserved()]; }, index)));
-
-                    animation->bindRotationController(std::unique_ptr<JointRotationProvider>(new JointRotationProvider(joint, 
-                        [&](const JointObserver& old) -> const JointObject& { return *clonedJoints[&old.getObserved()]; }, index)));
-                }
-                
-                animation->bindPositionController(
-                    std::unique_ptr<JointPositionProvider>(new JointPositionProvider(joint, true, 
-                    [&](const JointObserver& old) -> const JointObject& { return *clonedJoints[&old.getObserved()]; }, index)),
-                    std::unique_ptr<JointPositionProvider>(new JointPositionProvider(joint, false, 
-                    [&](const JointObserver& old) -> const JointObject&
-                    {
-                        auto& result = *clonedJoints[&old.getObserved()];
-                        // This erase works on the very evil assumption of Animation::clone cloning the y-pos-provider as last one!
-                        // This should actually be assured by some unit-test or something.
-                        clonedJoints.erase(clonedJoints.find(&old.getObserved()));
-                        return result;
-                    }, index)));
-
-                results.emplace_back(std::move(animation));
-            }
-        }
+            prepareAnimation(animation, xml, results, joint);
+        });
+        loader.parseMultiple(*animXmls);
     }
     return results;
+}
+
+void JointParser::prepareAnimation(std::unique_ptr<Animation>& animation,
+                                   const tinyxml2::XMLElement& xml,
+                                   std::vector<std::unique_ptr<Animation>>& results,
+                                   JointObject& joint)
+{
+    static std::unordered_map<const Animation*, const Animation*> clonedAnimations;
+    static std::unordered_map<const JointObject*, const JointObject*> clonedJoints;
+
+    joint.registerCopyCallbacks(
+        [&](const JointObject& src, JointObject& clone) { clonedJoints.insert(std::make_pair(&src, &clone)); }, nullptr);
+
+    animation->registerCloneCallbacks(
+        [&](const Animation& src, Animation& clone) { clonedAnimations.insert(std::make_pair(&src, &clone)); },
+        [&](const Animation& src, Animation& clone) { clonedAnimations.erase(clonedAnimations.find(&src)); });
+                
+    ProviderLocation index = ::Link;
+    if(auto adherence = xml.Attribute("location"))
+    {
+        if(std::string(adherence) == "entity")
+            index = ::Entity;
+        else if(std::string(adherence) == "anchor")
+            index = ::Anchor;
+        else if(std::string(adherence) == "intermediate")
+            index = ::Intermediate;
+    }
+
+    if(index == ::Link || index == ::Intermediate)
+    {
+        animation->bindScaleController(nullptr, std::unique_ptr<JointScaleProvider>(new JointScaleProvider(joint, *animation.get(),
+            [&](const JointObserver& old) -> const JointObject& { return *clonedJoints[&old.getObserved()]; },
+            [&](const AnimationObserver& old) -> const Animation& { return *clonedAnimations[&old.getObserved()]; }, index)));
+
+        animation->bindRotationController(std::unique_ptr<JointRotationProvider>(new JointRotationProvider(joint, 
+            [&](const JointObserver& old) -> const JointObject& { return *clonedJoints[&old.getObserved()]; }, index)));
+    }
+                
+    animation->bindPositionController(
+        std::unique_ptr<JointPositionProvider>(new JointPositionProvider(joint, true, 
+        [&](const JointObserver& old) -> const JointObject& { return *clonedJoints[&old.getObserved()]; }, index)),
+        std::unique_ptr<JointPositionProvider>(new JointPositionProvider(joint, false, 
+        [&](const JointObserver& old) -> const JointObject&
+        {
+            auto& result = *clonedJoints[&old.getObserved()];
+            // This erase works on the very evil assumption of Animation::clone cloning the y-pos-provider as last one!
+            // This should actually be assured by some unit-test or something.
+            clonedJoints.erase(clonedJoints.find(&old.getObserved()));
+            return result;
+        }, index)));
+
+    results.emplace_back(std::move(animation));
 }

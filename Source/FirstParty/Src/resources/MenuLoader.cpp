@@ -396,6 +396,7 @@ std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(const
         for(auto styleXml = doc.FirstChildElement("styles")->FirstChildElement("buttonStyle");
             styleXml != nullptr; styleXml = styleXml->NextSiblingElement("buttonStyle"))
         {
+            auto name = styleXml->Attribute("name");
             ButtonStyle style;
             style.idleStyle = std::move(loadButtonStateStyle(styleXml->FirstChildElement("idle"), resourceManager));
             style.hoverStyle = std::move(loadButtonStateStyle(styleXml->FirstChildElement("hover"), resourceManager));
@@ -404,7 +405,7 @@ std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(const
                 style.mouseRect = sf::IntRect(
                     rect->IntAttribute("left"), rect->IntAttribute("top"),
                     rect->IntAttribute("width"), rect->IntAttribute("height"));
-            buttonStyles.emplace(std::make_pair(styleXml->Attribute("name"), std::move(style)));
+            buttonStyles.emplace(std::make_pair(name, std::move(style)));
         }
     }
     return buttonStyles;
@@ -420,30 +421,16 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(const tinyxml2::XMLElement* xm
     if(auto soundName = xml->Attribute("sound"))
         style.sound = std::shared_ptr<SoundObject>(new SoundObject(soundName, resourceManager.getSoundManager()));
 
-    if(auto animations = xml->FirstChildElement("animations"))
+    if(auto animationsXml = xml->FirstChildElement("animations"))
     {
-        animations->QueryBoolAttribute("resetOnExit", &style.resetOnExit);
-
+        animationsXml->QueryBoolAttribute("resetOnExit", &style.resetOnExit);
         style.animation = std::unique_ptr<AnimationContainer>(new AnimationContainer(sf::Vector2f(), sf::Vector2f(), 0, _cloneHandler));
-        std::unordered_map<std::string, const tinyxml2::XMLElement*> functions;
 
         ProviderContext context(style.animation.get(), style.animation.get(), style.animation.get(), style.animation.get(), _cloneHandler);
-        AnimationParser loader(context, resourceManager);
-        for(auto animation = animations->FirstChildElement("animation");
-            animation != nullptr; 
-            animation = animation->NextSiblingElement("animation"))
-        {
-            int copies = 1;
-            animation->QueryIntAttribute("copies", &copies);
-            for(int copy = 0; copy < copies; copy++)
-            {
-                if(auto ani = loader.parseSingle(*animation))
-                {
-                    ani->setValueOf("cloneId", static_cast<float>(copy));
-                    style.animation->bindAnimation(std::move(ani));
-                }
-            }
-        }
+        AnimationParser loader(context, resourceManager, 0);
+        auto animations = loader.parseMultiple(*animationsXml);
+        for(auto it = begin(animations); it != end(animations); ++it)
+            style.animation->bindAnimation(std::move(*it));
     }
     return style;
 }
@@ -683,25 +670,13 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
             auto position = sf::Vector2f(animationContainer->FloatAttribute("x"), animationContainer->FloatAttribute("y"));
             auto offset = sf::Vector2f(animationContainer->FloatAttribute("offsetx"), animationContainer->FloatAttribute("offsety"));
             std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(position, offset, id, _cloneHandler));
-            if(auto animations = animationContainer->FirstChildElement("animations"))
+            if(auto animationsXml = animationContainer->FirstChildElement("animations"))
             {
                 ProviderContext context(animContainer.get(), animContainer.get(), animContainer.get(), animContainer.get(), _cloneHandler);
-                AnimationParser loader(context, resourceManager);
-                for(auto animation = animations->FirstChildElement("animation");
-                    animation != nullptr; 
-                    animation = animation->NextSiblingElement("animation"))
-                {
-                    int copies = 1;
-                    animation->QueryIntAttribute("copies", &copies);
-                    for(int copy = 0; copy < copies; copy++)
-                    {
-                        if(auto ani = loader.parseSingle(*animation))
-                        {
-                            ani->setValueOf("cloneId", static_cast<float>(copy));
-                            animContainer->bindAnimation(std::move(ani));
-                        }
-                    }
-                }
+                AnimationParser loader(context, resourceManager, 0);
+                auto animations = loader.parseMultiple(*animationsXml);
+                for(auto ani = begin(animations); ani != end(animations); ++ani)
+                    animContainer->bindAnimation(std::move(*ani));
             }
 
             if(auto visibleWhenId = animationContainer->IntAttribute("visibleWhen"))

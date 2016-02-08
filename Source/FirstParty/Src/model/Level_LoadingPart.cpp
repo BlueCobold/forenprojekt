@@ -184,19 +184,14 @@ void Level::parseObjects(
             std::unique_ptr<ParallaxLayer> layer(new ParallaxLayer(sf::Vector2f(
                 parallax->FloatAttribute("width"),
                 parallax->FloatAttribute("height"))));
-            for(auto anim = parallax->FirstChildElement("animation"); anim != nullptr;
-                anim = anim->NextSiblingElement("animation"))
-            {
-                auto context = ProviderContext(nullptr, layer.get(), layer.get(), layer.get(), m_cloneHandler)
-                                                    .withFunctions(templates.functions);
-                AnimationParser loader(context, m_resourceManager);
-                if(auto animation = loader.parseSingle(*anim))
-                {
-                    if(animation->getBufferId() == UINT_MAX)
-                        animation->setBufferId(m_defaultTargetBuffer);
-                    layer->bindAnimation(std::move(animation));
-                }
-            }
+            
+            auto context = ProviderContext(nullptr, layer.get(), layer.get(), layer.get(), m_cloneHandler)
+                                                .withFunctions(templates.functions);
+            AnimationParser loader(context, m_resourceManager, m_defaultTargetBuffer);
+            auto animations = loader.parseMultiple(*parallax);
+            for(auto ani = begin(animations); ani != end(animations); ++ani)
+                layer->bindAnimation(std::move(*ani));
+
             background->bindLayer(std::move(layer));
         }
         m_background = std::move(background);
@@ -516,7 +511,7 @@ std::unique_ptr<Entity> Level::createEntity(
 
             auto context = ProviderContext(this, ball.get(), ball.get(), ball.get(), m_cloneHandler)
                                           .withFunctions(templates.functions);
-            LevelFileLoader loader(context, m_resourceManager);
+            LevelFileLoader loader(context, m_resourceManager, m_defaultTargetBuffer);
             ball->bindTrail(loader.parseTrail(*xml));
             entity = std::move(ball);
         }
@@ -572,27 +567,13 @@ std::unique_ptr<Entity> Level::createEntity(
 
     auto context = ProviderContext(this, entity.get(), entity.get(), entity.get(), m_cloneHandler)
                                   .withFunctions(templates.functions);
-    AnimationParser loader(context, m_resourceManager);
 
-    if(auto animations = xml->FirstChildElement("animations"))
+    if(auto animationsTag = xml->FirstChildElement("animations"))
     {
-        // Load animation
-        for(auto element = animations->FirstChildElement("animation"); element != nullptr;
-            element = element->NextSiblingElement("animation"))
-        {
-            int copies = 1;
-            element->QueryIntAttribute("copies", &copies);
-            for(int copy = 0; copy < copies; copy++)
-            {
-                if(auto animation = loader.parseSingle(*element))
-                {
-                    if(animation->getBufferId() == UINT_MAX)
-                        animation->setBufferId(m_defaultTargetBuffer);
-                    animation->setValueOf("cloneId", static_cast<float>(copy));
-                    entity->bindAnimation(std::move(animation));
-                }
-            }
-        }
+        AnimationParser loader(context, m_resourceManager, m_defaultTargetBuffer);
+        auto animations = loader.parseMultiple(*animationsTag);
+        for(auto ani = begin(animations); ani != end(animations); ++ani)
+            entity->bindAnimation(std::move(*ani));
     }
     if(physic == nullptr)
         entity->setPosition(b2Vec2(static_cast<float>(utility::toMeter(position.x)),
@@ -618,7 +599,7 @@ std::unique_ptr<Entity> Level::createEntity(
             std::string soundName = sound->Attribute("name");
             auto soundContext = ProviderContext(nullptr, nullptr, nullptr, nullptr, m_cloneHandler)
                                                .withFunctions(templates.functions);
-            ProviderParser parser(context);
+            ProviderParser parser(soundContext);
             std::unique_ptr<ValueProvider> provider(parser.parseSingle(*sound->FirstChildElement()));
             otherSounds.push_back(std::unique_ptr<SoundTrigger>(new SoundTrigger(soundName, m_resourceManager.getSoundManager(), std::move(provider))));
         }
@@ -661,15 +642,12 @@ std::unique_ptr<Entity> Level::createEntity(
 
     if(auto jointXml = xml->FirstChildElement("joints"))
     {
-        auto parser = JointParser(*jointXml,
-                                  m_resourceManager,
-                                  *entity.get(),
-                                  *entity.get(),
-                                  m_cloneHandler,
-                                  m_world,
-                                  *entity->getBody(),
-                                  m_defaultTargetBuffer);
-        auto joints = parser.parse();
+        JointParser parser(ProviderContext(entity.get(), entity.get(), entity.get(), entity.get(), m_cloneHandler),
+                           m_resourceManager,
+                           m_world,
+                           *entity->getBody(),
+                           m_defaultTargetBuffer);
+        auto joints = parser.parse(*jointXml);
         for(auto it = begin(joints); it != end(joints); ++it)
         {
             for(auto ani = begin(it->animations); ani != end(it->animations); ++ani)

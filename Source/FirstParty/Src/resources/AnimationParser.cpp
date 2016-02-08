@@ -17,10 +17,43 @@
 
 std::vector<std::unique_ptr<Animation>> AnimationParser::parseMultiple(const tinyxml2::XMLElement& xml)
 {
-    return std::vector<std::unique_ptr<Animation>>();
+    std::vector<std::unique_ptr<Animation>> animations;
+    for(auto anim = xml.FirstChildElement("animation"); anim != nullptr; anim = anim->NextSiblingElement("animation"))
+    {
+        auto singleAnims = parseSingle(*anim);
+        for(auto ani = begin(singleAnims); ani != end(singleAnims); ++ani)
+            animations.push_back(std::move(*ani));
+    }
+
+    return animations;
 }
 
-std::unique_ptr<Animation> AnimationParser::parseSingle(const tinyxml2::XMLElement& xml)
+std::vector<std::unique_ptr<Animation>> AnimationParser::parseSingle(const tinyxml2::XMLElement& xml)
+{
+    std::vector<std::unique_ptr<Animation>> animations;
+
+    int copies = 1;
+    xml.QueryIntAttribute("copies", &copies);
+    if(copies > 0)
+    {
+        std::unique_ptr<Animation> animation = parseSingleTag(xml);
+        auto original = animation.get();
+        for(int copy = 0; copy < copies; copy++)
+        {
+            std::unique_ptr<Animation> ani = copy > 0 ? original->clone() : std::move(animation);
+            ani->setValueOf("cloneId", static_cast<float>(copy));
+        
+            if(m_callback != nullptr)
+                m_callback(ani, xml);
+
+            if(ani != nullptr)
+                animations.push_back(std::move(ani));
+        }
+    }
+    return animations;
+}
+
+std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLElement& xml)
 {
     int frames = 1;
     if(auto frameIndex = xml.FirstChildElement("frameindex"))
@@ -148,6 +181,9 @@ std::unique_ptr<Animation> AnimationParser::parseSingle(const tinyxml2::XMLEleme
     anim->bindColorController(std::move(*color[0]), std::move(*color[1]), std::move(*color[2]), std::move(*color[3]));
 
     anim->bindRotationController(controllerParser.parseRotation(xml));
+    
+    if(anim->getBufferId() == UINT_MAX)
+        anim->setBufferId(m_defaultTargetBuffer);
 
     if(auto constants = xml.FirstChildElement("constants"))
         ValueParser::parseConstants(*constants, *anim.get());
