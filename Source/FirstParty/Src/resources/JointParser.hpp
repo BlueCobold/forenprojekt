@@ -36,7 +36,7 @@ struct JointData
 class JointParser
 {
 public:
-    JointParser(ProviderContext context,
+    JointParser(const ProviderContext& context,
                 ResourceManager& resourceManager,
                 b2World& world,
                 b2Body& body,
@@ -54,7 +54,7 @@ private:
                           std::vector<std::unique_ptr<Animation>>& results,
                           JointObject& joint);
 
-    ProviderContext m_context;
+    const ProviderContext& m_context;
     ResourceManager& m_resourceManager;
     b2World& m_world;
     b2Body& m_body;

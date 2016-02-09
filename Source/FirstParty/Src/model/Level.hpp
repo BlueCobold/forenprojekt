@@ -17,6 +17,7 @@
 #include "../rendering/DebugDraw.hpp"
 #include "../rendering/Drawable.hpp"
 #include "../resources/GameEventRecorder.hpp"
+#include "../resources/TemplateParser.hpp"
 #include "../ScrollView.hpp"
 
 #include <Box2D/Collision/Shapes/b2Shape.h>
@@ -140,16 +141,6 @@ private:
         float respawnAt;
     };
 
-    struct Templates
-    {
-    public:
-        std::unordered_map<std::string, const tinyxml2::XMLElement*> physics;
-        std::unordered_map<std::string, const tinyxml2::XMLElement*> shapes;
-        std::unordered_map<std::string, const tinyxml2::XMLElement*> entities;
-        std::unordered_map<std::string, const tinyxml2::XMLElement*> functions;
-        std::unordered_map<std::string, const tinyxml2::XMLElement*> overrides;
-    };
-
     void createLabelAt(const Entity* target, const std::string& fontName, const int points);
     void createLabelAt(const Entity* target, const std::string& fontName, const std::string& text);
     void createLabelAt(const sf::Vector2f& position, const std::string& fontName, const std::string& text);
@@ -173,16 +164,6 @@ private:
     void load();
 
     bool validate(const tinyxml2::XMLDocument& document) const;
-
-    void parseObjects(
-        Templates& templates,
-        const tinyxml2::XMLElement* root,
-        std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs);
-
-    void parseTemplates(
-        Templates& templates,
-        const tinyxml2::XMLElement* root,
-        std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs);
 
     std::unique_ptr<Entity> createEntity(
         const tinyxml2::XMLElement* xml,

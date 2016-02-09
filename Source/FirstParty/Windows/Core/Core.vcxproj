@@ -271,6 +271,7 @@
     <ClInclude Include="..\..\Src\resources\AnimationParser.hpp" />
     <ClInclude Include="..\..\Src\resources\AppConfig.hpp" />
     <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp" />
+    <ClInclude Include="..\..\Src\resources\BackgroundParser.hpp" />
     <ClInclude Include="..\..\Src\resources\CloneHandler.hpp" />
     <ClInclude Include="..\..\Src\resources\Config.hpp" />
     <ClInclude Include="..\..\Src\resources\ControllerParser.hpp" />
@@ -292,6 +293,7 @@
     <ClInclude Include="..\..\Src\resources\ShaderLoader.hpp" />
     <ClInclude Include="..\..\Src\resources\SoundBufferManager.hpp" />
     <ClInclude Include="..\..\Src\resources\SpriteSheet.hpp" />
+    <ClInclude Include="..\..\Src\resources\TemplateParser.hpp" />
     <ClInclude Include="..\..\Src\resources\ValueParser.hpp" />
     <ClInclude Include="..\..\Src\ScrollView.hpp" />
     <ClInclude Include="..\..\Src\state\AchievementState.hpp" />
@@ -432,6 +434,7 @@
     <ClCompile Include="..\..\Src\resources\AchievementManager.cpp" />
     <ClCompile Include="..\..\Src\resources\AnimationParser.cpp" />
     <ClCompile Include="..\..\Src\resources\AppConfig.cpp" />
+    <ClCompile Include="..\..\Src\resources\BackgroundParser.cpp" />
     <ClCompile Include="..\..\Src\resources\Config.cpp" />
     <ClCompile Include="..\..\Src\resources\ControllerParser.cpp" />
     <ClCompile Include="..\..\Src\resources\FileReader.cpp" />
@@ -447,6 +450,7 @@
     <ClCompile Include="..\..\Src\resources\ResourceManager.cpp" />
     <ClCompile Include="..\..\Src\resources\ShaderContext.cpp" />
     <ClCompile Include="..\..\Src\resources\SpriteSheet.cpp" />
+    <ClCompile Include="..\..\Src\resources\TemplateParser.cpp" />
     <ClCompile Include="..\..\Src\resources\ValueParser.cpp" />
     <ClCompile Include="..\..\Src\ScrollView.cpp" />
     <ClCompile Include="..\..\Src\state\AchievementState.cpp" />

@@ -18,11 +18,11 @@ class ResourceManager;
 
 class ControllerParser
 {
-    ProviderContext m_context;
+    const ProviderContext& m_context;
     ProviderParser m_providerParser;
 
 public:
-    ControllerParser(ProviderContext context) :
+    ControllerParser(const ProviderContext& context) :
         m_context(context),
         m_providerParser(context)
     { }

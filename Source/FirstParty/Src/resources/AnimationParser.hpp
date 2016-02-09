@@ -20,14 +20,14 @@ public:
     typedef std::function<void(std::unique_ptr<Animation>&, const tinyxml2::XMLElement&)> Callback;
 
 private:
-    ProviderContext m_context;
+    const ProviderContext& m_context;
     ProviderParser m_providerParser;
     ResourceManager& m_resourceManager;
     unsigned int m_defaultTargetBuffer;
     Callback m_callback;
 
 public:
-    AnimationParser(ProviderContext context, ResourceManager& resourceManager, unsigned int defaultTargetBuffer) :
+    AnimationParser(const ProviderContext& context, ResourceManager& resourceManager, unsigned int defaultTargetBuffer) :
         m_context(context),
         m_providerParser(context),
         m_resourceManager(resourceManager),

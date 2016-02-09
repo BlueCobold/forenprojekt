@@ -13,10 +13,10 @@
 
 class ProviderParser
 {
-    ProviderContext m_context;
+    const ProviderContext& m_context;
 
 public:
-    ProviderParser(ProviderContext context) :
+    ProviderParser(const ProviderContext& context) :
         m_context(context)
     { }
 

@@ -65,7 +65,7 @@ public:
         }
     };
 
-    PhysicsParser(ProviderContext context) :
+    PhysicsParser(const ProviderContext& context) :
         m_context(context),
         m_providerParser(context)
     { }
@@ -78,7 +78,7 @@ private:
 
     Physics::Controllers parseKinematics(const tinyxml2::XMLElement& xml) const;
 
-    ProviderContext m_context;
+    const ProviderContext& m_context;
     ProviderParser m_providerParser;
 };
 

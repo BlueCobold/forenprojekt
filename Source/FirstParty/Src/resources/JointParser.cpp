@@ -31,7 +31,7 @@ JointData& JointData::operator=(JointData&& other)
     return *this;
 }
 
-JointParser::JointParser(ProviderContext context,
+JointParser::JointParser(const ProviderContext& context,
                          ResourceManager& resourceManager,
                          b2World& world,
                          b2Body& body,

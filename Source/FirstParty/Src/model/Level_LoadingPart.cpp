@@ -4,6 +4,7 @@
 
 #include "../resources/AnimationParser.hpp"
 #include "../resources/AppConfig.hpp"
+#include "../resources/BackgroundParser.hpp"
 #include "../resources/ControllerParser.hpp"
 #include "../resources/JointParser.hpp"
 #include "../resources/LevelFileLoader.hpp"
@@ -66,10 +67,17 @@ void Level::load()
     if(!validate(doc)) // Validate the XML file
         throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filePath));
 
-    // Parse templates
-    Templates templates;
-    std::vector<std::unique_ptr<tinyxml2::XMLDocument>> docs;
-    parseTemplates(templates, doc.FirstChildElement("level"), docs);
+    auto levelXml = doc.FirstChildElement("level");
+    if(!levelXml)
+        throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filePath));
+    
+    if(auto setup = doc.FirstChildElement("level")->FirstChildElement("setup"))
+        setup->QueryUnsignedAttribute("defaultBufferId", &m_defaultTargetBuffer);
+    if(!Shader::isUsable())
+    {
+        if(auto setup = doc.FirstChildElement("level")->FirstChildElement("noShaderSetup"))
+            setup->QueryUnsignedAttribute("defaultBufferId", &m_defaultTargetBuffer);
+    }
 
     auto constants = doc.FirstChildElement("level")->FirstChildElement("constants");
     if(constants != nullptr)
@@ -84,13 +92,6 @@ void Level::load()
         m_remainingTime = -1.f;
         m_totalTime = -1.f;
         m_initialTime = -1.f;
-    }
-    if(auto setup = doc.FirstChildElement("level")->FirstChildElement("setup"))
-        setup->QueryUnsignedAttribute("defaultBufferId", &m_defaultTargetBuffer);
-    if(!Shader::isUsable())
-    {
-        if(auto setup = doc.FirstChildElement("level")->FirstChildElement("noShaderSetup"))
-            setup->QueryUnsignedAttribute("defaultBufferId", &m_defaultTargetBuffer);
     }
 
     // get Medal values
@@ -109,6 +110,27 @@ void Level::load()
     m_height = grid->FloatAttribute("height");
     m_width = grid->FloatAttribute("width");
 
+    Templates templates;
+    TemplateParser templateParser(pathname());
+    if(auto xmlTemplates = levelXml->FirstChildElement("templates"))
+        templates = templateParser.parse(*xmlTemplates);
+
+    if(auto objects = levelXml->FirstChildElement("objects"))
+        templateParser.parseObjects(*objects, templates);
+    
+    for(auto it = begin(templates.objects.entities); it != end(templates.objects.entities); ++it)
+    {
+        auto pos = sf::Vector2u(0, 0);
+        m_entities.push_back(std::move(parseEntity(*it, pos, templates)));
+    }
+    if(templates.objects.backgrounds.size() > 0)
+    {
+        auto context = ProviderContext(nullptr, nullptr, nullptr, nullptr, m_cloneHandler).withFunctions(templates.functions);
+        BackgroundParser backgroundParser(context, m_resourceManager);
+        auto size = sf::Vector2u(static_cast<unsigned int>(m_width), static_cast<unsigned int>(m_height));
+        m_background = backgroundParser.parse(*templates.objects.backgrounds[0], size, m_defaultTargetBuffer);
+    }
+
     // Separate the lines for easier processing
     std::vector<std::string> lines = LevelFileLoader::parseGrid(*grid);
     for(size_t row = 0; row < lines.size(); ++row)
@@ -125,8 +147,7 @@ void Level::load()
             if(entity != nullptr)
                 m_entities.push_back(std::move(entity));
         }
-    parseObjects(templates, doc.FirstChildElement("level"), docs);
-    
+
     tinyxml2::XMLElement* world = doc.FirstChildElement("level")->FirstChildElement("world");
     // Load world properties
     tinyxml2::XMLElement* gravity = world->FirstChildElement("gravity");
@@ -161,117 +182,6 @@ void Level::load()
     });
 
     m_remainingTarget = m_totalTarget;
-}
-
-void Level::parseObjects(
-    Templates& templates,
-    const tinyxml2::XMLElement* root,
-    std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs)
-{
-    auto objects = root->FirstChildElement("objects");
-    if(objects == nullptr)
-        return;
-
-    // Load background-image
-    if(auto backgroundXml = objects->FirstChildElement("background"))
-    {
-        std::unique_ptr<Background> background(new Background(sf::Vector2u(
-            static_cast<unsigned int>(m_width),
-            static_cast<unsigned int>(m_height))));
-        for(auto parallax = backgroundXml->FirstChildElement("parallax"); parallax != nullptr;
-            parallax = parallax->NextSiblingElement("parallax"))
-        {
-            std::unique_ptr<ParallaxLayer> layer(new ParallaxLayer(sf::Vector2f(
-                parallax->FloatAttribute("width"),
-                parallax->FloatAttribute("height"))));
-            
-            auto context = ProviderContext(nullptr, layer.get(), layer.get(), layer.get(), m_cloneHandler)
-                                                .withFunctions(templates.functions);
-            AnimationParser loader(context, m_resourceManager, m_defaultTargetBuffer);
-            auto animations = loader.parseMultiple(*parallax);
-            for(auto ani = begin(animations); ani != end(animations); ++ani)
-                layer->bindAnimation(std::move(*ani));
-
-            background->bindLayer(std::move(layer));
-        }
-        m_background = std::move(background);
-    }
-
-    for(auto entitiesIterator = objects->FirstChildElement("entity");
-        entitiesIterator != nullptr; entitiesIterator = entitiesIterator->NextSiblingElement("entity"))
-    {
-        auto pos = sf::Vector2u(0, 0);
-        m_entities.push_back(std::move(parseEntity(entitiesIterator, pos, templates)));
-    }
-   
-    for(auto child = objects->FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
-    {
-        std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-        std::string filename = resourcePath() + pathname() + child->Attribute("file");
-        doc->LoadFile(filename.c_str());
-        if(!validate(*(doc.get())))
-            throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
-        parseTemplates(templates, doc->RootElement(), docs);
-        parseObjects(templates, doc->RootElement(), docs);
-        docs.push_back(std::move(doc));
-    }
-}
-
-void Level::parseTemplates(
-    Templates& templates,
-    const tinyxml2::XMLElement* root,
-    std::vector<std::unique_ptr<tinyxml2::XMLDocument>>& docs)
-{
-    auto xmlTemplates = root->FirstChildElement("templates");
-    if(xmlTemplates == nullptr)
-        return;
-
-    if(auto shapes = xmlTemplates->FirstChildElement("shapes"))
-    {
-        auto values = std::move(ValueParser::parseList(*shapes, "shape", "name"));
-        templates.shapes.insert(begin(values), end(values));
-    }
-
-    if(auto physics = xmlTemplates->FirstChildElement("physics"))
-    {
-        auto values = std::move(ValueParser::parseList(*physics, "physic", "name"));
-        templates.physics.insert(begin(values), end(values));
-    }
-
-    if(auto functions = xmlTemplates->FirstChildElement("functions"))
-    {
-        auto values = std::move(ValueParser::parseList(*functions, "function", "name"));
-        templates.functions.insert(begin(values), end(values));
-    }
-
-    if(auto entities = xmlTemplates->FirstChildElement("entities"))
-    {
-        // Add use keys 'name' (objects) and 'rep' (grid)
-        auto reps = std::move(ValueParser::parseList(*entities, "entity", "rep"));
-        templates.entities.insert(begin(reps), end(reps));
-        auto temp = std::move(ValueParser::parseList(*entities, "entity", "name"));
-        templates.entities.insert(begin(temp), end(temp));
-    }
-
-    if(auto functions = xmlTemplates->FirstChildElement("overrides"))
-    {
-        auto values = std::move(ValueParser::parseList(*functions, "override", "newRep"));
-        templates.overrides.insert(begin(values), end(values));
-        values = std::move(ValueParser::parseList(*functions, "override", "newName"));
-        templates.overrides.insert(begin(values), end(values));
-    }
-
-    for(auto child = xmlTemplates->FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
-    {
-        std::unique_ptr<tinyxml2::XMLDocument> doc(new tinyxml2::XMLDocument);
-        std::string filename = resourcePath() + pathname() + child->Attribute("file");
-        doc->LoadFile(filename.c_str());
-        if(!validate(*(doc.get())))
-            throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
-        parseTemplates(templates, doc->RootElement(), docs);
-        parseObjects(templates, doc->RootElement(), docs);
-        docs.push_back(std::move(doc));
-    }
 }
 
 std::string buildOriginal(const std::string& targetName, const std::string& sourceName, const std::string& needle)
