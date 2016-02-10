@@ -37,6 +37,7 @@ AchievementState::~AchievementState()
 
 void AchievementState::onEnter(const EnterStateInformation* enterInformation, const float time)
 {
+    updateAchievementData();
     State::onEnter(enterInformation, time);
 }
 

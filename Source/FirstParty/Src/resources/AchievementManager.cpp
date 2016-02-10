@@ -276,7 +276,7 @@ void AchievementManager::addValueTo(Achievement::Condition condition,
 {
     std::string id = Achievement::createId(condition, specifically, object, 0);
 
-    for(auto it = m_achievements.begin(); it != m_achievements.begin(); ++it)
+    for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
     {
         if(it->first == id)
             it->second.addToCounter(value);
@@ -291,7 +291,7 @@ void AchievementManager::addValueTo(Achievement::Condition condition,
 {
     std::string id = Achievement::createId(condition, specifically, object, atOnceAmount);
 
-    for(auto it = m_achievements.begin(); it != m_achievements.begin(); ++it)
+    for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
     {
         if(it->first == id)
             it->second.addToCounter(value);
@@ -305,7 +305,7 @@ void AchievementManager::setValueTo(Achievement::Condition condition,
 {
     std::string id = Achievement::createId(condition, specifically, object, 0);
 
-    for(auto it = m_achievements.begin(); it != m_achievements.begin(); ++it)
+    for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
     {
         if(it->first == id)
             it->second.setCounter(value);

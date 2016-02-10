@@ -8,13 +8,6 @@ AchievementMenu::AchievementMenu(sf::RenderWindow& screen,
 {
 }
 
-void AchievementMenu::setLevelPreview(const sf::Texture& texture, const sf::IntRect& textureRect)
-{
-    //MenuSprite& sprite = Menu::getSprite(SPRITE_LEVELINFO);
-    //sprite.setTextureRect(textureRect);
-    //sprite.setTexture(texture);
-}
-
 void AchievementMenu::hideLeftButton(const bool value)
 {
     Menu::getButton(BUTTON_LEFT).setVisible(!value);

@@ -18,7 +18,6 @@ public:
 
     AchievementMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 
-    void setLevelPreview(const sf::Texture& texture, const sf::IntRect& textureRect);
     void hideLeftButton(const bool value);
     void hideRightButton(const bool value);
 };
