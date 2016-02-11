@@ -29,12 +29,12 @@ public:
         m_provider = std::move(provider);
     }
 
-    virtual bool shouldCollide(Entity* entityA, Entity* entityB) override
+    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override
     {
         if(m_provider == nullptr)
             throw std::runtime_error(utility::translateKey("FilterNull"));
-        m_entityA = entityA;
-        m_entityB = entityB;
+        m_entityA = &entityA;
+        m_entityB = &entityB;
         float val = m_provider->getValue();
         m_entityA = nullptr;
         m_entityB = nullptr;

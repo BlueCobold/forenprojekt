@@ -4,14 +4,14 @@
 #include "PathHelper.hpp"
 #include "ValueParser.hpp"
 
-Templates TemplateParser::parse(const tinyxml2::XMLElement& xml)
+Templates TemplateParser::parse(const tinyxml2::XMLElement& xml) const
 {
     Templates templates;
     parse(xml, templates);
     return templates;
 }
 
-void TemplateParser::parse(const tinyxml2::XMLElement& xml, Templates& templates)
+void TemplateParser::parse(const tinyxml2::XMLElement& xml, Templates& templates) const
 {
     if(auto shapes = xml.FirstChildElement("shapes"))
         parseShapes(*shapes, templates);
@@ -31,25 +31,25 @@ void TemplateParser::parse(const tinyxml2::XMLElement& xml, Templates& templates
     parseIncludes(xml, templates);
 }
 
-void TemplateParser::parseShapes(const tinyxml2::XMLElement& xml, Templates& templates)
+void TemplateParser::parseShapes(const tinyxml2::XMLElement& xml, Templates& templates) const
 {
     auto values = std::move(ValueParser::parseList(xml, "shape", "name"));
     templates.shapes.insert(begin(values), end(values));
 }
 
-void TemplateParser::parsePhysics(const tinyxml2::XMLElement& xml, Templates& templates)
+void TemplateParser::parsePhysics(const tinyxml2::XMLElement& xml, Templates& templates) const
 {
     auto values = std::move(ValueParser::parseList(xml, "physic", "name"));
     templates.physics.insert(begin(values), end(values));
 }
 
-void TemplateParser::parseFunctions(const tinyxml2::XMLElement& xml, Templates& templates)
+void TemplateParser::parseFunctions(const tinyxml2::XMLElement& xml, Templates& templates) const
 {
     auto values = std::move(ValueParser::parseList(xml, "function", "name"));
     templates.functions.insert(begin(values), end(values));
 }
 
-void TemplateParser::parseEntities(const tinyxml2::XMLElement& xml, Templates& templates)
+void TemplateParser::parseEntities(const tinyxml2::XMLElement& xml, Templates& templates) const
 {
     // Add use keys 'name' (objects) and 'rep' (grid)
     auto reps = std::move(ValueParser::parseList(xml, "entity", "rep"));
@@ -58,7 +58,7 @@ void TemplateParser::parseEntities(const tinyxml2::XMLElement& xml, Templates& t
     templates.entities.insert(begin(temp), end(temp));
 }
 
-void TemplateParser::parseOverrides(const tinyxml2::XMLElement& xml, Templates& templates)
+void TemplateParser::parseOverrides(const tinyxml2::XMLElement& xml, Templates& templates) const
 {
     auto values = std::move(ValueParser::parseList(xml, "override", "newRep"));
     templates.overrides.insert(begin(values), end(values));
@@ -66,7 +66,7 @@ void TemplateParser::parseOverrides(const tinyxml2::XMLElement& xml, Templates& 
     templates.overrides.insert(begin(values), end(values));
 }
 
-void TemplateParser::parseObjects(const tinyxml2::XMLElement& xml, Templates& templates)
+void TemplateParser::parseObjects(const tinyxml2::XMLElement& xml, Templates& templates) const
 {
     if(auto backgroundXml = xml.FirstChildElement("background"))
         templates.objects.backgrounds.push_back(backgroundXml);
@@ -78,7 +78,7 @@ void TemplateParser::parseObjects(const tinyxml2::XMLElement& xml, Templates& te
     parseIncludes(xml, templates);
 }
 
-void TemplateParser::parseIncludes(const tinyxml2::XMLElement& xml, Templates& templates)
+void TemplateParser::parseIncludes(const tinyxml2::XMLElement& xml, Templates& templates) const
 {
     for(auto child = xml.FirstChildElement("include"); child != nullptr; child = child->NextSiblingElement("include"))
     {

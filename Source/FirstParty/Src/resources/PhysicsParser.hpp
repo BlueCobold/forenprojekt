@@ -78,7 +78,7 @@ private:
 
     Physics::Controllers parseKinematics(const tinyxml2::XMLElement& xml) const;
 
-    const ProviderContext& m_context;
+    ProviderContext m_context;
     ProviderParser m_providerParser;
 };
 

@@ -13,7 +13,7 @@
 
 class ProviderParser
 {
-    const ProviderContext& m_context;
+    ProviderContext m_context;
 
 public:
     ProviderParser(const ProviderContext& context) :

@@ -31,19 +31,7 @@ JointData& JointData::operator=(JointData&& other)
     return *this;
 }
 
-JointParser::JointParser(const ProviderContext& context,
-                         ResourceManager& resourceManager,
-                         b2World& world,
-                         b2Body& body,
-                         unsigned int defaultTargetBuffer) :
-    m_context(context),
-    m_resourceManager(resourceManager),
-    m_world(world),
-    m_body(body),
-    m_defaultTargetBuffer(defaultTargetBuffer)
-{ }
-
-std::vector<JointData> JointParser::parse(const tinyxml2::XMLElement& xml)
+std::vector<JointData> JointParser::parse(const tinyxml2::XMLElement& xml) const
 {
     std::vector<JointData> results;
     for(auto jointXml = xml.FirstChildElement("singleRevolute");
@@ -66,7 +54,7 @@ std::vector<JointData> JointParser::parse(const tinyxml2::XMLElement& xml)
     return std::move(results);
 }
 
-JointData JointParser::parseSingleRevoluteJoint(const tinyxml2::XMLElement& jointXml)
+JointData JointParser::parseSingleRevoluteJoint(const tinyxml2::XMLElement& jointXml) const
 {
     b2RevoluteJointDef jointDef;
 
@@ -98,7 +86,7 @@ JointData JointParser::parseSingleRevoluteJoint(const tinyxml2::XMLElement& join
     return result;
 }
 
-JointData JointParser::parseSinglePrismaticJoint(const tinyxml2::XMLElement& jointXml)
+JointData JointParser::parseSinglePrismaticJoint(const tinyxml2::XMLElement& jointXml) const
 {
     b2PrismaticJointDef jointDef;
 
@@ -133,7 +121,7 @@ JointData JointParser::parseSinglePrismaticJoint(const tinyxml2::XMLElement& joi
     return result;
 }
 
-JointData JointParser::parseSingleDistanceJoint(const tinyxml2::XMLElement& jointXml)
+JointData JointParser::parseSingleDistanceJoint(const tinyxml2::XMLElement& jointXml) const
 {
     b2DistanceJointDef jointDef;
 
@@ -155,13 +143,13 @@ JointData JointParser::parseSingleDistanceJoint(const tinyxml2::XMLElement& join
     return result;
 }
 
-std::vector<std::unique_ptr<Animation>> JointParser::parseAnimations(const tinyxml2::XMLElement& jointXml, JointObject& joint)
+std::vector<std::unique_ptr<Animation>> JointParser::parseAnimations(const tinyxml2::XMLElement& jointXml, JointObject& joint) const
 {
     std::vector<std::unique_ptr<Animation>> results;
 
     if(auto animXmls = jointXml.FirstChildElement("animations"))
     {
-        auto loader = AnimationParser(m_context, m_resourceManager, m_defaultTargetBuffer)
+        auto loader = AnimationParser(m_context)
                                      .withElementCallback([&](std::unique_ptr<Animation>& animation,
                                                               const tinyxml2::XMLElement& xml)
         {
@@ -175,7 +163,7 @@ std::vector<std::unique_ptr<Animation>> JointParser::parseAnimations(const tinyx
 void JointParser::prepareAnimation(std::unique_ptr<Animation>& animation,
                                    const tinyxml2::XMLElement& xml,
                                    std::vector<std::unique_ptr<Animation>>& results,
-                                   JointObject& joint)
+                                   JointObject& joint) const
 {
     static std::unordered_map<const Animation*, const Animation*> clonedAnimations;
     static std::unordered_map<const JointObject*, const JointObject*> clonedJoints;

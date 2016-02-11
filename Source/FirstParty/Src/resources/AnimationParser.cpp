@@ -15,7 +15,7 @@
 #include "../rendering/Shader.hpp"
 #include "../Utility.hpp"
 
-std::vector<std::unique_ptr<Animation>> AnimationParser::parseMultiple(const tinyxml2::XMLElement& xml)
+std::vector<std::unique_ptr<Animation>> AnimationParser::parseMultiple(const tinyxml2::XMLElement& xml) const
 {
     std::vector<std::unique_ptr<Animation>> animations;
     for(auto anim = xml.FirstChildElement("animation"); anim != nullptr; anim = anim->NextSiblingElement("animation"))
@@ -28,7 +28,7 @@ std::vector<std::unique_ptr<Animation>> AnimationParser::parseMultiple(const tin
     return animations;
 }
 
-std::vector<std::unique_ptr<Animation>> AnimationParser::parseSingle(const tinyxml2::XMLElement& xml)
+std::vector<std::unique_ptr<Animation>> AnimationParser::parseSingle(const tinyxml2::XMLElement& xml) const
 {
     std::vector<std::unique_ptr<Animation>> animations;
 
@@ -53,7 +53,7 @@ std::vector<std::unique_ptr<Animation>> AnimationParser::parseSingle(const tinyx
     return animations;
 }
 
-std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLElement& xml)
+std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLElement& xml) const
 {
     int frames = 1;
     if(auto frameIndex = xml.FirstChildElement("frameindex"))
@@ -65,7 +65,7 @@ std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLEl
     SpriteSheet::SpriteData sprite;
     if(auto textureName = xml.Attribute("texture"))
     {
-        texture = m_resourceManager.getTexture(textureName);
+        texture = m_context.resourceManager.getTexture(textureName);
         std::string prefix("offscreenBuffer");
         // is this an offscreen texture name?
         if (!std::string(textureName).compare(0, prefix.size(), prefix))
@@ -75,9 +75,9 @@ std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLEl
     {
         auto sheetName = xml.Attribute("spritesheet");
         auto spriteName = xml.Attribute("sprite");
-        if(sheetName && spriteName && (sheet = m_resourceManager.getSpriteSheet(sheetName)) != nullptr)
+        if(sheetName && spriteName && (sheet = m_context.resourceManager.getSpriteSheet(sheetName)) != nullptr)
         {
-            texture = m_resourceManager.getTexture(sheet->getTextureName());
+            texture = m_context.resourceManager.getTexture(sheet->getTextureName());
             sprite = sheet->get(spriteName);
         }
     }
@@ -112,7 +112,7 @@ std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLEl
         horizontal = std::string("vertical") != alignment;
 
     std::unique_ptr<Animation> anim(new Animation(frames, width, height, rotate, origin, offset, horizontal));
-    auto aniContext = ProviderContext(m_context).withCustomTag("stopAnimation", anim.get());
+    auto aniContext = ProviderContext(m_context.providerContext).withCustomTag("stopAnimation", anim.get());
     if(aniContext.variableHandler == nullptr)
         aniContext.variableHandler = anim.get();
     ProviderParser providerParser(aniContext);
@@ -130,7 +130,7 @@ std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLEl
     if(auto shaderName = xml.Attribute("shader"))
     {
         if(Shader::isUsable())
-            anim->bindShader(*m_resourceManager.getShader(shaderName));
+            anim->bindShader(*m_context.resourceManager.getShader(shaderName));
         else
             return nullptr; // no shaders available -> skip animation
     }
@@ -183,7 +183,7 @@ std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLEl
     anim->bindRotationController(controllerParser.parseRotation(xml));
     
     if(anim->getBufferId() == UINT_MAX)
-        anim->setBufferId(m_defaultTargetBuffer);
+        anim->setBufferId(m_context.defaultTargetBuffer);
 
     if(auto constants = xml.FirstChildElement("constants"))
         ValueParser::parseConstants(*constants, *anim.get());

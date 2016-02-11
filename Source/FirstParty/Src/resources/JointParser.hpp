@@ -3,15 +3,10 @@
 #ifndef JOINT_PARSER_HPP
 #define JOINT_PARSER_HPP
 
-#include "ProviderContext.hpp"
+#include "AnimationContext.hpp"
 
 class Animation;
-class AnimatedGraphics;
-class CloneHandler;
-class Entity;
 class JointObject;
-class ResourceManager;
-class VariableHandler;
 
 #include "tinyxml2.h"
 
@@ -36,29 +31,29 @@ struct JointData
 class JointParser
 {
 public:
-    JointParser(const ProviderContext& context,
-                ResourceManager& resourceManager,
+    JointParser(AnimationContext& context,
                 b2World& world,
-                b2Body& body,
-                unsigned int defaultTargetBuffer);
+                b2Body& body) :
+        m_context(context),
+        m_world(world),
+        m_body(body)
+    { }
 
-    std::vector<JointData> parse(const tinyxml2::XMLElement& xml);
+    std::vector<JointData> parse(const tinyxml2::XMLElement& xml) const;
 
 private:
-    JointData parseSingleRevoluteJoint(const tinyxml2::XMLElement& jointXml);
-    JointData parseSinglePrismaticJoint(const tinyxml2::XMLElement& jointXml);
-    JointData parseSingleDistanceJoint(const tinyxml2::XMLElement& jointXml);
-    std::vector<std::unique_ptr<Animation>> parseAnimations(const tinyxml2::XMLElement& jointXml, JointObject& joint);
+    JointData parseSingleRevoluteJoint(const tinyxml2::XMLElement& jointXml) const;
+    JointData parseSinglePrismaticJoint(const tinyxml2::XMLElement& jointXml) const;
+    JointData parseSingleDistanceJoint(const tinyxml2::XMLElement& jointXml) const;
+    std::vector<std::unique_ptr<Animation>> parseAnimations(const tinyxml2::XMLElement& jointXml, JointObject& joint) const;
     void prepareAnimation(std::unique_ptr<Animation>& animation,
                           const tinyxml2::XMLElement& xml,
                           std::vector<std::unique_ptr<Animation>>& results,
-                          JointObject& joint);
+                          JointObject& joint) const;
 
-    const ProviderContext& m_context;
-    ResourceManager& m_resourceManager;
+    AnimationContext& m_context;
     b2World& m_world;
     b2Body& m_body;
-    unsigned int m_defaultTargetBuffer;
 };
 
 #endif // JOINT_PARSER_HPP

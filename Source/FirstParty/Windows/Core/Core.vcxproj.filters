@@ -626,49 +626,70 @@
       <Filter>Headers\model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\ProviderParser.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\ShaderLoader.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\JointParser.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\LevelFileLoader.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\MenuLoader.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\ShaderContext.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\AnimationParser.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\ControllerParser.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\ValueParser.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\ProviderContext.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\PhysicsParser.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\model\Array.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\TemplateParser.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Src\resources\BackgroundParser.hpp">
-      <Filter>Headers\resources\parsers</Filter>
+      <Filter>Headers\resources\parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\EntityParser.hpp">
+      <Filter>Headers\resources\parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\model\EntitySpawn.hpp">
+      <Filter>Headers\model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\AnimationContext.hpp">
+      <Filter>Headers\resources\parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\FilterParser.hpp">
+      <Filter>Headers\resources\parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\FilterContext.hpp">
+      <Filter>Headers\resources\parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\ColliderContext.hpp">
+      <Filter>Headers\resources\parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\ColliderParser.hpp">
+      <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -768,11 +789,11 @@
     <Filter Include="Headers\state">
       <UniqueIdentifier>{e89db21f-a3fd-4024-8fdd-62bf62b11ab1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\resources\parsers">
-      <UniqueIdentifier>{66444777-c30f-4a6b-9687-931bb7ae5c5d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Sources\resources\parsers">
+    <Filter Include="Sources\resources\parsing">
       <UniqueIdentifier>{a17ba4eb-ff58-4ff5-8ae3-3fd60a4e7311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\resources\parsing">
+      <UniqueIdentifier>{66444777-c30f-4a6b-9687-931bb7ae5c5d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1192,34 +1213,43 @@
       <Filter>Sources\rendering</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\resources\MenuLoader.cpp">
-      <Filter>Sources\resources\parsers</Filter>
+      <Filter>Sources\resources\parsing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\resources\LevelFileLoader.cpp">
-      <Filter>Sources\resources\parsers</Filter>
+      <Filter>Sources\resources\parsing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\resources\JointParser.cpp">
-      <Filter>Sources\resources\parsers</Filter>
+      <Filter>Sources\resources\parsing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\resources\ProviderParser.cpp">
-      <Filter>Sources\resources\parsers</Filter>
+      <Filter>Sources\resources\parsing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\resources\AnimationParser.cpp">
-      <Filter>Sources\resources\parsers</Filter>
+      <Filter>Sources\resources\parsing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\resources\ControllerParser.cpp">
-      <Filter>Sources\resources\parsers</Filter>
+      <Filter>Sources\resources\parsing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\resources\ValueParser.cpp">
-      <Filter>Sources\resources\parsers</Filter>
+      <Filter>Sources\resources\parsing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\resources\PhysicsParser.cpp">
-      <Filter>Sources\resources\parsers</Filter>
+      <Filter>Sources\resources\parsing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\resources\TemplateParser.cpp">
-      <Filter>Sources\resources\parsers</Filter>
+      <Filter>Sources\resources\parsing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\resources\BackgroundParser.cpp">
-      <Filter>Sources\resources\parsers</Filter>
+      <Filter>Sources\resources\parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\EntityParser.cpp">
+      <Filter>Sources\resources\parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\FilterParser.cpp">
+      <Filter>Sources\resources\parsing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\resources\ColliderParser.cpp">
+      <Filter>Sources\resources\parsing</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

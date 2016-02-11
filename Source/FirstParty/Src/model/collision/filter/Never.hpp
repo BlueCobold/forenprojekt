@@ -9,7 +9,7 @@ class Never : public CollisionFilter
 {
 public:
 
-    virtual bool shouldCollide(Entity* entityA, Entity* entityB) override
+    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override
     {
         return false;
     }

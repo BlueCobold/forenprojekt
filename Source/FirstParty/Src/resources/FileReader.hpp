@@ -18,7 +18,7 @@ public:
     virtual ~FileReader() {};
 
     std::string getFileName();
-    virtual std::string get(const std::string& key);
+    virtual std::string get(const std::string& key) const;
     std::unordered_map<std::string, std::string>::const_iterator beginIterator();
     std::unordered_map<std::string, std::string>::const_iterator endIterator();
 

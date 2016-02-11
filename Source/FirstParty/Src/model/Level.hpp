@@ -5,6 +5,7 @@
 
 #include "Ball.hpp"
 #include "Background.hpp"
+#include "EntitySpawn.hpp"
 #include "GravityGoody.hpp"
 #include "InvulnerableGoody.hpp"
 #include "SoundManager.hpp"
@@ -112,37 +113,9 @@ private:
 #ifdef LEVELTESTING
     std::string m_filename;
 #endif
-    struct EntitySpawn
-    {
-    public:
-        EntitySpawn(std::unique_ptr<Entity> target) :
-            target(std::move(target)),
-            respawnAt(-1.f)
-        { }
 
-        EntitySpawn(std::unique_ptr<Entity> target, const float time) :
-            target(std::move(target)),
-            respawnAt(time)
-        { }
-
-        EntitySpawn(EntitySpawn&& source) :
-            target(std::move(source.target)),
-            respawnAt(source.respawnAt)
-        { }
-
-        EntitySpawn& operator=(EntitySpawn&& source)
-        {
-            target = std::move(source.target);
-            respawnAt = source.respawnAt;
-            return *this;
-        }
-
-        std::unique_ptr<Entity> target;
-        float respawnAt;
-    };
-
-    void createLabelAt(const Entity* target, const std::string& fontName, const int points);
-    void createLabelAt(const Entity* target, const std::string& fontName, const std::string& text);
+    void createLabelAt(const Entity& target, const std::string& fontName, const int points);
+    void createLabelAt(const Entity& target, const std::string& fontName, const std::string& text);
     void createLabelAt(const sf::Vector2f& position, const std::string& fontName, const std::string& text);
     void respawnDeadBalls();
     void trackBallMovement(float elapsedTime);
@@ -152,68 +125,23 @@ private:
     void updateGoodyChoice();
     void updateGoodyCharges();
 
-    virtual bool shouldCollide(Entity* entityA, Entity* entityB) override;
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse) override;
-    void killTarget(Entity* target);
-    void killBonusTarget(Entity* target);
-    void prepareEntityForSpawn(const b2Vec2& position, const Entity* spawn, float angle = 0);
+    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override;
+    virtual void onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override;
+    void killTarget(Entity& target);
+    void killBonusTarget(Entity& target);
+    void prepareEntityForSpawn(const b2Vec2& position, const Entity& spawn, float angle = 0);
 
     void handleAutoRespawn();
 
     /// Load the level after m_number
     void load();
 
-    bool validate(const tinyxml2::XMLDocument& document) const;
-
-    std::unique_ptr<Entity> createEntity(
-        const tinyxml2::XMLElement* xml,
-        sf::Vector2u& position,
-        const tinyxml2::XMLElement* shape,
-        const tinyxml2::XMLElement* physic,
-        Templates& templates,
-        bool bindInstantly = true);
-
-    std::unique_ptr<Entity> parseEntityFromTemplate(
-        std::string name,
-        Templates& templates,
-        sf::Vector2u& position,
-        bool bindInstantly = true);
-
     std::unique_ptr<Entity> parseEntity(
         const tinyxml2::XMLElement* xml,
-        sf::Vector2u& position,
-        Templates& templates,
-        bool bindInstantly = true);
-
-    static void findPhysicAndShapeTag(
-        const tinyxml2::XMLElement*& physic,
-        const tinyxml2::XMLElement*& shape,
-        const tinyxml2::XMLElement* entity,
-        Templates& templates);
-
-    void parseCollider(
-        Entity* entity,
-        const tinyxml2::XMLElement* collider,
-        Templates& templates);
-
-    void parseCollisionFilter(
-        Entity* entity,
-        const tinyxml2::XMLElement* xml,
-        Templates& templates);
-
-    std::unique_ptr<CollisionFilter> getCollisionFilter(
-        Entity* entity,
-        const tinyxml2::XMLElement* xml,
-        Templates& templates);
-
-    std::unique_ptr<Entity> parseEntityReference(
-        const std::string& key,
-        const tinyxml2::XMLElement* xml,
+        const std::string& templateName,
         Templates& templates);
 
     void parseGameplayAttributes(const tinyxml2::XMLElement* xml);
-
-    std::unique_ptr<CollisionHandler> parseShowLabelHandler(const tinyxml2::XMLElement* xml);
 
     /// Construct the full level filename from the level number
     const std::string filename();

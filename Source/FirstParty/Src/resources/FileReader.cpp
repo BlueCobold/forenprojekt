@@ -135,7 +135,7 @@ void FileReader::readString()
     }
 }
 
-std::string FileReader::get(const std::string& key)
+std::string FileReader::get(const std::string& key) const
 {
     if(key.find("@@") == 0)
         return key.substr(2);

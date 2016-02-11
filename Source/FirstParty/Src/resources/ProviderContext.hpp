@@ -36,7 +36,7 @@ public:
         cloneHandler(cloneHandler)
     { }
 
-    ProviderContext& withFunctions(std::unordered_map<std::string, const tinyxml2::XMLElement*> functions)
+    ProviderContext& withFunctions(const std::unordered_map<std::string, const tinyxml2::XMLElement*>& functions)
     {
         this->functions = functions;
         return *this;

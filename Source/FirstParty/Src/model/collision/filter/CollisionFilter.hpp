@@ -11,7 +11,7 @@ public:
     virtual ~CollisionFilter()
     { }
 
-    virtual bool shouldCollide(Entity* entityA, Entity* entityB) = 0;
+    virtual bool shouldCollide(Entity& entityA, Entity& entityB) = 0;
 };
 
 #endif // COLLISION_FILTER_HPP

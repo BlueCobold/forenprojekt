@@ -8,11 +8,11 @@
 class SpawnEntityCollisionHandler : public CollisionHandler
 {
 public:
-    typedef std::function<void(const Entity* owner, const Entity* spawned, const b2Vec2& contactPoint)> SpawnHandler;
+    typedef std::function<void(const Entity& owner, const Entity& spawned, const b2Vec2& contactPoint)> SpawnHandler;
 
     SpawnEntityCollisionHandler(const SpawnHandler& spawnHandler,
-                                const Entity* owner,
-                                const Entity* spawn) :
+                                Entity& owner,
+                                Entity& spawn) :
         m_handler(spawnHandler),
         m_owner(owner),
         m_spawn(spawn),
@@ -20,9 +20,9 @@ public:
     {
     }
 
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse) override
+    virtual void onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
     {
-        if(!m_spawned || m_spawn->isRespawnable())
+        if(!m_spawned || m_spawn.isRespawnable())
         {
             m_spawned = true;
             m_handler(m_owner, m_spawn, point);
@@ -32,8 +32,8 @@ public:
 private:
 
     SpawnHandler m_handler;
-    const Entity* m_owner;
-    const Entity* m_spawn;
+    const Entity& m_owner;
+    const Entity& m_spawn;
     bool m_spawned;
 };
 

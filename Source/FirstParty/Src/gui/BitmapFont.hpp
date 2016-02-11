@@ -48,9 +48,6 @@ public:
     unsigned int getFontSize() const;
 
 private:
-    bool validate(const tinyxml2::XMLDocument& document);
-
-private:
     std::string m_fileName;
     std::map<char, Glyph> m_glyphs;
     const sf::Texture* m_texture;

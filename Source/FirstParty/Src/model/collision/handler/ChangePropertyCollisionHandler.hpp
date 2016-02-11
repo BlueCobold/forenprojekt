@@ -41,20 +41,20 @@ public:
         m_provider = std::move(provider);
     }
 
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse) override
+    virtual void onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
     {
         if(m_provider == nullptr)
             throw std::runtime_error(utility::translateKey("HandlerNull"));
-        m_entityA = entityA;
-        m_entityB = entityB;
+        m_entityA = &entityA;
+        m_entityB = &entityB;
         if(m_useGlobal)
             m_globalHandler->setValueOf(m_trimmedVar, m_provider->getValue());
         else
         {
             if(m_useValuesFromA)
-                entityA->setValueOf(m_trimmedVar, m_provider->getValue());
+                entityA.setValueOf(m_trimmedVar, m_provider->getValue());
             else
-                entityB->setValueOf(m_trimmedVar, m_provider->getValue());
+                entityB.setValueOf(m_trimmedVar, m_provider->getValue());
         }
         m_entityA = nullptr;
         m_entityB = nullptr;

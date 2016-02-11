@@ -18,7 +18,7 @@ class ResourceManager;
 
 class ControllerParser
 {
-    const ProviderContext& m_context;
+    ProviderContext m_context;
     ProviderParser m_providerParser;
 
 public:
@@ -27,19 +27,19 @@ public:
         m_providerParser(context)
     { }
 
-    Array<std::unique_ptr<ValueProvider>, 4> parseColor(const tinyxml2::XMLElement& xml);
+    Array<std::unique_ptr<ValueProvider>, 4> parseColor(const tinyxml2::XMLElement& xml) const;
 
-    Array<std::unique_ptr<ValueProvider>, 2> parsePosition(const tinyxml2::XMLElement& xml);
+    Array<std::unique_ptr<ValueProvider>, 2> parsePosition(const tinyxml2::XMLElement& xml) const;
 
-    Array<std::unique_ptr<ValueProvider>, 2> parseScale(const tinyxml2::XMLElement& xml);
+    Array<std::unique_ptr<ValueProvider>, 2> parseScale(const tinyxml2::XMLElement& xml) const;
 
-    std::unique_ptr<ValueProvider> parseRotation(const tinyxml2::XMLElement& xml);
+    std::unique_ptr<ValueProvider> parseRotation(const tinyxml2::XMLElement& xml) const;
 
     std::unique_ptr<ValueProvider> findController(
         const tinyxml2::XMLElement& xml,
         const std::string& childName,
         const std::string& propertyName,
-        const std::string& propertyValue);
+        const std::string& propertyValue) const;
 };
 
 #endif // CONTROLLER_PARSER_HPP

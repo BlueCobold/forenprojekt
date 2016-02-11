@@ -4,6 +4,7 @@
 #define BALL_TELEPORT_COLLISION_HANDLER_HPP
 
 #include "CollisionHandler.hpp"
+#include "../../Ball.hpp"
 #include "../../../Utility.hpp"
 
 class BallTeleportCollisionHandler : public CollisionHandler
@@ -14,12 +15,12 @@ public:
     {
     }
 
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse) override
+    virtual void onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
     {
-        if(entityA && entityA->getType() == Entity::Ball)
-            dynamic_cast<Ball*>(entityA)->teleportTo(m_x, m_y, m_kill);
-        else if(entityB && entityB->getType() == Entity::Ball)
-            dynamic_cast<Ball*>(entityB)->teleportTo(m_x, m_y, m_kill);
+        if(entityA.getType() == Entity::Ball)
+            dynamic_cast<Ball&>(entityA).teleportTo(m_x, m_y, m_kill);
+        else if(entityB.getType() == Entity::Ball)
+            dynamic_cast<Ball&>(entityB).teleportTo(m_x, m_y, m_kill);
         else
             throw std::runtime_error(utility::replace(utility::translateKey("EntityNoCollision"), "Ball"));
     }

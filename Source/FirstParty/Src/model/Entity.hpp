@@ -79,8 +79,8 @@ public:
 
     void bindCollisionHandler(std::unique_ptr<CollisionHandler> handler);
     void bindCollisionFilter(std::unique_ptr<CollisionFilter> filter);
-    void onCollide(Entity* partner, const b2Vec2& point, const float impulse);
-    bool shouldCollide(Entity* partner);
+    void onCollide(Entity& partner, const b2Vec2& point, const float impulse);
+    bool shouldCollide(Entity& partner);
 
     void applyOverrides(const std::function<void(Animation*)> function);
     void setAnimationAngle(const float angle);

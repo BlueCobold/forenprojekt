@@ -4,6 +4,7 @@
 #define ANIMATION_PARSER_HPP
 
 #include "../animation/Animation.hpp"
+#include "AnimationContext.hpp"
 #include "ProviderContext.hpp"
 #include "ProviderParser.hpp"
 
@@ -20,25 +21,21 @@ public:
     typedef std::function<void(std::unique_ptr<Animation>&, const tinyxml2::XMLElement&)> Callback;
 
 private:
-    const ProviderContext& m_context;
+    AnimationContext m_context;
     ProviderParser m_providerParser;
-    ResourceManager& m_resourceManager;
-    unsigned int m_defaultTargetBuffer;
     Callback m_callback;
 
 public:
-    AnimationParser(const ProviderContext& context, ResourceManager& resourceManager, unsigned int defaultTargetBuffer) :
+    AnimationParser(const AnimationContext& context) :
         m_context(context),
-        m_providerParser(context),
-        m_resourceManager(resourceManager),
-        m_defaultTargetBuffer(defaultTargetBuffer)
+        m_providerParser(context.providerContext)
     { }
 
-    std::vector<std::unique_ptr<Animation>> parseMultiple(const tinyxml2::XMLElement& xml);
+    std::vector<std::unique_ptr<Animation>> parseMultiple(const tinyxml2::XMLElement& xml) const;
     
-    std::vector<std::unique_ptr<Animation>> parseSingle(const tinyxml2::XMLElement& xml);
+    std::vector<std::unique_ptr<Animation>> parseSingle(const tinyxml2::XMLElement& xml) const;
     
-    std::unique_ptr<Animation> parseSingleTag(const tinyxml2::XMLElement& xml);
+    std::unique_ptr<Animation> parseSingleTag(const tinyxml2::XMLElement& xml) const;
 
     AnimationParser& withElementCallback(Callback callback)
     {

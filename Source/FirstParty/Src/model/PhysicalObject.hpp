@@ -64,6 +64,7 @@ public:
             unbindBody();
         m_fixtureDefs.clear();
         m_shapes = std::move(shapes);
+        m_basePosition = bodyDef.position;
         for(auto shape = begin(m_shapes); shape != end(m_shapes); ++shape)
         {
             b2FixtureDef def;
@@ -147,7 +148,10 @@ public:
     void setPosition(const b2Vec2& pos)
     {
         if(m_body != nullptr)
+        {
             m_body->SetTransform(pos, 0.0f);
+            m_basePosition = pos;
+        }
         else
         {
             m_basePosition = pos;

@@ -46,7 +46,8 @@ void ContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impu
         b2WorldManifold worldManifold;
         contact->GetWorldManifold(&worldManifold);
 
-        m_handler->onCollision(entityA, entityB, worldManifold.points[0], impulse->normalImpulses[0]);
+        if(entityA && entityB)
+            m_handler->onCollision(*entityA, *entityB, worldManifold.points[0], impulse->normalImpulses[0]);
     }
 }
 
@@ -55,5 +56,7 @@ bool ContactListener::shouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB)
     Entity* entityA = static_cast<Entity*>(fixtureA->GetBody()->GetUserData());
     Entity* entityB = static_cast<Entity*>(fixtureB->GetBody()->GetUserData());
 
-    return m_filter->shouldCollide(entityA, entityB);
+    if(entityA && entityB)
+        return m_filter->shouldCollide(*entityA, *entityB);
+    return false;
 }

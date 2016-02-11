@@ -240,14 +240,14 @@ void Level::respawnDeadBalls()
             m_remainingBall -= 1;
             m_lostBallCounter++;
             if(!(m_remainingBall < 1 && m_remainingBall > -1))
-                createLabelAt(m_ball, "red", -10);
+                createLabelAt(*m_ball, "red", -10);
 
             m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::LostBall);
         }
 
         const Ball* ball = dynamic_cast<const Ball*>((*it).get());
         if(ball->getSpawnAnimationEntity() != nullptr)
-            prepareEntityForSpawn(ball->getPosition(), ball->getSpawnAnimationEntity());
+            prepareEntityForSpawn(ball->getPosition(), *ball->getSpawnAnimationEntity());
     }
 }
 
@@ -265,6 +265,21 @@ void Level::trackBallMovement(float elapsedTime)
         t = m_ballTravelDistances.front().time;
     }
     m_lastBallPosition = ballPos;
+}
+
+void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity& spawn, float angle)
+{
+    for(auto it = std::begin(m_unspawnedEntities); it != std::end(m_unspawnedEntities); ++it)
+    {
+        if(it->target.get() == &spawn)
+        {
+            it->target->setPosition(position);
+            it->target->setAnimationAngle(angle);
+            m_entitiesToSpawn.push_back(std::move(it->target));
+            m_unspawnedEntities.erase(it);
+            break;
+        }
+    }
 }
 
 void Level::spawnPendingEntities(float currentTime)
@@ -298,8 +313,8 @@ void Level::cleanupKilledEntities()
         auto entity = it->get();
         if(entity->killed())
         {
-            if(entity->getKillAnimationEntity() != nullptr)
-                prepareEntityForSpawn(entity->getPosition(), entity->getKillAnimationEntity(), entity->getAngle());
+            if(auto killAnimation = entity->getKillAnimationEntity())
+                prepareEntityForSpawn(entity->getPosition(), *killAnimation, entity->getAngle());
 
             entity->unbindBody();
             if(entity->isRespawnable())
@@ -371,43 +386,43 @@ void Level::setValueOf(const std::string& name, const float value)
     }
 }
 
-bool Level::shouldCollide(Entity* entityA, Entity* entityB)
+bool Level::shouldCollide(Entity& entityA, Entity& entityB)
 {
-    if(entityB->getType() == Entity::Ball)
+    if(entityB.getType() == Entity::Ball)
     {
-        if(!entityA->shouldCollide(entityB))
+        if(!entityA.shouldCollide(entityB))
             return false;
 
-        if(entityA->getType() == Entity::Target)
+        if(entityA.getType() == Entity::Target)
             killTarget(entityA);
-        else if(entityA->getType() == Entity::Teeter)
+        else if(entityA.getType() == Entity::Teeter)
         {
             m_multiHit = 0;
-            entityB->setValueOf("hitTeeterTime", getPassedTime());
+            entityB.setValueOf("hitTeeterTime", getPassedTime());
             m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTeeter);
         }
-        else if(entityA->getType() == Entity::BonusTarget)
+        else if(entityA.getType() == Entity::BonusTarget)
             killBonusTarget(entityA);
 
-        return entityA->doesCollideWithBall();
+        return entityA.doesCollideWithBall();
     }
-    else if(entityA->getType() == Entity::Ball)
+    else if(entityA.getType() == Entity::Ball)
     {
-        if(!entityB->shouldCollide(entityA))
+        if(!entityB.shouldCollide(entityA))
             return false;
 
-        if(entityB->getType() == Entity::Target)
+        if(entityB.getType() == Entity::Target)
             killTarget(entityB);
-        else if(entityB->getType() == Entity::Teeter)
+        else if(entityB.getType() == Entity::Teeter)
         {
             m_multiHit = 0;
-            entityA->setValueOf("hitTeeterTime", getPassedTime());
+            entityA.setValueOf("hitTeeterTime", getPassedTime());
             m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::HitTeeter);
         }
-        else if(entityB->getType() == Entity::BonusTarget)
+        else if(entityB.getType() == Entity::BonusTarget)
             killBonusTarget(entityB);
 
-        return entityB->doesCollideWithBall();
+        return entityB.doesCollideWithBall();
     }
     else if(entityA->getType() == Entity::SpecialEntity || entityB->getType() == Entity::SpecialEntity)
         return false;
@@ -415,9 +430,9 @@ bool Level::shouldCollide(Entity* entityA, Entity* entityB)
     return true;
 }
 
-void Level::killTarget(Entity* target)
+void Level::killTarget(Entity& target)
 {
-    target->kill();
+    target.kill();
     m_remainingTarget--;
 
     if(!m_timeAttackMode && m_remainingTarget < 1)
@@ -437,9 +452,9 @@ void Level::killTarget(Entity* target)
     createLabelAt(target, "green", earned);
 }
 
-void Level::killBonusTarget(Entity* target)
+void Level::killBonusTarget(Entity& target)
 {
-    target->kill();
+    target.kill();
     int earned = m_bonusTargetPoints + m_multiHit * 50 + m_gravityGoody.getBonusPoints();
     if(m_ball->isSpeeding())
     {
@@ -454,7 +469,7 @@ void Level::killBonusTarget(Entity* target)
     createLabelAt(target, "green", earned);
 }
 
-void Level::createLabelAt(const Entity* target, const std::string& fontName, const int number)
+void Level::createLabelAt(const Entity& target, const std::string& fontName, const int number)
 {
     std::string prefix;
     if(number > 0)
@@ -462,11 +477,11 @@ void Level::createLabelAt(const Entity* target, const std::string& fontName, con
     createLabelAt(target, fontName, prefix + utility::toString(number));
 }
 
-void Level::createLabelAt(const Entity* target, const std::string& fontName, const std::string& text)
+void Level::createLabelAt(const Entity& target, const std::string& fontName, const std::string& text)
 {
     return createLabelAt(sf::Vector2f(
-                utility::toPixel(target->getPosition().x),
-                utility::toPixel(target->getPosition().y)),
+                utility::toPixel(target.getPosition().x),
+                utility::toPixel(target.getPosition().y)),
                 fontName,
                 text);
 }
@@ -484,12 +499,12 @@ void Level::createLabelAt(const sf::Vector2f& position, const std::string& fontN
     m_pointLabels.push_back(std::unique_ptr<TimedLabel>(new TimedLabel(std::move(label), getPassedTime())));
 }
 
-void Level::onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse)
+void Level::onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse)
 {
-    if(entityA->getType() == Entity::Ball)
-        entityB->onCollide(entityA, point, impulse);
-    else if(entityB->getType() == Entity::Ball)
-        entityA->onCollide(entityB, point, impulse);
+    if(entityA.getType() == Entity::Ball)
+        entityB.onCollide(entityA, point, impulse);
+    else if(entityB.getType() == Entity::Ball)
+        entityA.onCollide(entityB, point, impulse);
 }
 
 void Level::draw(const DrawParameter& param)

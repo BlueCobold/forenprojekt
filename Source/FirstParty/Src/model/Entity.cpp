@@ -176,7 +176,7 @@ void Entity::bindCollisionFilter(std::unique_ptr<CollisionFilter> filter)
     m_collisionFilter = std::move(filter);
 }
 
-void Entity::onCollide(Entity* partner, const b2Vec2& point, const float impulse)
+void Entity::onCollide(Entity& partner, const b2Vec2& point, const float impulse)
 {
     if(m_collisionSound != nullptr)
     {
@@ -186,14 +186,14 @@ void Entity::onCollide(Entity* partner, const b2Vec2& point, const float impulse
     }
 
     for(auto it = begin(m_collisionHandler); it != end(m_collisionHandler); ++it)
-        (*it)->onCollision(this, partner, point, impulse);
+        (*it)->onCollision(*this, partner, point, impulse);
 }
 
-bool Entity::shouldCollide(Entity* partner)
+bool Entity::shouldCollide(Entity& partner)
 {
     if(m_collisionFilter == nullptr)
         return true;
-    return m_collisionFilter->shouldCollide(this, partner);
+    return m_collisionFilter->shouldCollide(*this, partner);
 }
 
 void Entity::applyOverrides(const std::function<void(Animation*)> function)

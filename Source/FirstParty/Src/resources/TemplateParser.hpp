@@ -70,17 +70,17 @@ public:
         m_subPath(subPath)
     { }
 
-    Templates parse(const tinyxml2::XMLElement& xml);
-    void parseObjects(const tinyxml2::XMLElement& xml, Templates& templates);
+    Templates parse(const tinyxml2::XMLElement& xml) const;
+    void parseObjects(const tinyxml2::XMLElement& xml, Templates& templates) const;
 
 private:
-    void parse(const tinyxml2::XMLElement& xml, Templates& templates);
-    void parseIncludes(const tinyxml2::XMLElement& xml, Templates& templates);
-    void parseShapes(const tinyxml2::XMLElement& xml, Templates& templates);
-    void parsePhysics(const tinyxml2::XMLElement& xml, Templates& templates);
-    void parseFunctions(const tinyxml2::XMLElement& xml, Templates& templates);
-    void parseEntities(const tinyxml2::XMLElement& xml, Templates& templates);
-    void parseOverrides(const tinyxml2::XMLElement& xml, Templates& templates);
+    void parse(const tinyxml2::XMLElement& xml, Templates& templates) const;
+    void parseIncludes(const tinyxml2::XMLElement& xml, Templates& templates) const;
+    void parseShapes(const tinyxml2::XMLElement& xml, Templates& templates) const;
+    void parsePhysics(const tinyxml2::XMLElement& xml, Templates& templates) const;
+    void parseFunctions(const tinyxml2::XMLElement& xml, Templates& templates) const;
+    void parseEntities(const tinyxml2::XMLElement& xml, Templates& templates) const;
+    void parseOverrides(const tinyxml2::XMLElement& xml, Templates& templates) const;
 
     std::string m_subPath;
 };

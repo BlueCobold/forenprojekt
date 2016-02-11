@@ -4,6 +4,7 @@
 #define APPLY_IMPULSE_COLLISION_HANDLER_HPP
 
 #include "CollisionHandler.hpp"
+#include "../../Entity.hpp"
 
 class ApplyImpulseCollisionHandler : public CollisionHandler
 {
@@ -13,14 +14,14 @@ public:
     {
     }
 
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse) override
+    virtual void onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
     {
         b2Body* ballBody;
 
-        if(entityA && entityA->getType() == Entity::Ball)
-            ballBody = entityA->getBody();
-        else if(entityB && entityB->getType() == Entity::Ball)
-            ballBody = entityB->getBody();
+        if(entityA.getType() == Entity::Ball)
+            ballBody = entityA.getBody();
+        else if(entityB.getType() == Entity::Ball)
+            ballBody = entityB.getBody();
         else
             throw std::runtime_error(utility::replace(utility::translateKey("EntityNoCollision"), "Ball"));
 

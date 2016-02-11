@@ -22,7 +22,7 @@ public:
         m_cloneCallback(callback)
     {
         if(&observed == nullptr)
-            throw std::runtime_error(utility::replace(utility::translateKey("OwnerNull"), "?Provider"));
+            throw std::runtime_error(utility::replace(utility::translateKey("OwnerNull"), "ObserverProvider"));
     }
 
     O& getObserved() const

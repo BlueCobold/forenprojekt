@@ -427,7 +427,7 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(const tinyxml2::XMLElement* xm
         style.animation = std::unique_ptr<AnimationContainer>(new AnimationContainer(sf::Vector2f(), sf::Vector2f(), 0, _cloneHandler));
 
         ProviderContext context(style.animation.get(), style.animation.get(), style.animation.get(), style.animation.get(), _cloneHandler);
-        AnimationParser loader(context, resourceManager, 0);
+        AnimationParser loader(AnimationContext(context, resourceManager, 0));
         auto animations = loader.parseMultiple(*animationsXml);
         for(auto it = begin(animations); it != end(animations); ++it)
             style.animation->bindAnimation(std::move(*it));
@@ -673,7 +673,7 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
             if(auto animationsXml = animationContainer->FirstChildElement("animations"))
             {
                 ProviderContext context(animContainer.get(), animContainer.get(), animContainer.get(), animContainer.get(), _cloneHandler);
-                AnimationParser loader(context, resourceManager, 0);
+                AnimationParser loader(AnimationContext(context, resourceManager, 0));
                 auto animations = loader.parseMultiple(*animationsXml);
                 for(auto ani = begin(animations); ani != end(animations); ++ani)
                     animContainer->bindAnimation(std::move(*ani));

@@ -9,7 +9,7 @@
 
 class GenericCollisionHandler : public CollisionHandler
 {
-    typedef std::function<void(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse)> Handler;
+    typedef std::function<void(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse)> Handler;
 
 public:
 
@@ -18,7 +18,7 @@ public:
     {
     }
 
-    virtual void onCollision(Entity* entityA, Entity* entityB, const b2Vec2& point, const float impulse) override
+    virtual void onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
     {
         if(m_handler != nullptr)
             m_handler(entityA, entityB, point, impulse);

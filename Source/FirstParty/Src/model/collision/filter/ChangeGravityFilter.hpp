@@ -23,7 +23,7 @@ public:
     virtual ~ChangeGravityFilter()
     { }
 
-    virtual bool shouldCollide(Entity* entityA, Entity* entityB) override
+    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override
     {
         bool should = PropertyFilter::shouldCollide(entityA, entityB);
         if(should)

@@ -42,8 +42,9 @@ bool BitmapFont::loadFromFile(const std::string& path, ResourceManager& resource
     tinyxml2::XMLDocument doc;
     doc.LoadFile(path.c_str());
     
-    if(!validate(doc)) // Validate the XML file
+    if(doc.Error())
     {
+        doc.PrintError();
         sf::err() << "XML level file '" << path << "' is not valid!" << std::endl;
         return false;
     }
@@ -69,17 +70,6 @@ bool BitmapFont::loadFromFile(const std::string& path, ResourceManager& resource
     }
     m_fontSize = height;
 
-    return true;
-}
-
-bool BitmapFont::validate(const tinyxml2::XMLDocument& document)
-{
-    if(document.Error())
-    {
-        document.PrintError();
-        return false;
-    }
-        
     return true;
 }
 

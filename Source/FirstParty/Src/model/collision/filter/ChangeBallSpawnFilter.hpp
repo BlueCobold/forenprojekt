@@ -17,11 +17,11 @@ public:
     virtual ~ChangeBallSpawnFilter()
     { }
 
-    virtual bool shouldCollide(Entity* entityA, Entity* entityB) override
+    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override
     {
         bool collides = ActionFilter::shouldCollide(entityA, entityB);
         if(collides)
-            (dynamic_cast<Ball*>(entityB))->checkpointReached(entityA->getPosition());
+            (dynamic_cast<Ball&>(entityB)).checkpointReached(entityA.getPosition());
         return collides;
     }
 };

@@ -4,7 +4,7 @@
 #include "../animation/provider/ValueProvider.hpp"
 #include "../Utility.hpp"
 
-Array<std::unique_ptr<ValueProvider>, 4> ControllerParser::parseColor(const tinyxml2::XMLElement& xml)
+Array<std::unique_ptr<ValueProvider>, 4> ControllerParser::parseColor(const tinyxml2::XMLElement& xml) const
 {
     Array<std::unique_ptr<ValueProvider>, 4> colors;
     std::unique_ptr<ValueProvider> red, green, blue, alpha, tmp;
@@ -41,7 +41,7 @@ Array<std::unique_ptr<ValueProvider>, 4> ControllerParser::parseColor(const tiny
     return colors;
 }
 
-Array<std::unique_ptr<ValueProvider>, 2> ControllerParser::parsePosition(const tinyxml2::XMLElement& xml)
+Array<std::unique_ptr<ValueProvider>, 2> ControllerParser::parsePosition(const tinyxml2::XMLElement& xml) const
 {
     Array<std::unique_ptr<ValueProvider>, 2> position;
     position[0] = findController(xml, "position", "axis", "x");
@@ -49,7 +49,7 @@ Array<std::unique_ptr<ValueProvider>, 2> ControllerParser::parsePosition(const t
     return position;
 }
 
-Array<std::unique_ptr<ValueProvider>, 2> ControllerParser::parseScale(const tinyxml2::XMLElement& xml)
+Array<std::unique_ptr<ValueProvider>, 2> ControllerParser::parseScale(const tinyxml2::XMLElement& xml) const
 {
     Array<std::unique_ptr<ValueProvider>, 2> scale;
     scale[0] = findController(xml, "scale", "axis", "x");
@@ -57,7 +57,7 @@ Array<std::unique_ptr<ValueProvider>, 2> ControllerParser::parseScale(const tiny
     return std::move(scale);
 }
 
-std::unique_ptr<ValueProvider> ControllerParser::parseRotation(const tinyxml2::XMLElement& xml)
+std::unique_ptr<ValueProvider> ControllerParser::parseRotation(const tinyxml2::XMLElement& xml) const
 {
     if (auto rotation = xml.FirstChildElement("rotation"))
     {
@@ -71,7 +71,7 @@ std::unique_ptr<ValueProvider> ControllerParser::findController(
     const tinyxml2::XMLElement& xml,
     const std::string& childName,
     const std::string& propertyName,
-    const std::string& propertyValue)
+    const std::string& propertyValue) const
 {
     for(auto iterator = xml.FirstChildElement(childName.c_str());
         iterator != nullptr; iterator = iterator->NextSiblingElement(childName.c_str()))

@@ -1,7 +1,9 @@
 
 #include "BackgroundParser.hpp"
 
-std::unique_ptr<Background> BackgroundParser::parse(const tinyxml2::XMLElement& xml, const sf::Vector2u& size, unsigned int defaultTargetBuffer)
+std::unique_ptr<Background> BackgroundParser::parse(const tinyxml2::XMLElement& xml,
+                                                    const sf::Vector2u& size,
+                                                    unsigned int defaultTargetBuffer) const
 {
     std::unique_ptr<Background> background(new Background(size));
 
@@ -15,7 +17,7 @@ std::unique_ptr<Background> BackgroundParser::parse(const tinyxml2::XMLElement& 
             
         auto context = ProviderContext(nullptr, layer.get(), layer.get(), layer.get(), m_context.cloneHandler)
                                             .withFunctions(m_context.functions);
-        AnimationParser loader(context, m_resourceManager, defaultTargetBuffer);
+        AnimationParser loader(AnimationContext(context, m_resourceManager, defaultTargetBuffer));
         auto animations = loader.parseMultiple(*parallax);
         for(auto ani = begin(animations); ani != end(animations); ++ani)
             layer->bindAnimation(std::move(*ani));

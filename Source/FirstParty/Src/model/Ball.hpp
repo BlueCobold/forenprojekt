@@ -16,8 +16,7 @@ public:
     Ball(float resetTime,
          float stuckBallSpeed,
          CloneHandler& cloneHandler,
-         const Entity* spawnAnimationEntity = nullptr,
-         const Entity* killAnimationEntity = nullptr);
+         const Entity* spawnAnimationEntity = nullptr);
 
     virtual void restartAt(const float value) override;
     virtual void update(const float value) override;

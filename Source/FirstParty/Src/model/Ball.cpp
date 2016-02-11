@@ -5,8 +5,7 @@
 Ball::Ball(float resetTime,
            float stuckBallSpeed,
            CloneHandler& cloneHandler,
-           const Entity* spawnAnimationEntity,
-           const Entity* killAnimationEntity) :
+           const Entity* spawnAnimationEntity) :
     Entity(Entity::Ball, cloneHandler),
     m_ballResetTime(0.0f),
     m_resetTime(resetTime),
@@ -22,7 +21,6 @@ Ball::Ball(float resetTime,
 {
     Entity::setValueOf("hitTeeterTime", 0.f);
     Entity::setValueOf("stuckBallTimer", 0.f);
-    bindKillAnimationEntity(killAnimationEntity);
 }
 
 void Ball::autoResetBall(const float elapsedTime)

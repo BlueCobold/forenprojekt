@@ -24,7 +24,7 @@ public:
     ~Config();
 
     template<typename T>
-    T get(const std::string& data);
+    T get(const std::string& data) const;
 
     template<typename T>
     void set(const std::string& key, const T& value);
@@ -33,7 +33,7 @@ public:
 };
 
 template<typename T>
-T Config::get(const std::string& key)
+T Config::get(const std::string& key) const
 {
     return utility::stringTo<T>(FileReader::get(key));
 }
