@@ -11,7 +11,7 @@
 #if defined(LINUX)
 #include "LinuxHelper.hpp"
 #elif defined(ANDROID)
-#include "ANDROIDHelper.hpp"
+#include "AndroidHelper.hpp"
 #endif
 
 #ifdef IOS
@@ -26,7 +26,6 @@ int sfmlMain(int argc, char* argv[])
 int main(int argc, char* argv[])
 #endif
 {
-
 #if defined(LINUX) || defined(ANDROID)
     init();
 #endif

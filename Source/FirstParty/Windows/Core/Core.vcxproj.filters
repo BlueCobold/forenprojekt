@@ -691,6 +691,9 @@
     <ClInclude Include="..\..\Src\resources\ColliderParser.hpp">
       <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\BatteryState.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

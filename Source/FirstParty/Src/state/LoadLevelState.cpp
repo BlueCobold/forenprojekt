@@ -1,10 +1,12 @@
 #include "LoadLevelState.hpp"
 
+#include "../rendering/transitions/RandomTransition.hpp"
+
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Window/Keyboard.hpp>
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
-#include "../rendering/transitions/RandomTransition.hpp"
+#include <SFML/System/Err.hpp>
+#include <SFML/Window/Keyboard.hpp>
 
 #include <memory>
 #include <cstring>
@@ -64,8 +66,12 @@ StateChangeInformation LoadLevelState::update(const float time)
 
     if(m_levelLoaderJob->isLoaded())
     {
+        sf::err() << "Level loading finished" << std::endl;
         if(m_loadingErrorMessage.length() != 0)
+        {
+            sf::err() << "Error occurred during loading" << std::endl;
             throw std::runtime_error(m_loadingErrorMessage);
+        }
 
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = m_lastLevel;
@@ -79,11 +85,15 @@ StateChangeInformation LoadLevelState::update(const float time)
 
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_levelLoaderJob->reset();
+        sf::err() << "Returning new state info" << std::endl;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
 
     if(!m_levelLoaderJob->isLoading() && !m_levelLoaderJob->isLoaded())
+    {
+        sf::err() << "Start loader-job" << std::endl;
         m_levelLoaderJob->run();
+    }
 
 
     for(int i = 0; i < step; ++i)
@@ -99,21 +109,26 @@ void LoadLevelState::loadLevel()
     m_loadingErrorMessage = "";
     try
     {
+        sf::err() << "Creating new level" << std::endl;
 #ifdef LEVELTESTING
         m_level = std::unique_ptr<Level>(new Level(m_file, m_currentLevel, getResourceManager(), m_config));
 #else
         m_level = std::unique_ptr<Level>(new Level(m_currentLevel, getResourceManager(), m_config));
 #endif
+        sf::err() << "Loaded level from file, finishing" << std::endl;
         m_lastLevel = m_level.get();
     }
     catch(std::bad_alloc& e)
     {
+        sf::err() << "Allocation error in loaderLevel" << e.what() << std::endl;
         m_loadingErrorMessage = e.what();
     }
     catch(std::runtime_error& e)
     {
+        sf::err() << "Error in loaderLevel" << e.what() << std::endl;
         m_loadingErrorMessage = e.what();
     }
+    sf::err() << "Leaving loadLevel()" << std::endl;
 }
 
 void LoadLevelState::draw(const DrawParameter& params)

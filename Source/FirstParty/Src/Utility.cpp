@@ -1,4 +1,6 @@
+
 #include "Utility.hpp"
+
 #include "resources/FileReader.hpp"
 
 #include <exception>
@@ -8,6 +10,8 @@
 #else
 #include "MacHelper.hpp"
 #endif
+
+BatteryState getBatteryStateImpl();
 
 namespace utility
 {
@@ -163,4 +167,9 @@ namespace utility
         return "";
 #endif
     }
+
+    BatteryState getBatteryState()
+	{
+		return getBatteryStateImpl();
+	}
 }

@@ -3,7 +3,9 @@
 #ifndef BACKGROUNDLOADER_HPP
 #define BACKGROUNDLOADER_HPP
 
+#include <SFML/System/Err.hpp>
 #include <SFML/System/Thread.hpp>
+
 #include <memory>
 
 /// run a function of a class in separate thread
@@ -24,6 +26,7 @@ private:
         m_loadInProgress = true;
         (m_object.*m_function)();
         m_loadInProgress = false;
+        sf::err() << "Process finished, flagging success" << std::endl;
         m_loaded = true;
     }
 
@@ -35,23 +38,29 @@ public:
         m_function(function),
         m_object(object)
     {
+        sf::err() << "Creating new background process" << std::endl;
         m_backgroundProcess = std::unique_ptr<sf::Thread>(new sf::Thread(&BackgroundLoader::load, this));
     }
 
     void run()
     {
         if(!m_loaded && !m_loadInProgress)
+        {
+            sf::err() << "Launching background process" << std::endl;
             m_backgroundProcess->launch();
+        }
     }
 
     void stop()
     {
+        sf::err() << "Terminating background process" << std::endl;
         m_backgroundProcess->terminate();
         m_loadInProgress = false;
     }
 
     void reset()
     {
+        sf::err() << "Resetting background process" << std::endl;
         m_backgroundProcess->terminate();
         m_loadInProgress = false;
         m_loaded = false;

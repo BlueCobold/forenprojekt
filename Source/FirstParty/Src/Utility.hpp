@@ -3,6 +3,8 @@
 #ifndef UTILITY_HPP
 #define UTILITY_HPP
 
+#include "BatteryState.hpp"
+
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/View.hpp>
@@ -26,7 +28,7 @@ namespace utility
     static const float PIXEL_PER_METER = 10.f;
 
     static const std::string VERSION = "0.8";
-
+	
     template<typename T>
     std::string toString(const T& value)
     {
@@ -122,6 +124,9 @@ namespace utility
     {
         return std::unique_ptr<T>(dynamic_cast<T*>(toCast.release()));
     }
+	
+	BatteryState getBatteryState();
+
 } // namespace utility
 
 #endif // UTILITY_HPP

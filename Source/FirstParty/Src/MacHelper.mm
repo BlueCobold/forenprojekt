@@ -1,11 +1,13 @@
-#import <Foundation/Foundation.h>
+#import  <Foundation/Foundation.h>
 #ifdef IOS
-#import <UIKit/UIKit.h>
+#import  <UIKit/UIKit.h>
 #elif defined(OSX)
-#import <AppKit/AppKit.h>
+#import  <AppKit/AppKit.h>
 #endif
 
-#import "MacHelper.hpp"
+#import  "MacHelper.hpp"
+
+#import  "BatteryState.hpp"
 
 namespace utility
 {
@@ -13,6 +15,34 @@ namespace utility
 }
 
 #if defined(IOS) || defined(OSX)
+
+BatteryState getBatteryStateImpl()
+{
+    BatteryState state;
+    if(![UIDevice currentDevice].batteryMonitoringEnabled)
+		[UIDevice currentDevice].batteryMonitoringEnabled = YES;
+
+    swith([UIDevice currentDevice].batteryState)
+	{
+		case UIDeviceBatteryStateUnknown:
+			state.state = BatteryState::Unknown;
+			break;
+			
+		case UIDeviceBatteryStateUnplugged:
+			state.state = BatteryState::Unplugged;
+			break;
+			
+		case UIDeviceBatteryStateCharging:
+			state.state = BatteryState::Charging;
+			break;
+		
+		case UIDeviceBatteryStateFull:
+			state.state = BatteryState::Full;
+			break;
+	}
+	state.percent = [UIDevice currentDevice].batteryLevel;
+    return state;
+}
 
 std::string resourcePathApple()
 {

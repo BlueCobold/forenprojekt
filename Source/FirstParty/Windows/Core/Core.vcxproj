@@ -143,6 +143,7 @@
     <ClInclude Include="..\..\Src\animation\VariableHandler.hpp" />
     <ClInclude Include="..\..\Src\animation\VariableHolder.hpp" />
     <ClInclude Include="..\..\Src\App.hpp" />
+    <ClInclude Include="..\..\Src\BatteryState.hpp" />
     <ClInclude Include="..\..\Src\gui\AchievementMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\AnimationContainer.hpp" />
     <ClInclude Include="..\..\Src\gui\BitmapFont.hpp" />

@@ -5,8 +5,27 @@
 
 #ifdef WINDOWS
 
+#include "BatteryState.hpp"
+
 #include <Windows.h>
 #include <string>
+
+BatteryState getBatteryStateImpl()
+{
+    BatteryState state;
+    SYSTEM_POWER_STATUS status;
+    ZeroMemory(&status, sizeof(status));
+    if(!GetSystemPowerStatus(&status))
+        return state;
+    state.percent = status.BatteryLifePercent / 100.f;
+    if(status.BatteryFlag == 255)
+        state.state = BatteryState::Unknown;
+    else if((status.BatteryFlag & 8) != 0 || status.ACLineStatus == 1)
+        state.state = BatteryState::Charging;
+    else
+        state.state = BatteryState::Unplugged;
+    return state;
+}
 
 bool pickFileWin(std::string& path, const char* filter)
 {
