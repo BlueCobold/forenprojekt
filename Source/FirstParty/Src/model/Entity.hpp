@@ -28,6 +28,7 @@ public:
         Target,
         BonusTarget,
         EntityFactory,
+        SpecialEntity,
         None
     };
 
@@ -40,6 +41,7 @@ private:
     bool m_respawnable;
     bool m_autoKill;
     bool m_collideWithBall;
+    bool m_collideWithOtherEntity;
     Animation* m_updatingAni;
     std::vector<std::unique_ptr<CollisionHandler>> m_collisionHandler;
     std::unique_ptr<CollisionFilter> m_collisionFilter;
@@ -67,6 +69,8 @@ public:
 
     void setCollideWithBall(bool value);
     bool doesCollideWithBall();
+    void setCollideWithOtherEntity(bool value);
+    bool doesCollideWithOtherEntity();
     void bindCollisionSound(std::unique_ptr<SoundObject> sound);
     void bindOtherSounds(std::vector<std::unique_ptr<SoundTrigger>> otherSounds);
 

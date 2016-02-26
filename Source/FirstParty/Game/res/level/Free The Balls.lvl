@@ -1,0 +1,362 @@
+<level>
+	<levelinfo name="Free The Balls">
+		<infoimage srcx="718" srcy="330" width ="192" height="108" />
+	</levelinfo>
+	<templates>
+		<include file="assets/ball/twirl.inc" />
+		<include file="assets/target/static.inc" />
+		<include file="assets/spikes/spikes.inc" />
+		<include file="assets/teeter/wood.inc" />
+		<include file="sandy/walls.inc" />
+
+	<shapes>		
+		<shape name="Stoper" type="complex_polygon">
+			<polygon>
+				<vertex x="0" y="1" />
+				<vertex x="60" y="1" />
+				<vertex x="120" y="59" />
+				<vertex x="60" y="59" />
+			</polygon>
+			<polygon>
+				<vertex x="120" y="1" />
+				<vertex x="300" y="1" />
+				<vertex x="360" y="59" />
+				<vertex x="180" y="59" />
+			</polygon>
+		</shape>
+		<shape name="factory" type="complex_polygon">
+			<polygon>
+				<vertex x="0" y="0" />
+				<vertex x="180" y="0" />
+				<vertex x="180" y="60" />
+				<vertex x="0" y="60" />
+			</polygon>
+			<polygon>
+				<vertex x="0" y="61" />
+				<vertex x="60" y="61" />
+				<vertex x="60" y="120" />
+			</polygon>
+			<polygon>
+				<vertex x="120" y="61" />
+				<vertex x="180" y="61" />
+				<vertex x="120" y="120" />
+			</polygon>
+		</shape>
+		<shape name="tp" type="polygon">
+			<vertex x="30" y="0" />
+			<vertex x="30" y="60" />
+			<vertex x="60" y="60" />
+			<vertex x="60" y="0" />
+		</shape>
+	</shapes>
+
+	<physics>
+		<physic name="phy_lever">
+			<body type="dynamic" angle="0" />
+			<fixture density="0.5" friction="0.8" restitution="0.0" />
+		</physic>
+
+		<physic name="specialtarget">
+			<body type="dynamic" angle="0" />
+			<fixture density="0.01" friction="0.8" restitution="0.5" />
+		</physic>
+		<physic name="stoper">
+			<body type="dynamic" angle="0" />
+			<fixture density="0.1" friction="0.8" restitution="0.5" />
+		</physic>
+		<physic name="factory">
+			<body type="dynamic" angle="0" />
+			<fixture density="0.1" friction="0.8" restitution="0.5" />
+		</physic>
+		<physic name="product">
+			<body type="dynamic" angle="0" angularDamping="4.0" />
+			<fixture density="7.1" friction="0.0" restitution="0.4" />
+		</physic>
+		<physic name="pump1">
+				<body type="kinematic" angle="0">
+					<kinematics>
+						<position axis="y">
+							<mul>
+								<sine>
+									<min>
+										<mul>
+											<add>
+												<time />
+												<mul>
+													<var name="offset" />
+													<static value="-1" />
+												</mul>
+											</add>
+											<static value="1000" />
+										</mul>
+										<static value="180" />
+									</min>
+								</sine>
+								<static value="-29" />
+							</mul>
+						</position>
+					</kinematics>
+				</body>
+				<fixture density="0.1" friction="0.8" restitution="0" />
+			</physic>
+	</physics>
+
+	<entities>
+		<entity name="BallStoper" rep="SP" >
+			<physics name="stoper" shape="Stoper" />
+			<animations>
+				<animation spritesheet="walls" sprite="sand_right_upper" rotate="true" />
+				<animation spritesheet="walls" sprite="sand_left_lower" midx="-61" midy="0" rotate="true" />
+				<animation spritesheet="walls" sprite="sand_right_upper" midx="-123" midy="0" rotate="true" />
+				<animation spritesheet="walls" sprite="sand_wide_01" midx="-180" midy="0" rotate="true" />
+				<animation spritesheet="walls" sprite="sand_left_lower" midx="-305" midy="0" rotate="true" />
+			</animations>
+			<joints>
+				<singlePrismatic x="0" y="0" directionX="-1" directionY="0" endPointBackward="0" endPointForward="60">
+					<motor maxForce="15" speed="-360" />
+				</singlePrismatic>
+			</joints>
+		</entity>
+		<entity name="Factory" rep="F1" type="entityFactory" productName="DummyBall" minDelayTime="1.5" maxDelayTime="2.5" spawnOffsetX="9" spawnOffsetY="7" z="10" transferOwnSpeed="true" >
+			<physics name="factory" shape="factory" />
+			
+			<animations>
+				<animation spritesheet="assets" sprite="dispenser" x="90" y="60" z="2" />
+			</animations>
+		</entity>
+		<entity name="DummyBall" rep="B#" z="8" >
+			<physics name="product">
+				<shape type="circle" radius="15" />
+			</physics>
+			<onKill>
+				<spawnEntity name="ball_explosion" />
+			</onKill>
+			<constants color="1" />
+			<animations>
+				<animation texture="ball_twirl" width="32" height="32" midx="16" midy="16" rotate="true">
+					<scale axis="x">
+						<static value="0.6" />
+					</scale>
+					<scale axis="y">
+						<static value="0.6" />
+					</scale>
+					<frameindex frames="1">
+						<nop>
+							<ifpositive>
+								<sub>
+									<static value="1640" />
+									<var name="position.y" />
+								</sub>
+								<stop />
+							</ifpositive>
+							<static value="0" />
+						</nop>
+					</frameindex>
+				</animation>
+				<animation texture="ball_twirl" width="32" height="32" srcx="96" midx="16" midy="16" rotate="false">
+					<frameindex frames="3">
+						<var name="color" />
+					</frameindex>
+				</animation>
+			</animations>
+		</entity>
+		
+		<entity name="target_special" rep="ts" type="target" respawnable="true" points="100" collideWithBall="false" z="10">
+			<physics name="specialtarget">
+				<shape type="circle" radius="31" />
+			</physics>
+			<collides>
+				<spawnEntity name="target_2">
+					<spawnEntity name="target_particles">
+						<always />
+					</spawnEntity>
+				</spawnEntity>
+			</collides>
+			<animations>
+				<animation texture="target" width="67" height="67" midx="33.5" midy="33.5" rotate="false" />
+				<animation spritesheet="assets" sprite="bolt" blending="premul" z="2"/>
+			</animations>
+			<joints>
+				<singleDistance x="0" y="0" anchorX="0" anchorY="-240">
+					<animations>
+						<animation spritesheet="assets" sprite="rod" blending="premul" z="1" />
+						<animation spritesheet="assets" sprite="rod" location="intermediate" blending="premul" z="1" />
+						<animation spritesheet="assets" sprite="bolt" location="entity" blending="premul" z="2" />
+						<animation spritesheet="assets" sprite="bolt" location="anchor" blending="premul" z="2" />
+					</animations>
+				</singleDistance>
+			</joints>
+		</entity>
+
+		<entity name="info1" rep="i1">
+			<animations>
+				<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0" midx="0" midy="0">
+					<frameindex frames="4">
+						<static value="3" />
+					</frameindex>
+					<position axis="y">
+						<static value="13" />
+					</position>
+					<position axis="x">
+						<add>
+							<static value="13" />
+							<mod>
+								<mul>
+									<time />
+									<static value="60" />
+								</mul>
+								<static value="60" />
+							</mod>
+						</add>
+					</position>
+					<color channel="alpha">
+						<mod>
+							<mul>
+								<time />
+								<inv>
+									<static value="1" />
+								</inv>
+							</mul>
+							<static value="1" />
+						</mod>
+						</color>
+				</animation>
+				<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0" midx="0" midy="0">
+					<frameindex frames="4">
+						<static value="3" />
+					</frameindex>
+					<position axis="y">
+						<static value="13" />
+					</position>
+					<position axis="x">
+						<add>
+							<static value="73" />
+							<mod>
+								<mul>
+									<time />
+									<static value="60" />
+								</mul>
+								<static value="60" />
+							</mod>
+						</add>
+					</position>
+				</animation>
+				<animation texture="gravity_arrow" width="36" height="36" srcy="128" srcx="0" midx="0" midy="0">
+					<frameindex frames="4">
+						<static value="3" />
+					</frameindex>
+					<position axis="y">
+						<static value="13" />
+					</position>
+					<position axis="x">
+						<add>
+							<static value="133" />
+							<mod>
+								<mul>
+									<time />
+									<static value="60" />
+								</mul>
+								<static value="60" />
+							</mod>
+						</add>
+					</position>
+					<color channel="alpha">
+						<sub>
+							<static value="1" />
+							<mod>
+								<mul>
+									<time />
+									<inv>
+										<static value="1" />
+									</inv>
+								</mul>
+								<static value="1" />
+							</mod>
+						</sub>
+					</color>
+				</animation>
+			</animations>
+		</entity>
+			<entity name="ballteleport" rep="TP" collideWithBall="true" collideWithOtherEntity="false" >
+				<physics name="wall" shape="tp" />
+				<animations>
+					<animation texture="teleport" srcx="0" width="60" height="60" rotate="false">
+						<frameindex frames="5" >
+							<mul>
+								<time />
+								<static value="6" />
+							</mul>
+						</frameindex>
+					</animation>
+				</animations>
+				<collides>
+					<changeGravity x="0" y="40">
+						<nop>
+							<static value="1" />
+							<setVar name="global:direction">
+								<static value="1" />
+							</setVar>
+						</nop>
+					</changeGravity>
+				</collides>
+				<onCollision>
+					<ballTeleport keepSpeed="false" x="720" y="1020"/>
+				</onCollision>
+				
+			</entity>
+			<entity name="pump_1" rep="P1" offsetx="30" offsety="30">
+				<constants offset="0" />
+				<physics name="pump1" shape="wall" />
+				<animations>
+					<animation spritesheet="walls" sprite="sand_01" rotate="false"/>
+				</animations>
+				<onCollision>
+					<changeProperty name="offset">
+						<time />
+					</changeProperty>
+				</onCollision>
+			</entity>
+		</entities>
+	</templates>
+	<grid size="60" width="4000" height="2600">
+
+
+                          
+                w1w1w1w1w1w1w1w1
+                w1            w1
+                w1      F1    w1
+                w1            w5
+                w1            w5
+                w1            w5
+                                  
+                /1            \5
+              /1w1            w5\3
+            /1w1w1            w5w1\2
+            w1w2w1            w6w2w5
+            w1w1w1P1P1P1P1P1\1(1w1w1\1
+            w1        i1  SPxxxxxxxxxx
+            w1          BB    (1\1(1w1w1
+            w1                  (1\1  w1
+            w1  t1            t1  w1  w1
+            w1                    w1  w1
+            w1\2                /1w1  w3
+            w2d3\5            /1w1w1  w1
+            w6d1d3\1        /1w1w1w1  w1
+                  w1        TP    w1  w1
+                  w1        TP        (1
+                  w1        w1\1      \1
+                  w1        w1w1\1ts  w1
+                  w1        w1w2w3w4w5w6
+                  w1    TT  w1w1w1w2w2w1
+                                                                                    
+                                                                                    
+                                                                                    
+	</grid>
+	<objects>
+		<include file="pastureland/background.inc" />
+	</objects>
+	<world>
+		<gravity x="0" y="40" />
+	</world>
+	<medal bronze="250" silver="300" gold="450" />
+</level>

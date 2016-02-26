@@ -15,6 +15,7 @@ Entity::Entity(Type type, CloneHandler& cloneHandler, bool respawnable, bool aut
     m_respawnable(respawnable),
     m_autoKill(autoKill),
     m_collideWithBall(true),
+    m_collideWithOtherEntity(true),
     m_updatingAni(nullptr),
     m_animationAngle(0),
     m_killAnimationEntity(nullptr),
@@ -141,6 +142,20 @@ bool Entity::doesCollideWithBall()
     return m_collideWithBall;
 }
 
+void Entity::setCollideWithOtherEntity(bool value)
+{
+    m_collideWithOtherEntity = value;
+    if(m_collideWithOtherEntity && m_type == SpecialEntity)
+        m_type = None;
+    else if(!m_collideWithOtherEntity && m_type == None)
+        m_type = SpecialEntity;
+}
+
+bool Entity::doesCollideWithOtherEntity()
+{
+    return m_collideWithOtherEntity;
+}
+
 void Entity::bindCollisionSound(std::unique_ptr<SoundObject> sound)
 {
     m_collisionSound = std::move(sound);
@@ -215,6 +230,7 @@ std::unique_ptr<Entity> Entity::clone() const
     clone->m_lastTime = m_lastTime;
     clone->m_killed = m_killed;
     clone->m_collideWithBall = m_collideWithBall;
+    clone->m_collideWithBall = m_collideWithOtherEntity;
     clone->m_variables = m_variables;
     clone->m_animationAngle = m_animationAngle;
     clone->setDrawOrder(getDrawOrder());

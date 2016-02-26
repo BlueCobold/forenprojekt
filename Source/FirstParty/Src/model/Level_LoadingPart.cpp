@@ -691,6 +691,11 @@ std::unique_ptr<Entity> Level::createEntity(
         else
             entity->setCollideWithBall(true);
 
+        if(xml->Attribute("collideWithOtherEntity") != nullptr)
+            entity->setCollideWithOtherEntity(xml->BoolAttribute("collideWithOtherEntity"));
+        else
+            entity->setCollideWithOtherEntity(true);
+
         if(auto filter = xml->FirstChildElement("collides"))
             parseCollisionFilter(entity.get(), filter, templates);
 
