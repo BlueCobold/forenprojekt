@@ -90,7 +90,7 @@ public:
         auto& entityPos = points.at(0);
         auto& anchorPos = points.at(1);
         auto& entityOff = offsets.at(0);
-        auto& anchorOff = offsets.at(1);
+        //auto& anchorOff = offsets.at(1);
         // need relative position of anchor to entity? calculate diff
         if(m_index == Anchor)
             return utility::toPixel(m_useX ? (anchorPos.x - entityPos.x + entityOff.x) : (anchorPos.y - entityPos.y + entityOff.y));

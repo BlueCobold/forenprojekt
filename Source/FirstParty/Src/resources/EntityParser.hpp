@@ -16,8 +16,8 @@
 #include <memory>
 #include <vector>
 
-#include "Box2D/Box2D.h"
-#include "tinyxml2.h"
+#include <Box2D/Box2D.h>
+#include <tinyxml2.h>
 
 class ResourceManager;
 
@@ -99,9 +99,9 @@ private:
 
     void fillProperties(EntitySet& entities, const tinyxml2::XMLElement& xml) const;
 
-    const tinyxml2::XMLElement* EntityParser::findPhysicsTag(const tinyxml2::XMLElement& xml) const;
+    const tinyxml2::XMLElement* findPhysicsTag(const tinyxml2::XMLElement& xml) const;
     
-    const tinyxml2::XMLElement* EntityParser::findShapeTag(const tinyxml2::XMLElement& xml) const;
+    const tinyxml2::XMLElement* findShapeTag(const tinyxml2::XMLElement& xml) const;
 
     Override findOverrideSourceName(const std::string& repName) const;
     

@@ -7,10 +7,11 @@
 #include "ProviderContext.hpp"
 #include "ProviderParser.hpp"
 
+#include <tinyxml2.h>
+
+#include <string>
 #include <unordered_map>
 #include <vector>
-
-#include "tinyxml2.h"
 
 class SpriteSheet;
 class VariableHandler;

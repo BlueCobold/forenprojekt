@@ -3,9 +3,10 @@
 #ifndef PROVIDER_CONTEXT_HPP
 #define PROVIDER_CONTEXT_HPP
 
-#include <unordered_map>
+#include <tinyxml2.h>
 
-#include "tinyxml2.h"
+#include <string>
+#include <unordered_map>
 
 class VariableHandler;
 class Stoppable;

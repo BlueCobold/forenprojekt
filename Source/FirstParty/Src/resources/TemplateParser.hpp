@@ -3,9 +3,10 @@
 #ifndef TEMPLATE_PARSER_HPP
 #define TEMPLATE_PARSER_HPP
 
-#include "tinyxml2.h"
+#include <tinyxml2.h>
 
 #include <memory>
+#include <string>
 #include <unordered_map>
 #include <vector>
 

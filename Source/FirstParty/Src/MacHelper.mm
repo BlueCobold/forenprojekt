@@ -1,13 +1,17 @@
-#import  <Foundation/Foundation.h>
+
+#import "MacHelper.hpp"
+
+#import "BatteryState.hpp"
+
+#import <Foundation/Foundation.h>
+
 #ifdef IOS
 #import  <UIKit/UIKit.h>
 #elif defined(OSX)
-#import  <AppKit/AppKit.h>
+#import <AppKit/AppKit.h>
+#import <IOKit/ps/IOPowerSources.h>
+#import <IOKit/ps/IOPSKeys.h>
 #endif
-
-#import  "MacHelper.hpp"
-
-#import  "BatteryState.hpp"
 
 namespace utility
 {
@@ -15,34 +19,6 @@ namespace utility
 }
 
 #if defined(IOS) || defined(OSX)
-
-BatteryState getBatteryStateImpl()
-{
-    BatteryState state;
-    if(![UIDevice currentDevice].batteryMonitoringEnabled)
-		[UIDevice currentDevice].batteryMonitoringEnabled = YES;
-
-    swith([UIDevice currentDevice].batteryState)
-	{
-		case UIDeviceBatteryStateUnknown:
-			state.state = BatteryState::Unknown;
-			break;
-			
-		case UIDeviceBatteryStateUnplugged:
-			state.state = BatteryState::Unplugged;
-			break;
-			
-		case UIDeviceBatteryStateCharging:
-			state.state = BatteryState::Charging;
-			break;
-		
-		case UIDeviceBatteryStateFull:
-			state.state = BatteryState::Full;
-			break;
-	}
-	state.percent = [UIDevice currentDevice].batteryLevel;
-    return state;
-}
 
 std::string resourcePathApple()
 {
@@ -98,6 +74,34 @@ void showErrorApple(const std::string& msg)
 
 #ifdef IOS
 
+BatteryState getBatteryStateImpl()
+{
+    BatteryState state;
+    if(![UIDevice currentDevice].batteryMonitoringEnabled)
+        [UIDevice currentDevice].batteryMonitoringEnabled = YES;
+    
+    swith([UIDevice currentDevice].batteryState)
+    {
+    case UIDeviceBatteryStateUnknown:
+        state.state = BatteryState::Unknown;
+        break;
+        
+    case UIDeviceBatteryStateUnplugged:
+        state.state = BatteryState::Unplugged;
+        break;
+        
+    case UIDeviceBatteryStateCharging:
+        state.state = BatteryState::Charging;
+        break;
+        
+    case UIDeviceBatteryStateFull:
+        state.state = BatteryState::Full;
+        break;
+    }
+    state.percent = [UIDevice currentDevice].batteryLevel;
+    return state;
+}
+
 float iosContentScaleFactor()
 {
     static bool inited = false;
@@ -128,6 +132,57 @@ std::string documentPathIos()
 #endif
 
 #ifdef OSX
+
+BatteryState getBatteryStateImpl()
+{
+    auto blob = IOPSCopyPowerSourcesInfo();
+    auto sources = IOPSCopyPowerSourcesList(blob);
+    
+    int numOfSources = CFArrayGetCount(sources);
+    if (numOfSources == 0)
+        return BatteryState();
+    
+    for (int i = 0 ; i < numOfSources ; i++)
+    {
+        auto pSource = IOPSGetPowerSourceDescription(blob, CFArrayGetValueAtIndex(sources, i));
+        if(!pSource)
+            return BatteryState();
+        
+        int curCapacity = 0;
+        auto psValue = CFDictionaryGetValue(pSource, CFSTR(kIOPSCurrentCapacityKey));
+        CFNumberGetValue((CFNumberRef)psValue, kCFNumberSInt32Type, &curCapacity);
+        
+        int maxCapacity = 0;
+        psValue = CFDictionaryGetValue(pSource, CFSTR(kIOPSMaxCapacityKey));
+        CFNumberGetValue((CFNumberRef)psValue, kCFNumberSInt32Type, &maxCapacity);
+        
+        BatteryState state;
+        state.percent = 100.f * curCapacity / maxCapacity;
+        
+        int isFull = 0;
+        psValue = CFDictionaryGetValue(pSource, CFSTR(kIOPSIsChargedKey));
+        if(psValue)
+            CFNumberGetValue((CFNumberRef)psValue, kCFNumberSInt32Type, &isFull);
+        
+        if(isFull)
+            state.state = BatteryState::Full;
+        else
+        {
+            psValue = CFDictionaryGetValue(pSource, CFSTR(kIOPSPowerSourceStateKey));
+            if(psValue)
+            {
+                char strBuff[100];
+                CFStringGetCString((CFStringRef)psValue, strBuff, sizeof(strBuff), kCFStringEncodingUTF8);
+                std::string strState(strBuff);
+                state.state = strState == "AC Power" ? BatteryState::Charging : BatteryState::Unplugged;
+            }
+        }
+
+        return state;
+    }
+
+    return BatteryState();
+}
 
 void minimize(void* handle){
     NSWindow* window = (NSWindow*)handle;

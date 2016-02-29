@@ -17,7 +17,7 @@
 
 #include "Box2D/Dynamics/b2World.h"
 
-#include "tinyxml2.h"
+#include <tinyxml2.h>
 
 JointData::JointData(JointData&& other) :
     joint(std::move(other.joint)),

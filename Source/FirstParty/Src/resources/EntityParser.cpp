@@ -42,7 +42,7 @@ EntitySet EntityParser::parse(const tinyxml2::XMLElement& xml) const
             entity = std::unique_ptr<Teeter>(new Teeter(m_config.get<float>("MouseScale"), cloneHandler));
         else if(typeName == "ball")
         {
-            Entity* spawn;
+            Entity* spawn = nullptr;
             if(auto onRespawnXml = xml.FirstChildElement("onRespawn"))
             {
                 auto onRespawn = parseSpawns(*onRespawnXml);
@@ -247,9 +247,11 @@ void EntityParser::fillProperties(EntitySet& entities, const tinyxml2::XMLElemen
 
     if(auto jointXml = xml.FirstChildElement("joints"))
     {
-        JointParser parser(AnimationContext(ProviderContext(entity, entity, entity, entity, cloneHandler),
-                                            m_context.resourceManager,
-                                            m_context.defaultTargetBuffer),
+        ProviderContext context(entity, entity, entity, entity, cloneHandler);
+        AnimationContext aniContext(context,
+                                    m_context.resourceManager,
+                                    m_context.defaultTargetBuffer);
+        JointParser parser(aniContext,
                            m_world,
                            *entity->getBody());
         auto joints = parser.parse(*jointXml);

@@ -26,7 +26,7 @@ public:
     EntityFactory(CloneHandler& cloneHandler,
                   bool respawnable, 
                   bool autoKill,
-                  std::unique_ptr<Entity>& product,
+                  std::unique_ptr<Entity> product,
                   float minDelayTime,
                   float maxDelayTime,
                   const b2Vec2& spawnOffset);

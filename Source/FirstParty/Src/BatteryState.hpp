@@ -18,7 +18,7 @@ struct BatteryState
 
     BatteryState() :
         state(Unknown),
-        percent(1.f)
+        percent(0.f)
     { }
 };
 

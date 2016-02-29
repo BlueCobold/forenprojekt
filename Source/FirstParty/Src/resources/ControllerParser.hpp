@@ -11,7 +11,7 @@
 #include <memory>
 #include <array>
 
-#include "tinyxml2.h"
+#include <tinyxml2.h>
 
 class ResourceManager;
 

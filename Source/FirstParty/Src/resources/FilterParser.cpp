@@ -31,7 +31,6 @@ std::unique_ptr<CollisionFilter> FilterParser::getFilter(const tinyxml2::XMLElem
         if(!name)
             throw std::runtime_error(utility::translateKey("SpawnWithoutName"));
 
-        auto pos = sf::Vector2u(0, 0);
         Entity* spawned(m_parser ? m_parser(name) : nullptr);
         if(spawned == nullptr)
             throw std::runtime_error(utility::replace(utility::translateKey("UnknownEntityName"), name));
