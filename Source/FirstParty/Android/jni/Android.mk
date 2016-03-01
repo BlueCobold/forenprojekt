@@ -5,8 +5,10 @@ include $(CLEAR_VARS)
 LOCAL_MODULE    := RicketyRacquet
 
 LOCAL_C_INCLUDES := ../../Src
+
 LOCAL_CPPFLAGS := -fexceptions -frtti -DANDROID=1
-FILE_LIST := $(wildcard $(LOCAL_PATH)/../../Src/*.cpp)
+FILE_LIST := JNIHelper.cpp
+FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Src/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Src/animation/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Src/animation/provider/*.cpp)
 FILE_LIST += $(wildcard $(LOCAL_PATH)/../../Src/gui/*.cpp)

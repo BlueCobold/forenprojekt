@@ -49,7 +49,10 @@ namespace utility
 #endif
             m_leftDown(false)
         {
+#if !defined(ANDROID)
+            // Android has a problem with this, because the window is not created at that point yet
             capture();
+#endif
         }
 
         const sf::Vector2f& getPosition() const;

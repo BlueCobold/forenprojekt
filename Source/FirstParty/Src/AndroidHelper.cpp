@@ -2,7 +2,6 @@
 #ifdef ANDROID
 
 #include "AndroidHelper.hpp"
-#include "Utility.hpp"
 
 #include <android/asset_manager.h>
 #include <android/native_activity.h>

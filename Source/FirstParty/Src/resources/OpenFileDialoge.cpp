@@ -17,6 +17,8 @@ bool OpenFileDialoge::openDialoge()
     return pickFileWin(m_file, m_filter);
 #elif defined(OSX)
     return pickFileMac(m_file);
+#else
+    return false;
 #endif
 }
 

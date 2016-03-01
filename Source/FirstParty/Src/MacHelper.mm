@@ -59,6 +59,11 @@ void showErrorApple(const std::string& msg)
         auto button = [NSString stringWithCString:utility::translateKey("gui_alert_button_ok").c_str() encoding:[NSString defaultCStringEncoding]];
         auto alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:button otherButtonTitles: nil];
         [alert show];
+//        auto alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+//        auto app = [UIApplication sharedApplication];
+//        auto window = app.keyWindow;
+//        auto root = [window rootViewController];
+//        [root presentViewController:alert animated:YES completion:nil];
     }
 #elif defined(OSX)
     @autoreleasepool
@@ -80,7 +85,7 @@ BatteryState getBatteryStateImpl()
     if(![UIDevice currentDevice].batteryMonitoringEnabled)
         [UIDevice currentDevice].batteryMonitoringEnabled = YES;
     
-    swith([UIDevice currentDevice].batteryState)
+    switch([UIDevice currentDevice].batteryState)
     {
     case UIDeviceBatteryStateUnknown:
         state.state = BatteryState::Unknown;

@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class AlertService extends IntentService {
 
-        public static final String ERROR_EXTRA_KEY = "msg";
+    public static final String ERROR_EXTRA_KEY = "msg";
 
     public AlertService() {
         super("AlertService");

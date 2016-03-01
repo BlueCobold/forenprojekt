@@ -5,12 +5,12 @@
 
 struct BatteryState
 {
-	enum ChargeState
+    enum ChargeState : int
 	{
-		Unknown,
-		Unplugged,
-		Charging,
-		Full
+		Unknown = 0,
+		Unplugged = 1,
+		Charging = 2,
+		Full = 3
 	};
 	
 	float percent;
