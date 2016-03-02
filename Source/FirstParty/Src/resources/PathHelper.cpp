@@ -23,7 +23,7 @@ std::string resourcePath()
 #elif defined(ANDROID)
     return resourcePathAndroid();
 #else
-    return "/home/parallels/Desktop/Parallels Shared Folders/Host/Users/skohl1/Applications (Parallels)/ubuntu_share/forenprojekt/Source/FirstParty/Game/";
+    return "";
 #endif
 }
 

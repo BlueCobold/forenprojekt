@@ -424,7 +424,7 @@ bool Level::shouldCollide(Entity& entityA, Entity& entityB)
 
         return entityB.doesCollideWithBall();
     }
-    else if(entityA->getType() == Entity::SpecialEntity || entityB->getType() == Entity::SpecialEntity)
+    else if(entityA.getType() == Entity::SpecialEntity || entityB.getType() == Entity::SpecialEntity)
         return false;
 
     return true;

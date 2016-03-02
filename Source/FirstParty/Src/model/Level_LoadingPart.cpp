@@ -8,6 +8,7 @@
 #include "../resources/EntityParser.hpp"
 #include "../resources/JointParser.hpp"
 #include "../resources/LevelFileLoader.hpp"
+#include "../resources/PathHelper.hpp"
 #include "../resources/PhysicsParser.hpp"
 #include "../resources/ValueParser.hpp"
 #include "../Utility.hpp"

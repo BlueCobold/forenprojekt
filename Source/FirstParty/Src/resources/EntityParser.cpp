@@ -8,6 +8,7 @@
 #include "JointParser.hpp"
 #include "LevelFileLoader.hpp"
 #include "PhysicsParser.hpp"
+#include "ResourceManager.hpp"
 #include "ValueParser.hpp"
 #include "../model/Ball.hpp"
 #include "../model/EntityFactory.hpp"
@@ -56,8 +57,7 @@ EntitySet EntityParser::parse(const tinyxml2::XMLElement& xml) const
 
             auto context = ProviderContext(m_context.providerContext.variableHandler, ball.get(), ball.get(), ball.get(), cloneHandler)
                                           .withFunctions(m_templates.functions);
-            LevelFileLoader loader(context, m_context.resourceManager, m_context.defaultTargetBuffer);
-            ball->bindTrail(loader.parseTrail(xml));
+            ball->bindTrail(parseTrail(xml));
             entity = std::move(ball);
         }
         else if(typeName == "target")
@@ -262,6 +262,24 @@ void EntityParser::fillProperties(EntitySet& entities, const tinyxml2::XMLElemen
             entity->addJoint(std::move(it->joint));
         }
     }
+}
+
+std::unique_ptr<ParticleTrail> EntityParser::parseTrail(const tinyxml2::XMLElement& xml) const
+{
+    if(auto xmltrail = xml.FirstChildElement("trailing"))
+    {
+        auto distance = 100.f;
+        xmltrail->QueryFloatAttribute("spawnDist", &distance);
+        auto minSpeed = xmltrail->FloatAttribute("speedMin");
+        if(auto xmlani = xmltrail->FirstChildElement("animation"))
+        {
+            AnimationParser parser(m_context);
+            auto animations = parser.parseSingle(*xmlani);
+            if(animations.size() > 0)
+                return std::unique_ptr<ParticleTrail>(new ParticleTrail(std::move(animations[0]), distance, minSpeed));
+        }
+    }
+    return nullptr;
 }
 
 // Takes a result and tries to find the origin by checking if it matches the source-name using a target-conversion-pattern

@@ -1,14 +1,5 @@
 #include "LevelFileLoader.hpp"
 
-#include "AnimationParser.hpp"
-#include "ControllerParser.hpp"
-#include "SpriteSheet.hpp"
-#include "../animation/provider/ValueProvider.hpp"
-#include "../rendering/Shader.hpp"
-
-#include <map>
-#include <vector>
-
 std::vector<std::string> LevelFileLoader::parseGrid(const tinyxml2::XMLElement& xml)
 {
     std::string data = xml.GetText();
@@ -23,22 +14,4 @@ std::vector<std::string> LevelFileLoader::parseGrid(const tinyxml2::XMLElement& 
         lines.push_back(data.substr(i, data.find('\n', i) - i));
 
     return std::move(lines);
-}
-
-std::unique_ptr<ParticleTrail> LevelFileLoader::parseTrail(const tinyxml2::XMLElement& xml)
-{
-    if(auto xmltrail = xml.FirstChildElement("trailing"))
-    {
-        auto distance = 100.f;
-        xmltrail->QueryFloatAttribute("spawnDist", &distance);
-        auto minSpeed = xmltrail->FloatAttribute("speedMin");
-        if(auto xmlani = xmltrail->FirstChildElement("animation"))
-        {
-            AnimationParser parser(AnimationContext(m_context, m_resourceManager, m_defaultTargetBuffer));
-            auto animations = parser.parseSingle(*xmlani);
-            if(animations.size() > 0)
-                return std::unique_ptr<ParticleTrail>(new ParticleTrail(std::move(animations[0]), distance, minSpeed));
-        }
-    }
-    return nullptr;
 }

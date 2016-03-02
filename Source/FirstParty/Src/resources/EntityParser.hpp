@@ -9,6 +9,7 @@
 #include "FilterContext.hpp"
 #include "ProviderParser.hpp"
 #include "TemplateParser.hpp"
+#include "../animation/ParticleTrail.hpp"
 #include "../model/Entity.hpp"
 #include "../model/EntityFactory.hpp"
 #include "../model/EntitySpawn.hpp"
@@ -92,6 +93,8 @@ private:
             xml(nullptr)
         { }
     };
+    
+    std::unique_ptr<ParticleTrail> parseTrail(const tinyxml2::XMLElement& xml) const;
     
     EntitySet parseFromOverride(const std::string& name) const;
 
