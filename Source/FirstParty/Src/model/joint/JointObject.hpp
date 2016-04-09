@@ -94,8 +94,12 @@ protected:
 
     void create(const b2JointDef& jointDef)
     {
-        if(getWorld() != nullptr)
+        if(getWorld() != nullptr) {
+            if(m_joint != nullptr)
+                getWorld()->DestroyJoint(m_joint);
+
             m_joint = getWorld()->CreateJoint(&jointDef);
+        }
     }
 
     b2Joint* getJoint() const

@@ -90,10 +90,14 @@ public:
     {
         if(m_world == nullptr || m_body != nullptr)
             return;
+
         // Create & bind body
         m_body = m_world->CreateBody(&m_bodyDef);
         for(auto fixture = begin(m_fixtureDefs); fixture != end(m_fixtureDefs); ++fixture)
             m_body->CreateFixture(&(*fixture));
+
+        reinstallJoints();
+
         // Save the entity in the body for the contact listener
         m_body->SetUserData(this);
         if(m_basePosChanged)
@@ -151,6 +155,7 @@ public:
         {
             m_body->SetTransform(pos, 0.0f);
             m_basePosition = pos;
+            reinstallJoints();
         }
         else
         {

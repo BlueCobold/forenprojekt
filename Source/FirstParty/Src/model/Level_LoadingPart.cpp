@@ -203,7 +203,7 @@ std::unique_ptr<Entity> Level::parseEntity(
     EntityParser parser(animationContext, filterContext, colliderContext, m_config.getConfig(), templates, m_world,
                         [this](std::unique_ptr<Entity>& created)
     {
-        m_unspawnedEntities.push_back(std::move(created));
+        m_entitiesToSpawn.push_back(std::move(created));
     });
 
     auto entities = entityXml != nullptr ? parser.parse(*entityXml) : parser.parseFromTemplate(templateName);

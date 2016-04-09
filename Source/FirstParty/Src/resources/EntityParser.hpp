@@ -93,9 +93,9 @@ private:
             xml(nullptr)
         { }
     };
-    
-    std::unique_ptr<ParticleTrail> parseTrail(const tinyxml2::XMLElement& xml) const;
-    
+
+    std::unique_ptr<ParticleTrail> parseTrail(const tinyxml2::XMLElement& xml, Entity& target) const;
+
     EntitySet parseFromOverride(const std::string& name) const;
 
     EntitySet parseSpawns(const tinyxml2::XMLElement& xml) const;
@@ -103,11 +103,11 @@ private:
     void fillProperties(EntitySet& entities, const tinyxml2::XMLElement& xml) const;
 
     const tinyxml2::XMLElement* findPhysicsTag(const tinyxml2::XMLElement& xml) const;
-    
+
     const tinyxml2::XMLElement* findShapeTag(const tinyxml2::XMLElement& xml) const;
 
     Override findOverrideSourceName(const std::string& repName) const;
-    
+
     AnimationContext m_context;
     FilterContext m_filterContext;
     ColliderContext m_colliderContext;

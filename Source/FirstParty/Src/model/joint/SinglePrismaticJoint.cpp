@@ -30,7 +30,8 @@ bool SinglePrismaticJoint::reinstall(b2Body& body)
         if(body.GetType() == b2_dynamicBody)
         {
             bindBodies(body, *m_anchorBody);
-            m_jointDef.Initialize(&body, m_anchorBody, body.GetWorldCenter(), m_direction);
+            auto& center = body.GetWorldCenter();
+            m_jointDef.Initialize(&body, m_anchorBody, center, m_direction);
         }
         else
             throw std::runtime_error(utility::replace(utility::translateKey("WrongBodyType"), "SinglePrismaticJoint"));

@@ -94,13 +94,14 @@ std::unique_ptr<CollisionHandler> ColliderParser::parse(const tinyxml2::XMLEleme
                 location = OwnerLoc;
 
             auto spawnFunc = m_context.spawnFunc;
+            auto ballFunc = m_context.ball;
             std::unique_ptr<SpawnEntityCollisionHandler> handler(new SpawnEntityCollisionHandler(
             [=](const Entity& owner, const Entity& spawned, const b2Vec2& contactPoint)
             {
                 switch(location)
                 {
                     case BallLoc:
-                        spawnFunc(m_context.ball().getPosition(), spawned);
+                        spawnFunc(ballFunc().getPosition(), spawned);
                         break;
                     case OwnerLoc:
                         spawnFunc(owner.getPosition(), spawned);

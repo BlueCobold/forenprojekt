@@ -67,19 +67,30 @@ std::vector<std::unique_ptr<ValueProvider>> ProviderParser::parseMultiple(const 
     return providers;
 }
 
+template<typename T>
+T* nonNull(T* param, std::string type)
+{
+    if(param == nullptr)
+        throw std::runtime_error(std::string("A provider was used without source: ") + type);
+    return param;
+}
+
 std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLElement& xml) const
 {
     std::string name(xml.Name());
     if(name == "time")
-        return std::unique_ptr<TimeProvider>(new TimeProvider(*m_context.timeSource, m_context.cloneHandler.createTimeProviderCloneHandler()));
+        return std::unique_ptr<TimeProvider>(new TimeProvider(*nonNull(m_context.timeSource, name),
+                                                              m_context.cloneHandler.createTimeProviderCloneHandler()));
     else if(name == "stop")
-        return std::unique_ptr<Stop>(new Stop(*m_context.stoppable, m_context.cloneHandler.createStopProviderCloneHandler()));
+        return std::unique_ptr<Stop>(new Stop(*nonNull(m_context.stoppable, name),
+                                              m_context.cloneHandler.createStopProviderCloneHandler()));
     else if(name == "angle")
-        return std::unique_ptr<AngleProvider>(new AngleProvider(*m_context.angleSource, m_context.cloneHandler.createAngleProviderCloneHandler()));
+        return std::unique_ptr<AngleProvider>(new AngleProvider(*nonNull(m_context.angleSource, name),
+                                                                m_context.cloneHandler.createAngleProviderCloneHandler()));
     else if(name == "static")
         return std::unique_ptr<StaticProvider>(new StaticProvider(xml.FloatAttribute("value")));
     else if(name == "var" || name == "variable")
-        return std::unique_ptr<VariableProvider>(new VariableProvider(*m_context.variableHandler, xml.Attribute("name"),
+        return std::unique_ptr<VariableProvider>(new VariableProvider(*nonNull(m_context.variableHandler, name), xml.Attribute("name"),
                                                                       m_context.cloneHandler.createVariableProviderCloneHandler()));
     else if(name == "count")
         return std::unique_ptr<Count>(new Count(xml.FloatAttribute("start"), xml.FloatAttribute("increment")));
@@ -112,7 +123,7 @@ std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLEl
     {
         auto providers = parseMultiple(xml);
         if(name == "setVar" || name == "setVariable")
-            return std::unique_ptr<SetVariable>(new SetVariable(*m_context.variableHandler,
+            return std::unique_ptr<SetVariable>(new SetVariable(*nonNull(m_context.variableHandler, name),
                                                                 xml.Attribute("name"),
                                                                 std::move(providers[0]),
                                                                 xml.BoolAttribute("print"),

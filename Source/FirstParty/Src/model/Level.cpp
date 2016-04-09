@@ -292,9 +292,6 @@ void Level::spawnPendingEntities(float currentTime)
         if(e->getType() == Entity::Target)
             m_remainingTarget++;
 
-        if(e->hasJoints())
-            e->reinstallJoints();
-
         m_entities.push_back(std::move(e));
     }
     if(m_entitiesToSpawn.size() > 0)

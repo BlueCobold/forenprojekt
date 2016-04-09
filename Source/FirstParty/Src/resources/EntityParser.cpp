@@ -57,7 +57,7 @@ EntitySet EntityParser::parse(const tinyxml2::XMLElement& xml) const
 
             auto context = ProviderContext(m_context.providerContext.variableHandler, ball.get(), ball.get(), ball.get(), cloneHandler)
                                           .withFunctions(m_templates.functions);
-            ball->bindTrail(parseTrail(xml));
+            ball->bindTrail(parseTrail(xml, *ball.get()));
             entity = std::move(ball);
         }
         else if(typeName == "target")
@@ -264,7 +264,7 @@ void EntityParser::fillProperties(EntitySet& entities, const tinyxml2::XMLElemen
     }
 }
 
-std::unique_ptr<ParticleTrail> EntityParser::parseTrail(const tinyxml2::XMLElement& xml) const
+std::unique_ptr<ParticleTrail> EntityParser::parseTrail(const tinyxml2::XMLElement& xml, Entity& target) const
 {
     if(auto xmltrail = xml.FirstChildElement("trailing"))
     {
@@ -273,7 +273,11 @@ std::unique_ptr<ParticleTrail> EntityParser::parseTrail(const tinyxml2::XMLEleme
         auto minSpeed = xmltrail->FloatAttribute("speedMin");
         if(auto xmlani = xmltrail->FirstChildElement("animation"))
         {
-            AnimationParser parser(m_context);
+            ProviderContext context(&target, &target, &target, &target, m_context.providerContext.cloneHandler);
+            AnimationContext aniContext(context,
+                                        m_context.resourceManager,
+                                        m_context.defaultTargetBuffer);
+            AnimationParser parser(aniContext);
             auto animations = parser.parseSingle(*xmlani);
             if(animations.size() > 0)
                 return std::unique_ptr<ParticleTrail>(new ParticleTrail(std::move(animations[0]), distance, minSpeed));
