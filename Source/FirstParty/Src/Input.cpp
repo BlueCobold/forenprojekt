@@ -78,10 +78,12 @@ namespace utility
 
     void MouseWrapper::startInterpolation(const sf::Window& relativeTo)
     {
-        auto pos = sf::Mouse::getPosition(relativeTo);
-        m_totalPosition.x += pos.x - relativeTo.getSize().x/2;
-        m_totalPosition.y += pos.y - relativeTo.getSize().y/2;
+        m_realWindowPosition = sf::Mouse::getPosition(relativeTo);
+        m_totalPosition.x += m_realWindowPosition.x - relativeTo.getSize().x / 2;
+        m_totalPosition.y += m_realWindowPosition.y - relativeTo.getSize().y / 2;
+#ifndef TOUCHSIM
         sf::Mouse::setPosition(sf::Vector2i(relativeTo.getSize().x/2, relativeTo.getSize().y/2), relativeTo);
+#endif
     }
 
     void MouseWrapper::interpolate(int steps, int current)
@@ -206,6 +208,11 @@ namespace utility
         auto currentPosition = sf::Mouse::getPosition();
         return sf::Vector2i(m_beforMovePosition.x - currentPosition.x,
                             m_beforMovePosition.y - currentPosition.y);
+    }
+
+    const sf::Vector2i& MouseWrapper::getRealWindowPosition() const
+    {
+        return m_realWindowPosition;
     }
 }
 

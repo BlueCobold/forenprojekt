@@ -47,6 +47,10 @@
 #include "gui/ErrorMessageBox.hpp"
 #endif
 
+#ifdef TOUCHSIM
+#include "TouchController.hpp"
+#endif
+
 App::App(AppConfig& config) :
     m_config(config),
     m_windowTitle("Rickety Racquet"),
@@ -141,6 +145,12 @@ App::App(AppConfig& config) :
     m_screen.setMouseCursorVisible(false);
 #if defined(IOS) || defined(ANDROID)
     utility::Mouse.enableSensors(true);
+#endif
+#ifdef TOUCHSIM
+    utility::TeeterController.setTouchArea(sf::FloatRect(m_screen.getSize().x * 0.9f,
+                                                         m_screen.getSize().y * 0.66f,
+                                                         m_screen.getSize().x * 0.09f,
+                                                         m_screen.getSize().y * 0.25f));
 #endif
 }
 
@@ -410,6 +420,13 @@ void App::adjustVideoMode(sf::VideoMode& mode)
     }
     m_config.set("ResolutionX", mode.width);
     m_config.set("ResolutionY", mode.height);
+
+#ifdef TOUCHSIM
+    utility::TeeterController.setTouchArea(sf::FloatRect(m_screen.getSize().x * 0.9f,
+                                                         m_screen.getSize().y * 0.66f,
+                                                         m_screen.getSize().x * 0.09f,
+                                                         m_screen.getSize().y * 0.25f));
+#endif
 #endif
 }
 

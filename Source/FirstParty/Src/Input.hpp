@@ -56,6 +56,7 @@ namespace utility
         }
 
         const sf::Vector2f& getPosition() const;
+        const sf::Vector2i& getRealWindowPosition() const;
         sf::Vector2i getMoveDistanze() const;
         void startInterpolation(const sf::Window& relativeTo);
         void interpolate(int steps, int current);
@@ -111,6 +112,7 @@ namespace utility
         sf::Vector2i m_lastPosition;
         sf::Vector2i m_totalPosition;
         sf::Vector2i m_beforMovePosition;
+        sf::Vector2i m_realWindowPosition;
     };
     extern MouseWrapper Mouse;
 } // namespace utility

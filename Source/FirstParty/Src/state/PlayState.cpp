@@ -44,7 +44,9 @@ void PlayState::onEnter(const EnterStateInformation* enterInformation, const flo
     m_hud.onEnter(m_level);
 
     utility::Mouse.capture();
+#ifndef TOUCHSIM
     utility::Mouse.hideSystemCursor(m_screen);
+#endif
     m_level->adaptToMouse();
 
     if(!info->m_returnFromPause)

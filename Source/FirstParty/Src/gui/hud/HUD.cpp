@@ -3,6 +3,11 @@
 #include "../../model/Level.hpp"
 #include "../../resources/ResourceManager.hpp"
 
+#ifdef TOUCHSIM
+#include "../../TouchController.hpp"
+#include <SFML/Graphics/RectangleShape.hpp>
+#endif
+
 HUD::HUD(ResourceManager& resourceManager, AppConfig& config) :
     m_fpsCounter(sf::Vector2f(ScreenLocation::Left, ScreenLocation::Bottom), sf::Vector2f(30.f,-30.f), resourceManager.getBitmapFont("gold")),
     m_target(resourceManager, sf::Vector2f(ScreenLocation::Right, ScreenLocation::Top), sf::Vector2f(-30.f,10.f), resourceManager.getBitmapFont("gold")),
@@ -86,11 +91,25 @@ void HUD::draw(const DrawParameter& params)
     m_invulnerableGoody.update(params);
     m_invulnerableGoody.draw(params);
 
-    m_extraBallGoody.update(params);;
-    m_extraBallGoody.draw(params);;
+    m_extraBallGoody.update(params);
+    m_extraBallGoody.draw(params);
 
-    m_extraTimeGoody.update(params);;
-    m_extraTimeGoody.draw(params);;
+    m_extraTimeGoody.update(params);
+    m_extraTimeGoody.draw(params);
+
+#ifdef TOUCHSIM
+    sf::RectangleShape teeterController(sf::Vector2f(utility::TeeterController.getTouchArea().width,
+                                                     utility::TeeterController.getTouchArea().height));
+
+    teeterController.setPosition(utility::TeeterController.getTouchArea().left,
+                                 utility::TeeterController.getTouchArea().top);
+    
+    teeterController.setFillColor(sf::Color(255,255,255,128));
+    teeterController.setOutlineColor(sf::Color(0,0,0,128));
+    teeterController.setOutlineThickness(1.f);
+
+    params.getTarget().draw(teeterController);
+#endif
 }
 
 void HUD::setBallShow(bool ballShow)

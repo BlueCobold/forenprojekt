@@ -2,6 +2,10 @@
 #include "Teeter.hpp"
 #include "../Input.hpp"
 
+#ifdef TOUCHSIM
+#include "../TouchController.hpp"
+#endif
+
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
 #include <Box2D/Dynamics/Joints/b2RevoluteJoint.h>
@@ -43,7 +47,16 @@ void Teeter::update(const float value)
     auto mouseDiff = sf::Vector2f(mousePos.x * gravToAngle - angle,
                                   mousePos.y * gravToAngle - angle) / timeDiff;
 #else
+#ifdef TOUCHSIM
+    sf::Vector2f mousePos = sf::Vector2f(0, 0);
+    if(m_useVerticalAxis)
+        mousePos = sf::Vector2f(0, utility::TeeterController.getValue() * 6.f);
+    else
+        mousePos = sf::Vector2f(utility::TeeterController.getValue() * 6.f, 0);
+#else
     sf::Vector2f mousePos = utility::Mouse.getPosition();
+#endif
+
     sf::Vector2f mouseDiff = (m_lastMousePos - mousePos) * m_mouseScale / (timeDiff * 60);
 #endif
 

@@ -325,6 +325,7 @@
     <ClInclude Include="..\..\Src\state\StateChangeInformation.hpp" />
     <ClInclude Include="..\..\Src\state\StateManager.hpp" />
     <ClInclude Include="..\..\Src\state\TransitionState.hpp" />
+    <ClInclude Include="..\..\Src\TouchController.hpp" />
     <ClInclude Include="..\..\Src\Utility.hpp" />
     <ClInclude Include="..\..\Src\WindowsHelper.hpp" />
   </ItemGroup>
@@ -482,6 +483,7 @@
     <ClCompile Include="..\..\Src\state\StartState.cpp" />
     <ClCompile Include="..\..\Src\state\StateManager.cpp" />
     <ClCompile Include="..\..\Src\state\TransitionState.cpp" />
+    <ClCompile Include="..\..\Src\TouchController.cpp" />
     <ClCompile Include="..\..\Src\Utility.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
