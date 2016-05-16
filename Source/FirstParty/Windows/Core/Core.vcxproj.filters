@@ -562,9 +562,6 @@
     <ClInclude Include="..\..\Src\State\AchievementState.hpp">
       <Filter>Headers\state</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\gui\hud\GoodyHUD.hpp">
-      <Filter>Headers\gui\menus</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\gui\AchievementMenu.hpp">
       <Filter>Headers\gui\menus</Filter>
     </ClInclude>
@@ -696,6 +693,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\TouchController.hpp">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\TouchButton.hpp">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\hud\GoodyHUD.hpp">
+      <Filter>Headers\gui\hud</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1258,6 +1261,9 @@
       <Filter>Sources\resources\parsing</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\TouchController.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\TouchButton.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>

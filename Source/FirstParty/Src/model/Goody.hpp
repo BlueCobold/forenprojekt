@@ -4,6 +4,7 @@
 #define GOODY_HPP
 
 #include "../Input.hpp"
+#include "../TouchButton.hpp"
 
 #include <functional>
 
@@ -17,6 +18,9 @@ public:
                // Counter must allways be the last entry
                Counter};
 private:
+#ifdef TOUCHSIM
+    TouchButton m_button;
+#endif
     sf::Keyboard::Key m_key;
     bool m_active;
     int m_charges;
@@ -29,8 +33,13 @@ private:
     std::function<void(Goody& sender)>m_callback;
 
 public:
+#ifdef TOUCHSIM
+    Goody(const sf::Keyboard::Key key, const Type type, const sf::FloatRect& touchArea, const float durationTime = 0,
+        const float cooldownTime = 0, const int charges = -1);
+#else
     Goody(const sf::Keyboard::Key key, const Type type, const float durationTime = 0,
           const float cooldownTime = 0, const int charges = -1);
+#endif
 
     virtual void update(const float elapsedTime);
 

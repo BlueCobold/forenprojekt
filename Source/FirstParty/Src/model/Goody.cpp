@@ -1,5 +1,26 @@
 #include "Goody.hpp"
 
+#ifdef TOUCHSIM
+Goody::Goody(const sf::Keyboard::Key key,
+             const Type type,
+             const sf::FloatRect& touchArea,
+             const float durationTime,
+             const float cooldownTime,
+             const int charges) :
+    m_button(touchArea),
+    m_key(key),
+    m_active(false),
+    m_charges(charges),
+    m_cooldownTime(cooldownTime),
+    m_nextUseTime(0),
+    m_durationTime(durationTime),
+    m_durationUntilTime(0),
+    m_selected(false),
+    m_type(type),
+    m_callback(nullptr)
+{
+}
+#else
 Goody::Goody(const sf::Keyboard::Key key,
              const Type type,
              const float durationTime,
@@ -17,11 +38,19 @@ Goody::Goody(const sf::Keyboard::Key key,
     m_callback(nullptr)
 {
 }
+#endif
 
 void Goody::update(const float elapsedTime)
 {
-    if((utility::Keyboard.isKeyDown(m_key) || (m_selected && utility::Mouse.leftButtonDown()))
-       && m_charges != 0 && m_nextUseTime < elapsedTime)
+#ifdef TOUCHSIM
+    m_button.update();
+    bool down = utility::Keyboard.isKeyDown(m_key) || (m_selected && utility::Mouse.leftButtonDown()) || m_button.isDown();
+    bool pressed = utility::Keyboard.isKeyPressed(m_key) || (m_selected && utility::Mouse.leftButtonPressed()) || m_button.isPressed();
+#else
+    bool down = utility::Keyboard.isKeyDown(m_key) || (m_selected && utility::Mouse.leftButtonDown());
+    bool pressed = utility::Keyboard.isKeyPressed(m_key) || (m_selected && utility::Mouse.leftButtonPressed());
+#endif
+    if(down && m_charges != 0 && m_nextUseTime < elapsedTime)
     {
         if(canActivate())
             m_active = true;
@@ -35,8 +64,7 @@ void Goody::update(const float elapsedTime)
         if(m_callback != nullptr)
             m_callback(*this);
     }
-    else if((utility::Keyboard.isKeyPressed(m_key) || (m_selected && utility::Mouse.leftButtonPressed()))
-            && m_charges == -1 && m_nextUseTime < elapsedTime)
+    else if(pressed && m_charges == -1 && m_nextUseTime < elapsedTime)
     {
         if(canActivate())
             m_active = true;

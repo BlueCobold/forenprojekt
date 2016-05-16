@@ -69,8 +69,13 @@ Level::Level(const std::string& filename, const unsigned int level, ResourceMana
     m_levelName(""),
     m_gravityGoody(sf::Keyboard::Num1, 2.f, m_gravity, config.get<int>("goodygravity")),
     m_invulnerableGoody(sf::Keyboard::Num2, 3.f, m_ball, config.get<int>("goodyinvulnerable")),
+#ifdef TOUCHSIM
+    m_extraBallGoody(sf::Keyboard::Num3, Goody::ExtraBallGoody, sf::FloatRect(0.f, 178.f, 56.f, 64.f), 0, 0, config.get<int>("goodyextraball")),
+    m_extraTimeGoody(sf::Keyboard::Num4, Goody::ExtraTimeGoody, sf::FloatRect(0.f, 242.f, 56.f, 64.f), 0, 0, config.get<int>("goodyextratime")),
+#else
     m_extraBallGoody(sf::Keyboard::Num3, Goody::ExtraBallGoody, 0, 0, config.get<int>("goodyextraball")),
     m_extraTimeGoody(sf::Keyboard::Num4, Goody::ExtraTimeGoody, 0, 0, config.get<int>("goodyextratime")),
+#endif
     m_currentSeletedGoody(0),
     m_playing(false)
 {

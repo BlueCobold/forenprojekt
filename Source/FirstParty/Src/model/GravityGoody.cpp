@@ -4,7 +4,11 @@ GravityGoody::GravityGoody(const sf::Keyboard::Key key,
                            const float gravityFactor,
                            b2Vec2& gravity,
                            const int charge) :
+#ifdef TOUCHSIM
+    Goody(key, Goody::GravityGoody, sf::FloatRect(0.f, 50.f, 56.f, 64.f), 0, 0, charge),
+#else
     Goody(key, Goody::GravityGoody, 0, 0, charge),
+#endif
     m_gravityFactor(gravityFactor),
     m_activeStartTime(0),
     m_activeTime(0),

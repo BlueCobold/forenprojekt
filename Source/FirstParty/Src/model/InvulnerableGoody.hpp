@@ -13,8 +13,12 @@ private:
     const Ball* const& m_ball;
 
 public:
-    InvulnerableGoody(const sf::Keyboard::Key key, const float durationTime, const Ball* const& ball, const int charge)
-        : Goody(key, Goody::InvulnerableGoody, durationTime, 0, charge),
+    InvulnerableGoody(const sf::Keyboard::Key key, const float durationTime, const Ball* const& ball, const int charge) : 
+#ifdef TOUCHSIM
+        Goody(key, Goody::InvulnerableGoody, sf::FloatRect(0.f, 114.f, 56.f, 64.f), durationTime, 0, charge),
+#else
+        Goody(key, Goody::InvulnerableGoody, durationTime, 0, charge),
+#endif
         m_ball(ball)
     { }
 
