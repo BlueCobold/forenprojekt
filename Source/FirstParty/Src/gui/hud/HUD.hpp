@@ -8,6 +8,7 @@
 #include "BallHUD.hpp"
 #include "TimeHUD.hpp"
 #include "GoodyHUD.hpp"
+#include "BatteryHUD.hpp"
 
 #include <memory> // unique_ptr
 
@@ -31,10 +32,12 @@ private:
     ArrowHUD m_arrow;
     BallHUD m_ball;
     TimeHUD m_time;
+    BatteryHUD m_battery;
 
     bool m_fpsShow;
     bool m_ballShow;
     bool m_timeShow;
+    bool m_batteryStateShow;
 
     GoodyHUD m_gravityGoody;
     GoodyHUD m_invulnerableGoody;

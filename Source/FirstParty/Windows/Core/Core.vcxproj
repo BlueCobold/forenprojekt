@@ -162,6 +162,7 @@
     <ClInclude Include="..\..\Src\gui\HighScoreMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\hud\ArrowHUD.hpp" />
     <ClInclude Include="..\..\Src\gui\hud\BallHUD.hpp" />
+    <ClInclude Include="..\..\Src\gui\hud\BatteryHUD.hpp" />
     <ClInclude Include="..\..\Src\gui\hud\FPSCounter.hpp" />
     <ClInclude Include="..\..\Src\gui\hud\FPSCounterHUD.hpp" />
     <ClInclude Include="..\..\Src\gui\hud\GoodyHUD.hpp" />
@@ -366,6 +367,7 @@
     <ClCompile Include="..\..\Src\gui\HighScoreMenue.cpp" />
     <ClCompile Include="..\..\Src\gui\hud\ArrowHUD.cpp" />
     <ClCompile Include="..\..\Src\gui\hud\BallHUD.cpp" />
+    <ClCompile Include="..\..\Src\gui\hud\BatteryHUD.cpp" />
     <ClCompile Include="..\..\Src\gui\hud\FPSCounterHUD.cpp" />
     <ClCompile Include="..\..\Src\gui\hud\GoodyHUD.cpp" />
     <ClCompile Include="..\..\Src\gui\hud\HUD.cpp" />
