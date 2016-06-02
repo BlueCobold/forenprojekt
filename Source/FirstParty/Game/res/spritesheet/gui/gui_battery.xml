@@ -1,0 +1,9 @@
+<spriteSheet texture="battery">
+	<sprites>
+		<sprite name="More75" x="0" y="0" width="20" height="20" originx="0" originy="0" />
+		<sprite name="More50" x="0" y="20" width="20" height="20" originx="0" originy="0" />
+		<sprite name="More25" x="0" y="40" width="20" height="20" originx="0" originy="0" />
+		<sprite name="Less25" x="0" y="60" width="20" height="20" originx="0" originy="0" />
+		<sprite name="Charging" x="=" y="80" width="20" height="20" originx="0" originy="0" />
+	</sprites>
+</spriteSheet>
