@@ -24,6 +24,7 @@ public:
     static const int CHECKBOX_INVERT_AXIS = 15;
     static const int CHECKBOX_USE_STENCIL_EFFECTS = 30;
     static const int CHECKBOX_USE_SHADER_EFFECTS = 35;
+    static const int CHECKBOX_SHOW_BATTERY_STATE = 38;
 
     OptionMenu(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
 
@@ -49,6 +50,7 @@ private:
     sf::Vector2u m_appointedVideoMode;
     int m_currentVideoModeIndex;
     sf::Image m_icon;
+    bool m_showBatteryState;
 
     void adjustVideoMode(sf::VideoMode& mode, bool fullScreen);
     bool acceptableVideoMode(const sf::VideoMode videoMode);

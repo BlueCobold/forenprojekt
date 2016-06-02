@@ -28,6 +28,7 @@ OptionMenu::OptionMenu(sf::RenderWindow& screen,
     m_invertAxis = m_config.get<bool>("InvertAxis");
     m_useStencilEffects = m_config.get<bool>("UseStencilEffects");
     m_useShaderEffects = m_config.get<bool>("UseShaderEffects");
+    m_showBatteryState = m_config.get<bool>("ShowBatteryState");
 
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
     Menu::getSlider(SLIDER_SOUNDVOLUMEN).setValue(static_cast<float>(m_soundVolume));
@@ -39,6 +40,7 @@ OptionMenu::OptionMenu(sf::RenderWindow& screen,
     Animation::enableStencilEffects(m_useStencilEffects);
     Menu::getCheckbox(CHECKBOX_USE_SHADER_EFFECTS).setChecked(m_useShaderEffects);
     Shader::allowUsage(m_useShaderEffects);
+    Menu::getCheckbox(CHECKBOX_SHOW_BATTERY_STATE).setChecked(m_showBatteryState);
 
     for(auto it = begin(sf::VideoMode::getFullscreenModes()); it != end(sf::VideoMode::getFullscreenModes()); ++it)
     {
@@ -134,6 +136,12 @@ void OptionMenu::applyChanges()
         m_config.set("UseShaderEffects", m_useShaderEffects);
         Shader::allowUsage(m_useShaderEffects);
     }
+
+    if(Menu::getCheckbox(CHECKBOX_SHOW_BATTERY_STATE).getChecked() != m_showBatteryState)
+    {
+        m_showBatteryState = !m_showBatteryState;
+        m_config.set("ShowBatteryState", m_showBatteryState);
+    }
 }
 
 void OptionMenu::adjustVideoMode(sf::VideoMode& mode, bool fullScreen)
@@ -191,6 +199,8 @@ void OptionMenu::onEnter()
     m_invertAxis = m_config.get<bool>("InvertAxis");
     m_useVerticalAxis = m_config.get<bool>("UseVerticalAxis");
 
+    m_showBatteryState = m_config.get<bool>("ShowBatteryState");
+
     Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
 
     Menu::getSlider(SLIDER_SOUNDVOLUMEN).setValue(static_cast<float>(m_soundVolume));
@@ -201,6 +211,8 @@ void OptionMenu::onEnter()
     Menu::getCheckbox(CHECKBOX_USE_VERTICALAXIS).setChecked(m_useVerticalAxis);
 
     Menu::getCheckbox(CHECKBOX_INVERT_AXIS).setChecked(m_invertAxis);
+
+    Menu::getCheckbox(CHECKBOX_SHOW_BATTERY_STATE).setChecked(m_showBatteryState);
 
     // necessary becaus onEnter() is called twice
     auto screenSize = getRenderWindow().getSize();

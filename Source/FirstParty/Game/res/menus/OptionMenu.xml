@@ -4,7 +4,7 @@
 		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
 		<label text="gui_option" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
 		<button id="0" text="gui_close" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
-		<subwindow id="1" x="0.5" y="0.5" offsetx="-176" offsety="-94" sizex="352" sizey="150" innerheight="710">
+		<subwindow id="1" x="0.5" y="0.5" offsetx="-176" offsety="-94" sizex="352" sizey="150" innerheight="830">
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
 				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
@@ -48,6 +48,12 @@
 				<checkbox id="15" style="default" offsetx="76" offsety="640" />
 				<label id="16" text="gui_label_invert_used1" font="buttonHoverFont" alignment="0" offsetx="120" offsety="635" />
 				<label id="17" text="gui_label_invert_used2" font="buttonHoverFont" alignment="0" offsetx="120" offsety="665" />
+
+				<label text="gui_miscellaneous" font="buttonIdleFont" alignment="1" offsetx="170" offsety="710" />
+
+				<checkbox id="38" style="default" offsetx="76" offsety="760" />
+				<label id="39" text="gui_battery_state1" font="buttonHoverFont" alignment="0" offsetx="120" offsety="755" />
+				<label id="40" text="gui_battery_state2" font="buttonHoverFont" alignment="0" offsetx="120" offsety="785" />
 			</elements>
 		</subwindow>
 		

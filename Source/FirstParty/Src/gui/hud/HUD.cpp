@@ -22,9 +22,11 @@ HUD::HUD(ResourceManager& resourceManager, AppConfig& config) :
     m_gravityGoody(resourceManager, "goodie", sf::IntRect(0,0,56,64), sf::Vector2f(ScreenLocation::Left, ScreenLocation::Top), sf::Vector2f(0,50)),
     m_invulnerableGoody(resourceManager, "goodie", sf::IntRect(56,0,56,64), sf::Vector2f(ScreenLocation::Left, ScreenLocation::Top), sf::Vector2f(0,114)),
     m_extraBallGoody(resourceManager, "goodie", sf::IntRect(112,0,56,64), sf::Vector2f(ScreenLocation::Left, ScreenLocation::Top), sf::Vector2f(0,178)),
-    m_extraTimeGoody(resourceManager, "goodie", sf::IntRect(168,0,56,64), sf::Vector2f(ScreenLocation::Left, ScreenLocation::Top), sf::Vector2f(0,242))
+    m_extraTimeGoody(resourceManager, "goodie", sf::IntRect(168,0,56,64), sf::Vector2f(ScreenLocation::Left, ScreenLocation::Top), sf::Vector2f(0,242)),
+    m_config(config)
 {
-    m_fpsShow = config.get<bool>("ShowFps");
+    m_fpsShow = m_config.get<bool>("ShowFps");
+    m_batteryStateShow = m_config.get<bool>("ShowBatteryState");
 }
 
 void HUD::skipInterpolation()
@@ -151,4 +153,6 @@ void HUD::onEnter(Level* level)
     m_ballShow = false;
     m_points.setPoints(level != nullptr ? level->getPoints() : 0);
     m_points.skipInterpolation();
+
+    m_batteryStateShow = m_config.get<bool>("ShowBatteryState");
 }

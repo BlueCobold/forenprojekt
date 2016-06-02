@@ -160,6 +160,9 @@ gui_level = Level-Design
 gui_label_enable = Enable
 gui_label_shader = Shader
 gui_achievement = Achievements
+gui_miscellaneous = Miscellaneous
+gui_battery_state1 = Show Battery 
+gui_battery_state2 = State
 
 [ToolTip]
 tooltip_medals = gold: %\r\nsilver: %\r\nbronze: %

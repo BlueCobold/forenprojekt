@@ -44,6 +44,7 @@ private:
     GoodyHUD m_extraBallGoody;
     GoodyHUD m_extraTimeGoody;
 
+    AppConfig& m_config;
 public:
     HUD(ResourceManager& resourceManager, AppConfig& config);
 
