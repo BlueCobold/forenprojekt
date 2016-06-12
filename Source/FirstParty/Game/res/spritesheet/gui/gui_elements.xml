@@ -106,8 +106,13 @@
 		<sprite name="frame_top" x="388" y="197" width="164" height="19" originx="82" originy="9" />
 		<sprite name="Icon_16" x="481" y="173" width="16" height="16" originx="8" originy="8" />
 		<sprite name="frame_bottom" x="581" y="704" width="164" height="11" originx="82" originy="9" />
-		<sprite name="BackgroundGradient" x="1011" y="68" width="10" height="10" originx="5" originy="5" />
-		<sprite name="Icon_Backgrounds_Logo" x="747" y="700" width="258" height="136" originx="129" originy="68" />
 		<sprite name="caret" x="108" y="153" width="20" height="25" originx="0" originy="0" />
+		<sprite name="IconBattery025" x="970" y="303" width="32" height="19" originx="14" originy="7" />
+		<sprite name="IconBattery050" x="347" y="666" width="32" height="19" originx="14" originy="7" />
+		<sprite name="IconBattery075" x="381" y="666" width="32" height="19" originx="14" originy="7" />
+		<sprite name="IconBattery100" x="314" y="695" width="32" height="19" originx="14" originy="7" />
+		<sprite name="IconBatteryCharge" x="348" y="687" width="32" height="19" originx="14" originy="7" />
+		<sprite name="BackgroundGradient" x="1009" y="66" width="10" height="10" originx="5" originy="5" />
+		<sprite name="Icon_Backgrounds_Logo" x="745" y="698" width="258" height="136" originx="129" originy="68" />
 	</sprites>
 </spriteSheet>

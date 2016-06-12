@@ -32,7 +32,6 @@
 	<texture name="icon_backgrounds" path="gui/icon_backgrounds.png" smooth="true" />
 	<texture name="gui_animations" path="gui/gui_animations.png" smooth="true" />
 	<texture name="assets" path="assets/assets.png" smooth="true" />
-	<texture name="battery" path="gui/battery.png" smooth="false" />
 </textures>
 <sounds>
 	<sound name="bounce" path="bounce.ogg" />
@@ -76,7 +75,6 @@
 	<spritesheet name="icon_backgrounds" path="gui/icon_backgrounds.xml" />
 	<spritesheet name="gui_animations" path="gui/gui_animations.xml" />
 	<spritesheet name="assets" path="assets/assets.xml" />
-	<spritesheet name="gui_battery" path="gui/gui_battery.xml" />
 </spritesheets>
 <levels>
 	<level number="1" filename="Beginner Level.lvl" />
