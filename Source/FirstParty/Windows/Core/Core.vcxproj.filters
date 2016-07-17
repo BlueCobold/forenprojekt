@@ -1170,9 +1170,6 @@
     <ClCompile Include="..\..\Src\gui\AchievementMenu.cpp">
       <Filter>Sources\gui\menus</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Src\gui\ReplayMenu.cpp">
-      <Filter>Sources\gui</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Src\gui\InteractiveLabel.cpp">
       <Filter>Sources\gui</Filter>
     </ClCompile>
@@ -1271,6 +1268,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\hud\BatteryHUD.cpp">
       <Filter>Sources\gui\hud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\ReplayMenu.cpp">
+      <Filter>Sources\gui\menus</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -25,6 +25,7 @@ public:
     virtual void draw(const DrawParameter& params);
     virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
 
+    void setLanguage(const std::string& language) override;
 private:
     CoinShopMenu m_menu;
     Level* m_level;

@@ -25,6 +25,7 @@ public:
     virtual void draw(const DrawParameter& params);
     virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
 
+    void setLanguage(const std::string& language) override;
 private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);

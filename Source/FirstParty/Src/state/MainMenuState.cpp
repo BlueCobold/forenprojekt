@@ -124,3 +124,8 @@ void MainMenuState::draw(const DrawParameter& params)
 
     m_menu.draw(params);
 }
+
+void MainMenuState::setLanguage(const std::string& language)
+{
+    m_menu.setLanguage(language);
+}

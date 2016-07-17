@@ -52,6 +52,7 @@ sf::Sprite getSprite(const tinyxml2::XMLElement* element,
 }
 
 CloneHandler MenuLoader::_cloneHandler;
+std::string MenuLoader::_language;
 
 template<typename T>
 void addAll(std::vector<std::unique_ptr<T>> source, std::vector<std::unique_ptr<MenuElement>>& target)
@@ -60,8 +61,9 @@ void addAll(std::vector<std::unique_ptr<T>> source, std::vector<std::unique_ptr<
         target.push_back(std::move(*it));
 }
 
-std::unique_ptr<MenuTemplate> MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager)
+std::unique_ptr<MenuTemplate> MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager, const std::string& language)
 {
+    _language = language;
     tinyxml2::XMLDocument doc;
     doc.LoadFile((resourcePath() + path).c_str());
 
@@ -123,24 +125,25 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
             auto text = buttonXml->Attribute("text");
             std::string textResourceKey;
             if(text != nullptr && std::string(text) != "")
-                textResourceKey = utility::translateKey(text);
+                textResourceKey = text;
+                //TO DO textResourceKey = utility::translateKey(text);
 
             style.idleStyle.label = LineLabel(
                 textResourceKey, 
                 position, offset + style.idleStyle.textOffset,
-                0, style.idleStyle.font, LineLabel::Centered);
+                0, style.idleStyle.font, _language, LineLabel::Centered);
 
             style.hoverStyle.label = LineLabel(
                 textResourceKey, 
                 position, offset + style.hoverStyle.textOffset,
-                0, style.hoverStyle.font, LineLabel::Centered);
+                0, style.hoverStyle.font, _language, LineLabel::Centered);
 
             style.pressedStyle.label = LineLabel(
                 textResourceKey, 
                 position, offset + style.pressedStyle.textOffset,
-                0, style.pressedStyle.font, LineLabel::Centered);
+                0, style.pressedStyle.font, _language, LineLabel::Centered);
 
-            auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, offset, triggers));
+            auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, offset, _language, triggers));
             
             if(auto visibleWhenId = buttonXml->IntAttribute("visibleWhen"))
                 button->setVisibleWhenId(visibleWhenId);
@@ -152,7 +155,8 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
                 if(tooltip == end(toolTip))
                     throw std::runtime_error(utility::replace(utility::translateKey("UnknownButtonToolTip"), buttonXml->Attribute("tooltip")));
                 button->setToolTip(tooltip->second);
-                button->setToolTipText(utility::translateKey(buttonXml->Attribute("tooltiptext")));
+                // TO DO button->setToolTipText(utility::translateKey(buttonXml->Attribute("tooltiptext")));
+                button->setToolTipText(buttonXml->Attribute("tooltiptext"));
             }
 
             elements.push_back(std::move(button));
@@ -189,7 +193,8 @@ std::vector<std::unique_ptr<CheckBox>> MenuLoader::parseCheckBoxes(
                 if(tooltip == end(toolTip))
                     throw std::runtime_error(utility::replace(utility::translateKey("UnknownToolTip"), checkboxXml->Attribute("tooltip")));
                 checkBox->setToolTip(tooltip->second);
-                checkBox->setToolTipText(utility::translateKey(checkboxXml->Attribute("tooltiptext")));
+                //TO DO checkBox->setToolTipText(utility::translateKey(checkboxXml->Attribute("tooltiptext")));
+                checkBox->setToolTipText(checkboxXml->Attribute("tooltiptext"));
             }
             if(auto visibleWhenId = checkboxXml->IntAttribute("visibleWhen"))
                 checkBox->setVisibleWhenId(visibleWhenId);
@@ -239,11 +244,13 @@ std::vector<std::unique_ptr<LineLabel>> MenuLoader::parseLabels(
         for(auto labelXml = styles->FirstChildElement("label");
             labelXml != nullptr; labelXml = labelXml->NextSiblingElement("label"))
         {
-            auto label = std::unique_ptr<LineLabel>(new LineLabel(utility::translateKey(labelXml->Attribute("text")),
+            auto label = std::unique_ptr<LineLabel>(new LineLabel(/*utility::translateKey(labelXml->Attribute("text")),*/
+                            std::string(labelXml->Attribute("text")),
                             sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
                             sf::Vector2f(labelXml->FloatAttribute("offsetx"), labelXml->FloatAttribute("offsety")),
                             0,
                             resourceManager.getBitmapFont(labelXml->Attribute("font")),
+                            _language,
                             static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
                             labelXml->IntAttribute("id")));
             
@@ -268,11 +275,13 @@ std::vector<std::unique_ptr<InteractiveLabel>> MenuLoader::parseInteractiveLabel
             labelXml != nullptr; labelXml = labelXml->NextSiblingElement("ilabel"))
         {
             auto label = std::unique_ptr<InteractiveLabel>(new InteractiveLabel(
-                            utility::translateKey(labelXml->Attribute("text")),
+                            /* TO DO utility::translateKey(labelXml->Attribute("text")), */
+                            labelXml->Attribute("text"),
                             sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
                             sf::Vector2f(labelXml->FloatAttribute("offsetx"), labelXml->FloatAttribute("offsety")),
                             0,
                             resourceManager.getBitmapFont(labelXml->Attribute("font")),
+                            _language,
                             static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
                             labelXml->IntAttribute("id")));
 
@@ -286,7 +295,8 @@ std::vector<std::unique_ptr<InteractiveLabel>> MenuLoader::parseInteractiveLabel
                     throw std::runtime_error(utility::replace(utility::translateKey("UnknownButtonToolTip"), labelXml->Attribute("tooltip")));
 
                 label->setToolTip(tooltip->second);
-                label->setToolTipText(utility::translateKey(labelXml->Attribute("tooltiptext")));
+                // TO DO label->setToolTipText(utility::translateKey(labelXml->Attribute("tooltiptext")));
+                label->setToolTipText(labelXml->Attribute("tooltiptext"));
             }
 
             elements.push_back(std::move(label));
@@ -320,7 +330,8 @@ std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
                 if(tooltipIt == end(toolTip))
                     throw std::runtime_error(utility::replace(utility::translateKey("UnknownToolTip"), imageXml->Attribute("tooltip")));
                 auto tooltip = tooltipIt->second;
-                tooltip.setText(utility::translateKey(toolTipText));
+                //TO DO tooltip.setText(utility::translateKey(toolTipText));
+                tooltip.setText(toolTipText);
                 sprite->setToolTip(tooltip);
             }
 
@@ -561,6 +572,7 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(const tin
                 throw std::runtime_error(utility::replace(utility::translateKey("InvalidBackground"), "ToolTip"));
 
             ToolTip tempToolTip("",
+                                _language,
                                 resourceManager.getBitmapFont(tooltipXml->FirstChildElement("text")->Attribute("font")),
                                 sf::Vector2f(tooltipXml->FirstChildElement("text")->FloatAttribute("offsetx"),
                                              tooltipXml->FirstChildElement("text")->FloatAttribute("offsety")),

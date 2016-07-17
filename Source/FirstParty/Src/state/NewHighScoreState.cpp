@@ -115,8 +115,11 @@ StateChangeInformation NewHighScoreState::update(const float time)
 
 void NewHighScoreState::draw(const DrawParameter& params)
 {
-    m_level->adjustView(params);
-    m_level->draw(params);
+    if(m_level != nullptr)
+    {
+        m_level->adjustView(params);
+        m_level->draw(params);
+    }
 
     m_HUD.draw(params);
 
@@ -307,4 +310,9 @@ const std::string NewHighScoreState::createHighscoreString(const std::string& na
     }
 
     return result;
+}
+
+void NewHighScoreState::setLanguage(const std::string& language)
+{
+    m_menu.setLanguage(language);
 }

@@ -3,8 +3,12 @@
 
 #include <SFML/Window/Event.hpp>
 
-Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers) :
-    MenuElement(id, MenuElementType::Button, position, offset),
+Button::Button(int id, ButtonStyle style,
+               const sf::Vector2f& position,
+               const sf::Vector2f& offset,
+               const std::string& language,
+               bool triggers) :
+    MenuElement(id, MenuElementType::Button, position, offset, language),
     m_style(std::move(style)),
     m_showToolTip(false),
     m_isTriggering(triggers),
@@ -35,7 +39,7 @@ Button::Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf
 
 std::unique_ptr<MenuElement> Button::clone() const
 {
-    auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), getOffset(), m_isTriggering));
+    auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), getOffset(), getLanguage(), m_isTriggering));
     clone->setVisibleWhenId(getVisibleWhenId());
     clone->m_toolTip = m_toolTip;
     return std::move(clone);
@@ -139,9 +143,9 @@ void Button::setToolTip(const ToolTip& toolTip)
     m_toolTip = toolTip;
 }
 
-void Button::setToolTipText(const std::string& text)
+void Button::setToolTipText(const std::string& text, const std::string& replacement)
 {
-    m_toolTip.setText(text);
+    m_toolTip.setText(text, replacement);
 }
 
 void Button::drawAdditionalForeground(const DrawParameter& params)
@@ -189,3 +193,11 @@ void Button::updateLayout(const sf::Vector2f& screenSize)
     m_currentStyle->label.updateLayout(screenSize);
 }
 
+void Button::setLanguage(const std::string& language)
+{
+    MenuElement::setLanguage(language);
+    m_toolTip.setLanguage(language);
+    m_style.idleStyle.label.setLanguage(language);
+    m_style.hoverStyle.label.setLanguage(language);
+    m_style.pressedStyle.label.setLanguage(language);
+}

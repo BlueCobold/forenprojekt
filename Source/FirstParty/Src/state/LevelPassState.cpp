@@ -24,6 +24,7 @@ LevelPassState::LevelPassState(sf::RenderWindow& screen,
     State(screen, resourceManager, config),
     m_achievementManager(achievementManager),
     m_background(nullptr),
+    m_level(nullptr),
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
     m_replay(false),
@@ -49,10 +50,10 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
     m_menu.setPoints(m_level->getPoints());
     m_menu.setGrade(m_level->getMedal());
     m_menu.setLostBalls(m_level->getLostBalls());
-    std::string text = utility::replace(utility::replace(utility::replace(utility::translateKey("tooltip_medals"),
-                                        utility::toString(m_level->getMedal(Level::Gold))),   // first replace
-                                        utility::toString(m_level->getMedal(Level::Silver))), // second replace
-                                        utility::toString(m_level->getMedal(Level::Bronze))); // third replace
+    std::string text = "@@" + utility::replace(utility::replace(utility::replace(utility::translateKey(m_config.get<std::string>("language") + "tooltip_medals"),
+                                            utility::toString(m_level->getMedal(Level::Gold))),   // first replace
+                                            utility::toString(m_level->getMedal(Level::Silver))), // second replace
+                                            utility::toString(m_level->getMedal(Level::Bronze))); // third replace
     m_menu.setMedalToolTipText(text);
     if(!enterInformation->m_prepareOnly && !m_gotCoins)
     {
@@ -182,6 +183,7 @@ StateChangeInformation LevelPassState::update(const float time)
         m_gotCoins = false;
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = nullptr;
+        m_level = nullptr;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_achievementManager.saveValues();
@@ -201,8 +203,11 @@ StateChangeInformation LevelPassState::update(const float time)
 
 void LevelPassState::draw(const DrawParameter& params)
 {
-    m_level->adjustView(params);
-    m_level->draw(params);
+    if(m_level != nullptr)
+    {
+        m_level->adjustView(params);
+        m_level->draw(params);
+    }
 
     m_HUD.draw(params);
 
@@ -256,4 +261,23 @@ void LevelPassState::setAchievements()
 
     m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::Ball, m_level->getLostBalls());
     m_achievementManager.addValueTo(Achievement::Collect, Achievement::InSum, Achievement::Stars, stars);
+}
+
+void LevelPassState::setLanguage(const std::string& language)
+{
+    m_menu.setLanguage(language);
+
+    if(m_level != nullptr)
+    {
+        std::string text = "@@" + utility::replace(utility::replace(utility::replace(utility::translateKey(m_config.get<std::string>("language") + "tooltip_medals"),
+                                                   utility::toString(m_level->getMedal(Level::Gold))),   // first replace
+                                                   utility::toString(m_level->getMedal(Level::Silver))), // second replace
+                                                   utility::toString(m_level->getMedal(Level::Bronze))); // third replace
+
+        m_menu.setMedalToolTipText(text);
+
+        m_menu.setPoints(m_level->getPoints());
+        m_menu.setGrade(m_level->getMedal());
+        m_menu.setLostBalls(m_level->getLostBalls());
+    }
 }

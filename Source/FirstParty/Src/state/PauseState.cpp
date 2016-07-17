@@ -44,8 +44,7 @@ void PauseState::onEnter(const EnterStateInformation* enterInformation, const fl
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
     m_optionStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
-    m_menu.setCoinToolTipText(utility::replace(utility::translateKey("tooltip_coins"),
-                                           utility::toString(m_config.get<int>("coins"))));
+    m_menu.setCoinToolTipText("tooltip_coins", utility::toString(m_config.get<int>("coins")));
 }
 
 StateChangeInformation PauseState::update(const float time)
@@ -147,8 +146,11 @@ StateChangeInformation PauseState::update(const float time)
 
 void PauseState::draw(const DrawParameter& params)
 {
-    m_level->adjustView(params);
-    m_level->draw(params);
+    if(m_level != nullptr)
+    {
+        m_level->adjustView(params);
+        m_level->draw(params);
+    }
     m_HUD.update(m_level, getPassedTime());
     m_HUD.draw(params);
 
@@ -160,4 +162,9 @@ void PauseState::draw(const DrawParameter& params)
     params.getTarget().draw(whiteRect);
 
     m_menu.draw(params);
+}
+
+void PauseState::setLanguage(const std::string& language)
+{
+    m_menu.setLanguage(language);
 }

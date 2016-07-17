@@ -93,9 +93,9 @@ void CheckBox::setToolTip(const ToolTip& toolTip)
     m_toolTip = toolTip;
 }
 
-void CheckBox::setToolTipText(const std::string& text)
+void CheckBox::setToolTipText(const std::string& text, const std::string& replacement)
 {
-    m_toolTip.setText(text);
+    m_toolTip.setText(text, replacement);
 }
 
 void CheckBox::updateLayout(const sf::Vector2f& screenSize)
@@ -106,4 +106,10 @@ void CheckBox::updateLayout(const sf::Vector2f& screenSize)
     m_style.uncheckedStyle.sprite.setPosition(currentPosition + m_style.uncheckedStyle.spriteOffset);
     m_style.checkedStyle.sprite.setPosition(currentPosition + m_style.checkedStyle.spriteOffset);
     m_style.hoverStyle.sprite.setPosition(currentPosition + m_style.hoverStyle.spriteOffset);
+}
+
+void CheckBox::setLanguage(const std::string& language)
+{
+    MenuElement::setLanguage(language);
+    m_toolTip.setLanguage(language);
 }

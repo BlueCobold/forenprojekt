@@ -31,6 +31,7 @@ public:
         const sf::Vector2f& offset,
         const float rotation,
         const BitmapFont* font,
+        const std::string& language,
         const Alignment alignment = Left,
         int id = -1);
 
@@ -63,6 +64,7 @@ public:
         const float rotation,
         const MenuElementType::Type type,
         const BitmapFont* font,
+        const std::string& language,
         const Alignment alignment = Left,
         int id = -1);
 
@@ -71,12 +73,15 @@ public:
     void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 
     void updateLayout(const sf::Vector2f& screenSize) override;
+
+    virtual void setLanguage(const std::string& language) override;
 private:
 
     void rebuild();
 
     float m_width;
     std::string m_text;
+    std::string m_textKey;
     float m_rotation;
     const BitmapFont* m_font;
     std::vector<BitmapFont::Glyph> m_glyphs;

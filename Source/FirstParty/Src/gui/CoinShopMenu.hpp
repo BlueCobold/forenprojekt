@@ -33,6 +33,7 @@ public:
     int getBuyCost(const Goody::Type& goody) const;
     int getSellRefund(const Goody::Type& goody) const;
 
+    void setLanguage(const std::string& language);
 private:
 
     // price

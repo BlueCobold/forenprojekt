@@ -12,7 +12,8 @@
 #include <functional> // bind
 
 ResourceManager::ResourceManager(ShaderContext& context, AppConfig& config) :
-    m_context(&context)
+    m_context(&context),
+    m_config(config)
 {
     m_soundManager = std::unique_ptr<SoundManager>(new SoundManager(*this, config));
     // Parse resource information
@@ -134,7 +135,7 @@ const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
     return getOrFail<MenuTemplate, std::string>(m_menuKeys, m_menus, key,
         [=](const std::string& path)->std::function<std::unique_ptr<MenuTemplate>()>
         {
-            return [=](){ return MenuLoader::loadMenuTemplate(std::string("res/menus/") + path, *self); };
+            return [=](){ return MenuLoader::loadMenuTemplate(std::string("res/menus/") + path, *self, m_config.get<std::string>("language")); };
         }, "UnknownMenuTemplate");
 }
 

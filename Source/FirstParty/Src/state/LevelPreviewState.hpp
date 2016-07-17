@@ -21,6 +21,7 @@ public:
     virtual void draw(const DrawParameter& params);
     virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
 
+    void setLanguage(const std::string& language) override;
 private:
     LevelPreviewMenu m_menu;
     HUD m_HUD;

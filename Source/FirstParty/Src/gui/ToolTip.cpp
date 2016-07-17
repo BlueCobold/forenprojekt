@@ -4,6 +4,7 @@
 #include "../Utility.hpp"
 
 ToolTip::ToolTip(const std::string& text,
+                 const std::string& language,
                  const BitmapFont* font,
                  const sf::Vector2f& textOffset,
                  const sf::Vector2f& offset,
@@ -18,16 +19,18 @@ ToolTip::ToolTip(const std::string& text,
     m_font(font),
     m_longestLine(0),
     m_width(0),
-    m_height(0)
+    m_height(0),
+    m_textKey(text),
+    m_language(language)
 {
-    if(text != "")
+    if(m_textKey != "")
     {
-        setLines(text);
+        setLines(m_textKey);
         m_longestLine = findLongestLine();
         m_width = m_label.find(m_longestLine)->second.getWidth();
         m_height = static_cast<float>(m_label.find(m_longestLine)->second.getFontSize() * m_lines);
         m_scalefactorHorizontal = m_width / m_background.find(ToolTip::BottomCenter)->second.getTextureRect().width;
-        m_scalefactorVertical = m_height * m_lines / m_background.find(ToolTip::MiddleLeft)->second.getTextureRect().height;;
+        m_scalefactorVertical = m_height / m_background.find(ToolTip::MiddleLeft)->second.getTextureRect().height;
         stretchBackground();
     }
 }
@@ -106,11 +109,12 @@ void ToolTip::setPosition(const sf::Vector2f& position, const sf::RenderWindow& 
     }
 }
 
-void ToolTip::setText(const std::string& text)
+void ToolTip::setText(const std::string& text, const std::string& replacement)
 {
-    if(text != "")
+    m_textKey = text;
+    if(m_textKey != "")
     {
-        setLines(text);
+        setLines(m_textKey, replacement);
         m_longestLine = findLongestLine();
         m_width = m_label.find(m_longestLine)->second.getWidth();
         m_height = static_cast<float>(m_label.find(m_longestLine)->second.getFontSize() * m_lines);
@@ -122,7 +126,7 @@ void ToolTip::setText(const std::string& text)
         m_lines = -1;
 }
 
-void ToolTip::setLines(const std::string& text)
+void ToolTip::setLines(const std::string& text, const std::string& replacement)
 {
     if(text == "")
         return;
@@ -131,7 +135,8 @@ void ToolTip::setLines(const std::string& text)
 
     m_label.clear();
 
-    std::string tokens = text.c_str();
+    std::string tokens = utility::translateKey(m_language + text).c_str();
+
     std::string token;
 
     // multilines
@@ -139,11 +144,19 @@ void ToolTip::setLines(const std::string& text)
     {
         token = tokens.substr(0, pos);
         tokens.erase(0, pos + 4);
-        LineLabel label(token, sf::Vector2f(), sf::Vector2f(), 0, m_font, LineLabel::Centered);
+        /* TODO
+        LineLabel label(token, sf::Vector2f(), sf::Vector2f(), 0, m_font, LineLabel::Centered);*/
+        LineLabel label(text, sf::Vector2f(), sf::Vector2f(), 0, m_font, "", LineLabel::Centered);
+        if(replacement != "" && token.find("%") != std::string::npos)
+            token = utility::replace(token, replacement);
+        label.setText(token);
         m_label[m_lines++] = label;
     }
     // single line or last multiline
-    LineLabel label(tokens, sf::Vector2f(), sf::Vector2f(), 0, m_font, LineLabel::Centered);
+    LineLabel label(text, sf::Vector2f(), sf::Vector2f(), 0, m_font, "", LineLabel::Centered);
+    if(replacement != "" && tokens.find("%") != std::string::npos)
+            tokens = utility::replace(tokens, replacement);
+    label.setText(tokens);
     m_label[m_lines++] = label;
 }
 
@@ -207,4 +220,20 @@ sf::Vector2f ToolTip::calculateNeededOffset(const sf::Vector2f& position, const 
     }
 
     return sf::Vector2f(verticalOffset, horizontalOffset);
+}
+
+void ToolTip::setLanguage(const std::string& language)
+{
+    m_language = language;
+
+    if(m_textKey != "")
+    {
+        setLines(m_textKey);
+        m_longestLine = findLongestLine();
+        m_width = m_label.find(m_longestLine)->second.getWidth();
+        m_height = static_cast<float>(m_label.find(m_longestLine)->second.getFontSize() * m_lines);
+        m_scalefactorHorizontal = m_width / m_background.find(ToolTip::TopLeft)->second.getTextureRect().width;
+        m_scalefactorVertical = m_height / m_background.find(ToolTip::TopLeft)->second.getTextureRect().height;
+        stretchBackground();
+    }
 }

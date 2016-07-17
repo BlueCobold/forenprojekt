@@ -123,6 +123,7 @@ private:
     ResourceCache<CryptoPP::RSA::PublicKey> m_publicKeys;
     ResourceCache<sf::Music> m_music;
     ShaderContext* m_context;
+    AppConfig& m_config;
     
     std::vector<sf::Music*> m_musicList;
 

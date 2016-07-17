@@ -9,8 +9,8 @@ PauseMenu::PauseMenu(sf::RenderWindow& screen,
 {
 }
 
-void PauseMenu::setCoinToolTipText(const std::string& text)
+void PauseMenu::setCoinToolTipText(const std::string& text, const std::string& coins)
 {
     //Menu::getSprite(SPRITE_COINS).setToolTipText(text);
-    Menu::getButton(BUTTON_COINS).setToolTipText(text);
+    Menu::getButton(BUTTON_COINS).setToolTipText(text, coins);
 }

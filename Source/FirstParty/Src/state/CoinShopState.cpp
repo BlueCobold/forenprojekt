@@ -225,3 +225,8 @@ void CoinShopState::updateButtons()
     m_menu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_MINUS).setVisible(m_config.get<int>("goodyextraball") != 0);
     m_menu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_MINUS).setVisible(m_config.get<int>("goodyextratime") != 0);
 }
+
+void CoinShopState::setLanguage(const std::string& language)
+{
+    m_menu.setLanguage(language);
+}

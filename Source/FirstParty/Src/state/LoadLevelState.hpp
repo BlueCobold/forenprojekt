@@ -32,6 +32,7 @@ public:
     void onEnter(const EnterStateInformation *enterInformation, const float time);
     std::unique_ptr<Level> gainLevel();
 
+    void setLanguage(const std::string& language) override;
 private:
     void loadLevel();
     void onEvent(utility::Event::EventType type);

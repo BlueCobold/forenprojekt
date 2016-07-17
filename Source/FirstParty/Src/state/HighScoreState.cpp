@@ -274,3 +274,8 @@ void HighScoreState::buildSubWindowElements()
         m_offsetAdded = false;
     }
 }
+
+void HighScoreState::setLanguage(const std::string& language)
+{
+    m_menu.setLanguage(language);
+}

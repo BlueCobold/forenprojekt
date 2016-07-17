@@ -53,6 +53,7 @@ public:
 
     void setZoomFactor(float zoomFactor);
 
+    void setLanguage(const std::string& language) override;
 private:
 
     MenuPanel m_panel;

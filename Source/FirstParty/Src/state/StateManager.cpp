@@ -10,7 +10,7 @@ StateManager::StateManager() :
     m_currentTime(m_frametime.getElapsedTime().asSeconds()),
     m_currentState(nullptr),
     m_currentStateId(None),
-    m_pause(false)
+    m_paused(false)
 {
 }
 
@@ -46,7 +46,7 @@ void StateManager::setState(StateId id, EnterStateInformation* enterInformation)
         enterInformation = &info;
     enterInformation->m_prepareOnly = false;
     m_currentState->onEnter(enterInformation, m_currentTime);
-    if(m_pause)
+    if(m_paused)
         m_currentState->pause(m_currentTime);
     else
         m_currentState->resume(m_currentTime);
@@ -81,9 +81,9 @@ void StateManager::passEvent(utility::Event::EventType type)
     if(m_currentState != nullptr && type != utility::Event::NoEvent)
     {
         if(type == utility::Event::LostFocus)
-            m_pause = true;
+            m_paused = true;
         else if(type == utility::Event::GainFocus)
-            m_pause = false;
+            m_paused = false;
 
         m_currentState->onEvent(type, m_frametime.getElapsedTime().asSeconds());
     }
@@ -94,5 +94,13 @@ void StateManager::draw(const DrawParameter& parameter)
     if(m_currentState != nullptr)
     {
         m_currentState->draw(parameter);
+    }
+}
+
+void StateManager::setLanguage(const std::string& language)
+{
+    for(auto it = begin(m_statesById); it != end(m_statesById); ++it)
+    {
+        it->second->setLanguage(language);
     }
 }

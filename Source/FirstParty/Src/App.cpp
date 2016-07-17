@@ -276,6 +276,17 @@ void App::handleKeyboard()
         // keyboard or mouse (PlayState for example) - waiting for FocusLost would be too late
         m_stateManager.passEvent(utility::Event::LostFocus);
     }
+
+    if(utility::Keyboard.isKeyReleased(sf::Keyboard::E))
+    {
+        m_config.set<std::string>("language", "en_");
+        m_stateManager.setLanguage("en_");
+    }
+    if(utility::Keyboard.isKeyReleased(sf::Keyboard::D))
+    {
+        m_config.set<std::string>("language", "de_");
+        m_stateManager.setLanguage("de_");
+    }
 }
 
 void App::handleEvents()

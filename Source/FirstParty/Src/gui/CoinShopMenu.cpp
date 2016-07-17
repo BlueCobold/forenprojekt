@@ -22,8 +22,7 @@ CoinShopMenu::CoinShopMenu(sf::RenderWindow& screen,
 
 void CoinShopMenu::setToolTip(int id, const std::string& textKey, int costs)
 {
-    Menu::getButton(id).setToolTipText(utility::replace(utility::translateKey(textKey),
-                                                        utility::toString(costs)));
+    Menu::getButton(id).setToolTipText(textKey, utility::toString(costs));
 }
 
 void CoinShopMenu::setGoodyCharges(const Goody::Type& goody, const int charges)
@@ -102,4 +101,18 @@ int CoinShopMenu::getSellRefund(const Goody::Type& goody) const
     default:
         throw std::runtime_error(utility::translateKey("InvalidGoody"));
     }
+}
+
+void CoinShopMenu::setLanguage(const std::string& language)
+{
+    Menu::setLanguage(language);
+
+    setToolTip(BUTTON_GRAVITY_PLUS, "tooltip_goody_cost", Price_Gravity);
+    setToolTip(BUTTON_GRAVITY_MINUS, "tooltip_goody_refund", static_cast<int>(Price_Gravity * SellModifier));
+    setToolTip(BUTTON_INVULNERABLE_PLUS, "tooltip_goody_cost", Price_Invulnerable);
+    setToolTip(BUTTON_INVULNERABLE_MINUS, "tooltip_goody_refund", static_cast<int>(Price_Invulnerable * SellModifier));
+    setToolTip(BUTTON_EXTRA_BALL_PLUS, "tooltip_goody_cost", Price_Invulnerable);
+    setToolTip(BUTTON_EXTRA_BALL_MINUS, "tooltip_goody_refund", static_cast<int>(Price_Invulnerable * SellModifier));
+    setToolTip(BUTTON_EXTRA_TIME_PLUS, "tooltip_goody_cost", Price_Extra_Time);
+    setToolTip(BUTTON_EXTRA_TIME_MINUS, "tooltip_goody_refund", static_cast<int>(Price_Extra_Time * SellModifier));
 }

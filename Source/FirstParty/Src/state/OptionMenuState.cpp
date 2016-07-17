@@ -40,7 +40,7 @@ void OptionMenuState::onEnter(const EnterStateInformation* enterInformation, con
 
     m_pauseStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
-    m_menu.getLabel(OptionMenu::LABEL_RESOLUTION).setText(utility::translateKey("gui_label_resolution"));
+    m_menu.getLabel(OptionMenu::LABEL_RESOLUTION).setText(utility::translateKey(m_config.get<std::string>("language") + "gui_label_resolution"));
 }
 
 StateChangeInformation OptionMenuState::update(const float time)
@@ -87,4 +87,9 @@ void OptionMenuState::draw(const DrawParameter& params)
     params.getTarget().draw(whiteRect);
 
     m_menu.draw(params);
+}
+
+void OptionMenuState::setLanguage(const std::string& language)
+{
+    m_menu.setLanguage(language);
 }

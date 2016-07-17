@@ -63,3 +63,8 @@ void GameFinishedState::draw(const DrawParameter& params)
 
     m_menu.draw(params);
 }
+
+void GameFinishedState::setLanguage(const std::string& language)
+{
+    m_menu.setLanguage(language);
+}

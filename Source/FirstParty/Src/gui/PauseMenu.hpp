@@ -17,7 +17,7 @@ public:
 
     PauseMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 
-    void setCoinToolTipText(const std::string& text);
+    void setCoinToolTipText(const std::string& text, const std::string& coins);
 };
 
 #endif // PAUSE_MENU_HPP

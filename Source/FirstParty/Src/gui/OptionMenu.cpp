@@ -70,10 +70,10 @@ void OptionMenu::applyChanges()
 
         sf::ContextSettings settings = sf::ContextSettings(24, 8, 0);
         if(m_fullScreen)
-            Menu::getRenderWindow().create(videoMode, utility::translateKey("gui_rickety_racquet"), sf::Style::Fullscreen, settings);
+            Menu::getRenderWindow().create(videoMode, m_config.get<std::string>("language") + utility::translateKey("gui_rickety_racquet"), sf::Style::Fullscreen, settings);
         if(!m_fullScreen)
         {
-            Menu::getRenderWindow().create(sf::VideoMode(videoMode), utility::translateKey("gui_rickety_racquet"), sf::Style::Default, settings);
+            Menu::getRenderWindow().create(sf::VideoMode(videoMode), m_config.get<std::string>("language") + utility::translateKey("gui_rickety_racquet"), sf::Style::Default, settings);
             Menu::getRenderWindow().setIcon(m_icon.getSize().x, m_icon.getSize().y, m_icon.getPixelsPtr());
         }
 
@@ -235,7 +235,7 @@ void OptionMenu::nextVideoMode()
     m_currentVideoMode = m_availableVideoMode[m_currentVideoModeIndex];
 
     if(m_appointedVideoMode == m_currentVideoMode)
-        getLabel(LABEL_RESOLUTION).setText(utility::translateKey("gui_label_resolution"));
+        getLabel(LABEL_RESOLUTION).setText(utility::translateKey(m_config.get<std::string>("language") + "gui_label_resolution"));
     else
         getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.x) +
                                            utility::toString(" x ") +
@@ -251,7 +251,7 @@ void OptionMenu::prevVideoMode()
     m_currentVideoMode = m_availableVideoMode[m_currentVideoModeIndex];
 
     if(m_appointedVideoMode == m_currentVideoMode)
-        getLabel(LABEL_RESOLUTION).setText(utility::translateKey("gui_label_resolution"));
+        getLabel(LABEL_RESOLUTION).setText(utility::translateKey(m_config.get<std::string>("language") + "gui_label_resolution"));
     else
         getLabel(LABEL_RESOLUTION).setText(utility::toString(m_currentVideoMode.x) +
                                            utility::toString(" x ") +

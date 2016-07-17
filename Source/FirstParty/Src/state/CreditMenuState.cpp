@@ -55,3 +55,8 @@ void CreditMenuState::draw(const DrawParameter& params)
 
     m_menu.draw(params);
 }
+
+void CreditMenuState::setLanguage(const std::string& language)
+{
+    m_menu.setLanguage(language);
+}

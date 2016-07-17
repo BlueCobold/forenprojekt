@@ -49,9 +49,9 @@ void MenuSprite::update(const sf::RenderWindow& screen, const float time, const 
         m_showToolTip = false;  
 }
 
-void MenuSprite::setToolTipText(const std::string& text)
+void MenuSprite::setToolTipText(const std::string& text, const std::string& replacement)
 {
-    m_toolTip.setText(text);
+    m_toolTip.setText(text, replacement);
 }
 
 void MenuSprite::setTextureRect(const sf::IntRect& textureRect)
@@ -76,4 +76,10 @@ void MenuSprite::updateLayout(const sf::Vector2f& screenSize)
 {
     MenuElement::updateLayout(screenSize);
     m_sprite.setPosition(getCurrentPosition());
+}
+
+void MenuSprite::setLanguage(const std::string& language)
+{
+    MenuElement::setLanguage(language);
+    m_toolTip.setLanguage(language);
 }

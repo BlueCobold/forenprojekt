@@ -9,7 +9,7 @@ InputBox::InputBox(const int id,
                    const unsigned int inputLimit,
                    const InputBoxStyle& style) :
     MenuElement(id, MenuElementType::InputBox, position, offset),
-    m_inputText("", position, offset + style.textOffset, 0.f, style.font),
+    m_inputText("", position, offset + style.textOffset, 0.f, style.font, ""),
     m_inputLimit(inputLimit),
     m_size(size),
     m_finished(false),

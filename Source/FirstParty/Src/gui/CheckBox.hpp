@@ -26,7 +26,9 @@ public:
     void setChecked(bool checked);
 
     void setToolTip(const ToolTip& toolTip);
-    void setToolTipText(const std::string& text);
+    void setToolTipText(const std::string& text, const std::string& replacement = "");
+
+    void setLanguage(const std::string& language) override;
 protected:
     void updateLayout(const sf::Vector2f& screenSize) override;
 

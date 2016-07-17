@@ -128,8 +128,15 @@ void AchievementState::updateAchievementData()
 
     if(achievement)
     {
-        m_menu.getInteractiveLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setText(achievement->getName());
-        m_menu.getInteractiveLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setToolTipText(utility::translateKey("tooltip_" + achievement->getKey()));
+        m_menu.getInteractiveLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setText(achievement->getName(m_config.get<std::string>("language")));
+        m_menu.getInteractiveLabel(AchievementMenu::LABEL_ACHIEVEMENT_NAME).setToolTipText("tooltip_" + achievement->getKey());
         m_menu.getLabel(AchievementMenu::LABEL_ACHIEVEMENT_COUNTER).setText(utility::toString(achievement->getCounter()));
     }
+}
+
+void AchievementState::setLanguage(const std::string& language)
+{
+    m_menu.setLanguage(language);
+
+    updateAchievementData();
 }

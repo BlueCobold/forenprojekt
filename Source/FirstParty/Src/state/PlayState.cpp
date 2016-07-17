@@ -189,8 +189,11 @@ StateChangeInformation PlayState::update(const float time)
 
 void PlayState::draw(const DrawParameter& params)
 {
-    m_level->adjustView(params);
-    m_level->draw(params);
+    if(m_level != nullptr)
+    {
+        m_level->adjustView(params);
+        m_level->draw(params);
+    }
     m_hud.draw(params);
 }
 

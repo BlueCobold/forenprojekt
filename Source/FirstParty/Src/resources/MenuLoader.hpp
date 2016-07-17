@@ -28,7 +28,7 @@ class MenuLoader
 {
 public:
 
-    static std::unique_ptr<MenuTemplate> loadMenuTemplate(const std::string& path, ResourceManager& resourceManager);
+    static std::unique_ptr<MenuTemplate> loadMenuTemplate(const std::string& path, ResourceManager& resourceManager, const std::string& language);
 
 private:
 
@@ -96,6 +96,8 @@ private:
     static ButtonStateStyle loadButtonStateStyle(const tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
     static CheckBoxStateStyle loadCheckBoxStateStyle(const tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
     static SliderStateStyle loadSliderStateStyle(const tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
+
+    static std::string _language;
 };
 
 #endif // MENU_LOADER_HPP

@@ -27,8 +27,9 @@ public:
     
     void setLevelInfo(const std::string& levelName,
                       const float time,
-                      const int balls);
-    void setCoinToolTipText(const std::string& text);
+                      const int balls,
+                      const std::string& language);
+    void setCoinToolTipText(const std::string& text, const std::string& coins);
 };
 
 #endif // LEVEL_PREVIEW_NMENU_HPP

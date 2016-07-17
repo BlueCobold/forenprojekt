@@ -21,17 +21,20 @@ public:
         const sf::Vector2f& offset,
         const float rotation,
         const BitmapFont* font,
+        const std::string& language,
         const Alignment alignment = Left,
         int id = -1);
 
     virtual std::unique_ptr<MenuElement> clone() const override;
 
     void setToolTip(const ToolTip& toolTip);
-    void setToolTipText(const std::string& text);
+    void setToolTipText(const std::string& text, const std::string& replacement = "");
 
     void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     void draw(const DrawParameter& params) override;
     void drawAdditionalForeground(const DrawParameter& params) override;
+
+    void setLanguage(const std::string& language) override;
 };
 
 #endif

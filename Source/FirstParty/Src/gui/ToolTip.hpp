@@ -26,8 +26,10 @@ private:
     int m_longestLine;
     float m_width;
     float m_height;
+    std::string m_textKey;
+    std::string m_language;
 
-    void setLines(const std::string& text);
+    void setLines(const std::string& text, const std::string& replacement = "");
     const int findLongestLine() const;
     void stretchBackground();
     sf::Vector2f calculateNeededOffset(const sf::Vector2f& position, const sf::RenderWindow& screen);
@@ -44,6 +46,7 @@ public:
                       BottomRight = 9};
 
     ToolTip(const std::string& text,
+            const std::string& language,
             const BitmapFont* font,
             const sf::Vector2f& textOffset,
             const sf::Vector2f& offset,
@@ -54,7 +57,9 @@ public:
 
     void setPosition(const sf::Vector2f& position, const sf::RenderWindow& screen);
 
-    void setText(const std::string& text);
+    void setText(const std::string& text, const std::string& replacement = "");
+
+    void setLanguage(const std::string& language);
 };
 
 #endif // TOOLTIP_HPP

@@ -113,8 +113,11 @@ StateChangeInformation LevelFailState::update(const float time)
 
 void LevelFailState::draw(const DrawParameter& params)
 {
-    m_level->adjustView(params);
-    m_level->draw(params);
+    if(m_level != nullptr)
+    {
+        m_level->adjustView(params);
+        m_level->draw(params);
+    }
 
     m_HUD.draw(params);
 
@@ -139,4 +142,9 @@ void LevelFailState::setAchievements()
         m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::LevelNAM, 1);
 
     m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::Level, 1);
+}
+
+void LevelFailState::setLanguage(const std::string& language)
+{
+    m_menu.setLanguage(language);
 }

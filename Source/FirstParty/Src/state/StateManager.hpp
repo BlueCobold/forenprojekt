@@ -28,6 +28,7 @@ public:
     void update();
     void passEvent(utility::Event::EventType type);
 
+    void setLanguage(const std::string& language);
 private:
     State* getState(StateId id) const;
 
@@ -37,7 +38,7 @@ private:
     State* m_currentState;
     StateId m_currentStateId;
     std::unique_ptr<Level> m_currentLevel;
-    bool m_pause;
+    bool m_paused;
 };
 
 #endif // STATE_MANAGER_HPP

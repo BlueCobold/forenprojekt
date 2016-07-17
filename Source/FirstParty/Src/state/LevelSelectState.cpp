@@ -199,3 +199,8 @@ void LevelSelectState::updateButtons()
     else
         updateRightButton();
 }
+
+void LevelSelectState::setLanguage(const std::string& language)
+{
+    m_menu.setLanguage(language);
+}

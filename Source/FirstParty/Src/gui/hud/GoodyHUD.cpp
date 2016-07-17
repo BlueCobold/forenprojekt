@@ -10,7 +10,7 @@ GoodyHUD::GoodyHUD(ResourceManager& resourceManager,
                    const sf::Vector2f& position,
                    const sf::Vector2f& offset) :
     HUDElement(position, offset),
-    m_charges("", position, offset + sf::Vector2f(35, 44), 0, resourceManager.getBitmapFont("goodyFont"))
+    m_charges("", position, offset + sf::Vector2f(35, 44), 0, resourceManager.getBitmapFont("goodyFont"), "")
 {
     m_icon.setTexture(*resourceManager.getTexture(iconKey));
     m_icon.setTextureRect(textureRect);

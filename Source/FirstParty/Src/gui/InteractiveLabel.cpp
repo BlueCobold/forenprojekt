@@ -9,9 +9,10 @@ InteractiveLabel::InteractiveLabel(const std::string& text,
                                    const sf::Vector2f& offset,
                                    const float rotation,
                                    const BitmapFont* font,
+                                   const std::string& language,
                                    const Alignment alignment,
                                    int id) :
-    LineLabel(text, position, offset, rotation, MenuElementType::InteractiveLabel, font, alignment, id)
+    LineLabel(text, position, offset, rotation, MenuElementType::InteractiveLabel, font, language, alignment, id)
 {
 }
 
@@ -23,6 +24,7 @@ std::unique_ptr<MenuElement> InteractiveLabel::clone() const
                                                             getOffset(),
                                                             getRotation(),
                                                             getFont(),
+                                                            getLanguage(),
                                                             getAlignment(),
                                                             getId()));
     clone->setVisibleWhenId(getVisibleWhenId());
@@ -35,9 +37,9 @@ void InteractiveLabel::setToolTip(const ToolTip& toolTip)
     m_toolTip = toolTip;
 }
 
-void InteractiveLabel::setToolTipText(const std::string& text)
+void InteractiveLabel::setToolTipText(const std::string& text, const std::string& replacement)
 {
-    m_toolTip.setText(text);
+    m_toolTip.setText(text, replacement);
 }
 
 void InteractiveLabel::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
@@ -73,4 +75,10 @@ void InteractiveLabel::drawAdditionalForeground(const DrawParameter& params)
         m_toolTip.draw(params);
 
     m_showToolTip = false;
+}
+
+void InteractiveLabel::setLanguage(const std::string& language)
+{
+    LineLabel::setLanguage(language);
+    m_toolTip.setLanguage(language);
 }

@@ -139,3 +139,9 @@ void Menu::setZoomFactor(float zoomFactor)
             dynamic_cast<SubWindow*>((*it).get())->setZoomFactor(m_zoomFactor);
     }
 }
+
+void Menu::setLanguage(const std::string& language)
+{
+    for(auto it = begin(m_panel.getElements()); it != end(m_panel.getElements()); ++it)
+        (*it)->setLanguage(language);
+}

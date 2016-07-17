@@ -36,7 +36,12 @@ private:
 
 public:
 
-    Button(int id, ButtonStyle style, const sf::Vector2f& position, const sf::Vector2f& offset, bool triggers = true);
+    Button(int id, 
+           ButtonStyle style,
+           const sf::Vector2f& position,
+           const sf::Vector2f& offset,
+           const std::string& language,
+           bool triggers = true);
 
     virtual std::unique_ptr<MenuElement> clone() const override;
 
@@ -49,11 +54,13 @@ public:
     const sf::Vector2i& getSize() const;
 
     void setToolTip(const ToolTip& toolTip);
-    void setToolTipText(const std::string& text);
+    void setToolTipText(const std::string& text, const std::string& replacement = "");
 
     void changeIdleSprite(const sf::Sprite& sprite);
     void changeHoverSprite(const sf::Sprite& sprite);
     void changePressedSprite(const sf::Sprite& sprite);
+
+    void setLanguage(const std::string& language) override;
 protected:
     void updateLayout(const sf::Vector2f& screenSize) override;
 
