@@ -152,7 +152,7 @@ void LoadLevelState::onEvent(utility::Event::EventType type)
 
 void LoadLevelState::setLanguage(const std::string& language)
 {
-    m_label.setLanguage(m_label.getLanguage());
+    m_label.setLanguage(language);
     std::string text(utility::translateKey(m_label.getLanguage() + "gui_loading_screen"));
     m_label.setText(text);
 }

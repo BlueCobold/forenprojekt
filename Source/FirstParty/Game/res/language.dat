@@ -251,6 +251,7 @@ de_tooltip_goody_extratime = dieser helfer gibt\r\ndir 30 sekunden mehr zeit.
 de_tooltip_goody_cost = kaufwert: %
 de_tooltip_goody_refund = verkaufswert: %
 de_tooltip_preview_notimeattack = kein time attack\r\nmode verfügbar
+de_tooltip_achievement_name = beschreibung
 de_tooltip_online_highscore = online highscore zeigen.
 de_tooltip_offline_highscore = offline highscore zeigen.
 de_tooltip_ach_hit_target_insum = alle getroffenen ziele
@@ -510,3 +511,6 @@ en_ach_buy_goodygeneral_incash = Live Like A Lord
 en_ach_buy_invulnerablegoody_insum = Stronghold
 en_ach_buy_extraballgoody_insum = Ball Serving Machine
 en_ach_buy_extratimegoody_insum = Flux Compensator
+
+de_name = name
+en_name = name

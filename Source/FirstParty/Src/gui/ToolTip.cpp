@@ -146,14 +146,14 @@ void ToolTip::setLines(const std::string& text, const std::string& replacement)
         tokens.erase(0, pos + 4);
         /* TODO
         LineLabel label(token, sf::Vector2f(), sf::Vector2f(), 0, m_font, LineLabel::Centered);*/
-        LineLabel label(text, sf::Vector2f(), sf::Vector2f(), 0, m_font, "", LineLabel::Centered);
+        LineLabel label(text, sf::Vector2f(), sf::Vector2f(), 0, m_font, m_language, LineLabel::Centered);
         if(replacement != "" && token.find("%") != std::string::npos)
             token = utility::replace(token, replacement);
         label.setText(token);
         m_label[m_lines++] = label;
     }
     // single line or last multiline
-    LineLabel label(text, sf::Vector2f(), sf::Vector2f(), 0, m_font, "", LineLabel::Centered);
+    LineLabel label(text, sf::Vector2f(), sf::Vector2f(), 0, m_font, m_language, LineLabel::Centered);
     if(replacement != "" && tokens.find("%") != std::string::npos)
             tokens = utility::replace(tokens, replacement);
     label.setText(tokens);

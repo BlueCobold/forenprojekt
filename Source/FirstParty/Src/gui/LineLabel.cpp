@@ -33,7 +33,8 @@ LineLabel::LineLabel(const std::string& text,
     else
         m_text = "";
 
-    rebuild();
+    if(m_text.find("\\r\\n") == std::string::npos)
+        rebuild();
 }
 
 LineLabel::LineLabel(const std::string& text,
@@ -56,7 +57,9 @@ LineLabel::LineLabel(const std::string& text,
         m_text = utility::translateKey(getLanguage() + m_textKey);
     else
         m_text = "";
-    rebuild();
+    
+    if(m_text.find("\\r\\n") == std::string::npos)
+        rebuild();
 }
 
 std::unique_ptr<MenuElement> LineLabel::clone() const
