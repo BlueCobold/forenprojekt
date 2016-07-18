@@ -114,5 +114,7 @@
 		<sprite name="IconBatteryCharge" x="348" y="687" width="32" height="19" originx="14" originy="7" />
 		<sprite name="BackgroundGradient" x="1009" y="66" width="10" height="10" originx="5" originy="5" />
 		<sprite name="Icon_Backgrounds_Logo" x="745" y="698" width="258" height="136" originx="129" originy="68" />
+		<sprite name="flag_german" x="4" y="750" width="64" height="64" originx="0" originy="0" />
+		<sprite name="flag_english" x="71" y="750" width="64" height="64" originx="0" originy="0" />
 	</sprites>
 </spriteSheet>

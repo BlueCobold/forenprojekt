@@ -805,5 +805,18 @@
 		<button id="2" text="gui_option" style="optionButtonStyle" x="0.75" y="0.6" offsetx="45" offsety="-10" />
 		<button id="3" text="gui_credit" style="creditButtonStyle" x="0.25" y="0.65" offsetx="-55" offsety="-5" />
 		<button id="4" text="gui_close" style="exitButtonStyle" x="0.48" y="0.8" offsetx="-5" offsety="-5" />
+		<button id="7" text="@@Ger" style="flag_german" x="0" y="1" offsetx="40" offsety="-94" />
+		<button id="8" text="@@Eng" style="flag_english" x="0" y="1" offsetx="40" offsety="-94" />
+		<subwindow id="9" x="0" y="1" offsetx="90" offsety="-94" sizex="100" sizey="80" innerheight="150">
+			<style>
+				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
+				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
+				<scrollBottom spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="10" />
+			</style>
+			<elements>
+				<button id="10" text="@@Ger" style="flag_german" x="0" y="0" offsetx="40" offsety="0" />
+				<button id="11" text="@@Eng" style="flag_english" x="0" y="0" offsetx="40" offsety="70" />
+			</elements>
+		</subwindow>
 	</elements>
 </menu>

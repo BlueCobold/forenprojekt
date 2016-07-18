@@ -694,6 +694,30 @@
 			offsetx="-5" offsety="-5" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 	</buttonStyle>
+	<buttonStyle name="flag_german">
+		<mouseRect left="1" top="1" width="64" height="64" />
+		<idle spriteSheet="gui_elements" sprite="flag_german"
+			offsetx="0" offsety="0"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="9" />
+		<hover spriteSheet="gui_elements" sprite="flag_german"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="9" />
+		<pressed spriteSheet="gui_elements" sprite="flag_german"
+			offsetx="6" offsety="6" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="6" fontoffsety="15" />
+	</buttonStyle>
+	<buttonStyle name="flag_english">
+		<mouseRect left="1" top="1" width="64" height="64" />
+		<idle spriteSheet="gui_elements" sprite="flag_english"
+			offsetx="0" offsety="0"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="9" />
+		<hover spriteSheet="gui_elements" sprite="flag_english"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="9" />
+		<pressed spriteSheet="gui_elements" sprite="flag_english"
+			offsetx="6" offsety="6" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="6" fontoffsety="15" />
+	</buttonStyle>
 	<checkboxStyle name="default">
 		<mouseRect left="1" top="5" width="27" height="27" />
 		<unchecked spriteSheet="gui_elements" sprite="unchecked_idle"
@@ -739,6 +763,7 @@
 		<hover spriteSheet="gui_elements" sprite="online_hover"
 			offsetx="0" offsety="0" />
 	</checkboxStyle>
+
 	<sliderStyle name="default">
 		<mouseRect left="8" top="-3" width="26" height="36" />
 		<value min="0" max="100" width="83"/>

@@ -60,7 +60,8 @@ App::App(AppConfig& config) :
     m_shaderContext(),
     m_resourceManager(m_shaderContext, m_config),
     m_achievementManager("Achievement.dat", m_config),
-    m_musicPlayer(m_config, m_resourceManager.getMusic(), MusicPlayer::Normal)
+    m_musicPlayer(m_config, m_resourceManager.getMusic(), MusicPlayer::Normal),
+    m_selectedLanguage(m_config.get<std::string>("lanuage"))
 {
     gl::sys::LoadFunctions();
     int maxTextureSize = 0;
@@ -183,6 +184,13 @@ void App::update()
     m_resourceManager.getSoundManager().update();
     m_shaderContext.update();
     m_stateManager.update();
+
+    if(m_selectedLanguage != m_config.get<std::string>("language"))
+    {
+        m_selectedLanguage = m_config.get<std::string>("language");
+        m_stateManager.setLanguage(m_selectedLanguage);
+    }
+
     m_musicPlayer.update();
 
     if(!m_isMinimized)
@@ -275,17 +283,6 @@ void App::handleKeyboard()
         // notify the state manager to pause all states and prevent messing arround with
         // keyboard or mouse (PlayState for example) - waiting for FocusLost would be too late
         m_stateManager.passEvent(utility::Event::LostFocus);
-    }
-
-    if(utility::Keyboard.isKeyReleased(sf::Keyboard::E))
-    {
-        m_config.set<std::string>("language", "en_");
-        m_stateManager.setLanguage("en_");
-    }
-    if(utility::Keyboard.isKeyReleased(sf::Keyboard::D))
-    {
-        m_config.set<std::string>("language", "de_");
-        m_stateManager.setLanguage("de_");
     }
 }
 

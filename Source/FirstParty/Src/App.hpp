@@ -62,6 +62,8 @@ private:
     StateManager m_stateManager;
     AchievementManager m_achievementManager;
     MusicPlayer m_musicPlayer;
+
+    std::string m_selectedLanguage;
 };
 
 #endif // APP_HPP
