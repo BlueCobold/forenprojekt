@@ -67,12 +67,16 @@ void ToolTip::setPosition(const sf::Vector2f& position, const sf::RenderWindow& 
 {
     if(m_lines != -1)
     {
-        sf::Vector2f offset = calculateNeededOffset(position, screen);
+        float mobileOffset = 0;
+#if defined(IOS) || defined(ANDROID)
+        mobileOffset = m_offset.y + m_height + 30.f;
+#endif
+        sf::Vector2f offset = calculateNeededOffset(position - sf::Vector2f(0, mobileOffset) , screen);
 
         for(auto it = begin(m_label); it != end(m_label); ++it)
         {
             it->second.setOffset(sf::Vector2f(position.x + m_offset.x + m_textOffset.x + offset.x,
-                                 position.y + m_textOffset.y + m_offset.y + offset.y + it->first * m_height / m_lines));
+                                 position.y + m_textOffset.y + m_offset.y + offset.y - mobileOffset + it->first * m_height / m_lines));
 
             it->second.update(screen, 0);
         }
@@ -81,31 +85,31 @@ void ToolTip::setPosition(const sf::Vector2f& position, const sf::RenderWindow& 
         auto width = m_background[TopLeft].getTextureRect().width;
 
         m_background[TopLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x + offset.x,
-                                         position.y - height + m_offset.y + offset.y);
+                                         position.y - height + m_offset.y + offset.y - mobileOffset);
 
         m_background[TopCenter].setPosition(position.x - m_width / 2.f + m_offset.x + offset.x,
-                                           position.y - height + m_offset.y + offset.y);
+                                           position.y - height + m_offset.y + offset.y - mobileOffset);
 
         m_background[TopRight].setPosition(position.x + m_width / 2.f + m_offset.x + offset.x,
-                                          position.y - height + m_offset.y + offset.y);
+                                          position.y - height + m_offset.y + offset.y - mobileOffset);
 
         m_background[MiddleLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x + offset.x,
-                                            position.y + m_offset.y + offset.y);
+                                            position.y + m_offset.y + offset.y - mobileOffset);
 
         m_background[MiddleCenter].setPosition(position.x - m_width / 2.f + m_offset.x + offset.x,
-                                              position.y + m_offset.y + offset.y);
+                                              position.y + m_offset.y + offset.y - mobileOffset);
 
         m_background[MiddleRight].setPosition(position.x + m_width / 2.f + m_offset.x + offset.x,
-                                             position.y + m_offset.y + offset.y);
+                                             position.y + m_offset.y + offset.y - mobileOffset);
 
         m_background[BottomLeft].setPosition(position.x - m_width / 2.f - width + m_offset.x + offset.x,
-                                            position.y + m_height + m_offset.y + offset.y);
+                                            position.y + m_height + m_offset.y + offset.y - mobileOffset);
 
         m_background[BottomCenter].setPosition(position.x - m_width / 2.f + m_offset.x + offset.x,
-                                              position.y + m_height + m_offset.y + offset.y);
+                                              position.y + m_height + m_offset.y + offset.y - mobileOffset);
 
         m_background[BottomRight].setPosition(position.x + m_width / 2.f + m_offset.x + offset.x,
-                                             position.y + m_height + m_offset.y + offset.y);
+                                             position.y + m_height + m_offset.y + offset.y - mobileOffset);
     }
 }
 
@@ -144,8 +148,6 @@ void ToolTip::setLines(const std::string& text, const std::string& replacement)
     {
         token = tokens.substr(0, pos);
         tokens.erase(0, pos + 4);
-        /* TODO
-        LineLabel label(token, sf::Vector2f(), sf::Vector2f(), 0, m_font, LineLabel::Centered);*/
         LineLabel label(text, sf::Vector2f(), sf::Vector2f(), 0, m_font, m_language, LineLabel::Centered);
         if(replacement != "" && token.find("%") != std::string::npos)
             token = utility::replace(token, replacement);
