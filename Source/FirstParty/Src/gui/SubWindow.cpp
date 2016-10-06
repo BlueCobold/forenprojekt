@@ -110,9 +110,10 @@ void SubWindow::update(const sf::RenderWindow& screen, const float time, const s
     sf::IntRect mouseRect(static_cast<sf::Vector2i>(m_windowRect.getPosition()) + mouseOffset, static_cast<sf::Vector2i>(m_windowRect.getSize()));
     sf::IntRect sliderRect(static_cast<sf::Vector2i>(m_positionRect.getPosition()), static_cast<sf::Vector2i>(m_positionRect.getSize()));
 
-    auto cursorPosition = getCursorPosition(screen);
+    auto moveDistance = m_cursorPosition - getCursorPosition(screen);
+    m_cursorPosition = getCursorPosition(screen);
 
-    if(mouseRect.contains(cursorPosition))
+    if(mouseRect.contains(m_cursorPosition))
     {
         float scroll = 0;
 
@@ -121,7 +122,7 @@ void SubWindow::update(const sf::RenderWindow& screen, const float time, const s
         else if(utility::Mouse.isWheelMovedUp())
             scroll = m_positionRect.getPosition().y + ceilf(windowPixelToSliderPixel(-15));
         else if(utility::Mouse.leftButtonPressed())
-            scroll = m_positionRect.getPosition().y + windowPixelToSliderPixel(utility::Mouse.getMoveDistanze().y * 2.f);
+            scroll = m_positionRect.getPosition().y + windowPixelToSliderPixel(moveDistance.y * 2.f);
         if(scroll != 0)
         {
             if(scroll < currentPosition.y)
@@ -135,14 +136,14 @@ void SubWindow::update(const sf::RenderWindow& screen, const float time, const s
         }
     }
 
-    if(sliderRect.contains(cursorPosition) && utility::Mouse.leftButtonDown())
+    if(sliderRect.contains(m_cursorPosition) && utility::Mouse.leftButtonDown())
     {
-        m_startValue = cursorPosition.y;
+        m_startValue = m_cursorPosition.y;
         m_active = true;
     }
     else if(utility::Mouse.leftButtonPressed() && m_active)
     {
-        m_endValue = cursorPosition.y;
+        m_endValue = m_cursorPosition.y;
         float y = m_positionRect.getPosition().y + m_endValue - m_startValue;
         if(y < currentPosition.y)
             y = currentPosition.y;
@@ -165,7 +166,7 @@ void SubWindow::update(const sf::RenderWindow& screen, const float time, const s
     m_style.scrollbarMiddle.setScale(1, height/m_style.scrollbarMiddle.getTextureRect().height);
     m_style.scrollbarBottom.setPosition(pos.x, pos.y + height + m_style.scrollbarTop.getTextureRect().height);
 
-    if(mouseRect.contains(cursorPosition))
+    if(mouseRect.contains(m_cursorPosition))
         m_panel.update(screen, time, getMouseOffset(screen));
     else
         m_panel.update(screen, time, static_cast<sf::Vector2i>(screen.getSize()));

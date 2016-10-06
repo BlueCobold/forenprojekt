@@ -99,7 +99,6 @@ namespace utility
 
     void MouseWrapper::capture()
     {
-        m_beforMovePosition = sf::Mouse::getPosition();
         m_lastPosition = m_totalPosition;
         m_position = sf::Vector2f(m_lastPosition);
         // TODO: remove not needed code
@@ -202,13 +201,6 @@ namespace utility
         m_sensorsInited = false;
     }
 #endif
-
-    sf::Vector2i MouseWrapper::getMoveDistanze() const
-    {
-        auto currentPosition = sf::Mouse::getPosition();
-        return sf::Vector2i(m_beforMovePosition.x - currentPosition.x,
-                            m_beforMovePosition.y - currentPosition.y);
-    }
 
     const sf::Vector2i& MouseWrapper::getRealWindowPosition() const
     {

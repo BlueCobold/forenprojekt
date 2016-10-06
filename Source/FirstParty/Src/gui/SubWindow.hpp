@@ -72,6 +72,8 @@ private:
     sf::RectangleShape m_sliderRect;
     sf::RectangleShape m_positionRect;
 
+    sf::Vector2i m_cursorPosition;
+
     void on(const DrawParameter& params);
     void off(const DrawParameter& params);
 
