@@ -142,11 +142,11 @@ void Ball::setValueOf(const std::string& name, const float value)
     return Entity::setValueOf(name, value);
 }
 
-void Ball::draw(const DrawParameter& params)
+void Ball::doDraw(const DrawParameter& params)
 {
     if(m_trail != nullptr)
         m_trail->draw(params);
-    Entity::draw(params);
+    Entity::doDraw(params);
 }
 
 const Entity* Ball::getSpawnAnimationEntity() const

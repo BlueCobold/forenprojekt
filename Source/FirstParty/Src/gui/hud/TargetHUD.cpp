@@ -33,8 +33,8 @@ void TargetHUD::update(const DrawParameter& params)
         getCurrentPosition().y);
 }
 
-void TargetHUD::draw(const DrawParameter& params)
+void TargetHUD::doDraw(const DrawParameter& params)
 {
    params.getTarget().draw(m_targetTexture);
-   LabelHUD::draw(params);
+   LabelHUD::doDraw(params);
 }

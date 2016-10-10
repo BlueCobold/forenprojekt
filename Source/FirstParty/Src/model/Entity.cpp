@@ -222,7 +222,7 @@ bool compareDrawOrder(const std::unique_ptr<Entity>& lhs, const std::unique_ptr<
     return lhs->getDrawOrder() < rhs->getDrawOrder();
 }
 
-std::unique_ptr<Entity> Entity::clone() const
+std::unique_ptr<Entity> Entity::doClone() const
 {
     auto clone = std::unique_ptr<Entity>(new Entity(m_type, m_cloneHandler, m_respawnable, m_autoKill));
 

@@ -73,7 +73,7 @@ StateChangeInformation AchievementState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void AchievementState::draw(const DrawParameter& params)
+void AchievementState::doDraw(const DrawParameter& params)
 {    
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 

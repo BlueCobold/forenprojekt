@@ -25,6 +25,11 @@ private:
     float m_min;
     float m_max;
 
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        return std::unique_ptr<Ramp>(new Ramp(m_min, m_max, getProvider()->clone()));
+    }
+
 public:
 
     Ramp(const float min, const float max, std::unique_ptr<ValueProvider> provider) :
@@ -33,7 +38,7 @@ public:
         m_max(max)
     { }
 
-    virtual float getValue() override
+    float getValue() override
     {
         float value = getProvider()->getValue();
         if(value < m_min)
@@ -49,11 +54,6 @@ public:
                 return 1;
         }
         return (value - m_min) / diff;
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        return std::unique_ptr<Ramp>(new Ramp(m_min, m_max, getProvider()->clone()));
     }
 };
 

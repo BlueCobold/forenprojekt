@@ -26,16 +26,16 @@ public:
     LoadLevelState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~LoadLevelState();
 
-    virtual void draw(const DrawParameter& params);
-
-    StateChangeInformation update(const float time);
-    void onEnter(const EnterStateInformation *enterInformation, const float time);
+    StateChangeInformation update(const float time) override;
+    void onEnter(const EnterStateInformation *enterInformation, const float time) override;
     std::unique_ptr<Level> gainLevel();
 
     void setLanguage(const std::string& language) override;
+
 private:
     void loadLevel();
     void onEvent(utility::Event::EventType type);
+    void doDraw(const DrawParameter& params) override;
 
     LineLabel m_label;
     std::unique_ptr<Level> m_level;

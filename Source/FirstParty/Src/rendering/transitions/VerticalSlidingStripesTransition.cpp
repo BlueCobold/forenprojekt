@@ -98,7 +98,7 @@ void VerticalSlidingStripesTransition::update()
     }
 }
 
-void VerticalSlidingStripesTransition::draw(const DrawParameter& param)
+void VerticalSlidingStripesTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)

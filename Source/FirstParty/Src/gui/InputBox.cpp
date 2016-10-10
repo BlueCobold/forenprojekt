@@ -35,7 +35,7 @@ InputBox::InputBox(const int id,
 
 }
 
-std::unique_ptr<MenuElement> InputBox::clone() const
+std::unique_ptr<MenuElement> InputBox::doClone() const
 {
     auto clone = std::unique_ptr<MenuElement>(new InputBox(getId(), getPosition(), getOffset(), m_size, m_inputLimit, m_style));
     clone->setVisibleWhenId(getVisibleWhenId());
@@ -58,7 +58,7 @@ void InputBox::update(const sf::RenderWindow& screen, const float time, const sf
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 }
 
-void InputBox::draw(const DrawParameter& params)
+void InputBox::doDraw(const DrawParameter& params)
 {
     for(auto it = begin(m_background); it != end(m_background); ++it)
         params.getTarget().draw(it->second);

@@ -203,7 +203,7 @@ void JointParser::prepareAnimation(std::unique_ptr<Animation>& animation,
         [&](const JointObserver& old) -> const JointObject&
         {
             auto& result = *clonedJoints[&old.getObserved()];
-            // This erase works on the very evil assumption of Animation::clone cloning the y-pos-provider as last one!
+            // This erase works on the very evil assumption of Animation::doClone cloning the y-pos-provider as last one!
             // This should actually be assured by some unit-test or something.
             clonedJoints.erase(clonedJoints.find(&old.getObserved()));
             return result;

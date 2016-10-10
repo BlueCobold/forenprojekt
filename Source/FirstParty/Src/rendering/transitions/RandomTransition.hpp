@@ -48,6 +48,8 @@ private:
 
     std::unique_ptr<Transition> createTransition(int randomCount);
 
+    void doDraw(const DrawParameter& param);
+
 public:
 
     RandomTransition(const sf::Texture* sourceTexture,
@@ -57,8 +59,6 @@ public:
                      const TransitionType type = TypeCount);
 
     virtual void update();
-
-    virtual void draw(const DrawParameter& param);
 };
 
 #endif // RANDOMTRANSITION_HPP

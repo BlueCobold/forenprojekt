@@ -13,6 +13,13 @@
 /// Returns the difference of the values of the passed providers
 class Substractor : public MultiProvider
 {
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        auto list = cloneProviders();
+        return std::unique_ptr<Substractor>(new Substractor(std::move(list)));
+    }
+
 public:
 
     Substractor(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
@@ -21,7 +28,7 @@ public:
            throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Sub"));
     }
 
-    virtual float getValue() override
+    float getValue() override
     {
         float v = 0.0f;
         bool first = true;
@@ -34,12 +41,6 @@ public:
             first = false;
         }
         return v;
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        auto list = cloneProviders();
-        return std::unique_ptr<Substractor>(new Substractor(std::move(list)));
     }
 };
 

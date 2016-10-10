@@ -82,7 +82,7 @@ void HorizontalSpringTransition::update()
     }
 }
 
-void HorizontalSpringTransition::draw(const DrawParameter& param)
+void HorizontalSpringTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)

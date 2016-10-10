@@ -10,6 +10,9 @@ class NewHighScoreMenu : public Menu
 {
 private:
     KeyboardMenu m_virtualKeyboard;
+
+    void doDraw(const DrawParameter& params) override;
+
 public:
     static const int INPUTBOX = 1;
     static const int BUTTON_SKIP = 5;
@@ -17,8 +20,7 @@ public:
 
     NewHighScoreMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 
-    virtual void draw(const DrawParameter& params) override;
-    virtual void update(sf::RenderWindow& screen, const float time) override;
+    void update(sf::RenderWindow& screen, const float time) override;
 
     void showKeyboard();
 

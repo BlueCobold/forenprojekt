@@ -63,7 +63,7 @@ void VerticalMaskingStripesTransition::update()
     }
 }
 
-void VerticalMaskingStripesTransition::draw(const DrawParameter& param)
+void VerticalMaskingStripesTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);

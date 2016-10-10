@@ -64,7 +64,7 @@ void HUD::restartAt(const float time)
     m_points.restartAt(time);
 }
 
-void HUD::draw(const DrawParameter& params)
+void HUD::doDraw(const DrawParameter& params)
 {
     m_arrow.update(params);
     m_arrow.draw(params);

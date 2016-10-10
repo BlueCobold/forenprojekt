@@ -34,6 +34,9 @@ private:
 
     std::function<void (const Button& sender)> m_callback;
 
+    std::unique_ptr<MenuElement> doClone() const override;
+    void doDraw(const DrawParameter& params) override;
+
 public:
 
     Button(int id, 
@@ -43,10 +46,7 @@ public:
            const std::string& language,
            bool triggers = true);
 
-    virtual std::unique_ptr<MenuElement> clone() const override;
-
     virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
-    virtual void draw(const DrawParameter& params) override;
     virtual void drawAdditionalForeground(const DrawParameter& params) override;
 
     void registerOnPressed(std::function<void (const Button& sender)> callback);

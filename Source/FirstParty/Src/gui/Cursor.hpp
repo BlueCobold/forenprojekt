@@ -21,11 +21,12 @@ public:
     Cursor(ResourceManager& resourceManager, const sf::RenderWindow& screen);
 
     void update();
-    void draw(const DrawParameter& params);
 
 private:
     sf::Sprite m_sprite;
     const sf::RenderWindow& m_screen;
+
+    void doDraw(const DrawParameter& params) override;
 };
 
 #endif // CURSOR_HPP

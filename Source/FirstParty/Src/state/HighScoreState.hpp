@@ -21,11 +21,11 @@ public:
     HighScoreState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~HighScoreState();
 
-    virtual StateChangeInformation update(const float time);
-    virtual void draw(const DrawParameter& params);
-    virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
+    StateChangeInformation update(const float time) override;
+    void onEnter(const EnterStateInformation* enterInformation, const float time) override;
 
     void setLanguage(const std::string& language) override;
+
 private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
@@ -33,6 +33,7 @@ private:
     void clearHighScore();
     void loadOnlineHighscore();
     void buildSubWindowElements();
+    void doDraw(const DrawParameter& params) override;
 
     HighScoreMenu m_menu;
     HUD m_HUD;

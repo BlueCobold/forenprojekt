@@ -12,6 +12,14 @@
 /// Returns the value of the providers that is equal to a case
 class Switch : public MultiProvider
 {
+    std::vector<float> m_constants;
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        auto list = cloneProviders();
+        return std::unique_ptr<Switch>(new Switch(std::move(list), m_constants));
+    }
+
 public:
 
     Switch(std::vector<std::unique_ptr<ValueProvider>> provider, const std::vector<float>& constants)
@@ -24,7 +32,7 @@ public:
             throw std::runtime_error(utility::translateKey("SwitchInvalidSize"));
     }
 
-    virtual float getValue() override
+    float getValue() override
     {
         auto it = begin(getProvider());
         auto current = (*it)->getValue();
@@ -36,15 +44,6 @@ public:
         }
         return 0;
     }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        auto list = cloneProviders();
-        return std::unique_ptr<Switch>(new Switch(std::move(list), m_constants));
-    }
-
-private:
-    std::vector<float> m_constants;
 };
 
 #endif //SWITCH_HPP

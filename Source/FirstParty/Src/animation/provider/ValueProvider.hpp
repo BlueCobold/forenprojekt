@@ -17,8 +17,6 @@ public:
 
     virtual void reset()
     { }
-
-    virtual std::unique_ptr<ValueProvider> clone() const = 0;
 };
 
 #endif //VALUE_PROVIDER_HPP

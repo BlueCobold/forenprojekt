@@ -39,7 +39,7 @@ void GoodyHUD::update(const DrawParameter& params)
         m_icon.setTextureRect(sf::IntRect(m_startRect.left, m_startRect.top + m_iconHeight * Deselected, m_startRect.width, m_startRect.height));
 }
 
-void GoodyHUD::draw(const DrawParameter& params)
+void GoodyHUD::doDraw(const DrawParameter& params)
 {
     params.getTarget().draw(m_icon);
     m_charges.draw(params);

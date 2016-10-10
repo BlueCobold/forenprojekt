@@ -22,8 +22,6 @@ public:
 
     virtual void update(const DrawParameter& params);
 
-    virtual void draw(const DrawParameter& params) = 0;
-
     virtual void setPosition(const sf::Vector2f& position, const sf::Vector2f& offset);
 
 protected:

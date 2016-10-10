@@ -23,14 +23,14 @@ public:
 
     void update();
 
-    virtual void draw(const DrawParameter& param);
-
 private:
     sf::Sprite m_sourceSprite;
     sf::CircleShape m_targetSprites;
     int m_RectangleStartX;
     int m_RectangleStartY;
     float m_radius;
+
+    void doDraw(const DrawParameter& param);
 };
 
 #endif // GROWINGCIRCLE_TRANSITION_HPP

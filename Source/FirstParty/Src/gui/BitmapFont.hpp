@@ -35,7 +35,7 @@ public:
 
     private:
 
-        virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+        void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
         int m_spacing;
         int m_xOffset;

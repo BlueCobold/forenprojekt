@@ -201,7 +201,7 @@ StateChangeInformation LevelPassState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void LevelPassState::draw(const DrawParameter& params)
+void LevelPassState::doDraw(const DrawParameter& params)
 {
     if(m_level != nullptr)
     {

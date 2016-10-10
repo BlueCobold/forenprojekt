@@ -13,6 +13,13 @@
 /// Returns the provider 1 ^ provider 2
 class Pow : public MultiProvider
 {
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        auto list = cloneProviders();
+        return std::unique_ptr<Pow>(new Pow(std::move(list)));
+    }
+
 public:
 
     Pow(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
@@ -21,17 +28,11 @@ public:
            throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Pow"));
     }
 
-    virtual float getValue() override
+    float getValue() override
     {
         float base = getProvider()[0]->getValue();
         float exponent = getProvider()[1]->getValue();
         return powf(base, exponent);
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        auto list = cloneProviders();
-        return std::unique_ptr<Pow>(new Pow(std::move(list)));
     }
 };
 

@@ -15,6 +15,8 @@ private:
     sf::Sprite m_clock;
     ResourceManager& m_resourceManager;
 
+    void doDraw(const DrawParameter& params) override;
+
 public:
     TimeHUD(ResourceManager& resourceManager,
             const sf::Vector2f& position,
@@ -22,8 +24,6 @@ public:
             const BitmapFont* bitmapFont);
 
     void update(const DrawParameter& params);
-
-    void draw(const DrawParameter& params);
 
     void setTime(int totalSeconds);
 };

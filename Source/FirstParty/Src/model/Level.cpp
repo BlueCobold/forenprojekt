@@ -510,7 +510,7 @@ void Level::onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, c
         entityA.onCollide(entityB, point, impulse);
 }
 
-void Level::draw(const DrawParameter& param)
+void Level::doDraw(const DrawParameter& param)
 {
     if(m_background != nullptr)
         m_background->draw(param);

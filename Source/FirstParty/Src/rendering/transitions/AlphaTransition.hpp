@@ -22,11 +22,11 @@ public:
 
     void update();
 
-    virtual void draw(const DrawParameter& param);
-
 private:
     sf::Sprite m_sourceSprite;
     sf::Sprite m_targetSprite;
+
+    void doDraw(const DrawParameter& param);
 };
 
 #endif // ALPHA_TRANSITION_HPP

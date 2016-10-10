@@ -40,7 +40,7 @@ void GrowingRectangleTransition::update()
                                                static_cast<int>(m_RectangleStartY * scale * 2.f)));
 }
 
-void GrowingRectangleTransition::draw(const DrawParameter& param)
+void GrowingRectangleTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);

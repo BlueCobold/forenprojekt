@@ -35,10 +35,6 @@ public:
         const Alignment alignment = Left,
         int id = -1);
 
-    virtual std::unique_ptr<MenuElement> clone() const override;
-
-    virtual void draw(const DrawParameter& params) override;
-
     void setText(const std::string& text);
     std::string getText() const;
     float getWidth() const;
@@ -74,8 +70,13 @@ public:
 
     void updateLayout(const sf::Vector2f& screenSize) override;
 
-    virtual void setLanguage(const std::string& language) override;
+    void setLanguage(const std::string& language) override;
+
 private:
+
+    std::unique_ptr<MenuElement> doClone() const override;
+
+    void doDraw(const DrawParameter& params) override;
 
     void rebuild();
 

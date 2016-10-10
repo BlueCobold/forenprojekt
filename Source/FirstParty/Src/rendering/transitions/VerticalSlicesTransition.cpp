@@ -60,7 +60,7 @@ void VerticalSlicesTransition::update()
     }
 }
 
-void VerticalSlicesTransition::draw(const DrawParameter& param)
+void VerticalSlicesTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);

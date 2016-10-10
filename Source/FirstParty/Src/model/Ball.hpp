@@ -18,12 +18,11 @@ public:
          CloneHandler& cloneHandler,
          const Entity* spawnAnimationEntity = nullptr);
 
-    virtual void restartAt(const float value) override;
-    virtual void update(const float value) override;
-    virtual void draw(const DrawParameter& params) override;
+    void restartAt(const float value) override;
+    void update(const float value) override;
 
-    virtual float getValueOf(const std::string& name) const override;
-    virtual void setValueOf(const std::string& name, const float value) override;
+    float getValueOf(const std::string& name) const override;
+    void setValueOf(const std::string& name, const float value) override;
 
     void registerForCheckpointChanges(std::function<void()> handler);
 
@@ -64,9 +63,8 @@ private:
     float m_stuckBallTime;
     bool m_isStucking;
 
-private:
-
     void autoResetBall(const float elapsedTime);
+    void doDraw(const DrawParameter& params) override;
 
     bool isOutside();
 

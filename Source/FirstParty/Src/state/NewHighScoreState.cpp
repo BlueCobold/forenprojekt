@@ -113,7 +113,7 @@ StateChangeInformation NewHighScoreState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void NewHighScoreState::draw(const DrawParameter& params)
+void NewHighScoreState::doDraw(const DrawParameter& params)
 {
     if(m_level != nullptr)
     {

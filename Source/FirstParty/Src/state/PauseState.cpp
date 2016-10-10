@@ -144,7 +144,7 @@ StateChangeInformation PauseState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void PauseState::draw(const DrawParameter& params)
+void PauseState::doDraw(const DrawParameter& params)
 {
     if(m_level != nullptr)
     {

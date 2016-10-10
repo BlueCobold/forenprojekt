@@ -20,7 +20,7 @@ public:
         m_persistent(persistent)
     { }
 
-    virtual float getValue() override
+    float getValue() override
     {
         if(!m_inited)
         {
@@ -30,18 +30,18 @@ public:
         return m_value;
     }
 
-    virtual void reset() override
+    void reset() override
     {
         if(!m_persistent)
             m_inited = false;
     }
 
-    virtual std::unique_ptr<ValueProvider> clone() const override
+private:
+
+    std::unique_ptr<ValueProvider> doClone() const override
     {
         return std::unique_ptr<CachedProvider>(new CachedProvider(getProvider()->clone(), m_persistent));
     }
-
-private:
 
     bool m_inited;
     bool m_persistent;

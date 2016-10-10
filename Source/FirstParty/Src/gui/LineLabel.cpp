@@ -62,14 +62,14 @@ LineLabel::LineLabel(const std::string& text,
         rebuild();
 }
 
-std::unique_ptr<MenuElement> LineLabel::clone() const
+std::unique_ptr<MenuElement> LineLabel::doClone() const
 {
     auto clone = std::unique_ptr<MenuElement>(new LineLabel(m_textKey, getPosition(), getOffset(), m_rotation, getType(), m_font, getLanguage(), m_alignment, getId()));
     clone->setVisibleWhenId(getVisibleWhenId());
     return std::move(clone);
 }
 
-void LineLabel::draw(const DrawParameter& params)
+void LineLabel::doDraw(const DrawParameter& params)
 {
     if(!isVisible())
         return;

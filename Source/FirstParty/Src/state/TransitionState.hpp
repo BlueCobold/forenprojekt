@@ -20,15 +20,15 @@ public:
     TransitionState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config, std::vector<sf::RenderTexture*>& m_offscreenBuffers);
     ~TransitionState();
 
-    virtual StateChangeInformation update(const float time);
-    virtual void draw(const DrawParameter& params);
-    virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
+    StateChangeInformation update(const float time) override;
+    void onEnter(const EnterStateInformation* enterInformation, const float time) override;
 
 private:
     void render(const EnterTransitionStateInformation* info,
                 sf::RenderTexture& target,
                 State* state,
                 const float time);
+    void doDraw(const DrawParameter& params) override;
 
     std::unique_ptr<Transition> m_transition;
     StateId m_followingState;

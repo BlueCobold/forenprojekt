@@ -52,6 +52,8 @@ private:
     const Entity* m_killAnimationEntity;
     CloneHandler& m_cloneHandler;
 
+    std::unique_ptr<Entity> doClone() const override;
+
 public:
 
     Entity(Type type, CloneHandler& cloneHandler, bool respawnable = false, bool autoKill = false);
@@ -87,8 +89,6 @@ public:
 
     void bindKillAnimationEntity(const Entity* entity);
     const Entity* getKillAnimationEntity() const;
-
-    virtual std::unique_ptr<Entity> clone() const override;
 };
 
 bool compareDrawOrder(const std::unique_ptr<Entity>& lhs, const std::unique_ptr<Entity>& rhs);

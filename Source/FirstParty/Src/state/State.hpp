@@ -59,7 +59,6 @@ public:
     virtual ~State()
     { }
 
-    virtual void draw(const DrawParameter& params) = 0;
     virtual void onEnter(const EnterStateInformation* enterInformation, const float time)
     {
         utility::Mouse.capture();

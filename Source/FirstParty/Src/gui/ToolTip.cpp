@@ -49,7 +49,7 @@ ToolTip::ToolTip() :
 {
 }
 
-void ToolTip::draw(const DrawParameter& params)
+void ToolTip::doDraw(const DrawParameter& params)
 {
     if(m_label.size() == 0)
         return;

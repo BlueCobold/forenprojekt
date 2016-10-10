@@ -83,7 +83,7 @@ void VerticalSpringTransition::update()
     }
 }
 
-void VerticalSpringTransition::draw(const DrawParameter& param)
+void VerticalSpringTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)

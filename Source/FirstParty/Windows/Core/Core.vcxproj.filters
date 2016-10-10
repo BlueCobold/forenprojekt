@@ -1272,5 +1272,8 @@
     <ClCompile Include="..\..\Src\gui\ReplayMenu.cpp">
       <Filter>Sources\gui\menus</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\animation\Cloneable.inl">
+      <Filter>Headers\animation</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

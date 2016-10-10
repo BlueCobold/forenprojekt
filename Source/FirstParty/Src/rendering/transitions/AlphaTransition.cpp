@@ -32,7 +32,7 @@ void AlphaTransition::update()
         m_targetSprite.setColor(sf::Color(255, 255, 255, alpha));
 }
 
-void AlphaTransition::draw(const DrawParameter& param)
+void AlphaTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);

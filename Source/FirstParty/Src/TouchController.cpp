@@ -19,9 +19,9 @@ namespace utility
     bool TouchController::isTouched() const
     {
 #if defined(IOS) || defined(ANDROID)
-        return m_touchArea.contains(utility::Mouse.getTouchPosition());
+        return m_touchArea.contains(sf::Vector2f(utility::Mouse.getTouchPosition()));
 #elif defined(TOUCHSIM)
-        return m_touchArea.contains(static_cast<sf::Vector2f>(utility::Mouse.getRealWindowPosition()));
+        return m_touchArea.contains(sf::Vector2f(utility::Mouse.getRealWindowPosition()));
 #else
         return false;
 #endif

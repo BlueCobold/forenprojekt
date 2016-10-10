@@ -17,7 +17,7 @@ Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& positi
     m_max = m_style.max;
 }
 
-std::unique_ptr<MenuElement> Slider::clone() const
+std::unique_ptr<MenuElement> Slider::doClone() const
 {
     auto clone = std::unique_ptr<Slider>(new Slider(getId(), m_style, getPosition(), getOffset()));
     clone->setVisibleWhenId(getVisibleWhenId());
@@ -70,7 +70,7 @@ void Slider::update(const sf::RenderWindow& screen, const float time, const sf::
     m_spriteSlider->setPosition(m_sliderPosition + offset);
 }
 
-void Slider::draw(const DrawParameter& params)
+void Slider::doDraw(const DrawParameter& params)
 {
     if(!isVisible())
         return;

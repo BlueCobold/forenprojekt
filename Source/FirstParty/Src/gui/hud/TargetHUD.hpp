@@ -13,6 +13,8 @@ private:
     sf::Sprite m_targetTexture;
     ResourceManager& m_resourceManager;
 
+    void doDraw(const DrawParameter& params) override;
+
 public:
     TargetHUD(ResourceManager& resourceManager,
               const sf::Vector2f& position,
@@ -20,8 +22,6 @@ public:
               const BitmapFont* bitmapFont);
 
     void update(const DrawParameter& params);
-
-    void draw(const DrawParameter& params);
 
     void setTargets(int totalTarget,int remainingTarget);
 };

@@ -24,8 +24,6 @@ namespace sf
 /// for Displaying all the HUD Elements
 class HUD : public Drawable
 {
-private:
-
     FPSCounterHUD m_fpsCounter;
     TargetHUD m_target;
     PointsHUD m_points;
@@ -45,6 +43,7 @@ private:
     GoodyHUD m_extraTimeGoody;
 
     AppConfig& m_config;
+
 public:
     HUD(ResourceManager& resourceManager, AppConfig& config);
 
@@ -53,9 +52,10 @@ public:
     void update(const Level* level, const float time);
     void restartAt(const float time);
 
-    void draw(const DrawParameter& params);
-
     void onEnter(Level* level);
+
+protected:
+    void doDraw(const DrawParameter& params) override;
 
 private:
     void setBallShow(bool ballShow);

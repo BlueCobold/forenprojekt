@@ -39,7 +39,7 @@ bool GraphicalObject::hidden() const
     return m_hide;
 }
 
-void GraphicalObject::draw(const DrawParameter& param)
+void GraphicalObject::doDraw(const DrawParameter& param)
 {
     if(m_hide)
         return;

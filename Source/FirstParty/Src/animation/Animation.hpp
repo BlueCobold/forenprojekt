@@ -119,9 +119,7 @@ public:
     void scaleToScreenSize(bool scale);
     void bindShader(Shader& shader);
 
-    virtual void draw(const DrawParameter& param) override;
-
-    virtual std::unique_ptr<Animation> clone() const override;
+    void doDraw(const DrawParameter& param) override;
 
     static void enableStencilEffects(bool enable);
     static bool usesStencilEffects();
@@ -137,6 +135,8 @@ public:
         std::function<void(const Animation& src, Animation& clone)> after);
 
 private:
+
+    std::unique_ptr<Animation> doClone() const override;
 
     enum ColorChannels
     {

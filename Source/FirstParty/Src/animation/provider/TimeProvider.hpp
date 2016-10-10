@@ -10,20 +10,21 @@
 /// Returns the time of the owner.
 class TimeProvider : public ValueProvider, public Observer<const TimedObject>
 {
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        return std::unique_ptr<TimeProvider>(new TimeProvider(getCloneObservable(), getCallback()));
+    }
+
 public:
 
     TimeProvider(const TimedObject& observer, const CloneCallback cloneCallback = nullptr) :
         Observer(observer, cloneCallback)
     { }
 
-    virtual float getValue() override
+    float getValue() override
     {
         return getObserved().getPassedTime();
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        return std::unique_ptr<TimeProvider>(new TimeProvider(getCloneObservable(), getCallback()));
     }
 };
 

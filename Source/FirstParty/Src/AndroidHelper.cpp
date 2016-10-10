@@ -9,15 +9,20 @@
 #include <android/log.h>
 #define LOGE(...) ((void)__android_log_print(ANDROID_LOG_INFO, "de.gamecoding.ricketyracquet", __VA_ARGS__))
 
-#include <SFML/System/SystemHandle.hpp>
+#include <SFML/System/NativeActivity.hpp>
 #include <SFML/System.hpp>
+
+namespace sfExt
+{
+    bool StencilBufferEnabled = true;
+}
 
 ANativeActivity* getActivity()
 {
     static ANativeActivity* activity = nullptr;
     if(activity == nullptr)
     {
-        activity = (ANativeActivity*)sf::getSystemHandle();
+        activity = sf::getNativeActivity();
     }
     return activity;
 }

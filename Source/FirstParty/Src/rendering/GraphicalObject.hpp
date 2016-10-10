@@ -12,11 +12,12 @@
 /// This class defines typical behavior of graphical objects
 class GraphicalObject : public Drawable
 {
-private:
-
     std::vector<std::unique_ptr<Animation>> m_animations;
     bool m_hide;
     float m_z;
+
+protected:
+    void doDraw(const DrawParameter& param) override;
 
 public:
 
@@ -33,14 +34,10 @@ public:
     void unhide();
     bool hidden() const;
 
-    virtual void draw(const DrawParameter& param);
-
     void bindAnimation(std::unique_ptr<Animation> animation);
 
     void setDrawOrder(const float drawOrder);
     float getDrawOrder() const;
-
-protected:
     const std::vector<std::unique_ptr<Animation>>& getAnimations() const;
 };
 

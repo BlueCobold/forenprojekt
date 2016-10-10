@@ -37,7 +37,7 @@ Button::Button(int id, ButtonStyle style,
     }
 }
 
-std::unique_ptr<MenuElement> Button::clone() const
+std::unique_ptr<MenuElement> Button::doClone() const
 {
     auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), getOffset(), getLanguage(), m_isTriggering));
     clone->setVisibleWhenId(getVisibleWhenId());
@@ -114,7 +114,7 @@ void Button::setStyle(ButtonStateStyle& style, float time, const sf::Vector2f& s
     updateLayout(screenSize);
 }
 
-void Button::draw(const DrawParameter& params)
+void Button::doDraw(const DrawParameter& params)
 {
     if(!isVisible())
         return;

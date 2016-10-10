@@ -11,7 +11,7 @@ CheckBox::CheckBox(int id, CheckBoxStyle style, const sf::Vector2f& position, co
     m_sprite = &m_style.uncheckedStyle.sprite;
 }
 
-std::unique_ptr<MenuElement> CheckBox::clone() const
+std::unique_ptr<MenuElement> CheckBox::doClone() const
 {
     auto clone = std::unique_ptr<CheckBox>(new CheckBox(getId(), m_style, getPosition(), getOffset()));
     clone->setVisibleWhenId(getVisibleWhenId());
@@ -53,7 +53,7 @@ void CheckBox::update(const sf::RenderWindow& screen, const float time, const sf
         m_sprite = &m_style.uncheckedStyle.sprite;
 }
 
-void CheckBox::draw(const DrawParameter& params)
+void CheckBox::doDraw(const DrawParameter& params)
 {
     if(!isVisible())
         return;

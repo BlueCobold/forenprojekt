@@ -17,12 +17,14 @@ public:
     OptionMenuState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~OptionMenuState();
 
-    virtual StateChangeInformation update(const float time);
-    virtual void draw(const DrawParameter& params);
-    virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
+    StateChangeInformation update(const float time) override;
+    void onEnter(const EnterStateInformation* enterInformation, const float time) override;
 
     void setLanguage(const std::string& language) override;
+
 private:
+    void doDraw(const DrawParameter& params) override;
+
     OptionMenu m_menu;
     HUD m_HUD;
     Level* m_level;

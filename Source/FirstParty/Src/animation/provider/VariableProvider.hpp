@@ -13,8 +13,12 @@
 /// Returns the value of a variable owned by someone else.
 class VariableProvider : public ValueProvider, public Observer<const VariableHandler>
 {
-private:
     std::string m_varName;
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        return std::unique_ptr<VariableProvider>(new VariableProvider(getCloneObservable(), m_varName, getCallback()));
+    }
 
 public:
     VariableProvider(const VariableHandler& observed, const std::string& varName, const CloneCallback cloneCallback = nullptr) :
@@ -22,14 +26,9 @@ public:
         m_varName(varName)
     { }
 
-    virtual float getValue() override
+    float getValue() override
     {
         return getObserved().getValueOf(m_varName);
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        return std::unique_ptr<VariableProvider>(new VariableProvider(getCloneObservable(), m_varName, getCallback()));
     }
 };
 

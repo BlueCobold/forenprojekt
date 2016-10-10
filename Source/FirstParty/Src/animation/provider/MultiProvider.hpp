@@ -9,7 +9,7 @@
 #include <vector>
 #include "../../Utility.hpp"
 
-/// Returns the sum of the values of the passed providers
+/// Returns some operation performed on multiple providers
 class MultiProvider : public ValueProvider
 {
 private:
@@ -25,7 +25,7 @@ public:
                 throw std::runtime_error(utility::translateKey("ProviderNull"));
     }
 
-    virtual void reset() override
+    void reset() override
     {
         for(auto it = begin(m_provider); it != end(m_provider); ++it)
             (*it)->reset();

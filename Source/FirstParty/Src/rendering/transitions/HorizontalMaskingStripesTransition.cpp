@@ -64,7 +64,7 @@ void HorizontalMaskingStripesTransition::update()
     }
 }
 
-void HorizontalMaskingStripesTransition::draw(const DrawParameter& param)
+void HorizontalMaskingStripesTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);

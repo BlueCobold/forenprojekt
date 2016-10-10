@@ -18,7 +18,12 @@ AnimationContainer::AnimationContainer(AnimationContainer&& toMove) :
 {
 }
 
-std::unique_ptr<MenuElement> AnimationContainer::clone() const
+void AnimationContainer::bindAnimation(std::unique_ptr<Animation> animation)
+{
+    graphics.bindAnimation(std::move(animation));
+}
+
+std::unique_ptr<MenuElement> AnimationContainer::doClone() const
 {
     auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getPosition(), getOffset(), getId(), m_cloneHandler));
     m_cloneHandler.registerCloneAll(*this, *other.get());
@@ -28,8 +33,7 @@ std::unique_ptr<MenuElement> AnimationContainer::clone() const
     for(auto it = begin(m_variables); it != end(m_variables); ++it)
         other->m_variables[it->first] = it->second;
 
-    for(auto it = begin(getAnimations()); it != end(getAnimations()); ++it)
-        other->bindAnimation((*it)->clone());
+    other->graphics = graphics;
 
     m_cloneHandler.unregisterCloneAll(*this);
 
@@ -67,7 +71,7 @@ void AnimationContainer::update(const sf::RenderWindow& screen, const float time
     updateCurrentTime(time);
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
     auto currentPosition = getCurrentPosition();
-    for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
+    for(auto animation = begin(graphics.getAnimations()); animation != end(graphics.getAnimations()); ++animation)
     {
         auto ani = (*animation).get();
         if(ani->isStopped())
@@ -80,9 +84,9 @@ void AnimationContainer::update(const sf::RenderWindow& screen, const float time
     m_updatingAni = nullptr;
 }
 
-void AnimationContainer::draw(const DrawParameter& param)
+void AnimationContainer::doDraw(const DrawParameter& param)
 {
-    GraphicalObject::draw(param);
+    graphics.draw(param);
 }
 
 void AnimationContainer::updateLayout(const sf::Vector2f& screenSize)

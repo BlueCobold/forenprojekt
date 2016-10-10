@@ -13,6 +13,13 @@
 /// Returns min(max(provider 1, provider 2), provider 3)
 class Clamp : public MultiProvider
 {
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        auto list = cloneProviders();
+        return std::unique_ptr<Clamp>(new Clamp(std::move(list)));
+    }
+
 public:
 
     Clamp(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
@@ -21,18 +28,12 @@ public:
            throw std::runtime_error(utility::replace(utility::translateKey("ThreeChilds"), "Clamp"));
     }
 
-    virtual float getValue() override
+    float getValue() override
     {
         float actual = getProvider()[0]->getValue();
         float minv = getProvider()[1]->getValue();
         float maxv = getProvider()[2]->getValue();
         return std::min(std::max(actual, minv), maxv);
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        auto list = cloneProviders();
-        return std::unique_ptr<Clamp>(new Clamp(std::move(list)));
     }
 };
 

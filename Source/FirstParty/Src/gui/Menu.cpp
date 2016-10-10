@@ -26,7 +26,7 @@ Menu::Menu(const MenuTemplate& menuTemplate, sf::RenderWindow& screen) :
 Menu::~Menu()
 {}
 
-void Menu::draw(const DrawParameter& params)
+void Menu::doDraw(const DrawParameter& params)
 {
     auto view = params.getTarget().getView();
     view.zoom(m_zoomFactor);

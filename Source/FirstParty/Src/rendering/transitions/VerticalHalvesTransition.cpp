@@ -66,7 +66,7 @@ void VerticalHalvesTransition::update()
     }
 }
 
-void VerticalHalvesTransition::draw(const DrawParameter& param)
+void VerticalHalvesTransition::doDraw(const DrawParameter& param)
 {
     if(getTargetTexture() != nullptr)
         param.getTarget().draw(m_targetSprite);

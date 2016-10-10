@@ -52,7 +52,7 @@ StateChangeInformation GameFinishedState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void GameFinishedState::draw(const DrawParameter& params)
+void GameFinishedState::doDraw(const DrawParameter& params)
 {
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 

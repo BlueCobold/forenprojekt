@@ -24,12 +24,12 @@ public:
     PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~PlayState();
 
-    virtual StateChangeInformation update(const float time);
-    virtual void draw(const DrawParameter& params);
-    virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
+    StateChangeInformation update(const float time) override;
+    void onEnter(const EnterStateInformation* enterInformation, const float time) override;
     virtual void onEvent(utility::Event::EventType type);
 
 private:
+    void doDraw(const DrawParameter& params) override;
 
     Level* m_level;
     HUD m_hud;

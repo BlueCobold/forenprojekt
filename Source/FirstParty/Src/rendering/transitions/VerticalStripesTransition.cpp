@@ -45,7 +45,7 @@ void VerticalStripesTransition::update()
     }
 }
 
-void VerticalStripesTransition::draw(const DrawParameter& param)
+void VerticalStripesTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);

@@ -34,6 +34,8 @@ private:
     void stretchBackground();
     sf::Vector2f calculateNeededOffset(const sf::Vector2f& position, const sf::RenderWindow& screen);
 
+    void doDraw(const DrawParameter& params) override;
+
 public:
     enum BackgroundId {TopLeft = 1,
                       TopCenter = 2,
@@ -52,8 +54,6 @@ public:
             const sf::Vector2f& offset,
             const std::unordered_map<int, sf::Sprite>& background);
     ToolTip();
-
-    virtual void draw(const DrawParameter& params) override;
 
     void setPosition(const sf::Vector2f& position, const sf::RenderWindow& screen);
 

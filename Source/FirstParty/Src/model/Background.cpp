@@ -54,7 +54,7 @@ void Background::setValueOf(const std::string& name, const float value)
     m_updatingAni->setValueOf(name, value);
 }
 
-void Background::draw(const DrawParameter& param)
+void Background::doDraw(const DrawParameter& param)
 {
     for(auto layer = begin(m_layers); layer != end(m_layers); ++layer)
         (*layer)->draw(param);

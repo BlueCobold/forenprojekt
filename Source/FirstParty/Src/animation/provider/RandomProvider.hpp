@@ -28,6 +28,11 @@ private:
         }
     }
 
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        return std::unique_ptr<RandomProvider>(new RandomProvider(m_min, m_max));
+    }
+
 public:
 
     RandomProvider(const float min, const float max) :
@@ -36,14 +41,9 @@ public:
         init();
     }
 
-    virtual float getValue() override
+    float getValue() override
     {
         return m_min + (m_max - m_min) * _distribution(_random_engine);
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        return std::unique_ptr<RandomProvider>(new RandomProvider(m_min, m_max));
     }
 };
 

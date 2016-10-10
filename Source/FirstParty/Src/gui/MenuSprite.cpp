@@ -9,7 +9,7 @@ MenuSprite::MenuSprite(const sf::Sprite& sprite, const sf::Vector2f& position, c
 {
 }
 
-std::unique_ptr<MenuElement> MenuSprite::clone() const
+std::unique_ptr<MenuElement> MenuSprite::doClone() const
 {
     auto clone = std::unique_ptr<MenuSprite>(new MenuSprite(m_sprite, getPosition(), getOffset(), getId()));
     clone->setVisibleWhenId(getVisibleWhenId());
@@ -17,7 +17,7 @@ std::unique_ptr<MenuElement> MenuSprite::clone() const
     return std::move(clone);
 }
 
-void MenuSprite::draw(const DrawParameter& params)
+void MenuSprite::doDraw(const DrawParameter& params)
 {
     if(!isVisible())
         return;

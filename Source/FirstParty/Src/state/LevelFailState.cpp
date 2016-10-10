@@ -111,7 +111,7 @@ StateChangeInformation LevelFailState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void LevelFailState::draw(const DrawParameter& params)
+void LevelFailState::doDraw(const DrawParameter& params)
 {
     if(m_level != nullptr)
     {

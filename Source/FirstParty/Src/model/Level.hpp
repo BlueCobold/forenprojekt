@@ -63,7 +63,6 @@ public:
 
     virtual void restartAt(const float time) override;
     void update(const float dt);
-    virtual void draw(const DrawParameter& param) override;
     void adjustView(const DrawParameter& params);
 
     void adaptToMouse();
@@ -113,6 +112,8 @@ private:
 #ifdef LEVELTESTING
     std::string m_filename;
 #endif
+
+    void doDraw(const DrawParameter& param) override;
 
     void createLabelAt(const Entity& target, const std::string& fontName, const int points);
     void createLabelAt(const Entity& target, const std::string& fontName, const std::string& text);

@@ -170,6 +170,7 @@ namespace gl
             }
 
             int GetNumMissing() const {return m_numMissing;}
+            bool GetLoaded() const {return m_isLoaded;}
 
             LoadTest() : m_isLoaded(false), m_numMissing(0) {}
             LoadTest(bool isLoaded, int numMissing) : m_isLoaded(isLoaded), m_numMissing(numMissing) {}
@@ -184,11 +185,11 @@ namespace gl
 
         CURRENT_PROGRAM                  = 0x8B8D,
         EXTENSIONS                       = 0x1F03,
-		VERSION                          = 0x1F02,
+        VERSION                          = 0x1F02,
         MAJOR_VERSION                    = 0x821B,
         MINOR_VERSION                    = 0x821C,
         NUM_EXTENSIONS                   = 0x821D,
-		MAX_TEXTURE_SIZE                 = 0x0D33,
+        MAX_TEXTURE_SIZE                 = 0x0D33,
         TEXTURE0                         = 0x84C0,
 
         STENCIL_TEST                     = 0x0B90,
@@ -217,7 +218,8 @@ namespace gl
     extern void (CODEGEN_FUNCPTR *AlphaFunc)(GLenum func, GLfloat ref);
     extern void (CODEGEN_FUNCPTR *Flush)();
     extern void (CODEGEN_FUNCPTR *GetIntegerv)(GLenum pname, GLint * params);
-    extern const GLubyte * (CODEGEN_FUNCPTR *GetStringi)(GLenum name, GLuint index);
+    extern GLenum (CODEGEN_FUNCPTR *GetError)();
+    extern const GLubyte * (CODEGEN_FUNCPTR *GetString)(GLenum name);
     extern GLint (CODEGEN_FUNCPTR *GetUniformLocation)(GLuint program, const GLchar * name);
     extern void (CODEGEN_FUNCPTR *Uniform1f)(GLint location, GLfloat v0);
     extern void (CODEGEN_FUNCPTR *Uniform1i)(GLint location, GLint v0);

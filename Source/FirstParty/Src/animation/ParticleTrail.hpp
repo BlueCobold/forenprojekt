@@ -14,7 +14,7 @@ class ParticleTrail : public Drawable
 public:
     ParticleTrail(std::unique_ptr<Animation> animationTemplate, float density, float speedMin);
 
-    virtual void draw(const DrawParameter& params) override;
+    void doDraw(const DrawParameter& params) override;
 
     void moveTo(const float x, const float y);
     void setTo(const float x, const float y);

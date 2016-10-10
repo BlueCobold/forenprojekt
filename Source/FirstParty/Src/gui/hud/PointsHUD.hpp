@@ -24,9 +24,10 @@ public:
 
     void setTime(float time);
 
-    void draw(const DrawParameter& params) override;
-
 private:
+
+    void doDraw(const DrawParameter& params) override;
+
     Interpolation m_pointCounter;
 
     float m_elapsedTime;

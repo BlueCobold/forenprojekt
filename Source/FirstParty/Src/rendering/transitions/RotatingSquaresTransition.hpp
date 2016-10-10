@@ -25,9 +25,7 @@ public:
         const float duration,
         const sf::Vector2u& size);
 
-    void update();
-
-    virtual void draw(const DrawParameter& param);
+    void update() override;
 
 private:
     sf::Sprite m_sourceSprite;
@@ -36,6 +34,8 @@ private:
     int m_rectHeight;
     int m_columns;
     int m_rows;
+
+    void doDraw(const DrawParameter& param);
 };
 
 #endif // ROTATINGSQUARES_TRANSITION_HPP

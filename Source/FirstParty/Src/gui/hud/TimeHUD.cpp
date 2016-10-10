@@ -46,8 +46,8 @@ void TimeHUD::update(const DrawParameter& params)
                         getCurrentPosition().y);
 }
 
-void TimeHUD::draw(const DrawParameter& params)
+void TimeHUD::doDraw(const DrawParameter& params)
 {
    params.getTarget().draw(m_clock);
-   LabelHUD::draw(params);
+   LabelHUD::doDraw(params);
 }

@@ -29,6 +29,8 @@ struct SubWindowStyle
 
 class SubWindow : public MenuElement
 {
+    std::unique_ptr<MenuElement> doClone() const override;
+
 public:
 
     SubWindow(const int id,
@@ -39,9 +41,6 @@ public:
               const std::vector<std::unique_ptr<MenuElement>>& elements,
               const SubWindowStyle& style);
 
-    virtual std::unique_ptr<MenuElement> clone() const override;
-
-    virtual void draw(const DrawParameter& params) override;
     void drawAdditionalForeground(const DrawParameter& params) override;
     virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 
@@ -54,8 +53,8 @@ public:
     void setZoomFactor(float zoomFactor);
 
     void setLanguage(const std::string& language) override;
-private:
 
+private:
     MenuPanel m_panel;
     SubWindowStyle m_style;
     int m_innerHeight;
@@ -76,6 +75,7 @@ private:
 
     void on(const DrawParameter& params);
     void off(const DrawParameter& params);
+    void doDraw(const DrawParameter& params) override;
 
     std::function<void(const Button& sender)> m_clickCallback;
 

@@ -90,7 +90,7 @@ void VerticalExpandTransition::update()
     }
 }
 
-void VerticalExpandTransition::draw(const DrawParameter& param)
+void VerticalExpandTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)

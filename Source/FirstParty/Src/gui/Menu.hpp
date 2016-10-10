@@ -32,7 +32,6 @@ public:
 
     virtual ~Menu();
 
-    virtual void draw(const DrawParameter& params) override;
     virtual void update(sf::RenderWindow& screen, const float time);
     void update(sf::RenderWindow& screen, const float time, const MenuElementType::Type type);
 
@@ -53,10 +52,11 @@ public:
     virtual void setLanguage(const std::string& language);
 
 protected:
-
     virtual void drawAdditionalBackground(const DrawParameter& params);
     virtual void drawAdditionalForeground(const DrawParameter& params);
+
 private:
+    void doDraw(const DrawParameter& params) override;
 
     template<class T>
     T* find(int id, const MenuElementType::Type type) const;

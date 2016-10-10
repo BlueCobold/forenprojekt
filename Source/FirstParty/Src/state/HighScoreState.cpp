@@ -153,7 +153,7 @@ StateChangeInformation HighScoreState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void HighScoreState::draw(const DrawParameter& params)
+void HighScoreState::doDraw(const DrawParameter& params)
 {
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 

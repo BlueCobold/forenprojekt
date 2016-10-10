@@ -23,7 +23,7 @@ void Caret::setPosition(const sf::Vector2f& position)
     m_sprite.setPosition(position + m_offset);
 }
 
-void Caret::draw(const DrawParameter& params)
+void Caret::doDraw(const DrawParameter& params)
 {
     if(!m_activated)
         return;

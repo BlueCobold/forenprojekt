@@ -31,13 +31,18 @@ class JointRotationProvider : public ValueProvider, public JointObserver
 {
     ProviderLocation m_index;
 
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        return std::unique_ptr<JointRotationProvider>(new JointRotationProvider(getCloneObservable(), getCallback(), m_index));
+    }
+
 public:
     JointRotationProvider(const JointObject& joint, const CloneCallback cloneHandler, ProviderLocation index = Link) :
         Observer(joint, cloneHandler),
         m_index(index)
     { }
 
-    virtual float getValue() override
+    float getValue() override
     {
         auto points = getObserved().getAnchorPoints();
         auto offsets = getObserved().getAnchorOffsets();
@@ -56,17 +61,17 @@ public:
             return 360.f + degree;
         return degree;
     }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        return std::unique_ptr<JointRotationProvider>(new JointRotationProvider(getCloneObservable(), getCallback(), m_index));
-    }
 };
 
 class JointPositionProvider : public ValueProvider, public JointObserver
 {
     bool m_useX;
     ProviderLocation m_index;
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        return std::unique_ptr<JointPositionProvider>(new JointPositionProvider(getCloneObservable(), m_useX, getCallback(), m_index));
+    }
 
 public:
     JointPositionProvider(const JointObject& joint, bool xAxis, const CloneCallback cloneHandler, ProviderLocation index = Link) :
@@ -75,7 +80,7 @@ public:
         m_index(index)
     { }
 
-    virtual float getValue() override
+    float getValue() override
     {
         auto points = getObserved().getAnchorPoints();
         auto offsets = getObserved().getAnchorOffsets();
@@ -99,16 +104,20 @@ public:
 
         return utility::toPixel(m_useX ? ((anchorPos.x - entityPos.x)/2 + entityOff.x) : ((anchorPos.y - entityPos.y)/2 + entityOff.y));
     }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        return std::unique_ptr<JointPositionProvider>(new JointPositionProvider(getCloneObservable(), m_useX, getCallback(), m_index));
-    }
 };
 
 class JointScaleProvider : public ValueProvider, public JointObserver, public AnimationObserver
 {
     ProviderLocation m_index;
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        return std::unique_ptr<JointScaleProvider>(new JointScaleProvider(JointObserver::getCloneObservable(),
+                                                                          AnimationObserver::getCloneObservable(),
+                                                                          JointObserver::getCallback(),
+                                                                          AnimationObserver::getCallback(),
+                                                                          m_index));
+    }
 
 public:
     JointScaleProvider(const JointObject& joint,
@@ -121,7 +130,7 @@ public:
         m_index(index)
     { }
 
-    virtual float getValue() override
+    float getValue() override
     {
         auto points = JointObserver::getObserved().getAnchorPoints();
         auto offsets = JointObserver::getObserved().getAnchorOffsets();
@@ -138,15 +147,6 @@ public:
         auto& ani = AnimationObserver::getObserved();
         auto size = ani.getSize();
         return dist / size.y;
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        return std::unique_ptr<JointScaleProvider>(new JointScaleProvider(JointObserver::getCloneObservable(),
-                                                                          AnimationObserver::getCloneObservable(),
-                                                                          JointObserver::getCallback(),
-                                                                          AnimationObserver::getCallback(),
-                                                                          m_index));
     }
 };
 

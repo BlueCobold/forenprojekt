@@ -10,7 +10,7 @@ ParticleTrail::ParticleTrail(std::unique_ptr<Animation> animationTemplate, float
 {
 }
     
-void ParticleTrail::draw(const DrawParameter& params)
+void ParticleTrail::doDraw(const DrawParameter& params)
 {
     for(auto ani = begin(m_runningAnimations); ani != end(m_runningAnimations); ++ani)
         (*ani)->draw(params);

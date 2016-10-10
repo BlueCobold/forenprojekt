@@ -12,20 +12,21 @@
 /// Stops the owner
 class Stop : public ValueProvider, public Observer<Stoppable>
 {
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        return std::unique_ptr<Stop>(new Stop(getCloneObservable(), getCallback()));
+    }
+
 public:
 
     Stop(Stoppable& observed, const CloneCallback cloneCallback = nullptr) : Observer(observed, cloneCallback)
     { }
 
-    virtual float getValue() override
+    float getValue() override
     {
         getObserved().stop();
         return 0;
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        return std::unique_ptr<Stop>(new Stop(getCloneObservable(), getCallback()));
     }
 };
 

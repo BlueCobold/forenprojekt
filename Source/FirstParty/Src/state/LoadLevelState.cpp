@@ -132,7 +132,7 @@ void LoadLevelState::loadLevel()
     sf::err() << "Leaving loadLevel()" << std::endl;
 }
 
-void LoadLevelState::draw(const DrawParameter& params)
+void LoadLevelState::doDraw(const DrawParameter& params)
 {
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), params.getTarget().getSize()));
 

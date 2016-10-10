@@ -45,6 +45,7 @@
 #elif defined(ANDROID)
 #include "AndroidHelper.hpp"
 #include "gui/ErrorMessageBox.hpp"
+#include <android/log.h>
 #endif
 
 #ifdef TOUCHSIM
@@ -63,12 +64,6 @@ App::App(AppConfig& config) :
     m_musicPlayer(m_config, m_resourceManager.getMusic(), MusicPlayer::Normal),
     m_selectedLanguage(m_config.get<std::string>("lanuage"))
 {
-    gl::sys::LoadFunctions();
-    int maxTextureSize = 0;
-    gl::GetIntegerv(gl::MAX_TEXTURE_SIZE, &maxTextureSize);
-    sf::err() << "Max texure size: " << maxTextureSize << std::endl;
-    sf::err() << "GLVersion: " << gl::sys::GetMajorVersion() << "." << gl::sys::GetMinorVersion() << std::endl;
-
     // Cache often used settings
     sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
     m_windowTitle = m_config.get<std::string>("WindowName");
@@ -87,12 +82,33 @@ App::App(AppConfig& config) :
 
     sf::ContextSettings settings = sf::ContextSettings(24, 8, 0);
     m_screen.create(videoMode, m_windowTitle, m_fullscreen ? sf::Style::Fullscreen : sf::Style::Default, settings);
+
     // This kind of redundant line prevents shader-renderings to show the first frame incorrectly
     m_screen.resetGLStates();
 
     // This kind of redundant line prevents a thread-based crash when closing the app.
     // It is based on a known SFML bug: https://github.com/LaurentGomila/SFML/issues/790
     sf::Shader::isAvailable();
+
+    // These kind of redundant lines prevent a missing context on Android
+    sf::RenderTexture contextInit;
+    contextInit.create(20, 20, false);
+
+    m_screen.setActive(true);
+    auto loaded = gl::sys::LoadFunctions();
+    int maxTextureSize = 0;
+    gl::GetIntegerv(gl::MAX_TEXTURE_SIZE, &maxTextureSize);
+#ifdef ANDROID
+    auto msg = (((std::string)"Max texture size: ")+utility::toString(maxTextureSize))
+        +" loaded: " + utility::toString(loaded.GetLoaded())
+        +" miss: " + utility::toString(loaded.GetNumMissing())
+        +" version: " + reinterpret_cast<const char*>(gl::GetString(gl::VERSION))
+        +" extensions: " + reinterpret_cast<const char*>(gl::GetString(gl::EXTENSIONS));
+    auto m = msg.c_str();
+    __android_log_print(ANDROID_LOG_INFO, "de.gamecoding.ricketyracquet", "RRR %s", m);
+#endif
+    sf::err() << "Max texure size: " << maxTextureSize << std::endl;
+    sf::err() << "GLVersion: " << gl::sys::GetMajorVersion() << "." << gl::sys::GetMinorVersion() << std::endl;
 
     auto desktopMode = sf::VideoMode::getDesktopMode();
     auto size = static_cast<int>(desktopMode.width > desktopMode.height ?

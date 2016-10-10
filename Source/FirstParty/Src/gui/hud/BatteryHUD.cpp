@@ -24,7 +24,7 @@ void BatteryHUD::update(const DrawParameter& params)
     setIcon();
 }
 
-void BatteryHUD::draw(const DrawParameter& params)
+void BatteryHUD::doDraw(const DrawParameter& params)
 {
     params.getTarget().draw(m_icon);
 }

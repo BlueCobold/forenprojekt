@@ -26,7 +26,6 @@ public:
 
     MenuPanel(const std::vector<std::unique_ptr<MenuElement>>& elements);
 
-    virtual void draw(const DrawParameter& params) override;
     void drawAdditionalForeground(const DrawParameter& params);
 
     virtual void update(const sf::RenderWindow& screen,
@@ -57,6 +56,8 @@ public:
 private:
     std::vector<std::unique_ptr<MenuElement>> m_elements;
     std::function<void(const Button& sender)> m_clickCallback;
+
+    void doDraw(const DrawParameter& params) override;
 
     void setCorrelation();
 };

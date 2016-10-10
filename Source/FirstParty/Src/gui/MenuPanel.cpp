@@ -43,7 +43,7 @@ void MenuPanel::add(std::unique_ptr<MenuElement> element)
     });
 }
 
-void MenuPanel::draw(const DrawParameter& params)
+void MenuPanel::doDraw(const DrawParameter& params)
 {
     for(auto it = begin(m_elements); it != end(m_elements); ++it)
         (*it)->draw(params);

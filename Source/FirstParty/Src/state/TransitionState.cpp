@@ -120,7 +120,7 @@ StateChangeInformation TransitionState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void TransitionState::draw(const DrawParameter& params)
+void TransitionState::doDraw(const DrawParameter& params)
 {
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), params.getTarget().getSize()));
     m_transition->draw(params);

@@ -102,6 +102,9 @@ namespace gl
     typedef const GLubyte * (CODEGEN_FUNCPTR *PFNGETSTRING)(GLenum);
     PFNGETSTRING GetString = 0;
 
+    typedef GLenum (CODEGEN_FUNCPTR * PFNGLGETERRORPROC)();
+    PFNGLGETERRORPROC GetError = 0;
+
     typedef void (CODEGEN_FUNCPTR *PFNACTIVETEXTURE)(GLenum);
     PFNACTIVETEXTURE ActiveTexture = 0;
     typedef void (CODEGEN_FUNCPTR *PFNFLUSH)();
@@ -145,9 +148,11 @@ namespace gl
 #if !defined(IOS)
         GetString = reinterpret_cast<PFNGETSTRING>(IntGetProcAddress("glGetString"));
         if(!GetString) ++numFailed;
-		GetIntegerv = reinterpret_cast<PFNGETINTEGERV>(IntGetProcAddress("glGetIntegerv"));
-		if(!GetIntegerv) ++numFailed;
+        GetIntegerv = reinterpret_cast<PFNGETINTEGERV>(IntGetProcAddress("glGetIntegerv"));
+        if(!GetIntegerv) ++numFailed;
 
+        GetError = reinterpret_cast<PFNGLGETERRORPROC>(IntGetProcAddress("glGetError"));
+        if(!GetError) ++numFailed;
         Uniform1f = reinterpret_cast<PFNUNIFORM1F>(IntGetProcAddress("glUniform1f"));
         if(!Uniform1f) ++numFailed;
         Uniform1i = reinterpret_cast<PFNUNIFORM1I>(IntGetProcAddress("glUniform1i"));
@@ -183,6 +188,7 @@ namespace gl
 #else
         GetString = glGetString;
         GetIntegerv = glGetIntegerv;
+        GetError = glGetError;
         ActiveTexture = glActiveTexture;
         AlphaFunc = glAlphaFunc;
         StencilFunc = glStencilFunc;

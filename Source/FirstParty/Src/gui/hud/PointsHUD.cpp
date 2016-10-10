@@ -48,8 +48,8 @@ void PointsHUD::setTime(float time)
     m_elapsedTime = time;
 }
 
-void PointsHUD::draw(const DrawParameter& params)
+void PointsHUD::doDraw(const DrawParameter& params)
 {
    params.getTarget().draw(m_coinTexture);
-   LabelHUD::draw(params);
+   LabelHUD::doDraw(params);
 }

@@ -93,7 +93,7 @@ void RotatingSquaresTransition::update()
     }
 }
 
-void RotatingSquaresTransition::draw(const DrawParameter& param)
+void RotatingSquaresTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);

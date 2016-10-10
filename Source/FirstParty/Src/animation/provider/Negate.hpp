@@ -11,20 +11,21 @@
 /// Returns the negated value of the passed provider (-1 * provider)
 class Negate : public SingleProvider
 {
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        return std::unique_ptr<Negate>(new Negate(getProvider()->clone()));
+    }
+
 public:
     
     Negate(std::unique_ptr<ValueProvider> provider) : SingleProvider(std::move(provider))
     { }
 
-    virtual float getValue() override
+    float getValue() override
     {
         float value = getProvider()->getValue();
         return -1 * value;
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        return std::unique_ptr<Negate>(new Negate(getProvider()->clone()));
     }
 };
 

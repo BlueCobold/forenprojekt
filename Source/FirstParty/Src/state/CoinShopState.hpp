@@ -21,11 +21,11 @@ public:
     CoinShopState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config, AchievementManager& achievementManager);
     ~CoinShopState();
 
-    virtual StateChangeInformation update(const float time);
-    virtual void draw(const DrawParameter& params);
-    virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
+    StateChangeInformation update(const float time) override;
+    void onEnter(const EnterStateInformation* enterInformation, const float time) override;
 
     void setLanguage(const std::string& language) override;
+
 private:
     CoinShopMenu m_menu;
     Level* m_level;
@@ -38,6 +38,8 @@ private:
     EnterPauseStateInformation m_pauseStateInfo;
 
     AchievementManager& m_achievementManager;
+
+    void doDraw(const DrawParameter& params) override;
 
     void updateButtons();
     void buy(const Goody::Type type, const std::string& propertyName);

@@ -89,7 +89,7 @@ void HorizontalExpandTransition::update()
     }
 }
 
-void HorizontalExpandTransition::draw(const DrawParameter& param)
+void HorizontalExpandTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)

@@ -32,8 +32,8 @@ void BallHUD::update(const DrawParameter& params)
                        getCurrentPosition().y);
 }
 
-void BallHUD::draw(const DrawParameter& params)
+void BallHUD::doDraw(const DrawParameter& params)
 {
    params.getTarget().draw(m_ball);
-   LabelHUD::draw(params);
+   LabelHUD::doDraw(params);
 }

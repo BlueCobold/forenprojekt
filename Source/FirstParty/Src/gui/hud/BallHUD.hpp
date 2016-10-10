@@ -22,7 +22,7 @@ public:
 
     void update(const DrawParameter& params);
 
-    void draw(const DrawParameter& params);
+    void doDraw(const DrawParameter& params) override;
 
     void setBalls(int remainingBall);
 };

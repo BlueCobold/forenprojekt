@@ -24,14 +24,14 @@ public:
         const float duration,
         const sf::Vector2u& size);
 
-    void update();
-
-    virtual void draw(const DrawParameter& param);
+    void update() override;
 
 private:
     sf::Sprite m_sourceSprite;
     std::vector<std::unique_ptr<sf::Sprite>> m_targetSprites;
     int m_stripeHeight;
+
+    void doDraw(const DrawParameter& param);
 };
 
 #endif // HORIZONTALSTRIPES_TRANSITION_HPP

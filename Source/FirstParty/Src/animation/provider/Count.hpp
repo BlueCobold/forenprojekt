@@ -14,6 +14,11 @@ private:
     float m_increment;
     int m_calls;
 
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        return std::unique_ptr<Count>(new Count(m_start, m_increment));
+    }
+
 public:
 
     Count(const float start, const float increment) :
@@ -22,19 +27,14 @@ public:
         m_calls(0)
     { }
 
-    virtual float getValue() override
+    float getValue() override
     {
         return m_start + (m_calls++) * m_increment;
     }
 
-    virtual void reset() override
+    void reset() override
     {
         m_calls = 0;
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        return std::unique_ptr<Count>(new Count(m_start, m_increment));
     }
 };
 

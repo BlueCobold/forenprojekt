@@ -50,7 +50,7 @@ SubWindow::SubWindow(const int id,
     m_center.y = m_size.y / 2.f;
 }
 
-std::unique_ptr<MenuElement> SubWindow::clone() const
+std::unique_ptr<MenuElement> SubWindow::doClone() const
 {
     auto clone = std::unique_ptr<MenuElement>(new SubWindow(getId(), getPosition(), m_size, getOffset(), m_innerHeight, m_panel.getElements(), m_style));
     clone->setVisibleWhenId(getVisibleWhenId());
@@ -84,7 +84,7 @@ void SubWindow::off(const DrawParameter& params)
     params.getTarget().setView(m_orginalView);
 }
 
-void SubWindow::draw(const DrawParameter& params)
+void SubWindow::doDraw(const DrawParameter& params)
 {
     if(!isVisible())
         return;

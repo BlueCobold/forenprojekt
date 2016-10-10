@@ -52,7 +52,6 @@ public:
     virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0))
     { }
 
-    virtual void draw(const DrawParameter& params) override = 0;
     virtual void drawAdditionalForeground(const DrawParameter& params)
     { }
 

@@ -30,7 +30,7 @@ void Cursor::update()
     m_sprite.setPosition(static_cast<float>(pos.x), static_cast<float>(pos.y));
 }
 
-void Cursor::draw(const DrawParameter& params)
+void Cursor::doDraw(const DrawParameter& params)
 {
     if(!utility::Mouse.isCursorVisible())
         return;

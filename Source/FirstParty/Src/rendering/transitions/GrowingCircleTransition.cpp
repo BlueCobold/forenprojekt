@@ -48,7 +48,7 @@ void GrowingCircleTransition::update()
     m_targetSprites.setRadius(static_cast<float>(currentRadius));
 }
 
-void GrowingCircleTransition::draw(const DrawParameter& param)
+void GrowingCircleTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);

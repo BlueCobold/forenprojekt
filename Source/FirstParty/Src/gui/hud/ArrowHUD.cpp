@@ -104,7 +104,7 @@ void ArrowHUD::update(const DrawParameter& params)
     m_arrow.setPosition(position);
 }
 
-void ArrowHUD::draw(const DrawParameter& params)
+void ArrowHUD::doDraw(const DrawParameter& params)
 {
     if(m_outOfView)
         params.getTarget().draw(m_arrow);

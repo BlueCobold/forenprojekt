@@ -29,7 +29,7 @@ StateChangeInformation StartState::update(const float time)
     return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 }
 
-void StartState::draw(const DrawParameter& params)
+void StartState::doDraw(const DrawParameter& params)
 {    
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 

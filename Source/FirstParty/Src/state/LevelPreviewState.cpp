@@ -129,7 +129,7 @@ StateChangeInformation LevelPreviewState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void LevelPreviewState::draw(const DrawParameter& params)
+void LevelPreviewState::doDraw(const DrawParameter& params)
 {
     if(m_level != nullptr)
     {

@@ -7,8 +7,14 @@
 
 class Drawable
 {
+protected:
+    virtual void doDraw(const DrawParameter& params) = 0;
+
 public:
-    virtual void draw(const DrawParameter& params) = 0;
+    void draw(const DrawParameter& params)
+    {
+        doDraw(params);
+    }
 };
 
 #endif // DRAWABLE_HPP

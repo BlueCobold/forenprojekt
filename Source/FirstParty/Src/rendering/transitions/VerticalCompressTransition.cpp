@@ -91,7 +91,7 @@ void VerticalCompressTransition::update()
     }
 }
 
-void VerticalCompressTransition::draw(const DrawParameter& param)
+void VerticalCompressTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         for(auto it = m_sourceSprites.begin(); it != m_sourceSprites.end(); ++it)

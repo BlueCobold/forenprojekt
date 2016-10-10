@@ -60,7 +60,7 @@ void HorizontalSlicesTransition::update()
     }
 }
 
-void HorizontalSlicesTransition::draw(const DrawParameter& param)
+void HorizontalSlicesTransition::doDraw(const DrawParameter& param)
 {
     if(getSourceTexture() != nullptr)
         param.getTarget().draw(m_sourceSprite);

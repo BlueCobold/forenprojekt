@@ -24,7 +24,7 @@ public:
             throw std::runtime_error(utility::translateKey("TheProviderNull"));
     }
 
-    virtual void reset() override
+    void reset() override
     {
         m_provider->reset();
     }

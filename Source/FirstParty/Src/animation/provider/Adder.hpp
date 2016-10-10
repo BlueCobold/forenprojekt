@@ -12,6 +12,13 @@
 /// Returns the sum of the values of the passed providers
 class Adder : public MultiProvider
 {
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        auto list = cloneProviders();
+        return std::unique_ptr<Adder>(new Adder(std::move(list)));
+    }
+
 public:
 
     Adder(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
@@ -20,18 +27,12 @@ public:
            throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Add"));
     }
 
-    virtual float getValue() override
+    float getValue() override
     {
         float v = 0.0f;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
             v += (*it)->getValue();
         return v;
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        auto list = cloneProviders();
-        return std::unique_ptr<Adder>(new Adder(std::move(list)));
     }
 };
 

@@ -158,7 +158,7 @@ void RandomTransition::update()
     m_transition->update();
 }
 
-void RandomTransition::draw(const DrawParameter& param)
+void RandomTransition::doDraw(const DrawParameter& param)
 {
     m_transition->draw(param);
 }

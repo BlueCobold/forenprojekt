@@ -191,7 +191,7 @@ StateChangeInformation CoinShopState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void CoinShopState::draw(const DrawParameter& params)
+void CoinShopState::doDraw(const DrawParameter& params)
 {
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 

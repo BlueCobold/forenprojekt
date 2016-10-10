@@ -15,7 +15,7 @@ namespace sf
     class RenderWindow;
 };
 
-class Caret
+class Caret : public Drawable
 {
 private:
     sf::Sprite m_sprite;
@@ -24,11 +24,12 @@ private:
     sf::Vector2f m_offset;
     bool m_activated;
 
+    void doDraw(const DrawParameter& params) override;
+
 public:
     Caret(float frequency, const sf::Vector2f& offset, const sf::Sprite& sprite);
 
     void update(const float time);
-    void draw(const DrawParameter& params);
 
     void setPosition(const sf::Vector2f& position);
 

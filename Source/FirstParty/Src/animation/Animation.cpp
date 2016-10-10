@@ -184,7 +184,7 @@ const sf::IntRect Animation::getTextureRect() const
                 static_cast<int>(m_frame * m_frameHeight + m_sourceOffset.y), m_frameWidth, m_frameHeight);
 }
 
-void Animation::draw(const DrawParameter& param)
+void Animation::doDraw(const DrawParameter& param)
 {
     if(!_renderStencilEffects && m_stencil.mode == StencilInfo::Test)
         return;
@@ -292,7 +292,7 @@ void Animation::setLayout(
     m_offsets = srcOffsets;
 }
 
-std::unique_ptr<Animation> Animation::clone() const
+std::unique_ptr<Animation> Animation::doClone() const
 {
     auto ani = std::unique_ptr<Animation>(new Animation(m_frames, m_frameWidth, m_frameHeight,
         m_applyRotation, m_sprite.getOrigin(), m_drawOffset, m_horizontal));

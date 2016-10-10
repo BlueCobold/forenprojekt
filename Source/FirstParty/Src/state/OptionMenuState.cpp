@@ -68,7 +68,7 @@ StateChangeInformation OptionMenuState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void OptionMenuState::draw(const DrawParameter& params)
+void OptionMenuState::doDraw(const DrawParameter& params)
 {
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 

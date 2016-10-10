@@ -11,6 +11,13 @@
 /// Returns the product of the values of the passed providers
 class Multiplier : public MultiProvider
 {
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        auto list = cloneProviders();
+        return std::unique_ptr<Multiplier>(new Multiplier(std::move(list)));
+    }
+
 public:
 
     Multiplier(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
@@ -19,18 +26,12 @@ public:
            throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Multiply"));
     }
 
-    virtual float getValue() override
+    float getValue() override
     {
         float v = 1.0f;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
             v *= (*it)->getValue();
         return v;
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        auto list = cloneProviders();
-        return std::unique_ptr<Multiplier>(new Multiplier(std::move(list)));
     }
 };
 

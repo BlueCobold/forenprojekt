@@ -24,9 +24,7 @@ public:
         const float duration,
         const sf::Vector2u& size);
 
-    void update();
-
-    virtual void draw(const DrawParameter& param);
+    void update() override;
 
 private:
     sf::Sprite m_sourceSprite;
@@ -35,6 +33,8 @@ private:
     int m_stripeHeight;
     int m_offset;
     float m_timeFactor;
+
+    void doDraw(const DrawParameter& param);
 };
 
 #endif // HORIZONTALSLICES_TRANSITION_HPP

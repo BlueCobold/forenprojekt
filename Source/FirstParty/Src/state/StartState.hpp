@@ -13,13 +13,14 @@ public:
     StartState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~StartState();
 
-    virtual StateChangeInformation update(const float time);
-    virtual void draw(const DrawParameter& params);
-    virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
+    StateChangeInformation update(const float time) override;
+    void onEnter(const EnterStateInformation* enterInformation, const float time) override;
 
 private:
     EnterTransitionStateInformation m_transitionStateInfo;
     EnterStateInformation m_stateInfo;
+
+    void doDraw(const DrawParameter& params) override;
 };
 
 #endif // STARTSTATE_HPP

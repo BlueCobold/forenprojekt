@@ -13,6 +13,13 @@
 /// Returns the smallest of the values of the passed providers
 class Minimum : public MultiProvider
 {
+
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        auto list = cloneProviders();
+        return std::unique_ptr<Minimum>(new Minimum(std::move(list)));
+    }
+
 public:
 
     Minimum(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
@@ -21,7 +28,7 @@ public:
            throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Minimum"));
     }
 
-    virtual float getValue() override
+    float getValue() override
     {
         float v = 0.0f;
         bool set = false;
@@ -34,12 +41,6 @@ public:
             else
                 v = std::min(v, (*it)->getValue());
         return v;
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        auto list = cloneProviders();
-        return std::unique_ptr<Minimum>(new Minimum(std::move(list)));
     }
 };
 

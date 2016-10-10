@@ -18,21 +18,22 @@ private:
     Animation* m_updatingAni;
     std::vector<std::unique_ptr<ParallaxLayer>> m_layers;
 
+    void doDraw(const DrawParameter& param) override;
+
 public:
 
     Background(const sf::Vector2u& size);
     ~Background();
 
-    virtual void restartAt(const float time) override;
+    void restartAt(const float time) override;
     void update(const float time);
     void updateParallax(const sf::View& view);
 
     void bindLayer(std::unique_ptr<ParallaxLayer>&& layer);
 
-    virtual float getValueOf(const std::string& name) const override;
-    virtual void setValueOf(const std::string& name, const float value) override;
+    float getValueOf(const std::string& name) const override;
+    void setValueOf(const std::string& name, const float value) override;
 
-    virtual void draw(const DrawParameter& param) override;
 };
 
 #endif //BACKGROUND_HPP

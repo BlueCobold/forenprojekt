@@ -16,7 +16,7 @@ InteractiveLabel::InteractiveLabel(const std::string& text,
 {
 }
 
-std::unique_ptr<MenuElement> InteractiveLabel::clone() const
+std::unique_ptr<MenuElement> InteractiveLabel::doClone() const
 {
     auto clone = std::unique_ptr<InteractiveLabel>(new InteractiveLabel(
                                                             getText(),
@@ -64,7 +64,7 @@ void InteractiveLabel::update(const sf::RenderWindow& screen, const float time, 
     }
 }
 
-void InteractiveLabel::draw(const DrawParameter& params)
+void InteractiveLabel::doDraw(const DrawParameter& params)
 {
     LineLabel::draw(params);
 }

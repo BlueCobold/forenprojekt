@@ -12,6 +12,11 @@ private:
     float m_start;
     float m_duration;
     
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        return std::unique_ptr<Delay>(new Delay(m_start, m_duration, getProvider()->clone()));
+    }
+    
 public:
     
     Delay(const float start, const float duration, std::unique_ptr<ValueProvider> provider) :
@@ -20,7 +25,7 @@ public:
         m_duration(duration)
     { }
     
-    virtual float getValue() override
+    float getValue() override
     {
         float value = getProvider()->getValue();
         if(value < m_start)
@@ -28,11 +33,6 @@ public:
         if(value > m_start + m_duration)
             return value - m_duration;
         return m_start;
-    }
-    
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        return std::unique_ptr<Delay>(new Delay(m_start, m_duration, getProvider()->clone()));
     }
 };
 

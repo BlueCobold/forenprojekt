@@ -10,8 +10,8 @@ class ResourceManager;
 class LabelHUD : public HUDElement
 {
 protected:
-
     LineLabel m_label;
+    void doDraw(const DrawParameter& params) override;
 
 public:
     LabelHUD(const sf::Vector2f& position,
@@ -21,8 +21,6 @@ public:
              const LineLabel::Alignment alignment = LineLabel::Left);
 
     void update(const DrawParameter& params) override;
-
-    void draw(const DrawParameter& params) override;
 
     void setText(const std::string& text);
 

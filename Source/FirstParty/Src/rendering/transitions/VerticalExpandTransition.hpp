@@ -24,15 +24,15 @@ public:
         const float duration,
         const sf::Vector2u& size);
 
-    void update();
-
-    virtual void draw(const DrawParameter& param);
+    void update() override;
 
 private:
     std::vector<std::unique_ptr<sf::Sprite>> m_sourceSprites;
     std::vector<std::unique_ptr<sf::Sprite>> m_targetSprites;
     int m_stripeWidth;
     int m_stripeHeight;
+
+    void doDraw(const DrawParameter& param);
 };
 
 #endif // VERTICALEXPAND_TRANSITION_HPP

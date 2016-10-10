@@ -9,7 +9,12 @@ template<typename T>
 class Cloneable
 {
 public:
-    virtual std::unique_ptr<T> clone() const = 0;
+    std::unique_ptr<T> clone() const;
+
+private:
+    virtual std::unique_ptr<T> doClone() const = 0;
 };
+
+#include "Cloneable.inl"
 
 #endif // CLONEABLE_HPP

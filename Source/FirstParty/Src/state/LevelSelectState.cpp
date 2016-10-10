@@ -98,7 +98,7 @@ StateChangeInformation LevelSelectState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void LevelSelectState::draw(const DrawParameter& params)
+void LevelSelectState::doDraw(const DrawParameter& params)
 {    
     params.getTarget().setView(utility::getDefaultView(params.getTarget(), m_screen.getSize()));
 

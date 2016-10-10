@@ -187,7 +187,7 @@ StateChangeInformation PlayState::update(const float time)
     return StateChangeInformation::Empty();
 }
 
-void PlayState::draw(const DrawParameter& params)
+void PlayState::doDraw(const DrawParameter& params)
 {
     if(m_level != nullptr)
     {

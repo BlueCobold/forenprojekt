@@ -20,6 +20,12 @@ private:
     std::string m_varName;
     bool m_print;
 
+    std::unique_ptr<ValueProvider> doClone() const override
+    {
+        return std::unique_ptr<SetVariable>(new SetVariable(getCloneObservable(), m_varName,
+            getProvider()->clone(), m_print, getCallback()));
+    }
+
 public:
     SetVariable(
         VariableHandler& observed,
@@ -33,19 +39,13 @@ public:
             m_print(print)
     { }
 
-    virtual float getValue() override
+    float getValue() override
     {
         float value = getProvider()->getValue();
         getObserved().setValueOf(m_varName, value);
         if(m_print)
             std::cout << m_varName << "=" << value << std::endl;
         return value;
-    }
-
-    virtual std::unique_ptr<ValueProvider> clone() const override
-    {
-        return std::unique_ptr<SetVariable>(new SetVariable(getCloneObservable(), m_varName,
-            getProvider()->clone(), m_print, getCallback()));
     }
 };
 

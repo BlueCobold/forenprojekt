@@ -18,9 +18,8 @@ public:
     AchievementState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config, AchievementManager& achievementManager);
     ~AchievementState();
 
-    virtual StateChangeInformation update(const float time);
-    virtual void draw(const DrawParameter& params);
-    virtual void onEnter(const EnterStateInformation* enterInformation, const float time);
+    StateChangeInformation update(const float time) override;
+    void onEnter(const EnterStateInformation* enterInformation, const float time) override;
     void setLanguage(const std::string& language) override;
 
 private:
@@ -33,6 +32,8 @@ private:
     unsigned int m_currentAchievementIndex;
     EnterStateInformation m_stateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
+
+    void doDraw(const DrawParameter& params) override;
 
     void updateLeftButton();
     void updateRightButton();

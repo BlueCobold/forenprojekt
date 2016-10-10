@@ -17,7 +17,7 @@ void KeyboardMenu::showKeyboard()
     m_showKeyboard = true;
 }
 
-void KeyboardMenu::draw(const DrawParameter& params)
+void KeyboardMenu::doDraw(const DrawParameter& params)
 {
     if(!m_showKeyboard)
         return;
