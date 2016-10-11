@@ -64,11 +64,6 @@ void InteractiveLabel::update(const sf::RenderWindow& screen, const float time, 
     }
 }
 
-void InteractiveLabel::doDraw(const DrawParameter& params)
-{
-    LineLabel::draw(params);
-}
-
 void InteractiveLabel::drawAdditionalForeground(const DrawParameter& params)
 {
     if(m_showToolTip && isVisible())

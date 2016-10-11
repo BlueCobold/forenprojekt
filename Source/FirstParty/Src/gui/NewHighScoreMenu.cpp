@@ -17,7 +17,7 @@ void NewHighScoreMenu::update(sf::RenderWindow& screen, const float time)
 
 void NewHighScoreMenu::doDraw(const DrawParameter& params)
 {
-    Menu::draw(params);
+    Menu::doDraw(params);
     m_virtualKeyboard.draw(params);
 }
 

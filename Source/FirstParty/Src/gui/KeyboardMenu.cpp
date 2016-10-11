@@ -22,7 +22,7 @@ void KeyboardMenu::doDraw(const DrawParameter& params)
     if(!m_showKeyboard)
         return;
 
-    Menu::draw(params);
+    Menu::doDraw(params);
 }
 
 void KeyboardMenu::update(sf::RenderWindow& screen, const float time)

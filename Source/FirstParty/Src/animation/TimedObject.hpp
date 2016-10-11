@@ -20,11 +20,12 @@ public:
     virtual ~TimedObject()
     { }
 
-    virtual void restartAt(const float time)
+    void restartAt(const float time)
     {
         m_startTime = time;
         m_currentTime = time;
         Stoppable::continueNow();
+        onRestarted();
     }
 
     virtual float getPassedTime() const
@@ -33,6 +34,9 @@ public:
     }
 
 protected:
+    
+    virtual void onRestarted()
+    { }
 
     void updateCurrentTime(const float time)
     {

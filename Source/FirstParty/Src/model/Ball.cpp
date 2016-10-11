@@ -84,9 +84,9 @@ void Ball::teleportTo(const float x, const float y, const bool resetSpeed)
     m_resetSpeedOnTeleport = resetSpeed;
 }
 
-void Ball::restartAt(const float value)
+void Ball::onRestarted()
 {
-    Entity::restartAt(value);
+    Entity::onRestarted();
     m_spawnPosition = getStartPosition();
     if(m_trail != nullptr)
         m_trail->setTo(getPosition().x, getPosition().y);

@@ -107,10 +107,9 @@ const Entity::Type& Entity::getType() const
     return m_type;
 }
 
-void Entity::restartAt(const float value)
+void Entity::onRestarted()
 {
-    TimedObject::restartAt(value);
-    m_lastTime = value;
+    m_lastTime = getCurrentTime();
     m_killed = false;
 
     for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)

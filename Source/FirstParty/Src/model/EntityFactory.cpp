@@ -34,9 +34,9 @@ void EntityFactory::update(const float value)
     }
 }
 
-void EntityFactory::restartAt(const float value)
+void EntityFactory::onRestarted()
 {
-    Entity::restartAt(value);
+    Entity::onRestarted();
     m_manufactureMoment = getCurrentTime();
 }
 

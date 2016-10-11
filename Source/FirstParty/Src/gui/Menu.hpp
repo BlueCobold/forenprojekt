@@ -52,11 +52,11 @@ public:
     virtual void setLanguage(const std::string& language);
 
 protected:
-    virtual void drawAdditionalBackground(const DrawParameter& params);
-    virtual void drawAdditionalForeground(const DrawParameter& params);
+    void doDraw(const DrawParameter& params) override;
 
 private:
-    void doDraw(const DrawParameter& params) override;
+    virtual void drawAdditionalBackground(const DrawParameter& params);
+    virtual void drawAdditionalForeground(const DrawParameter& params);
 
     template<class T>
     T* find(int id, const MenuElementType::Type type) const;

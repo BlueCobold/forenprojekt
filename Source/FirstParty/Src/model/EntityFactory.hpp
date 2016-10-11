@@ -22,6 +22,8 @@ private:
     DeliveryCallback m_callback;
     bool m_transferOwnSpeed;
 
+    void onRestarted() override;
+
 public:
     EntityFactory(CloneHandler& cloneHandler,
                   bool respawnable, 
@@ -31,8 +33,7 @@ public:
                   float maxDelayTime,
                   const b2Vec2& spawnOffset);
 
-    virtual void update(const float value);
-    virtual void restartAt(const float value);
+    void update(const float value) override;
 
     void registerForDelivery(DeliveryCallback callback);
 

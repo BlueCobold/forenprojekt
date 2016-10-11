@@ -19,13 +19,13 @@ private:
     std::vector<std::unique_ptr<ParallaxLayer>> m_layers;
 
     void doDraw(const DrawParameter& param) override;
+    void onRestarted() override;
 
 public:
 
     Background(const sf::Vector2u& size);
     ~Background();
 
-    void restartAt(const float time) override;
     void update(const float time);
     void updateParallax(const sf::View& view);
 

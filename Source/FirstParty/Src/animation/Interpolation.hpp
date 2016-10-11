@@ -19,7 +19,6 @@ public:
 
     void start();
     virtual void stop() override;
-    virtual void restartAt(const float time) override;
     void update(const float elapsedTime);
 
     bool isFinished() const { return m_finished; }
@@ -32,6 +31,8 @@ public:
     void set(const float startValue, const float targetValue, const float duration);
 
 private:
+
+    void onRestarted() override;
 
     bool m_started;
     bool m_finished;

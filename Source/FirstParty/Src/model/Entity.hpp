@@ -54,13 +54,15 @@ private:
 
     std::unique_ptr<Entity> doClone() const override;
 
+protected:
+    void onRestarted() override;
+
 public:
 
     Entity(Type type, CloneHandler& cloneHandler, bool respawnable = false, bool autoKill = false);
     virtual ~Entity();
 
     virtual void update(const float value);
-    virtual void restartAt(const float value) override;
 
     void setName(std::string name);
     const Type& getType() const;

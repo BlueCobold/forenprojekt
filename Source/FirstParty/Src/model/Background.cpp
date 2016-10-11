@@ -18,9 +18,9 @@ void Background::bindLayer(std::unique_ptr<ParallaxLayer>&& layer)
    m_layers.push_back(std::move(layer));
 }
 
-void Background::restartAt(const float time)
+void Background::onRestarted()
 {
-    TimedObject::restartAt(time);
+    auto time = getCurrentTime();
     for(auto layer = begin(m_layers); layer != end(m_layers); ++layer)
         (*layer)->restartAt(time);
 }

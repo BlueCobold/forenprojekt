@@ -18,7 +18,6 @@ public:
          CloneHandler& cloneHandler,
          const Entity* spawnAnimationEntity = nullptr);
 
-    void restartAt(const float value) override;
     void update(const float value) override;
 
     float getValueOf(const std::string& name) const override;
@@ -65,6 +64,7 @@ private:
 
     void autoResetBall(const float elapsedTime);
     void doDraw(const DrawParameter& params) override;
+    void onRestarted() override;
 
     bool isOutside();
 

@@ -61,7 +61,6 @@ public:
 #endif
     ~Level();
 
-    virtual void restartAt(const float time) override;
     void update(const float dt);
     void adjustView(const DrawParameter& params);
 
@@ -149,7 +148,9 @@ private:
     const std::string pathname() const;
 
     bool isOriginal();
+
 private:
+    void onRestarted() override;
 
     ResourceManager& m_resourceManager;
     AppConfig& m_config;

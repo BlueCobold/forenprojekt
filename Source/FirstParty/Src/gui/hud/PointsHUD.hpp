@@ -5,9 +5,10 @@
 
 #include "LabelHUD.hpp"
 #include "../../animation/Interpolation.hpp"
+#include "../../animation/TimedObject.hpp"
 #include "../../resources/ResourceManager.hpp"
 
-class PointsHUD : public LabelHUD
+class PointsHUD : public LabelHUD, public TimedObject
 {
 public:
     PointsHUD(ResourceManager& resourceManager,
@@ -18,7 +19,6 @@ public:
     void skipInterpolation();
 
     void update(const DrawParameter& params) override;
-    void restartAt(const float time);
 
     void setPoints(int points);
 
@@ -27,10 +27,9 @@ public:
 private:
 
     void doDraw(const DrawParameter& params) override;
+    void onRestarted() override;
 
     Interpolation m_pointCounter;
-
-    float m_elapsedTime;
 
     ResourceManager& m_resourceManager;
     sf::Sprite m_coinTexture;

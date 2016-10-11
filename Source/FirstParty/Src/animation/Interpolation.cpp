@@ -43,9 +43,8 @@ void Interpolation::stop()
     m_currentValue = m_targetValue;
 }
 
-void Interpolation::restartAt(const float time)
+void Interpolation::onRestarted()
 {
-    TimedObject::restartAt(time);
     start();
 }
 

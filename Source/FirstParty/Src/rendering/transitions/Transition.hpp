@@ -25,7 +25,7 @@ public:
         m_duration(duration),
         m_isFinished(false)
     {
-        TimedObject::restartAt(m_frameTime.getElapsedTime().asSeconds());
+        restartAt(m_frameTime.getElapsedTime().asSeconds());
     }
 
     virtual ~Transition()

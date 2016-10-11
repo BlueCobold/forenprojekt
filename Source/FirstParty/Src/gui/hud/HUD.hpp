@@ -9,6 +9,7 @@
 #include "TimeHUD.hpp"
 #include "GoodyHUD.hpp"
 #include "BatteryHUD.hpp"
+#include "../../animation/TimedObject.hpp"
 
 #include <memory> // unique_ptr
 
@@ -22,7 +23,7 @@ namespace sf
 }
 
 /// for Displaying all the HUD Elements
-class HUD : public Drawable
+class HUD : public Drawable, public TimedObject
 {
     FPSCounterHUD m_fpsCounter;
     TargetHUD m_target;
@@ -48,14 +49,12 @@ public:
     HUD(ResourceManager& resourceManager, AppConfig& config);
 
     void skipInterpolation();
-
     void update(const Level* level, const float time);
-    void restartAt(const float time);
-
     void onEnter(Level* level);
 
 protected:
     void doDraw(const DrawParameter& params) override;
+    void onRestarted() override;
 
 private:
     void setBallShow(bool ballShow);

@@ -107,11 +107,11 @@ Level::~Level()
 
 }
 
-void Level::restartAt(const float time)
+void Level::onRestarted()
 {
+    auto time = getCurrentTime();
     if(m_background != nullptr)
         m_background->restartAt(time);
-    TimedObject::restartAt(time);
     for(auto it = begin(m_entities); it != end(m_entities); ++it)
         (*it)->restartAt(time);
     m_lastTime = time;

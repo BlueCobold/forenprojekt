@@ -36,6 +36,8 @@ void HUD::skipInterpolation()
 
 void HUD::update(const Level* level, const float elapsedTime)
 {
+    TimedObject::updateCurrentTime(elapsedTime);
+
     m_target.setTargets(level->getTotalTarget(), level->getRemainingTarget());
 
     m_points.setTime(elapsedTime);
@@ -59,9 +61,9 @@ void HUD::update(const Level* level, const float elapsedTime)
     m_extraBallGoody.updateState(level->getGoody(Goody::ExtraBallGoody));
 }
 
-void HUD::restartAt(const float time)
+void HUD::onRestarted()
 {
-    m_points.restartAt(time);
+    m_points.restartAt(getCurrentTime());
 }
 
 void HUD::doDraw(const DrawParameter& params)
