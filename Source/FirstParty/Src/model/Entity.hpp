@@ -56,6 +56,8 @@ private:
 
 protected:
     void onRestarted() override;
+    float onGetValueOf(const std::string& name) const override;
+    void onSetValueOf(const std::string& name, const float value) override;
 
 public:
 
@@ -77,9 +79,6 @@ public:
     bool doesCollideWithOtherEntity();
     void bindCollisionSound(std::unique_ptr<SoundObject> sound);
     void bindOtherSounds(std::vector<std::unique_ptr<SoundTrigger>> otherSounds);
-
-    virtual float getValueOf(const std::string& name) const override;
-    virtual void setValueOf(const std::string& name, const float value) override;
 
     void bindCollisionHandler(std::unique_ptr<CollisionHandler> handler);
     void bindCollisionFilter(std::unique_ptr<CollisionFilter> filter);

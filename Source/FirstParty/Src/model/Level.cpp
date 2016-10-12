@@ -362,7 +362,7 @@ void Level::updatePointLabels()
     }
 }
 
-float Level::getValueOf(const std::string& name) const
+float Level::onGetValueOf(const std::string& name) const
 {
     auto match = m_variables.find(name);
     if(match == end(m_variables))
@@ -374,7 +374,7 @@ float Level::getValueOf(const std::string& name) const
     return match->second;
 }
 
-void Level::setValueOf(const std::string& name, const float value)
+void Level::onSetValueOf(const std::string& name, const float value)
 {
     if(m_updatingEntity == nullptr)
         m_variables[name] = value;

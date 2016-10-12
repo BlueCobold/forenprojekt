@@ -87,9 +87,6 @@ public:
     const Goody getGoody(const Goody::Type& type) const;
     void onGoodyActivated(Goody& goody);
 
-    virtual float getValueOf(const std::string& name) const override;
-    virtual void setValueOf(const std::string& name, const float value) override;
-
     const sf::Vector2f getBallCoords() const;
     const int getLostBalls() const;
 
@@ -151,6 +148,9 @@ private:
 
 private:
     void onRestarted() override;
+
+    float onGetValueOf(const std::string& name) const override;
+    void onSetValueOf(const std::string& name, const float value) override;
 
     ResourceManager& m_resourceManager;
     AppConfig& m_config;

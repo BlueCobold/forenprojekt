@@ -40,7 +40,7 @@ std::unique_ptr<MenuElement> AnimationContainer::doClone() const
     return std::move(other);
 }
 
-float AnimationContainer::getValueOf(const std::string& name) const
+float AnimationContainer::onGetValueOf(const std::string& name) const
 {
     auto match = m_variables.find(name);
     if(match == end(m_variables))
@@ -52,7 +52,7 @@ float AnimationContainer::getValueOf(const std::string& name) const
     return match->second;
 }
 
-void AnimationContainer::setValueOf(const std::string& name, const float value)
+void AnimationContainer::onSetValueOf(const std::string& name, const float value)
 {
     if(m_updatingAni == nullptr)
         m_variables[name] = value;

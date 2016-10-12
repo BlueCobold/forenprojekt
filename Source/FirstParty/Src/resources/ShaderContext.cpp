@@ -2,7 +2,7 @@
 #include "ShaderContext.hpp"
 #include "../Utility.hpp"
 
-float ShaderContext::getValueOf(const std::string& name) const
+float ShaderContext::onGetValueOf(const std::string& name) const
 {
     auto found = m_variables.find(name);
     if(found != end(m_variables))
@@ -12,7 +12,7 @@ float ShaderContext::getValueOf(const std::string& name) const
     return 0;
 }
 
-void ShaderContext::setValueOf(const std::string& name, const float value)
+void ShaderContext::onSetValueOf(const std::string& name, const float value)
 {
     m_variables[name] = value;
 }

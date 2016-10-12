@@ -41,7 +41,7 @@ public:
         return val >= 1;
     }
 
-    virtual float getValueOf(const std::string& name) const override
+    float onGetValueOf(const std::string& name) const override
     {
         if(m_globalHandler != nullptr && name.length() > 7 && name.substr(0,7) == "global:")
             return m_globalHandler->getValueOf(name.substr(7));
@@ -57,7 +57,7 @@ public:
         return m_entityA->getValueOf(name);
     }
 
-    virtual void setValueOf(const std::string& name, const float value) override
+    void onSetValueOf(const std::string& name, const float value) override
     {
         if(m_globalHandler != nullptr && name.length() > 7 && name.substr(0,7) == "global:")
             return m_globalHandler->setValueOf(name.substr(7), value);

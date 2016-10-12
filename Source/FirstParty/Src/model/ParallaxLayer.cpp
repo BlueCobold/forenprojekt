@@ -38,14 +38,14 @@ void ParallaxLayer::update(const float time)
     m_updatingAni = nullptr;
 }
 
-float ParallaxLayer::getValueOf(const std::string& name) const
+float ParallaxLayer::onGetValueOf(const std::string& name) const
 {
     if(m_updatingAni == nullptr)
         throw std::runtime_error(utility::replace(utility::translateKey("GetVariable"), name));
     return m_updatingAni->getValueOf(name);
 }
 
-void ParallaxLayer::setValueOf(const std::string& name, const float value)
+void ParallaxLayer::onSetValueOf(const std::string& name, const float value)
 {
     if(m_updatingAni == nullptr)
         throw std::runtime_error(utility::replace(utility::translateKey("SetVariable"), name));

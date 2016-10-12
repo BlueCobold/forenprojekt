@@ -124,22 +124,22 @@ void Ball::update(const float value)
         m_trail->update();
 }
 
-float Ball::getValueOf(const std::string& name) const
+float Ball::onGetValueOf(const std::string& name) const
 {
     if(m_trail == nullptr)
-        return Entity::getValueOf(name);
+        return Entity::onGetValueOf(name);
     if(auto current = m_trail->getCurrentAnimation())
         return current->getValueOf(name);
-    return Entity::getValueOf(name);
+    return Entity::onGetValueOf(name);
 }
 
-void Ball::setValueOf(const std::string& name, const float value)
+void Ball::onSetValueOf(const std::string& name, const float value)
 {
     if(m_trail == nullptr)
-        return Entity::setValueOf(name, value);
+        return Entity::onSetValueOf(name, value);
     if(auto current = m_trail->getCurrentAnimation())
         return current->setValueOf(name, value);
-    return Entity::setValueOf(name, value);
+    return Entity::onSetValueOf(name, value);
 }
 
 void Ball::doDraw(const DrawParameter& params)

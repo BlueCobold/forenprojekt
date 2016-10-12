@@ -21,6 +21,9 @@ private:
     std::unique_ptr<MenuElement> doClone() const override;
     void doDraw(const DrawParameter& param) override;
 
+    float onGetValueOf(const std::string& name) const override;
+    void onSetValueOf(const std::string& name, const float value) override;
+
 public:
     AnimationContainer(const sf::Vector2f& position, 
                        const sf::Vector2f& offset,
@@ -29,8 +32,6 @@ public:
     AnimationContainer(AnimationContainer&& toMove);
     void bindAnimation(std::unique_ptr<Animation> animation);
 
-    float getValueOf(const std::string& name) const override;
-    void setValueOf(const std::string& name, const float value) override;
     void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     void updateLayout(const sf::Vector2f& screenSize) override;
 };

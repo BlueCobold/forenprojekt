@@ -71,7 +71,7 @@ void Entity::update(const float value)
         kill();
 }
 
-float Entity::getValueOf(const std::string& name) const
+float Entity::onGetValueOf(const std::string& name) const
 {
     auto match = m_variables.find(name);
     if(match == end(m_variables))
@@ -83,7 +83,7 @@ float Entity::getValueOf(const std::string& name) const
     return match->second;
 }
 
-void Entity::setValueOf(const std::string& name, const float value)
+void Entity::onSetValueOf(const std::string& name, const float value)
 {
     if(m_updatingAni == nullptr)
         m_variables[name] = value;

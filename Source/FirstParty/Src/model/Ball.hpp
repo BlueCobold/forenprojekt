@@ -20,9 +20,6 @@ public:
 
     void update(const float value) override;
 
-    float getValueOf(const std::string& name) const override;
-    void setValueOf(const std::string& name, const float value) override;
-
     void registerForCheckpointChanges(std::function<void()> handler);
 
     void setFieldDimension(const b2Vec2 fieldDimension);
@@ -40,6 +37,9 @@ public:
     void bindTrail(std::unique_ptr<ParticleTrail> trail);
 
 private:
+
+    float onGetValueOf(const std::string& name) const override;
+    void onSetValueOf(const std::string& name, const float value) override;
 
     float m_ballResetTime;
     float m_resetTime;

@@ -13,16 +13,12 @@
 
 #include "../Utility.hpp"
 
-/// This interface specifies an object that can store and return variables.
-class VariableHolder : public virtual VariableHandler
+/// This class offers a basic implementation for a simple VariableHandler
+class VariableHolder : public VariableHandler
 {
-private:
-
     std::map<std::string, float> m_variables;
-
-public:
-
-    virtual float getValueOf(const std::string& name) const override
+    
+    float onGetValueOf(const std::string& name) const override
     {
         auto found = m_variables.find(name);
         if(found != end(m_variables))
@@ -32,11 +28,12 @@ public:
         return 0;
     }
 
-    virtual void setValueOf(const std::string& name, const float value) override
+    void onSetValueOf(const std::string& name, const float value) override
     {
         m_variables[name] = value;
     }
-
+    
+public:
     void copyValuesFrom(const VariableHolder& other)
     {
         m_variables = other.m_variables;

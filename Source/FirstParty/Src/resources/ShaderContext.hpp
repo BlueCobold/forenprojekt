@@ -13,13 +13,11 @@
 class ShaderContext : public AnimatedObject
 {
 public:
-
-    virtual float getValueOf(const std::string& name) const override;
-    virtual void setValueOf(const std::string& name, const float value) override;
-
     void update();
 
 private:
+    float onGetValueOf(const std::string& name) const override;
+    void onSetValueOf(const std::string& name, const float value) override;
     
     std::map<std::string, float> m_variables;
     sf::Clock m_clock;

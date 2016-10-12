@@ -40,14 +40,14 @@ void Background::updateParallax(const sf::View& view)
         (*layer)->updatePosition(view, m_size);
 }
 
-float Background::getValueOf(const std::string& name) const
+float Background::onGetValueOf(const std::string& name) const
 {
     if(m_updatingAni == nullptr)
          throw std::runtime_error(utility::replace(utility::translateKey("GetVariable"), name));
     return m_updatingAni->getValueOf(name);
 }
 
-void Background::setValueOf(const std::string& name, const float value)
+void Background::onSetValueOf(const std::string& name, const float value)
 {
     if(m_updatingAni == nullptr)
         throw std::runtime_error(utility::replace(utility::translateKey("SetVariable"), name));

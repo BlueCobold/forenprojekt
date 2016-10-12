@@ -13,6 +13,9 @@ private:
     sf::Vector2f m_layerSize;
     Animation* m_updatingAni;
 
+    float onGetValueOf(const std::string& name) const override;
+    void onSetValueOf(const std::string& name, const float value) override;
+
 public:
 
     ParallaxLayer(const sf::Vector2f& layerSize);
@@ -20,10 +23,6 @@ public:
 
     void updatePosition(const sf::View& view, const sf::Vector2u& worldSize);
     void update(const float time);
-
-    virtual float getValueOf(const std::string& name) const override;
-
-    virtual void setValueOf(const std::string& name, const float value) override;
 };
 
 #endif //PARALLAX_LAYER_HPP
