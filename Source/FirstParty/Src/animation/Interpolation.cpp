@@ -6,40 +6,36 @@ Interpolation::Interpolation(const float startValue,
                              const float targetValue,
                              const float duration,
                              const float time) :
-    TimedObject(time),
-    m_started(false),
+    TimedObject(time, false),
     m_finished(false),
     m_startValue(startValue),
     m_targetValue(targetValue),
-    m_currentValue(0),
+    m_currentValue(m_startValue),
     m_duration(duration)
 {
     update(0);
 }
 
 Interpolation::Interpolation() :
-    TimedObject(0),
-    m_started(false),
+    TimedObject(0, false),
     m_finished(false),
     m_startValue(0),
     m_targetValue(0),
     m_currentValue(0),
     m_duration(0)
 {
-    update(0);
+    updateCurrentTime(0);
 }
 
 void Interpolation::start()
 {
     m_finished = false;
-    m_started = true;
+    continueNow();
     update(getCurrentTime());
 }
 
-void Interpolation::stop()
+void Interpolation::onStopped()
 {
-    Stoppable::stop();
-    m_started = false;
     m_currentValue = m_targetValue;
 }
 
@@ -50,10 +46,10 @@ void Interpolation::onRestarted()
 
 void Interpolation::update(const float elapsedTime)
 {
-    if(!m_started)
+    if(isStopped() || m_finished)
         return;
 
-    TimedObject::updateCurrentTime(elapsedTime);
+    updateCurrentTime(elapsedTime);
 
     if(getPassedTime() >= m_duration)
     {

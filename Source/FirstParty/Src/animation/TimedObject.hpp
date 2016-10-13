@@ -9,13 +9,16 @@
 class TimedObject : public Stoppable
 {
 public:
-    TimedObject() : m_startTime(0), m_currentTime(0)
+    TimedObject() :
+        m_startTime(0),
+        m_currentTime(0)
     { }
 
-    TimedObject(const float time)
-    {
-        restartAt(time);
-    }
+    TimedObject(const float time, bool started = true) :
+        Stoppable(started),
+        m_startTime(time),
+        m_currentTime(time)
+    { }
 
     virtual ~TimedObject()
     { }
@@ -24,7 +27,7 @@ public:
     {
         m_startTime = time;
         m_currentTime = time;
-        Stoppable::continueNow();
+        continueNow();
         onRestarted();
     }
 

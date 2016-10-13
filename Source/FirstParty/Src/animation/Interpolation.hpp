@@ -18,11 +18,10 @@ public:
     Interpolation();
 
     void start();
-    virtual void stop() override;
     void update(const float elapsedTime);
 
     bool isFinished() const { return m_finished; }
-    bool isStarted() const { return m_started; }
+    bool isStarted() const { return !isStopped(); }
 
     float getCurrentValue() const { return m_currentValue; }
 
@@ -33,8 +32,8 @@ public:
 private:
 
     void onRestarted() override;
+    void onStopped() override;
 
-    bool m_started;
     bool m_finished;
 
     float m_startValue;

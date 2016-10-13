@@ -10,22 +10,29 @@ public:
     Stoppable() : m_stopped(false)
     { }
 
+    Stoppable(bool started) : m_stopped(!started)
+    { }
+
     virtual ~Stoppable()
     { }
 
-    virtual void stop()
+    void stop()
     {
         m_stopped = true;
+        onStopped();
     }
 
-    virtual bool isStopped() const
+    bool isStopped() const
     {
         return m_stopped;
     }
 
 protected:
 
-    virtual void continueNow()
+    virtual void onStopped()
+    { }
+
+    void continueNow()
     {
         m_stopped = false;
     }

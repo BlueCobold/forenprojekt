@@ -105,7 +105,7 @@ void Animation::update()
 
 void Animation::reset()
 {
-    Stoppable::continueNow();
+    continueNow();
 
     if(m_frameProvider != nullptr)
         m_frameProvider->reset();
