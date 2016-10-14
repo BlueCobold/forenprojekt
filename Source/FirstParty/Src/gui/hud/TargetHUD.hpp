@@ -6,7 +6,6 @@
 /// 
 class TargetHUD : public LabelHUD
 {
-private:
     int m_totalTarget;
     int m_remainingTarget;
 
@@ -14,14 +13,13 @@ private:
     ResourceManager& m_resourceManager;
 
     void doDraw(const DrawParameter& params) override;
+    void updated(const DrawParameter& params) override;
 
 public:
     TargetHUD(ResourceManager& resourceManager,
               const sf::Vector2f& position,
               const sf::Vector2f& offset,
               const BitmapFont* bitmapFont);
-
-    void update(const DrawParameter& params);
 
     void setTargets(int totalTarget,int remainingTarget);
 };

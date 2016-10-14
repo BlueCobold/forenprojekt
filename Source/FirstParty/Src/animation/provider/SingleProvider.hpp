@@ -12,25 +12,22 @@
 /// Returns a modified value of the passed providers
 class SingleProvider : public ValueProvider
 {
-private:
-
     std::unique_ptr<ValueProvider> m_provider;
 
-public:
+    void onReset() override
+    {
+        m_provider->reset();
+    }
 
+public:
     SingleProvider(std::unique_ptr<ValueProvider> provider) : m_provider(std::move(provider))
     {
         if(m_provider == nullptr)
             throw std::runtime_error(utility::translateKey("TheProviderNull"));
     }
 
-    void reset() override
-    {
-        m_provider->reset();
-    }
 
 protected:
-
     ValueProvider* getProvider() const
     {
         return m_provider.get();

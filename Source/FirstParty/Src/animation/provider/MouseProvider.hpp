@@ -11,6 +11,13 @@
 /// Returns the relative mouse coordinates since the last call
 class MouseProvider : public ValueProvider
 {
+public:
+    MouseProvider(bool xAxis)
+      : m_firstCall(true),
+        m_xAxis(xAxis)
+    { }
+
+private:
     bool m_firstCall;
     bool m_xAxis;
     sf::Vector2f m_lastMousePos;
@@ -19,15 +26,8 @@ class MouseProvider : public ValueProvider
     {
         return std::unique_ptr<MouseProvider>(new MouseProvider(m_xAxis));
     }
-
-public:
     
-    MouseProvider(bool xAxis)
-      : m_firstCall(true),
-        m_xAxis(xAxis)
-    { }
-
-    float getValue() override
+    float calculateValue() override
     {
         if(m_firstCall)
         {
@@ -42,7 +42,7 @@ public:
         return mouseDiff.y;
     }
 
-    void reset() override
+    void onReset() override
     {
         m_firstCall = true;
     }

@@ -13,26 +13,24 @@
 /// Returns the the value of provider 1 modulo the value of provider 2
 class Modulo : public MultiProvider
 {
-
     std::unique_ptr<ValueProvider> doClone() const override
     {
         auto list = cloneProviders();
         return std::unique_ptr<Modulo>(new Modulo(std::move(list)));
     }
-
-public:
-
-    Modulo(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
-    {
-       if(getProvider().size() != 2)
-           throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Modulo"));
-    }
-
-    float getValue() override
+    
+    float calculateValue() override
     {
         float dividend = getProvider()[0]->getValue();
         float divisor = getProvider()[1]->getValue();
         return fmodf(dividend, divisor);
+    }
+
+public:
+    Modulo(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
+    {
+       if(getProvider().size() != 2)
+           throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Modulo"));
     }
 };
 

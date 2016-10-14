@@ -20,8 +20,6 @@
 ///        min  max
 class Ramp : public SingleProvider
 {
-private:
-
     float m_min;
     float m_max;
 
@@ -30,15 +28,7 @@ private:
         return std::unique_ptr<Ramp>(new Ramp(m_min, m_max, getProvider()->clone()));
     }
 
-public:
-
-    Ramp(const float min, const float max, std::unique_ptr<ValueProvider> provider) :
-        SingleProvider(std::move(provider)),
-        m_min(min),
-        m_max(max)
-    { }
-
-    float getValue() override
+    float calculateValue() override
     {
         float value = getProvider()->getValue();
         if(value < m_min)
@@ -55,6 +45,13 @@ public:
         }
         return (value - m_min) / diff;
     }
+
+public:
+    Ramp(const float min, const float max, std::unique_ptr<ValueProvider> provider) :
+        SingleProvider(std::move(provider)),
+        m_min(min),
+        m_max(max)
+    { }
 };
 
 #endif //RAMP_PROVIDER_HPP

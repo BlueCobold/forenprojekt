@@ -22,7 +22,7 @@ void EntityFactory::update(const float value)
 {
     Entity::update(value);
 
-    while(m_manufactureMoment < getCurrentTime() && m_callback != nullptr)
+    while(m_manufactureMoment < getPassedTime() && m_callback != nullptr)
     {
         auto product = m_product->clone();
         product->setPosition(m_spawnOffset + getPosition());
@@ -37,7 +37,7 @@ void EntityFactory::update(const float value)
 void EntityFactory::onRestarted()
 {
     Entity::onRestarted();
-    m_manufactureMoment = getCurrentTime();
+    m_manufactureMoment = 0;
 }
 
 void EntityFactory::registerForDelivery(DeliveryCallback callback)

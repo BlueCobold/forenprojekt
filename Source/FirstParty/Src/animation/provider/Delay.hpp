@@ -7,8 +7,6 @@
 
 class Delay : public SingleProvider
 {
-private:
-    
     float m_start;
     float m_duration;
     
@@ -16,16 +14,8 @@ private:
     {
         return std::unique_ptr<Delay>(new Delay(m_start, m_duration, getProvider()->clone()));
     }
-    
-public:
-    
-    Delay(const float start, const float duration, std::unique_ptr<ValueProvider> provider) :
-        SingleProvider(std::move(provider)),
-        m_start(start),
-        m_duration(duration)
-    { }
-    
-    float getValue() override
+
+    float calculateValue() override
     {
         float value = getProvider()->getValue();
         if(value < m_start)
@@ -34,6 +24,13 @@ public:
             return value - m_duration;
         return m_start;
     }
+    
+public:
+    Delay(const float start, const float duration, std::unique_ptr<ValueProvider> provider) :
+        SingleProvider(std::move(provider)),
+        m_start(start),
+        m_duration(duration)
+    { }
 };
 
 #endif // DELAY_PROVIDER_HPP

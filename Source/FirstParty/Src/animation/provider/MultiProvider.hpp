@@ -12,9 +12,13 @@
 /// Returns some operation performed on multiple providers
 class MultiProvider : public ValueProvider
 {
-private:
-
     std::vector<std::unique_ptr<ValueProvider>> m_provider;
+
+    void onReset() override
+    {
+        for(auto it = begin(m_provider); it != end(m_provider); ++it)
+            (*it)->reset();
+    }
 
 public:
 
@@ -23,12 +27,6 @@ public:
        for(auto it = begin(m_provider); it != end(m_provider); ++it)
            if((*it) == nullptr)
                 throw std::runtime_error(utility::translateKey("ProviderNull"));
-    }
-
-    void reset() override
-    {
-        for(auto it = begin(m_provider); it != end(m_provider); ++it)
-            (*it)->reset();
     }
 
 protected:

@@ -11,21 +11,19 @@
 /// Returns the absolute value of the passed provider
 class Absolute : public SingleProvider
 {
-
     std::unique_ptr<ValueProvider> doClone() const override
     {
         return std::unique_ptr<Absolute>(new Absolute(getProvider()->clone()));
     }
 
-public:
-    
-    Absolute(std::unique_ptr<ValueProvider> provider) : SingleProvider(std::move(provider))
-    { }
-
-    float getValue() override
+    float calculateValue() override
     {
         return fabsf(getProvider()->getValue());
     }
+
+public:
+    Absolute(std::unique_ptr<ValueProvider> provider) : SingleProvider(std::move(provider))
+    { }
 };
 
 #endif //ABSOLUTE_HPP

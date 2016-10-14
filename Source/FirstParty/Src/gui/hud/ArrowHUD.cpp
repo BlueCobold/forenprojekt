@@ -13,7 +13,7 @@ m_outOfView(false)
     m_arrow.setOrigin(ARROW_WIDTH / 2, ARROW_WIDTH / 2);
 }
 
-void ArrowHUD::update(const DrawParameter& params)
+void ArrowHUD::updated(const DrawParameter& params)
 {
     sf::Vector2f screenSize = params.getTarget().getView().getSize();
     sf::Vector2f screenCenter = params.getTarget().getView().getCenter();
@@ -22,34 +22,6 @@ void ArrowHUD::update(const DrawParameter& params)
     float bottom = screenCenter.y + screenSize.y / 2.f;
     float left = screenCenter.x - screenSize.x / 2.f;
     float right = screenCenter.x + screenSize.x / 2.f;
-    /*
-    // Version of the same check with a loop. Not much shorter, much harder to understand, far less performant
-    m_outOfView = false;
-    float vertical[] = { -FLT_MAX, top, bottom, FLT_MAX };
-    float horizontal[] = { -FLT_MAX, left, right, FLT_MAX };
-    float vpos[] = { top + m_arrowTexture.getTextureRect().height / 2.f,
-        m_position.y, bottom - m_arrowTexture.getTextureRect().height / 2.f };
-    float hpos[] = { left + m_arrowTexture.getTextureRect().width / 2.f,
-        m_position.x, right - m_arrowTexture.getTextureRect().width / 2.f};
-
-    int imgIndex = 0;
-    for(int y=0; y<3; y++)
-        for(int x=0; x<3; x++)
-        {
-            if(x==1 && y==1)
-                continue;
-            if(m_position.x >= horizontal[x] && m_position.x < horizontal[x+1]
-            && m_position.y >= vertical[y] && m_position.y < vertical[y+1])
-            {
-                m_position.x = hpos[x];
-                m_position.y = vpos[y];
-                m_arrowTexture.setTextureRect(sf::IntRect(imgIndex * 64, 0, 64, 64));
-                m_arrowTexture.setPosition(m_position);
-                m_outOfView = true;
-                return;
-            }
-            imgIndex++;
-        }*/
 
     m_outOfView = true;
 

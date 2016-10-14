@@ -15,12 +15,9 @@ BatteryHUD::BatteryHUD(ResourceManager& resourceManager,
 }
 
 
-void BatteryHUD::update(const DrawParameter& params)
+void BatteryHUD::updated(const DrawParameter& params)
 {
-    HUDElement::update(params);
-
     m_icon.setPosition(getCurrentPosition());
-
     setIcon();
 }
 

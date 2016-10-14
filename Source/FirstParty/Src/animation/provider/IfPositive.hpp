@@ -13,22 +13,13 @@
 /// Returns provider 1, if provider 1 >= 0, else provider 2
 class IfPositive : public MultiProvider
 {
-
     std::unique_ptr<ValueProvider> doClone() const override
     {
         auto list = cloneProviders();
         return std::unique_ptr<IfPositive>(new IfPositive(std::move(list)));
     }
 
-public:
-
-    IfPositive(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
-    {
-       if(getProvider().size() != 2)
-           throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "IfPositive"));
-    }
-
-     float getValue() override
+    float calculateValue() override
     {
         float value = getProvider()[0]->getValue();
         if(value >= 0)
@@ -36,6 +27,14 @@ public:
         else
             return getProvider()[1]->getValue();
     }
+
+public:
+    IfPositive(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
+    {
+       if(getProvider().size() != 2)
+           throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "IfPositive"));
+    }
+    
 };
 
 #endif //IF_POSITIVE_HPP

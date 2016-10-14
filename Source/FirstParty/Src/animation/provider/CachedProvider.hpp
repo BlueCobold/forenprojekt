@@ -13,14 +13,14 @@
 class CachedProvider : public SingleProvider
 {
 public:
-    
     CachedProvider(std::unique_ptr<ValueProvider> provider, const bool persistent = false) :
         SingleProvider(std::move(provider)),
         m_inited(false),
         m_persistent(persistent)
     { }
 
-    float getValue() override
+private:
+    float calculateValue() override
     {
         if(!m_inited)
         {
@@ -30,13 +30,11 @@ public:
         return m_value;
     }
 
-    void reset() override
+    void onReset() override
     {
         if(!m_persistent)
             m_inited = false;
     }
-
-private:
 
     std::unique_ptr<ValueProvider> doClone() const override
     {

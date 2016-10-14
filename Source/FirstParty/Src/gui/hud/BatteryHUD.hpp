@@ -8,23 +8,19 @@
 
 class BatteryHUD : public HUDElement
 {
-private:
     sf::Sprite m_icon;
-
     ResourceManager& m_resourceManager;
 
     sf::IntRect getIconRect(const std::string& key);
-
     void setIcon();
+    
+    void doDraw(const DrawParameter& params) override;
+    void updated(const DrawParameter& params) override;
 
 public:
     BatteryHUD(ResourceManager& resourceManager,
                const sf::Vector2f& position,
                const sf::Vector2f& offset);
-
-    void update(const DrawParameter& params);
-
-    void doDraw(const DrawParameter& params) override;
 };
 
 #endif

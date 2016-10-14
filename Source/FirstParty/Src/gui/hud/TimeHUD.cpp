@@ -12,8 +12,8 @@ TimeHUD::TimeHUD(ResourceManager& resourceManager,
     m_totalSeconds(0),
     m_resourceManager(resourceManager)
 {
-    m_label.setAlignment(LineLabel::Left);
-    m_label.setText(m_minutes + " " + m_seconds);
+    setAlignment(LineLabel::Left);
+    setText(m_minutes + " " + m_seconds);
     m_clock.setTexture(*m_resourceManager.getTexture("guiMisc"));
     m_clock.setTextureRect(sf::IntRect(22, 0, 22, 22));
 }
@@ -36,11 +36,11 @@ void TimeHUD::setTime(int totalSeconds)
     }
 }
 
-void TimeHUD::update(const DrawParameter& params)
+void TimeHUD::updated(const DrawParameter& params)
 {
-    LabelHUD::update(params);
+    LabelHUD::updated(params);
 
-    m_label.setText(m_minutes + ":" + m_seconds);
+    setText(m_minutes + ":" + m_seconds);
 
     m_clock.setPosition(getCurrentPosition().x - 10 - m_clock.getTextureRect().width,
                         getCurrentPosition().y);

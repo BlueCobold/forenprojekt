@@ -7,14 +7,14 @@ FPSCounterHUD::FPSCounterHUD(const sf::Vector2f& position,
                              const BitmapFont* bitmapFont) :
     LabelHUD(position, offset, bitmapFont) 
 {
-    m_label.setText(utility::toString<int>(m_fpsCounter.getFPS()));
+    setText(utility::toString<int>(m_fpsCounter.getFPS()));
 }
 
-void FPSCounterHUD::update(const DrawParameter& params)
+void FPSCounterHUD::updated(const DrawParameter& params)
 {
-    LabelHUD::update(params);
+    LabelHUD::updated(params);
 
     m_fpsCounter.update();
 
-    m_label.setText(utility::toString<int>(m_fpsCounter.getFPS()));
+    setText(utility::toString<int>(m_fpsCounter.getFPS()));
 }

@@ -9,13 +9,23 @@
 class ValueProvider : public Cloneable<ValueProvider>
 {
 public:
-
     virtual ~ValueProvider()
     { }
 
-    virtual float getValue() = 0;
+    float getValue()
+    {
+        return calculateValue();
+    }
 
-    virtual void reset()
+    void reset()
+    {
+        onReset();
+    }
+
+private:
+    virtual float calculateValue() = 0;
+
+    virtual void onReset()
     { }
 };
 

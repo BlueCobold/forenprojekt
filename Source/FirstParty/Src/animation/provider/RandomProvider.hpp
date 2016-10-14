@@ -10,8 +10,6 @@
 /// Returns a random real number in [min, max)
 class RandomProvider : public ValueProvider
 {
-private:
-
     float m_min, m_max;
 
     static bool _inited;
@@ -33,17 +31,16 @@ private:
         return std::unique_ptr<RandomProvider>(new RandomProvider(m_min, m_max));
     }
 
-public:
+    float calculateValue() override
+    {
+        return m_min + (m_max - m_min) * _distribution(_random_engine);
+    }
 
+public:
     RandomProvider(const float min, const float max) :
         m_min(min), m_max(max)
     {
         init();
-    }
-
-    float getValue() override
-    {
-        return m_min + (m_max - m_min) * _distribution(_random_engine);
     }
 };
 

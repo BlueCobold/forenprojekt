@@ -19,9 +19,8 @@ GoodyHUD::GoodyHUD(ResourceManager& resourceManager,
     m_iconHeight = m_startRect.height;
 }
 
-void GoodyHUD::update(const DrawParameter& params)
+void GoodyHUD::updated(const DrawParameter& params)
 {
-    HUDElement::update(params);
     m_icon.setPosition(getCurrentPosition());
 
     if(m_active)

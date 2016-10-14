@@ -17,22 +17,17 @@ public:
               const BitmapFont* bitmapFont);
 
     void skipInterpolation();
-
-    void update(const DrawParameter& params) override;
-
     void setPoints(int points);
-
     void setTime(float time);
 
 private:
+    Interpolation m_pointCounter;
+    ResourceManager& m_resourceManager;
+    sf::Sprite m_coinTexture;
 
     void doDraw(const DrawParameter& params) override;
     void onRestarted() override;
-
-    Interpolation m_pointCounter;
-
-    ResourceManager& m_resourceManager;
-    sf::Sprite m_coinTexture;
+    void updated(const DrawParameter& params) override;
 };
 
 #endif

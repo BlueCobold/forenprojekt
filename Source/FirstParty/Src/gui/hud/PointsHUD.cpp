@@ -18,11 +18,11 @@ void PointsHUD::skipInterpolation()
     m_pointCounter.set(m_pointCounter.getTargetValue(), m_pointCounter.getTargetValue(), 0.0f);
 }
 
-void PointsHUD::update(const DrawParameter& params)
+void PointsHUD::updated(const DrawParameter& params)
 {
     m_pointCounter.update(getPassedTime());
     setText(utility::toString<int>(static_cast<int>(m_pointCounter.getCurrentValue())));
-    LabelHUD::update(params);
+    LabelHUD::updated(params);
 
     m_coinTexture.setPosition(getCurrentPosition().x - 10 - m_coinTexture.getTextureRect().width,
                               getCurrentPosition().y);

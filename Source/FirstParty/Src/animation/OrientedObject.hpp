@@ -7,8 +7,13 @@
 class OrientedObject
 {
 public:
+    float getAngle() const
+    {
+        return calculateAngle();
+    }
 
-    virtual float getAngle() const
+private:
+    virtual float calculateAngle() const
     {
         return 0;
     }

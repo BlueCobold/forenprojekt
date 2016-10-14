@@ -19,20 +19,8 @@ class Switch : public MultiProvider
         auto list = cloneProviders();
         return std::unique_ptr<Switch>(new Switch(std::move(list), m_constants));
     }
-
-public:
-
-    Switch(std::vector<std::unique_ptr<ValueProvider>> provider, const std::vector<float>& constants)
-       : MultiProvider(std::move(provider)),
-         m_constants(constants)
-    {
-        if(getProvider().size() < 1)
-            throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Switch"));
-        if(getProvider().size() + 1 < constants.size())
-            throw std::runtime_error(utility::translateKey("SwitchInvalidSize"));
-    }
-
-    float getValue() override
+    
+    float calculateValue() override
     {
         auto it = begin(getProvider());
         auto current = (*it)->getValue();
@@ -43,6 +31,17 @@ public:
                 return (*it)->getValue();
         }
         return 0;
+    }
+
+public:
+    Switch(std::vector<std::unique_ptr<ValueProvider>> provider, const std::vector<float>& constants)
+       : MultiProvider(std::move(provider)),
+         m_constants(constants)
+    {
+        if(getProvider().size() < 1)
+            throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Switch"));
+        if(getProvider().size() + 1 < constants.size())
+            throw std::runtime_error(utility::translateKey("SwitchInvalidSize"));
     }
 };
 

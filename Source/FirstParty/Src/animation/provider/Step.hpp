@@ -21,22 +21,21 @@ class Step : public MultiProvider
         return std::unique_ptr<Step>(new Step(std::move(list)));
     }
 
-public:
+    float calculateValue() override
+    {
+        if(getProvider()[0]->getValue() < m_threshold)
+            return getProvider()[1]->getValue();
+        else
+            return getProvider()[2]->getValue();
+    }
 
+public:
     Step(std::vector<std::unique_ptr<ValueProvider>> provider, float threshold = 1) :
        MultiProvider(std::move(provider)),
        m_threshold(threshold)
     {
         if(getProvider().size() != 3)
             throw std::runtime_error(utility::replace(utility::translateKey("ThreeChilds"), "Step"));
-    }
-
-    float getValue() override
-    {
-        if(getProvider()[0]->getValue() < m_threshold)
-            return getProvider()[1]->getValue();
-        else
-            return getProvider()[2]->getValue();
     }
 };
 

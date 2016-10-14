@@ -10,7 +10,6 @@
 
 class KeyProvider : public ValueProvider
 {
-private:
     sf::Keyboard::Key m_KeyAttachedTo;
 
     // The array uses the US-ASCII encoding.
@@ -23,21 +22,19 @@ private:
                 return std::unique_ptr<KeyProvider>(new KeyProvider(i));
         return nullptr;
     }
+    
+    float calculateValue() override
+    {
+      return static_cast<float>(utility::Keyboard.isKeyPressed(this->m_KeyAttachedTo));
+    }
 
 public:
-
     KeyProvider(const int attachedKeyId) 
     {
       this->m_KeyAttachedTo = this->getKeyById(attachedKeyId);
     }
 
-    float getValue() override
-    {
-      return static_cast<float>(utility::Keyboard.isKeyPressed(this->m_KeyAttachedTo));
-    }
-
 protected:
-
     sf::Keyboard::Key getKeyById(int id)
     {
       return intToKeys[id];

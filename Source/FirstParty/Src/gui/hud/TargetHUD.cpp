@@ -11,8 +11,8 @@ TargetHUD::TargetHUD(ResourceManager& resourceManager,
     m_remainingTarget(0),
     m_resourceManager(resourceManager)
 {
-    m_label.setAlignment(LineLabel::Right);
-    m_label.setText(utility::toString<int>(m_remainingTarget) + "/" + utility::toString<int>(m_totalTarget));
+    setAlignment(LineLabel::Right);
+    setText(utility::toString<int>(m_remainingTarget) + "/" + utility::toString<int>(m_totalTarget));
     m_targetTexture.setTexture(*m_resourceManager.getTexture("targetmini"));
 }
 
@@ -22,14 +22,14 @@ void TargetHUD::setTargets(int totalTarget,int remainingTarget)
     m_remainingTarget = remainingTarget;
 }
 
-void TargetHUD::update(const DrawParameter& params)
+void TargetHUD::updated(const DrawParameter& params)
 {
-    LabelHUD::update(params);
+    LabelHUD::updated(params);
 
-    m_label.setText(" " + utility::toString<int>(m_remainingTarget) + "/" + utility::toString<int>(m_totalTarget));
+    setText(" " + utility::toString<int>(m_remainingTarget) + "/" + utility::toString<int>(m_totalTarget));
 
     m_targetTexture.setPosition(getCurrentPosition().x
-        - m_label.getWidth() - m_targetTexture.getTextureRect().width,
+        - getLabelWidth() - m_targetTexture.getTextureRect().width,
         getCurrentPosition().y);
 }
 

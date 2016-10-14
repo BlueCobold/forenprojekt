@@ -8,6 +8,9 @@
 /// Used for objects which have a time-based behavior.
 class TimedObject : public Stoppable
 {
+    float m_startTime;
+    float m_currentTime;
+
 public:
     TimedObject() :
         m_startTime(0),
@@ -31,13 +34,12 @@ public:
         onRestarted();
     }
 
-    virtual float getPassedTime() const
+    float getPassedTime() const
     {
-        return m_currentTime - m_startTime;
+        return calculatePassedTime();
     }
 
-protected:
-    
+protected:    
     virtual void onRestarted()
     { }
 
@@ -52,9 +54,10 @@ protected:
     }
 
 private:
-
-    float m_startTime;
-    float m_currentTime;
+    virtual float calculatePassedTime() const
+    {
+        return m_currentTime - m_startTime;
+    }
 };
 
 #endif //TIMED_OBJECT_HPP

@@ -60,6 +60,16 @@ public:
         m_entityB = nullptr;
     }
 
+private:
+    std::string m_name;
+    std::unique_ptr<ValueProvider> m_provider;
+    bool m_useValuesFromA;
+    bool m_useGlobal;
+    VariableHandler* m_globalHandler;
+    std::string m_trimmedVar;
+    Entity* m_entityA;
+    Entity* m_entityB;
+
     float onGetValueOf(const std::string& name) const override
     {
         if(m_globalHandler != nullptr && name.length() > 7 && name.substr(0,7) == "global:")
@@ -93,7 +103,7 @@ public:
         return m_entityA->setValueOf(name, value);
     }
 
-    float getPassedTime() const override
+    float calculatePassedTime() const override
     {
         if(m_useValuesFromA)
         {
@@ -109,7 +119,7 @@ public:
         }
     }
 
-    float getAngle() const override
+    float calculateAngle() const override
     {
         if(m_useValuesFromA)
         {
@@ -124,16 +134,6 @@ public:
             return m_entityB->getAngle();
         }
     }
-
-private:
-    std::string m_name;
-    std::unique_ptr<ValueProvider> m_provider;
-    bool m_useValuesFromA;
-    bool m_useGlobal;
-    VariableHandler* m_globalHandler;
-    std::string m_trimmedVar;
-    Entity* m_entityA;
-    Entity* m_entityB;
 };
 
 #endif // CHANGE_PROPERTY_COLLISION_HANDLER_HPP

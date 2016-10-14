@@ -5,20 +5,14 @@
 
 class FPSCounter
 {
-private:
-    
     int m_fps;
-
     float m_frameCounter;
-
     sf::Clock m_clock;
 
-public:
-    
+public:    
     FPSCounter();
     
     void update();
-
     int getFPS();
 };
 

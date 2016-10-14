@@ -8,21 +8,18 @@
 /// 
 class BallHUD : public LabelHUD
 {
-private:
     int m_remainingBall;
-
     sf::Sprite m_ball;
     ResourceManager& m_resourceManager;
+
+    void doDraw(const DrawParameter& params) override;
+    void updated(const DrawParameter& params) override;
 
 public:
     BallHUD(ResourceManager& resourceManager,
             const sf::Vector2f& position,
             const sf::Vector2f& offset,
             const BitmapFont* bitmapFont);
-
-    void update(const DrawParameter& params);
-
-    void doDraw(const DrawParameter& params) override;
 
     void setBalls(int remainingBall);
 };

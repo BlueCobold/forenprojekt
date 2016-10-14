@@ -12,9 +12,8 @@ LabelHUD::LabelHUD(const sf::Vector2f& position,
 {
 }
 
-void LabelHUD::update(const DrawParameter& params)
+void LabelHUD::updated(const DrawParameter& params)
 {
-    HUDElement::update(params);
     m_label.updateLayout(static_cast<sf::Vector2f>(params.getTarget().getSize()));
 }
 
@@ -27,9 +26,19 @@ void LabelHUD::setText(const std::string& text)
 {
     m_label.setText(text);
 }
-void LabelHUD::setPosition(const sf::Vector2f& position, const sf::Vector2f& offset)
+
+void LabelHUD::onPositionSet(const sf::Vector2f& position, const sf::Vector2f& offset)
 {
-    HUDElement::setPosition(position, offset);
     m_label.setPosition(position);
     m_label.setOffset(offset);
+}
+
+float LabelHUD::getLabelWidth() const
+{
+    return m_label.getWidth();
+}
+
+void LabelHUD::setAlignment(const LineLabel::Alignment alignment)
+{
+    m_label.setAlignment(alignment);
 }

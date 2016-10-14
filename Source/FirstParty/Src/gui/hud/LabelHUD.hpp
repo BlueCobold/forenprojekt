@@ -9,9 +9,12 @@ class ResourceManager;
 /// this class draw a label on HUD screen
 class LabelHUD : public HUDElement
 {
-protected:
     LineLabel m_label;
+
+protected:
     void doDraw(const DrawParameter& params) override;
+    void updated(const DrawParameter& params) override;
+    void onPositionSet(const sf::Vector2f& position, const sf::Vector2f& offset) override;
 
 public:
     LabelHUD(const sf::Vector2f& position,
@@ -20,11 +23,9 @@ public:
              const std::string& text = "",
              const LineLabel::Alignment alignment = LineLabel::Left);
 
-    void update(const DrawParameter& params) override;
-
     void setText(const std::string& text);
-
-    void setPosition(const sf::Vector2f& position, const sf::Vector2f& offset) override;
+    void setAlignment(const LineLabel::Alignment alignment);
+    float getLabelWidth() const;
 };
 
 #endif

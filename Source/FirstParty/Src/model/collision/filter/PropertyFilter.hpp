@@ -29,7 +29,7 @@ public:
         m_provider = std::move(provider);
     }
 
-    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override
+    bool shouldCollide(Entity& entityA, Entity& entityB) override
     {
         if(m_provider == nullptr)
             throw std::runtime_error(utility::translateKey("FilterNull"));
@@ -40,6 +40,14 @@ public:
         m_entityB = nullptr;
         return val >= 1;
     }
+
+private:
+    std::unique_ptr<ValueProvider> m_provider;
+    bool m_useValuesFromA;
+    bool m_useGlobal;
+    VariableHandler* m_globalHandler;
+    Entity* m_entityA;
+    Entity* m_entityB;
 
     float onGetValueOf(const std::string& name) const override
     {
@@ -74,7 +82,7 @@ public:
         return m_entityA->setValueOf(name, value);
     }
 
-    virtual float getPassedTime() const override
+    float calculatePassedTime() const override
     {
         if(m_useValuesFromA)
         {
@@ -90,7 +98,7 @@ public:
         }
     }
 
-    virtual float getAngle() const override
+    float calculateAngle() const override
     {
         if(m_useValuesFromA)
         {
@@ -105,14 +113,6 @@ public:
             return m_entityB->getAngle();
         }
     }
-
-private:
-    std::unique_ptr<ValueProvider> m_provider;
-    bool m_useValuesFromA;
-    bool m_useGlobal;
-    VariableHandler* m_globalHandler;
-    Entity* m_entityA;
-    Entity* m_entityB;
 };
 
 #endif // PROPERTY_FILTER

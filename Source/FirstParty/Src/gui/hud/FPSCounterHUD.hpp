@@ -10,18 +10,14 @@ class ResourceManager;
 ///
 class FPSCounterHUD : public LabelHUD
 {
-private:
-    
     FPSCounter m_fpsCounter;
+    
+    void updated(const DrawParameter& params) override;
 
 public:
-
     FPSCounterHUD(const sf::Vector2f& position,
                   const sf::Vector2f& offset,
                   const BitmapFont* bitmapFont);
-    
-    void update(const DrawParameter& params);
-
 };
 
 #endif

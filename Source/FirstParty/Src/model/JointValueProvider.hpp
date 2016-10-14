@@ -36,13 +36,7 @@ class JointRotationProvider : public ValueProvider, public JointObserver
         return std::unique_ptr<JointRotationProvider>(new JointRotationProvider(getCloneObservable(), getCallback(), m_index));
     }
 
-public:
-    JointRotationProvider(const JointObject& joint, const CloneCallback cloneHandler, ProviderLocation index = Link) :
-        Observer(joint, cloneHandler),
-        m_index(index)
-    { }
-
-    float getValue() override
+    float calculateValue() override
     {
         auto points = getObserved().getAnchorPoints();
         auto offsets = getObserved().getAnchorOffsets();
@@ -61,6 +55,12 @@ public:
             return 360.f + degree;
         return degree;
     }
+
+public:
+    JointRotationProvider(const JointObject& joint, const CloneCallback cloneHandler, ProviderLocation index = Link) :
+        Observer(joint, cloneHandler),
+        m_index(index)
+    { }
 };
 
 class JointPositionProvider : public ValueProvider, public JointObserver
@@ -73,14 +73,7 @@ class JointPositionProvider : public ValueProvider, public JointObserver
         return std::unique_ptr<JointPositionProvider>(new JointPositionProvider(getCloneObservable(), m_useX, getCallback(), m_index));
     }
 
-public:
-    JointPositionProvider(const JointObject& joint, bool xAxis, const CloneCallback cloneHandler, ProviderLocation index = Link) :
-        Observer(joint, cloneHandler),
-        m_useX(xAxis),
-        m_index(index)
-    { }
-
-    float getValue() override
+    float calculateValue() override
     {
         auto points = getObserved().getAnchorPoints();
         auto offsets = getObserved().getAnchorOffsets();
@@ -104,6 +97,13 @@ public:
 
         return utility::toPixel(m_useX ? ((anchorPos.x - entityPos.x)/2 + entityOff.x) : ((anchorPos.y - entityPos.y)/2 + entityOff.y));
     }
+
+public:
+    JointPositionProvider(const JointObject& joint, bool xAxis, const CloneCallback cloneHandler, ProviderLocation index = Link) :
+        Observer(joint, cloneHandler),
+        m_useX(xAxis),
+        m_index(index)
+    { }
 };
 
 class JointScaleProvider : public ValueProvider, public JointObserver, public AnimationObserver
@@ -119,18 +119,7 @@ class JointScaleProvider : public ValueProvider, public JointObserver, public An
                                                                           m_index));
     }
 
-public:
-    JointScaleProvider(const JointObject& joint,
-                       const Animation& target,
-                       const JointObserver::CloneCallback jointCloneHandler,
-                       const AnimationObserver::CloneCallback cloneAnimationHandler,
-                       ProviderLocation index = Link) :
-        JointObserver(joint, jointCloneHandler),
-        AnimationObserver(target, cloneAnimationHandler),
-        m_index(index)
-    { }
-
-    float getValue() override
+    float calculateValue() override
     {
         auto points = JointObserver::getObserved().getAnchorPoints();
         auto offsets = JointObserver::getObserved().getAnchorOffsets();
@@ -148,6 +137,17 @@ public:
         auto size = ani.getSize();
         return dist / size.y;
     }
+
+public:
+    JointScaleProvider(const JointObject& joint,
+                       const Animation& target,
+                       const JointObserver::CloneCallback jointCloneHandler,
+                       const AnimationObserver::CloneCallback cloneAnimationHandler,
+                       ProviderLocation index = Link) :
+        JointObserver(joint, jointCloneHandler),
+        AnimationObserver(target, cloneAnimationHandler),
+        m_index(index)
+    { }
 };
 
 #endif //JOINT_VALUE_PROVIDER_HPP

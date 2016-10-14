@@ -10,8 +10,8 @@ BallHUD::BallHUD(ResourceManager& resourceManager,
     m_remainingBall(0),
     m_resourceManager(resourceManager)
 {
-    m_label.setAlignment(LineLabel::Right);
-    m_label.setText(" " + utility::toString<int>(m_remainingBall));
+    setAlignment(LineLabel::Right);
+    setText(" " + utility::toString<int>(m_remainingBall));
     m_ball.setTexture(*m_resourceManager.getTexture("guiMisc"));
     m_ball.setTextureRect(sf::IntRect(0, 0, 22, 22));
 }
@@ -21,14 +21,12 @@ void BallHUD::setBalls(int remainingBall)
     m_remainingBall = remainingBall;
 }
 
-void BallHUD::update(const DrawParameter& params)
+void BallHUD::updated(const DrawParameter& params)
 {
-    LabelHUD::update(params);
-
-    m_label.setText(" " + utility::toString<int>(m_remainingBall));
+    setText(" " + utility::toString<int>(m_remainingBall));
 
     m_ball.setPosition(getCurrentPosition().x
-                       - m_label.getWidth() - m_ball.getTextureRect().width,
+                       - getLabelWidth() - m_ball.getTextureRect().width,
                        getCurrentPosition().y);
 }
 

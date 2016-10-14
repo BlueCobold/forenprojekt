@@ -31,7 +31,7 @@ void Interpolation::start()
 {
     m_finished = false;
     continueNow();
-    update(getCurrentTime());
+    update(getPassedTime());
 }
 
 void Interpolation::onStopped()

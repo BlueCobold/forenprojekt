@@ -24,8 +24,6 @@
 /// a physical body
 class PhysicalObject : public virtual OrientedObject
 {
-private:
-
     std::unique_ptr<ValueProvider> m_rotation;
     std::unique_ptr<ValueProvider> m_xPositionProvider;
     std::unique_ptr<ValueProvider> m_yPositionProvider;
@@ -133,13 +131,6 @@ public:
         m_yPositionProvider = std::move(y);
     }
 
-    virtual float getAngle() const override
-    {
-        if(m_body != nullptr)
-            return m_body->GetAngle();
-        return 0.f;
-    }
-
     void updateKinematics(const float value, const float delta);
 
     const b2Vec2& getPosition() const
@@ -204,8 +195,8 @@ public:
     {
         m_spawnSpeed = speed;
     }
-protected:
 
+protected:
     const b2Vec2& getStartPosition() const
     {
         return m_basePosition;
@@ -281,6 +272,14 @@ protected:
                 m_joints.push_back(std::unique_ptr<JointObject>(newJoint));
             }
         }
+    }
+    
+private:
+    float calculateAngle() const override
+    {
+        if(m_body != nullptr)
+            return m_body->GetAngle();
+        return 0.f;
     }
 };
 

@@ -13,18 +13,14 @@ class Goody;
 class GoodyHUD : public HUDElement
 {
 public:
-
     GoodyHUD(ResourceManager& resourceManager,
              const std::string& iconKey,
              const sf::IntRect& textureRect,
              const sf::Vector2f& position,
              const sf::Vector2f& offset);
 
-    void update(const DrawParameter& params);
-
-    void doDraw(const DrawParameter& params) override;
-
     void updateState(const Goody& goody);
+
 private:
     static const int Deselected = 0;
     static const int Selected = 1;
@@ -41,6 +37,9 @@ private:
     bool m_active;
 
     LineLabel m_charges;
+
+    void doDraw(const DrawParameter& params) override;
+    void updated(const DrawParameter& params) override;
 };
 
 #endif // GOODY_HPP

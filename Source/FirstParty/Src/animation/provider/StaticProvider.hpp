@@ -14,15 +14,15 @@ class StaticProvider : public ValueProvider
     {
         return std::unique_ptr<StaticProvider>(new StaticProvider(m_value));
     }
+    
+    float calculateValue() override
+    {
+        return m_value;
+    }
 
 public:
     StaticProvider(const float value) : m_value(value)
     {
-    }
-
-    float getValue() override
-    {
-        return m_value;
     }
 };
 

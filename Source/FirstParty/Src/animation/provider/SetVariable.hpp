@@ -15,8 +15,6 @@
 /// Sets the value of a variable owned by someone else and returns the child-value.
 class SetVariable : public SingleProvider, public Observer<VariableHandler>
 {
-private:
-
     std::string m_varName;
     bool m_print;
 
@@ -24,6 +22,15 @@ private:
     {
         return std::unique_ptr<SetVariable>(new SetVariable(getCloneObservable(), m_varName,
             getProvider()->clone(), m_print, getCallback()));
+    }
+
+    float calculateValue() override
+    {
+        float value = getProvider()->getValue();
+        getObserved().setValueOf(m_varName, value);
+        if(m_print)
+            std::cout << m_varName << "=" << value << std::endl;
+        return value;
     }
 
 public:
@@ -38,15 +45,6 @@ public:
             m_varName(varName),
             m_print(print)
     { }
-
-    float getValue() override
-    {
-        float value = getProvider()->getValue();
-        getObserved().setValueOf(m_varName, value);
-        if(m_print)
-            std::cout << m_varName << "=" << value << std::endl;
-        return value;
-    }
 };
 
 #endif //SET_VARIABLE_HPP
