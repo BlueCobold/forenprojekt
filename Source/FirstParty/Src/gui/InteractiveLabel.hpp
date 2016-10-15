@@ -14,6 +14,8 @@ private:
     bool m_showToolTip;
 
     std::unique_ptr<MenuElement> doClone() const override;
+    void onDrawAdditionalForeground(const DrawParameter& params) override;
+    void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 
 public:
     InteractiveLabel(const std::string& text,
@@ -27,11 +29,7 @@ public:
 
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text, const std::string& replacement = "");
-    void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     void setLanguage(const std::string& language) override;
-
-private:
-    void drawAdditionalForeground(const DrawParameter& params) override;
 };
 
 #endif

@@ -32,8 +32,6 @@ public:
              const unsigned int inputLimit,
              const InputBoxStyle& style);
 
-    void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
-
     bool isFinished();
 
     void setText(const std::string& text);
@@ -45,12 +43,11 @@ public:
 
     unsigned int getInputLimit() const;
 
-protected:
-    void updateLayout(const sf::Vector2f& screenSize) override;
-
 private:
     std::unique_ptr<MenuElement> doClone() const override;
     void doDraw(const DrawParameter& params) override;
+    void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
+    void layoutUpdated(const sf::Vector2f& screenSize) override;
 
     sf::RectangleShape m_backgroundShade;
     LineLabel m_inputText;

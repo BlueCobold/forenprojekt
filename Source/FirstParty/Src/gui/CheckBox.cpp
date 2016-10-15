@@ -19,7 +19,7 @@ std::unique_ptr<MenuElement> CheckBox::doClone() const
     return std::move(clone);
 }
 
-void CheckBox::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void CheckBox::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 
@@ -61,7 +61,7 @@ void CheckBox::doDraw(const DrawParameter& params)
     params.getTarget().draw(*m_sprite);
 }
 
-void CheckBox::drawAdditionalForeground(const DrawParameter& params)
+void CheckBox::onDrawAdditionalForeground(const DrawParameter& params)
 {
     if(m_showToolTip && isVisible())
         m_toolTip.draw(params);
@@ -98,10 +98,8 @@ void CheckBox::setToolTipText(const std::string& text, const std::string& replac
     m_toolTip.setText(text, replacement);
 }
 
-void CheckBox::updateLayout(const sf::Vector2f& screenSize)
+void CheckBox::layoutUpdated(const sf::Vector2f& screenSize)
 {
-    MenuElement::updateLayout(screenSize);
-
     auto currentPosition = getCurrentPosition();
     m_style.uncheckedStyle.sprite.setPosition(currentPosition + m_style.uncheckedStyle.spriteOffset);
     m_style.checkedStyle.sprite.setPosition(currentPosition + m_style.checkedStyle.spriteOffset);

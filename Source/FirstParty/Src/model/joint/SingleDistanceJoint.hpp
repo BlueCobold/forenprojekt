@@ -9,28 +9,22 @@
 
 class SingleDistanceJoint : public JointObject
 {
-    b2DistanceJointDef m_jointDef;
-
-    b2Body* m_anchorBody;
-    b2BodyDef m_anchorBodyDef;
-
 public:
     SingleDistanceJoint(b2World& world, const b2DistanceJointDef& jointDef, b2Body& body);
-
     SingleDistanceJoint();
 
     void update() override;
-
     bool reinstall(b2Body& body) override;
-
-    void doCopyFrom(const JointObject& other) override;
-
     std::vector<b2Vec2> getAnchorPoints() const override;
-
     std::vector<b2Vec2> getAnchorOffsets() const override;
 
-protected:
+private:
+    b2DistanceJointDef m_jointDef;
+    b2Body* m_anchorBody;
+    b2BodyDef m_anchorBodyDef;
+
     void bindBodies(b2Body& bodyA, b2Body& bodyB) override;
+    void doCopyFrom(const JointObject& other) override;
 };
 
 #endif

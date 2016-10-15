@@ -18,9 +18,12 @@ public:
     virtual ~ApplyForceFilter()
     { }
 
-    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override
+private:
+    b2Vec2 m_force;
+
+    virtual bool onShouldCollide(Entity& entityA, Entity& entityB) override
     {
-        bool collides = ActionFilter::shouldCollide(entityA, entityB);
+        bool collides = ActionFilter::onShouldCollide(entityA, entityB);
         if(collides)
         {
             if(entityA.getType() == Entity::Ball)
@@ -30,10 +33,6 @@ public:
         }
         return collides;
     }
-
-private:
-
-    b2Vec2 m_force;
 };
 
 #endif // APPLY_FORCE_FILTER_HPP

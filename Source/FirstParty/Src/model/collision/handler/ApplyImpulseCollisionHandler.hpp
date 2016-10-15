@@ -11,10 +11,13 @@ class ApplyImpulseCollisionHandler : public CollisionHandler
 public:
     ApplyImpulseCollisionHandler(float xImpulse, float yImpulse) 
         : m_xImpulse(xImpulse), m_yImpulse(yImpulse)
-    {
-    }
+    { }
 
-    virtual void onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
+private:
+    float m_xImpulse;
+    float m_yImpulse;
+
+    void handleCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
     {
         b2Body* ballBody;
 
@@ -27,10 +30,6 @@ public:
 
         ballBody->ApplyLinearImpulse(b2Vec2(m_xImpulse, m_yImpulse), ballBody->GetWorldCenter(), false);
     }
-
-private:
-    float m_xImpulse;
-    float m_yImpulse;
 };
 
 #endif // APPLY_IMPULSE_COLLISION_HANDLER_HPP

@@ -9,7 +9,6 @@
 class ChangeBallSpawnFilter : public ActionFilter
 {
 public:
-
     ChangeBallSpawnFilter(std::unique_ptr<CollisionFilter> child) :
         ActionFilter(std::move(child))
     { }
@@ -17,9 +16,10 @@ public:
     virtual ~ChangeBallSpawnFilter()
     { }
 
-    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override
+private:
+    virtual bool onShouldCollide(Entity& entityA, Entity& entityB) override
     {
-        bool collides = ActionFilter::shouldCollide(entityA, entityB);
+        bool collides = ActionFilter::onShouldCollide(entityA, entityB);
         if(collides)
             (dynamic_cast<Ball&>(entityB)).checkpointReached(entityA.getPosition());
         return collides;

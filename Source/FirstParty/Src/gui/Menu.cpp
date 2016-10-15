@@ -42,8 +42,7 @@ void Menu::doDraw(const DrawParameter& params)
 }
 
 void Menu::drawAdditionalBackground(const DrawParameter& params)
-{
-}
+{ }
 
 void Menu::drawAdditionalForeground(const DrawParameter& params)
 {
@@ -53,7 +52,11 @@ void Menu::drawAdditionalForeground(const DrawParameter& params)
 void Menu::update(sf::RenderWindow& screen, const float time)
 {
     m_panel.update(screen, time);
+    updated(screen, time);
 }
+
+void Menu::updated(sf::RenderWindow& screen, const float time)
+{ }
 
 void Menu::update(sf::RenderWindow& screen, const float time, const MenuElementType::Type type)
 {

@@ -25,7 +25,7 @@ void KeyboardMenu::doDraw(const DrawParameter& params)
     Menu::doDraw(params);
 }
 
-void KeyboardMenu::update(sf::RenderWindow& screen, const float time)
+void KeyboardMenu::updated(sf::RenderWindow& screen, const float time)
 {
     if(m_lastKey != -1)
     {
@@ -42,9 +42,7 @@ void KeyboardMenu::update(sf::RenderWindow& screen, const float time)
 
     int clicked = -1;
     registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
-
-    Menu::update(screen, time);
-
+    
     if(clicked == sf::Keyboard::LShift || clicked == sf::Keyboard::RShift)
     {
         m_shiftKeyPressed = !m_shiftKeyPressed;

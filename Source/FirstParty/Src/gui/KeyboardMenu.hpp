@@ -13,13 +13,12 @@ private:
     int m_lastKey;
 
     void doDraw(const DrawParameter& params) override;
+    void updated(sf::RenderWindow& screen, const float time) override;
 
 public:
     static const int BUTTON_KEYBOARD_OFF = 99;
 
     KeyboardMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
-
-    void update(sf::RenderWindow& screen, const float time) override;
 
     void showKeyboard();
 

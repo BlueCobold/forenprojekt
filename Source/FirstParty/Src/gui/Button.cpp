@@ -45,7 +45,7 @@ std::unique_ptr<MenuElement> Button::doClone() const
     return std::move(clone);
 }
 
-void Button::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void Button::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     auto screenSize = static_cast<sf::Vector2f>(screen.getSize());
     updateLayout(screenSize);
@@ -148,7 +148,7 @@ void Button::setToolTipText(const std::string& text, const std::string& replacem
     m_toolTip.setText(text, replacement);
 }
 
-void Button::drawAdditionalForeground(const DrawParameter& params)
+void Button::onDrawAdditionalForeground(const DrawParameter& params)
 {
     if(m_showToolTip && isVisible())
         m_toolTip.draw(params);
@@ -177,9 +177,9 @@ void Button::changePressedSprite(const sf::Sprite& sprite)
     m_style.pressedStyle.sprite = s;
 }
 
-void Button::updateLayout(const sf::Vector2f& screenSize)
+void Button::layoutUpdated(const sf::Vector2f& screenSize)
 {
-    MenuElement::updateLayout(screenSize);
+    MenuElement::layoutUpdated(screenSize);
     
     if(m_currentStyle->animation != nullptr)
         m_currentStyle->animation->updateLayout(screenSize);

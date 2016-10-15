@@ -24,7 +24,7 @@ std::unique_ptr<MenuElement> Slider::doClone() const
     return std::move(clone);
 }
 
-void Slider::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void Slider::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 
@@ -101,10 +101,8 @@ void Slider::calculateValue(const int left, const int mousex)
     m_value = std::max(std::min(value, m_max), m_min);
 }
 
-void Slider::updateLayout(const sf::Vector2f& screenSize)
+void Slider::layoutUpdated(const sf::Vector2f& screenSize)
 {
-    MenuElement::updateLayout(screenSize);
-
     auto currentPosition = getCurrentPosition();
 
     float x = currentPosition.x + m_style.mouseRect.left;

@@ -20,13 +20,13 @@ public:
     virtual ~ActionFilter()
     { }
 
-    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override
+protected:
+    virtual bool onShouldCollide(Entity& entityA, Entity& entityB) override
     {
         return m_child->shouldCollide(entityA, entityB);
     }
 
 private:
-
     std::unique_ptr<CollisionFilter> m_child;
 };
 

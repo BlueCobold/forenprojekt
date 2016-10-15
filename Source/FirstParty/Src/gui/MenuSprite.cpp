@@ -30,7 +30,7 @@ void MenuSprite::setToolTip(const ToolTip& toolTip)
     m_toolTip = toolTip;
 }
 
-void MenuSprite::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void MenuSprite::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 
@@ -64,7 +64,7 @@ void MenuSprite::setTexture(const sf::Texture& texture)
     m_sprite.setTexture(texture);
 }
 
-void MenuSprite::drawAdditionalForeground(const DrawParameter& params)
+void MenuSprite::onDrawAdditionalForeground(const DrawParameter& params)
 {
     if(m_showToolTip && isVisible())
         m_toolTip.draw(params);
@@ -72,9 +72,8 @@ void MenuSprite::drawAdditionalForeground(const DrawParameter& params)
     m_showToolTip = false;
 }
 
-void MenuSprite::updateLayout(const sf::Vector2f& screenSize)
+void MenuSprite::layoutUpdated(const sf::Vector2f& screenSize)
 {
-    MenuElement::updateLayout(screenSize);
     m_sprite.setPosition(getCurrentPosition());
 }
 

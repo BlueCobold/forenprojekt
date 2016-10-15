@@ -388,7 +388,7 @@ void Level::onSetValueOf(const std::string& name, const float value)
     }
 }
 
-bool Level::shouldCollide(Entity& entityA, Entity& entityB)
+bool Level::onShouldCollide(Entity& entityA, Entity& entityB)
 {
     if(entityB.getType() == Entity::Ball)
     {
@@ -502,7 +502,7 @@ void Level::createLabelAt(const sf::Vector2f& position, const std::string& fontN
     m_pointLabels.push_back(std::unique_ptr<TimedLabel>(new TimedLabel(std::move(label), getPassedTime())));
 }
 
-void Level::onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse)
+void Level::handleCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse)
 {
     if(entityA.getType() == Entity::Ball)
         entityB.onCollide(entityA, point, impulse);

@@ -32,7 +32,7 @@ public:
 
     virtual ~Menu();
 
-    virtual void update(sf::RenderWindow& screen, const float time);
+    void update(sf::RenderWindow& screen, const float time);
     void update(sf::RenderWindow& screen, const float time, const MenuElementType::Type type);
 
     void registerOnClick(std::function<void(const Button& sender)> callback);
@@ -57,6 +57,7 @@ protected:
 private:
     virtual void drawAdditionalBackground(const DrawParameter& params);
     virtual void drawAdditionalForeground(const DrawParameter& params);
+    virtual void updated(sf::RenderWindow& screen, const float time);
 
     template<class T>
     T* find(int id, const MenuElementType::Type type) const;

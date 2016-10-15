@@ -66,7 +66,7 @@ void AnimationContainer::onSetValueOf(const std::string& name, const float value
     }
 }
 
-void AnimationContainer::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void AnimationContainer::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     updateCurrentTime(time);
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
@@ -87,9 +87,4 @@ void AnimationContainer::update(const sf::RenderWindow& screen, const float time
 void AnimationContainer::doDraw(const DrawParameter& param)
 {
     graphics.draw(param);
-}
-
-void AnimationContainer::updateLayout(const sf::Vector2f& screenSize)
-{
-    MenuElement::updateLayout(screenSize);
 }

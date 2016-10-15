@@ -42,15 +42,12 @@ std::unique_ptr<MenuElement> InputBox::doClone() const
     return std::move(clone);
 }
 
-void InputBox::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void InputBox::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
 #if defined(IOS) || defined(ANDROID)
     if(!m_caret.isActive())
         m_caret.disable();
-#endif
-
-    MenuElement::update(screen, time, mouseOffset);
-    
+#endif    
     setActivatedByMouse(screen);
     handleInput();
     m_caret.update(time);
@@ -185,10 +182,8 @@ unsigned int InputBox::getInputLimit() const
     return m_inputLimit;
 }
 
-void InputBox::updateLayout(const sf::Vector2f& screenSize)
+void InputBox::layoutUpdated(const sf::Vector2f& screenSize)
 {
-    MenuElement::updateLayout(screenSize);
-
     auto currentPosition = getCurrentPosition();
 
     setBackGroundPosition(currentPosition);

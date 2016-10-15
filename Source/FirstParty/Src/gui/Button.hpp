@@ -19,8 +19,6 @@
 /// this class represent a Button
 class Button : public MenuElement
 {
-private:
-
     ButtonStyle m_style;
     sf::Vector2i m_size;
     ToolTip m_toolTip;
@@ -36,6 +34,9 @@ private:
 
     std::unique_ptr<MenuElement> doClone() const override;
     void doDraw(const DrawParameter& params) override;
+    void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
+    void onDrawAdditionalForeground(const DrawParameter& params) override;
+    void layoutUpdated(const sf::Vector2f& screenSize) override;
 
 public:
 
@@ -46,8 +47,6 @@ public:
            const std::string& language,
            bool triggers = true);
 
-    virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
-    virtual void drawAdditionalForeground(const DrawParameter& params) override;
 
     void registerOnPressed(std::function<void (const Button& sender)> callback);
 
@@ -61,8 +60,6 @@ public:
     void changePressedSprite(const sf::Sprite& sprite);
 
     void setLanguage(const std::string& language) override;
-protected:
-    void updateLayout(const sf::Vector2f& screenSize) override;
 
 private:
     void setStyle(ButtonStateStyle& style, float time, const sf::Vector2f& screenSize);

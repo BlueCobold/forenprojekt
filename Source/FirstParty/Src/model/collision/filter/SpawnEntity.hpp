@@ -28,9 +28,15 @@ public:
     virtual ~SpawnEntity()
     { }
 
-    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override
+private:
+    SpawnHandler m_handler;
+    const Entity& m_owner;
+    const Entity& m_spawn;
+    bool m_spawned;
+
+    virtual bool onShouldCollide(Entity& entityA, Entity& entityB) override
     {
-        bool collides = ActionFilter::shouldCollide(entityA, entityB);
+        bool collides = ActionFilter::onShouldCollide(entityA, entityB);
         if((!m_spawned || m_spawn.isRespawnable()) && collides)
         {
             m_spawned = true;
@@ -38,13 +44,6 @@ public:
         }
         return collides;
     }
-
-private:
-
-    SpawnHandler m_handler;
-    const Entity& m_owner;
-    const Entity& m_spawn;
-    bool m_spawned;
 };
 
 #endif // SPAWN_ENTITY_HPP

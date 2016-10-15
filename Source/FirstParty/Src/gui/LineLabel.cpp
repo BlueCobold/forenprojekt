@@ -228,13 +228,12 @@ const BitmapFont* LineLabel::getFont() const
     return m_font;
 }
 
-void LineLabel::updateLayout(const sf::Vector2f& screenSize)
+void LineLabel::layoutUpdated(const sf::Vector2f& screenSize)
 {
-    MenuElement::updateLayout(screenSize);
     rebuild();
 }
 
-void LineLabel::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void LineLabel::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 }

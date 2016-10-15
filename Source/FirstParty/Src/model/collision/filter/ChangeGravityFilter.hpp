@@ -23,9 +23,10 @@ public:
     virtual ~ChangeGravityFilter()
     { }
 
-    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override
+private:
+    virtual bool onShouldCollide(Entity& entityA, Entity& entityB) override
     {
-        bool should = PropertyFilter::shouldCollide(entityA, entityB);
+        bool should = PropertyFilter::onShouldCollide(entityA, entityB);
         if(should)
             m_targetGravity = m_gravity;
         return should;

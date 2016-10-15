@@ -28,8 +28,9 @@ public:
     {
         m_provider = std::move(provider);
     }
-
-    bool shouldCollide(Entity& entityA, Entity& entityB) override
+    
+protected:
+    bool onShouldCollide(Entity& entityA, Entity& entityB) override
     {
         if(m_provider == nullptr)
             throw std::runtime_error(utility::translateKey("FilterNull"));

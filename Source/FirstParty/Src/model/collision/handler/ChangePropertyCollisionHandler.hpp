@@ -41,7 +41,17 @@ public:
         m_provider = std::move(provider);
     }
 
-    void onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
+private:
+    std::string m_name;
+    std::unique_ptr<ValueProvider> m_provider;
+    bool m_useValuesFromA;
+    bool m_useGlobal;
+    VariableHandler* m_globalHandler;
+    std::string m_trimmedVar;
+    Entity* m_entityA;
+    Entity* m_entityB;
+
+    void handleCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
     {
         if(m_provider == nullptr)
             throw std::runtime_error(utility::translateKey("HandlerNull"));
@@ -59,16 +69,6 @@ public:
         m_entityA = nullptr;
         m_entityB = nullptr;
     }
-
-private:
-    std::string m_name;
-    std::unique_ptr<ValueProvider> m_provider;
-    bool m_useValuesFromA;
-    bool m_useGlobal;
-    VariableHandler* m_globalHandler;
-    std::string m_trimmedVar;
-    Entity* m_entityA;
-    Entity* m_entityB;
 
     float onGetValueOf(const std::string& name) const override
     {

@@ -101,7 +101,7 @@ void SubWindow::doDraw(const DrawParameter& params)
     params.getTarget().draw(m_style.scrollbarBottom);
 }
 
-void SubWindow::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void SubWindow::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 
@@ -190,7 +190,7 @@ sf::Vector2i SubWindow::getMouseOffset(const sf::RenderWindow& screen)
     return mouseOffset;
 }
 
-void SubWindow::drawAdditionalForeground(const DrawParameter& params)
+void SubWindow::onDrawAdditionalForeground(const DrawParameter& params)
 {
     m_panel.drawAdditionalForeground(params);
 }
@@ -204,13 +204,10 @@ void SubWindow::setInnerHeight(int innerHeight)
 {
     m_innerHeight = innerHeight;
 }
-void SubWindow::updateLayout(const sf::Vector2f& screenSize)
+void SubWindow::layoutUpdated(const sf::Vector2f& screenSize)
 {
     auto currentPosition = getCurrentPosition();
     auto rectPosition = m_positionRect.getPosition().y - currentPosition.y;
-
-    MenuElement::updateLayout(screenSize);
-    currentPosition = getCurrentPosition();
 
     float scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
 

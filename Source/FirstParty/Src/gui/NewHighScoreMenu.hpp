@@ -12,6 +12,7 @@ private:
     KeyboardMenu m_virtualKeyboard;
 
     void doDraw(const DrawParameter& params) override;
+    void updated(sf::RenderWindow& screen, const float time) override;
 
 public:
     static const int INPUTBOX = 1;
@@ -19,8 +20,6 @@ public:
     static const int BUTTON_OK = 6;
 
     NewHighScoreMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
-
-    void update(sf::RenderWindow& screen, const float time) override;
 
     void showKeyboard();
 

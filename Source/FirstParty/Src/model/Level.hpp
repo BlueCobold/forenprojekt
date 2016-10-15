@@ -122,8 +122,8 @@ private:
     void updateGoodyChoice();
     void updateGoodyCharges();
 
-    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override;
-    virtual void onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override;
+    bool onShouldCollide(Entity& entityA, Entity& entityB) override;
+    void handleCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override;
     void killTarget(Entity& target);
     void killBonusTarget(Entity& target);
     void prepareEntityForSpawn(const b2Vec2& position, const Entity& spawn, float angle = 0);

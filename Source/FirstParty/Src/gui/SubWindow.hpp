@@ -41,15 +41,10 @@ public:
               const std::vector<std::unique_ptr<MenuElement>>& elements,
               const SubWindowStyle& style);
 
-    void drawAdditionalForeground(const DrawParameter& params) override;
-    virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
-
     MenuPanel* getPanel();
 
     int getInnerHeight() const;
     void setInnerHeight(int innerHeight);
-    void updateLayout(const sf::Vector2f& screenSize) override;
-
     void setZoomFactor(float zoomFactor);
 
     void setLanguage(const std::string& language) override;
@@ -76,6 +71,9 @@ private:
     void on(const DrawParameter& params);
     void off(const DrawParameter& params);
     void doDraw(const DrawParameter& params) override;
+    void onDrawAdditionalForeground(const DrawParameter& params) override;
+    void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
+    void layoutUpdated(const sf::Vector2f& screenSize) override;
 
     std::function<void(const Button& sender)> m_clickCallback;
 

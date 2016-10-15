@@ -9,7 +9,6 @@
 class ChangeBallVelocityFilter : public ActionFilter
 {
 public:
-
     ChangeBallVelocityFilter(
         const float xSpeed,
         const float ySpeed,
@@ -22,18 +21,17 @@ public:
     virtual ~ChangeBallVelocityFilter()
     { }
 
-    virtual bool shouldCollide(Entity& entityA, Entity& entityB) override
+private:
+    float m_xSpeed;
+    float m_ySpeed;
+
+    virtual bool onShouldCollide(Entity& entityA, Entity& entityB) override
     {
-        bool collides = ActionFilter::shouldCollide(entityA, entityB);
+        bool collides = ActionFilter::onShouldCollide(entityA, entityB);
         if(collides)
             (dynamic_cast<Ball&>(entityB)).getBody()->SetLinearVelocity(b2Vec2(m_xSpeed, m_ySpeed));
         return collides;
     }
-
-private:
-
-    float m_xSpeed;
-    float m_ySpeed;
 };
 
 #endif // CHANGE_BALL_VELOCITY_FILTER_HPP

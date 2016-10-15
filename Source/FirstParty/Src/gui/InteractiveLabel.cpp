@@ -42,15 +42,15 @@ void InteractiveLabel::setToolTipText(const std::string& text, const std::string
     m_toolTip.setText(text, replacement);
 }
 
-void InteractiveLabel::update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void InteractiveLabel::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
 {
+    LineLabel::updated(screen, time, mouseOffset);
+
     float offset = 0;
     if(LineLabel::Centered == getAlignment())
         offset = -getWidth() / 2.f;
     else if(LineLabel::Right == getAlignment())
         offset = -getWidth();
-
-    LineLabel::update(screen, time, mouseOffset);
 
     auto position = getCurrentPosition() + sf::Vector2f(offset,0);
     auto size = sf::Vector2i(static_cast<int>(getWidth()), getFontSize());
@@ -64,8 +64,10 @@ void InteractiveLabel::update(const sf::RenderWindow& screen, const float time, 
     }
 }
 
-void InteractiveLabel::drawAdditionalForeground(const DrawParameter& params)
+void InteractiveLabel::onDrawAdditionalForeground(const DrawParameter& params)
 {
+    LineLabel::onDrawAdditionalForeground(params);
+
     if(m_showToolTip && isVisible())
         m_toolTip.draw(params);
 

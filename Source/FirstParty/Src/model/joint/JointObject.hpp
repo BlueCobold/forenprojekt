@@ -22,14 +22,6 @@ public:
         SingleDistance
     };
 
-private:
-    b2World* m_world;
-    b2Joint* m_joint;
-    JointType m_type;
-    std::vector<std::function<void(const JointObject& src, JointObject& clone)>> m_beforeCopyCallbacks;
-    std::vector<std::function<void(const JointObject& src, JointObject& clone)>> m_afterCopyCallbacks;
-
-public:
     JointObject(b2World& world, JointType type) :
         m_world(&world),
         m_joint(nullptr),
@@ -84,14 +76,6 @@ public:
     }
 
 protected:
-
-    virtual void doCopyFrom(const JointObject& other)
-    {
-        m_world = other.m_world;
-    }
-
-    virtual void bindBodies(b2Body& bodyA, b2Body& bodyB) = 0;
-
     void create(const b2JointDef& jointDef)
     {
         if(getWorld() != nullptr) {
@@ -111,6 +95,18 @@ protected:
     {
         return m_world;
     }
+
+private:
+    b2World* m_world;
+    b2Joint* m_joint;
+    JointType m_type;
+    std::vector<std::function<void(const JointObject& src, JointObject& clone)>> m_beforeCopyCallbacks;
+    std::vector<std::function<void(const JointObject& src, JointObject& clone)>> m_afterCopyCallbacks;
+    
+    virtual void doCopyFrom(const JointObject& other)
+    { }
+
+    virtual void bindBodies(b2Body& bodyA, b2Body& bodyB) = 0;
 };
 
 #endif

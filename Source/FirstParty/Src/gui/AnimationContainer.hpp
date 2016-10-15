@@ -23,17 +23,17 @@ private:
 
     float onGetValueOf(const std::string& name) const override;
     void onSetValueOf(const std::string& name, const float value) override;
+    void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 
 public:
     AnimationContainer(const sf::Vector2f& position, 
                        const sf::Vector2f& offset,
                        int id,
                        CloneHandler& cloneHandler);
-    AnimationContainer(AnimationContainer&& toMove);
-    void bindAnimation(std::unique_ptr<Animation> animation);
 
-    void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
-    void updateLayout(const sf::Vector2f& screenSize) override;
+    AnimationContainer(AnimationContainer&& toMove);
+
+    void bindAnimation(std::unique_ptr<Animation> animation);
 };
 
 #endif

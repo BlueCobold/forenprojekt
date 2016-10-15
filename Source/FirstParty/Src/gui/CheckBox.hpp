@@ -15,10 +15,7 @@ class CheckBox : public MenuElement
 public:
 
     CheckBox(int id, CheckBoxStyle style, const sf::Vector2f& position, const sf::Vector2f& offset);
-
-    void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
-    void drawAdditionalForeground(const DrawParameter& params) override;
-
+    
     bool getChecked();
     void setChecked(bool checked);
 
@@ -27,11 +24,11 @@ public:
 
     void setLanguage(const std::string& language) override;
 
-protected:
-    void updateLayout(const sf::Vector2f& screenSize) override;
-
 private:
     void doDraw(const DrawParameter& params) override;
+    void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
+    void layoutUpdated(const sf::Vector2f& screenSize) override;
+    void onDrawAdditionalForeground(const DrawParameter& params) override;
 
     std::unique_ptr<MenuElement> doClone() const override;
 

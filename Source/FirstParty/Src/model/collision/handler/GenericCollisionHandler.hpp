@@ -15,18 +15,16 @@ public:
 
     GenericCollisionHandler(const Handler& handler) :
         m_handler(handler)
-    {
-    }
+    { }
 
-    virtual void onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
+private:
+    Handler m_handler;
+
+    void handleCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
     {
         if(m_handler != nullptr)
             m_handler(entityA, entityB, point, impulse);
     }
-
-private:
-
-    Handler m_handler;
 };
 
 #endif // GENERIC_COLLISION_HANDLER_HPP

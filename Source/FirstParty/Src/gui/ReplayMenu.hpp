@@ -29,7 +29,6 @@ public:
     void setGrade(int grade);
     void setLostBalls(int lostBalls);
     void setMedalToolTipText(const std::string& text);
-
 };
 
 #endif // REPLAY_MENU_HPP

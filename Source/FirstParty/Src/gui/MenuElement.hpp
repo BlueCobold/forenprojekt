@@ -49,25 +49,25 @@ public:
     virtual ~MenuElement()
     { }
 
-    virtual void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0))
-    { }
+    void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0))
+    {
+        updated(screen, time, mouseOffset);
+    }
 
-    virtual void drawAdditionalForeground(const DrawParameter& params)
-    { }
+    void drawAdditionalForeground(const DrawParameter& params)
+    {
+        onDrawAdditionalForeground(params);
+    }
 
     void setPosition(const sf::Vector2f& position)
     {
         m_screenLocation.setPosition(position);
+        positionSet();
     }
 
     void setVisible(const bool visible)
     {
         m_visible = visible;
-    }
-
-    virtual void setPosition(const float x, const float y)
-    {
-        m_screenLocation.setPosition(sf::Vector2f(x, y));
     }
 
     int getId() const
@@ -105,14 +105,15 @@ public:
         m_visibleWhen = subject;
     }
 
-    virtual void setOffset(const sf::Vector2f& offset)
+    void setOffset(const sf::Vector2f& offset)
     {
         m_screenLocation.setOffset(offset);
     }
 
-    virtual void updateLayout(const sf::Vector2f& screenSize)
+    void updateLayout(const sf::Vector2f& screenSize)
     {
         m_screenLocation.setScreenSize(screenSize);
+        layoutUpdated(screenSize);
     }
 
     const std::string& getLanguage() const
@@ -126,6 +127,18 @@ public:
     }
 
 protected:
+    
+    virtual void positionSet()
+    { }
+
+    virtual void layoutUpdated(const sf::Vector2f& screenSize)
+    { }
+
+    virtual void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0))
+    { }
+
+    virtual void onDrawAdditionalForeground(const DrawParameter& params)
+    { }
 
     const sf::Vector2f& getOffset() const
     {

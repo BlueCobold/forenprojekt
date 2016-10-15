@@ -17,10 +17,15 @@ public:
         m_owner(owner),
         m_spawn(spawn),
         m_spawned(false)
-    {
-    }
+    { }
 
-    virtual void onCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
+private:
+    SpawnHandler m_handler;
+    const Entity& m_owner;
+    const Entity& m_spawn;
+    bool m_spawned;
+
+    void handleCollision(Entity& entityA, Entity& entityB, const b2Vec2& point, const float impulse) override
     {
         if(!m_spawned || m_spawn.isRespawnable())
         {
@@ -28,13 +33,6 @@ public:
             m_handler(m_owner, m_spawn, point);
         }
     }
-
-private:
-
-    SpawnHandler m_handler;
-    const Entity& m_owner;
-    const Entity& m_spawn;
-    bool m_spawned;
 };
 
 #endif // SPAWN_ENTITY_COLLISION_HANDLER_HPP
