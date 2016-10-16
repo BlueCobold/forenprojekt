@@ -12,6 +12,3 @@ void FloatParameter::onBind(int paramLocation)
 {
     gl::Uniform1f(paramLocation, m_provider->getValue());
 }
-
-void FloatParameter::prepare(const DrawParameter& param)
-{ }

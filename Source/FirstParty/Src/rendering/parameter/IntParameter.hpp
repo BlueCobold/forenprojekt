@@ -13,11 +13,10 @@ class IntParameter : public ShaderParameter
 public:
     IntParameter(const std::string& name, std::unique_ptr<ValueProvider>&& provider);
 
-    virtual void onBind(int paramLocation) override;
-    virtual void prepare(const DrawParameter& param) override;
-
 private:
     std::unique_ptr<ValueProvider> m_provider;
+
+    virtual void onBind(int paramLocation) override;
 };
 
 #endif // FLOAT_PARAMETER_HPP

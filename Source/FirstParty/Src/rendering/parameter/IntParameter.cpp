@@ -12,6 +12,3 @@ void IntParameter::onBind(int paramLocation)
 {
     gl::Uniform1i(paramLocation, static_cast<int>(m_provider->getValue()));
 }
-
-void IntParameter::prepare(const DrawParameter& param)
-{ }

@@ -14,10 +14,9 @@ public:
 
     void bind(int shaderProgram);
 
-    virtual void prepare(const DrawParameter& param) = 0;
+    void prepare(const DrawParameter& param);
 
 protected:
-    virtual void onBind(int paramLocation) = 0;
     const std::string& getName() const;
     int getParamLocation(int shaderProgram);
 
@@ -25,6 +24,9 @@ private:
     std::string m_name;
     int m_paramLocation;
     bool m_paramLocationLoaded;
+    
+    virtual void onBind(int paramLocation) = 0;
+    virtual void onPrepare(const DrawParameter& param);
 };
 
 #endif // SHADER_PARAMETER_HPP

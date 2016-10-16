@@ -17,6 +17,14 @@ void ShaderParameter::bind(int shaderProgram)
     onBind(location);
 }
 
+void ShaderParameter::prepare(const DrawParameter& param)
+{
+    onPrepare(param);
+}
+
+void ShaderParameter::onPrepare(const DrawParameter& param)
+{ }
+
 int ShaderParameter::getParamLocation(int shaderProgram)
 {
 #ifndef NO_SHADER

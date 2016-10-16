@@ -22,7 +22,7 @@ void TextureParameter::onBind(int paramLocation)
 #endif
 }
 
-void TextureParameter::prepare(const DrawParameter& param)
+void TextureParameter::onPrepare(const DrawParameter& param)
 {
     param.prepareTexture(m_texture);
 }
