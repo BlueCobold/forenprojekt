@@ -13,20 +13,18 @@
 class AlphaTransition : public Transition
 {
 public:
-    
     AlphaTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
         const float duration,
         const sf::Vector2u& size);
 
-    void update();
-
 private:
     sf::Sprite m_sourceSprite;
     sf::Sprite m_targetSprite;
 
     void doDraw(const DrawParameter& param);
+    void updated();
 };
 
 #endif // ALPHA_TRANSITION_HPP

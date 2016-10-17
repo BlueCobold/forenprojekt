@@ -16,7 +16,6 @@
 class HorizontalStripesTransition : public Transition
 {
 public:
-
     HorizontalStripesTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
@@ -24,14 +23,13 @@ public:
         const float duration,
         const sf::Vector2u& size);
 
-    void update() override;
-
 private:
     sf::Sprite m_sourceSprite;
     std::vector<std::unique_ptr<sf::Sprite>> m_targetSprites;
     int m_stripeHeight;
 
     void doDraw(const DrawParameter& param);
+    void updated() override;
 };
 
 #endif // HORIZONTALSTRIPES_TRANSITION_HPP

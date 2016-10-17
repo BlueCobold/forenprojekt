@@ -16,7 +16,6 @@
 class RotatingSquaresTransition : public Transition
 {
 public:
-
     RotatingSquaresTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
@@ -24,8 +23,6 @@ public:
         const int rows,
         const float duration,
         const sf::Vector2u& size);
-
-    void update() override;
 
 private:
     sf::Sprite m_sourceSprite;
@@ -36,6 +33,7 @@ private:
     int m_rows;
 
     void doDraw(const DrawParameter& param);
+    void updated() override;
 };
 
 #endif // ROTATINGSQUARES_TRANSITION_HPP

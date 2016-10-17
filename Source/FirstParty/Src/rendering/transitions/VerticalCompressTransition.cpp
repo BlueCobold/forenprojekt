@@ -40,10 +40,8 @@ VerticalCompressTransition::VerticalCompressTransition(
         throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "VerticalCompressTransition"));
 }
 
-void VerticalCompressTransition::update()
+void VerticalCompressTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     int count = 0;

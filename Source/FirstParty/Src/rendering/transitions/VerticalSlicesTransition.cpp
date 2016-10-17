@@ -39,10 +39,8 @@ VerticalSlicesTransition::VerticalSlicesTransition(
     }
 }
 
-void VerticalSlicesTransition::update()
+void VerticalSlicesTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress() * m_timeFactor;
 
     int count = 0;

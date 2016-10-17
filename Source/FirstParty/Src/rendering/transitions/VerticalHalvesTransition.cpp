@@ -36,10 +36,8 @@ VerticalHalvesTransition::VerticalHalvesTransition(
     }
 }
 
-void VerticalHalvesTransition::update()
+void VerticalHalvesTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     int count = 0;

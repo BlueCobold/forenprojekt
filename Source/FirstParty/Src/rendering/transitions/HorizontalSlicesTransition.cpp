@@ -38,10 +38,8 @@ HorizontalSlicesTransition::HorizontalSlicesTransition(
     }
 }
 
-void HorizontalSlicesTransition::update()
+void HorizontalSlicesTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress() * m_timeFactor;
 
     int count = 0;

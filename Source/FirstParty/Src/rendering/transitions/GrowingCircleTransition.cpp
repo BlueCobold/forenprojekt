@@ -30,10 +30,8 @@ GrowingCircleTransition::GrowingCircleTransition(
     }
 }
 
-void GrowingCircleTransition::update()
+void GrowingCircleTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     int currentRadius = static_cast<int>(m_radius * scale);

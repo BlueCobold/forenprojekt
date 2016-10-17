@@ -40,10 +40,8 @@ HorizontalExpandTransition::HorizontalExpandTransition(
         throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "HorizontalExpandTransition"));
 }
 
-void HorizontalExpandTransition::update()
+void HorizontalExpandTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     int count = 0;

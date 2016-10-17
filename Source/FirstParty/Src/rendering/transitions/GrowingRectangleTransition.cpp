@@ -25,10 +25,8 @@ GrowingRectangleTransition::GrowingRectangleTransition(
     }
 }
 
-void GrowingRectangleTransition::update()
+void GrowingRectangleTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     m_targetSprites.setPosition(static_cast<float>(m_RectangleStartX - static_cast<int>(m_RectangleStartX * scale)),

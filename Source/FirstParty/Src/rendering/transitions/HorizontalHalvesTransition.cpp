@@ -34,10 +34,8 @@ HorizontalHalvesTransition::HorizontalHalvesTransition(
     }
 }
 
-void HorizontalHalvesTransition::update()
+void HorizontalHalvesTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     int count = 0;

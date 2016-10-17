@@ -16,7 +16,6 @@
 class VerticalHalvesTransition : public Transition
 {
 public:
-
     VerticalHalvesTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
@@ -24,7 +23,6 @@ public:
         const float duration,
         const sf::Vector2u& size);
 
-    void update() override;
 
 private:
     sf::Sprite m_targetSprite;
@@ -33,6 +31,7 @@ private:
     int m_stripeHeight;
 
     void doDraw(const DrawParameter& param);
+    void updated() override;
 };
 
 #endif // VERTICALHALVES_TRANSITION_HPP

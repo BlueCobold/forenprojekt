@@ -40,10 +40,8 @@ VerticalSlidingStripesTransition::VerticalSlidingStripesTransition(
         throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "VerticalSlidingStripesTransition"));
 }
 
-void VerticalSlidingStripesTransition::update()
+void VerticalSlidingStripesTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     int count = 0;

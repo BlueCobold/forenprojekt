@@ -40,10 +40,8 @@ HorizontalSlidingStripesTransition::HorizontalSlidingStripesTransition(
         throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "HorizontalSlidingStripesTransition"));
 }
 
-void HorizontalSlidingStripesTransition::update()
+void HorizontalSlidingStripesTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     int count = 0;

@@ -14,14 +14,11 @@
 class GrowingCircleTransition : public Transition
 {
 public:
-    
     GrowingCircleTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
         const float duration,
         const sf::Vector2u& size);
-
-    void update();
 
 private:
     sf::Sprite m_sourceSprite;
@@ -31,6 +28,7 @@ private:
     float m_radius;
 
     void doDraw(const DrawParameter& param);
+    void updated();
 };
 
 #endif // GROWINGCIRCLE_TRANSITION_HPP

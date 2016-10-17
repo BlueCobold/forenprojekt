@@ -13,7 +13,6 @@
 class Transition : public Drawable, public TimedObject
 {
 public:
-
     Transition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
@@ -31,16 +30,19 @@ public:
     virtual ~Transition()
     { }
 
-    virtual void update()
+    void update()
     {
         TimedObject::updateCurrentTime(m_frameTime.getElapsedTime().asSeconds());
         if(getPassedTime() > m_duration)
             m_isFinished = true;
+        updated();
     }
 
     bool isFinished() const { return m_isFinished; };
 
 protected:
+    virtual void updated()
+    { }
 
     const float getProgress() const
     {
@@ -56,16 +58,15 @@ protected:
     const sf::Vector2u& getSize() const { return m_size; }
 
 private:
-
-    Transition( const Transition& other );
-    Transition& operator=( const Transition& );
-
     const sf::Vector2u m_size;
     const sf::Texture* m_targetTexture;
     const sf::Texture* m_sourceTexture;
     sf::Clock m_frameTime;
     float m_duration;
     bool m_isFinished;
+
+    Transition( const Transition& other );
+    Transition& operator=( const Transition& );
 };
 
 #endif // TRANSITION_HPP

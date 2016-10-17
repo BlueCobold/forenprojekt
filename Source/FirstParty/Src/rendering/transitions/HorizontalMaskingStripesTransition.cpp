@@ -34,10 +34,8 @@ HorizontalMaskingStripesTransition::HorizontalMaskingStripesTransition(
     }
 }
 
-void HorizontalMaskingStripesTransition::update()
+void HorizontalMaskingStripesTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     int count = 0;

@@ -40,10 +40,8 @@ HorizontalCompressTransition::HorizontalCompressTransition(
         throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "HorizontalCompressTransition"));
 }
 
-void HorizontalCompressTransition::update()
+void HorizontalCompressTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     int count = 0;

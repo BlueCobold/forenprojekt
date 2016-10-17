@@ -16,15 +16,12 @@
 class HorizontalMaskingStripesTransition : public Transition
 {
 public:
-
     HorizontalMaskingStripesTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
         const int stripeCount,
         const float duration,
         const sf::Vector2u& size);
-
-    void update() override;
 
 private:
     sf::Sprite m_sourceSprite;
@@ -33,6 +30,7 @@ private:
     int m_stripeHeight;
 
     void doDraw(const DrawParameter& param);
+    void updated() override;
 };
 
 #endif // HORIZONTALMASKINGSTRIPES_TRANSITION_HPP

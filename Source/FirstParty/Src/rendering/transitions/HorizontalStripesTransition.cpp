@@ -28,10 +28,8 @@ HorizontalStripesTransition::HorizontalStripesTransition(
     }
 }
 
-void HorizontalStripesTransition::update()
+void HorizontalStripesTransition::updated()
 {
-    Transition::update();
-
     for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)
     {
         auto currentRect = (*it)->getTextureRect();

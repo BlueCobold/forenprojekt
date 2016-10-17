@@ -13,14 +13,11 @@
 class GrowingRectangleTransition : public Transition
 {
 public:
-    
     GrowingRectangleTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
         const float duration,
         const sf::Vector2u& size);
-
-    void update() override;
 
 private:
     sf::Sprite m_sourceSprite;
@@ -29,6 +26,7 @@ private:
     int m_RectangleStartY;
 
     void doDraw(const DrawParameter& param);
+    void updated() override;
 };
 
 #endif // GROWINGRECTANGLE_TRANSITION_HPP

@@ -20,10 +20,8 @@ AlphaTransition::AlphaTransition(
     }
 }
 
-void AlphaTransition::update()
+void AlphaTransition::updated()
 {
-    Transition::update();
-
     sf::Uint8 alpha = static_cast<sf::Uint8>(255 * getProgress());
 
     if(getSourceTexture() != nullptr)

@@ -46,10 +46,8 @@ RotatingSquaresTransition::RotatingSquaresTransition(const sf::Texture* sourceTe
     }
 }
 
-void RotatingSquaresTransition::update()
+void RotatingSquaresTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     /*int spriteCount = 0;

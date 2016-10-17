@@ -40,10 +40,8 @@ VerticalSpringTransition::VerticalSpringTransition(
         throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "VerticalSpringTransition"));
 }
 
-void VerticalSpringTransition::update()
+void VerticalSpringTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     int count = 0;

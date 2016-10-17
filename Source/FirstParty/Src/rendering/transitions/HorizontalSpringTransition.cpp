@@ -40,10 +40,8 @@ HorizontalSpringTransition::HorizontalSpringTransition(
         throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "HorizontalSpringTransition"));
 }
 
-void HorizontalSpringTransition::update()
+void HorizontalSpringTransition::updated()
 {
-    Transition::update();
-
     float scale = getProgress();
 
     int count = 0;

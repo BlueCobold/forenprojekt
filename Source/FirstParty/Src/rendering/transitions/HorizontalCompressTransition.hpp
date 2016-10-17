@@ -16,15 +16,12 @@
 class HorizontalCompressTransition : public Transition
 {
 public:
-
     HorizontalCompressTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
         const int stripeCount,
         const float duration,
         const sf::Vector2u& size);
-
-    void update() override;
 
 private:
     std::vector<std::unique_ptr<sf::Sprite>> m_sourceSprites;
@@ -33,6 +30,7 @@ private:
     int m_stripeHeight;
 
     void doDraw(const DrawParameter& param);
+    void updated() override;
 };
 
 #endif // HORIZONTALCOMPRESS_TRANSITION_HPP

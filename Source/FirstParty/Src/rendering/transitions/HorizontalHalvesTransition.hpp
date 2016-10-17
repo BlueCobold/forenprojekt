@@ -24,8 +24,6 @@ public:
         const float duration,
         const sf::Vector2u& size);
 
-    void update() override;
-
 private:
     sf::Sprite m_targetSprite;
     std::vector<std::unique_ptr<sf::Sprite>> m_sourceSprites;
@@ -33,6 +31,7 @@ private:
     int m_stripeHeight;
 
     void doDraw(const DrawParameter& param);
+    void updated() override;
 };
 
 #endif // HORIZONTALHALVES_TRANSITION_HPP

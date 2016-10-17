@@ -16,15 +16,12 @@
 class VerticalSlicesTransition : public Transition
 {
 public:
-
     VerticalSlicesTransition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
         const int stripeCount,
         const float duration,
         const sf::Vector2u& size);
-
-    void update() override;
 
 private:
     sf::Sprite m_sourceSprite;
@@ -35,6 +32,7 @@ private:
     float m_timeFactor;
 
     void doDraw(const DrawParameter& param);
+    void updated() override;
 };
 
 #endif // VERTICALSLICES_TRANSITION_HPP

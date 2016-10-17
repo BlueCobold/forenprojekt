@@ -49,6 +49,7 @@ private:
     std::unique_ptr<Transition> createTransition(int randomCount);
 
     void doDraw(const DrawParameter& param);
+    void updated() override;
 
 public:
 
@@ -58,7 +59,6 @@ public:
                      const sf::Vector2u& size,
                      const TransitionType type = TypeCount);
 
-    virtual void update();
 };
 
 #endif // RANDOMTRANSITION_HPP
