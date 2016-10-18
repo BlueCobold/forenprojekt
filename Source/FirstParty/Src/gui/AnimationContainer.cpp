@@ -71,16 +71,12 @@ void AnimationContainer::updated(const sf::RenderWindow& screen, const float tim
     updateCurrentTime(time);
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
     auto currentPosition = getCurrentPosition();
-    for(auto animation = begin(graphics.getAnimations()); animation != end(graphics.getAnimations()); ++animation)
-    {
-        auto ani = (*animation).get();
-        if(ani->isStopped())
-            continue;
-        m_updatingAni = ani;
-        
-        ani->setPosition(currentPosition.x, currentPosition.y);
-        ani->update();
-    }
+    
+    graphics.updateAnimations([&](Animation& ani)->bool{
+        m_updatingAni = &ani;
+        ani.setPosition(currentPosition.x, currentPosition.y);
+        return true;
+    });
     m_updatingAni = nullptr;
 }
 

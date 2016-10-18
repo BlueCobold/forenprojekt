@@ -6,6 +6,7 @@
 #include "../animation/Animation.hpp"
 #include "Drawable.hpp"
 
+#include <functional>
 #include <memory>
 #include <vector>
 
@@ -20,7 +21,6 @@ protected:
     void doDraw(const DrawParameter& param) override;
 
 public:
-
     GraphicalObject() : 
         m_hide(false),
         m_z(0)
@@ -35,10 +35,12 @@ public:
     bool hidden() const;
 
     void bindAnimation(std::unique_ptr<Animation> animation);
+    typedef std::function<bool(Animation&)> BeforeCallback;
+    typedef std::function<void(Animation&)> AfterCallback;
+    void updateAnimations(BeforeCallback before = nullptr, AfterCallback after = nullptr) const;
 
     void setDrawOrder(const float drawOrder);
     float getDrawOrder() const;
-    const std::vector<std::unique_ptr<Animation>>& getAnimations() const;
 };
 
 #endif // GRAPHICAL_OBJECT_HPP

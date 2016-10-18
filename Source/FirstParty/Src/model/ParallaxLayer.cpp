@@ -22,19 +22,20 @@ void ParallaxLayer::updatePosition(const sf::View& view, const sf::Vector2u& wor
     sf::Vector2f offset = viewPos + sf::Vector2f(
         -(m_layerSize.x - view.getSize().x) * percent.x,
         -(m_layerSize.y - view.getSize().y) * percent.y);
-
-    for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
-        (*animation)->setPosition(offset.x, offset.y);
+    
+    updateAnimations([&](Animation& ani)->bool{
+        ani.setPosition(offset.x, offset.y);
+        return false;
+    });
 }
 
 void ParallaxLayer::update(const float time)
 {
     updateCurrentTime(time);
-    for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
-    {
-        m_updatingAni = (*animation).get();
-        (*animation)->update();
-    }
+    updateAnimations([&](Animation& ani)->bool{
+        m_updatingAni = &ani;
+        return true;
+    });
     m_updatingAni = nullptr;
 }
 

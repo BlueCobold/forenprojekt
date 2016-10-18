@@ -41,21 +41,21 @@ void Entity::update(const float value)
         setValueOf("position.y", y);
 
         bool running = false;
-        for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
-        {
-            auto ani = (*animation).get();
-            if(ani->isStopped())
-                continue;
-            m_updatingAni = ani;
-            ani->setPosition(x, y);
-            if(getBody() != nullptr)
-                ani->setRotation(getBody()->GetAngle());
-            else if(m_animationAngle != 0)
-                ani->setRotation(m_animationAngle);
-            ani->update();
-            running |= !ani->isStopped();
-            m_updatingAni = nullptr;
-        }
+        updateAnimations(
+            [&](Animation& ani)->bool{
+                m_updatingAni = &ani;
+                ani.setPosition(x, y);
+                if(getBody() != nullptr)
+                    ani.setRotation(getBody()->GetAngle());
+                else if(m_animationAngle != 0)
+                    ani.setRotation(m_animationAngle);
+                return true;
+            },
+            [&](Animation& ani){
+                running |= !ani.isStopped();
+                m_updatingAni = nullptr;
+            }
+        );
         updateJoints();
 
         for(auto sound = begin(m_otherSounds); sound != end(m_otherSounds); ++sound)
@@ -111,9 +111,11 @@ void Entity::onRestarted()
 {
     m_lastTime = getCurrentTime();
     m_killed = false;
-
-    for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
-        (*animation)->reset();
+    
+    updateAnimations([&](Animation& ani)->bool{
+        ani.reset();
+        return false;
+    });
 }
 
 void Entity::kill()
@@ -197,8 +199,10 @@ bool Entity::shouldCollide(Entity& partner)
 
 void Entity::applyOverrides(const std::function<void(Animation*)> function)
 {
-    for(auto it = begin(getAnimations()); it != end(getAnimations()); ++it)
-        function(it->get());
+    updateAnimations([&](Animation& ani)->bool{
+        function(&ani);
+        return false;
+    });
 }
 
 const Entity* Entity::getKillAnimationEntity() const
@@ -238,9 +242,11 @@ std::unique_ptr<Entity> Entity::doClone() const
     clone->copyFrom(this);
 
     m_cloneHandler.registerCloneAll(*this, *clone.get());
-
-    for(auto animation = begin(getAnimations()); animation != end(getAnimations()); ++animation)
-        clone->bindAnimation((*animation)->clone());
+    
+    updateAnimations([&](Animation& ani)->bool{
+        clone->bindAnimation(ani.clone());
+        return false;
+    });
 
     m_cloneHandler.unregisterCloneAll(*this);
 

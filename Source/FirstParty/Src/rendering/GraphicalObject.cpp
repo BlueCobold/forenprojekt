@@ -24,6 +24,26 @@ GraphicalObject& GraphicalObject::operator=(const GraphicalObject& rhs)
     return *this;
 }
 
+void GraphicalObject::updateAnimations(BeforeCallback before, AfterCallback after) const
+{
+    for(auto animation = begin(m_animations); animation != end(m_animations); ++animation)
+    {
+        auto ani = (*animation).get();
+        if(ani->isStopped())
+            continue;
+
+        bool update = true;
+        if(before)
+            update = before(*ani);
+
+        if(update)
+            ani->update();
+
+        if(after)
+            after(*ani);
+    }
+}
+
 void GraphicalObject::hide()
 {
     m_hide = true;
@@ -64,9 +84,4 @@ void GraphicalObject::setDrawOrder(const float drawOrder)
 float GraphicalObject::getDrawOrder() const
 {
     return m_z;
-}
-
-const std::vector<std::unique_ptr<Animation>>& GraphicalObject::getAnimations() const
-{
-    return m_animations;
 }
