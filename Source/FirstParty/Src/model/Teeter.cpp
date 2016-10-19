@@ -34,8 +34,9 @@ void Teeter::adaptToMouse()
     m_lastMousePos = utility::Mouse.getPosition();
 }
 
-void Teeter::update(const float value)
+void Teeter::timeUpdated()
 {
+    const auto value = getPassedTime();
     auto velocity = 0.f;
     auto angle = utility::toDegree(getAngle());
     auto timeDiff = value - m_lastTime;
@@ -77,7 +78,6 @@ void Teeter::update(const float value)
 
     m_lastTime = value;
     m_lastMousePos = mousePos;
-    Entity::update(value);
 }
 
 void Teeter::setControl(const bool invertAxis, const bool useVerticalAxis)

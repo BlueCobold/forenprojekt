@@ -18,10 +18,8 @@ EntityFactory::EntityFactory(CloneHandler& cloneHandler,
         throw std::runtime_error(utility::translateKey("InvalidFactoryTime"));
 }
 
-void EntityFactory::update(const float value)
+void EntityFactory::updated()
 {
-    Entity::update(value);
-
     while(m_manufactureMoment < getPassedTime() && m_callback != nullptr)
     {
         auto product = m_product->clone();

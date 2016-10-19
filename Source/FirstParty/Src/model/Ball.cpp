@@ -92,8 +92,9 @@ void Ball::onRestarted()
         m_trail->setTo(getPosition().x, getPosition().y);
 }
 
-void Ball::update(const float value)
+void Ball::updated()
 {
+    const auto value = getPassedTime();
     m_lostBall = false;
 
     if(blownUp() && !frozen())
@@ -117,8 +118,6 @@ void Ball::update(const float value)
         m_isStucking = true;
 
     autoResetBall(value);
-
-    Entity::update(value);
 
     if(m_trail != nullptr)
         m_trail->update();

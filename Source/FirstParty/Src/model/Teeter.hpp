@@ -8,6 +8,13 @@
 /// This class will be used to bind the physical setting and the control to a entity of a teeter
 class Teeter : public Entity
 {
+public:
+    Teeter(const float mouseScale, CloneHandler& cloneHandler);
+    ~Teeter();
+
+    void adaptToMouse();
+    void setControl(const bool invertAxis, const bool useVerticalAxis);
+
 private:
     sf::Vector2f m_lastMousePos;
     float m_lastTime;
@@ -16,15 +23,7 @@ private:
     bool m_invertAxis;
     bool m_useVerticalAxis;
 
-public:
-
-    Teeter(const float mouseScale, CloneHandler& cloneHandler);
-    ~Teeter();
-
-    virtual void update(const float value) override;
-
-    void adaptToMouse();
-    void setControl(const bool invertAxis, const bool useVerticalAxis);
+    void timeUpdated() override;
 };
 
 #endif //TEETER_HPP

@@ -32,6 +32,8 @@ void Entity::update(const float value)
     if(!m_killed)
     {
         updateCurrentTime(value);
+        timeUpdated();
+
         updateKinematics(getPassedTime(), value - m_lastTime);
 
         auto pos = getPosition();
@@ -69,7 +71,15 @@ void Entity::update(const float value)
 
     if(isStopped())
         kill();
+
+    updated();
 }
+
+void Entity::timeUpdated()
+{ }
+
+void Entity::updated()
+{ }
 
 float Entity::onGetValueOf(const std::string& name) const
 {

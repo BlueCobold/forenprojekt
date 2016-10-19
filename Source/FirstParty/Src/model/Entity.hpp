@@ -53,6 +53,8 @@ private:
     CloneHandler& m_cloneHandler;
 
     std::unique_ptr<Entity> doClone() const override;
+    virtual void timeUpdated();
+    virtual void updated();
 
 protected:
     void onRestarted() override;
@@ -64,7 +66,7 @@ public:
     Entity(Type type, CloneHandler& cloneHandler, bool respawnable = false, bool autoKill = false);
     virtual ~Entity();
 
-    virtual void update(const float value);
+    void update(const float value);
 
     void setName(std::string name);
     const Type& getType() const;

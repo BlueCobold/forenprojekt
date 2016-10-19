@@ -23,6 +23,7 @@ private:
     bool m_transferOwnSpeed;
 
     void onRestarted() override;
+    void updated() override;
 
 public:
     EntityFactory(CloneHandler& cloneHandler,
@@ -32,8 +33,6 @@ public:
                   float minDelayTime,
                   float maxDelayTime,
                   const b2Vec2& spawnOffset);
-
-    void update(const float value) override;
 
     void registerForDelivery(DeliveryCallback callback);
 
