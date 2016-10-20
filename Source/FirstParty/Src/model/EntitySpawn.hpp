@@ -11,29 +11,45 @@ struct EntitySpawn
 {
 public:
     EntitySpawn(std::unique_ptr<Entity> target) :
-        target(std::move(target)),
-        respawnAt(-1.f)
+        m_target(std::move(target)),
+        m_respawnAt(-1.f)
     { }
 
     EntitySpawn(std::unique_ptr<Entity> target, const float time) :
-        target(std::move(target)),
-        respawnAt(time)
+        m_target(std::move(target)),
+        m_respawnAt(time)
     { }
 
     EntitySpawn(EntitySpawn&& source) :
-        target(std::move(source.target)),
-        respawnAt(source.respawnAt)
+        m_target(std::move(source.m_target)),
+        m_respawnAt(source.m_respawnAt)
     { }
 
     EntitySpawn& operator=(EntitySpawn&& source)
     {
-        target = std::move(source.target);
-        respawnAt = source.respawnAt;
+        m_target = std::move(source.m_target);
+        m_respawnAt = source.m_respawnAt;
         return *this;
     }
 
-    std::unique_ptr<Entity> target;
-    float respawnAt;
+    Entity* getTarget() const
+    {
+        return m_target.get();
+    }
+
+    std::unique_ptr<Entity> releaseTarget()
+    {
+        return std::move(std::move(m_target));
+    }
+
+    float getRespawnTime() const
+    {
+        return m_respawnAt;
+    }
+
+private:
+    std::unique_ptr<Entity> m_target;
+    float m_respawnAt;
 };
 
 #endif // ENTITY_SPAWN_HPP

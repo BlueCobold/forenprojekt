@@ -8,20 +8,19 @@
 
 class SoundTrigger
 {
-private:
-    SoundObject m_sound;
-    std::unique_ptr<ValueProvider> m_trigger;
-
 public:
     SoundTrigger(const std::string& key,
                  SoundManager& soundManager,
                  std::unique_ptr<ValueProvider> trigger);
 
     SoundTrigger(SoundTrigger& other);
-
     SoundTrigger(SoundTrigger&& other);
 
     void update();
+
+private:
+    SoundObject m_sound;
+    std::unique_ptr<ValueProvider> m_trigger;
 };
 
 #endif // SOUNDTRIGGER_HPP

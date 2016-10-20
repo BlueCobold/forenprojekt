@@ -22,7 +22,7 @@ public:
         m_ball(ball)
     { }
 
-    virtual bool canActivate() const override
+    bool calculateCanActivate() const override
     {
         return !m_ball->blownUp() && !m_ball->getBallLost();
     }

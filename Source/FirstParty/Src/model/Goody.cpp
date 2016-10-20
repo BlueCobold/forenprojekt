@@ -40,8 +40,14 @@ Goody::Goody(const sf::Keyboard::Key key,
 }
 #endif
 
+float Goody::getCurrentTime()
+{
+    return m_currentTime;
+}
+
 void Goody::update(const float elapsedTime)
 {
+    m_currentTime = elapsedTime;
 #ifdef TOUCHSIM
     m_button.update();
     bool down = utility::Keyboard.isKeyDown(m_key) || (m_selected && utility::Mouse.leftButtonDown()) || m_button.isDown();
@@ -74,7 +80,12 @@ void Goody::update(const float elapsedTime)
     }
     else if(m_durationUntilTime < elapsedTime)
         m_active = false;
+
+    updated();
 }
+
+void Goody::updated()
+{ }
 
 bool Goody::isActive() const
 {
@@ -87,6 +98,11 @@ bool Goody::isSelected() const
 }
 
 bool Goody::canActivate() const
+{
+    return calculateCanActivate();
+}
+
+bool Goody::calculateCanActivate() const
 {
     return true;
 }

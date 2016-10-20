@@ -14,6 +14,17 @@ class EntityFactory : public Entity
 public:
     typedef std::function<void(std::unique_ptr<Entity>&)> DeliveryCallback;
 
+    EntityFactory(CloneHandler& cloneHandler,
+                  bool respawnable, 
+                  bool autoKill,
+                  std::unique_ptr<Entity> product,
+                  float minDelayTime,
+                  float maxDelayTime,
+                  const b2Vec2& spawnOffset);
+
+    void registerForDelivery(DeliveryCallback callback);
+    void setOwnSpeedTransfer(bool value);
+
 private:
     std::unique_ptr<Entity> m_product;
     float m_manufactureMoment;
@@ -24,19 +35,6 @@ private:
 
     void onRestarted() override;
     void updated() override;
-
-public:
-    EntityFactory(CloneHandler& cloneHandler,
-                  bool respawnable, 
-                  bool autoKill,
-                  std::unique_ptr<Entity> product,
-                  float minDelayTime,
-                  float maxDelayTime,
-                  const b2Vec2& spawnOffset);
-
-    void registerForDelivery(DeliveryCallback callback);
-
-    void setOwnSpeedTransfer(bool value);
 };
 
 #endif

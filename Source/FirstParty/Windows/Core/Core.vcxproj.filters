@@ -616,9 +616,6 @@
     <ClInclude Include="..\..\Src\animation\provider\Delay.hpp">
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\model\JointAnimation.hpp">
-      <Filter>Headers\model</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\model\JointValueProvider.hpp">
       <Filter>Headers\model</Filter>
     </ClInclude>
@@ -1271,9 +1268,6 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\ReplayMenu.cpp">
       <Filter>Sources\gui\menus</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\animation\Cloneable.inl">
-      <Filter>Headers\animation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

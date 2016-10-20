@@ -16,16 +16,15 @@ GravityGoody::GravityGoody(const sf::Keyboard::Key key,
 {
 }
 
-void GravityGoody::update(const float elapsedTime)
+void GravityGoody::updated()
 {
-    Goody::update(elapsedTime);
     if(isActive())
     {
         m_currentFactor = m_gravityFactor;
         if(m_activeStartTime == 0)
-            m_activeStartTime = elapsedTime;
+            m_activeStartTime = getCurrentTime();
         else
-            m_activeTime = elapsedTime - m_activeStartTime;
+            m_activeTime = getCurrentTime() - m_activeStartTime;
     }
     else
     {

@@ -223,7 +223,6 @@
     <ClInclude Include="..\..\Src\model\Goody.hpp" />
     <ClInclude Include="..\..\Src\model\GravityGoody.hpp" />
     <ClInclude Include="..\..\Src\model\InvulnerableGoody.hpp" />
-    <ClInclude Include="..\..\Src\model\JointAnimation.hpp" />
     <ClInclude Include="..\..\Src\model\JointValueProvider.hpp" />
     <ClInclude Include="..\..\Src\model\joint\JointObject.hpp" />
     <ClInclude Include="..\..\Src\model\joint\SingleDistanceJoint.hpp" />

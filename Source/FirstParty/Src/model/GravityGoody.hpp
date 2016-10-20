@@ -8,6 +8,12 @@
 
 class GravityGoody : public Goody
 {
+public:
+    GravityGoody(const sf::Keyboard::Key key, const float gravityFactor, b2Vec2& m_currentGravity, const int charge);
+
+    b2Vec2 getGravity() const;
+    const int getBonusPoints() const;
+
 private:
     float m_gravityFactor;
     float m_currentFactor;
@@ -15,14 +21,7 @@ private:
     float m_activeTime;
     b2Vec2& m_currentGravity;
 
-public:
-    GravityGoody(const sf::Keyboard::Key key, const float gravityFactor, b2Vec2& m_currentGravity, const int charge);
-
-    virtual void update(const float elapsedTime) override;
-
-    b2Vec2 getGravity() const;
-
-    const int getBonusPoints() const;
+    void updated() override;
 };
 
 #endif // GRAVITYGOODY_HPP

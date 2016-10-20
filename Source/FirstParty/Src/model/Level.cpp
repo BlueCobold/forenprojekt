@@ -276,12 +276,14 @@ void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity& spawn, f
 {
     for(auto it = std::begin(m_unspawnedEntities); it != std::end(m_unspawnedEntities); ++it)
     {
-        if(it->target.get() == &spawn)
+        if(it->getTarget() == &spawn)
         {
-            it->target->setPosition(position);
-            it->target->setAnimationAngle(angle);
-            m_entitiesToSpawn.push_back(std::move(it->target));
+            auto target = it->releaseTarget();
             m_unspawnedEntities.erase(it);
+
+            target->setPosition(position);
+            target->setAnimationAngle(angle);
+            m_entitiesToSpawn.push_back(std::move(target));
             break;
         }
     }
@@ -669,9 +671,9 @@ void Level::handleAutoRespawn()
     auto it = begin(m_unspawnedEntities);
     while(it != end(m_unspawnedEntities))
     {
-        if(it->respawnAt > 0 && it->respawnAt < getPassedTime())
+        if(it->getRespawnTime() > 0 && it->getRespawnTime() < getPassedTime())
         {
-            m_entitiesToSpawn.push_back(std::move(it->target));
+            m_entitiesToSpawn.push_back(it->releaseTarget());
             it = m_unspawnedEntities.erase(it);
         }
         else
