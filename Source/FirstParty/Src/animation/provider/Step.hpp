@@ -18,7 +18,7 @@ class Step : public MultiProvider
     std::unique_ptr<ValueProvider> doClone() const override
     {
         auto list = cloneProviders();
-        return std::unique_ptr<Step>(new Step(std::move(list)));
+        return std::unique_ptr<Step>(new Step(std::move(list), m_threshold));
     }
 
     float calculateValue() override
