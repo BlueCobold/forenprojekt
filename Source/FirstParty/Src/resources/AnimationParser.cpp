@@ -74,6 +74,8 @@ std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLEl
     else
     {
         auto sheetName = xml.Attribute("spritesheet");
+        if (!sheetName)
+            sheetName = xml.Attribute("spriteSheet");
         auto spriteName = xml.Attribute("sprite");
         if(sheetName && spriteName && (sheet = m_context.resourceManager.getSpriteSheet(sheetName)) != nullptr)
         {
