@@ -54,6 +54,14 @@ Array<std::unique_ptr<ValueProvider>, 2> ControllerParser::parseScale(const tiny
     Array<std::unique_ptr<ValueProvider>, 2> scale;
     scale[0] = findController(xml, "scale", "axis", "x");
     scale[1] = findController(xml, "scale", "axis", "y");
+    if(*scale[0] == nullptr && *scale[1] == nullptr)
+    {
+        if(auto provider = findController(xml, "scale", "", ""))
+        {
+            scale[0] = provider->clone();
+            scale[1] = std::move(provider);
+        }
+    }
     return std::move(scale);
 }
 
@@ -76,9 +84,12 @@ std::unique_ptr<ValueProvider> ControllerParser::findController(
     for(auto iterator = xml.FirstChildElement(childName.c_str());
         iterator != nullptr; iterator = iterator->NextSiblingElement(childName.c_str()))
     {
-        auto value = iterator->Attribute(propertyName.c_str());
-        if(value == nullptr || value != propertyValue)
-            continue;
+        if(!propertyName.empty())
+        {
+            auto value = iterator->Attribute(propertyName.c_str());
+            if(value == nullptr || value != propertyValue)
+                continue;
+        }
 
         if(iterator->FirstChildElement() == nullptr)
             throw std::runtime_error(utility::translateKey("SubTag"));
