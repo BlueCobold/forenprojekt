@@ -7,14 +7,14 @@
 
 class OpenFileDialoge
 {
-private:
-    const char* m_filter;
-    std::string m_file;
-
 public:
     OpenFileDialoge(const char* filter);
     bool openDialoge();
     std::string getFile();
+
+private:
+    const char* m_filter;
+    std::string m_file;
 };
 
 #endif

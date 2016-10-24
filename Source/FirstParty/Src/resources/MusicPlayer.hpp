@@ -21,6 +21,16 @@ public:
         Normal,
         Shuffle
     };
+
+    MusicPlayer(AppConfig& config, std::vector<sf::Music*>& music, MusicPlayer::PlayMode mode);
+
+    void update();
+    void play();
+    void stop();
+    void pause();
+    void next();
+    void previous();
+
 private:
     AppConfig& m_config;
     std::vector<sf::Music*>& m_music;
@@ -31,21 +41,6 @@ private:
     float m_currentVolume;
 
     unsigned int getRandomNumber();
-
-public:
-    MusicPlayer(AppConfig& config, std::vector<sf::Music*>& music, MusicPlayer::PlayMode mode);
-
-    void update();
-
-    void play();
-
-    void stop();
-
-    void pause();
-
-    void next();
-
-    void previous();
 };
 
 #endif
