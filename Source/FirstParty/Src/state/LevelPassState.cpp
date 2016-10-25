@@ -47,6 +47,7 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
     m_HUD.restartAt(getPassedTime());
     m_HUD.onEnter(m_level);
 
+    m_menu.onEnter(getPassedTime());
     m_menu.setPoints(m_level->getPoints());
     m_menu.setGrade(m_level->getMedal());
     m_menu.setLostBalls(m_level->getLostBalls());
@@ -55,6 +56,7 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
                                             utility::toString(m_level->getMedal(Level::Silver))), // second replace
                                             utility::toString(m_level->getMedal(Level::Bronze))); // third replace
     m_menu.setMedalToolTipText(text);
+    m_menu.update(m_screen, getPassedTime());
     if(!enterInformation->m_prepareOnly && !m_gotCoins)
     {
         if(m_level->getPoints() > 0)

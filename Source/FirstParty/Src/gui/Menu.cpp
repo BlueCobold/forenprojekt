@@ -1,5 +1,6 @@
 #include "Menu.hpp"
 
+#include "AnimationContainer.hpp"
 #include "Button.hpp"
 #include "CheckBox.hpp"
 #include "LineLabel.hpp"
@@ -115,6 +116,11 @@ InteractiveLabel& Menu::getInteractiveLabel(int id) const
 MenuSprite& Menu::getSprite(int id) const
 {
     return *find<MenuSprite>(id, MenuElementType::Image);
+}
+
+AnimationContainer& Menu::getAnimation(int id) const
+{
+    return *find<AnimationContainer>(id, MenuElementType::Animation);
 }
 
 Button& Menu::getButton(int id) const

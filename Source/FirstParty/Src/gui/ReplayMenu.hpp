@@ -25,6 +25,7 @@ public:
     ReplayMenu(sf::RenderWindow& screen,
                ResourceManager& resourceManager);
 
+    void onEnter(float time);
     void setPoints(int points);
     void setGrade(int grade);
     void setLostBalls(int lostBalls);

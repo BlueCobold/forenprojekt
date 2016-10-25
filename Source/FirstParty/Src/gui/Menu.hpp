@@ -47,6 +47,7 @@ public:
     MenuSprite& getSprite(int id) const;
     InputBox& getInputBox(int id) const;
     SubWindow& getSubWindow(int id) const;
+    AnimationContainer& getAnimation(int id) const;
 
     void setZoomFactor(float zoomFactor);
     virtual void setLanguage(const std::string& language);
