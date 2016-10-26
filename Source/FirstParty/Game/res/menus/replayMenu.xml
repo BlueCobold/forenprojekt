@@ -18,9 +18,305 @@
 		<image id="25" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="-87" offsety="-212" spriteSheet="gui_elements" sprite="empty_small"/>
 		<image id="26" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="35" offsety="-212" spriteSheet="gui_elements" sprite="empty_small"/>
 		<image id="27" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="-39" offsety="-239" spriteSheet="gui_elements" sprite="empty_large"/>
-		<image id="35" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="-98" offsety="-223" spriteSheet="gui_elements" sprite="filled_small"/>
-		<image id="36" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="24" offsety="-223" spriteSheet="gui_elements" sprite="filled_small"/>
-		<image id="37" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="-50" offsety="-246" spriteSheet="gui_elements" sprite="filled_large"/>
+		
+		<animationContainer id="35" x="0.5" y="0.5" offsetx="-68" offsety="-193">
+			<animations>
+				<animation spritesheet="gui_animations" sprite="Icon_Star_hover" copies="36" blending="premul">
+					<layout>
+						<sprites>
+							Icon_Star_hover_small
+						</sprites>
+					</layout>
+					<color channel="alpha">
+						<step threshold="0.5">
+							<time />
+							<static value="0" />
+							<sub>
+								<static value="1"/>
+								<ramp min="0.6" max="1.2">
+									<time />
+								</ramp>
+							</sub>
+						</step>
+					</color>
+					<scale>
+						<add>
+							<mul>
+								<static value="-0.5" />
+								<ramp min="0.6" max="1.2">
+									<time />
+								</ramp>
+							</mul>
+							<cache>
+								<random min="0.7" max="1" />
+							</cache>
+						</add>
+					</scale>
+					<position axis="x">
+						<mul>
+							<ramp min="0.5" max="1.2">
+								<time />
+							</ramp>
+							<cache>
+								<mul>
+									<step threshold="0">
+										<random min="-100" max="100" />
+										<static value="1" />
+										<static value="-1" />
+									</step>
+									<random min="0" max="50" />
+								</mul>
+							</cache>
+						</mul>
+					</position>
+					<position axis="y">
+						<mul>
+							<ramp min="0.5" max="1.2">
+								<time />
+							</ramp>
+							<cache>
+								<mul>
+									<step threshold="0">
+										<random min="-100" max="100" />
+										<static value="1" />
+										<static value="-1" />
+									</step>
+									<random min="0" max="50" />
+								</mul>
+							</cache>
+						</mul>
+					</position>
+				</animation>
+				<animation spriteSheet="gui_elements" sprite="filled_small">
+					<color channel="alpha">
+						<ramp min="0.25" max="0.5">
+							<time />
+						</ramp>
+					</color>
+					<position axis="y">
+						<add>
+							<static value="-50" />
+							<mul>
+								<static value="50" />
+								<ramp min="0.25" max="0.5">
+									<time />
+								</ramp>
+							</mul>
+						</add>
+					</position>
+					<scale>
+						<add>
+							<static value="4" />
+							<mul>
+								<static value="-3" />
+								<ramp min="0.25" max="0.5">
+									<time />
+								</ramp>
+							</mul>
+						</add>
+					</scale>
+				</animation>
+			</animations>
+		</animationContainer>
+		<animationContainer id="36" x="0.5" y="0.5" offsetx="56" offsety="-193">
+			<animations>
+				<animation spritesheet="gui_animations" sprite="Icon_Star_hover" copies="36" blending="premul">
+					<layout>
+						<sprites>
+							Icon_Star_hover_small
+						</sprites>
+					</layout>
+					<color channel="alpha">
+						<step threshold="0.75">
+							<time />
+							<static value="0" />
+							<sub>
+								<static value="1"/>
+								<ramp min="0.85" max="1.45">
+									<time />
+								</ramp>
+							</sub>
+						</step>
+					</color>
+					<scale>
+						<add>
+							<mul>
+								<static value="-0.5" />
+								<ramp min="0.85" max="1.45">
+									<time />
+								</ramp>
+							</mul>
+							<cache>
+								<random min="0.7" max="1" />
+							</cache>
+						</add>
+					</scale>
+					<position axis="x">
+						<mul>
+							<ramp min="0.75" max="1.45">
+								<time />
+							</ramp>
+							<cache>
+								<mul>
+									<step threshold="0">
+										<random min="-100" max="100" />
+										<static value="1" />
+										<static value="-1" />
+									</step>
+									<random min="0" max="50" />
+								</mul>
+							</cache>
+						</mul>
+					</position>
+					<position axis="y">
+						<mul>
+							<ramp min="0.75" max="1.45">
+								<time />
+							</ramp>
+							<cache>
+								<mul>
+									<step threshold="0">
+										<random min="-100" max="100" />
+										<static value="1" />
+										<static value="-1" />
+									</step>
+									<random min="0" max="50" />
+								</mul>
+							</cache>
+						</mul>
+					</position>
+				</animation>
+				<animation spriteSheet="gui_elements" sprite="filled_small">
+					<color channel="alpha">
+						<ramp min="0.5" max="0.75">
+							<time />
+						</ramp>
+					</color>
+					<position axis="y">
+						<add>
+							<static value="-50" />
+							<mul>
+								<static value="50" />
+								<ramp min="0.5" max="0.75">
+									<time />
+								</ramp>
+							</mul>
+						</add>
+					</position>
+					<scale>
+						<add>
+							<static value="4" />
+							<mul>
+								<static value="-3" />
+								<ramp min="0.5" max="0.75">
+									<time />
+								</ramp>
+							</mul>
+						</add>
+					</scale>
+				</animation>
+			</animations>
+		</animationContainer>
+
+		<animationContainer id="37" x="0.5" y="0.5" offsetx="-5" offsety="-206">
+			<animations>
+				<animation spritesheet="gui_animations" sprite="Icon_Star_hover" copies="50" blending="premul">
+					<layout>
+						<sprites>
+							Icon_Star_hover_small
+						</sprites>
+					</layout>
+					<color channel="alpha">
+						<step threshold="1.0">
+							<time />
+							<static value="0" />
+							<sub>
+								<static value="1"/>
+								<ramp min="1.0" max="1.85">
+									<time />
+								</ramp>
+							</sub>
+						</step>
+					</color>
+					<scale>
+						<add>
+							<mul>
+								<static value="-0.8" />
+								<ramp min="1.25" max="1.85">
+									<time />
+								</ramp>
+							</mul>
+							<cache>
+								<random min="0.7" max="1" />
+							</cache>
+						</add>
+					</scale>
+					<position axis="x">
+						<mul>
+							<ramp min="0.9" max="1.85">
+								<time />
+							</ramp>
+							<cache>
+								<mul>
+									<step threshold="0">
+										<random min="-100" max="100" />
+										<static value="1" />
+										<static value="-1" />
+									</step>
+									<random min="0" max="80" />
+								</mul>
+							</cache>
+						</mul>
+					</position>
+					<position axis="y">
+						<mul>
+							<ramp min="0.9" max="1.85">
+								<time />
+							</ramp>
+							<cache>
+								<mul>
+									<step threshold="0">
+										<random min="-100" max="100" />
+										<static value="1" />
+										<static value="-1" />
+									</step>
+									<random min="0" max="80" />
+								</mul>
+							</cache>
+						</mul>
+					</position>
+				</animation>
+				<animation spriteSheet="gui_elements" sprite="filled_large">
+					<color channel="alpha">
+						<ramp min="0.75" max="1">
+							<time />
+						</ramp>
+					</color>
+					<position axis="y">
+						<add>
+							<static value="-50" />
+							<mul>
+								<static value="50" />
+								<ramp min="0.75" max="1">
+									<time />
+								</ramp>
+							</mul>
+						</add>
+					</position>
+					<scale>
+						<add>
+							<static value="4" />
+							<mul>
+								<static value="-3" />
+								<ramp min="0.75" max="1">
+									<time />
+								</ramp>
+							</mul>
+						</add>
+					</scale>
+				</animation>
+			</animations>
+		</animationContainer>
 		
 		<image id="20" x="0.5" y="0.5" offsetx="102" offsety="-218" spriteSheet="gui_elements" sprite="highscoreBackground"/>
 		<button id="30" text="" style="goblet" x="0.5" y="0.5" offsetx="157" offsety="-204" tooltip="default" tooltiptext="tooltip_highscore"/>
