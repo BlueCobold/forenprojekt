@@ -568,9 +568,6 @@
     <ClInclude Include="..\..\Src\animation\provider\Observer.hpp">
       <Filter>Headers\animation\provider</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\resources\CloneHandler.hpp">
-      <Filter>Headers\resources</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\gui\InteractiveLabel.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>

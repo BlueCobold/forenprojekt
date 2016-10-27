@@ -275,7 +275,6 @@
     <ClInclude Include="..\..\Src\resources\AppConfig.hpp" />
     <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp" />
     <ClInclude Include="..\..\Src\resources\BackgroundParser.hpp" />
-    <ClInclude Include="..\..\Src\resources\CloneHandler.hpp" />
     <ClInclude Include="..\..\Src\resources\ColliderContext.hpp" />
     <ClInclude Include="..\..\Src\resources\ColliderParser.hpp" />
     <ClInclude Include="..\..\Src\resources\Config.hpp" />
