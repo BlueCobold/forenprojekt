@@ -82,5 +82,6 @@ void AnimationContainer::updated(const sf::RenderWindow& screen, const float tim
 
 void AnimationContainer::doDraw(const DrawParameter& param)
 {
-    graphics.draw(param);
+    if(isVisible())
+        graphics.draw(param);
 }
