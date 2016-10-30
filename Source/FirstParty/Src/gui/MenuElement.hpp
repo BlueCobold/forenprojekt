@@ -65,6 +65,11 @@ public:
         positionSet();
     }
 
+    void setOffset(const sf::Vector2f& offset)
+    {
+        m_screenLocation.setOffset(offset);
+    }
+
     void setVisible(const bool visible)
     {
         m_visible = visible;
@@ -83,6 +88,11 @@ public:
     const sf::Vector2f& getPosition() const
     {
         return m_screenLocation.getPosition();
+    }
+
+    const sf::Vector2f& getOffset() const
+    {
+        return m_screenLocation.getOffset();
     }
 
     bool isVisible() const
@@ -105,11 +115,6 @@ public:
         m_visibleWhen = subject;
     }
 
-    void setOffset(const sf::Vector2f& offset)
-    {
-        m_screenLocation.setOffset(offset);
-    }
-
     void updateLayout(const sf::Vector2f& screenSize)
     {
         m_screenLocation.setScreenSize(screenSize);
@@ -127,7 +132,6 @@ public:
     }
 
 protected:
-    
     virtual void positionSet()
     { }
 
@@ -139,11 +143,6 @@ protected:
 
     virtual void onDrawAdditionalForeground(const DrawParameter& params)
     { }
-
-    const sf::Vector2f& getOffset() const
-    {
-        return m_screenLocation.getOffset();
-    }
 
     const sf::Vector2f& getCurrentPosition() const
     {

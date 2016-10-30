@@ -1,6 +1,9 @@
 #include "LineLabel.hpp"
-#include <cmath>
 #include "../Utility.hpp"
+
+#include <cmath>
+
+#include <SFML/System/Mutex.hpp>
 
 LineLabel::LineLabel() :
     MenuElement(-1, MenuElementType::Label, sf::Vector2f(0,0), sf::Vector2f(0,0), ""),
@@ -69,12 +72,20 @@ std::unique_ptr<MenuElement> LineLabel::doClone() const
     return std::move(clone);
 }
 
+namespace
+{
+    sf::Mutex mutex;
+};
+
 void LineLabel::doDraw(const DrawParameter& params)
 {
     if(!isVisible())
         return;
 
-    for(auto it = begin(m_glyphs); it != end(m_glyphs); it++)
+    mutex.lock();
+    auto glyphs(m_glyphs);
+    mutex.unlock();
+    for(auto it = begin(glyphs); it != end(glyphs); it++)
     {
         auto glyph = (*it);
         glyph.setPosition(
@@ -103,7 +114,7 @@ std::string LineLabel::getText() const
 
 void LineLabel::rebuild()
 {
-    m_glyphs.clear();
+    std::vector<BitmapFont::Glyph> newGlyphs;
 
     float shift = 0;
     if(m_alignment != Left)
@@ -124,11 +135,14 @@ void LineLabel::rebuild()
         auto glyph = m_font->getGlyph(*it);
         glyph.setPosition(shift + currentPosition.x + xOffset, currentPosition.y + glyph.getVerticalOffset());
         glyph.setRotation(m_rotation);
-        m_glyphs.push_back(glyph);
+        newGlyphs.push_back(glyph);
 
         xOffset += glyph.getSpacing();
     }
     m_width = xOffset;
+    mutex.lock();
+    m_glyphs = std::move(newGlyphs);
+    mutex.unlock();
 }
 
 void LineLabel::setAlignment(const Alignment alignment)
