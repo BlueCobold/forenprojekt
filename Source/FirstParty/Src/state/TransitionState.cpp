@@ -56,6 +56,7 @@ void TransitionState::render(const EnterTransitionStateInformation* info,
 {
     auto size = m_screen.getSize();
     target.setView(utility::getDefaultView(target, size));
+    target.setActive(true);
     target.clear();
     DrawParameter params(target);
 
