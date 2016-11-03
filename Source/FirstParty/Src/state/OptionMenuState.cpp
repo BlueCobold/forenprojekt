@@ -5,10 +5,12 @@
 #include "../resources/Config.hpp"
 
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 OptionMenuState::OptionMenuState(sf::RenderWindow& screen, 
                                  ResourceManager& resourceManager, 
                                  AppConfig& config) :
+    m_screen(screen),
     State(screen, resourceManager, config),
     m_menu(screen, resourceManager, config),
     m_HUD(resourceManager, config),
@@ -36,7 +38,7 @@ void OptionMenuState::onEnter(const EnterStateInformation* enterInformation, con
 
     m_HUD.onEnter(m_level);
 
-    m_menu.onEnter();
+    m_menu.onEnter(m_screen);
 
     m_pauseStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
@@ -57,7 +59,7 @@ StateChangeInformation OptionMenuState::update(const float time)
     {
         m_pauseStateInfo.m_level = m_level;
         m_transitionStateInfo.m_onEnterInformation = &m_pauseStateInfo;
-        m_menu.applyChanges();
+        m_menu.applyChanges(m_screen);
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
     else if(m_clicked == OptionMenu::BUTTON_ARROW_LEFT)

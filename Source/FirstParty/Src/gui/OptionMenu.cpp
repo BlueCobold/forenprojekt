@@ -12,10 +12,9 @@
 template<class T>
 bool compareVector2 (const sf::Vector2<T> lhs, const sf::Vector2<T> rhs);
 
-OptionMenu::OptionMenu(sf::RenderWindow& screen,
-                       ResourceManager& resourceManager,
+OptionMenu::OptionMenu(ResourceManager& resourceManager,
                        AppConfig& config) :
-    Menu(*resourceManager.getMenuTemplate("OptionMenu"), screen),
+    Menu(*resourceManager.getMenuTemplate("OptionMenu")),
     m_config(config),
     m_fullScreen(false),
     m_currentVideoModeIndex(0)
@@ -48,14 +47,16 @@ OptionMenu::OptionMenu(sf::RenderWindow& screen,
             m_availableVideoMode.push_back(sf::Vector2u(it->width, it->height));
     }
 
+#ifndef ANDROID
     auto sheet = resourceManager.getSpriteSheet("gui_elements");
     auto icon = sheet->get("Icon_16");
     m_icon.create(icon.width, icon.height);
     sf::Image texture = resourceManager.getTexture(sheet->getTextureName())->copyToImage();
     m_icon.copy(texture, 0, 0, sf::IntRect(icon.x, icon.y, icon.width, icon.height));
+#endif
 }
 
-void OptionMenu::applyChanges()
+void OptionMenu::applyChanges(sf::RenderWindow& screen)
 {
     if(Menu::getCheckbox(CHECKBOX_FULLSCREEN).getChecked() != m_fullScreen ||
        m_currentVideoMode.x != m_config.get<unsigned int>("ResolutionX") ||
@@ -69,13 +70,15 @@ void OptionMenu::applyChanges()
         adjustVideoMode(videoMode, m_fullScreen);
 
         sf::ContextSettings settings = sf::ContextSettings(24, 8, 0);
+#ifndef ANDROID
         if(m_fullScreen)
-            Menu::getRenderWindow().create(videoMode, m_config.get<std::string>("language") + utility::translateKey("gui_rickety_racquet"), sf::Style::Fullscreen, settings);
-        if(!m_fullScreen)
+            screen.create(videoMode, m_config.get<std::string>("language") + utility::translateKey("gui_rickety_racquet"), sf::Style::Fullscreen, settings);
+        else
         {
-            Menu::getRenderWindow().create(sf::VideoMode(videoMode), m_config.get<std::string>("language") + utility::translateKey("gui_rickety_racquet"), sf::Style::Default, settings);
-            Menu::getRenderWindow().setIcon(m_icon.getSize().x, m_icon.getSize().y, m_icon.getPixelsPtr());
+            screen.create(sf::VideoMode(videoMode), m_config.get<std::string>("language") + utility::translateKey("gui_rickety_racquet"), sf::Style::Default, settings);
+            screen.setIcon(m_icon.getSize().x, m_icon.getSize().y, m_icon.getPixelsPtr());
         }
+#endif
 
         if(!sf::VideoMode(m_appointedVideoMode.x, m_appointedVideoMode.y).isValid())
         {
@@ -84,14 +87,14 @@ void OptionMenu::applyChanges()
                 m_availableVideoMode.erase(index);
         }
 
-        Menu::getRenderWindow().setMouseCursorVisible(false);
+        screen.setMouseCursorVisible(false);
 
         m_config.set("IsFullScreen", m_fullScreen);
         m_config.set("ResolutionX", videoMode.width);
         m_config.set("ResolutionY", videoMode.height);
 
-        Menu::getRenderWindow().setFramerateLimit(m_config.get<int>("FrameRateLimit"));
-        Menu::getRenderWindow().setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
+        screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
+        screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
     }
 
     if(Menu::getSlider(SLIDER_MUSICVOLUMEN).getValue() != m_musicVolume)
@@ -187,7 +190,7 @@ void OptionMenu::adjustVideoMode(sf::VideoMode& mode, bool fullScreen)
     }
 }
 
-void OptionMenu::onEnter()
+void OptionMenu::onEnter(const sf::RenderWindow& screen)
 {
     m_fullScreen = m_config.get<bool>("IsFullScreen");
 
@@ -215,7 +218,7 @@ void OptionMenu::onEnter()
     Menu::getCheckbox(CHECKBOX_SHOW_BATTERY_STATE).setChecked(m_showBatteryState);
 
     // necessary becaus onEnter() is called twice
-    auto screenSize = getRenderWindow().getSize();
+    auto screenSize = screen.getSize();
     if(!sf::VideoMode(screenSize.x, screenSize.y).isValid() &&
        std::find(begin(m_availableVideoMode), end(m_availableVideoMode), screenSize) == end(m_availableVideoMode))
         m_availableVideoMode.push_back(screenSize);

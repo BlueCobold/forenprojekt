@@ -26,10 +26,10 @@ public:
     static const int CHECKBOX_USE_SHADER_EFFECTS = 35;
     static const int CHECKBOX_SHOW_BATTERY_STATE = 38;
 
-    OptionMenu(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
+    OptionMenu(ResourceManager& resourceManager, AppConfig& config);
 
-    void applyChanges();
-    void onEnter();
+    void applyChanges(sf::RenderWindow& screen);
+    void onEnter(const sf::RenderWindow& screen);
     void nextVideoMode();
     void prevVideoMode();
 

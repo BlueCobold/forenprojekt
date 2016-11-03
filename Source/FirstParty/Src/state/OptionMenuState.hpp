@@ -9,6 +9,11 @@
 
 class Level;
 
+namespace sf
+{
+    class RenderWindow;
+};
+
 /// This is the option menu.
 class OptionMenuState : public State
 {
@@ -31,6 +36,7 @@ private:
 
     int m_clicked;
 
+    sf::RenderWindow& m_screen;
     EnterPauseStateInformation m_pauseStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
 };
