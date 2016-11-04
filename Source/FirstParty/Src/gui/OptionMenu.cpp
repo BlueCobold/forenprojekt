@@ -12,9 +12,10 @@
 template<class T>
 bool compareVector2 (const sf::Vector2<T> lhs, const sf::Vector2<T> rhs);
 
-OptionMenu::OptionMenu(ResourceManager& resourceManager,
+OptionMenu::OptionMenu(sf::RenderWindow& screen, 
+                       ResourceManager& resourceManager,
                        AppConfig& config) :
-    Menu(*resourceManager.getMenuTemplate("OptionMenu")),
+    Menu(*resourceManager.getMenuTemplate("OptionMenu"), screen),
     m_config(config),
     m_fullScreen(false),
     m_currentVideoModeIndex(0)
@@ -204,18 +205,13 @@ void OptionMenu::onEnter(const sf::RenderWindow& screen)
 
     m_showBatteryState = m_config.get<bool>("ShowBatteryState");
 
-    Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
-
-    Menu::getSlider(SLIDER_SOUNDVOLUMEN).setValue(static_cast<float>(m_soundVolume));
-    Menu::getSlider(SLIDER_MUSICVOLUMEN).setValue(static_cast<float>(m_musicVolume));
-
-    Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
-
-    Menu::getCheckbox(CHECKBOX_USE_VERTICALAXIS).setChecked(m_useVerticalAxis);
-
-    Menu::getCheckbox(CHECKBOX_INVERT_AXIS).setChecked(m_invertAxis);
-
-    Menu::getCheckbox(CHECKBOX_SHOW_BATTERY_STATE).setChecked(m_showBatteryState);
+    getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
+    getSlider(SLIDER_SOUNDVOLUMEN).setValue(static_cast<float>(m_soundVolume));
+    getSlider(SLIDER_MUSICVOLUMEN).setValue(static_cast<float>(m_musicVolume));
+    getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
+    getCheckbox(CHECKBOX_USE_VERTICALAXIS).setChecked(m_useVerticalAxis);
+    getCheckbox(CHECKBOX_INVERT_AXIS).setChecked(m_invertAxis);
+    getCheckbox(CHECKBOX_SHOW_BATTERY_STATE).setChecked(m_showBatteryState);
 
     // necessary becaus onEnter() is called twice
     auto screenSize = screen.getSize();

@@ -40,6 +40,7 @@ void MainMenuState::onEnter(const EnterStateInformation* enterInformation, const
         m_menu.showGermanLanguage();
 
     m_menu.showLanguageSelect(false);
+    m_menu.update(m_screen, getPassedTime());
 }
 
 StateChangeInformation MainMenuState::update(const float time)

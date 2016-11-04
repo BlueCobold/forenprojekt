@@ -45,6 +45,7 @@ void LevelSelectState::onEnter(const EnterStateInformation* enterInformation, co
     m_unlockedLevel = m_config.get<int>("UnlockedLevel");
 
     updateButtons();
+    m_menu.update(m_screen, getPassedTime());
 }
 
 StateChangeInformation LevelSelectState::update(const float time)

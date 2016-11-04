@@ -44,6 +44,7 @@ void LevelFailState::onEnter(const EnterStateInformation* enterInformation, cons
 
     if(!enterInformation->m_prepareOnly)
         setAchievements();
+    m_menu.update(m_screen, getPassedTime());
 }
 
 StateChangeInformation LevelFailState::update(const float time)

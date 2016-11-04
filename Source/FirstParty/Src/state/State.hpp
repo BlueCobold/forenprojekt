@@ -104,8 +104,8 @@ public:
 
     virtual void setLanguage(const std::string& language)
     { }
+
 protected:
-    
     void updateTime(const float time)
     {
         if(isPaused())

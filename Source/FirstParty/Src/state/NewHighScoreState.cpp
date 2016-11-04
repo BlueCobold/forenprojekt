@@ -63,6 +63,7 @@ void NewHighScoreState::onEnter(const EnterStateInformation* enterInformation, c
 #if defined(IOS) || defined(ANDROID)
     m_menu.showKeyboard();
 #endif
+    m_menu.update(m_screen, getPassedTime());
 }
 
 StateChangeInformation NewHighScoreState::update(const float time)

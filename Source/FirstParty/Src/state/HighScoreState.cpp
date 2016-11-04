@@ -64,6 +64,7 @@ void HighScoreState::onEnter(const EnterStateInformation* enterInformation, cons
     m_onlineHighscore = false;
     m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).setChecked(m_onlineHighscore);
     m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).setChecked(!m_onlineHighscore);
+    m_menu.update(m_screen, getPassedTime());
 }
 
 StateChangeInformation HighScoreState::update(const float time)

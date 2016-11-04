@@ -39,6 +39,7 @@ void AchievementState::onEnter(const EnterStateInformation* enterInformation, co
 {
     updateAchievementData();
     State::onEnter(enterInformation, time);
+    m_menu.update(m_screen, getPassedTime());
 }
 
 StateChangeInformation AchievementState::update(const float time)

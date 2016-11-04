@@ -45,6 +45,7 @@ void PauseState::onEnter(const EnterStateInformation* enterInformation, const fl
     m_optionStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
     m_menu.setCoinToolTipText("tooltip_coins", utility::toString(m_config.get<int>("coins")));
+    m_menu.update(m_screen, getPassedTime());
 }
 
 StateChangeInformation PauseState::update(const float time)

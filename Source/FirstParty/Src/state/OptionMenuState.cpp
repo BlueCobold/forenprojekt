@@ -43,6 +43,7 @@ void OptionMenuState::onEnter(const EnterStateInformation* enterInformation, con
     m_pauseStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 
     m_menu.getLabel(OptionMenu::LABEL_RESOLUTION).setText(utility::translateKey(m_config.get<std::string>("language") + "gui_label_resolution"));
+    m_menu.update(m_screen, getPassedTime());
 }
 
 StateChangeInformation OptionMenuState::update(const float time)

@@ -58,6 +58,7 @@ void CoinShopState::onEnter(const EnterStateInformation* enterInformation, const
     m_menu.setGoodyCharges(Goody::ExtraTimeGoody, m_config.get<int>("goodyextratime"));
 
     updateButtons();
+    m_menu.update(m_screen, getPassedTime());
 }
 
 void CoinShopState::buy(const Goody::Type type, const std::string& propertyKey)
