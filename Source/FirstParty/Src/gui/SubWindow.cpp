@@ -36,15 +36,14 @@ SubWindow::SubWindow(const int id,
     m_sliderRect.setSize(sf::Vector2f(scrollWidth, m_size.y));
     m_sliderRect.setFillColor(sf::Color(40, 40, 40, 70));
 
-    m_positionRect.setPosition(getCurrentPosition().x + m_size.x - scrollWidth,
-                               getCurrentPosition().y);
+    m_positionRect.setPosition(m_size.x - scrollWidth, 0);
 
     float positionSize = m_size.y / m_innerHeight;
     if(positionSize > 1.f)
         positionSize = 1.f;
 
     m_positionRect.setSize(sf::Vector2f(m_sliderRect.getSize().x, floorf(m_size.y * positionSize)));
-    m_positionRect.setFillColor(sf::Color(128, 128, 128, 250));
+    m_positionRect.setFillColor(sf::Color(128, 8, 128, 50));
 
     m_center.x = m_size.x / 2.f;
     m_center.y = m_size.y / 2.f;
@@ -108,32 +107,29 @@ void SubWindow::updated(const sf::RenderWindow& screen, const float time, const 
     auto currentPosition = getCurrentPosition();
 
     sf::IntRect mouseRect(static_cast<sf::Vector2i>(m_windowRect.getPosition()) + mouseOffset, static_cast<sf::Vector2i>(m_windowRect.getSize()));
-    sf::IntRect sliderRect(static_cast<sf::Vector2i>(m_positionRect.getPosition()), static_cast<sf::Vector2i>(m_positionRect.getSize()));
+    sf::IntRect sliderRect(static_cast<sf::Vector2i>(m_positionRect.getPosition() + currentPosition), static_cast<sf::Vector2i>(m_positionRect.getSize()));
 
     auto moveDistance = m_cursorPosition - getCursorPosition(screen);
     m_cursorPosition = getCursorPosition(screen);
 
     if(mouseRect.contains(m_cursorPosition))
     {
-        float scroll = 0;
+        float scroll = m_positionRect.getPosition().y;
 
         if(utility::Mouse.isWheelMovedDown())
-            scroll = m_positionRect.getPosition().y + ceilf(windowPixelToSliderPixel(15));
+            scroll += ceilf(windowPixelToSliderPixel(15));
         else if(utility::Mouse.isWheelMovedUp())
-            scroll = m_positionRect.getPosition().y + ceilf(windowPixelToSliderPixel(-15));
+            scroll += ceilf(windowPixelToSliderPixel(-15));
         else if(utility::Mouse.leftButtonPressed())
-            scroll = m_positionRect.getPosition().y + windowPixelToSliderPixel(moveDistance.y * 2.f);
-        if(scroll != 0)
-        {
-            if(scroll < currentPosition.y)
-                scroll = currentPosition.y;
-            if(scroll > currentPosition.y + m_size.y - m_positionRect.getSize().y)
-                scroll = currentPosition.y + m_size.y - m_positionRect.getSize().y;
+            scroll += windowPixelToSliderPixel(moveDistance.y * 2.f);
 
-            m_positionRect.setPosition(m_positionRect.getPosition().x, scroll);
+        if(scroll < 0)
+            scroll = 0;
+        if(scroll > m_size.y - m_positionRect.getSize().y)
+            scroll = m_size.y - m_positionRect.getSize().y;
 
-            m_center.y = floorf(m_size.y / 2.f + sliderPixelToWindowPixel(m_positionRect.getPosition().y - getCurrentPosition().y));
-        }
+        m_positionRect.setPosition(m_positionRect.getPosition().x, scroll);
+        m_center.y = floorf(m_size.y / 2.f + sliderPixelToWindowPixel(m_positionRect.getPosition().y));
     }
 
     if(sliderRect.contains(m_cursorPosition) && utility::Mouse.leftButtonDown())
@@ -145,19 +141,19 @@ void SubWindow::updated(const sf::RenderWindow& screen, const float time, const 
     {
         m_endValue = m_cursorPosition.y;
         float y = m_positionRect.getPosition().y + m_endValue - m_startValue;
-        if(y < currentPosition.y)
-            y = currentPosition.y;
-        if(y > currentPosition.y + m_size.y - m_positionRect.getSize().y)
-            y = currentPosition.y + m_size.y - m_positionRect.getSize().y;
+        if(y < 0)
+            y = 0;
+        if(y > m_size.y - m_positionRect.getSize().y)
+            y = m_size.y - m_positionRect.getSize().y;
         m_positionRect.setPosition(m_positionRect.getPosition().x, y);
 
-        m_center.y = floorf(m_size.y / 2.f + sliderPixelToWindowPixel(m_positionRect.getPosition().y - currentPosition.y));
+        m_center.y = floorf(m_size.y / 2.f + sliderPixelToWindowPixel(m_positionRect.getPosition().y));
         m_startValue = m_endValue;
     }
     else if(utility::Mouse.leftButtonReleased())
         m_active = false;
 
-    auto pos = m_positionRect.getPosition();
+    auto pos = m_positionRect.getPosition() + currentPosition;
     m_style.scrollbarTop.setPosition(pos);
     m_style.scrollbarMiddle.setPosition(pos.x, pos.y + m_style.scrollbarTop.getTextureRect().height);
     float height = m_positionRect.getSize().y
@@ -204,20 +200,21 @@ void SubWindow::setInnerHeight(int innerHeight)
 {
     m_innerHeight = innerHeight;
 }
+
 void SubWindow::layoutUpdated(const sf::Vector2f& screenSize)
 {
     auto currentPosition = getCurrentPosition();
-    auto rectPosition = m_positionRect.getPosition().y - currentPosition.y;
+    auto rectPosition = m_positionRect.getPosition().y;
 
     float scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
 
     m_windowRect.setPosition(currentPosition);
     m_sliderRect.setPosition(currentPosition.x + m_size.x - scrollWidth,
                              currentPosition.y);
-    m_positionRect.setPosition(currentPosition.x + m_size.x - scrollWidth,
-                               currentPosition.y + rectPosition);
+    m_positionRect.setPosition(m_size.x - scrollWidth,
+                               rectPosition);
 
-    auto position = m_positionRect.getPosition();
+    auto position = m_positionRect.getPosition() + currentPosition;
     m_style.scrollbarTop.setPosition(position);
     m_style.scrollbarMiddle.setPosition(position.x, position.y + m_style.scrollbarTop.getTextureRect().height);
     float height = m_positionRect.getSize().y
