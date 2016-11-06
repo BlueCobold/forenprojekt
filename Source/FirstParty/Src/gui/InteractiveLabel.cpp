@@ -57,11 +57,9 @@ void InteractiveLabel::updated(const sf::RenderWindow& screen, const float time,
     auto mousePosition = getCursorPosition(screen);
     sf::IntRect hitBox(static_cast<sf::Vector2i>(position), size);
     
-    if(hitBox.contains(mousePosition + mouseOffset) && isVisible())
-    {
-        m_showToolTip = true;
+    m_showToolTip = hitBox.contains(mousePosition + mouseOffset) && isVisible();
+    if(m_showToolTip)
         m_toolTip.setPosition(static_cast<const sf::Vector2f>(mousePosition), screen);
-    }
 }
 
 void InteractiveLabel::onDrawAdditionalForeground(const DrawParameter& params)
@@ -70,8 +68,6 @@ void InteractiveLabel::onDrawAdditionalForeground(const DrawParameter& params)
 
     if(m_showToolTip && isVisible())
         m_toolTip.draw(params);
-
-    m_showToolTip = false;
 }
 
 void InteractiveLabel::setLanguage(const std::string& language)
