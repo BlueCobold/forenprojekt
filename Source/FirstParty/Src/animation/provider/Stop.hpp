@@ -17,7 +17,7 @@ class Stop : public ValueProvider, public Observer<Stoppable>
         return std::unique_ptr<Stop>(new Stop(getCloneObservable(), getCallback()));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
         getObserved().stop();
         return 0;

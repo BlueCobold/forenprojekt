@@ -117,7 +117,7 @@ void Level::onRestarted()
     m_lastTime = time;
 }
 
-void Level::update(const float elapsedTime)
+void Level::update(const double elapsedTime)
 {
     bool gravityEvent = m_gravityGoody.isActive();
     bool ballInvulnerableEvent = m_invulnerableGoody.isActive();
@@ -146,8 +146,8 @@ void Level::update(const float elapsedTime)
     if(!m_levelPass)
         m_levelEndingTime = elapsedTime + 1.0f;
 
-    int steps = std::min(20, std::max(1, static_cast<int>(ceilf(m_timeStep / (1 / (60.0f * 2))))));
-    float delta = 0;
+    int steps = std::min(20, std::max(1, static_cast<int>(ceil(m_timeStep / (1 / (60.0 * 2))))));
+    double delta = 0;
     for(int i = 1; i <= steps; i++)
     {
         utility::Mouse.interpolate(steps, i);
@@ -161,7 +161,7 @@ void Level::update(const float elapsedTime)
         cleanupKilledEntities();
         respawnDeadBalls();
 
-        m_world.Step(m_timeStep / steps, m_velocityIterations, m_positionIterations);
+        m_world.Step(static_cast<float>(m_timeStep / steps), m_velocityIterations, m_positionIterations);
 
         for(auto it = begin(m_entities); it != end(m_entities); ++it)
         {
@@ -196,10 +196,14 @@ void Level::update(const float elapsedTime)
     if(utility::Keyboard.isKeyDown(sf::Keyboard::Space) && utility::toPixel(m_ballTravelDistance) < 60 && m_ballImpulseTime < elapsedTime - 1.0f)
     {
         m_ballImpulseTime = elapsedTime;
-        float angle = m_ballImpulseAngle.getValue();
-        float g = m_world.GetGravity().Length();
-        float strength = m_ball->getBody()->GetMass() * sqrt(2 * g * utility::toMeter<float>(100.0f));
-        m_ball->getBody()->ApplyLinearImpulse(utility::rotate(-strength / g * m_world.GetGravity(), utility::toRadian(angle)), m_ball->getBody()->GetWorldCenter(), false);
+        auto angle = static_cast<float>(m_ballImpulseAngle.getValue());
+        auto g = m_world.GetGravity().Length();
+        auto strength = m_ball->getBody()->GetMass() * sqrtf(2 * g * utility::toMeter<float>(100.f));
+        m_ball->getBody()->ApplyLinearImpulse(
+            utility::rotate(
+                -strength / g * m_world.GetGravity(),
+                utility::toRadian(angle)),
+                m_ball->getBody()->GetWorldCenter(), false);
     }
 
     trackBallMovement(elapsedTime);
@@ -256,13 +260,13 @@ void Level::respawnDeadBalls()
     }
 }
 
-void Level::trackBallMovement(float elapsedTime)
+void Level::trackBallMovement(double elapsedTime)
 {
     b2Vec2 ballPos = m_ball->getPosition();
-    float distance = (ballPos - m_lastBallPosition).Length();
+    auto distance = (ballPos - m_lastBallPosition).Length();
     m_ballTravelDistances.push(BallMovement(elapsedTime, distance));
     m_ballTravelDistance += distance;
-    for(float t = m_ballTravelDistances.front().time; t < elapsedTime - 1.5;)
+    for(auto t = m_ballTravelDistances.front().time; t < elapsedTime - 1.5;)
     {
         auto f = m_ballTravelDistances.front();
         m_ballTravelDistance -= f.distance;
@@ -289,7 +293,7 @@ void Level::prepareEntityForSpawn(const b2Vec2& position, const Entity& spawn, f
     }
 }
 
-void Level::spawnPendingEntities(float currentTime)
+void Level::spawnPendingEntities(double currentTime)
 {
     for(auto it = std::begin(m_entitiesToSpawn); it != std::end(m_entitiesToSpawn); ++it)
     {
@@ -364,7 +368,7 @@ void Level::updatePointLabels()
     }
 }
 
-float Level::onGetValueOf(const std::string& name) const
+double Level::onGetValueOf(const std::string& name) const
 {
     auto match = m_variables.find(name);
     if(match == end(m_variables))
@@ -376,7 +380,7 @@ float Level::onGetValueOf(const std::string& name) const
     return match->second;
 }
 
-void Level::onSetValueOf(const std::string& name, const float value)
+void Level::onSetValueOf(const std::string& name, const double value)
 {
     if(m_updatingEntity == nullptr)
         m_variables[name] = value;
@@ -604,12 +608,12 @@ const bool Level::isLevelPassed() const
         return (m_timeAttackMode && m_remainingTime < 0);
 }
 
-const float Level::getRemainigTime() const
+const double Level::getRemainigTime() const
 {
     return m_remainingTime;
 }
 
-const float Level::getTotalTime() const
+const double Level::getTotalTime() const
 {
     return m_totalTime;
 }
@@ -771,7 +775,7 @@ std::string Level::getFileName()
 }
 #endif
 
-const float Level::getLevelPlayTime() const
+const double Level::getLevelPlayTime() const
 {
     if(m_levelPass)
         return m_levelPlayTime;

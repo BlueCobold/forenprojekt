@@ -42,7 +42,7 @@ std::unique_ptr<MenuElement> InputBox::doClone() const
     return std::move(clone);
 }
 
-void InputBox::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void InputBox::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
 #if defined(IOS) || defined(ANDROID)
     if(!m_caret.isActive())

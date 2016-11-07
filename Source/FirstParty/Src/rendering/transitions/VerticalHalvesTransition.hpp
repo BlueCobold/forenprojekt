@@ -20,7 +20,7 @@ public:
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
         const int stripeCount,
-        const float duration,
+        const double duration,
         const sf::Vector2u& size);
 
 

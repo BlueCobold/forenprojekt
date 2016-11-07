@@ -61,7 +61,7 @@ public:
 #endif
     ~Level();
 
-    void update(const float dt);
+    void update(const double elapsedTime);
     void adjustView(const DrawParameter& params);
 
     void adaptToMouse();
@@ -81,8 +81,8 @@ public:
     const bool isLevelPassed() const;
     const bool isLevelFailed() const;
 
-    const float getRemainigTime() const;
-    const float getTotalTime() const;
+    const double getRemainigTime() const;
+    const double getTotalTime() const;
 
     const Goody getGoody(const Goody::Type& type) const;
     void onGoodyActivated(Goody& goody);
@@ -102,7 +102,7 @@ public:
 
     const std::list<GameEvent>& getGameEvents() const;
 
-    const float getLevelPlayTime() const;
+    const double getLevelPlayTime() const;
 
 private:
 #ifdef LEVELTESTING
@@ -115,8 +115,8 @@ private:
     void createLabelAt(const Entity& target, const std::string& fontName, const std::string& text);
     void createLabelAt(const sf::Vector2f& position, const std::string& fontName, const std::string& text);
     void respawnDeadBalls();
-    void trackBallMovement(float elapsedTime);
-    void spawnPendingEntities(float currentTime);
+    void trackBallMovement(double elapsedTime);
+    void spawnPendingEntities(double currentTime);
     void cleanupKilledEntities();
     void updatePointLabels();
     void updateGoodyChoice();
@@ -149,8 +149,8 @@ private:
 private:
     void onRestarted() override;
 
-    float onGetValueOf(const std::string& name) const override;
-    void onSetValueOf(const std::string& name, const float value) override;
+    double onGetValueOf(const std::string& name) const override;
+    void onSetValueOf(const std::string& name, const double value) override;
 
     ResourceManager& m_resourceManager;
     AppConfig& m_config;
@@ -164,7 +164,7 @@ private:
 
     unsigned int m_number;
 
-    std::map<std::string, float> m_variables;
+    std::map<std::string, double> m_variables;
     Entity* m_updatingEntity;
     std::vector<std::unique_ptr<Entity>> m_entities;
     std::vector<std::unique_ptr<Entity>> m_entitiesToSpawn;
@@ -174,16 +174,16 @@ private:
 
     ContactListener  m_contactListener;
 
-    float m_timeStep;
+    double m_timeStep;
     int m_velocityIterations;
     int m_positionIterations;
 
     float m_width;
     float m_height;
 
-    float m_lastTime;
-    float m_levelEndingTime;
-    float m_levelPlayTime;
+    double m_lastTime;
+    double m_levelEndingTime;
+    double m_levelPlayTime;
 
 #ifdef _DEBUG_BOX2D
     bool m_debugDraw;
@@ -199,12 +199,12 @@ private:
     struct BallMovement
     {
         BallMovement() : time(0.0f), distance(0.0f) {}
-        BallMovement(float time, float dist) : time(time), distance(dist) {}
-        float time;
+        BallMovement(double time, float dist) : time(time), distance(dist) {}
+        double time;
         float distance;
     };
     std::queue<BallMovement> m_ballTravelDistances;
-    float m_ballImpulseTime;
+    double m_ballImpulseTime;
     b2Vec2 m_lastBallPosition;
     float m_ballTravelDistance;
     RandomProvider m_ballImpulseAngle;
@@ -217,23 +217,23 @@ private:
     int m_normalTargetPoints;
     int m_multiHit;
 
-    float m_remainingTime;
-    float m_totalTime;
-    float m_initialTime;
+    double m_remainingTime;
+    double m_totalTime;
+    double m_initialTime;
     unsigned int m_defaultTargetBuffer;
 
     struct TimedLabel
     {
     public:
 
-        TimedLabel(std::unique_ptr<LineLabel> label, const float time)
+        TimedLabel(std::unique_ptr<LineLabel> label, const double time)
         {
             this->label = std::move(label);
             this->time = time;
         }
 
         std::unique_ptr<LineLabel> label;
-        float time;
+        double time;
     };
 
     std::vector<std::unique_ptr<TimedLabel>> m_pointLabels;

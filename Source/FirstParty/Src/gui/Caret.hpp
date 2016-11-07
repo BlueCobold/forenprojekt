@@ -19,8 +19,8 @@ class Caret : public Drawable
 {
 private:
     sf::Sprite m_sprite;
-    const float m_blinkTime;
-    float m_nextFullFadeOut;
+    const double m_blinkTime;
+    double m_nextFullFadeOut;
     sf::Vector2f m_offset;
     bool m_activated;
 
@@ -29,7 +29,7 @@ private:
 public:
     Caret(float frequency, const sf::Vector2f& offset, const sf::Sprite& sprite);
 
-    void update(const float time);
+    void update(const double time);
 
     void setPosition(const sf::Vector2f& position);
 

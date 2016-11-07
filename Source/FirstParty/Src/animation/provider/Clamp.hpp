@@ -19,11 +19,11 @@ class Clamp : public MultiProvider
         return std::unique_ptr<Clamp>(new Clamp(std::move(list)));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
-        float actual = getProvider()[0]->getValue();
-        float minv = getProvider()[1]->getValue();
-        float maxv = getProvider()[2]->getValue();
+        auto actual = getProvider()[0]->getValue();
+        auto minv = getProvider()[1]->getValue();
+        auto maxv = getProvider()[2]->getValue();
         return std::min(std::max(actual, minv), maxv);
     }
 

@@ -25,7 +25,7 @@ public:
     std::unique_ptr<ValueProvider> parseSingle(const tinyxml2::XMLElement& xml) const;
 
 private:
-    std::vector<float> parseFloatList(const std::string& valueString) const;
+    std::vector<double> parseFloatList(const std::string& valueString) const;
 };
 
 #endif // PROVIDER_PARSER_HPP

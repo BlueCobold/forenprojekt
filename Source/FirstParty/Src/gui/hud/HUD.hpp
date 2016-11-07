@@ -49,7 +49,7 @@ public:
     HUD(ResourceManager& resourceManager, AppConfig& config);
 
     void skipInterpolation();
-    void update(const Level* level, const float time);
+    void update(const Level* level, const double time);
     void onEnter(Level* level);
 
 protected:

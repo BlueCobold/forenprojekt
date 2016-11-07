@@ -8,8 +8,8 @@
 /// Returns start+x*increment, where x is the number of calls to "getValue"
 class Count : public ValueProvider
 {
-    float m_start;
-    float m_increment;
+    double m_start;
+    double m_increment;
     int m_calls;
 
     std::unique_ptr<ValueProvider> doClone() const override
@@ -17,7 +17,7 @@ class Count : public ValueProvider
         return std::unique_ptr<Count>(new Count(m_start, m_increment));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
         return m_start + (m_calls++) * m_increment;
     }
@@ -28,7 +28,7 @@ class Count : public ValueProvider
     }
 
 public:
-    Count(const float start, const float increment) :
+    Count(const double start, const double increment) :
         m_start(start),
         m_increment(increment),
         m_calls(0)

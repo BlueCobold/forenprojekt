@@ -26,7 +26,7 @@ LevelPreviewState::~LevelPreviewState()
 {
 }
 
-void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     m_levelUpdated = false;
     State::onEnter(enterInformation, time);
@@ -51,7 +51,7 @@ void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, c
     m_menu.update(m_screen, getPassedTime());
 }
 
-StateChangeInformation LevelPreviewState::update(const float time)
+StateChangeInformation LevelPreviewState::update(const double time)
 {
     if(State::isPaused())
         return StateChangeInformation::Empty();

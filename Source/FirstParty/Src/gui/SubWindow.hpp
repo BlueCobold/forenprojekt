@@ -72,7 +72,7 @@ private:
     void off(const DrawParameter& params);
     void doDraw(const DrawParameter& params) override;
     void onDrawAdditionalForeground(const DrawParameter& params) override;
-    void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
+    void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     void layoutUpdated(const sf::Vector2f& screenSize) override;
 
     std::function<void(const Button& sender)> m_clickCallback;

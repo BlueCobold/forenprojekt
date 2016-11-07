@@ -18,9 +18,9 @@ class Adder : public MultiProvider
         return std::unique_ptr<Adder>(new Adder(std::move(list)));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
-        float v = 0.0f;
+        auto v = 0.0;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
             v += (*it)->getValue();
         return v;

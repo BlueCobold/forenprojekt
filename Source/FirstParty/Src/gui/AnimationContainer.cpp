@@ -40,7 +40,7 @@ std::unique_ptr<MenuElement> AnimationContainer::doClone() const
     return std::move(other);
 }
 
-float AnimationContainer::onGetValueOf(const std::string& name) const
+double AnimationContainer::onGetValueOf(const std::string& name) const
 {
     auto match = m_variables.find(name);
     if(match == end(m_variables))
@@ -52,7 +52,7 @@ float AnimationContainer::onGetValueOf(const std::string& name) const
     return match->second;
 }
 
-void AnimationContainer::onSetValueOf(const std::string& name, const float value)
+void AnimationContainer::onSetValueOf(const std::string& name, const double value)
 {
     if(m_updatingAni == nullptr)
         m_variables[name] = value;
@@ -66,7 +66,7 @@ void AnimationContainer::onSetValueOf(const std::string& name, const float value
     }
 }
 
-void AnimationContainer::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void AnimationContainer::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     updateCurrentTime(time);
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));

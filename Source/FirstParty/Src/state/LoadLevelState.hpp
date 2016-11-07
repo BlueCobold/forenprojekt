@@ -26,8 +26,8 @@ public:
     LoadLevelState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~LoadLevelState();
 
-    StateChangeInformation update(const float time) override;
-    void onEnter(const EnterStateInformation *enterInformation, const float time) override;
+    StateChangeInformation update(const double time) override;
+    void onEnter(const EnterStateInformation *enterInformation, const double time) override;
     std::unique_ptr<Level> gainLevel();
 
     void setLanguage(const std::string& language) override;

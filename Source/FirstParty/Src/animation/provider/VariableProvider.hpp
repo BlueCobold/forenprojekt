@@ -20,7 +20,7 @@ class VariableProvider : public ValueProvider, public Observer<const VariableHan
         return std::unique_ptr<VariableProvider>(new VariableProvider(getCloneObservable(), m_varName, getCallback()));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
         return getObserved().getValueOf(m_varName);
     }

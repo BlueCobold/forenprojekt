@@ -10,19 +10,19 @@ class VariableHandler
 {
 public:
 
-    float getValueOf(const std::string& name) const
+    double getValueOf(const std::string& name) const
     {
         return onGetValueOf(name);
     }
 
-    void setValueOf(const std::string& name, const float value)
+    void setValueOf(const std::string& name, const double value)
     {
         onSetValueOf(name, value);
     }
 
 protected:
-    virtual float onGetValueOf(const std::string& name) const = 0;
-    virtual void onSetValueOf(const std::string& name, const float value) = 0;
+    virtual double onGetValueOf(const std::string& name) const = 0;
+    virtual void onSetValueOf(const std::string& name, const double value) = 0;
 };
 
 #endif //VARIABLE_HANDLER_HPP

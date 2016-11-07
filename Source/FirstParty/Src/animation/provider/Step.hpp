@@ -13,7 +13,7 @@
 /// Returns provider 2, if provider 1 < threshold, else provider 3
 class Step : public MultiProvider
 {
-    float m_threshold;
+    double m_threshold;
 
     std::unique_ptr<ValueProvider> doClone() const override
     {
@@ -21,7 +21,7 @@ class Step : public MultiProvider
         return std::unique_ptr<Step>(new Step(std::move(list), m_threshold));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
         if(getProvider()[0]->getValue() < m_threshold)
             return getProvider()[1]->getValue();
@@ -30,7 +30,7 @@ class Step : public MultiProvider
     }
 
 public:
-    Step(std::vector<std::unique_ptr<ValueProvider>> provider, float threshold = 1) :
+    Step(std::vector<std::unique_ptr<ValueProvider>> provider, double threshold = 1) :
        MultiProvider(std::move(provider)),
        m_threshold(threshold)
     {

@@ -17,9 +17,9 @@ class Multiplier : public MultiProvider
         return std::unique_ptr<Multiplier>(new Multiplier(std::move(list)));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
-        float v = 1.0f;
+        auto v = 1.0;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
             v *= (*it)->getValue();
         return v;

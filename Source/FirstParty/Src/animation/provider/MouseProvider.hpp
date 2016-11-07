@@ -27,7 +27,7 @@ private:
         return std::unique_ptr<MouseProvider>(new MouseProvider(m_xAxis));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
         if(m_firstCall)
         {

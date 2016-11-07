@@ -23,8 +23,8 @@ Goody::Goody(const sf::Keyboard::Key key,
 #else
 Goody::Goody(const sf::Keyboard::Key key,
              const Type type,
-             const float durationTime,
-             const float cooldownTime,
+             const double durationTime,
+             const double cooldownTime,
              const int charges) :
     m_key(key),
     m_active(false),
@@ -40,12 +40,12 @@ Goody::Goody(const sf::Keyboard::Key key,
 }
 #endif
 
-float Goody::getCurrentTime()
+double Goody::getCurrentTime()
 {
     return m_currentTime;
 }
 
-void Goody::update(const float elapsedTime)
+void Goody::update(const double elapsedTime)
 {
     m_currentTime = elapsedTime;
 #ifdef TOUCHSIM

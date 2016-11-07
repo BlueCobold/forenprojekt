@@ -42,7 +42,7 @@ void PointsHUD::setPoints(int points)
     }
 }
 
-void PointsHUD::setTime(float time)
+void PointsHUD::setTime(double time)
 {
     updateCurrentTime(time);
 }

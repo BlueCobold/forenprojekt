@@ -18,18 +18,18 @@ public:
                         ExtraTimeGoody,
                         InvulnerableGoody};
 private:
-    float m_passedTime;
+    double m_passedTime;
     float m_ballSpeed;
     GameEventType m_type;
 
 public:
-    GameEvent(const float passedTime, const float ballSpeed, const GameEventType type) :
+    GameEvent(const double passedTime, const float ballSpeed, const GameEventType type) :
         m_passedTime(passedTime),
         m_ballSpeed(ballSpeed),
         m_type(type)
     {}
 
-    float getPassedTime() const
+    double getPassedTime() const
     {
         return m_passedTime;
     }

@@ -12,7 +12,7 @@
 /// Returns the value of the providers that is equal to a case
 class Switch : public MultiProvider
 {
-    std::vector<float> m_constants;
+    std::vector<double> m_constants;
 
     std::unique_ptr<ValueProvider> doClone() const override
     {
@@ -20,7 +20,7 @@ class Switch : public MultiProvider
         return std::unique_ptr<Switch>(new Switch(std::move(list), m_constants));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
         auto it = begin(getProvider());
         auto current = (*it)->getValue();
@@ -34,7 +34,7 @@ class Switch : public MultiProvider
     }
 
 public:
-    Switch(std::vector<std::unique_ptr<ValueProvider>> provider, const std::vector<float>& constants)
+    Switch(std::vector<std::unique_ptr<ValueProvider>> provider, const std::vector<double>& constants)
        : MultiProvider(std::move(provider)),
          m_constants(constants)
     {

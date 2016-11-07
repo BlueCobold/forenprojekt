@@ -60,19 +60,19 @@ void Animation::update()
 
     m_sprite.setTextureRect(getTextureRect());
 
-    float rotation = m_externalRotation;
+    auto rotation = m_externalRotation;
     if(m_rotationProvider != nullptr)
         rotation += m_rotationProvider->getValue();
-    m_sprite.setRotation(rotation);
+    m_sprite.setRotation(static_cast<float>(rotation));
 
     updatePosition();
 
-    float scaleX = 1, scaleY = 1;
+    double scaleX = 1, scaleY = 1;
     if(m_xScaleProvider != nullptr)
         scaleX = m_xScaleProvider->getValue();
     if(m_yScaleProvider != nullptr)
         scaleY = m_yScaleProvider->getValue();
-    m_sprite.setScale(scaleX, scaleY);
+    m_sprite.setScale(static_cast<float>(scaleX), static_cast<float>(scaleY));
 
     if(m_origins.size() != 0)
         m_sprite.setOrigin(static_cast<float>(m_origins[m_frame].x), static_cast<float>(m_origins[m_frame].y));
@@ -86,7 +86,7 @@ void Animation::update()
         color.b = static_cast<sf::Uint8>(255*m_colorProviders[Blue]->getValue());
     if(m_colorProviders[Alpha] != nullptr)
     {
-        float alpha = m_colorProviders[Alpha]->getValue();
+        auto alpha = m_colorProviders[Alpha]->getValue();
         if(m_stopOnAlphaZero && alpha < 0)
         {
             stop();
@@ -138,9 +138,9 @@ void Animation::updatePosition()
 {
     m_dynamicPosition = sf::Vector2f(0, 0);
     if(m_xPositionProvider != nullptr)
-        m_dynamicPosition.x += m_xPositionProvider->getValue();
+        m_dynamicPosition.x += static_cast<float>(m_xPositionProvider->getValue());
     if(m_yPositionProvider != nullptr)
-        m_dynamicPosition.y += m_yPositionProvider->getValue();
+        m_dynamicPosition.y += static_cast<float>(m_yPositionProvider->getValue());
 
     auto offset = sf::Vector2f();
     if(m_offsets.size() != 0)

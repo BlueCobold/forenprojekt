@@ -33,7 +33,7 @@ private:
     State* getState(StateId id) const;
 
     sf::Clock m_frametime;
-    float m_currentTime;
+    double m_currentTime;
     std::map<StateId, std::unique_ptr<State>> m_statesById;
     State* m_currentState;
     StateId m_currentStateId;

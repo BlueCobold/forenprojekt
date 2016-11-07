@@ -31,7 +31,7 @@ NewHighScoreState::~NewHighScoreState()
 {
 }
 
-void NewHighScoreState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void NewHighScoreState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     m_replay = false;
     const EnterPauseStateInformation* info = dynamic_cast<const EnterPauseStateInformation*>(enterInformation);
@@ -66,7 +66,7 @@ void NewHighScoreState::onEnter(const EnterStateInformation* enterInformation, c
     m_menu.update(m_screen, getPassedTime());
 }
 
-StateChangeInformation NewHighScoreState::update(const float time)
+StateChangeInformation NewHighScoreState::update(const double time)
 {
     if(State::isPaused())
         return StateChangeInformation::Empty();
@@ -134,7 +134,7 @@ void NewHighScoreState::doDraw(const DrawParameter& params)
     m_menu.draw(params);
 }
 
-void NewHighScoreState::addNewHighScore(int points, float time, std::string name)
+void NewHighScoreState::addNewHighScore(int points, double time, std::string name)
 {
     if(name == "")
     {
@@ -214,14 +214,14 @@ void NewHighScoreState::addNewHighScore(int points, float time, std::string name
                 std::string termTime2 = "HighScoreLevel" + utility::toString(number) + "_Time" + utility::toString(i) + mode + "T";
                 std::string termName2 = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(i) + mode + "T";
 
-                State::m_config.set<float>(termTime2, State::m_config.get<float>(termTime1));
+                State::m_config.set<double>(termTime2, State::m_config.get<double>(termTime1));
                 State::m_config.set<std::string>(termName2, State::m_config.get<std::string>(termName1));
             }
 
             std::string termTime = "HighScoreLevel" + utility::toString(number) + "_Time" + utility::toString(newPlaceTime) + mode + "T";
             std::string termName = "HighScoreLevel" + utility::toString(number) + "_Name" + utility::toString(newPlaceTime) + mode + "T";
 
-            State::m_config.set<float>(termTime, time);
+            State::m_config.set<double>(termTime, time);
             State::m_config.set<std::string>(termName, name);
         }
     }

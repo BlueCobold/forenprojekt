@@ -16,9 +16,9 @@ class Absolute : public SingleProvider
         return std::unique_ptr<Absolute>(new Absolute(getProvider()->clone()));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
-        return fabsf(getProvider()->getValue());
+        return fabs(getProvider()->getValue());
     }
 
 public:

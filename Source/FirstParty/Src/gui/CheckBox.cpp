@@ -19,7 +19,7 @@ std::unique_ptr<MenuElement> CheckBox::doClone() const
     return std::move(clone);
 }
 
-void CheckBox::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void CheckBox::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 

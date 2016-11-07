@@ -19,9 +19,9 @@ class Substractor : public MultiProvider
         return std::unique_ptr<Substractor>(new Substractor(std::move(list)));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
-        float v = 0.0f;
+        auto v = 0.0;
         bool first = true;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
         {

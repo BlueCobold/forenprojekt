@@ -31,7 +31,7 @@ void Caret::doDraw(const DrawParameter& params)
     params.getTarget().draw(m_sprite);
 }
 
-void Caret::update(const float time)
+void Caret::update(const double time)
 {
     if(!m_activated)
         return;

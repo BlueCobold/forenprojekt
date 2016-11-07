@@ -188,12 +188,12 @@ std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLEl
     throw std::runtime_error(utility::replace(utility::translateKey("Unknown"), name));
 }
 
-std::vector<float> ProviderParser::parseFloatList(const std::string& valueString) const
+std::vector<double> ProviderParser::parseFloatList(const std::string& valueString) const
 {
-    std::vector<float> results;
+    std::vector<double> results;
     std::stringstream ss(valueString);
     std::string item;
     while(std::getline(ss, item, ','))
-        results.push_back(utility::stringTo<float>(item));
+        results.push_back(utility::stringTo<double>(item));
     return results;
 }

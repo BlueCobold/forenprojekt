@@ -8,20 +8,20 @@
 /// Returns a static value
 class StaticProvider : public ValueProvider
 {
-    float m_value;
+    double m_value;
 
     std::unique_ptr<ValueProvider> doClone() const override
     {
         return std::unique_ptr<StaticProvider>(new StaticProvider(m_value));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
         return m_value;
     }
 
 public:
-    StaticProvider(const float value) : m_value(value)
+    StaticProvider(const double value) : m_value(value)
     {
     }
 };

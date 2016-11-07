@@ -10,5 +10,5 @@ FloatParameter::FloatParameter(const std::string& name, std::unique_ptr<ValuePro
 
 void FloatParameter::onBind(int paramLocation)
 {
-    gl::Uniform1f(paramLocation, m_provider->getValue());
+    gl::Uniform1f(paramLocation, static_cast<float>(m_provider->getValue()));
 }

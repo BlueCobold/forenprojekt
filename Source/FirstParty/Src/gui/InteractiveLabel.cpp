@@ -42,7 +42,7 @@ void InteractiveLabel::setToolTipText(const std::string& text, const std::string
     m_toolTip.setText(text, replacement);
 }
 
-void InteractiveLabel::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void InteractiveLabel::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     LineLabel::updated(screen, time, mouseOffset);
 

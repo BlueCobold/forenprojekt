@@ -15,7 +15,7 @@ private:
 public:
     GameEventRecorder();
 
-    void addEvent(const float passedTime, const float ballSpeed, const GameEvent::GameEventType type);
+    void addEvent(const double passedTime, const float ballSpeed, const GameEvent::GameEventType type);
     void clearList();
 
     const std::list<GameEvent>& getGameEvents() const;

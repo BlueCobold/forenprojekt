@@ -34,7 +34,7 @@ class Button : public MenuElement
 
     std::unique_ptr<MenuElement> doClone() const override;
     void doDraw(const DrawParameter& params) override;
-    void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
+    void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     void onDrawAdditionalForeground(const DrawParameter& params) override;
     void layoutUpdated(const sf::Vector2f& screenSize) override;
 
@@ -62,7 +62,7 @@ public:
     void setLanguage(const std::string& language) override;
 
 private:
-    void setStyle(ButtonStateStyle& style, float time, const sf::Vector2f& screenSize);
+    void setStyle(ButtonStateStyle& style, double time, const sf::Vector2f& screenSize);
 };
 
 #endif // BUTTON_HPP

@@ -21,7 +21,7 @@ public:
         const sf::Texture* targetTexture,
         const int columns,
         const int rows,
-        const float duration,
+        const double duration,
         const sf::Vector2u& size);
 
 private:

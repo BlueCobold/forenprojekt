@@ -15,7 +15,7 @@ public:
         m_respawnAt(-1.f)
     { }
 
-    EntitySpawn(std::unique_ptr<Entity> target, const float time) :
+    EntitySpawn(std::unique_ptr<Entity> target, const double time) :
         m_target(std::move(target)),
         m_respawnAt(time)
     { }
@@ -42,14 +42,14 @@ public:
         return std::move(std::move(m_target));
     }
 
-    float getRespawnTime() const
+    double getRespawnTime() const
     {
         return m_respawnAt;
     }
 
 private:
     std::unique_ptr<Entity> m_target;
-    float m_respawnAt;
+    double m_respawnAt;
 };
 
 #endif // ENTITY_SPAWN_HPP

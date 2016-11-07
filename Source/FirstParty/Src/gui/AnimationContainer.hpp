@@ -13,7 +13,7 @@ class CloneHandler;
 class AnimationContainer : public AnimatedObject, public MenuElement
 {
 private:
-    std::map<std::string, float> m_variables;
+    std::map<std::string, double> m_variables;
     Animation* m_updatingAni;
     CloneHandler& m_cloneHandler;
     GraphicalObject graphics;
@@ -21,9 +21,9 @@ private:
     std::unique_ptr<MenuElement> doClone() const override;
     void doDraw(const DrawParameter& param) override;
 
-    float onGetValueOf(const std::string& name) const override;
-    void onSetValueOf(const std::string& name, const float value) override;
-    void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
+    double onGetValueOf(const std::string& name) const override;
+    void onSetValueOf(const std::string& name, const double value) override;
+    void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 
 public:
     AnimationContainer(const sf::Vector2f& position, 

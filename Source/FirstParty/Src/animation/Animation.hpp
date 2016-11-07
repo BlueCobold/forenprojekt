@@ -173,7 +173,7 @@ private:
     sf::Vector2f m_sourceOffset;
     sf::Vector2f m_externalPosition;
     sf::Vector2f m_dynamicPosition;
-    float m_externalRotation;
+    double m_externalRotation;
     sf::Vector2f m_drawOffset;
     Blending::Mode m_blending;
     unsigned int m_targetBuffer;

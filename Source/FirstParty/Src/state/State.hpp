@@ -59,16 +59,16 @@ public:
     virtual ~State()
     { }
 
-    virtual void onEnter(const EnterStateInformation* enterInformation, const float time)
+    virtual void onEnter(const EnterStateInformation* enterInformation, const double time)
     {
         utility::Mouse.capture();
         utility::Mouse.showSystemCursor(m_screen);
         updateTime(time);
     }
 
-    virtual StateChangeInformation update(const float time) = 0;
+    virtual StateChangeInformation update(const double time) = 0;
 
-    void pause(const float time)
+    void pause(const double time)
     {
         if(!isPaused())
             m_pauseStart = time;
@@ -79,7 +79,7 @@ public:
 #endif
     }
 
-    void resume(const float time)
+    void resume(const double time)
     {
         if(isPaused())
             m_pauseDelay += time - m_pauseStart;
@@ -94,7 +94,7 @@ public:
         return m_pause;
     }
 
-    virtual void onEvent(utility::Event::EventType type, const float time)
+    virtual void onEvent(utility::Event::EventType type, const double time)
     {
         if(type == utility::Event::LostFocus)
             pause(time);
@@ -106,19 +106,19 @@ public:
     { }
 
 protected:
-    void updateTime(const float time)
+    void updateTime(const double time)
     {
         if(isPaused())
             return;
         m_currentTime = time;
     }
 
-    float getCurrentTime() const
+    double getCurrentTime() const
     {
         return m_currentTime;
     }
 
-    float getPassedTime() const
+    double getPassedTime() const
     {
         return m_currentTime - m_pauseDelay;
     }
@@ -134,9 +134,9 @@ protected:
 private:
     ResourceManager& m_resourceManager;
     bool m_pause;
-    float m_pauseStart;
-    float m_currentTime;
-    float m_pauseDelay;
+    double m_pauseStart;
+    double m_currentTime;
+    double m_pauseDelay;
 };
 
 #endif // STATE_HPP

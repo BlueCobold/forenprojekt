@@ -2,10 +2,10 @@
 
 #include <iostream>
 
-Interpolation::Interpolation(const float startValue,
-                             const float targetValue,
-                             const float duration,
-                             const float time) :
+Interpolation::Interpolation(const double startValue,
+                             const double targetValue,
+                             const double duration,
+                             const double time) :
     TimedObject(time, false),
     m_finished(false),
     m_startValue(startValue),
@@ -44,7 +44,7 @@ void Interpolation::onRestarted()
     start();
 }
 
-void Interpolation::update(const float elapsedTime)
+void Interpolation::update(const double elapsedTime)
 {
     if(isStopped() || m_finished)
         return;
@@ -60,7 +60,7 @@ void Interpolation::update(const float elapsedTime)
         m_currentValue = m_startValue + (getPassedTime() * (m_targetValue - m_startValue) / m_duration);
 }
 
-void Interpolation::set(const float startValue, const float targetValue, const float duration)
+void Interpolation::set(const double startValue, const double targetValue, const double duration)
 {
     m_startValue = startValue;
     m_targetValue = targetValue;

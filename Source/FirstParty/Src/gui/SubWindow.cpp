@@ -28,7 +28,7 @@ SubWindow::SubWindow(const int id,
     m_active(false),
     m_zoomFactor(1.f)
 {
-    float scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
+    auto scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
 
     m_windowRect.setSize(sf::Vector2f(size.x - scrollWidth, size.y));
     m_windowRect.setFillColor(sf::Color(100, 100, 100, 70));
@@ -38,7 +38,7 @@ SubWindow::SubWindow(const int id,
 
     m_positionRect.setPosition(m_size.x - scrollWidth, 0);
 
-    float positionSize = m_size.y / m_innerHeight;
+    auto positionSize = m_size.y / m_innerHeight;
     if(positionSize > 1.f)
         positionSize = 1.f;
 
@@ -100,7 +100,7 @@ void SubWindow::doDraw(const DrawParameter& params)
     params.getTarget().draw(m_style.scrollbarBottom);
 }
 
-void SubWindow::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void SubWindow::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 
@@ -114,7 +114,7 @@ void SubWindow::updated(const sf::RenderWindow& screen, const float time, const 
 
     if(mouseRect.contains(m_cursorPosition))
     {
-        float scroll = m_positionRect.getPosition().y;
+        auto scroll = m_positionRect.getPosition().y;
 
         if(utility::Mouse.isWheelMovedDown())
             scroll += ceilf(windowPixelToSliderPixel(15));
@@ -140,7 +140,7 @@ void SubWindow::updated(const sf::RenderWindow& screen, const float time, const 
     else if(utility::Mouse.leftButtonPressed() && m_active)
     {
         m_endValue = m_cursorPosition.y;
-        float y = m_positionRect.getPosition().y + m_endValue - m_startValue;
+        auto y = m_positionRect.getPosition().y + m_endValue - m_startValue;
         if(y < 0)
             y = 0;
         if(y > m_size.y - m_positionRect.getSize().y)
@@ -156,7 +156,7 @@ void SubWindow::updated(const sf::RenderWindow& screen, const float time, const 
     auto pos = m_positionRect.getPosition() + currentPosition;
     m_style.scrollbarTop.setPosition(pos);
     m_style.scrollbarMiddle.setPosition(pos.x, pos.y + m_style.scrollbarTop.getTextureRect().height);
-    float height = m_positionRect.getSize().y
+    auto height = m_positionRect.getSize().y
                     - m_style.scrollbarTop.getTextureRect().height
                     - m_style.scrollbarBottom.getTextureRect().height;
     m_style.scrollbarMiddle.setScale(1, height/m_style.scrollbarMiddle.getTextureRect().height);
@@ -206,7 +206,7 @@ void SubWindow::layoutUpdated(const sf::Vector2f& screenSize)
     auto currentPosition = getCurrentPosition();
     auto rectPosition = m_positionRect.getPosition().y;
 
-    float scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
+    auto scrollWidth = static_cast<float>(m_style.scrollbarTop.getTextureRect().width);
 
     m_windowRect.setPosition(currentPosition);
     m_sliderRect.setPosition(currentPosition.x + m_size.x - scrollWidth,
@@ -217,7 +217,7 @@ void SubWindow::layoutUpdated(const sf::Vector2f& screenSize)
     auto position = m_positionRect.getPosition() + currentPosition;
     m_style.scrollbarTop.setPosition(position);
     m_style.scrollbarMiddle.setPosition(position.x, position.y + m_style.scrollbarTop.getTextureRect().height);
-    float height = m_positionRect.getSize().y
+    auto height = m_positionRect.getSize().y
                     - m_style.scrollbarTop.getTextureRect().height
                     - m_style.scrollbarBottom.getTextureRect().height;
     m_style.scrollbarMiddle.setScale(1, height/m_style.scrollbarMiddle.getTextureRect().height);

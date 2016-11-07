@@ -4,7 +4,7 @@
 GrowingRectangleTransition::GrowingRectangleTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
-    const float duration,
+    const double duration,
     const sf::Vector2u& size) :
     Transition(sourceTexture, targetTexture, duration, size)
 {
@@ -27,7 +27,7 @@ GrowingRectangleTransition::GrowingRectangleTransition(
 
 void GrowingRectangleTransition::updated()
 {
-    float scale = getProgress();
+    auto scale = getProgress();
 
     m_targetSprites.setPosition(static_cast<float>(m_RectangleStartX - static_cast<int>(m_RectangleStartX * scale)),
                                 static_cast<float>(m_RectangleStartY - static_cast<int>(m_RectangleStartY * scale)));

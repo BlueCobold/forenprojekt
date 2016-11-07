@@ -18,9 +18,9 @@ class AngleProvider : public ValueProvider, public Observer<const OrientedObject
         return std::unique_ptr<AngleProvider>(new AngleProvider(getCloneObservable(), getCallback()));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
-        float angle = fmod(utility::toDegree(getObserved().getAngle()), 360.f);
+        double angle = fmod(utility::toDegree(getObserved().getAngle()), 360.f);
         if(angle < 0)
             return angle + 360;
         return angle;

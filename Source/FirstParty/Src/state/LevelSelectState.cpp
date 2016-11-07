@@ -38,7 +38,7 @@ LevelSelectState::~LevelSelectState()
 {
 }
 
-void LevelSelectState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void LevelSelectState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     State::onEnter(enterInformation, time);
 
@@ -48,7 +48,7 @@ void LevelSelectState::onEnter(const EnterStateInformation* enterInformation, co
     m_menu.update(m_screen, getPassedTime());
 }
 
-StateChangeInformation LevelSelectState::update(const float time)
+StateChangeInformation LevelSelectState::update(const double time)
 { 
     if(State::isPaused())
         return StateChangeInformation::Empty();

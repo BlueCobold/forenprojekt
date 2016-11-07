@@ -24,7 +24,7 @@ std::unique_ptr<MenuElement> Slider::doClone() const
     return std::move(clone);
 }
 
-void Slider::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void Slider::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 

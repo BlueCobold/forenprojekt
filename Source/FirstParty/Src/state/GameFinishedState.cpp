@@ -23,13 +23,13 @@ GameFinishedState::~GameFinishedState()
 {
 }
 
-void GameFinishedState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void GameFinishedState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     State::onEnter(enterInformation, time);
     m_menu.update(m_screen, getPassedTime());
 }
 
-StateChangeInformation GameFinishedState::update(const float time)
+StateChangeInformation GameFinishedState::update(const double time)
 {
     updateTime(time);
 

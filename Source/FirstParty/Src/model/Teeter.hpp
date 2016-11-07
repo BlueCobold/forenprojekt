@@ -17,7 +17,7 @@ public:
 
 private:
     sf::Vector2f m_lastMousePos;
-    float m_lastTime;
+    double m_lastTime;
     float m_mouseScale;
 
     bool m_invertAxis;

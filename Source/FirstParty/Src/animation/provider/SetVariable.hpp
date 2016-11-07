@@ -24,9 +24,9 @@ class SetVariable : public SingleProvider, public Observer<VariableHandler>
             getProvider()->clone(), m_print, getCallback()));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
-        float value = getProvider()->getValue();
+        auto value = getProvider()->getValue();
         getObserved().setValueOf(m_varName, value);
         if(m_print)
             std::cout << m_varName << "=" << value << std::endl;

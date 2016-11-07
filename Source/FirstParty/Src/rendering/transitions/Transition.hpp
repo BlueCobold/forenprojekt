@@ -16,7 +16,7 @@ public:
     Transition(
         const sf::Texture* sourceTexture,
         const sf::Texture* targetTexture,
-        const float duration,
+        const double duration,
         const sf::Vector2u& size) :
         m_size(size),
         m_targetTexture(targetTexture),
@@ -46,15 +46,15 @@ protected:
 
     const float getProgress() const
     {
-        float elapsed = getPassedTime();
+        auto elapsed = getPassedTime();
         if(elapsed > m_duration)
             return 1.f;
-        return elapsed / m_duration;
+        return static_cast<float>(elapsed / m_duration);
     }
 
     const sf::Texture* getTargetTexture() const { return m_targetTexture; };
     const sf::Texture* getSourceTexture() const { return m_sourceTexture; };
-    const float getDuration() const { return m_duration; }
+    const double getDuration() const { return m_duration; }
     const sf::Vector2u& getSize() const { return m_size; }
 
 private:
@@ -62,7 +62,7 @@ private:
     const sf::Texture* m_targetTexture;
     const sf::Texture* m_sourceTexture;
     sf::Clock m_frameTime;
-    float m_duration;
+    double m_duration;
     bool m_isFinished;
 
     Transition( const Transition& other );

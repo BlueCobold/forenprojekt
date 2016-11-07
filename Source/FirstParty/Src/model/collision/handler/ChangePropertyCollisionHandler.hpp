@@ -70,7 +70,7 @@ private:
         m_entityB = nullptr;
     }
 
-    float onGetValueOf(const std::string& name) const override
+    double onGetValueOf(const std::string& name) const override
     {
         if(m_globalHandler != nullptr && name.length() > 7 && name.substr(0,7) == "global:")
             return m_globalHandler->getValueOf(name.substr(7));
@@ -86,7 +86,7 @@ private:
         return m_entityA->getValueOf(name);
     }
 
-    void onSetValueOf(const std::string& name, const float value) override
+    void onSetValueOf(const std::string& name, const double value) override
     {
         if(m_globalHandler != nullptr && name.length() > 7 && name.substr(0,7) == "global:")
             return m_globalHandler->setValueOf(name.substr(7), value);
@@ -103,7 +103,7 @@ private:
         return m_entityA->setValueOf(name, value);
     }
 
-    float calculatePassedTime() const override
+    double calculatePassedTime() const override
     {
         if(m_useValuesFromA)
         {

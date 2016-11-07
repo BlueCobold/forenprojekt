@@ -19,9 +19,9 @@ class IfPositive : public MultiProvider
         return std::unique_ptr<IfPositive>(new IfPositive(std::move(list)));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
-        float value = getProvider()[0]->getValue();
+        auto value = getProvider()[0]->getValue();
         if(value >= 0)
             return value;
         else

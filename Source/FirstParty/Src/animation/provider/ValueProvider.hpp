@@ -12,7 +12,7 @@ public:
     virtual ~ValueProvider()
     { }
 
-    float getValue()
+    double getValue()
     {
         return calculateValue();
     }
@@ -23,7 +23,7 @@ public:
     }
 
 private:
-    virtual float calculateValue() = 0;
+    virtual double calculateValue() = 0;
 
     virtual void onReset()
     { }

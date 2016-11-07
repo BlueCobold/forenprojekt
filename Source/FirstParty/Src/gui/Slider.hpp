@@ -22,7 +22,7 @@ protected:
 private:
     std::unique_ptr<MenuElement> doClone() const override;
     void doDraw(const DrawParameter& params) override;
-    void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
+    void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     void layoutUpdated(const sf::Vector2f& screenSize) override;
 
     SliderStyle m_style;

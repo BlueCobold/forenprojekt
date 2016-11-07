@@ -17,12 +17,12 @@ StartState::~StartState()
 {
 }
 
-void StartState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void StartState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     State::onEnter(enterInformation, time);
 }
 
-StateChangeInformation StartState::update(const float time)
+StateChangeInformation StartState::update(const double time)
 {
     m_transitionStateInfo.m_followingState = MainMenuStateId;
     m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;

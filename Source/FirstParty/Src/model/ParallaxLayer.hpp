@@ -13,8 +13,8 @@ private:
     sf::Vector2f m_layerSize;
     Animation* m_updatingAni;
 
-    float onGetValueOf(const std::string& name) const override;
-    void onSetValueOf(const std::string& name, const float value) override;
+    double onGetValueOf(const std::string& name) const override;
+    void onSetValueOf(const std::string& name, const double value) override;
 
 public:
 
@@ -22,7 +22,7 @@ public:
     ~ParallaxLayer();
 
     void updatePosition(const sf::View& view, const sf::Vector2u& worldSize);
-    void update(const float time);
+    void update(const double time);
 };
 
 #endif //PARALLAX_LAYER_HPP

@@ -21,15 +21,15 @@ private:
     void doDraw(const DrawParameter& param) override;
     void onRestarted() override;
 
-    float onGetValueOf(const std::string& name) const override;
-    void onSetValueOf(const std::string& name, const float value) override;
+    double onGetValueOf(const std::string& name) const override;
+    void onSetValueOf(const std::string& name, const double value) override;
 
 public:
 
     Background(const sf::Vector2u& size);
     ~Background();
 
-    void update(const float time);
+    void update(const double time);
     void updateParallax(const sf::View& view);
 
     void bindLayer(std::unique_ptr<ParallaxLayer>&& layer);

@@ -36,7 +36,7 @@ private:
 
     std::string m_name;
     Type m_type;
-    float m_lastTime;
+    double m_lastTime;
     bool m_killed;
     bool m_respawnable;
     bool m_autoKill;
@@ -45,7 +45,7 @@ private:
     Animation* m_updatingAni;
     std::vector<std::unique_ptr<CollisionHandler>> m_collisionHandler;
     std::unique_ptr<CollisionFilter> m_collisionFilter;
-    std::map<std::string, float> m_variables;
+    std::map<std::string, double> m_variables;
     float m_animationAngle;
     std::unique_ptr<SoundObject> m_collisionSound;
     std::vector<std::unique_ptr<SoundTrigger>> m_otherSounds;
@@ -58,15 +58,15 @@ private:
 
 protected:
     void onRestarted() override;
-    float onGetValueOf(const std::string& name) const override;
-    void onSetValueOf(const std::string& name, const float value) override;
+    double onGetValueOf(const std::string& name) const override;
+    void onSetValueOf(const std::string& name, const double value) override;
 
 public:
 
     Entity(Type type, CloneHandler& cloneHandler, bool respawnable = false, bool autoKill = false);
     virtual ~Entity();
 
-    void update(const float value);
+    void update(const double time);
 
     void setName(std::string name);
     const Type& getType() const;

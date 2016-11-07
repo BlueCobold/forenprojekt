@@ -22,15 +22,15 @@ public:
     NewHighScoreState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~NewHighScoreState();
 
-    StateChangeInformation update(const float time) override;
-    void onEnter(const EnterStateInformation* enterInformation, const float time) override;
+    StateChangeInformation update(const double time) override;
+    void onEnter(const EnterStateInformation* enterInformation, const double time) override;
 
     void setLanguage(const std::string& language) override;
 
 private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
-    void addNewHighScore(int points, float time, std::string name);
+    void addNewHighScore(int points, double time, std::string name);
     void doDraw(const DrawParameter& params);
 
     void sendDataToHighScoreServer(const std::string& name) const;

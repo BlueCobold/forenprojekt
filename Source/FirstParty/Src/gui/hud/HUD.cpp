@@ -34,7 +34,7 @@ void HUD::skipInterpolation()
     m_points.skipInterpolation();
 }
 
-void HUD::update(const Level* level, const float elapsedTime)
+void HUD::update(const Level* level, const double elapsedTime)
 {
     TimedObject::updateCurrentTime(elapsedTime);
 

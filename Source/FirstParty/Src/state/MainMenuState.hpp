@@ -20,8 +20,8 @@ public:
     MainMenuState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~MainMenuState();
 
-    StateChangeInformation update(const float time) override;
-    void onEnter(const EnterStateInformation* enterInformation, const float time) override;
+    StateChangeInformation update(const double time) override;
+    void onEnter(const EnterStateInformation* enterInformation, const double time) override;
 
     void setLanguage(const std::string& language) override;
 

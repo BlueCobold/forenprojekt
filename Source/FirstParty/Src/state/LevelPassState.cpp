@@ -37,7 +37,7 @@ LevelPassState::~LevelPassState()
 {
 }
 
-void LevelPassState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void LevelPassState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     m_replay = false;
     const EnterPauseStateInformation* info = dynamic_cast<const EnterPauseStateInformation*>(enterInformation);
@@ -73,7 +73,7 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
     m_playStateInfo.m_levelNumber = enterInformation->m_levelNumber;
 }
 
-StateChangeInformation LevelPassState::update(const float time)
+StateChangeInformation LevelPassState::update(const double time)
 {
     if(State::isPaused())
         return StateChangeInformation::Empty();

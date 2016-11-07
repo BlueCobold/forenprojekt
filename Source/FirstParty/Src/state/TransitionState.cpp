@@ -31,7 +31,7 @@ TransitionState::~TransitionState()
 {
 }
 
-void TransitionState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void TransitionState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     State::onEnter(enterInformation, time);
     const EnterTransitionStateInformation* info = dynamic_cast<const EnterTransitionStateInformation*>(enterInformation);
@@ -52,7 +52,7 @@ void TransitionState::onEnter(const EnterStateInformation* enterInformation, con
 void TransitionState::render(const EnterTransitionStateInformation* info,
             sf::RenderTexture& target,
             State* state,
-            const float time)
+            const double time)
 {
     auto size = m_screen.getSize();
     target.setView(utility::getDefaultView(target, size));
@@ -82,7 +82,7 @@ void TransitionState::render(const EnterTransitionStateInformation* info,
     target.display();
 }
 
-StateChangeInformation TransitionState::update(const float time)
+StateChangeInformation TransitionState::update(const double time)
 {
     updateTime(time);
     if(m_transition)

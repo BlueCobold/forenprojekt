@@ -24,8 +24,8 @@ public:
     PlayState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~PlayState();
 
-    StateChangeInformation update(const float time) override;
-    void onEnter(const EnterStateInformation* enterInformation, const float time) override;
+    StateChangeInformation update(const double time) override;
+    void onEnter(const EnterStateInformation* enterInformation, const double time) override;
     virtual void onEvent(utility::Event::EventType type);
 
 private:

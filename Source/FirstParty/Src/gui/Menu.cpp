@@ -50,16 +50,16 @@ void Menu::drawAdditionalForeground(const DrawParameter& params)
     m_panel.drawAdditionalForeground(params);
 }
 
-void Menu::update(sf::RenderWindow& screen, const float time)
+void Menu::update(sf::RenderWindow& screen, const double time)
 {
     m_panel.update(screen, time);
     updated(screen, time);
 }
 
-void Menu::updated(sf::RenderWindow& screen, const float time)
+void Menu::updated(sf::RenderWindow& screen, const double time)
 { }
 
-void Menu::update(sf::RenderWindow& screen, const float time, const MenuElementType::Type type)
+void Menu::update(sf::RenderWindow& screen, const double time, const MenuElementType::Type type)
 {
     m_panel.update(screen, time, type);
 }

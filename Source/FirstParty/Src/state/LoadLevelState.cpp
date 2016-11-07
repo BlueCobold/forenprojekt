@@ -35,7 +35,7 @@ LoadLevelState::~LoadLevelState()
 {
 }
 
-void LoadLevelState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void LoadLevelState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     State::onEnter(enterInformation, time);
 
@@ -55,7 +55,7 @@ std::unique_ptr<Level> LoadLevelState::gainLevel()
     return std::move(m_level);
 }
 
-StateChangeInformation LoadLevelState::update(const float time)
+StateChangeInformation LoadLevelState::update(const double time)
 {
     std::string text(utility::translateKey(m_label.getLanguage() + "gui_loading_screen"));
 

@@ -19,9 +19,9 @@ class Maximum : public MultiProvider
         return std::unique_ptr<Maximum>(new Maximum(std::move(list)));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
-        float v = 0.0f;
+        auto v = 0.0;
         bool set = false;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
             if(!set)

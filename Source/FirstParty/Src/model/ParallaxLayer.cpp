@@ -29,7 +29,7 @@ void ParallaxLayer::updatePosition(const sf::View& view, const sf::Vector2u& wor
     });
 }
 
-void ParallaxLayer::update(const float time)
+void ParallaxLayer::update(const double time)
 {
     updateCurrentTime(time);
     updateAnimations([&](Animation& ani)->bool{
@@ -39,14 +39,14 @@ void ParallaxLayer::update(const float time)
     m_updatingAni = nullptr;
 }
 
-float ParallaxLayer::onGetValueOf(const std::string& name) const
+double ParallaxLayer::onGetValueOf(const std::string& name) const
 {
     if(m_updatingAni == nullptr)
         throw std::runtime_error(utility::replace(utility::translateKey("GetVariable"), name));
     return m_updatingAni->getValueOf(name);
 }
 
-void ParallaxLayer::onSetValueOf(const std::string& name, const float value)
+void ParallaxLayer::onSetValueOf(const std::string& name, const double value)
 {
     if(m_updatingAni == nullptr)
         throw std::runtime_error(utility::replace(utility::translateKey("SetVariable"), name));

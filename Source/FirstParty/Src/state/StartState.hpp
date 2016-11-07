@@ -13,8 +13,8 @@ public:
     StartState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
     ~StartState();
 
-    StateChangeInformation update(const float time) override;
-    void onEnter(const EnterStateInformation* enterInformation, const float time) override;
+    StateChangeInformation update(const double time) override;
+    void onEnter(const EnterStateInformation* enterInformation, const double time) override;
 
 private:
     EnterTransitionStateInformation m_transitionStateInfo;

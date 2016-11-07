@@ -13,7 +13,7 @@ class Ball : public Entity
 {
 public:
 
-    Ball(float resetTime,
+    Ball(double resetTime,
          float stuckBallSpeed,
          CloneHandler& cloneHandler,
          const Entity* spawnAnimationEntity = nullptr);
@@ -37,13 +37,13 @@ public:
 private:
     
     void updated() override;
-    float onGetValueOf(const std::string& name) const override;
-    void onSetValueOf(const std::string& name, const float value) override;
+    double onGetValueOf(const std::string& name) const override;
+    void onSetValueOf(const std::string& name, const double value) override;
 
-    float m_ballResetTime;
-    float m_resetTime;
-    float m_hideTime;
-    float m_blowUpTime;
+    double m_ballResetTime;
+    double m_resetTime;
+    double m_hideTime;
+    double m_blowUpTime;
 
     b2Vec2 m_spawnPosition;
     b2Vec2 m_fieldDimension;
@@ -58,10 +58,10 @@ private:
     std::unique_ptr<ParticleTrail> m_trail;
 
     float m_stuckBallSpeed;
-    float m_stuckBallTime;
+    double m_stuckBallTime;
     bool m_isStucking;
 
-    void autoResetBall(const float elapsedTime);
+    void autoResetBall(const double elapsedTime);
     void doDraw(const DrawParameter& params) override;
     void onRestarted() override;
 

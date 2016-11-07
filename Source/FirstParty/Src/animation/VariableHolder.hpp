@@ -16,9 +16,9 @@
 /// This class offers a basic implementation for a simple VariableHandler
 class VariableHolder : public VariableHandler
 {
-    std::map<std::string, float> m_variables;
+    std::map<std::string, double> m_variables;
     
-    float onGetValueOf(const std::string& name) const override
+    double onGetValueOf(const std::string& name) const override
     {
         auto found = m_variables.find(name);
         if(found != end(m_variables))
@@ -28,7 +28,7 @@ class VariableHolder : public VariableHandler
         return 0;
     }
 
-    void onSetValueOf(const std::string& name, const float value) override
+    void onSetValueOf(const std::string& name, const double value) override
     {
         m_variables[name] = value;
     }

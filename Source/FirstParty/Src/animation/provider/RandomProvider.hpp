@@ -10,11 +10,11 @@
 /// Returns a random real number in [min, max)
 class RandomProvider : public ValueProvider
 {
-    float m_min, m_max;
+    double m_min, m_max;
 
     static bool _inited;
     static std::random_device _device;
-    static std::uniform_real_distribution<float> _distribution;
+    static std::uniform_real_distribution<double> _distribution;
     static std::default_random_engine _random_engine;
 
     static void init()
@@ -31,13 +31,13 @@ class RandomProvider : public ValueProvider
         return std::unique_ptr<RandomProvider>(new RandomProvider(m_min, m_max));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
         return m_min + (m_max - m_min) * _distribution(_random_engine);
     }
 
 public:
-    RandomProvider(const float min, const float max) :
+    RandomProvider(const double min, const double max) :
         m_min(min), m_max(max)
     {
         init();

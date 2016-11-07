@@ -33,7 +33,7 @@ PlayState::~PlayState()
 
 }
 
-void PlayState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void PlayState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     m_shouldPause = false;
     State::onEnter(enterInformation, time);
@@ -64,7 +64,7 @@ void PlayState::onEnter(const EnterStateInformation* enterInformation, const flo
         m_onlineHighScoreLoaderJob->run();
 }
 
-StateChangeInformation PlayState::update(const float time)
+StateChangeInformation PlayState::update(const double time)
 {
     updateTime(time);
 
@@ -206,7 +206,7 @@ void PlayState::onEvent(utility::Event::EventType type)
 bool PlayState::checkForNewHighscore()
 {
     int points = m_level->getPoints();
-    float time = m_level->getLevelPlayTime();
+    auto time = m_level->getLevelPlayTime();
     unsigned int number = m_level->number();
     if(m_level->isTimeAttackMode())
     {

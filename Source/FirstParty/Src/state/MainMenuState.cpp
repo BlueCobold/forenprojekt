@@ -28,7 +28,7 @@ MainMenuState::~MainMenuState()
 {
 }
 
-void MainMenuState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void MainMenuState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     State::onEnter(enterInformation, time);
 
@@ -43,7 +43,7 @@ void MainMenuState::onEnter(const EnterStateInformation* enterInformation, const
     m_menu.update(m_screen, getPassedTime());
 }
 
-StateChangeInformation MainMenuState::update(const float time)
+StateChangeInformation MainMenuState::update(const double time)
 {
     updateTime(time);
 

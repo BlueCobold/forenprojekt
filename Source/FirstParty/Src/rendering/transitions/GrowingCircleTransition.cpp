@@ -5,7 +5,7 @@
 GrowingCircleTransition::GrowingCircleTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
-    const float duration,
+    const double duration,
     const sf::Vector2u& size) :
     Transition(sourceTexture, targetTexture, duration, size),
     m_targetSprites(0, 32)
@@ -32,7 +32,7 @@ GrowingCircleTransition::GrowingCircleTransition(
 
 void GrowingCircleTransition::updated()
 {
-    float scale = getProgress();
+    auto scale = getProgress();
 
     int currentRadius = static_cast<int>(m_radius * scale);
 

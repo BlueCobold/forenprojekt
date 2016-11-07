@@ -28,7 +28,7 @@ OptionMenuState::~OptionMenuState()
 {
 }
 
-void OptionMenuState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void OptionMenuState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     State::onEnter(enterInformation, time);
 
@@ -46,7 +46,7 @@ void OptionMenuState::onEnter(const EnterStateInformation* enterInformation, con
     m_menu.update(m_screen, getPassedTime());
 }
 
-StateChangeInformation OptionMenuState::update(const float time)
+StateChangeInformation OptionMenuState::update(const double time)
 {
     if(State::isPaused())
         return StateChangeInformation::Empty();

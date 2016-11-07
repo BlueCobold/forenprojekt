@@ -19,9 +19,9 @@ class Minimum : public MultiProvider
         return std::unique_ptr<Minimum>(new Minimum(std::move(list)));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
-        float v = 0.0f;
+        auto v = 0.0;
         bool set = false;
         for(auto it = begin(getProvider()); it != end(getProvider()); ++it)
             if(!set)

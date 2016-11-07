@@ -20,7 +20,7 @@ public:
     { }
 
 private:
-    float calculateValue() override
+    double calculateValue() override
     {
         if(!m_inited)
         {
@@ -43,7 +43,7 @@ private:
 
     bool m_inited;
     bool m_persistent;
-    float m_value;
+    double m_value;
 };
 
 #endif //CACHED_PROVIDER_HPP

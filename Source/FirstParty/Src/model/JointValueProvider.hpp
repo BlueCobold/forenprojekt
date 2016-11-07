@@ -36,7 +36,7 @@ class JointRotationProvider : public ValueProvider, public JointObserver
         return std::unique_ptr<JointRotationProvider>(new JointRotationProvider(getCloneObservable(), getCallback(), m_index));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
         auto points = getObserved().getAnchorPoints();
         auto offsets = getObserved().getAnchorOffsets();
@@ -73,7 +73,7 @@ class JointPositionProvider : public ValueProvider, public JointObserver
         return std::unique_ptr<JointPositionProvider>(new JointPositionProvider(getCloneObservable(), m_useX, getCallback(), m_index));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
         auto points = getObserved().getAnchorPoints();
         auto offsets = getObserved().getAnchorOffsets();
@@ -119,7 +119,7 @@ class JointScaleProvider : public ValueProvider, public JointObserver, public An
                                                                           m_index));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
         auto points = JointObserver::getObserved().getAnchorPoints();
         auto offsets = JointObserver::getObserved().getAnchorOffsets();

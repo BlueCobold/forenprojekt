@@ -30,7 +30,7 @@ void MenuSprite::setToolTip(const ToolTip& toolTip)
     m_toolTip = toolTip;
 }
 
-void MenuSprite::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void MenuSprite::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 

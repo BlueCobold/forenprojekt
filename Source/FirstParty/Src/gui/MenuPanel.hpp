@@ -29,11 +29,11 @@ public:
     void drawAdditionalForeground(const DrawParameter& params);
 
     virtual void update(const sf::RenderWindow& screen,
-        const float time,
+        const double time,
         const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0));
 
     void update(const sf::RenderWindow& screen,
-        const float time,
+        const double time,
         const MenuElementType::Type type,
         const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0));
 

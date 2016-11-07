@@ -19,14 +19,14 @@ public:
                Counter};
 
 #ifdef TOUCHSIM
-    Goody(const sf::Keyboard::Key key, const Type type, const sf::FloatRect& touchArea, const float durationTime = 0,
-        const float cooldownTime = 0, const int charges = -1);
+    Goody(const sf::Keyboard::Key key, const Type type, const sf::FloatRect& touchArea, const double durationTime = 0,
+        const double cooldownTime = 0, const int charges = -1);
 #else
-    Goody(const sf::Keyboard::Key key, const Type type, const float durationTime = 0,
-          const float cooldownTime = 0, const int charges = -1);
+    Goody(const sf::Keyboard::Key key, const Type type, const double durationTime = 0,
+          const double cooldownTime = 0, const int charges = -1);
 #endif
 
-    void update(const float elapsedTime);
+    void update(const double elapsedTime);
 
     bool isActive() const;
     bool canActivate() const;
@@ -38,7 +38,7 @@ public:
     void registerForActivation(std::function<void(Goody& sender)> callback);
 
 protected:
-    float getCurrentTime();
+    double getCurrentTime();
 
 private:
 #ifdef TOUCHSIM
@@ -47,11 +47,11 @@ private:
     sf::Keyboard::Key m_key;
     bool m_active;
     int m_charges;
-    float m_currentTime;
-    float m_cooldownTime;
-    float m_nextUseTime;
-    float m_durationTime;
-    float m_durationUntilTime;
+    double m_currentTime;
+    double m_cooldownTime;
+    double m_nextUseTime;
+    double m_durationTime;
+    double m_durationUntilTime;
     bool m_selected;
     Type m_type;
     std::function<void(Goody& sender)>m_callback;

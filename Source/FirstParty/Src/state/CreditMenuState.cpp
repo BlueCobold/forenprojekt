@@ -18,13 +18,13 @@ CreditMenuState::~CreditMenuState()
 {
 }
 
-void CreditMenuState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void CreditMenuState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     State::onEnter(enterInformation, time);
     m_menu.update(m_screen, getPassedTime());
 }
 
-StateChangeInformation CreditMenuState::update(const float time)
+StateChangeInformation CreditMenuState::update(const double time)
 {
     if(State::isPaused())
         return StateChangeInformation::Empty();

@@ -17,9 +17,9 @@ class Inverse : public SingleProvider
         return std::unique_ptr<Inverse>(new Inverse(getProvider()->clone()));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
-        float value = getProvider()->getValue();
+        auto value = getProvider()->getValue();
         if((value >= FLT_EPSILON) || (value <= -FLT_EPSILON))
             return 1/value;
         else

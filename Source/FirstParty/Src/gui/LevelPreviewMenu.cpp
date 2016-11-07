@@ -12,7 +12,7 @@ LevelPreviewMenu::LevelPreviewMenu(sf::RenderWindow& screen,
 }
 
 void LevelPreviewMenu::setLevelInfo(const std::string& levelName,
-                                    const float time,
+                                    const double time,
                                     const int balls,
                                     const std::string& language)
 {

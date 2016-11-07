@@ -49,7 +49,7 @@ public:
     virtual ~MenuElement()
     { }
 
-    void update(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0))
+    void update(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0))
     {
         updated(screen, time, mouseOffset);
     }
@@ -138,7 +138,7 @@ protected:
     virtual void layoutUpdated(const sf::Vector2f& screenSize)
     { }
 
-    virtual void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0))
+    virtual void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0))
     { }
 
     virtual void onDrawAdditionalForeground(const DrawParameter& params)

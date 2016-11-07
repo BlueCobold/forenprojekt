@@ -20,22 +20,22 @@
 ///        min  max
 class Ramp : public SingleProvider
 {
-    float m_min;
-    float m_max;
+    double m_min;
+    double m_max;
 
     std::unique_ptr<ValueProvider> doClone() const override
     {
         return std::unique_ptr<Ramp>(new Ramp(m_min, m_max, getProvider()->clone()));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
-        float value = getProvider()->getValue();
+        auto value = getProvider()->getValue();
         if(value < m_min)
             return 0;
         if(value > m_max)
             return 1;
-        float diff = m_max - m_min;
+        auto diff = m_max - m_min;
         if(diff < FLT_EPSILON)
         {
             if(value < m_min)
@@ -47,7 +47,7 @@ class Ramp : public SingleProvider
     }
 
 public:
-    Ramp(const float min, const float max, std::unique_ptr<ValueProvider> provider) :
+    Ramp(const double min, const double max, std::unique_ptr<ValueProvider> provider) :
         SingleProvider(std::move(provider)),
         m_min(min),
         m_max(max)

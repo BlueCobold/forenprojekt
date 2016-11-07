@@ -45,7 +45,7 @@ std::unique_ptr<MenuElement> Button::doClone() const
     return std::move(clone);
 }
 
-void Button::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void Button::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     auto screenSize = static_cast<sf::Vector2f>(screen.getSize());
     updateLayout(screenSize);
@@ -99,7 +99,7 @@ void Button::updated(const sf::RenderWindow& screen, const float time, const sf:
         m_currentStyle->animation->update(screen, time, mouseOffset);
 }
 
-void Button::setStyle(ButtonStateStyle& style, float time, const sf::Vector2f& screenSize)
+void Button::setStyle(ButtonStateStyle& style, double time, const sf::Vector2f& screenSize)
 {
     if(m_currentStyle->animation != style.animation)
     {

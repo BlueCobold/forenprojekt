@@ -10,7 +10,7 @@ ReplayMenu::ReplayMenu(sf::RenderWindow& screen,
 {
 }
 
-void ReplayMenu::onEnter(float time)
+void ReplayMenu::onEnter(double time)
 {
     Menu::getAnimation(SPRITE_SYMBOL_STAR_BRONCE_FILLED).restartAt(time);
     Menu::getAnimation(SPRITE_SYMBOL_STAR_SILVER_FILLED).restartAt(time);

@@ -8,8 +8,8 @@
 /// Used for objects which have a time-based behavior.
 class TimedObject : public Stoppable
 {
-    float m_startTime;
-    float m_currentTime;
+    double m_startTime;
+    double m_currentTime;
 
 public:
     TimedObject() :
@@ -17,7 +17,7 @@ public:
         m_currentTime(0)
     { }
 
-    TimedObject(const float time, bool started = true) :
+    TimedObject(const double time, bool started = true) :
         Stoppable(started),
         m_startTime(time),
         m_currentTime(time)
@@ -26,7 +26,7 @@ public:
     virtual ~TimedObject()
     { }
 
-    void restartAt(const float time)
+    void restartAt(const double time)
     {
         m_startTime = time;
         m_currentTime = time;
@@ -34,7 +34,7 @@ public:
         onRestarted();
     }
 
-    float getPassedTime() const
+    double getPassedTime() const
     {
         return calculatePassedTime();
     }
@@ -43,18 +43,18 @@ protected:
     virtual void onRestarted()
     { }
 
-    void updateCurrentTime(const float time)
+    void updateCurrentTime(const double time)
     {
         m_currentTime = time;
     }
 
-    float getCurrentTime()
+    double getCurrentTime()
     {
         return m_currentTime;
     }
 
 private:
-    virtual float calculatePassedTime() const
+    virtual double calculatePassedTime() const
     {
         return m_currentTime - m_startTime;
     }

@@ -5,7 +5,7 @@ VerticalMaskingStripesTransition::VerticalMaskingStripesTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
     const int stripeCount,
-    const float duration,
+    const double duration,
     const sf::Vector2u& size) :
     Transition(sourceTexture, targetTexture, duration, size)
 {
@@ -36,7 +36,7 @@ VerticalMaskingStripesTransition::VerticalMaskingStripesTransition(
 
 void VerticalMaskingStripesTransition::updated()
 {
-    float scale = getProgress();
+    auto scale = getProgress();
 
     int count = 0;
     for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)

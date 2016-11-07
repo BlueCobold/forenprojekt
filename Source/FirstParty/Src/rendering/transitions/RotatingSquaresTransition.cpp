@@ -5,7 +5,7 @@ RotatingSquaresTransition::RotatingSquaresTransition(const sf::Texture* sourceTe
                                                      const sf::Texture* targetTexture,
                                                      const int columns,
                                                      const int rows,
-                                                     const float duration,
+                                                     const double duration,
                                                      const sf::Vector2u& size) :
     Transition(sourceTexture, targetTexture, duration, size),
     m_columns(columns),
@@ -48,44 +48,12 @@ RotatingSquaresTransition::RotatingSquaresTransition(const sf::Texture* sourceTe
 
 void RotatingSquaresTransition::updated()
 {
-    float scale = getProgress();
-
-    /*int spriteCount = 0;
-
-    int column = 0;
-    int row = 0;
-
-    float centreX = 0;
-    float centreY = 0;
-
-    float sizeX = scale * m_rectWidth / 2.f;
-    float sizeY = scale * m_rectHeight / 2.f;*/
-
+    auto scale = getProgress();
+    
     sf::Uint8 alpha = static_cast<sf::Uint8>(255 * scale);
 
     for(auto it = m_targetSprites.begin(); it != m_targetSprites.end(); ++it)
     {
-
-        /*column = spriteCount % m_columns;
-        row = spriteCount / m_columns;
-
-        centreX = column * m_rectWidth + m_rectWidth / 2.f;
-        centreY = row * m_rectHeight + m_rectHeight / 2.f;
-
-        auto rect = (*it)->getTextureRect();
-
-        rect.left = static_cast<int>(centreX - sizeX);
-        rect.top =  static_cast<int>(centreY - sizeY);
-        rect.width = static_cast<int>(sizeX * 2);
-        rect.height = static_cast<int>(sizeY * 2);
-
-        (*it)->setPosition(centreX ,centreY );
-        (*it)->setOrigin(sizeX, sizeY);
-
-        (*it)->setTextureRect(rect);
-
-        spriteCount++;*/
-
         (*it)->setColor(sf::Color(255, 255, 255, alpha));
         (*it)->setRotation(270.f + 90.f * scale);
     }

@@ -128,7 +128,7 @@ std::unique_ptr<CollisionHandler> ColliderParser::parseShowLabelHandler(const ti
     for(auto child = xml.FirstChildElement("label"); child != nullptr; child = child->NextSiblingElement("label"))
         labels.push_back(utility::translateKey(child->GetText()));
 
-    float time = -1;
+    double time = -1;
     auto source = m_context.timeSource;
     auto labelFunc = m_context.labelFunc;
     return std::unique_ptr<GenericCollisionHandler>(
@@ -151,7 +151,7 @@ std::unique_ptr<CollisionHandler> ColliderParser::parseShowLabelHandler(const ti
             auto pos = sf::Vector2f(
                 utility::toPixel(entityB.getPosition().x), 
                 utility::toPixel(entityB.getPosition().y));
-            sf::Vector2f offset(length * sinf(angle), length * cosf(angle));
+            sf::Vector2f offset(static_cast<float>(length * sin(angle)), static_cast<float>(length * cos(angle)));
 
             labelFunc(offset + pos, font, text);
         }));

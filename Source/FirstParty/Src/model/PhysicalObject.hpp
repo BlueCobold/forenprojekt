@@ -131,7 +131,7 @@ public:
         m_yPositionProvider = std::move(y);
     }
 
-    void updateKinematics(const float value, const float delta);
+    void updateKinematics(const double value, const double delta);
 
     const b2Vec2& getPosition() const
     {

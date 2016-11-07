@@ -23,7 +23,7 @@ class KeyProvider : public ValueProvider
         return nullptr;
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
       return static_cast<float>(utility::Keyboard.isKeyPressed(this->m_KeyAttachedTo));
     }

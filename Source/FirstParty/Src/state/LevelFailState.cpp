@@ -30,7 +30,7 @@ LevelFailState::~LevelFailState()
 {
 }
 
-void LevelFailState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void LevelFailState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     m_replay = false;
     const EnterPauseStateInformation* info = dynamic_cast<const EnterPauseStateInformation*>(enterInformation);
@@ -47,7 +47,7 @@ void LevelFailState::onEnter(const EnterStateInformation* enterInformation, cons
     m_menu.update(m_screen, getPassedTime());
 }
 
-StateChangeInformation LevelFailState::update(const float time)
+StateChangeInformation LevelFailState::update(const double time)
 {
     if(State::isPaused())
         return StateChangeInformation::Empty();

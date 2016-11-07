@@ -6,7 +6,7 @@ GameEventRecorder::GameEventRecorder() :
 {
 }
 
-void GameEventRecorder::addEvent(const float passedTime, const float ballSpeed, const GameEvent::GameEventType type)
+void GameEventRecorder::addEvent(const double passedTime, const float ballSpeed, const GameEvent::GameEventType type)
 {
     if(type != GameEvent::HitTeeter || m_lastGameEventType != GameEvent::HitTeeter)
     {

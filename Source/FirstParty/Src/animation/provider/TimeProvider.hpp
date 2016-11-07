@@ -15,7 +15,7 @@ class TimeProvider : public ValueProvider, public Observer<const TimedObject>
         return std::unique_ptr<TimeProvider>(new TimeProvider(getCloneObservable(), getCallback()));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
         return getObserved().getPassedTime();
     }

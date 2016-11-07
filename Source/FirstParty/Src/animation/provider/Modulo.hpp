@@ -19,11 +19,11 @@ class Modulo : public MultiProvider
         return std::unique_ptr<Modulo>(new Modulo(std::move(list)));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
-        float dividend = getProvider()[0]->getValue();
-        float divisor = getProvider()[1]->getValue();
-        return fmodf(dividend, divisor);
+        auto dividend = getProvider()[0]->getValue();
+        auto divisor = getProvider()[1]->getValue();
+        return fmod(dividend, divisor);
     }
 
 public:

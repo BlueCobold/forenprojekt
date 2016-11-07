@@ -5,7 +5,7 @@ VerticalExpandTransition::VerticalExpandTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
     const int stripeCount,
-    const float duration,
+    const double duration,
     const sf::Vector2u& size) :
     Transition(sourceTexture, targetTexture, duration, size)
 {
@@ -42,7 +42,7 @@ VerticalExpandTransition::VerticalExpandTransition(
 
 void VerticalExpandTransition::updated()
 {
-    float scale = getProgress();
+    auto scale = getProgress();
 
     int count = 0;
 

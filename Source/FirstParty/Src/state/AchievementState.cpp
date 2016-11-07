@@ -35,14 +35,14 @@ AchievementState::~AchievementState()
 {
 }
 
-void AchievementState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void AchievementState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     updateAchievementData();
     State::onEnter(enterInformation, time);
     m_menu.update(m_screen, getPassedTime());
 }
 
-StateChangeInformation AchievementState::update(const float time)
+StateChangeInformation AchievementState::update(const double time)
 {
     updateTime(time);
 

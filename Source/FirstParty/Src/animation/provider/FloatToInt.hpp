@@ -17,9 +17,9 @@ class FloatToInt : public SingleProvider
         return std::unique_ptr<FloatToInt>(new FloatToInt(getProvider()->clone()));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
-        return static_cast<float>(static_cast<int>(getProvider()->getValue()));
+        return static_cast<double>(static_cast<int>(getProvider()->getValue()));
     }
 
 public:

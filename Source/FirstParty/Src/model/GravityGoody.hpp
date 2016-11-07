@@ -17,8 +17,8 @@ public:
 private:
     float m_gravityFactor;
     float m_currentFactor;
-    float m_activeStartTime;
-    float m_activeTime;
+    double m_activeStartTime;
+    double m_activeTime;
     b2Vec2& m_currentGravity;
 
     void updated() override;

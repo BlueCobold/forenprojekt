@@ -19,11 +19,11 @@ class Pow : public MultiProvider
         return std::unique_ptr<Pow>(new Pow(std::move(list)));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
-        float base = getProvider()[0]->getValue();
-        float exponent = getProvider()[1]->getValue();
-        return powf(base, exponent);
+        auto base = getProvider()[0]->getValue();
+        auto exponent = getProvider()[1]->getValue();
+        return pow(base, exponent);
     }
 
 public:

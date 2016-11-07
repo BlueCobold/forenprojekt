@@ -26,7 +26,7 @@ public:
     LevelPreviewMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
     
     void setLevelInfo(const std::string& levelName,
-                      const float time,
+                      const double time,
                       const int balls,
                       const std::string& language);
     void setCoinToolTipText(const std::string& text, const std::string& coins);

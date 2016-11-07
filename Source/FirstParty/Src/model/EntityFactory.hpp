@@ -27,7 +27,7 @@ public:
 
 private:
     std::unique_ptr<Entity> m_product;
-    float m_manufactureMoment;
+    double m_manufactureMoment;
     b2Vec2 m_spawnOffset;
     RandomProvider m_randomGenerator;
     DeliveryCallback m_callback;

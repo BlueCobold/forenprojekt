@@ -18,7 +18,7 @@ public:
 
     void skipInterpolation();
     void setPoints(int points);
-    void setTime(float time);
+    void setTime(double time);
 
 private:
     Interpolation m_pointCounter;

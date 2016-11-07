@@ -63,7 +63,7 @@ State* StateManager::getState(StateId id) const
 
 void StateManager::update()
 {
-    m_currentTime = m_frametime.getElapsedTime().asSeconds();
+    m_currentTime = m_frametime.getElapsedTime().asMicroseconds() / 1000000.0;
     if(m_currentState == nullptr)
         return;
 

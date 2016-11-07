@@ -18,9 +18,9 @@ class Sine : public SingleProvider
         return std::unique_ptr<Sine>(new Sine(getProvider()->clone()));
     }
 
-    float calculateValue() override
+    double calculateValue() override
     {
-        return sinf(utility::toRadian(getProvider()->getValue()));
+        return sin(utility::toRadian(getProvider()->getValue()));
     }
 
 public:

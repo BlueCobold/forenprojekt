@@ -196,18 +196,18 @@ void LineLabel::attachAlphaProgress(const Interpolation& alpha)
         m_alphaChange.start();
 }
 
-void LineLabel::updateProgress(const float time)
+void LineLabel::updateProgress(const double time)
 {
     sf::Vector2f pos(0, 0);
     if(m_xPosChange.isStarted() && !m_xPosChange.isFinished())
     {
         m_xPosChange.update(time);
-        pos.x = floorf(m_xPosChange.getCurrentValue());
+        pos.x = floorf(static_cast<float>(m_xPosChange.getCurrentValue()));
     }
     if(m_yPosChange.isStarted() && !m_yPosChange.isFinished())
     {
         m_yPosChange.update(time);
-        pos.y = floorf(m_yPosChange.getCurrentValue());
+        pos.y = floorf(static_cast<float>(m_yPosChange.getCurrentValue()));
     }
     m_progressPosition = pos;
 
@@ -247,7 +247,7 @@ void LineLabel::layoutUpdated(const sf::Vector2f& screenSize)
     rebuild();
 }
 
-void LineLabel::updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset)
+void LineLabel::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
 }

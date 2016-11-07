@@ -25,7 +25,7 @@ void KeyboardMenu::doDraw(const DrawParameter& params)
     Menu::doDraw(params);
 }
 
-void KeyboardMenu::updated(sf::RenderWindow& screen, const float time)
+void KeyboardMenu::updated(sf::RenderWindow& screen, const double time)
 {
     if(m_lastKey != -1)
     {

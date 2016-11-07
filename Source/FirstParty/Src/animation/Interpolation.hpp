@@ -10,24 +10,24 @@ class Interpolation : public TimedObject
 public:
 
     Interpolation(
-        const float startValue,
-        const float targetValue,
-        const float duration,
-        const float time = 0);
+        const double startValue,
+        const double targetValue,
+        const double duration,
+        const double time = 0);
 
     Interpolation();
 
     void start();
-    void update(const float elapsedTime);
+    void update(const double elapsedTime);
 
     bool isFinished() const { return m_finished; }
     bool isStarted() const { return !isStopped(); }
 
-    float getCurrentValue() const { return m_currentValue; }
+    double getCurrentValue() const { return m_currentValue; }
 
-    float getTargetValue() const { return m_targetValue; }
+    double getTargetValue() const { return m_targetValue; }
     
-    void set(const float startValue, const float targetValue, const float duration);
+    void set(const double startValue, const double targetValue, const double duration);
 
 private:
 
@@ -36,11 +36,11 @@ private:
 
     bool m_finished;
 
-    float m_startValue;
-    float m_targetValue;
-    float m_currentValue;
+    double m_startValue;
+    double m_targetValue;
+    double m_currentValue;
 
-    float m_duration;
+    double m_duration;
 };
 
 #endif //INTERPOLATION_HPP

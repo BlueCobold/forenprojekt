@@ -2,7 +2,7 @@
 #include "../Utility.hpp"
 #include <iostream>
 
-Ball::Ball(float resetTime,
+Ball::Ball(double resetTime,
            float stuckBallSpeed,
            CloneHandler& cloneHandler,
            const Entity* spawnAnimationEntity) :
@@ -23,7 +23,7 @@ Ball::Ball(float resetTime,
     Entity::setValueOf("stuckBallTimer", 0.f);
 }
 
-void Ball::autoResetBall(const float elapsedTime)
+void Ball::autoResetBall(const double elapsedTime)
 {
     if(m_isTeleporting)
     {
@@ -123,7 +123,7 @@ void Ball::updated()
         m_trail->update();
 }
 
-float Ball::onGetValueOf(const std::string& name) const
+double Ball::onGetValueOf(const std::string& name) const
 {
     if(m_trail == nullptr)
         return Entity::onGetValueOf(name);
@@ -132,7 +132,7 @@ float Ball::onGetValueOf(const std::string& name) const
     return Entity::onGetValueOf(name);
 }
 
-void Ball::onSetValueOf(const std::string& name, const float value)
+void Ball::onSetValueOf(const std::string& name, const double value)
 {
     if(m_trail == nullptr)
         return Entity::onSetValueOf(name, value);

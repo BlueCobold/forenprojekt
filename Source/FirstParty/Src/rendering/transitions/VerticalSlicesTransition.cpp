@@ -5,7 +5,7 @@ VerticalSlicesTransition::VerticalSlicesTransition(
     const sf::Texture* sourceTexture,
     const sf::Texture* targetTexture,
     const int stripeCount,
-    const float duration,
+    const double duration,
     const sf::Vector2u& size) :
     Transition(sourceTexture, targetTexture, duration, size)
 {
@@ -41,7 +41,7 @@ VerticalSlicesTransition::VerticalSlicesTransition(
 
 void VerticalSlicesTransition::updated()
 {
-    float scale = getProgress() * m_timeFactor;
+    auto scale = getProgress() * m_timeFactor;
 
     int count = 0;
 

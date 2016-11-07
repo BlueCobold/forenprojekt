@@ -43,7 +43,7 @@ public:
 
     void attachPositionProgress(const Interpolation& x, const Interpolation& y);
     void attachAlphaProgress(const Interpolation& alpha);
-    void updateProgress(const float time);
+    void updateProgress(const double time);
     bool anyProgressRunning();
     bool allProgressesFinished();
 
@@ -71,7 +71,7 @@ public:
     
 protected:
     void doDraw(const DrawParameter& params) override;
-    void updated(const sf::RenderWindow& screen, const float time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
+    void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     void layoutUpdated(const sf::Vector2f& screenSize) override;
 
 private:

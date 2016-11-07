@@ -39,7 +39,7 @@ HighScoreState::~HighScoreState()
 {
 }
 
-void HighScoreState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void HighScoreState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     const EnterHighScoreStateInformation* info = dynamic_cast<const EnterHighScoreStateInformation*>(enterInformation);
 
@@ -67,7 +67,7 @@ void HighScoreState::onEnter(const EnterStateInformation* enterInformation, cons
     m_menu.update(m_screen, getPassedTime());
 }
 
-StateChangeInformation HighScoreState::update(const float time)
+StateChangeInformation HighScoreState::update(const double time)
 {
     if(State::isPaused())
         return StateChangeInformation::Empty();

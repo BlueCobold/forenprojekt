@@ -19,10 +19,10 @@ class Nop : public MultiProvider
         return std::unique_ptr<Nop>(new Nop(std::move(list)));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
         auto it = begin(getProvider());
-        float ret = (*it)->getValue();
+        auto ret = (*it)->getValue();
 
         for(++it; it != end(getProvider()); ++it)
             (*it)->getValue();

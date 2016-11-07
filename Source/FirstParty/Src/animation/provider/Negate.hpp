@@ -16,9 +16,9 @@ class Negate : public SingleProvider
         return std::unique_ptr<Negate>(new Negate(getProvider()->clone()));
     }
     
-    float calculateValue() override
+    double calculateValue() override
     {
-        float value = getProvider()->getValue();
+        auto value = getProvider()->getValue();
         return -1 * value;
     }
 

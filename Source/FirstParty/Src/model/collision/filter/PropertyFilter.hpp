@@ -36,7 +36,7 @@ protected:
             throw std::runtime_error(utility::translateKey("FilterNull"));
         m_entityA = &entityA;
         m_entityB = &entityB;
-        float val = m_provider->getValue();
+        auto val = m_provider->getValue();
         m_entityA = nullptr;
         m_entityB = nullptr;
         return val >= 1;
@@ -50,7 +50,7 @@ private:
     Entity* m_entityA;
     Entity* m_entityB;
 
-    float onGetValueOf(const std::string& name) const override
+    double onGetValueOf(const std::string& name) const override
     {
         if(m_globalHandler != nullptr && name.length() > 7 && name.substr(0,7) == "global:")
             return m_globalHandler->getValueOf(name.substr(7));
@@ -66,7 +66,7 @@ private:
         return m_entityA->getValueOf(name);
     }
 
-    void onSetValueOf(const std::string& name, const float value) override
+    void onSetValueOf(const std::string& name, const double value) override
     {
         if(m_globalHandler != nullptr && name.length() > 7 && name.substr(0,7) == "global:")
             return m_globalHandler->setValueOf(name.substr(7), value);
@@ -83,7 +83,7 @@ private:
         return m_entityA->setValueOf(name, value);
     }
 
-    float calculatePassedTime() const override
+    double calculatePassedTime() const override
     {
         if(m_useValuesFromA)
         {

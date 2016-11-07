@@ -43,7 +43,7 @@ CoinShopState::~CoinShopState()
 {
 }
 
-void CoinShopState::onEnter(const EnterStateInformation* enterInformation, const float time)
+void CoinShopState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     const EnterCoinShopStateInformation* info = dynamic_cast<const EnterCoinShopStateInformation*>(enterInformation);
     State::onEnter(info, time);
@@ -118,7 +118,7 @@ void CoinShopState::sell(const Goody::Type type, const std::string& propertyKey)
     }
 }
 
-StateChangeInformation CoinShopState::update(const float time)
+StateChangeInformation CoinShopState::update(const double time)
 {
     if(State::isPaused())
         return StateChangeInformation::Empty();

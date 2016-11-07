@@ -27,14 +27,14 @@ Entity::~Entity()
 {
 }
 
-void Entity::update(const float value)
+void Entity::update(const double time)
 {
     if(!m_killed)
     {
-        updateCurrentTime(value);
+        updateCurrentTime(time);
         timeUpdated();
 
-        updateKinematics(getPassedTime(), value - m_lastTime);
+        updateKinematics(getPassedTime(), time - m_lastTime);
 
         auto pos = getPosition();
         auto x = utility::toPixel(pos.x);
@@ -63,7 +63,7 @@ void Entity::update(const float value)
         for(auto sound = begin(m_otherSounds); sound != end(m_otherSounds); ++sound)
             (*sound)->update();
 
-        m_lastTime = value;
+        m_lastTime = time;
 
         if(!running && m_autoKill)
             kill();
@@ -81,7 +81,7 @@ void Entity::timeUpdated()
 void Entity::updated()
 { }
 
-float Entity::onGetValueOf(const std::string& name) const
+double Entity::onGetValueOf(const std::string& name) const
 {
     auto match = m_variables.find(name);
     if(match == end(m_variables))
@@ -93,7 +93,7 @@ float Entity::onGetValueOf(const std::string& name) const
     return match->second;
 }
 
-void Entity::onSetValueOf(const std::string& name, const float value)
+void Entity::onSetValueOf(const std::string& name, const double value)
 {
     if(m_updatingAni == nullptr)
         m_variables[name] = value;
