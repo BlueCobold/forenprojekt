@@ -195,7 +195,6 @@
     <ClInclude Include="..\..\Src\gui\SubWindow.hpp" />
     <ClInclude Include="..\..\Src\gui\ToolTip.hpp" />
     <ClInclude Include="..\..\Src\Input.hpp" />
-    <ClInclude Include="..\..\Src\Log.hpp" />
     <ClInclude Include="..\..\Src\MacHelper.hpp" />
     <ClInclude Include="..\..\Src\model\AnimatedGraphics.hpp" />
     <ClInclude Include="..\..\Src\model\Array.hpp" />
