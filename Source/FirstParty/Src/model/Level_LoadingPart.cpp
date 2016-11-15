@@ -106,7 +106,7 @@ void Level::load()
     if(templates.objects.backgrounds.size() > 0)
     {
         auto context = ProviderContext(nullptr, nullptr, nullptr, nullptr, m_cloneHandler).withFunctions(templates.functions);
-        BackgroundParser backgroundParser(context, m_resourceManager);
+        BackgroundParser backgroundParser(context, *m_resourceManager);
         auto size = sf::Vector2u(static_cast<unsigned int>(m_width), static_cast<unsigned int>(m_height));
         m_background = backgroundParser.parse(*templates.objects.backgrounds[0], size, m_defaultTargetBuffer);
     }
@@ -177,7 +177,7 @@ std::unique_ptr<Entity> Level::parseEntity(
 {
 
     ProviderContext context(this, nullptr, nullptr, nullptr, m_cloneHandler);
-    AnimationContext animationContext(context, m_resourceManager, m_defaultTargetBuffer);
+    AnimationContext animationContext(context, *m_resourceManager, m_defaultTargetBuffer);
     FilterContext filterContext(m_gravity, [this](const b2Vec2& position, const Entity& spawn)
     {
         prepareEntityForSpawn(position, spawn);

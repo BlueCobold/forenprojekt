@@ -23,10 +23,10 @@
 #ifndef LEVELTESTING
 Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConfig& config) :
 #else
-Level::Level(const std::string& filename, const unsigned int level, ResourceManager& resourceManager, AppConfig& config) :
+Level::Level(const std::string& filename, const unsigned int level, std::unique_ptr<ResourceManager> resourceManager, AppConfig& config) :
     m_filename(filename),
 #endif
-    m_resourceManager(resourceManager),
+    m_resourceManager(std::move(resourceManager)),
     m_config(config),
     m_world(b2Vec2(0.f, 9.81f)),
     m_gravityFactor(1),
@@ -501,7 +501,7 @@ void Level::createLabelAt(const sf::Vector2f& position, const std::string& fontN
             "@@" + text,
             sf::Vector2f(), position, 
             0,
-            m_resourceManager.getBitmapFont(fontName),
+            m_resourceManager->getBitmapFont(fontName),
             "ml_",
             LineLabel::Centered));
 
@@ -559,7 +559,7 @@ const std::string Level::filename()
 {
     std::string filename = pathname();
 
-    filename.append(m_resourceManager.getFileNames().find(m_number)->second);
+    filename.append(m_resourceManager->getFileNames().find(m_number)->second);
 
     return filename;
 }
@@ -789,9 +789,9 @@ bool Level::isOriginal()
     if(m_number < 1)
         return false;
     std::string message = utility::toString(m_number);
-    std::string filename = m_resourceManager.getFileNames().find(m_number)->second;
-    CryptoPP::RSA::PublicKey* publicKey = m_resourceManager.getPublicKey("LevelKey");
-    std::string signaturKey = m_resourceManager.getHashValue(filename);
+    std::string filename = m_resourceManager->getFileNames().find(m_number)->second;
+    CryptoPP::RSA::PublicKey* publicKey = m_resourceManager->getPublicKey("LevelKey");
+    std::string signaturKey = m_resourceManager->getHashValue(filename);
 
     message.append(utility::fileToString(resourcePath() + Level::filename()));
     message.append(filename);

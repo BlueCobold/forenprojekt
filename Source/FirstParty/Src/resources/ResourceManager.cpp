@@ -12,10 +12,23 @@
 #include <functional> // bind
 
 ResourceManager::ResourceManager(ShaderContext& context, AppConfig& config) :
-    m_context(&context),
-    m_config(config)
+    m_context(context),
+    m_config(config),
+    m_texturesPtr(&m_textures),
+    m_shadersPtr(&m_shaders),
+    m_fontsPtr(&m_fonts),
+#ifndef NO_SOUND
+    m_soundBuffersPtr(&m_soundBuffers),
+#endif
+    m_bitmapFontsPtr(&m_bitmapFonts),
+    m_menusPtr(&m_menus),
+    m_spriteSheetsPtr(&m_spriteSheets),
+    m_publicKeysPtr(&m_publicKeys),
+    m_musicPtr(&m_music)
 {
     m_soundManager = std::unique_ptr<SoundManager>(new SoundManager(*this, config));
+    m_soundManagerPtr = m_soundManager.get();
+
     // Parse resource information
     tinyxml2::XMLDocument doc;
     doc.LoadFile((resourcePath() + "res/resources.nfo").c_str());
@@ -43,7 +56,45 @@ ResourceManager::ResourceManager(ShaderContext& context, AppConfig& config) :
 
 ResourceManager::~ResourceManager()
 {
-    m_soundManager->clear();
+    m_soundManagerPtr->clear();
+}
+
+std::unique_ptr<ResourceManager> ResourceManager::getSubScope(const std::string& scope)
+{
+    std::unique_ptr<ResourceManager> sub(new ResourceManager(m_context, m_config));
+    sub->m_bitmapFontKeys = m_bitmapFontKeys;
+    sub->m_bitmapFontsPtr = m_bitmapFontsPtr->addScope(scope);
+    sub->m_fontKeys = m_fontKeys;
+    sub->m_fontsPtr = m_fontsPtr->addScope(scope);
+    sub->m_hashValues = m_hashValues;
+    sub->m_levelFileNames = m_levelFileNames;
+    sub->m_menuKeys = m_menuKeys;
+    sub->m_menusPtr = m_menusPtr->addScope(scope);
+    sub->m_musicKeys = m_musicKeys;
+    sub->m_musicPtr = m_musicPtr->addScope(scope);
+    sub->m_publicKeyKeys = m_publicKeyKeys;
+    sub->m_publicKeysPtr = m_publicKeysPtr->addScope(scope);
+    sub->m_shaderKeys = m_shaderKeys;
+    sub->m_shadersPtr = m_shadersPtr->addScope(scope);
+    sub->m_soundBufferKeys = m_soundBufferKeys;
+    sub->m_soundBuffersPtr = m_soundBuffersPtr;
+    sub->m_spriteSheetKeys = m_spriteSheetKeys;
+    sub->m_spriteSheetsPtr = m_spriteSheetsPtr->addScope(scope);
+    sub->m_textureKeys = m_textureKeys;
+    sub->m_texturesPtr = m_texturesPtr->addScope(scope);
+    return std::move(sub);
+}
+
+void ResourceManager::purge(const std::string& scope)
+{
+    m_bitmapFontsPtr->purge(scope);
+    m_fontsPtr->purge(scope);
+    m_menusPtr->purge(scope);
+    m_musicPtr->purge(scope);
+    m_publicKeysPtr->purge(scope);
+    m_shadersPtr->purge(scope);
+    m_spriteSheetsPtr->purge(scope);
+    m_texturesPtr->purge(scope);
 }
 
 std::unique_ptr<sf::Texture> ResourceManager::loadTexture(const std::string& path, bool smooth)
@@ -122,7 +173,7 @@ std::unique_ptr<sf::Music> ResourceManager::loadMusic(const std::string& path)
 const BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
 {
     auto self = this;
-    return getOrFail<const BitmapFont, std::string>(m_bitmapFontKeys, m_bitmapFonts, key,
+    return getOrFail<const BitmapFont, std::string>(m_bitmapFontKeys, *m_bitmapFontsPtr, key,
         [=](const std::string& path)->std::function<std::unique_ptr<const BitmapFont>()>
         {
             return [=](){ return std::move(self->loadBitmapFont(path)); };
@@ -132,7 +183,7 @@ const BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
 const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
 {
     auto self = this;
-    return getOrFail<MenuTemplate, std::string>(m_menuKeys, m_menus, key,
+    return getOrFail<MenuTemplate, std::string>(m_menuKeys, *m_menusPtr, key,
         [=](const std::string& path)->std::function<std::unique_ptr<MenuTemplate>()>
         {
             return [=](){ return MenuLoader::loadMenuTemplate(std::string("res/menus/") + path, *self, m_config.get<std::string>("language")); };
@@ -142,7 +193,7 @@ const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
 #ifndef NO_SOUND
 sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
 {
-    return getOrFail<sf::SoundBuffer, std::string>(m_soundBufferKeys, m_soundBuffers, key,
+    return getOrFail<sf::SoundBuffer, std::string>(m_soundBufferKeys, *m_soundBuffersPtr, key,
         [=](const std::string& path)->std::function<std::unique_ptr<sf::SoundBuffer>()>
         {
             return [=](){ return ResourceManager::loadSoundBuffer(path); };
@@ -152,7 +203,7 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
 
 const sf::Texture* ResourceManager::getTexture(const std::string& key)
 {
-    return getOrFail<const sf::Texture, TextureParams>(m_textureKeys, m_textures, key,
+    return getOrFail<const sf::Texture, TextureParams>(m_textureKeys, *m_texturesPtr, key,
         [=](const TextureParams& params)->std::function<std::unique_ptr<const sf::Texture>()>
         {
             return [=](){ return ResourceManager::loadTexture(std::get<0>(params), std::get<1>(params)); };
@@ -161,7 +212,7 @@ const sf::Texture* ResourceManager::getTexture(const std::string& key)
 
 void ResourceManager::addTexture(const std::string& key, const sf::Texture& texture)
 {
-    m_textures.put(key, texture);
+    m_texturesPtr->put(key, texture);
 }
 
 Shader* ResourceManager::getShader(const std::string& key)
@@ -170,7 +221,7 @@ Shader* ResourceManager::getShader(const std::string& key)
         throw std::runtime_error(utility::translateKey("ShadersNotAvailable"));
 
     auto self = this;
-    return getOrFail<Shader, ShaderParams>(m_shaderKeys, m_shaders, key,
+    return getOrFail<Shader, ShaderParams>(m_shaderKeys, *m_shadersPtr, key,
         [=](const ShaderParams& params)->std::function<std::unique_ptr<Shader>()>
         {
             return [=](){ return ShaderLoader::loadShader(std::get<0>(params), std::get<1>(params), std::get<2>(params), *self); };
@@ -179,12 +230,12 @@ Shader* ResourceManager::getShader(const std::string& key)
 
 ShaderContext& ResourceManager::getShaderContext() const
 {
-    return *m_context;
+    return m_context;
 }
 
 const SpriteSheet* ResourceManager::getSpriteSheet(const std::string& key)
 {
-    return getOrFail<const SpriteSheet, std::string>(m_spriteSheetKeys, m_spriteSheets, key,
+    return getOrFail<const SpriteSheet, std::string>(m_spriteSheetKeys, *m_spriteSheetsPtr, key,
         [=](const std::string& path)->std::function<std::unique_ptr<SpriteSheet>()>
         {
             return [=](){ return ResourceManager::loadSpriteSheet(path); };
@@ -193,7 +244,7 @@ const SpriteSheet* ResourceManager::getSpriteSheet(const std::string& key)
 
 const sf::Font* ResourceManager::getFont(const std::string& key)
 {
-    return getOrFail<const sf::Font, std::string>(m_fontKeys, m_fonts, key,
+    return getOrFail<const sf::Font, std::string>(m_fontKeys, *m_fontsPtr, key,
         [=](const std::string& path)->std::function<std::unique_ptr<sf::Font>()>
         {
             return [=](){ return ResourceManager::loadFont(path); };
@@ -294,7 +345,7 @@ void ResourceManager::parseLevelFileName(tinyxml2::XMLDocument& doc)
 
 SoundManager& ResourceManager::getSoundManager()
 {
-    return *m_soundManager;
+    return *m_soundManagerPtr;
 }
 
 const std::unordered_map<int, std::string>& ResourceManager::getFileNames()
@@ -322,12 +373,12 @@ CryptoPP::RSA::PublicKey* ResourceManager::getPublicKey(const std::string& key)
     {
         std::string name = publicKey->first;
         std::string path = publicKey->second;
-        if(m_publicKeys.exists(name))
-            return m_publicKeys.get(name);
+        if(m_publicKeysPtr->exists(name))
+            return m_publicKeysPtr->get(name);
         else
         {
-            if(m_publicKeys.load(name, [path, this](){ return loadPublicKey(path); }))
-                return m_publicKeys.get(name);
+            if(m_publicKeysPtr->load(name, [path, this](){ return loadPublicKey(path); }))
+                return m_publicKeysPtr->get(name);
         }
     }
 
@@ -367,7 +418,7 @@ void ResourceManager::parseMusic(tinyxml2::XMLDocument& doc)
 
 sf::Music* ResourceManager::getMusic(const std::string& key)
 {
-    return getOrFail<sf::Music, std::string>(m_musicKeys, m_music, key,
+    return getOrFail<sf::Music, std::string>(m_musicKeys, *m_musicPtr, key,
         [=](const std::string& path)->std::function<std::unique_ptr<sf::Music>()>
         {
             return [=](){ return ResourceManager::loadMusic(path); };

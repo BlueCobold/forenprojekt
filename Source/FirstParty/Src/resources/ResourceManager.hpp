@@ -30,6 +30,7 @@ class SoundManager;
 #include <string>
 #include <tuple>
 #include <unordered_map>
+#include <list>
 
 namespace tinyxml2
 {
@@ -43,6 +44,9 @@ class ResourceManager : public SoundBufferManager
 public:
     ResourceManager(ShaderContext& context, AppConfig& config);
     ~ResourceManager();
+
+    std::unique_ptr<ResourceManager> getSubScope(const std::string& scope);
+    void purge(const std::string& scope);
 
     const sf::Texture* getTexture(const std::string& key);
     void addTexture(const std::string& key, const sf::Texture& texture);
@@ -111,18 +115,28 @@ private:
     std::unordered_map<std::string, std::string> m_musicKeys;
 
     std::unique_ptr<SoundManager> m_soundManager;
+    SoundManager* m_soundManagerPtr;
     ResourceCache<const sf::Texture> m_textures;
+    ResourceCache<const sf::Texture>* m_texturesPtr;
     ResourceCache<Shader> m_shaders;
+    ResourceCache<Shader>* m_shadersPtr;
     ResourceCache<const sf::Font> m_fonts;
+    ResourceCache<const sf::Font>* m_fontsPtr;
 #ifndef NO_SOUND
     ResourceCache<sf::SoundBuffer> m_soundBuffers;
+    ResourceCache<sf::SoundBuffer>* m_soundBuffersPtr;
 #endif
     ResourceCache<const BitmapFont> m_bitmapFonts;
+    ResourceCache<const BitmapFont>* m_bitmapFontsPtr;
     ResourceCache<MenuTemplate> m_menus;
+    ResourceCache<MenuTemplate>* m_menusPtr;
     ResourceCache<const SpriteSheet> m_spriteSheets;
+    ResourceCache<const SpriteSheet>* m_spriteSheetsPtr;
     ResourceCache<CryptoPP::RSA::PublicKey> m_publicKeys;
+    ResourceCache<CryptoPP::RSA::PublicKey>* m_publicKeysPtr;
     ResourceCache<sf::Music> m_music;
-    ShaderContext* m_context;
+    ResourceCache<sf::Music>* m_musicPtr;
+    ShaderContext& m_context;
     AppConfig& m_config;
     
     std::vector<sf::Music*> m_musicList;

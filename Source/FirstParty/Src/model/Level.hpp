@@ -54,7 +54,7 @@ class Level :
 public:
     /// Construct a level from the given level number
 #ifdef LEVELTESTING
-    Level(const std::string& file, const unsigned int level, ResourceManager& resourceManager, AppConfig& config);
+    Level(const std::string& file, const unsigned int level, std::unique_ptr<ResourceManager> resourceManager, AppConfig& config);
     std::string getFileName();
 #else
     Level(const unsigned int level, ResourceManager& resourceManager, AppConfig& config);
@@ -152,7 +152,7 @@ private:
     double onGetValueOf(const std::string& name) const override;
     void onSetValueOf(const std::string& name, const double value) override;
 
-    ResourceManager& m_resourceManager;
+    std::unique_ptr<ResourceManager> m_resourceManager;
     AppConfig& m_config;
 
     b2World m_world;

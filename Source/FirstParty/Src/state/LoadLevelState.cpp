@@ -104,11 +104,12 @@ void LoadLevelState::loadLevel()
     try
     {
 #ifdef LEVELTESTING
-        m_level = std::unique_ptr<Level>(new Level(m_file, m_currentLevel, getResourceManager(), m_config));
+        m_level = std::unique_ptr<Level>(new Level(m_file, m_currentLevel, getResourceManager().getSubScope("level"), m_config));
 #else
-        m_level = std::unique_ptr<Level>(new Level(m_currentLevel, getResourceManager(), m_config));
+        m_level = std::unique_ptr<Level>(new Level(m_currentLevel, getResourceManager().getSubScope("level"), m_config));
 #endif
         m_lastLevel = m_level.get();
+        getResourceManager().purge("level");
     }
     catch(std::bad_alloc& e)
     {
