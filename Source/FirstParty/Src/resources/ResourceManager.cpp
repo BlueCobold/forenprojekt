@@ -16,7 +16,6 @@ ResourceManager::ResourceManager(ShaderContext& context, AppConfig& config) :
     m_config(config),
     m_texturesPtr(&m_textures),
     m_shadersPtr(&m_shaders),
-    m_fontsPtr(&m_fonts),
 #ifndef NO_SOUND
     m_soundBuffersPtr(&m_soundBuffers),
 #endif
@@ -42,7 +41,6 @@ ResourceManager::ResourceManager(ShaderContext& context, AppConfig& config) :
     parseSounds(doc);
     parseTextures(doc);
     parseShaders(doc);
-    parseFonts(doc);
     parseBitmapFonts(doc);
     parseMenus(doc);
     parseSpriteSheet(doc);
@@ -64,8 +62,6 @@ std::unique_ptr<ResourceManager> ResourceManager::getSubScope(const std::string&
     std::unique_ptr<ResourceManager> sub(new ResourceManager(m_context, m_config));
     sub->m_bitmapFontKeys = m_bitmapFontKeys;
     sub->m_bitmapFontsPtr = m_bitmapFontsPtr->addScope(scope);
-    sub->m_fontKeys = m_fontKeys;
-    sub->m_fontsPtr = m_fontsPtr->addScope(scope);
     sub->m_hashValues = m_hashValues;
     sub->m_levelFileNames = m_levelFileNames;
     sub->m_menuKeys = m_menuKeys;
@@ -88,7 +84,6 @@ std::unique_ptr<ResourceManager> ResourceManager::getSubScope(const std::string&
 void ResourceManager::purge(const std::string& scope)
 {
     m_bitmapFontsPtr->purge(scope);
-    m_fontsPtr->purge(scope);
     m_menusPtr->purge(scope);
     m_musicPtr->purge(scope);
     m_publicKeysPtr->purge(scope);
@@ -109,15 +104,6 @@ std::unique_ptr<sf::Texture> ResourceManager::loadTexture(const std::string& pat
         gl::Flush();
         return texture;
     }
-}
-
-std::unique_ptr<sf::Font> ResourceManager::loadFont(const std::string& path)
-{
-    auto font = std::unique_ptr<sf::Font>(new sf::Font);
-    if(!font->loadFromFile(resourcePath() + "res/font/" + path))
-        return nullptr;
-    else
-        return font;
 }
 
 #ifndef NO_SOUND
@@ -242,15 +228,6 @@ const SpriteSheet* ResourceManager::getSpriteSheet(const std::string& key)
         }, "UnknownSpriteSheet");
 }
 
-const sf::Font* ResourceManager::getFont(const std::string& key)
-{
-    return getOrFail<const sf::Font, std::string>(m_fontKeys, *m_fontsPtr, key,
-        [=](const std::string& path)->std::function<std::unique_ptr<sf::Font>()>
-        {
-            return [=](){ return ResourceManager::loadFont(path); };
-        }, "UnknownFont");
-}
-
 void ResourceManager::parse(const tinyxml2::XMLDocument& doc,
                             const std::string& parent,
                             const std::string& element,
@@ -286,15 +263,6 @@ void ResourceManager::parseShaders(tinyxml2::XMLDocument& doc)
                                                std::string(element->Attribute("vertexPath")),
                                                std::string(element->Attribute("fragmentPath")),
                                                std::string(element->Attribute("configPath")))));
-    });
-}
-
-void ResourceManager::parseFonts(tinyxml2::XMLDocument& doc)
-{
-    parse(doc, "fonts", "font", [&](const tinyxml2::XMLElement* element)
-    {
-        m_fontKeys.insert(std::make_pair(std::string(element->Attribute("name")),
-                                         std::string(element->Attribute("path"))));
     });
 }
 

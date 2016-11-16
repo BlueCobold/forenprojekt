@@ -16,7 +16,6 @@ class SoundManager;
 
 #include <tinyxml2.h>
 
-#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Audio/Sound.hpp>
 #include <SFML/Audio/SoundBuffer.hpp>
@@ -54,7 +53,6 @@ public:
     Shader* getShader(const std::string& key);
     ShaderContext& getShaderContext() const;
 
-    const sf::Font* getFont(const std::string& key);
 #ifndef NO_SOUND
     sf::SoundBuffer* getSoundBuffer(const std::string& key) override;
 #endif
@@ -88,7 +86,6 @@ private:
                       std::function<void(const tinyxml2::XMLElement*)> operation);
 
     static std::unique_ptr<sf::Texture> loadTexture(const std::string& path, bool smooth);
-    static std::unique_ptr<sf::Font> loadFont(const std::string& path);
 #ifndef NO_SOUND
     static std::unique_ptr<sf::SoundBuffer> loadSoundBuffer(const std::string& path);
 #endif
@@ -104,7 +101,6 @@ private:
 
     std::unordered_map<std::string, TextureParams> m_textureKeys;
     std::unordered_map<std::string, ShaderParams> m_shaderKeys;
-    std::unordered_map<std::string, std::string> m_fontKeys;
     std::unordered_map<std::string, std::string> m_soundBufferKeys;
     std::unordered_map<std::string, std::string> m_bitmapFontKeys;
     std::unordered_map<std::string, std::string> m_menuKeys;
@@ -120,8 +116,6 @@ private:
     ResourceCache<const sf::Texture>* m_texturesPtr;
     ResourceCache<Shader> m_shaders;
     ResourceCache<Shader>* m_shadersPtr;
-    ResourceCache<const sf::Font> m_fonts;
-    ResourceCache<const sf::Font>* m_fontsPtr;
 #ifndef NO_SOUND
     ResourceCache<sf::SoundBuffer> m_soundBuffers;
     ResourceCache<sf::SoundBuffer>* m_soundBuffersPtr;
