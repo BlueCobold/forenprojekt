@@ -102,9 +102,6 @@ public:
             resume(time);
     }
 
-    virtual void setLanguage(const std::string& language)
-    { }
-
 protected:
     void updateTime(const double time)
     {

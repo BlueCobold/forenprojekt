@@ -26,7 +26,7 @@ private:
         else if(entityB.getType() == Entity::Ball)
             ballBody = entityB.getBody();
         else
-            throw std::runtime_error(utility::replace(utility::translateKey("EntityNoCollision"), "Ball"));
+            throw std::runtime_error(utility::replace(utility::translateKey("@EntityNoCollision"), "Ball"));
 
         ballBody->ApplyLinearImpulse(b2Vec2(m_xImpulse, m_yImpulse), ballBody->GetWorldCenter(), false);
     }

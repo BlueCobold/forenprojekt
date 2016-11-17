@@ -34,9 +34,9 @@ void MainMenuState::onEnter(const EnterStateInformation* enterInformation, const
 
     auto language = m_config.get<std::string>("language");
 
-    if(language == "en_")
+    if(language == "en")
         m_menu.showEnglishLanguage();
-    if(language == "de_")
+    else if(language == "de")
         m_menu.showGermanLanguage();
 
     m_menu.showLanguageSelect(false);
@@ -130,13 +130,15 @@ StateChangeInformation MainMenuState::update(const double time)
     {
         m_menu.showGermanLanguage();
         m_menu.showLanguageSelect(false);
-        m_config.set("language", "de_");
+        m_config.set("language", "de");
+        utility::setLanguage("de");
     }
     else if(subWindowClicked == MainMenu::BUTTON_ENGLISH_SELECT)
     {
         m_menu.showEnglishLanguage();
         m_menu.showLanguageSelect(false);
-        m_config.set("language", "en_");
+        m_config.set("language", "en");
+        utility::setLanguage("en");
     }
     return StateChangeInformation::Empty();
 }
@@ -151,9 +153,4 @@ void MainMenuState::doDraw(const DrawParameter& params)
     params.getTarget().draw(whiteRect);
 
     m_menu.draw(params);
-}
-
-void MainMenuState::setLanguage(const std::string& language)
-{
-    m_menu.setLanguage(language);
 }

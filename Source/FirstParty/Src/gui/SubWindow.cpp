@@ -228,10 +228,3 @@ void SubWindow::setZoomFactor(float zoomFactor)
 {
     m_zoomFactor = zoomFactor;
 }
-
-void SubWindow::setLanguage(const std::string& language)
-{
-    MenuElement::setLanguage(language);
-    for(auto it = begin(m_panel.getElements()); it != end(m_panel.getElements()); ++it)
-        (*it)->setLanguage(language);
-}

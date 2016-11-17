@@ -4,7 +4,6 @@
 #include "../Utility.hpp"
 
 ToolTip::ToolTip(const std::string& text,
-                 const std::string& language,
                  const BitmapFont* font,
                  const sf::Vector2f& textOffset,
                  const sf::Vector2f& offset,
@@ -20,8 +19,7 @@ ToolTip::ToolTip(const std::string& text,
     m_longestLine(0),
     m_width(0),
     m_height(0),
-    m_textKey(text),
-    m_language(language)
+    m_textKey(text)
 {
     if(m_textKey != "")
     {
@@ -136,30 +134,40 @@ void ToolTip::setLines(const std::string& text, const std::string& replacement)
         return;
 
     m_lines = 0;
-
     m_label.clear();
 
-    std::string tokens = utility::translateKey(m_language + text).c_str();
+    m_lastTranslation = utility::translateKey(text);
+    m_lastReplacement = replacement;
+    std::string tokens = m_lastTranslation.c_str();
 
     std::string token;
-
     // multilines
     for(auto pos = tokens.find("\\r\\n"); pos != std::string::npos; pos = tokens.find("\\r\\n"))
     {
         token = tokens.substr(0, pos);
         tokens.erase(0, pos + 4);
-        LineLabel label(text, sf::Vector2f(), sf::Vector2f(), 0, m_font, m_language, LineLabel::Centered);
+        LineLabel label(text, sf::Vector2f(), sf::Vector2f(), 0, m_font, LineLabel::Centered);
         if(replacement != "" && token.find("%") != std::string::npos)
             token = utility::replace(token, replacement);
         label.setText(token);
         m_label[m_lines++] = label;
     }
     // single line or last multiline
-    LineLabel label(text, sf::Vector2f(), sf::Vector2f(), 0, m_font, m_language, LineLabel::Centered);
+    LineLabel label(text, sf::Vector2f(), sf::Vector2f(), 0, m_font, LineLabel::Centered);
     if(replacement != "" && tokens.find("%") != std::string::npos)
-            tokens = utility::replace(tokens, replacement);
+        tokens = utility::replace(tokens, replacement);
     label.setText(tokens);
     m_label[m_lines++] = label;
+}
+
+void ToolTip::update()
+{
+    if(m_textKey != "")
+    {
+        auto next = utility::translateKey(m_textKey);
+        if(next != m_lastTranslation)
+            setText(m_textKey, m_lastReplacement);
+    }
 }
 
 const int ToolTip::findLongestLine() const
@@ -222,20 +230,4 @@ sf::Vector2f ToolTip::calculateNeededOffset(const sf::Vector2f& position, const 
     }
 
     return sf::Vector2f(verticalOffset, horizontalOffset);
-}
-
-void ToolTip::setLanguage(const std::string& language)
-{
-    m_language = language;
-
-    if(m_textKey != "")
-    {
-        setLines(m_textKey);
-        m_longestLine = findLongestLine();
-        m_width = m_label.find(m_longestLine)->second.getWidth();
-        m_height = static_cast<float>(m_label.find(m_longestLine)->second.getFontSize() * m_lines);
-        m_scalefactorHorizontal = m_width / m_background.find(ToolTip::TopLeft)->second.getTextureRect().width;
-        m_scalefactorVertical = m_height / m_background.find(ToolTip::TopLeft)->second.getTextureRect().height;
-        stretchBackground();
-    }
 }

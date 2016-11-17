@@ -19,11 +19,6 @@ public:
     void setTextureRect(const sf::IntRect& textureRect);
     void setTexture(const sf::Texture& texture);
 
-
-    void setLanguage(const std::string& language) override;
-
-protected:
-
 private:
     void doDraw(const DrawParameter& params) override;
     void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& offset = sf::Vector2i(0, 0)) override;

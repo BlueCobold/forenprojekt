@@ -25,7 +25,7 @@ HorizontalHalvesTransition::HorizontalHalvesTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "HorizontalHalvesTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@SourceTexture"), "HorizontalHalvesTransition"));
 
     if(targetTexture != nullptr)
     {

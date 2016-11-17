@@ -35,15 +35,13 @@ public:
     MenuElement(const int id,
                 const MenuElementType::Type type,
                 const sf::Vector2f& position,
-                const sf::Vector2f& offset,
-                const std::string& language = "") :
+                const sf::Vector2f& offset) :
         m_id(id),
         m_type(type),
         m_screenLocation(position, offset),
         m_visible(true),
         m_visibleWhen(nullptr),
-        m_masterId(-1),
-        m_language(language)
+        m_masterId(-1)
     { }
 
     virtual ~MenuElement()
@@ -121,16 +119,6 @@ public:
         layoutUpdated(screenSize);
     }
 
-    const std::string& getLanguage() const
-    {
-        return m_language;
-    }
-
-    virtual void setLanguage(const std::string& language)
-    {
-        m_language = language;
-    }
-
 protected:
     virtual void positionSet()
     { }
@@ -166,7 +154,6 @@ private:
     bool m_visible;
     const MenuElement* m_visibleWhen;
     int m_masterId;
-    std::string m_language;
 };
 
 #endif // MENU_ELEMENT_HPP

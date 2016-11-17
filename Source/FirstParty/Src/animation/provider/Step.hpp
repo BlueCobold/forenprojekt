@@ -35,7 +35,7 @@ public:
        m_threshold(threshold)
     {
         if(getProvider().size() != 3)
-            throw std::runtime_error(utility::replace(utility::translateKey("ThreeChilds"), "Step"));
+            throw std::runtime_error(utility::replace(utility::translateKey("@ThreeChilds"), "Step"));
     }
 };
 

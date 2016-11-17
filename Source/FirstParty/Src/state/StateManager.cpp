@@ -18,7 +18,7 @@ void StateManager::registerState(StateId id, std::unique_ptr<State> state)
 {
     auto existingState = m_statesById.find(id);
     if(existingState != end(m_statesById))
-        throw std::runtime_error(utility::replace(utility::translateKey("StateExist"), utility::toString(id)));
+        throw std::runtime_error(utility::replace(utility::translateKey("@StateExist"), utility::toString(id)));
 
     m_statesById[id] = std::move(state);
 }
@@ -56,7 +56,7 @@ State* StateManager::getState(StateId id) const
 {
     auto state = m_statesById.find(id);
     if(state == end(m_statesById))
-        throw std::runtime_error(utility::replace(utility::translateKey("StateUnknow"), utility::toString(id)));
+        throw std::runtime_error(utility::replace(utility::translateKey("@StateUnknow"), utility::toString(id)));
 
     return state->second.get();
 }
@@ -94,13 +94,5 @@ void StateManager::draw(const DrawParameter& parameter)
     if(m_currentState != nullptr)
     {
         m_currentState->draw(parameter);
-    }
-}
-
-void StateManager::setLanguage(const std::string& language)
-{
-    for(auto it = begin(m_statesById); it != end(m_statesById); ++it)
-    {
-        it->second->setLanguage(language);
     }
 }

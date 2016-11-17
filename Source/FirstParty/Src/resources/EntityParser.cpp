@@ -393,11 +393,11 @@ EntitySet EntityParser::parseSpawns(const tinyxml2::XMLElement& xml) const
 
     auto name = action->Attribute("name");
     if(!name)
-        throw std::runtime_error(utility::translateKey("SpawnWithoutName"));
+        throw std::runtime_error(utility::translateKey("@SpawnWithoutName"));
 
     EntitySet entities = parseFromTemplate(name);
     if(entities.entity == nullptr)
-        throw std::runtime_error(utility::replace(utility::translateKey("UnknownEntityName"), name));
+        throw std::runtime_error(utility::replace(utility::translateKey("@UnknownEntityName"), name));
 
     return entities;
 }
@@ -412,7 +412,7 @@ const tinyxml2::XMLElement* EntityParser::findPhysicsTag(const tinyxml2::XMLElem
             if(physicsTemplate != end(m_templates.physics))
                 return physicsTemplate->second;
 
-            throw std::runtime_error(utility::replace(utility::translateKey("UnknownPhysicReference"), physicsName));
+            throw std::runtime_error(utility::replace(utility::translateKey("@UnknownPhysicReference"), physicsName));
         }
         else
             return physics;

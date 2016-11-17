@@ -29,11 +29,11 @@ std::unique_ptr<CollisionFilter> FilterParser::getFilter(const tinyxml2::XMLElem
     {
         auto name = xml.Attribute("name");
         if(!name)
-            throw std::runtime_error(utility::translateKey("SpawnWithoutName"));
+            throw std::runtime_error(utility::translateKey("@SpawnWithoutName"));
 
         Entity* spawned(m_parser ? m_parser(name) : nullptr);
         if(spawned == nullptr)
-            throw std::runtime_error(utility::replace(utility::translateKey("UnknownEntityName"), name));
+            throw std::runtime_error(utility::replace(utility::translateKey("@UnknownEntityName"), name));
 
         std::unique_ptr<CollisionFilter> subFilter;
         if(auto subXml = xml.FirstChildElement())
@@ -100,5 +100,5 @@ std::unique_ptr<CollisionFilter> FilterParser::getFilter(const tinyxml2::XMLElem
         return std::move(filter);
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("UnknownFilter"), xml.Name()));
+        throw std::runtime_error(utility::replace(utility::translateKey("@UnknownFilter"), xml.Name()));
 }

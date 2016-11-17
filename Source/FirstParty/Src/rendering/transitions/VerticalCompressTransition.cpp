@@ -25,7 +25,7 @@ VerticalCompressTransition::VerticalCompressTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "VerticalCompressTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "VerticalCompressTransition"));
 
     if(sourceTexture != nullptr)
     {
@@ -37,7 +37,7 @@ VerticalCompressTransition::VerticalCompressTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "VerticalCompressTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@SourceTexture"), "VerticalCompressTransition"));
 }
 
 void VerticalCompressTransition::updated()

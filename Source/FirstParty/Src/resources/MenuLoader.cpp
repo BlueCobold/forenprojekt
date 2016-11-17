@@ -52,7 +52,6 @@ sf::Sprite getSprite(const tinyxml2::XMLElement* element,
 }
 
 CloneHandler MenuLoader::_cloneHandler;
-std::string MenuLoader::_language;
 
 template<typename T>
 void addAll(std::vector<std::unique_ptr<T>> source, std::vector<std::unique_ptr<MenuElement>>& target)
@@ -61,20 +60,19 @@ void addAll(std::vector<std::unique_ptr<T>> source, std::vector<std::unique_ptr<
         target.push_back(std::move(*it));
 }
 
-std::unique_ptr<MenuTemplate> MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager, const std::string& language)
+std::unique_ptr<MenuTemplate> MenuLoader::loadMenuTemplate(const std::string& path, ResourceManager& resourceManager)
 {
-    _language = language;
     tinyxml2::XMLDocument doc;
     doc.LoadFile((resourcePath() + path).c_str());
 
     if(doc.Error())
     {
         doc.PrintError();
-        throw std::runtime_error(utility::replace(utility::translateKey("MenuFileInvalid"), path));
+        throw std::runtime_error(utility::replace(utility::translateKey("@MenuFileInvalid"), path));
     }
     auto menuXml = doc.FirstChildElement("menu");
     if(menuXml == nullptr)
-        throw std::runtime_error(utility::replace(utility::translateKey("MenuEntryMissing"), path));
+        throw std::runtime_error(utility::replace(utility::translateKey("@MenuEntryMissing"), path));
 
     auto menu = std::unique_ptr<MenuTemplate>(new MenuTemplate);
 
@@ -111,7 +109,7 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
         {
             auto styleIt = buttonStyles.find(buttonXml->Attribute("style"));
             if(styleIt == end(buttonStyles))
-                throw std::runtime_error(utility::replace(utility::translateKey("UnknownButtonStyle"), buttonXml->Attribute("style")));
+                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownButtonStyle"), buttonXml->Attribute("style")));
             auto style = styleIt->second;
             auto position = sf::Vector2f(buttonXml->FloatAttribute("x"), buttonXml->FloatAttribute("y"));
             auto offset = sf::Vector2f(buttonXml->FloatAttribute("offsetx"), buttonXml->FloatAttribute("offsety"));
@@ -130,19 +128,19 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
             style.idleStyle.label = LineLabel(
                 textResourceKey, 
                 position, offset + style.idleStyle.textOffset,
-                0, style.idleStyle.font, _language, LineLabel::Centered);
+                0, style.idleStyle.font, LineLabel::Centered);
 
             style.hoverStyle.label = LineLabel(
                 textResourceKey, 
                 position, offset + style.hoverStyle.textOffset,
-                0, style.hoverStyle.font, _language, LineLabel::Centered);
+                0, style.hoverStyle.font, LineLabel::Centered);
 
             style.pressedStyle.label = LineLabel(
                 textResourceKey, 
                 position, offset + style.pressedStyle.textOffset,
-                0, style.pressedStyle.font, _language, LineLabel::Centered);
+                0, style.pressedStyle.font, LineLabel::Centered);
 
-            auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, offset, _language, triggers));
+            auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, offset, triggers));
             
             if(auto visibleWhenId = buttonXml->IntAttribute("visibleWhen"))
                 button->setVisibleWhenId(visibleWhenId);
@@ -152,7 +150,7 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
             {
                 auto tooltip = toolTip.find(tooltipAvailable);
                 if(tooltip == end(toolTip))
-                    throw std::runtime_error(utility::replace(utility::translateKey("UnknownButtonToolTip"), buttonXml->Attribute("tooltip")));
+                    throw std::runtime_error(utility::replace(utility::translateKey("@UnknownButtonToolTip"), buttonXml->Attribute("tooltip")));
                 button->setToolTip(tooltip->second);
                 button->setToolTipText(buttonXml->Attribute("tooltiptext"));
             }
@@ -177,7 +175,7 @@ std::vector<std::unique_ptr<CheckBox>> MenuLoader::parseCheckBoxes(
         {
             auto styleIt = checkBoxStyles.find(checkboxXml->Attribute("style"));
             if(styleIt == end(checkBoxStyles))
-                throw std::runtime_error(utility::replace(utility::translateKey("UnknownCheckBoxStyle"), checkboxXml->Attribute("style")));
+                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownCheckBoxStyle"), checkboxXml->Attribute("style")));
             auto style = styleIt->second;
             
             auto position = sf::Vector2f(checkboxXml->FloatAttribute("x"), checkboxXml->FloatAttribute("y"));
@@ -189,7 +187,7 @@ std::vector<std::unique_ptr<CheckBox>> MenuLoader::parseCheckBoxes(
             {
                 auto tooltip = toolTip.find(toolTipName);
                 if(tooltip == end(toolTip))
-                    throw std::runtime_error(utility::replace(utility::translateKey("UnknownToolTip"), checkboxXml->Attribute("tooltip")));
+                    throw std::runtime_error(utility::replace(utility::translateKey("@UnknownToolTip"), checkboxXml->Attribute("tooltip")));
                 checkBox->setToolTip(tooltip->second);
                 checkBox->setToolTipText(checkboxXml->Attribute("tooltiptext"));
             }
@@ -215,7 +213,7 @@ std::vector<std::unique_ptr<Slider>> MenuLoader::parseSliders(
         {
             auto styleIt = sliderStyles.find(sliderXml->Attribute("style"));
             if(styleIt == end(sliderStyles))
-                throw std::runtime_error(utility::replace(utility::translateKey("UnknownSliderStyle"), sliderXml->Attribute("style")));
+                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownSliderStyle"), sliderXml->Attribute("style")));
             auto style = styleIt->second;
             auto position = sf::Vector2f(sliderXml->FloatAttribute("x"), sliderXml->FloatAttribute("y"));
             auto offset = sf::Vector2f(sliderXml->FloatAttribute("offsetx"), sliderXml->FloatAttribute("offsety"));
@@ -247,7 +245,6 @@ std::vector<std::unique_ptr<LineLabel>> MenuLoader::parseLabels(
                             sf::Vector2f(labelXml->FloatAttribute("offsetx"), labelXml->FloatAttribute("offsety")),
                             0,
                             resourceManager.getBitmapFont(labelXml->Attribute("font")),
-                            _language,
                             static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
                             labelXml->IntAttribute("id")));
             
@@ -277,7 +274,6 @@ std::vector<std::unique_ptr<InteractiveLabel>> MenuLoader::parseInteractiveLabel
                             sf::Vector2f(labelXml->FloatAttribute("offsetx"), labelXml->FloatAttribute("offsety")),
                             0,
                             resourceManager.getBitmapFont(labelXml->Attribute("font")),
-                            _language,
                             static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
                             labelXml->IntAttribute("id")));
 
@@ -288,7 +284,7 @@ std::vector<std::unique_ptr<InteractiveLabel>> MenuLoader::parseInteractiveLabel
             {
                 auto tooltip = toolTip.find(tooltipAvailable);
                 if(tooltip == end(toolTip))
-                    throw std::runtime_error(utility::replace(utility::translateKey("UnknownButtonToolTip"), labelXml->Attribute("tooltip")));
+                    throw std::runtime_error(utility::replace(utility::translateKey("@UnknownButtonToolTip"), labelXml->Attribute("tooltip")));
 
                 label->setToolTip(tooltip->second);
                 label->setToolTipText(labelXml->Attribute("tooltiptext"));
@@ -323,7 +319,7 @@ std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
             {
                 auto tooltipIt = toolTip.find(toolTipName);
                 if(tooltipIt == end(toolTip))
-                    throw std::runtime_error(utility::replace(utility::translateKey("UnknownToolTip"), imageXml->Attribute("tooltip")));
+                    throw std::runtime_error(utility::replace(utility::translateKey("@UnknownToolTip"), imageXml->Attribute("tooltip")));
                 auto tooltip = tooltipIt->second;
                 tooltip.setText(toolTipText);
                 sprite->setToolTip(tooltip);
@@ -395,7 +391,7 @@ std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(const
         if(doc.Error())
         {
             doc.PrintError();
-            throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
+            throw std::runtime_error(utility::replace(utility::translateKey("@IncludeFileInvalid"), filename));
         }
 
         for(auto styleXml = doc.FirstChildElement("styles")->FirstChildElement("buttonStyle");
@@ -452,7 +448,7 @@ std::unordered_map<std::string, CheckBoxStyle> MenuLoader::parseCheckBoxStyles(c
         if(doc.Error())
         {
             doc.PrintError();
-            throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
+            throw std::runtime_error(utility::replace(utility::translateKey("@IncludeFileInvalid"), filename));
         }
 
         for(auto styleXml = doc.FirstChildElement("styles")->FirstChildElement("checkboxStyle");
@@ -494,7 +490,7 @@ std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(const
         if(doc.Error())
         {
             doc.PrintError();
-            throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
+            throw std::runtime_error(utility::replace(utility::translateKey("@IncludeFileInvalid"), filename));
         }
 
         for(auto styleXml = doc.FirstChildElement("styles")->FirstChildElement("sliderStyle");
@@ -544,7 +540,7 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(const tin
         if(doc.Error())
         {
             doc.PrintError();
-            throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
+            throw std::runtime_error(utility::replace(utility::translateKey("@IncludeFileInvalid"), filename));
         }
 
         for(auto tooltipXml = doc.FirstChildElement("styles")->FirstChildElement("tooltipStyle");
@@ -563,10 +559,9 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(const tin
                 ++counter;
             }
             if(counter < 9)
-                throw std::runtime_error(utility::replace(utility::translateKey("InvalidBackground"), "ToolTip"));
+                throw std::runtime_error(utility::replace(utility::translateKey("@InvalidBackground"), "ToolTip"));
 
             ToolTip tempToolTip("",
-                                _language,
                                 resourceManager.getBitmapFont(tooltipXml->FirstChildElement("text")->Attribute("font")),
                                 sf::Vector2f(tooltipXml->FirstChildElement("text")->FloatAttribute("offsetx"),
                                              tooltipXml->FirstChildElement("text")->FloatAttribute("offsety")),
@@ -592,7 +587,7 @@ std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(co
         if(doc.Error())
         {
             doc.PrintError();
-            throw std::runtime_error(utility::replace(utility::translateKey("IncludeFileInvalid"), filename));
+            throw std::runtime_error(utility::replace(utility::translateKey("@IncludeFileInvalid"), filename));
         }
 
         for(auto inputBoxStyleXml = doc.FirstChildElement("styles")->FirstChildElement("inputboxStyle");
@@ -613,7 +608,7 @@ std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(co
             }
 
             if(counter < 9)
-                throw std::runtime_error(utility::replace(utility::translateKey("InvalidBackground"), "InputBox"));
+                throw std::runtime_error(utility::replace(utility::translateKey("@InvalidBackground"), "InputBox"));
 
             if(auto caret = inputBoxStyleXml->FirstChildElement("caret"))
             {
@@ -622,7 +617,7 @@ std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(co
                 inputBoxStyle[styleName].caretBlinkFrequency = caret->FloatAttribute("frequency");
             }
             else
-                throw std::runtime_error(utility::translateKey("NoCaret"));
+                throw std::runtime_error(utility::translateKey("@NoCaret"));
         }
     }
 
@@ -642,7 +637,7 @@ std::vector<std::unique_ptr<InputBox>> MenuLoader::parseInputBox(
         {
             auto styleIt = inputBoxStyle.find(inputBoxXml->Attribute("style"));
             if(styleIt == end(inputBoxStyle))
-                throw std::runtime_error(utility::replace(utility::translateKey("UnknownInputBoxStyle"), inputBoxXml->Attribute("style")));
+                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownInputBoxStyle"), inputBoxXml->Attribute("style")));
             
             auto style = styleIt->second;
             auto id = inputBoxXml->IntAttribute("id");

@@ -30,7 +30,7 @@ public:
     Modulo(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
     {
        if(getProvider().size() != 2)
-           throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Modulo"));
+           throw std::runtime_error(utility::replace(utility::translateKey("@TwoChilds"), "Modulo"));
     }
 };
 

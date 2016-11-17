@@ -93,9 +93,9 @@ const std::string Achievement::getId() const
     return m_id;
 }
 
-const std::string Achievement::getName(const std::string& language) const
+const std::string Achievement::getName() const
 {
-    return utility::translateKey(language + m_key);
+    return utility::translateKey(m_key);
 }
 
 const std::string Achievement::getKey() const

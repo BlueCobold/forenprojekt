@@ -20,7 +20,7 @@ GrowingCircleTransition::GrowingCircleTransition(
         m_targetSprites.setPosition(size.x / 2.f, size.y / 2.f);
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "GrowingCircleTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "GrowingCircleTransition"));
 
     if(sourceTexture != nullptr)
     {

@@ -9,10 +9,10 @@ Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath) :
     m_programId(-1)
 {
     if(!isAvailable())
-        throw std::runtime_error(utility::translateKey("ShadersNotAvailable"));
+        throw std::runtime_error(utility::translateKey("@ShadersNotAvailable"));
 
     if(!m_shader.loadFromFile(vertexPath, fragmentPath))
-        throw std::runtime_error(utility::replace(utility::replace(utility::translateKey("ShaderFailed"), vertexPath), fragmentPath));
+        throw std::runtime_error(utility::replace(utility::replace(utility::translateKey("@ShaderFailed"), vertexPath), fragmentPath));
 }
 
 void Shader::addParameter(std::unique_ptr<ShaderParameter>&& parameter)

@@ -35,7 +35,7 @@ void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, c
 
     m_HUD.onEnter(m_level);
 
-    m_menu.setLevelInfo(m_level->getLevelName(), m_level->getTotalTime(), m_level->getRemainingBall(), m_config.get<std::string>("language"));
+    m_menu.setLevelInfo(m_level->getLevelName(), m_level->getTotalTime(), m_level->getRemainingBall());
     m_menu.setCoinToolTipText("tooltip_coins", utility::toString(m_config.get<int>("coins")));
 
     if(m_config.get<unsigned int>("UnlockedLevel") == m_level->number())
@@ -85,7 +85,7 @@ StateChangeInformation LevelPreviewState::update(const double time)
             m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
         }
     }
-    m_menu.setLevelInfo(m_level->getLevelName(), m_level->getRemainigTime(), m_level->getRemainingBall(), m_config.get<std::string>("language"));
+    m_menu.setLevelInfo(m_level->getLevelName(), m_level->getRemainigTime(), m_level->getRemainingBall());
     if(clicked == LevelPreviewMenu::BUTTON_START)
     {
         m_level->setTimeAttackMode(m_menu.getCheckbox(10).getChecked());
@@ -153,10 +153,4 @@ void LevelPreviewState::doDraw(const DrawParameter& params)
     params.getTarget().draw(whiteRect);
 
     m_menu.draw(params);
-}
-
-void LevelPreviewState::setLanguage(const std::string& language)
-{
-    m_menu.setLanguage(language);
-    m_menu.setCoinToolTipText("tooltip_coins", utility::toString(m_config.get<int>("coins")));
 }

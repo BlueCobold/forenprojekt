@@ -18,7 +18,7 @@ AchievementManager::AchievementManager(const std::string& file, AppConfig& confi
     m_config(config)
 {
     if(!load())
-        throw std::runtime_error(utility::replace(utility::translateKey("AchievementLoadError"), m_achievementFile));
+        throw std::runtime_error(utility::replace(utility::translateKey("@AchievementLoadError"), m_achievementFile));
 
     loadValues();
 }
@@ -41,7 +41,7 @@ void AchievementManager::addAchievement(const std::string& name,
 
     for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
         if(it->first == id)
-            throw std::runtime_error(utility::replace(utility::translateKey("DoubleAchievement"), id));
+            throw std::runtime_error(utility::replace(utility::translateKey("@DoubleAchievement"), id));
     
     m_achievements.push_back(std::make_pair(id, Achievement(name, condition, specifically, object, bronze, silver, gold, atOnceAmount)));
 }
@@ -83,7 +83,7 @@ bool AchievementManager::load()
                 else if(specificallyAsString.find("MaxOfTime") != std::string::npos)
                     specifically = stringToSpecifically("MaxOfTime");
                 else
-                    throw std::runtime_error(utility::replace(utility::translateKey("UnknownAchievementSpecifically"), specificallyAsString));
+                    throw std::runtime_error(utility::replace(utility::translateKey("@UnknownAchievementSpecifically"), specificallyAsString));
             }
             else
                 specifically = stringToSpecifically(specificallyAsString);
@@ -156,7 +156,7 @@ Achievement::Object AchievementManager::stringToObject(const std::string& object
     else if(object == "Stars")
         return Achievement::Stars;
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("UnknownAchievementObject"), object));
+        throw std::runtime_error(utility::replace(utility::translateKey("@UnknownAchievementObject"), object));
 }
 
 Achievement::Condition AchievementManager::stringToCondition(const std::string& condition)
@@ -176,7 +176,7 @@ Achievement::Condition AchievementManager::stringToCondition(const std::string& 
     else if(condition == "Use")
         return Achievement::Use;
     else 
-        throw std::runtime_error(utility::replace(utility::translateKey("UnknownAchievementCondition"), condition));
+        throw std::runtime_error(utility::replace(utility::translateKey("@UnknownAchievementCondition"), condition));
 }
 
 Achievement::Specifically AchievementManager::stringToSpecifically(const std::string& specifically)
@@ -196,7 +196,7 @@ Achievement::Specifically AchievementManager::stringToSpecifically(const std::st
     else if(specifically == "MaxOfTime")
         return Achievement::MaxOfTime;
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("UnknownAchievementSpecifically"), specifically));
+        throw std::runtime_error(utility::replace(utility::translateKey("@UnknownAchievementSpecifically"), specifically));
 }
 
 void AchievementManager::analyseGameEvents(const std::list<GameEvent>& gameEvents)

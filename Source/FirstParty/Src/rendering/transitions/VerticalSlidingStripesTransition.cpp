@@ -25,7 +25,7 @@ VerticalSlidingStripesTransition::VerticalSlidingStripesTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "VerticalSlidingStripesTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "VerticalSlidingStripesTransition"));
 
     if(sourceTexture != nullptr)
     {
@@ -37,7 +37,7 @@ VerticalSlidingStripesTransition::VerticalSlidingStripesTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "VerticalSlidingStripesTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@SourceTexture"), "VerticalSlidingStripesTransition"));
 }
 
 void VerticalSlidingStripesTransition::updated()

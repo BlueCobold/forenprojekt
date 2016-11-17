@@ -8,7 +8,7 @@ double ShaderContext::onGetValueOf(const std::string& name) const
     if(found != end(m_variables))
         return found->second;
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("NoVariable"), name));
+        throw std::runtime_error(utility::replace(utility::translateKey("@NoVariable"), name));
     return 0;
 }
 

@@ -27,7 +27,7 @@ VerticalHalvesTransition::VerticalHalvesTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "HorizontalMaskingStripesTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@SourceTexture"), "HorizontalMaskingStripesTransition"));
 
     if(targetTexture != nullptr)
     {

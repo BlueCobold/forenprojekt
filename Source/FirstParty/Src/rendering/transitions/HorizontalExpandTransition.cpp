@@ -25,7 +25,7 @@ HorizontalExpandTransition::HorizontalExpandTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "HorizontalExpandTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "HorizontalExpandTransition"));
 
     if(sourceTexture != nullptr)
     {
@@ -37,7 +37,7 @@ HorizontalExpandTransition::HorizontalExpandTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "HorizontalExpandTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@SourceTexture"), "HorizontalExpandTransition"));
 }
 
 void HorizontalExpandTransition::updated()

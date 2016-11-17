@@ -22,6 +22,7 @@ std::unique_ptr<MenuElement> CheckBox::doClone() const
 void CheckBox::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+    m_toolTip.update();
 
     auto currentPosition = getCurrentPosition();
     sf::IntRect checkboxRect(static_cast<int>(currentPosition.x + m_style.mouseRect.left),
@@ -104,10 +105,4 @@ void CheckBox::layoutUpdated(const sf::Vector2f& screenSize)
     m_style.uncheckedStyle.sprite.setPosition(currentPosition + m_style.uncheckedStyle.spriteOffset);
     m_style.checkedStyle.sprite.setPosition(currentPosition + m_style.checkedStyle.spriteOffset);
     m_style.hoverStyle.sprite.setPosition(currentPosition + m_style.hoverStyle.spriteOffset);
-}
-
-void CheckBox::setLanguage(const std::string& language)
-{
-    MenuElement::setLanguage(language);
-    m_toolTip.setLanguage(language);
 }

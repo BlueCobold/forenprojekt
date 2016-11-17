@@ -81,7 +81,7 @@ void CoinShopState::buy(const Goody::Type type, const std::string& propertyKey)
         else if(Goody::GravityGoody == type)
             m_achievementManager.addValueTo(Achievement::Buy, Achievement::InSum, Achievement::GravityGoody, 1);
         else
-            throw std::runtime_error(utility::translateKey("InvalidGoody"));
+            throw std::runtime_error(utility::translateKey("@InvalidGoody"));
 
         m_achievementManager.addValueTo(Achievement::Buy, Achievement::InSum, Achievement::GoodyGenaral, 1);
         m_achievementManager.addValueTo(Achievement::Buy, Achievement::InCash, Achievement::GoodyGenaral, cost);
@@ -110,7 +110,7 @@ void CoinShopState::sell(const Goody::Type type, const std::string& propertyKey)
         else if(Goody::GravityGoody == type)
             m_achievementManager.addValueTo(Achievement::Sell, Achievement::InSum, Achievement::GravityGoody, 1);
         else
-            throw std::runtime_error(utility::translateKey("InvalidGoody"));
+            throw std::runtime_error(utility::translateKey("@InvalidGoody"));
 
         m_achievementManager.addValueTo(Achievement::Sell, Achievement::InSum, Achievement::GoodyGenaral, 1);
         m_achievementManager.addValueTo(Achievement::Sell, Achievement::InCash, Achievement::GoodyGenaral, refund);
@@ -225,9 +225,4 @@ void CoinShopState::updateButtons()
     m_menu.getButton(CoinShopMenu::BUTTON_INVULNERABLE_MINUS).setVisible(m_config.get<int>("goodyinvulnerable") != 0);
     m_menu.getButton(CoinShopMenu::BUTTON_EXTRA_BALL_MINUS).setVisible(m_config.get<int>("goodyextraball") != 0);
     m_menu.getButton(CoinShopMenu::BUTTON_EXTRA_TIME_MINUS).setVisible(m_config.get<int>("goodyextratime") != 0);
-}
-
-void CoinShopState::setLanguage(const std::string& language)
-{
-    m_menu.setLanguage(language);
 }

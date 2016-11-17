@@ -28,7 +28,6 @@ public:
     void update();
     void passEvent(utility::Event::EventType type);
 
-    void setLanguage(const std::string& language);
 private:
     State* getState(StateId id) const;
 

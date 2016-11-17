@@ -50,7 +50,6 @@ public:
     AnimationContainer& getAnimation(int id) const;
 
     void setZoomFactor(float zoomFactor);
-    virtual void setLanguage(const std::string& language);
 
 protected:
     void doDraw(const DrawParameter& params) override;

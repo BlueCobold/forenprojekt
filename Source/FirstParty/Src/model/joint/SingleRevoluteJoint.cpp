@@ -32,7 +32,7 @@ bool SingleRevoluteJoint::reinstall(b2Body& body)
             m_jointDef.Initialize(&body, m_anchorBody, body.GetPosition() + m_jointDef.localAnchorA);
         }
         else
-            throw std::runtime_error(utility::replace(utility::translateKey("WrongBodyType"), "SingleRevoluteJoint"));
+            throw std::runtime_error(utility::replace(utility::translateKey("@WrongBodyType"), "SingleRevoluteJoint"));
 
         create(m_jointDef);
 
@@ -48,7 +48,7 @@ void SingleRevoluteJoint::update()
 void SingleRevoluteJoint::doCopyFrom(const JointObject& other)
 {
     if(getType() != other.getType())
-        throw std::runtime_error(utility::translateKey("JointCopyError"));
+        throw std::runtime_error(utility::translateKey("@JointCopyError"));
 
     auto joint = dynamic_cast<const SingleRevoluteJoint&>(other);
 

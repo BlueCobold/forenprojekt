@@ -17,7 +17,7 @@ GrowingRectangleTransition::GrowingRectangleTransition(
         m_targetSprites.setPosition(size.x / 2.f, size.y / 2.f);
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "GrowingRectangleTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "GrowingRectangleTransition"));
     if(sourceTexture != nullptr)
     {
         m_sourceSprite.setTexture(*sourceTexture, true);

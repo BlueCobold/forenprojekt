@@ -27,8 +27,7 @@ public:
     
     void setLevelInfo(const std::string& levelName,
                       const double time,
-                      const int balls,
-                      const std::string& language);
+                      const int balls);
     void setCoinToolTipText(const std::string& text, const std::string& coins);
 };
 

@@ -6,7 +6,7 @@
 #include <SFML/System/Mutex.hpp>
 
 LineLabel::LineLabel() :
-    MenuElement(-1, MenuElementType::Label, sf::Vector2f(0,0), sf::Vector2f(0,0), ""),
+    MenuElement(-1, MenuElementType::Label, sf::Vector2f(0,0), sf::Vector2f(0,0)),
     m_text(""),
     m_textKey(""),
     m_rotation(0),
@@ -21,10 +21,9 @@ LineLabel::LineLabel(const std::string& text,
                     const sf::Vector2f& offset,
                     const float rotation,
                     const BitmapFont* font,
-                    const std::string& language,
                     Alignment alignment,
                     int id) :
-    MenuElement(id, MenuElementType::Label, position, offset, language),
+    MenuElement(id, MenuElementType::Label, position, offset),
     m_textKey(text),
     m_rotation(rotation),
     m_font(font),
@@ -32,7 +31,7 @@ LineLabel::LineLabel(const std::string& text,
     m_progressPosition(0, 0)
 {
     if(m_textKey != "")
-        m_text = utility::translateKey(getLanguage() + m_textKey);
+        m_text = utility::translateKey(m_textKey);
     else
         m_text = "";
 
@@ -46,10 +45,9 @@ LineLabel::LineLabel(const std::string& text,
                      const float rotation,
                      const MenuElementType::Type type,
                      const BitmapFont* font,
-                     const std::string& language,
                      const Alignment alignment,
                      int id) :
-    MenuElement(id, type, position, offset, language),
+    MenuElement(id, type, position, offset),
     m_textKey(text),
     m_rotation(rotation),
     m_font(font),
@@ -57,7 +55,7 @@ LineLabel::LineLabel(const std::string& text,
     m_progressPosition(0, 0)
 {
     if(m_textKey != "")
-        m_text = utility::translateKey(getLanguage() + m_textKey);
+        m_text = utility::translateKey( m_textKey);
     else
         m_text = "";
     
@@ -67,7 +65,7 @@ LineLabel::LineLabel(const std::string& text,
 
 std::unique_ptr<MenuElement> LineLabel::doClone() const
 {
-    auto clone = std::unique_ptr<MenuElement>(new LineLabel(m_textKey, getPosition(), getOffset(), m_rotation, getType(), m_font, getLanguage(), m_alignment, getId()));
+    auto clone = std::unique_ptr<MenuElement>(new LineLabel(m_textKey, getPosition(), getOffset(), m_rotation, getType(), m_font, m_alignment, getId()));
     clone->setVisibleWhenId(getVisibleWhenId());
     return std::move(clone);
 }
@@ -98,11 +96,12 @@ void LineLabel::doDraw(const DrawParameter& params)
     }
 }
 
-void LineLabel::setText(const std::string& text)
+void LineLabel::setText(const std::string& text, const std::string& key)
 {
     if(text != m_text)
     {
         m_text = text;
+        m_textKey = key;
         rebuild();
     }
 }
@@ -250,16 +249,11 @@ void LineLabel::layoutUpdated(const sf::Vector2f& screenSize)
 void LineLabel::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
-}
-
-void LineLabel::setLanguage(const std::string& language)
-{
-    MenuElement::setLanguage(language);
-
+    
     if(m_textKey != "")
-        m_text = utility::translateKey(getLanguage() + m_textKey);
-    else
-        m_text = "";
-
-    rebuild();
+    {
+        auto next = utility::translateKey(m_textKey);
+        if(next != m_text)
+            setText(next, m_textKey);
+    }
 }

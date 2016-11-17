@@ -40,7 +40,7 @@ namespace utility
     {
         sf::Color color;
         if(hex.length() < 8)
-            throw std::runtime_error(translateKey("InvalidColorFormat"));
+            throw std::runtime_error(translateKey("@InvalidColorFormat"));
         color.r = hexToInt(hex.substr(0, 2));
         color.g = hexToInt(hex.substr(2, 2));
         color.b = hexToInt(hex.substr(4, 2));
@@ -48,10 +48,24 @@ namespace utility
         return color;
     }
 
-    std::string translateKey(std::string key)
+    std::string _language;
+    void setLanguage(const std::string& language)
+    {
+        _language = language;
+    }
+
+    std::string translateKey(const std::string& key)
     {
         static FileReader File("res/language.dat", true);
-        return File.get(key);
+        // don't attach language key to strings starting with @
+        // don't translate at all if it starts with @@
+        if(key.length() >= 2 && key[0] == '@')
+        {
+            if(key[1] == '@')
+                return key.substr(2);
+            return File.get(key.substr(1));
+        }
+        return File.get(_language + "_" + key);
     }
 
     std::string replace(std::string string, std::string needle, std::string replacement)
@@ -147,7 +161,7 @@ namespace utility
             }
         }
         else
-            throw std::runtime_error(utility::replace(utility::translateKey("MissingFile"), file));
+            throw std::runtime_error(utility::replace(utility::translateKey("@MissingFile"), file));
 
         return message;
     }

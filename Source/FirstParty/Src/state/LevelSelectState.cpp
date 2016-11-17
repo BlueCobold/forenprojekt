@@ -125,7 +125,7 @@ void LevelSelectState::loadLevelInfos()
         if(doc.Error()) // Error while loading file
         {
             auto msg = std::string(doc.GetErrorStr1() ? doc.GetErrorStr1() : "");
-            auto error = utility::replace(utility::translateKey("InvalidXml"), file + " [" + msg +"]");
+            auto error = utility::replace(utility::translateKey("@InvalidXml"), file + " [" + msg +"]");
             if(doc.GetErrorStr2())
                 error += std::string(" / ") + doc.GetErrorStr2();
             throw std::runtime_error(error);
@@ -199,9 +199,4 @@ void LevelSelectState::updateButtons()
         m_menu.hideRightButton(true);
     else
         updateRightButton();
-}
-
-void LevelSelectState::setLanguage(const std::string& language)
-{
-    m_menu.setLanguage(language);
 }

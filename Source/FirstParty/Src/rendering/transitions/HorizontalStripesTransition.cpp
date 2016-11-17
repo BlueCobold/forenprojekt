@@ -20,7 +20,7 @@ HorizontalStripesTransition::HorizontalStripesTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "HorizontalStripesTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "HorizontalStripesTransition"));
     if(sourceTexture != nullptr)
     {
         m_sourceSprite.setTexture(*sourceTexture, true);

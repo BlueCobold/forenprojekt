@@ -45,7 +45,7 @@ public:
     sf::RenderTarget& getTarget(unsigned int bufferLayer) const
     {
         if(bufferLayer > m_buffers.size())
-            throw std::runtime_error(utility::translateKey("UnknownLayer"));
+            throw std::runtime_error(utility::translateKey("@UnknownLayer"));
 
         auto buffer = m_buffers[bufferLayer];
         return *buffer;

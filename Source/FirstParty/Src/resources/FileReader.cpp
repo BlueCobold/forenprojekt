@@ -137,17 +137,11 @@ void FileReader::readString()
 
 std::string FileReader::get(const std::string& key) const
 {
-    if(key.find("@@") != std::string::npos)
-        return key.substr(5);
-
-    // Default return value
-    std::string output = std::string("Key not found: ") + key;
-
     auto it = m_content.find(key);
     if(it != end(m_content))
         return it->second;
     else
-        return output;
+        return std::string("Key not found: ") + key;
 }
 
 std::string FileReader::getFileName()

@@ -374,7 +374,7 @@ double Level::onGetValueOf(const std::string& name) const
     if(match == end(m_variables))
     {
         if(m_updatingEntity == nullptr)
-            throw std::runtime_error(utility::replace(utility::translateKey("GetVariable"), name));
+            throw std::runtime_error(utility::replace(utility::translateKey("@GetVariable"), name));
         return m_updatingEntity->getValueOf(name);
     }
     return match->second;
@@ -502,7 +502,6 @@ void Level::createLabelAt(const sf::Vector2f& position, const std::string& fontN
             sf::Vector2f(), position, 
             0,
             m_resourceManager->getBitmapFont(fontName),
-            "ml_",
             LineLabel::Centered));
 
     m_pointLabels.push_back(std::unique_ptr<TimedLabel>(new TimedLabel(std::move(label), getPassedTime())));
@@ -628,7 +627,7 @@ const Goody Level::getGoody (const Goody::Type& type) const
         return m_extraTimeGoody;
     else if(type == Goody::ExtraBallGoody)
         return m_extraBallGoody;
-    throw new std::runtime_error(utility::translateKey("InvalidGoody"));
+    throw new std::runtime_error(utility::translateKey("@InvalidGoody"));
 }
 
 void Level::onGoodyActivated(Goody &sender)

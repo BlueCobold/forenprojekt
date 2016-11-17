@@ -42,6 +42,7 @@ int main(int argc, char* argv[])
         previous = sf::err().rdbuf(file.rdbuf());
         sf::err() << "=== Rickety Racquet starting ===" << std::endl;
         AppConfig configFile("Config.ini", "stash.dat");
+        utility::setLanguage(configFile.get<std::string>("language"));
 
         App app(configFile);
         app.run();

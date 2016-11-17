@@ -31,11 +31,10 @@ public:
         const sf::Vector2f& offset,
         const float rotation,
         const BitmapFont* font,
-        const std::string& language,
         const Alignment alignment = Left,
         int id = -1);
 
-    void setText(const std::string& text);
+    void setText(const std::string& text, const std::string& key = "");
     std::string getText() const;
     float getWidth() const;
 
@@ -60,14 +59,11 @@ public:
         const float rotation,
         const MenuElementType::Type type,
         const BitmapFont* font,
-        const std::string& language,
         const Alignment alignment = Left,
         int id = -1);
 
     Alignment getAlignment() const;
     const BitmapFont* getFont() const;
-
-    void setLanguage(const std::string& language) override;
     
 protected:
     void doDraw(const DrawParameter& params) override;

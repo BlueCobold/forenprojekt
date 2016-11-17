@@ -26,7 +26,7 @@ public:
     {
        for(auto it = begin(m_provider); it != end(m_provider); ++it)
            if((*it) == nullptr)
-                throw std::runtime_error(utility::translateKey("ProviderNull"));
+                throw std::runtime_error(utility::translateKey("@ProviderNull"));
     }
 
 protected:

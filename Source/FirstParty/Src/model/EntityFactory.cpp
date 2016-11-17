@@ -15,7 +15,7 @@ EntityFactory::EntityFactory(CloneHandler& cloneHandler,
     m_transferOwnSpeed(false)
 {
     if(minDelayTime <= 0 || maxDelayTime <= 0)
-        throw std::runtime_error(utility::translateKey("InvalidFactoryTime"));
+        throw std::runtime_error(utility::translateKey("@InvalidFactoryTime"));
 }
 
 void EntityFactory::updated()

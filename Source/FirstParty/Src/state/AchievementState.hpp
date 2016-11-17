@@ -20,7 +20,6 @@ public:
 
     StateChangeInformation update(const double time) override;
     void onEnter(const EnterStateInformation* enterInformation, const double time) override;
-    void setLanguage(const std::string& language) override;
 
 private:
     AchievementMenu m_menu;

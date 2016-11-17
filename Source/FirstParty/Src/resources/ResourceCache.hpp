@@ -36,7 +36,7 @@ public:
 
         auto resource = func();
         if(resource == nullptr)
-            throw std::runtime_error(utility::replace(utility::translateKey("LoadFail"), key));
+            throw std::runtime_error(utility::replace(utility::translateKey("@LoadFail"), key));
 
         auto ptr = resource.get();
         m_resources.insert(std::make_pair(key, std::move(resource)));

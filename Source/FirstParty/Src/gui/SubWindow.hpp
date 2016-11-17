@@ -47,8 +47,6 @@ public:
     void setInnerHeight(int innerHeight);
     void setZoomFactor(float zoomFactor);
 
-    void setLanguage(const std::string& language) override;
-
 private:
     MenuPanel m_panel;
     SubWindowStyle m_style;

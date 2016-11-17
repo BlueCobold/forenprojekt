@@ -80,7 +80,7 @@ BitmapFont::Glyph BitmapFont::getGlyph(const char key) const
 
     throw std::runtime_error(
         utility::replace(
-            utility::replace(utility::translateKey("UnknownGlyph"), m_fileName),
+            utility::replace(utility::translateKey("@UnknownGlyph"), m_fileName),
         utility::toString(key)));
 }
 

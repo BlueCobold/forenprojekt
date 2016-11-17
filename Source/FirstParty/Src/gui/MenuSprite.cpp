@@ -44,6 +44,7 @@ void MenuSprite::updated(const sf::RenderWindow& screen, const double time, cons
     {
         m_showToolTip = true;
         m_toolTip.setPosition(static_cast<const sf::Vector2f>(mousePosition), screen);
+        m_toolTip.update();
     }
     else
         m_showToolTip = false;  
@@ -75,10 +76,4 @@ void MenuSprite::onDrawAdditionalForeground(const DrawParameter& params)
 void MenuSprite::layoutUpdated(const sf::Vector2f& screenSize)
 {
     m_sprite.setPosition(getCurrentPosition());
-}
-
-void MenuSprite::setLanguage(const std::string& language)
-{
-    MenuElement::setLanguage(language);
-    m_toolTip.setLanguage(language);
 }

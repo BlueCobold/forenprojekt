@@ -29,7 +29,7 @@ HorizontalSlicesTransition::HorizontalSlicesTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "HorizontalSlicesTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "HorizontalSlicesTransition"));
 
     if(sourceTexture != nullptr)
     {

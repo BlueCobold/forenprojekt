@@ -25,7 +25,7 @@ HorizontalCompressTransition::HorizontalCompressTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "HorizontalCompressTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "HorizontalCompressTransition"));
 
     if(sourceTexture != nullptr)
     {
@@ -37,7 +37,7 @@ HorizontalCompressTransition::HorizontalCompressTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "HorizontalCompressTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@SourceTexture"), "HorizontalCompressTransition"));
 }
 
 void HorizontalCompressTransition::updated()

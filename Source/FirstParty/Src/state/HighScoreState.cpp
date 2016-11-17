@@ -72,7 +72,7 @@ StateChangeInformation HighScoreState::update(const double time)
     if(State::isPaused())
         return StateChangeInformation::Empty();
 
-    std::string text(utility::translateKey("de_gui_loading_screen"));
+    std::string text(utility::translateKey("gui_loading_screen"));
 
     m_clicked = -1;
 
@@ -276,9 +276,4 @@ void HighScoreState::buildSubWindowElements()
         m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).setInnerHeight(m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).getInnerHeight() - static_cast<int>(m_offset.y));
         m_offsetAdded = false;
     }
-}
-
-void HighScoreState::setLanguage(const std::string& language)
-{
-    m_menu.setLanguage(language);
 }

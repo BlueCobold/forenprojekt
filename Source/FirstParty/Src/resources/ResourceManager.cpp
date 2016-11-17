@@ -172,7 +172,7 @@ const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
     return getOrFail<MenuTemplate, std::string>(m_menuKeys, *m_menusPtr, key,
         [=](const std::string& path)->std::function<std::unique_ptr<MenuTemplate>()>
         {
-            return [=](){ return MenuLoader::loadMenuTemplate(std::string("res/menus/") + path, *self, m_config.get<std::string>("language")); };
+            return [=](){ return MenuLoader::loadMenuTemplate(std::string("res/menus/") + path, *self); };
         }, "UnknownMenuTemplate");
 }
 
@@ -204,7 +204,7 @@ void ResourceManager::addTexture(const std::string& key, const sf::Texture& text
 Shader* ResourceManager::getShader(const std::string& key)
 {
     if(!Shader::isAvailable())
-        throw std::runtime_error(utility::translateKey("ShadersNotAvailable"));
+        throw std::runtime_error(utility::translateKey("@ShadersNotAvailable"));
 
     auto self = this;
     return getOrFail<Shader, ShaderParams>(m_shaderKeys, *m_shadersPtr, key,
@@ -350,7 +350,7 @@ CryptoPP::RSA::PublicKey* ResourceManager::getPublicKey(const std::string& key)
         }
     }
 
-    throw std::runtime_error(utility::replace(utility::translateKey("UnknownPublicKey"), key));
+    throw std::runtime_error(utility::replace(utility::translateKey("@UnknownPublicKey"), key));
 }
 
 void ResourceManager::parseHashValues(tinyxml2::XMLDocument& doc)
@@ -372,7 +372,7 @@ std::string ResourceManager::getHashValue(const std::string& key)
     if(result != end(m_hashValues))
         return result->second;
 
-    throw std::runtime_error(utility::replace(utility::translateKey("UnknownHashValue"), key));
+    throw std::runtime_error(utility::replace(utility::translateKey("@UnknownHashValue"), key));
 }
 
 void ResourceManager::parseMusic(tinyxml2::XMLDocument& doc)

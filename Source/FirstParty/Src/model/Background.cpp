@@ -43,14 +43,14 @@ void Background::updateParallax(const sf::View& view)
 double Background::onGetValueOf(const std::string& name) const
 {
     if(m_updatingAni == nullptr)
-         throw std::runtime_error(utility::replace(utility::translateKey("GetVariable"), name));
+         throw std::runtime_error(utility::replace(utility::translateKey("@GetVariable"), name));
     return m_updatingAni->getValueOf(name);
 }
 
 void Background::onSetValueOf(const std::string& name, const double value)
 {
     if(m_updatingAni == nullptr)
-        throw std::runtime_error(utility::replace(utility::translateKey("SetVariable"), name));
+        throw std::runtime_error(utility::replace(utility::translateKey("@SetVariable"), name));
     m_updatingAni->setValueOf(name, value);
 }
 

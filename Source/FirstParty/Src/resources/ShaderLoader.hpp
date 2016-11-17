@@ -48,11 +48,11 @@ public:
         if(doc.Error())
         {
             doc.PrintError();
-            throw std::runtime_error(utility::replace(utility::translateKey("ShaderFileInvalid"), path));
+            throw std::runtime_error(utility::replace(utility::translateKey("@ShaderFileInvalid"), path));
         }
         tinyxml2::XMLElement* xml = doc.FirstChildElement("shader");
         if(xml == nullptr)
-            throw std::runtime_error(utility::replace(utility::translateKey("ShaderEntryMissing"), path));
+            throw std::runtime_error(utility::replace(utility::translateKey("@ShaderEntryMissing"), path));
 
         parseParameters(shader, xml, resourceManager);
     }

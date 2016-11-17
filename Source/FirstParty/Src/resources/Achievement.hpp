@@ -67,7 +67,7 @@ public:
     const bool isSilver() const;
     const bool isGold() const;
     const std::string getId() const;
-    const std::string getName(const std::string& language) const;
+    const std::string getName() const;
     const std::string getKey() const;
 
     static std::string createId(Achievement::Condition condition,

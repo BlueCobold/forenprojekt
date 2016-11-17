@@ -144,8 +144,3 @@ void LevelFailState::setAchievements()
 
     m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::Level, 1);
 }
-
-void LevelFailState::setLanguage(const std::string& language)
-{
-    m_menu.setLanguage(language);
-}

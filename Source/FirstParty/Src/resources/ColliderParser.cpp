@@ -64,7 +64,7 @@ std::unique_ptr<CollisionHandler> ColliderParser::parse(const tinyxml2::XMLEleme
                 if(isInvul())
                     return;
                 if(entityA.getType() != Entity::Ball && entityB.getType() != Entity::Ball)
-                    throw std::runtime_error(utility::replace(utility::translateKey("EntityNoCollision"), "Ball"));
+                    throw std::runtime_error(utility::replace(utility::translateKey("@EntityNoCollision"), "Ball"));
                 auto& ball = getBall();
                 ball.blowUp();
                 if(auto killAnimation = ball.getKillAnimationEntity())
@@ -80,11 +80,11 @@ std::unique_ptr<CollisionHandler> ColliderParser::parse(const tinyxml2::XMLEleme
         {
             auto name = child->Attribute("name");
             if(!name)
-                throw std::runtime_error(utility::translateKey("SpawnWithoutName"));
+                throw std::runtime_error(utility::translateKey("@SpawnWithoutName"));
 
             auto spawned = m_parser(name);
             if(spawned == nullptr)
-                throw std::runtime_error(utility::replace(utility::translateKey("UnknownEntityName"), name));
+                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownEntityName"), name));
 
             SpawnLocation location = BallLoc;
             auto loc = child->Attribute("location");
@@ -114,7 +114,7 @@ std::unique_ptr<CollisionHandler> ColliderParser::parse(const tinyxml2::XMLEleme
             return std::move(handler);
         }
         else
-            throw std::runtime_error(utility::replace(utility::translateKey("UnknownCollider"), child->Name()));
+            throw std::runtime_error(utility::replace(utility::translateKey("@UnknownCollider"), child->Name()));
     }
     return nullptr;
 }

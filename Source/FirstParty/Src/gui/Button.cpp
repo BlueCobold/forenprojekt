@@ -6,9 +6,8 @@
 Button::Button(int id, ButtonStyle style,
                const sf::Vector2f& position,
                const sf::Vector2f& offset,
-               const std::string& language,
                bool triggers) :
-    MenuElement(id, MenuElementType::Button, position, offset, language),
+    MenuElement(id, MenuElementType::Button, position, offset),
     m_style(std::move(style)),
     m_showToolTip(false),
     m_isTriggering(triggers),
@@ -39,7 +38,7 @@ Button::Button(int id, ButtonStyle style,
 
 std::unique_ptr<MenuElement> Button::doClone() const
 {
-    auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), getOffset(), getLanguage(), m_isTriggering));
+    auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), getOffset(), m_isTriggering));
     clone->setVisibleWhenId(getVisibleWhenId());
     clone->m_toolTip = m_toolTip;
     return std::move(clone);
@@ -49,6 +48,7 @@ void Button::updated(const sf::RenderWindow& screen, const double time, const sf
 {
     auto screenSize = static_cast<sf::Vector2f>(screen.getSize());
     updateLayout(screenSize);
+    m_toolTip.update();
 
     auto currentPosition = getCurrentPosition();
     sf::IntRect buttonRect(static_cast<int>(currentPosition.x + m_style.mouseRect.left - getSize().x / 2),
@@ -95,6 +95,7 @@ void Button::updated(const sf::RenderWindow& screen, const double time, const sf
         m_showToolTip = false;
     }
 
+    m_currentStyle->label.update(screen, time, mouseOffset);
     if(m_currentStyle->animation != nullptr)
         m_currentStyle->animation->update(screen, time, mouseOffset);
 }
@@ -191,13 +192,4 @@ void Button::layoutUpdated(const sf::Vector2f& screenSize)
     }
     
     m_currentStyle->label.updateLayout(screenSize);
-}
-
-void Button::setLanguage(const std::string& language)
-{
-    MenuElement::setLanguage(language);
-    m_toolTip.setLanguage(language);
-    m_style.idleStyle.label.setLanguage(language);
-    m_style.hoverStyle.label.setLanguage(language);
-    m_style.pressedStyle.label.setLanguage(language);
 }

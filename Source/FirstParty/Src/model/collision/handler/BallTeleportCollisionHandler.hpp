@@ -26,7 +26,7 @@ private:
         else if(entityB.getType() == Entity::Ball)
             dynamic_cast<Ball&>(entityB).teleportTo(m_x, m_y, m_kill);
         else
-            throw std::runtime_error(utility::replace(utility::translateKey("EntityNoCollision"), "Ball"));
+            throw std::runtime_error(utility::replace(utility::translateKey("@EntityNoCollision"), "Ball"));
     }
 };
 

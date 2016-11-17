@@ -25,7 +25,7 @@ HorizontalSlidingStripesTransition::HorizontalSlidingStripesTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "HorizontalSlidingStripesTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "HorizontalSlidingStripesTransition"));
 
     if(sourceTexture != nullptr)
     {
@@ -37,7 +37,7 @@ HorizontalSlidingStripesTransition::HorizontalSlidingStripesTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "HorizontalSlidingStripesTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@SourceTexture"), "HorizontalSlidingStripesTransition"));
 }
 
 void HorizontalSlidingStripesTransition::updated()

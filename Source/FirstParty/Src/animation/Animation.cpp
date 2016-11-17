@@ -275,16 +275,16 @@ void Animation::setLayout(
     const std::vector<sf::Vector2i>& origins)
 {
     if(m_frames > srcPositions.size())
-        throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "srcPositions"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@InvalidLayout"), "srcPositions"));
 
     if(m_frames > srcOffsets.size())
-        throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "srcOffsets"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@InvalidLayout"), "srcOffsets"));
 
     if(m_frames > sizes.size())
-        throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "sizes"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@InvalidLayout"), "sizes"));
 
     if(m_frames > origins.size())
-        throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), "origins"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@InvalidLayout"), "origins"));
 
     for(unsigned i = 0; i < m_frames; i++)
         m_sizes.push_back(sf::IntRect(srcPositions[i].x, srcPositions[i].y, sizes[i].x, sizes[i].y));

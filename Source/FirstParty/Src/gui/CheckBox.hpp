@@ -22,8 +22,6 @@ public:
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text, const std::string& replacement = "");
 
-    void setLanguage(const std::string& language) override;
-
 private:
     void doDraw(const DrawParameter& params) override;
     void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;

@@ -42,7 +42,7 @@ void CoinShopMenu::setGoodyCharges(const Goody::Type& goody, const int charges)
     case Goody::ExtraTimeGoody:
         return Menu::getLabel(LABEL_EXTRA_TIME).setText(utility::toString<int>(charges));
     default:
-        throw std::runtime_error(utility::translateKey("InvalidGoody"));
+        throw std::runtime_error(utility::translateKey("@InvalidGoody"));
     }
 }
 
@@ -65,7 +65,7 @@ void CoinShopMenu::setGoodyIcon(const Goody::Type& goody, const int charges)
     case Goody::ExtraTimeGoody:
         return Menu::getSprite(SPRITE_EXTRA_TIME).setTextureRect(textureRect);
     default:
-        throw std::runtime_error(utility::translateKey("InvalidGoody"));
+        throw std::runtime_error(utility::translateKey("@InvalidGoody"));
     }
 }
 
@@ -82,7 +82,7 @@ int CoinShopMenu::getBuyCost(const Goody::Type& goody) const
     case Goody::ExtraTimeGoody:
         return Price_Extra_Time;
     default:
-        throw std::runtime_error(utility::translateKey("InvalidGoody"));
+        throw std::runtime_error(utility::translateKey("@InvalidGoody"));
     }
 }
 
@@ -99,20 +99,6 @@ int CoinShopMenu::getSellRefund(const Goody::Type& goody) const
     case Goody::ExtraTimeGoody:
         return static_cast<int>(Price_Extra_Time * SellModifier);
     default:
-        throw std::runtime_error(utility::translateKey("InvalidGoody"));
+        throw std::runtime_error(utility::translateKey("@InvalidGoody"));
     }
-}
-
-void CoinShopMenu::setLanguage(const std::string& language)
-{
-    Menu::setLanguage(language);
-
-    setToolTip(BUTTON_GRAVITY_PLUS, "tooltip_goody_cost", Price_Gravity);
-    setToolTip(BUTTON_GRAVITY_MINUS, "tooltip_goody_refund", static_cast<int>(Price_Gravity * SellModifier));
-    setToolTip(BUTTON_INVULNERABLE_PLUS, "tooltip_goody_cost", Price_Invulnerable);
-    setToolTip(BUTTON_INVULNERABLE_MINUS, "tooltip_goody_refund", static_cast<int>(Price_Invulnerable * SellModifier));
-    setToolTip(BUTTON_EXTRA_BALL_PLUS, "tooltip_goody_cost", Price_Invulnerable);
-    setToolTip(BUTTON_EXTRA_BALL_MINUS, "tooltip_goody_refund", static_cast<int>(Price_Invulnerable * SellModifier));
-    setToolTip(BUTTON_EXTRA_TIME_PLUS, "tooltip_goody_cost", Price_Extra_Time);
-    setToolTip(BUTTON_EXTRA_TIME_MINUS, "tooltip_goody_refund", static_cast<int>(Price_Extra_Time * SellModifier));
 }

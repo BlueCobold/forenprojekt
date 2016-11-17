@@ -84,7 +84,7 @@ std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLEl
         }
     }
     if(texture == nullptr)
-        throw std::runtime_error(utility::translateKey("NoTextureFound"));
+        throw std::runtime_error(utility::translateKey("@NoTextureFound"));
 
     int width = -1, height = -1;
     if(sheet != nullptr)
@@ -155,7 +155,7 @@ std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLEl
     {
         auto child = frameIndex->FirstChildElement();
         if(child == nullptr)
-            throw std::runtime_error(utility::translateKey("NoProvider"));
+            throw std::runtime_error(utility::translateKey("@NoProvider"));
         anim->bindFrameProvider(providerParser.parseSingle(*child));
     }
     else
@@ -195,7 +195,7 @@ std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLEl
         if(auto sprites = layout->FirstChildElement("sprites"))
         {
             if(sheet == nullptr)
-                throw std::runtime_error(utility::translateKey("CannotUseSpriteLayout"));
+                throw std::runtime_error(utility::translateKey("@CannotUseSpriteLayout"));
 
             std::vector<sf::Vector2i> srcPos, sizes, origins, srcOffset;
             ValueParser::parseSpriteValueList(*sprites, *sheet, srcPos, srcOffset, sizes, origins);

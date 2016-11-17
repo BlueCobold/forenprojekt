@@ -88,7 +88,7 @@ void TemplateParser::parseIncludes(const tinyxml2::XMLElement& xml, Templates& t
         if(doc->Error())
         {
             doc->PrintError();
-            throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filename));
+            throw std::runtime_error(utility::replace(utility::translateKey("@InvalidXml"), filename));
         }
 
         if(auto root = doc->RootElement())

@@ -93,7 +93,8 @@ namespace utility
     // "RRGGBBAA"
     sf::Color hexToColor(const std::string& hex);
 
-    std::string translateKey(std::string key);
+    void setLanguage(const std::string& language);
+    std::string translateKey(const std::string& key);
 
     std::string replace(std::string string, std::string needle, std::string replacement);
     std::string replace(std::string string, std::string replacement);

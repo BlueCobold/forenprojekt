@@ -51,7 +51,7 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
     m_menu.setPoints(m_level->getPoints());
     m_menu.setGrade(m_level->getMedal());
     m_menu.setLostBalls(m_level->getLostBalls());
-    std::string text = "@@" + utility::replace(utility::replace(utility::replace(utility::translateKey(m_config.get<std::string>("language") + "tooltip_medals"),
+    std::string text = "@@" + utility::replace(utility::replace(utility::replace(utility::translateKey("tooltip_medals"),
                                             utility::toString(m_level->getMedal(Level::Gold))),   // first replace
                                             utility::toString(m_level->getMedal(Level::Silver))), // second replace
                                             utility::toString(m_level->getMedal(Level::Bronze))); // third replace
@@ -263,23 +263,4 @@ void LevelPassState::setAchievements()
 
     m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::Ball, m_level->getLostBalls());
     m_achievementManager.addValueTo(Achievement::Collect, Achievement::InSum, Achievement::Stars, stars);
-}
-
-void LevelPassState::setLanguage(const std::string& language)
-{
-    m_menu.setLanguage(language);
-
-    if(m_level != nullptr)
-    {
-        std::string text = "@@" + utility::replace(utility::replace(utility::replace(utility::translateKey(m_config.get<std::string>("language") + "tooltip_medals"),
-                                                   utility::toString(m_level->getMedal(Level::Gold))),   // first replace
-                                                   utility::toString(m_level->getMedal(Level::Silver))), // second replace
-                                                   utility::toString(m_level->getMedal(Level::Bronze))); // third replace
-
-        m_menu.setMedalToolTipText(text);
-
-        m_menu.setPoints(m_level->getPoints());
-        m_menu.setGrade(m_level->getMedal());
-        m_menu.setLostBalls(m_level->getLostBalls());
-    }
 }

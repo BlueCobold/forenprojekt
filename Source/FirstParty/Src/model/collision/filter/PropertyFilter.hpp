@@ -33,7 +33,7 @@ protected:
     bool onShouldCollide(Entity& entityA, Entity& entityB) override
     {
         if(m_provider == nullptr)
-            throw std::runtime_error(utility::translateKey("FilterNull"));
+            throw std::runtime_error(utility::translateKey("@FilterNull"));
         m_entityA = &entityA;
         m_entityB = &entityB;
         auto val = m_provider->getValue();
@@ -58,11 +58,11 @@ private:
         if(name.length() >= 5 && name.substr(0, 5) == "ball:")
         {
             if(m_entityB == nullptr)
-                throw std::runtime_error(utility::replace(utility::translateKey("GetVariable"), "ball"));
+                throw std::runtime_error(utility::replace(utility::translateKey("@GetVariable"), "ball"));
             return m_entityB->getValueOf(name.substr(5));
         }
         if(m_entityA == nullptr)
-            throw std::runtime_error(utility::replace(utility::translateKey("GetVariable"), "entity"));
+            throw std::runtime_error(utility::replace(utility::translateKey("@GetVariable"), "entity"));
         return m_entityA->getValueOf(name);
     }
 
@@ -74,12 +74,12 @@ private:
         if(name.length() >= 5 && name.substr(5) == "ball:")
         {
             if(m_entityB == nullptr)
-                throw std::runtime_error(utility::replace(utility::translateKey("SetVariable"), "ball"));
+                throw std::runtime_error(utility::replace(utility::translateKey("@SetVariable"), "ball"));
             m_entityB->setValueOf(name.substr(5), value);
             return;
         }
         if(m_entityA == nullptr)
-             throw std::runtime_error(utility::replace(utility::translateKey("SetVariable"), "entity"));
+             throw std::runtime_error(utility::replace(utility::translateKey("@SetVariable"), "entity"));
         return m_entityA->setValueOf(name, value);
     }
 
@@ -88,13 +88,13 @@ private:
         if(m_useValuesFromA)
         {
             if(m_entityA == nullptr)
-                throw std::runtime_error(utility::replace(utility::translateKey("ReceiveTimestamp"), "entity"));
+                throw std::runtime_error(utility::replace(utility::translateKey("@ReceiveTimestamp"), "entity"));
             return m_entityA->getPassedTime();
         }
         else
         {
             if(m_entityB == nullptr)
-                throw std::runtime_error(utility::replace(utility::translateKey("ReceiveTimestamp"), "ball"));
+                throw std::runtime_error(utility::replace(utility::translateKey("@ReceiveTimestamp"), "ball"));
             return m_entityB->getPassedTime();
         }
     }
@@ -104,13 +104,13 @@ private:
         if(m_useValuesFromA)
         {
             if(m_entityA == nullptr)
-                throw std::runtime_error(utility::replace(utility::translateKey("ReceiveAngle"), "entity"));
+                throw std::runtime_error(utility::replace(utility::translateKey("@ReceiveAngle"), "entity"));
             return m_entityA->getAngle();
         }
         else
         {
             if(m_entityB == nullptr)
-                throw std::runtime_error(utility::replace(utility::translateKey("ReceiveAngle"), "ball"));
+                throw std::runtime_error(utility::replace(utility::translateKey("@ReceiveAngle"), "ball"));
             return m_entityB->getAngle();
         }
     }

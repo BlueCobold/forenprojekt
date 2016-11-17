@@ -149,7 +149,7 @@ std::unique_ptr<Transition> RandomTransition::createTransition(int randomCount)
         default:
         break;
     }
-    throw std::runtime_error(utility::replace(utility::translateKey("RandomTransition"), utility::toString(randomCount)));
+    throw std::runtime_error(utility::replace(utility::translateKey("@RandomTransition"), utility::toString(randomCount)));
 }
 
 void RandomTransition::updated()

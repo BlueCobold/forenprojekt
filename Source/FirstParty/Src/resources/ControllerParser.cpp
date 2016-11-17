@@ -92,7 +92,7 @@ std::unique_ptr<ValueProvider> ControllerParser::findController(
         }
 
         if(iterator->FirstChildElement() == nullptr)
-            throw std::runtime_error(utility::translateKey("SubTag"));
+            throw std::runtime_error(utility::translateKey("@SubTag"));
 
         return m_providerParser.parseSingle(*iterator->FirstChildElement());
     }

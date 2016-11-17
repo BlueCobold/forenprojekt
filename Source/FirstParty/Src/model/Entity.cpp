@@ -87,7 +87,7 @@ double Entity::onGetValueOf(const std::string& name) const
     if(match == end(m_variables))
     {
         if(m_updatingAni == nullptr)
-            throw std::runtime_error(utility::replace(utility::translateKey("GetVariable"), name));
+            throw std::runtime_error(utility::replace(utility::translateKey("@GetVariable"), name));
         return m_updatingAni->getValueOf(name);
     }
     return match->second;

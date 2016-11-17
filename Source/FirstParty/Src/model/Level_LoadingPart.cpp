@@ -22,10 +22,10 @@ void Level::load()
 {
 #ifndef LEVELTESTING
     if(m_number == 0) // Level start from 1
-        throw std::runtime_error(utility::replace(utility::translateKey("InvalidLevelNumber"), filename()));
+        throw std::runtime_error(utility::replace(utility::translateKey("@InvalidLevelNumber"), filename()));
 
     if(!isOriginal())
-        throw std::runtime_error(utility::replace(utility::translateKey("NoOriginalFile"), filename()));
+        throw std::runtime_error(utility::replace(utility::translateKey("@NoOriginalFile"), filename()));
 
 #endif
     tinyxml2::XMLDocument doc;
@@ -42,12 +42,12 @@ void Level::load()
     if(doc.Error())
     {
         doc.PrintError();
-        throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filePath));
+        throw std::runtime_error(utility::replace(utility::translateKey("@InvalidXml"), filePath));
     }
 
     auto levelXml = doc.FirstChildElement("level");
     if(!levelXml)
-        throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filePath));
+        throw std::runtime_error(utility::replace(utility::translateKey("@InvalidXml"), filePath));
     
     if(auto setup = levelXml->FirstChildElement("setup"))
         setup->QueryUnsignedAttribute("defaultBufferId", &m_defaultTargetBuffer);
@@ -83,7 +83,7 @@ void Level::load()
     // ==Parse grid==
     auto grid = levelXml->FirstChildElement("grid");
     if(!grid)
-        throw std::runtime_error(utility::replace(utility::translateKey("InvalidXml"), filePath));
+        throw std::runtime_error(utility::replace(utility::translateKey("@InvalidXml"), filePath));
 
     // Get tile size
     unsigned int size = static_cast<unsigned int>(grid->IntAttribute("size"));

@@ -307,13 +307,8 @@ const std::string NewHighScoreState::createHighscoreString(const std::string& na
                 it->getEventType() == GameEvent::InvulnerableGoody)
             result.append("&og[" + utility::toString(counterOtherGoody++) + "]=" + value);
         else
-            throw std::runtime_error(utility::replace(utility::translateKey("UnknownGameEvent"), utility::toString(it->getEventType())));
+            throw std::runtime_error(utility::replace(utility::translateKey("@UnknownGameEvent"), utility::toString(it->getEventType())));
     }
 
     return result;
-}
-
-void NewHighScoreState::setLanguage(const std::string& language)
-{
-    m_menu.setLanguage(language);
 }

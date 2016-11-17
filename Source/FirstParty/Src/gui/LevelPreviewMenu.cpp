@@ -13,20 +13,19 @@ LevelPreviewMenu::LevelPreviewMenu(sf::RenderWindow& screen,
 
 void LevelPreviewMenu::setLevelInfo(const std::string& levelName,
                                     const double time,
-                                    const int balls,
-                                    const std::string& language)
+                                    const int balls)
 {
     int seconds = static_cast<int>(time) % 60;
     int minutes = static_cast<int>(time) / 60;
     Menu::getLabel(LABEL_LEVELNAME).setText(levelName);
 
     if(balls == -1)
-        Menu::getLabel(LABEL_BALLS).setText(utility::translateKey(language + "gui_unlimited"));
+        Menu::getLabel(LABEL_BALLS).setText(utility::translateKey("gui_unlimited"));
     else
         Menu::getLabel(LABEL_BALLS).setText(utility::toString(balls));
 
     if(time < 0)
-        Menu::getLabel(LABEL_TIME).setText(utility::translateKey(language + "gui_unlimited"));
+        Menu::getLabel(LABEL_TIME).setText(utility::translateKey("gui_unlimited"));
     else
         if(seconds < 10)
             Menu::getLabel(LABEL_TIME).setText(utility::toString(minutes) + ":0" + utility::toString(seconds));

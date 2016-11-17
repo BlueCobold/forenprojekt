@@ -164,8 +164,3 @@ void PauseState::doDraw(const DrawParameter& params)
 
     m_menu.draw(params);
 }
-
-void PauseState::setLanguage(const std::string& language)
-{
-    m_menu.setLanguage(language);
-}

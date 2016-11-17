@@ -23,7 +23,7 @@ public:
     SingleProvider(std::unique_ptr<ValueProvider> provider) : m_provider(std::move(provider))
     {
         if(m_provider == nullptr)
-            throw std::runtime_error(utility::translateKey("TheProviderNull"));
+            throw std::runtime_error(utility::translateKey("@TheProviderNull"));
     }
 
 

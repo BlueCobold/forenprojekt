@@ -11,7 +11,7 @@ SoundObject::SoundObject(const std::string& name, SoundManager& soundManager) :
     m_volume(100)
 {
     if(m_soundName.length() <= 0)
-        throw std::runtime_error(utility::translateKey("NoSoundName"));
+        throw std::runtime_error(utility::translateKey("@NoSoundName"));
 }
 
 SoundObject::SoundObject(const SoundObject&& other) :

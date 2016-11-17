@@ -39,7 +39,7 @@ public:
     Maximum(std::vector<std::unique_ptr<ValueProvider>> provider) : MultiProvider(std::move(provider))
     {
        if(getProvider().size() < 1)
-           throw std::runtime_error(utility::replace(utility::translateKey("TwoChildsMin"), "Maximum"));
+           throw std::runtime_error(utility::replace(utility::translateKey("@TwoChildsMin"), "Maximum"));
     }
 };
 

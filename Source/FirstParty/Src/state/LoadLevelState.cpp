@@ -19,7 +19,6 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
             sf::Vector2f(),
             0,
             resourceManager.getBitmapFont("red"),
-            config.get<std::string>("language"),
             LineLabel::Left),
     m_lastLevel(nullptr),
     m_currentLevel(1),
@@ -57,7 +56,7 @@ std::unique_ptr<Level> LoadLevelState::gainLevel()
 
 StateChangeInformation LoadLevelState::update(const double time)
 {
-    std::string text(utility::translateKey(m_label.getLanguage() + "gui_loading_screen"));
+    std::string text(utility::translateKey("gui_loading_screen"));
 
     m_label.updateLayout(static_cast<sf::Vector2f>(m_screen.getSize()));
 
@@ -137,11 +136,4 @@ void LoadLevelState::onEvent(utility::Event::EventType type)
 {
     if(type == utility::Event::Resized)
         m_label.setPosition(sf::Vector2f(m_screen.getSize().x / 2.f - m_label.getWidth() / 2.f, m_screen.getSize().y / 2.f));
-}
-
-void LoadLevelState::setLanguage(const std::string& language)
-{
-    m_label.setLanguage(language);
-    std::string text(utility::translateKey(m_label.getLanguage() + "gui_loading_screen"));
-    m_label.setText(text);
 }

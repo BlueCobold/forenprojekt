@@ -37,7 +37,7 @@ RotatingSquaresTransition::RotatingSquaresTransition(const sf::Texture* sourceTe
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "RotatingSquaresTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "RotatingSquaresTransition"));
 
     if(sourceTexture != nullptr)
     {

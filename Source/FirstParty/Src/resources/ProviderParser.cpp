@@ -47,11 +47,11 @@ std::vector<std::unique_ptr<ValueProvider>> ProviderParser::parseMultiple(const 
         if(std::string(child->Name()) == "function")
         {
             if(m_context.functions.size() == 0)
-                throw std::runtime_error(utility::translateKey("FunctionNull"));
+                throw std::runtime_error(utility::translateKey("@FunctionNull"));
 
             auto function = m_context.functions.find(child->Attribute("name"));
             if(function == end(m_context.functions))
-                throw std::runtime_error(utility::replace(utility::translateKey("NoTemplate"), child->Attribute("name")));
+                throw std::runtime_error(utility::replace(utility::translateKey("@NoTemplate"), child->Attribute("name")));
 
             auto subs = parseMultiple(*function->second);
             for(auto sub = begin(subs); sub != end(subs); ++sub)
@@ -103,19 +103,19 @@ std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLEl
     else if(name == "function")
     {
         if(m_context.functions.size() == 0)
-            throw std::runtime_error(utility::translateKey("FunctionNull"));
+            throw std::runtime_error(utility::translateKey("@FunctionNull"));
 
         auto funcName = xml.Attribute("name");
         if(funcName == nullptr)
-            throw std::runtime_error(utility::translateKey("NoName"));
+            throw std::runtime_error(utility::translateKey("@NoName"));
 
         auto function = m_context.functions.find(funcName);
         if(function == end(m_context.functions))
-            throw std::runtime_error(utility::replace(utility::translateKey("NoTemplate"), funcName));
+            throw std::runtime_error(utility::replace(utility::translateKey("@NoTemplate"), funcName));
 
         auto providers = parseMultiple(*function->second);
         if(providers.size() > 1)
-            throw std::runtime_error(utility::replace(utility::translateKey("TemplateChild"), funcName));
+            throw std::runtime_error(utility::replace(utility::translateKey("@TemplateChild"), funcName));
 
         return std::move(providers[0]);
     }
@@ -185,7 +185,7 @@ std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLEl
             throw std::runtime_error("Unregistered custom stop tag has been used on an invalid element");
         }
     }
-    throw std::runtime_error(utility::replace(utility::translateKey("Unknown"), name));
+    throw std::runtime_error(utility::replace(utility::translateKey("@Unknown"), name));
 }
 
 std::vector<double> ProviderParser::parseFloatList(const std::string& valueString) const

@@ -8,7 +8,7 @@ LabelHUD::LabelHUD(const sf::Vector2f& position,
                    const std::string& text,
                    const LineLabel::Alignment alignment) :
     HUDElement(position, offset),
-    m_label(text, position, offset, 0, bitmapFont, "", alignment)
+    m_label(text, position, offset, 0, bitmapFont, alignment)
 {
 }
 

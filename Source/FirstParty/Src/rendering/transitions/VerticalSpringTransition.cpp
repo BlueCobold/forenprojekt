@@ -25,7 +25,7 @@ VerticalSpringTransition::VerticalSpringTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "VerticalSpringTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "VerticalSpringTransition"));
 
     if(sourceTexture != nullptr)
     {
@@ -37,7 +37,7 @@ VerticalSpringTransition::VerticalSpringTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "VerticalSpringTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@SourceTexture"), "VerticalSpringTransition"));
 }
 
 void VerticalSpringTransition::updated()

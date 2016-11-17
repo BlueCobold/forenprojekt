@@ -23,8 +23,6 @@ public:
     StateChangeInformation update(const double time) override;
     void onEnter(const EnterStateInformation* enterInformation, const double time) override;
 
-    void setLanguage(const std::string& language) override;
-
 private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);

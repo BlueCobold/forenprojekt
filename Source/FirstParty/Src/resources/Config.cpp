@@ -24,5 +24,5 @@ void Config::save()
             configFile << it->first << " = " << it->second << "\n";
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("MissingFile"), getFileName()));
+        throw std::runtime_error(utility::replace(utility::translateKey("@MissingFile"), getFileName()));
 }

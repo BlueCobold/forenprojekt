@@ -23,13 +23,11 @@ public:
         const sf::Vector2f& offset,
         const float rotation,
         const BitmapFont* font,
-        const std::string& language,
         const Alignment alignment = Left,
         int id = -1);
 
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text, const std::string& replacement = "");
-    void setLanguage(const std::string& language) override;
 };
 
 #endif

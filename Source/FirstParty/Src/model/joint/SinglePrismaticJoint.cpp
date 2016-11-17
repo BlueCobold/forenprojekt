@@ -34,7 +34,7 @@ bool SinglePrismaticJoint::reinstall(b2Body& body)
             m_jointDef.Initialize(&body, m_anchorBody, center, m_direction);
         }
         else
-            throw std::runtime_error(utility::replace(utility::translateKey("WrongBodyType"), "SinglePrismaticJoint"));
+            throw std::runtime_error(utility::replace(utility::translateKey("@WrongBodyType"), "SinglePrismaticJoint"));
 
         create(m_jointDef);
 
@@ -49,7 +49,7 @@ void SinglePrismaticJoint::update()
 void SinglePrismaticJoint::doCopyFrom(const JointObject& other)
 {
     if(getType() != other.getType())
-        throw std::runtime_error(utility::translateKey("JointCopyError"));
+        throw std::runtime_error(utility::translateKey("@JointCopyError"));
 
     auto joint = dynamic_cast<const SinglePrismaticJoint&>(other);
 

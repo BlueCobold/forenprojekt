@@ -39,9 +39,9 @@ public:
          m_constants(constants)
     {
         if(getProvider().size() < 1)
-            throw std::runtime_error(utility::replace(utility::translateKey("TwoChilds"), "Switch"));
+            throw std::runtime_error(utility::replace(utility::translateKey("@TwoChilds"), "Switch"));
         if(getProvider().size() + 1 < constants.size())
-            throw std::runtime_error(utility::translateKey("SwitchInvalidSize"));
+            throw std::runtime_error(utility::translateKey("@SwitchInvalidSize"));
     }
 };
 

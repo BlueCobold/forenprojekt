@@ -29,12 +29,12 @@ std::vector<sf::Vector2i> ValueParser::parseValueList(const tinyxml2::XMLElement
     while(std::getline(tokens, token, ','))
     {
         if(i > result.size())
-            throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), y));
+            throw std::runtime_error(utility::replace(utility::translateKey("@InvalidLayout"), y));
         result[i].y = utility::stringTo<int>(token);
         ++i;
     }
     if(i != result.size())
-        throw std::runtime_error(utility::replace(utility::translateKey("InvalidLayout"), y));
+        throw std::runtime_error(utility::replace(utility::translateKey("@InvalidLayout"), y));
     return result;
 }
 

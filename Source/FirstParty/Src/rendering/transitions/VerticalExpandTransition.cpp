@@ -25,7 +25,7 @@ VerticalExpandTransition::VerticalExpandTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "VerticalExpandTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "VerticalExpandTransition"));
 
     if(sourceTexture != nullptr)
     {
@@ -37,7 +37,7 @@ VerticalExpandTransition::VerticalExpandTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "VerticalExpandTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@SourceTexture"), "VerticalExpandTransition"));
 }
 
 void VerticalExpandTransition::updated()

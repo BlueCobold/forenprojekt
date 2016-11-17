@@ -25,7 +25,7 @@ HorizontalSpringTransition::HorizontalSpringTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("TargetTexture"), "HorizontalSpringTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@TargetTexture"), "HorizontalSpringTransition"));
 
     if(sourceTexture != nullptr)
     {
@@ -37,7 +37,7 @@ HorizontalSpringTransition::HorizontalSpringTransition(
         }
     }
     else
-        throw std::runtime_error(utility::replace(utility::translateKey("SourceTexture"), "HorizontalSpringTransition"));
+        throw std::runtime_error(utility::replace(utility::translateKey("@SourceTexture"), "HorizontalSpringTransition"));
 }
 
 void HorizontalSpringTransition::updated()
