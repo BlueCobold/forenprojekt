@@ -63,7 +63,7 @@ StateChangeInformation MainMenuState::update(const double time)
 
     if(clicked == MainMenu::BUTTON_START_NEW_GAME)
     {
-        m_loadLevelStateInfo = EnterLoadLevelStateInformation();
+        m_loadLevelStateInfo.m_levelNumber = m_config.get<int>("UnlockedLevel");
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
