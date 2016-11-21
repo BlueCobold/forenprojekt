@@ -24,6 +24,7 @@ void BallHUD::setBalls(int remainingBall)
 void BallHUD::updated(const DrawParameter& params)
 {
     setText(" " + utility::toString<int>(m_remainingBall));
+    LabelHUD::updated(params);
 
     m_ball.setPosition(getCurrentPosition().x
                        - getLabelWidth() - m_ball.getTextureRect().width,
