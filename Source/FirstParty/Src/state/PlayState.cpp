@@ -245,7 +245,7 @@ void PlayState::loadOnlineHighscore()
 
     FileReader onlineString(response.getBody(), false);
 
-    std::string mode = "NAM";
+    std::string mode = "NAMP";
 
     if(m_level->isTimeAttackMode())
         mode = "TAM";
