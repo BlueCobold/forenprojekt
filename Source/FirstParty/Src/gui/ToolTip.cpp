@@ -82,31 +82,31 @@ void ToolTip::setPosition(const sf::Vector2f& position, const sf::RenderWindow& 
         auto height = m_background[TopLeft].getTextureRect().height;
         auto width = m_background[TopLeft].getTextureRect().width;
 
-        m_background[TopLeft].setPosition(position.x - static_cast<int>(m_width / 2.f) - width + m_offset.x + offset.x,
+        m_background[TopLeft].setPosition(position.x - floorf(m_width / 2.f) - width + m_offset.x + offset.x,
                                          position.y - height + m_offset.y + offset.y - mobileOffset);
 
-        m_background[TopCenter].setPosition(position.x - static_cast<int>(m_width / 2.f) + m_offset.x + offset.x,
+        m_background[TopCenter].setPosition(position.x - floorf(m_width / 2.f) + m_offset.x + offset.x,
                                            position.y - height + m_offset.y + offset.y - mobileOffset);
 
-        m_background[TopRight].setPosition(position.x + static_cast<int>(m_width / 2.f) + m_offset.x + offset.x,
+        m_background[TopRight].setPosition(position.x + floorf(m_width / 2.f) + m_offset.x + offset.x,
                                           position.y - height + m_offset.y + offset.y - mobileOffset);
 
-        m_background[MiddleLeft].setPosition(position.x - static_cast<int>(m_width / 2.f) - width + m_offset.x + offset.x,
+        m_background[MiddleLeft].setPosition(position.x - floorf(m_width / 2.f) - width + m_offset.x + offset.x,
                                             position.y + m_offset.y + offset.y - mobileOffset);
 
-        m_background[MiddleCenter].setPosition(position.x - static_cast<int>(m_width / 2.f) + m_offset.x + offset.x,
+        m_background[MiddleCenter].setPosition(position.x - floorf(m_width / 2.f) + m_offset.x + offset.x,
                                               position.y + m_offset.y + offset.y - mobileOffset);
 
-        m_background[MiddleRight].setPosition(position.x + static_cast<int>(m_width / 2.f) + m_offset.x + offset.x,
+        m_background[MiddleRight].setPosition(position.x + floorf(m_width / 2.f) + m_offset.x + offset.x,
                                              position.y + m_offset.y + offset.y - mobileOffset);
 
-        m_background[BottomLeft].setPosition(position.x - static_cast<int>(m_width / 2.f) - width + m_offset.x + offset.x,
+        m_background[BottomLeft].setPosition(position.x - floorf(m_width / 2.f) - width + m_offset.x + offset.x,
                                             position.y + m_height + m_offset.y + offset.y - mobileOffset);
 
-        m_background[BottomCenter].setPosition(position.x - static_cast<int>(m_width / 2.f) + m_offset.x + offset.x,
+        m_background[BottomCenter].setPosition(position.x - floorf(m_width / 2.f) + m_offset.x + offset.x,
                                               position.y + m_height + m_offset.y + offset.y - mobileOffset);
 
-        m_background[BottomRight].setPosition(position.x + static_cast<int>(m_width / 2.f) + m_offset.x + offset.x,
+        m_background[BottomRight].setPosition(position.x + floorf(m_width / 2.f) + m_offset.x + offset.x,
                                              position.y + m_height + m_offset.y + offset.y - mobileOffset);
     }
 }
@@ -204,27 +204,27 @@ sf::Vector2f ToolTip::calculateNeededOffset(const sf::Vector2f& position, const 
     float horizontalOffset = 0;
 
     // check left screen border
-    if(static_cast<int>(position.x - m_width / 2.f - width + m_offset.x) < 0)
-        verticalOffset = static_cast<int>(position.x - m_width / 2.f - width + m_offset.x) * -1.f;
+    if(floorf(position.x - m_width / 2.f - width + m_offset.x) < 0)
+        verticalOffset = floorf(position.x - m_width / 2.f - width + m_offset.x) * -1.f;
 
     // check right screen border
-    if(static_cast<int>(position.x + m_width / 2.f + m_offset.x) > screen.getSize().x)
+    if(floorf(position.x + m_width / 2.f + m_offset.x) > screen.getSize().x)
     {
         if(verticalOffset == 0)
-            verticalOffset = screen.getSize().x - static_cast<int>(position.x - m_width / 2.f - width + m_offset.x);
+            verticalOffset = screen.getSize().x - floorf(position.x - m_width / 2.f - width + m_offset.x);
         else
             throw std::runtime_error(utility::translateKey("ToolTipTooLong"));
     }
 
     // check upper screen border
-    if(static_cast<int>(position.y - height + m_offset.y) < 0)
-        horizontalOffset = static_cast<int>(position.y - height + m_offset.y) * -1.f;
+    if(floorf(position.y - height + m_offset.y) < 0)
+        horizontalOffset = floorf(position.y - height + m_offset.y) * -1.f;
 
     // check bottom screen border
-    if(static_cast<int>(position.y + m_height + m_offset.y) > screen.getSize().y)
+    if(floorf(position.y + m_height + m_offset.y) > screen.getSize().y)
     {
         if(horizontalOffset == 0)
-            horizontalOffset = screen.getSize().y - static_cast<int>(position.y + m_height + m_offset.y);
+            horizontalOffset = screen.getSize().y - floorf(position.y + m_height + m_offset.y);
         else
             throw std::runtime_error(utility::translateKey("ToolTipTooLong"));
     }
