@@ -697,6 +697,12 @@
     <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp">
       <Filter>Headers\resources</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\gui\GestureFilter.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\GestureHandler.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

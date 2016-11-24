@@ -17,6 +17,8 @@ PauseState::PauseState(sf::RenderWindow& screen,
                        ResourceManager& resourceManager,
                        AppConfig& config) :
     State(screen, resourceManager, config),
+    m_screen(screen),
+    m_gestures(screen),
     m_background(nullptr),
     m_menu(screen, resourceManager),
     m_HUD(resourceManager, config),
@@ -25,6 +27,14 @@ PauseState::PauseState(sf::RenderWindow& screen,
     m_transitionStateInfo(PauseStateId),
     m_optionStateInfo(PauseStateId)
 {
+    std::vector<GesturePart> parts;
+    parts.push_back(GesturePart(-0.321751f, 0.321751f));
+    parts.push_back(GesturePart(2.81984f, -2.81984f));
+    parts.push_back(GesturePart(-1.89255f, -1.24905f));
+    parts.push_back(GesturePart(1.24905f, 1.89255f));
+    m_gestures.addGesture(Gesture(5, parts), [&](){
+        m_level->addBall();
+    });
 }
 
 PauseState::~PauseState()
@@ -54,6 +64,8 @@ StateChangeInformation PauseState::update(const double time)
         return StateChangeInformation::Empty();
 
     updateTime(time);
+
+    m_gestures.process();
 
     int clicked = -1;
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });

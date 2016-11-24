@@ -55,6 +55,7 @@
 App::App(AppConfig& config) :
     m_config(config),
     m_windowTitle("Rickety Racquet"),
+    m_gestures(m_screen),
     m_fullscreen(false),
     m_focus(true),
     m_isMinimized(false),
@@ -168,6 +169,22 @@ App::App(AppConfig& config) :
                                                          m_screen.getSize().x * 0.09f,
                                                          m_screen.getSize().y * 0.25f));
 #endif
+
+    std::vector<GesturePart> parts;
+    parts.push_back(GesturePart(0.321751f, 1.24905f));
+    parts.push_back(GesturePart(-2.35619f, -0.785398f));
+    parts.push_back(GesturePart(1.89255f, 2.81984f));
+    m_gestures.addGesture(Gesture(5, parts), [&](){
+        m_config.set("UnlockedLevel", 12);
+    });
+    parts.clear();
+    parts.push_back(GesturePart(1.24905f, 1.89255f));
+    parts.push_back(GesturePart(-0.321751f, 0.321751f));
+    parts.push_back(GesturePart(-1.89255f, -1.24905f));
+    parts.push_back(GesturePart(2.81984f, -2.81984f));
+    m_gestures.addGesture(Gesture(5, parts), [&](){
+        m_config.set("coins", m_config.get<int>("coins") + 1000);
+    });
 }
 
 void App::run()
@@ -205,6 +222,8 @@ void App::update()
     if(!m_isMinimized)
         utility::Mouse.capture();
     m_cursor->update();
+
+    m_gestures.process();
 
 #ifdef ANDROID
     // android needs to keep the window/activity open or won't display anything

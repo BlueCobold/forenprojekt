@@ -176,7 +176,7 @@ void Level::update(const double elapsedTime)
 
     if(m_extraBallGoody.isActive() && m_remainingBall > 0)
     {
-        m_remainingBall++;
+        addBall();
         m_eventRecorder.addEvent(m_levelPlayTime, m_ball->getBody()->GetLinearVelocity().Length(), GameEvent::ExtraBallGoody);
     }
     if(m_extraTimeGoody.isActive() && m_totalTime > 0)
@@ -597,6 +597,11 @@ const sf::Vector2f Level::getBallCoords() const
 const int Level::getRemainingBall() const
 {
     return m_remainingBall;
+}
+
+void Level::addBall()
+{
+    m_remainingBall++;
 }
 
 const bool Level::isLevelPassed() const

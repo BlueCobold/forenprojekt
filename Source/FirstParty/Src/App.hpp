@@ -4,6 +4,7 @@
 #define APP_HPP
 
 #include "gui/Cursor.hpp"
+#include "gui/GestureHandler.hpp"
 #include "resources/AppConfig.hpp"
 #include "resources/ResourceManager.hpp"
 #include "resources/AchievementManager.hpp"
@@ -48,6 +49,7 @@ private:
     AppConfig& m_config;
     std::string m_windowTitle;
     sf::RenderWindow m_screen;
+    GestureHandler m_gestures;
     bool m_fullscreen;
     bool m_focus;
     bool m_isMinimized;

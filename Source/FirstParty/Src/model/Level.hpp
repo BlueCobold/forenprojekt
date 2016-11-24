@@ -77,6 +77,7 @@ public:
 
     const int getPoints() const;
     const int getRemainingBall() const;
+    void addBall();
 
     const bool isLevelPassed() const;
     const bool isLevelFailed() const;

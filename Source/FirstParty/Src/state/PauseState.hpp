@@ -6,6 +6,7 @@
 #include "State.hpp"
 #include "EnterStateInformation.hpp"
 #include "../gui/hud/HUD.hpp"
+#include "../gui/GestureHandler.hpp"
 #include "../gui/PauseMenu.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
@@ -28,6 +29,8 @@ private:
     void render(sf::RenderTarget& m_renderTexture);
     void doDraw(const DrawParameter& params) override;
 
+    sf::RenderWindow& m_screen;
+    GestureHandler m_gestures;
     std::unique_ptr<sf::Texture> m_background;
     PauseMenu m_menu;
     HUD m_HUD;

@@ -159,6 +159,8 @@
     <ClInclude Include="..\..\Src\gui\FailMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\FPSCounter.hpp" />
     <ClInclude Include="..\..\Src\gui\GameFinishedMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\GestureFilter.hpp" />
+    <ClInclude Include="..\..\Src\gui\GestureHandler.hpp" />
     <ClInclude Include="..\..\Src\gui\HighScoreMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\hud\ArrowHUD.hpp" />
     <ClInclude Include="..\..\Src\gui\hud\BallHUD.hpp" />
