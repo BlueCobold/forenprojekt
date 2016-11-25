@@ -544,17 +544,17 @@ void Level::adaptToMouse()
             dynamic_cast<Teeter*>((*it).get())->adaptToMouse();
 }
 
-const unsigned int Level::number()
+unsigned int Level::number()
 {
     return m_number;
 }
 
-const std::string Level::pathname() const
+std::string Level::pathname() const
 {
     return std::string("res/level/");
 }
 
-const std::string Level::filename()
+std::string Level::filename()
 {
     std::string filename = pathname();
 
@@ -563,38 +563,38 @@ const std::string Level::filename()
     return filename;
 }
 
-const float Level::getWidth() const
+float Level::getWidth() const
 {
     return m_width;
 }
 
-const float Level::getHeight() const
+float Level::getHeight() const
 {
     return m_height;
 }
 
-const int Level::getTotalTarget() const
+int Level::getTotalTarget() const
 {
     return m_totalTarget;
 }
 
-const int Level::getRemainingTarget() const
+int Level::getRemainingTarget() const
 {
     return m_remainingTarget;
 }
 
-const int Level::getPoints() const
+int Level::getPoints() const
 {
     return m_points;
 }
 
-const sf::Vector2f Level::getBallCoords() const
+sf::Vector2f Level::getBallCoords() const
 {
     return sf::Vector2f(utility::toPixel(m_ball->getPosition().x),
                         utility::toPixel(m_ball->getPosition().y));
 }
 
-const int Level::getRemainingBall() const
+int Level::getRemainingBall() const
 {
     return m_remainingBall;
 }
@@ -604,7 +604,7 @@ void Level::addBall()
     m_remainingBall++;
 }
 
-const bool Level::isLevelPassed() const
+bool Level::isLevelPassed() const
 {
     if(m_levelEndingTime < m_lastTime)
         return m_levelPass;
@@ -612,17 +612,17 @@ const bool Level::isLevelPassed() const
         return (m_timeAttackMode && m_remainingTime < 0);
 }
 
-const double Level::getRemainigTime() const
+double Level::getRemainigTime() const
 {
     return m_remainingTime;
 }
 
-const double Level::getTotalTime() const
+double Level::getTotalTime() const
 {
     return m_totalTime;
 }
 
-const Goody Level::getGoody (const Goody::Type& type) const
+const Goody& Level::getGoody (const Goody::Type& type) const
 {
     if(type == Goody::InvulnerableGoody)
         return m_invulnerableGoody;
@@ -645,7 +645,7 @@ void Level::onGoodyActivated(Goody &sender)
     m_currentSeletedGoody = sender.getType();
 }
 
-const bool Level::isLevelFailed() const
+bool Level::isLevelFailed() const
 {
     bool value = m_remainingBall < 1 && m_remainingBall > -1;
     // don't use the same variable to check - it can cause negative times
@@ -688,7 +688,8 @@ void Level::handleAutoRespawn()
             ++it;
     }
 }
-const Level::Medals Level::getMedal() const
+
+Level::Medals Level::getMedal() const
 {
     if(m_points >= m_goldMedal)
         return Level::Gold;
@@ -700,17 +701,17 @@ const Level::Medals Level::getMedal() const
         return Level::none;
 }
 
-const std::string Level::getLevelName() const
+std::string Level::getLevelName() const
 {
     return m_levelName;
 }
 
-const int Level::getLostBalls() const
+int Level::getLostBalls() const
 {
     return m_lostBallCounter;
 }
 
-const int Level::getMedal(const Level::Medals medal) const
+int Level::getMedal(const Level::Medals medal) const
 {
     if(medal == Bronze)
         return m_bronzeMedal;
@@ -779,7 +780,7 @@ std::string Level::getFileName()
 }
 #endif
 
-const double Level::getLevelPlayTime() const
+double Level::getLevelPlayTime() const
 {
     if(m_levelPass)
         return m_levelPlayTime;

@@ -67,43 +67,43 @@ public:
     void adaptToMouse();
 
     /// Return the level number
-    const unsigned int number();
+    unsigned int number();
 
-    const float getWidth() const;
-    const float getHeight() const;
+    float getWidth() const;
+    float getHeight() const;
 
-    const int getTotalTarget() const;
-    const int getRemainingTarget() const;
+    int getTotalTarget() const;
+    int getRemainingTarget() const;
 
-    const int getPoints() const;
-    const int getRemainingBall() const;
+    int getPoints() const;
+    int getRemainingBall() const;
     void addBall();
 
-    const bool isLevelPassed() const;
-    const bool isLevelFailed() const;
+    bool isLevelPassed() const;
+    bool isLevelFailed() const;
 
-    const double getRemainigTime() const;
-    const double getTotalTime() const;
+    double getRemainigTime() const;
+    double getTotalTime() const;
 
-    const Goody getGoody(const Goody::Type& type) const;
+    const Goody& getGoody(const Goody::Type& type) const;
     void onGoodyActivated(Goody& goody);
 
-    const sf::Vector2f getBallCoords() const;
-    const int getLostBalls() const;
+    sf::Vector2f getBallCoords() const;
+    int getLostBalls() const;
 
     void setTimeAttackMode(bool timeAttackMode);
     bool isTimeAttackMode() const;
 
     enum Medals {Gold, Silver, Bronze, none};
-    const Level::Medals getMedal() const;
-    const int getMedal(const Level::Medals medal) const;
-    const std::string getLevelName() const;
+    Level::Medals getMedal() const;
+    int getMedal(const Level::Medals medal) const;
+    std::string getLevelName() const;
 
     void onEnter();
 
     const std::list<GameEvent>& getGameEvents() const;
 
-    const double getLevelPlayTime() const;
+    double getLevelPlayTime() const;
 
 private:
 #ifdef LEVELTESTING
@@ -142,8 +142,8 @@ private:
     void parseGameplayAttributes(const tinyxml2::XMLElement* xml);
 
     /// Construct the full level filename from the level number
-    const std::string filename();
-    const std::string pathname() const;
+    std::string filename();
+    std::string pathname() const;
 
     bool isOriginal();
 
