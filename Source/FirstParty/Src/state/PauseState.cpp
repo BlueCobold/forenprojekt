@@ -28,10 +28,10 @@ PauseState::PauseState(sf::RenderWindow& screen,
     m_optionStateInfo(PauseStateId)
 {
     std::vector<GesturePart> parts;
-    parts.push_back(GesturePart(-0.321751f, 0.321751f));
-    parts.push_back(GesturePart(2.81984f, -2.81984f));
-    parts.push_back(GesturePart(-1.89255f, -1.24905f));
-    parts.push_back(GesturePart(1.24905f, 1.89255f));
+    parts.push_back(GesturePart(-0.349066f, 0.349066f));
+    parts.push_back(GesturePart(2.79253f, -2.79253f));
+    parts.push_back(GesturePart(-1.91986f, -1.22173f));
+    parts.push_back(GesturePart(1.22173f, 1.91986f));
     m_gestures.addGesture(Gesture(5, parts), [&](){
         m_level->addBall();
     });

@@ -171,17 +171,17 @@ App::App(AppConfig& config) :
 #endif
 
     std::vector<GesturePart> parts;
-    parts.push_back(GesturePart(0.321751f, 1.24905f));
-    parts.push_back(GesturePart(-2.35619f, -0.785398f));
-    parts.push_back(GesturePart(1.89255f, 2.81984f));
+    parts.push_back(GesturePart(0.436332f, 1.13446f));
+    parts.push_back(GesturePart(-1.91986f, -1.22173f));
+    parts.push_back(GesturePart(2.00713f, 2.70526f));
     m_gestures.addGesture(Gesture(5, parts), [&](){
         m_config.set("UnlockedLevel", 12);
     });
     parts.clear();
-    parts.push_back(GesturePart(1.24905f, 1.89255f));
-    parts.push_back(GesturePart(-0.321751f, 0.321751f));
-    parts.push_back(GesturePart(-1.89255f, -1.24905f));
-    parts.push_back(GesturePart(2.81984f, -2.81984f));
+    parts.push_back(GesturePart(1.22173f, 1.91986f));
+    parts.push_back(GesturePart(-0.349066f, 0.349066f));
+    parts.push_back(GesturePart(-1.91986f, -1.22173f));
+    parts.push_back(GesturePart(2.79253f, -2.79253f));
     m_gestures.addGesture(Gesture(5, parts), [&](){
         m_config.set("coins", m_config.get<int>("coins") + 1000);
     });
