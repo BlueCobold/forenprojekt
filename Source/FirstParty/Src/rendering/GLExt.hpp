@@ -195,16 +195,20 @@ namespace gl
         STENCIL_TEST                     = 0x0B90,
         STENCIL_VALUE_MASK               = 0x0B93,
         STENCIL_WRITEMASK                = 0x0B98,
+        DEPTH_BUFFER_BIT                 = 0x00000100,
         STENCIL_BUFFER_BIT               = 0x00000400,
 
         ALPHA_TEST                       = 0x0BC0,
         ALPHA_TEST_FUNC                  = 0x0BC1,
         ALPHA_TEST_REF                   = 0x0BC2,
 
+        DEPTH_TEST                       = 0x0B71,
+
         INVERT                           = 0x150A,
         KEEP                             = 0x1E00,
         LEFT                             = 0x0406,
         LEQUAL                           = 0x0203,
+        EQUAL                            = 0x0202,
         LESS                             = 0x0201,
 
         TRUE_                            = 1,
@@ -231,6 +235,10 @@ namespace gl
     extern void (CODEGEN_FUNCPTR *StencilMask)(GLuint mask);
     extern void (CODEGEN_FUNCPTR *StencilOp)(GLenum fail, GLenum zfail, GLenum zpass);
     extern void (CODEGEN_FUNCPTR *ColorMask)(GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha);
+
+    extern void (CODEGEN_FUNCPTR *DepthFunc)(GLenum func);
+    extern void (CODEGEN_FUNCPTR *DepthMask)(GLboolean enabled);
+    extern void (CODEGEN_FUNCPTR *ClearDepth)(GLclampd depth);
 
     extern void (CODEGEN_FUNCPTR *Enable)(GLenum cap);
     extern void (CODEGEN_FUNCPTR *Disable)(GLenum cap);

@@ -703,6 +703,21 @@
     <ClInclude Include="..\..\Src\gui\GestureHandler.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\gui\ScreenSize.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\gui\Border.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\Sprite.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\Blending.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\BlendingParser.hpp">
+      <Filter>Headers\resources\parsing</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -1271,6 +1286,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\ReplayMenu.cpp">
       <Filter>Sources\gui\menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\gui\Border.cpp">
+      <Filter>Sources\gui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -147,6 +147,7 @@
     <ClInclude Include="..\..\Src\gui\AchievementMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\AnimationContainer.hpp" />
     <ClInclude Include="..\..\Src\gui\BitmapFont.hpp" />
+    <ClInclude Include="..\..\Src\gui\Border.hpp" />
     <ClInclude Include="..\..\Src\gui\Button.hpp" />
     <ClInclude Include="..\..\Src\gui\ButtonStyle.hpp" />
     <ClInclude Include="..\..\Src\gui\Caret.hpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="..\..\Src\gui\PauseMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\ReplayMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\ScreenLocation.hpp" />
+    <ClInclude Include="..\..\Src\gui\ScreenSize.hpp" />
     <ClInclude Include="..\..\Src\gui\Slider.hpp" />
     <ClInclude Include="..\..\Src\gui\SliderStyle.hpp" />
     <ClInclude Include="..\..\Src\gui\SubWindow.hpp" />
@@ -237,6 +239,7 @@
     <ClInclude Include="..\..\Src\model\SoundObject.hpp" />
     <ClInclude Include="..\..\Src\model\SoundTrigger.hpp" />
     <ClInclude Include="..\..\Src\model\Teeter.hpp" />
+    <ClInclude Include="..\..\Src\rendering\Blending.hpp" />
     <ClInclude Include="..\..\Src\rendering\DebugDraw.hpp" />
     <ClInclude Include="..\..\Src\rendering\Drawable.hpp" />
     <ClInclude Include="..\..\Src\rendering\DrawParameter.hpp" />
@@ -247,6 +250,7 @@
     <ClInclude Include="..\..\Src\rendering\parameter\ShaderParameter.hpp" />
     <ClInclude Include="..\..\Src\rendering\parameter\TextureParameter.hpp" />
     <ClInclude Include="..\..\Src\rendering\Shader.hpp" />
+    <ClInclude Include="..\..\Src\rendering\Sprite.hpp" />
     <ClInclude Include="..\..\Src\rendering\transitions\AlphaTransition.hpp" />
     <ClInclude Include="..\..\Src\rendering\transitions\GrowingCircleTransition.hpp" />
     <ClInclude Include="..\..\Src\rendering\transitions\GrowingRectangleTransition.hpp" />
@@ -277,6 +281,7 @@
     <ClInclude Include="..\..\Src\resources\AppConfig.hpp" />
     <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp" />
     <ClInclude Include="..\..\Src\resources\BackgroundParser.hpp" />
+    <ClInclude Include="..\..\Src\resources\BlendingParser.hpp" />
     <ClInclude Include="..\..\Src\resources\ColliderContext.hpp" />
     <ClInclude Include="..\..\Src\resources\ColliderParser.hpp" />
     <ClInclude Include="..\..\Src\resources\Config.hpp" />
@@ -354,6 +359,7 @@
     <ClCompile Include="..\..\Src\gui\AchievementMenu.cpp" />
     <ClCompile Include="..\..\Src\gui\AnimationContainer.cpp" />
     <ClCompile Include="..\..\Src\gui\BitmapFont.cpp" />
+    <ClCompile Include="..\..\Src\gui\Border.cpp" />
     <ClCompile Include="..\..\Src\gui\Button.cpp" />
     <ClCompile Include="..\..\Src\gui\ButtonStyle.cpp" />
     <ClCompile Include="..\..\Src\gui\Caret.cpp" />

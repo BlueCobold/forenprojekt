@@ -23,7 +23,8 @@ namespace MenuElementType
         SubWindow,
         InputBox,
         Animation,
-        InteractiveLabel
+        InteractiveLabel,
+        Border
     };
 }
 
@@ -32,13 +33,24 @@ class MenuElement : public Drawable, public Cloneable<MenuElement>
 {
 public:
 
-    MenuElement(const int id,
-                const MenuElementType::Type type,
+    MenuElement(int id,
+                MenuElementType::Type type,
                 const sf::Vector2f& position,
                 const sf::Vector2f& offset) :
         m_id(id),
         m_type(type),
         m_screenLocation(position, offset),
+        m_visible(true),
+        m_visibleWhen(nullptr),
+        m_masterId(-1)
+    { }
+
+    MenuElement(int id,
+                MenuElementType::Type type,
+                ScreenLocation position) :
+        m_id(id),
+        m_type(type),
+        m_screenLocation(position),
         m_visible(true),
         m_visibleWhen(nullptr),
         m_masterId(-1)

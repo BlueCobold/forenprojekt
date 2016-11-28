@@ -6,6 +6,7 @@
 #include "Cloneable.hpp"
 #include "VariableHolder.hpp"
 #include "Stoppable.hpp"
+#include "../rendering/Blending.hpp"
 #include "../rendering/Drawable.hpp"
 class ValueProvider;
 class Shader;
@@ -21,33 +22,6 @@ class Shader;
 #include <SFML/Graphics/Sprite.hpp>
 
 class CloneHandler;
-
-struct Blending
-{
-    enum Mode
-    {
-        RegularAlpha,
-        PreMultipliedAlpha,
-        Multiply,
-        Add
-    };
-    
-    static sf::BlendMode toSfmlMode(const Mode mode) 
-    {
-        switch (mode)
-        {
-            case RegularAlpha:
-                return sf::BlendAlpha;
-            case PreMultipliedAlpha:
-                return sf::BlendMode(sf::BlendMode::One, sf::BlendMode::OneMinusSrcAlpha);
-            case Multiply:
-                return sf::BlendMultiply;
-            case Add:
-                return sf::BlendAdd;
-        }
-        return sf::BlendAlpha;
-    }
-};
 
 struct StencilInfo
 {
