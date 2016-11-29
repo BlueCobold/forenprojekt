@@ -97,10 +97,8 @@ namespace utility
     {
         auto view = sf::View(
             sf::FloatRect(0, 0,
-            // because of rounding/casting-crap in SFML (RenderTarget::getViewport),
-            // pretend the view to be larger, so that no error-pixels occur
-            static_cast<float>(viewSize.x) + 0.2f,
-            static_cast<float>(viewSize.y) + 0.2f));
+            static_cast<float>(viewSize.x),
+            static_cast<float>(viewSize.y)));
         view.setViewport(sf::FloatRect(0, 0,
             view.getSize().x / target.getSize().x,
             view.getSize().y / target.getSize().y));
