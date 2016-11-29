@@ -631,9 +631,6 @@
     <ClInclude Include="..\..\Src\resources\MenuLoader.hpp">
       <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp">
-      <Filter>Headers\resources\parsing</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\resources\ShaderContext.hpp">
       <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
@@ -696,6 +693,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Src\gui\hud\BatteryHUD.hpp">
       <Filter>Headers\gui\hud</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Src\resources\BackgroundLoader.hpp">
+      <Filter>Headers\resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
