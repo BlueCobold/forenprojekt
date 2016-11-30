@@ -11,6 +11,8 @@
 #include "../gui/SubWindow.hpp"
 #include "../MacHelper.hpp"
 
+#include <array>
+#include <vector>
 #include <string>
 
 sf::Sprite getSprite(const std::string& prefix,
@@ -363,6 +365,9 @@ std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
 
             }
             auto position = sf::Vector2f(subXml->FloatAttribute("x"), subXml->FloatAttribute("y"));
+            auto relativeSize = sf::Vector2f();
+            subXml->QueryFloatAttribute("widthPercent", &relativeSize.x);
+            subXml->QueryFloatAttribute("heightPercent", &relativeSize.y);
             auto offset = sf::Vector2f(subXml->FloatAttribute("offsetx"), subXml->FloatAttribute("offsety"));
             auto size = sf::Vector2f(subXml->FloatAttribute("sizex"), subXml->FloatAttribute("sizey"));
             auto innerHeight = subXml->IntAttribute("innerheight");
@@ -373,7 +378,7 @@ std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
             addAll(parseLabels(subXml, resourceManager), subElements);
             addAll(parseImages(subXml, toolTip, resourceManager), subElements);
             addAll(parseAnimationContainer(subXml, resourceManager), subElements);
-            elements.push_back(std::unique_ptr<SubWindow>(new SubWindow(id, position, size, offset, innerHeight, subElements, style)));
+            elements.push_back(std::unique_ptr<SubWindow>(new SubWindow(id, position, ScreenSize(size, relativeSize), offset, innerHeight, subElements, style)));
         }
     }
     return elements;

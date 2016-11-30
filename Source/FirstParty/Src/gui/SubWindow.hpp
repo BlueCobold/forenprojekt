@@ -6,6 +6,7 @@
 #include "MenuElement.hpp"
 #include "MenuPanel.hpp"
 #include "MenuTemplate.hpp"
+#include "ScreenSize.hpp"
 
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -32,12 +33,11 @@ class SubWindow : public MenuElement
     std::unique_ptr<MenuElement> doClone() const override;
 
 public:
-
-    SubWindow(const int id,
+    SubWindow(int id,
               const sf::Vector2f& position,
-              const sf::Vector2f& size,
+              const ScreenSize& size,
               const sf::Vector2f& offset,
-              const int innerHeight,
+              int innerHeight,
               const std::vector<std::unique_ptr<MenuElement>>& elements,
               const SubWindowStyle& style);
 
@@ -52,7 +52,7 @@ private:
     SubWindowStyle m_style;
     int m_innerHeight;
     sf::Vector2f m_center;
-    sf::Vector2f m_size;
+    ScreenSize m_size;
     sf::View m_orginalView;
     float m_zoomFactor;
 
