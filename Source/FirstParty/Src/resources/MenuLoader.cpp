@@ -1,8 +1,10 @@
 
 #include "AnimationParser.hpp"
+#include "BlendingParser.hpp"
 #include "MenuLoader.hpp"
 #include "ResourceManager.hpp"
 #include "SpriteSheet.hpp"
+#include "../rendering/Sprite.hpp"
 #include "../gui/AnimationContainer.hpp"
 #include "../gui/Button.hpp"
 #include "../gui/CheckBox.hpp"
@@ -29,9 +31,13 @@ sf::Sprite getSprite(const std::string& prefix,
 
         if(element->Attribute((prefix + "width").c_str()))
             sprite.width = element->IntAttribute((prefix + "width").c_str());
+        if(element->Attribute((prefix + "widthoffset").c_str()))
+            sprite.width += element->IntAttribute((prefix + "widthoffset").c_str());
 
         if(element->Attribute((prefix + "height").c_str()))
             sprite.height = element->IntAttribute((prefix + "height").c_str());
+        if(element->Attribute((prefix + "heightoffset").c_str()))
+            sprite.height += element->IntAttribute((prefix + "heightoffset").c_str());
 
         sf::Sprite baseSprite = sf::Sprite(*resourceManager.getTexture(spriteSheeet->getTextureName()),
                                            sf::IntRect(sprite.x, sprite.y, sprite.width, sprite.height));
@@ -85,6 +91,7 @@ std::unique_ptr<MenuTemplate> MenuLoader::loadMenuTemplate(const std::string& pa
     std::unordered_map<std::string, InputBoxStyle> inputBoxStyle = parseInputBoxStyle(menuXml, resourceManager);
 
     addAll(parseButtons(menuXml, buttonStyles, toolTip, resourceManager), menu->menuElements);
+    addAll(parseBorders(menuXml, resourceManager),  menu->menuElements);
     addAll(parseCheckBoxes(menuXml, checkboxStyles, toolTip, resourceManager), menu->menuElements);
     addAll(parseSliders(menuXml, sliderStyles, resourceManager), menu->menuElements);
     addAll(parseLabels(menuXml, resourceManager), menu->menuElements);
@@ -158,6 +165,56 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
             }
 
             elements.push_back(std::move(button));
+        }
+    }
+    return elements;
+}
+
+std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
+    const tinyxml2::XMLElement* menuXml,
+    ResourceManager& resourceManager)
+{
+    std::vector<std::unique_ptr<Border>> elements;
+    if(auto styles = menuXml->FirstChildElement("elements"))
+    {
+        for(auto borderXml = styles->FirstChildElement("border");
+            borderXml != nullptr; borderXml = borderXml->NextSiblingElement("border"))
+        {
+            auto position = sf::Vector2f(borderXml->FloatAttribute("x"), borderXml->FloatAttribute("y"));
+            auto offset = sf::Vector2f(borderXml->FloatAttribute("offsetx"), borderXml->FloatAttribute("offsety"));
+            auto relativeSize = sf::Vector2f(borderXml->FloatAttribute("widthPercent"), borderXml->FloatAttribute("heightPercent"));
+            auto sizeOffset = sf::Vector2f(borderXml->FloatAttribute("width"), borderXml->FloatAttribute("height"));
+            auto id = borderXml->IntAttribute("id");
+
+            std::unordered_map<Border::BackgroundId, Sprite> backgrounds;
+            for(auto background = borderXml->FirstChildElement("background");
+                background != nullptr; background = background->NextSiblingElement("background"))
+            {
+                auto id = static_cast<Border::BackgroundId>(background->IntAttribute("id"));
+                auto texture = getSprite(background, resourceManager);
+                backgrounds[id] = Sprite(texture, parseBlending(*background));
+            }
+
+            if(backgrounds.size() < 8)
+                throw std::runtime_error(utility::replace(utility::translateKey("@InvalidBackground"), "Border"));
+            
+            std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4> decos;
+            for(auto deco = borderXml->FirstChildElement("deco");
+                deco != nullptr; deco = deco->NextSiblingElement("deco"))
+            {
+                auto id = static_cast<Border::DecoId>(deco->IntAttribute("id") - 1);
+                auto texture = getSprite(deco, resourceManager);
+                sf::Vector2f offset;
+                deco->QueryFloatAttribute("offsetx", &offset.x);
+                deco->QueryFloatAttribute("offsety", &offset.y);
+                decos[id].push_back(std::make_pair(Sprite(texture, parseBlending(*deco)), offset));
+            }
+
+            elements.push_back(std::unique_ptr<Border>(new Border(id,
+                                                                  ScreenLocation(position, offset),
+                                                                  ScreenSize(sizeOffset, relativeSize),
+                                                                  std::move(backgrounds),
+                                                                  std::move(decos))));
         }
     }
     return elements;
@@ -373,6 +430,7 @@ std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
             auto innerHeight = subXml->IntAttribute("innerheight");
             std::vector<std::unique_ptr<MenuElement>> subElements;
             addAll(parseButtons(subXml, buttonStyles, toolTip, resourceManager), subElements);
+            addAll(parseBorders(subXml, resourceManager), subElements);
             addAll(parseCheckBoxes(subXml, checkBoxStyles, toolTip, resourceManager), subElements);
             addAll(parseSliders(subXml, sliderStyles, resourceManager), subElements);
             addAll(parseLabels(subXml, resourceManager), subElements);

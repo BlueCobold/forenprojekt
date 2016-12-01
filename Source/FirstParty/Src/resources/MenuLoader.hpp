@@ -5,6 +5,7 @@
 
 #include "../animation/CloneHandler.hpp"
 #include "../gui/Button.hpp"
+#include "../gui/Border.hpp"
 #include "../gui/CheckBox.hpp"
 #include "../gui/InputBox.hpp"
 #include "../gui/InteractiveLabel.hpp"
@@ -42,6 +43,10 @@ private:
         const tinyxml2::XMLElement* menuXml, 
         const std::unordered_map<std::string, ButtonStyle>& buttonStyles, 
         const std::unordered_map<std::string, ToolTip>& toolTip,
+        ResourceManager& resourceManager);
+
+    static std::vector<std::unique_ptr<Border>> parseBorders(
+        const tinyxml2::XMLElement* menuXml,
         ResourceManager& resourceManager);
 
     static std::vector<std::unique_ptr<CheckBox>> parseCheckBoxes(

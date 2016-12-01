@@ -1,6 +1,7 @@
 
 #include "AnimationParser.hpp"
 
+#include "BlendingParser.hpp"
 #include "ControllerParser.hpp"
 #include "ResourceManager.hpp"
 #include "SpriteSheet.hpp"
@@ -210,18 +211,7 @@ std::unique_ptr<Animation> AnimationParser::parseSingleTag(const tinyxml2::XMLEl
             anim->setLayout(srcoffsets, offsets, sizes, origins);
         }
     }
-
-    if(auto blend = xml.Attribute("blending"))
-    {
-        auto mode = Blending::RegularAlpha;
-        if(std::string("add") == blend)
-            mode = Blending::Add;
-        else if(std::string("mul") == blend)
-            mode = Blending::Multiply;
-        else if(std::string("premul") == blend)
-            mode = Blending::PreMultipliedAlpha;
-        anim->setBlending(mode);
-    }
+    anim->setBlending(parseBlending(xml));
 
     return anim;
 }
