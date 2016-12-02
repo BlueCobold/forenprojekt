@@ -38,6 +38,8 @@ std::vector<std::unique_ptr<Animation>> AnimationParser::parseSingle(const tinyx
     if(copies > 0)
     {
         std::unique_ptr<Animation> animation = parseSingleTag(xml);
+        if(!animation)
+            return animations;
         auto original = animation.get();
         for(int copy = 0; copy < copies; copy++)
         {
