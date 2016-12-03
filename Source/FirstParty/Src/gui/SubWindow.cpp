@@ -11,6 +11,8 @@
 #include "../rendering/DrawParameter.hpp"
 #include "../Utility.hpp"
 
+#include <algorithm>
+
 SubWindow::SubWindow(int id,
                      const sf::Vector2f& position,
                      const ScreenSize& screenSize,
@@ -69,14 +71,14 @@ void SubWindow::on(const DrawParameter& params)
     auto size = m_size.getCurrentSize();
     auto orginalScreenRect = params.getTarget().getSize();
     sf::FloatRect windowViewport;
-    windowViewport.width = size.x / (orginalScreenRect.x - 0.2f) / m_zoomFactor;
-    windowViewport.height = size.y / (orginalScreenRect.y - 0.2f) / m_zoomFactor;
-    windowViewport.left = currentPosition.x / (orginalScreenRect.x - 0.2f) + windowViewport.width * ((m_zoomFactor - 1.f) / 2.f);
-    windowViewport.top = currentPosition.y / (orginalScreenRect.y - 0.2f)  + windowViewport.height * ((m_zoomFactor - 1.f) / 1.6f);
+    windowViewport.width = std::min(size.x / (orginalScreenRect.x - 0.0002f) / m_zoomFactor, 1.0f);
+    windowViewport.height = std::min(size.y / (orginalScreenRect.y - 0.0002f) / m_zoomFactor, 1.0f);
+    windowViewport.left = currentPosition.x / (orginalScreenRect.x - 0.0002f) + windowViewport.width * ((m_zoomFactor - 1.f) / 2.f);
+    windowViewport.top = currentPosition.y / (orginalScreenRect.y - 0.0002f)  + windowViewport.height * ((m_zoomFactor - 1.f) / 1.6f);
     sf::View windowView;
     windowView.setViewport(windowViewport);
     windowView.setCenter(m_center);
-    windowView.setSize(m_size.getCurrentSize());
+    windowView.setSize(size);
     params.getTarget().setView(windowView);
 }
 
@@ -169,7 +171,10 @@ void SubWindow::updated(const sf::RenderWindow& screen, const double time, const
 
 float SubWindow::sliderPixelToWindowPixel(float pixel)
 {
-    return pixel * (m_innerHeight - m_size.getCurrentSize().y) / (m_sliderRect.getSize().y - m_positionRect.getSize().y);
+    auto delta = m_sliderRect.getSize().y - m_positionRect.getSize().y;
+    if(delta > 0)
+        return pixel * (m_innerHeight - m_size.getCurrentSize().y) / delta;
+    return pixel;
 }
 
 float SubWindow::windowPixelToSliderPixel(float pixel)
