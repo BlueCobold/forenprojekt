@@ -57,6 +57,7 @@ private:
     std::unordered_map<BackgroundId, Sprite> m_backgrounds;
     std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4> m_decos;
     ScreenSize m_size;
+    bool m_hasDecos;
 
     void doDraw(const DrawParameter& params) override;
     std::unique_ptr<MenuElement> doClone() const override;

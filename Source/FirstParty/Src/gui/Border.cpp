@@ -11,7 +11,11 @@ Border::Border(int id,
     MenuElement(id, MenuElementType::Border, position),
     m_backgrounds(std::move(backgrounds)),
     m_decos(std::move(decos)),
-    m_size(size)
+    m_size(size),
+    m_hasDecos(m_decos[Top].size() > 0
+            || m_decos[Right].size() > 0
+            || m_decos[Left].size() > 0
+            || m_decos[Bottom].size() > 0)
 { }
 
 void Border::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
@@ -67,7 +71,7 @@ void Border::updateDeco(DecoId id, float x, float y)
 
 void Border::doDraw(const DrawParameter& params)
 {
-    if(m_decos.size() > 0)
+    if(m_hasDecos)
     {
         gl::DepthMask(true);
         gl::Enable(gl::DEPTH_TEST);
@@ -78,13 +82,13 @@ void Border::doDraw(const DrawParameter& params)
         for(auto deco = begin(*it); deco != end(*it); ++deco)
             deco->first.draw(params);
 
-    if(m_decos.size() > 0)
+    if(m_hasDecos)
         gl::DepthFunc(gl::LESS);
 
     for(auto it = begin(m_backgrounds); it != end(m_backgrounds); ++it)
         it->second.draw(params);
 
-    if(m_decos.size() > 0)
+    if(m_hasDecos)
     {
         gl::Disable(gl::DEPTH_TEST);
         gl::DepthMask(false);
