@@ -39,6 +39,40 @@
 							</nop>
 						</frameindex>
 					</animation>
+					<animation texture="ball_twirl" srcx="64" srcy="0" width="32" height="32" midx="16" midy="16" rotate="true" bufferId="0" whenShaders="false">
+						<scale>
+							<static value="0.4375" />
+						</scale>
+						<frameindex frames="1">
+							<nop>
+								<ifpositive>
+									<sub>
+										<static value="1400" />
+										<var name="position.y" />
+									</sub>
+									<stop />
+								</ifpositive>
+								<static value="0" />
+							</nop>
+						</frameindex>
+					</animation>
+					<animation texture="ball_twirl" srcx="160" srcy="0" width="32" height="32" midx="16" midy="16" rotate="true" bufferId="0" whenShaders="false">
+						<scale>
+							<static value="0.4375" />
+						</scale>
+						<frameindex frames="1">
+							<nop>
+								<ifpositive>
+									<sub>
+										<static value="1400" />
+										<var name="position.y" />
+									</sub>
+									<stop />
+								</ifpositive>
+								<static value="0" />
+							</nop>
+						</frameindex>
+					</animation>
 				</animations>
 			</entity>
 			<entity name="merge" rep="#2" z="1003" >
