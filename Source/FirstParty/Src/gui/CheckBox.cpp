@@ -101,7 +101,8 @@ void CheckBox::setToolTipText(const std::string& text, const std::string& replac
 
 void CheckBox::layoutUpdated(const sf::Vector2f& screenSize)
 {
-    auto currentPosition = getCurrentPosition();
+    auto pos = getCurrentPosition();
+    auto currentPosition = sf::Vector2f(floorf(pos.x), floorf(pos.y));
     m_style.uncheckedStyle.sprite.setPosition(currentPosition + m_style.uncheckedStyle.spriteOffset);
     m_style.checkedStyle.sprite.setPosition(currentPosition + m_style.checkedStyle.spriteOffset);
     m_style.hoverStyle.sprite.setPosition(currentPosition + m_style.hoverStyle.spriteOffset);
