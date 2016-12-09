@@ -4,11 +4,11 @@
 #define BATTERYHUD_HPP
 
 #include "HUDElement.hpp"
-#include <SFML/Graphics/Sprite.hpp>
+#include "../../rendering/Sprite.hpp"
 
 class BatteryHUD : public HUDElement
 {
-    sf::Sprite m_icon;
+    Sprite m_icon;
     ResourceManager& m_resourceManager;
 
     sf::IntRect getIconRect(const std::string& key);

@@ -23,7 +23,7 @@ void BatteryHUD::updated(const DrawParameter& params)
 
 void BatteryHUD::doDraw(const DrawParameter& params)
 {
-    params.getTarget().draw(m_icon);
+    m_icon.draw(params);
 }
 
 void BatteryHUD::setIcon()
