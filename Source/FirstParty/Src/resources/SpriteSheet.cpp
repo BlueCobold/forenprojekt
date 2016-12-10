@@ -1,5 +1,8 @@
+
 #include "SpriteSheet.hpp"
+#include "../resources/BlendingParser.hpp"
 #include "../Utility.hpp"
+
 #include <tinyxml2.h>
 
 SpriteSheet::SpriteSheet(const std::string& fileName) :
@@ -31,6 +34,7 @@ bool SpriteSheet::loadFromFile(const std::string& filename)
 
     if(auto spritesheet = doc.FirstChildElement("spriteSheet"))
     {
+        m_blendMode = parseBlending(*spritesheet);
         if(auto name = spritesheet->Attribute("texture"))
             m_textureName = name;
         else
@@ -63,8 +67,10 @@ bool SpriteSheet::loadFromFile(const std::string& filename)
 
 void SpriteSheet::insert(const std::string& key, const SpriteData& data)
 {
+    auto sprite = data;
+    sprite.blendMode = m_blendMode;
     if(m_spriteKeys.find(key) == std::end(m_spriteKeys))
-        m_spriteKeys[key] = data;
+        m_spriteKeys[key] = sprite;
     else
         throw std::runtime_error(utility::replace(utility::translateKey("@DoubleListing"), key));
 }
