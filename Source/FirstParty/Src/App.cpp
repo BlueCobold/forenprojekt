@@ -262,7 +262,10 @@ void App::draw()
 #endif
     gl::StencilMask(0xFF); // Write to entire stencil buffer
     gl::ClearStencil(0);
-    gl::Clear(gl::STENCIL_BUFFER_BIT);
+    gl::DepthMask(true);
+    gl::ClearDepth(1);
+    gl::Clear(gl::STENCIL_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
+    gl::DepthMask(false);
 
     auto params = DrawParameter(m_screen);
     std::unordered_map<const sf::Texture*, sf::RenderTexture*> offscreens;
