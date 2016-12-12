@@ -124,7 +124,7 @@ void LineLabel::rebuild()
         if(m_alignment == Right)
             shift -= width;
         else
-            shift -= width/2;
+            shift -= width / 2;
     }
 
     float xOffset = 0;
@@ -132,7 +132,8 @@ void LineLabel::rebuild()
     for(auto it = begin(m_text); it != end(m_text); it++)
     {
         auto glyph = m_font->getGlyph(*it);
-        glyph.setPosition(shift + currentPosition.x + xOffset, currentPosition.y + glyph.getVerticalOffset());
+        glyph.setPosition(floorf(shift + currentPosition.x + xOffset),
+                          floorf(currentPosition.y + glyph.getVerticalOffset()));
         glyph.setRotation(m_rotation);
         newGlyphs.push_back(glyph);
 
