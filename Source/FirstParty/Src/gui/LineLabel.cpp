@@ -83,12 +83,13 @@ void LineLabel::doDraw(const DrawParameter& params)
     mutex.lock();
     auto glyphs(m_glyphs);
     mutex.unlock();
+    auto currentPosition = getCurrentPosition();
     for(auto it = begin(glyphs); it != end(glyphs); it++)
     {
         auto glyph = (*it);
         glyph.setPosition(
-            glyph.getPosition().x + m_progressPosition.x,
-            glyph.getPosition().y + m_progressPosition.y);
+            floorf(currentPosition.x + glyph.getPosition().x + m_progressPosition.x),
+            floorf(currentPosition.y + glyph.getPosition().y + m_progressPosition.y));
 
         if(m_alphaChange.isStarted())
             glyph.setColor(sf::Color(255, 255, 255, static_cast<sf::Uint8>(255 * m_alphaChange.getCurrentValue())));
@@ -128,12 +129,10 @@ void LineLabel::rebuild()
     }
 
     float xOffset = 0;
-    auto currentPosition = getCurrentPosition();
     for(auto it = begin(m_text); it != end(m_text); it++)
     {
         auto glyph = m_font->getGlyph(*it);
-        glyph.setPosition(floorf(shift + currentPosition.x + xOffset),
-                          floorf(currentPosition.y + glyph.getVerticalOffset()));
+        glyph.setPosition(shift + xOffset, static_cast<float>(glyph.getVerticalOffset()));
         glyph.setRotation(m_rotation);
         newGlyphs.push_back(glyph);
 
@@ -243,9 +242,7 @@ const BitmapFont* LineLabel::getFont() const
 }
 
 void LineLabel::layoutUpdated(const sf::Vector2f& screenSize)
-{
-    rebuild();
-}
+{ }
 
 void LineLabel::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
