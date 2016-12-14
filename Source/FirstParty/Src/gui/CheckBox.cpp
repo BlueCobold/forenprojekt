@@ -48,6 +48,8 @@ void CheckBox::updated(const sf::RenderWindow& screen, const double time, const 
 
     if(m_hover && !m_checked)
         m_sprite = &m_style.hoverStyle.sprite;
+    else if(m_hover)
+        m_sprite = &m_style.checkedHoverStyle.sprite;
     else if(m_checked)
         m_sprite = &m_style.checkedStyle.sprite;
     else
@@ -106,4 +108,5 @@ void CheckBox::layoutUpdated(const sf::Vector2f& screenSize)
     m_style.uncheckedStyle.sprite.setPosition(currentPosition + m_style.uncheckedStyle.spriteOffset);
     m_style.checkedStyle.sprite.setPosition(currentPosition + m_style.checkedStyle.spriteOffset);
     m_style.hoverStyle.sprite.setPosition(currentPosition + m_style.hoverStyle.spriteOffset);
+    m_style.checkedHoverStyle.sprite.setPosition(currentPosition + m_style.checkedHoverStyle.spriteOffset);
 }

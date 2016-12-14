@@ -20,6 +20,7 @@ struct CheckBoxStyle
     CheckBoxStateStyle uncheckedStyle;
     CheckBoxStateStyle checkedStyle;
     CheckBoxStateStyle hoverStyle;
+    CheckBoxStateStyle checkedHoverStyle;
     sf::IntRect mouseRect;
 };
 
