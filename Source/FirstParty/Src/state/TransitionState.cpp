@@ -1,6 +1,7 @@
 #include "TransitionState.hpp"
 #include "EnterStateInformation.hpp"
 #include "../Utility.hpp"
+#include "../rendering/GLExt.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -54,10 +55,12 @@ void TransitionState::render(const EnterTransitionStateInformation* info,
             State* state,
             const double time)
 {
+    gl::DepthMask(true);
     auto size = m_screen.getSize();
     target.setView(utility::getDefaultView(target, size));
     target.setActive(true);
     target.clear();
+    gl::Clear(gl::STENCIL_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
     DrawParameter params(target);
 
     std::unordered_map<const sf::Texture*, sf::RenderTexture*> offscreens;
@@ -80,6 +83,7 @@ void TransitionState::render(const EnterTransitionStateInformation* info,
     
     state->draw(params);
     target.display();
+    gl::DepthMask(false);
 }
 
 StateChangeInformation TransitionState::update(const double time)
