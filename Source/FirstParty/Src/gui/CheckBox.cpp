@@ -61,7 +61,7 @@ void CheckBox::doDraw(const DrawParameter& params)
     if(!isVisible())
         return;
 
-    params.getTarget().draw(*m_sprite);
+    m_sprite->draw(params);
 }
 
 void CheckBox::onDrawAdditionalForeground(const DrawParameter& params)

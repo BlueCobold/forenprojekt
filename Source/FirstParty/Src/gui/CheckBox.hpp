@@ -7,7 +7,6 @@
 #include "MenuElement.hpp"
 #include "ToolTip.hpp"
 
-#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
 class CheckBox : public MenuElement
@@ -35,7 +34,7 @@ private:
     bool m_hover;
     ToolTip m_toolTip;
     bool m_showToolTip;
-    sf::Sprite* m_sprite;
+    Sprite* m_sprite;
 };
 
 #endif // CHECKBOX_HPP

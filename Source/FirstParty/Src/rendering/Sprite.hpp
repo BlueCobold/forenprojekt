@@ -19,6 +19,11 @@ public:
         m_blendMode(blendMode)
     { }
 
+    const sf::Sprite& getSprite() const
+    {
+        return m_sprite;
+    }
+
     void setPosition(float x, float y)
     {
         m_sprite.setPosition(x, y);
@@ -27,6 +32,11 @@ public:
     void setPosition(const sf::Vector2f &position)
     {
         m_sprite.setPosition(position);
+    }
+
+    const sf::Vector2f& getPosition() const
+    {
+        return m_sprite.getPosition();
     }
 
     void setScale(const sf::Vector2f &factors)
