@@ -2,7 +2,7 @@
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-MenuSprite::MenuSprite(const sf::Sprite& sprite, const sf::Vector2f& position, const sf::Vector2f& offset, const int id) :
+MenuSprite::MenuSprite(const Sprite& sprite, const sf::Vector2f& position, const sf::Vector2f& offset, const int id) :
     MenuElement(id, MenuElementType::Image, position, offset),
     m_sprite(sprite),
     m_showToolTip(false)
@@ -22,7 +22,7 @@ void MenuSprite::doDraw(const DrawParameter& params)
     if(!isVisible())
         return;
 
-    params.getTarget().draw(m_sprite);
+    m_sprite.draw(params);
 }
 
 void MenuSprite::setToolTip(const ToolTip& toolTip)

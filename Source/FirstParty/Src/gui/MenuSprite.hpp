@@ -6,13 +6,13 @@
 #include "MenuElement.hpp"
 #include "ToolTip.hpp"
 
-#include <SFML/Graphics/Sprite.hpp>
+#include "../rendering/Sprite.hpp"
 
 class MenuSprite : public MenuElement
 {
 public:
 
-    MenuSprite(const sf::Sprite& sprite, const sf::Vector2f& position, const sf::Vector2f& offset, const int id);
+    MenuSprite(const Sprite& sprite, const sf::Vector2f& position, const sf::Vector2f& offset, const int id);
 
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text, const std::string& replacement = "");
@@ -25,7 +25,7 @@ private:
     void layoutUpdated(const sf::Vector2f& screenSize) override;
     void onDrawAdditionalForeground(const DrawParameter& params) override;
 
-    sf::Sprite m_sprite;
+    Sprite m_sprite;
     ToolTip m_toolTip;
     bool m_showToolTip;
 

@@ -372,7 +372,7 @@ std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
         for(auto imageXml = styles->FirstChildElement("image");
             imageXml != nullptr; imageXml = imageXml->NextSiblingElement("image"))
         {
-            sf::Sprite baseSprite = getSprite(imageXml, resourceManager).getSprite();
+            Sprite baseSprite = getSprite(imageXml, resourceManager);
             auto sprite = std::unique_ptr<MenuSprite>(new MenuSprite(
                                                           baseSprite,
                                                           sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")),
