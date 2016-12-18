@@ -487,7 +487,7 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(const tinyxml2::XMLElement* xm
     style.font = resourceManager.getBitmapFont(xml->Attribute("font"));
     style.textOffset = sf::Vector2f(xml->FloatAttribute("fontoffsetx"), xml->FloatAttribute("fontoffsety"));
     style.spriteOffset = sf::Vector2f(xml->FloatAttribute("offsetx"), xml->FloatAttribute("offsety"));
-    style.sprite = getSprite(xml, resourceManager).getSprite();
+    style.sprite = getSprite(xml, resourceManager);
     if(auto soundName = xml->Attribute("sound"))
         style.sound = std::shared_ptr<SoundObject>(new SoundObject(soundName, resourceManager.getSoundManager()));
 

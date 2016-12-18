@@ -6,9 +6,10 @@
 #include "BitmapFont.hpp"
 #include "LineLabel.hpp"
 #include "AnimationContainer.hpp"
+#include "../rendering/Sprite.hpp"
 
 #include <SFML/System/Vector2.hpp>
-#include <SFML/Graphics/Sprite.hpp>
+
 #include <memory>
 
 class SoundObject;
@@ -18,7 +19,7 @@ struct ButtonStateStyle
     const BitmapFont* font;
     sf::Vector2f spriteOffset;
     sf::Vector2f textOffset;
-    sf::Sprite sprite;
+    Sprite sprite;
     LineLabel label;
     std::shared_ptr<SoundObject> sound;
     std::unique_ptr<AnimationContainer> animation;

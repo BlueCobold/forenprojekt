@@ -124,7 +124,7 @@ void Button::doDraw(const DrawParameter& params)
         m_currentStyle->animation->draw(params);
     else
     {
-        params.getTarget().draw(m_currentStyle->sprite);
+        m_currentStyle->sprite.draw(params);
         m_currentStyle->label.draw(params);
     }
 }
