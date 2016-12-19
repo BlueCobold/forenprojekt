@@ -3,11 +3,13 @@
 #ifndef INPUTBOX_HPP
 #define INPUTBOX_HPP
 
-#include <SFML/Graphics/RectangleShape.hpp>
 #include "MenuElement.hpp"
 #include "LineLabel.hpp"
 #include "InputBoxStyle.hpp"
 #include "Caret.hpp"
+
+#include <SFML/Graphics/RectangleShape.hpp>
+
 #include <unordered_map>
 
 class ResourceManager;
@@ -56,7 +58,7 @@ private:
     bool m_finished;
     bool m_activated;
     InputBoxStyle m_style;
-    std::unordered_map<int, sf::Sprite> m_background;
+    std::unordered_map<int, Sprite> m_background;
     float m_scalefactorHorizontal;
     float m_scalefactorVertical;
     Caret m_caret;

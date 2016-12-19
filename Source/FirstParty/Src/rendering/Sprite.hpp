@@ -24,6 +24,11 @@ public:
         return m_sprite;
     }
 
+    void setColor(const sf::Color &color)
+    {
+        m_sprite.setColor(color);
+    }
+
     void setPosition(float x, float y)
     {
         m_sprite.setPosition(x, y);

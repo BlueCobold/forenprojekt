@@ -676,7 +676,7 @@ std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(co
                 background != nullptr; background = background->NextSiblingElement("background"))
             {
                 id = background->IntAttribute("id");
-                inputBoxStyle[styleName].background[id] = getSprite(background, resourceManager).getSprite();
+                inputBoxStyle[styleName].background[id] = getSprite(background, resourceManager);
                 ++counter;
             }
 
@@ -685,7 +685,7 @@ std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(co
 
             if(auto caret = inputBoxStyleXml->FirstChildElement("caret"))
             {
-                inputBoxStyle[styleName].caret = getSprite(caret, resourceManager).getSprite();
+                inputBoxStyle[styleName].caret = getSprite(caret, resourceManager);
                 inputBoxStyle[styleName].caretOffset = sf::Vector2f(caret->FloatAttribute("offsetX"), caret->FloatAttribute("offsetY"));
                 inputBoxStyle[styleName].caretBlinkFrequency = caret->FloatAttribute("frequency");
             }

@@ -58,7 +58,7 @@ void InputBox::updated(const sf::RenderWindow& screen, const double time, const 
 void InputBox::doDraw(const DrawParameter& params)
 {
     for(auto it = begin(m_background); it != end(m_background); ++it)
-        params.getTarget().draw(it->second);
+        it->second.draw(params);
 
     params.getTarget().draw(m_backgroundShade);
     m_inputText.draw(params);

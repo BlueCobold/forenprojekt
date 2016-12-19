@@ -4,8 +4,7 @@
 #define CARAT_HPP
 
 #include "../rendering/Drawable.hpp"
-
-#include <SFML/Graphics/Sprite.hpp>
+#include "../rendering/Sprite.hpp"
 
 class ResourceManager;
 class DrawParameter;
@@ -18,7 +17,7 @@ namespace sf
 class Caret : public Drawable
 {
 private:
-    sf::Sprite m_sprite;
+    Sprite m_sprite;
     const double m_blinkTime;
     double m_nextFullFadeOut;
     sf::Vector2f m_offset;
@@ -27,7 +26,7 @@ private:
     void doDraw(const DrawParameter& params) override;
 
 public:
-    Caret(float frequency, const sf::Vector2f& offset, const sf::Sprite& sprite);
+    Caret(float frequency, const sf::Vector2f& offset, const Sprite& sprite);
 
     void update(const double time);
 
