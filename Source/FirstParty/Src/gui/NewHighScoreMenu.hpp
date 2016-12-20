@@ -12,7 +12,7 @@ private:
     KeyboardMenu m_virtualKeyboard;
 
     void doDraw(const DrawParameter& params) override;
-    void updated(sf::RenderWindow& screen, const double time) override;
+    void onBeforeUpdate(sf::RenderWindow& screen, const double time) override;
 
 public:
     static const int INPUTBOX = 1;

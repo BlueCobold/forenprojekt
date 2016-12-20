@@ -57,6 +57,7 @@ protected:
 private:
     virtual void drawAdditionalBackground(const DrawParameter& params);
     virtual void drawAdditionalForeground(const DrawParameter& params);
+    virtual void onBeforeUpdate(sf::RenderWindow& screen, const double time);
     virtual void updated(sf::RenderWindow& screen, const double time);
 
     template<class T>

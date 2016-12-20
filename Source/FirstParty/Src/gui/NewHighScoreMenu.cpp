@@ -9,7 +9,7 @@ NewHighScoreMenu::NewHighScoreMenu(sf::RenderWindow& screen,
 {
 }
 
-void NewHighScoreMenu::updated(sf::RenderWindow& screen, const double time)
+void NewHighScoreMenu::onBeforeUpdate(sf::RenderWindow& screen, const double time)
 {
     m_virtualKeyboard.update(screen, time);
 }

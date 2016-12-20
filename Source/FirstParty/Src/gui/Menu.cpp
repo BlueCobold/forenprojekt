@@ -52,9 +52,13 @@ void Menu::drawAdditionalForeground(const DrawParameter& params)
 
 void Menu::update(sf::RenderWindow& screen, const double time)
 {
+    onBeforeUpdate(screen, time);
     m_panel.update(screen, time);
     updated(screen, time);
 }
+
+void Menu::onBeforeUpdate(sf::RenderWindow& screen, const double time)
+{ }
 
 void Menu::updated(sf::RenderWindow& screen, const double time)
 { }

@@ -11,9 +11,11 @@ private:
     bool m_showKeyboard;
     bool m_shiftKeyPressed;
     int m_lastKey;
+    int m_currentKey;
 
     void doDraw(const DrawParameter& params) override;
     void updated(sf::RenderWindow& screen, const double time) override;
+    void onBeforeUpdate(sf::RenderWindow& screen, const double time) override;
 
 public:
     static const int BUTTON_KEYBOARD_OFF = 99;
