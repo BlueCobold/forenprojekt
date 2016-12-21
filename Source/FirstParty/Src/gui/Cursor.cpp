@@ -10,12 +10,13 @@
 const std::string SHEET_NAME = "gui_elements";
 const std::string SPRITE_NAME = "Mouse";
 
-Cursor::Cursor(ResourceManager& resourceManager, const sf::RenderWindow& screen)
-    : m_screen(screen)
+Cursor::Cursor(ResourceManager& resourceManager, const sf::RenderWindow& screen) :
+    m_screen(screen),
+    m_sprite(sf::Sprite())
 {
     auto sheet = resourceManager.getSpriteSheet(SHEET_NAME);
     auto iconSprite = sheet->get(SPRITE_NAME);
-    m_sprite.setTexture(*resourceManager.getTexture(sheet->getTextureName()));
+    m_sprite = Sprite(sf::Sprite(*resourceManager.getTexture(sheet->getTextureName())), iconSprite.blendMode);
     m_sprite.setTextureRect(sf::IntRect(iconSprite.x, iconSprite.y, iconSprite.width, iconSprite.height));
 }
 
@@ -34,5 +35,6 @@ void Cursor::doDraw(const DrawParameter& params)
 {
     if(!utility::Mouse.isCursorVisible())
         return;
-    params.getTarget().draw(m_sprite);
+
+    m_sprite.draw(params);
 }

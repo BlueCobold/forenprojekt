@@ -4,8 +4,7 @@
 #define CURSOR_HPP
 
 #include "../rendering/Drawable.hpp"
-
-#include <SFML/Graphics/Sprite.hpp>
+#include "../rendering/Sprite.hpp"
 
 class ResourceManager;
 class DrawParameter;
@@ -23,7 +22,7 @@ public:
     void update();
 
 private:
-    sf::Sprite m_sprite;
+    Sprite m_sprite;
     const sf::RenderWindow& m_screen;
 
     void doDraw(const DrawParameter& params) override;
