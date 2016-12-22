@@ -594,10 +594,10 @@ SliderStateStyle MenuLoader::loadSliderStateStyle(const tinyxml2::XMLElement* xm
 {
     SliderStateStyle style;
     style.backgroundOffset = sf::Vector2f(xml->FloatAttribute("backgroundoffsetx"), xml->FloatAttribute("backgroundoffsety"));
-    style.spriteBackground = getSprite("background", xml, resourceManager).getSprite();
+    style.background = getSprite("background", xml, resourceManager);
 
-    style.sliderOffset = sf::Vector2f(xml->FloatAttribute("slideroffsetx"), xml->FloatAttribute("slideroffsety"));
-    style.spriteSlider = getSprite("slider", xml, resourceManager).getSprite();
+    style.buttonOffset = sf::Vector2f(xml->FloatAttribute("slideroffsetx"), xml->FloatAttribute("slideroffsety"));
+    style.button = getSprite("slider", xml, resourceManager);
     return style;
 }
 

@@ -5,16 +5,16 @@
 
 #include "BitmapFont.hpp"
 #include "LineLabel.hpp"
+#include "../rendering/Sprite.hpp"
 
 #include <SFML/System/Vector2.hpp>
-#include <SFML/Graphics/Sprite.hpp>
 
 struct SliderStateStyle
 {
     sf::Vector2f backgroundOffset;
-    sf::Vector2f sliderOffset;
-    sf::Sprite spriteBackground;
-    sf::Sprite spriteSlider;
+    sf::Vector2f buttonOffset;
+    Sprite background;
+    Sprite button;
 };
 
 struct SliderStyle

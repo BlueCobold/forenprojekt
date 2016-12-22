@@ -33,9 +33,9 @@ private:
     float m_max;
     int m_pick;
 
-    sf::Vector2f m_sliderPosition;
-    sf::Sprite* m_spriteSlider;
-    sf::Sprite* m_spriteBackground;
+    sf::Vector2f m_buttonPosition;
+    Sprite* m_button;
+    Sprite* m_background;
 
     void calculateSliderPosition(const sf::IntRect& rect);
     void calculateValue(const int left, const int mousex);

@@ -8,10 +8,10 @@ Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& positi
     m_active(false),
     m_pick(0)
 {
-    m_spriteSlider = &m_style.idle.spriteSlider;
-    m_spriteBackground = &m_style.idle.spriteBackground;
+    m_button = &m_style.idle.button;
+    m_background = &m_style.idle.background;
 
-    m_sliderPosition.y = position.y + offset.y + m_style.mouseRect.top;
+    m_buttonPosition.y = position.y + offset.y + m_style.mouseRect.top;
 
     m_min = m_style.min;
     m_max = m_style.max;
@@ -42,7 +42,7 @@ void Slider::updated(const sf::RenderWindow& screen, const double time, const sf
     }
     else if(!m_active)
     {
-        sliderRect.left += static_cast<int>(m_sliderPosition.x);
+        sliderRect.left += static_cast<int>(m_buttonPosition.x);
         auto mousePos = getCursorPosition(screen);
         if(sliderRect.contains(mousePos + mouseOffset))
         {
@@ -53,21 +53,21 @@ void Slider::updated(const sf::RenderWindow& screen, const double time, const sf
 
     if(!m_active)
     {
-        m_spriteSlider = &m_style.idle.spriteSlider;
-        m_spriteBackground = &m_style.idle.spriteBackground;
-        offset = m_style.idle.sliderOffset;
+        m_button = &m_style.idle.button;
+        m_background = &m_style.idle.background;
+        offset = m_style.idle.buttonOffset;
     }
     else
     {
         auto mousePos = getCursorPosition(screen) + mouseOffset;
         calculateValue(x, mousePos.x - m_pick);
-        m_spriteSlider = &m_style.active.spriteSlider;
-        m_spriteBackground = &m_style.active.spriteBackground;
-        offset = m_style.active.sliderOffset;
+        m_button = &m_style.active.button;
+        m_background = &m_style.active.background;
+        offset = m_style.active.buttonOffset;
     }
-    m_sliderPosition.x = (m_value - m_min) * m_style.width / m_max;
+    m_buttonPosition.x = (m_value - m_min) * m_style.width / m_max;
     offset.x += x;
-    m_spriteSlider->setPosition(m_sliderPosition + offset);
+    m_button->setPosition(m_buttonPosition + offset);
 }
 
 void Slider::doDraw(const DrawParameter& params)
@@ -75,8 +75,8 @@ void Slider::doDraw(const DrawParameter& params)
     if(!isVisible())
         return;
 
-    params.getTarget().draw(*m_spriteBackground);
-    params.getTarget().draw(*m_spriteSlider);
+    m_background->draw(params);
+    m_button->draw(params);
 }
 
 float Slider::getValue() const
@@ -92,7 +92,7 @@ void Slider::setValue(const float value)
 void Slider::calculateSliderPosition(const sf::IntRect& rect)
 {
     float posx = rect.width * (m_value / m_max);
-    m_sliderPosition.x = rect.left + posx;
+    m_buttonPosition.x = rect.left + posx;
 }
 
 void Slider::calculateValue(const int left, const int mousex)
@@ -106,10 +106,10 @@ void Slider::layoutUpdated(const sf::Vector2f& screenSize)
     auto currentPosition = getCurrentPosition();
 
     float x = currentPosition.x + m_style.mouseRect.left;
-    m_sliderPosition.x = (m_value - m_min) * m_style.width / m_max;
-    m_sliderPosition.y = currentPosition.y + m_style.mouseRect.top;
+    m_buttonPosition.x = (m_value - m_min) * m_style.width / m_max;
+    m_buttonPosition.y = currentPosition.y + m_style.mouseRect.top;
 
-    m_style.active.spriteBackground.setPosition(currentPosition + m_style.active.backgroundOffset);
-    m_style.idle.spriteBackground.setPosition(currentPosition + m_style.idle.backgroundOffset);
-    m_spriteSlider->setPosition(m_sliderPosition + m_style.idle.sliderOffset + sf::Vector2f(x, 0));
+    m_style.active.background.setPosition(currentPosition + m_style.active.backgroundOffset);
+    m_style.idle.background.setPosition(currentPosition + m_style.idle.backgroundOffset);
+    m_button->setPosition(m_buttonPosition + m_style.idle.buttonOffset + sf::Vector2f(x, 0));
 }
