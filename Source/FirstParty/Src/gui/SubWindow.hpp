@@ -7,6 +7,7 @@
 #include "MenuPanel.hpp"
 #include "MenuTemplate.hpp"
 #include "ScreenSize.hpp"
+#include "../rendering/Sprite.hpp"
 
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
@@ -23,9 +24,9 @@ class Slider;
 
 struct SubWindowStyle
 {
-    sf::Sprite scrollbarTop;
-    sf::Sprite scrollbarMiddle;
-    sf::Sprite scrollbarBottom;
+    Sprite scrollbarTop;
+    Sprite scrollbarMiddle;
+    Sprite scrollbarBottom;
 };
 
 class SubWindow : public MenuElement
