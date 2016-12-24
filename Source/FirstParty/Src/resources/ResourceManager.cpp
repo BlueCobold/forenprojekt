@@ -163,7 +163,7 @@ const BitmapFont* ResourceManager::getBitmapFont(const std::string& key)
         [=](const std::string& path)->std::function<std::unique_ptr<const BitmapFont>()>
         {
             return [=](){ return std::move(self->loadBitmapFont(path)); };
-        }, "UnknownBitmapFont");
+        }, "@UnknownBitmapFont");
 }
 
 const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
@@ -173,7 +173,7 @@ const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
         [=](const std::string& path)->std::function<std::unique_ptr<MenuTemplate>()>
         {
             return [=](){ return MenuLoader::loadMenuTemplate(std::string("res/menus/") + path, *self); };
-        }, "UnknownMenuTemplate");
+        }, "@UnknownMenuTemplate");
 }
 
 #ifndef NO_SOUND
@@ -183,7 +183,7 @@ sf::SoundBuffer* ResourceManager::getSoundBuffer(const std::string& key)
         [=](const std::string& path)->std::function<std::unique_ptr<sf::SoundBuffer>()>
         {
             return [=](){ return ResourceManager::loadSoundBuffer(path); };
-        }, "UnknownSound");
+        }, "@UnknownSound");
 }
 #endif
 
@@ -193,7 +193,7 @@ const sf::Texture* ResourceManager::getTexture(const std::string& key)
         [=](const TextureParams& params)->std::function<std::unique_ptr<const sf::Texture>()>
         {
             return [=](){ return ResourceManager::loadTexture(std::get<0>(params), std::get<1>(params)); };
-        }, "UnknownTexture");
+        }, "@UnknownTexture");
 }
 
 void ResourceManager::addTexture(const std::string& key, const sf::Texture& texture)
@@ -211,7 +211,7 @@ Shader* ResourceManager::getShader(const std::string& key)
         [=](const ShaderParams& params)->std::function<std::unique_ptr<Shader>()>
         {
             return [=](){ return ShaderLoader::loadShader(std::get<0>(params), std::get<1>(params), std::get<2>(params), *self); };
-        }, "UnknownShader");
+        }, "@UnknownShader");
 }
 
 ShaderContext& ResourceManager::getShaderContext() const
@@ -225,7 +225,7 @@ const SpriteSheet* ResourceManager::getSpriteSheet(const std::string& key)
         [=](const std::string& path)->std::function<std::unique_ptr<SpriteSheet>()>
         {
             return [=](){ return ResourceManager::loadSpriteSheet(path); };
-        }, "UnknownSpriteSheet");
+        }, "@UnknownSpriteSheet");
 }
 
 void ResourceManager::parse(const tinyxml2::XMLDocument& doc,
@@ -390,7 +390,7 @@ sf::Music* ResourceManager::getMusic(const std::string& key)
         [=](const std::string& path)->std::function<std::unique_ptr<sf::Music>()>
         {
             return [=](){ return ResourceManager::loadMusic(path); };
-        }, "UnknownMusic");
+        }, "@UnknownMusic");
 }
 
 void ResourceManager::loadAllMusic()
