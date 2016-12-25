@@ -40,7 +40,7 @@ void MenuSprite::updated(const sf::RenderWindow& screen, const double time, cons
                                    m_sprite.getTextureRect().height);
 
     auto mousePosition = getCursorPosition(screen);
-    if(rect.contains(mousePosition + mouseOffset) && isVisible())
+    if(cursorIsValid() && rect.contains(mousePosition + mouseOffset) && isVisible())
     {
         m_showToolTip = true;
         m_toolTip.setPosition(static_cast<const sf::Vector2f>(mousePosition), screen);

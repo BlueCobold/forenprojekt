@@ -166,6 +166,7 @@ void SubWindow::updated(const sf::RenderWindow& screen, const double time, const
     m_style.scrollbarMiddle.setScale(1, height/m_style.scrollbarMiddle.getTextureRect().height);
     m_style.scrollbarBottom.setPosition(pos.x, pos.y + height + m_style.scrollbarTop.getTextureRect().height);
 
+    m_panel.setCursorIsValid(mouseRect.contains(m_cursorPosition));
     m_panel.update(screen, time, getMouseOffset(screen));
 }
 

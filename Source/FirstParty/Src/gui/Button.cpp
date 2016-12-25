@@ -52,12 +52,12 @@ void Button::updated(const sf::RenderWindow& screen, const double time, const sf
 
     auto currentPosition = getCurrentPosition();
     sf::IntRect buttonRect(static_cast<int>(currentPosition.x + m_style.mouseRect.left - getSize().x / 2),
-                           static_cast<int>(currentPosition.y + m_style.mouseRect.top),
-                           m_style.mouseRect.width,
-                           m_style.mouseRect.height);
+                            static_cast<int>(currentPosition.y + m_style.mouseRect.top),
+                            m_style.mouseRect.width,
+                            m_style.mouseRect.height);
     auto mousePosition = getCursorPosition(screen);
 
-    if(buttonRect.contains(mousePosition + mouseOffset) && isVisible())
+    if(cursorIsValid() && buttonRect.contains(mousePosition + mouseOffset) && isVisible())
     {
         if(!m_playHoverSound && m_style.hoverStyle.sound)
         {

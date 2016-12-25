@@ -44,10 +44,16 @@ public:
     {
         for(auto it = begin(m_elements); it != end(m_elements); ++it)
         {
-            if(it->get()->getType() == type && it->get()->getId() == id)
+            if((*it)->getType() == type && (*it)->getId() == id)
                 return dynamic_cast<T*>(it->get());
         }
         return nullptr;
+    }
+
+    void setCursorIsValid(bool isValid)
+    {
+        for(auto it = begin(m_elements); it != end(m_elements); ++it)
+            (*it)->setCursorIsValid(isValid);
     }
 
     void add(std::unique_ptr<MenuElement> element);

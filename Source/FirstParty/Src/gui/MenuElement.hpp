@@ -41,6 +41,7 @@ public:
         m_type(type),
         m_screenLocation(position, offset),
         m_visible(true),
+        m_cursorIsValid(true),
         m_visibleWhen(nullptr),
         m_masterId(-1)
     { }
@@ -52,6 +53,7 @@ public:
         m_type(type),
         m_screenLocation(position),
         m_visible(true),
+        m_cursorIsValid(true),
         m_visibleWhen(nullptr),
         m_masterId(-1)
     { }
@@ -131,7 +133,17 @@ public:
         layoutUpdated(screenSize);
     }
 
+    void setCursorIsValid(bool isValid)
+    {
+        m_cursorIsValid = isValid;
+    }
+
 protected:
+    bool cursorIsValid() const
+    {
+        return m_cursorIsValid;
+    }
+
     virtual void positionSet()
     { }
 
@@ -151,6 +163,9 @@ protected:
 
     const sf::Vector2i getCursorPosition(const sf::RenderWindow& screen) const
     {
+        if(!m_cursorIsValid)
+            return sf::Vector2i(INT_MIN, INT_MIN);
+
 #if defined(IOS) || defined(ANDROID)
         return static_cast<sf::Vector2i>(screen.mapPixelToCoords(utility::Mouse.getTouchPosition()));
 #else
@@ -164,6 +179,7 @@ private:
     MenuElementType::Type m_type;
     ScreenLocation m_screenLocation;
     bool m_visible;
+    bool m_cursorIsValid;
     const MenuElement* m_visibleWhen;
     int m_masterId;
 };

@@ -55,7 +55,7 @@ void InteractiveLabel::updated(const sf::RenderWindow& screen, const double time
     auto mousePosition = getCursorPosition(screen);
     sf::IntRect hitBox(static_cast<sf::Vector2i>(position), size);
     
-    m_showToolTip = hitBox.contains(mousePosition + mouseOffset) && isVisible();
+    m_showToolTip = cursorIsValid() && hitBox.contains(mousePosition + mouseOffset) && isVisible();
     if(m_showToolTip)
     {
         m_toolTip.setPosition(static_cast<const sf::Vector2f>(mousePosition), screen);

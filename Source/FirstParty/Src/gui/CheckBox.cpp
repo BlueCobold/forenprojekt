@@ -23,15 +23,15 @@ void CheckBox::updated(const sf::RenderWindow& screen, const double time, const 
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
     m_toolTip.update();
-
+    
     auto currentPosition = getCurrentPosition();
     sf::IntRect checkboxRect(static_cast<int>(currentPosition.x + m_style.mouseRect.left),
-                             static_cast<int>(currentPosition.y + m_style.mouseRect.top),
-                             m_style.mouseRect.width,
-                             m_style.mouseRect.height);
-    
+                                static_cast<int>(currentPosition.y + m_style.mouseRect.top),
+                                m_style.mouseRect.width,
+                                m_style.mouseRect.height);
+
     auto mousePosition = getCursorPosition(screen);
-    if(checkboxRect.contains(getCursorPosition(screen) + mouseOffset))
+    if(cursorIsValid() && checkboxRect.contains(getCursorPosition(screen) + mouseOffset))
     {
         m_showToolTip = true;
         m_hover = true;

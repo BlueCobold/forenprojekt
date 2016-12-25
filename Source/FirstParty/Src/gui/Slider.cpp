@@ -35,7 +35,7 @@ void Slider::updated(const sf::RenderWindow& screen, const double time, const sf
                            m_style.mouseRect.height);
 
     sf::Vector2f offset(0, 0);
-    if(!utility::Mouse.leftButtonPressed())
+    if(!utility::Mouse.leftButtonPressed() || !cursorIsValid())
     {
         m_active = false;
         m_pick = 0;
@@ -44,7 +44,7 @@ void Slider::updated(const sf::RenderWindow& screen, const double time, const sf
     {
         sliderRect.left += static_cast<int>(m_buttonPosition.x);
         auto mousePos = getCursorPosition(screen);
-        if(sliderRect.contains(mousePos + mouseOffset))
+        if(cursorIsValid() && sliderRect.contains(mousePos + mouseOffset))
         {
             m_active = true;
             m_pick = mousePos.x - sliderRect.left + mouseOffset.x;
