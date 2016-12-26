@@ -141,7 +141,7 @@ std::string FileReader::get(const std::string& key) const
     if(it != end(m_content))
         return it->second;
     else
-        return std::string("Key not found: ") + key;
+        return std::string("key not found: ") + key;
 }
 
 std::string FileReader::getFileName()

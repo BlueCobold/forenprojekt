@@ -30,17 +30,19 @@ OptionMenu::OptionMenu(sf::RenderWindow& screen,
     m_useShaderEffects = m_config.get<bool>("UseShaderEffects");
     m_showBatteryState = m_config.get<bool>("ShowBatteryState");
 
-    Menu::getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
-    Menu::getSlider(SLIDER_SOUNDVOLUMEN).setValue(static_cast<float>(m_soundVolume));
-    Menu::getSlider(SLIDER_MUSICVOLUMEN).setValue(static_cast<float>(m_musicVolume));
-    Menu::getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
-    Menu::getCheckbox(CHECKBOX_INVERT_AXIS).setChecked(m_invertAxis);
-    Menu::getCheckbox(CHECKBOX_USE_VERTICALAXIS).setChecked(m_useVerticalAxis);
-    Menu::getCheckbox(CHECKBOX_USE_STENCIL_EFFECTS).setChecked(m_useStencilEffects);
+    getCheckbox(CHECKBOX_FULLSCREEN).setChecked(m_fullScreen);
+    getSlider(SLIDER_SOUNDVOLUMEN).setValue(static_cast<float>(m_soundVolume));
+    getSlider(SLIDER_MUSICVOLUMEN).setValue(static_cast<float>(m_musicVolume));
+    getCheckbox(CHECKBOX_MUTEINACTIVE).setChecked(m_muteSoundWhenInactive);
+    getCheckbox(CHECKBOX_INVERT_AXIS).setChecked(m_invertAxis);
+    getCheckbox(CHECKBOX_USE_VERTICALAXIS).setChecked(m_useVerticalAxis);
+    getCheckbox(CHECKBOX_USE_STENCIL_EFFECTS).setChecked(m_useStencilEffects);
     Animation::enableStencilEffects(m_useStencilEffects);
-    Menu::getCheckbox(CHECKBOX_USE_SHADER_EFFECTS).setChecked(m_useShaderEffects);
+    getCheckbox(CHECKBOX_USE_SHADER_EFFECTS).setChecked(m_useShaderEffects);
     Shader::allowUsage(m_useShaderEffects);
-    Menu::getCheckbox(CHECKBOX_SHOW_BATTERY_STATE).setChecked(m_showBatteryState);
+    getCheckbox(CHECKBOX_SHOW_BATTERY_STATE).setChecked(m_showBatteryState);
+    auto language = m_config.get<std::string>("language");
+    getCheckbox(CHECKBOX_LANGUAGE).setChecked(language == "de");
 
     for(auto it = begin(sf::VideoMode::getFullscreenModes()); it != end(sf::VideoMode::getFullscreenModes()); ++it)
     {
@@ -97,6 +99,12 @@ void OptionMenu::applyChanges(sf::RenderWindow& screen)
         screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
         screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
     }
+    
+    std::string language = "en";
+    if(Menu::getCheckbox(CHECKBOX_LANGUAGE).getChecked())
+        language = "de";
+    m_config.set("language", language);
+    utility::setLanguage(language);
 
     if(Menu::getSlider(SLIDER_MUSICVOLUMEN).getValue() != m_musicVolume)
     {

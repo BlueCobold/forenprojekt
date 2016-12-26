@@ -17,7 +17,7 @@
 	<texture name="bitmapfontGreen" path="bitmapfonts/green.png" smooth="false" />
 	<texture name="bitmapfontRed" path="bitmapfonts/red.png" smooth="false" />
 	<texture name="gui_large" path="bitmapfonts/gui_large.png" smooth="false" />
-	<texture name="buttonHoverFont" path="bitmapfonts/button_hover.png" smooth="false" />
+	<texture name="buttonHoverFont" path="bitmapfonts/button_hover.png" smooth="true" />
 	<texture name="buttonIdleFont" path="bitmapfonts/button_idle.png" smooth="false" />
 	<texture name="arrowHUD" path="gui/arrows.png" smooth="true" />
 	<texture name="guiMisc" path="gui/misc.png" smooth="false" />
@@ -32,6 +32,7 @@
 	<texture name="icon_backgrounds" path="gui/icon_backgrounds.png" smooth="true" />
 	<texture name="gui_animations" path="gui/gui_animations.png" smooth="true" />
 	<texture name="assets" path="assets/assets.png" smooth="true" />
+	<texture name="option_elements" path="gui/option_elements.png" smooth="true" />
 </textures>
 <sounds>
 	<sound name="bounce" path="bounce.ogg" />
@@ -74,6 +75,7 @@
 	<spritesheet name="gui_window" path="backgrounds/gui_window.xml" />
 	<spritesheet name="icon_backgrounds" path="gui/icon_backgrounds.xml" />
 	<spritesheet name="gui_animations" path="gui/gui_animations.xml" />
+	<spritesheet name="option_elements" path="gui/option_elements.xml" />
 	<spritesheet name="assets" path="assets/assets.xml" />
 </spritesheets>
 <levels>

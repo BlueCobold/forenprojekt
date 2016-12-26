@@ -718,6 +718,7 @@
 			offsetx="6" offsety="6" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="6" fontoffsety="15" />
 	</buttonStyle>
+
 	<checkboxStyle name="default">
 		<mouseRect left="1" top="5" width="27" height="27" />
 		<unchecked spriteSheet="gui_elements" sprite="unchecked_idle"
@@ -764,6 +765,99 @@
 			offsetx="0" offsety="0" />
 	</checkboxStyle>
 
+	<checkboxStyle name="screenMode">
+		<mouseRect left="0" top="0" width="105" height="96" />
+		<unchecked spriteSheet="option_elements" sprite="icon_windowed"
+			offsetx="8" offsety="16" />
+		<checked spriteSheet="option_elements" sprite="icon_fullscreen"
+			offsetx="8" offsety="16" />
+		<hover spriteSheet="option_elements" sprite="icon_windowed_hover"
+			offsetx="8" offsety="16" />
+		<checkedHover spriteSheet="option_elements" sprite="icon_fullscreen_hover"
+			offsetx="8" offsety="16" />
+	</checkboxStyle>
+
+	<checkboxStyle name="shaderMode">
+		<mouseRect left="0" top="0" width="105" height="96" />
+		<unchecked spriteSheet="option_elements" sprite="icon_no_shaders"
+			offsetx="8" offsety="16" />
+		<checked spriteSheet="option_elements" sprite="icon_shaders"
+			offsetx="8" offsety="16" />
+		<hover spriteSheet="option_elements" sprite="icon_no_shaders_hover"
+			offsetx="8" offsety="16" />
+		<checkedHover spriteSheet="option_elements" sprite="icon_shaders_hover"
+			offsetx="8" offsety="16" />
+	</checkboxStyle>
+
+	<checkboxStyle name="shadowMode">
+		<mouseRect left="0" top="0" width="105" height="96" />
+		<unchecked spriteSheet="option_elements" sprite="icon_no_shadows"
+			offsetx="8" offsety="16" />
+		<checked spriteSheet="option_elements" sprite="icon_shadows"
+			offsetx="8" offsety="16" />
+		<hover spriteSheet="option_elements" sprite="icon_no_shadows_hover"
+			offsetx="8" offsety="16" />
+		<checkedHover spriteSheet="option_elements" sprite="icon_shadows_hover"
+			offsetx="8" offsety="16" />
+	</checkboxStyle>
+
+	<checkboxStyle name="backgroundMusic">
+		<mouseRect left="0" top="0" width="105" height="96" />
+		<unchecked spriteSheet="option_elements" sprite="icon_background_music"
+			offsetx="8" offsety="16" />
+		<checked spriteSheet="option_elements" sprite="icon_no_background_music"
+			offsetx="8" offsety="16" />
+		<hover spriteSheet="option_elements" sprite="icon_background_music_hover"
+			offsetx="8" offsety="16" />
+		<checkedHover spriteSheet="option_elements" sprite="icon_no_background_music_hover"
+			offsetx="8" offsety="16" />
+	</checkboxStyle>
+
+	<checkboxStyle name="verticalMouse">
+		<mouseRect left="10" top="16" width="105" height="96" />
+		<unchecked spriteSheet="option_elements" sprite="icon_mouse_horizontal"
+			offsetx="8" offsety="16" />
+		<checked spriteSheet="option_elements" sprite="icon_mouse_vertical"
+			offsetx="8" offsety="16" />
+		<hover spriteSheet="option_elements" sprite="icon_mouse_horizontal_hover"
+			offsetx="8" offsety="16" />
+		<checkedHover spriteSheet="option_elements" sprite="icon_mouse_vertical_hover"
+			offsetx="8" offsety="16" />
+	</checkboxStyle>
+	<checkboxStyle name="invertMouse">
+		<mouseRect left="10" top="16" width="105" height="96" />
+		<unchecked spriteSheet="option_elements" sprite="icon_mouse_no_flip"
+			offsetx="8" offsety="16" />
+		<checked spriteSheet="option_elements" sprite="icon_mouse_flip"
+			offsetx="8" offsety="16" />
+		<hover spriteSheet="option_elements" sprite="icon_mouse_no_flip_hover"
+			offsetx="8" offsety="16" />
+		<checkedHover spriteSheet="option_elements" sprite="icon_mouse_flip_hover"
+			offsetx="8" offsety="16" />
+	</checkboxStyle>
+	<checkboxStyle name="language">
+		<mouseRect left="10" top="16" width="105" height="96" />
+		<unchecked spriteSheet="option_elements" sprite="icon_language_en"
+			offsetx="8" offsety="16" />
+		<hover spriteSheet="option_elements" sprite="icon_language_en_hover"
+			offsetx="8" offsety="16" />
+		<checked spriteSheet="option_elements" sprite="icon_language_de"
+			offsetx="8" offsety="16" />
+		<checkedHover spriteSheet="option_elements" sprite="icon_language_de_hover"
+			offsetx="8" offsety="16" />
+	</checkboxStyle>
+	<checkboxStyle name="batteryStatus">
+		<mouseRect left="10" top="16" width="105" height="96" />
+		<unchecked spriteSheet="option_elements" sprite="icon_battery_invisible"
+			offsetx="8" offsety="15" />
+		<hover spriteSheet="option_elements" sprite="icon_battery_invisible_hover"
+			offsetx="8" offsety="15" />
+		<checked spriteSheet="option_elements" sprite="icon_battery_visible"
+			offsetx="8" offsety="16" />
+		<checkedHover spriteSheet="option_elements" sprite="icon_battery_visible_hover"
+			offsetx="8" offsety="16" />
+	</checkboxStyle>
+	
 	<sliderStyle name="default">
 		<mouseRect left="8" top="-3" width="26" height="36" />
 		<value min="0" max="100" width="83"/>

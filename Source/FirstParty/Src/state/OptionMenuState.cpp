@@ -67,7 +67,7 @@ StateChangeInformation OptionMenuState::update(const double time)
         m_menu.prevVideoMode();
     else if(m_clicked == OptionMenu::BUTTON_ARROW_RIGHT)
         m_menu.nextVideoMode();
-
+    
     return StateChangeInformation::Empty();
 }
 

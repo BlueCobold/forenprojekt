@@ -1,4 +1,4 @@
-<spriteSheet texture="gui_animations">
+<spriteSheet texture="gui_animations" blending="premul">
 	<sprites>
 		<sprite name="Icon_Play_pressed10" x="0" y="0" width="114" height="122" originx="57" originy="67" />
 		<sprite name="Icon_Play_pressed11" x="116" y="0" width="114" height="122" originx="57" originy="67" />

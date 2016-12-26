@@ -25,6 +25,7 @@ public:
     static const int CHECKBOX_USE_STENCIL_EFFECTS = 30;
     static const int CHECKBOX_USE_SHADER_EFFECTS = 35;
     static const int CHECKBOX_SHOW_BATTERY_STATE = 38;
+    static const int CHECKBOX_LANGUAGE = 41;
 
     OptionMenu(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
 

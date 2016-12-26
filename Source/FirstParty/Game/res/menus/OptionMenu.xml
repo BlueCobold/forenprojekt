@@ -1,69 +1,91 @@
 <menu>
 	<styles source="Styles.inc"/>
 	<elements>
-		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
-		<label text="gui_option" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
-		<button id="0" text="gui_close" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
-		<subwindow id="1" x="0.5" y="0.5" offsetx="-176" offsety="-94" sizex="352" sizey="150" innerheight="830">
+		<label text="gui_option" font="gui_large" alignment="1" x="0.5" y="0.0" offsetx="0" offsety="58" />
+		<button id="0" text="gui_close" style="default" x="0.5" y="1" offsetx="0" offsety="-120" />
+		<subwindow id="1" x="0.5" y="0.5" offsetx="0" offsety="-10" sizex="-170" sizey="-250" innerheight="860"
+			heightPercent="1.0" widthPercent="1.0">
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
 				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
 				<scrollBottom spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="10" />
 			</style>
 			<elements>
-				<label text="gui_graphicsetup" font="buttonIdleFont" alignment="1" offsetx="180" offsety="10" />
+				<label text="gui_graphicsetup" font="buttonIdleFont" alignment="0" offsetx="100" offsety="30" y="0.0" x="0.0"/>
 
-				<button id="9" text="" style="arrowright" offsetx="290" offsety="50" />
-				<button id="10" text="" style="arrowleft" offsetx="40" offsety="50" />
-				<label id="11" text="gui_label_resolution" font="buttonHoverFont" alignment="1" offsetx="167" offsety="56" />
+				<button id="9" text="" style="arrowright" offsetx="380" offsety="80" />
+				<button id="10" text="" style="arrowleft" offsetx="130" offsety="80" />
+				<label id="11" text="gui_label_resolution" font="buttonHoverFont" alignment="1" offsetx="257" offsety="86" />
 
-				<checkbox id="2" style="default" offsetx="76" offsety="100" />
-				<label id="4" text="gui_label_fullscreen" font="buttonHoverFont" alignment="0" offsetx="120" offsety="102" />
+				<!--
+					left=100px,
+					170px distance at 800x600 between left edge of icons,
+					+5% screensize distance at higher resolutions (that's why there is -40px/-80px at 800x600)
+					x = 0*0.05, offset = 100 + 0*270 - 0*0.05*800 = 100
+					x = 1*0.05, offset = 100 + 1*170 - 1*0.05*800 = 230
+					x = 2*0.05, offset = 100 + 2*170 - 2*0.05*800 = 360
+				-->
+				<image id="1" spriteSheet="option_elements" sprite="icon_graphics_background" offsetx="100" offsety="140" x="0.0" />
+				<checkbox id="2" style="screenMode" offsetx="100" offsety="140" x="0.0"
+					tooltip="default" tooltiptext="tooltip_fullscreen" />
 
-				<checkbox id="30" style="default" offsetx="76" offsety="160" />
-				<label id="31" text="gui_label_draw" font="buttonHoverFont" alignment="0" offsetx="120" offsety="145" />
-				<label id="32" text="gui_label_shadows" font="buttonHoverFont" alignment="0" offsetx="120" offsety="175" />
+				<image id="1" spriteSheet="option_elements" sprite="icon_graphics_background" offsetx="230" offsety="140" x="0.05" />
+				<checkbox id="30" style="shaderMode" offsetx="230" offsety="140" x="0.05"
+					tooltip="default" tooltiptext="tooltip_shaders" />
 
-				<checkbox id="35" style="default" offsetx="76" offsety="230" />
-				<label id="36" text="gui_label_enable" font="buttonHoverFont" alignment="0" offsetx="120" offsety="215" />
-				<label id="37" text="gui_label_shader" font="buttonHoverFont" alignment="0" offsetx="120" offsety="245" />
+				<image id="1" spriteSheet="option_elements" sprite="icon_graphics_background" offsetx="360" offsety="140" x="0.10" />
+				<checkbox id="35" style="shadowMode" offsetx="360" offsety="140" x="0.10"
+					tooltip="default" tooltiptext="tooltip_shadows" />
 
-				<label text="gui_soundsetup" font="buttonIdleFont" alignment="1" offsetx="170" offsety="290" />
-				
-				<slider id="3" style="default" offsetx="0" offsety="340" />
-				<label id="5" text="gui_label_soundvolumen" font="buttonHoverFont" alignment="0" offsetx="120" offsety="340" />
-				<slider id="33" style="default" offsetx="0" offsety="390" />
-				<label id="34" text="gui_label_musicvolumen" font="buttonHoverFont" alignment="0" offsetx="120" offsety="390" />
-				
-				<checkbox id="6" style="default" offsetx="76" offsety="450" />
-				<label id="7" text="gui_label_mutesound" font="buttonHoverFont" alignment="0" offsetx="120" offsety="445" />
-				<label id="8" text="gui_label_wheninactive" font="buttonHoverFont" alignment="0" offsetx="120" offsety="475" />
-				
-				<label text="gui_gameplaysetup" font="buttonIdleFont" alignment="1" offsetx="170" offsety="520" />
+				<label text="gui_soundsetup" font="buttonIdleFont" alignment="0" offsetx="100" offsety="270" />
 
-				<checkbox id="12" style="default" offsetx="76" offsety="570" />
-				<label id="13" text="gui_label_use_vertical1" font="buttonHoverFont" alignment="0" offsetx="120" offsety="565" />
-				<label id="14" text="gui_label_use_vertical2" font="buttonHoverFont" alignment="0" offsetx="120" offsety="595" />
-				
-				<checkbox id="15" style="default" offsetx="76" offsety="640" />
-				<label id="16" text="gui_label_invert_used1" font="buttonHoverFont" alignment="0" offsetx="120" offsety="635" />
-				<label id="17" text="gui_label_invert_used2" font="buttonHoverFont" alignment="0" offsetx="120" offsety="665" />
+				<image id="1" spriteSheet="option_elements" sprite="icon_music" offsetx="100" offsety="320" x="0.0" />
+				<slider id="3" style="default" offsetx="90" offsety="429" />
 
-				<label text="gui_miscellaneous" font="buttonIdleFont" alignment="1" offsetx="170" offsety="710" />
+				<image id="1" spriteSheet="option_elements" sprite="icon_sound" offsetx="240" offsety="320" x="0.05" />
+				<slider id="33" style="default" offsetx="220" offsety="429" x="0.05" />
 
-				<checkbox id="38" style="default" offsetx="76" offsety="760" />
-				<label id="39" text="gui_battery_state1" font="buttonHoverFont" alignment="0" offsetx="120" offsety="755" />
-				<label id="40" text="gui_battery_state2" font="buttonHoverFont" alignment="0" offsetx="120" offsety="785" />
+				<image id="1" spriteSheet="option_elements" sprite="icon_graphics_background" offsetx="360" offsety="320" x="0.10" />
+				<checkbox id="6" style="backgroundMusic" offsetx="360" offsety="320" x="0.10"
+					tooltip="default" tooltiptext="tooltip_bgmusic" />
+
+				<label text="gui_gameplaysetup" font="buttonIdleFont" alignment="0" offsetx="100" offsety="495" />
+
+				<checkbox id="12" style="verticalMouse" offsetx="100" offsety="530" x="0.0" tooltip="default" tooltiptext="tooltip_mouse_vertical" />
+				<checkbox id="15" style="invertMouse" offsetx="230" offsety="530" x="0.05" tooltip="default" tooltiptext="tooltip_mouse_invert" />
+
+				<label text="gui_miscellaneous" font="buttonIdleFont" alignment="0" offsetx="100" offsety="675" />
+
+				<checkbox id="38" style="batteryStatus" offsetx="100" x="0.0" offsety="710" tooltip="default" tooltiptext="tooltip_show_battery" />
+				<checkbox id="41" style="language" offsetx="230" x="0.05" offsety="710" tooltip="default" tooltiptext="tooltip_chose_language" />
 			</elements>
 		</subwindow>
-		
-		<image id="22" x="0.5" y="0.5" offsetx="-179" offsety="-97" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
-		<image id="23" x="0.5" y="0.5" offsetx="-179" offsety="3" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="59" height="60"/>
-		<image id="24" x="0.5" y="0.5" offsetx="-159" offsety="-97" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
-		<image id="25" x="0.5" y="0.5" offsetx="4" offsety="-97" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
-		<image id="26" x="0.5" y="0.5" offsetx="167" offsety="-97" spriteSheet="gui_elements" sprite="frame_right" height="100"/>
-		<image id="27" x="0.5" y="0.5" offsetx="167" offsety="3" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
-		<image id="28" x="0.5" y="0.5" offsetx="-159" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
-		<image id="29" x="0.5" y="0.5" offsetx="4" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		<border id="-1" x="0.5" y="0.5" width="-150" height="-150" widthPercent="1.0" heightPercent="1.0">
+			<background id="1" spriteSheet="gui_elements" sprite="window_left_upper" />
+			<background id="2" spriteSheet="gui_elements" sprite="window_top" widthoffset="-2" srcxoffset="1" />
+			<background id="3" spriteSheet="gui_elements" sprite="window_right_upper" />
+			<background id="4" spriteSheet="gui_elements" sprite="window_left" heightoffset="-2" srcyoffset="1" />
+			<background id="5" spriteSheet="gui_elements" sprite="window_right" heightoffset="-2" srcyoffset="1" />
+			<background id="6" spriteSheet="gui_elements" sprite="window_left_lower" />
+			<background id="7" spriteSheet="gui_elements" sprite="window_bottom" widthoffset="-2" srcxoffset="1" />
+			<background id="8" spriteSheet="gui_elements" sprite="window_right_lower" />
+			<background id="9" spriteSheet="gui_elements" sprite="window_main" widthoffset="-2" srcxoffset="1" heightoffset="-2" srcyoffset="1" />
+			<deco id="2" spriteSheet="gui_elements" sprite="window_deco_top" offsetx="-200" offsety="-36"/>
+			<deco id="2" spriteSheet="gui_elements" sprite="window_deco_top_right" offsetx="-24" offsety="0"/>
+			<deco id="2" spriteSheet="gui_elements" sprite="window_deco_right" offsetx="-1" offsety="-30" />
+			<deco id="3" spriteSheet="gui_elements" sprite="window_deco_left" offsetx="-43" offsety="-157" />
+			<deco id="3" spriteSheet="gui_elements" sprite="window_deco_bottom_left" offsetx="0" offsety="-24" />
+			<deco id="3" spriteSheet="gui_elements" sprite="window_deco_bottom" offsetx="2" offsety="-1" />
+		</border>
+		<border id="20" x="0.5" y="0.5" offsetx="4" offsety="-3" width="-197" height="-270" widthPercent="1.0" heightPercent="1.0">
+			<background id="1" spriteSheet="gui_elements" sprite="frame_left" height="20" />
+			<background id="2" spriteSheet="gui_elements" sprite="frame_top" srcxoffset="1" width="18" />
+			<background id="3" spriteSheet="gui_elements" sprite="frame_right" height="20" />
+			<background id="4" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="20" height="20" />
+			<background id="5" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="20" height="20" />
+			<background id="6" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="108" height="11" />
+			<background id="7" spriteSheet="gui_elements" sprite="frame_bottom" srcxoffset="1" width="18" />
+			<background id="8" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="108" height="11" />
+		</border>
 	</elements>
 </menu>

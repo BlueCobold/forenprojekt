@@ -19,17 +19,7 @@ public:
     static const int BUTTON_GERMAN_SHOW = 7;
     static const int BUTTON_ENGLISH_SHOW = 8;
 
-    static const int SUBWINDOW_SELECT_LANGUAGE = 9;
-
-    static const int BUTTON_GERMAN_SELECT = 10;
-    static const int BUTTON_ENGLISH_SELECT = 11;
-
     MainMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
-
-    void showGermanLanguage() const;
-    void showEnglishLanguage() const;
-
-    void showLanguageSelect(bool show) const;
 };
 
 #endif // MAIN_MENU_HPP
