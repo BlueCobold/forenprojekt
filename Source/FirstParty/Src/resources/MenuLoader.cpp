@@ -38,6 +38,11 @@ Sprite getSprite(const std::string& prefix,
             sprite.height = element->IntAttribute((prefix + "height").c_str());
         if(element->Attribute((prefix + "heightoffset").c_str()))
             sprite.height += element->IntAttribute((prefix + "heightoffset").c_str());
+        
+        if(element->Attribute((prefix + "originx").c_str()))
+            sprite.originX = element->FloatAttribute((prefix + "originx").c_str());
+        if(element->Attribute((prefix + "originy").c_str()))
+            sprite.originY = element->FloatAttribute((prefix + "originy").c_str());
 
         auto blending = sprite.blendMode;
         if(element->Attribute("blending"))
@@ -46,6 +51,12 @@ Sprite getSprite(const std::string& prefix,
         Sprite baseSprite = Sprite(sf::Sprite(*resourceManager.getTexture(spriteSheeet->getTextureName()),
                                    sf::IntRect(sprite.x, sprite.y, sprite.width, sprite.height)),
                                    blending);
+
+        bool useOrigin = false;
+        element->QueryBoolAttribute("useOrigin", &useOrigin);
+        if(useOrigin)
+            baseSprite.setOrigin(sprite.originX, sprite.originY);
+
         return baseSprite;
     }
     else
@@ -372,12 +383,18 @@ std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
         for(auto imageXml = styles->FirstChildElement("image");
             imageXml != nullptr; imageXml = imageXml->NextSiblingElement("image"))
         {
+            auto id = imageXml->IntAttribute("id");
             Sprite baseSprite = getSprite(imageXml, resourceManager);
+            auto position = ScreenLocation(sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")),
+                                           sf::Vector2f(imageXml->FloatAttribute("offsetx"), imageXml->FloatAttribute("offsety")));
+            auto relativeSize = sf::Vector2f(imageXml->FloatAttribute("widthPercent"), imageXml->FloatAttribute("heightPercent"));
+            auto texRect = sf::Vector2i(baseSprite.getTextureRect().width, baseSprite.getTextureRect().height);
+            auto size = ScreenSize(sf::Vector2f(texRect), relativeSize);
             auto sprite = std::unique_ptr<MenuSprite>(new MenuSprite(
                                                           baseSprite,
-                                                          sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")),
-                                                          sf::Vector2f(imageXml->FloatAttribute("offsetx"), imageXml->FloatAttribute("offsety")),
-                                                          imageXml->IntAttribute("id")));
+                                                          position,
+                                                          size,
+                                                          id));
 
             auto toolTipText = imageXml->Attribute("tooltiptext");
             if(auto toolTipName = toolTipText ? imageXml->Attribute("tooltip") : nullptr)

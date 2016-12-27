@@ -2,16 +2,20 @@
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-MenuSprite::MenuSprite(const Sprite& sprite, const sf::Vector2f& position, const sf::Vector2f& offset, const int id) :
-    MenuElement(id, MenuElementType::Image, position, offset),
+MenuSprite::MenuSprite(const Sprite& sprite,
+                       const ScreenLocation& position,
+                       const ScreenSize& size,
+                       const int id) :
+    MenuElement(id, MenuElementType::Image, position),
     m_sprite(sprite),
+    m_size(size),
     m_showToolTip(false)
 {
 }
 
 std::unique_ptr<MenuElement> MenuSprite::doClone() const
 {
-    auto clone = std::unique_ptr<MenuSprite>(new MenuSprite(m_sprite, getPosition(), getOffset(), getId()));
+    auto clone = std::unique_ptr<MenuSprite>(new MenuSprite(m_sprite, ScreenLocation(getPosition(), getOffset()), m_size, getId()));
     clone->setVisibleWhenId(getVisibleWhenId());
     clone->m_toolTip = m_toolTip;
     return std::move(clone);
@@ -32,7 +36,9 @@ void MenuSprite::setToolTip(const ToolTip& toolTip)
 
 void MenuSprite::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
-    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+    auto screenSize = static_cast<sf::Vector2f>(screen.getSize());
+    m_size.setScreenSize(screenSize);
+    updateLayout(screenSize);
 
     sf::IntRect rect = sf::IntRect(static_cast<int>(m_sprite.getPosition().x),
                                    static_cast<int>(m_sprite.getPosition().y),
@@ -76,4 +82,7 @@ void MenuSprite::onDrawAdditionalForeground(const DrawParameter& params)
 void MenuSprite::layoutUpdated(const sf::Vector2f& screenSize)
 {
     m_sprite.setPosition(sf::Vector2f(floorf(getCurrentPosition().x), floorf(getCurrentPosition().y)));
+    auto& texRect = m_sprite.getTextureRect();
+    auto& size = m_size.getCurrentSize();
+    m_sprite.setScale(size.x / texRect.width, size.y / texRect.height);
 }

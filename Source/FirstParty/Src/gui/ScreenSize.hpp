@@ -8,8 +8,8 @@
 class ScreenSize
 {
 public:
-    ScreenSize(const sf::Vector2f& fixedSize = sf::Vector2f(0 ,0),
-               const sf::Vector2f& relativeSize = sf::Vector2f(0 ,0)) :
+    explicit ScreenSize(const sf::Vector2f& fixedSize = sf::Vector2f(0 ,0),
+                        const sf::Vector2f& relativeSize = sf::Vector2f(0 ,0)) :
         m_relativeSize(relativeSize),
         m_offset(fixedSize)
     { }

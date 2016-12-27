@@ -22,9 +22,9 @@ private:
 
     void calculatePosition();
 public:
-    ScreenLocation(const sf::Vector2f& relativePosition = sf::Vector2f(0 ,0),
-                   const sf::Vector2f& offset = sf::Vector2f(0 ,0),
-                   const sf::Vector2f& screenSize = sf::Vector2f(0 ,0));
+    explicit ScreenLocation(const sf::Vector2f& relativePosition = sf::Vector2f(0 ,0),
+                            const sf::Vector2f& offset = sf::Vector2f(0 ,0),
+                            const sf::Vector2f& screenSize = sf::Vector2f(0 ,0));
 
     void setScreenSize(const sf::Vector2f& screenSize);
 

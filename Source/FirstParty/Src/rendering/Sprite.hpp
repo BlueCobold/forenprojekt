@@ -59,6 +59,16 @@ public:
         m_sprite.setTextureRect(rectangle);
     }
 
+    void setOrigin(float x, float y)
+    {
+        m_sprite.setOrigin(x, y);
+    }
+ 
+    void setOrigin(const sf::Vector2f &origin)
+    {
+        m_sprite.setOrigin(origin);
+    }
+
     const sf::IntRect& getTextureRect() const
     {
         return m_sprite.getTextureRect();

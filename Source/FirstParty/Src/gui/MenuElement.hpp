@@ -48,7 +48,7 @@ public:
 
     MenuElement(int id,
                 MenuElementType::Type type,
-                ScreenLocation position) :
+                const ScreenLocation& position) :
         m_id(id),
         m_type(type),
         m_screenLocation(position),

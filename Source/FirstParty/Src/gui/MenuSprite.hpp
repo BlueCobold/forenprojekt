@@ -7,12 +7,17 @@
 #include "ToolTip.hpp"
 
 #include "../rendering/Sprite.hpp"
+#include "ScreenSize.hpp"
+#include "ScreenLocation.hpp"
 
 class MenuSprite : public MenuElement
 {
 public:
 
-    MenuSprite(const Sprite& sprite, const sf::Vector2f& position, const sf::Vector2f& offset, const int id);
+    MenuSprite(const Sprite& sprite,
+               const ScreenLocation& position,
+               const ScreenSize& size,
+               const int id);
 
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text, const std::string& replacement = "");
@@ -26,6 +31,7 @@ private:
     void onDrawAdditionalForeground(const DrawParameter& params) override;
 
     Sprite m_sprite;
+    ScreenSize m_size;
     ToolTip m_toolTip;
     bool m_showToolTip;
 
