@@ -17,7 +17,8 @@ public:
     MenuSprite(const Sprite& sprite,
                const ScreenLocation& position,
                const ScreenSize& size,
-               const int id);
+               const int id,
+               const sf::Vector2f& scale = sf::Vector2f(1, 1));
 
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text, const std::string& replacement = "");
@@ -32,6 +33,7 @@ private:
 
     Sprite m_sprite;
     ScreenSize m_size;
+    sf::Vector2f m_scale;
     ToolTip m_toolTip;
     bool m_showToolTip;
 

@@ -385,16 +385,20 @@ std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
         {
             auto id = imageXml->IntAttribute("id");
             Sprite baseSprite = getSprite(imageXml, resourceManager);
-            auto position = ScreenLocation(sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")),
-                                           sf::Vector2f(imageXml->FloatAttribute("offsetx"), imageXml->FloatAttribute("offsety")));
-            auto relativeSize = sf::Vector2f(imageXml->FloatAttribute("widthPercent"), imageXml->FloatAttribute("heightPercent"));
-            auto texRect = sf::Vector2i(baseSprite.getTextureRect().width, baseSprite.getTextureRect().height);
-            auto size = ScreenSize(sf::Vector2f(texRect), relativeSize);
+            ScreenLocation position(sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")),
+                                    sf::Vector2f(imageXml->FloatAttribute("offsetx"), imageXml->FloatAttribute("offsety")));
+            sf::Vector2f relativeSize(imageXml->FloatAttribute("widthPercent"), imageXml->FloatAttribute("heightPercent"));
+            sf::Vector2i texRect(baseSprite.getTextureRect().width, baseSprite.getTextureRect().height);
+            ScreenSize size(sf::Vector2f(texRect), relativeSize);
+            sf::Vector2f scale(1, 1);
+            imageXml->QueryFloatAttribute("scalex", &scale.x);
+            imageXml->QueryFloatAttribute("scaley", &scale.y);
             auto sprite = std::unique_ptr<MenuSprite>(new MenuSprite(
                                                           baseSprite,
                                                           position,
                                                           size,
-                                                          id));
+                                                          id,
+                                                          scale));
 
             auto toolTipText = imageXml->Attribute("tooltiptext");
             if(auto toolTipName = toolTipText ? imageXml->Attribute("tooltip") : nullptr)

@@ -5,17 +5,19 @@
 MenuSprite::MenuSprite(const Sprite& sprite,
                        const ScreenLocation& position,
                        const ScreenSize& size,
-                       const int id) :
+                       const int id,
+                       const sf::Vector2f& scale) :
     MenuElement(id, MenuElementType::Image, position),
     m_sprite(sprite),
     m_size(size),
+    m_scale(scale),
     m_showToolTip(false)
 {
 }
 
 std::unique_ptr<MenuElement> MenuSprite::doClone() const
 {
-    auto clone = std::unique_ptr<MenuSprite>(new MenuSprite(m_sprite, ScreenLocation(getPosition(), getOffset()), m_size, getId()));
+    auto clone = std::unique_ptr<MenuSprite>(new MenuSprite(m_sprite, ScreenLocation(getPosition(), getOffset()), m_size, getId(), m_scale));
     clone->setVisibleWhenId(getVisibleWhenId());
     clone->m_toolTip = m_toolTip;
     return std::move(clone);
@@ -84,5 +86,5 @@ void MenuSprite::layoutUpdated(const sf::Vector2f& screenSize)
     m_sprite.setPosition(sf::Vector2f(floorf(getCurrentPosition().x), floorf(getCurrentPosition().y)));
     auto& texRect = m_sprite.getTextureRect();
     auto& size = m_size.getCurrentSize();
-    m_sprite.setScale(size.x / texRect.width, size.y / texRect.height);
+    m_sprite.setScale(size.x / texRect.width * m_scale.x, size.y / texRect.height * m_scale.y);
 }
