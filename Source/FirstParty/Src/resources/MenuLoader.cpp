@@ -390,15 +390,19 @@ std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
             sf::Vector2f relativeSize(imageXml->FloatAttribute("widthPercent"), imageXml->FloatAttribute("heightPercent"));
             sf::Vector2i texRect(baseSprite.getTextureRect().width, baseSprite.getTextureRect().height);
             ScreenSize size(sf::Vector2f(texRect), relativeSize);
-            sf::Vector2f scale(1, 1);
-            imageXml->QueryFloatAttribute("scalex", &scale.x);
-            imageXml->QueryFloatAttribute("scaley", &scale.y);
+
             auto sprite = std::unique_ptr<MenuSprite>(new MenuSprite(
                                                           baseSprite,
                                                           position,
                                                           size,
-                                                          id,
-                                                          scale));
+                                                          id));
+            
+            sf::Vector2f scale(1, 1);
+            imageXml->QueryFloatAttribute("scalex", &scale.x);
+            imageXml->QueryFloatAttribute("scaley", &scale.y);
+            bool keepAspectRatio = false;
+            imageXml->QueryBoolAttribute("keepAspectRatio", &keepAspectRatio);
+            sprite->setScale(scale, keepAspectRatio);
 
             auto toolTipText = imageXml->Attribute("tooltiptext");
             if(auto toolTipName = toolTipText ? imageXml->Attribute("tooltip") : nullptr)
