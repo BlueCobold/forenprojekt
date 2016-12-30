@@ -15,8 +15,15 @@ Border::Border(int id,
     m_hasDecos(m_decos[Top].size() > 0
             || m_decos[Right].size() > 0
             || m_decos[Left].size() > 0
-            || m_decos[Bottom].size() > 0)
+            || m_decos[Bottom].size() > 0),
+    m_keepAspectRatio(false)
 { }
+
+void Border::setAspectRatio(float aspectRatio)
+{
+    m_keepAspectRatio = true;
+    m_aspectRatio = aspectRatio;
+}
 
 void Border::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
@@ -24,6 +31,9 @@ void Border::updated(const sf::RenderWindow& screen, const double time, const sf
     updateLayout(screenSize);
     m_size.setScreenSize(screenSize);
     auto size = m_size.getCurrentSize();
+    if(m_keepAspectRatio)
+        size.y = size.x / m_aspectRatio;
+
     size = sf::Vector2f(floorf(size.x), floorf(size.y));
 
     auto tileHeight = m_backgrounds[TopLeft].getTextureRect().height;
@@ -97,5 +107,8 @@ void Border::doDraw(const DrawParameter& params)
 
 std::unique_ptr<MenuElement> Border::doClone() const
 {
-    return std::unique_ptr<MenuElement>(new Border(getId(), ScreenLocation(getPosition(), getOffset()), m_size, m_backgrounds, m_decos));
+    std::unique_ptr<Border> clone(new Border(getId(), ScreenLocation(getPosition(), getOffset()), m_size, m_backgrounds, m_decos));
+    clone->m_keepAspectRatio = m_keepAspectRatio;
+    clone->m_aspectRatio = m_aspectRatio;
+    return std::move(clone);
 }

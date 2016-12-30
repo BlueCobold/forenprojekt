@@ -51,17 +51,20 @@ public:
            std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4> decos
                = std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4>());
 
-    void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
+    void setAspectRatio(float aspectRatio);
 
 private:
     std::unordered_map<BackgroundId, Sprite> m_backgrounds;
     std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4> m_decos;
     ScreenSize m_size;
     bool m_hasDecos;
+    bool m_keepAspectRatio;
+    float m_aspectRatio;
 
     void doDraw(const DrawParameter& params) override;
     std::unique_ptr<MenuElement> doClone() const override;
     void updateDeco(DecoId id, float x, float y);
+    void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 };
 
 #endif // BORDER_HPP

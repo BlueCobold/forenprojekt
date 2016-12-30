@@ -197,10 +197,10 @@ std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
         for(auto borderXml = styles->FirstChildElement("border");
             borderXml != nullptr; borderXml = borderXml->NextSiblingElement("border"))
         {
-            auto position = sf::Vector2f(borderXml->FloatAttribute("x"), borderXml->FloatAttribute("y"));
-            auto offset = sf::Vector2f(borderXml->FloatAttribute("offsetx"), borderXml->FloatAttribute("offsety"));
-            auto relativeSize = sf::Vector2f(borderXml->FloatAttribute("widthPercent"), borderXml->FloatAttribute("heightPercent"));
-            auto sizeOffset = sf::Vector2f(borderXml->FloatAttribute("width"), borderXml->FloatAttribute("height"));
+            sf::Vector2f position(borderXml->FloatAttribute("x"), borderXml->FloatAttribute("y"));
+            sf::Vector2f offset(borderXml->FloatAttribute("offsetx"), borderXml->FloatAttribute("offsety"));
+            sf::Vector2f relativeSize(borderXml->FloatAttribute("widthPercent"), borderXml->FloatAttribute("heightPercent"));
+            sf::Vector2f sizeOffset(borderXml->FloatAttribute("width"), borderXml->FloatAttribute("height"));
             auto id = borderXml->IntAttribute("id");
 
             std::unordered_map<Border::BackgroundId, Sprite> backgrounds;
@@ -211,7 +211,6 @@ std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
                 auto sprite = getSprite(background, resourceManager);
                 backgrounds[id] = sprite;
             }
-
             if(backgrounds.size() < 8)
                 throw std::runtime_error(utility::replace(utility::translateKey("@InvalidBackground"), "Border"));
             
@@ -227,11 +226,17 @@ std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
                 decos[id].push_back(std::make_pair(sprite, offset));
             }
 
-            elements.push_back(std::unique_ptr<Border>(new Border(id,
-                                                                  ScreenLocation(position, offset),
-                                                                  ScreenSize(sizeOffset, relativeSize),
-                                                                  std::move(backgrounds),
-                                                                  std::move(decos))));
+            std::unique_ptr<Border> border(new Border(id,
+                                                      ScreenLocation(position, offset),
+                                                      ScreenSize(sizeOffset, relativeSize),
+                                                      std::move(backgrounds),
+                                                      std::move(decos)));
+            float aspectRatio = FLT_MIN;
+            borderXml->QueryFloatAttribute("aspectRatio", &aspectRatio);
+            if(aspectRatio > FLT_MIN)
+                border->setAspectRatio(aspectRatio);
+
+            elements.push_back(std::move(border));
         }
     }
     return elements;
