@@ -231,10 +231,13 @@ std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
                                                       ScreenSize(sizeOffset, relativeSize),
                                                       std::move(backgrounds),
                                                       std::move(decos)));
-            float aspectRatio = FLT_MIN;
-            borderXml->QueryFloatAttribute("aspectRatio", &aspectRatio);
-            if(aspectRatio > FLT_MIN)
-                border->setAspectRatio(aspectRatio);
+            
+            sf::Vector2f scale(1, 1);
+            borderXml->QueryFloatAttribute("scalex", &scale.x);
+            borderXml->QueryFloatAttribute("scaley", &scale.y);
+            bool keepAspectRatio = false;
+            borderXml->QueryBoolAttribute("keepAspectRatio", &keepAspectRatio);
+            border->setScale(scale, keepAspectRatio);
 
             elements.push_back(std::move(border));
         }

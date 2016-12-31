@@ -25,6 +25,11 @@ public:
         return m_currentSize;
     }
 
+    float getFixedAspectRatio() const
+    {
+        return m_offset.x / m_offset.y;
+    }
+
 private:
     sf::Vector2f m_relativeSize;
     sf::Vector2f m_offset;

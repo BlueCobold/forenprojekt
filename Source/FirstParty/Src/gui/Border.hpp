@@ -50,8 +50,8 @@ public:
            std::unordered_map<BackgroundId, Sprite> backgrounds,
            std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4> decos
                = std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4>());
-
-    void setAspectRatio(float aspectRatio);
+    
+    void setScale(const sf::Vector2f& scale, bool keepAspectRatio);
 
 private:
     std::unordered_map<BackgroundId, Sprite> m_backgrounds;
@@ -59,7 +59,7 @@ private:
     ScreenSize m_size;
     bool m_hasDecos;
     bool m_keepAspectRatio;
-    float m_aspectRatio;
+    sf::Vector2f m_scale;
 
     void doDraw(const DrawParameter& params) override;
     std::unique_ptr<MenuElement> doClone() const override;
