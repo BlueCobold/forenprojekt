@@ -8,7 +8,7 @@
 #include "ScreenSize.hpp"
 #include "../rendering/Sprite.hpp"
 
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Rect.hpp>
 
 #include <array>
 #include <vector>
@@ -48,6 +48,7 @@ public:
            ScreenLocation position,
            ScreenSize size,
            std::unordered_map<BackgroundId, Sprite> backgrounds,
+           const sf::FloatRect& innerOffsets,
            std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4> decos
                = std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4>());
     
@@ -60,6 +61,7 @@ private:
     bool m_hasDecos;
     bool m_keepAspectRatio;
     sf::Vector2f m_scale;
+    sf::FloatRect m_innerOffsets;
 
     void doDraw(const DrawParameter& params) override;
     std::unique_ptr<MenuElement> doClone() const override;

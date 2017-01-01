@@ -226,10 +226,19 @@ std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
                 decos[id].push_back(std::make_pair(sprite, offset));
             }
 
+            sf::FloatRect innerOffsets(0, 0, 0, 0);
+            if(auto innerOffsetsXml = borderXml->FirstChildElement("innerOffsets"))
+            {
+                innerOffsetsXml->QueryFloatAttribute("x", &innerOffsets.left);
+                innerOffsetsXml->QueryFloatAttribute("y", &innerOffsets.top);
+                innerOffsetsXml->QueryFloatAttribute("width", &innerOffsets.width);
+                innerOffsetsXml->QueryFloatAttribute("height", &innerOffsets.height);
+            }
             std::unique_ptr<Border> border(new Border(id,
                                                       ScreenLocation(position, offset),
                                                       ScreenSize(sizeOffset, relativeSize),
                                                       std::move(backgrounds),
+                                                      innerOffsets,
                                                       std::move(decos)));
             
             sf::Vector2f scale(1, 1);

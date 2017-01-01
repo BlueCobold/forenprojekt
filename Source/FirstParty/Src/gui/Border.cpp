@@ -3,10 +3,13 @@
 #include "../Utility.hpp"
 #include "../rendering/GLExt.hpp"
 
+#include <SFML/Graphics/RenderWindow.hpp>
+
 Border::Border(int id,
                ScreenLocation position,
                ScreenSize size,
                std::unordered_map<BackgroundId, Sprite> backgrounds,
+               const sf::FloatRect& innerOffsets,
                std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4> decos) :
     MenuElement(id, MenuElementType::Border, position),
     m_backgrounds(std::move(backgrounds)),
@@ -17,7 +20,8 @@ Border::Border(int id,
             || m_decos[Left].size() > 0
             || m_decos[Bottom].size() > 0),
     m_keepAspectRatio(false),
-    m_scale(sf::Vector2f(1, 1))
+    m_scale(sf::Vector2f(1, 1)),
+    m_innerOffsets(innerOffsets)
 { }
 
 void Border::setScale(const sf::Vector2f& scale, bool keepAspectRatio)
@@ -37,13 +41,15 @@ void Border::updated(const sf::RenderWindow& screen, const double time, const sf
     if(m_keepAspectRatio)
         size.y = size.x / m_size.getFixedAspectRatio();
 
-    size = sf::Vector2f(floorf(size.x), floorf(size.y));
+    size = sf::Vector2f(floorf(size.x + m_innerOffsets.width),
+                        floorf(size.y + m_innerOffsets.height));
 
     auto tileHeight = m_backgrounds[TopLeft].getTextureRect().height;
     auto tileWidth = m_backgrounds[TopLeft].getTextureRect().width;
 
     auto pos = getCurrentPosition();
-    auto position = sf::Vector2f(floorf(pos.x - size.x / 2.f), floorf(pos.y - size.y / 2.f));
+    auto position = sf::Vector2f(floorf(pos.x - size.x / 2.f + m_innerOffsets.left),
+                                 floorf(pos.y - size.y / 2.f + m_innerOffsets.top));
 
     auto scalefactorHorizontal = size.x / m_backgrounds[BottomCenter].getTextureRect().width;
     auto scalefactorVertical = size.y / m_backgrounds[MiddleLeft].getTextureRect().height;
@@ -110,7 +116,7 @@ void Border::doDraw(const DrawParameter& params)
 
 std::unique_ptr<MenuElement> Border::doClone() const
 {
-    std::unique_ptr<Border> clone(new Border(getId(), ScreenLocation(getPosition(), getOffset()), m_size, m_backgrounds, m_decos));
+    std::unique_ptr<Border> clone(new Border(getId(), ScreenLocation(getPosition(), getOffset()), m_size, m_backgrounds, m_innerOffsets, m_decos));
     clone->m_keepAspectRatio = m_keepAspectRatio;
     clone->setScale(m_scale, m_keepAspectRatio);
     return std::move(clone);
