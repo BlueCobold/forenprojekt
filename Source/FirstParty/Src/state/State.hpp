@@ -120,7 +120,7 @@ protected:
         return m_currentTime - m_pauseDelay;
     }
 
-    ResourceManager& getResourceManager() const
+    ResourceManager& getResourceManager()
     {
         return m_resourceManager;
     }

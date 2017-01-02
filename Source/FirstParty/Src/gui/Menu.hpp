@@ -37,8 +37,6 @@ public:
 
     void registerOnClick(std::function<void(const Button& sender)> callback);
 
-    sf::RenderWindow& getRenderWindow() const;
-
     CheckBox& getCheckbox(int id) const;
     Slider& getSlider(int id) const;
     LineLabel& getLabel(int id) const;

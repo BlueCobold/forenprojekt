@@ -73,11 +73,6 @@ void Menu::registerOnClick(std::function<void(const Button& sender)> callback)
     m_panel.registerOnClick(callback);
 }
 
-sf::RenderWindow& Menu::getRenderWindow() const
-{
-    return *m_screen;
-}
-
 template<class T>
 T* Menu::find(int id, const MenuElementType::Type type) const
 {
