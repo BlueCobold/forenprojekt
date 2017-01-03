@@ -1,8 +1,8 @@
 #include "CheckBox.hpp"
 #include "../Input.hpp"
 
-CheckBox::CheckBox(int id, CheckBoxStyle style, const sf::Vector2f& position, const sf::Vector2f& offset) :
-    MenuElement(id, MenuElementType::CheckBox, position, offset),
+CheckBox::CheckBox(int id, CheckBoxStyle style, const ScreenLocation& position) :
+    MenuElement(id, MenuElementType::CheckBox, position),
     m_style(style),
     m_checked(false),
     m_hover(false),
@@ -13,7 +13,7 @@ CheckBox::CheckBox(int id, CheckBoxStyle style, const sf::Vector2f& position, co
 
 std::unique_ptr<MenuElement> CheckBox::doClone() const
 {
-    auto clone = std::unique_ptr<CheckBox>(new CheckBox(getId(), m_style, getPosition(), getOffset()));
+    auto clone = std::unique_ptr<CheckBox>(new CheckBox(getId(), m_style, getPosition()));
     clone->setVisibleWhenId(getVisibleWhenId());
     clone->m_toolTip = m_toolTip;
     return std::move(clone);

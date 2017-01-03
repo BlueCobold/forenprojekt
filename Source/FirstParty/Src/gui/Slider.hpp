@@ -12,7 +12,7 @@
 class Slider : public MenuElement
 {
 public:
-    Slider(const int id, const SliderStyle style, const sf::Vector2f& position, const sf::Vector2f& offset);
+    Slider(const int id, const SliderStyle style, const ScreenLocation& position);
 
     float getValue() const;
     void setValue(const float value);

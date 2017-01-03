@@ -4,10 +4,9 @@
 #include <SFML/Window/Event.hpp>
 
 Button::Button(int id, ButtonStyle style,
-               const sf::Vector2f& position,
-               const sf::Vector2f& offset,
+               const ScreenLocation& position,
                bool triggers) :
-    MenuElement(id, MenuElementType::Button, position, offset),
+    MenuElement(id, MenuElementType::Button, position),
     m_style(std::move(style)),
     m_showToolTip(false),
     m_isTriggering(triggers),
@@ -19,26 +18,20 @@ Button::Button(int id, ButtonStyle style,
     m_size.x = m_style.idleStyle.sprite.getTextureRect().width;
     m_size.y = m_style.idleStyle.sprite.getTextureRect().height;
 
+    auto currentPosition = position.getCurrentPosition();
     if(m_style.idleStyle.animation != nullptr)
-    {
-        m_style.idleStyle.animation->setPosition(position);
-        m_style.idleStyle.animation->setOffset(offset + m_style.idleStyle.spriteOffset);
-    }
+        m_style.idleStyle.animation->setPosition(ScreenLocation(position).addOffset(m_style.idleStyle.spriteOffset));
+
     if(m_style.hoverStyle.animation != nullptr)
-    {
-        m_style.hoverStyle.animation->setPosition(position);
-        m_style.hoverStyle.animation->setOffset(offset + m_style.hoverStyle.spriteOffset);
-    }
+        m_style.hoverStyle.animation->setPosition(ScreenLocation(position).addOffset(m_style.hoverStyle.spriteOffset));
+
     if(m_style.pressedStyle.animation != nullptr)
-    {
-        m_style.pressedStyle.animation->setPosition(position);
-        m_style.pressedStyle.animation->setOffset(offset + m_style.pressedStyle.spriteOffset);
-    }
+        m_style.pressedStyle.animation->setPosition(ScreenLocation(position).addOffset(m_style.pressedStyle.spriteOffset));
 }
 
 std::unique_ptr<MenuElement> Button::doClone() const
 {
-    auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), getOffset(), m_isTriggering));
+    auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), m_isTriggering));
     clone->setVisibleWhenId(getVisibleWhenId());
     clone->m_toolTip = m_toolTip;
     return std::move(clone);

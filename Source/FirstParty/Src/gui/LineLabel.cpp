@@ -17,13 +17,12 @@ LineLabel::LineLabel() :
 }
 
 LineLabel::LineLabel(const std::string& text,
-                    const sf::Vector2f& position,
-                    const sf::Vector2f& offset,
-                    const float rotation,
-                    const BitmapFont* font,
-                    Alignment alignment,
-                    int id) :
-    MenuElement(id, MenuElementType::Label, position, offset),
+                     const ScreenLocation& position,
+                     const float rotation,
+                     const BitmapFont* font,
+                     Alignment alignment,
+                     int id) :
+    MenuElement(id, MenuElementType::Label, position),
     m_textKey(text),
     m_rotation(rotation),
     m_font(font),
@@ -40,14 +39,13 @@ LineLabel::LineLabel(const std::string& text,
 }
 
 LineLabel::LineLabel(const std::string& text,
-                     const sf::Vector2f& position,
-                     const sf::Vector2f& offset,
+                     const ScreenLocation& position,
                      const float rotation,
                      const MenuElementType::Type type,
                      const BitmapFont* font,
                      const Alignment alignment,
                      int id) :
-    MenuElement(id, type, position, offset),
+    MenuElement(id, type, position),
     m_textKey(text),
     m_rotation(rotation),
     m_font(font),
@@ -65,7 +63,7 @@ LineLabel::LineLabel(const std::string& text,
 
 std::unique_ptr<MenuElement> LineLabel::doClone() const
 {
-    auto clone = std::unique_ptr<MenuElement>(new LineLabel(m_textKey, getPosition(), getOffset(), m_rotation, getType(), m_font, m_alignment, getId()));
+    auto clone = std::unique_ptr<MenuElement>(new LineLabel(m_textKey, getPosition(), m_rotation, getType(), m_font, m_alignment, getId()));
     clone->setVisibleWhenId(getVisibleWhenId());
     return std::move(clone);
 }

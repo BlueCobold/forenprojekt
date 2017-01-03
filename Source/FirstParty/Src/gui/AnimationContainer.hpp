@@ -26,8 +26,7 @@ private:
     void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 
 public:
-    AnimationContainer(const sf::Vector2f& position, 
-                       const sf::Vector2f& offset,
+    AnimationContainer(ScreenLocation position,
                        int id,
                        CloneHandler& cloneHandler);
 

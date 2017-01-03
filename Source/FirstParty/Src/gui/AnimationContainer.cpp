@@ -2,17 +2,16 @@
 #include "AnimationContainer.hpp"
 #include "../animation/CloneHandler.hpp"
 
-AnimationContainer::AnimationContainer(const sf::Vector2f& position,
-                                       const sf::Vector2f& offset,
+AnimationContainer::AnimationContainer(ScreenLocation position,
                                        int id, CloneHandler& cloneHandler) :
-    MenuElement(id, MenuElementType::Animation, position, offset),
+    MenuElement(id, MenuElementType::Animation, position),
     m_updatingAni(nullptr),
     m_cloneHandler(cloneHandler)
 {
 }
 
 AnimationContainer::AnimationContainer(AnimationContainer&& toMove) :
-    MenuElement(toMove.getId(), MenuElementType::Animation, toMove.getPosition(), toMove.getOffset()),
+    MenuElement(toMove.getId(), MenuElementType::Animation, toMove.getPosition()),
     m_updatingAni(toMove.m_updatingAni),
     m_cloneHandler(toMove.m_cloneHandler)
 {
@@ -25,7 +24,7 @@ void AnimationContainer::bindAnimation(std::unique_ptr<Animation> animation)
 
 std::unique_ptr<MenuElement> AnimationContainer::doClone() const
 {
-    auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getPosition(), getOffset(), getId(), m_cloneHandler));
+    auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getPosition(), getId(), m_cloneHandler));
     m_cloneHandler.registerCloneAll(*this, *other.get());
     
     other->setVisibleWhenId(getVisibleWhenId());

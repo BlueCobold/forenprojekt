@@ -45,7 +45,7 @@ public:
     };
 
     Border(int id,
-           ScreenLocation position,
+           const ScreenLocation& position,
            ScreenSize size,
            std::unordered_map<BackgroundId, Sprite> backgrounds,
            const sf::FloatRect& innerOffsets,

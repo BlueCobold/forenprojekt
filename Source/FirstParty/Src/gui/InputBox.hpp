@@ -28,8 +28,7 @@ public:
                       BottomRight = 9};
 
     InputBox(const int id,
-             const sf::Vector2f& position,
-             const sf::Vector2f& offset,
+             const ScreenLocation& position,
              const sf::Vector2f size,
              const unsigned int inputLimit,
              const InputBoxStyle& style);

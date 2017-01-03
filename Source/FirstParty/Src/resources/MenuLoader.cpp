@@ -153,20 +153,20 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
 
             style.idleStyle.label = LineLabel(
                 textResourceKey, 
-                position, offset + style.idleStyle.textOffset,
+                ScreenLocation(position, offset + style.idleStyle.textOffset),
                 0, style.idleStyle.font, LineLabel::Centered);
 
             style.hoverStyle.label = LineLabel(
                 textResourceKey, 
-                position, offset + style.hoverStyle.textOffset,
+                ScreenLocation(position, offset + style.hoverStyle.textOffset),
                 0, style.hoverStyle.font, LineLabel::Centered);
 
             style.pressedStyle.label = LineLabel(
                 textResourceKey, 
-                position, offset + style.pressedStyle.textOffset,
+                ScreenLocation(position, offset + style.pressedStyle.textOffset),
                 0, style.pressedStyle.font, LineLabel::Centered);
 
-            auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, offset, triggers));
+            auto button = std::unique_ptr<Button>(new Button(id, std::move(style), ScreenLocation(position, offset), triggers));
             
             if(auto visibleWhenId = buttonXml->IntAttribute("visibleWhen"))
                 button->setVisibleWhenId(visibleWhenId);
@@ -275,7 +275,7 @@ std::vector<std::unique_ptr<CheckBox>> MenuLoader::parseCheckBoxes(
             auto offset = sf::Vector2f(checkboxXml->FloatAttribute("offsetx"), checkboxXml->FloatAttribute("offsety"));
             auto id = checkboxXml->IntAttribute("id");
 
-            auto checkBox = std::unique_ptr<CheckBox>(new CheckBox(id, style, position, offset));
+            auto checkBox = std::unique_ptr<CheckBox>(new CheckBox(id, style, ScreenLocation(position, offset)));
             if(auto toolTipName = checkboxXml->Attribute("tooltip"))
             {
                 auto tooltip = toolTip.find(toolTipName);
@@ -312,7 +312,7 @@ std::vector<std::unique_ptr<Slider>> MenuLoader::parseSliders(
             auto offset = sf::Vector2f(sliderXml->FloatAttribute("offsetx"), sliderXml->FloatAttribute("offsety"));
             auto id = sliderXml->IntAttribute("id");
             
-            auto slider = std::unique_ptr<Slider>(new Slider(id, style, position, offset));
+            auto slider = std::unique_ptr<Slider>(new Slider(id, style, ScreenLocation(position, offset)));
             if(auto visibleWhenId = sliderXml->IntAttribute("visibleWhen"))
                 slider->setVisibleWhenId(visibleWhenId);
             
@@ -334,8 +334,8 @@ std::vector<std::unique_ptr<LineLabel>> MenuLoader::parseLabels(
         {
             auto label = std::unique_ptr<LineLabel>(new LineLabel(/*utility::translateKey(labelXml->Attribute("text")),*/
                             std::string(labelXml->Attribute("text")),
-                            sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
-                            sf::Vector2f(labelXml->FloatAttribute("offsetx"), labelXml->FloatAttribute("offsety")),
+                            ScreenLocation(sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
+                                           sf::Vector2f(labelXml->FloatAttribute("offsetx"), labelXml->FloatAttribute("offsety"))),
                             0,
                             resourceManager.getBitmapFont(labelXml->Attribute("font")),
                             static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
@@ -363,8 +363,8 @@ std::vector<std::unique_ptr<InteractiveLabel>> MenuLoader::parseInteractiveLabel
         {
             auto label = std::unique_ptr<InteractiveLabel>(new InteractiveLabel(
                             labelXml->Attribute("text"),
-                            sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
-                            sf::Vector2f(labelXml->FloatAttribute("offsetx"), labelXml->FloatAttribute("offsety")),
+                            ScreenLocation(sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
+                                           sf::Vector2f(labelXml->FloatAttribute("offsetx"), labelXml->FloatAttribute("offsety"))),
                             0,
                             resourceManager.getBitmapFont(labelXml->Attribute("font")),
                             static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
@@ -484,7 +484,7 @@ std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
             addAll(parseLabels(subXml, resourceManager), subElements);
             addAll(parseImages(subXml, toolTip, resourceManager), subElements);
             addAll(parseAnimationContainer(subXml, resourceManager), subElements);
-            elements.push_back(std::unique_ptr<SubWindow>(new SubWindow(id, position, ScreenSize(size, relativeSize), offset, innerHeight, subElements, style)));
+            elements.push_back(std::unique_ptr<SubWindow>(new SubWindow(id, ScreenLocation(position, offset), ScreenSize(size, relativeSize), innerHeight, subElements, style)));
         }
     }
     return elements;
@@ -536,7 +536,7 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(const tinyxml2::XMLElement* xm
     if(auto animationsXml = xml->FirstChildElement("animations"))
     {
         animationsXml->QueryBoolAttribute("resetOnExit", &style.resetOnExit);
-        style.animation = std::unique_ptr<AnimationContainer>(new AnimationContainer(sf::Vector2f(), sf::Vector2f(), 0, _cloneHandler));
+        style.animation = std::unique_ptr<AnimationContainer>(new AnimationContainer(ScreenLocation(), 0, _cloneHandler));
 
         ProviderContext context(style.animation.get(), style.animation.get(), style.animation.get(), style.animation.get(), _cloneHandler);
         AnimationParser loader(AnimationContext(context, resourceManager, 0));
@@ -761,7 +761,7 @@ std::vector<std::unique_ptr<InputBox>> MenuLoader::parseInputBox(
             auto offset = sf::Vector2f(inputBoxXml->FloatAttribute("offsetx"), inputBoxXml->FloatAttribute("offsety"));
             auto size = sf::Vector2f(inputBoxXml->FloatAttribute("width"), inputBoxXml->FloatAttribute("height"));
 
-            auto inputBox = std::unique_ptr<InputBox>(new InputBox(id, position, offset, size, inputLimit, style));
+            auto inputBox = std::unique_ptr<InputBox>(new InputBox(id, ScreenLocation(position, offset), size, inputLimit, style));
 
             if(auto visibleWhenId = inputBoxXml->IntAttribute("visibleWhen"))
                 inputBox->setVisibleWhenId(visibleWhenId);
@@ -783,9 +783,9 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
             animationContainer != nullptr; animationContainer = animationContainer->NextSiblingElement("animationContainer"))
         {
             int id = animationContainer->IntAttribute("id");
-            auto position = sf::Vector2f(animationContainer->FloatAttribute("x"), animationContainer->FloatAttribute("y"));
-            auto offset = sf::Vector2f(animationContainer->FloatAttribute("offsetx"), animationContainer->FloatAttribute("offsety"));
-            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(position, offset, id, _cloneHandler));
+            sf::Vector2f position(animationContainer->FloatAttribute("x"), animationContainer->FloatAttribute("y"));
+            sf::Vector2f offset(animationContainer->FloatAttribute("offsetx"), animationContainer->FloatAttribute("offsety"));
+            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(ScreenLocation(position, offset), id, _cloneHandler));
             if(auto animationsXml = animationContainer->FirstChildElement("animations"))
             {
                 ProviderContext context(animContainer.get(), animContainer.get(), animContainer.get(), animContainer.get(), _cloneHandler);

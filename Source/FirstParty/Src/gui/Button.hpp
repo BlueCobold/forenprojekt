@@ -42,8 +42,7 @@ public:
 
     Button(int id, 
            ButtonStyle style,
-           const sf::Vector2f& position,
-           const sf::Vector2f& offset,
+           const ScreenLocation& position,
            bool triggers = true);
 
 

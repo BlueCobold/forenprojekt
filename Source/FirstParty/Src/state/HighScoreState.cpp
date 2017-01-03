@@ -260,8 +260,10 @@ void HighScoreState::buildSubWindowElements()
     {
         for(int i = 0; i < 5; ++i)
         {
-            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setOffset(m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).getOffset() + m_offset);
-            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setOffset(m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).getOffset() + m_offset);
+            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i)
+                .setPosition(ScreenLocation(m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).getPosition()).addOffset(m_offset));
+            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i)
+                .setPosition(ScreenLocation(m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).getPosition()).addOffset(m_offset));
         }
         m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).setInnerHeight(m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).getInnerHeight() + static_cast<int>(m_offset.y));
         m_offsetAdded = true;
@@ -270,8 +272,10 @@ void HighScoreState::buildSubWindowElements()
     {
         for(int i = 0; i < 5; ++i)
         {
-            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).setOffset(m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).getOffset() - m_offset);
-            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).setOffset(m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).getOffset() - m_offset);
+            m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i)
+                .setPosition(ScreenLocation(m_menu.getLabel(HighScoreMenu::LABEL_PLACES + i).getPosition()).addOffset(- m_offset));
+            m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i)
+                .setPosition(ScreenLocation(m_menu.getLabel(HighScoreMenu::LABEL_POINTS + i).getPosition()).addOffset(- m_offset));
         }
         m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).setInnerHeight(m_menu.getSubWindow(HighScoreMenu::SUBWINDOW).getInnerHeight() - static_cast<int>(m_offset.y));
         m_offsetAdded = false;

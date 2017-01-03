@@ -3,13 +3,12 @@
 #include "../Utility.hpp"
 
 InputBox::InputBox(const int id,
-                   const sf::Vector2f& position,
-                   const sf::Vector2f& offset,
+                   const ScreenLocation& position,
                    const sf::Vector2f size,
                    const unsigned int inputLimit,
                    const InputBoxStyle& style) :
-    MenuElement(id, MenuElementType::InputBox, position, offset),
-    m_inputText("", position, offset + style.textOffset, 0.f, style.font),
+    MenuElement(id, MenuElementType::InputBox, position),
+    m_inputText("", ScreenLocation(position).addOffset(style.textOffset), 0.f, style.font),
     m_inputLimit(inputLimit),
     m_size(size),
     m_finished(false),
@@ -29,15 +28,13 @@ InputBox::InputBox(const int id,
 
     stretchBackground();
 
-    setBackGroundPosition(position + offset);
-
     m_caret.enable();
 
 }
 
 std::unique_ptr<MenuElement> InputBox::doClone() const
 {
-    auto clone = std::unique_ptr<MenuElement>(new InputBox(getId(), getPosition(), getOffset(), m_size, m_inputLimit, m_style));
+    auto clone = std::unique_ptr<MenuElement>(new InputBox(getId(), getPosition(), m_size, m_inputLimit, m_style));
     clone->setVisibleWhenId(getVisibleWhenId());
     return std::move(clone);
 }
@@ -51,8 +48,8 @@ void InputBox::updated(const sf::RenderWindow& screen, const double time, const 
     setActivatedByMouse(screen);
     handleInput();
     m_caret.update(time);
-    m_inputText.update(screen, time, mouseOffset);
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+    m_inputText.update(screen, time, mouseOffset);
 }
 
 void InputBox::doDraw(const DrawParameter& params)
@@ -188,6 +185,5 @@ void InputBox::layoutUpdated(const sf::Vector2f& screenSize)
 
     setBackGroundPosition(currentPosition);
 
-    m_inputText.setPosition(getPosition());
     m_caret.setPosition(currentPosition + sf::Vector2f(m_inputText.getWidth(), 0));
 }

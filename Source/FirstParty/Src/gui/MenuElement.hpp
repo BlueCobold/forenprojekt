@@ -70,6 +70,12 @@ public:
     {
         onDrawAdditionalForeground(params);
     }
+    
+    void setPosition(const ScreenLocation& position)
+    {
+        m_screenLocation = position;
+        positionSet();
+    }
 
     void setPosition(const sf::Vector2f& position)
     {
@@ -97,14 +103,9 @@ public:
         return m_type;
     }
 
-    const sf::Vector2f& getPosition() const
+    const ScreenLocation& getPosition() const
     {
-        return m_screenLocation.getPosition();
-    }
-
-    const sf::Vector2f& getOffset() const
-    {
-        return m_screenLocation.getOffset();
+        return m_screenLocation;
     }
 
     bool isVisible() const

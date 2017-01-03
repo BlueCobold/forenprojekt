@@ -13,7 +13,7 @@ class CheckBox : public MenuElement
 {
 public:
 
-    CheckBox(int id, CheckBoxStyle style, const sf::Vector2f& position, const sf::Vector2f& offset);
+    CheckBox(int id, CheckBoxStyle style, const ScreenLocation& position);
     
     bool getChecked();
     void setChecked(bool checked);

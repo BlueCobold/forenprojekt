@@ -27,8 +27,7 @@ public:
 
     LineLabel();
     LineLabel(const std::string& text,
-        const sf::Vector2f& position,
-        const sf::Vector2f& offset,
+        const ScreenLocation& position,
         const float rotation,
         const BitmapFont* font,
         const Alignment alignment = Left,
@@ -54,8 +53,7 @@ public:
     unsigned int getFontSize();
 
     LineLabel(const std::string& text,
-        const sf::Vector2f& position,
-        const sf::Vector2f& offset,
+        const ScreenLocation& position,
         const float rotation,
         const MenuElementType::Type type,
         const BitmapFont* font,

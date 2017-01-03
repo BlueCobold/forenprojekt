@@ -19,8 +19,7 @@ private:
 
 public:
     InteractiveLabel(const std::string& text,
-        const sf::Vector2f& position,
-        const sf::Vector2f& offset,
+        const ScreenLocation& position,
         const float rotation,
         const BitmapFont* font,
         const Alignment alignment = Left,

@@ -8,18 +8,22 @@ const float ScreenLocation::Bottom = 1.0f;
 
 ScreenLocation::ScreenLocation(const sf::Vector2f& relativePosition,
                                const sf::Vector2f& offset,
-                               const sf::Vector2f& screenSize) :
+                               const sf::Vector2f& screenSize,
+                               const sf::Vector2f& relativeAxisInvertedPosition) :
     m_relativePosition(relativePosition),
     m_offset(offset),
-    m_screenSize(screenSize)
+    m_screenSize(screenSize),
+    m_relativeAxisInvertedPosition(relativeAxisInvertedPosition)
 {
     calculatePosition();
 }
 
 void ScreenLocation::calculatePosition()
 {
-    m_currentPosition = sf::Vector2f(m_screenSize.x * m_relativePosition.x,
-                                     m_screenSize.y * m_relativePosition.y) + m_offset;
+    m_currentPosition = sf::Vector2f(m_screenSize.x * m_relativePosition.x
+                                   + m_screenSize.y * m_relativeAxisInvertedPosition.x,
+                                     m_screenSize.y * m_relativePosition.y
+                                   + m_screenSize.x * m_relativeAxisInvertedPosition.y) + m_offset;
 }
 
 void ScreenLocation::setScreenSize(const sf::Vector2f& screenSize)
@@ -29,6 +33,12 @@ void ScreenLocation::setScreenSize(const sf::Vector2f& screenSize)
         m_screenSize = screenSize;
         calculatePosition();
     }
+}
+
+ScreenLocation& ScreenLocation::addOffset(const sf::Vector2f& offset)
+{
+    m_offset += offset;
+    return *this;
 }
 
 void ScreenLocation::setOffset(const sf::Vector2f& offset)
@@ -49,17 +59,7 @@ void ScreenLocation::setPosition(const sf::Vector2f& relativePosition)
     }
 }
 
-const sf::Vector2f& ScreenLocation::getPosition() const
-{
-    return m_relativePosition;
-}
-
 const sf::Vector2f& ScreenLocation::getCurrentPosition() const
 {
     return m_currentPosition;
-}
-
-const sf::Vector2f& ScreenLocation::getOffset() const
-{
-    return m_offset;
 }

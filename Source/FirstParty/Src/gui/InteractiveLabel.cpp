@@ -5,13 +5,12 @@
 {}*/
 
 InteractiveLabel::InteractiveLabel(const std::string& text,
-                                   const sf::Vector2f& position,
-                                   const sf::Vector2f& offset,
+                                   const ScreenLocation& position,
                                    const float rotation,
                                    const BitmapFont* font,
                                    const Alignment alignment,
                                    int id) :
-    LineLabel(text, position, offset, rotation, MenuElementType::InteractiveLabel, font, alignment, id)
+    LineLabel(text, position, rotation, MenuElementType::InteractiveLabel, font, alignment, id)
 {
 }
 
@@ -20,7 +19,6 @@ std::unique_ptr<MenuElement> InteractiveLabel::doClone() const
     auto clone = std::unique_ptr<InteractiveLabel>(new InteractiveLabel(
                                                             getText(),
                                                             getPosition(),
-                                                            getOffset(),
                                                             getRotation(),
                                                             getFont(),
                                                             getAlignment(),

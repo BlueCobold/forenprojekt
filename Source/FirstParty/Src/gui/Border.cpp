@@ -6,7 +6,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 
 Border::Border(int id,
-               ScreenLocation position,
+               const ScreenLocation& position,
                ScreenSize size,
                std::unordered_map<BackgroundId, Sprite> backgrounds,
                const sf::FloatRect& innerOffsets,
@@ -116,7 +116,7 @@ void Border::doDraw(const DrawParameter& params)
 
 std::unique_ptr<MenuElement> Border::doClone() const
 {
-    std::unique_ptr<Border> clone(new Border(getId(), ScreenLocation(getPosition(), getOffset()), m_size, m_backgrounds, m_innerOffsets, m_decos));
+    std::unique_ptr<Border> clone(new Border(getId(), getPosition(), m_size, m_backgrounds, m_innerOffsets, m_decos));
     clone->m_keepAspectRatio = m_keepAspectRatio;
     clone->setScale(m_scale, m_keepAspectRatio);
     return std::move(clone);

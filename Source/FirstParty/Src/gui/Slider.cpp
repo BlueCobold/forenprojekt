@@ -2,8 +2,8 @@
 #include "../Input.hpp"
 #include "../Utility.hpp"
 
-Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& position, const sf::Vector2f& offset) :
-    MenuElement(id, MenuElementType::Slider, position, offset),
+Slider::Slider(const int id, const SliderStyle style, const ScreenLocation& position) :
+    MenuElement(id, MenuElementType::Slider, position),
     m_style(style),
     m_active(false),
     m_pick(0)
@@ -11,7 +11,7 @@ Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& positi
     m_button = &m_style.idle.button;
     m_background = &m_style.idle.background;
 
-    m_buttonPosition.y = position.y + offset.y + m_style.mouseRect.top;
+    m_buttonPosition.y = position.getCurrentPosition().y + m_style.mouseRect.top;
 
     m_min = m_style.min;
     m_max = m_style.max;
@@ -19,7 +19,7 @@ Slider::Slider(const int id, const SliderStyle style, const sf::Vector2f& positi
 
 std::unique_ptr<MenuElement> Slider::doClone() const
 {
-    auto clone = std::unique_ptr<Slider>(new Slider(getId(), m_style, getPosition(), getOffset()));
+    auto clone = std::unique_ptr<Slider>(new Slider(getId(), m_style, getPosition()));
     clone->setVisibleWhenId(getVisibleWhenId());
     return std::move(clone);
 }

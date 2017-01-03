@@ -35,9 +35,8 @@ class SubWindow : public MenuElement
 
 public:
     SubWindow(int id,
-              const sf::Vector2f& position,
+              const ScreenLocation& position,
               const ScreenSize& size,
-              const sf::Vector2f& offset,
               int innerHeight,
               const std::vector<std::unique_ptr<MenuElement>>& elements,
               const SubWindowStyle& style);

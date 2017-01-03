@@ -14,13 +14,12 @@
 #include <algorithm>
 
 SubWindow::SubWindow(int id,
-                     const sf::Vector2f& position,
+                     const ScreenLocation& position,
                      const ScreenSize& screenSize,
-                     const sf::Vector2f& offset,
                      int innerHeight,
                      const std::vector<std::unique_ptr<MenuElement>>& elements,
                      const SubWindowStyle& style) :
-    MenuElement(id, MenuElementType::SubWindow, position, offset),
+    MenuElement(id, MenuElementType::SubWindow, position),
     m_panel(elements),
     m_style(style),
     m_innerHeight(innerHeight),
@@ -54,7 +53,7 @@ SubWindow::SubWindow(int id,
 
 std::unique_ptr<MenuElement> SubWindow::doClone() const
 {
-    auto clone = std::unique_ptr<MenuElement>(new SubWindow(getId(), getPosition(), m_size, getOffset(), m_innerHeight, m_panel.getElements(), m_style));
+    auto clone = std::unique_ptr<MenuElement>(new SubWindow(getId(), getPosition(), m_size, m_innerHeight, m_panel.getElements(), m_style));
     clone->setVisibleWhenId(getVisibleWhenId());
     return std::move(clone);
 }
