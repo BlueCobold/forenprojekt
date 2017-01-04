@@ -91,7 +91,7 @@ void FileReader::readFile()
 
             key = line.substr(0, pos);
             eraseOverhang(key);
-            value = line.substr(pos + 1) ;
+            value = line.substr(pos + 1);
             eraseOverhang(value);
 
             if(!key.empty() && !value.empty())
