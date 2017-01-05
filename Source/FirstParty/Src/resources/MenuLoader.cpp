@@ -76,6 +76,41 @@ Sprite getSprite(const tinyxml2::XMLElement* element,
     return getSprite("", element, resourceManager);
 }
 
+void parseComplexPositionPart(const char* attribute, float& relative, float& inverse, bool xAxis)
+{
+    if(!attribute)
+        return;
+    std::string val(attribute);
+    auto pos = val.find(',');
+    if(pos != std::string::npos)
+    {
+        std::vector<std::string> parts;
+        parts.push_back(val.substr(0, pos));
+        parts.push_back(val.substr(pos + 1));
+        for(auto it = begin(parts); it != end(parts); ++it)
+        {
+            if(it->length() > 0 && (*it)[it->length() - 1] == (xAxis ? 'w' : 'h'))
+                relative = utility::stringTo<float>(it->substr(0, it->length() - 1));
+            else if(it->length() > 0 && (*it)[it->length() - 1] == (xAxis ? 'h' : 'w'))
+                inverse = utility::stringTo<float>(it->substr(0, it->length() - 1));
+            else
+                relative = utility::stringTo<float>(*it);
+        }
+    }
+    else
+        relative = utility::stringTo<float>(val);
+}
+
+ScreenLocation parsePosition(const tinyxml2::XMLElement& element)
+{
+    sf::Vector2f relative, offset, inverse;
+    parseComplexPositionPart(element.Attribute("x"), relative.x, inverse.x, true);
+    parseComplexPositionPart(element.Attribute("y"), relative.y, inverse.y, false);
+    element.QueryFloatAttribute("offsetx", &offset.x);
+    element.QueryFloatAttribute("offsety", &offset.y);
+    return ScreenLocation(relative, offset, sf::Vector2f(), inverse);
+}
+
 CloneHandler MenuLoader::_cloneHandler;
 
 template<typename T>
@@ -334,8 +369,7 @@ std::vector<std::unique_ptr<LineLabel>> MenuLoader::parseLabels(
         {
             auto label = std::unique_ptr<LineLabel>(new LineLabel(/*utility::translateKey(labelXml->Attribute("text")),*/
                             std::string(labelXml->Attribute("text")),
-                            ScreenLocation(sf::Vector2f(labelXml->FloatAttribute("x"), labelXml->FloatAttribute("y")),
-                                           sf::Vector2f(labelXml->FloatAttribute("offsetx"), labelXml->FloatAttribute("offsety"))),
+                            parsePosition(*labelXml),
                             0,
                             resourceManager.getBitmapFont(labelXml->Attribute("font")),
                             static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
