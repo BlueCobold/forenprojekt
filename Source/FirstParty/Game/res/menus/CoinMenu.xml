@@ -4,7 +4,7 @@
 		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
 		<label text="gui_coin_shop_title" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
 		<button id="17" text="gui_close" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
-		<subwindow id="0" x="0.5" y="0.5" offsetx="-176" offsety="-94" sizex="352" sizey="150" innerheight="227">
+		<subwindow id="0" x="0.5" y="0.5" offsetx="0" offsety="-18" sizex="352" sizey="150" innerheight="227">
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
 				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
