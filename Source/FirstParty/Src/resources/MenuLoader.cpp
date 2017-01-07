@@ -232,8 +232,6 @@ std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
         for(auto borderXml = styles->FirstChildElement("border");
             borderXml != nullptr; borderXml = borderXml->NextSiblingElement("border"))
         {
-            sf::Vector2f position(borderXml->FloatAttribute("x"), borderXml->FloatAttribute("y"));
-            sf::Vector2f offset(borderXml->FloatAttribute("offsetx"), borderXml->FloatAttribute("offsety"));
             sf::Vector2f relativeSize(borderXml->FloatAttribute("widthPercent"), borderXml->FloatAttribute("heightPercent"));
             sf::Vector2f sizeOffset(borderXml->FloatAttribute("width"), borderXml->FloatAttribute("height"));
             auto id = borderXml->IntAttribute("id");
@@ -270,7 +268,7 @@ std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
                 innerOffsetsXml->QueryFloatAttribute("height", &innerOffsets.height);
             }
             std::unique_ptr<Border> border(new Border(id,
-                                                      ScreenLocation(position, offset),
+                                                      parsePosition(*borderXml),
                                                       ScreenSize(sizeOffset, relativeSize),
                                                       std::move(backgrounds),
                                                       innerOffsets,
