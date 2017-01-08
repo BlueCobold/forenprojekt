@@ -434,15 +434,13 @@ std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
         {
             auto id = imageXml->IntAttribute("id");
             Sprite baseSprite = getSprite(imageXml, resourceManager);
-            ScreenLocation position(sf::Vector2f(imageXml->FloatAttribute("x"), imageXml->FloatAttribute("y")),
-                                    sf::Vector2f(imageXml->FloatAttribute("offsetx"), imageXml->FloatAttribute("offsety")));
             sf::Vector2f relativeSize(imageXml->FloatAttribute("widthPercent"), imageXml->FloatAttribute("heightPercent"));
             sf::Vector2i texRect(baseSprite.getTextureRect().width, baseSprite.getTextureRect().height);
             ScreenSize size(sf::Vector2f(texRect), relativeSize);
 
             auto sprite = std::unique_ptr<MenuSprite>(new MenuSprite(
                                                           baseSprite,
-                                                          position,
+                                                          parsePosition(*imageXml),
                                                           size,
                                                           id));
             
