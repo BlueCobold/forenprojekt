@@ -40,47 +40,47 @@ private:
     static CloneHandler _cloneHandler;
 
     static std::vector<std::unique_ptr<Button>> parseButtons(
-        const tinyxml2::XMLElement* menuXml, 
+        const tinyxml2::XMLElement& menuXml, 
         const std::unordered_map<std::string, ButtonStyle>& buttonStyles, 
         const std::unordered_map<std::string, ToolTip>& toolTip,
         ResourceManager& resourceManager);
 
     static std::vector<std::unique_ptr<Border>> parseBorders(
-        const tinyxml2::XMLElement* menuXml,
+        const tinyxml2::XMLElement& menuXml,
         ResourceManager& resourceManager);
 
     static std::vector<std::unique_ptr<CheckBox>> parseCheckBoxes(
-        const tinyxml2::XMLElement* menuXml, 
+        const tinyxml2::XMLElement& menuXml, 
         const std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles,
         const std::unordered_map<std::string, ToolTip>& toolTip,
         ResourceManager& resourceManager);
 
     static std::vector<std::unique_ptr<Slider>> parseSliders(
-        const tinyxml2::XMLElement* menuXml, 
+        const tinyxml2::XMLElement& menuXml, 
         const std::unordered_map<std::string, SliderStyle>& sliderStyles, 
         ResourceManager& resourceManager);
 
     static std::vector<std::unique_ptr<LineLabel>> parseLabels(
-        const tinyxml2::XMLElement* menuXml, 
+        const tinyxml2::XMLElement& menuXml, 
         ResourceManager& resourceManager);
 
     static std::vector<std::unique_ptr<InteractiveLabel>> parseInteractiveLabels(
-        const tinyxml2::XMLElement* menuXml,
+        const tinyxml2::XMLElement& menuXml,
         const std::unordered_map<std::string, ToolTip>& toolTip,
         ResourceManager& resourceManager);
 
     static std::vector<std::unique_ptr<MenuSprite>> parseImages(
-        const tinyxml2::XMLElement* menuXml,
+        const tinyxml2::XMLElement& menuXml,
         const std::unordered_map<std::string, ToolTip>& toolTip,
         ResourceManager& resourceManager);
 
     static std::vector<std::unique_ptr<InputBox>> parseInputBox(
-        const tinyxml2::XMLElement* menuXml,
+        const tinyxml2::XMLElement& menuXml,
         const std::unordered_map<std::string, InputBoxStyle>& inputBoxStyle,
         ResourceManager& resourceManager);
 
     static std::vector<std::unique_ptr<SubWindow>> parseSubWindow(
-        const tinyxml2::XMLElement* menuXml,
+        const tinyxml2::XMLElement& menuXml,
         ResourceManager& resourceManager,
         const std::unordered_map<std::string, ToolTip>& toolTip,
         const std::unordered_map<std::string, SliderStyle>& sliderStyles,
@@ -88,19 +88,19 @@ private:
         const std::unordered_map<std::string, ButtonStyle>& buttonStyles);
 
     static std::vector<std::unique_ptr<AnimationContainer>> parseAnimationContainer(
-        const tinyxml2::XMLElement* menuXml,
+        const tinyxml2::XMLElement& menuXml,
         ResourceManager& resourceManager);
 
-    static std::unordered_map<std::string, ButtonStyle> parseButtonStyles(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
-    static std::unordered_map<std::string, SoundObject> parseSounds(const tinyxml2::XMLElement* menuXml, SoundManager& soundManager);
-    static std::unordered_map<std::string, CheckBoxStyle> parseCheckBoxStyles(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
-    static std::unordered_map<std::string, SliderStyle> parseSliderStyles(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
-    static std::unordered_map<std::string, ToolTip> parseToolTipStyle(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
-    static std::unordered_map<std::string, InputBoxStyle> parseInputBoxStyle(const tinyxml2::XMLElement* menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, ButtonStyle> parseButtonStyles(const tinyxml2::XMLElement& menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, SoundObject> parseSounds(const tinyxml2::XMLElement& menuXml, SoundManager& soundManager);
+    static std::unordered_map<std::string, CheckBoxStyle> parseCheckBoxStyles(const tinyxml2::XMLElement& menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, SliderStyle> parseSliderStyles(const tinyxml2::XMLElement& menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, ToolTip> parseToolTipStyle(const tinyxml2::XMLElement& menuXml, ResourceManager& resourceManager);
+    static std::unordered_map<std::string, InputBoxStyle> parseInputBoxStyle(const tinyxml2::XMLElement& menuXml, ResourceManager& resourceManager);
 
-    static ButtonStateStyle loadButtonStateStyle(const tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
-    static CheckBoxStateStyle loadCheckBoxStateStyle(const tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
-    static SliderStateStyle loadSliderStateStyle(const tinyxml2::XMLElement* xml, ResourceManager& resourceManager);
+    static ButtonStateStyle loadButtonStateStyle(const tinyxml2::XMLElement& xml, ResourceManager& resourceManager);
+    static CheckBoxStateStyle loadCheckBoxStateStyle(const tinyxml2::XMLElement& xml, ResourceManager& resourceManager);
+    static SliderStateStyle loadSliderStateStyle(const tinyxml2::XMLElement& xml, ResourceManager& resourceManager);
 };
 
 #endif // MENU_LOADER_HPP
