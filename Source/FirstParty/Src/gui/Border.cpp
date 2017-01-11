@@ -7,21 +7,17 @@
 
 Border::Border(int id,
                const ScreenLocation& position,
-               ScreenSize size,
-               std::unordered_map<BackgroundId, Sprite> backgrounds,
-               const sf::FloatRect& innerOffsets,
-               std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4> decos) :
+               const ScreenSize& size,
+               const BorderStyle& style) :
     MenuElement(id, MenuElementType::Border, position),
-    m_backgrounds(std::move(backgrounds)),
-    m_decos(std::move(decos)),
+    m_style(style),
     m_size(size),
-    m_hasDecos(m_decos[Top].size() > 0
-            || m_decos[Right].size() > 0
-            || m_decos[Left].size() > 0
-            || m_decos[Bottom].size() > 0),
     m_keepAspectRatio(false),
     m_scale(sf::Vector2f(1, 1)),
-    m_innerOffsets(innerOffsets)
+    m_hasDecos(m_style.decos[BorderStyle::Top].size() > 0
+            || m_style.decos[BorderStyle::Right].size() > 0
+            || m_style.decos[BorderStyle::Left].size() > 0
+            || m_style.decos[BorderStyle::Bottom].size() > 0)
 { }
 
 void Border::setScale(const sf::Vector2f& scale, bool keepAspectRatio)
@@ -41,49 +37,49 @@ void Border::updated(const sf::RenderWindow& screen, const double time, const sf
     if(m_keepAspectRatio)
         size.y = size.x / m_size.getFixedAspectRatio();
 
-    size = sf::Vector2f(floorf(size.x + m_innerOffsets.width),
-                        floorf(size.y + m_innerOffsets.height));
+    size = sf::Vector2f(floorf(size.x + m_style.innerOffsets.width),
+                        floorf(size.y + m_style.innerOffsets.height));
 
-    auto tileHeight = m_backgrounds[TopLeft].getTextureRect().height;
-    auto tileWidth = m_backgrounds[TopLeft].getTextureRect().width;
+    auto tileHeight = m_style.backgrounds[BorderStyle::TopLeft].getTextureRect().height;
+    auto tileWidth = m_style.backgrounds[BorderStyle::TopLeft].getTextureRect().width;
 
     auto pos = getCurrentPosition();
-    auto position = sf::Vector2f(floorf(pos.x - size.x / 2.f + m_innerOffsets.left),
-                                 floorf(pos.y - size.y / 2.f + m_innerOffsets.top));
+    auto position = sf::Vector2f(floorf(pos.x - size.x / 2.f + m_style.innerOffsets.left),
+                                 floorf(pos.y - size.y / 2.f + m_style.innerOffsets.top));
 
-    auto scalefactorHorizontal = size.x / m_backgrounds[BottomCenter].getTextureRect().width;
-    auto scalefactorVertical = size.y / m_backgrounds[MiddleLeft].getTextureRect().height;
+    auto scalefactorHorizontal = size.x / m_style.backgrounds[BorderStyle::BottomCenter].getTextureRect().width;
+    auto scalefactorVertical = size.y / m_style.backgrounds[BorderStyle::MiddleLeft].getTextureRect().height;
 
-    m_backgrounds[TopLeft].setPosition(position.x - tileWidth, position.y - tileHeight);
-    m_backgrounds[TopCenter].setPosition(position.x, position.y - tileHeight);
-    m_backgrounds[TopCenter].setScale(scalefactorHorizontal, 1.f);
-    m_backgrounds[TopRight].setPosition(position.x + size.x, position.y - tileHeight);
-    m_backgrounds[MiddleLeft].setPosition(position.x - tileWidth, position.y);
-    m_backgrounds[MiddleLeft].setScale(1.f, scalefactorVertical);
-    m_backgrounds[MiddleRight].setPosition(position.x + size.x, position.y);
-    m_backgrounds[MiddleRight].setScale(1.f, scalefactorVertical);
-    m_backgrounds[BottomLeft].setPosition(position.x - tileWidth, position.y + size.y);
-    m_backgrounds[BottomCenter].setPosition(position.x, position.y + size.y);
-    m_backgrounds[BottomCenter].setScale(scalefactorHorizontal, 1.f);
-    m_backgrounds[BottomRight].setPosition(position.x + size.x, position.y + size.y);
+    m_style.backgrounds[BorderStyle::TopLeft].setPosition(position.x - tileWidth, position.y - tileHeight);
+    m_style.backgrounds[BorderStyle::TopCenter].setPosition(position.x, position.y - tileHeight);
+    m_style.backgrounds[BorderStyle::TopCenter].setScale(scalefactorHorizontal, 1.f);
+    m_style.backgrounds[BorderStyle::TopRight].setPosition(position.x + size.x, position.y - tileHeight);
+    m_style.backgrounds[BorderStyle::MiddleLeft].setPosition(position.x - tileWidth, position.y);
+    m_style.backgrounds[BorderStyle::MiddleLeft].setScale(1.f, scalefactorVertical);
+    m_style.backgrounds[BorderStyle::MiddleRight].setPosition(position.x + size.x, position.y);
+    m_style.backgrounds[BorderStyle::MiddleRight].setScale(1.f, scalefactorVertical);
+    m_style.backgrounds[BorderStyle::BottomLeft].setPosition(position.x - tileWidth, position.y + size.y);
+    m_style.backgrounds[BorderStyle::BottomCenter].setPosition(position.x, position.y + size.y);
+    m_style.backgrounds[BorderStyle::BottomCenter].setScale(scalefactorHorizontal, 1.f);
+    m_style.backgrounds[BorderStyle::BottomRight].setPosition(position.x + size.x, position.y + size.y);
 
-    auto it = m_backgrounds.find(Background);
-    if(it != end(m_backgrounds))
+    auto it = m_style.backgrounds.find(BorderStyle::Background);
+    if(it != end(m_style.backgrounds))
     {
         it->second.setPosition(position.x, position.y);
         it->second.setScale(size.x / it->second.getTextureRect().width,
                             size.y / it->second.getTextureRect().height);
     }
 
-    updateDeco(Top, position.x - tileWidth, position.y - tileHeight);
-    updateDeco(Right, position.x + size.x + tileWidth, position.y - tileHeight);
-    updateDeco(Left, position.x - tileWidth, position.y + size.y + tileHeight);
-    updateDeco(Bottom, position.x + size.x + tileWidth, position.y + size.y + tileHeight);
+    updateDeco(BorderStyle::Top, position.x - tileWidth, position.y - tileHeight);
+    updateDeco(BorderStyle::Right, position.x + size.x + tileWidth, position.y - tileHeight);
+    updateDeco(BorderStyle::Left, position.x - tileWidth, position.y + size.y + tileHeight);
+    updateDeco(BorderStyle::Bottom, position.x + size.x + tileWidth, position.y + size.y + tileHeight);
 }
 
-void Border::updateDeco(DecoId id, float x, float y)
+void Border::updateDeco(BorderStyle::DecoId id, float x, float y)
 {
-    auto& v = m_decos[id];
+    auto& v = m_style.decos[id];
     for(auto it = begin(v); it != end(v); ++it)
         it->first.setPosition(x + it->second.x, y + it->second.y);
 }
@@ -97,14 +93,14 @@ void Border::doDraw(const DrawParameter& params)
         gl::DepthFunc(gl::ALWAYS);
     }
 
-    for(auto it = begin(m_decos); it != end(m_decos); ++it)
+    for(auto it = begin(m_style.decos); it != end(m_style.decos); ++it)
         for(auto deco = begin(*it); deco != end(*it); ++deco)
             deco->first.draw(params);
 
     if(m_hasDecos)
         gl::DepthFunc(gl::LESS);
 
-    for(auto it = begin(m_backgrounds); it != end(m_backgrounds); ++it)
+    for(auto it = begin(m_style.backgrounds); it != end(m_style.backgrounds); ++it)
         it->second.draw(params);
 
     if(m_hasDecos)
@@ -116,8 +112,7 @@ void Border::doDraw(const DrawParameter& params)
 
 std::unique_ptr<MenuElement> Border::doClone() const
 {
-    std::unique_ptr<Border> clone(new Border(getId(), getPosition(), m_size, m_backgrounds, m_innerOffsets, m_decos));
-    clone->m_keepAspectRatio = m_keepAspectRatio;
+    std::unique_ptr<Border> clone(new Border(getId(), getPosition(), m_size, m_style));
     clone->setScale(m_scale, m_keepAspectRatio);
     return std::move(clone);
 }

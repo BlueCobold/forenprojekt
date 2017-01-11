@@ -895,4 +895,16 @@
 		<background id="9" spriteSheet="gui_elements" sprite="toolTip" srcxoffset="20" srcyoffset="20" width="10" height="10" />
 		<caret spriteSheet="gui_elements" sprite="caret" srcxoffset="0" srcyoffset="0" width="20" height="40" offsetX="5" offsetY="0" frequency="1"/>
 	</inputboxStyle>
+
+	<borderStyle name="default">
+		<innerOffsets x="1" y="7" width="-24" height="-15" />
+		<background id="1" spriteSheet="gui_elements" sprite="frame_left" height="20" />
+		<background id="2" spriteSheet="gui_elements" sprite="frame_top" srcxoffset="1" width="18" />
+		<background id="3" spriteSheet="gui_elements" sprite="frame_right" height="20" />
+		<background id="4" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="20" height="20" />
+		<background id="5" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="20" height="20" />
+		<background id="6" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="108" height="11" />
+		<background id="7" spriteSheet="gui_elements" sprite="frame_bottom" srcxoffset="1" width="18" />
+		<background id="8" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="108" height="11" />
+	</borderStyle>
 </styles>

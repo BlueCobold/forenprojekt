@@ -718,6 +718,9 @@
     <ClInclude Include="..\..\Src\resources\BlendingParser.hpp">
       <Filter>Headers\resources\parsing</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\gui\BorderStyle.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

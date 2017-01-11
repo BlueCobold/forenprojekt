@@ -148,6 +148,7 @@
     <ClInclude Include="..\..\Src\gui\AnimationContainer.hpp" />
     <ClInclude Include="..\..\Src\gui\BitmapFont.hpp" />
     <ClInclude Include="..\..\Src\gui\Border.hpp" />
+    <ClInclude Include="..\..\Src\gui\BorderStyle.hpp" />
     <ClInclude Include="..\..\Src\gui\Button.hpp" />
     <ClInclude Include="..\..\Src\gui\ButtonStyle.hpp" />
     <ClInclude Include="..\..\Src\gui\Caret.hpp" />

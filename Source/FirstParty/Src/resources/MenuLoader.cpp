@@ -139,19 +139,20 @@ std::unique_ptr<MenuTemplate> MenuLoader::loadMenuTemplate(const std::string& pa
     std::unordered_map<std::string, ButtonStyle> buttonStyles = parseButtonStyles(*menuXml, resourceManager);
     std::unordered_map<std::string, CheckBoxStyle> checkboxStyles = parseCheckBoxStyles(*menuXml, resourceManager);
     std::unordered_map<std::string, SliderStyle> sliderStyles = parseSliderStyles(*menuXml, resourceManager);
-    std::unordered_map<std::string, ToolTip> toolTip = parseToolTipStyle(*menuXml, resourceManager);
-    std::unordered_map<std::string, InputBoxStyle> inputBoxStyle = parseInputBoxStyle(*menuXml, resourceManager);
+    std::unordered_map<std::string, ToolTip> toolTips = parseToolTipStyles(*menuXml, resourceManager);
+    std::unordered_map<std::string, InputBoxStyle> inputBoxStyles = parseInputBoxStyles(*menuXml, resourceManager);
+    std::unordered_map<std::string, BorderStyle> borderStyles = parseBorderStyles(*menuXml, resourceManager);
 
-    addAll(parseButtons(*menuXml, buttonStyles, toolTip, resourceManager), menu->menuElements);
-    addAll(parseBorders(*menuXml, resourceManager),  menu->menuElements);
-    addAll(parseCheckBoxes(*menuXml, checkboxStyles, toolTip, resourceManager), menu->menuElements);
+    addAll(parseButtons(*menuXml, buttonStyles, toolTips, resourceManager), menu->menuElements);
+    addAll(parseBorders(*menuXml, borderStyles, resourceManager), menu->menuElements);
+    addAll(parseCheckBoxes(*menuXml, checkboxStyles, toolTips, resourceManager), menu->menuElements);
     addAll(parseSliders(*menuXml, sliderStyles, resourceManager), menu->menuElements);
     addAll(parseLabels(*menuXml, resourceManager), menu->menuElements);
-    addAll(parseInteractiveLabels(*menuXml, toolTip, resourceManager), menu->menuElements);
-    addAll(parseImages(*menuXml, toolTip, resourceManager), menu->menuElements);
-    addAll(parseInputBox(*menuXml, inputBoxStyle, resourceManager), menu->menuElements);
+    addAll(parseInteractiveLabels(*menuXml, toolTips, resourceManager), menu->menuElements);
+    addAll(parseImages(*menuXml, toolTips, resourceManager), menu->menuElements);
+    addAll(parseInputBox(*menuXml, inputBoxStyles, resourceManager), menu->menuElements);
     addAll(parseAnimationContainer(*menuXml, resourceManager), menu->menuElements);
-    addAll(parseSubWindow(*menuXml, resourceManager, toolTip, sliderStyles, checkboxStyles, buttonStyles), menu->menuElements);
+    addAll(parseSubWindow(*menuXml, resourceManager, toolTips, sliderStyles, checkboxStyles, buttonStyles, borderStyles), menu->menuElements);
     
     return menu;
 }
@@ -218,11 +219,12 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
             elements.push_back(std::move(button));
         }
     }
-    return elements;
+    return std::move(elements);
 }
 
 std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
     const tinyxml2::XMLElement& menuXml,
+    const std::unordered_map<std::string, BorderStyle>& borderStyles,
     ResourceManager& resourceManager)
 {
     std::vector<std::unique_ptr<Border>> elements;
@@ -231,48 +233,30 @@ std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
         for(auto borderXml = styles->FirstChildElement("border");
             borderXml != nullptr; borderXml = borderXml->NextSiblingElement("border"))
         {
-            sf::Vector2f relativeSize(borderXml->FloatAttribute("widthPercent"), borderXml->FloatAttribute("heightPercent"));
-            sf::Vector2f sizeOffset(borderXml->FloatAttribute("width"), borderXml->FloatAttribute("height"));
             auto id = borderXml->IntAttribute("id");
-
-            std::unordered_map<Border::BackgroundId, Sprite> backgrounds;
-            for(auto background = borderXml->FirstChildElement("background");
-                background != nullptr; background = background->NextSiblingElement("background"))
-            {
-                auto id = static_cast<Border::BackgroundId>(background->IntAttribute("id"));
-                auto sprite = getSprite(*background, resourceManager);
-                backgrounds[id] = sprite;
-            }
-            if(backgrounds.size() < 8)
-                throw std::runtime_error(utility::replace(utility::translateKey("@InvalidBackground"), "Border"));
             
-            std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4> decos;
-            for(auto deco = borderXml->FirstChildElement("deco");
-                deco != nullptr; deco = deco->NextSiblingElement("deco"))
+            BorderStyle style;
+            if(auto styleName = borderXml->Attribute("style"))
             {
-                auto id = static_cast<Border::DecoId>(deco->IntAttribute("id") - 1);
-                auto sprite = getSprite(*deco, resourceManager);
-                sf::Vector2f offset;
-                deco->QueryFloatAttribute("offsetx", &offset.x);
-                deco->QueryFloatAttribute("offsety", &offset.y);
-                decos[id].push_back(std::make_pair(sprite, offset));
+                auto listedStyle = borderStyles.find(styleName);
+                if(listedStyle != end(borderStyles))
+                    style = listedStyle->second;
             }
+            parseStyle(*borderXml, style, resourceManager);
+            
+            sf::Vector2f relativeSize;
+            borderXml->QueryFloatAttribute("widthPercent", &relativeSize.x);
+            borderXml->QueryFloatAttribute("heightPercent", &relativeSize.y);
+            sf::Vector2f sizeOffset;
+            borderXml->QueryFloatAttribute("width", &sizeOffset.x);
+            borderXml->QueryFloatAttribute("height", &sizeOffset.y);
+            ScreenSize size(sizeOffset, relativeSize);
 
-            sf::FloatRect innerOffsets(0, 0, 0, 0);
-            if(auto innerOffsetsXml = borderXml->FirstChildElement("innerOffsets"))
-            {
-                innerOffsetsXml->QueryFloatAttribute("x", &innerOffsets.left);
-                innerOffsetsXml->QueryFloatAttribute("y", &innerOffsets.top);
-                innerOffsetsXml->QueryFloatAttribute("width", &innerOffsets.width);
-                innerOffsetsXml->QueryFloatAttribute("height", &innerOffsets.height);
-            }
             std::unique_ptr<Border> border(new Border(id,
                                                       parsePosition(*borderXml),
-                                                      ScreenSize(sizeOffset, relativeSize),
-                                                      std::move(backgrounds),
-                                                      innerOffsets,
-                                                      std::move(decos)));
-            
+                                                      size,
+                                                      style));
+
             sf::Vector2f scale(1, 1);
             borderXml->QueryFloatAttribute("scalex", &scale.x);
             borderXml->QueryFloatAttribute("scaley", &scale.y);
@@ -283,7 +267,7 @@ std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
             elements.push_back(std::move(border));
         }
     }
-    return elements;
+    return std::move(elements);
 }
 
 std::vector<std::unique_ptr<CheckBox>> MenuLoader::parseCheckBoxes(
@@ -320,7 +304,7 @@ std::vector<std::unique_ptr<CheckBox>> MenuLoader::parseCheckBoxes(
             elements.push_back(std::move(checkBox));
         }
     }
-    return elements;
+    return std::move(elements);
 }
 
 std::vector<std::unique_ptr<Slider>> MenuLoader::parseSliders(
@@ -347,7 +331,7 @@ std::vector<std::unique_ptr<Slider>> MenuLoader::parseSliders(
             elements.push_back(std::move(slider));
         }
     }
-    return elements;
+    return std::move(elements);
 }
 
 std::vector<std::unique_ptr<LineLabel>> MenuLoader::parseLabels(
@@ -374,7 +358,7 @@ std::vector<std::unique_ptr<LineLabel>> MenuLoader::parseLabels(
             elements.push_back(std::move(label));
         }
     }
-    return elements;
+    return std::move(elements);
 }
 
 std::vector<std::unique_ptr<InteractiveLabel>> MenuLoader::parseInteractiveLabels(
@@ -412,7 +396,7 @@ std::vector<std::unique_ptr<InteractiveLabel>> MenuLoader::parseInteractiveLabel
             elements.push_back(std::move(label));
         }
     }
-    return elements;
+    return std::move(elements);
 }
 
 std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
@@ -462,7 +446,7 @@ std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
             elements.push_back(std::move(sprite));
         }
     }
-    return elements;
+    return std::move(elements);
 }
 
 std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
@@ -471,7 +455,8 @@ std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
         const std::unordered_map<std::string, ToolTip>& toolTip,
         const std::unordered_map<std::string, SliderStyle>& sliderStyles,
         const std::unordered_map<std::string, CheckBoxStyle>& checkBoxStyles,
-        const std::unordered_map<std::string, ButtonStyle>& buttonStyles)
+        const std::unordered_map<std::string, ButtonStyle>& buttonStyles,
+        const std::unordered_map<std::string, BorderStyle>& borderStyles)
 {
     std::vector<std::unique_ptr<SubWindow>> elements;
     if(auto element = menuXml.FirstChildElement("elements"))
@@ -499,7 +484,7 @@ std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
             auto innerHeight = subXml->IntAttribute("innerheight");
             std::vector<std::unique_ptr<MenuElement>> subElements;
             addAll(parseButtons(*subXml, buttonStyles, toolTip, resourceManager), subElements);
-            addAll(parseBorders(*subXml, resourceManager), subElements);
+            addAll(parseBorders(*subXml, borderStyles, resourceManager), subElements);
             addAll(parseCheckBoxes(*subXml, checkBoxStyles, toolTip, resourceManager), subElements);
             addAll(parseSliders(*subXml, sliderStyles, resourceManager), subElements);
             addAll(parseLabels(*subXml, resourceManager), subElements);
@@ -508,7 +493,7 @@ std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
             elements.push_back(std::unique_ptr<SubWindow>(new SubWindow(id, parsePosition(*subXml), ScreenSize(size, relativeSize), innerHeight, subElements, style)));
         }
     }
-    return elements;
+    return std::move(elements);
 }
 
 std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(const tinyxml2::XMLElement& menuXml, ResourceManager& resourceManager)
@@ -549,7 +534,69 @@ std::unordered_map<std::string, ButtonStyle> MenuLoader::parseButtonStyles(const
             buttonStyles.emplace(std::make_pair(name, std::move(style)));
         }
     }
-    return buttonStyles;
+    return std::move(buttonStyles);
+}
+
+std::unordered_map<std::string, BorderStyle> MenuLoader::parseBorderStyles(const tinyxml2::XMLElement& menuXml, ResourceManager& resourceManager)
+{
+    std::unordered_map<std::string, BorderStyle> styles;
+    
+    if(auto stylesXml = menuXml.FirstChildElement("styles"))
+    {
+        tinyxml2::XMLDocument doc;
+        std::string filename = resourcePath() + utility::toString("res/menus/") + stylesXml->Attribute("source");
+        doc.LoadFile(filename.c_str());
+
+        if(doc.Error())
+        {
+            doc.PrintError();
+            throw std::runtime_error(utility::replace(utility::translateKey("@IncludeFileInvalid"), filename));
+        }
+
+        for(auto styleXml = doc.FirstChildElement("styles")->FirstChildElement("borderStyle");
+            styleXml != nullptr; styleXml = styleXml->NextSiblingElement("borderStyle"))
+        {
+            if(auto name = styleXml->Attribute("name"))
+            {
+                BorderStyle style;
+                parseStyle(*styleXml, style, resourceManager);
+                styles[std::string(name)] = style;
+            }
+        }
+    }
+    return std::move(styles);
+}
+
+void MenuLoader::parseStyle(const tinyxml2::XMLElement& borderXml, BorderStyle& style, ResourceManager& resourceManager)
+{
+    for(auto background = borderXml.FirstChildElement("background");
+        background != nullptr; background = background->NextSiblingElement("background"))
+    {
+        auto id = static_cast<BorderStyle::BackgroundId>(background->IntAttribute("id"));
+        auto sprite = getSprite(*background, resourceManager);
+        style.backgrounds[id] = sprite;
+    }
+    if(style.backgrounds.size() < 8)
+        throw std::runtime_error(utility::replace(utility::translateKey("@InvalidBackground"), "Border"));
+            
+    for(auto deco = borderXml.FirstChildElement("deco");
+        deco != nullptr; deco = deco->NextSiblingElement("deco"))
+    {
+        auto id = static_cast<BorderStyle::DecoId>(deco->IntAttribute("id") - 1);
+        auto sprite = getSprite(*deco, resourceManager);
+        sf::Vector2f offset;
+        deco->QueryFloatAttribute("offsetx", &offset.x);
+        deco->QueryFloatAttribute("offsety", &offset.y);
+        style.decos[id].push_back(std::make_pair(sprite, offset));
+    }
+
+    if(auto innerOffsetsXml = borderXml.FirstChildElement("innerOffsets"))
+    {
+        innerOffsetsXml->QueryFloatAttribute("x", &style.innerOffsets.left);
+        innerOffsetsXml->QueryFloatAttribute("y", &style.innerOffsets.top);
+        innerOffsetsXml->QueryFloatAttribute("width", &style.innerOffsets.width);
+        innerOffsetsXml->QueryFloatAttribute("height", &style.innerOffsets.height);
+    }
 }
 
 ButtonStateStyle MenuLoader::loadButtonStateStyle(const tinyxml2::XMLElement& xml, ResourceManager& resourceManager)
@@ -618,7 +665,7 @@ std::unordered_map<std::string, CheckBoxStyle> MenuLoader::parseCheckBoxStyles(c
             checkboxStyles[styleXml->Attribute("name")] = style;
         }
     }
-    return checkboxStyles;
+    return std::move(checkboxStyles);
 }
 
 CheckBoxStateStyle MenuLoader::loadCheckBoxStateStyle(const tinyxml2::XMLElement& xml, ResourceManager& resourceManager)
@@ -669,7 +716,7 @@ std::unordered_map<std::string, SliderStyle> MenuLoader::parseSliderStyles(const
             sliderStyles[styleXml->Attribute("name")] = style;
         }
     }
-    return sliderStyles;
+    return std::move(sliderStyles);
 }
 
 SliderStateStyle MenuLoader::loadSliderStateStyle(const tinyxml2::XMLElement& xml, ResourceManager& resourceManager)
@@ -683,7 +730,7 @@ SliderStateStyle MenuLoader::loadSliderStateStyle(const tinyxml2::XMLElement& xm
     return style;
 }
 
-std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(const tinyxml2::XMLElement& menuXml, ResourceManager& resourceManager)
+std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyles(const tinyxml2::XMLElement& menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, ToolTip> toolTip;
     if(auto styles = menuXml.FirstChildElement("styles"))
@@ -734,10 +781,10 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyle(const tin
             }
         }
     }
-    return toolTip;
+    return std::move(toolTip);
 }
 
-std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(const tinyxml2::XMLElement& menuXml, ResourceManager& resourceManager)
+std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyles(const tinyxml2::XMLElement& menuXml, ResourceManager& resourceManager)
 {
     std::unordered_map<std::string, InputBoxStyle> inputBoxStyle;
     if(auto styles = menuXml.FirstChildElement("styles"))
@@ -787,7 +834,7 @@ std::unordered_map<std::string, InputBoxStyle> MenuLoader::parseInputBoxStyle(co
         }
     }
 
-    return inputBoxStyle;
+    return std::move(inputBoxStyle);
 }
 
 std::vector<std::unique_ptr<InputBox>> MenuLoader::parseInputBox(
@@ -818,7 +865,7 @@ std::vector<std::unique_ptr<InputBox>> MenuLoader::parseInputBox(
             elements.push_back(std::move(inputBox));
         }
     }
-    return elements;
+    return std::move(elements);
 }
 
 std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationContainer(
@@ -848,5 +895,5 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
             elements.push_back(std::move(animContainer));
         }
     }
-    return elements;
+    return std::move(elements);
 }
