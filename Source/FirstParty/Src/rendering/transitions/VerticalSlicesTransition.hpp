@@ -31,7 +31,7 @@ private:
     int m_offset;
     float m_timeFactor;
 
-    void doDraw(const DrawParameter& param);
+    void doDraw(const DrawParameter& param) override;
     void updated() override;
 };
 

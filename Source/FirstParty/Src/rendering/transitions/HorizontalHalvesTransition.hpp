@@ -30,7 +30,7 @@ private:
     int m_stripeWidth;
     int m_stripeHeight;
 
-    void doDraw(const DrawParameter& param);
+    void doDraw(const DrawParameter& param) override;
     void updated() override;
 };
 

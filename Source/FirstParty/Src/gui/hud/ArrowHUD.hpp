@@ -14,7 +14,7 @@ class ArrowHUD : public HUDElement
     bool m_outOfView;
 
     void updated(const DrawParameter& params) override;
-    void doDraw(const DrawParameter& params);
+    void doDraw(const DrawParameter& params) override;
 
 public:
     ArrowHUD(ResourceManager& resourceManager);

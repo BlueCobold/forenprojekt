@@ -48,7 +48,7 @@ private:
 
     std::unique_ptr<Transition> createTransition(int randomCount);
 
-    void doDraw(const DrawParameter& param);
+    void doDraw(const DrawParameter& param) override;
     void updated() override;
 
 public:

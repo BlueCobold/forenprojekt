@@ -32,7 +32,7 @@ private:
     int m_columns;
     int m_rows;
 
-    void doDraw(const DrawParameter& param);
+    void doDraw(const DrawParameter& param) override;
     void updated() override;
 };
 

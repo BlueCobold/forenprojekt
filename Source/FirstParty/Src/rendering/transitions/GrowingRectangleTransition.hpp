@@ -25,7 +25,7 @@ private:
     int m_RectangleStartX;
     int m_RectangleStartY;
 
-    void doDraw(const DrawParameter& param);
+    void doDraw(const DrawParameter& param) override;
     void updated() override;
 };
 

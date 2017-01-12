@@ -29,7 +29,7 @@ private:
     void renderStateTexture();
     void render(sf::RenderTarget& m_renderTexture);
     void addNewHighScore(int points, double time, std::string name);
-    void doDraw(const DrawParameter& params);
+    void doDraw(const DrawParameter& params) override;
 
     void sendDataToHighScoreServer(const std::string& name) const;
 

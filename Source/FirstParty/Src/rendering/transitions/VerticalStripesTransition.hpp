@@ -28,7 +28,7 @@ private:
     std::vector<std::unique_ptr<sf::Sprite>> m_targetSprites;
     int m_stripeWidth;
 
-    void doDraw(const DrawParameter& param);
+    void doDraw(const DrawParameter& param) override;
     void updated() override;
 };
 
