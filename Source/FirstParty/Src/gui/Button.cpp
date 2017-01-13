@@ -18,7 +18,6 @@ Button::Button(int id, ButtonStyle style,
     m_size.x = m_style.idleStyle.sprite.getTextureRect().width;
     m_size.y = m_style.idleStyle.sprite.getTextureRect().height;
 
-    auto currentPosition = position.getCurrentPosition();
     if(m_style.idleStyle.animation != nullptr)
         m_style.idleStyle.animation->setPosition(ScreenLocation(position).addOffset(m_style.idleStyle.spriteOffset));
 

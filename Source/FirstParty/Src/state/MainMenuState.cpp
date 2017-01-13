@@ -45,7 +45,6 @@ StateChangeInformation MainMenuState::update(const double time)
     }
 
     int clicked = -1;
-    int subWindowClicked = -1;
 
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
     

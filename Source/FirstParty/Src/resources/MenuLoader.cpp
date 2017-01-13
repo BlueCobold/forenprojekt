@@ -763,7 +763,6 @@ std::unordered_map<std::string, ToolTip> MenuLoader::parseToolTipStyles(const ti
             if(counter < 9)
                 throw std::runtime_error(utility::replace(utility::translateKey("@InvalidBackground"), "ToolTip"));
 
-            BitmapFont* font = nullptr;
             if(auto textXml = tooltipXml->FirstChildElement("text"))
             {
                 if(auto fontName = textXml->Attribute("font"))
