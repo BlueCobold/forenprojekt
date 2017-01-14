@@ -127,10 +127,10 @@ private:
             {
                 auto resource = std::move(it->second);
                 m_resources.erase(it);
-                return std::make_pair<Resource, T*>(std::move(resource), nullptr);
+                return std::pair<Resource, T*>(std::move(resource), nullptr);
             }
             else
-                return std::make_pair<Resource, T*>(nullptr, it->second.get());
+                return std::pair<Resource, T*>(nullptr, it->second.get());
         }
         // try to find the resource in all scopes and all their cycles
         for(auto scopeIt = begin(m_scopes); scopeIt != end(m_scopes);  ++scopeIt)
@@ -139,20 +139,20 @@ private:
             {
                 auto resource = (*cycleIt)->getFromScopes(key, false);
                 if(resource.second)
-                    return std::make_pair<Resource, T*>(nullptr, resource.second);
+                    return std::pair<Resource, T*>(nullptr, resource.second);
 
                 // if it shall be kept in scope, move it to first element, otherwise return ownership
                 if(resource.first)
                 {
                     if(!keepInScope)
-                        return std::make_pair<Resource, T*>(std::move(resource.first), nullptr);
+                        return std::pair<Resource, T*>(std::move(resource.first), nullptr);
                     else
                     {
                         auto ptr = resource.first.get();
                         auto& currentScope = m_scopes[scopeIt->first];
                         auto& firstInScope = currentScope.front();
                         firstInScope->m_resources[key] = std::move(resource.first);
-                        return std::make_pair<Resource, T*>(nullptr, ptr);
+                        return std::pair<Resource, T*>(nullptr, ptr);
                     }
                 }
             }
