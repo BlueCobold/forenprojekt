@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6E0A82781A2713B200ED9747 /* libtinyxml2-s.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0A82771A2713B200ED9747 /* libtinyxml2-s.a */; };
+		6E21E49C1E06BCAD00F2AA3F /* Border.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E21E48D1E06ACE500F2AA3F /* Border.cpp */; };
+		6E21E49D1E06BCAD00F2AA3F /* BatteryHUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E21E4931E06ACF400F2AA3F /* BatteryHUD.cpp */; };
 		6E2EABEA1B36B6D90010CE54 /* InteractiveLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E2EABE81B36B6D90010CE54 /* InteractiveLabel.cpp */; };
 		6E476EFD1B85ACD9009CBA0F /* OpenFileDialoge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E476EFB1B85ACD9009CBA0F /* OpenFileDialoge.cpp */; };
 		6E4AAD371ABAC116004DD346 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E4AABFD1ABAC116004DD346 /* Animation.cpp */; };
@@ -170,6 +172,21 @@
 
 /* Begin PBXFileReference section */
 		6E0A82771A2713B200ED9747 /* libtinyxml2-s.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libtinyxml2-s.a"; path = "../../../../tinyxml2-master/tinyxml2-s/usr/local/lib/libtinyxml2-s.a"; sourceTree = "<group>"; };
+		6E21E48D1E06ACE500F2AA3F /* Border.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Border.cpp; sourceTree = "<group>"; };
+		6E21E48E1E06ACE500F2AA3F /* Border.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Border.hpp; sourceTree = "<group>"; };
+		6E21E48F1E06ACE500F2AA3F /* BorderStyle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BorderStyle.hpp; sourceTree = "<group>"; };
+		6E21E4901E06ACE500F2AA3F /* GestureFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GestureFilter.hpp; sourceTree = "<group>"; };
+		6E21E4911E06ACE500F2AA3F /* GestureHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GestureHandler.hpp; sourceTree = "<group>"; };
+		6E21E4921E06ACE500F2AA3F /* ScreenSize.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = ScreenSize.hpp; path = gui/ScreenSize.hpp; sourceTree = "<group>"; };
+		6E21E4931E06ACF400F2AA3F /* BatteryHUD.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BatteryHUD.cpp; sourceTree = "<group>"; };
+		6E21E4941E06ACF400F2AA3F /* BatteryHUD.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BatteryHUD.hpp; sourceTree = "<group>"; };
+		6E21E4951E06AD1000F2AA3F /* Blending.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Blending.hpp; sourceTree = "<group>"; };
+		6E21E4961E06AD1000F2AA3F /* Sprite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Sprite.hpp; path = rendering/Sprite.hpp; sourceTree = "<group>"; };
+		6E21E4971E06AD2500F2AA3F /* BlendingParser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BlendingParser.hpp; sourceTree = "<group>"; };
+		6E21E4981E06AD3700F2AA3F /* TouchButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TouchButton.cpp; sourceTree = "<group>"; };
+		6E21E4991E06AD3700F2AA3F /* TouchButton.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TouchButton.hpp; sourceTree = "<group>"; };
+		6E21E49A1E06AD3700F2AA3F /* TouchController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TouchController.cpp; sourceTree = "<group>"; };
+		6E21E49B1E06AD3700F2AA3F /* TouchController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TouchController.hpp; sourceTree = "<group>"; };
 		6E2EABE81B36B6D90010CE54 /* InteractiveLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InteractiveLabel.cpp; sourceTree = "<group>"; };
 		6E2EABE91B36B6D90010CE54 /* InteractiveLabel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InteractiveLabel.hpp; sourceTree = "<group>"; };
 		6E476EFB1B85ACD9009CBA0F /* OpenFileDialoge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenFileDialoge.cpp; sourceTree = "<group>"; };
@@ -583,28 +600,34 @@
 		6E4AABFA1ABAC116004DD346 /* Src */ = {
 			isa = PBXGroup;
 			children = (
+				6E4AABFB1ABAC116004DD346 /* animation */,
 				6E4AAC2B1ABAC116004DD346 /* App.cpp */,
-				6E4AAC2E1ABAC116004DD346 /* Core.cpp */,
-				6E4AAC861ABAC116004DD346 /* Input.cpp */,
-				6E4AAD0D1ABAC116004DD346 /* ScrollView.cpp */,
-				6E4AAD351ABAC116004DD346 /* Utility.cpp */,
-				6E4AAD0C1ABAC116004DD346 /* Resources.h */,
 				6E4AAC2C1ABAC116004DD346 /* App.hpp */,
+				6E4AAC2D1ABAC116004DD346 /* app.rc */,
 				6E4D38721C84473B00F7F3CA /* BatteryState.hpp */,
+				6E4AAC2E1ABAC116004DD346 /* Core.cpp */,
+				6E4AAC2F1ABAC116004DD346 /* gui */,
+				6E4AAC851ABAC116004DD346 /* icon.ico */,
+				6E4AAC861ABAC116004DD346 /* Input.cpp */,
 				6E4AAC871ABAC116004DD346 /* Input.hpp */,
 				6E4AAC881ABAC116004DD346 /* MacHelper.hpp */,
-				6E4AAD0E1ABAC116004DD346 /* ScrollView.hpp */,
-				6E4AAD361ABAC116004DD346 /* Utility.hpp */,
-				6E476EFE1B85AD55009CBA0F /* WindowsHelper.hpp */,
-				6E4AAC851ABAC116004DD346 /* icon.ico */,
 				6E4AAC891ABAC116004DD346 /* MacHelper.mm */,
-				6E4AAC2D1ABAC116004DD346 /* app.rc */,
-				6E4AABFB1ABAC116004DD346 /* animation */,
-				6E4AAC2F1ABAC116004DD346 /* gui */,
 				6E4AAC8A1ABAC116004DD346 /* model */,
 				6E4AACC31ABAC116004DD346 /* rendering */,
 				6E4AACF51ABAC116004DD346 /* resources */,
+				6E4AAD0C1ABAC116004DD346 /* Resources.h */,
+				6E21E4921E06ACE500F2AA3F /* ScreenSize.hpp */,
+				6E4AAD0D1ABAC116004DD346 /* ScrollView.cpp */,
+				6E4AAD0E1ABAC116004DD346 /* ScrollView.hpp */,
+				6E21E4961E06AD1000F2AA3F /* Sprite.hpp */,
 				6E4AAD0F1ABAC116004DD346 /* state */,
+				6E21E4981E06AD3700F2AA3F /* TouchButton.cpp */,
+				6E21E4991E06AD3700F2AA3F /* TouchButton.hpp */,
+				6E21E49A1E06AD3700F2AA3F /* TouchController.cpp */,
+				6E21E49B1E06AD3700F2AA3F /* TouchController.hpp */,
+				6E4AAD351ABAC116004DD346 /* Utility.cpp */,
+				6E4AAD361ABAC116004DD346 /* Utility.hpp */,
+				6E476EFE1B85AD55009CBA0F /* WindowsHelper.hpp */,
 			);
 			name = Src;
 			path = ../../Src;
@@ -685,6 +708,9 @@
 				6E4AAC311ABAC116004DD346 /* AnimationContainer.hpp */,
 				6E4AAC321ABAC116004DD346 /* BitmapFont.cpp */,
 				6E4AAC331ABAC116004DD346 /* BitmapFont.hpp */,
+				6E21E48D1E06ACE500F2AA3F /* Border.cpp */,
+				6E21E48E1E06ACE500F2AA3F /* Border.hpp */,
+				6E21E48F1E06ACE500F2AA3F /* BorderStyle.hpp */,
 				6E4AAC341ABAC116004DD346 /* Button.cpp */,
 				6E4AAC351ABAC116004DD346 /* Button.hpp */,
 				6E73F9451BEA0DC300539444 /* ButtonStyle.cpp */,
@@ -709,6 +735,8 @@
 				6E4AAC461ABAC116004DD346 /* FPSCounter.hpp */,
 				6E4AAC471ABAC116004DD346 /* GameFinishedMenu.cpp */,
 				6E4AAC481ABAC116004DD346 /* GameFinishedMenu.hpp */,
+				6E21E4901E06ACE500F2AA3F /* GestureFilter.hpp */,
+				6E21E4911E06ACE500F2AA3F /* GestureHandler.hpp */,
 				6E4AAC491ABAC116004DD346 /* HighScoreMenu.hpp */,
 				6E4AAC4A1ABAC116004DD346 /* HighScoreMenue.cpp */,
 				6E4AAC4B1ABAC116004DD346 /* hud */,
@@ -763,6 +791,8 @@
 				6E4AAC4D1ABAC116004DD346 /* ArrowHUD.hpp */,
 				6E4AAC4E1ABAC116004DD346 /* BallHUD.cpp */,
 				6E4AAC4F1ABAC116004DD346 /* BallHUD.hpp */,
+				6E21E4931E06ACF400F2AA3F /* BatteryHUD.cpp */,
+				6E21E4941E06ACF400F2AA3F /* BatteryHUD.hpp */,
 				6E4AAC501ABAC116004DD346 /* FPSCounter.hpp */,
 				6E4AAC511ABAC116004DD346 /* FPSCounterHUD.cpp */,
 				6E4AAC521ABAC116004DD346 /* FPSCounterHUD.hpp */,
@@ -883,6 +913,7 @@
 		6E4AACC31ABAC116004DD346 /* rendering */ = {
 			isa = PBXGroup;
 			children = (
+				6E21E4951E06AD1000F2AA3F /* Blending.hpp */,
 				6E4AACC41ABAC116004DD346 /* DebugDraw.cpp */,
 				6E4AACC51ABAC116004DD346 /* DebugDraw.hpp */,
 				6E4AACC61ABAC116004DD346 /* Drawable.hpp */,
@@ -964,6 +995,7 @@
 				6E4AACF81ABAC116004DD346 /* BackgroundLoader.hpp */,
 				6E4D38471C8435B200F7F3CA /* BackgroundParser.cpp */,
 				6E4D38481C8435B200F7F3CA /* BackgroundParser.hpp */,
+				6E21E4971E06AD2500F2AA3F /* BlendingParser.hpp */,
 				6E4D38491C8435B200F7F3CA /* ColliderContext.hpp */,
 				6E4D384A1C8435B200F7F3CA /* ColliderParser.cpp */,
 				6E4D384B1C8435B200F7F3CA /* ColliderParser.hpp */,
@@ -1220,6 +1252,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E21E49C1E06BCAD00F2AA3F /* Border.cpp in Sources */,
+				6E21E49D1E06BCAD00F2AA3F /* BatteryHUD.cpp in Sources */,
 				6E4D386F1C843CAB00F7F3CA /* CloneHandler.cpp in Sources */,
 				6E4AAD8F1ABAC116004DD346 /* Config.cpp in Sources */,
 				6ED3AD221B4BA13800E32567 /* FloatParameter.cpp in Sources */,
