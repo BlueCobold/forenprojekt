@@ -14,7 +14,7 @@
 
 struct BorderStyle
 {
-    enum BackgroundId
+    enum BackgroundId : int
     {
         TopLeft = 1,
         TopCenter = 2,
@@ -27,7 +27,7 @@ struct BorderStyle
         Background = 9
     };
 
-    enum DecoId
+    enum DecoId : int
     {
         Top = 0,
         Right = 1,
@@ -35,7 +35,7 @@ struct BorderStyle
         Bottom = 3
     };
     
-    std::unordered_map<BackgroundId, Sprite> backgrounds;
+    std::unordered_map<BackgroundId, Sprite, std::hash<int>> backgrounds;
     std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4> decos;
     sf::FloatRect innerOffsets;
 };
