@@ -15,13 +15,14 @@
 #include <Box2D/Common/b2Draw.h>
 
 #include <algorithm>
+#include <memory>
 #include <ostream> // endl
 #include <string>
 #include <unordered_map>
 #include <utility> // pair, make_pair, move
 
 #ifndef LEVELTESTING
-Level::Level(const unsigned int level, ResourceManager& resourceManager, AppConfig& config) :
+Level::Level(const unsigned int level, std::unique_ptr<ResourceManager> resourceManager, AppConfig& config) :
 #else
 Level::Level(const std::string& filename, const unsigned int level, std::unique_ptr<ResourceManager> resourceManager, AppConfig& config) :
     m_filename(filename),

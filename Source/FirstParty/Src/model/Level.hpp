@@ -57,7 +57,7 @@ public:
     Level(const std::string& file, const unsigned int level, std::unique_ptr<ResourceManager> resourceManager, AppConfig& config);
     std::string getFileName();
 #else
-    Level(const unsigned int level, ResourceManager& resourceManager, AppConfig& config);
+    Level(const unsigned int level, std::unique_ptr<ResourceManager> resourceManager, AppConfig& config);
 #endif
     ~Level();
 
