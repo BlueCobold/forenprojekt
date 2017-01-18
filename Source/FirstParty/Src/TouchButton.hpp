@@ -3,7 +3,7 @@
 #ifndef TOUCHBUTTON_HPP
 #define TOUCHBUTTON_HPP
 
-#include <SFML\Graphics\Rect.hpp>
+#include <SFML/Graphics/Rect.hpp>
 
 class TouchButton
 {
