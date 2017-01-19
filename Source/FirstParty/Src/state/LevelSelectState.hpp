@@ -4,6 +4,7 @@
 #define LEVELSELECTSTATE_HPP
 
 #include "State.hpp"
+#include "../model/Level.hpp"
 #include "../gui/LevelSelectMenu.hpp"
 
 class LevelSelectState : public State
@@ -26,8 +27,7 @@ private:
     };
 
     LevelSelectMenu m_menu;
-    std::map<int, std::string> m_levelNames;
-    std::map<int, PreviewInfo> m_textureCoordinates;
+    std::map<int, LevelInfo> m_levelInfos;
     int m_currentLevelNumber;
     int m_unlockedLevel;
 

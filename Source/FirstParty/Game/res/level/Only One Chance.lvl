@@ -1,8 +1,8 @@
 <level>
 	<levelinfo name="Only One Chance">
 		<infoimage srcx="192" srcy="217" width="192" height="108" />
+		<gameplay maxBalls="1" time="85" />
 	</levelinfo>
-	<gameplay maxBalls="1" time="85" />
 	<templates>
 		<include file="assets/ball/twirl.inc" />
 		<include file="assets/target/static.inc" />

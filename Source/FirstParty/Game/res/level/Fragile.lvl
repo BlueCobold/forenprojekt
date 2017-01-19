@@ -1,9 +1,9 @@
 <level>
 	<levelinfo name="Fragile">
 		<infoimage spriteSheet="gui_elements" sprite="preview: Fragile" />
+		<gameplay time="60" />
 	</levelinfo>
 	<constants gate="0" gatetime="0"/>
-	<gameplay time="60"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />
 		<include file="assets/target/phase_out.inc" />

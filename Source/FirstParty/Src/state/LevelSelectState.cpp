@@ -2,6 +2,7 @@
 #include "LevelSelectState.hpp"
 
 #include "../gui/Button.hpp"
+#include "../model/Level.hpp"
 #include "../rendering/transitions/RandomTransition.hpp"
 #include "../resources/Config.hpp"
 #include "../resources/SpriteSheet.hpp"
@@ -21,13 +22,13 @@ LevelSelectState::LevelSelectState(sf::RenderWindow& screen,
     m_transitionStateInfo(LevelSelectStateId)
 {
     loadLevelInfos();
-    auto captionName = m_levelNames.find(1);
-    if(captionName != end(m_levelNames))
-        m_menu.getLabel(LevelSelectMenu::LABEL_CAPTION).setText(captionName->second);
+    auto captionName = m_levelInfos.find(1);
+    if(captionName != end(m_levelInfos))
+        m_menu.getLabel(LevelSelectMenu::LABEL_CAPTION).setText(captionName->second.name);
 
-    auto preview = m_textureCoordinates.find(1);
-    if(preview != end(m_textureCoordinates))
-        m_menu.setLevelPreview(*preview->second.texture, preview->second.rect);
+    auto preview = m_levelInfos.find(1);
+    if(preview != end(m_levelInfos))
+        m_menu.setLevelPreview(*preview->second.preview.getSprite().getTexture(), preview->second.preview.getTextureRect());
 
     updateRightButton();
 
@@ -73,24 +74,24 @@ StateChangeInformation LevelSelectState::update(const double time)
     }
     if(clicked == LevelSelectMenu::BUTTON_LEFT)
     {
-        if(m_levelNames.find(m_currentLevelNumber - 1) != end(m_levelNames))
+        if(m_levelInfos.find(m_currentLevelNumber - 1) != end(m_levelInfos))
         {
             m_currentLevelNumber--;
-            m_menu.getLabel(LevelSelectMenu::LABEL_CAPTION).setText(m_levelNames.find(m_currentLevelNumber)->second);
-            auto preview = m_textureCoordinates.find(m_currentLevelNumber);
-            if(preview != end(m_textureCoordinates))
-                m_menu.setLevelPreview(*preview->second.texture, preview->second.rect);
+            m_menu.getLabel(LevelSelectMenu::LABEL_CAPTION).setText(m_levelInfos.find(m_currentLevelNumber)->second.name);
+            auto preview = m_levelInfos.find(m_currentLevelNumber);
+            if(preview != end(m_levelInfos))
+                m_menu.setLevelPreview(*preview->second.preview.getSprite().getTexture(), preview->second.preview.getTextureRect());
         }
     }
     if(clicked == LevelSelectMenu::BUTTON_RIGHT)
     {
-        if(m_levelNames.find(m_currentLevelNumber + 1) != end(m_levelNames))
+        if(m_levelInfos.find(m_currentLevelNumber + 1) != end(m_levelInfos))
         {
             m_currentLevelNumber++;
-            m_menu.getLabel(LevelSelectMenu::LABEL_CAPTION).setText(m_levelNames.find(m_currentLevelNumber)->second);
-            auto preview = m_textureCoordinates.find(m_currentLevelNumber);
-            if(preview != end(m_textureCoordinates))
-                m_menu.setLevelPreview(*preview->second.texture, preview->second.rect);
+            m_menu.getLabel(LevelSelectMenu::LABEL_CAPTION).setText(m_levelInfos.find(m_currentLevelNumber)->second.name);
+            auto preview = m_levelInfos.find(m_currentLevelNumber);
+            if(preview != end(m_levelInfos))
+                m_menu.setLevelPreview(*preview->second.preview.getSprite().getTexture(), preview->second.preview.getTextureRect());
         }
     }
 
@@ -117,54 +118,21 @@ void LevelSelectState::loadLevelInfos()
     std::string file = "";
     std::unordered_map<int, std::string> fileNames = State::getResourceManager().getFileNames();
 
+    int i = 0;
     for(auto it = std::begin(fileNames); it != std::end(fileNames); ++it)
     {
-        file = resourcePath() + "res/level/" + it->second;
-
-        doc.LoadFile(file.c_str());
-        if(doc.Error()) // Error while loading file
-        {
-            auto msg = std::string(doc.GetErrorStr1() ? doc.GetErrorStr1() : "");
-            auto error = utility::replace(utility::translateKey("@InvalidXml"), file + " [" + msg +"]");
-            if(doc.GetErrorStr2())
-                error += std::string(" / ") + doc.GetErrorStr2();
-            throw std::runtime_error(error);
-        }
-        auto levelinfo = doc.FirstChildElement("level")->FirstChildElement("levelinfo");
-
-        std::string name = levelinfo->Attribute("name");
-
-        PreviewInfo preview;
-        if(auto info = levelinfo->FirstChildElement("infoimage"))
-        {
-            SpriteSheet::SpriteData sprite;
-            auto spriteName = info->Attribute("sprite");
-            auto sheetName = spriteName ? info->Attribute("spriteSheet") : nullptr;
-            auto sheet = sheetName ? getResourceManager().getSpriteSheet(sheetName) : nullptr;
-            if(sheet != nullptr)
-                sprite = sheet->get(spriteName);
-            if(info->Attribute("srcx"))
-                sprite.x = info->IntAttribute("srcx");
-            if(info->Attribute("srcy"))
-                sprite.y = info->IntAttribute("srcy");
-            if(info->Attribute("width"))
-                sprite.width = info->IntAttribute("width");
-            if(info->Attribute("height"))
-                sprite.height = info->IntAttribute("height");
-            preview.texture = getResourceManager().getTexture(sheet ? sheet->getTextureName() : "GuiElements");
-            preview.rect = sf::IntRect(sprite.x, sprite.y, sprite.width, sprite.height);
-        }
-        m_textureCoordinates[it->first] = preview;
-        m_levelNames[it->first] = name;
+        Level level("", it->first, getResourceManager().getSubScope("menus"), getConfig(), true);
+        m_levelInfos[it->first] = level.getInfo();
     }
+    getResourceManager().purge("menus");
 }
 
 void LevelSelectState::updateLeftButton()
 {
-    auto preview = m_textureCoordinates.find(m_currentLevelNumber - 1);
-    if(preview != end(m_textureCoordinates))
+    auto preview = m_levelInfos.find(m_currentLevelNumber - 1);
+    if(preview != end(m_levelInfos))
     {
-        sf::Sprite sprite(*preview->second.texture, preview->second.rect);
+        sf::Sprite sprite = preview->second.preview.getSprite();
         auto& b = m_menu.getButton(LevelSelectMenu::BUTTON_LEFT);
         b.changeIdleSprite(sprite);
         b.changeHoverSprite(sprite);
@@ -175,10 +143,10 @@ void LevelSelectState::updateLeftButton()
 
 void LevelSelectState::updateRightButton()
 {
-    auto preview = m_textureCoordinates.find(m_currentLevelNumber + 1);
-    if(preview != end(m_textureCoordinates))
+    auto preview = m_levelInfos.find(m_currentLevelNumber + 1);
+    if(preview != end(m_levelInfos))
     {
-        sf::Sprite sprite(*preview->second.texture, preview->second.rect);
+        sf::Sprite sprite = preview->second.preview.getSprite();
         auto& b = m_menu.getButton(LevelSelectMenu::BUTTON_RIGHT);
         b.changeIdleSprite(sprite);
         b.changeHoverSprite(sprite);
@@ -189,12 +157,12 @@ void LevelSelectState::updateRightButton()
 
 void LevelSelectState::updateButtons()
 {
-    if(m_levelNames.find(m_currentLevelNumber - 1) == end(m_levelNames))
+    if(m_levelInfos.find(m_currentLevelNumber - 1) == end(m_levelInfos))
         m_menu.hideLeftButton(true);
     else
         updateLeftButton();
 
-    if(m_levelNames.find(m_currentLevelNumber + 1) == end(m_levelNames) ||
+    if(m_levelInfos.find(m_currentLevelNumber + 1) == end(m_levelInfos) ||
        (m_unlockedLevel < (m_currentLevelNumber + 1)))
         m_menu.hideRightButton(true);
     else

@@ -1,9 +1,9 @@
 <level>
 	<levelinfo name="Cardinal Points">
 		<infoimage srcx="192" srcy="217" width="192" height="108" />
+		<gameplay maxBalls="5" time="180"/>
 	</levelinfo>
 	<medal bronze="300" silver="500" gold="1000" />
-	<gameplay maxBalls="5" time="180"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />
 		<include file="assets/target/static.inc" />

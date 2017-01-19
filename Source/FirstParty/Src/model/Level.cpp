@@ -21,12 +21,8 @@
 #include <unordered_map>
 #include <utility> // pair, make_pair, move
 
-#ifndef LEVELTESTING
-Level::Level(const unsigned int level, std::unique_ptr<ResourceManager> resourceManager, AppConfig& config) :
-#else
-Level::Level(const std::string& filename, const unsigned int level, std::unique_ptr<ResourceManager> resourceManager, AppConfig& config) :
+Level::Level(const std::string& filename, const unsigned int level, std::unique_ptr<ResourceManager> resourceManager, AppConfig& config, bool loadInfoOnly) :
     m_filename(filename),
-#endif
     m_resourceManager(std::move(resourceManager)),
     m_config(config),
     m_world(b2Vec2(0.f, 9.81f)),
@@ -94,7 +90,7 @@ Level::Level(const std::string& filename, const unsigned int level, std::unique_
     m_debugDraw = false;
 #endif
     m_contactListener = ContactListener(this, this);
-    load();
+    m_info = load(loadInfoOnly);
 
     for(auto it = begin(m_entities); it != end(m_entities); ++it)
     {

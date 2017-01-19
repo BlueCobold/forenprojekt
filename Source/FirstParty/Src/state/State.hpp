@@ -125,6 +125,11 @@ protected:
         return m_resourceManager;
     }
 
+    AppConfig& getConfig()
+    {
+        return m_config;
+    }
+
     sf::RenderWindow& m_screen;
     AppConfig& m_config;
 

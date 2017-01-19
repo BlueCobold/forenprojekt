@@ -1,9 +1,9 @@
 <level>
 	<levelinfo name="Rotating Spikes">
 		<infoimage spriteSheet="gui_elements" sprite="preview: Beginner Level" />
+		<gameplay maxBalls="5" />
 	</levelinfo>
 	<medal bronze="250" silver="300" gold="450" />
-	<gameplay maxBalls="5" />
 	<templates>
 		<include file="assets/ball/twirl.inc" />
 		<include file="assets/target/static.inc" />

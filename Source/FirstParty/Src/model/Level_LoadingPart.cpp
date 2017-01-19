@@ -10,6 +10,8 @@
 #include "../resources/LevelFileLoader.hpp"
 #include "../resources/PathHelper.hpp"
 #include "../resources/PhysicsParser.hpp"
+#include "../resources/ResourceManager.hpp"
+#include "../resources/SpriteSheet.hpp"
 #include "../resources/ValueParser.hpp"
 #include "../Utility.hpp"
 #include "../MacHelper.hpp"
@@ -17,26 +19,26 @@
 #include <tinyxml2.h>
 
 #include <algorithm>
+#include <memory>
 
-void Level::load()
+LevelInfo Level::load(bool loadInfoOnly)
 {
-#ifndef LEVELTESTING
-    if(m_number == 0) // Level start from 1
-        throw std::runtime_error(utility::replace(utility::translateKey("@InvalidLevelNumber"), filename()));
+    if(number() != 0)
+    {
+        if(m_number == 0) // Level start from 1
+            throw std::runtime_error(utility::replace(utility::translateKey("@InvalidLevelNumber"), filename()));
 
-    if(!isOriginal())
-        throw std::runtime_error(utility::replace(utility::translateKey("@NoOriginalFile"), filename()));
+        if(!isOriginal())
+            throw std::runtime_error(utility::replace(utility::translateKey("@NoOriginalFile"), filename()));
+    }
 
-#endif
     tinyxml2::XMLDocument doc;
 
     std::string filePath;
-#ifdef LEVELTESTING
-    if(number() == 0)
+    if(number() == 0 && !m_filename.empty())
         filePath = m_filename;
     else
-#endif
-    filePath = resourcePath() + filename();
+        filePath = resourcePath() + filename();
     doc.LoadFile(filePath.c_str());
 
     if(doc.Error())
@@ -48,7 +50,29 @@ void Level::load()
     auto levelXml = doc.FirstChildElement("level");
     if(!levelXml)
         throw std::runtime_error(utility::replace(utility::translateKey("@InvalidXml"), filePath));
-    
+
+    LevelInfo info;
+    if(auto levelinfo = levelXml->FirstChildElement("levelinfo"))
+    {
+        if(auto name = levelinfo->Attribute("name"))
+            info.name = name;
+
+        parsePreview(*levelinfo, info);
+
+        // get optional Attribute
+        if(auto gameplay = levelXml->FirstChildElement("gameplay"))
+            parseGameplayAttributes(*gameplay, info);
+        else
+        {
+            m_remainingBall = -1;
+            m_remainingTime = -1.f;
+            m_totalTime = -1.f;
+            m_initialTime = -1.f;
+        }
+    }
+    if(loadInfoOnly)
+        return info;
+
     if(auto setup = levelXml->FirstChildElement("setup"))
         setup->QueryUnsignedAttribute("defaultBufferId", &m_defaultTargetBuffer);
     if(!Shader::isUsable())
@@ -61,24 +85,13 @@ void Level::load()
     if(constants != nullptr)
         ValueParser::parseConstants(*constants, *this);
 
-    // get optional Attribute
-    if(auto gameplay = levelXml->FirstChildElement("gameplay"))
-        parseGameplayAttributes(gameplay);
-    else
+    if(auto medal = levelXml->FirstChildElement("medal"))
     {
-        m_remainingBall = -1;
-        m_remainingTime = -1.f;
-        m_totalTime = -1.f;
-        m_initialTime = -1.f;
+        // get Medal values
+        medal->QueryIntAttribute("bronze", &m_bronzeMedal);
+        medal->QueryIntAttribute("silver", &m_silverMedal);
+        medal->QueryIntAttribute("gold", &m_goldMedal);
     }
-
-    // get Medal values
-    m_bronzeMedal = levelXml->FirstChildElement("medal")->IntAttribute("bronze");
-    m_silverMedal = levelXml->FirstChildElement("medal")->IntAttribute("silver");
-    m_goldMedal = levelXml->FirstChildElement("medal")->IntAttribute("gold");
-
-    // get LevelName
-    m_levelName = levelXml->FirstChildElement("levelinfo")->Attribute("name");
 
     // ==Parse grid==
     auto grid = levelXml->FirstChildElement("grid");
@@ -168,6 +181,7 @@ void Level::load()
     });
 
     m_remainingTarget = m_totalTarget;
+    return info;
 }
 
 std::unique_ptr<Entity> Level::parseEntity(
@@ -220,18 +234,49 @@ std::unique_ptr<Entity> Level::parseEntity(
     return std::move(entities.entity);
 }
 
-void Level::parseGameplayAttributes(const tinyxml2::XMLElement* xml)
+void Level::parsePreview(const tinyxml2::XMLElement& levelinfo, LevelInfo& infoToFill)
 {
-    int balls = xml->IntAttribute("maxBalls");
-    float remainingTime = xml->FloatAttribute("time");
-    if(balls > 0)
-        m_remainingBall = balls;
+    if(auto info = levelinfo.FirstChildElement("infoimage"))
+    {
+        SpriteSheet::SpriteData sprite;
+        auto spriteName = info->Attribute("sprite");
+        auto sheetName = spriteName ? info->Attribute("spriteSheet") : nullptr;
+        auto sheet = sheetName ? m_resourceManager->getSpriteSheet(sheetName) : nullptr;
+        if(sheet != nullptr)
+            sprite = sheet->get(spriteName);
+        if(auto srcx = info->Attribute("srcx"))
+            sprite.x = utility::stringTo<int>(srcx);
+        if(auto srcy = info->Attribute("srcy"))
+            sprite.y = utility::stringTo<int>(srcy);
+        if(auto width = info->Attribute("width"))
+            sprite.width = utility::stringTo<int>(width);
+        if(auto height = info->Attribute("height"))
+            sprite.height = utility::stringTo<int>(height);
+        auto tex = m_resourceManager->getTexture(sheet ? sheet->getTextureName() : "GuiElements");
+        infoToFill.preview = Sprite(
+            sf::Sprite(*tex,
+                       sf::IntRect(sprite.x,
+                                   sprite.y,
+                                   sprite.width,
+                                   sprite.height)),
+                       sprite.blendMode);
+    }
+}
+
+void Level::parseGameplayAttributes(const tinyxml2::XMLElement& gameplay, LevelInfo& infoToFill)
+{
+    gameplay.QueryIntAttribute("maxBalls", &infoToFill.maxBalls);
+
+    gameplay.QueryFloatAttribute("time", &infoToFill.time);
+
+    if(infoToFill.maxBalls > 0)
+        m_remainingBall = infoToFill.maxBalls;
     else
         m_remainingBall = -1;
 
-    if(remainingTime > 0)
+    if(infoToFill.time > 0)
     {
-        m_remainingTime = remainingTime;
+        m_remainingTime = infoToFill.time;
         m_totalTime = m_remainingTime;
         m_initialTime = m_totalTime;
     }

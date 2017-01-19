@@ -1,9 +1,9 @@
 <level>
 	<levelinfo name="RR Pong extrem">
 		<infoimage srcx="312" srcy="561" width="192" height="108" />
+		<gameplay maxBalls="3" time="180"/>
 	</levelinfo>
 	<constants solid="0" posy="0"/>
-	<gameplay maxBalls="3" time="180"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />
 		<include file="assets/target/static.inc" />

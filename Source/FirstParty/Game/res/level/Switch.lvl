@@ -1,9 +1,9 @@
 <level>
 	<levelinfo name="Switch">
 		<infoimage srcx="312" srcy="561" width="192" height="108" />
+		<gameplay maxBalls="5" time="90"/>
 	</levelinfo>
 	<constants gate1="0" gatetime1="0" gate2="0" gatetime2="0"/>
-	<gameplay maxBalls="5" time="90"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />
 		<include file="assets/target/phase_out.inc" />

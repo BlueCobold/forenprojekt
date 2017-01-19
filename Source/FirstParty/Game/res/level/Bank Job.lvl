@@ -1,8 +1,8 @@
 <level>
 	<levelinfo name="Bank Job">
 		<infoimage spriteSheet="gui_elements" sprite="preview: Bank Job" />
+		<gameplay time="90"/>
 	</levelinfo>
-	<gameplay time="90"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />
 		<include file="assets/target/static.inc" />

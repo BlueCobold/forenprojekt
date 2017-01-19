@@ -1,8 +1,8 @@
 <level>
 	<levelinfo name="Locked">
 		<infoimage srcx="312" srcy="561" width="192" height="108" />
+		<gameplay time="180"/>
 	</levelinfo>
-	<gameplay time="180"/>
 	<constants solid="0"/>
 	<templates>
 		<include file="assets/ball/twirl.inc" />

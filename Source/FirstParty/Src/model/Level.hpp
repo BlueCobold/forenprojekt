@@ -17,6 +17,7 @@
 #include "../gui/LineLabel.hpp"
 #include "../rendering/DebugDraw.hpp"
 #include "../rendering/Drawable.hpp"
+#include "../rendering/Sprite.hpp"
 #include "../resources/GameEventRecorder.hpp"
 #include "../resources/TemplateParser.hpp"
 #include "../ScrollView.hpp"
@@ -42,6 +43,17 @@ namespace tinyxml2
     class XMLElement;
 }
 
+struct LevelInfo
+{
+    std::string name;
+    Sprite preview;
+    int maxBalls;
+    float time;
+
+    LevelInfo() : maxBalls(0), time(0)
+    { }
+};
+
 /// Manages the different levels and is
 /// also resposible for loading them.
 class Level :
@@ -53,12 +65,8 @@ class Level :
 {
 public:
     /// Construct a level from the given level number
-#ifdef LEVELTESTING
-    Level(const std::string& file, const unsigned int level, std::unique_ptr<ResourceManager> resourceManager, AppConfig& config);
+    Level(const std::string& file, const unsigned int level, std::unique_ptr<ResourceManager> resourceManager, AppConfig& config, bool loadInfoOnly = false);
     std::string getFileName();
-#else
-    Level(const unsigned int level, std::unique_ptr<ResourceManager> resourceManager, AppConfig& config);
-#endif
     ~Level();
 
     void update(const double elapsedTime);
@@ -105,6 +113,11 @@ public:
 
     double getLevelPlayTime() const;
 
+    LevelInfo getInfo() const
+    {
+        return m_info;
+    }
+
 private:
 #ifdef LEVELTESTING
     std::string m_filename;
@@ -132,14 +145,15 @@ private:
     void handleAutoRespawn();
 
     /// Load the level after m_number
-    void load();
+    LevelInfo load(bool loadInfoOnly = false);
 
     std::unique_ptr<Entity> parseEntity(
         const tinyxml2::XMLElement* xml,
         const std::string& templateName,
         Templates& templates);
 
-    void parseGameplayAttributes(const tinyxml2::XMLElement* xml);
+    void parsePreview(const tinyxml2::XMLElement& levelinfo, LevelInfo& infoToFill);
+    void parseGameplayAttributes(const tinyxml2::XMLElement& gameplay, LevelInfo& infoToFill);
 
     /// Construct the full level filename from the level number
     std::string filename();
@@ -258,6 +272,7 @@ private:
     bool m_playing;
 
     GameEventRecorder m_eventRecorder;
+    LevelInfo m_info;
 };
 
 #endif // LEVEL_HPP
