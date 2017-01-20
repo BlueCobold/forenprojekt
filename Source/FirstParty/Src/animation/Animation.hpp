@@ -67,7 +67,7 @@ public:
 
     void setPosition(const float x, const float y);
     void setRotation(const float radians);
-    void setScale(const float x, const float y);
+    void setScale(const sf::Vector2f& scale);
     void setBlending(const Blending::Mode mode);
     void bindTexture(const sf::Texture& texture, const sf::Vector2f& sourceOffset, bool prepareOnUsage = false);
     void bindFrameProvider(std::unique_ptr<ValueProvider> frames);
@@ -157,6 +157,7 @@ private:
     std::vector<std::function<void(const Animation& src, Animation& clone)>> m_beforeCloneCallbacks;
     std::vector<std::function<void(const Animation& src, Animation& clone)>> m_afterCloneCallbacks;
     bool m_scaleToScreenSize;
+    sf::Vector2f m_scale;
 };
 
 #endif // ANIMATION_HPP

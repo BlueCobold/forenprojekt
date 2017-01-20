@@ -17,6 +17,7 @@ private:
     Animation* m_updatingAni;
     CloneHandler& m_cloneHandler;
     GraphicalObject graphics;
+    sf::Vector2f m_scale;
 
     std::unique_ptr<MenuElement> doClone() const override;
     void doDraw(const DrawParameter& param) override;
@@ -33,6 +34,11 @@ public:
     AnimationContainer(AnimationContainer&& toMove);
 
     void bindAnimation(std::unique_ptr<Animation> animation);
+
+    void setScale(const sf::Vector2f& scale)
+    {
+        m_scale = scale;
+    }
 };
 
 #endif

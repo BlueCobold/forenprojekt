@@ -6,7 +6,8 @@ AnimationContainer::AnimationContainer(ScreenLocation position,
                                        int id, CloneHandler& cloneHandler) :
     MenuElement(id, MenuElementType::Animation, position),
     m_updatingAni(nullptr),
-    m_cloneHandler(cloneHandler)
+    m_cloneHandler(cloneHandler),
+    m_scale(sf::Vector2f(1.f, 1.f))
 {
 }
 
@@ -73,6 +74,7 @@ void AnimationContainer::updated(const sf::RenderWindow& screen, const double ti
     
     graphics.updateAnimations([&](Animation& ani)->bool{
         m_updatingAni = &ani;
+        ani.setScale(m_scale);
         ani.setPosition(currentPosition.x, currentPosition.y);
         return true;
     });

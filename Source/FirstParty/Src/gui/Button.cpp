@@ -89,7 +89,10 @@ void Button::updated(const sf::RenderWindow& screen, const double time, const sf
 
     m_currentStyle->label.update(screen, time, mouseOffset);
     if(m_currentStyle->animation != nullptr)
+    {
+        m_currentStyle->animation->setScale(scale);
         m_currentStyle->animation->update(screen, time, mouseOffset);
+    }
 }
 
 void Button::setStyle(ButtonStateStyle& style, double time, const sf::Vector2f& screenSize)

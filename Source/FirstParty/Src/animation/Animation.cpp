@@ -35,7 +35,8 @@ Animation::Animation(const unsigned int frames,
     m_isViewAligned(false),
     m_shader(nullptr),
     m_cloneHandler(nullptr),
-    m_scaleToScreenSize(false)
+    m_scaleToScreenSize(false),
+    m_scale(sf::Vector2f(1.f, 1.f))
 {
     m_sprite.setOrigin(origin);
 }
@@ -67,7 +68,7 @@ void Animation::update()
 
     updatePosition();
 
-    double scaleX = 1, scaleY = 1;
+    double scaleX = m_scale.x, scaleY = m_scale.y;
     if(m_xScaleProvider != nullptr)
         scaleX = m_xScaleProvider->getValue();
     if(m_yScaleProvider != nullptr)
@@ -138,9 +139,9 @@ void Animation::updatePosition()
 {
     m_dynamicPosition = sf::Vector2f(0, 0);
     if(m_xPositionProvider != nullptr)
-        m_dynamicPosition.x += static_cast<float>(m_xPositionProvider->getValue());
+        m_dynamicPosition.x += static_cast<float>(m_xPositionProvider->getValue()) * m_scale.x;
     if(m_yPositionProvider != nullptr)
-        m_dynamicPosition.y += static_cast<float>(m_yPositionProvider->getValue());
+        m_dynamicPosition.y += static_cast<float>(m_yPositionProvider->getValue()) * m_scale.y;
 
     auto offset = sf::Vector2f();
     if(m_offsets.size() != 0)
@@ -317,6 +318,7 @@ std::unique_ptr<Animation> Animation::doClone() const
     ani->m_origins = m_origins;
     ani->m_shader = m_shader;
     ani->m_scaleToScreenSize = m_scaleToScreenSize;
+    ani->m_scale = m_scale;
     ani->copyValuesFrom(*this);
     ani->m_beforeCloneCallbacks = m_beforeCloneCallbacks;
     ani->m_afterCloneCallbacks = m_afterCloneCallbacks;
@@ -418,12 +420,12 @@ sf::Vector2f Animation::getSize() const
 
 const sf::Vector2f& Animation::getScale() const
 {
-    return m_sprite.getScale();
+    return m_scale;
 }
 
-void Animation::setScale(const float x, const float y)
+void Animation::setScale(const sf::Vector2f& scale)
 {
-    m_sprite.setScale(x, y);
+    m_scale = scale;
 }
 
 void Animation::registerCloneCallbacks(
