@@ -28,7 +28,7 @@
 	<achievement key="ach_collect_stars_atonce_3" condition="Collect" object="Stars" specifically="AtOnce = 3" gold="50" silver="25" bronze="10" />
 	<achievement key="ach_collect_stars_atonce_2" condition="Collect" object="Stars" specifically="AtOnce = 2" gold="100" silver="50" bronze="25" />
 	<achievement key="ach_collect_stars_atonce_1" condition="Collect" object="Stars" specifically="AtOnce = 1" gold="250" silver="100" bronze="50" />
-	<achievement key="ach_loose_ball_insum" condition="Loose" object="Ball" specifically="InSum" gold="100" silver="50" bronze="25" />
+	<achievement key="ach_lose_ball_insum" condition="Lose" object="Ball" specifically="InSum" gold="100" silver="50" bronze="25" />
 	<achievement key="ach_finish_level_insum" condition="Finish" object="Level" specifically="InSum" gold="24" silver="12" bronze="6" />
 	<achievement key="ach_finish_levelnam_insum" condition="Finish" object="LevelNAM" specifically="InSum" gold="12" silver="6" bronze="3" />
 	<achievement key="ach_finish_leveltam_insum" condition="Finish" object="LevelTAM" specifically="InSum" gold="12" silver="6" bronze="3" />
@@ -38,8 +38,8 @@
 	<achievement key="ach_finish_levelnam_maxoftime_30000" condition="Finish" object="LevelNAM" specifically="MaxOfTime = 30000" gold="12" silver="6" bronze="3" />
 	<achievement key="ach_finish_levelnam_maxoftime_20000" condition="Finish" object="LevelNAM" specifically="MaxOfTime = 20000" gold="9" silver="5" bronze="2" />
 	<achievement key="ach_finish_levelnam_maxoftime_10000" condition="Finish" object="LevelNAM" specifically="MaxOfTime = 10000" gold="6" silver="4" bronze="1" />
-	<achievement key="ach_loose_levelnam_insum" condition="Loose" object="LevelNAM" specifically="InSum" gold="12" silver="6" bronze="3" />
-	<achievement key="ach_loose_leveltam_insum" condition="Loose" object="LevelTAM" specifically="InSum" gold="12" silver="6" bronze="3" />
+	<achievement key="ach_lose_levelnam_insum" condition="Lose" object="LevelNAM" specifically="InSum" gold="12" silver="6" bronze="3" />
+	<achievement key="ach_lose_leveltam_insum" condition="Lose" object="LevelTAM" specifically="InSum" gold="12" silver="6" bronze="3" />
 	<achievement key="ach_use_gravitygoody_insum" condition="Use" object="GravityGoody" specifically="InSum" gold="100" silver="50" bronze="25" />
 	<achievement key="ach_use_invulnerablegoody_insum" condition="Use" object="InvulnerableGoody" specifically="InSum" gold="100" silver="50" bronze="25" />
 	<achievement key="ach_use_extraballgoody_insum" condition="Use" object="ExtraBallGoody" specifically="InSum" gold="100" silver="50" bronze="25" />

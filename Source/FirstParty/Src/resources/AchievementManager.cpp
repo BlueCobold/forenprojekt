@@ -169,8 +169,8 @@ Achievement::Condition AchievementManager::stringToCondition(const std::string& 
         return Achievement::Buy;
     else if(condition == "Sell")
         return Achievement::Sell;
-    else if(condition == "Loose")
-        return Achievement::Loose;
+    else if(condition == "Lose")
+        return Achievement::Lose;
     else if(condition == "Finish")
         return Achievement::Finish;
     else if(condition == "Use")
@@ -279,7 +279,12 @@ void AchievementManager::addValueTo(Achievement::Condition condition,
     for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
     {
         if(it->first == id)
+		{
+			Achievement::AchievementLevel level = it->second.getAchievementLevel();
             it->second.addToCounter(value);
+			if(level != it->second.getAchievementLevel())
+				m_latestAchievementLevelUp.push_back(id);
+		}
     } 
 }
 
@@ -293,8 +298,10 @@ void AchievementManager::addValueTo(Achievement::Condition condition,
 
     for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
     {
-        if(it->first == id)
-            it->second.addToCounter(value);
+        Achievement::AchievementLevel level = it->second.getAchievementLevel();
+        it->second.addToCounter(value);
+		if(level != it->second.getAchievementLevel())
+			m_latestAchievementLevelUp.push_back(id);
     }
 }
 
@@ -307,8 +314,10 @@ void AchievementManager::setValueTo(Achievement::Condition condition,
 
     for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
     {
-        if(it->first == id)
-            it->second.setCounter(value);
+        Achievement::AchievementLevel level = it->second.getAchievementLevel();
+        it->second.addToCounter(value);
+		if(level != it->second.getAchievementLevel())
+			m_latestAchievementLevelUp.push_back(id);
     }
 }
 
@@ -318,6 +327,17 @@ Achievement* AchievementManager::getAchievement(unsigned int number)
         return nullptr;
 
     return &m_achievements[number].second;
+}
+
+Achievement* AchievementManager::getAchievement(const std::string& id)
+{
+	for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
+    {
+        if(it->first == id)
+			return &(it->second);
+    }
+
+	return nullptr;
 }
 
 void AchievementManager::saveValues()
@@ -330,4 +350,22 @@ void AchievementManager::loadValues()
 {
     for(auto it = std::begin(m_achievements); it != std::end(m_achievements); ++it)
         it->second.setCounter(m_config.get<unsigned int>(it->second.getKey()));
+}
+
+bool AchievementManager::newAchievementLevelUp() const
+{
+	return m_latestAchievementLevelUp.size() > 0 ;
+}
+
+std::string AchievementManager::popLatestAchievementLevelUp()
+{
+	std::string result = "";
+
+	if(!m_latestAchievementLevelUp.empty())
+	{
+		result = m_latestAchievementLevelUp.back();
+		m_latestAchievementLevelUp.pop_back();
+	}
+
+	return result;
 }

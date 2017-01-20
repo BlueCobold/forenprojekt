@@ -724,6 +724,9 @@
     <ClInclude Include="..\..\Src\gui\CustomContent.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\rendering\AchievementLevelUpRenderer.hpp">
+      <Filter>Headers\rendering</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">
@@ -1292,6 +1295,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Src\gui\Border.cpp">
       <Filter>Sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Src\rendering\AchievementLevelUpRenderer.cpp">
+      <Filter>Sources\rendering</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

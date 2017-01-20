@@ -48,7 +48,11 @@ public:
                     unsigned int value);
 
     Achievement* getAchievement(unsigned int number);
+	Achievement* getAchievement(const std::string& id);
     void saveValues();
+
+	bool newAchievementLevelUp() const;
+	std::string popLatestAchievementLevelUp();
 
 private:
     void addAchievement(const std::string& name,
@@ -70,6 +74,7 @@ private:
 
     std::string m_achievementFile;
     std::vector<std::pair<std::string, Achievement>> m_achievements;
+	std::vector<std::string> m_latestAchievementLevelUp;
 
     AppConfig& m_config;
 };

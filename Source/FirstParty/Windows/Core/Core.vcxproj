@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -20,12 +20,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -242,6 +244,7 @@
     <ClInclude Include="..\..\Src\model\SoundObject.hpp" />
     <ClInclude Include="..\..\Src\model\SoundTrigger.hpp" />
     <ClInclude Include="..\..\Src\model\Teeter.hpp" />
+    <ClInclude Include="..\..\Src\rendering\AchievementLevelUpRenderer.hpp" />
     <ClInclude Include="..\..\Src\rendering\Blending.hpp" />
     <ClInclude Include="..\..\Src\rendering\DebugDraw.hpp" />
     <ClInclude Include="..\..\Src\rendering\Drawable.hpp" />
@@ -421,6 +424,7 @@
     <ClCompile Include="..\..\Src\model\SoundObject.cpp" />
     <ClCompile Include="..\..\Src\model\SoundTrigger.cpp" />
     <ClCompile Include="..\..\Src\model\Teeter.cpp" />
+    <ClCompile Include="..\..\Src\rendering\AchievementLevelUpRenderer.cpp" />
     <ClCompile Include="..\..\Src\rendering\DebugDraw.cpp" />
     <ClCompile Include="..\..\Src\rendering\GLExt.cpp" />
     <ClCompile Include="..\..\Src\rendering\GraphicalObject.cpp" />

@@ -102,3 +102,15 @@ const std::string Achievement::getKey() const
 {
     return m_key;
 }
+
+const Achievement::AchievementLevel Achievement::getAchievementLevel() const
+{
+	if(isGold())
+		return Gold;
+	else if(isSilver())
+		return Silver;
+	else if(isBronze())
+		return Bronze;
+
+	return None;
+}

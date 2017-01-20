@@ -8,13 +8,22 @@
 class Achievement
 {
 public:
+
+	enum AchievementLevel
+	{
+		Gold,
+		Silver,
+		Bronze,
+		None
+	};
+
     enum Condition
     {
         Collect,
         Hit,
         Buy,
         Sell,
-        Loose,
+        Lose,
         Finish,
         Use
     };
@@ -60,6 +69,7 @@ public:
     void addToCounter(const unsigned int counter);
     const unsigned int getCounter() const;
     const unsigned int getSpecificallyAmount() const;
+	const AchievementLevel getAchievementLevel() const;
     const Condition getCondition() const;
     const Specifically getSpecifically() const;
     const Object getObject() const;
