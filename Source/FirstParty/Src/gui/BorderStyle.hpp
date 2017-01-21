@@ -35,9 +35,14 @@ struct BorderStyle
         Bottom = 3
     };
     
+    BorderStyle() :
+        color(sf::Color(255, 255, 255, 255))
+    { }
+
     std::unordered_map<BackgroundId, Sprite, std::hash<int>> backgrounds;
     std::array<std::vector<std::pair<Sprite, sf::Vector2f>>, 4> decos;
     sf::FloatRect innerOffsets;
+    sf::Color color;
 };
 
 #endif // BORDER_STYLE_HPP

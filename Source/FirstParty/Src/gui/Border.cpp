@@ -95,12 +95,16 @@ void Border::doDraw(const DrawParameter& params)
 
     for(auto it = begin(m_style.decos); it != end(m_style.decos); ++it)
         for(auto deco = begin(*it); deco != end(*it); ++deco)
+        {
+            deco->first.setColor(m_style.color);
             deco->first.draw(params);
 
     if(m_hasDecos)
         gl::DepthFunc(gl::LESS);
 
     for(auto it = begin(m_style.backgrounds); it != end(m_style.backgrounds); ++it)
+    {
+        it->second.setColor(m_style.color);
         it->second.draw(params);
 
     if(m_hasDecos)

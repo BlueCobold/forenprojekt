@@ -597,6 +597,9 @@ void MenuLoader::parseStyle(const tinyxml2::XMLElement& borderXml, BorderStyle& 
         innerOffsetsXml->QueryFloatAttribute("width", &style.innerOffsets.width);
         innerOffsetsXml->QueryFloatAttribute("height", &style.innerOffsets.height);
     }
+    
+    if(auto color = borderXml.Attribute("color"))
+        style.color = utility::hexToColor(color);
 }
 
 ButtonStateStyle MenuLoader::loadButtonStateStyle(const tinyxml2::XMLElement& xml, ResourceManager& resourceManager)
