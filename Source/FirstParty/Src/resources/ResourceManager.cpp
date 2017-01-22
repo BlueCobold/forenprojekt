@@ -172,7 +172,10 @@ const MenuTemplate* ResourceManager::getMenuTemplate(const std::string& key)
     return getOrFail<MenuTemplate, std::string>(m_menuKeys, *m_menusPtr, key,
         [=](const std::string& path)->std::function<std::unique_ptr<MenuTemplate>()>
         {
-            return [=](){ return MenuLoader::loadMenuTemplate(std::string("res/menus/") + path, *self); };
+            return [=]() -> std::unique_ptr<MenuTemplate> {
+                MenuLoader loader(*self);
+                return loader.loadMenuTemplate(std::string("res/menus/") + path);
+            };
         }, "@UnknownMenuTemplate");
 }
 
