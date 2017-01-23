@@ -157,6 +157,7 @@
     <ClInclude Include="..\..\Src\gui\CoinShopMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\CreditMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\Cursor.hpp" />
+    <ClInclude Include="..\..\Src\gui\CustomContent.hpp" />
     <ClInclude Include="..\..\Src\gui\ErrorMessageBox.hpp" />
     <ClInclude Include="..\..\Src\gui\FailMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\FPSCounter.hpp" />

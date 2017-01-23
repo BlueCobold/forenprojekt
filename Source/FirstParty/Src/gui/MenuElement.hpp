@@ -24,7 +24,8 @@ namespace MenuElementType
         InputBox,
         Animation,
         InteractiveLabel,
-        Border
+        Border,
+        CustomContent
     };
 }
 

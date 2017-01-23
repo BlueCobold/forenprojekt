@@ -16,6 +16,7 @@ class ResourceManager;
 class MenuElement;
 class InputBox;
 class SubWindow;
+class CustomContent;
 
 namespace sf
 {
@@ -46,6 +47,7 @@ public:
     InputBox& getInputBox(int id) const;
     SubWindow& getSubWindow(int id) const;
     AnimationContainer& getAnimation(int id) const;
+    CustomContent& getCustomContent(int id) const;
 
     void setZoomFactor(float zoomFactor);
 

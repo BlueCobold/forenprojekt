@@ -3,6 +3,7 @@
 #include "AnimationContainer.hpp"
 #include "Button.hpp"
 #include "CheckBox.hpp"
+#include "CustomContent.hpp"
 #include "LineLabel.hpp"
 #include "MenuSprite.hpp"
 #include "InputBox.hpp"
@@ -120,6 +121,11 @@ MenuSprite& Menu::getSprite(int id) const
 AnimationContainer& Menu::getAnimation(int id) const
 {
     return *find<AnimationContainer>(id, MenuElementType::Animation);
+}
+
+CustomContent& Menu::getCustomContent(int id) const
+{
+    return *find<CustomContent>(id, MenuElementType::CustomContent);
 }
 
 Button& Menu::getButton(int id) const

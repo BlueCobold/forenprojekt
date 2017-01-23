@@ -4,13 +4,6 @@
 #include "MenuLoader.hpp"
 #include "ResourceManager.hpp"
 #include "SpriteSheet.hpp"
-#include "../rendering/Sprite.hpp"
-#include "../gui/AnimationContainer.hpp"
-#include "../gui/Button.hpp"
-#include "../gui/CheckBox.hpp"
-#include "../gui/LineLabel.hpp"
-#include "../gui/Slider.hpp"
-#include "../gui/SubWindow.hpp"
 #include "../MacHelper.hpp"
 
 #include <array>
@@ -146,6 +139,7 @@ std::unique_ptr<MenuTemplate> MenuLoader::loadMenuTemplate(const std::string& pa
     addAll(parseButtons(*menuXml), menu->menuElements);
     addAll(parseBorders(*menuXml), menu->menuElements);
     addAll(parseCheckBoxes(*menuXml), menu->menuElements);
+    addAll(parseCustomContents(*menuXml), menu->menuElements);
     addAll(parseSliders(*menuXml), menu->menuElements);
     addAll(parseLabels(*menuXml), menu->menuElements);
     addAll(parseInteractiveLabels(*menuXml), menu->menuElements);
@@ -260,6 +254,24 @@ std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
             border->setScale(scale, keepAspectRatio);
 
             elements.push_back(std::move(border));
+        }
+    }
+    return std::move(elements);
+}
+
+std::vector<std::unique_ptr<CustomContent>> MenuLoader::parseCustomContents(
+    const tinyxml2::XMLElement& menuXml)
+{
+    std::vector<std::unique_ptr<CustomContent>> elements;
+    if(auto styles = menuXml.FirstChildElement("elements"))
+    {
+        for(auto xml = styles->FirstChildElement("customContent");
+            xml != nullptr; xml = xml->NextSiblingElement("customContent"))
+        {
+            auto id = xml->IntAttribute("id");
+            
+            std::unique_ptr<CustomContent> customContent(new CustomContent(id));
+            elements.push_back(std::move(customContent));
         }
     }
     return std::move(elements);
@@ -465,6 +477,7 @@ std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
             addAll(parseButtons(*subXml), subElements);
             addAll(parseBorders(*subXml), subElements);
             addAll(parseCheckBoxes(*subXml), subElements);
+            addAll(parseCustomContents(*subXml), subElements);
             addAll(parseSliders(*subXml), subElements);
             addAll(parseLabels(*subXml), subElements);
             addAll(parseImages(*subXml), subElements);

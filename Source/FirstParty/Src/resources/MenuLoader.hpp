@@ -7,6 +7,7 @@
 #include "../gui/Button.hpp"
 #include "../gui/Border.hpp"
 #include "../gui/CheckBox.hpp"
+#include "../gui/CustomContent.hpp"
 #include "../gui/InputBox.hpp"
 #include "../gui/InteractiveLabel.hpp"
 #include "../gui/LineLabel.hpp"
@@ -49,6 +50,9 @@ private:
         const tinyxml2::XMLElement& menuXml);
 
     std::vector<std::unique_ptr<Border>> parseBorders(
+        const tinyxml2::XMLElement& menuXml);
+
+    std::vector<std::unique_ptr<CustomContent>> parseCustomContents(
         const tinyxml2::XMLElement& menuXml);
 
     std::vector<std::unique_ptr<CheckBox>> parseCheckBoxes(
