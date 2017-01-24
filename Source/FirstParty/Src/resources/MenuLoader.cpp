@@ -113,6 +113,26 @@ void addAll(std::vector<std::unique_ptr<T>> source, std::vector<std::unique_ptr<
         target.push_back(std::move(*it));
 }
 
+template<typename T>
+std::vector<std::unique_ptr<T>> parseElements(
+    const char* name,
+    const tinyxml2::XMLElement& menuXml,
+    std::function<std::unique_ptr<T>(const tinyxml2::XMLElement& xml)> parser)
+{
+    std::vector<std::unique_ptr<T>> elements;
+    if(auto element = menuXml.FirstChildElement("elements"))
+    {
+        for(auto subXml = element->FirstChildElement(name);
+            subXml != nullptr; subXml = subXml->NextSiblingElement(name))
+        {
+            auto result = parser(*subXml);
+            if(result)
+                elements.push_back(std::move(result));
+        }
+    }
+    return elements;
+}
+
 std::unique_ptr<MenuTemplate> MenuLoader::loadMenuTemplate(const std::string& path)
 {
     tinyxml2::XMLDocument doc;
@@ -154,338 +174,339 @@ std::unique_ptr<MenuTemplate> MenuLoader::loadMenuTemplate(const std::string& pa
 std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
     const tinyxml2::XMLElement& menuXml)
 {
-    std::vector<std::unique_ptr<Button>> elements;
-    if(auto styles = menuXml.FirstChildElement("elements"))
+    return parseElements<Button>("button", menuXml,
+        [&](const tinyxml2::XMLElement& buttonXml) -> std::unique_ptr<Button>
     {
-        for(auto buttonXml = styles->FirstChildElement("button");
-            buttonXml != nullptr; buttonXml = buttonXml->NextSiblingElement("button"))
-        {
-            auto styleIt = m_buttonStyles.find(buttonXml->Attribute("style"));
-            if(styleIt == end(m_buttonStyles))
-                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownButtonStyle"), buttonXml->Attribute("style")));
-            auto style = styleIt->second;
-            auto position = parsePosition(*buttonXml);
-            auto id = buttonXml->IntAttribute("id");
-            auto triggers = false;
-            if(buttonXml->Attribute("triggering"))
-                triggers = buttonXml->BoolAttribute("triggering");
-            else
-                triggers = true;
+        auto styleIt = m_buttonStyles.find(buttonXml.Attribute("style"));
+        if(styleIt == std::end(m_buttonStyles))
+            throw std::runtime_error(utility::replace(utility::translateKey("@UnknownButtonStyle"), buttonXml.Attribute("style")));
+        auto style = styleIt->second;
+        auto position = parsePosition(buttonXml);
+        auto id = buttonXml.IntAttribute("id");
+        auto triggers = false;
+        if(buttonXml.Attribute("triggering"))
+            triggers = buttonXml.BoolAttribute("triggering");
+        else
+            triggers = true;
 
-            auto text = buttonXml->Attribute("text");
-            std::string textResourceKey;
-            if(text != nullptr && std::string(text) != "")
-                textResourceKey = text;
+        auto text = buttonXml.Attribute("text");
+        std::string textResourceKey;
+        if(text != nullptr && std::string(text) != "")
+            textResourceKey = text;
 
-            style.idleStyle.label = LineLabel(
-                textResourceKey, 
-                ScreenLocation(position).addOffset(style.idleStyle.textOffset),
-                0, style.idleStyle.font, LineLabel::Centered);
+        style.idleStyle.label = LineLabel(
+            textResourceKey, 
+            ScreenLocation(position).addOffset(style.idleStyle.textOffset),
+            0, style.idleStyle.font, LineLabel::Centered);
 
-            style.hoverStyle.label = LineLabel(
-                textResourceKey, 
-                ScreenLocation(position).addOffset(style.hoverStyle.textOffset),
-                0, style.hoverStyle.font, LineLabel::Centered);
+        style.hoverStyle.label = LineLabel(
+            textResourceKey, 
+            ScreenLocation(position).addOffset(style.hoverStyle.textOffset),
+            0, style.hoverStyle.font, LineLabel::Centered);
 
-            style.pressedStyle.label = LineLabel(
-                textResourceKey, 
-                ScreenLocation(position).addOffset(style.pressedStyle.textOffset),
-                0, style.pressedStyle.font, LineLabel::Centered);
+        style.pressedStyle.label = LineLabel(
+            textResourceKey, 
+            ScreenLocation(position).addOffset(style.pressedStyle.textOffset),
+            0, style.pressedStyle.font, LineLabel::Centered);
 
-            auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, triggers));
+        auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, triggers));
             
-            if(auto visibleWhenId = buttonXml->IntAttribute("visibleWhen"))
-                button->setVisibleWhenId(visibleWhenId);
+        if(auto visibleWhenId = buttonXml.IntAttribute("visibleWhen"))
+            button->setVisibleWhenId(visibleWhenId);
 
-            auto tooltipAvailable = buttonXml->Attribute("tooltip");
-            if(tooltipAvailable != nullptr)
-            {
-                auto tooltip = m_toolTips.find(tooltipAvailable);
-                if(tooltip == end(m_toolTips))
-                    throw std::runtime_error(utility::replace(utility::translateKey("@UnknownButtonToolTip"), buttonXml->Attribute("tooltip")));
-                button->setToolTip(tooltip->second);
-                button->setToolTipText(buttonXml->Attribute("tooltiptext"));
-            }
-
-            elements.push_back(std::move(button));
+        auto tooltipAvailable = buttonXml.Attribute("tooltip");
+        if(tooltipAvailable != nullptr)
+        {
+            auto tooltip = m_toolTips.find(tooltipAvailable);
+            if(tooltip == std::end(m_toolTips))
+                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownButtonToolTip"), buttonXml.Attribute("tooltip")));
+            button->setToolTip(tooltip->second);
+            button->setToolTipText(buttonXml.Attribute("tooltiptext"));
         }
-    }
-    return std::move(elements);
+
+        return button;
+    });
 }
 
 std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
     const tinyxml2::XMLElement& menuXml)
 {
-    std::vector<std::unique_ptr<Border>> elements;
-    if(auto styles = menuXml.FirstChildElement("elements"))
+    return parseElements<Border>("border", menuXml,
+        [&](const tinyxml2::XMLElement& borderXml) -> std::unique_ptr<Border>
     {
-        for(auto borderXml = styles->FirstChildElement("border");
-            borderXml != nullptr; borderXml = borderXml->NextSiblingElement("border"))
+        auto id = borderXml.IntAttribute("id");
+
+        BorderStyle style;
+        if(auto styleName = borderXml.Attribute("style"))
         {
-            auto id = borderXml->IntAttribute("id");
-            
-            BorderStyle style;
-            if(auto styleName = borderXml->Attribute("style"))
-            {
-                auto listedStyle = m_borderStyles.find(styleName);
-                if(listedStyle != end(m_borderStyles))
-                    style = listedStyle->second;
-            }
-            parseStyle(*borderXml, style);
-            
-            sf::Vector2f relativeSize;
-            borderXml->QueryFloatAttribute("widthPercent", &relativeSize.x);
-            borderXml->QueryFloatAttribute("heightPercent", &relativeSize.y);
-            sf::Vector2f sizeOffset;
-            borderXml->QueryFloatAttribute("width", &sizeOffset.x);
-            borderXml->QueryFloatAttribute("height", &sizeOffset.y);
-            ScreenSize size(sizeOffset, relativeSize);
-
-            std::unique_ptr<Border> border(new Border(id,
-                                                      parsePosition(*borderXml),
-                                                      size,
-                                                      style));
-
-            sf::Vector2f scale(1, 1);
-            borderXml->QueryFloatAttribute("scalex", &scale.x);
-            borderXml->QueryFloatAttribute("scaley", &scale.y);
-            bool keepAspectRatio = false;
-            borderXml->QueryBoolAttribute("keepAspectRatio", &keepAspectRatio);
-            border->setScale(scale, keepAspectRatio);
-
-            elements.push_back(std::move(border));
+            auto listedStyle = m_borderStyles.find(styleName);
+            if(listedStyle != std::end(m_borderStyles))
+                style = listedStyle->second;
         }
-    }
-    return std::move(elements);
+        parseStyle(borderXml, style);
+
+        sf::Vector2f relativeSize;
+        borderXml->QueryFloatAttribute("widthPercent", &relativeSize.x);
+        borderXml->QueryFloatAttribute("heightPercent", &relativeSize.y);
+        sf::Vector2f sizeOffset;
+        borderXml->QueryFloatAttribute("width", &sizeOffset.x);
+        borderXml->QueryFloatAttribute("height", &sizeOffset.y);
+        ScreenSize size(sizeOffset, relativeSize);
+
+        std::unique_ptr<Border> border(new Border(id,
+                                                  parsePosition(borderXml),
+                                                  size,
+                                                  style));
+
+        sf::Vector2f scale(1, 1);
+        borderXml.QueryFloatAttribute("scalex", &scale.x);
+        borderXml.QueryFloatAttribute("scaley", &scale.y);
+        bool keepAspectRatio = false;
+        borderXml.QueryBoolAttribute("keepAspectRatio", &keepAspectRatio);
+        border->setScale(scale, keepAspectRatio);
+
+        return border;
+    });
 }
 
 std::vector<std::unique_ptr<CustomContent>> MenuLoader::parseCustomContents(
     const tinyxml2::XMLElement& menuXml)
 {
-    std::vector<std::unique_ptr<CustomContent>> elements;
-    if(auto styles = menuXml.FirstChildElement("elements"))
+    return parseElements<CustomContent>("customContent", menuXml,
+        [&](const tinyxml2::XMLElement& xml) -> std::unique_ptr<CustomContent>
     {
-        for(auto xml = styles->FirstChildElement("customContent");
-            xml != nullptr; xml = xml->NextSiblingElement("customContent"))
-        {
-            auto id = xml->IntAttribute("id");
-            
-            std::unique_ptr<CustomContent> customContent(new CustomContent(id));
-            elements.push_back(std::move(customContent));
-        }
-    }
-    return std::move(elements);
+        auto id = xml.IntAttribute("id");
+        return std::unique_ptr<CustomContent>(new CustomContent(id));
+    });
 }
 
 std::vector<std::unique_ptr<CheckBox>> MenuLoader::parseCheckBoxes(
     const tinyxml2::XMLElement& menuXml)
 {
-    std::vector<std::unique_ptr<CheckBox>> elements;
-    if(auto styles = menuXml.FirstChildElement("elements"))
+    return parseElements<CheckBox>("checkbox", menuXml,
+        [&](const tinyxml2::XMLElement& checkboxXml) -> std::unique_ptr<CheckBox>
     {
-        for(auto checkboxXml = styles->FirstChildElement("checkbox");
-            checkboxXml != nullptr; checkboxXml = checkboxXml->NextSiblingElement("checkbox"))
-        {
-            auto styleIt = m_checkBoxStyles.find(checkboxXml->Attribute("style"));
-            if(styleIt == end(m_checkBoxStyles))
-                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownCheckBoxStyle"), checkboxXml->Attribute("style")));
-            auto style = styleIt->second;
+        auto styleIt = m_checkBoxStyles.find(checkboxXml.Attribute("style"));
+        if(styleIt == std::end(m_checkBoxStyles))
+            throw std::runtime_error(utility::replace(utility::translateKey("@UnknownCheckBoxStyle"), checkboxXml.Attribute("style")));
+        auto style = styleIt->second;
             
-            auto id = checkboxXml->IntAttribute("id");
+        auto id = checkboxXml.IntAttribute("id");
 
-            auto checkBox = std::unique_ptr<CheckBox>(new CheckBox(id, style, parsePosition(*checkboxXml)));
-            if(auto toolTipName = checkboxXml->Attribute("tooltip"))
-            {
-                auto tooltip = m_toolTips.find(toolTipName);
-                if(tooltip == end(m_toolTips))
-                    throw std::runtime_error(utility::replace(utility::translateKey("@UnknownToolTip"), checkboxXml->Attribute("tooltip")));
-                checkBox->setToolTip(tooltip->second);
-                checkBox->setToolTipText(checkboxXml->Attribute("tooltiptext"));
-            }
-            if(auto visibleWhenId = checkboxXml->IntAttribute("visibleWhen"))
-                checkBox->setVisibleWhenId(visibleWhenId);
-
-            elements.push_back(std::move(checkBox));
+        auto checkBox = std::unique_ptr<CheckBox>(new CheckBox(id, style, parsePosition(checkboxXml)));
+        if(auto toolTipName = checkboxXml.Attribute("tooltip"))
+        {
+            auto tooltip = m_toolTips.find(toolTipName);
+            if(tooltip == std::end(m_toolTips))
+                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownToolTip"), checkboxXml.Attribute("tooltip")));
+            checkBox->setToolTip(tooltip->second);
+            checkBox->setToolTipText(checkboxXml.Attribute("tooltiptext"));
         }
-    }
-    return std::move(elements);
+        if(auto visibleWhenId = checkboxXml.IntAttribute("visibleWhen"))
+            checkBox->setVisibleWhenId(visibleWhenId);
+
+        return checkBox;
+    });
 }
 
 std::vector<std::unique_ptr<Slider>> MenuLoader::parseSliders(
     const tinyxml2::XMLElement& menuXml)
 {
-    std::vector<std::unique_ptr<Slider>> elements;
-    if(auto styles = menuXml.FirstChildElement("elements"))
+    return parseElements<Slider>("slider", menuXml,
+        [&](const tinyxml2::XMLElement& sliderXml) -> std::unique_ptr<Slider>
     {
-        for(auto sliderXml = styles->FirstChildElement("slider");
-            sliderXml != nullptr; sliderXml = sliderXml->NextSiblingElement("slider"))
-        {
-            auto styleIt = m_sliderStyles.find(sliderXml->Attribute("style"));
-            if(styleIt == end(m_sliderStyles))
-                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownSliderStyle"), sliderXml->Attribute("style")));
-            auto style = styleIt->second;
-            auto id = sliderXml->IntAttribute("id");
+        auto styleIt = m_sliderStyles.find(sliderXml.Attribute("style"));
+        if(styleIt == std::end(m_sliderStyles))
+            throw std::runtime_error(utility::replace(utility::translateKey("@UnknownSliderStyle"), sliderXml.Attribute("style")));
+        auto style = styleIt->second;
+        auto id = sliderXml.IntAttribute("id");
+
+        auto slider = std::unique_ptr<Slider>(new Slider(id, style, parsePosition(sliderXml)));
+        if(auto visibleWhenId = sliderXml.IntAttribute("visibleWhen"))
+            slider->setVisibleWhenId(visibleWhenId);
             
-            auto slider = std::unique_ptr<Slider>(new Slider(id, style, parsePosition(*sliderXml)));
-            if(auto visibleWhenId = sliderXml->IntAttribute("visibleWhen"))
-                slider->setVisibleWhenId(visibleWhenId);
-            
-            elements.push_back(std::move(slider));
-        }
-    }
-    return std::move(elements);
+        return slider;
+    });
 }
 
 std::vector<std::unique_ptr<LineLabel>> MenuLoader::parseLabels(
     const tinyxml2::XMLElement& menuXml)
 {
-    std::vector<std::unique_ptr<LineLabel>> elements;
-    if(auto styles = menuXml.FirstChildElement("elements"))
+    return parseElements<LineLabel>("label", menuXml,
+        [&](const tinyxml2::XMLElement& labelXml) -> std::unique_ptr<LineLabel>
     {
-        for(auto labelXml = styles->FirstChildElement("label");
-            labelXml != nullptr; labelXml = labelXml->NextSiblingElement("label"))
-        {
-            auto label = std::unique_ptr<LineLabel>(new LineLabel(/*utility::translateKey(labelXml->Attribute("text")),*/
-                            std::string(labelXml->Attribute("text")),
-                            parsePosition(*labelXml),
-                            0,
-                            m_resourceManager.getBitmapFont(labelXml->Attribute("font")),
-                            static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
-                            labelXml->IntAttribute("id")));
-            
-            if(auto visibleWhenId = labelXml->IntAttribute("visibleWhen"))
-                label->setVisibleWhenId(visibleWhenId);
-            
-            elements.push_back(std::move(label));
-        }
-    }
-    return std::move(elements);
+        auto label = std::unique_ptr<LineLabel>(new LineLabel(
+                        std::string(labelXml.Attribute("text")),
+                        parsePosition(labelXml),
+                        0,
+                        m_resourceManager.getBitmapFont(labelXml.Attribute("font")),
+                        static_cast<LineLabel::Alignment>(labelXml.IntAttribute("alignment")),
+                        labelXml.IntAttribute("id")));
+
+        if(auto visibleWhenId = labelXml.IntAttribute("visibleWhen"))
+            label->setVisibleWhenId(visibleWhenId);
+
+        return label;
+    });
 }
 
 std::vector<std::unique_ptr<InteractiveLabel>> MenuLoader::parseInteractiveLabels(
     const tinyxml2::XMLElement& menuXml)
 {
-    std::vector<std::unique_ptr<InteractiveLabel>> elements;
-    if(auto styles = menuXml.FirstChildElement("elements"))
+    return parseElements<InteractiveLabel>("ilabel", menuXml,
+        [&](const tinyxml2::XMLElement& labelXml) -> std::unique_ptr<InteractiveLabel>
     {
-        for(auto labelXml = styles->FirstChildElement("ilabel");
-            labelXml != nullptr; labelXml = labelXml->NextSiblingElement("ilabel"))
+        auto label = std::unique_ptr<InteractiveLabel>(new InteractiveLabel(
+                        labelXml.Attribute("text"),
+                        parsePosition(labelXml),
+                        0,
+                        m_resourceManager.getBitmapFont(labelXml.Attribute("font")),
+                        static_cast<LineLabel::Alignment>(labelXml.IntAttribute("alignment")),
+                        labelXml.IntAttribute("id")));
+
+        if(auto visibleWhenId = labelXml.IntAttribute("visibleWhen"))
+            label->setVisibleWhenId(visibleWhenId);
+
+        if(auto tooltipAvailable = labelXml.Attribute("tooltip"))
         {
-            auto label = std::unique_ptr<InteractiveLabel>(new InteractiveLabel(
-                            labelXml->Attribute("text"),
-                            parsePosition(*labelXml),
-                            0,
-                            m_resourceManager.getBitmapFont(labelXml->Attribute("font")),
-                            static_cast<LineLabel::Alignment>(labelXml->IntAttribute("alignment")),
-                            labelXml->IntAttribute("id")));
+            auto tooltip = m_toolTips.find(tooltipAvailable);
+            if(tooltip == std::end(m_toolTips))
+                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownButtonToolTip"), labelXml.Attribute("tooltip")));
 
-            if(auto visibleWhenId = labelXml->IntAttribute("visibleWhen"))
-                label->setVisibleWhenId(visibleWhenId);
-
-            if(auto tooltipAvailable = labelXml->Attribute("tooltip"))
-            {
-                auto tooltip = m_toolTips.find(tooltipAvailable);
-                if(tooltip == end(m_toolTips))
-                    throw std::runtime_error(utility::replace(utility::translateKey("@UnknownButtonToolTip"), labelXml->Attribute("tooltip")));
-
-                label->setToolTip(tooltip->second);
-                label->setToolTipText(labelXml->Attribute("tooltiptext"));
-            }
-
-            elements.push_back(std::move(label));
+            label->setToolTip(tooltip->second);
+            label->setToolTipText(labelXml.Attribute("tooltiptext"));
         }
-    }
-    return std::move(elements);
+
+        return label;
+    });
 }
 
 std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
     const tinyxml2::XMLElement& menuXml)
 {
-    std::vector<std::unique_ptr<MenuSprite>> elements;
-    if(auto styles = menuXml.FirstChildElement("elements"))
+    return parseElements<MenuSprite>("image", menuXml,
+        [&](const tinyxml2::XMLElement& imageXml) -> std::unique_ptr<MenuSprite>
     {
-        for(auto imageXml = styles->FirstChildElement("image");
-            imageXml != nullptr; imageXml = imageXml->NextSiblingElement("image"))
-        {
-            auto id = imageXml->IntAttribute("id");
-            Sprite baseSprite = getSprite(*imageXml, m_resourceManager);
-            sf::Vector2f relativeSize(imageXml->FloatAttribute("widthPercent"), imageXml->FloatAttribute("heightPercent"));
-            sf::Vector2i texRect(baseSprite.getTextureRect().width, baseSprite.getTextureRect().height);
-            ScreenSize size(sf::Vector2f(texRect), relativeSize);
+        auto id = imageXml.IntAttribute("id");
+        Sprite baseSprite = getSprite(imageXml, m_resourceManager);
+        sf::Vector2f relativeSize(imageXml.FloatAttribute("widthPercent"), imageXml.FloatAttribute("heightPercent"));
+        sf::Vector2i texRect(baseSprite.getTextureRect().width, baseSprite.getTextureRect().height);
+        ScreenSize size(sf::Vector2f(texRect), relativeSize);
 
-            auto sprite = std::unique_ptr<MenuSprite>(new MenuSprite(
-                                                          baseSprite,
-                                                          parsePosition(*imageXml),
-                                                          size,
-                                                          id));
+        auto sprite = std::unique_ptr<MenuSprite>(new MenuSprite(
+                                                        baseSprite,
+                                                        parsePosition(imageXml),
+                                                        size,
+                                                        id));
             
-            sf::Vector2f scale(1, 1);
-            imageXml->QueryFloatAttribute("scalex", &scale.x);
-            imageXml->QueryFloatAttribute("scaley", &scale.y);
-            bool keepAspectRatio = false;
-            imageXml->QueryBoolAttribute("keepAspectRatio", &keepAspectRatio);
-            sprite->setScale(scale, keepAspectRatio);
+        sf::Vector2f scale(1, 1);
+        imageXml.QueryFloatAttribute("scalex", &scale.x);
+        imageXml.QueryFloatAttribute("scaley", &scale.y);
+        bool keepAspectRatio = false;
+        imageXml.QueryBoolAttribute("keepAspectRatio", &keepAspectRatio);
+        sprite->setScale(scale, keepAspectRatio);
 
-            auto toolTipText = imageXml->Attribute("tooltiptext");
-            if(auto toolTipName = toolTipText ? imageXml->Attribute("tooltip") : nullptr)
-            {
-                auto tooltipIt = m_toolTips.find(toolTipName);
-                if(tooltipIt == end(m_toolTips))
-                    throw std::runtime_error(utility::replace(utility::translateKey("@UnknownToolTip"), imageXml->Attribute("tooltip")));
-                auto tooltip = tooltipIt->second;
-                tooltip.setText(toolTipText);
-                sprite->setToolTip(tooltip);
-            }
-
-            if(auto visibleWhenId = imageXml->IntAttribute("visibleWhen"))
-                sprite->setVisibleWhenId(visibleWhenId);
-
-            elements.push_back(std::move(sprite));
+        auto toolTipText = imageXml.Attribute("tooltiptext");
+        if(auto toolTipName = toolTipText ? imageXml.Attribute("tooltip") : nullptr)
+        {
+            auto tooltipIt = m_toolTips.find(toolTipName);
+            if(tooltipIt == std::end(m_toolTips))
+                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownToolTip"), imageXml.Attribute("tooltip")));
+            auto tooltip = tooltipIt->second;
+            tooltip.setText(toolTipText);
+            sprite->setToolTip(tooltip);
         }
-    }
-    return std::move(elements);
+
+        if(auto visibleWhenId = imageXml.IntAttribute("visibleWhen"))
+            sprite->setVisibleWhenId(visibleWhenId);
+
+        return sprite;
+    });
+}
+
+std::vector<std::unique_ptr<InputBox>> MenuLoader::parseInputBox(
+    const tinyxml2::XMLElement& menuXml)
+{
+    return parseElements<InputBox>("inputbox", menuXml,
+        [&](const tinyxml2::XMLElement& inputBoxXml) -> std::unique_ptr<InputBox>
+    {
+        auto styleIt = m_inputBoxStyles.find(inputBoxXml.Attribute("style"));
+        if(styleIt == std::end(m_inputBoxStyles))
+            throw std::runtime_error(utility::replace(utility::translateKey("@UnknownInputBoxStyle"), inputBoxXml.Attribute("style")));
+            
+        auto style = styleIt->second;
+        auto id = inputBoxXml.IntAttribute("id");
+        auto inputLimit = inputBoxXml.IntAttribute("inputlimit");
+        sf::Vector2f size(inputBoxXml.FloatAttribute("width"), inputBoxXml.FloatAttribute("height"));
+
+        auto inputBox = std::unique_ptr<InputBox>(new InputBox(id, parsePosition(inputBoxXml), size, inputLimit, style));
+
+        if(auto visibleWhenId = inputBoxXml.IntAttribute("visibleWhen"))
+            inputBox->setVisibleWhenId(visibleWhenId);
+
+        return inputBox;
+    });
+}
+
+std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationContainer(
+        const tinyxml2::XMLElement& menuXml)
+{
+    return parseElements<AnimationContainer>("animationContainer", menuXml,
+        [&](const tinyxml2::XMLElement& animationContainer) -> std::unique_ptr<AnimationContainer>
+    {
+        int id = animationContainer.IntAttribute("id");
+        std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(parsePosition(animationContainer), id, _cloneHandler));
+        if(auto animationsXml = animationContainer.FirstChildElement("animations"))
+        {
+            ProviderContext context(animContainer.get(), animContainer.get(), animContainer.get(), animContainer.get(), _cloneHandler);
+            AnimationParser loader(AnimationContext(context, m_resourceManager, 0));
+            auto animations = loader.parseMultiple(*animationsXml);
+            for(auto ani = std::begin(animations); ani != std::end(animations); ++ani)
+                animContainer->bindAnimation(std::move(*ani));
+        }
+
+        if(auto visibleWhenId = animationContainer.IntAttribute("visibleWhen"))
+            animContainer->setVisibleWhenId(visibleWhenId);
+
+        return animContainer;
+    });
 }
 
 std::vector<std::unique_ptr<SubWindow>> MenuLoader::parseSubWindow(
     const tinyxml2::XMLElement& menuXml)
 {
-    std::vector<std::unique_ptr<SubWindow>> elements;
-    if(auto element = menuXml.FirstChildElement("elements"))
+    return parseElements<SubWindow>("subwindow", menuXml,
+        [&](const tinyxml2::XMLElement& subXml) -> std::unique_ptr<SubWindow>
     {
-        for(auto subXml = element->FirstChildElement("subwindow");
-            subXml != nullptr; subXml = subXml->NextSiblingElement("subwindow"))
+        auto id = subXml.IntAttribute("id");
+        SubWindowStyle style;
+        if(auto styleXml = subXml.FirstChildElement("style"))
         {
-            auto id = subXml->IntAttribute("id");
-            SubWindowStyle style;
-            if(auto styleXml = subXml->FirstChildElement("style"))
-            {
-                if(auto sprite = styleXml->FirstChildElement("scrollTop"))
-                    style.scrollbarTop = getSprite(*sprite, m_resourceManager);
+            if(auto sprite = styleXml->FirstChildElement("scrollTop"))
+                style.scrollbarTop = getSprite(*sprite, m_resourceManager);
 
-                if(auto sprite = styleXml->FirstChildElement("scrollMiddle"))
-                    style.scrollbarMiddle = getSprite(*sprite, m_resourceManager);
+            if(auto sprite = styleXml->FirstChildElement("scrollMiddle"))
+                style.scrollbarMiddle = getSprite(*sprite, m_resourceManager);
 
-                if(auto sprite = styleXml->FirstChildElement("scrollBottom"))
-                    style.scrollbarBottom = getSprite(*sprite, m_resourceManager);
-            }
-            auto relativeSize = sf::Vector2f();
-            subXml->QueryFloatAttribute("widthPercent", &relativeSize.x);
-            subXml->QueryFloatAttribute("heightPercent", &relativeSize.y);
-            auto size = sf::Vector2f(subXml->FloatAttribute("sizex"), subXml->FloatAttribute("sizey"));
-            auto innerHeight = subXml->IntAttribute("innerheight");
-            std::vector<std::unique_ptr<MenuElement>> subElements;
-            addAll(parseButtons(*subXml), subElements);
-            addAll(parseBorders(*subXml), subElements);
-            addAll(parseCheckBoxes(*subXml), subElements);
-            addAll(parseCustomContents(*subXml), subElements);
-            addAll(parseSliders(*subXml), subElements);
-            addAll(parseLabels(*subXml), subElements);
-            addAll(parseImages(*subXml), subElements);
-            addAll(parseAnimationContainer(*subXml), subElements);
-            elements.push_back(std::unique_ptr<SubWindow>(new SubWindow(id, parsePosition(*subXml), ScreenSize(size, relativeSize), innerHeight, subElements, style)));
+            if(auto sprite = styleXml->FirstChildElement("scrollBottom"))
+                style.scrollbarBottom = getSprite(*sprite, m_resourceManager);
         }
-    }
-    return std::move(elements);
+        auto relativeSize = sf::Vector2f();
+        subXml.QueryFloatAttribute("widthPercent", &relativeSize.x);
+        subXml.QueryFloatAttribute("heightPercent", &relativeSize.y);
+        auto size = sf::Vector2f(subXml.FloatAttribute("sizex"), subXml.FloatAttribute("sizey"));
+        auto innerHeight = subXml.IntAttribute("innerheight");
+        std::vector<std::unique_ptr<MenuElement>> subElements;
+        addAll(parseButtons(subXml), subElements);
+        addAll(parseBorders(subXml), subElements);
+        addAll(parseCheckBoxes(subXml), subElements);
+        addAll(parseCustomContents(subXml), subElements);
+        addAll(parseSliders(subXml), subElements);
+        addAll(parseLabels(subXml), subElements);
+        addAll(parseImages(subXml), subElements);
+        addAll(parseAnimationContainer(subXml), subElements);
+        return std::unique_ptr<SubWindow>(new SubWindow(id, parsePosition(subXml), ScreenSize(size, relativeSize), innerHeight, subElements, style));
+    });
 }
 
 void MenuLoader::parseButtonStyles(
@@ -837,62 +858,4 @@ void MenuLoader::parseInputBoxStyles(
     }
 
     m_inputBoxStyles = std::move(inputBoxStyle);
-}
-
-std::vector<std::unique_ptr<InputBox>> MenuLoader::parseInputBox(
-    const tinyxml2::XMLElement& menuXml)
-{
-    std::vector<std::unique_ptr<InputBox>> elements;
-    if(auto styles = menuXml.FirstChildElement("elements"))
-    {
-        for(auto inputBoxXml = styles->FirstChildElement("inputbox");
-            inputBoxXml != nullptr; inputBoxXml = inputBoxXml->NextSiblingElement("inputbox"))
-        {
-            auto styleIt = m_inputBoxStyles.find(inputBoxXml->Attribute("style"));
-            if(styleIt == end(m_inputBoxStyles))
-                throw std::runtime_error(utility::replace(utility::translateKey("@UnknownInputBoxStyle"), inputBoxXml->Attribute("style")));
-            
-            auto style = styleIt->second;
-            auto id = inputBoxXml->IntAttribute("id");
-            auto inputLimit = inputBoxXml->IntAttribute("inputlimit");
-            sf::Vector2f size(inputBoxXml->FloatAttribute("width"), inputBoxXml->FloatAttribute("height"));
-
-            auto inputBox = std::unique_ptr<InputBox>(new InputBox(id, parsePosition(*inputBoxXml), size, inputLimit, style));
-
-            if(auto visibleWhenId = inputBoxXml->IntAttribute("visibleWhen"))
-                inputBox->setVisibleWhenId(visibleWhenId);
-
-            elements.push_back(std::move(inputBox));
-        }
-    }
-    return std::move(elements);
-}
-
-std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationContainer(
-        const tinyxml2::XMLElement& menuXml)
-{
-    std::vector<std::unique_ptr<AnimationContainer>> elements;
-    if(auto element = menuXml.FirstChildElement("elements"))
-    {
-        for(auto animationContainer = element->FirstChildElement("animationContainer");
-            animationContainer != nullptr; animationContainer = animationContainer->NextSiblingElement("animationContainer"))
-        {
-            int id = animationContainer->IntAttribute("id");
-            std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(parsePosition(*animationContainer), id, _cloneHandler));
-            if(auto animationsXml = animationContainer->FirstChildElement("animations"))
-            {
-                ProviderContext context(animContainer.get(), animContainer.get(), animContainer.get(), animContainer.get(), _cloneHandler);
-                AnimationParser loader(AnimationContext(context, m_resourceManager, 0));
-                auto animations = loader.parseMultiple(*animationsXml);
-                for(auto ani = begin(animations); ani != end(animations); ++ani)
-                    animContainer->bindAnimation(std::move(*ani));
-            }
-
-            if(auto visibleWhenId = animationContainer->IntAttribute("visibleWhen"))
-                animContainer->setVisibleWhenId(visibleWhenId);
-
-            elements.push_back(std::move(animContainer));
-        }
-    }
-    return std::move(elements);
 }
