@@ -150,19 +150,18 @@ std::vector<std::unique_ptr<Animation>> JointParser::parseAnimations(const tinyx
     if(auto animXmls = jointXml.FirstChildElement("animations"))
     {
         auto loader = AnimationParser(m_context)
-                                     .withElementCallback([&](std::unique_ptr<Animation>& animation,
+                                     .withElementCallback([&](Animation& animation,
                                                               const tinyxml2::XMLElement& xml)
         {
-            prepareAnimation(animation, xml, results, joint);
+            prepareAnimation(animation, xml, joint);
         });
-        loader.parseMultiple(*animXmls);
+        results = loader.parseMultiple(*animXmls);
     }
     return results;
 }
 
-void JointParser::prepareAnimation(std::unique_ptr<Animation>& animation,
+void JointParser::prepareAnimation(Animation& animation,
                                    const tinyxml2::XMLElement& xml,
-                                   std::vector<std::unique_ptr<Animation>>& results,
                                    JointObject& joint) const
 {
     static std::unordered_map<const Animation*, const Animation*> clonedAnimations;
@@ -171,7 +170,7 @@ void JointParser::prepareAnimation(std::unique_ptr<Animation>& animation,
     joint.registerCopyCallbacks(
         [&](const JointObject& src, JointObject& clone) { clonedJoints.insert(std::make_pair(&src, &clone)); }, nullptr);
 
-    animation->registerCloneCallbacks(
+    animation.registerCloneCallbacks(
         [&](const Animation& src, Animation& clone) { clonedAnimations.insert(std::make_pair(&src, &clone)); },
         [&](const Animation& src, Animation& clone) { clonedAnimations.erase(clonedAnimations.find(&src)); });
                 
@@ -188,15 +187,15 @@ void JointParser::prepareAnimation(std::unique_ptr<Animation>& animation,
 
     if(index == ::Link || index == ::Intermediate)
     {
-        animation->bindScaleController(nullptr, std::unique_ptr<JointScaleProvider>(new JointScaleProvider(joint, *animation.get(),
+        animation.bindScaleController(nullptr, std::unique_ptr<JointScaleProvider>(new JointScaleProvider(joint, animation,
             [&](const JointObserver& old) -> const JointObject& { return *clonedJoints[&old.getObserved()]; },
             [&](const AnimationObserver& old) -> const Animation& { return *clonedAnimations[&old.getObserved()]; }, index)));
 
-        animation->bindRotationController(std::unique_ptr<JointRotationProvider>(new JointRotationProvider(joint, 
+        animation.bindRotationController(std::unique_ptr<JointRotationProvider>(new JointRotationProvider(joint, 
             [&](const JointObserver& old) -> const JointObject& { return *clonedJoints[&old.getObserved()]; }, index)));
     }
                 
-    animation->bindPositionController(
+    animation.bindPositionController(
         std::unique_ptr<JointPositionProvider>(new JointPositionProvider(joint, true, 
         [&](const JointObserver& old) -> const JointObject& { return *clonedJoints[&old.getObserved()]; }, index)),
         std::unique_ptr<JointPositionProvider>(new JointPositionProvider(joint, false, 
@@ -208,6 +207,4 @@ void JointParser::prepareAnimation(std::unique_ptr<Animation>& animation,
             clonedJoints.erase(clonedJoints.find(&old.getObserved()));
             return result;
         }, index)));
-
-    results.emplace_back(std::move(animation));
 }

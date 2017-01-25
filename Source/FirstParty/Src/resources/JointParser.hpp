@@ -46,9 +46,8 @@ private:
     JointData parseSinglePrismaticJoint(const tinyxml2::XMLElement& jointXml) const;
     JointData parseSingleDistanceJoint(const tinyxml2::XMLElement& jointXml) const;
     std::vector<std::unique_ptr<Animation>> parseAnimations(const tinyxml2::XMLElement& jointXml, JointObject& joint) const;
-    void prepareAnimation(std::unique_ptr<Animation>& animation,
+    void prepareAnimation(Animation& animation,
                           const tinyxml2::XMLElement& xml,
-                          std::vector<std::unique_ptr<Animation>>& results,
                           JointObject& joint) const;
 
     AnimationContext& m_context;

@@ -47,7 +47,7 @@ std::vector<std::unique_ptr<Animation>> AnimationParser::parseSingle(const tinyx
             ani->setValueOf("cloneId", static_cast<float>(copy));
         
             if(m_callback != nullptr)
-                m_callback(ani, xml);
+                m_callback(*ani, xml);
 
             if(ani != nullptr)
                 animations.push_back(std::move(ani));

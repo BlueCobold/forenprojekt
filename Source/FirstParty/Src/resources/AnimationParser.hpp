@@ -18,7 +18,7 @@ class ResourceManager;
 class AnimationParser
 {
 public:
-    typedef std::function<void(std::unique_ptr<Animation>&, const tinyxml2::XMLElement&)> Callback;
+    typedef std::function<void(Animation&, const tinyxml2::XMLElement&)> Callback;
 
 private:
     AnimationContext m_context;
