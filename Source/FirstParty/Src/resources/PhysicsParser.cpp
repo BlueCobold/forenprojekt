@@ -73,7 +73,8 @@ PhysicsParser::Physics PhysicsParser::parse(const tinyxml2::XMLElement& physic,
         cs->m_radius = utility::toMeter(shape.FloatAttribute("radius"));
         physics.shapes.push_back(std::move(cs));
     }
-    // TODO: else exception?
+    else
+        throw std::runtime_error(utility::translateKey("@NoValidShapeFound"));
 
     // Load fixtures
     if(auto fixtureXml = physic.FirstChildElement("fixture"))

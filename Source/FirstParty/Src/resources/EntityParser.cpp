@@ -186,8 +186,10 @@ void EntityParser::fillProperties(EntitySet& entities, const tinyxml2::XMLElemen
     
     auto physic = findPhysicsTag(xml);
     auto shape = findShapeTag(xml);
-    if(physic != nullptr && shape != nullptr)
+    if(physic != nullptr)
     {
+        if(shape == nullptr)
+            throw std::runtime_error(utility::translateKey("@NoValidShapeFound"));
         PhysicsParser parser(ProviderContext(entity, entity, entity, entity, cloneHandler));
         auto physics = parser.parse(*physic, *shape);
         physics.bodyDef.bullet = entity->getType() == Entity::Ball;
