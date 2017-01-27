@@ -1,7 +1,7 @@
 <menu>
 	<styles source="Styles.inc"/>
 	<elements>
-		<animationContainer id="-1" x="0.5" y="0.5" >
+		<animationContainer id="-2" x="0.5" y="0.5" >
 			<animations>
 				<animation spritesheet="gui_elements" sprite="BackgroundGradient" scaleToScreenSize="true" alignToScreen="true" blending="premul"/>
 			</animations>
