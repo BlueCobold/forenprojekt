@@ -721,6 +721,9 @@
     <ClInclude Include="..\..\Src\gui\BorderStyle.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\model\collision\filter\BallAngleFilter.hpp">
+      <Filter>Headers\model\collision\filter</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Src\gui\CustomContent.hpp">
       <Filter>Headers\gui</Filter>
     </ClInclude>

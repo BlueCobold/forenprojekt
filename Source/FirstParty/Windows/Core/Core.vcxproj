@@ -210,6 +210,7 @@
     <ClInclude Include="..\..\Src\model\collision\filter\ActionFilter.hpp" />
     <ClInclude Include="..\..\Src\model\collision\filter\Always.hpp" />
     <ClInclude Include="..\..\Src\model\collision\filter\ApplyForceFilter.hpp" />
+    <ClInclude Include="..\..\Src\model\collision\filter\BallAngleFilter.hpp" />
     <ClInclude Include="..\..\Src\model\collision\filter\ChangeBallSpawnFilter.hpp" />
     <ClInclude Include="..\..\Src\model\collision\filter\ChangeBallVelocityFilter.hpp" />
     <ClInclude Include="..\..\Src\model\collision\filter\ChangeGravityFilter.hpp" />
@@ -484,7 +485,6 @@
     <ClCompile Include="..\..\Src\state\LevelFailState.cpp" />
     <ClCompile Include="..\..\Src\state\LevelPassState.cpp" />
     <ClCompile Include="..\..\Src\state\LevelPreviewState.cpp" />
-    <ClCompile Include="..\..\Src\state\LevelSelectState.cpp" />
     <ClCompile Include="..\..\Src\state\LoadLevelState.cpp" />
     <ClCompile Include="..\..\Src\state\MainMenuState.cpp" />
     <ClCompile Include="..\..\Src\state\NewHighScoreState.cpp" />

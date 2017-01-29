@@ -6,6 +6,7 @@
 #include "../model/EntitySpawn.hpp"
 #include "../model/collision/filter/Always.hpp"
 #include "../model/collision/filter/ApplyForceFilter.hpp"
+#include "../model/collision/filter/BallAngleFilter.hpp"
 #include "../model/collision/filter/ChangeBallSpawnFilter.hpp"
 #include "../model/collision/filter/ChangeBallVelocityFilter.hpp"
 #include "../model/collision/filter/ChangeGravityFilter.hpp"
@@ -97,6 +98,15 @@ std::unique_ptr<CollisionFilter> FilterParser::getFilter(const tinyxml2::XMLElem
         ProviderParser parser(context);
         std::unique_ptr<ValueProvider> provider(parser.parseSingle(*xml.FirstChildElement()));
         filter->bindProvider(std::move(provider));
+        return std::move(filter);
+    }
+    else if(name == "angleFilter")
+    {
+        float mina = 0;
+        float maxa = 0;
+        xml.QueryFloatAttribute("min", &mina);
+        xml.QueryFloatAttribute("max", &maxa);
+        std::unique_ptr<BallAngleFilter> filter(new BallAngleFilter(mina, maxa));
         return std::move(filter);
     }
     else
