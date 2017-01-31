@@ -21,7 +21,7 @@ namespace sf
     class RenderWindow;
 };
 
-class Border : public MenuElement
+class Border : public MenuElement, public SizedElement
 {
 public:
     Border(int id,
@@ -33,12 +33,11 @@ public:
 
 private:
     BorderStyle m_style;
-    ScreenSize m_size;
     bool m_keepAspectRatio;
     sf::Vector2f m_scale;
     bool m_hasDecos;
 
-    void doDraw(const DrawParameter& params) override;
+    void onDrawElement(const DrawParameter& params) override;
     std::unique_ptr<MenuElement> doClone() const override;
     void updateDeco(BorderStyle::DecoId id, float x, float y);
     void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;

@@ -253,13 +253,11 @@ void Level::parsePreview(const tinyxml2::XMLElement& levelinfo, LevelInfo& infoT
         if(auto height = info->Attribute("height"))
             sprite.height = utility::stringTo<int>(height);
         auto tex = m_resourceManager->getTexture(sheet ? sheet->getTextureName() : "GuiElements");
-        infoToFill.preview = Sprite(
-            sf::Sprite(*tex,
-                       sf::IntRect(sprite.x,
-                                   sprite.y,
-                                   sprite.width,
-                                   sprite.height)),
-                       sprite.blendMode);
+        sf::Sprite baseSprite(*tex,
+                              sf::IntRect(sprite.x, sprite.y,
+                                          sprite.width, sprite.height));
+        baseSprite.setOrigin(sprite.originX, sprite.originY);
+        infoToFill.preview = Sprite(baseSprite, sprite.blendMode);
     }
 }
 

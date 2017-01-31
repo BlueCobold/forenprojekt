@@ -1,9 +1,5 @@
 #include "InteractiveLabel.hpp"
 
-/*InteractiveLabel::InteractiveLabel() :
-    LineLabel("", sf::Vector2f(0,0), sf::Vector2f(0,0), 0, MenuElementType::InteractiveLabel, nullptr)
-{}*/
-
 InteractiveLabel::InteractiveLabel(const std::string& text,
                                    const ScreenLocation& position,
                                    const float rotation,

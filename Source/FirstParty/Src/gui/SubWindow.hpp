@@ -68,7 +68,7 @@ private:
 
     void on(const DrawParameter& params);
     void off(const DrawParameter& params);
-    void doDraw(const DrawParameter& params) override;
+    void onDrawElement(const DrawParameter& params) override;
     void onDrawAdditionalForeground(const DrawParameter& params) override;
     void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     void layoutUpdated(const sf::Vector2f& screenSize) override;

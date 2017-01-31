@@ -7,9 +7,12 @@
 #include "../rendering/Drawable.hpp"
 #include "../Input.hpp"
 #include "ScreenLocation.hpp"
+#include "ScreenSize.hpp"
 
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/System/Vector2.hpp>
+
+#include <utility>
 
 namespace MenuElementType
 {
@@ -28,6 +31,38 @@ namespace MenuElementType
         CustomContent
     };
 }
+
+class SizedElement
+{
+public:
+    SizedElement(const ScreenSize& size) : m_size(size)
+    { }
+
+    const sf::Vector2f& getCurrentSize(const sf::Vector2f& screenSize)
+    {
+        m_size.setScreenSize(screenSize);
+        return m_size.getCurrentSize();
+    }
+
+    const sf::Vector2f& getCurrentSize() const
+    {
+        return m_size.getCurrentSize();
+    }
+
+protected:
+    void setScreenSize(const sf::Vector2f& screenSize)
+    {
+        m_size.setScreenSize(screenSize);
+    }
+
+    const ScreenSize& getSize() const
+    {
+        return m_size;
+    }
+
+private:
+    ScreenSize m_size;
+};
 
 /// The basic interface type of all menu elements to unify their common attributes
 class MenuElement : public Drawable, public Cloneable<MenuElement>
@@ -176,6 +211,13 @@ protected:
     }
 
 private:
+    void doDraw(const DrawParameter& params) override
+    {
+        if(isVisible())
+            onDrawElement(params);
+    }
+
+    virtual void onDrawElement(const DrawParameter& params) = 0;
 
     int m_id;
     MenuElementType::Type m_type;

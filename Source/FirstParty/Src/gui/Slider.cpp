@@ -70,11 +70,8 @@ void Slider::updated(const sf::RenderWindow& screen, const double time, const sf
     m_button->setPosition(m_buttonPosition + offset);
 }
 
-void Slider::doDraw(const DrawParameter& params)
+void Slider::onDrawElement(const DrawParameter& params)
 {
-    if(!isVisible())
-        return;
-
     m_background->draw(params);
     m_button->draw(params);
 }

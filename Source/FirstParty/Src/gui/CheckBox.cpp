@@ -56,11 +56,8 @@ void CheckBox::updated(const sf::RenderWindow& screen, const double time, const 
         m_sprite = &m_style.uncheckedStyle.sprite;
 }
 
-void CheckBox::doDraw(const DrawParameter& params)
+void CheckBox::onDrawElement(const DrawParameter& params)
 {
-    if(!isVisible())
-        return;
-
     m_sprite->draw(params);
 }
 

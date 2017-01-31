@@ -20,7 +20,7 @@ private:
     sf::Vector2f m_scale;
 
     std::unique_ptr<MenuElement> doClone() const override;
-    void doDraw(const DrawParameter& param) override;
+    void onDrawElement(const DrawParameter& param) override;
 
     double onGetValueOf(const std::string& name) const override;
     void onSetValueOf(const std::string& name, const double value) override;

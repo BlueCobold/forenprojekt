@@ -25,6 +25,11 @@ public:
         return m_currentSize;
     }
 
+    const sf::Vector2f& getFixedSize() const
+    {
+        return m_offset;
+    }
+
     float getFixedAspectRatio() const
     {
         return m_offset.x / m_offset.y;
@@ -39,7 +44,7 @@ private:
     void calculateSize()
     {
         m_currentSize = sf::Vector2f(m_screenSize.x * m_relativeSize.x, 
-                                    m_screenSize.y * m_relativeSize.y)
+                                     m_screenSize.y * m_relativeSize.y)
                       + m_offset;
     }
 };

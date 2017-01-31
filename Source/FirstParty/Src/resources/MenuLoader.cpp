@@ -104,6 +104,17 @@ ScreenLocation parsePosition(const tinyxml2::XMLElement& element)
     return ScreenLocation(relative, offset, sf::Vector2f(), inverse);
 }
 
+ScreenSize parseSize(const tinyxml2::XMLElement& element)
+{
+    sf::Vector2f relativeSize;
+    element.QueryFloatAttribute("widthPercent", &relativeSize.x);
+    element.QueryFloatAttribute("heightPercent", &relativeSize.y);
+    sf::Vector2f sizeOffset;
+    element.QueryFloatAttribute("width", &sizeOffset.x);
+    element.QueryFloatAttribute("height", &sizeOffset.y);
+    return ScreenSize(sizeOffset, relativeSize);
+}
+
 CloneHandler MenuLoader::_cloneHandler;
 
 template<typename T>
@@ -209,8 +220,8 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
             ScreenLocation(position).addOffset(style.pressedStyle.textOffset),
             0, style.pressedStyle.font, LineLabel::Centered);
 
-        auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, triggers));
-            
+        auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, parseSize(buttonXml), triggers));
+
         if(auto visibleWhenId = buttonXml.IntAttribute("visibleWhen"))
             button->setVisibleWhenId(visibleWhenId);
 
@@ -223,6 +234,13 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
             button->setToolTip(tooltip->second);
             button->setToolTipText(buttonXml.Attribute("tooltiptext"));
         }
+
+        sf::Vector2f scale(1, 1);
+        buttonXml.QueryFloatAttribute("scalex", &scale.x);
+        buttonXml.QueryFloatAttribute("scaley", &scale.y);
+        bool keepAspectRatio = false;
+        buttonXml.QueryBoolAttribute("keepAspectRatio", &keepAspectRatio);
+        button->setScale(scale, keepAspectRatio);
 
         return button;
     });
@@ -245,18 +263,13 @@ std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
         }
         parseStyle(borderXml, style);
 
-        sf::Vector2f relativeSize;
-        borderXml->QueryFloatAttribute("widthPercent", &relativeSize.x);
-        borderXml->QueryFloatAttribute("heightPercent", &relativeSize.y);
-        sf::Vector2f sizeOffset;
-        borderXml->QueryFloatAttribute("width", &sizeOffset.x);
-        borderXml->QueryFloatAttribute("height", &sizeOffset.y);
-        ScreenSize size(sizeOffset, relativeSize);
-
         std::unique_ptr<Border> border(new Border(id,
                                                   parsePosition(borderXml),
-                                                  size,
+                                                  parseSize(borderXml),
                                                   style));
+
+        if(auto visibleWhenId = borderXml.Attribute("visibleWhen"))
+            border->setVisibleWhenId(utility::stringTo<int>(visibleWhenId));
 
         sf::Vector2f scale(1, 1);
         borderXml.QueryFloatAttribute("scalex", &scale.x);

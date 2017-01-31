@@ -17,13 +17,14 @@
 #include <functional>
 
 /// this class represent a Button
-class Button : public MenuElement
+class Button : public MenuElement, public SizedElement
 {
     ButtonStyle m_style;
-    sf::Vector2i m_size;
     ToolTip m_toolTip;
     bool m_showToolTip;
     bool m_isTriggering;
+    bool m_keepAspectRatio;
+    sf::Vector2f m_scale;
 
     ButtonStateStyle* m_currentStyle;
 
@@ -33,7 +34,7 @@ class Button : public MenuElement
     std::function<void (const Button& sender)> m_callback;
 
     std::unique_ptr<MenuElement> doClone() const override;
-    void doDraw(const DrawParameter& params) override;
+    void onDrawElement(const DrawParameter& params) override;
     void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
     void onDrawAdditionalForeground(const DrawParameter& params) override;
     void layoutUpdated(const sf::Vector2f& screenSize) override;
@@ -43,19 +44,18 @@ public:
     Button(int id, 
            ButtonStyle style,
            const ScreenLocation& position,
+           const ScreenSize& size,
            bool triggers = true);
-
 
     void registerOnPressed(std::function<void (const Button& sender)> callback);
 
-    const sf::Vector2i& getSize() const;
-
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text, const std::string& replacement = "");
+    void setScale(const sf::Vector2f& scale, bool keepAspectRatio);
 
-    void changeIdleSprite(const sf::Sprite& sprite);
-    void changeHoverSprite(const sf::Sprite& sprite);
-    void changePressedSprite(const sf::Sprite& sprite);
+    void changeIdleSprite(const Sprite& sprite);
+    void changeHoverSprite(const Sprite& sprite);
+    void changePressedSprite(const Sprite& sprite);
 
 private:
     void setStyle(ButtonStateStyle& style, double time, const sf::Vector2f& screenSize);

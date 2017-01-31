@@ -52,7 +52,7 @@ void InputBox::updated(const sf::RenderWindow& screen, const double time, const 
     m_inputText.update(screen, time, mouseOffset);
 }
 
-void InputBox::doDraw(const DrawParameter& params)
+void InputBox::onDrawElement(const DrawParameter& params)
 {
     for(auto it = begin(m_background); it != end(m_background); ++it)
         it->second.draw(params);

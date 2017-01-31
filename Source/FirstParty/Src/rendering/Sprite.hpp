@@ -19,6 +19,16 @@ public:
         m_blendMode(blendMode)
     { }
 
+    Blending::Mode getBlendMode() const
+    {
+        return m_blendMode;
+    }
+
+    void setBlendMode(Blending::Mode mode)
+    {
+        m_blendMode = mode;
+    }
+
     const sf::Sprite& getSprite() const
     {
         return m_sprite;
@@ -59,6 +69,11 @@ public:
         m_sprite.setTextureRect(rectangle);
     }
 
+    const sf::Vector2f& getOrigin() const
+    {
+        return m_sprite.getOrigin();
+    }
+
     void setOrigin(float x, float y)
     {
         m_sprite.setOrigin(x, y);
@@ -82,6 +97,11 @@ public:
     void setTexture(const sf::Texture &texture, bool resetRect = false)
     {
         m_sprite.setTexture(texture, resetRect);
+    }
+
+    const sf::Texture* getTexture() const
+    {
+        return m_sprite.getTexture();
     }
 
 private:

@@ -10,8 +10,8 @@ Border::Border(int id,
                const ScreenSize& size,
                const BorderStyle& style) :
     MenuElement(id, MenuElementType::Border, position),
+    SizedElement(size),
     m_style(style),
-    m_size(size),
     m_keepAspectRatio(false),
     m_scale(sf::Vector2f(1, 1)),
     m_hasDecos(m_style.decos[BorderStyle::Top].size() > 0
@@ -29,13 +29,13 @@ void Border::setScale(const sf::Vector2f& scale, bool keepAspectRatio)
 void Border::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     auto screenSize = sf::Vector2f(screen.getSize());
-    m_size.setScreenSize(screenSize);
+    setScreenSize(screenSize);
     updateLayout(screenSize);
-    auto size = m_size.getCurrentSize();
+    auto size = getCurrentSize();
     size.x *= m_scale.x;
     size.y *= m_scale.y;
     if(m_keepAspectRatio)
-        size.y = size.x / m_size.getFixedAspectRatio();
+        size.y = size.x / getSize().getFixedAspectRatio();
 
     size = sf::Vector2f(floorf(size.x + m_style.innerOffsets.width),
                         floorf(size.y + m_style.innerOffsets.height));
@@ -84,7 +84,7 @@ void Border::updateDeco(BorderStyle::DecoId id, float x, float y)
         it->first.setPosition(x + it->second.x, y + it->second.y);
 }
 
-void Border::doDraw(const DrawParameter& params)
+void Border::onDrawElement(const DrawParameter& params)
 {
     if(m_hasDecos)
     {
@@ -93,19 +93,21 @@ void Border::doDraw(const DrawParameter& params)
         gl::DepthFunc(gl::ALWAYS);
     }
 
+    if(m_hasDecos)
+        gl::DepthFunc(gl::LESS);
+
     for(auto it = begin(m_style.decos); it != end(m_style.decos); ++it)
         for(auto deco = begin(*it); deco != end(*it); ++deco)
         {
             deco->first.setColor(m_style.color);
             deco->first.draw(params);
-
-    if(m_hasDecos)
-        gl::DepthFunc(gl::LESS);
+        }
 
     for(auto it = begin(m_style.backgrounds); it != end(m_style.backgrounds); ++it)
     {
         it->second.setColor(m_style.color);
         it->second.draw(params);
+    }
 
     if(m_hasDecos)
     {
@@ -116,7 +118,8 @@ void Border::doDraw(const DrawParameter& params)
 
 std::unique_ptr<MenuElement> Border::doClone() const
 {
-    std::unique_ptr<Border> clone(new Border(getId(), getPosition(), m_size, m_style));
+    std::unique_ptr<Border> clone(new Border(getId(), getPosition(), getSize(), m_style));
+    clone->setVisibleWhenId(getVisibleWhenId());
     clone->setScale(m_scale, m_keepAspectRatio);
     return std::move(clone);
 }

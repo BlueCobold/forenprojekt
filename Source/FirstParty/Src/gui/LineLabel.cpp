@@ -73,11 +73,8 @@ namespace
     sf::Mutex mutex;
 };
 
-void LineLabel::doDraw(const DrawParameter& params)
+void LineLabel::onDrawElement(const DrawParameter& params)
 {
-    if(!isVisible())
-        return;
-
     mutex.lock();
     auto glyphs(m_glyphs);
     mutex.unlock();
