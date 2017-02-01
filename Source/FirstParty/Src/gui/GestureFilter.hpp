@@ -76,7 +76,6 @@ private:
     float m_maxAngle;
 };
 
-#include <iostream>
 class Gesture
 {
 public:
@@ -104,25 +103,16 @@ public:
         if(m_currentPart == -1)
         {
             if(m_parts[0].isInRange(result.angle))
-            {
                 m_currentPart = 0;
-                std::cerr<<"0"<<m_currentPart<<std::endl;
-            }
             return;
         }
 
         if(!m_parts[m_currentPart].isInRange(result.angle))
         {
             if(m_currentPart + 1 < static_cast<int>(m_parts.size()) && m_parts[m_currentPart + 1].isInRange(result.angle))
-            {
                 m_currentPart++;
-                std::cerr<<"+"<<m_currentPart<<std::endl;
-            }
             else
-            {
                 m_currentPart = -1;
-                std::cerr<<"-"<<std::endl;
-            }
         }
     }
 
