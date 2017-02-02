@@ -208,10 +208,10 @@ sf::Vector2f ToolTip::calculateNeededOffset(const sf::Vector2f& position, const 
         verticalOffset = floorf(position.x - m_width / 2.f - width + m_offset.x) * -1.f;
 
     // check right screen border
-    if(floorf(position.x + m_width / 2.f + m_offset.x) > screen.getSize().x)
+    if(floorf(position.x + m_width / 2.f + width + m_offset.x) > screen.getSize().x)
     {
         if(verticalOffset == 0)
-            verticalOffset = screen.getSize().x - floorf(position.x - m_width / 2.f - width + m_offset.x);
+            verticalOffset = screen.getSize().x - floorf(position.x + m_width / 2.f + width + m_offset.x);
         else
             throw std::runtime_error(utility::translateKey("ToolTipTooLong"));
     }
