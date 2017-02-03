@@ -12,7 +12,7 @@
 class EntityFactory : public Entity
 {
 public:
-    typedef std::function<void(std::unique_ptr<Entity>&)> DeliveryCallback;
+    typedef std::function<void(std::unique_ptr<Entity>&)> DeliveryCallback; // & should not exist, VS2010 bug requires it
 
     EntityFactory(CloneHandler& cloneHandler,
                   bool respawnable, 
