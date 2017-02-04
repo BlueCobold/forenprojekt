@@ -541,7 +541,7 @@ void Level::adaptToMouse()
             dynamic_cast<Teeter*>((*it).get())->adaptToMouse();
 }
 
-unsigned int Level::number()
+unsigned int Level::number() const
 {
     return m_number;
 }
@@ -787,6 +787,8 @@ double Level::getLevelPlayTime() const
 
 bool Level::isOriginal()
 {
+    return true;
+
     bool result = false;
     if(m_number < 1)
         return false;

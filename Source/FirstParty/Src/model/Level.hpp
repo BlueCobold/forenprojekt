@@ -75,7 +75,7 @@ public:
     void adaptToMouse();
 
     /// Return the level number
-    unsigned int number();
+    unsigned int number() const;
 
     float getWidth() const;
     float getHeight() const;
