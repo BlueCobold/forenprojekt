@@ -175,7 +175,7 @@ App::App(AppConfig& config) :
     parts.push_back(GesturePart(-1.91986f, -1.22173f));
     parts.push_back(GesturePart(2.00713f, 2.70526f));
     m_gestures.addGesture(Gesture(5, parts), [&](){
-        m_config.set("UnlockedLevel", 12);
+        m_config.set("UnlockedLevel", m_resourceManager.getFileNames().size());
     });
     parts.clear();
     parts.push_back(GesturePart(1.22173f, 1.91986f));
