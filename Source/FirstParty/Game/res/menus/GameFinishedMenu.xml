@@ -2,7 +2,6 @@
 	<styles source="Styles.inc"/>
 	<elements>
 		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
-		<image id="5" x="0.5" y="0.5" offsetx="-129" offsety="-267" spriteSheet="gui_elements" sprite="Logo" />
 		<button id="0" text="gui_close" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
 		<label text="betafinished1" font="buttonHoverFont" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-150" />
 		<label text="betafinished2" font="buttonHoverFont" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-120" />

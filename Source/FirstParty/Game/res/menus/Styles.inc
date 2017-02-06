@@ -1,27 +1,18 @@
 <styles>
 	<buttonStyle name="achieveButtonStyle">
-		<mouseRect left="10" top="-50" width="100" height="100" />
+		<mouseRect left="-50" top="-50" width="100" height="100" />
 		<idle spriteSheet="gui_animations" sprite="Icon_Star"
 			offsetx="0" offsety="0"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" >
 			<animations resetOnExit="true">
-				<animation spritesheet="gui_animations" sprite="Icon_Star">
-					<layout>
-						<sprites>Icon_Star</sprites>
-					</layout>
-				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Star" />
 			</animations>
 		</idle>
 		<hover spriteSheet="gui_animations" sprite="Icon_Star_hover"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4">
 			<animations>
-				<animation spritesheet="gui_animations" sprite="Icon_Star_hover" copies="11" blending="premul">
-					<layout>
-						<sprites>
-							Icon_Star_hover_small
-						</sprites>
-					</layout>
+				<animation spritesheet="gui_animations" sprite="Icon_Star_hover_small" copies="11" blending="premul">
 					<position axis="y">
 						<mul>
 							<static value="-50"/>
@@ -85,23 +76,14 @@
 						</sub>
 					</color>
 				</animation>
-				<animation spritesheet="gui_animations" sprite="Icon_Star_hover" blending="premul">
-					<layout>
-						<sprites>Icon_Star_hover</sprites>
-					</layout>
-				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Star_hover" blending="premul" />
 			</animations>
 		</hover>
 		<pressed spriteSheet="gui_animations" sprite="Icon_Star_pressed"
-			offsetx="2" offsety="2" sound="bounce" 
+			offsetx="3" offsety="3" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5">
 			<animations>
-				<animation spritesheet="gui_animations" sprite="Icon_Star_hover" copies="11" blending="premul">
-					<layout>
-						<sprites>
-							Icon_Star_pressed_small
-						</sprites>
-					</layout>
+				<animation spritesheet="gui_animations" sprite="Icon_Star_pressed_small" copies="11" blending="premul">
 					<position axis="y">
 						<mul>
 							<static value="-50"/>
@@ -165,216 +147,373 @@
 						</sub>
 					</color>
 				</animation>
-				<animation spritesheet="gui_animations" sprite="Icon_Star_hover" blending="premul">
-					<layout>
-						<sprites>Icon_Star_pressed</sprites>
-					</layout>
-				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Star_pressed" blending="premul" />
 			</animations>
 		</pressed>
 	</buttonStyle>
 	<buttonStyle name="playButtonStyle">
-		<mouseRect left="-30" top="-55" width="100" height="90" />
-		<idle spriteSheet="gui_animations" sprite="Icon_Play_hover_ball00"
+		<mouseRect left="-50" top="-45" width="100" height="100" />
+		<idle spriteSheet="gui_animations" sprite="Icon_Play00"
 			offsetx="0" offsety="0"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" >
 			<animations resetOnExit="true">
-				<animation spritesheet="gui_animations" sprite="Icon_Play_hover_ball00" blending="premul">
-					<layout>
-						<sprites>Icon_Play00</sprites>
-					</layout>
+				<animation spritesheet="gui_animations" sprite="Icon_Play00" blending="premul" />
+				<animation spritesheet="gui_animations" sprite="Icon_Play_button" blending="premul">
+					<position axis="y">
+						<static value="25" />
+					</position>
+				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Play_button_icon" blending="premul">
+					<position axis="y">
+						<static value="25" />
+					</position>
 				</animation>
 			</animations>
 		</idle>
-		<hover spriteSheet="gui_animations" sprite="Icon_Play_hover_ball00"
+		<hover spriteSheet="gui_animations" sprite="Icon_Play_hover_ball_shadow"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4">
-			<animations>
-				<animation spritesheet="gui_animations" sprite="Icon_Play_hover_ball00" blending="premul">
-					<layout>
-						<sprites>
-							Icon_Play_hover_ball00,Icon_Play_hover_ball01,Icon_Play_hover_ball02,Icon_Play_hover_ball03,
-							Icon_Play_hover_ball04,Icon_Play_hover_ball05,Icon_Play_hover_ball06,Icon_Play_hover_ball07,
-							Icon_Play_hover_ball08,Icon_Play_hover_ball09,Icon_Play_hover_ball10,Icon_Play_hover_ball11,
-							Icon_Play_hover_ball12,Icon_Play_hover_ball13,Icon_Play_hover_ball14,Icon_Play_hover_ball15,
-							Icon_Play_hover_ball16,Icon_Play_hover_ball17,Icon_Play_hover_ball18,Icon_Play_hover_ball19,
-							Icon_Play_hover_ball20,
-							Icon_Play_hover_ball21,Icon_Play_hover_ball20,Icon_Play_hover_ball19,Icon_Play_hover_ball18,
-							Icon_Play_hover_ball17,Icon_Play_hover_ball16,Icon_Play_hover_ball15,Icon_Play_hover_ball14,
-							Icon_Play_hover_ball13,Icon_Play_hover_ball12,Icon_Play_hover_ball11,Icon_Play_hover_ball10,
-							Icon_Play_hover_ball09,Icon_Play_hover_ball08,Icon_Play_hover_ball07,Icon_Play_hover_ball06,
-							Icon_Play_hover_ball05,Icon_Play_hover_ball04,Icon_Play_hover_ball03,Icon_Play_hover_ball02,
-							Icon_Play_hover_ball01
-						</sprites>
-					</layout>
-					<frameindex frames="42">
-						<mul>
-							<time />
-							<static value="30"/>
-						</mul>
-					</frameindex>
+			<animations>				
+				<animation spritesheet="gui_animations" sprite="Icon_Play_hover_ball_shadow" blending="premul" rotate="true">
+					<position axis="y">
+						<add>
+							<static value="-13" />
+							<mul>
+								<static value="-30" />
+								<abs>
+									<sine>
+										<mul>
+											<static value="270" />
+											<mod>
+												<time />
+												<static value="1.333333" />
+											</mod>
+										</mul>
+									</sine>
+								</abs>
+							</mul>
+						</add>
+					</position>
+					<position axis="x">
+						<step threshold="0.666666">
+							<setVariable name="t">
+								<mod>
+									<time />
+									<static value="1.333333" />
+								</mod>
+							</setVariable>
+							<add>
+								<static value="-25" />
+								<mul>
+									<static value="75" />
+									<variable name="t" />
+								</mul>
+							</add>
+							<add>
+								<static value="75" />
+								<mul>
+									<static value="-75" />
+									<variable name="t" />
+								</mul>
+							</add>
+						</step>
+					</position>
 				</animation>
-				<animation spritesheet="gui_animations" sprite="Icon_Play_hover_teeter00" blending="premul">
-					<layout>
-						<sprites>
-							Icon_Play_hover_teeter00,Icon_Play_hover_teeter01,Icon_Play_hover_teeter02,Icon_Play_hover_teeter03,
-							Icon_Play_hover_teeter04,Icon_Play_hover_teeter05,Icon_Play_hover_teeter06,Icon_Play_hover_teeter07,
-							Icon_Play_hover_teeter08,Icon_Play_hover_teeter09,Icon_Play_hover_teeter10,Icon_Play_hover_teeter10,
-							Icon_Play_hover_teeter09,Icon_Play_hover_teeter08,Icon_Play_hover_teeter07,Icon_Play_hover_teeter06,
-							Icon_Play_hover_teeter05,Icon_Play_hover_teeter04,Icon_Play_hover_teeter03,Icon_Play_hover_teeter02,
-							Icon_Play_hover_teeter01,
-							Icon_Play_hover_teeter00,Icon_Play_hover_teeter22,Icon_Play_hover_teeter23,Icon_Play_hover_teeter24,
-							Icon_Play_hover_teeter25,Icon_Play_hover_teeter26,Icon_Play_hover_teeter27,Icon_Play_hover_teeter28,
-							Icon_Play_hover_teeter29,Icon_Play_hover_teeter30,Icon_Play_hover_teeter31,Icon_Play_hover_teeter31,
-							Icon_Play_hover_teeter30,Icon_Play_hover_teeter29,Icon_Play_hover_teeter28,Icon_Play_hover_teeter27,
-							Icon_Play_hover_teeter26,Icon_Play_hover_teeter25,Icon_Play_hover_teeter24,Icon_Play_hover_teeter23,
-							Icon_Play_hover_teeter22
-						</sprites>
-					</layout>
-					<frameindex frames="42">
+				<animation spritesheet="gui_animations" sprite="Icon_Play_hover_teeter_shadow" blending="premul" rotate="true">
+					<position axis="y">
+						<static value="17" />
+					</position>
+					<position axis="x">
+						<static value="-1" />
+					</position>
+					<rotation>
 						<mul>
-							<time />
-							<static value="30"/>
+							<static value="25" />
+							<sine>
+								<mul>
+									<static value="270" />
+									<mod>
+										<time />
+										<static value="1.333333" />
+									</mod>
+								</mul>
+							</sine>
 						</mul>
-					</frameindex>
+					</rotation>
+				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Play_hover_ball" blending="premul" rotate="true">
+					<position axis="y">
+						<add>
+							<static value="-13" />
+							<mul>
+								<static value="-30" />
+								<abs>
+									<sine>
+										<mul>
+											<static value="270" />
+											<mod>
+												<time />
+												<static value="1.333333" />
+											</mod>
+										</mul>
+									</sine>
+								</abs>
+							</mul>
+						</add>
+					</position>
+					<position axis="x">
+						<step threshold="0.666666">
+							<setVariable name="t">
+								<mod>
+									<time />
+									<static value="1.333333" />
+								</mod>
+							</setVariable>
+							<add>
+								<static value="-25" />
+								<mul>
+									<static value="75" />
+									<variable name="t" />
+								</mul>
+							</add>
+							<add>
+								<static value="75" />
+								<mul>
+									<static value="-75" />
+									<variable name="t" />
+								</mul>
+							</add>
+						</step>
+					</position>
+				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Play_hover_teeter" blending="premul" rotate="true">
+					<position axis="y">
+						<static value="17" />
+					</position>
+					<position axis="x">
+						<static value="-1" />
+					</position>
+					<rotation>
+						<mul>
+							<static value="25" />
+							<sine>
+								<mul>
+									<static value="270" />
+									<mod>
+										<time />
+										<static value="1.333333" />
+									</mod>
+								</mul>
+							</sine>
+						</mul>
+					</rotation>
+				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Play_button_hover" blending="premul">
+					<position axis="y">
+						<static value="25" />
+					</position>
+				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Play_button_icon" blending="premul" rotate="true">
+					<position axis="y">
+						<static value="25" />
+					</position>
+					<rotation>
+						<step threshold="0.5">
+							<mod>
+								<time />
+								<static value="1.5" />
+							</mod>
+							<mul>
+								<static value="10" />
+								<sine>
+									<mul>
+										<time />
+										<static value="1080" />
+									</mul>
+								</sine>
+							</mul>
+							<static value="0" />
+						</step>
+					</rotation>
 				</animation>
 			</animations>
 		</hover>
-		<pressed spriteSheet="gui_animations" sprite="Icon_Play_pressed00"
-			offsetx="2" offsety="2" sound="bounce" 
+		<pressed spriteSheet="gui_animations" sprite="Icon_Play_pressed_ball_glow"
+			offsetx="3" offsety="3" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5">
 			<animations>
-				<animation spritesheet="gui_animations" sprite="Icon_Play_pressed00" blending="premul">
-					<layout>
-						<sprites>
-							Icon_Play_pressed00,Icon_Play_pressed01,Icon_Play_pressed02,Icon_Play_pressed03,
-							Icon_Play_pressed04,Icon_Play_pressed05,Icon_Play_pressed06,Icon_Play_pressed07,
-							Icon_Play_pressed08,Icon_Play_pressed09,Icon_Play_pressed10,Icon_Play_pressed11,
-							Icon_Play_pressed12,Icon_Play_pressed13,Icon_Play_pressed14,Icon_Play_pressed15,
-							Icon_Play_pressed16,Icon_Play_pressed17,Icon_Play_pressed18,Icon_Play_pressed19,
-							Icon_Play_pressed20,Icon_Play_pressed21,Icon_Play_pressed22,Icon_Play_pressed23,
-							Icon_Play_pressed24,Icon_Play_pressed25,Icon_Play_pressed26,Icon_Play_pressed27,
-							Icon_Play_pressed28,Icon_Play_pressed29,Icon_Play_pressed30,Icon_Play_pressed31,
-							Icon_Play_pressed32,Icon_Play_pressed33,Icon_Play_pressed34,Icon_Play_pressed35,
-							Icon_Play_pressed36,Icon_Play_pressed37,Icon_Play_pressed38,Icon_Play_pressed39,
-							Icon_Play_pressed40,Icon_Play_pressed41
-						</sprites>
-					</layout>
-					<frameindex frames="42">
+				<animation spritesheet="gui_animations" sprite="Icon_Play_pressed_ball_glow" blending="premul" rotate="true">
+					<position axis="y">
+						<add>
+							<static value="-13" />
+							<mul>
+								<static value="-30" />
+								<abs>
+									<sine>
+										<mul>
+											<static value="270" />
+											<mod>
+												<time />
+												<static value="1.333333" />
+											</mod>
+										</mul>
+									</sine>
+								</abs>
+							</mul>
+						</add>
+					</position>
+					<position axis="x">
+						<step threshold="0.666666">
+							<setVariable name="t">
+								<mod>
+									<time />
+									<static value="1.333333" />
+								</mod>
+							</setVariable>
+							<add>
+								<static value="-25" />
+								<mul>
+									<static value="75" />
+									<variable name="t" />
+								</mul>
+							</add>
+							<add>
+								<static value="75" />
+								<mul>
+									<static value="-75" />
+									<variable name="t" />
+								</mul>
+							</add>
+						</step>
+					</position>
+				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Play_pressed_teeter_glow" blending="premul" rotate="true">
+					<position axis="y">
+						<static value="17" />
+					</position>
+					<position axis="x">
+						<static value="-1" />
+					</position>
+					<rotation>
 						<mul>
-							<time />
-							<static value="30"/>
+							<static value="25" />
+							<sine>
+								<mul>
+									<static value="270" />
+									<mod>
+										<time />
+										<static value="1.333333" />
+									</mod>
+								</mul>
+							</sine>
 						</mul>
-					</frameindex>
+					</rotation>
 				</animation>
-			</animations>
-		</pressed>
-	</buttonStyle>
-	<buttonStyle name="selectButtonStyle">
-		<mouseRect left="0" top="-40" width="100" height="75" />
-		<idle spriteSheet="gui_animations" sprite="Icon_Select00"
-			offsetx="0" offsety="0"
-			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" >
-			<animations resetOnExit="true">
-				<animation spritesheet="gui_animations" sprite="Icon_Select00" blending="premul">
-					<layout>
-						<sprites>Icon_Select00</sprites>
-					</layout>
-				</animation>
-			</animations>
-		</idle>
-		<hover spriteSheet="gui_animations" sprite="Icon_Select_Hover_base"
-			offsetx="0" offsety="0" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4">
-			<animations>
-				<animation spritesheet="gui_animations" sprite="Icon_Select_Hover_base" blending="premul"/>
-				<animation spritesheet="gui_animations" sprite="Icon_Select_Hover_base" x="-3" y="-5" blending="premul">
-					<layout>
-						<sprites>
-							Icon_Select_Hover00,Icon_Select_Hover01,Icon_Select_Hover02,Icon_Select_Hover03,
-							Icon_Select_Hover04,Icon_Select_Hover05,Icon_Select_Hover06,Icon_Select_Hover07,
-							Icon_Select_Hover08,Icon_Select_Hover09,Icon_Select_Hover10,Icon_Select_Hover11,
-							Icon_Select_Hover12,Icon_Select_Hover13,Icon_Select_Hover14,Icon_Select_Hover15,
-							Icon_Select_Hover16,Icon_Select_Hover17,Icon_Select_Hover18,Icon_Select_Hover19,
-							Icon_Select_Hover20,Icon_Select_Hover21,Icon_Select_Hover22,Icon_Select_Hover23,
-							Icon_Select_Hover24,Icon_Select_Hover25,Icon_Select_Hover26,
-							Icon_Select_Hover26,Icon_Select_Hover25,Icon_Select_Hover24,Icon_Select_Hover23,
-							Icon_Select_Hover22,Icon_Select_Hover21,Icon_Select_Hover20,Icon_Select_Hover19,
-							Icon_Select_Hover18,Icon_Select_Hover17,Icon_Select_Hover16,Icon_Select_Hover15,
-							Icon_Select_Hover14,Icon_Select_Hover13,Icon_Select_Hover12,Icon_Select_Hover11,
-							Icon_Select_Hover10,Icon_Select_Hover09,Icon_Select_Hover08,Icon_Select_Hover07,
-							Icon_Select_Hover06,Icon_Select_Hover05,Icon_Select_Hover04,Icon_Select_Hover03,
-							Icon_Select_Hover02,Icon_Select_Hover01,Icon_Select_Hover00
-						</sprites>
-					</layout>
-					<frameindex frames="54">
-						<delay start="53" duration="10">
-							<delay start="26" duration="10">
+				<animation spritesheet="gui_animations" sprite="Icon_Play_pressed_ball" blending="premul" rotate="true">
+					<position axis="y">
+						<add>
+							<static value="-13" />
+							<mul>
+								<static value="-30" />
+								<abs>
+									<sine>
+										<mul>
+											<static value="270" />
+											<mod>
+												<time />
+												<static value="1.333333" />
+											</mod>
+										</mul>
+									</sine>
+								</abs>
+							</mul>
+						</add>
+					</position>
+					<position axis="x">
+						<step threshold="0.666666">
+							<setVariable name="t">
 								<mod>
+									<time />
+									<static value="1.333333" />
+								</mod>
+							</setVariable>
+							<add>
+								<static value="-25" />
+								<mul>
+									<static value="75" />
+									<variable name="t" />
+								</mul>
+							</add>
+							<add>
+								<static value="75" />
+								<mul>
+									<static value="-75" />
+									<variable name="t" />
+								</mul>
+							</add>
+						</step>
+					</position>
+				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Play_pressed_teeter" blending="premul" rotate="true">
+					<position axis="y">
+						<static value="17" />
+					</position>
+					<position axis="x">
+						<static value="-1" />
+					</position>
+					<rotation>
+						<mul>
+							<static value="25" />
+							<sine>
+								<mul>
+									<static value="270" />
+									<mod>
+										<time />
+										<static value="1.333333" />
+									</mod>
+								</mul>
+							</sine>
+						</mul>
+					</rotation>
+				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Play_button_pressed" blending="premul">
+					<position axis="y">
+						<static value="25" />
+					</position>
+				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Play_button_icon" blending="premul">
+					<position axis="y">
+						<static value="25" />
+					</position>
+					<rotation>
+						<step threshold="0.5">
+							<mod>
+								<time />
+								<static value="1.5" />
+							</mod>
+							<mul>
+								<static value="10" />
+								<sine>
 									<mul>
 										<time />
-										<static value="30"/>
+										<static value="1080" />
 									</mul>
-									<static value="74" /><!-- 54+10+10 -->
-								</mod>
-							</delay>
-						</delay>
-					</frameindex>
-				</animation>
-			</animations>
-		</hover>
-		<pressed spriteSheet="gui_animations" sprite="Icon_Select_pressed_base"
-			offsetx="-1" offsety="-3" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5">
-			<animations>
-				<animation spritesheet="gui_animations" sprite="Icon_Select_pressed_base" blending="premul"/>
-				<animation spritesheet="gui_animations" sprite="Icon_Select_pressed_base" x="0" y="0" blending="premul">
-					<layout>
-						<sprites>
-							Icon_Select_pressed00,Icon_Select_pressed01,Icon_Select_pressed02,Icon_Select_pressed03,
-							Icon_Select_pressed04,Icon_Select_pressed05,Icon_Select_pressed06,Icon_Select_pressed07,
-							Icon_Select_pressed08,Icon_Select_pressed09,Icon_Select_pressed10,Icon_Select_pressed11,
-							Icon_Select_pressed12,Icon_Select_pressed13,Icon_Select_pressed14,Icon_Select_pressed15,
-							Icon_Select_pressed16,Icon_Select_pressed17,Icon_Select_pressed18,Icon_Select_pressed19,
-							Icon_Select_pressed20,Icon_Select_pressed21,Icon_Select_pressed22,Icon_Select_pressed23,
-							Icon_Select_pressed24,Icon_Select_pressed25,Icon_Select_pressed26,
-							Icon_Select_pressed26,Icon_Select_pressed25,Icon_Select_pressed24,Icon_Select_pressed23,
-							Icon_Select_pressed22,Icon_Select_pressed21,Icon_Select_pressed20,Icon_Select_pressed19,
-							Icon_Select_pressed18,Icon_Select_pressed17,Icon_Select_pressed16,Icon_Select_pressed15,
-							Icon_Select_pressed14,Icon_Select_pressed13,Icon_Select_pressed12,Icon_Select_pressed11,
-							Icon_Select_pressed10,Icon_Select_pressed09,Icon_Select_pressed08,Icon_Select_pressed07,
-							Icon_Select_pressed06,Icon_Select_pressed05,Icon_Select_pressed04,Icon_Select_pressed03,
-							Icon_Select_pressed02,Icon_Select_pressed01,Icon_Select_pressed00
-						</sprites>
-					</layout>
-					<frameindex frames="54">
-						<delay start="53" duration="10">
-							<delay start="26" duration="10">
-								<mod>
-									<mul>
-										<time />
-										<static value="30"/>
-									</mul>
-									<static value="74" /><!-- 54+10+10 -->
-								</mod>
-							</delay>
-						</delay>
-					</frameindex>
+								</sine>
+							</mul>
+							<static value="0" />
+						</step>
+					</rotation>
 				</animation>
 			</animations>
 		</pressed>
 	</buttonStyle>
 	<buttonStyle name="optionButtonStyle">
-		<mouseRect left="0" top="-50" width="100" height="100" />
+		<mouseRect left="-50" top="-50" width="100" height="100" />
 		<idle spriteSheet="gui_animations" sprite="Icon_Wheels00"
 			offsetx="0" offsety="0"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" >
 			<animations resetOnExit="true">
-				<animation spritesheet="gui_animations" sprite="Icon_Wheels00" blending="premul">
-					<layout>
-						<sprites>Icon_Wheels00</sprites>
-					</layout>
-				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Wheels00" blending="premul" />
 			</animations>
 		</idle>
 		<hover spriteSheet="gui_animations" sprite="Icon_Wheels_hover00"
@@ -399,7 +538,7 @@
 			</animations>
 		</hover>
 		<pressed spriteSheet="gui_animations" sprite="Icon_Wheels_pressed00"
-			offsetx="2" offsety="2" sound="bounce" 
+			offsetx="3" offsety="3" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5">
 			<animations>
 				<animation spritesheet="gui_animations" sprite="Icon_Wheels_pressed00" blending="premul">
@@ -421,83 +560,107 @@
 		</pressed>
 	</buttonStyle>
 	<buttonStyle name="exitButtonStyle">
-		<mouseRect left="10" top="-50" width="100" height="100" />
+		<mouseRect left="-50" top="-50" width="100" height="100" />
 		<idle spriteSheet="gui_animations" sprite="Icon_Door00"
 			offsetx="0" offsety="0"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" >
 			<animations resetOnExit="true">
-				<animation spritesheet="gui_animations" sprite="Icon_Door00" blending="premul">
-					<layout>
-						<sprites>Icon_Door00</sprites>
-					</layout>
-				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Door00" blending="premul" />
 			</animations>
 		</idle>
-		<hover spriteSheet="gui_animations" sprite="Icon_Door_hover00"
+		<hover spriteSheet="gui_animations" sprite="Icon_Door_hover_arrow_shadow"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4">
 			<animations>
-				<animation spritesheet="gui_animations" sprite="Icon_Door_hover00" blending="premul">
-					<layout>
-						<sprites>
-							Icon_Door_hover00,Icon_Door_hover01,Icon_Door_hover02,Icon_Door_hover03,
-							Icon_Door_hover04,Icon_Door_hover05,Icon_Door_hover06,Icon_Door_hover07,
-							Icon_Door_hover08,
-							Icon_Door_hover07,Icon_Door_hover06,Icon_Door_hover05,Icon_Door_hover04,
-							Icon_Door_hover03,Icon_Door_hover02,Icon_Door_hover01,Icon_Door_hover00
-						</sprites>
-					</layout>
-					<frameindex frames="17">
-						<mul>
-							<time />
-							<static value="30"/>
-						</mul>
-					</frameindex>
+				<animation spritesheet="gui_animations" sprite="Icon_Door_hover_arrow_shadow" blending="premul">
+					<position axis="x">
+						<abs>
+							<mul>
+								<static value="20" />
+								<sine>
+									<mul>
+										<time />
+										<static value="250" />
+									</mul>
+								</sine>
+							</mul>
+						</abs>
+					</position>
 				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Door_hover_shadow" blending="premul" />
+				<animation spritesheet="gui_animations" sprite="Icon_Door_hover" blending="premul" />
+				<animation spritesheet="gui_animations" sprite="Icon_Door_hover_arrow" blending="premul">
+					<position axis="x">
+						<abs>
+							<mul>
+								<static value="20" />
+								<sine>
+									<mul>
+										<time />
+										<static value="250" />
+									</mul>
+								</sine>
+							</mul>
+						</abs>
+					</position>
+				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Door_hover_part" blending="premul" />
 			</animations>
 		</hover>
-		<pressed spriteSheet="gui_animations" sprite="Icon_Door_pressed00"
-			offsetx="2" offsety="2" sound="bounce" 
+		<pressed spriteSheet="gui_animations" sprite="Icon_Door_pressed_arrow_glow"
+			offsetx="3" offsety="3" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5">
 			<animations>
-				<animation spritesheet="gui_animations" sprite="Icon_Door_pressed00" blending="premul">
-					<layout>
-						<sprites>
-							Icon_Door_pressed00,Icon_Door_pressed01,Icon_Door_pressed02,Icon_Door_pressed03,
-							Icon_Door_pressed04,Icon_Door_pressed05,Icon_Door_pressed06,Icon_Door_pressed07,
-							Icon_Door_pressed08,
-							Icon_Door_pressed07,Icon_Door_pressed06,Icon_Door_pressed05,Icon_Door_pressed04,
-							Icon_Door_pressed03,Icon_Door_pressed02,Icon_Door_pressed01,Icon_Door_pressed00
-						</sprites>
-					</layout>
-					<frameindex frames="17">
-						<mul>
-							<time />
-							<static value="30"/>
-						</mul>
-					</frameindex>
+				<animation spritesheet="gui_animations" sprite="Icon_Door_pressed_arrow_glow" blending="premul">
+					<position axis="x">
+						<abs>
+							<mul>
+								<static value="20" />
+								<sine>
+									<mul>
+										<time />
+										<static value="250" />
+									</mul>
+								</sine>
+							</mul>
+						</abs>
+					</position>
 				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Door_pressed_glow" blending="premul" />
+				<animation spritesheet="gui_animations" sprite="Icon_Door_pressed" blending="premul" />
+				<animation spritesheet="gui_animations" sprite="Icon_Door_pressed_arrow" blending="premul">
+					<position axis="x">
+						<abs>
+							<mul>
+								<static value="20" />
+								<sine>
+									<mul>
+										<time />
+										<static value="250" />
+									</mul>
+								</sine>
+							</mul>
+						</abs>
+					</position>
+				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Door_pressed_part" blending="premul" />
 			</animations>
 		</pressed>
 	</buttonStyle>
 	<buttonStyle name="creditButtonStyle">
-		<mouseRect left="5" top="-45" width="100" height="95" />
+		<mouseRect left="-50" top="-45" width="100" height="95" />
 		<idle spriteSheet="gui_animations" sprite="Icon_Monitor00"
 			offsetx="0" offsety="0"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" >
 			<animations resetOnExit="true">
-				<animation spritesheet="gui_animations" sprite="Icon_Monitor00" blending="premul">
-					<layout>
-						<sprites>Icon_Monitor00</sprites>
-					</layout>
-				</animation>
+				<animation spritesheet="gui_animations" sprite="Icon_Monitor00" blending="premul" />
 			</animations>
 		</idle>
 		<hover spriteSheet="gui_animations" sprite="Icon_Monitor_hover00"
 			offsetx="0" offsety="0" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4">
 			<animations>
-				<animation spritesheet="gui_animations" sprite="Icon_Monitor_hover00" blending="premul"/>
+				<animation spritesheet="gui_animations" sprite="Icon_Monitor_hover00" blending="premul" />
 				<animation spritesheet="gui_animations" sprite="Icon_Monitor_hover00" x="-7" y="5" blending="premul">
 					<layout>
 						<sprites>
@@ -534,10 +697,10 @@
 			</animations>
 		</hover>
 		<pressed spriteSheet="gui_animations" sprite="Icon_Monitor_pressed00"
-			offsetx="2" offsety="2" sound="bounce" 
+			offsetx="3" offsety="3" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5">
 			<animations>
-				<animation spritesheet="gui_animations" sprite="Icon_Monitor_pressed00" blending="premul"/>
+				<animation spritesheet="gui_animations" sprite="Icon_Monitor_pressed00" blending="premul" />
 				<animation spritesheet="gui_animations" sprite="Icon_Monitor_pressed00" x="-7" y="5" blending="premul">
 					<layout>
 						<sprites>
@@ -575,99 +738,99 @@
 		</pressed>
 	</buttonStyle>
 	<buttonStyle name="default">
-		<mouseRect left="2" top="2" width="306" height="46" />
+		<mouseRect left="-153" top="-23" width="306" height="46" />
 		<idle spriteSheet="gui_elements" sprite="Button_idle"
-			offsetx="0" offsety="0"
-			font="buttonIdleFont" fontoffsetx="0" fontoffsety="9" />
+			offsetx="0" offsety="0" useOrigin="true"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="-19" />
 		<hover spriteSheet="gui_elements" sprite="Button_hover"
-			offsetx="0" offsety="0" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="0" fontoffsety="9" />
+			offsetx="0" offsety="0" sound="bounce" useOrigin="true"
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="-19" />
 		<pressed spriteSheet="gui_elements" sprite="Button_pressed"
-			offsetx="-6" offsety="-6" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="1" fontoffsety="11" />
+			offsetx="-2" offsety="-2" sound="bounce" useOrigin="true"
+			font="buttonHoverFont" fontoffsetx="1" fontoffsety="-17" />
 	</buttonStyle>
 	<buttonStyle name="square">
-		<mouseRect left="2" top="2" width="36" height="36" />
+		<mouseRect left="-18" top="-18" width="36" height="36" />
 		<idle spriteSheet="gui_elements" sprite="normal"
-			offsetx="0" offsety="0"
-			font="buttonIdleFont" fontoffsetx="-2" fontoffsety="1" />
+			offsetx="0" offsety="0" useOrigin="true"
+			font="buttonIdleFont" fontoffsetx="-2" fontoffsety="-19" />
 		<hover spriteSheet="gui_elements" sprite="hover"
-			offsetx="0" offsety="0" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="-2" fontoffsety="1" />
+			offsetx="0" offsety="0" useOrigin="true" sound="bounce"
+			font="buttonHoverFont" fontoffsetx="-2" fontoffsety="-19" />
 		<pressed spriteSheet="gui_elements" sprite="pressed"
-			offsetx="-4" offsety="-4" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="0" fontoffsety="2" />
+			offsetx="-2" offsety="-2" useOrigin="true" sound="bounce"
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="-17" />
 	</buttonStyle>
 	<buttonStyle name="coins">
-		<mouseRect left="2" top="2" width="40" height="42" />
-		<idle spriteSheet="gui_elements" sprite="coins_idle"
-			offsetx="3" offsety="3"
+		<mouseRect left="-57" top="-47" width="114" height="94" />
+		<idle spriteSheet="gui_animations" sprite="Icon_Coins_idle"
+			offsetx="0" offsety="0" useOrigin="true"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
-		<hover spriteSheet="gui_elements" sprite="coins_hover"
-			offsetx="0" offsety="0" sound="bounce" 
+		<hover spriteSheet="gui_animations" sprite="Icon_Coins_hover"
+			offsetx="0" offsety="0" useOrigin="true" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
-		<pressed spriteSheet="gui_elements" sprite="coins_hover"
-			offsetx="0" offsety="0" sound="bounce" 
+		<pressed spriteSheet="gui_animations" sprite="Icon_Coins_pressed"
+			offsetx="3" offsety="3" useOrigin="true" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
 	</buttonStyle>
 	<buttonStyle name="goblet">
-		<mouseRect left="3" top="3" width="36" height="30" />
-		<idle spriteSheet="gui_elements" sprite="goblet_idle"
-			offsetx="2" offsety="3"
+		<mouseRect left="-53" top="-45" width="106" height="90" />
+		<idle spriteSheet="gui_animations" sprite="Goblet_idle"
+			offsetx="0" offsety="0" useOrigin="true"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
-		<hover spriteSheet="gui_elements" sprite="goblet_hover"
-			offsetx="0" offsety="0"
+		<hover spriteSheet="gui_animations" sprite="Goblet_hover"
+			offsetx="0" offsety="0" useOrigin="true" sound="bounce" 
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
-		<pressed spriteSheet="gui_elements" sprite="goblet_hover"
-			offsetx="0" offsety="0"
+		<pressed spriteSheet="gui_animations" sprite="Goblet_pressed"
+			offsetx="3" offsety="3" useOrigin="true" sound="bounce" 
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
 	</buttonStyle>
 	<buttonStyle name="small">
-		<mouseRect left="2" top="2" width="141" height="46" />
+		<mouseRect left="-70" top="-23" width="141" height="46" />
 		<idle spriteSheet="gui_elements" sprite="Button_small_idle"
-			offsetx="0" offsety="0"
-			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" />
+			offsetx="0" offsety="0" useOrigin="true"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="-19" />
 		<hover spriteSheet="gui_elements" sprite="Button_small_hover"
-			offsetx="0" offsety="0" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
+			offsetx="0" offsety="0" useOrigin="true" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="-19" />
 		<pressed spriteSheet="gui_elements" sprite="Button_small_pressed"
-			offsetx="-6" offsety="-6" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="1" fontoffsety="5" />
+			offsetx="-2" offsety="-2" useOrigin="true" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="1" fontoffsety="-17" />
 	</buttonStyle>
 	<buttonStyle name="selectLevel">
-		<mouseRect left="0" top="0" width="192" height="108" />
+		<mouseRect left="-96" top="-54" width="192" height="108" />
 		<idle spriteSheet="gui_elements" sprite="missing"
-			offsetx="0" offsety="0"
+			offsetx="0" offsety="0" useOrigin="true"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="0" />
 		<hover spriteSheet="gui_elements" sprite="missing"
-			offsetx="0" offsety="0" sound="bounce" 
+			offsetx="0" offsety="0" useOrigin="true" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 		<pressed spriteSheet="gui_elements" sprite="missing"
-			offsetx="0" offsety="0" sound="bounce" 
+			offsetx="0" offsety="0" useOrigin="true" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 	</buttonStyle>
 	<buttonStyle name="selectNextLevel">
-		<mouseRect left="-63" top="0" width="192" height="108" />
+		<mouseRect left="-96" top="-54" width="192" height="108" />
 		<idle spriteSheet="gui_elements" sprite="right_idle"
-			offsetx="4" offsety="35"
+			offsetx="0" offsety="0" useOrigin="true"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="0" />
 		<hover spriteSheet="gui_elements" sprite="right_hover"
-			offsetx="4" offsety="35"
+			offsetx="0" offsety="0" useOrigin="true"
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 		<pressed spriteSheet="gui_elements" sprite="right_pressed"
-			offsetx="-1" offsety="30"
+			offsetx="-2" offsety="-2" useOrigin="true"
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 	</buttonStyle>
 	<buttonStyle name="selectPreviousLevel">
-		<mouseRect left="-63" top="0" width="192" height="108" />
+		<mouseRect left="-96" top="-54" width="192" height="108" />
 		<idle spriteSheet="gui_elements" sprite="left_idle"
-			offsetx="4" offsety="35"
+			offsetx="0" offsety="0" useOrigin="true"
 			font="buttonIdleFont" fontoffsetx="0" fontoffsety="0" />
 		<hover spriteSheet="gui_elements" sprite="left_hover"
-			offsetx="4" offsety="35"
+			offsetx="0" offsety="0" useOrigin="true"
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 		<pressed spriteSheet="gui_elements" sprite="left_pressed"
-			offsetx="-1" offsety="30"
+			offsetx="-2" offsety="-2" useOrigin="true"
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 	</buttonStyle>
 	<buttonStyle name="arrowleft">
@@ -693,30 +856,6 @@
 		<pressed spriteSheet="gui_elements" sprite="right_pressed"
 			offsetx="-5" offsety="-5" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
-	</buttonStyle>
-	<buttonStyle name="flag_german">
-		<mouseRect left="1" top="1" width="64" height="64" />
-		<idle spriteSheet="gui_elements" sprite="flag_german"
-			offsetx="0" offsety="0"
-			font="buttonIdleFont" fontoffsetx="0" fontoffsety="9" />
-		<hover spriteSheet="gui_elements" sprite="flag_german"
-			offsetx="0" offsety="0" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="0" fontoffsety="9" />
-		<pressed spriteSheet="gui_elements" sprite="flag_german"
-			offsetx="6" offsety="6" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="6" fontoffsety="15" />
-	</buttonStyle>
-	<buttonStyle name="flag_english">
-		<mouseRect left="1" top="1" width="64" height="64" />
-		<idle spriteSheet="gui_elements" sprite="flag_english"
-			offsetx="0" offsety="0"
-			font="buttonIdleFont" fontoffsetx="0" fontoffsety="9" />
-		<hover spriteSheet="gui_elements" sprite="flag_english"
-			offsetx="0" offsety="0" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="0" fontoffsety="9" />
-		<pressed spriteSheet="gui_elements" sprite="flag_english"
-			offsetx="6" offsety="6" sound="bounce" 
-			font="buttonHoverFont" fontoffsetx="6" fontoffsety="15" />
 	</buttonStyle>
 
 	<checkboxStyle name="default">
@@ -896,6 +1035,23 @@
 		<caret spriteSheet="gui_elements" sprite="caret" srcxoffset="0" srcyoffset="0" width="20" height="40" offsetX="5" offsetY="0" frequency="1"/>
 	</inputboxStyle>
 
+	<borderStyle name="window" color="D2D2D2D2">
+			<background id="1" spriteSheet="gui_elements" sprite="window_left_upper" />
+			<background id="2" spriteSheet="gui_elements" sprite="window_top" widthoffset="-2" srcxoffset="1" />
+			<background id="3" spriteSheet="gui_elements" sprite="window_right_upper" />
+			<background id="4" spriteSheet="gui_elements" sprite="window_left" heightoffset="-2" srcyoffset="1" />
+			<background id="5" spriteSheet="gui_elements" sprite="window_right" heightoffset="-2" srcyoffset="1" />
+			<background id="6" spriteSheet="gui_elements" sprite="window_left_lower" />
+			<background id="7" spriteSheet="gui_elements" sprite="window_bottom" widthoffset="-2" srcxoffset="1" />
+			<background id="8" spriteSheet="gui_elements" sprite="window_right_lower" />
+			<background id="9" spriteSheet="gui_elements" sprite="window_main" widthoffset="-2" srcxoffset="1" heightoffset="-2" srcyoffset="1" />
+			<deco id="2" spriteSheet="gui_elements" sprite="window_deco_top" offsetx="-200" offsety="-36"/>
+			<deco id="2" spriteSheet="gui_elements" sprite="window_deco_top_right" offsetx="-24" offsety="0"/>
+			<deco id="2" spriteSheet="gui_elements" sprite="window_deco_right" offsetx="-1" offsety="-30" />
+			<deco id="3" spriteSheet="gui_elements" sprite="window_deco_left" offsetx="-43" offsety="-157" />
+			<deco id="3" spriteSheet="gui_elements" sprite="window_deco_bottom_left" offsetx="0" offsety="-24" />
+			<deco id="3" spriteSheet="gui_elements" sprite="window_deco_bottom" offsetx="2" offsety="-1" />
+	</borderStyle>
 	<borderStyle name="default">
 		<innerOffsets x="1" y="7" width="-24" height="-15" />
 		<background id="1" spriteSheet="gui_elements" sprite="frame_left" height="20" />

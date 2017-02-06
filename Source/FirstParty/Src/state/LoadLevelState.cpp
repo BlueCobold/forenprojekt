@@ -12,7 +12,8 @@
 
 LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
                                ResourceManager& resourceManager,
-                               AppConfig& config) :
+                               AppConfig& config,
+                               LoadCallback onLevelLoaded) :
     State(screen, resourceManager, config),
     m_label("gui_loading_screen",
             ScreenLocation(sf::Vector2f(ScreenLocation::Center, ScreenLocation::Center),
@@ -23,7 +24,8 @@ LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
     m_lastLevel(nullptr),
     m_currentLevel(1),
     m_directPlay(false),
-    m_transitionStateInfo(LoadLevelStateId)
+    m_transitionStateInfo(LoadLevelStateId),
+    m_onLevelLoaded(onLevelLoaded)
 {
     m_loadingErrorMessage = "";
     m_levelLoaderJob = std::unique_ptr<BackgroundLoader<LoadLevelState>>(new BackgroundLoader<LoadLevelState>(&LoadLevelState::loadLevel, *this));
@@ -47,11 +49,6 @@ void LoadLevelState::onEnter(const EnterStateInformation* enterInformation, cons
         m_levelLoaderJob->reset();
 
     m_currentLevel = enterInformation->m_levelNumber;
-}
-
-std::unique_ptr<Level> LoadLevelState::gainLevel()
-{
-    return std::move(m_level);
 }
 
 StateChangeInformation LoadLevelState::update(const double time)
@@ -88,7 +85,6 @@ StateChangeInformation LoadLevelState::update(const double time)
         m_levelLoaderJob->run();
     }
 
-
     for(int i = 0; i < step; ++i)
         text.append(".");
 
@@ -102,12 +98,9 @@ void LoadLevelState::loadLevel()
     m_loadingErrorMessage = "";
     try
     {
-#ifdef LEVELTESTING
-        m_level = std::unique_ptr<Level>(new Level(m_file, m_currentLevel, getResourceManager().getSubScope("level"), m_config));
-#else
-        m_level = std::unique_ptr<Level>(new Level(m_currentLevel, getResourceManager().getSubScope("level"), m_config));
-#endif
-        m_lastLevel = m_level.get();
+        auto level = std::unique_ptr<Level>(new Level(m_file, m_currentLevel, getResourceManager().getSubScope("level"), m_config));
+        m_lastLevel = level.get();
+        m_onLevelLoaded(level);
         getResourceManager().purge("level");
     }
     catch(std::bad_alloc& e)

@@ -14,7 +14,6 @@
 #include "State/OptionMenuState.hpp"
 #include "State/CreditMenuState.hpp"
 #include "State/LevelPreviewState.hpp"
-#include "State/LevelSelectState.hpp"
 #include "State/CoinShopState.hpp"
 #include "State/HighScoreState.hpp"
 #include "State/NewHighScoreState.hpp"
@@ -137,7 +136,11 @@ App::App(AppConfig& config) :
     m_screen.setFramerateLimit(m_config.get<int>("FrameRateLimit"));
     m_screen.setVerticalSyncEnabled(m_config.get<bool>("Vsync"));
 
-    m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config)));
+    auto loadCallback = [this](std::unique_ptr<Level>& level)
+    {
+        m_currentLevel = std::move(level);
+    };
+    m_stateManager.registerState(LoadLevelStateId, std::unique_ptr<LoadLevelState>(new LoadLevelState(m_screen, m_resourceManager, m_config, loadCallback)));
     m_stateManager.registerState(PlayStateId, std::unique_ptr<PlayState>(new PlayState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(PauseStateId, std::unique_ptr<PauseState>(new PauseState(m_screen, m_resourceManager, m_config)));
     std::vector<sf::RenderTexture*> buffers;
@@ -150,8 +153,7 @@ App::App(AppConfig& config) :
     m_stateManager.registerState(StartStateId, std::unique_ptr<StartState>(new StartState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(OptionMenuStateId, std::unique_ptr<OptionMenuState>(new OptionMenuState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(CreditMenuStateId, std::unique_ptr<CreditMenuState>(new CreditMenuState(m_screen, m_resourceManager, m_config)));
-    m_stateManager.registerState(LevelPreviewStateId, std::unique_ptr<LevelPreviewState>(new LevelPreviewState(m_screen, m_resourceManager, m_config)));
-    m_stateManager.registerState(LevelSelectStateId, std::unique_ptr<LevelSelectState>(new LevelSelectState(m_screen, m_resourceManager, m_config)));
+    m_stateManager.registerState(LevelPreviewStateId, std::unique_ptr<LevelPreviewState>(new LevelPreviewState(m_screen, m_resourceManager, m_config, loadCallback)));
     m_stateManager.registerState(CoinShopStateId, std::unique_ptr<CoinShopState>(new CoinShopState(m_screen, m_resourceManager, m_config, m_achievementManager)));
     m_stateManager.registerState(HighScoreStateId, std::unique_ptr<HighScoreState>(new HighScoreState(m_screen, m_resourceManager, m_config)));
     m_stateManager.registerState(NewHighScoreStateId, std::unique_ptr<NewHighScoreState>(new NewHighScoreState(m_screen, m_resourceManager, m_config)));

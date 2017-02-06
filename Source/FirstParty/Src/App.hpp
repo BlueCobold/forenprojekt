@@ -5,6 +5,7 @@
 
 #include "gui/Cursor.hpp"
 #include "gui/GestureHandler.hpp"
+#include "model/Level.hpp"
 #include "resources/AppConfig.hpp"
 #include "resources/ResourceManager.hpp"
 #include "resources/AchievementManager.hpp"
@@ -56,6 +57,7 @@ private:
 
     std::array<sf::RenderTexture, 2> m_offscreens;
     std::unique_ptr<Cursor> m_cursor;
+    std::unique_ptr<Level> m_currentLevel;
 
     utility::Event m_event;
     ShaderContext m_shaderContext;

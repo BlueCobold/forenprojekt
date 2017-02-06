@@ -38,7 +38,6 @@
 		<image id="28" x="0.5" y="0.5" offsetx="-159" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
 		<image id="29" x="0.5" y="0.5" offsetx="4" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
 
-		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-181" spriteSheet="gui_elements" sprite="mode_background"/>
 		<checkbox id="30" style="offlineHighscore" x="0.5" y="0.5" offsetx="-245" offsety="-150" tooltip="default" tooltiptext="tooltip_offline_highscore" />
 		<checkbox id="31" style="onlineHighscore" x="0.5" y="0.5" offsetx="-245" offsety="-98" tooltip="default" tooltiptext="tooltip_online_highscore"/>
 	</elements>

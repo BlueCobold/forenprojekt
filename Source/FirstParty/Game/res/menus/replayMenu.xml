@@ -318,7 +318,6 @@
 			</animations>
 		</animationContainer>
 		
-		<image id="20" x="0.5" y="0.5" offsetx="102" offsety="-218" spriteSheet="gui_elements" sprite="highscoreBackground"/>
 		<button id="30" text="" style="goblet" x="0.5" y="0.5" offsetx="157" offsety="-204" tooltip="default" tooltiptext="tooltip_highscore"/>
 	</elements>
 </menu>

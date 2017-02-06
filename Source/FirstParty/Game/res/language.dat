@@ -1,5 +1,6 @@
 [Errors]
 UnknownLayer = The specified rendering layer doesn't exist.
+NoValidShapeFound = No valid shape found for an entity.
 TwoChilds = % needs two children to function.
 ThreeChilds = % needs three children to function.
 TwoChildsMin = % needs at least two children to function.

@@ -10,11 +10,10 @@ LevelSelectMenu::LevelSelectMenu(sf::RenderWindow& screen,
 {
 }
 
-void LevelSelectMenu::setLevelPreview(const sf::Texture& texture, const sf::IntRect& textureRect)
+void LevelSelectMenu::setLevelPreview(const Sprite& sprite)
 {
-    MenuSprite& sprite = Menu::getSprite(SPRITE_LEVELINFO);
-    sprite.setTextureRect(textureRect);
-    sprite.setTexture(texture);
+    MenuSprite& item = Menu::getSprite(SPRITE_LEVELINFO);
+    item.setSprite(sprite);
 }
 
 void LevelSelectMenu::hideLeftButton(const bool value)

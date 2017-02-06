@@ -1,8 +1,17 @@
 <menu>
 	<styles source="Styles.inc"/>
 	<elements>
+		<animationContainer id="-3" x="0.5" y="0.5" >
+			<animations>
+				<animation spritesheet="gui_elements" sprite="BackgroundGradient" scaleToScreenSize="true" alignToScreen="true" blending="premul"/>
+			</animations>
+		</animationContainer>
+		<customContent id="-2" description="optionally draw level here" />
+		<border id="-1" style="window"
+			x="0.5" y="0.5" width="-150" height="-150" widthPercent="1.0" heightPercent="1.0" />
+
 		<label text="gui_option" font="gui_large" alignment="1" x="0.5" y="0.0" offsetx="0" offsety="58" />
-		<button id="0" text="gui_close" style="default" x="0.5" y="1" offsetx="0" offsety="-120" />
+		<button id="0" text="gui_close" style="default" x="0.5" y="1" offsetx="0" offsety="-95" />
 		<subwindow id="1" x="0.5" y="0.5" offsetx="0" offsety="-10" sizex="-170" sizey="-250" innerheight="860"
 			heightPercent="1.0" widthPercent="1.0">
 			<style>
@@ -13,8 +22,8 @@
 			<elements>
 				<label text="gui_graphicsetup" font="buttonIdleFont" alignment="0" offsetx="100" offsety="30" y="0.0" x="0.0"/>
 
-				<button id="9" text="" style="arrowright" offsetx="380" offsety="80" />
-				<button id="10" text="" style="arrowleft" offsetx="130" offsety="80" />
+				<button id="9" text="" style="arrowright" offsetx="347" offsety="80" />
+				<button id="10" text="" style="arrowleft" offsetx="97" offsety="80" />
 				<label id="11" text="gui_label_resolution" font="buttonHoverFont" alignment="1" offsetx="257" offsety="86" />
 
 				<!--
@@ -60,32 +69,7 @@
 				<checkbox id="41" style="language" offsetx="230" x="0.05" offsety="710" tooltip="default" tooltiptext="tooltip_chose_language" />
 			</elements>
 		</subwindow>
-		<border id="-1" x="0.5" y="0.5" width="-150" height="-150" widthPercent="1.0" heightPercent="1.0">
-			<background id="1" spriteSheet="gui_elements" sprite="window_left_upper" />
-			<background id="2" spriteSheet="gui_elements" sprite="window_top" widthoffset="-2" srcxoffset="1" />
-			<background id="3" spriteSheet="gui_elements" sprite="window_right_upper" />
-			<background id="4" spriteSheet="gui_elements" sprite="window_left" heightoffset="-2" srcyoffset="1" />
-			<background id="5" spriteSheet="gui_elements" sprite="window_right" heightoffset="-2" srcyoffset="1" />
-			<background id="6" spriteSheet="gui_elements" sprite="window_left_lower" />
-			<background id="7" spriteSheet="gui_elements" sprite="window_bottom" widthoffset="-2" srcxoffset="1" />
-			<background id="8" spriteSheet="gui_elements" sprite="window_right_lower" />
-			<background id="9" spriteSheet="gui_elements" sprite="window_main" widthoffset="-2" srcxoffset="1" heightoffset="-2" srcyoffset="1" />
-			<deco id="2" spriteSheet="gui_elements" sprite="window_deco_top" offsetx="-200" offsety="-36"/>
-			<deco id="2" spriteSheet="gui_elements" sprite="window_deco_top_right" offsetx="-24" offsety="0"/>
-			<deco id="2" spriteSheet="gui_elements" sprite="window_deco_right" offsetx="-1" offsety="-30" />
-			<deco id="3" spriteSheet="gui_elements" sprite="window_deco_left" offsetx="-43" offsety="-157" />
-			<deco id="3" spriteSheet="gui_elements" sprite="window_deco_bottom_left" offsetx="0" offsety="-24" />
-			<deco id="3" spriteSheet="gui_elements" sprite="window_deco_bottom" offsetx="2" offsety="-1" />
-		</border>
-		<border id="20" x="0.5" y="0.5" offsetx="4" offsety="-3" width="-197" height="-270" widthPercent="1.0" heightPercent="1.0">
-			<background id="1" spriteSheet="gui_elements" sprite="frame_left" height="20" />
-			<background id="2" spriteSheet="gui_elements" sprite="frame_top" srcxoffset="1" width="18" />
-			<background id="3" spriteSheet="gui_elements" sprite="frame_right" height="20" />
-			<background id="4" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="20" height="20" />
-			<background id="5" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="20" height="20" />
-			<background id="6" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="108" height="11" />
-			<background id="7" spriteSheet="gui_elements" sprite="frame_bottom" srcxoffset="1" width="18" />
-			<background id="8" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="108" height="11" />
-		</border>
+		<border style="default" id="20" 
+			x="0.5" y="0.5" offsetx="0" offsety="-10" width="-170" height="-250" widthPercent="1.0" heightPercent="1.0" />
 	</elements>
 </menu>

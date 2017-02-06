@@ -6,6 +6,11 @@
 #include "State.hpp"
 #include "../gui/LevelPreviewMenu.hpp"
 #include "../gui/hud/HUD.hpp"
+#include "../model/Level.hpp"
+#include "../resources/BackgroundLoader.hpp"
+
+#include <functional>
+#include <memory>
 
 class Level;
 
@@ -13,8 +18,11 @@ class Level;
 class LevelPreviewState : public State
 {
 public:
-
-    LevelPreviewState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
+    typedef std::function<void(std::unique_ptr<Level>&)> LoadCallback; // & should not exist, VS2010 bug requires it
+    LevelPreviewState(sf::RenderWindow& screen,
+                      ResourceManager& resourceManager,
+                      AppConfig& config,
+                      LoadCallback onLevelLoaded);
     ~LevelPreviewState();
 
     StateChangeInformation update(const double time) override;
@@ -26,13 +34,25 @@ private:
     LevelPreviewMenu m_menu;
     HUD m_HUD;
     Level* m_level;
+    std::unique_ptr<Level> m_loadedLevel;
     bool m_levelUpdated;
-    int m_levelNumber;
+    LoadCallback m_onLevelLoaded;
+    std::string m_loadingErrorMessage;
 
     EnterPlayStateInformation m_playStateInfo;
     EnterHighScoreStateInformation m_highScoreInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
+    EnterOptionStateInformation m_optionStateInfo;
     EnterCoinShopStateInformation m_coinShopStateInfo;
+    
+    std::map<int, LevelInfo> m_levelInfos;
+    int m_nextLevelNumber;
+    int m_unlockedLevel;
+    std::unique_ptr<BackgroundLoader<LevelPreviewState>> m_levelLoaderJob;
+
+    void loadLevelInfos();
+    void updateButton(int id, int levelNumber);
+    void loadLevel();
 };
 
 #endif // LEVEL_PREVIEW_STATE_HPP

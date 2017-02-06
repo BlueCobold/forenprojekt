@@ -7,11 +7,11 @@
 			</animations>
 		</animationContainer>
 
-		<image id="5" x="0.5" y="0" offsetx="-137" offsety="-1" spriteSheet="gui_elements" sprite="Icon_Backgrounds_Logo" />
+		<image id="5" x="0.5" y="0" offsetx="-127" offsety="-1" spriteSheet="gui_elements" sprite="Icon_Backgrounds_Logo" />
 
 		<animationContainer id="100" x="0.5" y="0.0" offsetx="-65" offsety="30">
 			<animations>
-				<animation spritesheet="gui_elements" sprite="Logo" copies="28" blending="premul" >
+				<animation spritesheet="gui_animations" sprite="r_ickety_shadow" copies="28" blending="premul" >
 					<constants orderId="0"/>
 					<layout>
 						<sprites>
@@ -800,7 +800,6 @@
 			</animations>
 		</animationContainer>
 		<button id="0" text="gui_start_new_game" style="playButtonStyle" x="0.5" y="0.45" offsetx="-5" offsety="-5" />
-		<button id="1" text="gui_select_level" style="selectButtonStyle" x="0.7" y="0.25" offsetx="50" offsety="-5" />
 		<button id="6" text="gui_achievement" style="achieveButtonStyle" x="0.32" y="0.3" offsetx="-75" offsety="-10" />
 		<button id="2" text="gui_option" style="optionButtonStyle" x="0.75" y="0.6" offsetx="45" offsety="-10" />
 		<button id="3" text="gui_credit" style="creditButtonStyle" x="0.25" y="0.65" offsetx="-55" offsety="-5" />

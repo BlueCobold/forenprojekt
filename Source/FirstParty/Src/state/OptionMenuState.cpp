@@ -1,6 +1,7 @@
 #include "OptionMenuState.hpp"
 
 #include "../gui/Button.hpp"
+#include "../gui/CustomContent.hpp"
 #include "../model/Level.hpp"
 #include "../resources/Config.hpp"
 
@@ -77,17 +78,20 @@ void OptionMenuState::doDraw(const DrawParameter& params)
 
     sf::RectangleShape whiteRect;
     whiteRect.setSize(m_screen.getView().getSize());
-    if(m_level != nullptr)
-    {
-        m_level->adjustView(params);
-        m_HUD.update(m_level, getPassedTime());
-        m_level->draw(params);
-        m_HUD.draw(params);
-        whiteRect.setFillColor(sf::Color(255, 255, 255, 128));
-    }
-    else
-        whiteRect.setFillColor(sf::Color(255, 255, 255, 255));
+    whiteRect.setFillColor(sf::Color(255, 255, 255, 255));
     params.getTarget().draw(whiteRect);
 
+    m_menu.getCustomContent(-2).registerOnDraw([&](int id, const DrawParameter& p)
+    {
+        if(m_level != nullptr)
+        {
+            m_level->adjustView(p);
+            m_HUD.update(m_level, getPassedTime());
+            m_level->draw(p);
+            m_HUD.draw(p);
+            whiteRect.setFillColor(sf::Color(255, 255, 255, 128));
+            p.getTarget().draw(whiteRect);
+        }
+    });
     m_menu.draw(params);
 }

@@ -4,7 +4,7 @@
 #define LEVELSELECTMENU_HPP
 
 #include "Menu.hpp"
-#include <SFML/Graphics/Rect.hpp>
+#include "../rendering/Sprite.hpp"
 
 class LevelSelectMenu : public Menu
 {
@@ -19,7 +19,7 @@ public:
 
     LevelSelectMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
 
-    void setLevelPreview(const sf::Texture& texture, const sf::IntRect& textureRect);
+    void setLevelPreview(const Sprite& sprite);
     void hideLeftButton(const bool value);
     void hideRightButton(const bool value);
 };

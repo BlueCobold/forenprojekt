@@ -463,9 +463,6 @@
     <ClInclude Include="..\..\Src\State\LevelPreviewState.hpp">
       <Filter>Headers\state</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Src\State\LevelSelectState.hpp">
-      <Filter>Headers\state</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Src\State\LoadLevelState.hpp">
       <Filter>Headers\state</Filter>
     </ClInclude>
@@ -1129,9 +1126,6 @@
       <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\LevelPreviewState.cpp">
-      <Filter>Sources\state</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Src\State\LevelSelectState.cpp">
       <Filter>Sources\state</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Src\State\LoadLevelState.cpp">

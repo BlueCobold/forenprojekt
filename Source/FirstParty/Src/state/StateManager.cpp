@@ -1,8 +1,6 @@
 #include "StateManager.hpp"
 
-#include "LoadLevelState.hpp"
-
-#include <utility> // move
+#include <utility>
 #include <exception>
 #include <sstream>
 
@@ -35,9 +33,6 @@ void StateManager::setState(StateId id, EnterStateInformation* enterInformation)
         info->m_source = m_currentState;
         info->m_target = getState(info->m_followingState);
     }
-    if(m_currentStateId == LoadLevelStateId)
-        m_currentLevel = std::move((dynamic_cast<LoadLevelState*>(m_currentState))->gainLevel());
-
     m_currentStateId = id;
     m_currentState = state;
 

@@ -24,7 +24,6 @@ enum StateId
     OptionMenuStateId,
     CreditMenuStateId,
     LevelPreviewStateId,
-    LevelSelectStateId,
     CoinShopStateId,
     HighScoreStateId,
     NewHighScoreStateId,

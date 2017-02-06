@@ -1,14 +1,29 @@
 #include "LevelPreviewMenu.hpp"
 
-#include "../resources/ResourceManager.hpp"
 #include "../Utility.hpp"
+#include "../gui/MenuSprite.hpp"
+#include "../resources/ResourceManager.hpp"
 
 #include "Button.hpp"
 
 LevelPreviewMenu::LevelPreviewMenu(sf::RenderWindow& screen,
                                    ResourceManager& resourceManager) :
     Menu(*resourceManager.getMenuTemplate("LevelPreviewMenu"), screen)
+{ }
+
+void LevelPreviewMenu::setLoading(bool loading)
 {
+    Menu::getLabel(LABEL_BALLS).setVisible(!loading);
+    Menu::getLabel(LABEL_BALLS_HINT).setVisible(!loading);
+    Menu::getLabel(LABEL_TIME).setVisible(!loading);
+    Menu::getLabel(LABEL_TIME_HINT).setVisible(!loading);
+    Menu::getLabel(LABEL_LOADING).setVisible(loading);
+}
+
+void LevelPreviewMenu::setLevelPreview(const Sprite& sprite)
+{
+    MenuSprite& item = Menu::getSprite(SPRITE_LEVELINFO);
+    item.setSprite(sprite);
 }
 
 void LevelPreviewMenu::setLevelInfo(const std::string& levelName,
@@ -19,12 +34,12 @@ void LevelPreviewMenu::setLevelInfo(const std::string& levelName,
     int minutes = static_cast<int>(time) / 60;
     Menu::getLabel(LABEL_LEVELNAME).setText(levelName);
 
-    if(balls == -1)
+    if(balls <= 0)
         Menu::getLabel(LABEL_BALLS).setText(utility::translateKey("gui_unlimited"));
     else
         Menu::getLabel(LABEL_BALLS).setText(utility::toString(balls));
 
-    if(time < 0)
+    if(time <= 0)
         Menu::getLabel(LABEL_TIME).setText(utility::translateKey("gui_unlimited"));
     else
         if(seconds < 10)
@@ -35,6 +50,5 @@ void LevelPreviewMenu::setLevelInfo(const std::string& levelName,
 
 void LevelPreviewMenu::setCoinToolTipText(const std::string& text, const std::string& coins)
 {
-    //Menu::getSprite(SPRITE_COINS).setToolTipText(text);
     Menu::getButton(BUTTON_COINS).setToolTipText(text, coins);
 }

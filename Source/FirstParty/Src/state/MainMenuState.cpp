@@ -52,27 +52,6 @@ StateChangeInformation MainMenuState::update(const double time)
 
     if(clicked == MainMenu::BUTTON_START_NEW_GAME)
     {
-        m_loadLevelStateInfo.m_levelNumber = m_config.get<int>("UnlockedLevel");
-        m_transitionStateInfo.m_followingState = LoadLevelStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
-        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
-    }
-    else if(clicked == MainMenu::BUTTON_OPTIONS)
-    {
-        m_optionStateInfo = EnterOptionStateInformation(MainMenuStateId);
-        m_transitionStateInfo.m_followingState = OptionMenuStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_optionStateInfo;
-        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
-    }
-    else if(clicked == MainMenu::BUTTON_CREDITS)
-    {
-        m_stateInfo = EnterStateInformation();
-        m_transitionStateInfo.m_followingState = CreditMenuStateId;
-        m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
-        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
-    }
-    else if(clicked == MainMenu::BUTTON_SELECT_LEVEL)
-    {
 #ifdef LEVELTESTING
         if(utility::Keyboard.isKeyDown(sf::Keyboard::L) || utility::Keyboard.isKeyPressed(sf::Keyboard::L))
         {
@@ -91,18 +70,28 @@ StateChangeInformation MainMenuState::update(const double time)
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
         else
+#endif
         {
-            m_stateInfo = EnterStateInformation();
-            m_transitionStateInfo.m_followingState = LevelSelectStateId;
-            m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
+            m_loadLevelStateInfo.m_levelNumber = m_config.get<int>("UnlockedLevel");
+            m_loadLevelStateInfo.m_directPlay = false;
+            m_transitionStateInfo.m_followingState = LoadLevelStateId;
+            m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
-#else
+    }
+    else if(clicked == MainMenu::BUTTON_OPTIONS)
+    {
+        m_optionStateInfo = EnterOptionStateInformation(MainMenuStateId);
+        m_transitionStateInfo.m_followingState = OptionMenuStateId;
+        m_transitionStateInfo.m_onEnterInformation = &m_optionStateInfo;
+        return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
+    }
+    else if(clicked == MainMenu::BUTTON_CREDITS)
+    {
         m_stateInfo = EnterStateInformation();
-        m_transitionStateInfo.m_followingState = LevelSelectStateId;
+        m_transitionStateInfo.m_followingState = CreditMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_stateInfo;
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
-#endif
     }
     else if(clicked == MainMenu::BUTTON_CLOSE)
         State::m_screen.close();

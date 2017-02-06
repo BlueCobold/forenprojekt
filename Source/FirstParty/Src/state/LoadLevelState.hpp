@@ -15,20 +15,23 @@
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/System/Thread.hpp>
 
-#include <memory> // unique_ptr
+#include <functional>
+#include <memory>
 #include <string>
 
 /// The State where the level will be loaded and faded in.
 class LoadLevelState : public State
 {
 public:
-
-    LoadLevelState(sf::RenderWindow& screen, ResourceManager& resourceManager, AppConfig& config);
+    typedef std::function<void(std::unique_ptr<Level>&)> LoadCallback; // & should not exist, VS2010 bug requires it
+    LoadLevelState(sf::RenderWindow& screen,
+                   ResourceManager& resourceManager,
+                   AppConfig& config,
+                   LoadCallback onLevelLoaded);
     ~LoadLevelState();
 
     StateChangeInformation update(const double time) override;
     void onEnter(const EnterStateInformation *enterInformation, const double time) override;
-    std::unique_ptr<Level> gainLevel();
 
 private:
     void loadLevel();
@@ -36,16 +39,14 @@ private:
     void doDraw(const DrawParameter& params) override;
 
     LineLabel m_label;
-    std::unique_ptr<Level> m_level;
     Level* m_lastLevel;
     std::string m_loadingErrorMessage;
-#ifdef LEVELTESTING
     std::string m_file;
-#endif
     int m_currentLevel;
     bool m_directPlay;
     EnterPlayStateInformation m_playStateInfo;
     EnterTransitionStateInformation m_transitionStateInfo;
+    LoadCallback m_onLevelLoaded;
 
     std::unique_ptr<BackgroundLoader<LoadLevelState>> m_levelLoaderJob;
 };

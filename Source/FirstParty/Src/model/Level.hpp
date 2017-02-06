@@ -119,10 +119,6 @@ public:
     }
 
 private:
-#ifdef LEVELTESTING
-    std::string m_filename;
-#endif
-
     void doDraw(const DrawParameter& param) override;
 
     void createLabelAt(const Entity& target, const std::string& fontName, const int points);
@@ -160,13 +156,12 @@ private:
     std::string pathname() const;
 
     bool isOriginal();
-
-private:
     void onRestarted() override;
 
     double onGetValueOf(const std::string& name) const override;
     void onSetValueOf(const std::string& name, const double value) override;
 
+    std::string m_filename;
     std::unique_ptr<ResourceManager> m_resourceManager;
     AppConfig& m_config;
 

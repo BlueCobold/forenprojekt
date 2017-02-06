@@ -322,7 +322,6 @@
     <ClInclude Include="..\..\Src\state\LevelFailState.hpp" />
     <ClInclude Include="..\..\Src\state\LevelPassState.hpp" />
     <ClInclude Include="..\..\Src\state\LevelPreviewState.hpp" />
-    <ClInclude Include="..\..\Src\state\LevelSelectState.hpp" />
     <ClInclude Include="..\..\Src\state\LoadLevelState.hpp" />
     <ClInclude Include="..\..\Src\state\MainMenuState.hpp" />
     <ClInclude Include="..\..\Src\state\NewHighScoreState.hpp" />

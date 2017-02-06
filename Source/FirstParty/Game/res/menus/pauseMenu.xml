@@ -7,7 +7,6 @@
 		<button id="2" text="gui_restart" style="default" x="0.5" y="0.5" offsetx="0" offsety="-20" />
 		<button id="1" text="gui_option" style="default" x="0.5" y="0.5" offsetx="0" offsety="30" />
 		<button id="3" text="gui_mainmenu" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
-		<image id="-1" x="0.5" y="0.5" offsetx="-197" offsety="-221" spriteSheet="gui_elements" sprite="coins" />
 		<button id="4" text="" style="coins" x="0.5" y="0.5" offsetx="-143" offsety="-208" tooltip="default" tooltiptext="tooltip_coins"/>
 	</elements>
 </menu>

@@ -1,8 +1,13 @@
 <menu>
 	<styles source="Styles.inc"/>
 	<elements>
+		<animationContainer id="-2" x="0.5" y="0.5" >
+			<animations>
+				<animation spritesheet="gui_elements" sprite="BackgroundGradient" scaleToScreenSize="true" alignToScreen="true" blending="premul"/>
+			</animations>
+		</animationContainer>
 		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
-		<button id="1" text="gui_mainmenu" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
+		<button id="1" text="gui_mainmenu" style="default" x="0.5" y="0.5" offsetx="0" offsety="105" />
 		<button id="2" text="" style="arrowright" x="0.5" y="0.5" offsetx="145" offsety="30" />
 		<button id="3" text="" style="arrowleft" x="0.5" y="0.5" offsetx="-145" offsety="30" />
 		<ilabel id="4" text="gui_label_achievement_name" font="buttonHoverFont" tooltip="default" tooltiptext="tooltip_achievement_name" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />

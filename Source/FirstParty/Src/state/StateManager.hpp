@@ -4,7 +4,6 @@
 #define STATE_MANAGER_HPP
 
 #include "State.hpp"
-#include "../model/Level.hpp"
 #include "EnterStateInformation.hpp"
 
 #include "SFML/Graphics/RenderWindow.hpp"
@@ -36,7 +35,6 @@ private:
     std::map<StateId, std::unique_ptr<State>> m_statesById;
     State* m_currentState;
     StateId m_currentStateId;
-    std::unique_ptr<Level> m_currentLevel;
     bool m_paused;
 };
 
