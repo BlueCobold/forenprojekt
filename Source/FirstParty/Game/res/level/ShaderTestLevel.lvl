@@ -11,7 +11,7 @@
 		<include file="assets/teeter/wood.inc" />
 		<include file="sandy/walls.inc" />
 		<entities>
-			<entity name="slimeDot" rep="#1" z="1002" >
+			<entity name="slimeDot" rep="#1" z="1002" propagatePosition="true">
 				<physics>
 					<body type="dynamic" angle="0" />
 					<shape type="circle" radius="7" />

@@ -100,7 +100,7 @@
 				<constants scale="5" />
 			</override>
 
-			<override rep="q*" newRep="k*">
+			<override rep="q*" newRep="k*" propagatePosition="true">
 				<constants collides="1" killTime="0" delta="0" scale="1" />
 				<physics shape="wall" name="dynamicWall"/>
 				<animations>

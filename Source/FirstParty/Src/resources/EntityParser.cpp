@@ -120,7 +120,7 @@ void EntityParser::fillProperties(EntitySet& entities, const tinyxml2::XMLElemen
     position += offset;
     auto physicalPosition = b2Vec2(static_cast<float>(utility::toMeter(position.x)),
                                    static_cast<float>(utility::toMeter(position.y)));
-    
+
     auto entity = entities.entity.get();
     if(entity == nullptr)
         return;
@@ -139,7 +139,7 @@ void EntityParser::fillProperties(EntitySet& entities, const tinyxml2::XMLElemen
         entity->setName(name);
     if(auto name = xml.Attribute("newName"))
         entity->setName(name);
-    
+
     auto z = entity->getDrawOrder();
     xml.QueryFloatAttribute("z", &z);
     xml.QueryFloatAttribute("draworder", &z);
@@ -156,6 +156,11 @@ void EntityParser::fillProperties(EntitySet& entities, const tinyxml2::XMLElemen
         for(auto ani = begin(animations); ani != end(animations); ++ani)
             entity->bindAnimation(std::move(*ani));
     }
+
+    bool propagate = false;
+    xml.QueryBoolAttribute("propagatePosition", &propagate);
+    if (propagate)
+        entity->propagatePosition(propagate);
 
     if(auto constants = xml.FirstChildElement("constants"))
         ValueParser::parseConstants(*constants, *entity);
@@ -183,7 +188,7 @@ void EntityParser::fillProperties(EntitySet& entities, const tinyxml2::XMLElemen
         }
         entity->bindOtherSounds(std::move(otherSounds));
     }
-    
+
     auto physic = findPhysicsTag(xml);
     auto shape = findShapeTag(xml);
     if(physic != nullptr)
@@ -222,7 +227,7 @@ void EntityParser::fillProperties(EntitySet& entities, const tinyxml2::XMLElemen
             entity->setCollideWithBall(xml.BoolAttribute("collideWithBall"));
         else
             entity->setCollideWithBall(true);
-        
+
         if(xml.Attribute("collideWithOtherEntity") != nullptr)
             entity->setCollideWithOtherEntity(xml.BoolAttribute("collideWithOtherEntity"));
         else

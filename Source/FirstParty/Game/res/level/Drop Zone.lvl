@@ -97,7 +97,7 @@
 				<animation spritesheet="assets" sprite="dispenser" x="90" y="60" z="2" />
 			</animations>
 		</entity>
-		<entity name="DummyBall" rep="B#" z="8" >
+		<entity name="DummyBall" rep="B#" z="8" propagatePosition="true" >
 			<physics name="product">
 				<shape type="circle" radius="15" />
 			</physics>

@@ -51,6 +51,7 @@ private:
     std::vector<std::unique_ptr<SoundTrigger>> m_otherSounds;
     const Entity* m_killAnimationEntity;
     CloneHandler& m_cloneHandler;
+    bool m_propagatePosition;
 
     std::unique_ptr<Entity> doClone() const override;
     virtual void timeUpdated();
@@ -74,6 +75,10 @@ public:
     void kill();
     bool killed() const;
     bool isRespawnable() const;
+    void propagatePosition(bool value)
+    {
+        m_propagatePosition = value;
+    }
 
     void setCollideWithBall(bool value);
     bool doesCollideWithBall();

@@ -19,7 +19,8 @@ Entity::Entity(Type type, CloneHandler& cloneHandler, bool respawnable, bool aut
     m_updatingAni(nullptr),
     m_animationAngle(0),
     m_killAnimationEntity(nullptr),
-    m_cloneHandler(cloneHandler)
+    m_cloneHandler(cloneHandler),
+    m_propagatePosition(false)
 {
 }
 
@@ -39,8 +40,11 @@ void Entity::update(const double time)
         auto pos = getPosition();
         auto x = utility::toPixel(pos.x);
         auto y = utility::toPixel(pos.y);
-        setValueOf("position.x", x);
-        setValueOf("position.y", y);
+        if(m_propagatePosition)
+        {
+            setValueOf("position.x", x);
+            setValueOf("position.y", y);
+        }
 
         bool running = false;
         updateAnimations(
@@ -247,6 +251,7 @@ std::unique_ptr<Entity> Entity::doClone() const
     clone->m_variables = m_variables;
     clone->m_animationAngle = m_animationAngle;
     clone->setDrawOrder(getDrawOrder());
+    clone->m_propagatePosition = m_propagatePosition;
 
     // copy physical property
     clone->copyFrom(this);
