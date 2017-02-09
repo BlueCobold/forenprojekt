@@ -15,6 +15,7 @@
 #include <Box2D/Common/b2Math.h>
 
 #include <algorithm>
+#include <memory>
 #include <vector>
 #include <sstream>
 #include <string>
