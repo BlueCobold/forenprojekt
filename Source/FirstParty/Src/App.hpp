@@ -66,6 +66,7 @@ private:
     StateManager m_stateManager;
     AchievementManager m_achievementManager;
     MusicPlayer m_musicPlayer;
+    sf::Clock m_frameClock;
 };
 
 #endif // APP_HPP

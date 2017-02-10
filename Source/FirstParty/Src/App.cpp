@@ -197,7 +197,6 @@ void App::run()
     {
         update();
         draw();
-        m_screen.display();
     }
 }
 
@@ -290,6 +289,14 @@ void App::draw()
 
     m_stateManager.draw(params);
     m_cursor->draw(m_screen);
+
+    auto configLimit = m_config.get<int>("FrameRateLimit");
+    sf::Time limit(sf::microseconds(1000000 / configLimit));
+    auto delta = limit - m_frameClock.getElapsedTime();
+    if (delta.asMicroseconds() > 0)
+        sf::sleep(delta);
+    m_screen.display();
+    m_frameClock.restart();
 }
 
 void App::handleKeyboard()
