@@ -53,7 +53,7 @@ LineLabel::LineLabel(const std::string& text,
     m_progressPosition(0, 0)
 {
     if(m_textKey != "")
-        m_text = utility::translateKey( m_textKey);
+        m_text = utility::translateKey(m_textKey);
     else
         m_text = "";
     
