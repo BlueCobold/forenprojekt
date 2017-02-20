@@ -61,7 +61,8 @@ App::App(AppConfig& config) :
     m_shaderContext(),
     m_resourceManager(m_shaderContext, m_config),
     m_achievementManager("Achievement.dat", m_config),
-    m_musicPlayer(m_config, m_resourceManager.getMusic(), MusicPlayer::Normal)
+    m_musicPlayer(m_config, m_resourceManager.getMusic(), MusicPlayer::Normal),
+    m_achievementLevelUpRenderer(m_achievementManager, m_resourceManager, m_screen, 4.f) /* <---- Fehler */
 {
     // Cache often used settings
     sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
@@ -222,6 +223,8 @@ void App::update()
 
     if(!m_isMinimized)
         utility::Mouse.capture();
+
+    m_achievementLevelUpRenderer.update();
     m_cursor->update();
 
     m_gestures.process();
@@ -288,6 +291,7 @@ void App::draw()
     });
 
     m_stateManager.draw(params);
+    m_achievementLevelUpRenderer.draw(params);
     m_cursor->draw(m_screen);
 
     auto configLimit = m_config.get<int>("FrameRateLimit");

@@ -279,12 +279,12 @@ void AchievementManager::addValueTo(Achievement::Condition condition,
     for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
     {
         if(it->first == id)
-		{
-			Achievement::AchievementLevel level = it->second.getAchievementLevel();
+        {
+            Achievement::AchievementLevel level = it->second.getAchievementLevel();
             it->second.addToCounter(value);
-			if(level != it->second.getAchievementLevel())
-				m_latestAchievementLevelUp.push_back(id);
-		}
+            if(level != it->second.getAchievementLevel())
+                m_latestAchievementLevelUp.push_back(id);
+        }
     } 
 }
 
@@ -298,10 +298,13 @@ void AchievementManager::addValueTo(Achievement::Condition condition,
 
     for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
     {
-        Achievement::AchievementLevel level = it->second.getAchievementLevel();
-        it->second.addToCounter(value);
-		if(level != it->second.getAchievementLevel())
-			m_latestAchievementLevelUp.push_back(id);
+        if(it->first == id)
+        {
+            Achievement::AchievementLevel level = it->second.getAchievementLevel();
+            it->second.addToCounter(value);
+            if(level != it->second.getAchievementLevel())
+                m_latestAchievementLevelUp.push_back(id);
+        }
     }
 }
 
@@ -314,10 +317,13 @@ void AchievementManager::setValueTo(Achievement::Condition condition,
 
     for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
     {
-        Achievement::AchievementLevel level = it->second.getAchievementLevel();
-        it->second.addToCounter(value);
-		if(level != it->second.getAchievementLevel())
-			m_latestAchievementLevelUp.push_back(id);
+        if(it->first == id)
+        {
+            Achievement::AchievementLevel level = it->second.getAchievementLevel();
+            it->second.addToCounter(value);
+            if(level != it->second.getAchievementLevel())
+            m_latestAchievementLevelUp.push_back(id);
+        }
     }
 }
 
@@ -331,13 +337,13 @@ Achievement* AchievementManager::getAchievement(unsigned int number)
 
 Achievement* AchievementManager::getAchievement(const std::string& id)
 {
-	for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
+    for(auto it = m_achievements.begin(); it != m_achievements.end(); ++it)
     {
         if(it->first == id)
-			return &(it->second);
+            return &(it->second);
     }
 
-	return nullptr;
+    return nullptr;
 }
 
 void AchievementManager::saveValues()
@@ -354,18 +360,18 @@ void AchievementManager::loadValues()
 
 bool AchievementManager::newAchievementLevelUp() const
 {
-	return m_latestAchievementLevelUp.size() > 0 ;
+    return m_latestAchievementLevelUp.size() > 0 ;
 }
 
 std::string AchievementManager::popLatestAchievementLevelUp()
 {
-	std::string result = "";
+    std::string result = "";
 
-	if(!m_latestAchievementLevelUp.empty())
-	{
-		result = m_latestAchievementLevelUp.back();
-		m_latestAchievementLevelUp.pop_back();
-	}
+    if(!m_latestAchievementLevelUp.empty())
+    {
+        result = m_latestAchievementLevelUp.back();
+        m_latestAchievementLevelUp.pop_back();
+    }
 
-	return result;
+    return result;
 }

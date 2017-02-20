@@ -11,6 +11,7 @@
 #include "resources/AchievementManager.hpp"
 #include "resources/MusicPlayer.hpp"
 #include "State/StateManager.hpp"
+#include "rendering/AchievementLevelUpRenderer.hpp"
 
 #include <SFML/Graphics/RenderTexture.hpp>
 #include <SFML/Window/VideoMode.hpp>
@@ -66,6 +67,7 @@ private:
     StateManager m_stateManager;
     AchievementManager m_achievementManager;
     MusicPlayer m_musicPlayer;
+    AchievementLevelUpRenderer m_achievementLevelUpRenderer;
     sf::Clock m_frameClock;
 };
 

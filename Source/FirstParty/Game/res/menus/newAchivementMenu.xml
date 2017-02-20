@@ -1,0 +1,6 @@
+<menu>
+	<styles source="Styles.inc"/>
+	<elements>
+		<label id="1" text="gui_achievement" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
+	</elements>
+</menu>

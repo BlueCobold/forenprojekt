@@ -261,6 +261,6 @@ void LevelPassState::setAchievements()
             m_achievementManager.addValueTo(Achievement::Finish, Achievement::MaxOfTime, Achievement::LevelNAM, i * AchievementManager::Level_Nam_Max_Of_Time_Step, 1);
     }
 
-    m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::Ball, m_level->getLostBalls());
+    m_achievementManager.addValueTo(Achievement::Lose, Achievement::InSum, Achievement::Ball, m_level->getLostBalls());
     m_achievementManager.addValueTo(Achievement::Collect, Achievement::InSum, Achievement::Stars, stars);
 }

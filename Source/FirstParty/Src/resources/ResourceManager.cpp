@@ -101,7 +101,7 @@ std::unique_ptr<sf::Texture> ResourceManager::loadTexture(const std::string& pat
     else
     {
         texture->setSmooth(smooth);
-        gl::Flush();
+        // gl::Flush(); /* <<--- Fehler? */
         return texture;
     }
 }

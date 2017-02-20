@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -20,14 +20,12 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>NotSet</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -147,6 +145,7 @@
     <ClInclude Include="..\..\Src\App.hpp" />
     <ClInclude Include="..\..\Src\BatteryState.hpp" />
     <ClInclude Include="..\..\Src\gui\AchievementMenu.hpp" />
+    <ClInclude Include="..\..\Src\gui\AchievementPopUpMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\AnimationContainer.hpp" />
     <ClInclude Include="..\..\Src\gui\BitmapFont.hpp" />
     <ClInclude Include="..\..\Src\gui\Border.hpp" />
@@ -362,6 +361,7 @@
     <ClCompile Include="..\..\Src\App.cpp" />
     <ClCompile Include="..\..\Src\Core.cpp" />
     <ClCompile Include="..\..\Src\gui\AchievementMenu.cpp" />
+    <ClCompile Include="..\..\Src\gui\AchievementPopUpMenu.cpp" />
     <ClCompile Include="..\..\Src\gui\AnimationContainer.cpp" />
     <ClCompile Include="..\..\Src\gui\BitmapFont.cpp" />
     <ClCompile Include="..\..\Src\gui\Border.cpp" />

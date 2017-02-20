@@ -135,12 +135,12 @@ void LevelFailState::doDraw(const DrawParameter& params)
 void LevelFailState::setAchievements()
 {
     m_achievementManager.analyseGameEvents(m_level->getGameEvents());
-    m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::Ball, m_level->getLostBalls());
+    m_achievementManager.addValueTo(Achievement::Lose, Achievement::InSum, Achievement::Ball, m_level->getLostBalls());
 
     if(m_level->isTimeAttackMode())
-        m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::LevelTAM, 1);
+        m_achievementManager.addValueTo(Achievement::Lose, Achievement::InSum, Achievement::LevelTAM, 1);
     else
-        m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::LevelNAM, 1);
+        m_achievementManager.addValueTo(Achievement::Lose, Achievement::InSum, Achievement::LevelNAM, 1);
 
-    m_achievementManager.addValueTo(Achievement::Loose, Achievement::InSum, Achievement::Level, 1);
+    m_achievementManager.addValueTo(Achievement::Lose, Achievement::InSum, Achievement::Level, 1);
 }
