@@ -53,6 +53,7 @@
 	<menu name="KeyboardMenu" path="KeyboardMenu.xml" />
 	<menu name="GameFinishedMenu" path="GameFinishedMenu.xml" />
 	<menu name="AchievementMenu" path="AchievementMenu.xml" />
+	<menu name="newAchivementMenu" path="newAchivementMenu.xml" />
 </menus>
 <bitmapfonts>
 	<bitmapfont name="gold" path="bitmapfontGold.xml" />
