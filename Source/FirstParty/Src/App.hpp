@@ -67,7 +67,7 @@ private:
     StateManager m_stateManager;
     AchievementManager m_achievementManager;
     MusicPlayer m_musicPlayer;
-    AchievementLevelUpRenderer m_achievementLevelUpRenderer;
+    std::unique_ptr<AchievementLevelUpRenderer> m_achievementLevelUpRenderer;
     sf::Clock m_frameClock;
 };
 

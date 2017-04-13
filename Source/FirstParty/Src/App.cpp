@@ -61,8 +61,7 @@ App::App(AppConfig& config) :
     m_shaderContext(),
     m_resourceManager(m_shaderContext, m_config),
     m_achievementManager("Achievement.dat", m_config),
-    m_musicPlayer(m_config, m_resourceManager.getMusic(), MusicPlayer::Normal),
-    m_achievementLevelUpRenderer(m_achievementManager, m_resourceManager, m_screen, 4.f) /* <---- Fehler */
+    m_musicPlayer(m_config, m_resourceManager.getMusic(), MusicPlayer::Normal)
 {
     // Cache often used settings
     sfExt::StencilBufferEnabled = m_config.get<bool>("UseStencilEffects");
@@ -162,6 +161,9 @@ App::App(AppConfig& config) :
     m_stateManager.registerState(AchievementStateId, std::unique_ptr<AchievementState>(new AchievementState(m_screen, m_resourceManager, m_config, m_achievementManager)));
     m_stateManager.setState(StartStateId);
 
+    m_achievementLevelUpRenderer = std::unique_ptr<AchievementLevelUpRenderer>(
+        new AchievementLevelUpRenderer(m_achievementManager, m_resourceManager, m_screen, 4.f));
+
     m_screen.setMouseCursorVisible(false);
 #if defined(IOS) || defined(ANDROID)
     utility::Mouse.enableSensors(true);
@@ -224,7 +226,7 @@ void App::update()
     if(!m_isMinimized)
         utility::Mouse.capture();
 
-    m_achievementLevelUpRenderer.update();
+    m_achievementLevelUpRenderer->update();
     m_cursor->update();
 
     m_gestures.process();
@@ -291,7 +293,7 @@ void App::draw()
     });
 
     m_stateManager.draw(params);
-    m_achievementLevelUpRenderer.draw(params);
+    m_achievementLevelUpRenderer->draw(params);
     m_cursor->draw(m_screen);
 
     auto configLimit = m_config.get<int>("FrameRateLimit");
