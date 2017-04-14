@@ -86,7 +86,7 @@
 		<glyph name=":" x="48" y="115" width="10" />
 		<glyph name=";" x="60" y="115" width="8" />
 		<glyph name="*" x="70" y="115" width="14" />
-		<glyph name="~" x="86" y="115" width="25" />
+		<glyph name="~" x="86" y="115" width="28" />
 		<glyph name="#-60" x="113" y="115" yoffset="-2" width="22" />
 		<glyph name="#-36" x="137" y="115" yoffset="-2" width="22" />
 		<glyph name="#-42" x="161" y="115" yoffset="-2" width="22" />
