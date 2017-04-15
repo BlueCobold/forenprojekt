@@ -44,7 +44,8 @@ PauseState::~PauseState()
 void PauseState::onEnter(const EnterStateInformation* enterInformation, const double time)
 {
     const EnterPauseStateInformation* info = dynamic_cast<const EnterPauseStateInformation*>(enterInformation);
-    m_level = info->m_level;
+    if(info->m_level)
+        m_level = info->m_level;
     m_levelNumber = info->m_levelNumber;
 
     State::onEnter(enterInformation, time);
