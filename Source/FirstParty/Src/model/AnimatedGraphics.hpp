@@ -7,7 +7,7 @@
 #include "../animation/AnimatedObject.hpp"
 
 /// This class defines typical behavior of graphical objects
-class AnimatedGraphics : public GraphicalObject, public virtual AnimatedObject
+class AnimatedGraphics : public GraphicalObject, public AnimatedObject
 {
 };
 
