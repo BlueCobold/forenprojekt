@@ -1,12 +1,12 @@
 #include "Goody.hpp"
 
 #ifdef TOUCHSIM
-Goody::Goody(const sf::Keyboard::Key key,
-             const Type type,
+Goody::Goody(sf::Keyboard::Key key,
+             Type type,
              const sf::FloatRect& touchArea,
-             const float durationTime,
-             const float cooldownTime,
-             const int charges) :
+             double durationTime,
+             double cooldownTime,
+             int charges) :
     m_button(touchArea),
     m_key(key),
     m_active(false),
@@ -21,11 +21,11 @@ Goody::Goody(const sf::Keyboard::Key key,
 {
 }
 #else
-Goody::Goody(const sf::Keyboard::Key key,
-             const Type type,
-             const double durationTime,
-             const double cooldownTime,
-             const int charges) :
+Goody::Goody(sf::Keyboard::Key key,
+             Type type,
+             double durationTime,
+             double cooldownTime,
+             int charges) :
     m_key(key),
     m_active(false),
     m_charges(charges),

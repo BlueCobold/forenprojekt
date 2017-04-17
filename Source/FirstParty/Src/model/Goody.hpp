@@ -19,11 +19,18 @@ public:
                Counter};
 
 #ifdef TOUCHSIM
-    Goody(const sf::Keyboard::Key key, const Type type, const sf::FloatRect& touchArea, const double durationTime = 0,
-        const double cooldownTime = 0, const int charges = -1);
+    Goody(sf::Keyboard::Key key,
+          Type type,
+          const sf::FloatRect& touchArea,
+          double durationTime = 0,
+          double cooldownTime = 0,
+          int charges = -1);
 #else
-    Goody(const sf::Keyboard::Key key, const Type type, const double durationTime = 0,
-          const double cooldownTime = 0, const int charges = -1);
+    Goody(sf::Keyboard::Key key,
+          Type type,
+          double durationTime = 0,
+          double cooldownTime = 0,
+          int charges = -1);
 #endif
 
     void update(const double elapsedTime);
