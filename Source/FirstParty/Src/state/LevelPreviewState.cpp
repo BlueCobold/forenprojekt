@@ -43,7 +43,8 @@ void LevelPreviewState::loadLevel()
     try
     {
         m_loadingErrorMessage = std::string();
-        auto tmp = std::unique_ptr<Level>(new Level("", m_nextLevelNumber, getResourceManager().getSubScope("level"), m_config));
+        int number = std::min(static_cast<int>(getResourceManager().getFileNames().size()), m_nextLevelNumber);
+        auto tmp = std::unique_ptr<Level>(new Level("", number, getResourceManager().getSubScope("level"), m_config));
         tmp->restartAt(0);
         tmp->update(0);
         getResourceManager().purge("level");

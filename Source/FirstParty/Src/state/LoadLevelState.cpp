@@ -7,8 +7,9 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
-#include <memory>
+#include <algorithm>
 #include <cstring>
+#include <memory>
 
 LoadLevelState::LoadLevelState(sf::RenderWindow& screen,
                                ResourceManager& resourceManager,
@@ -98,7 +99,8 @@ void LoadLevelState::loadLevel()
     m_loadingErrorMessage = "";
     try
     {
-        auto level = std::unique_ptr<Level>(new Level(m_file, m_currentLevel, getResourceManager().getSubScope("level"), m_config));
+        int number = std::min(static_cast<int>(getResourceManager().getFileNames().size()), m_currentLevel);
+        auto level = std::unique_ptr<Level>(new Level(m_file, number, getResourceManager().getSubScope("level"), m_config));
         m_lastLevel = level.get();
         m_onLevelLoaded(level);
         getResourceManager().purge("level");
