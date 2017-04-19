@@ -787,8 +787,6 @@ double Level::getLevelPlayTime() const
 
 bool Level::isOriginal()
 {
-    return true;
-
     bool result = false;
     if(m_number < 1)
         return false;
