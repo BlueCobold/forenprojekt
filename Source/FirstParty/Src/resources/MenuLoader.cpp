@@ -222,8 +222,10 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
 
         auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, parseSize(buttonXml), triggers));
 
-        if(auto visibleWhenId = buttonXml.IntAttribute("visibleWhen"))
-            button->setVisibleWhenId(visibleWhenId);
+        if(buttonXml.Attribute("visibleWhen"))
+            button->setVisibleWhenId(buttonXml.IntAttribute("visibleWhen"));
+        if(buttonXml.Attribute("z"))
+            button->setZLayer(buttonXml.IntAttribute("z"));
 
         auto tooltipAvailable = buttonXml.Attribute("tooltip");
         if(tooltipAvailable != nullptr)
@@ -268,8 +270,10 @@ std::vector<std::unique_ptr<Border>> MenuLoader::parseBorders(
                                                   parseSize(borderXml),
                                                   style));
 
-        if(auto visibleWhenId = borderXml.Attribute("visibleWhen"))
-            border->setVisibleWhenId(utility::stringTo<int>(visibleWhenId));
+        if(borderXml.Attribute("visibleWhen"))
+            border->setVisibleWhenId(borderXml.IntAttribute("visibleWhen"));
+        if(borderXml.Attribute("z"))
+            border->setZLayer(borderXml.IntAttribute("z"));
 
         sf::Vector2f scale(1, 1);
         borderXml.QueryFloatAttribute("scalex", &scale.x);
@@ -315,8 +319,11 @@ std::vector<std::unique_ptr<CheckBox>> MenuLoader::parseCheckBoxes(
             checkBox->setToolTip(tooltip->second);
             checkBox->setToolTipText(checkboxXml.Attribute("tooltiptext"));
         }
-        if(auto visibleWhenId = checkboxXml.IntAttribute("visibleWhen"))
-            checkBox->setVisibleWhenId(visibleWhenId);
+
+        if(checkboxXml.Attribute("visibleWhen"))
+            checkBox->setVisibleWhenId(checkboxXml.IntAttribute("visibleWhen"));
+        if(checkboxXml.Attribute("z"))
+            checkBox->setZLayer(checkboxXml.IntAttribute("z"));
 
         return checkBox;
     });
@@ -335,9 +342,11 @@ std::vector<std::unique_ptr<Slider>> MenuLoader::parseSliders(
         auto id = sliderXml.IntAttribute("id");
 
         auto slider = std::unique_ptr<Slider>(new Slider(id, style, parsePosition(sliderXml)));
-        if(auto visibleWhenId = sliderXml.IntAttribute("visibleWhen"))
-            slider->setVisibleWhenId(visibleWhenId);
-            
+        if(sliderXml.Attribute("visibleWhen"))
+            slider->setVisibleWhenId(sliderXml.IntAttribute("visibleWhen"));
+        if(sliderXml.Attribute("z"))
+            slider->setZLayer(sliderXml.IntAttribute("z"));
+
         return slider;
     });
 }
@@ -356,8 +365,10 @@ std::vector<std::unique_ptr<LineLabel>> MenuLoader::parseLabels(
                         static_cast<LineLabel::Alignment>(labelXml.IntAttribute("alignment")),
                         labelXml.IntAttribute("id")));
 
-        if(auto visibleWhenId = labelXml.IntAttribute("visibleWhen"))
-            label->setVisibleWhenId(visibleWhenId);
+        if(labelXml.Attribute("visibleWhen"))
+            label->setVisibleWhenId(labelXml.IntAttribute("visibleWhen"));
+        if(labelXml.Attribute("z"))
+            label->setZLayer(labelXml.IntAttribute("z"));
 
         return label;
     });
@@ -377,8 +388,10 @@ std::vector<std::unique_ptr<InteractiveLabel>> MenuLoader::parseInteractiveLabel
                         static_cast<LineLabel::Alignment>(labelXml.IntAttribute("alignment")),
                         labelXml.IntAttribute("id")));
 
-        if(auto visibleWhenId = labelXml.IntAttribute("visibleWhen"))
-            label->setVisibleWhenId(visibleWhenId);
+        if(labelXml.Attribute("visibleWhen"))
+            label->setVisibleWhenId(labelXml.IntAttribute("visibleWhen"));
+        if(labelXml.Attribute("z"))
+            label->setZLayer(labelXml.IntAttribute("z"));
 
         if(auto tooltipAvailable = labelXml.Attribute("tooltip"))
         {
@@ -411,7 +424,7 @@ std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
                                                         parsePosition(imageXml),
                                                         size,
                                                         id));
-            
+
         sf::Vector2f scale(1, 1);
         imageXml.QueryFloatAttribute("scalex", &scale.x);
         imageXml.QueryFloatAttribute("scaley", &scale.y);
@@ -430,8 +443,10 @@ std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
             sprite->setToolTip(tooltip);
         }
 
-        if(auto visibleWhenId = imageXml.IntAttribute("visibleWhen"))
-            sprite->setVisibleWhenId(visibleWhenId);
+        if(imageXml.Attribute("visibleWhen"))
+            sprite->setVisibleWhenId(imageXml.IntAttribute("visibleWhen"));
+        if(imageXml.Attribute("z"))
+            sprite->setZLayer(imageXml.IntAttribute("z"));
 
         return sprite;
     });
@@ -454,8 +469,10 @@ std::vector<std::unique_ptr<InputBox>> MenuLoader::parseInputBox(
 
         auto inputBox = std::unique_ptr<InputBox>(new InputBox(id, parsePosition(inputBoxXml), size, inputLimit, style));
 
-        if(auto visibleWhenId = inputBoxXml.IntAttribute("visibleWhen"))
-            inputBox->setVisibleWhenId(visibleWhenId);
+        if(inputBoxXml.Attribute("visibleWhen"))
+            inputBox->setVisibleWhenId(inputBoxXml.IntAttribute("visibleWhen"));
+        if(inputBoxXml.Attribute("z"))
+            inputBox->setZLayer(inputBoxXml.IntAttribute("z"));
 
         return inputBox;
     });
@@ -465,11 +482,11 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
         const tinyxml2::XMLElement& menuXml)
 {
     return parseElements<AnimationContainer>("animationContainer", menuXml,
-        [&](const tinyxml2::XMLElement& animationContainer) -> std::unique_ptr<AnimationContainer>
+        [&](const tinyxml2::XMLElement& aniContainerXml) -> std::unique_ptr<AnimationContainer>
     {
-        int id = animationContainer.IntAttribute("id");
-        std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(parsePosition(animationContainer), id, _cloneHandler));
-        if(auto animationsXml = animationContainer.FirstChildElement("animations"))
+        int id = aniContainerXml.IntAttribute("id");
+        std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(parsePosition(aniContainerXml), id, _cloneHandler));
+        if(auto animationsXml = aniContainerXml.FirstChildElement("animations"))
         {
             ProviderContext context(animContainer.get(), animContainer.get(), animContainer.get(), animContainer.get(), _cloneHandler);
             AnimationParser loader(AnimationContext(context, m_resourceManager, 0));
@@ -478,8 +495,10 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
                 animContainer->bindAnimation(std::move(*ani));
         }
 
-        if(auto visibleWhenId = animationContainer.IntAttribute("visibleWhen"))
-            animContainer->setVisibleWhenId(visibleWhenId);
+        if(aniContainerXml.Attribute("visibleWhen"))
+            animContainer->setVisibleWhenId(aniContainerXml.IntAttribute("visibleWhen"));
+        if(aniContainerXml.Attribute("z"))
+            animContainer->setZLayer(aniContainerXml.IntAttribute("z"));
 
         return animContainer;
     });
