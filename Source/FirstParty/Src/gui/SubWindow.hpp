@@ -31,8 +31,6 @@ struct SubWindowStyle
 
 class SubWindow : public MenuElement
 {
-    std::unique_ptr<MenuElement> doClone() const override;
-
 public:
     SubWindow(int id,
               const ScreenLocation& position,
@@ -79,6 +77,8 @@ private:
     float windowPixelToSliderPixel(float pixel);
 
     sf::Vector2i getMouseOffset(const sf::RenderWindow& screen);
+
+    std::unique_ptr<MenuElement> onClone() const override;
 };
 
 #endif

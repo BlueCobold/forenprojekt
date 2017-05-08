@@ -35,10 +35,9 @@ void Button::setScale(const sf::Vector2f& scale, bool keepAspectRatio)
     m_keepAspectRatio = keepAspectRatio;
 }
 
-std::unique_ptr<MenuElement> Button::doClone() const
+std::unique_ptr<MenuElement> Button::onClone() const
 {
     auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), getSize(), m_isTriggering));
-    clone->setVisibleWhenId(getVisibleWhenId());
     clone->setScale(m_scale, m_keepAspectRatio);
     clone->m_toolTip = m_toolTip;
     return std::move(clone);

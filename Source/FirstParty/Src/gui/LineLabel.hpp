@@ -69,7 +69,7 @@ protected:
     void layoutUpdated(const sf::Vector2f& screenSize) override;
 
 private:
-    std::unique_ptr<MenuElement> doClone() const override;
+    std::unique_ptr<MenuElement> onClone() const override;
 
     void rebuild();
 

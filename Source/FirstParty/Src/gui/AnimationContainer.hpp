@@ -19,7 +19,7 @@ private:
     GraphicalObject graphics;
     sf::Vector2f m_scale;
 
-    std::unique_ptr<MenuElement> doClone() const override;
+    std::unique_ptr<MenuElement> onClone() const override;
     void onDrawElement(const DrawParameter& param) override;
 
     double onGetValueOf(const std::string& name) const override;

@@ -11,10 +11,9 @@ CheckBox::CheckBox(int id, CheckBoxStyle style, const ScreenLocation& position) 
     m_sprite = &m_style.uncheckedStyle.sprite;
 }
 
-std::unique_ptr<MenuElement> CheckBox::doClone() const
+std::unique_ptr<MenuElement> CheckBox::onClone() const
 {
     auto clone = std::unique_ptr<CheckBox>(new CheckBox(getId(), m_style, getPosition()));
-    clone->setVisibleWhenId(getVisibleWhenId());
     clone->m_toolTip = m_toolTip;
     return std::move(clone);
 }

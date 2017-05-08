@@ -23,12 +23,13 @@ void AnimationContainer::bindAnimation(std::unique_ptr<Animation> animation)
     graphics.bindAnimation(std::move(animation));
 }
 
-std::unique_ptr<MenuElement> AnimationContainer::doClone() const
+std::unique_ptr<MenuElement> AnimationContainer::onClone() const
 {
     auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getPosition(), getId(), m_cloneHandler));
     m_cloneHandler.registerCloneAll(*this, *other.get());
     
     other->setVisibleWhenId(getVisibleWhenId());
+    other->setZLayer(getZLayer());
 
     for(auto it = begin(m_variables); it != end(m_variables); ++it)
         other->m_variables[it->first] = it->second;

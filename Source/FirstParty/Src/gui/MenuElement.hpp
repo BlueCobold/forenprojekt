@@ -74,6 +74,7 @@ public:
                 const sf::Vector2f& position,
                 const sf::Vector2f& offset) :
         m_id(id),
+        m_zLayer(id),
         m_type(type),
         m_screenLocation(position, offset),
         m_visible(true),
@@ -86,6 +87,7 @@ public:
                 MenuElementType::Type type,
                 const ScreenLocation& position) :
         m_id(id),
+        m_zLayer(id),
         m_type(type),
         m_screenLocation(position),
         m_visible(true),
@@ -106,7 +108,17 @@ public:
     {
         onDrawAdditionalForeground(params);
     }
-    
+
+    void setZLayer(int z)
+    {
+        m_zLayer = z;
+    }
+
+    int getZLayer() const
+    {
+        return m_zLayer;
+    }
+
     void setPosition(const ScreenLocation& position)
     {
         m_screenLocation = position;
@@ -211,6 +223,20 @@ protected:
     }
 
 private:
+
+    std::unique_ptr<MenuElement> doClone() const override
+    {
+        auto element = onClone();
+        element->m_zLayer = m_zLayer;
+        element->m_visible = m_visible;
+        element->m_cursorIsValid = m_cursorIsValid;
+        element->m_visibleWhen = m_visibleWhen;
+        element->m_masterId = m_masterId;
+        return element;
+    }
+
+    virtual std::unique_ptr<MenuElement> onClone() const = 0;
+
     void doDraw(const DrawParameter& params) override
     {
         if(isVisible())
@@ -220,6 +246,7 @@ private:
     virtual void onDrawElement(const DrawParameter& params) = 0;
 
     int m_id;
+    int m_zLayer;
     MenuElementType::Type m_type;
     ScreenLocation m_screenLocation;
     bool m_visible;

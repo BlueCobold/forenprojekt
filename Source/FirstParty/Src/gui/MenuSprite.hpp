@@ -38,7 +38,7 @@ private:
     ToolTip m_toolTip;
     bool m_showToolTip;
 
-    std::unique_ptr<MenuElement> doClone() const override;
+    std::unique_ptr<MenuElement> onClone() const override;
 };
 
 #endif // MENUSPRITE_HPP

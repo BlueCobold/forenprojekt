@@ -32,11 +32,9 @@ InputBox::InputBox(const int id,
 
 }
 
-std::unique_ptr<MenuElement> InputBox::doClone() const
+std::unique_ptr<MenuElement> InputBox::onClone() const
 {
-    auto clone = std::unique_ptr<MenuElement>(new InputBox(getId(), getPosition(), m_size, m_inputLimit, m_style));
-    clone->setVisibleWhenId(getVisibleWhenId());
-    return std::move(clone);
+    return std::unique_ptr<MenuElement>(new InputBox(getId(), getPosition(), m_size, m_inputLimit, m_style));
 }
 
 void InputBox::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)

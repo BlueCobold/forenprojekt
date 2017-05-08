@@ -27,7 +27,7 @@ private:
     void layoutUpdated(const sf::Vector2f& screenSize) override;
     void onDrawAdditionalForeground(const DrawParameter& params) override;
 
-    std::unique_ptr<MenuElement> doClone() const override;
+    std::unique_ptr<MenuElement> onClone() const override;
 
     CheckBoxStyle m_style;
     bool m_checked;

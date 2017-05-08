@@ -17,11 +17,9 @@ Slider::Slider(const int id, const SliderStyle style, const ScreenLocation& posi
     m_max = m_style.max;
 }
 
-std::unique_ptr<MenuElement> Slider::doClone() const
+std::unique_ptr<MenuElement> Slider::onClone() const
 {
-    auto clone = std::unique_ptr<Slider>(new Slider(getId(), m_style, getPosition()));
-    clone->setVisibleWhenId(getVisibleWhenId());
-    return std::move(clone);
+    return std::unique_ptr<Slider>(new Slider(getId(), m_style, getPosition()));
 }
 
 void Slider::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)

@@ -116,10 +116,9 @@ void Border::onDrawElement(const DrawParameter& params)
     }
 }
 
-std::unique_ptr<MenuElement> Border::doClone() const
+std::unique_ptr<MenuElement> Border::onClone() const
 {
     std::unique_ptr<Border> clone(new Border(getId(), getPosition(), getSize(), m_style));
-    clone->setVisibleWhenId(getVisibleWhenId());
     clone->setScale(m_scale, m_keepAspectRatio);
     return std::move(clone);
 }

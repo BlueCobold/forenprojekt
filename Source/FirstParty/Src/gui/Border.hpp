@@ -38,7 +38,7 @@ private:
     bool m_hasDecos;
 
     void onDrawElement(const DrawParameter& params) override;
-    std::unique_ptr<MenuElement> doClone() const override;
+    std::unique_ptr<MenuElement> onClone() const override;
     void updateDeco(BorderStyle::DecoId id, float x, float y);
     void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 };

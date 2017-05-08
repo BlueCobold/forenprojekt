@@ -29,7 +29,7 @@ MenuPanel::MenuPanel(const std::vector<std::unique_ptr<MenuElement>>& elements)
     std::sort(m_elements.begin(), m_elements.end(), 
         [](const std::unique_ptr<MenuElement>& a, const std::unique_ptr<MenuElement>& b) -> bool
     { 
-        return a->getId() < b->getId(); 
+        return a->getZLayer() < b->getZLayer(); 
     });
 }
 

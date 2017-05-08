@@ -15,10 +15,9 @@ MenuSprite::MenuSprite(const Sprite& sprite,
 {
 }
 
-std::unique_ptr<MenuElement> MenuSprite::doClone() const
+std::unique_ptr<MenuElement> MenuSprite::onClone() const
 {
     auto clone = std::unique_ptr<MenuSprite>(new MenuSprite(m_sprite, getPosition(), getSize(), getId()));
-    clone->setVisibleWhenId(getVisibleWhenId());
     clone->m_toolTip = m_toolTip;
     clone->setScale(m_scale, m_keepAspectRatio);
     return std::move(clone);

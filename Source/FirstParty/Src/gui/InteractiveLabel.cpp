@@ -10,7 +10,7 @@ InteractiveLabel::InteractiveLabel(const std::string& text,
 {
 }
 
-std::unique_ptr<MenuElement> InteractiveLabel::doClone() const
+std::unique_ptr<MenuElement> InteractiveLabel::onClone() const
 {
     auto clone = std::unique_ptr<InteractiveLabel>(new InteractiveLabel(
                                                             getText(),
@@ -19,7 +19,6 @@ std::unique_ptr<MenuElement> InteractiveLabel::doClone() const
                                                             getFont(),
                                                             getAlignment(),
                                                             getId()));
-    clone->setVisibleWhenId(getVisibleWhenId());
     clone->m_toolTip = m_toolTip;
     return std::move(clone);
 }

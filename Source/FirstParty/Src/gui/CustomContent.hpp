@@ -13,7 +13,7 @@ class CustomContent : public MenuElement
 {
     std::function<void (int id, const DrawParameter& params)> m_callback;
 
-    std::unique_ptr<MenuElement> doClone() const override
+    std::unique_ptr<MenuElement> onClone() const override
     {
         return std::unique_ptr<MenuElement>(new CustomContent(getId()));
     }
