@@ -4,6 +4,6 @@
 
 FailMenu::FailMenu(sf::RenderWindow& screen,
                    ResourceManager& resourceManager) :
-    Menu(*resourceManager.getMenuTemplate("failMenu"), screen)
+    Menu(*resourceManager.getMenuTemplate("FailMenu"), screen)
 {
 }

@@ -1,0 +1,16 @@
+<menu>
+	<styles source="Styles.inc"/>
+	<elements>
+		<border id="-1" style="window"
+			x="0.5" y="0.5" width="-150" height="-150" widthPercent="1.0" heightPercent="1.0" />
+
+		<label text="gui_level_unsuccessful" font="gui_large" alignment="1" x="0.5" y="0.0" offsetx="0" offsety="58" />
+
+		<button id="0" text="gui_play_again" style="playButtonStyle" x="0.5" y="0.8" offsetx="0" offsety="-60"
+			width="800" height="600" widthPercent="1" heightPercent="1" keepAspectRatio="true" scalex="0.5" scaley="0.5" />
+		<button id="1" text="gui_mainmenu" style="exitButtonStyle" x="0.25" y="0.8" offsetx="0" offsety="-50"
+			width="800" height="600" widthPercent="1" heightPercent="1" keepAspectRatio="true" scalex="0.5" scaley="0.5" />
+		<button id="2" text="" style="goblet" x="0.25" y="0.4h,0.065w" offsetx="-50" offsety="20" tooltip="default" tooltiptext="tooltip_highscore"
+			width="800" height="600" widthPercent="1" heightPercent="1" keepAspectRatio="true" scalex="0.5" scaley="0.5"/>
+	</elements>
+</menu>
