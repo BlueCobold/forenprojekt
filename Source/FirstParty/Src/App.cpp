@@ -269,7 +269,8 @@ void App::draw()
     gl::StencilMask(0xFF); // Write to entire stencil buffer
     gl::ClearStencil(0);
     gl::DepthMask(true);
-    gl::ClearDepth(1);
+    if(gl::ClearDepth)
+        gl::ClearDepth(1);
     gl::Clear(gl::STENCIL_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
     gl::DepthMask(false);
 
@@ -296,11 +297,13 @@ void App::draw()
     m_achievementLevelUpRenderer->draw(params);
     m_cursor->draw(m_screen);
 
+#ifndef ANDROID
     auto configLimit = m_config.get<int>("FrameRateLimit");
     sf::Time limit(sf::microseconds(1000000 / configLimit));
     auto delta = limit - m_frameClock.getElapsedTime();
     if (delta.asMicroseconds() > 0)
         sf::sleep(delta);
+#endif
     m_screen.display();
     m_frameClock.restart();
 }
