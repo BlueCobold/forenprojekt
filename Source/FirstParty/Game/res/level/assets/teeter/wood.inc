@@ -80,6 +80,7 @@
 
 		<entities>
 			<entity name="PadellTeeter1" rep="P1" type="paddel">
+				<constants posy="0" />
 				<physics name="verticalmoving1" shape="teeter2" />
 				<sound name="bounce" />
 				<collides>
@@ -97,6 +98,7 @@
 				</animations>
 			</entity>
 			<entity name="PadellTeeter2" rep="P2" type="paddel">
+				<constants posy="0" />
 				<physics name="verticalmoving1" shape="teeter2" />
 				<sound name="bounce" />
 				<collides>
