@@ -21,6 +21,8 @@ public:
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text, const std::string& replacement = "");
 
+    void registerOnChange(std::function<void (const CheckBox& sender)> callback);
+
 private:
     void onDrawElement(const DrawParameter& params) override;
     void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
@@ -35,6 +37,7 @@ private:
     ToolTip m_toolTip;
     bool m_showToolTip;
     Sprite* m_sprite;
+    std::function<void (const CheckBox& sender)> m_callback;
 };
 
 #endif // CHECKBOX_HPP

@@ -18,6 +18,11 @@ std::unique_ptr<MenuElement> CheckBox::onClone() const
     return std::move(clone);
 }
 
+void CheckBox::registerOnChange(std::function<void (const CheckBox& sender)> callback)
+{
+    m_callback = callback;
+}
+
 void CheckBox::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
@@ -37,7 +42,11 @@ void CheckBox::updated(const sf::RenderWindow& screen, const double time, const 
         m_toolTip.setPosition(static_cast<const sf::Vector2f>(mousePosition), screen);
 
         if(utility::Mouse.leftButtonReleased())
+        {
             m_checked = !m_checked;
+            if(m_callback)
+                m_callback(*this);
+        }
     }
     else
     {
@@ -96,6 +105,7 @@ void CheckBox::setToolTipText(const std::string& text, const std::string& replac
 {
     m_toolTip.setText(text, replacement);
 }
+
 
 void CheckBox::layoutUpdated(const sf::Vector2f& screenSize)
 {
