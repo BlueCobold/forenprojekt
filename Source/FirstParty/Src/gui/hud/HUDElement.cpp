@@ -16,6 +16,8 @@ void HUDElement::update(const DrawParameter& params)
 
 void HUDElement::setPosition(const sf::Vector2f& position, const sf::Vector2f& offset)
 {
+    m_screenLocation.setPosition(position);
+    m_screenLocation.setOffset(offset);
     onPositionSet(position, offset);
 }
 
@@ -28,7 +30,4 @@ const sf::Vector2f HUDElement::getCurrentPosition() const
 }
 
 void HUDElement::onPositionSet(const sf::Vector2f& position, const sf::Vector2f& offset)
-{
-    m_screenLocation.setPosition(position);
-    m_screenLocation.setOffset(offset);
-}
+{ }
