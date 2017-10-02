@@ -60,7 +60,7 @@ LevelInfo Level::load(bool loadInfoOnly)
         parsePreview(*levelinfo, info);
 
         // get optional Attribute
-        if(auto gameplay = levelXml->FirstChildElement("gameplay"))
+        if(auto gameplay = levelinfo->FirstChildElement("gameplay"))
             parseGameplayAttributes(*gameplay, info);
         else
         {
