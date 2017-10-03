@@ -143,7 +143,7 @@ void Level::update(const double elapsedTime)
     if(!m_levelPass)
         m_levelEndingTime = elapsedTime + 1.0f;
 
-    int steps = std::min(20, std::max(1, static_cast<int>(ceil(m_timeStep / (1 / (60.0 * 2))))));
+    int steps = 1 + std::min(20, static_cast<int>(ceil(m_timeStep / (1 / (60.0 * 2)))));
     double delta = 0;
     for(int i = 1; i <= steps; i++)
     {
