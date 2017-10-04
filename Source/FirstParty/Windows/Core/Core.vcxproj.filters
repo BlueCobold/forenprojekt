@@ -730,6 +730,9 @@
     <ClInclude Include="..\..\Src\gui\AchievementPopUpMenu.hpp">
       <Filter>Headers\gui\menus</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Src\gui\ScreenScale.hpp">
+      <Filter>Headers\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Resouces">

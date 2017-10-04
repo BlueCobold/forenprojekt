@@ -196,6 +196,7 @@
     <ClInclude Include="..\..\Src\gui\PauseMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\ReplayMenu.hpp" />
     <ClInclude Include="..\..\Src\gui\ScreenLocation.hpp" />
+    <ClInclude Include="..\..\Src\gui\ScreenScale.hpp" />
     <ClInclude Include="..\..\Src\gui\ScreenSize.hpp" />
     <ClInclude Include="..\..\Src\gui\Slider.hpp" />
     <ClInclude Include="..\..\Src\gui\SliderStyle.hpp" />
