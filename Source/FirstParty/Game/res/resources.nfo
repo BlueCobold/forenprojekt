@@ -13,12 +13,12 @@
 	<texture name="gravity_arrow" path="assets/misc/gravity_arrow.png" smooth="false" />
 	<texture name="target" path="assets/target/target.png" smooth="true" />
 	<texture name="targetmini" path="assets/target/TargetMini.png" smooth="true" />
-	<texture name="bitmapfontGold" path="bitmapfonts/gold.png" smooth="false" />
-	<texture name="bitmapfontGreen" path="bitmapfonts/green.png" smooth="false" />
-	<texture name="bitmapfontRed" path="bitmapfonts/red.png" smooth="false" />
-	<texture name="gui_large" path="bitmapfonts/gui_large.png" smooth="false" />
+	<texture name="bitmapfontGold" path="bitmapfonts/gold.png" smooth="true" />
+	<texture name="bitmapfontGreen" path="bitmapfonts/green.png" smooth="true" />
+	<texture name="bitmapfontRed" path="bitmapfonts/red.png" smooth="true" />
+	<texture name="gui_large" path="bitmapfonts/gui_large.png" smooth="true" />
 	<texture name="buttonHoverFont" path="bitmapfonts/button_hover.png" smooth="true" />
-	<texture name="buttonIdleFont" path="bitmapfonts/button_idle.png" smooth="false" />
+	<texture name="buttonIdleFont" path="bitmapfonts/button_idle.png" smooth="true" />
 	<texture name="arrowHUD" path="gui/arrows.png" smooth="true" />
 	<texture name="guiMisc" path="gui/misc.png" smooth="false" />
 	<texture name="sparkles" path="assets/misc/sparkles.png" smooth="false" />
