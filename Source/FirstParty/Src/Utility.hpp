@@ -29,7 +29,7 @@ namespace utility
     static const float PIXEL_PER_METER = 10.f;
 
     static const std::string VERSION = "0.8";
-	
+
     template<typename T>
     std::string toString(const T& value)
     {
@@ -98,6 +98,7 @@ namespace utility
     std::string translateKey(const std::string& key);
 
     std::string replace(std::string string, std::string needle, std::string replacement);
+    std::string replaceAll(std::string string, std::string needle, std::string replacement);
     std::string replace(std::string string, std::string replacement);
 
     sf::View getDefaultView(const sf::RenderTarget& target, const sf::Vector2f viewSize);

@@ -77,6 +77,14 @@ namespace utility
         return string;
     }
 
+    std::string replaceAll(std::string string, std::string needle, std::string replacement)
+    {
+        for(auto pos = string.find(needle); pos != std::string::npos; pos = string.find(needle))
+            string.replace(pos, needle.length(), replacement);
+
+        return string;
+    }
+
     std::string replace(std::string string, std::string replacement)
     {
         auto pos = string.find("%");
