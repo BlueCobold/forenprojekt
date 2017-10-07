@@ -10,13 +10,13 @@
 #include "ScreenSize.hpp"
 #include "ScreenLocation.hpp"
 
-class MenuSprite : public MenuElement, public SizedElement
+class MenuSprite : public MenuElement
 {
 public:
 
     MenuSprite(const Sprite& sprite,
                const ScreenLocation& position,
-               const ScreenSize& size,
+               const ScreenScale& scale,
                const int id);
 
     void setToolTip(const ToolTip& toolTip);
@@ -24,7 +24,6 @@ public:
     void setTextureRect(const sf::IntRect& textureRect);
     void setTexture(const sf::Texture& texture);
     void setSprite(const Sprite& sprite);
-    void setScale(const sf::Vector2f& scale, bool keepAspectRatio);
 
 private:
     void onDrawElement(const DrawParameter& params) override;
@@ -33,8 +32,7 @@ private:
     void onDrawAdditionalForeground(const DrawParameter& params) override;
 
     Sprite m_sprite;
-    sf::Vector2f m_scale;
-    bool m_keepAspectRatio;
+    ScreenScale m_scale;
     ToolTip m_toolTip;
     bool m_showToolTip;
 

@@ -17,14 +17,13 @@
 #include <functional>
 
 /// this class represent a Button
-class Button : public MenuElement, public SizedElement
+class Button : public MenuElement
 {
     ButtonStyle m_style;
     ToolTip m_toolTip;
     bool m_showToolTip;
     bool m_isTriggering;
-    bool m_keepAspectRatio;
-    sf::Vector2f m_scale;
+    ScreenScale m_scale;
 
     ButtonStateStyle* m_currentStyle;
 
@@ -44,14 +43,13 @@ public:
     Button(int id, 
            ButtonStyle style,
            const ScreenLocation& position,
-           const ScreenSize& size,
+           const ScreenScale& scale,
            bool triggers = true);
 
     void registerOnPressed(std::function<void (const Button& sender)> callback);
 
     void setToolTip(const ToolTip& toolTip);
     void setToolTipText(const std::string& text, const std::string& replacement = "");
-    void setScale(const sf::Vector2f& scale, bool keepAspectRatio);
 
     void changeIdleSprite(const Sprite& sprite);
     void changeHoverSprite(const Sprite& sprite);

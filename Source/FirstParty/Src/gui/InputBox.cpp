@@ -8,7 +8,7 @@ InputBox::InputBox(const int id,
                    const unsigned int inputLimit,
                    const InputBoxStyle& style) :
     MenuElement(id, MenuElementType::InputBox, position),
-    m_inputText("", ScreenLocation(position).addOffset(style.textOffset), 0.f, style.font),
+    m_inputText("", ScreenLocation(position).addOffset(style.textOffset), ScreenScale(), 0.f, style.font),
     m_inputLimit(inputLimit),
     m_size(size),
     m_finished(false),

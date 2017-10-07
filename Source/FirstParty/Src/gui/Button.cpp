@@ -5,17 +5,15 @@
 
 Button::Button(int id, ButtonStyle style,
                const ScreenLocation& position,
-               const ScreenSize& size,
+               const ScreenScale& scale,
                bool triggers) :
     MenuElement(id, MenuElementType::Button, position),
-    SizedElement(size),
     m_style(std::move(style)),
     m_showToolTip(false),
     m_isTriggering(triggers),
     m_playHoverSound(false),
     m_playPressedSound(false),
-    m_keepAspectRatio(false),
-    m_scale(sf::Vector2f(1, 1))
+    m_scale(scale)
 {
     m_currentStyle = &m_style.idleStyle;
 
@@ -29,16 +27,9 @@ Button::Button(int id, ButtonStyle style,
         m_style.pressedStyle.animation->setPosition(ScreenLocation(position).addOffset(m_style.pressedStyle.spriteOffset));
 }
 
-void Button::setScale(const sf::Vector2f& scale, bool keepAspectRatio)
-{
-    m_scale = scale;
-    m_keepAspectRatio = keepAspectRatio;
-}
-
 std::unique_ptr<MenuElement> Button::onClone() const
 {
-    auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), getSize(), m_isTriggering));
-    clone->setScale(m_scale, m_keepAspectRatio);
+    auto clone = std::unique_ptr<Button>(new Button(getId(), m_style, getPosition(), m_scale, m_isTriggering));
     clone->m_toolTip = m_toolTip;
     return std::move(clone);
 }
@@ -46,15 +37,11 @@ std::unique_ptr<MenuElement> Button::onClone() const
 void Button::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     auto screenSize = static_cast<sf::Vector2f>(screen.getSize());
-    setScreenSize(screenSize);
+    m_scale.setScreenSize(screenSize);
     updateLayout(screenSize);
     m_toolTip.update();
 
-    auto& size = getCurrentSize();
-    auto& rect = getSize().getFixedSize();
-    auto scalex = m_scale.x * ((size.x != 0 && rect.x != 0) ? size.x / rect.x : 1);
-    sf::Vector2f scale(scalex,
-                       m_keepAspectRatio ? scalex : (m_scale.y * ((size.y != 0 && rect.y != 0) ? size.y / rect.y : 1)));
+    sf::Vector2f scale(m_scale.getCurrentScale());
 
     auto& currentPosition = getCurrentPosition();
     sf::IntRect buttonRect(static_cast<int>(currentPosition.x + scale.x * m_style.mouseRect.left),

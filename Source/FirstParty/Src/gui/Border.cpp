@@ -34,8 +34,6 @@ void Border::updated(const sf::RenderWindow& screen, const double time, const sf
     auto size = getCurrentSize();
     size.x *= m_scale.x;
     size.y *= m_scale.y;
-    if(m_keepAspectRatio)
-        size.y = size.x / getSize().getFixedAspectRatio();
 
     size = sf::Vector2f(floorf(size.x + m_style.innerOffsets.width),
                         floorf(size.y + m_style.innerOffsets.height));
@@ -119,6 +117,5 @@ void Border::onDrawElement(const DrawParameter& params)
 std::unique_ptr<MenuElement> Border::onClone() const
 {
     std::unique_ptr<Border> clone(new Border(getId(), getPosition(), getSize(), m_style));
-    clone->setScale(m_scale, m_keepAspectRatio);
     return std::move(clone);
 }

@@ -13,8 +13,11 @@ class CheckBox : public MenuElement
 {
 public:
 
-    CheckBox(int id, CheckBoxStyle style, const ScreenLocation& position);
-    
+    CheckBox(int id,
+             CheckBoxStyle style,
+             const ScreenLocation& position,
+             const ScreenScale& scale);
+
     bool getChecked();
     void setChecked(bool checked);
 
@@ -37,6 +40,7 @@ private:
     ToolTip m_toolTip;
     bool m_showToolTip;
     Sprite* m_sprite;
+    ScreenScale m_scale;
     std::function<void (const CheckBox& sender)> m_callback;
 };
 

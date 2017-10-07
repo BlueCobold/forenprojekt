@@ -497,6 +497,7 @@ void Level::createLabelAt(const sf::Vector2f& position, const std::string& fontN
     std::unique_ptr<LineLabel> label(new LineLabel(
             "@@" + text,
             ScreenLocation(sf::Vector2f(), position),
+            ScreenScale(), 
             0,
             m_resourceManager->getBitmapFont(fontName),
             LineLabel::Centered));

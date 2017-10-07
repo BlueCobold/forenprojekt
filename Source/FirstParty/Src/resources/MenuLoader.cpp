@@ -110,9 +110,47 @@ ScreenSize parseSize(const tinyxml2::XMLElement& element)
     element.QueryFloatAttribute("widthPercent", &relativeSize.x);
     element.QueryFloatAttribute("heightPercent", &relativeSize.y);
     sf::Vector2f sizeOffset;
-    element.QueryFloatAttribute("width", &sizeOffset.x);
-    element.QueryFloatAttribute("height", &sizeOffset.y);
-    return ScreenSize(sizeOffset, relativeSize);
+    element.QueryFloatAttribute("widthOffset", &sizeOffset.x);
+    element.QueryFloatAttribute("heightOffset", &sizeOffset.y);
+    float aspectRatio = 0;
+    element.QueryFloatAttribute("aspectRatio", &aspectRatio);
+    ScreenSize::ScaleType scaleType = ScreenSize::XY;
+    std::string sType;
+    if(auto xmlType = element.Attribute("scaleType"))
+        sType = std::string(xmlType);
+    if(sType == "min")
+        scaleType = ScreenSize::MIN;
+    else if(sType == "max")
+        scaleType = ScreenSize::MAX;
+    return ScreenSize(sizeOffset, relativeSize, aspectRatio, scaleType);
+}
+
+ScreenScale parseScale(const tinyxml2::XMLElement& element)
+{
+    sf::Vector2f refSize(1, 1);
+    element.QueryFloatAttribute("refWidth", &refSize.x);
+    element.QueryFloatAttribute("refHeight", &refSize.y);
+    sf::Vector2f percent;
+    element.QueryFloatAttribute("growWidth", &percent.x);
+    element.QueryFloatAttribute("growHeight", &percent.y);
+    sf::Vector2f postScale(1, 1);
+    element.QueryFloatAttribute("scalex", &postScale.x);
+    element.QueryFloatAttribute("scaley", &postScale.y);
+    std::string scaleType;
+    if(auto type = element.Attribute("scaleType"))
+        scaleType = std::string(type);
+    auto type = ScreenScale::XY;
+    if(scaleType == "min")
+        type = ScreenScale::MIN;
+    else if(scaleType == "max")
+        type = ScreenScale::MAX;
+    else if(scaleType == "xy")
+        type = ScreenScale::XY;
+    else if(scaleType == "xForBoth")
+        type = ScreenScale::X_FOR_BOTH;
+    else if(scaleType == "yForBoth")
+        type = ScreenScale::Y_FOR_BOTH;
+    return ScreenScale(percent, refSize, postScale, type);
 }
 
 CloneHandler MenuLoader::_cloneHandler;
@@ -208,19 +246,22 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
         style.idleStyle.label = LineLabel(
             textResourceKey, 
             ScreenLocation(position).addOffset(style.idleStyle.textOffset),
+            ScreenScale(), 
             0, style.idleStyle.font, LineLabel::Centered);
 
         style.hoverStyle.label = LineLabel(
             textResourceKey, 
             ScreenLocation(position).addOffset(style.hoverStyle.textOffset),
+            ScreenScale(),
             0, style.hoverStyle.font, LineLabel::Centered);
 
         style.pressedStyle.label = LineLabel(
             textResourceKey, 
             ScreenLocation(position).addOffset(style.pressedStyle.textOffset),
+            ScreenScale(),
             0, style.pressedStyle.font, LineLabel::Centered);
 
-        auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, parseSize(buttonXml), triggers));
+        auto button = std::unique_ptr<Button>(new Button(id, std::move(style), position, parseScale(buttonXml), triggers));
 
         if(buttonXml.Attribute("visibleWhen"))
             button->setVisibleWhenId(buttonXml.IntAttribute("visibleWhen"));
@@ -240,9 +281,6 @@ std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(
         sf::Vector2f scale(1, 1);
         buttonXml.QueryFloatAttribute("scalex", &scale.x);
         buttonXml.QueryFloatAttribute("scaley", &scale.y);
-        bool keepAspectRatio = false;
-        buttonXml.QueryBoolAttribute("keepAspectRatio", &keepAspectRatio);
-        button->setScale(scale, keepAspectRatio);
 
         return button;
     });
@@ -310,7 +348,10 @@ std::vector<std::unique_ptr<CheckBox>> MenuLoader::parseCheckBoxes(
             
         auto id = checkboxXml.IntAttribute("id");
 
-        auto checkBox = std::unique_ptr<CheckBox>(new CheckBox(id, style, parsePosition(checkboxXml)));
+        auto checkBox = std::unique_ptr<CheckBox>(new CheckBox(id,
+                                                               style,
+                                                               parsePosition(checkboxXml),
+                                                               parseScale(checkboxXml)));
         if(auto toolTipName = checkboxXml.Attribute("tooltip"))
         {
             auto tooltip = m_toolTips.find(toolTipName);
@@ -360,6 +401,7 @@ std::vector<std::unique_ptr<LineLabel>> MenuLoader::parseLabels(
         auto label = std::unique_ptr<LineLabel>(new LineLabel(
                         std::string(labelXml.Attribute("text")),
                         parsePosition(labelXml),
+                        parseScale(labelXml),
                         0,
                         m_resourceManager.getBitmapFont(labelXml.Attribute("font")),
                         static_cast<LineLabel::Alignment>(labelXml.IntAttribute("alignment")),
@@ -417,20 +459,12 @@ std::vector<std::unique_ptr<MenuSprite>> MenuLoader::parseImages(
         Sprite baseSprite = getSprite(imageXml, m_resourceManager);
         sf::Vector2f relativeSize(imageXml.FloatAttribute("widthPercent"), imageXml.FloatAttribute("heightPercent"));
         sf::Vector2i texRect(baseSprite.getTextureRect().width, baseSprite.getTextureRect().height);
-        ScreenSize size(sf::Vector2f(texRect), relativeSize);
 
         auto sprite = std::unique_ptr<MenuSprite>(new MenuSprite(
                                                         baseSprite,
                                                         parsePosition(imageXml),
-                                                        size,
+                                                        parseScale(imageXml),
                                                         id));
-
-        sf::Vector2f scale(1, 1);
-        imageXml.QueryFloatAttribute("scalex", &scale.x);
-        imageXml.QueryFloatAttribute("scaley", &scale.y);
-        bool keepAspectRatio = false;
-        imageXml.QueryBoolAttribute("keepAspectRatio", &keepAspectRatio);
-        sprite->setScale(scale, keepAspectRatio);
 
         auto toolTipText = imageXml.Attribute("tooltiptext");
         if(auto toolTipName = toolTipText ? imageXml.Attribute("tooltip") : nullptr)

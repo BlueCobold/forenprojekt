@@ -1,19 +1,23 @@
 #include "CheckBox.hpp"
 #include "../Input.hpp"
 
-CheckBox::CheckBox(int id, CheckBoxStyle style, const ScreenLocation& position) :
+CheckBox::CheckBox(int id,
+                   CheckBoxStyle style,
+                   const ScreenLocation& position,
+                   const ScreenScale& scale) :
     MenuElement(id, MenuElementType::CheckBox, position),
     m_style(style),
     m_checked(false),
     m_hover(false),
-    m_showToolTip(false)
+    m_showToolTip(false),
+    m_scale(scale)
 {
     m_sprite = &m_style.uncheckedStyle.sprite;
 }
 
 std::unique_ptr<MenuElement> CheckBox::onClone() const
 {
-    auto clone = std::unique_ptr<CheckBox>(new CheckBox(getId(), m_style, getPosition()));
+    auto clone = std::unique_ptr<CheckBox>(new CheckBox(getId(), m_style, getPosition(), m_scale));
     clone->m_toolTip = m_toolTip;
     return std::move(clone);
 }
@@ -27,12 +31,13 @@ void CheckBox::updated(const sf::RenderWindow& screen, const double time, const 
 {
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
     m_toolTip.update();
-    
-    auto currentPosition = getCurrentPosition();
-    sf::IntRect checkboxRect(static_cast<int>(currentPosition.x + m_style.mouseRect.left),
-                                static_cast<int>(currentPosition.y + m_style.mouseRect.top),
-                                m_style.mouseRect.width,
-                                m_style.mouseRect.height);
+
+    auto position = getCurrentPosition();
+    auto &scale = m_scale.getCurrentScale();
+    sf::IntRect checkboxRect(static_cast<int>(position.x + scale.x * m_style.mouseRect.left),
+                             static_cast<int>(position.y + scale.y * m_style.mouseRect.top),
+                             static_cast<int>(scale.x * m_style.mouseRect.width),
+                             static_cast<int>(scale.y * m_style.mouseRect.height));
 
     auto mousePosition = getCursorPosition(screen);
     if(cursorIsValid() && checkboxRect.contains(getCursorPosition(screen) + mouseOffset))
@@ -106,13 +111,30 @@ void CheckBox::setToolTipText(const std::string& text, const std::string& replac
     m_toolTip.setText(text, replacement);
 }
 
+sf::Vector2f operator*(const sf::Vector2f& l, const sf::Vector2f& r)
+{
+    return sf::Vector2f(l.x*r.x, l.y*r.y);
+}
 
 void CheckBox::layoutUpdated(const sf::Vector2f& screenSize)
 {
     auto pos = getCurrentPosition();
+    m_scale.setScreenSize(screenSize);
     auto currentPosition = sf::Vector2f(floorf(pos.x), floorf(pos.y));
-    m_style.uncheckedStyle.sprite.setPosition(currentPosition + m_style.uncheckedStyle.spriteOffset);
-    m_style.checkedStyle.sprite.setPosition(currentPosition + m_style.checkedStyle.spriteOffset);
-    m_style.hoverStyle.sprite.setPosition(currentPosition + m_style.hoverStyle.spriteOffset);
-    m_style.checkedHoverStyle.sprite.setPosition(currentPosition + m_style.checkedHoverStyle.spriteOffset);
+
+    m_style.uncheckedStyle.sprite.setPosition(currentPosition
+                                            + m_scale.getCurrentScale() * m_style.uncheckedStyle.spriteOffset);
+    m_style.uncheckedStyle.sprite.setScale(m_scale.getCurrentScale());
+
+    m_style.checkedStyle.sprite.setPosition(currentPosition
+                                          + m_scale.getCurrentScale() * m_style.checkedStyle.spriteOffset);
+    m_style.checkedStyle.sprite.setScale(m_scale.getCurrentScale());
+
+    m_style.hoverStyle.sprite.setPosition(currentPosition
+                                        + m_scale.getCurrentScale() * m_style.hoverStyle.spriteOffset);
+    m_style.hoverStyle.sprite.setScale(m_scale.getCurrentScale());
+
+    m_style.checkedHoverStyle.sprite.setPosition(currentPosition
+                                               + m_scale.getCurrentScale() * m_style.checkedHoverStyle.spriteOffset);
+    m_style.checkedHoverStyle.sprite.setScale(m_scale.getCurrentScale());
 }

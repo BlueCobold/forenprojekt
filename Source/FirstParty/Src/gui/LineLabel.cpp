@@ -6,7 +6,7 @@
 #include <SFML/System/Mutex.hpp>
 
 LineLabel::LineLabel() :
-    MenuElement(-1, MenuElementType::Label, sf::Vector2f(0,0), sf::Vector2f(0,0)),
+    MenuElement(-1, MenuElementType::Label, sf::Vector2f(0, 0), sf::Vector2f(0, 0)),
     m_text(""),
     m_textKey(""),
     m_rotation(0),
@@ -18,11 +18,13 @@ LineLabel::LineLabel() :
 
 LineLabel::LineLabel(const std::string& text,
                      const ScreenLocation& position,
+                     const ScreenScale& scale,
                      const float rotation,
                      const BitmapFont* font,
                      Alignment alignment,
                      int id) :
     MenuElement(id, MenuElementType::Label, position),
+    m_scale(scale),
     m_textKey(text),
     m_rotation(rotation),
     m_font(font),
@@ -34,18 +36,20 @@ LineLabel::LineLabel(const std::string& text,
     else
         m_text = "";
 
-    if(m_text.find("\\r\\n") == std::string::npos)
-        rebuild();
+    m_text = utility::replaceAll(m_text, "\\r\\n", "\n");
+    rebuild();
 }
 
 LineLabel::LineLabel(const std::string& text,
                      const ScreenLocation& position,
+                     const ScreenScale& scale,
                      const float rotation,
                      const MenuElementType::Type type,
                      const BitmapFont* font,
                      const Alignment alignment,
                      int id) :
     MenuElement(id, type, position),
+    m_scale(scale),
     m_textKey(text),
     m_rotation(rotation),
     m_font(font),
@@ -56,14 +60,14 @@ LineLabel::LineLabel(const std::string& text,
         m_text = utility::translateKey(m_textKey);
     else
         m_text = "";
-    
-    if(m_text.find("\\r\\n") == std::string::npos)
-        rebuild();
+
+    m_text = utility::replaceAll(m_text, "\\r\\n", "\n");
+    rebuild();
 }
 
 std::unique_ptr<MenuElement> LineLabel::onClone() const
 {
-    return std::unique_ptr<MenuElement>(new LineLabel(m_textKey, getPosition(), m_rotation, getType(), m_font, m_alignment, getId()));
+    return std::unique_ptr<MenuElement>(new LineLabel(m_textKey, getPosition(), m_scale, m_rotation, getType(), m_font, m_alignment, getId()));
 }
 
 namespace
@@ -92,9 +96,10 @@ void LineLabel::onDrawElement(const DrawParameter& params)
 
 void LineLabel::setText(const std::string& text, const std::string& key)
 {
-    if(text != m_text)
+    auto t = utility::replaceAll(text, "\\r\\n", "\n");
+    if(t != m_text)
     {
-        m_text = text;
+        m_text = t;
         m_textKey = key;
         rebuild();
     }
@@ -110,22 +115,41 @@ void LineLabel::rebuild()
     std::vector<BitmapFont::Glyph> newGlyphs;
 
     float shift = 0;
+    float scale = m_scale.getCurrentScale().x;
     if(m_alignment != Left)
     {
         float width = 0;
+        float maxWidth = 0;
         for(auto it = begin(m_text); it != end(m_text); it++)
+        {
+            if(*it == '\n')
+            {
+                maxWidth = std::max(width, maxWidth);
+                width = 0;
+                continue;
+            }
             width += m_font->getGlyph(*it).getSpacing();
+        }
         if(m_alignment == Right)
-            shift -= width;
+            shift -= scale * std::max(width, maxWidth);
         else
-            shift -= width / 2;
+            shift -= scale * std::max(width, maxWidth) / 2;
     }
 
     float xOffset = 0;
+    float yOffset = 0;
     for(auto it = begin(m_text); it != end(m_text); it++)
     {
+        if(*it == '\n')
+        {
+            xOffset = 0;
+            yOffset += floorf(scale * 1.1f * m_font->getFontSize());
+            continue;
+        }
+
         auto glyph = m_font->getGlyph(*it);
-        glyph.setPosition(shift + xOffset, static_cast<float>(glyph.getVerticalOffset()));
+        glyph.setPosition(shift + xOffset, scale * glyph.getVerticalOffset() + yOffset);
+        glyph.setScale(scale, scale);
         glyph.setRotation(m_rotation);
         newGlyphs.push_back(glyph);
 
@@ -235,7 +259,12 @@ const BitmapFont* LineLabel::getFont() const
 }
 
 void LineLabel::layoutUpdated(const sf::Vector2f& screenSize)
-{ }
+{
+    float oldscale = m_scale.getCurrentScale().x;
+    m_scale.setScreenSize(screenSize);
+    if(m_scale.getCurrentScale().x != oldscale)
+        rebuild();
+}
 
 void LineLabel::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {

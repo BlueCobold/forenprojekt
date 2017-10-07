@@ -4,22 +4,19 @@
 
 MenuSprite::MenuSprite(const Sprite& sprite,
                        const ScreenLocation& position,
-                       const ScreenSize& size,
+                       const ScreenScale& scale,
                        const int id) :
     MenuElement(id, MenuElementType::Image, position),
-    SizedElement(size),
     m_sprite(sprite),
-    m_scale(sf::Vector2f(1, 1)),
-    m_keepAspectRatio(false),
+    m_scale(scale),
     m_showToolTip(false)
 {
 }
 
 std::unique_ptr<MenuElement> MenuSprite::onClone() const
 {
-    auto clone = std::unique_ptr<MenuSprite>(new MenuSprite(m_sprite, getPosition(), getSize(), getId()));
+    auto clone = std::unique_ptr<MenuSprite>(new MenuSprite(m_sprite, getPosition(), m_scale, getId()));
     clone->m_toolTip = m_toolTip;
-    clone->setScale(m_scale, m_keepAspectRatio);
     return std::move(clone);
 }
 
@@ -36,7 +33,6 @@ void MenuSprite::setToolTip(const ToolTip& toolTip)
 void MenuSprite::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     auto screenSize = static_cast<sf::Vector2f>(screen.getSize());
-    setScreenSize(screenSize);
     updateLayout(screenSize);
 
     sf::IntRect rect = sf::IntRect(static_cast<int>(m_sprite.getPosition().x),
@@ -78,12 +74,6 @@ void MenuSprite::setSprite(const Sprite& sprite)
     m_sprite.setBlendMode(sprite.getBlendMode());
 }
 
-void MenuSprite::setScale(const sf::Vector2f& scale, bool keepAspectRatio)
-{
-    m_scale = scale;
-    m_keepAspectRatio = keepAspectRatio;
-}
-
 void MenuSprite::onDrawAdditionalForeground(const DrawParameter& params)
 {
     if(m_showToolTip && isVisible())
@@ -96,10 +86,7 @@ void MenuSprite::layoutUpdated(const sf::Vector2f& screenSize)
 {
     m_sprite.setPosition(sf::Vector2f(floorf(getCurrentPosition().x), floorf(getCurrentPosition().y)));
     auto& texRect = m_sprite.getTextureRect();
-    auto& size = getCurrentSize();
-    auto scaleX = size.x / texRect.width * m_scale.x;
-    if(m_keepAspectRatio)
-        m_sprite.setScale(scaleX, scaleX);
-    else
-        m_sprite.setScale(scaleX, size.y / texRect.height * m_scale.y);
+    m_scale.setScreenSize(screenSize);
+    auto scale = m_scale.getCurrentScale();
+    m_sprite.setScale(scale);
 }

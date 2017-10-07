@@ -6,7 +6,7 @@ InteractiveLabel::InteractiveLabel(const std::string& text,
                                    const BitmapFont* font,
                                    const Alignment alignment,
                                    int id) :
-    LineLabel(text, position, rotation, MenuElementType::InteractiveLabel, font, alignment, id)
+    LineLabel(text, position, ScreenScale(), rotation, MenuElementType::InteractiveLabel, font, alignment, id)
 {
 }
 

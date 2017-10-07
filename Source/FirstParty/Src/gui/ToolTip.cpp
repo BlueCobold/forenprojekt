@@ -146,14 +146,14 @@ void ToolTip::setLines(const std::string& text, const std::string& replacement)
     {
         token = tokens.substr(0, pos);
         tokens.erase(0, pos + 4);
-        LineLabel label(text, ScreenLocation(), 0, m_font, LineLabel::Centered);
+        LineLabel label(text, ScreenLocation(), ScreenScale(), 0, m_font, LineLabel::Centered);
         if(replacement != "" && token.find("%") != std::string::npos)
             token = utility::replace(token, replacement);
         label.setText(token);
         m_label[m_lines++] = label;
     }
     // single line or last multiline
-    LineLabel label(text, ScreenLocation(), 0, m_font, LineLabel::Centered);
+    LineLabel label(text, ScreenLocation(), ScreenScale(), 0, m_font, LineLabel::Centered);
     if(replacement != "" && tokens.find("%") != std::string::npos)
         tokens = utility::replace(tokens, replacement);
     label.setText(tokens);
@@ -177,7 +177,7 @@ const int ToolTip::findLongestLine() const
 
     for(auto it = begin(m_label); it != end(m_label); ++it)
     {
-        if( longestwidth < it->second.getWidth())
+        if(longestwidth < it->second.getWidth())
         {
             longestwidth = it->second.getWidth();
             longestLine = it->first;

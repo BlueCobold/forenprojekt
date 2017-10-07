@@ -5,6 +5,7 @@
 
 #include "BitmapFont.hpp"
 #include "MenuElement.hpp"
+#include "ScreenScale.hpp"
 #include "../animation/Interpolation.hpp"
 #include "../rendering/Drawable.hpp"
 
@@ -28,7 +29,17 @@ public:
     LineLabel();
     LineLabel(const std::string& text,
         const ScreenLocation& position,
+        const ScreenScale& scale,
         const float rotation,
+        const BitmapFont* font,
+        const Alignment alignment = Left,
+        int id = -1);
+
+    LineLabel(const std::string& text,
+        const ScreenLocation& position,
+        const ScreenScale& scale,
+        const float rotation,
+        const MenuElementType::Type type,
         const BitmapFont* font,
         const Alignment alignment = Left,
         int id = -1);
@@ -52,14 +63,6 @@ public:
 
     unsigned int getFontSize();
 
-    LineLabel(const std::string& text,
-        const ScreenLocation& position,
-        const float rotation,
-        const MenuElementType::Type type,
-        const BitmapFont* font,
-        const Alignment alignment = Left,
-        int id = -1);
-
     Alignment getAlignment() const;
     const BitmapFont* getFont() const;
     
@@ -74,6 +77,7 @@ private:
     void rebuild();
 
     float m_width;
+    ScreenScale m_scale;
     std::string m_text;
     std::string m_textKey;
     float m_rotation;
