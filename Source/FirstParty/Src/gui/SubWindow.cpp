@@ -110,16 +110,15 @@ void SubWindow::updated(const sf::RenderWindow& screen, const double time, const
     auto moveDistance = m_cursorPosition - getCursorPosition(screen);
     m_cursorPosition = getCursorPosition(screen);
 
-    if(mouseRect.contains(m_cursorPosition))
+    if(mouseRect.contains(m_cursorPosition) && !m_active)
     {
         auto scroll = m_positionRect.getPosition().y;
 
-        if(utility::Mouse.isWheelMovedDown())
-            scroll += ceilf(windowPixelToSliderPixel(15));
-        else if(utility::Mouse.isWheelMovedUp())
-            scroll += ceilf(windowPixelToSliderPixel(-15));
+        auto delta = utility::Mouse.getWheelDelta();
+        if(delta != 0)
+            scroll -= ceilf(windowPixelToSliderPixel(35.f * delta));
         else if(utility::Mouse.leftButtonPressed())
-            scroll += windowPixelToSliderPixel(moveDistance.y * 2.f);
+            scroll += windowPixelToSliderPixel(moveDistance.y * 3.f);
 
         if(scroll < 0)
             scroll = 0;
