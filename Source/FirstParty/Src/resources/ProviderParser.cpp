@@ -131,7 +131,13 @@ std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLEl
         else if(name == "abs")
             return std::unique_ptr<Absolute>(new Absolute(std::move(providers[0])));
         else if(name == "sine")
-            return std::unique_ptr<Sine>(new Sine(std::move(providers[0])));
+        {
+            float amplitude = 1.f;
+            float period = 1.f;
+            xml.QueryFloatAttribute("amplitude", &amplitude);
+            xml.QueryFloatAttribute("period", &period);
+            return std::unique_ptr<Sine>(new Sine(std::move(providers[0]), amplitude, period));
+        }
         else if(name == "cache")
             return std::unique_ptr<CachedProvider>(new CachedProvider(std::move(providers[0]),
                 xml.Attribute("reset") ? std::string("true") != xml.Attribute("reset") : false));
