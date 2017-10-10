@@ -130,7 +130,7 @@ std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLEl
                                                                 m_context.cloneHandler.createSetVariableProviderCloneHandler()));
         else if(name == "abs")
             return std::unique_ptr<Absolute>(new Absolute(std::move(providers[0])));
-        else if(name == "sine")
+        else if(name == "sin" || name == "sine")
         {
             float amplitude = 1.f;
             float period = 1.f;
@@ -141,7 +141,7 @@ std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLEl
         else if(name == "cache")
             return std::unique_ptr<CachedProvider>(new CachedProvider(std::move(providers[0]),
                 xml.Attribute("reset") ? std::string("true") != xml.Attribute("reset") : false));
-        else if(name == "int")
+        else if(name == "int" || name == "integer")
             return std::unique_ptr<FloatToInt>(new FloatToInt(std::move(providers[0])));
         else if(name == "add")
             return std::unique_ptr<Adder>(new Adder(std::move(providers)));
@@ -171,7 +171,7 @@ std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLEl
             return std::unique_ptr<Substractor>(new Substractor(std::move(providers)));
         else if(name == "switch")
             return std::unique_ptr<Switch>(new Switch(std::move(providers), parseFloatList(xml.Attribute("cases"))));
-        else if(name == "neg")
+        else if(name == "neg" || name == "negate")
             return std::unique_ptr<Negate>(new Negate(std::move(providers[0])));
         else if(name == "ramp")
             return std::unique_ptr<Ramp>(new Ramp(xml.FloatAttribute("min"), xml.FloatAttribute("max"),
@@ -179,7 +179,7 @@ std::unique_ptr<ValueProvider> ProviderParser::parseSingle(const tinyxml2::XMLEl
         else if(name == "delay")
             return std::unique_ptr<Delay>(new Delay(xml.FloatAttribute("start"), xml.FloatAttribute("duration"),
                                                     std::move(providers[0])));
-        else if(name == "inv")
+        else if(name == "inv" || name == "invert")
             return std::unique_ptr<Inverse>(new Inverse(std::move(providers[0])));
         else if(m_context.customStopTags.size() > 0)
         {
