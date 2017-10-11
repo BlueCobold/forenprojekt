@@ -76,10 +76,9 @@ namespace utility
         bool leftButtonDown() const;
 
         void notifyWheelMoved(const int delta);
-
         bool isWheelMovedUp() const;
-
         bool isWheelMovedDown() const;
+        int getWheelDelta() const;
 
         void hideSystemCursor(sf::RenderWindow& window);
         void showSystemCursor(sf::RenderWindow& window);
@@ -107,6 +106,7 @@ namespace utility
         bool m_isRightDown; // tracks the physical state of the right mouse button
         bool m_mouseWheelUp;
         bool m_mouseWheelDown;
+        int m_mouseWheelDelta;
         sf::Vector2f m_position;
         sf::Vector2i m_lastPosition;
         sf::Vector2i m_totalPosition;

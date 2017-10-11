@@ -12,6 +12,8 @@ namespace utility
         float m_minValue;
         float m_maxValue;
         float m_lastValue;
+        float m_currentValue;
+        float m_interpolatedValue;
         bool m_horizontal;
 
     public:
@@ -22,13 +24,15 @@ namespace utility
 
         bool isTouched() const;
 
-        float getValue();
+        float getValue(bool interpolated = true);
+        void startInterpolation();
+        void interpolate(int steps, int current);
 
         const sf::FloatRect& getTouchArea() const;
 
         void setTouchArea(const sf::FloatRect& touchArea);
     };
 
-    extern TouchController TeeterController;
+    extern TouchController Touch;
 }
 #endif

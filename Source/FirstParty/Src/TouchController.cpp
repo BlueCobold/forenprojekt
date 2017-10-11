@@ -3,8 +3,6 @@
 
 namespace utility
 {
-    TouchController TeeterController(sf::FloatRect(0, 0, 0, 0),45.f, 45.f);
-
     TouchController::TouchController(const sf::FloatRect& touchArea,
                                      float minValue,
                                      float maxValue,
@@ -13,6 +11,8 @@ namespace utility
         m_minValue(minValue),
         m_maxValue(maxValue),
         m_lastValue(0),
+        m_currentValue(0),
+        m_interpolatedValue(0),
         m_horizontal(horizontal)
     { }
 
@@ -28,8 +28,21 @@ namespace utility
 
     }
 
-    float TouchController::getValue()
+    void TouchController::startInterpolation()
     {
+        getValue(false);
+    }
+
+    void TouchController::interpolate(int steps, int current)
+    {
+        m_interpolatedValue = m_lastValue + current * (m_currentValue - m_lastValue) / steps;
+    }
+
+    float TouchController::getValue(bool interpolated)
+    {
+        if(interpolated)
+            return m_interpolatedValue;
+
         float zeroPointDistance = 0;
         float touchPoint = 0;
 
@@ -58,11 +71,12 @@ namespace utility
             }
         }
 
+        m_lastValue = m_currentValue;
         if(touchPoint > 0)
-            m_lastValue = touchPoint / zeroPointDistance * m_maxValue;
+            m_currentValue = touchPoint / zeroPointDistance * m_maxValue;
 
         if(touchPoint < 0)
-            m_lastValue = touchPoint / zeroPointDistance * m_minValue;
+            m_currentValue = touchPoint / zeroPointDistance * m_minValue;
 
         return m_lastValue;
     }

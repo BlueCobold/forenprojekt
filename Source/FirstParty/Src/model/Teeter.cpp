@@ -45,8 +45,8 @@ void Teeter::timeUpdated()
     auto gravToAngle = 90 / 9.81f;
     sf::Vector2f mousePos = 0.5f * sf::Vector2f(utility::Mouse.getAcceleration().y, utility::Mouse.getAcceleration().x)
                            +0.5f * m_lastMousePos;
-    auto mouseDiff = sf::Vector2f(mousePos.x * gravToAngle - angle,
-                                  mousePos.y * gravToAngle - angle) / timeDiff;
+    auto mouseDiff = sf::Vector2f((mousePos.x * gravToAngle - angle) / timeDiff,
+                                  (mousePos.y * gravToAngle - angle) / timeDiff);
 #else
 #ifdef TOUCHSIM
     sf::Vector2f mousePos = sf::Vector2f(0, 0);

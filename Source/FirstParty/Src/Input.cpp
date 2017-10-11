@@ -1,7 +1,6 @@
 
 #include "Input.hpp"
-
-//#include "Utility.hpp"
+#include "TouchController.hpp"
 
 #if defined(IOS)
 #include "MacHelper.hpp"
@@ -14,6 +13,7 @@ namespace utility
 {
     MouseWrapper Mouse;
     KeyboardWrapper Keyboard;
+    TouchController TeeterController(sf::FloatRect(0, 0, 0, 0),45.f, 45.f);
 
     void KeyboardWrapper::progress()
     {
@@ -84,6 +84,7 @@ namespace utility
 #ifndef TOUCHSIM
         sf::Mouse::setPosition(sf::Vector2i(relativeTo.getSize().x/2, relativeTo.getSize().y/2), relativeTo);
 #endif
+        TeeterController.startInterpolation();
     }
 
     void MouseWrapper::interpolate(int steps, int current)
@@ -95,6 +96,7 @@ namespace utility
 #if defined(IOS) || defined(ANDROID)
         m_currentAcceleration = m_lastAcceleration + (m_acceleration - m_lastAcceleration) * percent;
 #endif
+        TeeterController.interpolate(steps, current);
     }
 
     void MouseWrapper::capture()
@@ -109,7 +111,8 @@ namespace utility
 
         m_mouseWheelDown = false;
         m_mouseWheelUp = false;
-        
+        m_mouseWheelDelta = 0;
+
 #if defined(IOS) || defined(ANDROID)
         if(m_sensorsEnabled && sf::Sensor::isAvailable(sf::Sensor::Accelerometer))
         {
@@ -162,6 +165,7 @@ namespace utility
             m_mouseWheelDown = true;
             m_mouseWheelUp = false;
         }
+        m_mouseWheelDelta = delta;
     }
 
     bool MouseWrapper::isWheelMovedUp() const
@@ -172,6 +176,11 @@ namespace utility
     bool MouseWrapper::isWheelMovedDown() const
     {
         return m_mouseWheelDown;
+    }
+
+    int MouseWrapper::getWheelDelta() const
+    {
+        return m_mouseWheelDelta;
     }
 
     bool  MouseWrapper::leftButtonDown() const
