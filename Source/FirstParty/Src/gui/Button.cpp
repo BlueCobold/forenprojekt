@@ -103,9 +103,12 @@ void Button::setStyle(ButtonStateStyle& style, double time, const sf::Vector2f& 
     {
         if(m_currentStyle->resetOnExit)
         {
-            m_style.idleStyle.animation->restartAt(time);
-            m_style.hoverStyle.animation->restartAt(time);
-            m_style.pressedStyle.animation->restartAt(time);
+            if(m_style.idleStyle.animation)
+                m_style.idleStyle.animation->restartAt(time);
+            if(m_style.hoverStyle.animation)
+                m_style.hoverStyle.animation->restartAt(time);
+            if(m_style.pressedStyle.animation)
+                m_style.pressedStyle.animation->restartAt(time);
         }
     }
     m_currentStyle = &style;
