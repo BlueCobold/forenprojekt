@@ -507,6 +507,43 @@
 			</animations>
 		</pressed>
 	</buttonStyle>
+	<buttonStyle name="replayButtonStyle">
+		<mouseRect left="-50" top="-45" width="100" height="100" />
+		<idle spriteSheet="gui_animations" sprite="Icon_Replay_idle"
+			offsetx="0" offsety="0" useOrigin="true"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" >
+			<animations resetOnExit="true">
+				<animation spritesheet="gui_animations" sprite="Icon_Replay_idle" blending="premul" rotate="true">
+				</animation>
+			</animations>
+		</idle>
+		<hover spriteSheet="gui_animations" sprite="Icon_Replay_hover"
+			offsetx="0" offsety="0" useOrigin="true" sound="bounce" 
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" >
+			<animations>
+				<animation spritesheet="gui_animations" sprite="Icon_Replay_hover" blending="premul" rotate="true" offsetx="5">
+					<rotation>
+						<sine amplitude="20" period="250">
+							<time />
+						</sine>
+					</rotation>
+				</animation>
+			</animations>
+		</hover>
+		<pressed spriteSheet="gui_animations" sprite="Icon_Replay_pressed"
+			offsetx="3" offsety="3" useOrigin="true" sound="bounce" 
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="4" >
+			<animations>
+				<animation spritesheet="gui_animations" sprite="Icon_Replay_pressed" blending="premul" rotate="true" offsetx="5">
+					<rotation>
+						<sine amplitude="20" period="250">
+							<time />
+						</sine>
+					</rotation>
+				</animation>
+			</animations>
+		</pressed>
+	</buttonStyle>
 	<buttonStyle name="optionButtonStyle">
 		<mouseRect left="-50" top="-50" width="100" height="100" />
 		<idle spriteSheet="gui_animations" sprite="Icon_Wheels00"

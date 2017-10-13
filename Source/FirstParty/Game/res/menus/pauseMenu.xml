@@ -1,12 +1,28 @@
 <menu>
 	<styles source="Styles.inc"/>
 	<elements>
-		<label id="1" text="gui_game_paused" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
-		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
-		<button id="0" text="gui_continue" style="default" x="0.5" y="0.5" offsetx="0" offsety="-70" />
-		<button id="2" text="gui_restart" style="default" x="0.5" y="0.5" offsetx="0" offsety="-20" />
-		<button id="1" text="gui_option" style="default" x="0.5" y="0.5" offsetx="0" offsety="30" />
-		<button id="3" text="gui_mainmenu" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
-		<button id="4" text="" style="coins" x="0.5" y="0.5" offsetx="-143" offsety="-208" tooltip="default" tooltiptext="tooltip_coins"/>
+		<label id="1" text="gui_game_paused" font="gui_large" alignment="1" x="0.5" y="0.0" offsetx="0" offsety="58"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+		<button id="2" text="" style="replayButtonStyle" x="0.25" y="0.4h,0.065w" offsetx="-50" offsety="20" tooltip="default" tooltiptext="tooltip_highscore"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+
+		<button id="0" text="gui_continue" style="playButtonStyle" x="0.5" y="0.8" offsetx="0" offsety="-60"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+		<button id="1" text="gui_option" style="optionButtonStyle" x="0.75" y="0.8" offsetx="0" offsety="-50"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+		<button id="3" text="gui_mainmenu" style="exitButtonStyle" x="0.25" y="0.8" offsetx="0" offsety="-50"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+		<button id="4" text="" style="coins" x="0.75" y="0.4h,0.065w" offsetx="40" offsety="20" tooltip="default" tooltiptext="tooltip_coins"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+
+		<image id="10" spriteSheet="gui_elements" sprite="missing" useOrigin="true"
+			x="0.5" y="0.3,0.03w" offsetx="4" offsety="-18"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+		<border id="20" style="default" x="0.5" y="0.3,0.03w" offsetx="4" offsety="-18"
+			widthPercent="0.24" heightPercent="0.18" aspectRatio="0.5625" scaleType="min" />
+
+		<border id="-1" style="window"
+			x="0.5" y="0.5"
+			widthOffset="-150" heightOffset="-150" widthPercent="1.0" heightPercent="1.0" />
 	</elements>
 </menu>

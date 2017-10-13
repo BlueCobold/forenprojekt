@@ -1,6 +1,7 @@
 #include "PauseState.hpp"
 
 #include "../gui/Button.hpp"
+#include "../gui/MenuSprite.hpp"
 #include "../Input.hpp"
 #include "../model/Level.hpp"
 #include "../resources/Config.hpp"
@@ -47,6 +48,8 @@ void PauseState::onEnter(const EnterStateInformation* enterInformation, const do
     if(info->m_level)
         m_level = info->m_level;
     m_levelNumber = info->m_levelNumber;
+
+    m_menu.getSprite(PauseMenu::IMAGE_PREVIEW).setSprite(m_level->getInfo().preview);
 
     State::onEnter(enterInformation, time);
     m_HUD.onEnter(m_level);
