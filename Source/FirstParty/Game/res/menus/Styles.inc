@@ -894,6 +894,18 @@
 			offsetx="-5" offsety="-5" sound="bounce" 
 			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
 	</buttonStyle>
+	<buttonStyle name="optionBackScreen">
+		<mouseRect left="0" top="0" width="105" height="96" />
+		<idle spriteSheet="option_elements" sprite="icon_graphics_background"
+			offsetx="0" offsety="0"
+			font="buttonIdleFont" fontoffsetx="0" fontoffsety="0" />
+		<hover spriteSheet="option_elements" sprite="icon_graphics_background_hover"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="4" />
+		<pressed spriteSheet="option_elements" sprite="icon_graphics_background_hover"
+			offsetx="0" offsety="0" sound="bounce" 
+			font="buttonHoverFont" fontoffsetx="0" fontoffsety="0" />
+	</buttonStyle>
 
 	<checkboxStyle name="default">
 		<mouseRect left="1" top="5" width="27" height="27" />
@@ -939,6 +951,41 @@
 			offsetx="0" offsety="0" />
 		<hover spriteSheet="gui_elements" sprite="online_hover"
 			offsetx="0" offsety="0" />
+	</checkboxStyle>
+
+	<checkboxStyle name="highscoreMode">
+		<mouseRect left="-48" top="-48" width="96" height="96" />
+		<unchecked spriteSheet="gui_animations" sprite="Icon_Highscore_Local_idle"
+			offsetx="0" offsety="0" useOrigin="true" />
+		<checked spriteSheet="gui_animations" sprite="Icon_Highscore_Global_idle"
+			offsetx="0" offsety="0" useOrigin="true" />
+		<hover spriteSheet="gui_animations" sprite="Icon_Highscore_Local_hover"
+			offsetx="0" offsety="0" useOrigin="true" />
+		<checkedHover spriteSheet="gui_animations" sprite="Icon_Highscore_Global_hover"
+			offsetx="0" offsety="0" useOrigin="true" />
+	</checkboxStyle>
+
+	<checkboxStyle name="gameMode">
+		<mouseRect left="0" top="0" width="85" height="96" />
+		<unchecked spriteSheet="gui_animations" sprite="Icons_Targets_idle"
+			offsetx="0" offsety="0" />
+		<checked spriteSheet="gui_animations" sprite="Icon_Clock_idle"
+			offsetx="0" offsety="0" />
+		<hover spriteSheet="gui_animations" sprite="Icons_Targets_hover"
+			offsetx="0" offsety="0" />
+		<checkedHover spriteSheet="gui_animations" sprite="Icon_Clock_hover"
+			offsetx="0" offsety="0" />
+	</checkboxStyle>
+	<checkboxStyle name="gameModeCentered">
+		<mouseRect left="-48" top="-48" width="90" height="96" />
+		<unchecked spriteSheet="gui_animations" sprite="Icons_Targets_idle"
+			offsetx="0" offsety="0" useOrigin="true" />
+		<checked spriteSheet="gui_animations" sprite="Icon_Clock_idle"
+			offsetx="5" offsety="5" useOrigin="true" />
+		<hover spriteSheet="gui_animations" sprite="Icons_Targets_hover"
+			offsetx="0" offsety="0" useOrigin="true" />
+		<checkedHover spriteSheet="gui_animations" sprite="Icon_Clock_hover"
+			offsetx="5" offsety="5" useOrigin="true" />
 	</checkboxStyle>
 
 	<checkboxStyle name="screenMode">

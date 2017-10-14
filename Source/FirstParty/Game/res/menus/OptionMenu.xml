@@ -7,13 +7,13 @@
 			</animations>
 		</animationContainer>
 		<customContent id="-2" description="optionally draw level here" />
-		<border id="-1" style="window"
-			x="0.5" y="0.5" width="-150" height="-150" widthPercent="1.0" heightPercent="1.0" />
 
-		<label text="gui_option" font="gui_large" alignment="1" x="0.5" y="0.0" offsetx="0" offsety="58" />
-		<button id="0" text="gui_close" style="default" x="0.5" y="1" offsetx="0" offsety="-95" />
-		<subwindow id="1" x="0.5" y="0.5" offsetx="0" offsety="-10" sizex="-170" sizey="-250" innerheight="860"
-			heightPercent="1.0" widthPercent="1.0">
+		<label text="gui_option" font="gui_large" alignment="1" x="0.5" y="0.0" offsetx="0" offsety="58"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+		<button id="0" text="gui_close" style="exitButtonStyle" x="0.5" y="0.98" offsetx="0" offsety="-95"
+			refWidth="800" refHeight="600" growWidth="0.2" growHeight="0.2" scaleType="min" />
+		<subwindow id="1" x="0.5" y="0.5125" offsetx="0" offsety="-30" sizex="-170" sizey="-210" innerheight="860"
+			heightPercent="0.875" widthPercent="1.0">
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
 				<scrollMiddle spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="1" />
@@ -34,15 +34,15 @@
 					x = 1*0.05, offset = 100 + 1*170 - 1*0.05*800 = 230
 					x = 2*0.05, offset = 100 + 2*170 - 2*0.05*800 = 360
 				-->
-				<image id="1" spriteSheet="option_elements" sprite="icon_graphics_background" offsetx="100" offsety="140" x="0.0" />
+				<button id="1" style="optionBackScreen" offsetx="100" offsety="140" x="0.0" triggering="false" />
 				<checkbox id="2" style="screenMode" offsetx="100" offsety="140" x="0.0"
 					tooltip="default" tooltiptext="tooltip_fullscreen" />
 
-				<image id="1" spriteSheet="option_elements" sprite="icon_graphics_background" offsetx="230" offsety="140" x="0.05" />
+				<button id="1" style="optionBackScreen" offsetx="230" offsety="140" x="0.05" />
 				<checkbox id="30" style="shaderMode" offsetx="230" offsety="140" x="0.05"
 					tooltip="default" tooltiptext="tooltip_shaders" />
 
-				<image id="1" spriteSheet="option_elements" sprite="icon_graphics_background" offsetx="360" offsety="140" x="0.10" />
+				<button id="1" style="optionBackScreen" offsetx="360" offsety="140" x="0.10" />
 				<checkbox id="35" style="shadowMode" offsetx="360" offsety="140" x="0.10"
 					tooltip="default" tooltiptext="tooltip_shadows" />
 
@@ -54,7 +54,7 @@
 				<image id="1" spriteSheet="option_elements" sprite="icon_sound" offsetx="240" offsety="320" x="0.05" />
 				<slider id="33" style="default" offsetx="220" offsety="429" x="0.05" />
 
-				<image id="1" spriteSheet="option_elements" sprite="icon_graphics_background" offsetx="360" offsety="320" x="0.10" />
+				<button id="1" style="optionBackScreen" offsetx="360" offsety="320" x="0.10" />
 				<checkbox id="6" style="backgroundMusic" offsetx="360" offsety="320" x="0.10"
 					tooltip="default" tooltiptext="tooltip_bgmusic" />
 
@@ -69,7 +69,11 @@
 				<checkbox id="41" style="language" offsetx="230" x="0.05" offsety="710" tooltip="default" tooltiptext="tooltip_chose_language" />
 			</elements>
 		</subwindow>
-		<border style="default" id="20" 
-			x="0.5" y="0.5" offsetx="0" offsety="-10" width="-170" height="-250" widthPercent="1.0" heightPercent="1.0" />
+		<border id="-1" style="window"
+			x="0.5" y="0.5"
+			widthOffset="-150" heightOffset="-150" widthPercent="1.0" heightPercent="1.0" />
+		<border style="default" id="20"
+			x="0.5" y="0.5125" offsetx="0" offsety="-30"
+			widthOffset="-170" heightOffset="-210" widthPercent="1.0" heightPercent="0.875" />
 	</elements>
 </menu>
