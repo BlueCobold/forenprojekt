@@ -30,9 +30,10 @@ HighScoreState::HighScoreState(sf::RenderWindow& screen,
     m_onlineHighscoreLoaderJob = std::unique_ptr<BackgroundLoader<HighScoreState>>(new BackgroundLoader<HighScoreState>(&HighScoreState::loadOnlineHighscore, *this));
 
     auto buttonFunc = [&](const Button& sender){ m_clicked = sender.getId(); };
-    m_menu.getButton(HighScoreMenu::BUTTON_TAB_TIME).registerOnPressed(buttonFunc);
-    m_menu.getButton(HighScoreMenu::BUTTON_TAB_POINTS).registerOnPressed(buttonFunc);
+    auto checkboxFunc = [&](const CheckBox& sender){ m_clicked = sender.getId(); };
     m_menu.getButton(HighScoreMenu::BUTTON_CLOSE).registerOnPressed(buttonFunc);
+    m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).registerOnChange(checkboxFunc);
+    m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GAMEMODE).registerOnChange(checkboxFunc);
 }
 
 HighScoreState::~HighScoreState()
@@ -51,8 +52,7 @@ void HighScoreState::onEnter(const EnterStateInformation* enterInformation, cons
         m_showPoints = true;
 
     bool showButton = !m_highScoreStateInfo.m_level->isTimeAttackMode();
-    m_menu.getButton(HighScoreMenu::BUTTON_TAB_TIME).setVisible(showButton);
-    m_menu.getButton(HighScoreMenu::BUTTON_TAB_POINTS).setVisible(showButton);
+    m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GAMEMODE).setVisible(showButton);
 
     buildSubWindowElements();
 
@@ -62,8 +62,8 @@ void HighScoreState::onEnter(const EnterStateInformation* enterInformation, cons
     m_HUD.onEnter(m_highScoreStateInfo.m_level);
 
     m_onlineHighscore = false;
-    m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).setChecked(m_onlineHighscore);
-    m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).setChecked(!m_onlineHighscore);
+    m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GAMEMODE).setChecked(!m_showPoints);
+    m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).setChecked(m_onlineHighscore);
     m_menu.update(m_screen, getPassedTime());
 }
 
@@ -79,34 +79,16 @@ StateChangeInformation HighScoreState::update(const double time)
     updateTime(time - m_timeDiff);
     m_menu.update(m_screen, getPassedTime());
 
-    if(m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).getChecked())
+    if(m_clicked == HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE || m_clicked == HighScoreMenu::CHECKBOX_GAMEMODE)
     {
-        if(m_clicked == HighScoreMenu::BUTTON_TAB_TIME)
-        {
-            m_showPoints = false;
-            loadHighScore();
-        }
+        m_showPoints = !m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GAMEMODE).getChecked();
+        m_onlineHighscore = m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).getChecked();
+        clearHighScore();
 
-        if(m_clicked == HighScoreMenu::BUTTON_TAB_POINTS)
-        {
-            m_showPoints = true;
+        if(!m_onlineHighscore)
             loadHighScore();
-        }
-    }
-    else if(m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).getChecked())
-    {
-        if(m_clicked == HighScoreMenu::BUTTON_TAB_TIME)
+        else
         {
-            m_showPoints = false;
-            clearHighScore();
-            m_onlineHighscoreLoaderJob->reset();
-            m_onlineHighscoreLoaderJob->run();
-        }
-
-        if(m_clicked == HighScoreMenu::BUTTON_TAB_POINTS)
-        {
-            m_showPoints = true;
-            clearHighScore();
             m_onlineHighscoreLoaderJob->reset();
             m_onlineHighscoreLoaderJob->run();
         }
@@ -126,22 +108,7 @@ StateChangeInformation HighScoreState::update(const double time)
 
         return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
     }
-
-    if(m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).getChecked() && !m_onlineHighscore)
-    {
-        m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).setChecked(false);
-        m_onlineHighscore = true;
-        clearHighScore();
-        m_onlineHighscoreLoaderJob->run();
-    }
-    else if(m_menu.getCheckbox(HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE).getChecked() && m_onlineHighscore)
-    {
-        m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GLOBAL_HIGHSCORE).setChecked(false);
-        m_onlineHighscore = false;
-        m_onlineHighscoreLoaderJob->reset();
-        loadHighScore();
-    }
-    else if(m_onlineHighscore && m_onlineHighscoreLoaderJob->isLoading() && !m_onlineHighscoreLoaderJob->isLoaded())
+    if(m_onlineHighscore && m_onlineHighscoreLoaderJob->isLoading() && !m_onlineHighscoreLoaderJob->isLoaded())
     {
         int step = static_cast<int>(getPassedTime() * 2) % 4;
         for(int i = 0; i < step; ++i)

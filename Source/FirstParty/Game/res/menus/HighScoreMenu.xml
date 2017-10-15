@@ -1,10 +1,12 @@
 <menu>
 	<styles source="Styles.inc"/>
 	<elements>
-		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
-		<label text="gui_credit" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
-		<button id="0" text="gui_close" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
-		<subwindow id="1" x="0.5" y="0.5" offsetx="0" offsety="-18" sizex="352" sizey="150" innerheight="220">
+		<label text="gui_highscore" font="gui_large" alignment="1" x="0.5" y="0.0" offsetx="0" offsety="58"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+		<button id="0" text="gui_close" style="exitButtonStyle" x="0.5" y="0.98" offsetx="0" offsety="-95"
+			refWidth="800" refHeight="600" growWidth="0.2" growHeight="0.2" scaleType="min" />
+		<subwindow id="1" x="0.5" y="0.5125" offsetx="0" offsety="-30" sizex="-170" sizey="-210" innerheight="300"
+			heightPercent="0.875" widthPercent="1.0">
 
 			<style>
 				<scrollTop spriteSheet="gui_elements" sprite="scrollbar" height="10" />
@@ -12,33 +14,55 @@
 				<scrollBottom spriteSheet="gui_elements" sprite="scrollbar" srcyoffset="10" height="10" />
 			</style>
 			<elements>
-				<button id="32" text="gui_highscore_time" style="small" offsetx="240" offsety="10" />
-				<button id="33" text="gui_highscore_points" style="small" offsetx="80" offsety="10" />
-				<label id="11" text="" font="buttonHoverFont" alignment="0" offsetx="20" offsety="10" />
-				<label id="12" text="" font="buttonHoverFont" alignment="0" offsetx="20" offsety="50" />
-				<label id="13" text="" font="buttonHoverFont" alignment="0" offsetx="20" offsety="90" />
-				<label id="14" text="" font="buttonHoverFont" alignment="0" offsetx="20" offsety="130" />
-				<label id="15" text="" font="buttonHoverFont" alignment="0" offsetx="20" offsety="170" />
+				<checkbox id="30" style="highscoreMode"
+					x="0.2" y="0.2" offsetx="-85" offsety="-60" tooltip="default" tooltiptext="tooltip_offline_highscore"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+				<checkbox id="31" style="gameModeCentered"
+					x="0.2" y="0.38" offsetx="-85" offsety="-60" tooltip="default" tooltiptext="tooltip_offline_highscore"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+				<label id="11" text="" font="buttonHoverFont" alignment="0"
+					x="0.3" y="0.048" offsetx="-85"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+				<label id="12" text="" font="buttonHoverFont" alignment="0"
+					x="0.3" y="0.118" offsetx="-85"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+				<label id="13" text="" font="buttonHoverFont" alignment="0"
+					x="0.3" y="0.188" offsetx="-85"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+				<label id="14" text="" font="buttonHoverFont" alignment="0"
+					x="0.3" y="0.258" offsetx="-85"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+				<label id="15" text="" font="buttonHoverFont" alignment="0"
+					x="0.3" y="0.328" offsetx="-85"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
 
-				<label id="21" text="" font="buttonHoverFont" alignment="2" offsetx="325" offsety="10" />
-				<label id="22" text="" font="buttonHoverFont" alignment="2" offsetx="325" offsety="50" />
-				<label id="23" text="" font="buttonHoverFont" alignment="2" offsetx="325" offsety="90" />
-				<label id="24" text="" font="buttonHoverFont" alignment="2" offsetx="325" offsety="130" />
-				<label id="25" text="" font="buttonHoverFont" alignment="2" offsetx="325" offsety="170" />
+				<label id="21" text="" font="buttonHoverFont" alignment="2"
+					x="0.7" y="0.048" offsetx="-85"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+				<label id="22" text="" font="buttonHoverFont" alignment="2"
+					x="0.7" y="0.118" offsetx="-85"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+				<label id="23" text="" font="buttonHoverFont" alignment="2"
+					x="0.7" y="0.188" offsetx="-85"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+				<label id="24" text="" font="buttonHoverFont" alignment="2"
+					x="0.7" y="0.258" offsetx="-85"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+				<label id="25" text="" font="buttonHoverFont" alignment="2"
+					x="0.7" y="0.328" offsetx="-85"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
 
-				<label id="27" text="" font="buttonHoverFont" alignment="0" offsetx="80" offsety="60" />
+				<label id="27" text="" font="buttonHoverFont" alignment="0"
+					x="0.3" y="0.048" offsetx="-85"
+					refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
 			</elements>
 		</subwindow>
-		<image id="22" x="0.5" y="0.5" offsetx="-179" offsety="-97" spriteSheet="gui_elements" sprite="frame_left" height="100"/>
-		<image id="23" x="0.5" y="0.5" offsetx="-179" offsety="3" spriteSheet="gui_elements" sprite="frame_left" srcyoffset="59" height="60"/>
-		<image id="24" x="0.5" y="0.5" offsetx="-159" offsety="-97" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
-		<image id="25" x="0.5" y="0.5" offsetx="4" offsety="-97" spriteSheet="gui_elements" sprite="frame_top" width="163"/>
-		<image id="26" x="0.5" y="0.5" offsetx="167" offsety="-97" spriteSheet="gui_elements" sprite="frame_right" height="100"/>
-		<image id="27" x="0.5" y="0.5" offsetx="167" offsety="3" spriteSheet="gui_elements" sprite="frame_right" srcyoffset="59" height="60"/>
-		<image id="28" x="0.5" y="0.5" offsetx="-159" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
-		<image id="29" x="0.5" y="0.5" offsetx="4" offsety="52" spriteSheet="gui_elements" sprite="frame_bottom" width="163"/>
+		<border id="-1" style="window"
+			x="0.5" y="0.5"
+			widthOffset="-150" heightOffset="-150" widthPercent="1.0" heightPercent="1.0" />
+		<border style="default" id="20"
+			x="0.5" y="0.5125" offsetx="0" offsety="-30"
+			widthOffset="-170" heightOffset="-210" widthPercent="1.0" heightPercent="0.875" />
 
-		<checkbox id="30" style="offlineHighscore" x="0.5" y="0.5" offsetx="-245" offsety="-150" tooltip="default" tooltiptext="tooltip_offline_highscore" />
-		<checkbox id="31" style="onlineHighscore" x="0.5" y="0.5" offsetx="-245" offsety="-98" tooltip="default" tooltiptext="tooltip_online_highscore"/>
 	</elements>
 </menu>
