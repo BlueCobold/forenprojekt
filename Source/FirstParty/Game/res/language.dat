@@ -153,6 +153,9 @@ de_gui_achievement = Errungenschaften
 de_gui_miscellaneous = Sonstiges
 de_loading = laden
 
+de_gui_failed_balls = Zu viele Bälle\r\nverloren
+en_gui_failed_balls = You lost too\r\nmany balls
+
 en_gui_game_paused = Game Paused
 en_gui_continue = Continue
 en_gui_level_success = Congratulations!
