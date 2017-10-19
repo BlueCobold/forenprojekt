@@ -30,8 +30,7 @@ LevelPreviewState::LevelPreviewState(sf::RenderWindow& screen,
     if(captionName != end(m_levelInfos))
         m_menu.getLabel(LevelPreviewMenu::LABEL_LEVELNAME).setText(captionName->second.name);
 
-    m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
-    m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(true);
+    m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(false);
 }
 
 LevelPreviewState::~LevelPreviewState()
@@ -77,14 +76,11 @@ void LevelPreviewState::onEnter(const EnterStateInformation* enterInformation, c
     m_menu.setLevelPreview(info.preview);
     m_menu.setCoinToolTipText("tooltip_coins", utility::toString(m_config.get<int>("coins")));
 
-    if(m_config.get<unsigned int>("UnlockedLevel") == m_level->number())
-    {
-        m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setToolTipText("tooltip_preview_notimeattack");
-        m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
-        m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(true);
-    }
-    else
-        m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setToolTipText("tooltip_preview_timeattack");
+    auto& modeBox = m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE);
+    bool timeAttackLocked = m_config.get<unsigned int>("UnlockedLevel") == m_level->number();
+    if(timeAttackLocked)
+        modeBox.setChecked(false);
+    modeBox.setVisible(!timeAttackLocked);
 
     m_menu.update(m_screen, getPassedTime());
 }
@@ -109,6 +105,13 @@ StateChangeInformation LevelPreviewState::update(const double time)
     updateButton(LevelPreviewMenu::BUTTON_LEFT, m_level->number() - 1);
     updateButton(LevelPreviewMenu::BUTTON_RIGHT, m_level->number() + 1);
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
+
+    auto& modeBox = m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE);
+    bool timeAttackUnlocked = m_config.get<unsigned int>("UnlockedLevel") > m_level->number();
+    if(!timeAttackUnlocked)
+        modeBox.setChecked(false);
+    modeBox.setVisible(timeAttackUnlocked);
+
     m_menu.update(m_screen, getPassedTime());
 
     if(m_levelLoaderJob->isLoaded())
@@ -117,30 +120,7 @@ StateChangeInformation LevelPreviewState::update(const double time)
         m_level->restartAt(time);
     }
 
-    if(m_level->isTimeAttackMode())
-    {
-        if(m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).getChecked())
-        {
-            m_level->setTimeAttackMode(false);
-            m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
-        }
-        else
-            m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(true);
-    }
-    else
-    {
-        if(m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).getChecked() &&
-           m_config.get<unsigned int>("UnlockedLevel") > m_level->number())
-        {
-            m_level->setTimeAttackMode(true);
-            m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(false);
-        }
-        else
-        {
-            m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TARGETMODE).setChecked(true);
-            m_menu.getCheckbox(LevelPreviewMenu::CHECKBOX_TIMEATTACKMODE).setChecked(false);
-        }
-    }
+    m_level->setTimeAttackMode(modeBox.getChecked());
 
     auto& info = m_levelInfos.find(m_level->number())->second;
     m_menu.setLevelInfo(info.name, info.time, info.maxBalls);

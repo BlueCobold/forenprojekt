@@ -2,16 +2,17 @@
 	<styles source="Styles.inc"/>
 	<elements>
 		<border id="-1" style="window"
-			x="0.5" y="0.5" width="-150" height="-150" widthPercent="1.0" heightPercent="1.0" />
+			x="0.5" y="0.5"
+			widthOffset="-150" heightOffset="-150" widthPercent="1.0" heightPercent="1.0" />
 
 		<label id="1" text="gui_levelname" font="gui_large" alignment="1" x="0.5" y="0.1" offsetx="0" offsety="-2" />
 
 		<button id="0" text="gui_start" style="playButtonStyle" x="0.5" y="0.8" offsetx="0" offsety="-60"
-			width="800" height="600" widthPercent="1" heightPercent="1" keepAspectRatio="true" scalex="0.5" scaley="0.5" />
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
 		<button id="7" text="gui_mainmenu" style="exitButtonStyle" x="0.25" y="0.8" offsetx="0" offsety="-50"
-			width="800" height="600" widthPercent="1" heightPercent="1" keepAspectRatio="true" scalex="0.5" scaley="0.5" />
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
 		<button id="13" text="gui_option" style="optionButtonStyle" x="0.75" y="0.8" offsetx="0" offsety="-50"
-			width="800" height="600" widthPercent="1" heightPercent="1" keepAspectRatio="true" scalex="0.5" scaley="0.5" />
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
 
 		<label id="2" text="gui_balls" font="buttonHoverFont" alignment="0" x="0.5w" y="0.4h,0.065w" offsetx="-180" offsety="-20" />
 		<label id="3" text="gui_balls" font="buttonHoverFont" alignment="2" x="0.5w" y="0.4h,0.065w" offsetx="130" offsety="-16" />
@@ -19,53 +20,50 @@
 		<label id="5" text="gui_time" font="buttonHoverFont" alignment="2" x="0.5w" y="0.4h,0.065w" offsetx="130" offsety="24" />
 		<label id="6" text="gui_loading_screen" font="red" alignment="1" x="0.5w" y="0.4h,0.065w" offsetx="0" offsety="0" />
 
-		<button id="8" text="" style="coins" x="0.25" y="0.4h,0.065w" offsetx="-50" offsety="20" tooltip="default" tooltiptext="tooltip_coins"
-			width="800" height="600" widthPercent="1" heightPercent="1" keepAspectRatio="true" scalex="0.5" scaley="0.5"/>
-		<checkbox id="11" style="targetmode" x="0.5" y="0.5" offsetx="-245" offsety="-150" tooltip="default" tooltiptext="tooltip_preview_targetmode" />
-		<checkbox id="10" style="timemode" x="0.5" y="0.5" offsetx="-245" offsety="-98" tooltip="default" tooltiptext="tooltip_preview_timeattack"/>
-		<button id="9" text="" style="goblet" x="0.75" y="0.4h,0.065w" offsetx="40" offsety="20" tooltip="default" tooltiptext="tooltip_highscore"
-			width="800" height="600" widthPercent="1" heightPercent="1" keepAspectRatio="true" scalex="0.5" scaley="0.5"/>
+		<button id="9" text="" style="goblet" x="0.25" y="0.4h,0.065w" offsetx="-50" offsety="20" tooltip="default" tooltiptext="tooltip_highscore"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+		<button id="8" text="" style="coins" x="0.75" y="0.4h,0.065w" offsetx="40" offsety="20" tooltip="default" tooltiptext="tooltip_coins"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
 
 		<image id="2" spriteSheet="gui_elements" sprite="missing"
 			x="0.5" y="0.3,0.03w" offsetx="4" offsety="-18"
-			width="192" height="108" widthPercent="0.3" heightPercent="0.3"
-			scalex="0.44444" scaley="0.44444" keepAspectRatio="true"/>
+            refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
 		<border id="20" style="default" x="0.5" y="0.3,0.03w" offsetx="4" offsety="-18"
-			width="192" height="108" widthPercent="0.3" heightPercent="0.3"
-			scalex="0.44444" scaley="0.44444" keepAspectRatio="true" />
+			widthPercent="0.24" heightPercent="0.18" aspectRatio="0.5625" scaleType="min" />
+
+		<checkbox id="10" z="1000" style="gameMode" x="0.565" y="0.30" offsetx="-5" offsety="-80"
+			tooltip="default" tooltiptext="tooltip_preview_targetmode" />
 
 		<button id="30" style="selectLevel" 
 			x="0.3" y="0.3,0.03w" offsetx="-79" offsety="-18"
-			width="192" height="108" widthPercent="0.3" heightPercent="0.3"
-			scalex="0.35" scaley="0.35" keepAspectRatio="true" />
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min"
+			scalex="0.83" scaley="0.83" />
 		<image id="90" visibleWhen="30" spriteSheet="gui_elements" sprite="frame_blend" useOrigin="true"
 			x="0.3" y="0.3,0.03w" offsetx="-78" offsety="-18"
-			width="192" height="108" widthPercent="0.3" heightPercent="0.3"
-			scalex="0.35" scaley="0.35" keepAspectRatio="true" />
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min"
+			scalex="0.83" scaley="0.83" />
 		<button id="100" visibleWhen="30" style="selectPreviousLevel"
 			x="0.3" y="0.3,0.03w" offsetx="-79" offsety="-18"
-			width="192" height="108" widthPercent="0.3" heightPercent="0.3"
-			scalex="0.35" scaley="0.35" keepAspectRatio="true" triggering="false" />
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min"
+			scalex="0.83" scaley="0.83" triggering="false" />
 		<border id="121" style="default" visibleWhen="30" 
 			x="0.3" y="0.3,0.03w" offsetx="-78" offsety="-18"
-			width="192" height="108" widthPercent="0.3" heightPercent="0.3"
-			scalex="0.35" scaley="0.35" keepAspectRatio="true" />
+			widthPercent="0.1992" heightPercent="0.1494" aspectRatio="0.5625" scaleType="min" />
 
 		<button id="40" style="selectLevel"
 			x="0.7" y="0.3,0.03w" offsetx="80" offsety="-18"
-			width="192" height="108" widthPercent="0.3" heightPercent="0.3"
-			scalex="0.35" scaley="0.35" keepAspectRatio="true" />
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min"
+			scalex="0.83" scaley="0.83" />
 		<image id="91" visibleWhen="40" spriteSheet="gui_elements" sprite="frame_blend" useOrigin="true"
 			x="0.7" y="0.3,0.03w" offsetx="82" offsety="-18"
-			width="192" height="108" widthPercent="0.3" heightPercent="0.3"
-			scalex="0.35" scaley="0.35" keepAspectRatio="true" />
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min"
+			scalex="0.83" scaley="0.83" />
 		<button id="101" visibleWhen="40" style="selectNextLevel"
 			x="0.7" y="0.3,0.03w" offsetx="80" offsety="-18"
-			width="192" height="108" widthPercent="0.3" heightPercent="0.3"
-			scalex="0.35" scaley="0.35" keepAspectRatio="true" triggering="false" />
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min"
+			scalex="0.83" scaley="0.83" triggering="false" />
 		<border id="122" style="default" visibleWhen="40" 
 			x="0.7" y="0.3,0.03w" offsetx="82" offsety="-18"
-			width="192" height="108" widthPercent="0.3" heightPercent="0.3"
-			scalex="0.35" scaley="0.35" keepAspectRatio="true" />
+			widthPercent="0.1992" heightPercent="0.1494" aspectRatio="0.5625" scaleType="min" />
 	</elements>
 </menu>

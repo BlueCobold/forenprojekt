@@ -26,8 +26,7 @@ public:
     static const int BUTTON_COINS = 8;
     static const int BUTTON_MAIN_MENU = 7;
     static const int BUTTON_OPTIONS = 13;
-    static const int CHECKBOX_TIMEATTACKMODE = 10;
-    static const int CHECKBOX_TARGETMODE = 11;
+    static const int CHECKBOX_TARGETMODE = 10;
 
     LevelPreviewMenu(sf::RenderWindow& screen, ResourceManager& resourceManager);
     
