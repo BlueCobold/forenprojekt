@@ -1,6 +1,7 @@
 <level>
 	<levelinfo name="Level 5">
 		<infoimage srcx="38" srcy="421" width ="192" height="108" />
+		<gameplay maxBalls="1" time="100"/>
 	</levelinfo>
 	<constants direction="1" arrowtime="0"/>
 	<templates>
