@@ -98,10 +98,7 @@ public:
 
         // Save the entity in the body for the contact listener
         m_body->SetUserData(this);
-        if(m_basePosChanged)
-            m_body->SetTransform(m_basePosition, m_bodyDef.angle);
-        else
-            m_basePosition = m_body->GetPosition();
+        m_body->SetTransform(m_basePosition, m_bodyDef.angle);
 
         m_body->SetLinearVelocity(m_spawnSpeed);
     }
