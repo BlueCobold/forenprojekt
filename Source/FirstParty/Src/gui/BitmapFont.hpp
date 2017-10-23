@@ -1,7 +1,7 @@
+#pragma once
+
 #ifndef BITMAP_FONT_HPP
 #define BITMAP_FONT_HPP
-
-#pragma once
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>

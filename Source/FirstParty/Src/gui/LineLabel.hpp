@@ -1,7 +1,7 @@
+#pragma once
+
 #ifndef LINELABEL_HPP
 #define LINELABEL_HPP
-
-#pragma once
 
 #include "BitmapFont.hpp"
 #include "MenuElement.hpp"

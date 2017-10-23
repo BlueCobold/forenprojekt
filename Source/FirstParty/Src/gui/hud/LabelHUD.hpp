@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef LABELHUD_HPP
 #define LABELHUD_HPP
 

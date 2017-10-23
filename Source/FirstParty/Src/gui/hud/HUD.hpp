@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef HUD_HPP
 #define HUD_HPP
 

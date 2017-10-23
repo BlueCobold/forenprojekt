@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef TIMEHUD_HPP
 #define TIMEHUD_HPP
 

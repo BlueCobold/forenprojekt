@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef FPSCOUNTERHUD_HPP
 #define FPSCOUNTERHUD_HPP
 

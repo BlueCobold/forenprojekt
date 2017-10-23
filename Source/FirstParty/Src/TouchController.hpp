@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef TOUCHCONTROLLER_HPP
 #define TOUCHCONTROLLER_HPP
 

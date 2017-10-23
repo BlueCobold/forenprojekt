@@ -1,10 +1,10 @@
+#pragma once
+
 #ifndef INTERACTIVELABEL_HPP
 #define INTERACTIVELABEL_HPP
 
 #include "LineLabel.hpp"
 #include "ToolTip.hpp"
-
-#pragma once
 
 // this class add a ToolTip to a standard LineLabel
 class InteractiveLabel : public LineLabel

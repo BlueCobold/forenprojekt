@@ -1,7 +1,7 @@
+#pragma once
+
 #ifndef SOUND_MANAGER
 #define SOUND_MANAGER
-
-#pragma once
 
 #include "../resources/SoundBufferManager.hpp"
 

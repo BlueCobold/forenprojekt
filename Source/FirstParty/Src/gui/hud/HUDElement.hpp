@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef HUDELEMENT_HPP
 #define HUDELEMENT_HPP
 

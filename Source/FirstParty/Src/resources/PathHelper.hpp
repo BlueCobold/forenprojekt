@@ -1,10 +1,4 @@
-//
-//  PathHelper.hpp
-//  RicketyRacquet
-//
-//  Created by Sebastian Kohl on 13.11.14.
-//
-//
+#pragma once
 
 #ifndef RicketyRacquet_PathHelper_hpp
 #define RicketyRacquet_PathHelper_hpp

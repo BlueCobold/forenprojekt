@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef ARROW_HPP
 #define ARROW_HPP
 

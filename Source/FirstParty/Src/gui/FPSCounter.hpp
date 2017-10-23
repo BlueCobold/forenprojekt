@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef FPSCOUNTER_HPP
 #define FPSCOUNTER_HPP
 

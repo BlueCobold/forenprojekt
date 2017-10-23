@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef TARGETHUD_HPP
 #define TARGETHUD_HPP
 
