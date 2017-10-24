@@ -12,6 +12,7 @@
 
 #include <algorithm>
 #include <vector>
+#include "TouchController.hpp"
 
 namespace utility
 {
@@ -113,6 +114,9 @@ namespace utility
         sf::Vector2i m_realWindowPosition;
     };
     extern MouseWrapper Mouse;
+
+    extern TouchController TeeterController;
+
 } // namespace utility
 
 #endif // INPUT_HPP

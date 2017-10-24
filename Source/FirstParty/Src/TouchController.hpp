@@ -34,7 +34,5 @@ namespace utility
 
         void setTouchArea(const sf::FloatRect& touchArea);
     };
-
-    extern TouchController TeeterController;
 }
 #endif

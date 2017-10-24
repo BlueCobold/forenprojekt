@@ -13,7 +13,7 @@ namespace utility
 {
     MouseWrapper Mouse;
     KeyboardWrapper Keyboard;
-    TouchController TeeterController(sf::FloatRect(0, 0, 0, 0),45.f, 45.f);
+    TouchController TeeterController(sf::FloatRect(0, 0, 0, 0), 45.f, 45.f);
 
     void KeyboardWrapper::progress()
     {
