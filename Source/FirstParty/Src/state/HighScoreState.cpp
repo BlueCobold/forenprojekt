@@ -78,6 +78,9 @@ StateChangeInformation HighScoreState::update(const double time)
 
     updateTime(time - m_timeDiff);
     m_menu.update(m_screen, getPassedTime());
+    
+    if(utility::Keyboard.isKeyReleased(sf::Keyboard::Escape))
+        m_clicked = HighScoreMenu::BUTTON_CLOSE;
 
     if(m_clicked == HighScoreMenu::CHECKBOX_LOCAL_HIGHSCORE || m_clicked == HighScoreMenu::CHECKBOX_GAMEMODE)
     {

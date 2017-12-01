@@ -56,6 +56,9 @@ StateChangeInformation OptionMenuState::update(const double time)
 
     updateTime(time);
     m_menu.update(m_screen, getPassedTime());
+    
+    if(utility::Keyboard.isKeyReleased(sf::Keyboard::Escape))
+        m_clicked = OptionMenu::BUTTON_CLOSE;
 
     if(m_clicked == OptionMenu::BUTTON_CLOSE)
     {

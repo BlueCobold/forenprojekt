@@ -35,6 +35,9 @@ StateChangeInformation CreditMenuState::update(const double time)
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
     m_menu.update(m_screen, getPassedTime());
 
+    if(utility::Keyboard.isKeyReleased(sf::Keyboard::Escape))
+        clicked = CreditMenu::BUTTON_CLOSE;
+
     if(clicked == CreditMenu::BUTTON_CLOSE)
     {
         m_transitionStateInfo.m_followingState = MainMenuStateId;

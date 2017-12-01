@@ -129,6 +129,9 @@ StateChangeInformation CoinShopState::update(const double time)
     m_menu.update(m_screen, getPassedTime());
     updateButtons();
 
+    if(utility::Keyboard.isKeyReleased(sf::Keyboard::Escape))
+        m_clicked = CoinShopMenu::BUTTON_CLOSE;
+
     switch(m_clicked)
     {
     case CoinShopMenu::BUTTON_CLOSE:

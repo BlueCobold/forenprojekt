@@ -113,6 +113,9 @@ StateChangeInformation LevelPreviewState::update(const double time)
     modeBox.setVisible(timeAttackUnlocked);
 
     m_menu.update(m_screen, getPassedTime());
+    
+    if(utility::Keyboard.isKeyReleased(sf::Keyboard::Escape))
+        clicked = LevelPreviewMenu::BUTTON_MAIN_MENU;
 
     if(m_levelLoaderJob->isLoaded())
     {

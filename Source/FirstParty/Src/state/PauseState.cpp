@@ -74,9 +74,10 @@ StateChangeInformation PauseState::update(const double time)
     int clicked = -1;
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
     m_menu.update(m_screen, getPassedTime());
-
-    if(utility::Keyboard.isKeyDown(sf::Keyboard::P)
-        || utility::Keyboard.isKeyDown(sf::Keyboard::Pause)
+    
+    if(utility::Keyboard.isKeyReleased(sf::Keyboard::P)
+        || utility::Keyboard.isKeyReleased(sf::Keyboard::Pause)
+        || utility::Keyboard.isKeyReleased(sf::Keyboard::Escape)
         || PauseMenu::BUTTON_CONTINUE == clicked)
     {
         m_playStateInfo.m_returnFromPause = true;

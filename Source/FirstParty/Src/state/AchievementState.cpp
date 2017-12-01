@@ -49,6 +49,9 @@ StateChangeInformation AchievementState::update(const double time)
     int clicked = -1;
     m_menu.registerOnClick([&](const Button& sender){ clicked = sender.getId(); });
     m_menu.update(m_screen, getPassedTime());
+    
+    if(utility::Keyboard.isKeyReleased(sf::Keyboard::Escape))
+        clicked = AchievementMenu::BUTTON_MAIN_MENU;
 
     if(clicked == AchievementMenu::BUTTON_MAIN_MENU)
     {

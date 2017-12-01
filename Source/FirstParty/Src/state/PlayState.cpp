@@ -73,6 +73,7 @@ StateChangeInformation PlayState::update(const double time)
         utility::Mouse.startInterpolation(dynamic_cast<sf::Window&>(m_screen));
         m_level->update(getPassedTime());
         m_hud.update(m_level, getPassedTime());
+        
         if(utility::Keyboard.isKeyDown(sf::Keyboard::F5) || utility::Keyboard.isKeyPressed(sf::Keyboard::F5))
         {
 #ifdef LEVELTESTING
@@ -133,8 +134,10 @@ StateChangeInformation PlayState::update(const double time)
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
         }
 #endif
-        if(m_shouldPause || utility::Keyboard.isKeyDown(sf::Keyboard::P) || 
-           utility::Keyboard.isKeyDown(sf::Keyboard::Pause) || utility::Keyboard.isKeyDown(sf::Keyboard::Escape))
+        if(m_shouldPause
+            || utility::Keyboard.isKeyReleased(sf::Keyboard::P)
+            || utility::Keyboard.isKeyReleased(sf::Keyboard::Pause)
+            || utility::Keyboard.isKeyReleased(sf::Keyboard::Escape))
         {
             m_pauseStateInfo.m_level = m_level;
             m_transitionStateInfo.m_level = m_level;
