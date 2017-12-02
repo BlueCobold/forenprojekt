@@ -70,9 +70,9 @@ void Animation::update()
 
     double scaleX = m_scale.x, scaleY = m_scale.y;
     if(m_xScaleProvider != nullptr)
-        scaleX = m_xScaleProvider->getValue();
+        scaleX *= m_xScaleProvider->getValue();
     if(m_yScaleProvider != nullptr)
-        scaleY = m_yScaleProvider->getValue();
+        scaleY *= m_yScaleProvider->getValue();
     m_sprite.setScale(static_cast<float>(scaleX), static_cast<float>(scaleY));
 
     if(m_origins.size() != 0)
@@ -139,14 +139,16 @@ void Animation::updatePosition()
 {
     m_dynamicPosition = sf::Vector2f(0, 0);
     if(m_xPositionProvider != nullptr)
-        m_dynamicPosition.x += static_cast<float>(m_xPositionProvider->getValue()) * m_scale.x;
+        m_dynamicPosition.x += static_cast<float>(m_xPositionProvider->getValue());
     if(m_yPositionProvider != nullptr)
-        m_dynamicPosition.y += static_cast<float>(m_yPositionProvider->getValue()) * m_scale.y;
+        m_dynamicPosition.y += static_cast<float>(m_yPositionProvider->getValue());
 
-    auto offset = sf::Vector2f();
+    sf::Vector2i offset;
     if(m_offsets.size() != 0)
-        offset = sf::Vector2f(m_offsets[m_frame]);
-    m_sprite.setPosition(m_externalPosition + m_dynamicPosition + m_drawOffset + offset);
+        offset = m_offsets[m_frame];
+
+    m_sprite.setPosition(m_externalPosition + sf::Vector2f((m_dynamicPosition.x + m_drawOffset.x + offset.x) * m_scale.x,
+                                                           (m_dynamicPosition.y + m_drawOffset.y + offset.y) * m_scale.y));
 }
 
 void Animation::setRotation(const float radians)

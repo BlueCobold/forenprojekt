@@ -2,11 +2,14 @@
 #include "AnimationContainer.hpp"
 #include "../animation/CloneHandler.hpp"
 
-AnimationContainer::AnimationContainer(ScreenLocation position,
-                                       int id, CloneHandler& cloneHandler) :
+AnimationContainer::AnimationContainer(int id,
+                                       const ScreenLocation position,
+                                       const ScreenScale& scale,
+                                       CloneHandler& cloneHandler) :
     MenuElement(id, MenuElementType::Animation, position),
     m_updatingAni(nullptr),
     m_cloneHandler(cloneHandler),
+    m_screenScale(scale),
     m_scale(sf::Vector2f(1.f, 1.f))
 {
 }
@@ -25,7 +28,7 @@ void AnimationContainer::bindAnimation(std::unique_ptr<Animation> animation)
 
 std::unique_ptr<MenuElement> AnimationContainer::onClone() const
 {
-    auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getPosition(), getId(), m_cloneHandler));
+    auto other = std::unique_ptr<AnimationContainer>(new AnimationContainer(getId(), getPosition(), m_screenScale, m_cloneHandler));
     m_cloneHandler.registerCloneAll(*this, *other.get());
     
     other->setVisibleWhenId(getVisibleWhenId());
@@ -73,9 +76,13 @@ void AnimationContainer::updated(const sf::RenderWindow& screen, const double ti
     updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
     auto currentPosition = getCurrentPosition();
     
+    m_screenScale.setScreenSize(sf::Vector2f(screen.getSize()));
+    auto screenScale(m_screenScale.getCurrentScale());
+    auto scale = sf::Vector2f(m_scale.x * screenScale.x, m_scale.y * screenScale.y);
+
     graphics.updateAnimations([&](Animation& ani)->bool{
         m_updatingAni = &ani;
-        ani.setScale(m_scale);
+        ani.setScale(scale);
         ani.setPosition(currentPosition.x, currentPosition.y);
         return true;
     });

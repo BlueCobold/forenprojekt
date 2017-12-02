@@ -519,7 +519,10 @@ std::vector<std::unique_ptr<AnimationContainer>> MenuLoader::parseAnimationConta
         [&](const tinyxml2::XMLElement& aniContainerXml) -> std::unique_ptr<AnimationContainer>
     {
         int id = aniContainerXml.IntAttribute("id");
-        std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(parsePosition(aniContainerXml), id, _cloneHandler));
+        std::unique_ptr<AnimationContainer> animContainer(new AnimationContainer(id,
+                                                                                 parsePosition(aniContainerXml),
+                                                                                 parseScale(aniContainerXml),
+                                                                                 _cloneHandler));
         if(auto animationsXml = aniContainerXml.FirstChildElement("animations"))
         {
             ProviderContext context(animContainer.get(), animContainer.get(), animContainer.get(), animContainer.get(), _cloneHandler);
@@ -696,7 +699,7 @@ ButtonStateStyle MenuLoader::loadButtonStateStyle(const tinyxml2::XMLElement& xm
     if(auto animationsXml = xml.FirstChildElement("animations"))
     {
         animationsXml->QueryBoolAttribute("resetOnExit", &style.resetOnExit);
-        style.animation = std::unique_ptr<AnimationContainer>(new AnimationContainer(ScreenLocation(), 0, _cloneHandler));
+        style.animation = std::unique_ptr<AnimationContainer>(new AnimationContainer(0, ScreenLocation(), ScreenScale(), _cloneHandler));
 
         ProviderContext context(style.animation.get(), style.animation.get(), style.animation.get(), style.animation.get(), _cloneHandler);
         AnimationParser loader(AnimationContext(context, m_resourceManager, 0));

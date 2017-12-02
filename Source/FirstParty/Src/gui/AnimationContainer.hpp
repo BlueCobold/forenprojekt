@@ -7,6 +7,7 @@
 #include "../animation/Animation.hpp"
 #include "../rendering/GraphicalObject.hpp"
 #include "MenuElement.hpp"
+#include "ScreenScale.hpp"
 
 class CloneHandler;
 
@@ -17,6 +18,7 @@ private:
     Animation* m_updatingAni;
     CloneHandler& m_cloneHandler;
     GraphicalObject graphics;
+    ScreenScale m_screenScale;
     sf::Vector2f m_scale;
 
     std::unique_ptr<MenuElement> onClone() const override;
@@ -27,8 +29,9 @@ private:
     void updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset = sf::Vector2i(0, 0)) override;
 
 public:
-    AnimationContainer(ScreenLocation position,
-                       int id,
+    AnimationContainer(int id,
+                       const ScreenLocation position,
+                       const ScreenScale& scale,
                        CloneHandler& cloneHandler);
 
     AnimationContainer(AnimationContainer&& toMove);
