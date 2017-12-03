@@ -7,9 +7,11 @@
 			</animations>
 		</animationContainer>
 
-		<image id="5" x="0.5" y="0" offsetx="-127" offsety="-1" spriteSheet="gui_elements" sprite="Icon_Backgrounds_Logo" />
+		<image id="5" x="0.5" y="0" offsetx="-127" offsety="-1" spriteSheet="gui_elements" sprite="Icon_Backgrounds_Logo"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
 
-		<animationContainer id="100" x="0.5" y="0.0" offsetx="-65" offsety="30">
+		<animationContainer id="100" x="0.5" y="0.0" offsetx="-65" offsety="30"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min">
 			<animations>
 				<animation spritesheet="gui_animations" sprite="r_ickety_shadow" copies="28" blending="premul" >
 					<constants orderId="0"/>
@@ -213,7 +215,8 @@
 				</animation>
 			</animations>
 		</animationContainer>
-		<animationContainer id="-1" x="0.32" y="0.3" offsetx="-70">
+		<animationContainer id="-1" x="0.32" y="0.3" offsetx="-70"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min">
 			<animations>
 				<animation spritesheet="icon_backgrounds" sprite="Icon_Backgrounds1" blending="premul">
 					<scale axis="x">
@@ -294,7 +297,8 @@
 				</animation>
 			</animations>
 		</animationContainer>
-		<animationContainer id="-1" x="0.7" y="0.25" offsetx="50">
+		<animationContainer id="-1" x="0.7" y="0.25" offsetx="50"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min">
 			<animations>
 				<animation spritesheet="icon_backgrounds" sprite="Icon_Backgrounds2" blending="premul">
 					<scale axis="x">
@@ -395,7 +399,8 @@
 				</animation>
 			</animations>
 		</animationContainer>
-		<animationContainer id="-1" x="0.25" y="0.65" offsetx="-50">
+		<animationContainer id="-1" x="0.25" y="0.65" offsetx="-50"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min">
 			<animations>
 				<animation spritesheet="icon_backgrounds" sprite="Icon_Backgrounds2" blending="premul">
 					<scale axis="x">
@@ -496,7 +501,8 @@
 				</animation>
 			</animations>
 		</animationContainer>
-		<animationContainer id="-1" x="0.48" y="0.8">
+		<animationContainer id="-1" x="0.48" y="0.8"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min">
 			<animations>
 				<animation spritesheet="icon_backgrounds" sprite="Icon_Backgrounds3" blending="premul">
 					<scale axis="x">
@@ -597,7 +603,8 @@
 				</animation>
 			</animations>
 		</animationContainer>
-		<animationContainer id="-1" x="0.75" y="0.6" offsetx="50">
+		<animationContainer id="-1" x="0.75" y="0.6" offsetx="50"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min">
 			<animations>
 				<animation spritesheet="icon_backgrounds" sprite="Icon_Backgrounds1" blending="premul">
 					<scale axis="x">
@@ -698,7 +705,8 @@
 				</animation>
 			</animations>
 		</animationContainer>
-		<animationContainer id="-1" x="0.5" y="0.45" offsetx="0">
+		<animationContainer id="-1" x="0.5" y="0.45" offsetx="0"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min">
 			<animations>
 				<animation spritesheet="icon_backgrounds" sprite="Icon_Backgrounds4" blending="premul">
 					<scale axis="x">
@@ -799,10 +807,15 @@
 				</animation>
 			</animations>
 		</animationContainer>
-		<button id="0" text="gui_start_new_game" style="playButtonStyle" x="0.5" y="0.45" offsetx="-5" offsety="-5" />
-		<button id="6" text="gui_achievement" style="achieveButtonStyle" x="0.32" y="0.3" offsetx="-75" offsety="-10" />
-		<button id="2" text="gui_option" style="optionButtonStyle" x="0.75" y="0.6" offsetx="45" offsety="-10" />
-		<button id="3" text="gui_credit" style="creditButtonStyle" x="0.25" y="0.65" offsetx="-55" offsety="-5" />
-		<button id="4" text="gui_close" style="exitButtonStyle" x="0.48" y="0.8" offsetx="-5" offsety="-5" />
+		<button id="0" text="gui_start_new_game" style="playButtonStyle" x="0.5" y="0.45" offsetx="-5" offsety="-5"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+		<button id="6" text="gui_achievement" style="achieveButtonStyle" x="0.32" y="0.3" offsetx="-75" offsety="-10"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+		<button id="2" text="gui_option" style="optionButtonStyle" x="0.75" y="0.6" offsetx="45" offsety="-10"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+		<button id="3" text="gui_credit" style="creditButtonStyle" x="0.25" y="0.65" offsetx="-55" offsety="-5"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
+		<button id="4" text="gui_close" style="exitButtonStyle" x="0.48" y="0.8" offsetx="-5" offsety="-5"
+			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
 	</elements>
 </menu>
