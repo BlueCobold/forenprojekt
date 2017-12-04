@@ -84,9 +84,12 @@ void MenuSprite::onDrawAdditionalForeground(const DrawParameter& params)
 
 void MenuSprite::layoutUpdated(const sf::Vector2f& screenSize)
 {
-    m_sprite.setPosition(sf::Vector2f(floorf(getCurrentPosition().x), floorf(getCurrentPosition().y)));
-    auto& texRect = m_sprite.getTextureRect();
     m_scale.setScreenSize(screenSize);
     auto scale = m_scale.getCurrentScale();
     m_sprite.setScale(scale);
+
+    m_sprite.setPosition(
+        sf::Vector2f(
+            floorf(getCurrentPosition().x),
+            floorf(getCurrentPosition().y)));
 }
