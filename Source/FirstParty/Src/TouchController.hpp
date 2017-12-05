@@ -3,7 +3,7 @@
 #ifndef TOUCHCONTROLLER_HPP
 #define TOUCHCONTROLLER_HPP
 
-#include <SFML\Graphics\Rect.hpp>
+#include <SFML/Graphics/Rect.hpp>
 
 namespace utility
 {

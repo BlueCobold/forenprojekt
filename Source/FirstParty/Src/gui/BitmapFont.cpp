@@ -78,6 +78,7 @@ BitmapFont::Glyph BitmapFont::getGlyph(const char key) const
     if(m_glyphs.count(key))
         return m_glyphs.at(key);
 
+    return m_glyphs.at(' ');
     throw std::runtime_error(
         utility::replace(
             utility::replace(utility::translateKey("@UnknownGlyph"), m_fileName),

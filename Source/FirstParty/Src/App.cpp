@@ -96,11 +96,12 @@ App::App(AppConfig& config) :
     m_screen.setActive(true);
     auto loaded = gl::sys::LoadFunctions();
     int maxTextureSize = 0;
+    auto missing = utility::toString(loaded.GetNumMissing());
     gl::GetIntegerv(gl::MAX_TEXTURE_SIZE, &maxTextureSize);
 #ifdef ANDROID
     auto msg = (((std::string)"Max texture size: ")+utility::toString(maxTextureSize))
         +" loaded: " + utility::toString(loaded.GetLoaded())
-        +" miss: " + utility::toString(loaded.GetNumMissing())
+        +" miss: " + missing
         +" version: " + reinterpret_cast<const char*>(gl::GetString(gl::VERSION))
         +" extensions: " + reinterpret_cast<const char*>(gl::GetString(gl::EXTENSIONS));
     auto m = msg.c_str();
@@ -269,8 +270,10 @@ void App::draw()
     gl::StencilMask(0xFF); // Write to entire stencil buffer
     gl::ClearStencil(0);
     gl::DepthMask(true);
-    if(gl::ClearDepth)
-        gl::ClearDepth(1);
+
+    if(gl::ClearDepthf)
+        gl::ClearDepthf(1);
+
     gl::Clear(gl::STENCIL_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
     gl::DepthMask(false);
 

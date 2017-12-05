@@ -240,7 +240,7 @@ namespace gl
 
     extern void (CODEGEN_FUNCPTR *DepthFunc)(GLenum func);
     extern void (CODEGEN_FUNCPTR *DepthMask)(GLboolean enabled);
-    extern void (CODEGEN_FUNCPTR *ClearDepth)(GLclampd depth);
+    extern void (CODEGEN_FUNCPTR *ClearDepthf)(GLfloat depth);
 
     extern void (CODEGEN_FUNCPTR *Enable)(GLenum cap);
     extern void (CODEGEN_FUNCPTR *Disable)(GLenum cap);

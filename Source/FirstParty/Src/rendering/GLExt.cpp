@@ -140,8 +140,8 @@ namespace gl
     PFNDEPTHFUNC DepthFunc = 0;
     typedef void (CODEGEN_FUNCPTR *PFNDEPTHMASK)(GLboolean);
     PFNDEPTHMASK DepthMask = 0;
-    typedef void (CODEGEN_FUNCPTR *PFNCLEARDEPTH)(GLclampd);
-    PFNCLEARDEPTH ClearDepth = 0;
+    typedef void (CODEGEN_FUNCPTR *PFNCLEARDEPTHF)(GLfloat);
+    PFNCLEARDEPTHF ClearDepthf = 0;
     
     typedef void (CODEGEN_FUNCPTR *PFNENABLE)(GLenum);
     PFNENABLE Enable = 0;
@@ -183,8 +183,8 @@ namespace gl
         if(!DepthFunc) ++numFailed;
         DepthMask = reinterpret_cast<PFNDEPTHMASK>(IntGetProcAddress("glDepthMask"));
         if(!DepthMask) ++numFailed;
-        ClearDepth = reinterpret_cast<PFNCLEARDEPTH>(IntGetProcAddress("glClearDepth"));
-        if(!ClearDepth) ++numFailed;
+        ClearDepthf = reinterpret_cast<PFNCLEARDEPTHF>(IntGetProcAddress("glClearDepthf"));
+        if(!ClearDepthf) ++numFailed;
 
         ClearStencil = reinterpret_cast<PFNCLEARSTENCIL>(IntGetProcAddress("glClearStencil"));
         if(!ClearStencil) ++numFailed;
@@ -207,6 +207,9 @@ namespace gl
         StencilMask = glStencilMask;
         StencilOp = glStencilOp;
         ColorMask = glColorMask;
+        DepthMask = glDepthMask;
+        ClearDepthf = glClearDepthf;
+        DepthFunc = glDepthFunc;
         ClearStencil = glClearStencil;
         Clear = glClear;
         Disable = glDisable;

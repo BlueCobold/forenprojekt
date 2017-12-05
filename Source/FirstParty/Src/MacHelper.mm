@@ -2,6 +2,7 @@
 #import "MacHelper.hpp"
 
 #import "BatteryState.hpp"
+#import "Utility.hpp"
 
 #import <Foundation/Foundation.h>
 
@@ -12,11 +13,6 @@
 #import <IOKit/ps/IOPowerSources.h>
 #import <IOKit/ps/IOPSKeys.h>
 #endif
-
-namespace utility
-{
-    std::string translateKey(std::string key);
-}
 
 #if defined(IOS) || defined(OSX)
 

@@ -33,6 +33,8 @@
 		6E4D38AE1C85D70200F7F3CA /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E4D38AD1C85D70200F7F3CA /* libjpeg.a */; };
 		6E5ACDC31B68A2E80052FE08 /* EntityFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5ACDC11B68A2E80052FE08 /* EntityFactory.cpp */; };
 		6E5ACDC61B68A2F00052FE08 /* Caret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5ACDC51B68A2F00052FE08 /* Caret.cpp */; };
+		6E5FA9161E9531630023760D /* Border.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FA9091E952EEB0023760D /* Border.cpp */; };
+		6E5FA9171E9531780023760D /* BatteryHUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FA9101E952F080023760D /* BatteryHUD.cpp */; };
 		6E745C5B1A1B79AE001595DE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E745C5A1A1B79AE001595DE /* OpenGLES.framework */; };
 		6E745C5D1A1B79B3001595DE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E745C5C1A1B79B3001595DE /* QuartzCore.framework */; };
 		6E745C5F1A1B79BC001595DE /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E745C5E1A1B79BC001595DE /* CoreMotion.framework */; };
@@ -142,7 +144,6 @@
 		6EC866BA1B807264004192B1 /* LevelFailState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866991B807264004192B1 /* LevelFailState.cpp */; };
 		6EC866BB1B807264004192B1 /* LevelPassState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8669B1B807264004192B1 /* LevelPassState.cpp */; };
 		6EC866BC1B807264004192B1 /* LevelPreviewState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8669D1B807264004192B1 /* LevelPreviewState.cpp */; };
-		6EC866BD1B807264004192B1 /* LevelSelectState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC8669F1B807264004192B1 /* LevelSelectState.cpp */; };
 		6EC866BE1B807264004192B1 /* LoadLevelState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866A11B807264004192B1 /* LoadLevelState.cpp */; };
 		6EC866BF1B807264004192B1 /* MainMenuState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866A31B807264004192B1 /* MainMenuState.cpp */; };
 		6EC866C01B807264004192B1 /* NewHighScoreState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866A51B807264004192B1 /* NewHighScoreState.cpp */; };
@@ -236,6 +237,25 @@
 		6E5ACDC11B68A2E80052FE08 /* EntityFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityFactory.cpp; sourceTree = "<group>"; };
 		6E5ACDC21B68A2E80052FE08 /* EntityFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityFactory.hpp; sourceTree = "<group>"; };
 		6E5ACDC51B68A2F00052FE08 /* Caret.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Caret.cpp; sourceTree = "<group>"; };
+		6E5FA9031E952E770023760D /* TouchButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TouchButton.cpp; path = ../../Src/TouchButton.cpp; sourceTree = "<group>"; };
+		6E5FA9041E952E770023760D /* TouchButton.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = TouchButton.hpp; path = ../../Src/TouchButton.hpp; sourceTree = "<group>"; };
+		6E5FA9051E952E770023760D /* TouchController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = TouchController.cpp; path = ../../Src/TouchController.cpp; sourceTree = "<group>"; };
+		6E5FA9061E952E770023760D /* TouchController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = TouchController.hpp; path = ../../Src/TouchController.hpp; sourceTree = "<group>"; };
+		6E5FA9071E952E950023760D /* Delay.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Delay.hpp; sourceTree = "<group>"; };
+		6E5FA9081E952E950023760D /* Observer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Observer.hpp; sourceTree = "<group>"; };
+		6E5FA9091E952EEB0023760D /* Border.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Border.cpp; sourceTree = "<group>"; };
+		6E5FA90A1E952EEB0023760D /* Border.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Border.hpp; sourceTree = "<group>"; };
+		6E5FA90B1E952EEB0023760D /* BorderStyle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BorderStyle.hpp; sourceTree = "<group>"; };
+		6E5FA90C1E952EEB0023760D /* GestureHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GestureHandler.hpp; sourceTree = "<group>"; };
+		6E5FA90D1E952EFA0023760D /* CustomContent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CustomContent.hpp; sourceTree = "<group>"; };
+		6E5FA90E1E952EFA0023760D /* GestureFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GestureFilter.hpp; sourceTree = "<group>"; };
+		6E5FA90F1E952EFA0023760D /* ScreenSize.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ScreenSize.hpp; sourceTree = "<group>"; };
+		6E5FA9101E952F080023760D /* BatteryHUD.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BatteryHUD.cpp; sourceTree = "<group>"; };
+		6E5FA9111E952F080023760D /* BatteryHUD.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BatteryHUD.hpp; sourceTree = "<group>"; };
+		6E5FA9121E952F220023760D /* BallAngleFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BallAngleFilter.hpp; sourceTree = "<group>"; };
+		6E5FA9131E952F3C0023760D /* Blending.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Blending.hpp; sourceTree = "<group>"; };
+		6E5FA9141E952F3C0023760D /* Sprite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sprite.hpp; sourceTree = "<group>"; };
+		6E5FA9151E952F5D0023760D /* BlendingParser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BlendingParser.hpp; sourceTree = "<group>"; };
 		6E745C051A1B744E001595DE /* RicketyRacquet iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RicketyRacquet iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E745C091A1B744E001595DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E745C5A1A1B79AE001595DE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -519,8 +539,6 @@
 		6EC8669C1B807264004192B1 /* LevelPassState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LevelPassState.hpp; path = ../state/LevelPassState.hpp; sourceTree = "<group>"; };
 		6EC8669D1B807264004192B1 /* LevelPreviewState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LevelPreviewState.cpp; path = ../state/LevelPreviewState.cpp; sourceTree = "<group>"; };
 		6EC8669E1B807264004192B1 /* LevelPreviewState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LevelPreviewState.hpp; path = ../state/LevelPreviewState.hpp; sourceTree = "<group>"; };
-		6EC8669F1B807264004192B1 /* LevelSelectState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LevelSelectState.cpp; path = ../state/LevelSelectState.cpp; sourceTree = "<group>"; };
-		6EC866A01B807264004192B1 /* LevelSelectState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LevelSelectState.hpp; path = ../state/LevelSelectState.hpp; sourceTree = "<group>"; };
 		6EC866A11B807264004192B1 /* LoadLevelState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LoadLevelState.cpp; path = ../state/LoadLevelState.cpp; sourceTree = "<group>"; };
 		6EC866A21B807264004192B1 /* LoadLevelState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LoadLevelState.hpp; path = ../state/LoadLevelState.hpp; sourceTree = "<group>"; };
 		6EC866A31B807264004192B1 /* MainMenuState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainMenuState.cpp; path = ../state/MainMenuState.cpp; sourceTree = "<group>"; };
@@ -673,17 +691,12 @@
 		6E745C071A1B744E001595DE /* RicketyRacquet */ = {
 			isa = PBXGroup;
 			children = (
-				6E745E0D1A1B7C11001595DE /* animation */,
-				6E745E3D1A1B7C11001595DE /* gui */,
-				6E745E911A1B7C12001595DE /* model */,
-				6E745EC21A1B7C12001595DE /* rendering */,
-				6E7460861A1B87C0001595DE /* Res */,
-				6E745EF41A1B7C12001595DE /* resources */,
-				6E745F0B1A1B7C12001595DE /* state */,
 				6E745F311A1B7C12001595DE /* App.cpp */,
 				6E745F331A1B7C12001595DE /* Core.cpp */,
 				6E745F341A1B7C12001595DE /* Input.cpp */,
 				6E745F391A1B7C12001595DE /* ScrollView.cpp */,
+				6E5FA9031E952E770023760D /* TouchButton.cpp */,
+				6E5FA9051E952E770023760D /* TouchController.cpp */,
 				6E745F3B1A1B7C12001595DE /* Utility.cpp */,
 				6E745F381A1B7C12001595DE /* Resources.h */,
 				6E745F321A1B7C12001595DE /* App.hpp */,
@@ -691,8 +704,17 @@
 				6E745F351A1B7C12001595DE /* Input.hpp */,
 				6E745F361A1B7C12001595DE /* MacHelper.hpp */,
 				6E745F3A1A1B7C12001595DE /* ScrollView.hpp */,
+				6E5FA9041E952E770023760D /* TouchButton.hpp */,
+				6E5FA9061E952E770023760D /* TouchController.hpp */,
 				6E745F3C1A1B7C12001595DE /* Utility.hpp */,
 				6E745F371A1B7C12001595DE /* MacHelper.mm */,
+				6E745E0D1A1B7C11001595DE /* animation */,
+				6E745E3D1A1B7C11001595DE /* gui */,
+				6E745E911A1B7C12001595DE /* model */,
+				6E745EC21A1B7C12001595DE /* rendering */,
+				6E7460861A1B87C0001595DE /* Res */,
+				6E745EF41A1B7C12001595DE /* resources */,
+				6E745F0B1A1B7C12001595DE /* state */,
 				6E745C081A1B744E001595DE /* Supporting Files */,
 			);
 			path = RicketyRacquet;
@@ -734,6 +756,8 @@
 		6E745E171A1B7C11001595DE /* provider */ = {
 			isa = PBXGroup;
 			children = (
+				6E5FA9071E952E950023760D /* Delay.hpp */,
+				6E5FA9081E952E950023760D /* Observer.hpp */,
 				6ED3AE741B4D940E00E32567 /* RandomProvider.cpp */,
 				6E745E181A1B7C11001595DE /* Absolute.hpp */,
 				6E745E191A1B7C11001595DE /* Adder.hpp */,
@@ -781,6 +805,9 @@
 				6E745E3F1A1B7C11001595DE /* AnimationContainer.hpp */,
 				6E745E401A1B7C11001595DE /* BitmapFont.cpp */,
 				6E745E411A1B7C11001595DE /* BitmapFont.hpp */,
+				6E5FA9091E952EEB0023760D /* Border.cpp */,
+				6E5FA90A1E952EEB0023760D /* Border.hpp */,
+				6E5FA90B1E952EEB0023760D /* BorderStyle.hpp */,
 				6E745E421A1B7C11001595DE /* Button.cpp */,
 				6E745E431A1B7C11001595DE /* Button.hpp */,
 				6E4D38A41C84705200F7F3CA /* ButtonStyle.cpp */,
@@ -798,6 +825,7 @@
 				6E745E4D1A1B7C11001595DE /* CreditMenu.hpp */,
 				6E745E4E1A1B7C11001595DE /* Cursor.cpp */,
 				6E745E4F1A1B7C11001595DE /* Cursor.hpp */,
+				6E5FA90D1E952EFA0023760D /* CustomContent.hpp */,
 				6E745E501A1B7C11001595DE /* ErrorMessageBox.hpp */,
 				6E745E511A1B7C11001595DE /* FailMenu.cpp */,
 				6E745E521A1B7C11001595DE /* FailMenu.hpp */,
@@ -805,6 +833,8 @@
 				6E745E541A1B7C11001595DE /* FPSCounter.hpp */,
 				6E745E551A1B7C11001595DE /* GameFinishedMenu.cpp */,
 				6E745E561A1B7C11001595DE /* GameFinishedMenu.hpp */,
+				6E5FA90E1E952EFA0023760D /* GestureFilter.hpp */,
+				6E5FA90C1E952EEB0023760D /* GestureHandler.hpp */,
 				6E745E571A1B7C11001595DE /* HighScoreMenu.hpp */,
 				6E745E581A1B7C11001595DE /* HighScoreMenue.cpp */,
 				6E745E591A1B7C11001595DE /* hud */,
@@ -841,6 +871,7 @@
 				6E745E891A1B7C12001595DE /* ReplayMenu.hpp */,
 				6E4D38A61C84705200F7F3CA /* ScreenLocation.cpp */,
 				6E4D38A71C84705200F7F3CA /* ScreenLocation.hpp */,
+				6E5FA90F1E952EFA0023760D /* ScreenSize.hpp */,
 				6E745E8A1A1B7C12001595DE /* Slider.cpp */,
 				6E745E8B1A1B7C12001595DE /* Slider.hpp */,
 				6E745E8C1A1B7C12001595DE /* SliderStyle.hpp */,
@@ -856,6 +887,8 @@
 		6E745E591A1B7C11001595DE /* hud */ = {
 			isa = PBXGroup;
 			children = (
+				6E5FA9101E952F080023760D /* BatteryHUD.cpp */,
+				6E5FA9111E952F080023760D /* BatteryHUD.hpp */,
 				6E745E5A1A1B7C11001595DE /* ArrowHUD.cpp */,
 				6E745E5B1A1B7C11001595DE /* ArrowHUD.hpp */,
 				6E745E5C1A1B7C11001595DE /* BallHUD.cpp */,
@@ -937,6 +970,7 @@
 		6E745E9A1A1B7C12001595DE /* filter */ = {
 			isa = PBXGroup;
 			children = (
+				6E5FA9121E952F220023760D /* BallAngleFilter.hpp */,
 				6E745E9B1A1B7C12001595DE /* ActionFilter.hpp */,
 				6E745E9C1A1B7C12001595DE /* Always.hpp */,
 				6E745E9D1A1B7C12001595DE /* ApplyForceFilter.hpp */,
@@ -967,17 +1001,19 @@
 		6E745EC21A1B7C12001595DE /* rendering */ = {
 			isa = PBXGroup;
 			children = (
+				6E5FA9131E952F3C0023760D /* Blending.hpp */,
 				6E745EC31A1B7C12001595DE /* DebugDraw.cpp */,
-				6ED3AE541B4D8CBA00E32567 /* GLExt.cpp */,
-				6E4D38A21C846EEC00F7F3CA /* GraphicalObject.cpp */,
-				6ED3AE561B4D8CBA00E32567 /* Shader.cpp */,
 				6E745EC41A1B7C12001595DE /* DebugDraw.hpp */,
 				6E745EC51A1B7C12001595DE /* Drawable.hpp */,
 				6E745EC61A1B7C12001595DE /* DrawParameter.hpp */,
+				6ED3AE541B4D8CBA00E32567 /* GLExt.cpp */,
 				6ED3AE551B4D8CBA00E32567 /* GLExt.hpp */,
+				6E4D38A21C846EEC00F7F3CA /* GraphicalObject.cpp */,
 				6E745EC71A1B7C12001595DE /* GraphicalObject.hpp */,
-				6ED3AE571B4D8CBA00E32567 /* Shader.hpp */,
 				6ED3AE671B4D93E400E32567 /* parameter */,
+				6ED3AE561B4D8CBA00E32567 /* Shader.cpp */,
+				6ED3AE571B4D8CBA00E32567 /* Shader.hpp */,
+				6E5FA9141E952F3C0023760D /* Sprite.hpp */,
 				6E745EC81A1B7C12001595DE /* transitions */,
 			);
 			name = rendering;
@@ -1037,6 +1073,7 @@
 		6E745EF41A1B7C12001595DE /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				6E5FA9151E952F5D0023760D /* BlendingParser.hpp */,
 				6ED3AE5A1B4D8CD500E32567 /* Achievement.cpp */,
 				6ED3AE5B1B4D8CD500E32567 /* Achievement.hpp */,
 				6ED3AE5C1B4D8CD500E32567 /* AchievementManager.cpp */,
@@ -1122,8 +1159,6 @@
 				6EC8669C1B807264004192B1 /* LevelPassState.hpp */,
 				6EC8669D1B807264004192B1 /* LevelPreviewState.cpp */,
 				6EC8669E1B807264004192B1 /* LevelPreviewState.hpp */,
-				6EC8669F1B807264004192B1 /* LevelSelectState.cpp */,
-				6EC866A01B807264004192B1 /* LevelSelectState.hpp */,
 				6EC866A11B807264004192B1 /* LoadLevelState.cpp */,
 				6EC866A21B807264004192B1 /* LoadLevelState.hpp */,
 				6EC866A31B807264004192B1 /* MainMenuState.cpp */,
@@ -1224,6 +1259,7 @@
 				TargetAttributes = {
 					6E745C041A1B744E001595DE = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = 4ZW66E3E8Z;
 					};
 				};
 			};
@@ -1264,6 +1300,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E5FA9171E9531780023760D /* BatteryHUD.cpp in Sources */,
+				6E5FA9161E9531630023760D /* Border.cpp in Sources */,
 				6E4D389A1C846ECA00F7F3CA /* PhysicsParser.cpp in Sources */,
 				6E745F641A1B7C12001595DE /* SubWindow.cpp in Sources */,
 				6E745F851A1B7C12001595DE /* VerticalMaskingStripesTransition.cpp in Sources */,
@@ -1318,7 +1356,6 @@
 				6ED3AE661B4D93BA00E32567 /* MusicPlayer.cpp in Sources */,
 				6E745F4B1A1B7C12001595DE /* GameFinishedMenu.cpp in Sources */,
 				6E4D389D1C846ECA00F7F3CA /* TemplateParser.cpp in Sources */,
-				6EC866BD1B807264004192B1 /* LevelSelectState.cpp in Sources */,
 				6E4D389B1C846ECA00F7F3CA /* ProviderParser.cpp in Sources */,
 				6ED3AE581B4D8CBA00E32567 /* GLExt.cpp in Sources */,
 				6ED3AE711B4D93E400E32567 /* IntParameter.cpp in Sources */,
@@ -1454,7 +1491,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "158b0ef5-7324-42a0-bb2c-156dfb5d730c";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALID_ARCHS = "$(ARCHS)";
@@ -1498,7 +1535,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "158b0ef5-7324-42a0-bb2c-156dfb5d730c";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -1513,6 +1550,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1539,7 +1578,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "RicketyRacquet iOS";
-				PROVISIONING_PROFILE = "158b0ef5-7324-42a0-bb2c-156dfb5d730c";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "$(ARCHS)";
 			};
 			name = Debug;
@@ -1554,6 +1593,8 @@
 					x86_64,
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = IOS;
 				HEADER_SEARCH_PATHS = (
@@ -1575,7 +1616,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "RicketyRacquet iOS";
-				PROVISIONING_PROFILE = "158b0ef5-7324-42a0-bb2c-156dfb5d730c";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "$(ARCHS)";
 				"VALID_ARCHS[sdk=iphoneos*]" = "$(ARCHS)";
 				"VALID_ARCHS[sdk=iphonesimulator*]" = "$(ARCHS)";

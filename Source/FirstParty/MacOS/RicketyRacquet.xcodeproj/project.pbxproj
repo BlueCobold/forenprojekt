@@ -147,7 +147,6 @@
 		6EC866F31B8073CB004192B1 /* LevelFailState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866D21B8073CB004192B1 /* LevelFailState.cpp */; };
 		6EC866F41B8073CB004192B1 /* LevelPassState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866D41B8073CB004192B1 /* LevelPassState.cpp */; };
 		6EC866F51B8073CB004192B1 /* LevelPreviewState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866D61B8073CB004192B1 /* LevelPreviewState.cpp */; };
-		6EC866F61B8073CB004192B1 /* LevelSelectState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866D81B8073CB004192B1 /* LevelSelectState.cpp */; };
 		6EC866F71B8073CB004192B1 /* LoadLevelState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866DA1B8073CB004192B1 /* LoadLevelState.cpp */; };
 		6EC866F81B8073CB004192B1 /* MainMenuState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866DC1B8073CB004192B1 /* MainMenuState.cpp */; };
 		6EC866F91B8073CB004192B1 /* NewHighScoreState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6EC866DE1B8073CB004192B1 /* NewHighScoreState.cpp */; };
@@ -493,6 +492,8 @@
 		6E4D38721C84473B00F7F3CA /* BatteryState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BatteryState.hpp; sourceTree = "<group>"; };
 		6E4D38731C8455FC00F7F3CA /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		6E5ACDB91B68A2490052FE08 /* Caret.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Caret.cpp; sourceTree = "<group>"; };
+		6E5FA9181E9531D10023760D /* CustomContent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CustomContent.hpp; sourceTree = "<group>"; };
+		6E5FA9191E9531E40023760D /* BallAngleFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BallAngleFilter.hpp; sourceTree = "<group>"; };
 		6E73F9451BEA0DC300539444 /* ButtonStyle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ButtonStyle.cpp; sourceTree = "<group>"; };
 		6E73F9461BEA0DC300539444 /* Caret.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Caret.hpp; sourceTree = "<group>"; };
 		6E73F9471BEA0DC300539444 /* ScreenLocation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenLocation.cpp; sourceTree = "<group>"; };
@@ -533,8 +534,6 @@
 		6EC866D51B8073CB004192B1 /* LevelPassState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LevelPassState.hpp; path = ../state/LevelPassState.hpp; sourceTree = "<group>"; };
 		6EC866D61B8073CB004192B1 /* LevelPreviewState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LevelPreviewState.cpp; path = ../state/LevelPreviewState.cpp; sourceTree = "<group>"; };
 		6EC866D71B8073CB004192B1 /* LevelPreviewState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LevelPreviewState.hpp; path = ../state/LevelPreviewState.hpp; sourceTree = "<group>"; };
-		6EC866D81B8073CB004192B1 /* LevelSelectState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LevelSelectState.cpp; path = ../state/LevelSelectState.cpp; sourceTree = "<group>"; };
-		6EC866D91B8073CB004192B1 /* LevelSelectState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LevelSelectState.hpp; path = ../state/LevelSelectState.hpp; sourceTree = "<group>"; };
 		6EC866DA1B8073CB004192B1 /* LoadLevelState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LoadLevelState.cpp; path = ../state/LoadLevelState.cpp; sourceTree = "<group>"; };
 		6EC866DB1B8073CB004192B1 /* LoadLevelState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LoadLevelState.hpp; path = ../state/LoadLevelState.hpp; sourceTree = "<group>"; };
 		6EC866DC1B8073CB004192B1 /* MainMenuState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainMenuState.cpp; path = ../state/MainMenuState.cpp; sourceTree = "<group>"; };
@@ -702,6 +701,7 @@
 		6E4AAC2F1ABAC116004DD346 /* gui */ = {
 			isa = PBXGroup;
 			children = (
+				6E5FA9181E9531D10023760D /* CustomContent.hpp */,
 				6EBF3D831B355C1F00E0CAE8 /* AchievementMenu.cpp */,
 				6EBF3D841B355C1F00E0CAE8 /* AchievementMenu.hpp */,
 				6E4AAC301ABAC116004DD346 /* AnimationContainer.cpp */,
@@ -869,6 +869,7 @@
 		6E4AAC931ABAC116004DD346 /* filter */ = {
 			isa = PBXGroup;
 			children = (
+				6E5FA9191E9531E40023760D /* BallAngleFilter.hpp */,
 				6E4AAC941ABAC116004DD346 /* ActionFilter.hpp */,
 				6E4AAC951ABAC116004DD346 /* Always.hpp */,
 				6E4AAC961ABAC116004DD346 /* ApplyForceFilter.hpp */,
@@ -1068,8 +1069,6 @@
 				6EC866D51B8073CB004192B1 /* LevelPassState.hpp */,
 				6EC866D61B8073CB004192B1 /* LevelPreviewState.cpp */,
 				6EC866D71B8073CB004192B1 /* LevelPreviewState.hpp */,
-				6EC866D81B8073CB004192B1 /* LevelSelectState.cpp */,
-				6EC866D91B8073CB004192B1 /* LevelSelectState.hpp */,
 				6EC866DA1B8073CB004192B1 /* LoadLevelState.cpp */,
 				6EC866DB1B8073CB004192B1 /* LoadLevelState.hpp */,
 				6EC866DC1B8073CB004192B1 /* MainMenuState.cpp */,
@@ -1309,7 +1308,6 @@
 				6E4AAD6E1ABAC116004DD346 /* SinglePrismaticJoint.cpp in Sources */,
 				6E4AAD6F1ABAC116004DD346 /* SingleRevoluteJoint.cpp in Sources */,
 				6E73F9491BEA0DC300539444 /* ButtonStyle.cpp in Sources */,
-				6EC866F61B8073CB004192B1 /* LevelSelectState.cpp in Sources */,
 				6ED3AD231B4BA13800E32567 /* IntParameter.cpp in Sources */,
 				6E4AAD851ABAC116004DD346 /* RotatingSquaresTransition.cpp in Sources */,
 				6E4AAD5D1ABAC116004DD346 /* NewHighScoreMenu.cpp in Sources */,
