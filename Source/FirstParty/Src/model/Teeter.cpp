@@ -39,16 +39,15 @@ void Teeter::timeUpdated()
     const auto value = getPassedTime();
     auto velocity = 0.f;
     auto angle = utility::toDegree(getAngle());
-    auto timeDiff = value - m_lastTime;
+    auto timeDiff = std::max(0.00001, value - m_lastTime);
 
 #if defined(IOS) || defined(ANDROID)
     auto gravToAngle = 90 / 9.81f;
-    sf::Vector2f mousePos = 0.5f * sf::Vector2f(utility::Mouse.getAcceleration().y, utility::Mouse.getAcceleration().x)
-                           +0.5f * m_lastMousePos;
 
-    auto mouseDiff = sf::Vector2f(mousePos.x * gravToAngle - angle / timeDiff,
-                                  mousePos.y * gravToAngle - angle / timeDiff);
-
+    auto accel = sf::Vector2f(utility::Mouse.getAcceleration().y, utility::Mouse.getAcceleration().x);
+    sf::Vector2f mousePos = 0.1f * accel
+                           +0.9f * m_lastMousePos;
+    sf::Vector2f mouseDiff = (m_lastMousePos - mousePos) * m_mouseScale*100.f / static_cast<float>(timeDiff * 60);
 #else
 #ifdef TOUCHSIM
     sf::Vector2f mousePos = sf::Vector2f(0, 0);
@@ -63,8 +62,8 @@ void Teeter::timeUpdated()
     sf::Vector2f mouseDiff = (m_lastMousePos - mousePos) * m_mouseScale / static_cast<float>(timeDiff * 60);
 #endif
 
-    auto minVelocity = static_cast<float>(((-45.f) - angle) / timeDiff);
-    auto maxVelocity = static_cast<float>(((45.f) - angle) / timeDiff);
+    auto minVelocity = static_cast<float>(((-45.f) - angle) * timeDiff * 60*100);
+    auto maxVelocity = static_cast<float>(((45.f) - angle) * timeDiff * 60*100);
 
     if(m_invertAxis)
         mouseDiff = -mouseDiff;
@@ -79,7 +78,7 @@ void Teeter::timeUpdated()
     getBody()->SetAngularVelocity(velocity);
 
     m_lastTime = value;
-    m_lastMousePos = mousePos;
+    m_lastMousePos =  mousePos;
 }
 
 void Teeter::setControl(const bool invertAxis, const bool useVerticalAxis)
