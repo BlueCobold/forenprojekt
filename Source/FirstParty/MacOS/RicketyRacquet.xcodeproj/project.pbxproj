@@ -125,6 +125,10 @@
 		6E4D386F1C843CAB00F7F3CA /* CloneHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D386E1C843CAB00F7F3CA /* CloneHandler.cpp */; settings = {ASSET_TAGS = (); }; };
 		6E4D38711C843CDF00F7F3CA /* GraphicalObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D38701C843CDF00F7F3CA /* GraphicalObject.cpp */; settings = {ASSET_TAGS = (); }; };
 		6E4D38741C8455FC00F7F3CA /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E4D38731C8455FC00F7F3CA /* IOKit.framework */; };
+		6E55036D1ECE08DA00462005 /* AchievementLevelUpRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E55036B1ECE08DA00462005 /* AchievementLevelUpRenderer.cpp */; settings = {ASSET_TAGS = (); }; };
+		6E5503701ECE08EA00462005 /* AchievementPopUpMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E55036E1ECE08EA00462005 /* AchievementPopUpMenu.cpp */; settings = {ASSET_TAGS = (); }; };
+		6E5503711ECE09BF00462005 /* TouchButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E21E4981E06AD3700F2AA3F /* TouchButton.cpp */; };
+		6E5503721ECE09BF00462005 /* TouchController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E21E49A1E06AD3700F2AA3F /* TouchController.cpp */; };
 		6E5ACDBA1B68A2490052FE08 /* Caret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5ACDB91B68A2490052FE08 /* Caret.cpp */; };
 		6E73F9491BEA0DC300539444 /* ButtonStyle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E73F9451BEA0DC300539444 /* ButtonStyle.cpp */; settings = {ASSET_TAGS = (); }; };
 		6E73F94A1BEA0DC300539444 /* ScreenLocation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E73F9471BEA0DC300539444 /* ScreenLocation.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -491,6 +495,10 @@
 		6E4D38701C843CDF00F7F3CA /* GraphicalObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GraphicalObject.cpp; sourceTree = "<group>"; };
 		6E4D38721C84473B00F7F3CA /* BatteryState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BatteryState.hpp; sourceTree = "<group>"; };
 		6E4D38731C8455FC00F7F3CA /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		6E55036B1ECE08DA00462005 /* AchievementLevelUpRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AchievementLevelUpRenderer.cpp; sourceTree = "<group>"; };
+		6E55036C1ECE08DA00462005 /* AchievementLevelUpRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AchievementLevelUpRenderer.hpp; sourceTree = "<group>"; };
+		6E55036E1ECE08EA00462005 /* AchievementPopUpMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AchievementPopUpMenu.cpp; sourceTree = "<group>"; };
+		6E55036F1ECE08EA00462005 /* AchievementPopUpMenu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AchievementPopUpMenu.hpp; sourceTree = "<group>"; };
 		6E5ACDB91B68A2490052FE08 /* Caret.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Caret.cpp; sourceTree = "<group>"; };
 		6E5FA9181E9531D10023760D /* CustomContent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CustomContent.hpp; sourceTree = "<group>"; };
 		6E5FA9191E9531E40023760D /* BallAngleFilter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BallAngleFilter.hpp; sourceTree = "<group>"; };
@@ -701,6 +709,8 @@
 		6E4AAC2F1ABAC116004DD346 /* gui */ = {
 			isa = PBXGroup;
 			children = (
+				6E55036E1ECE08EA00462005 /* AchievementPopUpMenu.cpp */,
+				6E55036F1ECE08EA00462005 /* AchievementPopUpMenu.hpp */,
 				6E5FA9181E9531D10023760D /* CustomContent.hpp */,
 				6EBF3D831B355C1F00E0CAE8 /* AchievementMenu.cpp */,
 				6EBF3D841B355C1F00E0CAE8 /* AchievementMenu.hpp */,
@@ -914,6 +924,8 @@
 		6E4AACC31ABAC116004DD346 /* rendering */ = {
 			isa = PBXGroup;
 			children = (
+				6E55036B1ECE08DA00462005 /* AchievementLevelUpRenderer.cpp */,
+				6E55036C1ECE08DA00462005 /* AchievementLevelUpRenderer.hpp */,
 				6E21E4951E06AD1000F2AA3F /* Blending.hpp */,
 				6E4AACC41ABAC116004DD346 /* DebugDraw.cpp */,
 				6E4AACC51ABAC116004DD346 /* DebugDraw.hpp */,
@@ -1251,6 +1263,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E5503711ECE09BF00462005 /* TouchButton.cpp in Sources */,
+				6E5503721ECE09BF00462005 /* TouchController.cpp in Sources */,
 				6E21E49C1E06BCAD00F2AA3F /* Border.cpp in Sources */,
 				6E21E49D1E06BCAD00F2AA3F /* BatteryHUD.cpp in Sources */,
 				6E4D386F1C843CAB00F7F3CA /* CloneHandler.cpp in Sources */,
@@ -1331,6 +1345,7 @@
 				6E4AAD921ABAC116004DD346 /* LevelFileLoader.cpp in Sources */,
 				6E4D38621C8435B200F7F3CA /* ControllerParser.cpp in Sources */,
 				6E4AAD801ABAC116004DD346 /* HorizontalSlicesTransition.cpp in Sources */,
+				6E55036D1ECE08DA00462005 /* AchievementLevelUpRenderer.cpp in Sources */,
 				6E4AAD911ABAC116004DD346 /* GameEventRecorder.cpp in Sources */,
 				6E4AAD931ABAC116004DD346 /* MenuLoader.cpp in Sources */,
 				6E4AAD491ABAC116004DD346 /* HighScoreMenue.cpp in Sources */,
@@ -1357,6 +1372,7 @@
 				6E4AAD6D1ABAC116004DD346 /* SingleDistanceJoint.cpp in Sources */,
 				6E4AAD941ABAC116004DD346 /* PathHelper.cpp in Sources */,
 				6E4D38661C8435B200F7F3CA /* PhysicsParser.cpp in Sources */,
+				6E5503701ECE08EA00462005 /* AchievementPopUpMenu.cpp in Sources */,
 				6ED971691B5CCFBB00A7AC13 /* EntityFactory.cpp in Sources */,
 				6E4AAD401ABAC116004DD346 /* Button.cpp in Sources */,
 				6EC866F81B8073CB004192B1 /* MainMenuState.cpp in Sources */,

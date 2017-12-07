@@ -31,6 +31,10 @@
 		6E4D38A91C84705200F7F3CA /* ScreenLocation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D38A61C84705200F7F3CA /* ScreenLocation.cpp */; settings = {ASSET_TAGS = (); }; };
 		6E4D38AC1C84709D00F7F3CA /* CloneHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E4D38AA1C84709D00F7F3CA /* CloneHandler.cpp */; settings = {ASSET_TAGS = (); }; };
 		6E4D38AE1C85D70200F7F3CA /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E4D38AD1C85D70200F7F3CA /* libjpeg.a */; };
+		6E5503651ECE066800462005 /* AchievementPopUpMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5503621ECE060900462005 /* AchievementPopUpMenu.cpp */; };
+		6E5503661ECE072400462005 /* TouchController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FA9051E952E770023760D /* TouchController.cpp */; };
+		6E5503671ECE076C00462005 /* TouchButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FA9031E952E770023760D /* TouchButton.cpp */; };
+		6E55036A1ECE07BF00462005 /* AchievementLevelUpRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5503681ECE07BF00462005 /* AchievementLevelUpRenderer.cpp */; settings = {ASSET_TAGS = (); }; };
 		6E5ACDC31B68A2E80052FE08 /* EntityFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5ACDC11B68A2E80052FE08 /* EntityFactory.cpp */; };
 		6E5ACDC61B68A2F00052FE08 /* Caret.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5ACDC51B68A2F00052FE08 /* Caret.cpp */; };
 		6E5FA9161E9531630023760D /* Border.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E5FA9091E952EEB0023760D /* Border.cpp */; };
@@ -234,6 +238,11 @@
 		6E4D38AB1C84709D00F7F3CA /* CloneHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CloneHandler.hpp; sourceTree = "<group>"; };
 		6E4D38AD1C85D70200F7F3CA /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = "../../ThirdParty/lib-ios/libjpeg.a"; sourceTree = "<group>"; };
 		6E4D38AF1C85E11F00F7F3CA /* BatteryState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BatteryState.hpp; path = ../../Src/BatteryState.hpp; sourceTree = "<group>"; };
+		6E5503621ECE060900462005 /* AchievementPopUpMenu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AchievementPopUpMenu.cpp; sourceTree = "<group>"; };
+		6E5503631ECE060900462005 /* AchievementPopUpMenu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AchievementPopUpMenu.hpp; sourceTree = "<group>"; };
+		6E5503641ECE060900462005 /* ScreenScale.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ScreenScale.hpp; sourceTree = "<group>"; };
+		6E5503681ECE07BF00462005 /* AchievementLevelUpRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AchievementLevelUpRenderer.cpp; sourceTree = "<group>"; };
+		6E5503691ECE07BF00462005 /* AchievementLevelUpRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AchievementLevelUpRenderer.hpp; sourceTree = "<group>"; };
 		6E5ACDC11B68A2E80052FE08 /* EntityFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityFactory.cpp; sourceTree = "<group>"; };
 		6E5ACDC21B68A2E80052FE08 /* EntityFactory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EntityFactory.hpp; sourceTree = "<group>"; };
 		6E5ACDC51B68A2F00052FE08 /* Caret.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Caret.cpp; sourceTree = "<group>"; };
@@ -799,6 +808,9 @@
 		6E745E3D1A1B7C11001595DE /* gui */ = {
 			isa = PBXGroup;
 			children = (
+				6E5503621ECE060900462005 /* AchievementPopUpMenu.cpp */,
+				6E5503631ECE060900462005 /* AchievementPopUpMenu.hpp */,
+				6E5503641ECE060900462005 /* ScreenScale.hpp */,
 				6ED3AE761B4D942A00E32567 /* AchievementMenu.cpp */,
 				6ED3AE771B4D942A00E32567 /* AchievementMenu.hpp */,
 				6E745E3E1A1B7C11001595DE /* AnimationContainer.cpp */,
@@ -1001,6 +1013,8 @@
 		6E745EC21A1B7C12001595DE /* rendering */ = {
 			isa = PBXGroup;
 			children = (
+				6E5503681ECE07BF00462005 /* AchievementLevelUpRenderer.cpp */,
+				6E5503691ECE07BF00462005 /* AchievementLevelUpRenderer.hpp */,
 				6E5FA9131E952F3C0023760D /* Blending.hpp */,
 				6E745EC31A1B7C12001595DE /* DebugDraw.cpp */,
 				6E745EC41A1B7C12001595DE /* DebugDraw.hpp */,
@@ -1300,6 +1314,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E5503671ECE076C00462005 /* TouchButton.cpp in Sources */,
+				6E5503661ECE072400462005 /* TouchController.cpp in Sources */,
+				6E5503651ECE066800462005 /* AchievementPopUpMenu.cpp in Sources */,
 				6E5FA9171E9531780023760D /* BatteryHUD.cpp in Sources */,
 				6E5FA9161E9531630023760D /* Border.cpp in Sources */,
 				6E4D389A1C846ECA00F7F3CA /* PhysicsParser.cpp in Sources */,
@@ -1345,6 +1362,7 @@
 				6E745F761A1B7C12001595DE /* GrowingCircleTransition.cpp in Sources */,
 				6E745F481A1B7C12001595DE /* Cursor.cpp in Sources */,
 				6E745F551A1B7C12001595DE /* TargetHUD.cpp in Sources */,
+				6E55036A1ECE07BF00462005 /* AchievementLevelUpRenderer.cpp in Sources */,
 				6E4D38981C846ECA00F7F3CA /* JointParser.cpp in Sources */,
 				6E745F401A1B7C12001595DE /* KeyProvider.cpp in Sources */,
 				6E4D38A31C846EEC00F7F3CA /* GraphicalObject.cpp in Sources */,
@@ -1568,7 +1586,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = RicketyRacquet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1606,7 +1624,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = RicketyRacquet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
