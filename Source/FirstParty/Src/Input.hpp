@@ -44,7 +44,10 @@ namespace utility
     class MouseWrapper
     {
     public:
-        MouseWrapper() : m_leftPressed(false),
+        MouseWrapper() :
+            m_leftPressed(false),
+            m_leftReleased(false),
+            m_leftPreReleased(false),
 #if defined(IOS) || defined(ANDROID)
             m_sensorsEnabled(false),
 #endif
@@ -103,6 +106,7 @@ namespace utility
         bool m_leftPressed;
         bool m_leftDown;
         bool m_leftReleased;
+        bool m_leftPreReleased;
         bool m_isLeftDown; // tracks the physical state of the left mouse button
         bool m_isRightDown; // tracks the physical state of the right mouse button
         bool m_mouseWheelUp;

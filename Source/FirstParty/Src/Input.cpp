@@ -103,11 +103,10 @@ namespace utility
     {
         m_lastPosition = m_totalPosition;
         m_position = sf::Vector2f(m_lastPosition);
-        // TODO: remove not needed code
-        m_leftDown = /*sf::Mouse::isButtonPressed(sf::Mouse::Left)*/ m_isLeftDown && !m_leftPressed;
-        bool last = m_leftPressed;
-        m_leftPressed = m_isLeftDown;//sf::Mouse::isButtonPressed(sf::Mouse::Left);
-        m_leftReleased = last && !m_leftPressed;
+        m_leftDown = m_isLeftDown && !m_leftPressed;
+        m_leftPressed = m_isLeftDown;
+        m_leftReleased = m_leftPreReleased;
+        m_leftPreReleased = false;
 
         m_mouseWheelDown = false;
         m_mouseWheelUp = false;
@@ -137,8 +136,10 @@ namespace utility
 
     void MouseWrapper::notifyButtonReleased(sf::Mouse::Button button)
     {
-        if(button == sf::Mouse::Left)
+        if(button == sf::Mouse::Left) {
+            m_leftPreReleased = m_isLeftDown;
             m_isLeftDown = false;
+        }
         else if(button == sf::Mouse::Right)
             m_isRightDown = false;
     }
