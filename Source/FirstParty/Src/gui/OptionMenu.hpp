@@ -22,8 +22,8 @@ public:
     static const int LABEL_RESOLUTION = 11;
     static const int CHECKBOX_USE_VERTICALAXIS = 12;
     static const int CHECKBOX_INVERT_AXIS = 15;
-    static const int CHECKBOX_USE_STENCIL_EFFECTS = 30;
-    static const int CHECKBOX_USE_SHADER_EFFECTS = 35;
+    static const int CHECKBOX_USE_SHADER_EFFECTS = 30;
+    static const int CHECKBOX_USE_STENCIL_EFFECTS = 35;
     static const int CHECKBOX_SHOW_BATTERY_STATE = 38;
     static const int CHECKBOX_LANGUAGE = 41;
 
