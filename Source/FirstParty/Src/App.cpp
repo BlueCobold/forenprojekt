@@ -282,7 +282,9 @@ void App::draw()
     for(unsigned int i = 0; i < m_offscreens.size(); i++)
     {
         params.addTargetBuffer(m_offscreens[i]);
+        gl::DepthMask(true);
         m_offscreens[i].clear(sf::Color(0x7F, 0x7F, 0x7F, 0));
+        gl::DepthMask(false);
         offscreens.insert(std::make_pair(&(m_offscreens[i].getTexture()), &m_offscreens[i]));
     }
 
