@@ -185,7 +185,6 @@ StateChangeInformation LevelPassState::update(const double time)
         m_gotCoins = false;
         m_playStateInfo.m_returnFromPause = false;
         m_playStateInfo.m_level = nullptr;
-        m_level = nullptr;
         m_transitionStateInfo.m_followingState = MainMenuStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_playStateInfo;
         m_achievementManager.saveValues();
