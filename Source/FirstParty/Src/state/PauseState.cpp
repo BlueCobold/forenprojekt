@@ -106,16 +106,15 @@ StateChangeInformation PauseState::update(const double time)
         {
             m_loadLevelStateInfo.m_file = m_level->getFileName();
             m_loadLevelStateInfo.m_level = nullptr;
-            m_loadLevelStateInfo.m_directPlay = true;
             m_loadLevelStateInfo.m_levelNumber = 0;
         }
         else
         {
             m_loadLevelStateInfo.m_file = "";
             m_loadLevelStateInfo.m_level = m_level;
-            m_loadLevelStateInfo.m_directPlay = false;
             m_loadLevelStateInfo.m_levelNumber = m_playStateInfo.m_levelNumber;
         }
+        m_loadLevelStateInfo.m_directPlay = true;
         m_loadLevelStateInfo.m_prepareOnly = false;
         m_transitionStateInfo.m_followingState = LoadLevelStateId;
         m_transitionStateInfo.m_onEnterInformation = &m_loadLevelStateInfo;
