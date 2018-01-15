@@ -7,10 +7,10 @@
 			</animations>
 		</animationContainer>
 
-		<image id="5" x="0.5" y="0" offsetx="-127" offsety="-1" spriteSheet="gui_elements" sprite="Icon_Backgrounds_Logo"
+		<image name="titleBack" id="5" x="0.43" y="0" offsetx="-71" offsety="-1" spriteSheet="gui_elements" sprite="Icon_Backgrounds_Logo"
 			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min" />
 
-		<animationContainer id="100" x="0.5" y="0.0" offsetx="-65" offsety="30"
+		<animationContainer name="title" id="100" x="0.47" y="0.05" offsetx="-41" offsety="0"
 			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min">
 			<animations>
 				<animation spritesheet="gui_animations" sprite="r_ickety_shadow" copies="28" blending="premul" >
@@ -215,6 +215,7 @@
 				</animation>
 			</animations>
 		</animationContainer>
+
 		<animationContainer id="-1" x="0.32" y="0.3" offsetx="-70"
 			refWidth="800" refHeight="600" growWidth="1" growHeight="1" scaleType="min">
 			<animations>
