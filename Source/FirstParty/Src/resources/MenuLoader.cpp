@@ -125,9 +125,9 @@ ScreenSize parseSize(const tinyxml2::XMLElement& element)
     return ScreenSize(sizeOffset, relativeSize, aspectRatio, scaleType);
 }
 
-ScreenScale parseScale(const tinyxml2::XMLElement& element)
+ScreenScale MenuLoader::parseScale(const tinyxml2::XMLElement& element)
 {
-    sf::Vector2f refSize(1, 1);
+    sf::Vector2f refSize(m_refSize);
     element.QueryFloatAttribute("refWidth", &refSize.x);
     element.QueryFloatAttribute("refHeight", &refSize.y);
     sf::Vector2f percent;
@@ -198,6 +198,8 @@ std::unique_ptr<MenuTemplate> MenuLoader::loadMenuTemplate(const std::string& pa
 
     auto menu = std::unique_ptr<MenuTemplate>(new MenuTemplate);
 
+    parseDesign(*menuXml);
+
     parseButtonStyles(*menuXml);
     parseCheckBoxStyles(*menuXml);
     parseSliderStyles(*menuXml);
@@ -218,6 +220,15 @@ std::unique_ptr<MenuTemplate> MenuLoader::loadMenuTemplate(const std::string& pa
     addAll(parseSubWindow(*menuXml), menu->menuElements);
     
     return menu;
+}
+
+void MenuLoader::parseDesign(const tinyxml2::XMLElement& menuXml)
+{
+    if(auto designXml = menuXml.FirstChildElement("design"))
+    {
+        designXml->QueryFloatAttribute("refWidth", &m_refSize.x);
+        designXml->QueryFloatAttribute("refHeight", &m_refSize.y);
+    }
 }
 
 std::vector<std::unique_ptr<Button>> MenuLoader::parseButtons(

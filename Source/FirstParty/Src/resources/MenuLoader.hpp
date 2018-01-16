@@ -32,19 +32,24 @@ public:
 
     std::unique_ptr<MenuTemplate> loadMenuTemplate(const std::string& path);
 
-    MenuLoader(ResourceManager& resourceManager)
-        : m_resourceManager(resourceManager)
+    MenuLoader(ResourceManager& resourceManager) :
+        m_resourceManager(resourceManager),
+        m_refSize(1, 1)
     { }
 
 private:
     ResourceManager& m_resourceManager;
     static CloneHandler _cloneHandler;
+    sf::Vector2f m_refSize;
     std::unordered_map<std::string, ToolTip> m_toolTips;
     std::unordered_map<std::string, SliderStyle> m_sliderStyles;
     std::unordered_map<std::string, CheckBoxStyle> m_checkBoxStyles;
     std::unordered_map<std::string, InputBoxStyle> m_inputBoxStyles;
     std::unordered_map<std::string, ButtonStyle> m_buttonStyles;
     std::unordered_map<std::string, BorderStyle> m_borderStyles;
+
+    ScreenScale MenuLoader::parseScale(const tinyxml2::XMLElement& element);
+    void parseDesign(const tinyxml2::XMLElement& menuXml);
 
     std::vector<std::unique_ptr<Button>> parseButtons(
         const tinyxml2::XMLElement& menuXml);
