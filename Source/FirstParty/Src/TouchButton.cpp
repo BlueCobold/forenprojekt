@@ -10,7 +10,7 @@ TouchButton::TouchButton(const sf::FloatRect& touchArea) :
 
 void TouchButton::update()
 {
-    if(m_touchArea.contains(static_cast<sf::Vector2f>(utility::Mouse.getRealWindowPosition())))
+    if(m_touchArea.contains(sf::Vector2f(utility::Mouse.getRealWindowPosition())))
     {
         if(!m_stillPressed && !m_newlyPressed)
         {

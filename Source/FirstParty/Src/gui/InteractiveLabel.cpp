@@ -44,14 +44,14 @@ void InteractiveLabel::updated(const sf::RenderWindow& screen, const double time
         offset = -getWidth();
 
     auto position = getCurrentPosition() + sf::Vector2f(offset,0);
-    auto size = sf::Vector2i(static_cast<int>(getWidth()), getFontSize());
+    sf::Vector2f size(getWidth(), static_cast<float>(getFontSize()));
     auto mousePosition = getCursorPosition(screen);
-    sf::IntRect hitBox(static_cast<sf::Vector2i>(position), size);
+    sf::FloatRect hitBox(position, size);
     
-    m_showToolTip = cursorIsValid() && hitBox.contains(mousePosition + mouseOffset) && isVisible();
+    m_showToolTip = cursorIsValid() && hitBox.contains(sf::Vector2f(mousePosition + mouseOffset)) && isVisible();
     if(m_showToolTip)
     {
-        m_toolTip.setPosition(static_cast<const sf::Vector2f>(mousePosition), screen);
+        m_toolTip.setPosition(sf::Vector2f(mousePosition), screen);
         m_toolTip.update();
     }
 }

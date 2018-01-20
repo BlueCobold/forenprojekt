@@ -36,7 +36,7 @@ std::unique_ptr<MenuElement> Button::onClone() const
 
 void Button::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
-    auto screenSize = static_cast<sf::Vector2f>(screen.getSize());
+    auto screenSize = sf::Vector2f(screen.getSize());
     m_scale.setScreenSize(screenSize);
     updateLayout(screenSize);
     m_toolTip.update();
@@ -44,13 +44,13 @@ void Button::updated(const sf::RenderWindow& screen, const double time, const sf
     sf::Vector2f scale(m_scale.getCurrentScale());
 
     auto& currentPosition = getCurrentPosition();
-    sf::IntRect buttonRect(static_cast<int>(currentPosition.x + scale.x * m_style.mouseRect.left),
-                           static_cast<int>(currentPosition.y + scale.y * m_style.mouseRect.top),
-                           static_cast<int>(scale.x * m_style.mouseRect.width),
-                           static_cast<int>(scale.y * m_style.mouseRect.height));
+    sf::FloatRect buttonRect(currentPosition.x + scale.x * m_style.mouseRect.left,
+                             currentPosition.y + scale.y * m_style.mouseRect.top,
+                             scale.x * m_style.mouseRect.width,
+                             scale.y * m_style.mouseRect.height);
     auto& mousePosition = getCursorPosition(screen);
 
-    if(cursorIsValid() && buttonRect.contains(mousePosition + mouseOffset) && isVisible())
+    if(cursorIsValid() && buttonRect.contains(sf::Vector2f(mousePosition + mouseOffset)) && isVisible())
     {
         if(!m_playHoverSound && m_style.hoverStyle.sound)
         {

@@ -10,7 +10,7 @@ HUDElement::HUDElement(const sf::Vector2f& position,
     
 void HUDElement::update(const DrawParameter& params)
 {
-    m_screenLocation.setScreenSize(static_cast<sf::Vector2f>(params.getTarget().getSize()));
+    m_screenLocation.setScreenSize(sf::Vector2f(params.getTarget().getSize()));
     updated(params);
 }
 

@@ -73,7 +73,7 @@ void AnimationContainer::onSetValueOf(const std::string& name, const double valu
 void AnimationContainer::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
     updateCurrentTime(time);
-    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+    updateLayout(sf::Vector2f(screen.getSize()));
     auto currentPosition = getCurrentPosition();
     
     m_screenScale.setScreenSize(sf::Vector2f(screen.getSize()));

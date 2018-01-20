@@ -57,7 +57,7 @@ StateChangeInformation LoadLevelState::update(const double time)
 {
     std::string text(utility::translateKey("gui_loading_screen"));
 
-    m_label.updateLayout(static_cast<sf::Vector2f>(m_screen.getSize()));
+    m_label.updateLayout(sf::Vector2f(m_screen.getSize()));
 
     updateTime(time);
     int step = static_cast<int>(getPassedTime() * 2) % 4;

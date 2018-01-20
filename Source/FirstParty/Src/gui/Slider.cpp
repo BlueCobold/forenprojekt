@@ -24,13 +24,13 @@ std::unique_ptr<MenuElement> Slider::onClone() const
 
 void Slider::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
-    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+    updateLayout(sf::Vector2f(screen.getSize()));
 
     auto currentPosition = getCurrentPosition();
-    int x = static_cast<int>(currentPosition.x + m_style.mouseRect.left);
-    sf::IntRect sliderRect(x, static_cast<int>(currentPosition.y + m_style.mouseRect.top),
-                           m_style.mouseRect.width,
-                           m_style.mouseRect.height);
+    auto x = currentPosition.x + m_style.mouseRect.left;
+    sf::FloatRect sliderRect(x, currentPosition.y + m_style.mouseRect.top,
+                           static_cast<float>(m_style.mouseRect.width),
+                           static_cast<float>(m_style.mouseRect.height));
 
     sf::Vector2f offset(0, 0);
     if(!utility::Mouse.leftButtonPressed() || !cursorIsValid())
@@ -42,10 +42,10 @@ void Slider::updated(const sf::RenderWindow& screen, const double time, const sf
     {
         sliderRect.left += static_cast<int>(m_buttonPosition.x);
         auto mousePos = getCursorPosition(screen);
-        if(cursorIsValid() && sliderRect.contains(mousePos + mouseOffset))
+        if(cursorIsValid() && sliderRect.contains(sf::Vector2f(mousePos + mouseOffset)))
         {
             m_active = true;
-            m_pick = mousePos.x - sliderRect.left + mouseOffset.x;
+            m_pick = static_cast<int>(mousePos.x - sliderRect.left + mouseOffset.x);
         }
     }
 
@@ -58,7 +58,7 @@ void Slider::updated(const sf::RenderWindow& screen, const double time, const sf
     else
     {
         auto mousePos = getCursorPosition(screen) + mouseOffset;
-        calculateValue(x, mousePos.x - m_pick);
+        calculateValue(static_cast<int>(x), mousePos.x - m_pick);
         m_button = &m_style.active.button;
         m_background = &m_style.active.background;
         offset = m_style.active.buttonOffset;

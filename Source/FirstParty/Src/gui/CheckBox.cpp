@@ -29,22 +29,22 @@ void CheckBox::registerOnChange(std::function<void (const CheckBox& sender)> cal
 
 void CheckBox::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
-    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+    updateLayout(sf::Vector2f(screen.getSize()));
     m_toolTip.update();
 
     auto position = getCurrentPosition();
     auto &scale = m_scale.getCurrentScale();
-    sf::IntRect checkboxRect(static_cast<int>(position.x + scale.x * m_style.mouseRect.left),
-                             static_cast<int>(position.y + scale.y * m_style.mouseRect.top),
-                             static_cast<int>(scale.x * m_style.mouseRect.width),
-                             static_cast<int>(scale.y * m_style.mouseRect.height));
+    sf::FloatRect checkboxRect(position.x + scale.x * m_style.mouseRect.left,
+                               position.y + scale.y * m_style.mouseRect.top,
+                               scale.x * m_style.mouseRect.width,
+                               scale.y * m_style.mouseRect.height);
 
     auto mousePosition = getCursorPosition(screen);
-    if(cursorIsValid() && checkboxRect.contains(getCursorPosition(screen) + mouseOffset))
+    if(cursorIsValid() && checkboxRect.contains(sf::Vector2f(getCursorPosition(screen) + mouseOffset)))
     {
         m_showToolTip = true;
         m_hover = true;
-        m_toolTip.setPosition(static_cast<const sf::Vector2f>(mousePosition), screen);
+        m_toolTip.setPosition(sf::Vector2f(mousePosition), screen);
 
         if(utility::Mouse.leftButtonReleased())
         {

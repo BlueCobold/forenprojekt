@@ -100,17 +100,17 @@ void SubWindow::onDrawElement(const DrawParameter& params)
 
 void SubWindow::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
-    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+    updateLayout(sf::Vector2f(screen.getSize()));
 
     auto currentPosition = getCurrentPosition() - m_size.getCurrentSize() / 2.f;
 
-    sf::IntRect mouseRect(static_cast<sf::Vector2i>(m_windowRect.getPosition()) + mouseOffset, static_cast<sf::Vector2i>(m_windowRect.getSize()));
-    sf::IntRect sliderRect(static_cast<sf::Vector2i>(m_positionRect.getPosition() + currentPosition), static_cast<sf::Vector2i>(m_positionRect.getSize()));
+    sf::FloatRect mouseRect(m_windowRect.getPosition() + sf::Vector2f(mouseOffset), m_windowRect.getSize());
+    sf::FloatRect sliderRect(m_positionRect.getPosition() + currentPosition, m_positionRect.getSize());
 
     auto moveDistance = m_cursorPosition - getCursorPosition(screen);
     m_cursorPosition = getCursorPosition(screen);
 
-    if(mouseRect.contains(m_cursorPosition) && !m_active)
+    if(mouseRect.contains(sf::Vector2f(m_cursorPosition)) && !m_active)
     {
         auto scroll = m_positionRect.getPosition().y;
 
@@ -128,7 +128,7 @@ void SubWindow::updated(const sf::RenderWindow& screen, const double time, const
         m_positionRect.setPosition(m_positionRect.getPosition().x, scroll);
     }
 
-    if(sliderRect.contains(m_cursorPosition) && utility::Mouse.leftButtonDown())
+    if(sliderRect.contains(sf::Vector2f(m_cursorPosition)) && utility::Mouse.leftButtonDown())
     {
         m_startValue = m_cursorPosition.y;
         m_active = true;
@@ -159,7 +159,7 @@ void SubWindow::updated(const sf::RenderWindow& screen, const double time, const
     m_style.scrollbarMiddle.setScale(1, height/m_style.scrollbarMiddle.getTextureRect().height);
     m_style.scrollbarBottom.setPosition(pos.x, pos.y + height + m_style.scrollbarTop.getTextureRect().height);
 
-    m_panel.setCursorIsValid(mouseRect.contains(m_cursorPosition));
+    m_panel.setCursorIsValid(mouseRect.contains(sf::Vector2f(m_cursorPosition)));
     m_panel.update(screen, time, getMouseOffset(screen));
 }
 
@@ -178,7 +178,7 @@ float SubWindow::windowPixelToSliderPixel(float pixel)
 
 sf::Vector2i SubWindow::getMouseOffset(const sf::RenderWindow& screen)
 {
-    sf::Vector2i mouseOffset = - static_cast<sf::Vector2i>(getCurrentPosition() - m_size.getCurrentSize() / 2.f) +
+    sf::Vector2i mouseOffset = - sf::Vector2i(getCurrentPosition() - m_size.getCurrentSize() / 2.f) +
                                  sf::Vector2i(static_cast<int>(m_center.x - m_size.getCurrentSize().x / 2.f),
                                               static_cast<int>(m_center.y - m_size.getCurrentSize().y / 2.f));
 

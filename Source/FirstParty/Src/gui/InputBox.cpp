@@ -46,7 +46,7 @@ void InputBox::updated(const sf::RenderWindow& screen, const double time, const 
     setActivatedByMouse(screen);
     handleInput();
     m_caret.update(time);
-    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+    updateLayout(sf::Vector2f(screen.getSize()));
     m_inputText.update(screen, time, mouseOffset);
 }
 
@@ -152,7 +152,7 @@ void InputBox::setActivatedByMouse(const sf::RenderWindow& screen)
 
     if(utility::Mouse.leftButtonDown())
     {
-        m_activated = hitBox.contains(static_cast<sf::Vector2f>(getCursorPosition(screen)));
+        m_activated = hitBox.contains(sf::Vector2f(getCursorPosition(screen)));
 #if defined(IOS) || defined(ANDROID)
         if(m_activated)
             m_caret.enable();

@@ -14,7 +14,7 @@ LabelHUD::LabelHUD(const sf::Vector2f& position,
 
 void LabelHUD::updated(const DrawParameter& params)
 {
-    m_label.updateLayout(static_cast<sf::Vector2f>(params.getTarget().getSize()));
+    m_label.updateLayout(sf::Vector2f(params.getTarget().getSize()));
 }
 
 void LabelHUD::doDraw(const DrawParameter& params)

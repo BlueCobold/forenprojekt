@@ -268,7 +268,7 @@ void LineLabel::layoutUpdated(const sf::Vector2f& screenSize)
 
 void LineLabel::updated(const sf::RenderWindow& screen, const double time, const sf::Vector2i& mouseOffset)
 {
-    updateLayout(static_cast<sf::Vector2f>(screen.getSize()));
+    updateLayout(sf::Vector2f(screen.getSize()));
     
     if(m_textKey != "")
     {

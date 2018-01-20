@@ -216,9 +216,9 @@ protected:
             return sf::Vector2i(INT_MIN, INT_MIN);
 
 #if defined(IOS) || defined(ANDROID)
-        return static_cast<sf::Vector2i>(screen.mapPixelToCoords(utility::Mouse.getTouchPosition()));
+        return sf::Vector2i(screen.mapPixelToCoords(utility::Mouse.getTouchPosition()));
 #else
-        return static_cast<sf::Vector2i>(screen.mapPixelToCoords(sf::Mouse::getPosition(screen)));
+        return sf::Vector2i(screen.mapPixelToCoords(sf::Mouse::getPosition(screen)));
 #endif
     }
 
