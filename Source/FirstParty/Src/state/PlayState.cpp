@@ -108,11 +108,6 @@ StateChangeInformation PlayState::update(const double time)
             return StateChangeInformation(TransitionStateId, &m_transitionStateInfo);
 #endif
         }
-        /* not needed anymore, since we got a button for it
-        if(utility::Keyboard.isKeyDown(sf::Keyboard::T))
-        {
-            m_level->setTimeAttackMode(true);
-        }*/
 #ifdef LEVELTESTING
         if(utility::Keyboard.isKeyDown(sf::Keyboard::L) || utility::Keyboard.isKeyPressed(sf::Keyboard::L))
         {
