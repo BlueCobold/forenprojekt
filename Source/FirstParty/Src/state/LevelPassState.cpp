@@ -106,7 +106,7 @@ StateChangeInformation LevelPassState::update(const double time)
         {
             m_loadLevelStateInfo.m_file = "";
             m_loadLevelStateInfo.m_level = m_level;
-            m_loadLevelStateInfo.m_directPlay = false;
+            m_loadLevelStateInfo.m_directPlay = true;
             m_loadLevelStateInfo.m_levelNumber = m_playStateInfo.m_levelNumber;
         }
         m_loadLevelStateInfo.m_prepareOnly = false;
