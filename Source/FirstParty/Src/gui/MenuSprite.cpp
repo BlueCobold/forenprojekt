@@ -35,10 +35,11 @@ void MenuSprite::updated(const sf::RenderWindow& screen, const double time, cons
     auto screenSize = sf::Vector2f(screen.getSize());
     updateLayout(screenSize);
 
-    sf::FloatRect rect(m_sprite.getPosition().x - m_sprite.getOrigin().x,
-                       m_sprite.getPosition().y - m_sprite.getOrigin().y,
-                       m_sprite.getTextureRect().width,
-                       m_sprite.getTextureRect().height);
+    auto scale = m_scale.getCurrentScale();
+    sf::FloatRect rect(m_sprite.getPosition().x - m_sprite.getOrigin().x * scale.x,
+                       m_sprite.getPosition().y - m_sprite.getOrigin().y * scale.y,
+                       m_sprite.getTextureRect().width * scale.x,
+                       m_sprite.getTextureRect().height * scale.y);
 
     auto mousePosition = getCursorPosition(screen);
     if(cursorIsValid() && rect.contains(sf::Vector2f(mousePosition + mouseOffset)) && isVisible())
