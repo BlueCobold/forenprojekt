@@ -916,42 +916,6 @@
 		<hover spriteSheet="gui_elements" sprite="checked_hover"
 			offsetx="0" offsety="0" />
 	</checkboxStyle>
-	<checkboxStyle name="timemode">
-		<mouseRect left="1" top="1" width="34" height="34" />
-		<unchecked spriteSheet="gui_elements" sprite="target_unchecked"
-			offsetx="0" offsety="0" />
-		<checked spriteSheet="gui_elements" sprite="target_checked"
-			offsetx="0" offsety="0" />
-		<hover spriteSheet="gui_elements" sprite="target_hover"
-			offsetx="0" offsety="0" />
-	</checkboxStyle>
-	<checkboxStyle name="targetmode">
-		<mouseRect left="1" top="1" width="34" height="34" />
-		<unchecked spriteSheet="gui_elements" sprite="time_unchecked"
-			offsetx="0" offsety="0" />
-		<checked spriteSheet="gui_elements" sprite="time_checked"
-			offsetx="0" offsety="0" />
-		<hover spriteSheet="gui_elements" sprite="time_hover"
-			offsetx="0" offsety="0" />
-	</checkboxStyle>
-	<checkboxStyle name="offlineHighscore">
-		<mouseRect left="1" top="1" width="34" height="34" />
-		<unchecked spriteSheet="gui_elements" sprite="offline_unchecked"
-			offsetx="0" offsety="0" />
-		<checked spriteSheet="gui_elements" sprite="offline_checked"
-			offsetx="0" offsety="0" />
-		<hover spriteSheet="gui_elements" sprite="offline_hover"
-			offsetx="0" offsety="0" />
-	</checkboxStyle>
-	<checkboxStyle name="onlineHighscore">
-		<mouseRect left="1" top="1" width="34" height="34" />
-		<unchecked spriteSheet="gui_elements" sprite="online_unchecked"
-			offsetx="0" offsety="0" />
-		<checked spriteSheet="gui_elements" sprite="online_checked"
-			offsetx="0" offsety="0" />
-		<hover spriteSheet="gui_elements" sprite="online_hover"
-			offsetx="0" offsety="0" />
-	</checkboxStyle>
 
 	<checkboxStyle name="highscoreMode">
 		<mouseRect left="-48" top="-48" width="96" height="96" />
