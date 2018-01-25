@@ -6,91 +6,83 @@
 		<sprite name="right_side" x="123" y="1" width="68" height="200" originx="34" originy="100" />
 		<sprite name="window_deco_left" x="193" y="1" width="45" height="186" originx="22" originy="93" />
 		<sprite name="left_left" x="240" y="1" width="38" height="158" originx="19" originy="79" />
-		<sprite name="Icon_Backgrounds_Logo" x="280" y="1" width="244" height="130" originx="117" originy="68" />
-		<sprite name="window_main" x="526" y="1" width="160" height="120" originx="80" originy="60" />
-		<sprite name="frame_left" x="688" y="1" width="20" height="119" originx="10" originy="59" />
-		<sprite name="frame_right" x="710" y="1" width="16" height="119" originx="10" originy="59" />
-		<sprite name="stars_0" x="65" y="258" width="352" height="109" originx="176" originy="54" />
-		<sprite name="preview: Beginner Level" x="728" y="1" width="192" height="108" originx="96" originy="54" />
-		<sprite name="preview: Clockwork" x="688" y="122" width="192" height="108" originx="96" originy="54" />
-		<sprite name="preview: Things Change" x="419" y="133" width="192" height="108" originx="96" originy="54" />
-		<sprite name="preview: Up and Down" x="419" y="243" width="192" height="108" originx="96" originy="54" />
-		<sprite name="preview: Four Chambers" x="613" y="232" width="192" height="108" originx="96" originy="54" />
-		<sprite name="preview: Bank Job" x="807" y="232" width="192" height="108" originx="96" originy="54" />
-		<sprite name="preview: Moving Spikes" x="65" y="369" width="192" height="108" originx="96" originy="54" />
-		<sprite name="missing" x="259" y="369" width="192" height="108" originx="96" originy="54" />
-		<sprite name="preview: Rocket Science" x="453" y="353" width="192" height="108" originx="96" originy="54" />
-		<sprite name="preview: Pisa Studies" x="647" y="342" width="192" height="108" originx="96" originy="54" />
-		<sprite name="preview: Crossroads" x="1" y="483" width="192" height="108" originx="96" originy="54" />
-		<sprite name="preview: Fragile" x="195" y="479" width="192" height="108" originx="96" originy="54" />
-		<sprite name="preview: Moving Walls" x="389" y="479" width="192" height="108" originx="96" originy="54" />
-		<sprite name="frame_blend" x="583" y="463" width="192" height="108" originx="96" originy="54" />
-		<sprite name="filled_large" x="922" y="1" width="91" height="84" originx="45" originy="42" />
-		<sprite name="Button_pressed" x="1" y="593" width="326" height="66" originx="163" originy="33" />
-		<sprite name="Button_small_pressed" x="841" y="342" width="160" height="66" originx="80" originy="33" />
-		<sprite name="empty_large" x="882" y="111" width="69" height="66" originx="34" originy="33" />
-		<sprite name="filled_small" x="953" y="87" width="63" height="60" originx="31" originy="30" />
-		<sprite name="Button_idle" x="329" y="589" width="318" height="58" originx="159" originy="29" />
-		<sprite name="Button_hover" x="649" y="573" width="318" height="58" originx="159" originy="29" />
-		<sprite name="right_top" x="777" y="452" width="136" height="58" originx="68" originy="29" />
-		<sprite name="Button_small_hover" x="1" y="661" width="152" height="58" originx="76" originy="29" />
-		<sprite name="Button_small_idle" x="155" y="661" width="152" height="58" originx="76" originy="29" />
-		<sprite name="left_pressed" x="915" y="410" width="72" height="57" originx="36" originy="28" />
-		<sprite name="right_pressed" x="777" y="512" width="72" height="57" originx="36" originy="28" />
-		<sprite name="button_active" x="613" y="123" width="38" height="54" originx="19" originy="27" />
-		<sprite name="left_bottom" x="851" y="512" width="150" height="54" originx="75" originy="27" />
-		<sprite name="pressed" x="309" y="661" width="54" height="52" originx="27" originy="26" />
+		<sprite name="Icon_Backgrounds_LeftLower" x="280" y="1" width="148" height="140" originx="100" originy="36" />
+		<sprite name="Icon_Backgrounds_Logo" x="430" y="1" width="244" height="130" originx="117" originy="68" />
+		<sprite name="window_main" x="676" y="1" width="160" height="120" originx="80" originy="60" />
+		<sprite name="frame_left" x="838" y="1" width="20" height="119" originx="10" originy="59" />
+		<sprite name="frame_right" x="860" y="1" width="16" height="119" originx="10" originy="59" />
+		<sprite name="preview: Beginner Level" x="65" y="258" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Clockwork" x="259" y="161" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Things Change" x="453" y="133" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Up and Down" x="647" y="133" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Four Chambers" x="65" y="368" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Bank Job" x="259" y="271" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Moving Spikes" x="453" y="243" width="192" height="108" originx="96" originy="54" />
+		<sprite name="missing" x="647" y="243" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Rocket Science" x="1" y="483" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Pisa Studies" x="195" y="478" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Crossroads" x="389" y="381" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Fragile" x="583" y="353" width="192" height="108" originx="96" originy="54" />
+		<sprite name="preview: Moving Walls" x="777" y="353" width="192" height="108" originx="96" originy="54" />
+		<sprite name="frame_blend" x="1" y="593" width="192" height="108" originx="96" originy="54" />
+		<sprite name="filled_large" x="878" y="1" width="91" height="84" originx="45" originy="42" />
+		<sprite name="Ribbon_bronce" x="389" y="491" width="233" height="75" originx="113" originy="37" />
+		<sprite name="Ribbon_gold" x="624" y="463" width="233" height="75" originx="113" originy="37" />
+		<sprite name="Ribbon_silver" x="195" y="588" width="233" height="75" originx="113" originy="37" />
+		<sprite name="Button_pressed" x="430" y="568" width="326" height="66" originx="163" originy="33" />
+		<sprite name="Button_small_pressed" x="841" y="122" width="160" height="66" originx="80" originy="33" />
+		<sprite name="empty_large" x="841" y="190" width="69" height="66" originx="34" originy="33" />
+		<sprite name="filled_small" x="912" y="190" width="63" height="60" originx="31" originy="30" />
+		<sprite name="Button_idle" x="1" y="703" width="318" height="58" originx="159" originy="29" />
+		<sprite name="Button_hover" x="321" y="665" width="318" height="58" originx="159" originy="29" />
+		<sprite name="right_top" x="841" y="258" width="136" height="58" originx="68" originy="29" />
+		<sprite name="Button_small_hover" x="859" y="463" width="152" height="58" originx="76" originy="29" />
+		<sprite name="Button_small_idle" x="758" y="540" width="152" height="58" originx="76" originy="29" />
+		<sprite name="left_pressed" x="259" y="381" width="72" height="57" originx="36" originy="28" />
+		<sprite name="right_pressed" x="912" y="523" width="72" height="57" originx="36" originy="28" />
+		<sprite name="button_active" x="971" y="1" width="38" height="54" originx="19" originy="27" />
+		<sprite name="left_bottom" x="641" y="636" width="150" height="54" originx="75" originy="27" />
+		<sprite name="pressed" x="793" y="600" width="54" height="52" originx="27" originy="26" />
 		<sprite name="left_hover" x="123" y="203" width="65" height="49" originx="32" originy="24" />
 		<sprite name="left_idle" x="190" y="203" width="65" height="49" originx="32" originy="24" />
-		<sprite name="right_hover" x="257" y="161" width="65" height="49" originx="32" originy="24" />
-		<sprite name="right_idle" x="324" y="133" width="65" height="49" originx="32" originy="24" />
-		<sprite name="Mouse" x="613" y="179" width="38" height="48" originx="19" originy="24" />
-		<sprite name="button_hover" x="882" y="179" width="32" height="46" originx="16" originy="23" />
-		<sprite name="button_idle" x="916" y="179" width="32" height="46" originx="16" originy="23" />
-		<sprite name="hover" x="950" y="179" width="47" height="46" originx="23" originy="23" />
-		<sprite name="normal" x="969" y="568" width="48" height="46" originx="24" originy="23" />
-		<sprite name="checked_hover" x="365" y="649" width="38" height="41" originx="19" originy="20" />
-		<sprite name="checked_idle" x="405" y="649" width="38" height="41" originx="19" originy="20" />
-		<sprite name="target_checked" x="257" y="212" width="40" height="40" originx="20" originy="20" />
-		<sprite name="target_hover" x="299" y="212" width="40" height="40" originx="20" originy="20" />
-		<sprite name="target_unchecked" x="341" y="184" width="40" height="40" originx="20" originy="20" />
-		<sprite name="time_checked" x="445" y="649" width="40" height="40" originx="20" originy="20" />
-		<sprite name="time_hover" x="487" y="649" width="40" height="40" originx="20" originy="20" />
-		<sprite name="time_unchecked" x="529" y="649" width="40" height="40" originx="20" originy="20" />
-		<sprite name="offline_checked" x="571" y="649" width="40" height="40" originx="20" originy="20" />
-		<sprite name="offline_hover" x="613" y="649" width="40" height="40" originx="20" originy="20" />
-		<sprite name="offline_unchecked" x="655" y="633" width="40" height="40" originx="20" originy="20" />
-		<sprite name="online_checked" x="697" y="633" width="40" height="40" originx="20" originy="20" />
-		<sprite name="online_hover" x="739" y="633" width="40" height="40" originx="20" originy="20" />
-		<sprite name="online_unchecked" x="781" y="633" width="40" height="40" originx="20" originy="20" />
-		<sprite name="empty_small" x="915" y="469" width="41" height="39" originx="20" originy="19" />
-		<sprite name="window_deco_top" x="445" y="691" width="238" height="38" originx="119" originy="19" />
-		<sprite name="unchecked_idle" x="841" y="410" width="38" height="37" originx="19" originy="18" />
-		<sprite name="right_bottom" x="823" y="633" width="136" height="37" originx="68" originy="18" />
-		<sprite name="left_top" x="685" y="675" width="148" height="36" originx="74" originy="18" />
-		<sprite name="window_bottom" x="1" y="731" width="638" height="36" originx="319" originy="22" />
-		<sprite name="window_left_lower" x="653" y="123" width="24" height="36" originx="12" originy="22" />
-		<sprite name="window_right_lower" x="958" y="469" width="36" height="36" originx="22" originy="22" />
-		<sprite name="window_deco_bottom" x="835" y="672" width="129" height="31" originx="64" originy="15" />
-		<sprite name="bar_active" x="879" y="705" width="124" height="30" originx="62" originy="15" />
-		<sprite name="toolTip" x="653" y="161" width="30" height="30" originx="15" originy="15" />
-		<sprite name="window_left_upper" x="280" y="133" width="24" height="24" originx="12" originy="12" />
-		<sprite name="window_right_upper" x="953" y="149" width="36" height="24" originx="22" originy="12" />
-		<sprite name="window_top" x="1" y="769" width="638" height="24" originx="319" originy="12" />
-		<sprite name="window_deco_bottom_left" x="391" y="133" width="24" height="24" originx="12" originy="12" />
-		<sprite name="window_deco_top_right" x="991" y="149" width="24" height="24" originx="12" originy="12" />
-		<sprite name="bar_hover" x="641" y="731" width="118" height="22" originx="59" originy="11" />
-		<sprite name="bar_idle" x="641" y="755" width="118" height="22" originx="59" originy="11" />
-		<sprite name="scrollbar" x="922" y="87" width="20" height="20" originx="10" originy="10" />
-		<sprite name="frame_top" x="761" y="737" width="164" height="19" originx="82" originy="9" />
-		<sprite name="IconBattery025" x="383" y="184" width="32" height="19" originx="14" originy="7" />
-		<sprite name="IconBattery050" x="383" y="205" width="32" height="19" originx="14" originy="7" />
-		<sprite name="IconBattery075" x="341" y="226" width="32" height="19" originx="14" originy="7" />
-		<sprite name="IconBattery100" x="375" y="226" width="32" height="19" originx="14" originy="7" />
-		<sprite name="IconBatteryCharge" x="989" y="410" width="32" height="19" originx="14" originy="7" />
-		<sprite name="Icon_16" x="391" y="159" width="16" height="16" originx="8" originy="8" />
-		<sprite name="frame_bottom" x="685" y="713" width="164" height="11" originx="82" originy="9" />
-		<sprite name="BackgroundGradient" x="306" y="133" width="10" height="10" originx="5" originy="5" />
+		<sprite name="right_hover" x="849" y="600" width="65" height="49" originx="32" originy="24" />
+		<sprite name="right_idle" x="916" y="582" width="65" height="49" originx="32" originy="24" />
+		<sprite name="Mouse" x="977" y="190" width="38" height="48" originx="19" originy="24" />
+		<sprite name="button_hover" x="979" y="240" width="32" height="46" originx="16" originy="23" />
+		<sprite name="button_idle" x="971" y="318" width="32" height="46" originx="16" originy="23" />
+		<sprite name="hover" x="971" y="366" width="47" height="46" originx="23" originy="23" />
+		<sprite name="normal" x="333" y="381" width="48" height="46" originx="24" originy="23" />
+		<sprite name="checked_hover" x="971" y="414" width="38" height="41" originx="19" originy="20" />
+		<sprite name="checked_idle" x="983" y="582" width="38" height="41" originx="19" originy="20" />
+		<sprite name="empty_small" x="1" y="763" width="41" height="39" originx="20" originy="19" />
+		<sprite name="window_deco_top" x="44" y="763" width="238" height="38" originx="119" originy="19" />
+		<sprite name="unchecked_idle" x="284" y="763" width="38" height="37" originx="19" originy="18" />
+		<sprite name="right_bottom" x="324" y="725" width="136" height="37" originx="68" originy="18" />
+		<sprite name="left_top" x="793" y="654" width="148" height="36" originx="74" originy="18" />
+		<sprite name="window_bottom" x="324" y="764" width="638" height="36" originx="319" originy="22" />
+		<sprite name="window_left_lower" x="986" y="523" width="24" height="36" originx="12" originy="22" />
+		<sprite name="window_right_lower" x="943" y="633" width="36" height="36" originx="22" originy="22" />
+		<sprite name="window_deco_bottom" x="878" y="87" width="129" height="31" originx="64" originy="15" />
+		<sprite name="bar_active" x="841" y="318" width="124" height="30" originx="62" originy="15" />
+		<sprite name="toolTip" x="259" y="440" width="30" height="30" originx="15" originy="15" />
+		<sprite name="window_left_upper" x="971" y="57" width="24" height="24" originx="12" originy="12" />
+		<sprite name="window_right_upper" x="979" y="288" width="36" height="24" originx="22" originy="12" />
+		<sprite name="window_top" x="284" y="802" width="638" height="24" originx="319" originy="12" />
+		<sprite name="window_deco_bottom_left" x="997" y="57" width="24" height="24" originx="12" originy="12" />
+		<sprite name="window_deco_top_right" x="453" y="353" width="24" height="24" originx="12" originy="12" />
+		<sprite name="bar_hover" x="624" y="540" width="118" height="22" originx="59" originy="11" />
+		<sprite name="bar_idle" x="430" y="636" width="118" height="22" originx="59" originy="11" />
+		<sprite name="scrollbar" x="479" y="353" width="20" height="20" originx="10" originy="10" />
+		<sprite name="frame_top" x="641" y="692" width="164" height="19" originx="82" originy="9" />
+		<sprite name="IconBattery025" x="501" y="353" width="32" height="19" originx="14" originy="7" />
+		<sprite name="IconBattery050" x="535" y="353" width="32" height="19" originx="14" originy="7" />
+		<sprite name="IconBattery075" x="291" y="440" width="32" height="19" originx="14" originy="7" />
+		<sprite name="IconBattery100" x="325" y="440" width="32" height="19" originx="14" originy="7" />
+		<sprite name="IconBatteryCharge" x="583" y="463" width="32" height="19" originx="14" originy="7" />
+		<sprite name="Icon_16" x="1003" y="120" width="16" height="16" originx="8" originy="8" />
+		<sprite name="frame_bottom" x="280" y="143" width="164" height="11" originx="82" originy="9" />
+		<sprite name="BackgroundGradient" x="1011" y="1" width="10" height="10" originx="5" originy="5" />
+		<sprite name="Ribbon_red" x="44" y="803" width="233" height="75" originx="113" originy="37" />
 		<sprite name="caret" x="108" y="153" width="20" height="25" originx="0" originy="0" />
 	</sprites>
 </spriteSheet>

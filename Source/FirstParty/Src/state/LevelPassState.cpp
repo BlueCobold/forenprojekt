@@ -51,6 +51,12 @@ void LevelPassState::onEnter(const EnterStateInformation* enterInformation, cons
     m_menu.setPoints(m_level->getPoints());
     m_menu.setGrade(m_level->getMedal());
     m_menu.setLostBalls(m_level->getLostBalls());
+
+    if(m_level->isTimeAttackMode())
+        m_menu.setPlayTime(static_cast<float>(m_level->getTotalTime()));
+    else
+        m_menu.setPlayTime(static_cast<float>(m_level->getLevelPlayTime()));
+
     std::string text = "@@" + utility::replace(utility::replace(utility::replace(utility::translateKey("tooltip_medals"),
                                             utility::toString(m_level->getMedal(Level::Gold))),   // first replace
                                             utility::toString(m_level->getMedal(Level::Silver))), // second replace

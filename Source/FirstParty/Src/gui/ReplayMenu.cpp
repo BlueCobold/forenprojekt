@@ -27,6 +27,15 @@ void ReplayMenu::setGrade(int grade)
     Menu::getAnimation(SPRITE_SYMBOL_STAR_BRONCE_FILLED).setVisible(grade <= 2);
     Menu::getAnimation(SPRITE_SYMBOL_STAR_SILVER_FILLED).setVisible(grade <= 1);
     Menu::getAnimation(SPRITE_SYMBOL_STAR_GOLD_FILLED).setVisible(grade <= 0);
+    Menu::getSprite(SPRITE_RIBBON_RED).setVisible(grade > 2);
+    Menu::getSprite(SPRITE_RIBBON_BRONCE).setVisible(grade == 2);
+    Menu::getSprite(SPRITE_RIBBON_SILVER).setVisible(grade == 1);
+    Menu::getSprite(SPRITE_RIBBON_GOLD).setVisible(grade == 0);
+}
+
+void ReplayMenu::setPlayTime(float playTime)
+{
+    Menu::getLabel(LABEL_TIME).setText(utility::floatToPlayTimeString(playTime));
 }
 
 void ReplayMenu::setLostBalls(int lostBalls)

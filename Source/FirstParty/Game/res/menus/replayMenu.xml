@@ -1,25 +1,57 @@
 <menu>
 	<styles source="Styles.inc"/>
+	<design refWidth="800" refHeight="600" />
 	<elements>
-		<image id="-1" x="0.5" y="0.5" offsetx="-255" offsety="-200" spriteSheet="gui_window" sprite="menu_window" />
-		<label id="37" text="gui_level_success" font="gui_large" alignment="1" x="0.5" y="0.5" offsetx="0" offsety="-160" />
-		<button id="0" text="gui_play_again" style="small" x="0.5" y="0.5" offsetx="82" offsety="30" />
-		<button id="1" text="gui_play_next" style="small" x="0.5" y="0.5" offsetx="-82" offsety="30" />
-		<button id="2" text="gui_mainmenu" style="default" x="0.5" y="0.5" offsetx="0" offsety="80" />
-		
-		<label id="10" text="gui_score" font="buttonHoverFont" alignment="2" x="0.5" y="0.5" offsetx="130" offsety="-110" />
-		<label id="11" text="gui_score" font="buttonHoverFont" alignment="0" x="0.5" y="0.5" offsetx="-180" offsety="-106" />
+		<border id="-1" style="window"
+			x="0.5" y="0.5"
+			widthOffset="-150" heightOffset="-150" widthPercent="1.0" heightPercent="1.0" />
+		<label id="37" text="gui_level_success" font="gui_large" alignment="1" x="0.5" y="0.0" offsetx="0" offsety="58"
+			growWidth="1" growHeight="1" scaleType="min" />
 
-		<label id="12" text="gui_ball_lost" font="buttonHoverFont" alignment="2" x="0.5" y="0.5" offsetx="130" offsety="-70" />
-		<label id="13" text="gui_ball_lost" font="buttonHoverFont" alignment="0" x="0.5" y="0.5" offsetx="-180" offsety="-66" />
+		<button id="0" text="gui_play_again" style="replayButtonStyle" x="0.75" y="0.8" offsetx="0" offsety="-50"
+			growWidth="1" growHeight="1" scaleType="min" />
+		<button id="1" text="gui_play_next" style="playButtonStyle" x="0.5" y="0.8" offsetx="0" offsety="-60"
+			growWidth="1" growHeight="1" scaleType="min" />
+		<button id="2" text="gui_mainmenu" style="exitButtonStyle" x="0.25" y="0.8" offsetx="0" offsety="-50"
+			growWidth="1" growHeight="1" scaleType="min" />
+		
+		<label id="10" text="gui_score" font="buttonHoverFont" alignment="2"
+			x="0.625" y="0.313" offsetx="40" offsety="30" growWidth="1" growHeight="1" scaleType="min" />
+		<label id="11" text="gui_score" font="buttonHoverFont" alignment="0"
+			x="0.375" y="0.313" offsetx="-40" offsety="30" growWidth="1" growHeight="1" scaleType="min" />
 
-		<image id="14" x="0.5" y="0.5" offsetx="-176" offsety="-269" spriteSheet="gui_elements" sprite="stars_0"/>
+		<label id="12" text="gui_ball_lost" font="buttonHoverFont" alignment="2"
+			x="0.625" y="0.396" offsetx="40" offsety="30" growWidth="1" growHeight="1" scaleType="min" />
+		<label id="13" text="gui_ball_lost" font="buttonHoverFont" alignment="0"
+			x="0.375" y="0.396" offsetx="-40" offsety="30" growWidth="1" growHeight="1" scaleType="min" />
+
+		<label id="40" text="gui_time" font="buttonHoverFont" alignment="0"
+			x="0.375" y="0.479" offsetx="-40" offsety="30" growWidth="1" growHeight="1" scaleType="min" />
+		<label id="41" text="gui_ball_lost" font="buttonHoverFont" alignment="2"
+			x="0.625" y="0.479" offsetx="40" offsety="30" growWidth="1" growHeight="1" scaleType="min" />
+			
+		<image id="14" x="0.5" y="0.175h" offsetx="-6" offsety="60" useOrigin="true"
+			growWidth="1.2" growHeight="1.2" scaleType="min"
+			spriteSheet="gui_elements" sprite="Ribbon_bronce"/>
+		<image id="15" x="0.5" y="0.175h" offsetx="-6" offsety="60" useOrigin="true"
+			growWidth="1.2" growHeight="1.2" scaleType="min"
+			spriteSheet="gui_elements" sprite="Ribbon_silver"/>
+		<image id="16" x="0.5" y="0.175h" offsetx="-6" offsety="60" useOrigin="true"
+			growWidth="1.2" growHeight="1.2" scaleType="min"
+			spriteSheet="gui_elements" sprite="Ribbon_gold"/>
+		<image id="17" x="0.5" y="0.175h" offsetx="-6" offsety="60" useOrigin="true"
+			growWidth="1.2" growHeight="1.2" scaleType="min"
+			spriteSheet="gui_elements" sprite="Ribbon_red"/>
 		
-		<image id="25" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="-87" offsety="-212" spriteSheet="gui_elements" sprite="empty_small"/>
-		<image id="26" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="35" offsety="-212" spriteSheet="gui_elements" sprite="empty_small"/>
-		<image id="27" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.5" offsetx="-39" offsety="-239" spriteSheet="gui_elements" sprite="empty_large"/>
+		<image id="25" tooltip="default" tooltiptext="tooltip_medals" x="0.415" y="0.175h" offsetx="0" offsety="60" spriteSheet="gui_elements" sprite="empty_small"
+			growWidth="1" growHeight="1" scaleType="min" useOrigin="true" />
+		<image id="26" tooltip="default" tooltiptext="tooltip_medals" x="0.575" y="0.175h" offsetx="0" offsety="60" spriteSheet="gui_elements" sprite="empty_small"
+			growWidth="1" growHeight="1" scaleType="min" useOrigin="true" />
+		<image id="27" tooltip="default" tooltiptext="tooltip_medals" x="0.5" y="0.175h" offsetx="-5" offsety="40" spriteSheet="gui_elements" sprite="empty_large"
+			growWidth="1" growHeight="1" scaleType="min" useOrigin="true" />
 		
-		<animationContainer id="35" x="0.5" y="0.5" offsetx="-68" offsety="-193">
+		<animationContainer name="starBronce" id="35" x="0.415" y="0.175h" offsetx="0" offsety="60"
+			growWidth="1.2" growHeight="1.2" scaleType="min" >
 			<animations>
 				<animation spritesheet="gui_animations" sprite="Icon_Star_hover" copies="36" blending="premul">
 					<layout>
@@ -118,7 +150,8 @@
 				</animation>
 			</animations>
 		</animationContainer>
-		<animationContainer id="36" x="0.5" y="0.5" offsetx="56" offsety="-193">
+		<animationContainer name="starSilver" id="36" x="0.575" y="0.175h" offsetx="0" offsety="60"
+			growWidth="1.2" growHeight="1.2" scaleType="min" >
 			<animations>
 				<animation spritesheet="gui_animations" sprite="Icon_Star_hover" copies="36" blending="premul">
 					<layout>
@@ -218,7 +251,8 @@
 			</animations>
 		</animationContainer>
 
-		<animationContainer id="37" x="0.5" y="0.5" offsetx="-5" offsety="-206">
+		<animationContainer name="starGold" id="37" x="0.5" y="0.175h" offsetx="-5" offsety="40"
+			growWidth="1.2" growHeight="1.2" scaleType="min" >
 			<animations>
 				<animation spritesheet="gui_animations" sprite="Icon_Star_hover" copies="50" blending="premul">
 					<layout>
@@ -318,6 +352,7 @@
 			</animations>
 		</animationContainer>
 		
-		<button id="30" text="" style="goblet" x="0.5" y="0.5" offsetx="157" offsety="-204" tooltip="default" tooltiptext="tooltip_highscore"/>
+		<button id="30" text="" style="goblet" x="0.25" y="0.4h,0.065w" offsetx="-50" offsety="20" tooltip="default" tooltiptext="tooltip_highscore"
+			growWidth="1" growHeight="1" scaleType="min" />
 	</elements>
 </menu>
