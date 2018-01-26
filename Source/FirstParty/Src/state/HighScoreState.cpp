@@ -51,9 +51,6 @@ void HighScoreState::onEnter(const EnterStateInformation* enterInformation, cons
     if(m_highScoreStateInfo.m_level->isTimeAttackMode())
         m_showPoints = true;
 
-    bool showButton = !m_highScoreStateInfo.m_level->isTimeAttackMode();
-    m_menu.getCheckbox(HighScoreMenu::CHECKBOX_GAMEMODE).setVisible(showButton);
-
     buildSubWindowElements();
 
     State::onEnter(info, time);
